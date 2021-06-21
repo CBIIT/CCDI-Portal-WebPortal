@@ -4,10 +4,13 @@ import {
   withStyles, Drawer, List, Button,
 } from '@material-ui/core';
 import FacetFilter from './SideBarComponents/FacetFilters';
-import { facetSearchData } from '../../bento/dashboardData';
+import { facetSearchData, resetIcon } from '../../bento/dashboardData';
 import { clearAllFilters } from '../../pages/dashboardTab/store/dashboardReducer';
 
 const drawerWidth = 240;
+if (resetIcon.src === '') {
+  resetIcon.src = 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/Clear-icon.svg';
+}
 
 const SideBarContent = ({ classes }) => {
   const activeFilters = useSelector((state) => (
@@ -47,8 +50,14 @@ const SideBarContent = ({ classes }) => {
               onClick={() => clearAllFilters()}
               disableRipple
             >
-              CLEAR ALL
+              <img
+                src={resetIcon.src}
+                height={resetIcon.size}
+                width={resetIcon.size}
+                alt={resetIcon.alt}
+              />
             </Button>
+            <span className={classes.resetText}>Clear all filtered selections</span>
           </div>
         </div>
         <List component="nav" aria-label="filter cases" classes={{ root: classes.listRoot, divider: classes.dividerRoot }}>
@@ -74,11 +83,12 @@ const styles = (theme) => ({
     zIndex: '90',
     position: 'relative',
     float: 'left',
+    overflowX: 'hidden',
     overflowY: 'auto',
     border: 'none',
   },
   floatRight: {
-    margin: '14px 0px 14px 9px',
+    margin: '7px 0px 7px 6px',
   },
   floatLeft: {
     float: 'left',
@@ -99,25 +109,36 @@ const styles = (theme) => ({
     margin: 'auto',
   },
   customButton: {
-    borderRadius: '100px',
-    marginTop: '4px',
-    minHeight: '20px',
+    borderRadius: '5px',
+    maxWidth: '30px',
+    maxHeight: '30px',
+    minWidth: '30px',
+    minHeight: '30px',
+    marginTop: '0px',
     fontSize: 9,
     textTransform: 'none',
     color: '#3d4241',
-    marginLeft: '16px',
+    marginLeft: '0px',
     fontFamily: theme.custom.fontFamily,
     '&:hover': {
       backgroundColor: '#566672',
       color: 'white',
     },
   },
+  resetText: {
+    marginTop: '0px',
+    marginLeft: '8px',
+    color: '#638FB5',
+    fontSize: 14,
+  },
   listRoot: {
     paddingTop: 0,
     paddingBottom: 1,
-    height: '900px',
+    maxHeight: '1300px',
+    maxWidth: '100%',
     overflowX: 'hidden',
-    overflowY: 'auto',
+    overflowY: 'overlay',
+    borderBottom: 'thin solid #B1B1B1',
   },
   dividerRoot: {
     backgroundColor: '#B0CFE1',

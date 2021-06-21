@@ -75,6 +75,15 @@ export const facetSectionVariables = {
   },
 };
 
+// --------------- Default Dashboard Sidebar Sections styling --------------
+export const defaultFacetSectionVariables = {
+  color: '#000000',
+  checkBoxColorsOne: '#E8F7DC',
+  checkBoxColorsTwo: '#F5FDEE',
+  height: '5px',
+  isExpanded: false,
+};
+
 // --------------- Dashboard Widgets configuration --------------
 // A maximum of 6 widgets are allowed
 export const widgetsData = [
@@ -84,6 +93,7 @@ export const widgetsData = [
     dataName: 'armsByPrograms',
     datatable_level1_field: 'program',
     datatable_level2_field: 'study_acronym',
+    titleText: 'Cases',
     show: true,
   },
   {
@@ -91,6 +101,7 @@ export const widgetsData = [
     label: 'Diagnosis',
     dataName: 'subjectCountByDiagnoses',
     datatable_field: 'diagnosis',
+    titleText: 'Cases',
     show: true,
   },
   {
@@ -98,6 +109,7 @@ export const widgetsData = [
     label: 'Recurrence Score',
     dataName: 'subjectCountByRecurrenceScore',
     datatable_field: 'recurrence_score',
+    titleText: 'Cases',
     show: true,
   },
   {
@@ -105,6 +117,7 @@ export const widgetsData = [
     label: 'Tumor Size',
     dataName: 'subjectCountByTumorSize',
     datatable_field: 'tumor_size',
+    titleText: 'Cases',
     show: true,
   },
   {
@@ -112,6 +125,7 @@ export const widgetsData = [
     label: 'Chemotherapy',
     dataName: 'subjectCountByChemotherapyRegimen',
     datatable_field: 'chemotherapy',
+    titleText: 'Cases',
     show: true,
   },
   {
@@ -119,6 +133,7 @@ export const widgetsData = [
     label: 'Endocrine Therapy',
     dataName: 'subjectCountByEndocrineTherapy',
     datatable_field: 'endocrine_therapy',
+    titleText: 'Cases',
     show: true,
   },
 ];
@@ -133,6 +148,11 @@ export const externalLinkIcon = {
 // --------------- Facet resetIcon link configuration --------------
 // Ideal size for resetIcon is 16x16 px
 export const resetIcon = {
+  src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/Clear-icon.svg',
+  alt: 'Reset icon',
+  size: '12 px',
+};
+export const resetIconFilter = {
   src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/Clear-icon.svg',
   alt: 'Reset icon',
   size: '12 px',
@@ -218,8 +238,8 @@ export const dashboardTable = {
 
 // --------------- Sorting related labels configuration --------------
 export const sortLabels = {
-  sortAlphabetically: 'Sort Alphabetically',
-  sortByCount: 'Sort by Counts',
+  sortAlphabetically: 'Sort alphabetically',
+  sortByCount: 'Sort by counts',
   showMore: '...expand to see all selections',
 };
 

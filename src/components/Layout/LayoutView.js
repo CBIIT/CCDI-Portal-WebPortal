@@ -52,7 +52,13 @@ const Layout = ({ classes, isSidebarOpened }) => (
             <Route path="/arm/:id" component={ArmDetail} />
             <Route path="/JBrowse" component={JBrowse} />
             {aboutPageRoutes.map(
-              (aboutPageRoute) => <Route path={aboutPageRoute} component={About} />,
+              (aboutPageRoute, index) => (
+                <Route
+                  key={index}
+                  path={aboutPageRoute}
+                  component={About}
+                />
+              ),
             )}
             <Route path="/data-dictionary" component={DataDictonary} />
             <Route path="/graphql" component={GraphqlClient} />
@@ -80,17 +86,18 @@ const styles = (theme) => ({
   },
   '@global': {
     '*::-webkit-scrollbar': {
-      width: '0.7em',
-      height: '0.6em',
+      width: '0.5em',
+      height: '0.4em',
     },
     '*::-webkit-scrollbar-track': {
       '-webkit-box-shadow': 'inset 0 0 6px #ccc',
-      borderRadius: '10px',
+      borderRadius: '0px',
+      backgroundColor: '#FFFFFF',
     },
     '*::-webkit-scrollbar-thumb': {
       backgroundColor: '#97b0c0',
       outline: '1px solid slategrey',
-      borderRadius: '10px',
+      borderRadius: '0px',
     },
   },
 });

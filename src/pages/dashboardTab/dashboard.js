@@ -61,10 +61,10 @@ const Dashboard = ({
                 </div>
                 <Collapse in={collapse} className={classes.backgroundWidgets}>
                   <Grid container>
-                    {displaywidgets.map((widget) => {
+                    {displaywidgets.map((widget, index) => {
                       if (widget.type === 'sunburst' && widget.show) {
                         return (
-                          <Grid item lg={4} md={6} sm={12} xs={12}>
+                          <Grid key={index} item lg={4} md={6} sm={12} xs={12}>
                             <Widget
                               title={widget.label}
                               upperTitle
@@ -76,6 +76,7 @@ const Dashboard = ({
                             >
                               <ProgramSunburst
                                 data={data[widget.dataName]}
+                                titleText={widget.titleText || 'Cases'}
                                 width={250}
                                 height={173}
                                 innerRadius={40}
@@ -92,7 +93,7 @@ const Dashboard = ({
                       }
                       if (widget.type === 'donut' && widget.show) {
                         return (
-                          <Grid item lg={4} md={6} sm={12} xs={12}>
+                          <Grid key={index} item lg={4} md={6} sm={12} xs={12}>
                             <Widget
                               title={widget.label}
                               upperTitle
@@ -104,6 +105,7 @@ const Dashboard = ({
                             >
                               <CustomActiveDonut
                                 data={data[widget.dataName]}
+                                titleText={widget.titleText || 'Cases'}
                                 width={400}
                                 height={225}
                                 innerRadius={50}
@@ -222,8 +224,11 @@ const styles = (theme) => ({
   },
   sideBar: {
     width: '250px',
-    backgroundColor: '#FFFFFF',
-    boxShadow: 'inset 0 0 87px 7px #E2E7EC',
+    overflowX: 'hidden',
+    backgroundColor: 'transparent',
+    borderRight: 'thin solid #B1B1B1',
+    borderLeft: 'thin solid #B1B1B1',
+    overflow: 'auto',
     zIndex: '99',
   },
   statsBar: {

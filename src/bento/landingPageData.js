@@ -15,24 +15,20 @@ export const landingPageData = {
   },
   landingPageStatsBar: [
     {
-      statTitle: 'Programs',
+      statTitle: 'programs',
       statAPI: 'numberOfPrograms',
-    },
-    {
-      statTitle: 'Arms',
-      statAPI: 'numberOfStudies',
-    },
-    {
-      statTitle: 'Cases',
-      statAPI: 'numberOfSubjects',
-    },
-    {
-      statTitle: 'samples',
-      statAPI: 'numberOfSamples',
     },
     {
       statTitle: 'files',
       statAPI: 'numberOfFiles',
+    },
+    {
+      statTitle: 'studies',
+      statAPI: 'numberOfStudies',
+    },
+    {
+      statTitle: 'submitters',
+      statAPI: 'numberOfSubmitters',
     },
   ],
   tile1: {
@@ -72,9 +68,8 @@ export const landingPageData = {
 // --------------- GraphQL query - Retrieve Landing page data --------------
 export const GET_LANDING_PAGE_DATA_QUERY = gql`{
   numberOfPrograms
+  numberOfSubmitters
   numberOfStudies
-  numberOfSubjects
-  numberOfSamples
   numberOfFiles
   }
   `;

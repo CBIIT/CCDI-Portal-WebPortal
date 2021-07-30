@@ -3,7 +3,6 @@ import {
   Grid,
   withStyles,
 } from '@material-ui/core';
-import _ from 'lodash';
 import { useDispatch } from 'react-redux';
 import { getOptions, getColumns } from 'bento-components';
 import StatsView from '../../components/Stats/StatsView';
@@ -25,7 +24,7 @@ import Snackbar from '../../components/Snackbar';
 import { fetchDataForDashboardDataTable } from '../dashboard/dashboardState';
 
 // Main case detail component
-const CaseDetail = ({ data, filesOfSamples, classes }) => {
+const CaseDetail = ({ data, classes }) => {
   const [snackbarState, setsnackbarState] = React.useState({
     open: false,
     value: 0,
@@ -57,27 +56,6 @@ const CaseDetail = ({ data, filesOfSamples, classes }) => {
     to: '/cases',
     isALink: true,
   }];
-
-  // those are questioning codes for ICDC only, need to remove from here.
-  const filesOfSamplesObj = filesOfSamples.reduce(
-    (obj, item) => ({ ...obj, [item.sample_id]: item.files }), {},
-  );
-
-  // NOTE: Needs improvement.
-  const datFieldsFromRoot = [];
-  table1.columns.forEach((e) => (e.dataFromRoot ? datFieldsFromRoot.push(e.dataField) : null));
-
-  const samplesData = data.samples.map((s) => {
-    const files = filesOfSamplesObj[s.sample_id];
-    const sample = _.cloneDeep(s);
-    sample.files = files;
-    if (datFieldsFromRoot.length > 0) {
-      datFieldsFromRoot.forEach((e) => {
-        sample[e] = data[e];
-      });
-    }
-    return sample;
-  });
 
   return (
     <>
@@ -164,7 +142,7 @@ const CaseDetail = ({ data, filesOfSamples, classes }) => {
                 <Grid container spacing={4}>
                   <Grid item xs={12}>
                     <GridWithFooter
-                      data={samplesData}
+                      data={data[table1.subjectDetailField]}
                       title={(
                         <div className={classes.tableTitle}>
                           <span className={classes.tableHeader}>{table1.tableTitle}</span>

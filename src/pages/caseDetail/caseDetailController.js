@@ -4,7 +4,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import CaseDetailView from './caseDetailView';
 import { Typography } from '../../components/Wrappers/Wrappers';
 import {
-  GET_CASE_DETAIL_DATA_QUERY, dataRoot, caseIDField, filesOfSamples,
+  GET_CASE_DETAIL_DATA_QUERY, dataRoot, caseIDField,
 } from '../../bento/caseDetailData';
 
 const CaseDetailContainer = ({ match }) => {
@@ -21,7 +21,7 @@ const CaseDetailContainer = ({ match }) => {
     );
   }
 
-  return <CaseDetailView data={data[dataRoot]} filesOfSamples={data[filesOfSamples]} />;
+  return <CaseDetailView data={data[dataRoot]} />;
 };
 
 export default CaseDetailContainer;

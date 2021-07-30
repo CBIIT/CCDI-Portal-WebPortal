@@ -30,18 +30,10 @@ const table = {
   // A maximum of 10 columns are allowed
   columns: [
     {
-      dataField: 'program_acronym',
-      header: 'Program Code',
+      dataField: 'program_id',
+      header: 'Program Name',
       link: '/program/{program_id}',
       display: true,
-    },
-    {
-      dataField: 'program_id',
-      header: 'Program ID',
-    },
-    {
-      dataField: 'program_name',
-      header: 'Program Name',
     },
     {
       dataField: 'start_date',
@@ -52,17 +44,12 @@ const table = {
       header: 'End Date',
     },
     {
-      dataField: 'pubmed_id',
-      header: 'PubMed ID',
-      link: 'https://pubmed.ncbi.nlm.nih.gov/{pubmed_id}',
+      dataField: 'num_files',
+      header: 'Number of Submitted Files',
     },
     {
       dataField: 'num_studies',
-      header: 'Number of ARMs',
-    },
-    {
-      dataField: 'num_subjects',
-      header: 'Associated Cases',
+      header: 'Number of Studies',
     },
   ],
 };
@@ -70,14 +57,11 @@ const table = {
 // --------------- GraphQL query - Retrieve program info --------------
 const GET_PROGRAMS_DATA_QUERY = gql`{
   programInfo {
- program_acronym
  program_id
- program_name
  start_date
  end_date
- pubmed_id
+ num_files
  num_studies
- num_subjects
  }
 }
  `;

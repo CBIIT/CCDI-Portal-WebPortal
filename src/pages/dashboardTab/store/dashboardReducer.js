@@ -29,8 +29,6 @@ import {
   GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL,
   GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL,
   GET_FILES_OVERVIEW_DESC_QUERY,
-  GET_SAMPLES_OVERVIEW_DESC_QUERY,
-  GET_CASES_OVERVIEW_DESC_QUERY,
   GET_FILES_NAME_QUERY,
   GET_FILE_IDS_FROM_FILE_NAME,
   tabIndex,
@@ -241,13 +239,12 @@ function clearGroup(data) {
  */
 
 const querySwitch = (payload, tabContainer) => {
+  console.log(payload, tabContainer);
   switch (payload) {
-    case ('Samples'):
-      return { QUERY: tabContainer.defaultSortDirection === 'desc' ? GET_SAMPLES_OVERVIEW_DESC_QUERY : GET_SAMPLES_OVERVIEW_QUERY, sortfield: tabContainer.defaultSortField || '', sortDirection: tabContainer.defaultSortDirection || '' };
     case ('Files'):
       return { QUERY: tabContainer.defaultSortDirection === 'desc' ? GET_FILES_OVERVIEW_DESC_QUERY : GET_FILES_OVERVIEW_QUERY, sortfield: tabContainer.defaultSortField || '', sortDirection: tabContainer.defaultSortDirection || '' };
     default:
-      return { QUERY: tabContainer.defaultSortDirection === 'desc' ? GET_CASES_OVERVIEW_DESC_QUERY : GET_CASES_OVERVIEW_QUERY, sortfield: tabContainer.defaultSortField || '', sortDirection: tabContainer.defaultSortDirection || '' };
+      return { QUERY: tabContainer.defaultSortDirection === 'desc' ? GET_FILES_OVERVIEW_DESC_QUERY : GET_FILES_OVERVIEW_QUERY, sortfield: tabContainer.defaultSortField || '', sortDirection: tabContainer.defaultSortDirection || '' };
   }
 };
 
@@ -772,6 +769,7 @@ export async function tableHasSelections() {
  * return boolean
  */
 function hasFilter() {
+  console.log(getState());
   const currentAllActiveFilters = getState().allActiveFilters;
   return Object.entries(currentAllActiveFilters).filter((item) => item[1].length > 0).length > 0;
 }
@@ -874,7 +872,7 @@ const reducers = {
         ...state.datatable,
         dataCase: item.sortDirection === 'desc' ? item.data.subjectOverViewPagedDesc : item.data.subjectOverViewPaged,
         dataSample: item.sortDirection === 'desc' ? item.data.sampleOverviewDesc : item.data.sampleOverview,
-        dataFile: item.sortDirection === 'desc' ? item.data.fileOverviewDesc : item.data.fileOverview,
+        dataFile: item.sortDirection === 'desc' ? item.data.fileOverViewPagedDesc : item.data.fileOverViewPaged,
       },
     }
   ),

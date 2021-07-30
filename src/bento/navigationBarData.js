@@ -52,9 +52,9 @@ export const navBarData = [
     link: '/programs',
   },
   {
-    labelText: 'cases',
+    labelText: 'files',
     type: 'link',
-    link: '/cases',
+    link: '/files',
   },
   {
     labelText: 'about',

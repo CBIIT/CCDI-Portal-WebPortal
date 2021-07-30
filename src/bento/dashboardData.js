@@ -4,49 +4,10 @@ import gql from 'graphql-tag';
 // A maximum of 12 facetSearchData are allowed
 export const facetSearchData = [
   {
-    label: 'Program', field: 'group', api: 'subjectCountByProgram', apiForFiltering: 'filterSubjectCountByProgram', datafield: 'programs', section: 'Filter By Cases', show: true,
+    label: 'Program', field: 'group', api: 'fileCountByProgram', apiForFiltering: 'filterFileCountByProgram', datafield: 'programs', section: 'Filter By Files', show: true,
   },
   {
-    label: 'Arm', field: 'group', api: 'subjectCountByStudy', apiForFiltering: 'filterSubjectCountByStudy', datafield: 'studies', section: 'Filter By Cases', show: true,
-  },
-  {
-    label: 'Diagnosis', field: 'group', api: 'subjectCountByDiagnoses', apiForFiltering: 'filterSubjectCountByDiagnoses', datafield: 'diagnoses', section: 'Filter By Cases', show: true,
-  },
-  {
-    label: 'Recurrence Score', field: 'group', api: 'subjectCountByRecurrenceScore', apiForFiltering: 'filterSubjectCountByRecurrenceScore', datafield: 'rc_scores', section: 'Filter By Cases', show: true,
-  },
-  {
-    label: 'Tumor Size', field: 'group', api: 'subjectCountByTumorSize', apiForFiltering: 'filterSubjectCountByTumorSize', datafield: 'tumor_sizes', section: 'Filter By Cases', show: true,
-  },
-  {
-    label: 'Chemotherapy', field: 'group', api: 'subjectCountByChemotherapyRegimen', apiForFiltering: 'filterSubjectCountByChemotherapyRegimen', datafield: 'chemo_regimen', section: 'Filter By Cases', show: true,
-  },
-  {
-    label: 'Tumor Grade', field: 'group', api: 'subjectCountByTumorGrade', apiForFiltering: 'filterSubjectCountByTumorGrade', datafield: 'tumor_grades', section: 'Filter By Cases', show: true,
-  },
-  {
-    label: 'ER Status', field: 'group', api: 'subjectCountByErStatus', apiForFiltering: 'filterSubjectCountByErStatus', datafield: 'er_status', section: 'Filter By Cases', show: true,
-  },
-  {
-    label: 'PR Status', field: 'group', api: 'subjectCountByPrStatus', apiForFiltering: 'filterSubjectCountByPrStatus', datafield: 'pr_status', section: 'Filter By Cases', show: true,
-  },
-  {
-    label: 'Endocrine Therapy', field: 'group', api: 'subjectCountByEndocrineTherapy', apiForFiltering: 'filterSubjectCountByEndocrineTherapy', datafield: 'endo_therapies', section: 'Filter By Cases', show: true,
-  },
-  {
-    label: 'Menopause Status', field: 'group', api: 'subjectCountByMenopauseStatus', apiForFiltering: 'filterSubjectCountByMenopauseStatus', datafield: 'meno_status', section: 'Filter By Cases', show: true,
-  },
-  {
-    label: 'Tissue Type', field: 'group', api: 'subjectCountByTissueType', apiForFiltering: 'filterSubjectCountByTissueType', datafield: 'tissue_type', section: 'Filter By Samples', show: true,
-  },
-  {
-    label: 'Tissue Composition', field: 'group', api: 'subjectCountByTissueComposition', apiForFiltering: 'filterSubjectCountByTissueComposition', datafield: 'composition', section: 'Filter By Samples', show: true,
-  },
-  {
-    label: 'File Association', field: 'group', api: 'subjectCountByFileAssociation', apiForFiltering: 'filterSubjectCountByFileAssociation', datafield: 'association', section: 'Filter By Files', show: true,
-  },
-  {
-    label: 'File Type', field: 'group', api: 'subjectCountByFileType', apiForFiltering: 'filterSubjectCountByFileType', datafield: 'file_type', section: 'Filter By Files', show: true,
+    label: 'File Content Format', field: 'group', api: 'fileCountByContentFormat', apiForFiltering: 'filterFileCountByContentFormat', datafield: 'file_content_formats', section: 'Filter By Files', show: true,
   },
 ];
 
@@ -87,55 +48,6 @@ export const defaultFacetSectionVariables = {
 // --------------- Dashboard Widgets configuration --------------
 // A maximum of 6 widgets are allowed
 export const widgetsData = [
-  {
-    type: 'sunburst',
-    label: 'Programs and Arms',
-    dataName: 'armsByPrograms',
-    datatable_level1_field: 'program',
-    datatable_level2_field: 'study_acronym',
-    titleText: 'Cases',
-    show: true,
-  },
-  {
-    type: 'donut',
-    label: 'Diagnosis',
-    dataName: 'subjectCountByDiagnoses',
-    datatable_field: 'diagnosis',
-    titleText: 'Cases',
-    show: true,
-  },
-  {
-    type: 'donut',
-    label: 'Recurrence Score',
-    dataName: 'subjectCountByRecurrenceScore',
-    datatable_field: 'recurrence_score',
-    titleText: 'Cases',
-    show: true,
-  },
-  {
-    type: 'donut',
-    label: 'Tumor Size',
-    dataName: 'subjectCountByTumorSize',
-    datatable_field: 'tumor_size',
-    titleText: 'Cases',
-    show: true,
-  },
-  {
-    type: 'donut',
-    label: 'Chemotherapy',
-    dataName: 'subjectCountByChemotherapyRegimen',
-    datatable_field: 'chemotherapy',
-    titleText: 'Cases',
-    show: true,
-  },
-  {
-    type: 'donut',
-    label: 'Endocrine Therapy',
-    dataName: 'subjectCountByEndocrineTherapy',
-    datatable_field: 'endocrine_therapy',
-    titleText: 'Cases',
-    show: true,
-  },
 ];
 
 // --------------- Dahboard Table external link configuration --------------
@@ -160,76 +72,80 @@ export const resetIconFilter = {
 
 // --------------- Dashboard Table configuration --------------
 export const dashboardTable = {
-  tableTitle: 'Cases',
+  tableTitle: 'Files',
   tableData: [
     // A maximum of 10 columns (tableData) are allowed
     {
-      dataField: 'subject_id',
-      header: 'Case ID',
+      dataField: 'submitted_file_id',
+      header: 'Submitted File ID',
       sort: 'asc',
-      link: '/case/{subject_id}',
+      link: '/file/{submitted_file_id}',
       primary: true,
       display: true,
     },
     {
-      dataField: 'program',
-      header: 'Program Code',
+      dataField: 'ccdi_arm',
+      header: 'CCDI ARM',
       sort: 'asc',
-      link: '/program/{program_id}',
       display: true,
     },
     {
-      dataField: 'program_id',
-      header: 'Program ID',
+      dataField: 'submission_date',
+      header: 'Submission Date',
       sort: 'asc',
       display: false,
     },
     {
-      dataField: 'study_acronym',
-      header: 'Arm',
+      dataField: 'submission_ts',
+      header: 'Submission Timestamp',
       sort: 'asc',
-      link: '/arm/{study_acronym}',
-      display: true,
+      display: false,
     },
     {
-      dataField: 'diagnosis',
-      header: 'Diagnosis',
-      sort: 'asc',
-      display: true,
-    },
-    {
-      dataField: 'recurrence_score',
-      header: 'Recurrence Score',
+      dataField: 'source_ip',
+      header: 'Source IP',
       sort: 'asc',
       display: true,
     },
     {
-      dataField: 'tumor_size',
-      header: 'Tumor Size (cm)',
+      dataField: 'file_count_validate',
+      header: 'File Count Valideted',
       sort: 'asc',
       display: true,
     },
     {
-      dataField: 'er_status',
-      header: 'ER Status',
+      dataField: 'filename_list_validate',
+      header: 'Filename List Validated',
       sort: 'asc',
       display: true,
     },
     {
-      dataField: 'pr_status',
-      header: 'PR Status',
+      dataField: 'study_registered',
+      header: 'Study Registered',
       sort: 'asc',
       display: true,
     },
     {
-      dataField: 'age_at_index',
-      header: 'Age (years)',
+      dataField: 'primary_datatype',
+      header: 'Primary DataType',
       sort: 'asc',
       display: true,
     },
     {
-      dataField: 'survival_time',
-      header: 'Survival (days)',
+      dataField: 'have_subject_ids',
+      header: 'Contain Subject IDs',
+      sort: 'asc',
+      display: true,
+    },
+    {
+      dataField: 'have_pii',
+      header: 'Have PII',
+      sort: 'asc',
+      display: true,
+    },
+    {
+      dataField: 'contain_biospecimen_ids',
+      header: 'Contain Biospecimen IDs',
       sort: 'asc',
       display: true,
     },
@@ -248,132 +164,54 @@ export const showCheckboxCount = 5;
 // --------------- Dashboard Query configuration --------------
 export const GET_DASHBOARD_DATA_QUERY = gql`{
   numberOfPrograms
+  numberOfSubmitters
   numberOfStudies
-  numberOfSubjects
-  numberOfSamples
-  numberOfLabProcedures
   numberOfFiles
-  subjectCountByProgram{
-        group
-        subjects
-      }
-    subjectCountByStudy{
-        group
-        subjects
-      }
-    subjectCountByDiagnoses{
-        group
-        subjects
-      }
-    subjectCountByRecurrenceScore{
-        group
-        subjects
-      }
-    subjectCountByTumorSize{
-        group
-        subjects
-      }
-    subjectCountByChemotherapyRegimen{
-        group
-        subjects
-      }
-    subjectCountByTumorGrade{
-        group
-        subjects
-      }
-  subjectCountByErStatus{
-        group
-        subjects
-      }
-  subjectCountByPrStatus{
-        group
-        subjects
-      }
-  subjectCountByMenopauseStatus{
-        group
-        subjects
-      }
-  subjectCountByChemotherapyRegimen{
-        group
-        subjects
-      }
-      subjectCountByEndocrineTherapy{
+  fileCountByProgram{
     group
     subjects
   }
-  subjectCountByFileType{
+  fileCountByContentFormat{
     group
     subjects
-}
-subjectCountByFileAssociation {
-    group
-    subjects
-}
-subjectCountByTissueComposition{
-    group
-    subjects
-}
-subjectCountByTissueType{
-    group
-    subjects
-}
-    armsByPrograms {
-        program
-        caseSize
-        children {
-            arm
-            caseSize
-            size
-        }
+  }
+
+  fileOverViewPaged(first: 100) {
+    submitted_file_id
+    ccdi_arm
+    submission_date
+    submission_ts
+    source_ip
+    file_count_validate
+    filename_list_validate
+    study_registered
+    primary_datatype
+    have_subject_ids
+    have_pii
+    contain_biospecimen_ids
+    files{
+      file_set_id
     }
-    subjectOverViewPaged(first: 100) {
-      subject_id
-      program_id
-      study_info
-      samples
-      program
-      study_acronym
-      diagnosis
-      recurrence_score
-      tumor_size
-      tumor_grade
-      er_status
-      pr_status
-      chemotherapy
-      endocrine_therapy
-      menopause_status
-      age_at_index
-      survival_time
-      lab_procedures
-      files{
-        file_id
-      }
   }
   }`;
 
 // --------------- Dashboard Query configuration --------------
 export const GET_DASHBOARD_TABLE_DATA_QUERY = gql`{
-  subjectOverViewPaged(first: 1000000) {
-      subject_id
-      program_id
-      study_info
-      samples
-      program
-      study_acronym
-      diagnosis
-      recurrence_score
-      tumor_size
-      tumor_grade
-      er_status
-      pr_status
-      chemotherapy
-      endocrine_therapy
-      menopause_status
-      age_at_index
-      survival_time
-      lab_procedures
-      files{
-        file_id
-      }
+  fileOverViewPaged(first: 1000000) {
+    submitted_file_id
+    ccdi_arm
+    submission_date
+    submission_ts
+    source_ip
+    file_count_validate
+    filename_list_validate
+    study_registered
+    primary_datatype
+    have_subject_ids
+    have_pii
+    contain_biospecimen_ids
+    files{
+      file_set_id
+    }
   }
   }`;

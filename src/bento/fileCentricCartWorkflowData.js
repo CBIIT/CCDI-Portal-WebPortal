@@ -45,55 +45,35 @@ export const manifestData = {
 export const table = {
   dataField: 'filesInList',
   // Value must be one of the 'dataField's in "columns"
-  defaultSortField: 'file_name',
+  defaultSortField: 'file_set_id',
   // 'asc' or 'desc'
   defaultSortDirection: 'asc',
   tableDownloadCSV: customMyFilesTabDownloadCSV,
 
   columns: [
     {
+      dataField: 'file_set_id',
+      header: 'File ID',
+    },
+    {
+      dataField: 'file_ordinal',
+      header: 'File Ordinal',
+    },
+    {
+      dataField: 'file_id',
+      header: 'File UUID',
+    },
+    {
       dataField: 'file_name',
       header: 'File Name',
     },
     {
-      dataField: 'file_type',
-      header: 'File Type',
+      dataField: 'file_md5',
+      header: 'File MD5',
     },
     {
-      dataField: 'association',
-      header: 'Association',
-    },
-    {
-      dataField: 'file_description',
-      header: 'Description',
-    },
-    {
-      dataField: 'file_format',
-      header: 'Format',
-    },
-    {
-      dataField: 'file_size',
-      header: 'Size',
-      // set formatBytes to true to display file size (in bytes) in a more human readable format
-      formatBytes: true,
-    },
-    {
-      dataField: 'subject_id',
-      header: 'Case ID',
-    },
-    {
-      dataField: 'study_code',
-      header: 'Study Code',
-    },
-    {
-      dataField: 'file_id',
-      header: 'UUID',
-      display: false,
-    },
-    {
-      dataField: 'md5sum',
-      header: 'Md5Sum',
-      display: false,
+      dataField: 'file_content_format',
+      header: 'File Content Format',
     },
   ],
 };
@@ -102,16 +82,12 @@ export const table = {
 export const GET_MY_CART_DATA_QUERY = gql`
 query filesInList($file_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String ="") {
     filesInList(file_ids: $file_ids, offset: $offset,first: $first, order_by: $order_by) {
-        study_code
-        subject_id
-        file_name
-        file_type
-        association
-        file_description
-        file_format
-        file_size
-        file_id
-        md5sum
+      file_set_id
+      file_ordinal
+      file_id
+      file_name
+      file_md5
+      file_content_format
     }
 }`;
 

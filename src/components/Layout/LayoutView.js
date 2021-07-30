@@ -42,13 +42,13 @@ const Layout = ({ classes, isSidebarOpened }) => (
             <Route exact path="/ICDC/" component={Home} />
             <Route exact path="/" component={Home} />
             <Route exact path="/home" component={Home} />
-            <Route path="/cases" component={Dashboard} />
+            <Route path="/files" component={Dashboard} />
             <Route path="/programs" component={Programs} />
             <Route path="/model" component={modelPage} />
             <Route path="/table" component={table} />
             <Route path="/fileCentricCart" component={fileCentricCart} />
             <Route path="/program/:id" component={ProgramDetail} />
-            <Route path="/case/:id" component={CaseDetail} />
+            <Route path="/file/:id" component={CaseDetail} />
             <Route path="/arm/:id" component={ArmDetail} />
             <Route path="/JBrowse" component={JBrowse} />
             {aboutPageRoutes.map(

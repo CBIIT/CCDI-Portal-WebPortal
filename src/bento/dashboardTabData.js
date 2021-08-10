@@ -188,36 +188,14 @@ export const DASHBOARD_QUERY = gql`{
 
 export const FILTER_GROUP_QUERY = gql`
   query groupCounts($subject_ids: [String]){
-   armsByPrograms(subject_ids: $subject_ids) {
-     program
-     caseSize
-     children {
-         arm
-         caseSize
-         size
-     }
- }
- subjectCountByDiagnoses (subject_ids: $subject_ids){
-  group
-  subjects
-}
-subjectCountByRecurrenceScore (subject_ids: $subject_ids){
-  group
-  subjects
-}
-subjectCountByTumorSize(subject_ids: $subject_ids) {
-  group
-  subjects
-}
-subjectCountByChemotherapyRegimen(subject_ids: $subject_ids) {
-  group
-  subjects
-}
-subjectCountByEndocrineTherapy (subject_ids: $subject_ids){
-  group
-  subjects
-}
-   
+    fileCountByProgram(submitted_file_ids: $subject_ids){
+      group
+      subjects
+    }
+    fileCountByContentFormat(submitted_file_ids: $subject_ids){
+      group
+      subjects
+    } 
 }
  `;
 

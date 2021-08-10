@@ -33,5 +33,6 @@ module.exports = {
     "react/jsx-props-no-spreading":"off",
     "linebreak-style":"off",
     "no-sequences":"off",
+    "no-console":"off"
   },
 };

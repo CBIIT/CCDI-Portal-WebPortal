@@ -239,7 +239,6 @@ function clearGroup(data) {
  */
 
 const querySwitch = (payload, tabContainer) => {
-  console.log(payload, tabContainer);
   switch (payload) {
     case ('Files'):
       return { QUERY: tabContainer.defaultSortDirection === 'desc' ? GET_FILES_OVERVIEW_DESC_QUERY : GET_FILES_OVERVIEW_QUERY, sortfield: tabContainer.defaultSortField || '', sortDirection: tabContainer.defaultSortDirection || '' };
@@ -282,7 +281,7 @@ export function fetchDataForDashboardTab(
     .query({
       query: QUERY,
       variables: {
-        subject_ids: subjectIDsAfterFilter, sample_ids: sampleIDsAfterFilter, file_ids: fileIDsAfterFilter, order_by: sortfield || '',
+        submitted_file_ids: subjectIDsAfterFilter, sample_ids: sampleIDsAfterFilter, file_ids: fileIDsAfterFilter, order_by: sortfield || '',
       },
     })
     .then((result) => store.dispatch({ type: 'UPDATE_CURRRENT_TAB_DATA', payload: { currentTab: payload, sortDirection, ..._.cloneDeep(result) } }))
@@ -539,7 +538,7 @@ function toggleCheckBoxWithAPIAction(payload, currentAllFilterVariables) {
     })
     .then((result) => client.query({ // request to get the filtered group counts
       query: FILTER_GROUP_QUERY,
-      variables: { subject_ids: result.data.searchSubjects.subjectIds },
+      variables: { subject_ids: result.data.searchFiles.subjectIds },
     })
       .then((result2) => store.dispatch({
         type: 'TOGGGLE_CHECKBOX_WITH_API',
@@ -769,7 +768,6 @@ export async function tableHasSelections() {
  * return boolean
  */
 function hasFilter() {
-  console.log(getState());
   const currentAllActiveFilters = getState().allActiveFilters;
   return Object.entries(currentAllActiveFilters).filter((item) => item[1].length > 0).length > 0;
 }
@@ -847,19 +845,19 @@ const reducers = {
     );
     const checkboxData1 = setSelectedFilterValues(updatedCheckboxData1, item.allFilters);
     fetchDataForDashboardTab(state.currentActiveTab,
-      item.data.searchSubjects.subjectIds, item.data.searchSubjects.sampleIds,
-      item.data.searchSubjects.fileIds);
+      item.data.searchFiles.subjectIds, item.data.searchFiles.sampleIds,
+      item.data.searchFiles.fileIds);
     return {
       ...state,
       setSideBarLoading: false,
       allActiveFilters: item.allFilters,
-      filteredSubjectIds: item.data.searchSubjects.subjectIds,
-      filteredSampleIds: item.data.searchSubjects.sampleIds,
-      filteredFileIds: item.data.searchSubjects.fileIds,
+      filteredSubjectIds: item.data.searchFiles.subjectIds,
+      filteredSampleIds: item.data.searchFiles.sampleIds,
+      filteredFileIds: item.data.searchFiles.fileIds,
       checkbox: {
         data: checkboxData1,
       },
-      stats: getFilteredStat(item.data.searchSubjects, statsCount),
+      stats: getFilteredStat(item.data.searchFiles, statsCount),
       widgets: getWidgetsInitData(item.groups.data, widgetsData),
     };
   },
@@ -1038,7 +1036,6 @@ const reducers = {
   CLEAR_SECTION_SORT: (state, item) => {
     let { sortByList = {} } = state;
     const { groupName } = item;
-    console.log(groupName);
     sortByList[groupName] ? delete sortByList[groupName] : null ;
 
     return { ...state, sortByList };

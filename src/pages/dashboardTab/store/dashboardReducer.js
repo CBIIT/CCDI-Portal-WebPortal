@@ -339,8 +339,8 @@ export async function fetchAllFileIDsForSelectAll(fileCount = 100000) {
       },
     })
     .then((result) => {
-      const RESULT_DATA = getState().currentActiveTab === tabIndex[2].title ? 'fileOverview' : getState().currentActiveTab === tabIndex[1].title ? 'sampleOverview' : 'subjectOverViewPaged';
-      const fileIdsFromQuery = RESULT_DATA === 'fileOverview' ? transformfileIdsToFiles(result.data[RESULT_DATA]) : RESULT_DATA === 'subjectOverViewPaged' ? transformCasesFileIdsToFiles(result.data[RESULT_DATA]) : result.data[RESULT_DATA] || [];
+      const RESULT_DATA = getState().currentActiveTab === tabIndex[2].title ? 'fileOverview' : getState().currentActiveTab === tabIndex[1].title ? 'sampleOverview' : 'fileOverViewPaged';
+      const fileIdsFromQuery = RESULT_DATA === 'fileOverview' ? transformfileIdsToFiles(result.data[RESULT_DATA]) : RESULT_DATA === 'fileOverViewPaged' ? transformCasesFileIdsToFiles(result.data[RESULT_DATA]) : result.data[RESULT_DATA] || [];
       return fileIdsFromQuery;
     });
 
@@ -354,12 +354,15 @@ export async function fetchAllFileIDsForSelectAll(fileCount = 100000) {
     return accumulator;
   }, []);
 
-  // Removing fileIds that are not in our current list of filtered fileIds
+  return filesArray;
 
+  // Removing fileIds that are not in our current list of filtered fileIds
+  /*
   const filteredFilesArray = fileIds != null
     ? filesArray.filter((x) => fileIds.includes(x))
     : filesArray;
   return filteredFilesArray;
+  */
 }
 
 /**
@@ -470,7 +473,7 @@ export async function fetchAllFileIDs(fileCount = 100000, selectedIds = [], offs
       filesIds = await getFileIDs(fileCount, GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL, [], selectedIds, 'sampleOverview');
       break;
     default:
-      filesIds = await getFileIDs(fileCount, GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL, selectedIds, [], 'subjectOverViewPaged');
+      filesIds = await getFileIDs(fileCount, GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL, selectedIds, [], 'fileOverViewPaged');
   }
   return filterOutFileIds(filesIds);
 }

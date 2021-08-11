@@ -250,7 +250,7 @@ const table2 = {
   // A maximum of 10 columns are allowed
   columns: [
     {
-      dataField: 'file_set_id',
+      dataField: 'file_id',
       header: 'File ID',
     },
     {
@@ -258,7 +258,7 @@ const table2 = {
       header: 'Ordinal',
     },
     {
-      dataField: 'file_id',
+      dataField: 'file_uuid',
       header: 'File UUID',
     },
     {
@@ -309,9 +309,9 @@ const GET_CASE_DETAIL_DATA_QUERY = gql`
       have_pii
       contain_biospecimen_ids
       files {
-        file_set_id
+        file_id: file_set_id
         file_ordinal
-        file_id
+        file_uuid: file_id
         file_name
         file_md5
         file_content_format

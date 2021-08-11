@@ -266,8 +266,8 @@ query fileOverViewPaged($submitted_file_ids: [String], $offset: Int = 0, $first:
   `;
 
 export const GET_FILES_OVERVIEW_DESC_QUERY = gql`
-  query fileOverviewPagedDesc($file_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String ="submitted_file_id"){
-    fileOverviewPagedDesc(file_ids: $file_ids, offset: $offset,first: $first, order_by: $order_by) {
+  query fileOverviewPagedDesc($submitted_file_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String ="submitted_file_id"){
+    fileOverviewPagedDesc(submitted_file_ids: $submitted_file_ids, offset: $offset,first: $first, order_by: $order_by) {
       submitted_file_id
       ccdi_arm
       submission_date

@@ -23,8 +23,8 @@ export const tabContainers = [
     name: 'Files',
     dataField: 'dataFile',
     api: 'GET_FILES_OVERVIEW_QUERY',
-    paginationAPIField: 'fileOverview',
-    paginationAPIFieldDesc: 'fileOverviewDesc',
+    paginationAPIField: 'fileOverViewPaged',
+    paginationAPIFieldDesc: 'fileOverViewPagedDesc',
     defaultSortField: 'submitted_file_id',
     defaultSortDirection: 'asc',
     count: 'numberOfFiles',
@@ -266,8 +266,8 @@ query fileOverViewPaged($submitted_file_ids: [String], $offset: Int = 0, $first:
   `;
 
 export const GET_FILES_OVERVIEW_DESC_QUERY = gql`
-  query fileOverviewPagedDesc($submitted_file_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String ="submitted_file_id"){
-    fileOverviewPagedDesc(submitted_file_ids: $submitted_file_ids, offset: $offset,first: $first, order_by: $order_by) {
+  query fileOverViewPagedDesc($submitted_file_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String ="submitted_file_id"){
+    fileOverViewPagedDesc(submitted_file_ids: $submitted_file_ids, offset: $offset,first: $first, order_by: $order_by) {
       submitted_file_id
       ccdi_arm
       submission_date
@@ -278,11 +278,14 @@ export const GET_FILES_OVERVIEW_DESC_QUERY = gql`
       files{
         file_set_id
       }
+      study_registered
       primary_datatype
+      derived_interventional_clinical_trial
+      derived_observational_study
       have_subject_ids
       have_pii
       contain_biospecimen_ids
-      study_registered
+      contain_biospecimen_2_subject_mappings
     }
   }
     `;

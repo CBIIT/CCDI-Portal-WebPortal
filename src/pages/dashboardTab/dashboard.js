@@ -33,32 +33,6 @@ const Dashboard = ({
             </div>
             <div className={classes.rightContent}>
               <div className={classes.widgetsContainer}>
-                <div className={classes.widgetsCollapse}>
-                  <div className={classes.floatLeft} />
-                  <div className={classes.floatRight}>
-                    <FormControlLabel
-                      control={(
-                        <Button className={classes.customButton} onClick={handleChange}>
-                          {collapse ? 'COLLAPSE VIEW' : 'OPEN VIEW' }
-                        </Button>
-)}
-                    />
-                    <Switch
-                      classes={{
-                        root: classes.switchRoot,
-                        switchBase: classes.switchBase,
-                        thumb: classes.thumb,
-                        track: classes.track,
-                        checked: classes.checked,
-                      }}
-                      className={classes.customSwitch}
-                      disableRipple
-                      onChange={() => {
-                        themeChanger.toggleTheme();
-                      }}
-                    />
-                  </div>
-                </div>
                 <Collapse in={collapse} className={classes.backgroundWidgets}>
                   <Grid container>
                     {displaywidgets.map((widget, index) => {
@@ -127,7 +101,6 @@ const Dashboard = ({
                 </Collapse>
               </div>
               { collapse && <div className={classes.dashboardDividerTop} />}
-              { collapse && <div className={classes.dashboardDivider} />}
               <Tab />
             </div>
           </div>

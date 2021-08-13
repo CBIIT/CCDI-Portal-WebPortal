@@ -7,15 +7,15 @@ import {
 const LandingStatsView = ({ classes, stats, statsData }) => (
   <>
     <div className={classnames({
-      [classes.statsSection]: stats.length < 4,
-      [classes.statsSectionCenter]: stats.length === 4,
+      [classes.statsSection]: stats.length < 5,
+      [classes.statsSectionCenter]: stats.length === 5,
     })}
     >
       { stats.length > 0 && (
       <div
         className={classnames({
-          [classes.boxCut]: stats.length < 4,
-          [classes.box]: stats.length === 4,
+          [classes.boxCut]: stats.length < 5,
+          [classes.box]: stats.length === 5,
         })}
       >
 

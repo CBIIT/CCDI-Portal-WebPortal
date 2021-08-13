@@ -65,6 +65,34 @@ export const customSamplesTabDownloadCSV = {
   defaultFullTableDownload: false,
 };
 
+export const GET_PARTICIPANTS_TAB = gql`
+query sampleOverview($sample_ids: [String], $offset: Int = 0, $first: Int = 1000, $order_by:String =""){
+  sampleOverview(sample_ids: $sample_ids, offset: $offset,first: $first, order_by: $order_by) {
+    sample_id
+    subject_id
+    program
+    program_id
+    arm
+    diagnosis
+    tissue_type
+    tissue_composition
+    sample_anatomic_site
+    sample_procurement_method
+    platform
+    files 
+}
+}
+`;
+
+export const customParticipantsTabDownloadCSV = {
+  keysToInclude: ['sample_id', 'subject_id', 'program', 'arm', 'diagnosis', 'tissue_type', 'tissue_composition', 'sample_anatomic_site', 'sample_procurement_method', 'platform'],
+  header: ['Sample ID', 'Case Id', 'Program Code', 'Arm', 'Diagnosis', 'Tissue Type', 'Tissue Composition', 'Sample Anatomic Site', 'Sample Procurement Method', 'Platform'],
+  query: GET_PARTICIPANTS_TAB,
+  apiVariable: 'participantOverview',
+  fileName: 'tableDownload',
+  defaultFullTableDownload: false,
+};
+
 export const GET_FILES_TAB = gql`
 query fileOverview($file_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String ="file_name"){
   fileOverview(file_ids: $file_ids, offset: $offset,first: $first, order_by: $order_by) {

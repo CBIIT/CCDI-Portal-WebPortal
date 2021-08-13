@@ -22,6 +22,11 @@ export const globalStatsData = [
     statAPI: 'numberOfFiles',
   },
   {
+    statTitle: 'Participants',
+    type: 'field',
+    statAPI: 'numberOfParticipants',
+  },
+  {
     statTitle: 'Studies',
     type: 'field',
     statAPI: 'numberOfStudies',
@@ -38,6 +43,7 @@ export const GET_GLOBAL_STATS_DATA_QUERY = gql`{
   numberOfPrograms
   numberOfFiles
   numberOfStudies
+  numberOfParticipants
   numberOfSubmitters
   }
   `;

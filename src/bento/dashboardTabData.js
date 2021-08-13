@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import { customFilesTabDownloadCSV } from './tableDownloadCSV';
+import { customFilesTabDownloadCSV, customParticipantsTabDownloadCSV } from './tableDownloadCSV';
 
 // --------------- Tooltip configuration --------------
 export const tooltipContent = {
@@ -68,18 +68,6 @@ export const tabContainers = [
         display: true,
       },
       {
-        dataField: 'file_count_validate',
-        header: 'File Count Valideted',
-        sort: 'asc',
-        display: true,
-      },
-      {
-        dataField: 'filename_list_validate',
-        header: 'Filename List Validated',
-        sort: 'asc',
-        display: true,
-      },
-      {
         dataField: 'study_registered',
         header: 'Study Registered',
         sort: 'asc',
@@ -104,8 +92,20 @@ export const tabContainers = [
         display: true,
       },
       {
+        dataField: 'subject_id_cross_reference',
+        header: 'Subject ID Cross Reference',
+        sort: 'asc',
+        display: true,
+      },
+      {
         dataField: 'contain_biospecimen_ids',
         header: 'Contain Biospecimen IDs',
+        sort: 'asc',
+        display: true,
+      },
+      {
+        dataField: 'participant_id_column_header_or_number',
+        header: 'Participant ID Column Header',
         sort: 'asc',
         display: true,
       },
@@ -113,11 +113,11 @@ export const tabContainers = [
     id: 'file_tab',
     onRowsSelect: 'type1',
     disableRowSelection: 'type1',
-    tableID: 'case_tab_table',
+    tableID: 'file_tab_table',
     selectableRows: true,
     tabIndex: '0',
     tableDownloadCSV: customFilesTabDownloadCSV,
-    downloadFileName: 'Bento_Dashboard_cases_download',
+    downloadFileName: 'CCDI_Portal_Dashboard_files_download',
     headerPagination: true,
     footerPagination: true,
   },
@@ -142,7 +142,7 @@ export const tabIndex = [
     selectedColor: '#C92EC7',
   },
   {
-    title: 'Cases',
+    title: 'Participants',
     primaryColor: '#D6F2EA',
     secondaryColor: '#FFDFB8',
     selectedColor: '#10A075',
@@ -159,6 +159,7 @@ export const DASHBOARD_QUERY = gql`{
   numberOfPrograms
   numberOfSubmitters
   numberOfStudies
+  numberOfParticipants
   numberOfFiles
   fileCountByProgram{
     group
@@ -179,7 +180,9 @@ export const DASHBOARD_QUERY = gql`{
     primary_datatype
     have_subject_ids
     have_pii
+    subject_id_cross_reference
     contain_biospecimen_ids
+    participant_id_column_header_or_number
     files{
       file_set_id
     }
@@ -209,6 +212,7 @@ searchFiles(programs: $programs,
         numberOfPrograms
         numberOfSubmitters
         numberOfStudies
+        numberOfParticipants
         numberOfFiles
         fileIds
         subjectIds: fileIds
@@ -224,7 +228,9 @@ searchFiles(programs: $programs,
           primary_datatype
           have_subject_ids
           have_pii
+          subject_id_cross_reference
           contain_biospecimen_ids
+          participant_id_column_header_or_number
         }
 }
 filterFileCountByProgram(programs: $programs, file_content_formats: $file_content_formats) {
@@ -259,8 +265,10 @@ query fileOverViewPaged($submitted_file_ids: [String], $offset: Int = 0, $first:
       derived_observational_study
       have_subject_ids
       have_pii
+      subject_id_cross_reference
       contain_biospecimen_ids
       contain_biospecimen_2_subject_mappings
+      participant_id_column_header_or_number
   }
 }
   `;
@@ -286,6 +294,32 @@ export const GET_FILES_OVERVIEW_DESC_QUERY = gql`
       have_pii
       contain_biospecimen_ids
       contain_biospecimen_2_subject_mappings
+    }
+  }
+    `;
+
+export const GET_PARTICIPANTS_OVERVIEW_QUERY = gql`
+query participantOverViewPaged($participant_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String ="participant_id"){
+  participantOverViewPaged(participant_ids: $participant_ids, first: $first, offset: $offset, order_by: $order_by) {
+      participant_id
+      gender
+      age_at_index
+      alt_participants{
+        alt_participant_id
+      }
+  }
+}
+  `;
+
+export const GET_PARTICIPANTS_OVERVIEW_DESC_QUERY = gql`
+  query participantOverViewPagedDesc($participant_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String ="participant_id"){
+    participantOverViewPagedDesc(participant_ids: $participant_ids, offset: $offset,first: $first, order_by: $order_by) {
+      participant_id
+      gender
+      age_at_index
+      alt_participants{
+        alt_participant_id
+      }
     }
   }
     `;

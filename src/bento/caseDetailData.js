@@ -110,8 +110,27 @@ const rightPanel = [
         dataField: 'have_pii',
       },
       {
+        label: 'Subject ID to additional Subject ID cross-reference',
+        dataField: 'subject_id_cross_reference',
+      },
+      {
         label: 'Contain Biospecimen IDs',
         dataField: 'contain_biospecimen_ids',
+      },
+    ],
+  },
+  {
+    sectionHeader: 'Participant Info',
+    // sectionDesc: 'Follow Up Related Info',
+    properties: [
+      // A maximum of 10 properties are allowed
+      {
+        label: 'Column Header or Number',
+        dataField: 'participant_id_column_header_or_number',
+      },
+      {
+        label: 'Alternate Column Header or Number',
+        dataField: 'alt_participant_id_column_header_or_number',
       },
     ],
   },
@@ -165,7 +184,7 @@ const table1 = {
   // downloaded File Name
   downloadFileName: 'Bento_case_files_download',
   // Set 'selectableRows' to true to show the row selection
-  selectableRows: true,
+  selectableRows: false,
   // A maximum of 10 columns are allowed
   columns: [
     {
@@ -273,6 +292,76 @@ const table2 = {
       dataField: 'file_content_format',
       header: 'File Content Format',
     },
+    {
+      dataField: 'file_deposit_location',
+      header: 'File Deposit Location',
+    },
+  ],
+  // Util Functions
+  // Custom function on selct checkbox is selected.
+  customOnRowsSelect: FileOnRowsSelect,
+};
+
+// --------------- Table 3 configuration --------------
+const table3 = {
+  // Set 'display' to false to hide the table entirely
+  display: true,
+  // Table title
+  tableTitle: 'PARTICIPANTS',
+  // Field name for files data, need to be updated only when using a different GraphQL query
+  subjectDetailField: 'participants',
+  // Value must be one of the 'dataField's in fileTableColumns
+  defaultSortField: 'participant_id',
+  // 'asc' or 'desc'
+  defaultSortDirection: 'asc',
+  // Text to appear on Add to cart button
+  buttonText: 'Add Selected Files',
+  saveButtonDefaultStyle: {
+    color: '#fff',
+    backgroundColor: '#09A175',
+    opacity: '1',
+    border: '0px',
+    cursor: 'pointer',
+  },
+  ActiveSaveButtonDefaultStyle: {
+    disabled: 'true',
+    opacity: '0.3',
+    cursor: 'auto',
+  },
+  DeactiveSaveButtonDefaultStyle: {
+    cursor: 'pointer',
+    opacity: 'unset',
+    border: 'unset',
+  },
+  // Help Icon Message
+  tooltipMessage: 'Click button to add selected files.',
+  helpMessage: 'Here help message',
+  // showHideColumns 'true' or 'false'
+  showHideColumns: true,
+  // download csv 'true' or 'false'
+  download: false,
+  // downloaded File Name
+  downloadFileName: 'Bento_case_samples_download',
+  // Set 'selectableRows' to true to show the row selection
+  selectableRows: false,
+  // A maximum of 10 columns are allowed
+  columns: [
+    {
+      dataField: 'participant_id',
+      header: 'Participant ID',
+    },
+    {
+      dataField: 'gender',
+      header: 'Gender',
+    },
+    {
+      dataField: 'age_at_index',
+      header: 'Age At Index',
+    },
+    {
+      dataField: 'alt_participants',
+      header: 'Alternative Participant IDs',
+    },
   ],
   // Util Functions
   // Custom function on selct checkbox is selected.
@@ -307,7 +396,11 @@ const GET_CASE_DETAIL_DATA_QUERY = gql`
       primary_datatype
       have_subject_ids
       have_pii
+      subject_id_cross_reference
       contain_biospecimen_ids
+      contain_biospecimen_2_subject_mappings
+      participant_id_column_header_or_number
+      alt_participant_id_column_header_or_number
       files {
         file_id: file_set_id
         file_ordinal
@@ -315,8 +408,10 @@ const GET_CASE_DETAIL_DATA_QUERY = gql`
         file_name
         file_md5
         file_content_format
+        file_deposit_location
       }
       studies {
+        study_id
         pi_name
         pi_institution
         pi_email
@@ -334,6 +429,12 @@ const GET_CASE_DETAIL_DATA_QUERY = gql`
         figshare
         other_repo
       }
+      participants {
+        participant_id
+        gender
+        age_at_index
+        alt_participants
+      }
     }
   }
 `;
@@ -347,5 +448,6 @@ export {
   rightPanel,
   table1,
   table2,
+  table3,
   GET_CASE_DETAIL_DATA_QUERY,
 };

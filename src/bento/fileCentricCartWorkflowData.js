@@ -36,8 +36,8 @@ export const myFilesPageData = {
 };
 
 export const manifestData = {
-  keysToInclude: ['file_id', 'file_ordinal', 'file_name', 'file_md5', 'file_content_format'],
-  header: ['File UUID', 'File Ordinal', 'File Name', 'File Md5', 'File Content Format', 'User Comments'],
+  keysToInclude: ['file_id', 'file_ordinal', 'file_name', 'file_md5', 'file_content_format', 'file_deposit_location'],
+  header: ['File UUID', 'File Ordinal', 'File Name', 'File Md5', 'File Content Format', 'File Deposit Location', 'User Comments'],
 };
 
 // --------------- File table configuration --------------
@@ -75,6 +75,10 @@ export const table = {
       dataField: 'file_content_format',
       header: 'File Content Format',
     },
+    {
+      dataField: 'file_deposit_location',
+      header: 'File Deposit Location',
+    },
   ],
 };
 
@@ -88,6 +92,7 @@ query filesInList($file_ids: [String], $offset: Int = 0, $first: Int = 10, $orde
       file_name
       file_md5
       file_content_format
+      file_deposit_location
     }
 }`;
 

@@ -23,12 +23,12 @@ import {
   FILTER_QUERY,
   FILTER_GROUP_QUERY,
   GET_FILES_OVERVIEW_QUERY,
-  GET_SAMPLES_OVERVIEW_QUERY,
-  GET_CASES_OVERVIEW_QUERY,
+  GET_PARTICIPANTS_OVERVIEW_QUERY,
   GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL,
   GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL,
   GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL,
   GET_FILES_OVERVIEW_DESC_QUERY,
+  GET_PARTICIPANTS_OVERVIEW_DESC_QUERY,
   GET_FILES_NAME_QUERY,
   GET_FILE_IDS_FROM_FILE_NAME,
   tabIndex,
@@ -242,6 +242,8 @@ const querySwitch = (payload, tabContainer) => {
   switch (payload) {
     case ('Files'):
       return { QUERY: tabContainer.defaultSortDirection === 'desc' ? GET_FILES_OVERVIEW_DESC_QUERY : GET_FILES_OVERVIEW_QUERY, sortfield: tabContainer.defaultSortField || '', sortDirection: tabContainer.defaultSortDirection || '' };
+    case ('Participants'):
+      return { QUERY: tabContainer.defaultSortDirection === 'desc' ? GET_PARTICIPANTS_OVERVIEW_DESC_QUERY : GET_PARTICIPANTS_OVERVIEW_QUERY, sortfield: tabContainer.defaultSortField || '', sortDirection: tabContainer.defaultSortDirection || '' };
     default:
       return { QUERY: tabContainer.defaultSortDirection === 'desc' ? GET_FILES_OVERVIEW_DESC_QUERY : GET_FILES_OVERVIEW_QUERY, sortfield: tabContainer.defaultSortField || '', sortDirection: tabContainer.defaultSortDirection || '' };
   }
@@ -872,7 +874,7 @@ const reducers = {
       datatable: {
         ...state.datatable,
         dataCase: item.sortDirection === 'desc' ? item.data.subjectOverViewPagedDesc : item.data.subjectOverViewPaged,
-        dataSample: item.sortDirection === 'desc' ? item.data.sampleOverviewDesc : item.data.sampleOverview,
+        dataParticipant: item.sortDirection === 'desc' ? item.data.participantOverViewPagedDesc : item.data.participantOverViewPaged,
         dataFile: item.sortDirection === 'desc' ? item.data.fileOverViewPagedDesc : item.data.fileOverViewPaged,
       },
     }

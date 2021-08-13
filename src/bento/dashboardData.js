@@ -166,6 +166,7 @@ export const GET_DASHBOARD_DATA_QUERY = gql`{
   numberOfPrograms
   numberOfSubmitters
   numberOfStudies
+  numberOfParticipants
   numberOfFiles
   fileCountByProgram{
     group

@@ -17,6 +17,7 @@ import {
   rightPanel,
   table1,
   table2,
+  table3,
   externalLinkIcon,
   tooltipContent,
 } from '../../bento/caseDetailData';
@@ -44,16 +45,17 @@ const CaseDetail = ({ data, classes }) => {
 
   const stat = {
     numberOfPrograms: 1,
-    numberOfStudies: 1,
-    numberOfSubjects: 1,
-    numberOfSamples: data.num_samples,
-    numberOfLabProcedures: data.num_lab_procedures,
-    numberOfFiles: data.files.length,
+    numberOfStudies: data.studies.length,
+    numberOfParticipants: data.participants.length,
+    numberOfSubmitters: 1,
+    numberOfFiles: 1,
   };
 
+  console.log(data);
+
   const breadCrumbJson = [{
-    name: 'ALL CASES /',
-    to: '/cases',
+    name: 'ALL FILES /',
+    to: '/files',
     isALink: true,
   }];
 
@@ -192,6 +194,39 @@ const CaseDetail = ({ data, classes }) => {
                       ActiveSaveButtonDefaultStyle={table1.ActiveSaveButtonDefaultStyle}
                       DeactiveSaveButtonDefaultStyle={table1.DeactiveSaveButtonDefaultStyle}
                       tooltipMessage={table2.tooltipMessage}
+                      tooltipContent={tooltipContent}
+                    />
+                  </Grid>
+                </Grid>
+              </Grid>
+            </div>
+          </div>
+        ) : ''}
+      {table3.display
+        ? (
+          <div id="case_detail_table_associated_participants" className={classes.tableContainer}>
+            <div className={classes.tableDiv}>
+              <Grid item xs={12}>
+                <Grid container spacing={4}>
+                  <Grid item xs={12}>
+                    <GridWithFooter
+                      data={data[table3.subjectDetailField]}
+                      title={(
+                        <div className={classes.tableTitle}>
+                          <span className={classes.tableHeader}>{table3.tableTitle}</span>
+                        </div>
+                      )}
+                      columns={getColumns(table3, classes, data)}
+                      options={getOptions(table3, classes)}
+                      customOnRowsSelect={table3.customOnRowsSelect}
+                      openSnack={openSnack}
+                      closeSnack={closeSnack}
+                      disableRowSelection={table3.disableRowSelection}
+                      buttonText={table3.buttonText}
+                      saveButtonDefaultStyle={table3.saveButtonDefaultStyle}
+                      ActiveSaveButtonDefaultStyle={table3.ActiveSaveButtonDefaultStyle}
+                      DeactiveSaveButtonDefaultStyle={table3.DeactiveSaveButtonDefaultStyle}
+                      tooltipMessage={table3.tooltipMessage}
                       tooltipContent={tooltipContent}
                     />
                   </Grid>

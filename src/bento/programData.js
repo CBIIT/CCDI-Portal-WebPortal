@@ -48,6 +48,10 @@ const table = {
       header: 'Number of Submitted Files',
     },
     {
+      dataField: 'num_participants',
+      header: 'Number of participants',
+    },
+    {
       dataField: 'num_studies',
       header: 'Number of Studies',
     },
@@ -61,6 +65,7 @@ const GET_PROGRAMS_DATA_QUERY = gql`{
  start_date
  end_date
  num_files
+ num_participants
  num_studies
  }
 }

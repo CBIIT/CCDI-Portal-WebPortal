@@ -55,10 +55,10 @@ const ProgramView = ({ classes, data, theme }) => {
 
   const stat = {
     numberOfPrograms: 1,
-    numberOfStudies: programData.num_subjects !== undefined ? programData.studies.length : 'undefined',
-    numberOfSubjects: programData.num_subjects !== undefined ? programData.num_subjects : 'undefined',
+    numberOfStudies: programData.num_studies !== undefined ? programData.num_studies : 'undefined',
+    numberOfSubmitters: 1,
     numberOfSamples: programData.num_samples !== undefined ? programData.num_samples : 'undefined',
-    numberOfLabProcedures: programData.num_lab_procedures !== undefined ? programData.num_lab_procedures : 'undefined',
+    numberOfParticipants: programData.num_participants !== undefined ? programData.num_participants : 'undefined',
     numberOfFiles: programData.num_files !== undefined ? programData.num_files : 'undefined',
   };
 
@@ -231,71 +231,6 @@ const ProgramView = ({ classes, data, theme }) => {
 
               </Grid>
             </Grid>
-
-            <Grid
-              item
-              lg={5}
-              sm={6}
-              xs={12}
-            >
-              <Grid container spacing={16} direction="row" className={classes.detailContainerRight}>
-                { rightPanel.widget[0].display ? (
-                  <Grid
-                    item
-                    xs={12}
-                    className={classes.marginTopN37}
-                  >
-                    <Widget
-                      title={rightPanel.widget[0].label}
-                      upperTitle
-                      bodyClass={classes.fullHeightBody}
-                      className={classes.card}
-                      color={theme.palette.dodgeBlue.main}
-                      titleClass={classes.widgetTitle}
-                      noPaddedTitle
-                    >
-                      <CustomActiveDonut
-                        data={programData[rightPanel.widget[0].dataField] || []}
-                        width={400}
-                        height={225}
-                        innerRadius={50}
-                        outerRadius={75}
-                        cx="50%"
-                        cy="50%"
-                        fontSize="12px"
-                        colors={colors}
-                        titleLocation="bottom"
-                        titleAlignment="center"
-                      />
-                    </Widget>
-                  </Grid>
-                ) : ''}
-
-                { rightPanel.files[0].display ? (
-                  <Grid item xs={12}>
-                    <div className={classes.fileContainer}>
-                      <span
-                        className={classes.detailContainerHeader}
-                      >
-                        {rightPanel.files[0].label}
-                      </span>
-                      <div className={classes.fileContent}>
-                        <div className={classes.fileIcon}>
-                          <img
-                            src={rightPanel.files[0].fileIconSrc}
-                            alt={rightPanel.files[0].fileIconAlt}
-                          />
-                        </div>
-                        <div className={classes.fileCount} id="program_detail_file_count">
-                          {programData[rightPanel.files[0].dataField]}
-                        </div>
-                      </div>
-                    </div>
-                  </Grid>
-                ) : ''}
-              </Grid>
-            </Grid>
-
           </Grid>
         </div>
       </div>
@@ -510,8 +445,6 @@ const styles = (theme) => ({
     color: '#000000',
     size: '12px',
     lineHeight: '23px',
-    height: '525px',
-
   },
   detailContainerHeader: {
     textTransform: 'uppercase',
@@ -534,8 +467,6 @@ const styles = (theme) => ({
   detailContainerLeft: {
     display: 'block',
     padding: '5px  20px 5px 0px !important',
-    minHeight: '500px',
-    maxHeight: '500px',
     overflowY: 'auto',
     overflowX: 'hidden',
     width: '103.9%',

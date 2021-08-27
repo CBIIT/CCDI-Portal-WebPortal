@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 // --------------- Page title configuration --------------
 const pageTitle = {
   label: 'Program :',
-  dataField: 'program_acronym',
+  dataField: 'program_id',
 };
 
 const pageSubTitle = {
@@ -17,9 +17,9 @@ const breadCrumb = {
 
 // --------------- Aggregated count configuration --------------
 const aggregateCount = {
-  labelText: 'Cases',
-  dataField: 'num_subjects',
-  link: '/cases',
+  labelText: 'Files',
+  dataField: 'num_files',
+  link: '/files',
   display: true,
 };
 
@@ -41,29 +41,16 @@ const externalLinkIcon = {
 const leftPanel = {
   attributes: [
     {
-      dataField: 'program_acronym',
+      dataField: 'program_id',
       label: 'Program',
     },
     {
-      dataField: 'program_name',
-      label: 'Program Name',
+      dataField: 'start_date',
+      label: 'Program Start Date',
     },
     {
-      dataField: 'program_id',
-      label: 'Program Id',
-    },
-    {
-      dataField: 'program_full_description',
-      label: 'Program Description',
-    },
-    {
-      dataField: 'institution_name',
-      label: 'Institution',
-    },
-    {
-      dataField: 'program_external_url',
-      label: 'External Link to Program',
-      externalLinkToLabel: true,
+      dataField: 'end_date',
+      label: 'Program End Date',
     },
   ],
 };
@@ -73,17 +60,17 @@ const leftPanel = {
 const rightPanel = {
   widget: [
     {
-      dataField: 'diagnoses',
-      label: 'Diagnosis',
+      dataField: 'studies',
+      label: 'Studies',
       display: true,
     },
   ],
   files: [
     {
-      dataField: 'num_files',
-      label: 'Number of files',
+      dataField: 'num_participants',
+      label: 'Number of Participants',
       fileIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/programNumberofFilesIcon.svg',
-      fileIconAlt: 'Number of files icon',
+      fileIconAlt: 'Number of participants icon',
       display: true,
     },
   ],
@@ -94,11 +81,11 @@ const table = {
   // Set 'display' to false to hide the table entirely
   display: true,
   // Table title
-  title: 'ARMS',
+  title: 'Submitted Files',
   // Field name for table data, need to be updated only when using a different GraphQL query
-  dataField: 'studies',
+  dataField: 'files',
   // Value must be one of the 'field' in columns
-  defaultSortField: 'study_acronym',
+  defaultSortField: 'submitted_file_id',
   // 'asc' or 'desc'
   defaultSortDirection: 'asc',
   // Set 'selectableRows' to true to show the row selection
@@ -106,25 +93,41 @@ const table = {
   // A maximum of 10 columns are allowed
   columns: [
     {
-      dataField: 'study_acronym',
-      header: 'Arm',
-      link: '/arm/{study_acronym}',
+      dataField: 'submitted_file_id',
+      header: 'Submitted File ID',
+      link: '/file/{submitted_file_id}',
     },
     {
-      dataField: 'study_name',
-      header: 'Arm Name',
+      dataField: 'ccdi_arm',
+      header: 'CCDI ARM',
     },
     {
-      dataField: 'study_full_description',
-      header: 'Arm Description',
+      dataField: 'study_registered',
+      header: 'Study Registered',
     },
     {
-      dataField: 'study_type',
-      header: 'Arm Type',
+      dataField: 'primary_datatype',
+      header: 'Primary DataType',
     },
     {
-      dataField: 'num_subjects',
-      header: 'Associated Cases',
+      dataField: 'have_subject_ids',
+      header: 'Contain Subject IDs',
+    },
+    {
+      dataField: 'have_pii',
+      header: 'Have PII',
+    },
+    {
+      dataField: 'subject_id_cross_reference',
+      header: 'Subject ID Cross Reference',
+    },
+    {
+      dataField: 'contain_biospecimen_ids',
+      header: 'Contain Biospecimen IDs',
+    },
+    {
+      dataField: 'participant_id_column_header_or_number',
+      header: 'Participant ID Column Header',
     },
   ],
 };
@@ -133,28 +136,30 @@ const table = {
 const GET_PROGRAM_DETAIL_DATA_QUERY = gql`
 query programDetail($program_id: String!) {
   programDetail(program_id: $program_id) {
-    program_acronym
     program_id
-    program_name
-    program_full_description
-    institution_name
-    program_external_url
-    num_subjects
+    start_date
+    end_date
     num_files
-    num_samples
-    num_lab_procedures
-    disease_subtypes
-    diagnoses {
-      group
-      subjects
-    }
-    studies { 
-      study_name
-      study_type
-      study_acronym
-      study_info
-      study_full_description
-      num_subjects
+    num_participants
+    num_studies
+    files { 
+      submitted_file_id
+      ccdi_arm
+      submission_date
+      submission_ts
+      file_count_validate
+      filename_list_validate
+      study_registered
+      primary_datatype
+      derived_interventional_clinical_trial
+      derived_observational_study
+      have_subject_ids
+      have_pii
+      subject_id_cross_reference
+      contain_biospecimen_ids
+      contain_biospecimen_2_subject_mappings
+      participant_id_column_header_or_number
+      alt_participant_id_column_header_or_number
     }
   }
 }`;

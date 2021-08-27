@@ -202,6 +202,36 @@ type File_Set_Info {
     file_deposit_location: String
 }
 
+type SubmittedFileInfo {
+    submitted_file_id: String
+    ccdi_arm: String
+    submission_date: String
+    submission_ts: String
+    file_count_validate: Boolean
+    filename_list_validate: Boolean
+    study_registered: Boolean
+    primary_datatype: String
+    derived_interventional_clinical_trial: Boolean
+    derived_observational_study: Boolean
+    have_subject_ids: Boolean
+    have_pii: Boolean
+    subject_id_cross_reference: Boolean
+    contain_biospecimen_ids: Boolean
+    contain_biospecimen_2_subject_mappings: Boolean
+    participant_id_column_header_or_number: String
+    alt_participant_id_column_header_or_number: String
+}
+
+type ProgramDetail {
+    program_id: String
+    start_date: String
+    end_date: String
+    num_files: Int
+    num_participants: Int
+    num_studies: Int
+    files: [SubmittedFileInfo]
+}
+
 type SubmittedFileDetail {
     submitted_file_id: String
     submitter_id: String
@@ -516,6 +546,23 @@ type QueryType {
                       }))[0..$first]
         }
     """, passThrough:true)
+
+    programDetail(program_id: String): ProgramDetail @cypher(statement:  """
+        MATCH (s:submitter {program_id: $program_id})
+        MATCH (s)<--(sf:submitted_file)
+        OPTIONAL MATCH (sf)<--(p:participant)
+        OPTIONAL MATCH (sf)<--(st:study)
+        WITH s, sf, p, st
+        RETURN {
+            program_id: s.program_id,
+            start_date: "2006-04-07",
+            end_date: "2018-03-18",
+            num_files: COUNT(DISTINCT sf.submitted_file_id),
+            num_participants: COUNT(DISTINCT p.participant_id),
+            num_studies: COUNT(DISTINCT st.study_id),
+            files: collect(DISTINCT sf {.*})
+        }
+    """, passThrough: true)
 
     fileDetail(submitted_file_id: String): SubmittedFileDetail @cypher(statement:  """
         MATCH (sf:submitted_file {submitted_file_id: $submitted_file_id})

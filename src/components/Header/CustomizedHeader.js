@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import headerData from '../../bento/globalHeaderData';
 
 const LogoBanner = styled.div`
-  margin-top: 24px;
+  margin: 19px 0;
   width: 100%;
 `;
 

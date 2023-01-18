@@ -1,7 +1,7 @@
 import React from "react";
 import { CssBaseline } from '@material-ui/core';
 import { HashRouter, Route, Switch } from 'react-router-dom';
-import Header from '../Header/HeaderView';
+import Header from '../Header/CustomizedHeader';
 import NavBar from '../NavBar/NavBarView';
 import Footer from '../Footer/FooterView';
 import Home from '../../pages/landing/landingView';

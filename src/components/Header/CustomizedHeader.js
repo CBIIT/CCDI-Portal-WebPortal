@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import logo from '../../assets/header/Portal_Logo.png';
+import headerData from '../../bento/globalHeaderData';
 
 const LogoBanner = styled.div`
   margin-top: 24px;
@@ -10,6 +10,7 @@ const LogoBanner = styled.div`
 const LogoContainer = styled.div`
     width: 1440px;
     margin: 0 auto;
+    padding-left: 61px;
     img {
       width: 455px;
       height: 56px;
@@ -21,7 +22,9 @@ const Header = () => {
     <>
       <LogoBanner role="banner">
         <LogoContainer>
-            <a href="/"><img src={logo} alt="ccdc logo" /></a>
+          <a href={headerData.globalHeaderLogoLink}>
+            <img src={headerData.globalHeaderLogo} alt={headerData.globalHeaderLogoAltText} />
+          </a>
         </LogoContainer>
       </LogoBanner>
     </>

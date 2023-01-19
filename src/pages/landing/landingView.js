@@ -18,14 +18,14 @@ const FirstContainer = styled.div`
 
 const IntroContainer = styled.div`
     width: 720px;
-    background: yellow;
+    // background: yellow;
 `;
 
 const IntroTextContainer = styled.div`
+    // background: pink;
     height: 372px;
-    background: pink;
     padding-left: 162px;
-    padding-top: 60px;
+    padding-top: 94px;
     
     .introTextTitle1 {
       height: 38px;
@@ -57,6 +57,31 @@ const ListContainer = styled.div`
     background: green;
 `;
 
+const IntroAboutButtonContainer = styled.div`
+    display: flex;
+
+    .IntroAboutTitle {
+      width: 210px;
+      color: #078893;
+      font-weight: bold;
+      font-size: 16px;
+      margin-top: 40px;
+    }
+
+    .IntroAboutButton {
+      margin-top: 30px;
+      background: #05555C;
+      height: 41px;
+      width: 164px;
+      border-radius: 5px;
+      color: #FFFFFF;
+      font-weight: bold;
+      font-size: 16px;
+      text-align: center;
+      line-height: 41px;
+    }
+`;
+
 const StatsContainer = styled.div`
     position: absolute;
     height: 187px
@@ -82,6 +107,10 @@ const LandingView = () => {
           <IntroTextContainer>
             <div className='introTextTitle1'>{landingData.introTitle1}</div>
             <div className='introTextTitle2'>{landingData.introTitle2}</div>
+            <IntroAboutButtonContainer>
+              <div className='IntroAboutTitle'>{landingData.introTitle3}</div>
+              <div className='IntroAboutButton'>{landingData.introButtonTitle}</div>
+            </IntroAboutButtonContainer>
           </IntroTextContainer>
           <IntroPicContainer>
           </IntroPicContainer>
@@ -90,7 +119,7 @@ const LandingView = () => {
         </ListContainer>
       </FirstContainer>
       <StatsContainer>
-        </StatsContainer>
+      </StatsContainer>
       <div style={{marginTop: "140px", height: "250px", fontSize: "100px"}}>Hello World!</div>
     </LandingViewContainer>
   )

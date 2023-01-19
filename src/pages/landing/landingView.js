@@ -112,11 +112,13 @@ const StatsContainer = styled.div`
     .statTitle {
       color: #E6E6E6;
       font-size: 19px;
+      font-weight: 300;
     }
 
     .statDetail {
       color: #E6E6E6;
       font-size: 19px;
+      font-weight: bold;
     }
 `;
 

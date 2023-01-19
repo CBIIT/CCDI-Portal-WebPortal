@@ -25,7 +25,7 @@ const IntroTextContainer = styled.div`
     // background: pink;
     height: 372px;
     padding-left: 162px;
-    padding-top: 94px;
+    padding-top: 80px;
     
     .introTextTitle1 {
       height: 38px;

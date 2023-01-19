@@ -1,0 +1,7 @@
+@font-face {
+    font-family:"poppins";
+    src:url(./fonts/poppins-bold.woff2) format("woff2"),
+    url(./fonts/poppins-bold.woff) format("woff"),
+    url(./fonts/poppins-bold) format("opentype");
+    font-display:auto;font-style:normal;font-weight:700;font-stretch:normal;
+    }

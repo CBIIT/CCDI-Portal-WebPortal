@@ -17,11 +17,9 @@ const FirstContainer = styled.div`
 
 const IntroContainer = styled.div`
     width: 720px;
-    // background: yellow;
 `;
 
 const IntroTextContainer = styled.div`
-    // background: pink;
     height: 372px;
     padding-left: 162px;
     padding-top: 80px;
@@ -62,7 +60,7 @@ const ListContainer = styled.div`
 const IntroAboutButtonContainer = styled.div`
     display: flex;
 
-    .IntroAboutTitle {
+    .introAboutTitle {
       width: 210px;
       color: #078893;
       font-family: Poppins;
@@ -71,7 +69,7 @@ const IntroAboutButtonContainer = styled.div`
       margin-top: 40px;
     }
 
-    .IntroAboutButton {
+    .introAboutButton {
       margin-top: 30px;
       background: #05555C;
       height: 41px;
@@ -116,14 +114,56 @@ const StatsContainer = styled.div`
 
     .statTitle {
       color: #E6E6E6;
-      font-size: 19px;
+      font-family: Poppins;
       font-weight: 300;
+      font-size: 19px;
     }
 
     .statDetail {
       color: #E6E6E6;
-      font-size: 19px;
+      font-family: Poppins;
       font-weight: bold;
+      font-size: 19px;
+    }
+`;
+
+const LatestUpdatesContainer = styled.div`
+    height: 589px;
+    background-color: pink;
+
+    .latestUpdatesTitle {
+      display: flex;
+      color: #05555C;
+      margin: 0 151px 0 0;
+      justify-content: flex-end;
+    }
+
+    .titleLine {
+      margin-right: 15px;
+      display: flex;
+      height: 32px;
+    }
+
+    .titleLineLong {
+      content:'';
+      display:inline-block;
+      width: 100px; 
+      border-bottom: 3px solid #05555C;
+      margin-left: 2px;
+    }
+
+    .titleLineShort {
+      content:'';
+      display:inline-block;
+      width: 7px; 
+      border-bottom: 3px solid #05555C;
+      margin-right: 3px;
+    }
+
+    .latestUpdatesTitleText {
+      font-family: Poppins;
+      font-weight: bold;
+      font-size: 35px;
     }
 `;
 
@@ -142,8 +182,8 @@ const LandingView = () => {
             <div className='introTextTitle1'>{introData.introTitle1}</div>
             <div className='introTextTitle2'>{introData.introTitle2}</div>
             <IntroAboutButtonContainer>
-              <div className='IntroAboutTitle'>{introData.introTitle3}</div>
-              <div className='IntroAboutButton'>{introData.introButtonTitle}</div>
+              <div className='introAboutTitle'>{introData.introTitle3}</div>
+              <div className='introAboutButton'>{introData.introButtonTitle}</div>
             </IntroAboutButtonContainer>
           </IntroTextContainer>
           <IntroPicContainer>
@@ -168,7 +208,16 @@ const LandingView = () => {
           })
         }
       </StatsContainer>
-      <div style={{marginTop: "140px", height: "250px", fontSize: "100px"}}>Hello World!</div>
+      <LatestUpdatesContainer>
+        <div className='latestUpdatesTitle'>
+          <div className='titleLine'>
+            <div className='titleLineShort' />
+            <div className='titleLineShort' />
+            <div className='titleLineLong' />
+          </div>
+          <div className='latestUpdatesTitleText'>Latest Updates</div>
+        </div>
+      </LatestUpdatesContainer>
     </LandingViewContainer>
   )
 };

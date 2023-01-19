@@ -2,8 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
-import { GET_LANDING_PAGE_DATA_QUERY } from '../../bento/landingPageData';
-import landingData from '../../bento/landingPageData'
+import { introData, GET_LANDING_PAGE_DATA_QUERY } from '../../bento/landingPageData';
 
 const LandingViewContainer = styled.div`
     width: 1440px;
@@ -47,7 +46,7 @@ const IntroTextContainer = styled.div`
 const IntroPicContainer = styled.div`
     width: 664px;
     height: 434px;
-    background-image: url(${landingData.landingIntroPic});
+    background-image: url(${introData.landingIntroPic});
     background-repeat: no-repeat;
     background-position: -34px;
 `;
@@ -105,11 +104,11 @@ const LandingView = () => {
       <FirstContainer>
         <IntroContainer>
           <IntroTextContainer>
-            <div className='introTextTitle1'>{landingData.introTitle1}</div>
-            <div className='introTextTitle2'>{landingData.introTitle2}</div>
+            <div className='introTextTitle1'>{introData.introTitle1}</div>
+            <div className='introTextTitle2'>{introData.introTitle2}</div>
             <IntroAboutButtonContainer>
-              <div className='IntroAboutTitle'>{landingData.introTitle3}</div>
-              <div className='IntroAboutButton'>{landingData.introButtonTitle}</div>
+              <div className='IntroAboutTitle'>{introData.introTitle3}</div>
+              <div className='IntroAboutButton'>{introData.introButtonTitle}</div>
             </IntroAboutButtonContainer>
           </IntroTextContainer>
           <IntroPicContainer>

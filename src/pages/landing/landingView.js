@@ -30,6 +30,8 @@ const IntroTextContainer = styled.div`
       height: 38px;
       text-align: left;
       color: #939393;
+      font-family: Poppins;
+      font-weight: 500;
     }
 
     .introTextTitle2 {
@@ -37,6 +39,7 @@ const IntroTextContainer = styled.div`
       height: 141px;
       text-align: left;
       color: #05555C;
+      font-family: Poppins;
       font-weight: bold;
       font-size: 37px;
     }
@@ -62,6 +65,7 @@ const IntroAboutButtonContainer = styled.div`
     .IntroAboutTitle {
       width: 210px;
       color: #078893;
+      font-family: Poppins;
       font-weight: bold;
       font-size: 16px;
       margin-top: 40px;
@@ -74,6 +78,7 @@ const IntroAboutButtonContainer = styled.div`
       width: 164px;
       border-radius: 5px;
       color: #FFFFFF;
+      font-family: Poppins;
       font-weight: bold;
       font-size: 16px;
       text-align: center;

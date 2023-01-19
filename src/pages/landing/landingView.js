@@ -8,6 +8,7 @@ import img from '../../assets/landing/Landing_Intro_Pic.png'
 const LandingViewContainer = styled.div`
     width: 1440px;
     margin: 0 auto;
+    font-family: Poppins;
 `;
 
 const FirstContainer = styled.div`
@@ -23,7 +24,25 @@ const IntroContainer = styled.div`
 
 const IntroTextContainer = styled.div`
     height: 372px;
-    background: grey;
+    background: pink;
+    padding-left: 162px;
+    padding-top: 60px;
+    
+    .introTextTitle1 {
+      height: 38px;
+      text-align: left;
+      color: #939393;
+    }
+
+    .introTextTitle2 {
+      width: 526px;
+      height: 141px;
+      text-align: left;
+      color: #05555C;
+      font-weight: bold;
+      font-size: 37px;
+    }
+
 `;
 
 const IntroPicContainer = styled.div`
@@ -62,6 +81,8 @@ const LandingView = () => {
       <FirstContainer>
         <IntroContainer>
           <IntroTextContainer>
+            <div className='introTextTitle1'>LOREM IPSUM DOLOR SIT AMET</div>
+            <div className='introTextTitle2'>Discover one access point for CCDI data resources and tools</div>
           </IntroTextContainer>
           <IntroPicContainer>
           </IntroPicContainer>

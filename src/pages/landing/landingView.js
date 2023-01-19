@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_LANDING_PAGE_DATA_QUERY,introData, statsData } from '../../bento/landingPageData';
+import updateImg1 from '../../assets/landing/Updates-1.jpg';
+import updateImg2 from '../../assets/landing/Updates-2.jpg';
+import updateImg3 from '../../assets/landing/Updates-3.jpg';
 
 const LandingViewContainer = styled.div`
     width: 1440px;
@@ -93,7 +96,8 @@ const StatsContainer = styled.div`
     border-radius: 0px 20px;
     top: 713px;
     margin-left: 161px;
-    padding: 40px 0 0 10px;
+    padding-top: 40px;
+    justify-content: center;
 
     .statItem {
       display: flex;
@@ -103,7 +107,7 @@ const StatsContainer = styled.div`
       text-align: right;
       color: #078893;
       font-size: 40px;
-      width: 90px;
+      width: 88px;
       margin-right: 10px;
     }
 
@@ -129,12 +133,12 @@ const StatsContainer = styled.div`
 
 const LatestUpdatesContainer = styled.div`
     height: 589px;
-    background-color: pink;
+    // background-color: pink;
 
     .latestUpdatesTitle {
       display: flex;
       color: #05555C;
-      margin: 0 151px 0 0;
+      margin: 0 151px 20px 0;
       justify-content: flex-end;
     }
 
@@ -164,6 +168,41 @@ const LatestUpdatesContainer = styled.div`
       font-family: Poppins;
       font-weight: bold;
       font-size: 35px;
+    }
+
+    .latestUpdatesList {
+      display: flex;
+      justify-content: center;
+    }
+
+    .latestUpdatesListItem {
+      margin: 16px;
+      width: 367px;
+      height: 476px;
+      background-color: #05555C;
+      box-shadow: 0px 0px 16px #1B1C1C80;
+      border-radius: 0px 20px;
+    }
+
+    .latestUpdatesListItemPic {
+      border-radius: 0px 20px 0 0;
+      height: 311px;
+    }
+
+    .latestUpdatesListTitle {
+      color: #63D6C7;
+      padding: 14px 23px 0 23px;
+      font-family: Poppins;
+      font-weight: bold;
+      font-size: 14px;
+      height: 57px
+    }
+
+    .latestUpdatesListContent {
+      color: #FFFFFF;
+      padding: 0 23px 0 23px;
+      font-family: Inter;
+      font-size: 16px;
     }
 `;
 
@@ -197,7 +236,7 @@ const LandingView = () => {
           statsData.map((statItem, statidx) => {
             const statkey = `stat_${statidx}`;
             return (
-              <div className='statItem'>
+              <div className='statItem' key={statkey}>
                 <div className='statNum'>{statItem.num}</div>
                 <div className='statText'>
                   <div className='statTitle'>{statItem.title}</div>
@@ -216,6 +255,23 @@ const LandingView = () => {
             <div className='titleLineLong' />
           </div>
           <div className='latestUpdatesTitleText'>Latest Updates</div>
+        </div>
+        <div className='latestUpdatesList'>
+          <div className='latestUpdatesListItem'>
+            <div className='latestUpdatesListItemPic' style={{ backgroundImage: `url(${updateImg1})` }} />
+            <div className='latestUpdatesListTitle'>NEW RELEASE FROM CCDC LOREM IPSUM DOLOR SIT AMET CON</div>
+            <div className='latestUpdatesListContent'>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna </div>
+          </div>
+          <div className='latestUpdatesListItem'>
+            <div className='latestUpdatesListItemPic' style={{ backgroundImage: `url(${updateImg2})` }} />
+            <div className='latestUpdatesListTitle'>CCDI IS ON THE NEWS!</div>
+            <div className='latestUpdatesListContent'>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna </div>
+          </div>
+          <div className='latestUpdatesListItem'>
+            <div className='latestUpdatesListItemPic' style={{ backgroundImage: `url(${updateImg3})` }} />
+            <div className='latestUpdatesListTitle'>LEARN MORE ABOUT LOREM IPSUM DOLOR SIT AMET CON</div>
+            <div className='latestUpdatesListContent'>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna </div>
+          </div>
         </div>
       </LatestUpdatesContainer>
     </LandingViewContainer>

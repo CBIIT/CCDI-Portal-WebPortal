@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_LANDING_PAGE_DATA_QUERY } from '../../bento/landingPageData';
-import img from '../../assets/landing/Landing_Intro_Pic.png'
+import landingData from '../../bento/landingPageData'
 
 const LandingViewContainer = styled.div`
     width: 1440px;
@@ -14,7 +14,6 @@ const LandingViewContainer = styled.div`
 const FirstContainer = styled.div`
     display: flex;
     height: 900px;
-    background: red;
 `;
 
 const IntroContainer = styled.div`
@@ -48,7 +47,7 @@ const IntroTextContainer = styled.div`
 const IntroPicContainer = styled.div`
     width: 664px;
     height: 434px;
-    background-image: url(${img});
+    background-image: url(${landingData.landingIntroPic});
     background-repeat: no-repeat;
     background-position: -34px;
 `;
@@ -81,8 +80,8 @@ const LandingView = () => {
       <FirstContainer>
         <IntroContainer>
           <IntroTextContainer>
-            <div className='introTextTitle1'>LOREM IPSUM DOLOR SIT AMET</div>
-            <div className='introTextTitle2'>Discover one access point for CCDI data resources and tools</div>
+            <div className='introTextTitle1'>{landingData.introTitle1}</div>
+            <div className='introTextTitle2'>{landingData.introTitle2}</div>
           </IntroTextContainer>
           <IntroPicContainer>
           </IntroPicContainer>

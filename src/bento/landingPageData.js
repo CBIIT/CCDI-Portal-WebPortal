@@ -1,4 +1,11 @@
 import gql from 'graphql-tag';
+import landingImg from '../assets/landing/Landing_Intro_Pic.png'
+
+export default {
+  landingIntroPic: landingImg,
+  introTitle1: 'LOREM IPSUM DOLOR SIT AMET',
+  introTitle2: 'Discover one access point for CCDI data resources and tools',
+};
 
 export const GET_LANDING_PAGE_DATA_QUERY = gql`{
   numberOfPrograms

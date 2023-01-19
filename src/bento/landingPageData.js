@@ -9,6 +9,29 @@ export const introData = {
   introButtonTitle: 'ABOUT CCDI',
 };
 
+export const statsData = [
+  {
+    num: '33',
+    title: 'CCDC',
+    detail: 'RESOURCES',
+  },
+  {
+    num: '1.4M',
+    title: 'MTP',
+    detail: 'DISEASE/TARGET COMBINATIONS',
+  },
+  {
+    num: '512',
+    title: 'MTP',
+    detail: 'PEDIATRIC MOLECULAR TARGETS',
+  },
+  {
+    num: '158',
+    title: 'CCDC',
+    detail: 'PEDIATRIC CANCER SPECIFIC DATASETS',
+  }
+];
+
 export const GET_LANDING_PAGE_DATA_QUERY = gql`{
   numberOfPrograms
   numberOfStudies

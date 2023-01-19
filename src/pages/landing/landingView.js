@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
-import { introData, GET_LANDING_PAGE_DATA_QUERY } from '../../bento/landingPageData';
+import { GET_LANDING_PAGE_DATA_QUERY,introData, statsData } from '../../bento/landingPageData';
 
 const LandingViewContainer = styled.div`
     width: 1440px;
@@ -83,13 +83,41 @@ const IntroAboutButtonContainer = styled.div`
 
 const StatsContainer = styled.div`
     position: absolute;
+    display: flex;
     height: 187px
     width: 1119px;
     background: #05555C;
     border-radius: 0px 20px;
     top: 713px;
     margin-left: 161px;
+    padding: 40px 0 0 10px;
 
+    .statItem {
+      display: flex;
+    }
+
+    .statNum {
+      text-align: right;
+      color: #078893;
+      font-size: 40px;
+      width: 90px;
+      margin-right: 10px;
+    }
+
+    .statText {
+      margin-top: 17px;
+      width: 171px;
+    }
+
+    .statTitle {
+      color: #E6E6E6;
+      font-size: 19px;
+    }
+
+    .statDetail {
+      color: #E6E6E6;
+      font-size: 19px;
+    }
 `;
 
 const LandingView = () => {
@@ -118,6 +146,20 @@ const LandingView = () => {
         </ListContainer>
       </FirstContainer>
       <StatsContainer>
+        {
+          statsData.map((statItem, statidx) => {
+            const statkey = `stat_${statidx}`;
+            return (
+              <div className='statItem'>
+                <div className='statNum'>{statItem.num}</div>
+                <div className='statText'>
+                  <div className='statTitle'>{statItem.title}</div>
+                  <div className='statDetail'>{statItem.detail}</div>
+                </div>
+              </div>
+            )
+          })
+        }
       </StatsContainer>
       <div style={{marginTop: "140px", height: "250px", fontSize: "100px"}}>Hello World!</div>
     </LandingViewContainer>

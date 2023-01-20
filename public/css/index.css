@@ -23,8 +23,15 @@
 }
 
 @font-face {
-    font-family:"Inter";
-    src:url(./fonts/Inter-ExtraBold.woff2) format("woff2"),
-    url(./fonts/Inter-ExtraBold.woff) format("woff");
-    font-display:auto;font-style:normal;font-weight:800;font-stretch:normal;
-  }
+  font-family:"Inter";
+  src:url(./fonts/Inter-Regular.woff2) format("woff2"),
+  url(./fonts/Inter-Regular.woff) format("woff");
+  font-display:auto;font-style:normal;font-weight:400;font-stretch:normal;
+}
+
+@font-face {
+  font-family:"Inter";
+  src:url(./fonts/Inter-ExtraBold.woff2) format("woff2"),
+  url(./fonts/Inter-ExtraBold.woff) format("woff");
+  font-display:auto;font-style:normal;font-weight:800;font-stretch:normal;
+}

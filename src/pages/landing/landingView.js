@@ -104,7 +104,7 @@ const StatsContainer = styled.div`
       text-align: right;
       color: #078893;
       font-family: Inter;
-      font-weight: 800
+      font-weight: 800;
       font-size: 40px;
       width: 88px;
       margin-right: 10px;
@@ -131,7 +131,6 @@ const StatsContainer = styled.div`
 `;
 
 const LatestUpdatesContainer = styled.div`
-    height: 589px;
     // background-color: pink;
 
     .latestUpdatesTitle {
@@ -201,6 +200,7 @@ const LatestUpdatesContainer = styled.div`
       color: #FFFFFF;
       padding: 0 23px 0 23px;
       font-family: Inter;
+      font-weight: 400;
       font-size: 16px;
     }
 `;

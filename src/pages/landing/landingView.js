@@ -2,10 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
-import { GET_LANDING_PAGE_DATA_QUERY,introData, statsData } from '../../bento/landingPageData';
-import updateImg1 from '../../assets/landing/Updates-1.jpg';
-import updateImg2 from '../../assets/landing/Updates-2.jpg';
-import updateImg3 from '../../assets/landing/Updates-3.jpg';
+import { GET_LANDING_PAGE_DATA_QUERY,introData, statsData, latestUpdatesData } from '../../bento/landingPageData';
 
 const LandingViewContainer = styled.div`
     width: 1440px;
@@ -257,21 +254,18 @@ const LandingView = () => {
           <div className='latestUpdatesTitleText'>Latest Updates</div>
         </div>
         <div className='latestUpdatesList'>
-          <div className='latestUpdatesListItem'>
-            <div className='latestUpdatesListItemPic' style={{ backgroundImage: `url(${updateImg1})` }} />
-            <div className='latestUpdatesListTitle'>NEW RELEASE FROM CCDC LOREM IPSUM DOLOR SIT AMET CON</div>
-            <div className='latestUpdatesListContent'>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna </div>
-          </div>
-          <div className='latestUpdatesListItem'>
-            <div className='latestUpdatesListItemPic' style={{ backgroundImage: `url(${updateImg2})` }} />
-            <div className='latestUpdatesListTitle'>CCDI IS ON THE NEWS!</div>
-            <div className='latestUpdatesListContent'>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna </div>
-          </div>
-          <div className='latestUpdatesListItem'>
-            <div className='latestUpdatesListItemPic' style={{ backgroundImage: `url(${updateImg3})` }} />
-            <div className='latestUpdatesListTitle'>LEARN MORE ABOUT LOREM IPSUM DOLOR SIT AMET CON</div>
-            <div className='latestUpdatesListContent'>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna </div>
-          </div>
+          {
+            latestUpdatesData.map((updateItem, updateidx) => {
+              const updatekey = `update_${updateidx}`;
+              return (
+                <div className='latestUpdatesListItem' key={updatekey}>
+                  <div className='latestUpdatesListItemPic' style={{ backgroundImage: `url(${updateItem.img})` }} />
+                  <div className='latestUpdatesListTitle'>{updateItem.title}</div>
+                  <div className='latestUpdatesListContent'>{updateItem.content}</div>
+                </div>
+              )
+            })
+          }
         </div>
       </LatestUpdatesContainer>
     </LandingViewContainer>

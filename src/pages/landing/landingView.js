@@ -103,6 +103,8 @@ const StatsContainer = styled.div`
     .statNum {
       text-align: right;
       color: #078893;
+      font-family: Inter;
+      font-weight: 800
       font-size: 40px;
       width: 88px;
       margin-right: 10px;

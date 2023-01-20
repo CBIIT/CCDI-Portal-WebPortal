@@ -207,8 +207,6 @@ const LatestUpdatesContainer = styled.div`
 
 const ResourcesContainer = styled.div`
     margin-top: 131px;
-    height: 100px;
-    // background: yellow;
 
     .resourceTitle {
       margin-left: 162px;
@@ -250,6 +248,56 @@ const ResourcesContainer = styled.div`
       width: 7px; 
       border-bottom: 3px solid;
       margin-left: 3px;
+    }
+
+    .resourceList {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: left;
+      margin: 0 145px 0 145px;
+    }
+
+    .resourceListItem {
+      display: flex;
+      width: 50%;
+      padding: 17px;
+      // background: blue;
+    }
+
+    .resourceListItemLogo {
+      width: 133px;
+      height: 125px;
+      border-radius: 20px;
+      background: #0095A2;
+    }
+
+    .resourceListItemText {
+      margin-left: 15px;
+      width: 385px;
+      height: 125px;
+    }
+
+    .resourceListItemTitle {
+      color: #000000;
+      font-family: Poppins;
+      font-weight: 400;
+      font-size: 20px;
+      margin-bottom: 4px;
+      line-height: 99%;
+    }
+
+    .resourceListItemTitleSmall {
+      font-family: Poppins;
+      font-weight: 400;
+      font-size: 14px;
+      margin-left: 10px;
+    }
+
+    .resourceListItemContext {
+      color: #000000;
+      font-family: Poppins;
+      font-weight: 400;
+      font-size: 16px;
     }
 `;
 
@@ -328,7 +376,43 @@ const LandingView = () => {
             <div className='titleLineShort' />
           </div>
         </div>
-
+        <div className='resourceList'>
+          <div className='resourceListItem'>
+            <div className='resourceListItemLogo'></div>
+            <div className='resourceListItemText'>
+              <div className='resourceListItemTitle'>Childhood Cancer Data Catalog <span className='resourceListItemTitleSmall'>(CCDC)</span></div>
+              <div className='resourceListItemContext'>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+            </div>
+          </div>
+          <div className='resourceListItem'>
+            <div className='resourceListItemLogo'></div>
+            <div className='resourceListItemText'>
+              <div className='resourceListItemTitle'>Clinical Interpretation of Variants in Cancer (civicdb.org) <span className='resourceListItemTitleSmall'>(CIViC)</span></div>
+              <div className='resourceListItemContext'>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+            </div>
+          </div>
+          <div className='resourceListItem'>
+            <div className='resourceListItemLogo'></div>
+            <div className='resourceListItemText'>
+              <div className='resourceListItemTitle'>Molecular Characterization Initiative for Childhood Cancers - NCI <span className='resourceListItemTitleSmall'>(MCI Data)</span></div>
+              <div className='resourceListItemContext'>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+            </div>
+          </div>
+          <div className='resourceListItem'>
+            <div className='resourceListItemLogo'></div>
+            <div className='resourceListItemText'>
+              <div className='resourceListItemTitle'>Molecular Targets Platform<span className='resourceListItemTitleSmall'>(MTP)</span></div>
+              <div className='resourceListItemContext'>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+            </div>
+          </div>
+          <div className='resourceListItem'>
+            <div className='resourceListItemLogo'></div>
+            <div className='resourceListItemText'>
+              <div className='resourceListItemTitle'>National Childhood Cancer Registry Explorer <span className='resourceListItemTitleSmall'>(NCCR Explorer)</span></div>
+              <div className='resourceListItemContext'>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+            </div>
+          </div>
+        </div>
       </ResourcesContainer>
     </LandingViewContainer>
   )

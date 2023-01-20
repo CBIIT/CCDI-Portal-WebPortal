@@ -132,6 +132,7 @@ const StatsContainer = styled.div`
 const LatestUpdatesContainer = styled.div`
     // background-color: pink;
     margin-top: 97px;
+
     .latestUpdatesTitle {
       display: flex;
       color: #05555C;
@@ -217,12 +218,38 @@ const ResourcesContainer = styled.div`
       color: #05555C;
     }
 
-    .applicationsTitle {
-      margin-left: 169px;
+    .resourceSubtitle {
+      display: flex;
+    }
+
+    .resourceSubtitleText {
+      margin: 10px 0 10px 169px;
       font-family: Poppins;
       font-weight: bold;
       font-size: 17px;
-      color: #7CCFD6;
+    }
+
+    .titleLine {
+      margin-left: 10px;
+      display: flex;
+      height: 32px;
+      padding-bottom: 5px;
+    }
+    
+    .titleLineLong {
+      content:'';
+      display:inline-block;
+      width: 100px; 
+      border-bottom: 3px solid;
+      margin-right: 2px;
+    }
+
+    .titleLineShort {
+      content:'';
+      display:inline-block;
+      width: 7px; 
+      border-bottom: 3px solid;
+      margin-left: 3px;
     }
 `;
 
@@ -293,7 +320,15 @@ const LandingView = () => {
       </LatestUpdatesContainer>
       <ResourcesContainer>
         <div className='resourceTitle'>{titleData.resourceTitle}</div>
-        <div className='applicationsTitle'>{titleData.applicationsTitle}</div>
+        <div className='resourceSubtitle' style={{color: '#7CCFD6'}}>
+          <div className='resourceSubtitleText'>{titleData.applicationsTitle}</div>
+          <div className='titleLine'>
+            <div className='titleLineLong' />
+            <div className='titleLineShort' />
+            <div className='titleLineShort' />
+          </div>
+        </div>
+
       </ResourcesContainer>
     </LandingViewContainer>
   )

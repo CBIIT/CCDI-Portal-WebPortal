@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
-import { GET_LANDING_PAGE_DATA_QUERY,introData, statsData, latestUpdatesData } from '../../bento/landingPageData';
+import { GET_LANDING_PAGE_DATA_QUERY,introData, titleData, statsData, latestUpdatesData } from '../../bento/landingPageData';
 
 const LandingViewContainer = styled.div`
     width: 1440px;
@@ -12,7 +12,6 @@ const LandingViewContainer = styled.div`
 
 const FirstContainer = styled.div`
     display: flex;
-    height: 900px;
 `;
 
 const IntroContainer = styled.div`
@@ -132,7 +131,7 @@ const StatsContainer = styled.div`
 
 const LatestUpdatesContainer = styled.div`
     // background-color: pink;
-
+    margin-top: 97px;
     .latestUpdatesTitle {
       display: flex;
       color: #05555C;
@@ -205,6 +204,28 @@ const LatestUpdatesContainer = styled.div`
     }
 `;
 
+const ResourcesContainer = styled.div`
+    margin-top: 131px;
+    height: 100px;
+    // background: yellow;
+
+    .resourceTitle {
+      margin-left: 162px;
+      font-family: Poppins;
+      font-weight: bold;
+      font-size: 35px;
+      color: #05555C;
+    }
+
+    .applicationsTitle {
+      margin-left: 169px;
+      font-family: Poppins;
+      font-weight: bold;
+      font-size: 17px;
+      color: #7CCFD6;
+    }
+`;
+
 const LandingView = () => {
   const { loading, error, data } = useQuery(GET_LANDING_PAGE_DATA_QUERY);
 
@@ -253,7 +274,7 @@ const LandingView = () => {
             <div className='titleLineShort' />
             <div className='titleLineLong' />
           </div>
-          <div className='latestUpdatesTitleText'>Latest Updates</div>
+          <div className='latestUpdatesTitleText'>{titleData.latestUpdatesTitle}</div>
         </div>
         <div className='latestUpdatesList'>
           {
@@ -270,6 +291,10 @@ const LandingView = () => {
           }
         </div>
       </LatestUpdatesContainer>
+      <ResourcesContainer>
+        <div className='resourceTitle'>{titleData.resourceTitle}</div>
+        <div className='applicationsTitle'>{titleData.applicationsTitle}</div>
+      </ResourcesContainer>
     </LandingViewContainer>
   )
 };

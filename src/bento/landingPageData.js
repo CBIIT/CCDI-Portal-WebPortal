@@ -12,6 +12,14 @@ export const introData = {
   introButtonTitle: 'ABOUT CCDI',
 };
 
+export const titleData = {
+  latestUpdatesTitle: 'Latest Updates',
+  resourceTitle: 'Resources',
+  applicationsTitle: 'APPLICATIONS',
+  cloudResourcesTitle: 'CLOUD RESOURCES',
+  aboutTitle: 'About the CCDI Community',
+};
+
 export const statsData = [
   {
     num: '33',

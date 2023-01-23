@@ -88,12 +88,12 @@ const StatsContainer = styled.div`
     position: absolute;
     display: flex;
     height: 187px
-    width: 1119px;
+    width: 1120px;
     background: #05555C;
     border-radius: 0px 20px;
     top: 713px;
     margin-left: 160px;
-    padding-top: 40px;
+    padding-top: 50px;
     justify-content: center;
 
     .statItem {
@@ -127,6 +127,7 @@ const StatsContainer = styled.div`
       font-family: Poppins;
       font-weight: bold;
       font-size: 19px;
+      line-height: 23px;
     }
 `;
 
@@ -242,7 +243,7 @@ const ResourcesContainer = styled.div`
     .titleLineLong {
       content:'';
       display:inline-block;
-      width: 100px; 
+      width: 120px; 
       border-bottom: 3px solid;
       margin-right: 2px;
     }
@@ -250,7 +251,7 @@ const ResourcesContainer = styled.div`
     .titleLineShort {
       content:'';
       display:inline-block;
-      width: 7px; 
+      width: 8px; 
       border-bottom: 3px solid;
       margin-left: 3px;
     }

@@ -132,43 +132,7 @@ const StatsContainer = styled.div`
 `;
 
 const LatestUpdatesContainer = styled.div`
-    // background-color: pink;
     margin-top: 97px;
-
-    .latestUpdatesTitle {
-      display: flex;
-      color: #05555C;
-      margin: 0 151px 20px 0;
-      justify-content: flex-end;
-    }
-
-    .titleLine {
-      margin-right: 15px;
-      display: flex;
-      height: 32px;
-    }
-
-    .titleLineLong {
-      content:'';
-      display:inline-block;
-      width: 100px; 
-      border-bottom: 3px solid #05555C;
-      margin-left: 2px;
-    }
-
-    .titleLineShort {
-      content:'';
-      display:inline-block;
-      width: 7px; 
-      border-bottom: 3px solid #05555C;
-      margin-right: 3px;
-    }
-
-    .latestUpdatesTitleText {
-      font-family: Poppins;
-      font-weight: bold;
-      font-size: 35px;
-    }
 
     .latestUpdatesList {
       display: flex;
@@ -204,6 +168,41 @@ const LatestUpdatesContainer = styled.div`
       font-family: Inter;
       font-weight: 400;
       font-size: 16px;
+    }
+`;
+
+const TitleContainer = styled.div`
+    display: flex;
+    color: #05555C;
+    margin: 0 149px 38px 0;
+    justify-content: flex-end;
+
+    .titleLine {
+      margin-right: 15px;
+      display: flex;
+      height: 32px;
+    }
+
+    .titleLineLong {
+      content:'';
+      display:inline-block;
+      width: 100px; 
+      border-bottom: 3px solid #05555C;
+      margin-left: 2px;
+    }
+
+    .titleLineShort {
+      content:'';
+      display:inline-block;
+      width: 7px; 
+      border-bottom: 3px solid #05555C;
+      margin-right: 3px;
+    }
+
+    .titleText {
+      font-family: Poppins;
+      font-weight: bold;
+      font-size: 35px;
     }
 `;
 
@@ -310,6 +309,10 @@ const ResourcesContainer = styled.div`
     }
 `;
 
+const AboutContainer = styled.div`
+    margin-top: 149px;
+`;
+
 const LandingView = () => {
   const { loading, error, data } = useQuery(GET_LANDING_PAGE_DATA_QUERY);
 
@@ -352,14 +355,14 @@ const LandingView = () => {
         }
       </StatsContainer>
       <LatestUpdatesContainer>
-        <div className='latestUpdatesTitle'>
+        <TitleContainer>
           <div className='titleLine'>
             <div className='titleLineShort' />
             <div className='titleLineShort' />
             <div className='titleLineLong' />
           </div>
-          <div className='latestUpdatesTitleText'>{titleData.latestUpdatesTitle}</div>
-        </div>
+          <div className='titleText'>{titleData.latestUpdatesTitle}</div>
+        </TitleContainer>
         <div className='latestUpdatesList'>
           {
             latestUpdatesData.map((updateItem, updateidx) => {
@@ -430,6 +433,16 @@ const LandingView = () => {
           </div>
         </div>
       </ResourcesContainer>
+      <AboutContainer>
+        <TitleContainer>
+          <div className='titleLine'>
+            <div className='titleLineShort' />
+            <div className='titleLineShort' />
+            <div className='titleLineLong' />
+          </div>
+          <div className='titleText'>{titleData.aboutTitle}</div>
+        </TitleContainer>
+      </AboutContainer>
     </LandingViewContainer>
   )
 };

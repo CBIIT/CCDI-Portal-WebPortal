@@ -87,7 +87,25 @@ export const resourcesAppliationsListData = [
     subtitle: '(NCCR Explorer)',
     content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
   },
-]
+];
+
+export const resourcesCloudListData = [
+  {
+    title: 'Seven Bridges Cancer Genomics Cloud',
+    subtitle: '(SB–CGC)',
+    content: 'Explore and analyze large datasets alongside secure and scalable analytical resources for large-scale computational research.',
+  },
+  {
+    title: 'Database of Genotypes and Phenotypes',
+    subtitle: '(dbGap)',
+    content: 'Developed to archive and distribute the data and results from studies that have investigated the interaction of genotype and phenotype in Humans.',
+  },
+  {
+    title: 'St. Jude Cloud',
+    subtitle: '(St. Jude)',
+    content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  },
+];
 
 export const GET_LANDING_PAGE_DATA_QUERY = gql`{
   numberOfPrograms

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
-import { GET_LANDING_PAGE_DATA_QUERY,introData, titleData, statsData, latestUpdatesData, resourcesAppliationsListData } from '../../bento/landingPageData';
+import { GET_LANDING_PAGE_DATA_QUERY,introData, titleData, statsData, latestUpdatesData, resourcesAppliationsListData, resourcesCloudListData } from '../../bento/landingPageData';
 import resourcesItemLogo from '../../assets/landing/Resources_Logo.svg';
 
 const LandingViewContainer = styled.div`
@@ -92,7 +92,7 @@ const StatsContainer = styled.div`
     background: #05555C;
     border-radius: 0px 20px;
     top: 713px;
-    margin-left: 161px;
+    margin-left: 160px;
     padding-top: 40px;
     justify-content: center;
 
@@ -207,14 +207,18 @@ const LatestUpdatesContainer = styled.div`
 `;
 
 const ResourcesContainer = styled.div`
-    margin-top: 131px;
+    margin-top: 139px;
 
     .resourceTitle {
-      margin-left: 162px;
+      margin-left: 160px;
       font-family: Poppins;
       font-weight: bold;
       font-size: 35px;
       color: #05555C;
+    }
+
+    .resourceItem {
+      margin-bottom: 70px;
     }
 
     .resourceSubtitle {
@@ -222,7 +226,7 @@ const ResourcesContainer = styled.div`
     }
 
     .resourceSubtitleText {
-      margin: 10px 0 10px 169px;
+      margin: 10px 0 10px 170px;
       font-family: Poppins;
       font-weight: bold;
       font-size: 17px;
@@ -255,7 +259,7 @@ const ResourcesContainer = styled.div`
       display: flex;
       flex-wrap: wrap;
       justify-content: left;
-      margin: 0 145px 0 145px;
+      margin: 0 143px 0 143px;
     }
 
     .resourceListItem {
@@ -269,7 +273,6 @@ const ResourcesContainer = styled.div`
       width: 133px;
       height: 125px;
       border-radius: 20px;
-      background: #0095A2;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -277,7 +280,7 @@ const ResourcesContainer = styled.div`
     }
 
     .resourceListItemText {
-      margin-left: 15px;
+      margin: 5px 0 0 20px;
       width: 385px;
       height: 125px;
     }
@@ -295,7 +298,7 @@ const ResourcesContainer = styled.div`
       font-family: Poppins;
       font-weight: 400;
       font-size: 14px;
-      margin-left: 10px;
+      margin-left: 8px;
     }
 
     .resourceListItemContext {
@@ -373,29 +376,57 @@ const LandingView = () => {
       </LatestUpdatesContainer>
       <ResourcesContainer>
         <div className='resourceTitle'>{titleData.resourceTitle}</div>
-        <div className='resourceSubtitle' style={{color: '#7CCFD6'}}>
-          <div className='resourceSubtitleText'>{titleData.applicationsTitle}</div>
-          <div className='titleLine'>
-            <div className='titleLineLong' />
-            <div className='titleLineShort' />
-            <div className='titleLineShort' />
+        <div className='resourceItem'>
+          <div className='resourceSubtitle' style={{color: '#7CCFD6'}}>
+            <div className='resourceSubtitleText'>{titleData.applicationsTitle}</div>
+            <div className='titleLine'>
+              <div className='titleLineLong' />
+              <div className='titleLineShort' />
+              <div className='titleLineShort' />
+            </div>
+          </div>
+          <div className='resourceList'>
+            {
+              resourcesAppliationsListData.map((appItem, appidx) => {
+                const appkey = `app_${appidx}`;
+                return (
+                  <div className='resourceListItem' key={appkey}>
+                    <div className='resourceListItemLogo' style={{background: '#0095A2'}}><img src={resourcesItemLogo} alt='resourcesItemLogo' /></div>
+                    <div className='resourceListItemText'>
+                      <div className='resourceListItemTitle'>{appItem.title}<span className='resourceListItemTitleSmall'>{appItem.subtitle}</span></div>
+                      <div className='resourceListItemContext'>{appItem.content}</div>
+                    </div>
+                  </div>
+                )
+              })
+            }
           </div>
         </div>
-        <div className='resourceList'>
-          {
-            resourcesAppliationsListData.map((appItem, appidx) => {
-              const appkey = `app_${appidx}`;
-              return (
-                <div className='resourceListItem'>
-                  <div className='resourceListItemLogo'><img src={resourcesItemLogo} alt='resourcesItemLogo' /></div>
-                  <div className='resourceListItemText'>
-                    <div className='resourceListItemTitle'>{appItem.title}<span className='resourceListItemTitleSmall'>{appItem.subtitle}</span></div>
-                    <div className='resourceListItemContext'>{appItem.content}</div>
+        <div className='resourceItem'>
+          <div className='resourceSubtitle' style={{color: '#7884CA'}}>
+            <div className='resourceSubtitleText'>{titleData.cloudResourcesTitle}</div>
+            <div className='titleLine'>
+              <div className='titleLineLong' />
+              <div className='titleLineShort' />
+              <div className='titleLineShort' />
+            </div>
+          </div>
+          <div className='resourceList'>
+            {
+              resourcesCloudListData.map((cloudItem, cloudidx) => {
+                const cloudkey = `cloud_${cloudidx}`;
+                return (
+                  <div className='resourceListItem' key={cloudkey}>
+                    <div className='resourceListItemLogo' style={{background: '#455299'}}><img src={resourcesItemLogo} alt='resourcesItemLogo' /></div>
+                    <div className='resourceListItemText'>
+                      <div className='resourceListItemTitle'>{cloudItem.title}<span className='resourceListItemTitleSmall'>{cloudItem.subtitle}</span></div>
+                      <div className='resourceListItemContext'>{cloudItem.content}</div>
+                    </div>
                   </div>
-                </div>
-              )
-            })
-          }
+                )
+              })
+            }
+          </div>
         </div>
       </ResourcesContainer>
     </LandingViewContainer>

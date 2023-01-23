@@ -59,6 +59,34 @@ export const latestUpdatesData = [
     title: 'LEARN MORE ABOUT LOREM IPSUM DOLOR SIT AMET CON',
     content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna',
   },
+];
+
+export const resourcesAppliationsListData = [
+  {
+    title: 'Childhood Cancer Data Catalog',
+    subtitle: '(CCDC)',
+    content:'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  },
+  {
+    title: 'Clinical Interpretation of Variants in Cancer (civicdb.org)',
+    subtitle: '(CIViC)',
+    content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  },
+  {
+    title: 'Molecular Characterization Initiative for Childhood Cancers - NCI',
+    subtitle: '(MCI Data)',
+    content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  },
+  {
+    title: 'Molecular Targets Platform',
+    subtitle: '(MTP)',
+    content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  },
+  {
+    title: 'National Childhood Cancer Registry Explorer',
+    subtitle: '(NCCR Explorer)',
+    content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  },
 ]
 
 export const GET_LANDING_PAGE_DATA_QUERY = gql`{

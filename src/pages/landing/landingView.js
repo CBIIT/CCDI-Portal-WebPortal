@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
-import { GET_LANDING_PAGE_DATA_QUERY,introData, titleData, statsData, latestUpdatesData } from '../../bento/landingPageData';
+import { GET_LANDING_PAGE_DATA_QUERY,introData, titleData, statsData, latestUpdatesData, resourcesAppliationsListData } from '../../bento/landingPageData';
+import resourcesItemLogo from '../../assets/landing/Resources_Logo.svg';
 
 const LandingViewContainer = styled.div`
     width: 1440px;
@@ -269,6 +270,10 @@ const ResourcesContainer = styled.div`
       height: 125px;
       border-radius: 20px;
       background: #0095A2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 25px;
     }
 
     .resourceListItemText {
@@ -377,41 +382,20 @@ const LandingView = () => {
           </div>
         </div>
         <div className='resourceList'>
-          <div className='resourceListItem'>
-            <div className='resourceListItemLogo'></div>
-            <div className='resourceListItemText'>
-              <div className='resourceListItemTitle'>Childhood Cancer Data Catalog <span className='resourceListItemTitleSmall'>(CCDC)</span></div>
-              <div className='resourceListItemContext'>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
-            </div>
-          </div>
-          <div className='resourceListItem'>
-            <div className='resourceListItemLogo'></div>
-            <div className='resourceListItemText'>
-              <div className='resourceListItemTitle'>Clinical Interpretation of Variants in Cancer (civicdb.org) <span className='resourceListItemTitleSmall'>(CIViC)</span></div>
-              <div className='resourceListItemContext'>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
-            </div>
-          </div>
-          <div className='resourceListItem'>
-            <div className='resourceListItemLogo'></div>
-            <div className='resourceListItemText'>
-              <div className='resourceListItemTitle'>Molecular Characterization Initiative for Childhood Cancers - NCI <span className='resourceListItemTitleSmall'>(MCI Data)</span></div>
-              <div className='resourceListItemContext'>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
-            </div>
-          </div>
-          <div className='resourceListItem'>
-            <div className='resourceListItemLogo'></div>
-            <div className='resourceListItemText'>
-              <div className='resourceListItemTitle'>Molecular Targets Platform<span className='resourceListItemTitleSmall'>(MTP)</span></div>
-              <div className='resourceListItemContext'>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
-            </div>
-          </div>
-          <div className='resourceListItem'>
-            <div className='resourceListItemLogo'></div>
-            <div className='resourceListItemText'>
-              <div className='resourceListItemTitle'>National Childhood Cancer Registry Explorer <span className='resourceListItemTitleSmall'>(NCCR Explorer)</span></div>
-              <div className='resourceListItemContext'>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
-            </div>
-          </div>
+          {
+            resourcesAppliationsListData.map((appItem, appidx) => {
+              const appkey = `app_${appidx}`;
+              return (
+                <div className='resourceListItem'>
+                  <div className='resourceListItemLogo'><img src={resourcesItemLogo} alt='resourcesItemLogo' /></div>
+                  <div className='resourceListItemText'>
+                    <div className='resourceListItemTitle'>{appItem.title}<span className='resourceListItemTitleSmall'>{appItem.subtitle}</span></div>
+                    <div className='resourceListItemContext'>{appItem.content}</div>
+                  </div>
+                </div>
+              )
+            })
+          }
         </div>
       </ResourcesContainer>
     </LandingViewContainer>

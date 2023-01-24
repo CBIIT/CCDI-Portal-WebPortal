@@ -1,0 +1,37 @@
+@font-face {
+  font-family:"poppins";
+  src:url(./fonts/Poppins-Light.woff2) format("woff2"),
+  url(./fonts/Poppins-Light.woff) format("woff"),
+  url(./fonts/Poppins-Light) format("opentype");
+  font-display:auto;font-style:normal;font-weight:300;font-stretch:normal;
+}
+
+@font-face {
+  font-family:"poppins";
+  src:url(./fonts//Poppins-Medium.woff2) format("woff2"),
+  url(./fonts/Poppins-Medium.woff) format("woff"),
+  url(./fonts/Poppins-Medium) format("opentype");
+  font-display:auto;font-style:normal;font-weight:500;font-stretch:normal;
+}
+
+@font-face {
+  font-family:"poppins";
+  src:url(./fonts/Poppins-Bold.woff2) format("woff2"),
+  url(./fonts/Poppins-Bold.woff) format("woff"),
+  url(./fonts/Poppins-Bold) format("opentype");
+  font-display:auto;font-style:normal;font-weight:700;font-stretch:normal;
+}
+
+@font-face {
+  font-family:"Inter";
+  src:url(./fonts/Inter-Regular.woff2) format("woff2"),
+  url(./fonts/Inter-Regular.woff) format("woff");
+  font-display:auto;font-style:normal;font-weight:400;font-stretch:normal;
+}
+
+@font-face {
+  font-family:"Inter";
+  src:url(./fonts/Inter-ExtraBold.woff2) format("woff2"),
+  url(./fonts/Inter-ExtraBold.woff) format("woff");
+  font-display:auto;font-style:normal;font-weight:800;font-stretch:normal;
+}

@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_LANDING_PAGE_DATA_QUERY,introData, titleData, statsData, latestUpdatesData, resourcesAppliationsListData, resourcesCloudListData, aboutContainerData } from '../../bento/landingPageData';
 import resourcesItemLogo from '../../assets/landing/Resources_Logo.svg';
@@ -373,6 +372,7 @@ const AboutContainer = styled.div`
 
 const LandingView = () => {
   const { loading, error, data } = useQuery(GET_LANDING_PAGE_DATA_QUERY);
+  const [activeAbooutItem, setActiveAboutItem] = useState('MCI');
 
   useEffect(() => {
     console.log(data);
@@ -507,14 +507,14 @@ const LandingView = () => {
                 aboutContainerData.aboutButtonlist.map((aboutButtonItem, idx) => {
                   const key = `abt_${idx}`;
                   return (
-                    <div className='aboutButton' key={key}>{aboutButtonItem}</div>
+                    <div className={ activeAbooutItem === aboutButtonItem ? 'aboutButton active' : 'aboutButton' } key={key} onClick={() => setActiveAboutItem(aboutButtonItem)}>{aboutButtonItem}</div>
                   )
                 })
               }
             </div>
           </div>
           <div className='aboutRightContainer'>
-            <div className='aboutTextContainer'>{aboutContainerData.aboutList['MCI']}</div>
+            <div className='aboutTextContainer'>{aboutContainerData.aboutList[activeAbooutItem]}</div>
           </div>
         </div>
       </AboutContainer>

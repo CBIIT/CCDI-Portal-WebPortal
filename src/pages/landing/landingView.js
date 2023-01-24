@@ -503,9 +503,14 @@ const LandingView = () => {
         <div className='aboutContentContainer'>
           <div className="aboutLeftContainer">
             <div className='aboutButtonList'>
-              <div className='aboutButton'>{aboutContainerData.aboutButtonlist[0]}</div>
-              <div className='aboutButton'>{aboutContainerData.aboutButtonlist[1]}</div>
-              <div className='aboutButton active'>{aboutContainerData.aboutButtonlist[2]}</div>
+              {
+                aboutContainerData.aboutButtonlist.map((aboutButtonItem, idx) => {
+                  const key = `abt_${idx}`;
+                  return (
+                    <div className='aboutButton' key={key}>{aboutButtonItem}</div>
+                  )
+                })
+              }
             </div>
           </div>
           <div className='aboutRightContainer'>

@@ -1,4 +1,4 @@
-import Logo from '../assets/header/Portal_Logo.png';
+import Logo from '../assets/header/Portal_Logo.svg';
 
 // globalHeaderLogo image 468x100
 // globalHeaderImage: image 2200x100

@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
-import landingImg from '../assets/landing/Landing_Intro_Pic.png'
-import updateImg1 from '../assets/landing/Updates-1.jpg';
-import updateImg2 from '../assets/landing/Updates-2.jpg';
-import updateImg3 from '../assets/landing/Updates-3.jpg';
+import landingImg from '../assets/landing/Hero_1.png'
+import updateImg1 from '../assets/landing/Updates_1.png';
+import updateImg2 from '../assets/landing/Updates_2.png';
+import updateImg3 from '../assets/landing/Updates_3.png';
 
 export const introData = {
   landingIntroPic: landingImg,

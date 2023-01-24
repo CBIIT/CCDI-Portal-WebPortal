@@ -49,7 +49,6 @@ const IntroPicContainer = styled.div`
     height: 434px;
     background-image: url(${introData.landingIntroPic});
     background-repeat: no-repeat;
-    background-position: -34px;
 `;
 
 const ListContainer = styled.div`
@@ -150,7 +149,7 @@ const LatestUpdatesContainer = styled.div`
 
     .latestUpdatesListItemPic {
       border-radius: 0px 20px 0 0;
-      height: 311px;
+      height: 310px;
     }
 
     .latestUpdatesListTitle {

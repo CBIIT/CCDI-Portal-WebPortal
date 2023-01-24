@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
-import { GET_LANDING_PAGE_DATA_QUERY,introData, titleData, statsData, latestUpdatesData, resourcesAppliationsListData, resourcesCloudListData } from '../../bento/landingPageData';
+import { GET_LANDING_PAGE_DATA_QUERY,introData, titleData, statsData, latestUpdatesData, resourcesAppliationsListData, resourcesCloudListData, aboutContainerData } from '../../bento/landingPageData';
 import resourcesItemLogo from '../../assets/landing/Resources_Logo.svg';
 
 const LandingViewContainer = styled.div`
@@ -16,7 +16,7 @@ const FirstContainer = styled.div`
 `;
 
 const IntroContainer = styled.div`
-    width: 720px;
+    width: 50%;
 `;
 
 const IntroTextContainer = styled.div`
@@ -310,6 +310,65 @@ const ResourcesContainer = styled.div`
 
 const AboutContainer = styled.div`
     margin-top: 149px;
+
+    .aboutContentContainer {
+      display: flex;
+      margin: 88px 0 131px 0;
+    }
+
+    .aboutLeftContainer {
+      width: 50%;
+      height:378px;
+      background-image: url(${aboutContainerData.img});
+      background-repeat: no-repeat;
+    }
+
+    .aboutButtonList {
+      margin: 40px 0 0 332px;
+    }
+
+    .aboutButton {
+      height: 88px;
+      width: 218px;
+      border: 1px solid #078893;
+      background: #FFFFFF;
+      box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.25);
+      border-radius: 5px;
+      margin-bottom: 17px;
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 16px;
+      color: #05555C;
+      text-align: center;
+      line-height: 88px;
+    }
+
+    .aboutButton:hover {
+      cursor: pointer;
+    }
+
+    .active {
+      background: #078893;
+      color: #FFFFFF;
+    }
+
+    .aboutRightContainer {
+      width: 50%;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .aboutTextContainer {
+      width: 526px;
+      margin-left: 63px;
+      font-family: Inter;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 22px;
+    }
 `;
 
 const LandingView = () => {
@@ -441,6 +500,18 @@ const LandingView = () => {
           </div>
           <div className='titleText'>{titleData.aboutTitle}</div>
         </TitleContainer>
+        <div className='aboutContentContainer'>
+          <div className="aboutLeftContainer">
+            <div className='aboutButtonList'>
+              <div className='aboutButton'>{aboutContainerData.aboutButtonlist[0]}</div>
+              <div className='aboutButton'>{aboutContainerData.aboutButtonlist[1]}</div>
+              <div className='aboutButton active'>{aboutContainerData.aboutButtonlist[2]}</div>
+            </div>
+          </div>
+          <div className='aboutRightContainer'>
+            <div className='aboutTextContainer'>{aboutContainerData.aboutList['MCI']}</div>
+          </div>
+        </div>
       </AboutContainer>
     </LandingViewContainer>
   )

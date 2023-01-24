@@ -3,6 +3,7 @@ import landingImg from '../assets/landing/Hero_1.png'
 import updateImg1 from '../assets/landing/Updates_1.png';
 import updateImg2 from '../assets/landing/Updates_2.png';
 import updateImg3 from '../assets/landing/Updates_3.png';
+import aboutImg from '../assets/landing/About_1.png';
 
 export const introData = {
   landingIntroPic: landingImg,
@@ -106,6 +107,16 @@ export const resourcesCloudListData = [
     content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
   },
 ];
+
+export const aboutContainerData = {
+  img: aboutImg,
+  aboutButtonlist: ['CCDI HUB', 'CCDI', 'MCI'],
+  aboutList: {
+      'CCDI HUB': 'CCDI HUB',
+      'CCDI': 'HELL0',
+      'MCI': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque.',
+  },
+}
 
 export const GET_LANDING_PAGE_DATA_QUERY = gql`{
   numberOfPrograms

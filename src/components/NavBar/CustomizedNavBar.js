@@ -78,7 +78,6 @@ const NavBar = () => {
           <LiSection style={path === '/' ? activeStyle : null}><NavLink to="/">APPLICATIONS</NavLink></LiSection>
           <LiSection style={path === '/' ? activeStyle : null}><NavLink to="/">CLOUD RESOURCES</NavLink></LiSection>
           <LiSection style={path === '/news' ? activeStyle : null}><NavLink to="/news">NEWS</NavLink></LiSection>
-          <LiSection style={path === '/moonshot' ? activeStyle : null}><NavLink to="/moonshot">CANCER MOONSHOT</NavLink></LiSection>
         </UlContainer>
       </NavContainer>
     </Nav>

@@ -8,26 +8,22 @@ import Home from '../../pages/landing/landingView';
 import About from '../../pages/about/aboutView';
 import News from '../../pages/news/newsView';
 import Ccdi from '../../pages/ccdi/ccdiView';
-import Moonshot from '../../pages/moonshot/moonshotView';
 
 const Layout = () => {
     return (
     <>
       <CssBaseline />
       <Router>
-        <>
-          <Header />
-          <NavBar />
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/home" component={Home} />
-            <Route exact path="/about" component={About} />
-            <Route exact path="/news" component={News} />
-            <Route exact path="/ccdi" component={Ccdi} />
-            <Route exact path="/moonshot" component={Moonshot} />
-          </Switch>
-          <Footer />
-        </>
+        <Header />
+        <NavBar />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/home" component={Home} />
+          <Route exact path="/about" component={About} />
+          <Route exact path="/news" component={News} />
+          <Route exact path="/ccdi" component={Ccdi} />
+        </Switch>
+        <Footer />
       </Router>
     </>
     )

@@ -44,6 +44,15 @@ const HeaderContainer = styled.div`
       padding-top: 8px;
     }
 
+    .searchInput {
+      margin-left: 20px;
+      font-family: Inter;
+      font-weight: 400;
+      font-size: 10px;
+      line-height: 36px;
+      color: #004A8B;
+    }
+
     .searchIconImg {
       height: 18px;
       width: 18px;
@@ -64,6 +73,7 @@ const Header = () => {
           </a>
           <div className='searchBarContainer'>
             <div className='searchBar'>
+              <div className='searchInput'>SEARCH</div>
               <div className='searchIcon'>
                 <img className="searchIconImg" src={headerData.globalHeaderSearchIcon} alt={headerData.globalHeaderSearchIconAltText}/>
               </div>

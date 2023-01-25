@@ -3,7 +3,7 @@ import { CssBaseline } from '@material-ui/core';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Header from '../Header/CustomizedHeader';
 import NavBar from '../NavBar/CustomizedNavBar';
-import Footer from '../Footer/FooterView';
+import Footer from '../Footer/CustomizedFooter';
 import Home from '../../pages/landing/landingView';
 import About from '../../pages/about/aboutView';
 import News from '../../pages/news/newsView';

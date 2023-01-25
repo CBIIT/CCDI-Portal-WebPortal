@@ -16,10 +16,29 @@ const FooterContainer = styled.div`
 `;
 
 const FooterUpperContainer = styled.div`
-  height: 100px;
-  background: pink;
   display: flex;
+`;
 
+const FooterLogo = styled.div`
+  padding: 30px 0 0 66px;
+
+  .logoText {
+    text-decoration: none;
+  }
+
+  .logoUpperText {
+    font-family: Inter;
+    font-weight: 700;
+    font-size: 19px;
+    color: #393C3C;
+  }
+
+  .logoLowerText {
+    font-family: Inter;
+    font-weight: 700;
+    font-size: 12px;
+    color: #393C3C;
+  }
 
 `;
 
@@ -28,14 +47,12 @@ const Footer = () => {
     <FooterStyled role="contentinfo">
         <FooterContainer>
             <FooterUpperContainer>
-                <div className='footerLogo'>
-                  <a href="https://www.cancer.gov" target="_blank" rel="noopener noreferrer">
-                    <h1>
-                      National Cancer Institute
-                      <span>at the National Institutes of Health</span>
-                    </h1>
+                <FooterLogo>
+                  <a className='logoText' href="https://www.cancer.gov" target="_blank" rel="noopener noreferrer">
+                    <div className='logoUpperText'>National Cancer Institute</div>
+                    <div className='logoLowerText'>at the National Institutes of Health</div>
                   </a>
-                </div>
+                </FooterLogo>
             </FooterUpperContainer>
         </FooterContainer>
     </FooterStyled>

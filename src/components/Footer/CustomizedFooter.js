@@ -11,7 +11,6 @@ const FooterStyled = styled.footer`
 
 const FooterContainer = styled.div`
   width: 1440px;
-  height: 260px;
   margin: 0 auto;
 `;
 
@@ -42,7 +41,7 @@ const FooterLogo = styled.div`
 `;
 
 const FooterLinksContainer = styled.div`
-  margin: 54px 87px 0 auto;
+  margin: 54px 87px 23px auto;
   display: flex;
 
   .footItem {
@@ -54,11 +53,11 @@ const FooterLinksContainer = styled.div`
     color: #393C3C;
     font-weight: 700;
     font-size: 12px;
-    margin-bottom: 10px;
+    margin-bottom: 7px;
   }
 
   .footItemSubtitle {
-    margin-bottom: 10px;
+    margin-bottom: 7px;
   }
 
   .footItemLink {
@@ -67,6 +66,26 @@ const FooterLinksContainer = styled.div`
     font-weight: 600;
     font-size: 12px;
     text-decoration: none;
+  }
+`;
+
+const GlobalFooterContainer = styled.div`
+  padding-bottom: 64px;
+  height: 10px;
+  display: flex;
+  justify-content: center;
+  font-size: 9px;
+  font-family: Open Sans;
+  font-weight: 600;
+  color: #393C3C;
+
+  .globalFooterItemLink{
+    color: #393C3C;
+    text-decoration: none;
+  }
+
+  .footerSplit {
+    margin: 0 15px;
   }
 `;
 
@@ -109,6 +128,12 @@ const Footer = () => {
                     }
                 </FooterLinksContainer>
             </FooterUpperContainer>
+            <GlobalFooterContainer>
+                <div className='globalFooterItem'>
+                    <a className='globalFooterItemLink' href='https://www.hhs.gov' target="_blank" rel="noopener noreferrer">U.S. Department of Health and Human Services</a>
+                    <span className='footerSplit'>|</span>
+                </div>
+            </GlobalFooterContainer>
         </FooterContainer>
     </FooterStyled>
   )

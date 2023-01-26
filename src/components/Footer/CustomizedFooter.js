@@ -129,10 +129,17 @@ const Footer = () => {
                 </FooterLinksContainer>
             </FooterUpperContainer>
             <GlobalFooterContainer>
-                <div className='globalFooterItem'>
-                    <a className='globalFooterItemLink' href='https://www.hhs.gov' target="_blank" rel="noopener noreferrer">U.S. Department of Health and Human Services</a>
-                    <span className='footerSplit'>|</span>
-                </div>
+                {
+                    FooterData.global_footer_links.map((linkItem, idx) => {
+                        const linkitemkey = `linkitem_${idx}`;
+                        return (
+                            <div className='globalFooterItem' key={linkitemkey}>
+                                <a className='globalFooterItemLink' href={linkItem.link} target="_blank" rel="noopener noreferrer">{linkItem.text}</a>
+                                { idx !== FooterData.global_footer_links.length - 1 ? <span className='footerSplit'>|</span> : null}
+                            </div>
+                        )
+                    })
+                }
             </GlobalFooterContainer>
         </FooterContainer>
     </FooterStyled>

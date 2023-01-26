@@ -71,7 +71,6 @@ const FooterLinksContainer = styled.div`
 
 const GlobalFooterContainer = styled.div`
   padding-bottom: 64px;
-  height: 10px;
   display: flex;
   justify-content: center;
   font-size: 9px;

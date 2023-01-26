@@ -83,14 +83,16 @@ const Footer = () => {
                 </FooterLogo>
                 <FooterLinksContainer>
                     {
-                        FooterData.link_sections.map((linkItem, itemidx) => {
+                        FooterData.link_sections.map((linkItem, linkidx) => {
+                            const linkkey =  `link_${linkidx}`;
                             return (
-                                <div className='footItem'>
+                                <div className='footItem' key={linkkey}>
                                     <div className='footItemTitle'>{linkItem.title}</div>
                                     {
-                                        linkItem.items.map((item) => {
+                                        linkItem.items.map((item, itemidx) => {
+                                            const itemkey =  `item_${itemidx}`;
                                             return (
-                                                <div className='footItemSubtitle'>
+                                                <div className='footItemSubtitle' key={itemkey}>
                                                     {
                                                         item.link.includes('http') ? 
                                                         <a className='footItemLink' href={item.link} target="_blank" rel="noopener noreferrer">{item.text}</a>

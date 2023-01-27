@@ -33,7 +33,7 @@ const LiSection = styled.li`
   text-align: center;
   color: #252222;
   font-size: 17px;
-  font-weight: 900;
+  font-weight: 600;
   font-family: Poppins;
   text-decoration: none;
   cursor: pointer;

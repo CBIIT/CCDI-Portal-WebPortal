@@ -37,7 +37,7 @@ const IntroTextContainer = styled.div`
       text-align: left;
       color: #05555C;
       font-family: Poppins;
-      font-weight: bold;
+      font-weight: 600;
       font-size: 37px;
     }
 
@@ -62,7 +62,7 @@ const IntroAboutButtonContainer = styled.div`
       width: 210px;
       color: #078893;
       font-family: Poppins;
-      font-weight: bold;
+      font-weight: 600;
       font-size: 16px;
       margin-top: 40px;
     }
@@ -75,7 +75,7 @@ const IntroAboutButtonContainer = styled.div`
       border-radius: 5px;
       color: #FFFFFF;
       font-family: Poppins;
-      font-weight: bold;
+      font-weight: 600;
       font-size: 16px;
       text-align: center;
       line-height: 41px;
@@ -123,7 +123,7 @@ const StatsContainer = styled.div`
     .statDetail {
       color: #E6E6E6;
       font-family: Poppins;
-      font-weight: bold;
+      font-weight: 600;
       font-size: 19px;
       line-height: 23px;
     }
@@ -155,7 +155,7 @@ const LatestUpdatesContainer = styled.div`
       color: #63D6C7;
       padding: 14px 23px 0 23px;
       font-family: Poppins;
-      font-weight: bold;
+      font-weight: 600;
       font-size: 14px;
       height: 57px
     }
@@ -199,7 +199,7 @@ const TitleContainer = styled.div`
 
     .titleText {
       font-family: Poppins;
-      font-weight: bold;
+      font-weight: 600;
       font-size: 35px;
     }
 `;
@@ -210,7 +210,7 @@ const ResourcesContainer = styled.div`
     .resourceTitle {
       margin-left: 160px;
       font-family: Poppins;
-      font-weight: bold;
+      font-weight: 600;
       font-size: 35px;
       color: #05555C;
     }

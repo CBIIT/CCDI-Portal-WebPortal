@@ -1,0 +1,23 @@
+name: Contrast Security SCA
+run-name: SCA Scan 
+on: [workflow_dispatch]
+  # pull_request:
+  #   types: [opened, edited, reopened]
+  #   branches:
+  #     - 'dev**'
+jobs:
+  Scan-Dependencies:
+    runs-on: ubuntu-latest 
+    steps:
+      - name: Repository Checkout 
+        id: checkout
+        uses: actions/checkout@v3
+      - name: Install Node
+        id: node
+        with:
+          node-version: '16'
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
+      - name: NPM CI 
+        id: ci 
+        run: npm ci

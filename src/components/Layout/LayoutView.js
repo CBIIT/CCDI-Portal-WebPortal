@@ -9,6 +9,7 @@ import About from '../../pages/about/aboutView';
 import News from '../../pages/news/newsView';
 import Ccdi from '../../pages/ccdi/ccdiView';
 import Moonshot from '../../pages/moonshot/moonshotView';
+import Error from '../../pages/error/Error';
 
 const ScrollToTop = () => {
   window.scrollTo(0, 0);
@@ -32,6 +33,7 @@ const Layout = () => {
               <Route exact path="/news" component={News} />
               <Route exact path="/ccdi" component={Ccdi} />
               <Route exact path="/moonshot" component={Moonshot} />
+              <Route component={Error} />
             </Switch>
           </div>
           <Footer />

@@ -35,6 +35,10 @@ const ErrorContainer = styled.div`
       color: #05555C;
     }
 
+    .returnButtonContainer {
+      text-decoration: none;
+    }
+
     .returnButton {
       margin: 50px auto 0 auto;
       width: 176px;
@@ -61,7 +65,9 @@ const Error = () => {
           <div>{errorData.titleSecond1}</div>
           <div>{errorData.titleSecond2}</div>
         </div>
-        <div className='returnButton'>{errorData.buttonTitle}</div>
+        <a className='returnButtonContainer' href='/'>
+           <div className='returnButton'>{errorData.buttonTitle}</div>
+        </a>
       </div>
     </ErrorContainer>
   )

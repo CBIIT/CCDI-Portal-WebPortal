@@ -29,6 +29,8 @@ const AboutContainer = styled.div`
   .upperText {
     width: 432px;
     margin-right: 70px;
+    letter-spacing: 0.02em;
+    line-height: 27px;
   }
 
   .upperImg {
@@ -39,6 +41,8 @@ const AboutContainer = styled.div`
 
   .aboutBodyLowerContainer {
     margin: 64px 0 120px 0;
+    letter-spacing: 0.02em;
+    line-height: 27px;
   }
 `;
 

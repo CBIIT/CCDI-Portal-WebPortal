@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import {useLocation, NavLink, useNavigate} from 'react-router-dom';
+import {useLocation, NavLink, useHistory} from 'react-router-dom';
 import headerData from '../../bento/globalHeaderData';
 
 const HeaderBanner = styled.div`
@@ -45,15 +45,6 @@ const HeaderContainer = styled.div`
       padding-top: 8px;
     }
 
-    .searchInput {
-      margin-left: 20px;
-      font-family: Inter;
-      font-weight: 400;
-      font-size: 10px;
-      line-height: 36px;
-      color: #004A8B;
-    }
-
     .searchIconImg {
       height: 18px;
       width: 18px;
@@ -64,8 +55,47 @@ const HeaderContainer = styled.div`
     }
 `;
 
+const SearchInput = styled.input`
+  margin-left: 20px;
+  border: none;
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 36px;
+  color: #004A8B;
+  width: 225px;
+  background: transparent;
+
+  ::placeholder {
+    color: #004A8B;
+  }
+
+  :focus {
+    outline: none;
+  }
+`;
+
 const Header = () => {
   const path = useLocation().pathname;
+  const navigate = useHistory().push;
+  const [localText, setLocalText] = useState("");
+
+  const handleTextInputChange = (event) => {
+    const text = event.target.value;
+    setLocalText(text);
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      navigate(`/sitesearch?keyword=${localText.trim()}`);
+      setLocalText("");
+    }
+  };
+
+  const handleSearch = () => {
+    navigate(`/sitesearch?keyword=${localText.trim()}`);
+    setLocalText("");
+  };
 
   return (
     <>
@@ -79,8 +109,8 @@ const Header = () => {
             && (
               <div className='searchBarContainer'>
                 <div className='searchBar'>
-                  <div className='searchInput'>SEARCH</div>
-                  <div className='searchIcon'>
+                  <SearchInput type="text" value={localText} placeholder="SEARCH" onChange={handleTextInputChange} onKeyPress={handleKeyPress} />
+                  <div className='searchIcon' onClick={handleSearch}>
                     <img className="searchIconImg" src={headerData.globalHeaderSearchIcon} alt={headerData.globalHeaderSearchIconAltText}/>
                   </div>
                 </div>

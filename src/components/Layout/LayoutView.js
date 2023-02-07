@@ -8,6 +8,7 @@ import Home from '../../pages/landing/landingView';
 import About from '../../pages/about/aboutView';
 import News from '../../pages/news/newsView';
 import Ccdi from '../../pages/ccdi/ccdiView';
+import Error from '../../pages/error/Error';
 
 const Layout = () => {
     return (
@@ -22,6 +23,7 @@ const Layout = () => {
           <Route exact path="/about" component={About} />
           <Route exact path="/news" component={News} />
           <Route exact path="/ccdi" component={Ccdi} />
+          <Route component={Error} />
         </Switch>
         <Footer />
       </Router>

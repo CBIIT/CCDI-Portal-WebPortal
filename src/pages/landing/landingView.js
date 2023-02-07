@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
-import { GET_LANDING_PAGE_DATA_QUERY,introData, titleData, statsData, latestUpdatesData, resourcesAppliationsListData, resourcesCloudListData } from '../../bento/landingPageData';
+import { GET_LANDING_PAGE_DATA_QUERY,introData, titleData, statsData, latestUpdatesData, resourcesAppliationsListData, resourcesCloudListData, aboutContainerData } from '../../bento/landingPageData';
 import resourcesItemLogo from '../../assets/landing/Resources_Logo.svg';
 
 const LandingViewContainer = styled.div`
@@ -16,7 +15,7 @@ const FirstContainer = styled.div`
 `;
 
 const IntroContainer = styled.div`
-    width: 720px;
+    width: 50%;
 `;
 
 const IntroTextContainer = styled.div`
@@ -38,7 +37,7 @@ const IntroTextContainer = styled.div`
       text-align: left;
       color: #05555C;
       font-family: Poppins;
-      font-weight: bold;
+      font-weight: 600;
       font-size: 37px;
     }
 
@@ -49,7 +48,6 @@ const IntroPicContainer = styled.div`
     height: 434px;
     background-image: url(${introData.landingIntroPic});
     background-repeat: no-repeat;
-    background-position: -34px;
 `;
 
 const ListContainer = styled.div`
@@ -64,7 +62,7 @@ const IntroAboutButtonContainer = styled.div`
       width: 210px;
       color: #078893;
       font-family: Poppins;
-      font-weight: bold;
+      font-weight: 600;
       font-size: 16px;
       margin-top: 40px;
     }
@@ -77,7 +75,7 @@ const IntroAboutButtonContainer = styled.div`
       border-radius: 5px;
       color: #FFFFFF;
       font-family: Poppins;
-      font-weight: bold;
+      font-weight: 600;
       font-size: 16px;
       text-align: center;
       line-height: 41px;
@@ -125,7 +123,7 @@ const StatsContainer = styled.div`
     .statDetail {
       color: #E6E6E6;
       font-family: Poppins;
-      font-weight: bold;
+      font-weight: 600;
       font-size: 19px;
       line-height: 23px;
     }
@@ -150,14 +148,14 @@ const LatestUpdatesContainer = styled.div`
 
     .latestUpdatesListItemPic {
       border-radius: 0px 20px 0 0;
-      height: 311px;
+      height: 310px;
     }
 
     .latestUpdatesListTitle {
       color: #63D6C7;
       padding: 14px 23px 0 23px;
       font-family: Poppins;
-      font-weight: bold;
+      font-weight: 600;
       font-size: 14px;
       height: 57px
     }
@@ -201,7 +199,7 @@ const TitleContainer = styled.div`
 
     .titleText {
       font-family: Poppins;
-      font-weight: bold;
+      font-weight: 600;
       font-size: 35px;
     }
 `;
@@ -212,7 +210,7 @@ const ResourcesContainer = styled.div`
     .resourceTitle {
       margin-left: 160px;
       font-family: Poppins;
-      font-weight: bold;
+      font-weight: 600;
       font-size: 35px;
       color: #05555C;
     }
@@ -311,10 +309,70 @@ const ResourcesContainer = styled.div`
 
 const AboutContainer = styled.div`
     margin-top: 149px;
+
+    .aboutContentContainer {
+      display: flex;
+      margin: 88px 0 131px 0;
+    }
+
+    .aboutLeftContainer {
+      width: 50%;
+      height:378px;
+      background-image: url(${aboutContainerData.img});
+      background-repeat: no-repeat;
+    }
+
+    .aboutButtonList {
+      margin: 40px 0 0 332px;
+    }
+
+    .aboutButton {
+      height: 88px;
+      width: 218px;
+      border: 1px solid #078893;
+      background: #FFFFFF;
+      box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.25);
+      border-radius: 5px;
+      margin-bottom: 17px;
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 16px;
+      color: #05555C;
+      text-align: center;
+      line-height: 88px;
+    }
+
+    .aboutButton:hover {
+      cursor: pointer;
+    }
+
+    .active {
+      background: #078893;
+      color: #FFFFFF;
+    }
+
+    .aboutRightContainer {
+      width: 50%;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .aboutTextContainer {
+      width: 526px;
+      margin-left: 63px;
+      font-family: Inter;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 22px;
+    }
 `;
 
 const LandingView = () => {
   const { loading, error, data } = useQuery(GET_LANDING_PAGE_DATA_QUERY);
+  const [activeAbooutItem, setActiveAboutItem] = useState('MCI');
 
   useEffect(() => {
     console.log(data);
@@ -442,6 +500,23 @@ const LandingView = () => {
           </div>
           <div className='titleText'>{titleData.aboutTitle}</div>
         </TitleContainer>
+        <div className='aboutContentContainer'>
+          <div className="aboutLeftContainer">
+            <div className='aboutButtonList'>
+              {
+                aboutContainerData.aboutButtonlist.map((aboutButtonItem, idx) => {
+                  const key = `abt_${idx}`;
+                  return (
+                    <div className={ activeAbooutItem === aboutButtonItem ? 'aboutButton active' : 'aboutButton' } key={key} onClick={() => setActiveAboutItem(aboutButtonItem)}>{aboutButtonItem}</div>
+                  )
+                })
+              }
+            </div>
+          </div>
+          <div className='aboutRightContainer'>
+            <div className='aboutTextContainer'>{aboutContainerData.aboutList[activeAbooutItem]}</div>
+          </div>
+        </div>
       </AboutContainer>
     </LandingViewContainer>
   )

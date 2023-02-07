@@ -33,7 +33,7 @@ const LiSection = styled.li`
   text-align: center;
   color: #252222;
   font-size: 17px;
-  font-weight: 900;
+  font-weight: 600;
   font-family: Poppins;
   text-decoration: none;
   cursor: pointer;
@@ -78,7 +78,6 @@ const NavBar = () => {
           <LiSection style={path === '/' ? activeStyle : null}><NavLink to="/">APPLICATIONS</NavLink></LiSection>
           <LiSection style={path === '/' ? activeStyle : null}><NavLink to="/">CLOUD RESOURCES</NavLink></LiSection>
           <LiSection style={path === '/news' ? activeStyle : null}><NavLink to="/news">NEWS</NavLink></LiSection>
-          <LiSection style={path === '/moonshot' ? activeStyle : null}><NavLink to="/moonshot">CANCER MOONSHOT</NavLink></LiSection>
         </UlContainer>
       </NavContainer>
     </Nav>

@@ -26,7 +26,7 @@ export default {
         },
         {
           text: 'Contact CCDI Portal',
-          link: 'nciofficeofdatasharing@mail.nih.gov?Subject=Index%20of%20NCI%20Studies%20feedback',
+          link: 'mailto:nciofficeofdatasharing@mail.nih.gov?Subject=Index%20of%20NCI%20Studies%20feedback',
         },
         {
           text: 'Resources',
@@ -37,10 +37,6 @@ export default {
     {
       title: 'NIH Policies',
       items: [
-        {
-          text: 'Policies',
-          link: 'https://www.cancer.gov/policies',
-        },
         {
           text: 'Disclaimer',
           link: 'https://www.cancer.gov/policies/disclaimer',

@@ -16,7 +16,7 @@ const ErrorContainer = styled.div`
 const searchComponent = () => {
   return (
     <ErrorContainer>
-        <div className='searchResult'>searchView</div>
+        <div className='searchResult'>keyword is: <span>{window.location.href.split('?keyword=')[1]}</span></div>
     </ErrorContainer>
   )
 };

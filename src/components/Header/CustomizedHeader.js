@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import {useLocation, NavLink, useNavigate} from 'react-router-dom';
 import headerData from '../../bento/globalHeaderData';
 
 const HeaderBanner = styled.div`
@@ -64,6 +65,8 @@ const HeaderContainer = styled.div`
 `;
 
 const Header = () => {
+  const path = useLocation().pathname;
+
   return (
     <>
       <HeaderBanner role="banner">
@@ -71,14 +74,19 @@ const Header = () => {
           <a className='logoContainer' href={headerData.globalHeaderLogoLink}>
             <img src={headerData.globalHeaderLogo} alt={headerData.globalHeaderLogoAltText} />
           </a>
-          <div className='searchBarContainer'>
-            <div className='searchBar'>
-              <div className='searchInput'>SEARCH</div>
-              <div className='searchIcon'>
-                <img className="searchIconImg" src={headerData.globalHeaderSearchIcon} alt={headerData.globalHeaderSearchIconAltText}/>
+          {
+            path !== "/sitesearch"
+            && (
+              <div className='searchBarContainer'>
+                <div className='searchBar'>
+                  <div className='searchInput'>SEARCH</div>
+                  <div className='searchIcon'>
+                    <img className="searchIconImg" src={headerData.globalHeaderSearchIcon} alt={headerData.globalHeaderSearchIconAltText}/>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
+            )
+          }
         </HeaderContainer>
       </HeaderBanner>
     </>

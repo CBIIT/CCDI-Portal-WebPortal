@@ -87,13 +87,17 @@ const Header = () => {
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
-      navigate(`/sitesearch?keyword=${localText.trim()}`);
+      if (localText.trim() !== '') {
+        navigate(`/sitesearch?keyword=${localText.trim()}`);
+      }
       setLocalText("");
     }
   };
 
   const handleSearch = () => {
-    navigate(`/sitesearch?keyword=${localText.trim()}`);
+    if (localText.trim() !== '') {
+      navigate(`/sitesearch?keyword=${localText.trim()}`);
+    }
     setLocalText("");
   };
 

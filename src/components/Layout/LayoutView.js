@@ -8,6 +8,8 @@ import Home from '../../pages/landing/landingView';
 import About from '../../pages/about/aboutView';
 import News from '../../pages/news/newsView';
 import Ccdi from '../../pages/ccdi/ccdiView';
+import Error from '../../pages/error/Error';
+import Search from '../../pages/search/searchView'
 
 const Layout = () => {
     return (
@@ -22,6 +24,8 @@ const Layout = () => {
           <Route exact path="/about" component={About} />
           <Route exact path="/news" component={News} />
           <Route exact path="/ccdi" component={Ccdi} />
+          <Route path="/sitesearch" component={Search} />
+          <Route component={Error} />
         </Switch>
         <Footer />
       </Router>

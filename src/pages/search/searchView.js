@@ -21,17 +21,17 @@ const SearchBar = styled.div`
   display: flex;
   margin: 20px auto;
   width: 750px;
-  height: 53.69px;
-  border: 1px solid #004A8B;
+  height: 53px;
+  border: 2px solid #616161;
   border-radius: 8px;
   background: white;
 
   .searchIcon {
     margin-left: auto;
     margin-right: 13px;
-    height: 20px;
-    width: 20px;
-    padding-top: 8px;
+    height: 22px;
+    width: 22px;
+    padding-top: 15px;
   }
 
   .searchIconImg:hover {
@@ -42,10 +42,10 @@ const SearchBar = styled.div`
 const SearchInput = styled.input`
   margin-left: 20px;
   border: none;
-  font-family: Inter;
+  font-family: Lato;
   font-weight: 400;
-  font-size: 10px;
-  line-height: 36px;
+  font-size: 25px;
+  line-height: 53px;
   color: #004A8B;
   width: 225px;
   background: transparent;

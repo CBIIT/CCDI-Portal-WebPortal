@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import {
   useLocation,
 } from "react-router-dom";
@@ -16,6 +17,28 @@ import {
 
 import PublicTabView from './components/tabs/publicTabView';
 
+const SearchBar = styled.div`
+  display: flex;
+  margin: 20px auto;
+  width: 750px;
+  height: 53.69px;
+  border: 1px solid #004A8B;
+  border-radius: 8px;
+  background: white;
+
+  .searchIcon {
+    margin-left: auto;
+    margin-right: 13px;
+    height: 20px;
+    width: 20px;
+    padding-top: 8px;
+  }
+
+  .searchIconImg:hover {
+    cursor: pointer;
+  }
+`;
+
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
 };
@@ -32,6 +55,7 @@ function searchComponent({
   const [searchResults, setSearchResults] = React.useState([]);
   const loading = open;
   const [value] = React.useState([]);
+  const [localText, setLocalText] = React.useState(searchparam);
 
   const getAuthorizedResultQuery = (strValue) => {
     return getPublicSearchPageResults(strValue);
@@ -121,6 +145,12 @@ function searchComponent({
             )}
           />
         </div>
+        <SearchBar>
+          <div>hello</div>
+          <div className='searchIcon'>
+              <img className="searchIconImg" src='https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/globalSearchSearch.svg' alt='clear icon' />
+          </div>
+        </SearchBar>
       </div>
       <div className={classes.bodyContainer}>
         <Box sx={{ width: '100%', typography: 'body1' }}>

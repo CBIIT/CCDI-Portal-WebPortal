@@ -39,6 +39,26 @@ const SearchBar = styled.div`
   }
 `;
 
+const SearchInput = styled.input`
+  margin-left: 20px;
+  border: none;
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 36px;
+  color: #004A8B;
+  width: 225px;
+  background: transparent;
+
+  ::placeholder {
+    color: #004A8B;
+  }
+
+  :focus {
+    outline: none;
+  }
+`;
+
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
 };
@@ -55,7 +75,6 @@ function searchComponent({
   const [searchResults, setSearchResults] = React.useState([]);
   const loading = open;
   const [value] = React.useState([]);
-  const [localText, setLocalText] = React.useState(searchparam);
 
   const getAuthorizedResultQuery = (strValue) => {
     return getPublicSearchPageResults(strValue);
@@ -76,6 +95,21 @@ function searchComponent({
     setInputValue(newValue);
   }
 
+  const handleTextInputChange = (event) => {
+    const text = event.target.value;
+    setInputValue(text);
+  };
+
+  async function handleKeyPress(event) {
+    if (event.key === "Enter") {
+    const searchResp = await getAuthorizedResultQuery(inputValue);
+    setSearchResults(searchResp);
+    // setTab('1');
+    setSearchText(inputValue);
+    history.push(`/sitesearch?keyword=${inputValue}`);
+    }
+  };
+
   React.useEffect(() => {
     console.log("re-rendered!");
     getAutoCompleteRes(searchparam);
@@ -85,7 +119,7 @@ function searchComponent({
   return (
     <>
       <div className={classes.heroArea}>
-        <div>
+        {/* <div>
           <Autocomplete
             className={classes.autocomplete}
             closeIcon={(
@@ -144,10 +178,10 @@ function searchComponent({
               />
             )}
           />
-        </div>
+        </div> */}
         <SearchBar>
-          <div>hello</div>
-          <div className='searchIcon'>
+          <SearchInput type="text" value={inputValue} placeholder="SEARCH" onChange={handleTextInputChange} onKeyPress={handleKeyPress} />
+          <div className='searchIcon' onClick={() => onChange(inputValue)}>
               <img className="searchIconImg" src='https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/globalSearchSearch.svg' alt='clear icon' />
           </div>
         </SearchBar>

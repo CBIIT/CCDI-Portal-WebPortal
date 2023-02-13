@@ -19,7 +19,7 @@ import PublicTabView from './components/tabs/publicTabView';
 
 const SearchBar = styled.div`
   display: flex;
-  margin: 20px auto;
+  margin: 0 auto;
   width: 750px;
   height: 53px;
   border: 2px solid #616161;
@@ -246,6 +246,7 @@ const styles = () => ({
     width: '100%',
     height: '167px',
     background: '#D9E8F8',
+    paddingTop: '59px;'
   },
   autocomplete: {
     margin: '0 auto',

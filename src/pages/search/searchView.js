@@ -45,7 +45,7 @@ const SearchBar = styled.div`
     margin-right: 13px;
   }
 
-  .deleteIconImg {
+  .deleteIconImg:hover {
     cursor: pointer;
   }
 `;
@@ -58,7 +58,7 @@ const SearchInput = styled.input`
   font-size: 25px;
   line-height: 53px;
   color: #004A8B;
-  width: 225px;
+  width: 650px;
   background: transparent;
 
   ::placeholder {
@@ -193,9 +193,9 @@ function searchComponent({
         <SearchBar>
           <SearchInput type="text" value={inputValue} placeholder="SEARCH" onChange={handleTextInputChange} onKeyPress={handleKeyPress} />
           <div className='searchIcon' onClick={() => onChange(inputValue)}>
-              <img className="searchIconImg" src='https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/globalSearchSearch.svg' alt='clear icon' />
+              <img className="searchIconImg" src='https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/globalSearchSearch.svg' alt='search icon' />
           </div>
-          <div className='deleteIcon'>
+          <div className='deleteIcon' onClick={() => setInputValue('')}>
               <img className="deleteIconImg" src='https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/globalSearchDelete.svg' alt='clear icon' />
           </div>
         </SearchBar>

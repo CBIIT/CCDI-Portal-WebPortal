@@ -37,6 +37,17 @@ const SearchBar = styled.div`
   .searchIconImg:hover {
     cursor: pointer;
   }
+
+  .deleteIcon {
+    height: 18px;
+    width: 18px;
+    padding-top: 17px;
+    margin-right: 13px;
+  }
+
+  .deleteIconImg {
+    cursor: pointer;
+  }
 `;
 
 const SearchInput = styled.input`
@@ -183,6 +194,9 @@ function searchComponent({
           <SearchInput type="text" value={inputValue} placeholder="SEARCH" onChange={handleTextInputChange} onKeyPress={handleKeyPress} />
           <div className='searchIcon' onClick={() => onChange(inputValue)}>
               <img className="searchIconImg" src='https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/globalSearchSearch.svg' alt='clear icon' />
+          </div>
+          <div className='deleteIcon'>
+              <img className="deleteIconImg" src='https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/globalSearchDelete.svg' alt='clear icon' />
           </div>
         </SearchBar>
       </div>

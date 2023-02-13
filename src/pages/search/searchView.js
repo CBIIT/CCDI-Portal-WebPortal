@@ -86,6 +86,7 @@ function searchComponent({
   const [searchResults, setSearchResults] = React.useState([]);
   const loading = open;
   const [value] = React.useState([]);
+  const [deleteIconShow, setDeleteIconShow] = React.useState('none');
 
   const getAuthorizedResultQuery = (strValue) => {
     return getPublicSearchPageResults(strValue);
@@ -190,13 +191,13 @@ function searchComponent({
             )}
           />
         </div> */}
-        <SearchBar>
+        <SearchBar onMouseOver={() => setDeleteIconShow('block')} onMouseOut={() => setDeleteIconShow('none')}>
           <SearchInput type="text" value={inputValue} placeholder="SEARCH" onChange={handleTextInputChange} onKeyPress={handleKeyPress} />
           <div className='searchIcon' onClick={() => onChange(inputValue)}>
               <img className="searchIconImg" src='https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/globalSearchSearch.svg' alt='search icon' />
           </div>
-          <div className='deleteIcon' onClick={() => setInputValue('')}>
-              <img className="deleteIconImg" src='https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/globalSearchDelete.svg' alt='clear icon' />
+          <div className='deleteIcon' onClick={() => setInputValue('')} >
+              <img className="deleteIconImg" style={{display:deleteIconShow}} src='https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/globalSearchDelete.svg' alt='clear icon' />
           </div>
         </SearchBar>
       </div>

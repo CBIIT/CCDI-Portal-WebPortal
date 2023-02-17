@@ -99,6 +99,16 @@ const StatsContainer = styled.div`
       filter:blur(40px);
     }
 
+    .rightbox {
+      position: absolute;
+      background: #ffffff;
+      right: -300px;
+      top: 0;
+      width: 546px;
+      height: 417px;
+      z-index: 9;
+      filter:blur(40px);
+    }
 
     .borderTop {
       height: 72px;

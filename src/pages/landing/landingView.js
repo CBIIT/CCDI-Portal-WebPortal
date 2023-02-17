@@ -87,9 +87,36 @@ const StatsContainer = styled.div`
     top: 713px;
     margin: 80px auto;
     justify-content: center;
+    position: relative;
+
+    .leftbox {
+      position: absolute;
+      background: red;
+      left: 100px;
+      top: 100px;
+      width: 50px;
+      height: 50px;
+    }
+
+    .rightbox {
+
+    }
 
     .borderTop {
       height: 71px;
+      // border-bottom: 2px solid;
+      // border-image: linear-gradient(
+      //   90deg,
+      //   rgba(255, 255, 255, 0) 0%,
+      //   #7CCFD6 50%,
+      //   rgba(255, 255, 255, 0) 99%
+      // )
+      // 2 2 2 2;
+
+      background: linear-gradient(180deg, rgba(153, 153, 153, 0.2) 0%, rgba(255, 255, 255, 0) 94.44%);
+      backdrop-filter: blur(2.5px);
+      transform: matrix(1, 0, 0, -1, 0, 0);
+      border-top: 1.4px solid #7CCFD6;
     }
 
     .statGlance {
@@ -142,6 +169,7 @@ const StatsContainer = styled.div`
 
 const LatestUpdatesContainer = styled.div`
     margin-top: 97px;
+    position: relative;
 
     .latestUpdatesList {
       display: flex;
@@ -408,6 +436,8 @@ const LandingView = () => {
         </ListContainer>
       </FirstContainer>
       <StatsContainer>
+        <div className='leftbox' />
+        <div className='rightbox' />
         <div className='borderTop' />
         <div className='statGlance'>CCDI Stats At a Glance</div>
         <div className='statList'>

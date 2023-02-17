@@ -83,27 +83,25 @@ const IntroAboutButtonContainer = styled.div`
 `;
 
 const StatsContainer = styled.div`
-    width: 1120px;
-    top: 713px;
+    width: 1440px;
     margin: 80px auto;
     justify-content: center;
     position: relative;
 
     .leftbox {
       position: absolute;
-      background: red;
-      left: 100px;
-      top: 100px;
-      width: 50px;
-      height: 50px;
+      background: #ffffff;
+      left: -300px;
+      top: 0;
+      width: 546px;
+      height: 417px;
+      z-index: 9;
+      filter:blur(40px);
     }
 
-    .rightbox {
-
-    }
 
     .borderTop {
-      height: 71px;
+      height: 72px;
       // border-bottom: 2px solid;
       // border-image: linear-gradient(
       //   90deg,
@@ -116,6 +114,13 @@ const StatsContainer = styled.div`
       background: linear-gradient(180deg, rgba(153, 153, 153, 0.2) 0%, rgba(255, 255, 255, 0) 94.44%);
       backdrop-filter: blur(2.5px);
       transform: matrix(1, 0, 0, -1, 0, 0);
+      border-top: 1.4px solid #7CCFD6;
+    }
+
+    .borderBottom {
+      height: 72px;
+      background: linear-gradient(180deg, rgba(153, 153, 153, 0.2) 0%, rgba(255, 255, 255, 0) 94.44%);
+      backdrop-filter: blur(2.5px);
       border-top: 1.4px solid #7CCFD6;
     }
 
@@ -454,6 +459,7 @@ const LandingView = () => {
           })
         }
         </div>
+        <div className='borderBottom' />
       </StatsContainer>
       <LatestUpdatesContainer>
         <TitleContainer>

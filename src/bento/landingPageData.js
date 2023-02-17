@@ -28,20 +28,25 @@ export const statsData = [
     detail: 'RESOURCES',
   },
   {
-    num: '1.4M',
-    title: 'MTP',
-    detail: 'DISEASE/TARGET COMBINATIONS',
-  },
-  {
-    num: '512',
-    title: 'MTP',
-    detail: 'PEDIATRIC MOLECULAR TARGETS',
-  },
-  {
-    num: '158',
+    num: '33',
     title: 'CCDC',
-    detail: 'PEDIATRIC CANCER SPECIFIC DATASETS',
-  }
+    detail: 'RESOURCES',
+  },
+  {
+    num: '33',
+    title: 'CCDC',
+    detail: 'RESOURCES',
+  },
+  {
+    num: '33',
+    title: 'CCDC',
+    detail: 'RESOURCES',
+  },
+  {
+    num: '33',
+    title: 'CCDC',
+    detail: 'RESOURCES',
+  },
 ];
 
 export const latestUpdatesData = [

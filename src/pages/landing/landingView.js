@@ -83,49 +83,60 @@ const IntroAboutButtonContainer = styled.div`
 `;
 
 const StatsContainer = styled.div`
-    position: absolute;
-    display: flex;
-    height: 187px
     width: 1120px;
-    background: #05555C;
-    border-radius: 0px 20px;
     top: 713px;
-    margin-left: 160px;
-    padding-top: 50px;
+    margin: 80px auto;
     justify-content: center;
 
-    .statItem {
+    .borderTop {
+      height: 71px;
+    }
+
+    .statGlance {
+      margin: 41px 0 39px 0;
+      text-align: center;
+      font-family: poppins;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 35px;
+      color: #8CCCD0;
+      line-height: 38px;
+    }
+
+    .statList {
       display: flex;
+      justify-content: center;
+      margin-bottom: 50px;
+    }
+
+    .statItem {
+      width: 190px;
     }
 
     .statNum {
-      text-align: right;
+      text-align: center;
       color: #078893;
       font-family: Inter;
       font-weight: 800;
-      font-size: 40px;
-      width: 88px;
-      margin-right: 10px;
-    }
-
-    .statText {
-      margin-top: 17px;
-      width: 171px;
+      font-size: 32px;
     }
 
     .statTitle {
-      color: #E6E6E6;
+      color: #05555C;
       font-family: Poppins;
       font-weight: 300;
       font-size: 19px;
+      line-height: 23px;
+      text-align: center;
     }
 
     .statDetail {
-      color: #E6E6E6;
+      color: #05555C;
       font-family: Poppins;
       font-weight: 600;
       font-size: 19px;
       line-height: 23px;
+      text-align: center;
     }
 `;
 
@@ -397,20 +408,22 @@ const LandingView = () => {
         </ListContainer>
       </FirstContainer>
       <StatsContainer>
+        <div className='borderTop' />
+        <div className='statGlance'>CCDI Stats At a Glance</div>
+        <div className='statList'>
         {
           statsData.map((statItem, statidx) => {
             const statkey = `stat_${statidx}`;
             return (
               <div className='statItem' key={statkey}>
                 <div className='statNum'>{statItem.num}</div>
-                <div className='statText'>
-                  <div className='statTitle'>{statItem.title}</div>
-                  <div className='statDetail'>{statItem.detail}</div>
-                </div>
+                <div className='statTitle'>{statItem.title}</div>
+                <div className='statDetail'>{statItem.detail}</div>
               </div>
             )
           })
         }
+        </div>
       </StatsContainer>
       <LatestUpdatesContainer>
         <TitleContainer>

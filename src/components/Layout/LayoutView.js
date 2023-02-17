@@ -9,7 +9,7 @@ import About from '../../pages/about/aboutView';
 import News from '../../pages/news/newsView';
 import Ccdi from '../../pages/ccdi/ccdiView';
 import Error from '../../pages/error/Error';
-import Search from '../../pages/search/searchView4Hub'
+import Search from '../../pages/search/searchView'
 
 const Layout = () => {
     return (

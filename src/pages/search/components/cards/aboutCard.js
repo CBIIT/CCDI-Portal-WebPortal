@@ -40,8 +40,8 @@ const AboutCard = ({
         </Grid>
         <Grid item xs={11} className={classes.propertyContainer}>
           <div>
-            <span className={classes.detailContainerHeader}>ABOUT</span>
-            <span className={classes.cardTitle}>{data.title}</span>
+            {/* <span className={classes.detailContainerHeader}>ABOUT</span> */}
+            <a href={`${window.location.origin}${data.page}`} className={classes.cardTitle}>{data.title}</a>
           </div>
           <div className={classes.text}>{getHighlightedText(results, searchText)}</div>
           <div className={classes.linkText}><a href={`${window.location.origin}${data.page}`}>{`${window.location.origin}${data.page}`}</a></div>
@@ -77,7 +77,7 @@ const styles = (theme) => ({
     textDecoration: 'none',
     fontSize: '16px',
     fontFamily: 'Nunito',
-    paddingLeft: '9px',
+    // paddingLeft: '9px',
     verticalAlign: 'middle',
   },
   content: {

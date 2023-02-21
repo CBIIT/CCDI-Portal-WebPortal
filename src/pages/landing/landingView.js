@@ -83,54 +83,108 @@ const IntroAboutButtonContainer = styled.div`
 `;
 
 const StatsContainer = styled.div`
-    position: absolute;
-    display: flex;
-    height: 187px
-    width: 1120px;
-    background: #05555C;
-    border-radius: 0px 20px;
-    top: 713px;
-    margin-left: 160px;
-    padding-top: 50px;
+    width: 1440px;
+    margin: 80px auto;
     justify-content: center;
+    position: relative;
+
+    .leftbox {
+      position: absolute;
+      background: #ffffff;
+      left: -300px;
+      top: 0;
+      width: 546px;
+      height: 417px;
+      z-index: 9;
+      filter:blur(40px);
+    }
+
+    .rightbox {
+      position: absolute;
+      background: #ffffff;
+      right: -300px;
+      top: 0;
+      width: 546px;
+      height: 417px;
+      z-index: 9;
+      filter:blur(40px);
+    }
+
+    .borderTop {
+      height: 72px;
+      // border-bottom: 2px solid;
+      // border-image: linear-gradient(
+      //   90deg,
+      //   rgba(255, 255, 255, 0) 0%,
+      //   #7CCFD6 50%,
+      //   rgba(255, 255, 255, 0) 99%
+      // )
+      // 2 2 2 2;
+
+      background: linear-gradient(180deg, rgba(153, 153, 153, 0.2) 0%, rgba(255, 255, 255, 0) 94.44%);
+      backdrop-filter: blur(2.5px);
+      transform: matrix(1, 0, 0, -1, 0, 0);
+      border-top: 1.4px solid #7CCFD6;
+    }
+
+    .borderBottom {
+      height: 72px;
+      background: linear-gradient(180deg, rgba(153, 153, 153, 0.2) 0%, rgba(255, 255, 255, 0) 94.44%);
+      backdrop-filter: blur(2.5px);
+      border-top: 1.4px solid #7CCFD6;
+    }
+
+    .statGlance {
+      margin: 41px 0 39px 0;
+      text-align: center;
+      font-family: poppins;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 35px;
+      color: #8CCCD0;
+      line-height: 38px;
+    }
+
+    .statList {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 50px;
+    }
 
     .statItem {
-      display: flex;
+      width: 190px;
     }
 
     .statNum {
-      text-align: right;
+      text-align: center;
       color: #078893;
       font-family: Inter;
       font-weight: 800;
-      font-size: 40px;
-      width: 88px;
-      margin-right: 10px;
-    }
-
-    .statText {
-      margin-top: 17px;
-      width: 171px;
+      font-size: 32px;
     }
 
     .statTitle {
-      color: #E6E6E6;
+      color: #05555C;
       font-family: Poppins;
       font-weight: 300;
       font-size: 19px;
+      line-height: 23px;
+      text-align: center;
     }
 
     .statDetail {
-      color: #E6E6E6;
+      color: #05555C;
       font-family: Poppins;
       font-weight: 600;
       font-size: 19px;
       line-height: 23px;
+      text-align: center;
     }
 `;
 
 const LatestUpdatesContainer = styled.div`
-    margin-top: 97px;
+    margin-top: 67px;
+    position: relative;
 
     .latestUpdatesList {
       display: flex;
@@ -397,20 +451,25 @@ const LandingView = () => {
         </ListContainer>
       </FirstContainer>
       <StatsContainer>
+        <div className='leftbox' />
+        <div className='rightbox' />
+        <div className='borderTop' />
+        <div className='statGlance'>CCDI Stats At a Glance</div>
+        <div className='statList'>
         {
           statsData.map((statItem, statidx) => {
             const statkey = `stat_${statidx}`;
             return (
               <div className='statItem' key={statkey}>
                 <div className='statNum'>{statItem.num}</div>
-                <div className='statText'>
-                  <div className='statTitle'>{statItem.title}</div>
-                  <div className='statDetail'>{statItem.detail}</div>
-                </div>
+                <div className='statTitle'>{statItem.title}</div>
+                <div className='statDetail'>{statItem.detail}</div>
               </div>
             )
           })
         }
+        </div>
+        <div className='borderBottom' />
       </StatsContainer>
       <LatestUpdatesContainer>
         <TitleContainer>

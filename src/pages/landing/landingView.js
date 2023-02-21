@@ -183,7 +183,7 @@ const StatsContainer = styled.div`
 `;
 
 const LatestUpdatesContainer = styled.div`
-    margin-top: 97px;
+    margin-top: 67px;
     position: relative;
 
     .latestUpdatesList {

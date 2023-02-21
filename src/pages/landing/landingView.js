@@ -16,38 +16,53 @@ const FirstContainer = styled.div`
 
 const IntroContainer = styled.div`
     width: 50%;
+    margin-top: 115px;
+    box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.05);
+    border-radius: 0 20px 20px 0;
 `;
 
 const IntroTextContainer = styled.div`
-    height: 372px;
-    padding-left: 162px;
-    padding-top: 80px;
+    padding: 54px 0 85px 135px;
+    width: 90%
+    background: linear-gradient(#7CCFD6, #4bb48e);
+    border-radius: 0 20px 20px 0;
     
     .introTextTitle1 {
-      height: 38px;
       text-align: left;
-      color: #939393;
-      font-family: Poppins;
-      font-weight: 500;
+      color: #05555C;
+      font-family: poppins;
+      font-weight: 600;
+      font-size: 35px;
+      line-height: 35px;
     }
 
     .introTextTitle2 {
       width: 526px;
-      height: 141px;
       text-align: left;
-      color: #05555C;
+      color: #FFFFFF;
       font-family: Poppins;
-      font-weight: 600;
-      font-size: 37px;
+      font-weight: 500;
+      font-size: 16px;
+      text-transform: uppercase;
+      line-height: 20px;
     }
 
-`;
+    .upperLine {
+      content:'';
+      display:inline-block;
+      width: 421px;
+      border-bottom: 0.5px solid #FFFFFF;
+      margin: 30px 0 11px 0;
+    }
 
-const IntroPicContainer = styled.div`
-    width: 664px;
-    height: 434px;
-    background-image: url(${introData.landingIntroPic});
-    background-repeat: no-repeat;
+    .lowerLine {
+      content:'';
+      display:inline-block;
+      width: 421px;
+      border-bottom: 0.5px solid #FFFFFF;
+      margin: 18px 0 13px 0;
+    }
+
 `;
 
 const ListContainer = styled.div`
@@ -58,27 +73,25 @@ const ListContainer = styled.div`
 const IntroAboutButtonContainer = styled.div`
     display: flex;
 
-    .introAboutTitle {
-      width: 210px;
-      color: #078893;
-      font-family: Poppins;
-      font-weight: 600;
-      font-size: 16px;
-      margin-top: 40px;
-    }
-
     .introAboutButton {
       margin-top: 30px;
-      background: #05555C;
-      height: 41px;
+      margin-right: 20px;
+      border: 1px solid #ffffff;
+      height: 57px;
       width: 164px;
       border-radius: 5px;
-      color: #FFFFFF;
+      color: #033135;
       font-family: Poppins;
       font-weight: 600;
       font-size: 16px;
       text-align: center;
-      line-height: 41px;
+      line-height: 57px;
+    }
+
+    .hover {
+      background: #078893;
+      color: #FFFFFF;
+      border: transparent;
     }
 `;
 
@@ -437,15 +450,19 @@ const LandingView = () => {
       <FirstContainer>
         <IntroContainer>
           <IntroTextContainer>
-            <div className='introTextTitle1'>{introData.introTitle1}</div>
-            <div className='introTextTitle2'>{introData.introTitle2}</div>
+            <div className='introTextTitle1'>Discover CCDI</div>
+            <div className='introTextTitle1'>applications, data,</div>
+            <div className='introTextTitle1'>resources, and</div>
+            <div className='introTextTitle1'>other tools</div>
+            <div className='upperLine' />
+            <div className='introTextTitle2'>Explore the CCDI Hub by selecting</div>
+            <div className='introTextTitle2'>an available resource on the Hub Wheel</div>
+            <div className='lowerLine' />
             <IntroAboutButtonContainer>
-              <div className='introAboutTitle'>{introData.introTitle3}</div>
-              <div className='introAboutButton'>{introData.introButtonTitle}</div>
+              <div className='introAboutButton'>{introData.introTitle3}</div>
+              <div className='introAboutButton hover'>{introData.introButtonTitle}</div>
             </IntroAboutButtonContainer>
           </IntroTextContainer>
-          <IntroPicContainer>
-          </IntroPicContainer>
         </IntroContainer>
         <ListContainer>
         </ListContainer>

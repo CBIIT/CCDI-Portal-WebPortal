@@ -7,8 +7,8 @@ import aboutImg from '../assets/landing/About_1.png';
 
 export const introData = {
   landingIntroPic: landingImg,
-  introTitle1: 'LOREM IPSUM DOLOR SIT AMET',
-  introTitle2: 'Discover one access point for CCDI data resources and tools',
+  introTitle1: 'Discover CCDI applications, data, resources, and other tools',
+  introTitle2: 'Explore the CCDI Hub by selecting an available resource on the Hub Wheel',
   introTitle3: 'ABOUT CCDI HUB',
   introButtonTitle: 'ABOUT CCDI',
 };

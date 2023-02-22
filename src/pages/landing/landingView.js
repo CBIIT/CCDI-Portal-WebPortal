@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useQuery } from '@apollo/client';
 import { GET_LANDING_PAGE_DATA_QUERY,introData, titleData, statsData, latestUpdatesData, resourcesAppliationsListData, resourcesCloudListData, aboutContainerData } from '../../bento/landingPageData';
 import resourcesItemLogo from '../../assets/landing/Resources_Logo.svg';
+import Carousel from '../landing/component/carousel'
 
 const LandingViewContainer = styled.div`
     width: 1440px;
@@ -15,13 +16,12 @@ const FirstContainer = styled.div`
 `;
 
 const IntroContainer = styled.div`
-    width: 50%;
+    width: 41%;
     margin-top: 115px;
 `;
 
 const IntroTextContainer = styled.div`
     padding: 54px 0 85px 135px;
-    width: 90%
     background: linear-gradient(#7CCFD6, #4bb48e);
     border-radius: 0 20px 20px 0;
     
@@ -64,7 +64,7 @@ const IntroTextContainer = styled.div`
 `;
 
 const ListContainer = styled.div`
-    width: 720px;
+    width: 59%;
     background: green;
 `;
 
@@ -463,6 +463,7 @@ const LandingView = () => {
           </IntroTextContainer>
         </IntroContainer>
         <ListContainer>
+          <Carousel />
         </ListContainer>
       </FirstContainer>
       <StatsContainer>

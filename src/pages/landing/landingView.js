@@ -65,7 +65,6 @@ const IntroTextContainer = styled.div`
 
 const ListContainer = styled.div`
     width: 59%;
-    background: green;
 `;
 
 const IntroAboutButtonContainer = styled.div`

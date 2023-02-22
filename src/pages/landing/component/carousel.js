@@ -29,12 +29,31 @@ const HeroListContainer = styled.div`
         box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
         z-index: 9;
     }
+
+    .arrowUp {
+        margin: 20px 0 0 18px;
+        width: 0; 
+        height: 0; 
+        border-left: 13px solid transparent;
+        border-right: 13px solid transparent;
+        border-bottom: 17px solid #A0A8A9;
+      }
+
+    .arrowDown {
+        margin: 23px 0 0 18px;
+        width: 0; 
+        height: 0; 
+        border-left: 13px solid transparent;
+        border-right: 13px solid transparent;
+        border-top: 17px solid #D6DDDD;
+      }
 `;
 const HeroList = styled.div`
     margin-top: 57px;
     height: 640px;
     margin-left: 6%;
     border: 2.5px solid #00A8B3;
+    border-right: 0;
     box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.35);
     border-radius: 40px 0 0 40px;
 `;
@@ -42,8 +61,12 @@ const HeroList = styled.div`
 const Carousel = () => {
     return (
         <HeroListContainer>
-            <div className='upButton' />
-            <div className='downButton' />
+            <div className='upButton'>
+                <div class="arrowUp"></div>
+            </div>
+            <div className='downButton'>
+                <div class="arrowDown"></div>
+            </div>
             <HeroList>
             </HeroList>
         </HeroListContainer>

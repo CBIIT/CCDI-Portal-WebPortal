@@ -17,8 +17,6 @@ const FirstContainer = styled.div`
 const IntroContainer = styled.div`
     width: 50%;
     margin-top: 115px;
-    box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.05);
-    border-radius: 0 20px 20px 0;
 `;
 
 const IntroTextContainer = styled.div`

@@ -157,6 +157,18 @@ const HeroList = styled.div`
         filter:blur(20px);
         border-radius: 40px 0 0 0;
     }
+
+    .blurBottom {
+        position: absolute;
+        background: white;
+        bottom: 10px;
+        left: 10px;
+        width: 100%;
+        height: 60px;
+        z-index: 6;
+        filter:blur(20px);
+        border-radius: 0 0 0 40px;
+    }
 `;
 
 const Carousel = () => {
@@ -170,6 +182,7 @@ const Carousel = () => {
             </div>
             <HeroList>
                 <div className='blurTop' />
+                <div className='blurBottom' />
                 <div className='listItemSide'>
                     <div className='listItemImgEdge'><img src={wheel1}/></div>
                     <div className='listItemContentEdge'>Resource A. Lorem ipsum dolor sit amet consectetur</div>

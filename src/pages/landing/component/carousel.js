@@ -1,5 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import wheel1 from '../../../assets/landing/Wheel_1.png';
+import wheel2 from '../../../assets/landing/Wheel_2.png';
+import wheel3 from '../../../assets/landing/Wheel_3.png';
+import wheel4 from '../../../assets/landing/Wheel_4.png';
+import wheel5 from '../../../assets/landing/Wheel_5.png';
 
 const HeroListContainer = styled.div`
     position: relative;
@@ -20,7 +25,7 @@ const HeroListContainer = styled.div`
     .downButton {
         position: absolute;
         background: #FFFFFF;
-        top: 598px;
+        top: 618px;
         right: 348px;
         height: 63px;
         width: 63px;
@@ -50,12 +55,67 @@ const HeroListContainer = styled.div`
 `;
 const HeroList = styled.div`
     margin-top: 57px;
-    height: 640px;
+    height: 660px;
     margin-left: 6%;
     border: 2.5px solid #00A8B3;
     border-right: 0;
     box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.35);
     border-radius: 40px 0 0 40px;
+
+    .listItemSide {
+        margin-left: 38px;
+        display: flex;
+    }
+
+    .listItemCenter {
+        margin: 8px 0 8px 24px;
+        display: flex;
+        padding: 12px;
+        border: 3px solid #FFFFFF;
+        border-radius: 20px 0 0 20px;
+        box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    .listItemImgSmall {
+        width: 266px;
+        height: 112px;
+        border-radius: 12px;
+    }
+
+    .listItemImg {
+        width: 266px;
+        height: 115px;
+        border-radius: 12px;
+    }
+
+    .listItemContent {
+        color: #817979;
+        font-family: Inter;
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 23px;
+        width: 394px;
+        margin-left: 31px;
+        margin-top: 37px;
+    }
+
+    .listItemContentCenter {
+        color: #009EAA;
+        font-family: Inter;
+        font-weight: 600;
+        font-size: 28px;
+        line-height: 28px;
+        width: 334px;
+        margin: 17px 0 0 31px;
+    }
+
+    .separateLine {
+        content:'';
+        display:inline-block;
+        width: 432px;
+        border-bottom: 1px solid #898989;
+        margin: 5px 0 5px 321px;
+    }
 `;
 
 const Carousel = () => {
@@ -68,6 +128,28 @@ const Carousel = () => {
                 <div class="arrowDown"></div>
             </div>
             <HeroList>
+                <div className='listItemSide'>
+                    <div className='listItemImgSmall'><img src={wheel1}/></div>
+                    <div className='listItemContent'>Resource A. Lorem ipsum dolor sit amet consectetur</div>
+                </div>
+                <div className='separateLine' />
+                <div className='listItemSide'>
+                    <div className='listItemImg'><img src={wheel2}/></div>
+                    <div className='listItemContent'>Resource B. Lorem ipsum dolor sit amet consectetur</div>
+                </div>
+                <div className='listItemCenter'>
+                    <div className='listItemImg'><img src={wheel3}/></div>
+                    <div className='listItemContentCenter'>Resource C. Lorem ipsum dolor sit amet consectetur</div>
+                </div>
+                <div className='listItemSide'>
+                    <div className='listItemImg'><img src={wheel4}/></div>
+                    <div className='listItemContent'>Resource D. Lorem ipsum dolor sit amet consectetur</div>
+                </div>
+                <div className='separateLine' />
+                <div className='listItemSide'>
+                    <div className='listItemImgSmall'><img src={wheel5}/></div>
+                    <div className='listItemContent'>Resource E. Lorem ipsum dolor sit amet consectetur</div>
+                </div>
             </HeroList>
         </HeroListContainer>
     )

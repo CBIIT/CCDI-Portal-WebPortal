@@ -50,7 +50,7 @@ const IntroTextContainer = styled.div`
       display:inline-block;
       width: 421px;
       border-bottom: 0.5px solid #FFFFFF;
-      margin: 30px 0 11px 0;
+      margin: 43px 0 11px 0;
     }
 
     .lowerLine {

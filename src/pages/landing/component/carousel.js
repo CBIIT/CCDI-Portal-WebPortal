@@ -149,9 +149,10 @@ const HeroList = styled.div`
     .blurTop {
         position: absolute;
         background: white;
-        top: 0;
+        top: 10px;
+        left: 10px;
         width: 100%;
-        height: 70px;
+        height: 60px;
         z-index: 6;
         filter:blur(20px);
         border-radius: 40px 0 0 0;

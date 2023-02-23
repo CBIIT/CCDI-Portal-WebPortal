@@ -5,6 +5,7 @@ import wheel2 from '../../../assets/landing/Wheel_2.png';
 import wheel3 from '../../../assets/landing/Wheel_3.png';
 import wheel4 from '../../../assets/landing/Wheel_4.png';
 import wheel5 from '../../../assets/landing/Wheel_5.png';
+import exportIcon from '../../../assets/landing/Export_Icon.svg'
 
 const HeroListContainer = styled.div`
     position: relative;
@@ -76,7 +77,7 @@ const HeroList = styled.div`
         box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.35);
     }
 
-    .listItemImgSmall {
+    .listItemImgEdge {
         width: 266px;
         height: 112px;
         border-radius: 12px;
@@ -88,12 +89,23 @@ const HeroList = styled.div`
         border-radius: 12px;
     }
 
-    .listItemContent {
+    .listItemContentEdge {
         color: #817979;
         font-family: Inter;
         font-weight: 600;
         font-size: 24px;
         line-height: 23px;
+        width: 394px;
+        margin-left: 31px;
+        margin-top: 37px;
+    }
+
+    .listItemContent {
+        color: #817979;
+        font-family: Inter;
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 27px;
         width: 394px;
         margin-left: 31px;
         margin-top: 37px;
@@ -107,6 +119,22 @@ const HeroList = styled.div`
         line-height: 28px;
         width: 334px;
         margin: 17px 0 0 31px;
+    }
+
+    .exportIcon {
+        margin-left: 15px;
+    }
+
+    .exportContainer {
+        padding: 38px 0 0 10px;
+    }
+    .exportText {
+        color: #01828C;
+        font-family: poppins;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 14px;
+        letter-spacing: -0.02em;
     }
 
     .separateLine {
@@ -129,8 +157,8 @@ const Carousel = () => {
             </div>
             <HeroList>
                 <div className='listItemSide'>
-                    <div className='listItemImgSmall'><img src={wheel1}/></div>
-                    <div className='listItemContent'>Resource A. Lorem ipsum dolor sit amet consectetur</div>
+                    <div className='listItemImgEdge'><img src={wheel1}/></div>
+                    <div className='listItemContentEdge'>Resource A. Lorem ipsum dolor sit amet consectetur</div>
                 </div>
                 <div className='separateLine' />
                 <div className='listItemSide'>
@@ -140,6 +168,10 @@ const Carousel = () => {
                 <div className='listItemCenter'>
                     <div className='listItemImg'><img src={wheel3}/></div>
                     <div className='listItemContentCenter'>Resource C. Lorem ipsum dolor sit amet consectetur</div>
+                    <div className='exportContainer'>
+                        <img className='exportIcon' src={exportIcon} />
+                        <div className='exportText'>Go to site</div>
+                    </div>
                 </div>
                 <div className='listItemSide'>
                     <div className='listItemImg'><img src={wheel4}/></div>
@@ -147,8 +179,8 @@ const Carousel = () => {
                 </div>
                 <div className='separateLine' />
                 <div className='listItemSide'>
-                    <div className='listItemImgSmall'><img src={wheel5}/></div>
-                    <div className='listItemContent'>Resource E. Lorem ipsum dolor sit amet consectetur</div>
+                    <div className='listItemImgEdge'><img src={wheel5}/></div>
+                    <div className='listItemContentEdge'>Resource E. Lorem ipsum dolor sit amet consectetur</div>
                 </div>
             </HeroList>
         </HeroListContainer>

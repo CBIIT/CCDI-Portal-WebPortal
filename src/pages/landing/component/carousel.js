@@ -55,6 +55,7 @@ const HeroListContainer = styled.div`
       }
 `;
 const HeroList = styled.div`
+    position: relative;
     margin-top: 57px;
     height: 660px;
     margin-left: 6%;
@@ -144,6 +145,17 @@ const HeroList = styled.div`
         border-bottom: 1px solid #898989;
         margin: 5px 0 5px 321px;
     }
+
+    .blurTop {
+        position: absolute;
+        background: white;
+        top: 0;
+        width: 100%;
+        height: 70px;
+        z-index: 6;
+        filter:blur(20px);
+        border-radius: 40px 0 0 0;
+    }
 `;
 
 const Carousel = () => {
@@ -156,6 +168,7 @@ const Carousel = () => {
                 <div class="arrowDown"></div>
             </div>
             <HeroList>
+                <div className='blurTop' />
                 <div className='listItemSide'>
                     <div className='listItemImgEdge'><img src={wheel1}/></div>
                     <div className='listItemContentEdge'>Resource A. Lorem ipsum dolor sit amet consectetur</div>

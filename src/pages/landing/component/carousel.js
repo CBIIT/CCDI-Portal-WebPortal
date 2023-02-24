@@ -185,8 +185,8 @@ const Carousel = () => {
                       {img: wheel3, content: 'Resource C. Lorem ipsum dolor sit amet consectetur'},
                       {img: wheel4, content: 'Resource D. Lorem ipsum dolor sit amet consectetur'},
                       {img: wheel5, content: 'Resource E. Lorem ipsum dolor sit amet consectetur'},
-                      {img: wheel5, content: 'Resource F. Lorem ipsum dolor sit amet consectetur'},
-                      {img: wheel5, content: 'Resource G. Lorem ipsum dolor sit amet consectetur'}];
+                      {img: wheel3, content: 'Resource F. Lorem ipsum dolor sit amet consectetur'},
+                      {img: wheel3, content: 'Resource G. Lorem ipsum dolor sit amet consectetur'}];
     
     const [indexList, setIndexList] = useState([0,1,2,3,4]);
 

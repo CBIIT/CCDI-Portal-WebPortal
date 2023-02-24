@@ -40,6 +40,10 @@ const FooterLogo = styled.div`
   }
 `;
 
+const FooterEmailSignupContainer = styled.form`
+  margin: 54px 0px 0px 120px;
+`;
+
 const FooterLinksContainer = styled.div`
   margin: 54px 87px 23px auto;
   display: flex;
@@ -99,6 +103,21 @@ const Footer = () => {
                     <div className='logoLowerText'>at the National Institutes of Health</div>
                   </a>
                 </FooterLogo>
+                <FooterEmailSignupContainer action="https://public.govdelivery.com/accounts/USNIHNCI/subscribers/qualify" ariaLabel="Footer subscribe" method="post" target="_blank" id="signup">
+                  <input type="hidden" name="topic_id" id="topic_id" value="USNIHNCI_223" />
+                  <div>
+                    Sign up for email updates
+                  </div>
+                  <div>
+                    Enter your email address
+                  </div>
+                  <div>
+                    <input id="email" name="email" type="email" />
+                  </div>
+                  <button type="submit">
+                    Sign up
+                  </button>
+                </FooterEmailSignupContainer>
                 <FooterLinksContainer>
                     {
                         FooterData.link_sections.map((linkItem, linkidx) => {

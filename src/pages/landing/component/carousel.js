@@ -179,6 +179,8 @@ const HeroList = styled.div`
     }
 `;
 
+let timer = null;
+
 const Carousel = () => {
     const heroList = [{img: wheel1, content: 'Resource A. Lorem ipsum dolor sit amet consectetur'},
                       {img: wheel2, content: 'Resource B. Lorem ipsum dolor sit amet consectetur'},
@@ -206,6 +208,17 @@ const Carousel = () => {
         setIndexList(newIndexList);
     }
 
+    const startTimer = () => {
+        timer = setInterval(() => {
+            moveDown();
+        }, 3000);
+    };
+
+    const resetTimer = () => {
+        clearInterval(timer);
+        startTimer();
+    };
+
     useEffect(() => {
         const randomInt = Math.floor(Math.random() * heroList.length);
         const newIndexList = [];
@@ -214,6 +227,11 @@ const Carousel = () => {
         }
         setIndexList(newIndexList);
     }, [])
+
+    useEffect(() => {
+        resetTimer();
+        return () => clearInterval(timer);
+    }, [indexList])
     
     return (
         <HeroListContainer>

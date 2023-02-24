@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import wheel1 from '../../../assets/landing/Wheel_1.png';
 import wheel2 from '../../../assets/landing/Wheel_2.png';
@@ -23,6 +23,10 @@ const HeroListContainer = styled.div`
         z-index: 9;
     }
 
+    .upButton:hover {
+        cursor: pointer;
+    }
+
     .downButton {
         position: absolute;
         background: #FFFFFF;
@@ -34,6 +38,10 @@ const HeroListContainer = styled.div`
         border: 1px solid #C2DEDB;
         box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
         z-index: 9;
+    }
+
+    .downButton:hover {
+        cursor: pointer;
     }
 
     .arrowUp {
@@ -172,42 +180,68 @@ const HeroList = styled.div`
 `;
 
 const Carousel = () => {
+    const heroList = [{img: wheel1, content: 'Resource A. Lorem ipsum dolor sit amet consectetur'},
+                      {img: wheel2, content: 'Resource B. Lorem ipsum dolor sit amet consectetur'},
+                      {img: wheel3, content: 'Resource C. Lorem ipsum dolor sit amet consectetur'},
+                      {img: wheel4, content: 'Resource D. Lorem ipsum dolor sit amet consectetur'},
+                      {img: wheel5, content: 'Resource E. Lorem ipsum dolor sit amet consectetur'},
+                      {img: wheel5, content: 'Resource F. Lorem ipsum dolor sit amet consectetur'},
+                      {img: wheel5, content: 'Resource G. Lorem ipsum dolor sit amet consectetur'}];
+    
+    const [indexList, setIndexList] = useState([0,1,2,3,4]);
+
+    const moveUp = () => {
+        const newIndexList = [];
+        indexList.forEach(item => {
+            newIndexList.push((item + heroList.length -1) % heroList.length);
+        })
+        setIndexList(newIndexList);
+    }
+
+    const moveDown = () => {
+        const newIndexList = [];
+        indexList.forEach(item => {
+            newIndexList.push((item + 1) % heroList.length);
+        })
+        setIndexList(newIndexList);
+    }
+    
     return (
         <HeroListContainer>
-            <div className='upButton'>
+            <div className='upButton' onClick={moveUp}>
                 <div class="arrowUp"></div>
             </div>
-            <div className='downButton'>
+            <div className='downButton' onClick={moveDown}>
                 <div class="arrowDown"></div>
             </div>
             <HeroList>
                 <div className='blurTop' />
                 <div className='blurBottom' />
                 <div className='listItemSide'>
-                    <div className='listItemImgEdge'><img src={wheel1}/></div>
-                    <div className='listItemContentEdge'>Resource A. Lorem ipsum dolor sit amet consectetur</div>
+                    <div className='listItemImgEdge'><img src={heroList[indexList[0]].img}/></div>
+                    <div className='listItemContentEdge'>{heroList[indexList[0]].content}</div>
                 </div>
                 <div className='separateLine' />
                 <div className='listItemSide'>
-                    <div className='listItemImg'><img src={wheel2}/></div>
-                    <div className='listItemContent'>Resource B. Lorem ipsum dolor sit amet consectetur</div>
+                    <div className='listItemImg'><img src={heroList[indexList[1]].img}/></div>
+                    <div className='listItemContent'>{heroList[indexList[1]].content}</div>
                 </div>
                 <div className='listItemCenter'>
-                    <div className='listItemImg'><img src={wheel3}/></div>
-                    <div className='listItemContentCenter'>Resource C. Lorem ipsum dolor sit amet consectetur</div>
+                    <div className='listItemImg'><img src={heroList[indexList[2]].img}/></div>
+                    <div className='listItemContentCenter'>{heroList[indexList[2]].content}</div>
                     <div className='exportContainer'>
                         <img className='exportIcon' src={exportIcon} />
                         <div className='exportText'>Go to site</div>
                     </div>
                 </div>
                 <div className='listItemSide'>
-                    <div className='listItemImg'><img src={wheel4}/></div>
-                    <div className='listItemContent'>Resource D. Lorem ipsum dolor sit amet consectetur</div>
+                    <div className='listItemImg'><img src={heroList[indexList[3]].img}/></div>
+                    <div className='listItemContent'>{heroList[indexList[3]].content}</div>
                 </div>
                 <div className='separateLine' />
                 <div className='listItemSide'>
-                    <div className='listItemImgEdge'><img src={wheel5}/></div>
-                    <div className='listItemContentEdge'>Resource E. Lorem ipsum dolor sit amet consectetur</div>
+                    <div className='listItemImgEdge'><img src={heroList[indexList[4]].img}/></div>
+                    <div className='listItemContentEdge'>{heroList[indexList[4]].content}</div>
                 </div>
             </HeroList>
         </HeroListContainer>

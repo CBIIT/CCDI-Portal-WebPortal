@@ -166,25 +166,23 @@ const HeroList = styled.div`
 
     .blurTop {
         position: absolute;
-        background: white;
-        top: 10px;
-        left: 10px;
+        background: linear-gradient(to bottom, #FFFFFF, 70%, transparent);
+        top: 0;
+        left: 0;
         width: 100%;
-        height: 60px;
+        height: 100px;
         z-index: 6;
-        filter:blur(20px);
         border-radius: 40px 0 0 0;
     }
 
     .blurBottom {
         position: absolute;
-        background: white;
-        bottom: 10px;
-        left: 10px;
+        background: linear-gradient(to top, #FFFFFF, 70%, transparent);
+        bottom: 0;
+        left: 0;
         width: 100%;
-        height: 60px;
+        height: 100px;
         z-index: 6;
-        filter:blur(20px);
         border-radius: 0 0 0 40px;
     }
 `;
@@ -255,29 +253,29 @@ const Carousel = () => {
                 <div className='blurTop' />
                 <div className='blurBottom' />
                 <div className='listItemSide'>
-                    <div className='listItemImgEdge'><img src={heroList[indexList[0]].img}/></div>
+                    <img className='listItemImgEdge' src={heroList[indexList[0]].img} alt='img0' />
                     <div className='listItemContentEdge'>{heroList[indexList[0]].content}</div>
                 </div>
                 <div className='separateLine' />
                 <div className='listItemSide' onMouseOver={() => clearInterval(timer)} onMouseOut={() => startTimer()}>
-                    <div className='listItemImg'><img src={heroList[indexList[1]].img}/></div>
+                    <img className='listItemImg' src={heroList[indexList[1]].img} alt='img1' />
                     <div className='listItemContent'>{heroList[indexList[1]].content}</div>
                 </div>
                 <div className='listItemCenter' onMouseOver={() => clearInterval(timer)} onMouseOut={() => startTimer()}>
-                    <div className='listItemImg'><img src={heroList[indexList[2]].img}/></div>
+                    <img className='listItemImg' src={heroList[indexList[2]].img} alt='img2' />
                     <div className='listItemContentCenter'>{heroList[indexList[2]].content}</div>
                     <div className='exportContainer'>
-                        <img className='exportIcon' src={exportIcon} />
+                        <img className='exportIcon' src={exportIcon} alt='exportIcon' />
                         <div className='exportText'>Go to site</div>
                     </div>
                 </div>
                 <div className='listItemSide' onMouseOver={() => clearInterval(timer)} onMouseOut={() => startTimer()}>
-                    <div className='listItemImg'><img src={heroList[indexList[3]].img}/></div>
+                    <img className='listItemImg' src={heroList[indexList[3]].img} alt='img3' />
                     <div className='listItemContent'>{heroList[indexList[3]].content}</div>
                 </div>
                 <div className='separateLine' />
                 <div className='listItemSide'>
-                    <div className='listItemImgEdge'><img src={heroList[indexList[4]].img}/></div>
+                    <img className='listItemImgEdge' src={heroList[indexList[4]].img} alt='img4' />
                     <div className='listItemContentEdge'>{heroList[indexList[4]].content}</div>
                 </div>
             </HeroList>

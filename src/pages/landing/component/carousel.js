@@ -253,16 +253,16 @@ const Carousel = () => {
                 <div className='blurTop' />
                 <div className='blurBottom' />
                 <div className='listItemSide'>
-                    <img className='listItemImgEdge' src={heroList[indexList[0]].img} alt='img0' />
+                    <div className='listItemImgEdge'><img className='listItemImgEdge' src={heroList[indexList[0]].img} alt='img0' /></div>
                     <div className='listItemContentEdge'>{heroList[indexList[0]].content}</div>
                 </div>
                 <div className='separateLine' />
                 <div className='listItemSide' onMouseOver={() => clearInterval(timer)} onMouseOut={() => startTimer()}>
-                    <img className='listItemImg' src={heroList[indexList[1]].img} alt='img1' />
+                    <div className='listItemImg'><img className='listItemImg' src={heroList[indexList[1]].img} alt='img1' /></div>
                     <div className='listItemContent'>{heroList[indexList[1]].content}</div>
                 </div>
                 <div className='listItemCenter' onMouseOver={() => clearInterval(timer)} onMouseOut={() => startTimer()}>
-                    <img className='listItemImg' src={heroList[indexList[2]].img} alt='img2' />
+                    <div className='listItemImg' ><img className='listItemImg' src={heroList[indexList[2]].img} alt='img2' /></div>
                     <div className='listItemContentCenter'>{heroList[indexList[2]].content}</div>
                     <div className='exportContainer'>
                         <img className='exportIcon' src={exportIcon} alt='exportIcon' />
@@ -270,12 +270,12 @@ const Carousel = () => {
                     </div>
                 </div>
                 <div className='listItemSide' onMouseOver={() => clearInterval(timer)} onMouseOut={() => startTimer()}>
-                    <img className='listItemImg' src={heroList[indexList[3]].img} alt='img3' />
+                    <div className='listItemImg'><img className='listItemImg' src={heroList[indexList[3]].img} alt='img3' /></div>
                     <div className='listItemContent'>{heroList[indexList[3]].content}</div>
                 </div>
                 <div className='separateLine' />
                 <div className='listItemSide'>
-                    <img className='listItemImgEdge' src={heroList[indexList[4]].img} alt='img4' />
+                    <div className='listItemImgEdge'><img className='listItemImgEdge' src={heroList[indexList[4]].img} alt='img4' /></div>
                     <div className='listItemContentEdge'>{heroList[indexList[4]].content}</div>
                 </div>
             </HeroList>

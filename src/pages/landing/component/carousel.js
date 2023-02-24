@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import wheel1 from '../../../assets/landing/Wheel_1.png';
 import wheel2 from '../../../assets/landing/Wheel_2.png';
@@ -205,6 +205,15 @@ const Carousel = () => {
         })
         setIndexList(newIndexList);
     }
+
+    useEffect(() => {
+        const randomInt = Math.floor(Math.random() * heroList.length);
+        const newIndexList = [];
+        for (let i=0; i<5; i++) {
+            newIndexList.push((randomInt + i) % heroList.length);
+        }
+        setIndexList(newIndexList);
+    }, [])
     
     return (
         <HeroListContainer>

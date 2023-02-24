@@ -18,13 +18,18 @@ const HeroListContainer = styled.div`
         height: 63px;
         width: 63px;
         border-radius: 50%;
-        border: 1.5px solid #2ADEC7;
-        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.45);
+        border: 1px solid #C2DEDB;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
         z-index: 9;
     }
 
     .upButton:hover {
         cursor: pointer;
+        border: 1.5px solid #2ADEC7;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.45);
+        .arrowUp {
+            border-bottom: 17px solid #A0A8A9;
+        }
     }
 
     .downButton {
@@ -42,6 +47,11 @@ const HeroListContainer = styled.div`
 
     .downButton:hover {
         cursor: pointer;
+        border: 1.5px solid #2ADEC7;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.45);
+        .arrowDown {
+            border-top: 17px solid #A0A8A9;
+        }
     }
 
     .arrowUp {
@@ -50,8 +60,8 @@ const HeroListContainer = styled.div`
         height: 0; 
         border-left: 13px solid transparent;
         border-right: 13px solid transparent;
-        border-bottom: 17px solid #A0A8A9;
-      }
+        border-bottom: 17px solid #D6DDDD;
+    }
 
     .arrowDown {
         margin: 23px 0 0 18px;
@@ -249,11 +259,11 @@ const Carousel = () => {
                     <div className='listItemContentEdge'>{heroList[indexList[0]].content}</div>
                 </div>
                 <div className='separateLine' />
-                <div className='listItemSide'>
+                <div className='listItemSide' onMouseOver={() => clearInterval(timer)} onMouseOut={() => startTimer()}>
                     <div className='listItemImg'><img src={heroList[indexList[1]].img}/></div>
                     <div className='listItemContent'>{heroList[indexList[1]].content}</div>
                 </div>
-                <div className='listItemCenter'>
+                <div className='listItemCenter' onMouseOver={() => clearInterval(timer)} onMouseOut={() => startTimer()}>
                     <div className='listItemImg'><img src={heroList[indexList[2]].img}/></div>
                     <div className='listItemContentCenter'>{heroList[indexList[2]].content}</div>
                     <div className='exportContainer'>
@@ -261,7 +271,7 @@ const Carousel = () => {
                         <div className='exportText'>Go to site</div>
                     </div>
                 </div>
-                <div className='listItemSide'>
+                <div className='listItemSide' onMouseOver={() => clearInterval(timer)} onMouseOut={() => startTimer()}>
                     <div className='listItemImg'><img src={heroList[indexList[3]].img}/></div>
                     <div className='listItemContent'>{heroList[indexList[3]].content}</div>
                 </div>

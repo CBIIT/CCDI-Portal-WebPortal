@@ -22,13 +22,18 @@ const HeroListContainer = styled.div`
         height: 63px;
         width: 63px;
         border-radius: 50%;
-        border: 1.5px solid #2ADEC7;
-        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.45);
+        border: 1.5px solid #C2DEDB;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
         z-index: 9;
     }
 
     .upButton:hover {
         cursor: pointer;
+        border: 1.5px solid #2ADEC7;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.45);
+        .arrowUp {
+            border-bottom: 17px solid #A0A8A9;
+        }
     }
 
     .downButton {
@@ -46,6 +51,11 @@ const HeroListContainer = styled.div`
 
     .downButton:hover {
         cursor: pointer;
+        border: 1.5px solid #2ADEC7;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.45);
+        .arrowDown {
+            border-top: 17px solid #A0A8A9;
+        }
     }
 
     .arrowUp {
@@ -54,7 +64,7 @@ const HeroListContainer = styled.div`
         height: 0; 
         border-left: 13px solid transparent;
         border-right: 13px solid transparent;
-        border-bottom: 17px solid #A0A8A9;
+        border-bottom: 17px solid #D6DDDD;
       }
 
     .arrowDown {
@@ -116,9 +126,9 @@ const HeroList = styled.div`
     }
 
     .activeCard {
-        border: 3px solid #FFFFFF;
+        // border: 3px solid #FFFFFF;
         border-radius: 20px 0 0 20px;
-        box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.35);
+        // box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.35);
     }
 
     .listItemImg {

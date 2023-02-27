@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useQuery } from '@apollo/client';
 import { GET_LANDING_PAGE_DATA_QUERY,introData, titleData, statsData, latestUpdatesData, resourcesAppliationsListData, resourcesCloudListData, aboutContainerData } from '../../bento/landingPageData';
 import resourcesItemLogo from '../../assets/landing/Resources_Logo.svg';
-import Carousel from '../landing/component/carousel'
+import Carousel from '../landing/component/carousel1'
 
 const LandingViewContainer = styled.div`
     width: 1440px;

@@ -81,7 +81,6 @@ const HeroListContainer = styled.div`
         border-top: 78px solid transparent;
         border-bottom: 78px solid transparent;
         border-left: 130px solid #3fc0ac;
-        background: linear-gradient(#3cb8c3, 60%, #4bb48e);
     }
 `;
 const HeroList = styled.div`

@@ -198,6 +198,18 @@ const HeroList = styled.div`
         z-index: 6;
         border-radius: 0 0 0 40px;
     }
+
+    .activeFrame {
+        position: absolute;
+        top: 259px;
+        left: 19px;
+        width: 783px;
+        height: 133px;
+        border: 3px solid #FFFFFF;
+        border-radius: 20px 0 0 20px;
+        box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.35);
+        z-index: 60;
+    }
 `;
 
 const Carousel = () => {
@@ -329,6 +341,7 @@ const Carousel = () => {
             <HeroList onTouchStart={handleTouchStart} onTouchMove={handleTouchMove}>
                 <div className='blurTop' />
                 <div className='blurBottom' />
+                <div className='activeFrame' />
                 <div className="carouselList" onTransitionEnd={handleTransitionEnd} style={transform}>
                     {itemList.slice(itemList.length - showCount).map((item, idx) => {
                         const key = `carousel_${idx}_last_clone`;

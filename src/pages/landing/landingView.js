@@ -22,7 +22,7 @@ const IntroContainer = styled.div`
 
 const IntroTextContainer = styled.div`
     padding: 54px 0 85px 135px;
-    background: linear-gradient(#7CCFD6, #4bb48e);
+    background: linear-gradient(#3cb8c3, 30%, #3fc0ac, 80%, #4bb48e);
     border-radius: 0 20px 20px 0;
     
     .introTextTitle1 {

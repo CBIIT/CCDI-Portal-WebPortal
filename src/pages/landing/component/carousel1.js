@@ -179,21 +179,24 @@ const HeroList = styled.div`
 
     .blurTop {
         position: absolute;
+        background: linear-gradient(to bottom, #FFFFFF, 70%, transparent);
+        top: 0;
+        left: 0;
         width: 100%;
-        height: 131px;
+        height: 120px;
         z-index: 6;
         border-radius: 40px 0 0 0;
-        background: linear-gradient( to top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
     }
 
     .blurBottom {
         position: absolute;
+        background: linear-gradient(to top, #FFFFFF, 70%, transparent);
         bottom: 0;
+        left: 0;
         width: 100%;
-        height: 131px;
+        height: 120px;
         z-index: 6;
         border-radius: 0 0 0 40px;
-        background: linear-gradient( to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
     }
 `;
 

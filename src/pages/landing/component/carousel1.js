@@ -370,7 +370,7 @@ const Carousel = () => {
             <HeroList onTouchStart={handleTouchStart} onTouchMove={handleTouchMove}>
                 <div className='blurTop' />
                 <div className='blurBottom' />
-                <div className='activeFrame' />
+                <div className='activeFrame' onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}} />
                 <div className='smallTriangle' />
                 <div className="carouselList" onTransitionEnd={handleTransitionEnd} style={transform}>
                     {itemList.slice(itemList.length - showCount).map((item, idx) => {
@@ -378,7 +378,7 @@ const Carousel = () => {
                         const isActiveCard = ( currentIndex + 2 ) === idx;
                         const noBorderLine = ( currentIndex + 1 ) === idx;
                         return (
-                            <div key={key} className={isActiveCard ? "listItem activeCard" : "listItem"}>
+                            <div key={key} className={isActiveCard ? "listItem activeCard" : "listItem"} onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}}>
                                 <div className='listItemImg'><img src={item.img}/></div>
                                 <div className={noBorderLine ? 'listItemContentNoLine' : 'listItemContent'}>{item.content}</div>
                                 <div className={isActiveCard ? "exportContainer" : "exportContainerInactive"}>
@@ -393,7 +393,7 @@ const Carousel = () => {
                         const isActiveCard = ( currentIndex + 2 ) === (idx + showCount);
                         const noBorderLine = ( currentIndex + 1 ) === (idx + showCount);
                         return (
-                            <div key={key} className={isActiveCard ? "listItem activeCard" : "listItem"}>
+                            <div key={key} className={isActiveCard ? "listItem activeCard" : "listItem"} onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}}>
                                 <div className='listItemImg'><img src={item.img}/></div>
                                 <div className={noBorderLine ? 'listItemContentNoLine' : 'listItemContent'}>{item.content}</div>
                                 <div className={isActiveCard ? "exportContainer" : "exportContainerInactive"}>
@@ -408,7 +408,7 @@ const Carousel = () => {
                         const isActiveCard = ( currentIndex + 2 ) === (idx + itemList.length + showCount);
                         const noBorderLine = ( currentIndex + 1 ) === (idx + itemList.length + showCount);
                         return (
-                            <div key={key} className={isActiveCard ? "listItem activeCard" : "listItem"}>
+                            <div key={key} className={isActiveCard ? "listItem activeCard" : "listItem"} onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}}>
                                 <div className='listItemImg'><img src={item.img}/></div>
                                 <div className={noBorderLine ? 'listItemContentNoLine' : 'listItemContent'}>{item.content}</div>
                                 <div className={isActiveCard ? "exportContainer" : "exportContainerInactive"}>

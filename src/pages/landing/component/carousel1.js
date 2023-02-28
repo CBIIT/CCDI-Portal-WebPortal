@@ -237,7 +237,7 @@ const HeroList = styled.div`
         width: 65px;
         clip-path: polygon(20% 20%, 80% 80%, 0% 100%);
         transform: rotate(225deg);
-        // border-radius: 0 0 0 20px;
+        // border-radius: 0 0 0 25%;
     }
 `;
 
@@ -378,7 +378,7 @@ const Carousel = () => {
                         const isActiveCard = ( currentIndex + 2 ) === idx;
                         const noBorderLine = ( currentIndex + 1 ) === idx;
                         return (
-                            <div key={key} className={isActiveCard ? "listItem activeCard" : "listItem"} title={key}>
+                            <div key={key} className={isActiveCard ? "listItem activeCard" : "listItem"}>
                                 <div className='listItemImg'><img src={item.img}/></div>
                                 <div className={noBorderLine ? 'listItemContentNoLine' : 'listItemContent'}>{item.content}</div>
                                 <div className={isActiveCard ? "exportContainer" : "exportContainerInactive"}>
@@ -393,7 +393,7 @@ const Carousel = () => {
                         const isActiveCard = ( currentIndex + 2 ) === (idx + showCount);
                         const noBorderLine = ( currentIndex + 1 ) === (idx + showCount);
                         return (
-                            <div key={key} className={isActiveCard ? "listItem activeCard" : "listItem"} title={key}>
+                            <div key={key} className={isActiveCard ? "listItem activeCard" : "listItem"}>
                                 <div className='listItemImg'><img src={item.img}/></div>
                                 <div className={noBorderLine ? 'listItemContentNoLine' : 'listItemContent'}>{item.content}</div>
                                 <div className={isActiveCard ? "exportContainer" : "exportContainerInactive"}>
@@ -408,7 +408,7 @@ const Carousel = () => {
                         const isActiveCard = ( currentIndex + 2 ) === (idx + itemList.length + showCount);
                         const noBorderLine = ( currentIndex + 1 ) === (idx + itemList.length + showCount);
                         return (
-                            <div key={key} className={isActiveCard ? "listItem activeCard" : "listItem"} title={key}>
+                            <div key={key} className={isActiveCard ? "listItem activeCard" : "listItem"}>
                                 <div className='listItemImg'><img src={item.img}/></div>
                                 <div className={noBorderLine ? 'listItemContentNoLine' : 'listItemContent'}>{item.content}</div>
                                 <div className={isActiveCard ? "exportContainer" : "exportContainerInactive"}>

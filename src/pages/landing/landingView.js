@@ -162,15 +162,17 @@ const StatsContainer = styled.div`
     }
 
     .statItem {
-      width: 190px;
+      max-width: 280px;
+      padding: 0 40px 0 45px;
     }
 
     .statNum {
-      text-align: center;
       color: #078893;
       font-family: Inter;
       font-weight: 800;
       font-size: 32px;
+      line-height: 40px;
+      text-align: left;
     }
 
     .statTitle {
@@ -179,7 +181,7 @@ const StatsContainer = styled.div`
       font-weight: 300;
       font-size: 19px;
       line-height: 23px;
-      text-align: center;
+      text-align: left;
     }
 
     .statDetail {
@@ -188,7 +190,7 @@ const StatsContainer = styled.div`
       font-weight: 600;
       font-size: 19px;
       line-height: 23px;
-      text-align: center;
+      text-align: left;
     }
 `;
 

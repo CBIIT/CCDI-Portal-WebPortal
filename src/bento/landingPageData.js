@@ -23,29 +23,24 @@ export const titleData = {
 
 export const statsData = [
   {
-    num: '33',
-    title: 'CCDC',
-    detail: 'RESOURCES',
+    num: '203',
+    title: 'Cataloged Datasets',
+    detail: 'CCDC',
   },
   {
-    num: '33',
-    title: 'CCDC',
-    detail: 'RESOURCES',
+    num: '756',
+    title: 'Participants',
+    detail: 'MCI',
   },
   {
-    num: '33',
-    title: 'CCDC',
-    detail: 'RESOURCES',
+    num: '40,929',
+    title: 'Molecular Targets',
+    detail: 'MTP',
   },
   {
-    num: '33',
-    title: 'CCDC',
-    detail: 'RESOURCES',
-  },
-  {
-    num: '33',
-    title: 'CCDC',
-    detail: 'RESOURCES',
+    num: '218,246',
+    title: 'Cases',
+    detail: 'NCCR Explorer',
   },
 ];
 

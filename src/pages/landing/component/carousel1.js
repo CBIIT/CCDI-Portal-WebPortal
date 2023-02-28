@@ -78,14 +78,13 @@ const HeroListContainer = styled.div`
 
     .triangleLarge {
         position: absolute;
-        top: 257.5px;
+        top: 258px;
         left: 0;
         width: 0; 
         height: 0; 
         border-top: 67px solid transparent;
         border-bottom: 67px solid transparent;
         border-left: 130px solid #3fc0ac;
-        z-index:5;
     }
 `;
 const HeroList = styled.div`
@@ -243,8 +242,8 @@ const HeroList = styled.div`
 
     .smTriangle {
         position: absolute;
-        top: 197px;
-        left: 17px;
+        top: 179px;
+        left: 0;
         width: 40px;
         height: 65px;
         z-index: 6;
@@ -252,8 +251,25 @@ const HeroList = styled.div`
     }
 
     .triangle {
-        fill: red;
-        stroke: black;
+        fill: #3fc0ac;
+        stroke: #3fc0ac;
+        stroke-width: 20;
+        transform: rotate(90deg);
+    }
+
+    .whiteTriangle {
+        position: absolute;
+        top: 176.5px;
+        left: 0;
+        width: 40px;
+        height: 65px;
+        z-index: 5;
+        // transform: rotate(45deg);
+    }
+
+    .wtriangle {
+        fill: #FFFFFF;
+        stroke: #FFFFFF;
         stroke-width: 20;
         transform: rotate(90deg);
     }
@@ -390,8 +406,13 @@ const Carousel = () => {
                 <div className='blurBottom' />
                 <div className='activeFrame' onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}} />
                 {/* <div className='smallTriangle' /> */}
+                <div className='whiteTriangle'>
+                    <svg  width="250" height="250" viewBox="-75 -75 300 300">
+                        <polygon class="wtriangle" stroke-linejoin="round" points="100,0 0,200 200,200"/>
+                    </svg>
+                </div>
                 <div className='smTriangle'>
-                    <svg  width="250" height="250" viewBox="-50 -50 300 300">
+                    <svg  width="250" height="250" viewBox="-72 -72 300 300">
                         <polygon class="triangle" stroke-linejoin="round" points="100,0 0,200 200,200"/>
                     </svg>
                 </div>

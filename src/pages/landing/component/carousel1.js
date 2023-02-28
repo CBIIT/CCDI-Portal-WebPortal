@@ -78,13 +78,14 @@ const HeroListContainer = styled.div`
 
     .triangleLarge {
         position: absolute;
-        top: 250px;
+        top: 257.5px;
         left: 0;
         width: 0; 
         height: 0; 
-        border-top: 78px solid transparent;
-        border-bottom: 78px solid transparent;
+        border-top: 67px solid transparent;
+        border-bottom: 67px solid transparent;
         border-left: 130px solid #3fc0ac;
+        z-index:5;
     }
 `;
 const HeroList = styled.div`
@@ -239,6 +240,23 @@ const HeroList = styled.div`
         transform: rotate(225deg);
         // border-radius: 0 0 0 25%;
     }
+
+    .smTriangle {
+        position: absolute;
+        top: 197px;
+        left: 17px;
+        width: 40px;
+        height: 65px;
+        z-index: 6;
+        // transform: rotate(45deg);
+    }
+
+    .triangle {
+        fill: red;
+        stroke: black;
+        stroke-width: 20;
+        transform: rotate(90deg);
+    }
 `;
 
 const Carousel = () => {
@@ -371,7 +389,12 @@ const Carousel = () => {
                 <div className='blurTop' />
                 <div className='blurBottom' />
                 <div className='activeFrame' onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}} />
-                <div className='smallTriangle' />
+                {/* <div className='smallTriangle' /> */}
+                <div className='smTriangle'>
+                    <svg  width="250" height="250" viewBox="-50 -50 300 300">
+                        <polygon class="triangle" stroke-linejoin="round" points="100,0 0,200 200,200"/>
+                    </svg>
+                </div>
                 <div className="carouselList" onTransitionEnd={handleTransitionEnd} style={transform}>
                     {itemList.slice(itemList.length - showCount).map((item, idx) => {
                         const key = `carousel_${idx}_last_clone`;

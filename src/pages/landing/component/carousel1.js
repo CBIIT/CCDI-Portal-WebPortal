@@ -121,7 +121,7 @@ const HeroList = styled.div`
         width: 100%;
         height: 131px;
         margin: 0 0 0 24px;
-        padding: 6px;
+        padding: 6px 0 0 6px;
         transition: all 500ms ease-in-out;
     }
 

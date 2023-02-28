@@ -137,7 +137,7 @@ const HeroList = styled.div`
         border-radius: 12px;
     }
 
-    .listItemContent {
+    .listItemContentNoLine {
         color: #817979;
         font-family: Inter;
         font-weight: 600;
@@ -148,6 +148,18 @@ const HeroList = styled.div`
         margin-top: 37px;
     }
 
+    .listItemContent {
+        color: #817979;
+        font-family: Inter;
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 27px;
+        width: 394px;
+        margin-left: 31px;
+        margin-top: 37px;
+        border-bottom: 1px solid #898989;
+    }
+
     .activeCard .listItemContent {
         color: #009EAA;
         font-family: Inter;
@@ -156,6 +168,7 @@ const HeroList = styled.div`
         line-height: 28px;
         width: 334px;
         margin: 17px 0 0 31px;
+        border-bottom: none;
     }
 
     .exportIcon {
@@ -346,10 +359,11 @@ const Carousel = () => {
                     {itemList.slice(itemList.length - showCount).map((item, idx) => {
                         const key = `carousel_${idx}_last_clone`;
                         const isActiveCard = ( currentIndex + 2 ) === idx;
+                        const noBorderLine = ( currentIndex + 1 ) === idx;
                         return (
                             <div key={key} className={isActiveCard ? "listItem activeCard" : "listItem"} title={key}>
                                 <div className='listItemImg'><img src={item.img}/></div>
-                                <div className='listItemContent'>{item.content}</div>
+                                <div className={noBorderLine ? 'listItemContentNoLine' : 'listItemContent'}>{item.content}</div>
                                 <div className={isActiveCard ? "exportContainer" : "exportContainerInactive"}>
                                     <img className='exportIcon' src={exportIcon} />
                                     <div className='exportText'>Go to site</div>
@@ -360,10 +374,11 @@ const Carousel = () => {
                     {itemList.map((item, idx) => {
                         const key = `carousel_${idx}`;
                         const isActiveCard = ( currentIndex + 2 ) === (idx + showCount);
+                        const noBorderLine = ( currentIndex + 1 ) === (idx + showCount);
                         return (
                             <div key={key} className={isActiveCard ? "listItem activeCard" : "listItem"} title={key}>
                                 <div className='listItemImg'><img src={item.img}/></div>
-                                <div className='listItemContent'>{item.content}</div>
+                                <div className={noBorderLine ? 'listItemContentNoLine' : 'listItemContent'}>{item.content}</div>
                                 <div className={isActiveCard ? "exportContainer" : "exportContainerInactive"}>
                                     <img className='exportIcon' src={exportIcon} />
                                     <div className='exportText'>Go to site</div>
@@ -374,10 +389,11 @@ const Carousel = () => {
                     {itemList.slice(0, showCount).map((item, idx) => {
                         const key = `carousel_${idx}_first_clone`;
                         const isActiveCard = ( currentIndex + 2 ) === (idx + itemList.length + showCount);
+                        const noBorderLine = ( currentIndex + 1 ) === (idx + itemList.length + showCount);
                         return (
                             <div key={key} className={isActiveCard ? "listItem activeCard" : "listItem"} title={key}>
                                 <div className='listItemImg'><img src={item.img}/></div>
-                                <div className='listItemContent'>{item.content}</div>
+                                <div className={noBorderLine ? 'listItemContentNoLine' : 'listItemContent'}>{item.content}</div>
                                 <div className={isActiveCard ? "exportContainer" : "exportContainerInactive"}>
                                     <img className='exportIcon' src={exportIcon} />
                                     <div className='exportText'>Go to site</div>

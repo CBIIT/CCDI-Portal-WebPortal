@@ -273,6 +273,15 @@ const HeroList = styled.div`
         stroke-width: 20;
         transform: rotate(90deg);
     }
+
+    .whiteCover {
+        position: absolute;
+        top: 315px;
+        left: 70PX;
+        width: 10px;
+        height: 15px;
+        background: #FFFFFF;
+    }
 `;
 
 const Carousel = () => {
@@ -416,6 +425,7 @@ const Carousel = () => {
                         <polygon class="triangle" stroke-linejoin="round" points="100,0 0,200 200,200"/>
                     </svg>
                 </div>
+                <div className='whiteCover' />
                 <div className="carouselList" onTransitionEnd={handleTransitionEnd} style={transform}>
                     {itemList.slice(itemList.length - showCount).map((item, idx) => {
                         const key = `carousel_${idx}_last_clone`;

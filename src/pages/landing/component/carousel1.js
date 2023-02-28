@@ -223,6 +223,22 @@ const HeroList = styled.div`
         box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.35);
         z-index: 60;
     }
+
+    .smallTriangle {
+        position: absolute;
+        top: 293px;
+        left: -3px;
+        // width: 40px;
+        // height: 65px;
+        background: #3fc0ac;
+        z-index: 6;
+        display: block;
+        height: 65px;
+        width: 65px;
+        clip-path: polygon(20% 20%, 80% 80%, 0% 100%);
+        transform: rotate(225deg);
+        // border-radius: 0 0 0 20px;
+    }
 `;
 
 const Carousel = () => {
@@ -355,6 +371,7 @@ const Carousel = () => {
                 <div className='blurTop' />
                 <div className='blurBottom' />
                 <div className='activeFrame' />
+                <div className='smallTriangle' />
                 <div className="carouselList" onTransitionEnd={handleTransitionEnd} style={transform}>
                     {itemList.slice(itemList.length - showCount).map((item, idx) => {
                         const key = `carousel_${idx}_last_clone`;

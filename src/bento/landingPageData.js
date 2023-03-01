@@ -7,8 +7,8 @@ import aboutImg from '../assets/landing/About_1.png';
 
 export const introData = {
   landingIntroPic: landingImg,
-  introTitle1: 'LOREM IPSUM DOLOR SIT AMET',
-  introTitle2: 'Discover one access point for CCDI data resources and tools',
+  introTitle1: 'Discover CCDI applications, data, resources, and other tools',
+  introTitle2: 'Explore the CCDI Hub by selecting an available resource on the Hub Wheel',
   introTitle3: 'ABOUT CCDI HUB',
   introButtonTitle: 'ABOUT CCDI',
 };
@@ -23,29 +23,24 @@ export const titleData = {
 
 export const statsData = [
   {
-    num: '33',
-    title: 'CCDC',
-    detail: 'RESOURCES',
+    num: '203',
+    title: 'Cataloged Datasets',
+    detail: 'CCDC',
   },
   {
-    num: '33',
-    title: 'CCDC',
-    detail: 'RESOURCES',
+    num: '756',
+    title: 'Participants',
+    detail: 'MCI',
   },
   {
-    num: '33',
-    title: 'CCDC',
-    detail: 'RESOURCES',
+    num: '40,929',
+    title: 'Molecular Targets',
+    detail: 'MTP',
   },
   {
-    num: '33',
-    title: 'CCDC',
-    detail: 'RESOURCES',
-  },
-  {
-    num: '33',
-    title: 'CCDC',
-    detail: 'RESOURCES',
+    num: '218,246',
+    title: 'Cases',
+    detail: 'NCCR Explorer',
   },
 ];
 

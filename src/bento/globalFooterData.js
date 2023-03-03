@@ -56,6 +56,24 @@ export default {
       ],
     },
   ],
+  contact_links: [
+    {
+      text: 'Live Chat',
+      link: 'https://livehelp.cancer.gov/app/chat/chat_launch',
+    },
+    {
+      text: '1-800-4-CANCER',
+      link: 'tel:1-800-4-CANCER',
+    },
+    {
+      text: 'NCIinfo@nih.gov',
+      link: 'mailto:NCIinfo@mail.nih.gov',
+    },
+    {
+      text: 'Site Feedback',
+      link: 'https://nci.az1.qualtrics.com/jfe/form/SV_aeLLobt6ZeGVn5I',
+    }
+  ],
   global_footer_links: [
     {
       text: 'U.S. Department of Health and Human Services',

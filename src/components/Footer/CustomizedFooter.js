@@ -189,18 +189,21 @@ const Footer = () => {
           <div className='contactUs'>
             <div className='contactUsTitle'>Contact Us</div>
             <div className='contactList'>
-              <div className='contactListItem'>
-                <a className='contactListItemLink' href="https://livehelp.cancer.gov/app/chat/chat_launch" target="_blank" rel="noopener noreferrer">Live Chat</a>
-              </div>
-              <div className='contactListItem'>
-                <a className='contactListItemLink' href='tel:1-800-4-CANCER'>1-800-4-CANCER</a>
-              </div>
-              <div className='contactListItem'>
-                <a className='contactListItemLink' href='mailto:nciofficeofdatasharing@mail.nih.gov'>NCIinfo@nih.gov</a>
-              </div>
-              <div className='contactListItem'>
-                <a className='contactListItemLink' href='https://nci.az1.qualtrics.com/jfe/form/SV_aeLLobt6ZeGVn5I' target="_blank" rel="noopener noreferrer">Site Feedback</a>
-              </div>
+              {
+                FooterData.contact_links.map((contactItem, contactidx) => {
+                  const contactkey = `contact_${contactidx}`;
+                  return (
+                    <div className='contactListItem'>
+                      {
+                        contactItem.link.includes('http') ? 
+                        <a className='contactListItemLink' href={contactItem.link} target="_blank" rel="noopener noreferrer">{contactItem.text}</a>
+                        :
+                        <a className='contactListItemLink' href={contactItem.link}>{contactItem.text}</a>
+                      }
+                    </div>
+                  )
+                })
+              }
             </div>
             {
               FooterData.global_footer_links.map((linkItem, idx) => {

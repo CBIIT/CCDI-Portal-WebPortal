@@ -83,6 +83,15 @@ const GlobalFooterContainer = styled.div`
   width: 1440px;
   margin: 0 auto;
 
+  .followUsTitle {
+    margin-top: 24px;
+    font-family: poppins;
+    font-weight: 700;
+    font-size: 22.88px;
+    line-height: 34px;
+    color: #FFFFFF;
+  }
+
   .contactUs {
     margin-left: auto;
   }
@@ -180,12 +189,15 @@ const Footer = () => {
       </FooterStyled>
       <GlobalFooterStyled>
         <GlobalFooterContainer>
-          <FooterLogo>
-            <a className='logoText' href="https://www.cancer.gov" target="_blank" rel="noopener noreferrer">
-              <div className='logoUpperText'>National Cancer Institute</div>
-              <div className='logoLowerText'>at the National Institutes of Health</div>
-            </a>
-          </FooterLogo>
+          <div className='lowerFooterLeftContainer'>
+            <FooterLogo>
+              <a className='logoText' href="https://www.cancer.gov" target="_blank" rel="noopener noreferrer">
+                <div className='logoUpperText'>National Cancer Institute</div>
+                <div className='logoLowerText'>at the National Institutes of Health</div>
+              </a>
+            </FooterLogo>
+            <div className='followUsTitle'>Follow us</div>
+          </div>
           <div className='contactUs'>
             <div className='contactUsTitle'>Contact Us</div>
             <div className='contactList'>

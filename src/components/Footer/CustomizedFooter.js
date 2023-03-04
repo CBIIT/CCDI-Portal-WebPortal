@@ -84,12 +84,25 @@ const GlobalFooterContainer = styled.div`
   margin: 0 auto;
 
   .followUsTitle {
-    margin-top: 24px;
+    margin: 24px 0 18px 0;
     font-family: poppins;
     font-weight: 700;
     font-size: 22.88px;
     line-height: 34px;
     color: #FFFFFF;
+  }
+
+  .followUsList {
+    display: flex;
+  }
+
+  .followItem {
+    margin-right: 14.64px;
+  }
+
+  .followItemImg {
+    width: 29.29px;
+    height: 29.29px;
   }
 
   .contactUs {
@@ -197,6 +210,18 @@ const Footer = () => {
               </a>
             </FooterLogo>
             <div className='followUsTitle'>Follow us</div>
+            <div className='followUsList'>
+              {
+                FooterData.followUs_links.map((followItem, followidx) => {
+                  const followkey = `follow_${followidx}`;
+                  return (
+                    <div className='followItem' key={followkey}>
+                      <a href={followItem.link} target="_blank" rel="noopener noreferrer"><img className='followItemImg' src={followItem.img} alt="facebookIcon" /></a>
+                    </div>
+                  )
+                })
+              }
+            </div>
           </div>
           <div className='contactUs'>
             <div className='contactUsTitle'>Contact Us</div>
@@ -205,7 +230,7 @@ const Footer = () => {
                 FooterData.contact_links.map((contactItem, contactidx) => {
                   const contactkey = `contact_${contactidx}`;
                   return (
-                    <div className='contactListItem'>
+                    <div className='contactListItem' key={contactkey}>
                       {
                         contactItem.link.includes('http') ? 
                         <a className='contactListItemLink' href={contactItem.link} target="_blank" rel="noopener noreferrer">{contactItem.text}</a>

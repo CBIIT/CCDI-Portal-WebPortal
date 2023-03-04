@@ -1,4 +1,9 @@
 import env from '../utils/env';
+import instagramIcon from '../assets/footer/Instgram_Logo.svg';
+import twitterIcon from '../assets/footer/Twitter_Logo.svg';
+import facebookIcon from '../assets/footer/Facebook_Logo.svg';
+import youtubeIcon from '../assets/footer/Youtube_Logo.svg';
+import linkedInIcon from '../assets/footer/LinkedIn_Logo.svg';
 // footerLogoImage ideal image size 310x80 px
 
 export default {
@@ -55,6 +60,28 @@ export default {
         },
       ],
     },
+  ],
+  followUs_links: [
+    {
+      img: instagramIcon,
+      link: 'https://www.instagram.com/nationalcancerinstitute/',
+    },
+    {
+      img: twitterIcon,
+      link: 'https://twitter.com/thenci',
+    },
+    {
+      img: facebookIcon,
+      link: 'https://www.facebook.com/cancer.gov',
+    },
+    {
+      img: youtubeIcon,
+      link: 'https://www.youtube.com/NCIgov',
+    },
+    {
+      img: linkedInIcon,
+      link: 'https://www.linkedin.com/company/nationalcancerinstitute/',
+    }
   ],
   contact_links: [
     {

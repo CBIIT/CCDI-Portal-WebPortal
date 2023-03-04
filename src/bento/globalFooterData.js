@@ -19,10 +19,10 @@ export default {
   // Ideal size for icon is 20x20 px
   link_sections: [
     {
-      title: 'More Information',
+      title: 'About',
       items: [
         {
-          text: 'About CCDI Portal',
+          text: 'About CCDI Hub',
           link: '/about',
         },
         {
@@ -30,7 +30,7 @@ export default {
           link: '/ccdi',
         },
         {
-          text: 'Contact CCDI Portal',
+          text: 'Contact CCDI Hub',
           link: 'mailto:nciofficeofdatasharing@mail.nih.gov?Subject=Index%20of%20NCI%20Studies%20feedback',
         },
         {
@@ -40,12 +40,29 @@ export default {
       ],
     },
     {
-      title: 'NIH Policies',
+      title: 'Resoures',
       items: [
         {
-          text: 'Disclaimer',
-          link: 'https://www.cancer.gov/policies/disclaimer',
+          text: 'Contact Us',
+          link: 'https://www.cancer.gov/contact',
         },
+        {
+          text: 'Publications',
+          link: 'https://www.cancer.gov/publications',
+        },
+        {
+          text: 'Dictionary of Cancer Terms',
+          link: 'https://www.cancer.gov/publications/dictionaries/cancer-terms',
+        },
+        {
+          text: 'Find a Clinical Trial',
+          link: 'https://www.cancer.gov/about-cancer/treatment/clinical-trials/search',
+        },
+      ],
+    },
+    {
+      title: 'Policies',
+      items: [
         {
           text: 'Accessibility',
           link: 'https://www.cancer.gov/policies/accessibility',
@@ -55,7 +72,15 @@ export default {
           link: 'https://www.cancer.gov/policies/foia',
         },
         {
-          text: 'HHS Vulnerability Disclosure',
+          text: 'Privacy & Security',
+          link: 'https://www.cancer.gov/policies/privacy-security',
+        },
+        {
+          text: 'Disclaimer',
+          link: 'https://www.cancer.gov/policies/disclaimer',
+        },
+        {
+          text: 'Vulnerability Disclosure',
           link: 'https://www.hhs.gov/vulnerability-disclosure-policy/index.html',
         },
       ],

@@ -44,11 +44,11 @@ const FooterLogo = styled.div`
 `;
 
 const FooterEmailSignupContainer = styled.form`
-  margin: 54px 0px 0px 120px;
+  margin: 54px 62px 0 auto;
 `;
 
 const FooterLinksContainer = styled.div`
-  margin: 54px 87px 23px auto;
+  margin: 54px 0 98px 62px;
   display: flex;
 
   .footItem {
@@ -57,21 +57,24 @@ const FooterLinksContainer = styled.div`
 
   .footItemTitle {
     font-family: Open Sans;
-    color: #393C3C;
+    color: #FFFFFF;
     font-weight: 700;
-    font-size: 12px;
-    margin-bottom: 7px;
+    font-size: 16px;
+    line-height: 22px;
+    margin-bottom: 10px;
   }
 
   .footItemSubtitle {
-    margin-bottom: 7px;
+    margin-bottom: 10px;
+    max-width: 180px;
   }
 
   .footItemLink {
     font-family: Open Sans;
-    color: #393C3C;
-    font-weight: 600;
-    font-size: 12px;
+    color: #FFFFFF;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
     text-decoration: none;
   }
 `;
@@ -156,21 +159,6 @@ const Footer = () => {
     <>
       <FooterStyled role="contentinfo">
           <FooterContainer>
-            <FooterEmailSignupContainer action="https://public.govdelivery.com/accounts/USNIHNCI/subscribers/qualify" ariaLabel="Footer subscribe" method="post" target="_blank" id="signup">
-              <input type="hidden" name="topic_id" id="topic_id" value="USNIHNCI_223" />
-              <div>
-                Sign up for email updates
-              </div>
-              <div>
-                Enter your email address
-              </div>
-              <div>
-                <input id="email" name="email" type="email" />
-              </div>
-              <button type="submit">
-                Sign up
-              </button>
-            </FooterEmailSignupContainer>
             <FooterLinksContainer>
                 {
                     FooterData.link_sections.map((linkItem, linkidx) => {
@@ -198,6 +186,21 @@ const Footer = () => {
                     })
                 }
             </FooterLinksContainer>
+            <FooterEmailSignupContainer action="https://public.govdelivery.com/accounts/USNIHNCI/subscribers/qualify" ariaLabel="Footer subscribe" method="post" target="_blank" id="signup">
+              <input type="hidden" name="topic_id" id="topic_id" value="USNIHNCI_223" />
+              <div>
+                Sign up for email updates
+              </div>
+              <div>
+                Enter your email address
+              </div>
+              <div>
+                <input id="email" name="email" type="email" />
+              </div>
+              <button type="submit">
+                Sign up
+              </button>
+            </FooterEmailSignupContainer>
           </FooterContainer>
       </FooterStyled>
       <GlobalFooterStyled>

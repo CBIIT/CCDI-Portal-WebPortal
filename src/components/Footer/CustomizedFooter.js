@@ -45,6 +45,23 @@ const FooterLogo = styled.div`
 
 const FooterEmailSignupContainer = styled.form`
   margin: 54px 62px 0 auto;
+
+  .signUpTitle {
+    font-family: poppins;
+    font-weight: 700;
+    font-size: 22.88px;
+    line-height: 34px;
+    color: #FFFFFF;
+    margin-bottom: 28px;
+  }
+
+  .enterTitle {
+    font-family: 'Open Sans';
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    color: #FFFFFF;
+  }
 `;
 
 const FooterLinksContainer = styled.div`
@@ -188,10 +205,10 @@ const Footer = () => {
             </FooterLinksContainer>
             <FooterEmailSignupContainer action="https://public.govdelivery.com/accounts/USNIHNCI/subscribers/qualify" ariaLabel="Footer subscribe" method="post" target="_blank" id="signup">
               <input type="hidden" name="topic_id" id="topic_id" value="USNIHNCI_223" />
-              <div>
+              <div className='signUpTitle'>
                 Sign up for email updates
               </div>
-              <div>
+              <div className='enterTitle'>
                 Enter your email address
               </div>
               <div>

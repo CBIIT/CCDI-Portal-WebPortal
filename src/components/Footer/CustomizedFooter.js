@@ -83,6 +83,10 @@ const FooterEmailSignupContainer = styled.form`
     color: #14315C;
     margin-top: 18px;
   }
+
+  .signUpButton:hover {
+    cursor: pointer;
+  }
 `;
 
 const FooterLinksContainer = styled.div`

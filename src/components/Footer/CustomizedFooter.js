@@ -3,7 +3,14 @@ import styled from 'styled-components';
 import FooterData from '../../bento/globalFooterData';
 
 const FooterStyled = styled.footer`
-  background-color: #CCCED1;
+  background-color: #6D8586;
+  border-top: 1px solid #6C727B;
+  bottom: 0;
+  width: 100%;
+`;
+
+const GlobalFooterStyled = styled.footer`
+  background-color: #115154;
   border-top: 1px solid #6C727B;
   bottom: 0;
   width: 100%;
@@ -12,40 +19,78 @@ const FooterStyled = styled.footer`
 const FooterContainer = styled.div`
   width: 1440px;
   margin: 0 auto;
-`;
-
-const FooterUpperContainer = styled.div`
   display: flex;
 `;
 
 const FooterLogo = styled.div`
-  padding: 30px 0 0 66px;
-
   .logoText {
     text-decoration: none;
   }
 
   .logoUpperText {
-    font-family: Inter;
+    font-family: poppins;
     font-weight: 700;
-    font-size: 19px;
-    color: #393C3C;
+    font-size: 24.96px;
+    line-height: 37px;
+    color: #FFFFFF;
   }
 
   .logoLowerText {
-    font-family: Inter;
-    font-weight: 700;
-    font-size: 12px;
-    color: #393C3C;
+    font-family: poppins;
+    font-weight: 400;
+    font-size: 18.72px;
+    color: #FFFFFF;
   }
 `;
 
 const FooterEmailSignupContainer = styled.form`
-  margin: 54px 0px 0px 120px;
+  margin: 54px 62px 0 auto;
+
+  .signUpTitle {
+    font-family: poppins;
+    font-weight: 700;
+    font-size: 22.88px;
+    line-height: 34px;
+    color: #FFFFFF;
+    margin-bottom: 28px;
+  }
+
+  .enterTitle {
+    font-family: Open Sans;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    color: #FFFFFF;
+    margin-bottom: 10px;
+  }
+
+  .signUpInputBox {
+    width: 479px;
+    height: 47px;
+    font-size: 25px;
+    padding-left: 8px;
+  }
+
+  .signUpButton {
+    background: #FACE00;
+    border-radius: 8px;
+    border: 0;
+    padding: 9px 16px;
+    font-family: Open Sans;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+    color: #14315C;
+    margin-top: 18px;
+  }
+
+  .signUpButton:hover {
+    cursor: pointer;
+  }
 `;
 
 const FooterLinksContainer = styled.div`
-  margin: 54px 87px 23px auto;
+  margin: 54px 0 98px 62px;
   display: flex;
 
   .footItem {
@@ -54,113 +99,220 @@ const FooterLinksContainer = styled.div`
 
   .footItemTitle {
     font-family: Open Sans;
-    color: #393C3C;
+    color: #FFFFFF;
     font-weight: 700;
-    font-size: 12px;
-    margin-bottom: 7px;
+    font-size: 16px;
+    line-height: 22px;
+    margin-bottom: 10px;
   }
 
   .footItemSubtitle {
-    margin-bottom: 7px;
+    margin-bottom: 10px;
+    max-width: 180px;
   }
 
   .footItemLink {
     font-family: Open Sans;
-    color: #393C3C;
-    font-weight: 600;
-    font-size: 12px;
+    color: #FFFFFF;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
     text-decoration: none;
+  }
+
+  .footItemLink:hover {
+    text-decoration: underline;
   }
 `;
 
 const GlobalFooterContainer = styled.div`
-  padding-bottom: 64px;
+  padding: 20px 62px 26px 61px;
   display: flex;
-  justify-content: center;
-  font-size: 9px;
-  font-family: Open Sans;
-  font-weight: 600;
-  color: #393C3C;
+  background: #115154;
+  width: 1440px;
+  margin: 0 auto;
 
-  .globalFooterItemLink{
-    color: #393C3C;
-    text-decoration: none;
+  .followUsTitle {
+    margin: 24px 0 18px 0;
+    font-family: poppins;
+    font-weight: 700;
+    font-size: 22.88px;
+    line-height: 34px;
+    color: #FFFFFF;
   }
 
-  .footerSplit {
-    margin: 0 15px;
+  .followUsList {
+    display: flex;
+  }
+
+  .followItem {
+    margin-right: 14.64px;
+  }
+
+  .followItemImg {
+    width: 29.29px;
+    height: 29.29px;
+  }
+
+  .contactUs {
+    margin-left: auto;
+  }
+
+  .contactUsTitle {
+    font-family: poppins;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22.88px;
+    line-height: 34px;
+    text-align: right;
+    color: #FFFFFF;
+  }
+
+  .contactList {
+    display: flex;
+    margin: 6px 0 35px 0;
+  }
+
+  .contactListItem {
+    margin-left: 35px;
+  }
+
+  .contactListItemLink{
+    color: #FFFFFF;
+    text-decoration: none;
+    font-family: Open Sans;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  .contactListItemLink:hover {
+    text-decoration: underline;
+  }
+
+  .globalFooterItem {
+    text-align: right;
+  }
+
+  .globalFooterItemLink{
+    color: #FFFFFF;
+    text-decoration: none;
+    font-family: Open Sans;
+    font-weight: 400;
+    font-size: 14.24px;
+    line-height: 18px;
+  }
+
+  .globalFooterItemLink:hover {
+    text-decoration: underline;
   }
 `;
 
 const Footer = () => {
   return (
-    <FooterStyled role="contentinfo">
-        <FooterContainer>
-            <FooterUpperContainer>
-                <FooterLogo>
-                  <a className='logoText' href="https://www.cancer.gov" target="_blank" rel="noopener noreferrer">
-                    <div className='logoUpperText'>National Cancer Institute</div>
-                    <div className='logoLowerText'>at the National Institutes of Health</div>
-                  </a>
-                </FooterLogo>
-                <FooterEmailSignupContainer action="https://public.govdelivery.com/accounts/USNIHNCI/subscribers/qualify" ariaLabel="Footer subscribe" method="post" target="_blank" id="signup">
-                  <input type="hidden" name="topic_id" id="topic_id" value="USNIHNCI_223" />
-                  <div>
-                    Sign up for email updates
-                  </div>
-                  <div>
-                    Enter your email address
-                  </div>
-                  <div>
-                    <input id="email" name="email" type="email" />
-                  </div>
-                  <button type="submit">
-                    Sign up
-                  </button>
-                </FooterEmailSignupContainer>
-                <FooterLinksContainer>
-                    {
-                        FooterData.link_sections.map((linkItem, linkidx) => {
-                            const linkkey =  `link_${linkidx}`;
-                            return (
-                                <div className='footItem' key={linkkey}>
-                                    <div className='footItemTitle'>{linkItem.title}</div>
-                                    {
-                                        linkItem.items.map((item, itemidx) => {
-                                            const itemkey =  `item_${itemidx}`;
-                                            return (
-                                                <div className='footItemSubtitle' key={itemkey}>
-                                                    {
-                                                        item.link.includes('http') ? 
-                                                        <a className='footItemLink' href={item.link} target="_blank" rel="noopener noreferrer">{item.text}</a>
-                                                        :
-                                                        <a className='footItemLink' href={item.link}>{item.text}</a>
-                                                    }
-                                                </div>
-                                            )
-                                        })
-                                    }
-                                </div>
-                            )
-                        })
-                    }
-                </FooterLinksContainer>
-            </FooterUpperContainer>
-            <GlobalFooterContainer>
+    <>
+      <FooterStyled role="contentinfo">
+          <FooterContainer>
+            <FooterLinksContainer>
                 {
-                    FooterData.global_footer_links.map((linkItem, idx) => {
-                        const linkitemkey = `linkitem_${idx}`;
+                    FooterData.link_sections.map((linkItem, linkidx) => {
+                        const linkkey =  `link_${linkidx}`;
                         return (
-                            <div className='globalFooterItem' key={linkitemkey}>
-                                <a className='globalFooterItemLink' href={linkItem.link} target="_blank" rel="noopener noreferrer">{linkItem.text}</a>
-                                { idx !== FooterData.global_footer_links.length - 1 ? <span className='footerSplit'>|</span> : null}
+                            <div className='footItem' key={linkkey}>
+                                <div className='footItemTitle'>{linkItem.title}</div>
+                                {
+                                    linkItem.items.map((item, itemidx) => {
+                                        const itemkey =  `item_${itemidx}`;
+                                        return (
+                                            <div className='footItemSubtitle' key={itemkey}>
+                                                {
+                                                    item.link.includes('http') ? 
+                                                    <a className='footItemLink' href={item.link} target="_blank" rel="noopener noreferrer">{item.text}</a>
+                                                    :
+                                                    <a className='footItemLink' href={item.link}>{item.text}</a>
+                                                }
+                                            </div>
+                                        )
+                                    })
+                                }
                             </div>
                         )
                     })
                 }
-            </GlobalFooterContainer>
-        </FooterContainer>
-    </FooterStyled>
+            </FooterLinksContainer>
+            <FooterEmailSignupContainer action="https://public.govdelivery.com/accounts/USNIHNCI/subscribers/qualify" ariaLabel="Footer subscribe" method="post" target="_blank" id="signup">
+              <input type="hidden" name="topic_id" id="topic_id" value="USNIHNCI_223" />
+              <div className='signUpTitle'>
+                Sign up for email updates
+              </div>
+              <div className='enterTitle'>
+                Enter your email address
+              </div>
+              <div>
+                <input id="email" name="email" type="email" className='signUpInputBox' />
+              </div>
+              <button type="submit" className='signUpButton'>
+                Sign up
+              </button>
+            </FooterEmailSignupContainer>
+          </FooterContainer>
+      </FooterStyled>
+      <GlobalFooterStyled>
+        <GlobalFooterContainer>
+          <div className='lowerFooterLeftContainer'>
+            <FooterLogo>
+              <a className='logoText' href="https://www.cancer.gov" target="_blank" rel="noopener noreferrer">
+                <div className='logoUpperText'>National Cancer Institute</div>
+                <div className='logoLowerText'>at the National Institutes of Health</div>
+              </a>
+            </FooterLogo>
+            <div className='followUsTitle'>Follow us</div>
+            <div className='followUsList'>
+              {
+                FooterData.followUs_links.map((followItem, followidx) => {
+                  const followkey = `follow_${followidx}`;
+                  return (
+                    <div className='followItem' key={followkey}>
+                      <a href={followItem.link} target="_blank" rel="noopener noreferrer"><img className='followItemImg' src={followItem.img} alt="facebookIcon" /></a>
+                    </div>
+                  )
+                })
+              }
+            </div>
+          </div>
+          <div className='contactUs'>
+            <div className='contactUsTitle'>Contact Us</div>
+            <div className='contactList'>
+              {
+                FooterData.contact_links.map((contactItem, contactidx) => {
+                  const contactkey = `contact_${contactidx}`;
+                  return (
+                    <div className='contactListItem' key={contactkey}>
+                      {
+                        contactItem.link.includes('http') ? 
+                        <a className='contactListItemLink' href={contactItem.link} target="_blank" rel="noopener noreferrer">{contactItem.text}</a>
+                        :
+                        <a className='contactListItemLink' href={contactItem.link}>{contactItem.text}</a>
+                      }
+                    </div>
+                  )
+                })
+              }
+            </div>
+            {
+              FooterData.global_footer_links.map((linkItem, idx) => {
+                  const linkitemkey = `linkitem_${idx}`;
+                  return (
+                      <div className='globalFooterItem' key={linkitemkey}>
+                          <a className='globalFooterItemLink' href={linkItem.link} target="_blank" rel="noopener noreferrer">{linkItem.text}</a>
+                      </div>
+                  )
+              })
+            }
+          </div>
+        </GlobalFooterContainer>
+      </GlobalFooterStyled>
+    </>
   )
 };
 

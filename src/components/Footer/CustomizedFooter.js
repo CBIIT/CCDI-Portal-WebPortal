@@ -56,11 +56,32 @@ const FooterEmailSignupContainer = styled.form`
   }
 
   .enterTitle {
-    font-family: 'Open Sans';
+    font-family: Open Sans;
     font-weight: 400;
     font-size: 16px;
     line-height: 22px;
     color: #FFFFFF;
+    margin-bottom: 10px;
+  }
+
+  .signUpInputBox {
+    width: 479px;
+    height: 47px;
+    font-size: 25px;
+    padding-left: 8px;
+  }
+
+  .signUpButton {
+    background: #FACE00;
+    border-radius: 8px;
+    border: 0;
+    padding: 9px 16px;
+    font-family: Open Sans;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+    color: #14315C;
+    margin-top: 18px;
   }
 `;
 
@@ -93,6 +114,10 @@ const FooterLinksContainer = styled.div`
     font-size: 16px;
     line-height: 22px;
     text-decoration: none;
+  }
+
+  .footItemLink:hover {
+    text-decoration: underline;
   }
 `;
 
@@ -157,6 +182,10 @@ const GlobalFooterContainer = styled.div`
     line-height: 22px;
   }
 
+  .contactListItemLink:hover {
+    text-decoration: underline;
+  }
+
   .globalFooterItem {
     text-align: right;
   }
@@ -168,6 +197,10 @@ const GlobalFooterContainer = styled.div`
     font-weight: 400;
     font-size: 14.24px;
     line-height: 18px;
+  }
+
+  .globalFooterItemLink:hover {
+    text-decoration: underline;
   }
 `;
 
@@ -212,9 +245,9 @@ const Footer = () => {
                 Enter your email address
               </div>
               <div>
-                <input id="email" name="email" type="email" />
+                <input id="email" name="email" type="email" className='signUpInputBox' />
               </div>
-              <button type="submit">
+              <button type="submit" className='signUpButton'>
                 Sign up
               </button>
             </FooterEmailSignupContainer>

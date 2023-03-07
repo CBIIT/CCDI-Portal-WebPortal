@@ -6,7 +6,6 @@ const Nav = styled.div`
     top: 0;
     left: 0;
     width: 100%;
-    height: 55px;
     background: #fafafa;
     box-shadow: -0.1px 6px 9px -6px #1B1C1C57;
     z-index: 1100;
@@ -28,7 +27,7 @@ const UlContainer = styled.ul`
 const LiSection = styled.li`
   display: inline-block;
   position: relative;
-  line-height: 40px;
+  line-height: 51px;
   letter-spacing: 1px;
   text-align: center;
   color: #252222;
@@ -74,10 +73,10 @@ const NavBar = () => {
     <Nav>
       <NavContainer>
         <UlContainer>
-          <LiSection style={path === '/about' ? activeStyle : null}><NavLink to="/about">ABOUT</NavLink></LiSection>
-          <LiSection style={path === '/' ? activeStyle : null}><NavLink to="/">APPLICATIONS</NavLink></LiSection>
-          <LiSection style={path === '/' ? activeStyle : null}><NavLink to="/">CLOUD RESOURCES</NavLink></LiSection>
-          <LiSection style={path === '/news' ? activeStyle : null}><NavLink to="/news">NEWS</NavLink></LiSection>
+          <LiSection style={path === '/about' ? activeStyle : null}><NavLink to="/about">About</NavLink></LiSection>
+          <LiSection style={path === '/' ? activeStyle : null}><NavLink to="/">Applications</NavLink></LiSection>
+          <LiSection style={path === '/' ? activeStyle : null}><NavLink to="/">Other Applications</NavLink></LiSection>
+          <LiSection style={path === '/news' ? activeStyle : null}><NavLink to="/news">News</NavLink></LiSection>
         </UlContainer>
       </NavContainer>
     </Nav>

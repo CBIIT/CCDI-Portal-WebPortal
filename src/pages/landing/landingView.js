@@ -269,7 +269,7 @@ const TitleContainer = styled.div`
 `;
 
 const ResourcesContainer = styled.div`
-    margin-top: 139px;
+    margin: 139px 0 136px 0;
 
     .resourceTitle {
       margin-left: 160px;
@@ -368,69 +368,6 @@ const ResourcesContainer = styled.div`
       font-family: Poppins;
       font-weight: 400;
       font-size: 16px;
-    }
-`;
-
-const AboutContainer = styled.div`
-    margin-top: 149px;
-
-    .aboutContentContainer {
-      display: flex;
-      margin: 88px 0 131px 0;
-    }
-
-    .aboutLeftContainer {
-      width: 50%;
-      height:378px;
-      background-image: url(${aboutContainerData.img});
-      background-repeat: no-repeat;
-    }
-
-    .aboutButtonList {
-      margin: 40px 0 0 332px;
-    }
-
-    .aboutButton {
-      height: 88px;
-      width: 218px;
-      border: 1px solid #078893;
-      background: #FFFFFF;
-      box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.25);
-      border-radius: 5px;
-      margin-bottom: 17px;
-      font-family: Poppins;
-      font-style: normal;
-      font-weight: 700;
-      font-size: 16px;
-      color: #05555C;
-      text-align: center;
-      line-height: 88px;
-    }
-
-    .aboutButton:hover {
-      cursor: pointer;
-    }
-
-    .active {
-      background: #078893;
-      color: #FFFFFF;
-    }
-
-    .aboutRightContainer {
-      width: 50%;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    .aboutTextContainer {
-      width: 526px;
-      margin-left: 63px;
-      font-family: Inter;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 22px;
     }
 `;
 
@@ -565,33 +502,6 @@ const LandingView = () => {
           </div>
         </div>
       </ResourcesContainer>
-      <AboutContainer>
-        <TitleContainer>
-          <div className='titleLine'>
-            <div className='titleLineShort' />
-            <div className='titleLineShort' />
-            <div className='titleLineLong' />
-          </div>
-          <div className='titleText'>{titleData.aboutTitle}</div>
-        </TitleContainer>
-        <div className='aboutContentContainer'>
-          <div className="aboutLeftContainer">
-            <div className='aboutButtonList'>
-              {
-                aboutContainerData.aboutButtonlist.map((aboutButtonItem, idx) => {
-                  const key = `abt_${idx}`;
-                  return (
-                    <div className={ activeAbooutItem === aboutButtonItem ? 'aboutButton active' : 'aboutButton' } key={key} onClick={() => setActiveAboutItem(aboutButtonItem)}>{aboutButtonItem}</div>
-                  )
-                })
-              }
-            </div>
-          </div>
-          <div className='aboutRightContainer'>
-            <div className='aboutTextContainer'>{aboutContainerData.aboutList[activeAbooutItem]}</div>
-          </div>
-        </div>
-      </AboutContainer>
     </LandingViewContainer>
   )
 };

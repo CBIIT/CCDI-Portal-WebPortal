@@ -100,24 +100,22 @@ const StatsContainer = styled.div`
 
     .leftbox {
       position: absolute;
-      background: #ffffff;
-      left: -300px;
       top: 0;
-      width: 546px;
-      height: 417px;
+      left: 0;
+      width: 270px;
+      height: 400px;
       z-index: 9;
-      filter:blur(40px);
+      background: linear-gradient(to right, #fafafa, 70%, transparent);
     }
 
     .rightbox {
       position: absolute;
-      background: #ffffff;
-      right: -300px;
+      right: 0;
       top: 0;
-      width: 546px;
-      height: 417px;
+      width: 270px;
+      height: 400px;
       z-index: 9;
-      filter:blur(40px);
+      background: linear-gradient(to left, #fafafa, 70%, transparent);
     }
 
     .borderTop {

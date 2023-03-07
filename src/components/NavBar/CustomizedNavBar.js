@@ -14,8 +14,8 @@ const Nav = styled.div`
 
 const NavContainer = styled.div`
     margin: 0 auto;
-    width: 100%;
-    text-align: center;
+    width: 1440px;
+    text-align: left;
     position: relative;
 `;
 

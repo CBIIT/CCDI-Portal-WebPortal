@@ -7,8 +7,8 @@ const Nav = styled.div`
     left: 0;
     width: 100%;
     height: 55px;
-    background: #E8EDF5 0% 0% no-repeat padding-box;
-    box-shadow: -0.1px 6px 9px #1B1C1C57;
+    background: #fafafa;
+    box-shadow: -0.1px 6px 9px -6px #1B1C1C57;
     z-index: 1100;
 `;
 

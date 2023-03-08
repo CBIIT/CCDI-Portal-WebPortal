@@ -30,40 +30,30 @@ const LiSection = styled.li`
   line-height: 51px;
   letter-spacing: 1px;
   text-align: center;
-  color: #252222;
-  font-size: 17px;
-  font-weight: 600;
-  font-family: Poppins;
-  text-decoration: none;
-  cursor: pointer;
   transition:all 0.3s ease-in-out;
 
-  a{
+  a {
     display: block;
     color: #252222;
+    font-family: poppins;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 51px;
+    letter-spacing: 1px;
     text-decoration: none;
-    padding: 0 30px;
+    margin: 0 30px;
+    border-bottom: 4px solid transparent;
   }
 
-  &:hover {
-    color: #252222;
-  }
-
-  .menuLabel {
-    display: block;
-    color: #252222;
-    text-decoration: none;
-    padding: 0 30px;
-  }
-
-  &:hover .dropdown-block {
-    display: block;
+  a:hover {
+    cursor: pointer;
+    border-bottom: 4px solid #298085;
   }
 `;
 
 const activeStyle = {
   color: '#252222',
-  backgroundColor: '#E8EDF5',
+  // backgroundColor: '#E8EDF5',
 };
 
 

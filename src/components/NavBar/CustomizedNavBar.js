@@ -27,33 +27,50 @@ const UlContainer = styled.ul`
 const LiSection = styled.li`
   display: inline-block;
   position: relative;
-  line-height: 51px;
+  line-height: 50px;
   letter-spacing: 1px;
   text-align: center;
   transition:all 0.3s ease-in-out;
 
   a {
+    text-decoration: none;
+  }
+
+  .navTitle {
     display: block;
-    color: #252222;
+    color: #3D4551;
     font-family: poppins;
     font-size: 17px;
     font-weight: 600;
-    line-height: 51px;
+    line-height: 50px;
     letter-spacing: 1px;
     text-decoration: none;
-    margin: 0 30px;
+    margin: 0 60px 0 20px;
     border-bottom: 4px solid transparent;
   }
 
-  a:hover {
+  .navTitle:hover {
     cursor: pointer;
     border-bottom: 4px solid #298085;
+  }
+
+  .navTitle::after {
+    content: "";
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-bottom: 1px solid #3D4551;
+    border-left: 1px solid #3D4551;
+    margin: 0 0 4px 8px
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
   }
 `;
 
 const activeStyle = {
   color: '#252222',
   // backgroundColor: '#E8EDF5',
+  borderBottom: '4px solid #298085',
 };
 
 
@@ -63,10 +80,18 @@ const NavBar = () => {
     <Nav>
       <NavContainer>
         <UlContainer>
-          <LiSection style={path === '/about' ? activeStyle : null}><NavLink to="/about">About</NavLink></LiSection>
-          <LiSection style={path === '/' ? activeStyle : null}><NavLink to="/">Applications</NavLink></LiSection>
-          <LiSection style={path === '/' ? activeStyle : null}><NavLink to="/">Other Applications</NavLink></LiSection>
-          <LiSection style={path === '/news' ? activeStyle : null}><NavLink to="/news">News</NavLink></LiSection>
+          <LiSection>
+            <NavLink to="/about"><div className='navTitle' style={path === '/about' ? activeStyle : null}>About</div></NavLink>
+          </LiSection>
+          <LiSection>
+            <NavLink to="/"><div className='navTitle' style={path === '/' ? activeStyle : null}>Applications</div></NavLink>
+          </LiSection>
+          <LiSection>
+            <NavLink to="/"><div className='navTitle'style={path === '/' ? activeStyle : null}>Other Applications</div></NavLink>
+          </LiSection>
+          <LiSection>
+            <NavLink to="/news"><div className='navTitle' style={path === '/news' ? activeStyle : null}>News</div></NavLink>
+          </LiSection>
         </UlContainer>
       </NavContainer>
     </Nav>

@@ -128,11 +128,10 @@ const NavBar = () => {
   const [clickedTitle, setClickedTitle] = useState("");
 
   const handleMenuClick = (e) => {
-    console.log(clickedTitle);
-    if (e.target.id === clickedTitle || e.target.id === "aboutTitle" || e.target.id === "newsTitle") {
+    if (e.target.innerText === clickedTitle || e.target.innerText === "About" || e.target.innerText === "News") {
       setClickedTitle("");
     } else {
-      setClickedTitle(e.target.id);
+      setClickedTitle(e.target.innerText);
     }
   };
 
@@ -146,16 +145,16 @@ const NavBar = () => {
       <NavContainer>
         <UlContainer>
           <LiSection onClick={handleMenuClick}>
-            <NavLink to="/about"><div className='navTitle' id="aboutTitle" style={path === '/about' ? activeStyle : null}>About</div></NavLink>
+            <NavLink to="/about"><div className='navTitle' style={path === '/about' ? activeStyle : null}>About</div></NavLink>
           </LiSection>
           <LiSection onClick={handleMenuClick}>
-            <div className={clickedTitle === 'applicationsTitle' ? 'navTitle clicked' : 'navTitle'} id="applicationsTitle">Applications</div>
+            <div className={clickedTitle === 'Applications' ? 'navTitle clicked' : 'navTitle'}>Applications</div>
           </LiSection>
           <LiSection onClick={handleMenuClick}>
-            <div className={clickedTitle === 'otherApplicationsTitle' ? 'navTitle clicked' : 'navTitle'} id="otherApplicationsTitle">Other Applications</div>
+            <div className={clickedTitle === 'Other Applications' ? 'navTitle clicked' : 'navTitle'}>Other Applications</div>
           </LiSection>
           <LiSection onClick={handleMenuClick}>
-            <NavLink to="/news"><div className='navTitle' id="newsTitle" style={path === '/news' ? activeStyle : null}>News</div></NavLink>
+            <NavLink to="/news"><div className='navTitle' style={path === '/news' ? activeStyle : null}>News</div></NavLink>
           </LiSection>
         </UlContainer>
       </NavContainer>

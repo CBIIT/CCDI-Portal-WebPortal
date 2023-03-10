@@ -1,6 +1,5 @@
 /* eslint-disable arrow-body-style */
 /* eslint-disable react/destructuring-assignment */
-import _ from 'lodash';
 import store from '../../../store';
 import client from '../../../utils/graphqlClient';
 import {

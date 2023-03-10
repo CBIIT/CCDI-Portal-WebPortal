@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import {useLocation, NavLink, useHistory} from 'react-router-dom';
+import {useLocation, useHistory} from 'react-router-dom';
 import headerData from '../../bento/globalHeaderData';
 
 const HeaderBanner = styled.div`

@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { useQuery } from '@apollo/client';
-import { GET_LANDING_PAGE_DATA_QUERY,introData, titleData, statsData, latestUpdatesData, resourcesAppliationsListData, resourcesCloudListData, aboutContainerData } from '../../bento/landingPageData';
+import { introData, titleData, statsData, latestUpdatesData, resourcesAppliationsListData, resourcesCloudListData } from '../../bento/landingPageData';
 import resourcesItemLogo from '../../assets/landing/Resources_Logo.svg';
 import Carousel from '../landing/component/carousel1'
 
@@ -372,13 +371,6 @@ const ResourcesContainer = styled.div`
 `;
 
 const LandingView = () => {
-  const { loading, error, data } = useQuery(GET_LANDING_PAGE_DATA_QUERY);
-  const [activeAbooutItem, setActiveAboutItem] = useState('MCI');
-
-  useEffect(() => {
-    console.log(data);
-  },[data]);
-
   return (
     <LandingViewContainer>
       <FirstContainer>

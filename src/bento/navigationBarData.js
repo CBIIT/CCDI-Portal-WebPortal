@@ -74,6 +74,11 @@ export const navBarstyling = {
       type: 'link',
       link: '/ccdi',
     },
+    {
+      labelText: 'cancer moonshot',
+      type: 'link',
+      link: '/moonshot',
+    },
   ];
 
   export const navBarCartData = {

@@ -59,9 +59,19 @@ const LiSection = styled.li`
     border-bottom: 4px solid transparent;
   }
 
+  .clicked {
+    color: #FFFFFF;
+    background: #1A5255;
+    border-bottom: 4px solid #1A5255,
+  }
+
   .navTitle:hover {
     cursor: pointer;
     border-bottom: 4px solid #298085;
+  }
+
+  .clicked:hover {
+    border-bottom: 4px solid transparent;
   }
 
   .navTitle::after {
@@ -74,6 +84,12 @@ const LiSection = styled.li`
     margin: 0 0 4px 8px
     transform: rotate(-45deg);
     -webkit-transform: rotate(-45deg);
+  }
+
+  .clicked::after {
+    border-top: 1px solid #FFFFFF;
+    border-right: 1px solid #FFFFFF;
+    margin: 0 0 0 8px
   }
 `;
 
@@ -100,12 +116,6 @@ const activeStyle = {
   color: '#252222',
   // backgroundColor: '#E8EDF5',
   borderBottom: '4px solid #298085',
-};
-
-const clickedStyle = {
-  color: '#FFFFFF',
-  backgroundColor: '#1A5255',
-  borderBottom: '4px solid transparent',
 };
 
 const dropdownInvisibleStyle = {
@@ -139,10 +149,10 @@ const NavBar = () => {
             <NavLink to="/about"><div className='navTitle' id="aboutTitle" style={path === '/about' ? activeStyle : null}>About</div></NavLink>
           </LiSection>
           <LiSection onClick={handleMenuClick}>
-            <div className='navTitle' id="applicationsTitle" style={clickedTitle === 'applicationsTitle' ? clickedStyle : null}>Applications</div>
+            <div className={clickedTitle === 'applicationsTitle' ? 'navTitle clicked' : 'navTitle'} id="applicationsTitle">Applications</div>
           </LiSection>
           <LiSection onClick={handleMenuClick}>
-            <div className='navTitle' id="otherApplicationsTitle" style={clickedTitle === 'otherApplicationsTitle' ? clickedStyle : null}>Other Applications</div>
+            <div className={clickedTitle === 'otherApplicationsTitle' ? 'navTitle clicked' : 'navTitle'} id="otherApplicationsTitle">Other Applications</div>
           </LiSection>
           <LiSection onClick={handleMenuClick}>
             <NavLink to="/news"><div className='navTitle' id="newsTitle" style={path === '/news' ? activeStyle : null}>News</div></NavLink>

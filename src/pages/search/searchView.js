@@ -4,11 +4,8 @@ import {
   useLocation,
 } from "react-router-dom";
 import {
-  TextField, CircularProgress, withStyles, Box, Popper,
+  withStyles, Box,
 } from '@material-ui/core';
-import {
-  Autocomplete,
-} from '@material-ui/lab';
 import { useHistory } from 'react-router-dom'; // version 5.2.0
 
 import {
@@ -84,8 +81,6 @@ function searchComponent({
   const [inputValue, setInputValue] = React.useState('');
   const [searchText, setSearchText] = React.useState('');
   const [searchResults, setSearchResults] = React.useState([]);
-  const loading = open;
-  const [value] = React.useState([]);
   const [deleteIconShow, setDeleteIconShow] = React.useState('none');
 
   const getAuthorizedResultQuery = (strValue) => {
@@ -100,8 +95,6 @@ function searchComponent({
     setSearchText(newValue);
     history.push(`/sitesearch?keyword=${newValue}`);
   }
-
-  const CustomPopper = (props) => <Popper {...props} className={classes.root} placement="bottom" />;
 
   async function getAutoCompleteRes(newValue = []) {
     setInputValue(newValue);

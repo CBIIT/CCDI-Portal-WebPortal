@@ -122,10 +122,30 @@ const dropdownInvisibleStyle = {
   visibility: 'hidden',
 };
 
+const useOutsideAlerter = (ref) => {
+  useEffect(() => {
+      function handleClickOutside(event) {
+          if (!event.target || event.target.getAttribute("class") !== "DropdownList" && ref.current && !ref.current.contains(event.target)) {
+            const toggle = document.getElementsByClassName("navTitle clicked");
+            if (toggle[0]) {
+              toggle[0].click();
+            }
+          }
+      }
+
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+          document.removeEventListener("mousedown", handleClickOutside);
+      };
+  }, [ref]);
+};
+
 
 const NavBar = () => {
   const path = useLocation().pathname;
   const [clickedTitle, setClickedTitle] = useState("");
+  const dropdownSelection = useRef(null);
+  useOutsideAlerter(dropdownSelection);
 
   const handleMenuClick = (e) => {
     if (e.target.innerText === clickedTitle || e.target.innerText === "About" || e.target.innerText === "News") {
@@ -159,9 +179,9 @@ const NavBar = () => {
         </UlContainer>
       </NavContainer>
     </Nav>
-    <Dropdown style={clickedTitle === '' ? dropdownInvisibleStyle : null}>
+    <Dropdown ref={dropdownSelection} style={clickedTitle === '' ? dropdownInvisibleStyle : null}>
       <DropdownContainer>
-          hello
+          <div className='DropdownList'>hello</div>
       </DropdownContainer>
     </Dropdown>
     </>

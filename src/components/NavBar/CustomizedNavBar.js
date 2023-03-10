@@ -9,6 +9,15 @@ const Nav = styled.div`
     background: #fafafa;
     box-shadow: -0.1px 6px 9px -6px #1B1C1C57;
     z-index: 1100;
+
+    .dropdownContainer {
+      // outline: none;
+      // visibility: hidden;
+      // opacity: 0;
+      margin: 0 auto;
+      position: relative;
+      width: 1440px;
+    }
 `;
 
 const NavContainer = styled.div`
@@ -67,6 +76,25 @@ const LiSection = styled.li`
   }
 `;
 
+const Dropdown = styled.div`
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #1A5255;
+    z-index: 1100;
+    // visibility: hidden;
+    // outline: none;
+    // opacity: 0;
+`;
+
+const DropdownContainer = styled.div`
+    margin: 0 auto;
+    width: 1440px;
+    text-align: left;
+    position: relative;
+`;
+
+
 const activeStyle = {
   color: '#252222',
   // backgroundColor: '#E8EDF5',
@@ -77,6 +105,7 @@ const activeStyle = {
 const NavBar = () => {
   const path = useLocation().pathname;
   return (
+    <>
     <Nav>
       <NavContainer>
         <UlContainer>
@@ -84,10 +113,10 @@ const NavBar = () => {
             <NavLink to="/about"><div className='navTitle' style={path === '/about' ? activeStyle : null}>About</div></NavLink>
           </LiSection>
           <LiSection>
-            <NavLink to="/"><div className='navTitle' style={path === '/' ? activeStyle : null}>Applications</div></NavLink>
+            <div className='navTitle'>Applications</div>
           </LiSection>
           <LiSection>
-            <NavLink to="/"><div className='navTitle'style={path === '/' ? activeStyle : null}>Other Applications</div></NavLink>
+            <NavLink to="/"><div className='navTitle'>Other Applications</div></NavLink>
           </LiSection>
           <LiSection>
             <NavLink to="/news"><div className='navTitle' style={path === '/news' ? activeStyle : null}>News</div></NavLink>
@@ -95,6 +124,12 @@ const NavBar = () => {
         </UlContainer>
       </NavContainer>
     </Nav>
+    <Dropdown>
+      <DropdownContainer>
+          hello
+      </DropdownContainer>
+    </Dropdown>
+    </>
   );
 };
 

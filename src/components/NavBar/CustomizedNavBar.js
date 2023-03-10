@@ -144,7 +144,7 @@ const useOutsideAlerter = (ref) => {
       function handleClickOutside(event) {
           if (!event.target || event.target.getAttribute("class") !== "dropdownList" && ref.current && !ref.current.contains(event.target)) {
             const toggle = document.getElementsByClassName("navTitle clicked");
-            if (toggle[0]) {
+            if (toggle[0] && event.target.getAttribute("class") !== "navTitle clicked") {
               toggle[0].click();
             }
           }

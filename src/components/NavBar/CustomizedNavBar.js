@@ -99,6 +99,8 @@ const Dropdown = styled.div`
     width: 100%;
     background: #1A5255;
     z-index: 1100;
+    position: absolute;
+    top: 151px;
     // visibility: hidden;
     // outline: none;
     // opacity: 0;
@@ -109,6 +111,21 @@ const DropdownContainer = styled.div`
     width: 1440px;
     text-align: left;
     position: relative;
+
+    .dropdownList {
+      background: #1A5255;
+      display: grid;
+      grid-column-gap: 50px;
+      grid-template-columns: auto auto auto;
+      padding: 10px;
+    }
+
+    .dropdownItem {
+      border: 1px solid rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      font-size: 30px;
+      text-align: center;
+  }
 `;
 
 
@@ -125,7 +142,7 @@ const dropdownInvisibleStyle = {
 const useOutsideAlerter = (ref) => {
   useEffect(() => {
       function handleClickOutside(event) {
-          if (!event.target || event.target.getAttribute("class") !== "DropdownList" && ref.current && !ref.current.contains(event.target)) {
+          if (!event.target || event.target.getAttribute("class") !== "dropdownList" && ref.current && !ref.current.contains(event.target)) {
             const toggle = document.getElementsByClassName("navTitle clicked");
             if (toggle[0]) {
               toggle[0].click();
@@ -181,7 +198,13 @@ const NavBar = () => {
     </Nav>
     <Dropdown ref={dropdownSelection} style={clickedTitle === '' ? dropdownInvisibleStyle : null}>
       <DropdownContainer>
-          <div className='DropdownList'>hello</div>
+          <div className='dropdownList'>
+            <div class="dropdownItem">1</div>
+            <div class="dropdownItem">2</div>
+            <div class="dropdownItem">3</div>
+            <div class="dropdownItem">4</div>
+            <div class="dropdownItem">5</div>
+          </div>
       </DropdownContainer>
     </Dropdown>
     </>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useLocation, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -54,7 +54,8 @@ const LiSection = styled.li`
     line-height: 50px;
     letter-spacing: 1px;
     text-decoration: none;
-    margin: 0 60px 0 20px;
+    margin: 0 45px 0 5px;
+    padding: 0 15px;
     border-bottom: 4px solid transparent;
   }
 
@@ -101,30 +102,55 @@ const activeStyle = {
   borderBottom: '4px solid #298085',
 };
 
+const clickedStyle = {
+  color: '#FFFFFF',
+  backgroundColor: '#1A5255',
+  borderBottom: '4px solid transparent',
+};
+
+const dropdownInvisibleStyle = {
+  visibility: 'hidden',
+};
+
 
 const NavBar = () => {
   const path = useLocation().pathname;
+  const [clickedTitle, setClickedTitle] = useState("");
+
+  const handleMenuClick = (e) => {
+    console.log(clickedTitle);
+    if (e.target.id === clickedTitle || e.target.id === "aboutTitle" || e.target.id === "newsTitle") {
+      setClickedTitle("");
+    } else {
+      setClickedTitle(e.target.id);
+    }
+  };
+
+  useEffect(() => {
+    setClickedTitle("");
+  }, []);
+
   return (
     <>
     <Nav>
       <NavContainer>
         <UlContainer>
-          <LiSection>
-            <NavLink to="/about"><div className='navTitle' style={path === '/about' ? activeStyle : null}>About</div></NavLink>
+          <LiSection onClick={handleMenuClick}>
+            <NavLink to="/about"><div className='navTitle' id="aboutTitle" style={path === '/about' ? activeStyle : null}>About</div></NavLink>
           </LiSection>
-          <LiSection>
-            <div className='navTitle'>Applications</div>
+          <LiSection onClick={handleMenuClick}>
+            <div className='navTitle' id="applicationsTitle" style={clickedTitle === 'applicationsTitle' ? clickedStyle : null}>Applications</div>
           </LiSection>
-          <LiSection>
-            <NavLink to="/"><div className='navTitle'>Other Applications</div></NavLink>
+          <LiSection onClick={handleMenuClick}>
+            <div className='navTitle' id="otherApplicationsTitle" style={clickedTitle === 'otherApplicationsTitle' ? clickedStyle : null}>Other Applications</div>
           </LiSection>
-          <LiSection>
-            <NavLink to="/news"><div className='navTitle' style={path === '/news' ? activeStyle : null}>News</div></NavLink>
+          <LiSection onClick={handleMenuClick}>
+            <NavLink to="/news"><div className='navTitle' id="newsTitle" style={path === '/news' ? activeStyle : null}>News</div></NavLink>
           </LiSection>
         </UlContainer>
       </NavContainer>
     </Nav>
-    <Dropdown>
+    <Dropdown style={clickedTitle === '' ? dropdownInvisibleStyle : null}>
       <DropdownContainer>
           hello
       </DropdownContainer>

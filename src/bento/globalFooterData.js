@@ -1,4 +1,9 @@
 import env from '../utils/env';
+import instagramIcon from '../assets/footer/Instgram_Logo.svg';
+import twitterIcon from '../assets/footer/Twitter_Logo.svg';
+import facebookIcon from '../assets/footer/Facebook_Logo.svg';
+import youtubeIcon from '../assets/footer/Youtube_Logo.svg';
+import linkedInIcon from '../assets/footer/LinkedIn_Logo.svg';
 // footerLogoImage ideal image size 310x80 px
 
 export default {
@@ -14,10 +19,10 @@ export default {
   // Ideal size for icon is 20x20 px
   link_sections: [
     {
-      title: 'More Information',
+      title: 'About',
       items: [
         {
-          text: 'About CCDI Portal',
+          text: 'About CCDI Hub',
           link: '/about',
         },
         {
@@ -25,8 +30,8 @@ export default {
           link: '/ccdi',
         },
         {
-          text: 'Contact CCDI Portal',
-          link: 'nciofficeofdatasharing@mail.nih.gov?Subject=Index%20of%20NCI%20Studies%20feedback',
+          text: 'Contact CCDI Hub',
+          link: 'mailto:nciofficeofdatasharing@mail.nih.gov?Subject=Index%20of%20NCI%20Studies%20feedback',
         },
         {
           text: 'Resources',
@@ -35,16 +40,29 @@ export default {
       ],
     },
     {
-      title: 'NIH Policies',
+      title: 'Resoures',
       items: [
         {
-          text: 'Policies',
-          link: 'https://www.cancer.gov/policies',
+          text: 'Contact Us',
+          link: 'https://www.cancer.gov/contact',
         },
         {
-          text: 'Disclaimer',
-          link: 'https://www.cancer.gov/policies/disclaimer',
+          text: 'Publications',
+          link: 'https://www.cancer.gov/publications',
         },
+        {
+          text: 'Dictionary of Cancer Terms',
+          link: 'https://www.cancer.gov/publications/dictionaries/cancer-terms',
+        },
+        {
+          text: 'Find a Clinical Trial',
+          link: 'https://www.cancer.gov/about-cancer/treatment/clinical-trials/search',
+        },
+      ],
+    },
+    {
+      title: 'Policies',
+      items: [
         {
           text: 'Accessibility',
           link: 'https://www.cancer.gov/policies/accessibility',
@@ -54,11 +72,59 @@ export default {
           link: 'https://www.cancer.gov/policies/foia',
         },
         {
-          text: 'HHS Vulnerability Disclosure',
+          text: 'Privacy & Security',
+          link: 'https://www.cancer.gov/policies/privacy-security',
+        },
+        {
+          text: 'Disclaimer',
+          link: 'https://www.cancer.gov/policies/disclaimer',
+        },
+        {
+          text: 'Vulnerability Disclosure',
           link: 'https://www.hhs.gov/vulnerability-disclosure-policy/index.html',
         },
       ],
     },
+  ],
+  followUs_links: [
+    {
+      img: instagramIcon,
+      link: 'https://www.instagram.com/nationalcancerinstitute/',
+    },
+    {
+      img: twitterIcon,
+      link: 'https://twitter.com/thenci',
+    },
+    {
+      img: facebookIcon,
+      link: 'https://www.facebook.com/cancer.gov',
+    },
+    {
+      img: youtubeIcon,
+      link: 'https://www.youtube.com/NCIgov',
+    },
+    {
+      img: linkedInIcon,
+      link: 'https://www.linkedin.com/company/nationalcancerinstitute/',
+    }
+  ],
+  contact_links: [
+    {
+      text: 'Live Chat',
+      link: 'https://livehelp.cancer.gov/app/chat/chat_launch',
+    },
+    {
+      text: '1-800-4-CANCER',
+      link: 'tel:1-800-4-CANCER',
+    },
+    {
+      text: 'NCIinfo@nih.gov',
+      link: 'mailto:NCIinfo@mail.nih.gov',
+    },
+    {
+      text: 'Site Feedback',
+      link: 'https://nci.az1.qualtrics.com/jfe/form/SV_aeLLobt6ZeGVn5I',
+    }
   ],
   global_footer_links: [
     {

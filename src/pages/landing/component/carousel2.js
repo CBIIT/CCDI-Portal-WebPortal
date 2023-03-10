@@ -1,0 +1,440 @@
+import React, { useEffect, useState } from 'react';
+import usePageVisibility from "./PageVisibility";
+import styled from 'styled-components';
+import wheel1 from '../../../assets/landing/card_ccdc.png';
+import wheel2 from '../../../assets/landing/card_civic.png';
+import wheel3 from '../../../assets/landing/card_mci.png';
+import wheel4 from '../../../assets/landing/card_mtp.png';
+import wheel5 from '../../../assets/landing/card_nccr.png';
+import wheel6 from '../../../assets/landing/card_cgc.png';
+import wheel7 from '../../../assets/landing/card_dbgap.png';
+import exportIcon from '../../../assets/landing/Export_Icon.svg';
+
+let cardIdx = 0;
+let timer = null;
+
+const HeroListContainer = styled.div`
+    position: relative;
+
+    .upButton {
+        position: absolute;
+        background: #FFFFFF;
+        top: -20px;
+        right: 348px;
+        height: 63px;
+        width: 63px;
+        border-radius: 50%;
+        border: 1.5px solid #C2DEDB;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+        z-index: 9;
+    }
+
+    .upButton:hover {
+        cursor: pointer;
+        border: 1.5px solid #2ADEC7;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.45);
+        .arrowUp {
+            border-bottom: 17px solid #A0A8A9;
+        }
+    }
+
+    .downButton {
+        position: absolute;
+        background: #FFFFFF;
+        top: 618px;
+        right: 348px;
+        height: 63px;
+        width: 63px;
+        border-radius: 50%;
+        border: 1px solid #C2DEDB;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+        z-index: 9;
+    }
+
+    .downButton:hover {
+        cursor: pointer;
+        border: 1.5px solid #2ADEC7;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.45);
+        .arrowDown {
+            border-top: 17px solid #A0A8A9;
+        }
+    }
+
+    .arrowUp {
+        margin: 20px 0 0 18px;
+        width: 0; 
+        height: 0; 
+        border-left: 13px solid transparent;
+        border-right: 13px solid transparent;
+        border-bottom: 17px solid #D6DDDD;
+      }
+
+    .arrowDown {
+        margin: 23px 0 0 18px;
+        width: 0; 
+        height: 0; 
+        border-left: 13px solid transparent;
+        border-right: 13px solid transparent;
+        border-top: 17px solid #D6DDDD;
+      }
+
+    .triangleLarge {
+        position: absolute;
+        top: 258px;
+        left: 0;
+        width: 0; 
+        height: 0; 
+        border-top: 67px solid transparent;
+        border-bottom: 67px solid transparent;
+        border-left: 130px solid #3fc0ac;
+    }
+`;
+const HeroList = styled.div`
+    position: relative;
+    margin-top: 57px;
+    height: 660px;
+    margin-left: 6%;
+    border: 2.5px solid #00A8B3;
+    border-right: 0;
+    box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.35);
+    border-radius: 40px 0 0 40px;
+    overflow: hidden;
+
+    .carouselList {
+        width: 100%;
+        height: 131px;
+        -ms-overflow-style: none;
+        scrollbar-width: none; 
+    }
+
+    .carouselList::-webkit-scrollbar {
+        display: none;
+    }
+
+    .carouselList > * {
+        width: 100%;
+        flex-shrink: 0;
+        flex-grow: 1;
+      }
+
+    .listItem  {
+        display: flex;
+        position: relative;
+        width: 100%;
+        height: 131px;
+        margin: 0 0 0 24px;
+        padding: 6px 0 0 6px;
+        transition: all 500ms ease-in-out;
+    }
+
+    .activeCard {
+        border-radius: 20px 0 0 20px;
+        transition: transform .5s, opacity .5s;
+    }
+
+    .listItemImg {
+        width: 264px;
+        height: 121px;
+        border-radius: 12px;
+    }
+
+    .listItemImg img{
+        width: 264px;
+        height: 121px;
+        border-radius: 12px;
+    }
+
+    .listItemContent {
+        color: #817979;
+        font-family: Inter;
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 27px;
+        width: 394px;
+        margin-left: 15px
+        padding-left:  0 16px 0 16px;
+        border-bottom: 1px solid #898989;
+        transition: color 1s;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        flex: 0 0 394px;
+    }
+
+    .activeCard .listItemContent {
+        color: #009EAA;
+        font-family: Inter;
+        font-weight: 600;
+        font-size: 28px;
+        line-height: 28px;
+        width: 350px;
+        border-bottom: none;
+        flex: 0 0 350px;
+    }
+
+    .exportIcon {
+        margin-left: 15px;
+    }
+
+    .exportContainer {
+        padding: 38px 0 0 10px;
+        visibility: visible;
+        opacity: 1;
+        transition: visibility 0.5s, opacity 0.5s linear;
+    }
+    .exportContainerInactive {
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0.5s, opacity 0.5s linear;
+    }
+    .exportText {
+        color: #01828C;
+        font-family: poppins;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 14px;
+        letter-spacing: -0.02em;
+    }
+
+    .blurTop {
+        position: absolute;
+        background: linear-gradient(to bottom, #FFFFFF, 70%, transparent);
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 120px;
+        z-index: 6;
+        border-radius: 40px 0 0 0;
+    }
+
+    .blurBottom {
+        position: absolute;
+        background: linear-gradient(to top, #FFFFFF, 70%, transparent);
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 120px;
+        z-index: 6;
+        border-radius: 0 0 0 40px;
+    }
+
+    .activeFrame {
+        position: absolute;
+        top: 254px
+        left: 8px;
+        width: 787px;
+        height: 145px;
+        border: 3px solid #FFFFFF;
+        border-radius: 20px 0 0 20px;
+        box-shadow: 0px 4px 24px rgba(0, 0, 0);
+        z-index: 60;
+    }
+
+    .smallTriangle {
+        position: absolute;
+        top: 293px;
+        left: -3px;
+        // width: 40px;
+        // height: 65px;
+        background: #3fc0ac;
+        z-index: 6;
+        display: block;
+        height: 65px;
+        width: 65px;
+        clip-path: polygon(20% 20%, 80% 80%, 0% 100%);
+        transform: rotate(225deg);
+        // border-radius: 0 0 0 25%;
+    }
+
+    .smTriangle {
+        position: absolute;
+        top: 179px;
+        left: 0;
+        width: 40px;
+        height: 65px;
+        z-index: 6;
+    }
+
+    .triangle {
+        fill: #3fc0ac;
+        stroke: #3fc0ac;
+        stroke-width: 20;
+        transform: rotate(90deg);
+    }
+
+    .whiteTriangle {
+        position: absolute;
+        top: 176.5px;
+        left: 0;
+        width: 40px;
+        height: 65px;
+        z-index: 5;
+    }
+
+    .wtriangle {
+        fill: #FFFFFF;
+        stroke: #FFFFFF;
+        stroke-width: 20;
+        transform: rotate(90deg);
+    }
+
+    .scene {
+        position: relative;
+        width: 798px;
+        height: 145px;
+        left: 5px;
+        margin: 255px auto 255px auto;
+        perspective: 10000px;
+      }
+      
+      .carousel {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        transform: translateZ(-190px);
+        transform-style: preserve-3d;
+        transition: transform 1s;
+      }
+      
+      .carousel__cell {
+        position: absolute;
+        display: flex;
+        width: 765px;
+        height: 149px;
+        left: 15px;
+        padding: 14px 0;
+        transition: transform 1s, opacity 1s;
+        background: #fff;
+      }
+`;
+
+const Carousel = () => {
+    const itemList = [{img: wheel1, content: 'Childhood Cancer Data Catalog'},
+                      {img: wheel2, content: 'Clinical Interpretation of Variants in Cancer'},
+                      {img: wheel3, content: 'Molecular Characterization Initiative for Childhood Cancer'},
+                      {img: wheel4, content: 'Molecular Targets Platform'},
+                      {img: wheel5, content: 'National Childhood Cancer Registry Explorer'},
+                      {img: wheel6, content: 'Cancer Genomics Cloud'},
+                      {img: wheel7, content: 'Database of Genotypes and Phenotypes'}];
+
+    const repeatList = [].concat(...new Array(Math.floor(15/itemList.length )).fill(itemList));
+
+    const cardLen = repeatList.length;
+    const rotateDeg = 360 / cardLen ;
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [newTransform, setNewTransform] = useState({ transform: "translateZ(-325px) rotateX(0deg)" });
+    const isVisible = usePageVisibility();
+
+    const startTimer = () => {
+        timer = setInterval(() => {
+            const newTs =`translateZ(-325px) rotateX(${(cardIdx - 1) * rotateDeg}deg)`;
+            cardIdx -= 1;
+            setCurrentIndex(cardIdx);
+            setNewTransform({transform: newTs});
+        }, 3000000);
+    };
+
+    const resetTimer = () => {
+        clearInterval(timer);
+        startTimer();
+    };
+
+    const nextSlide = () => {
+        resetTimer();
+        const newTs =`translateZ(-325px) rotateX(${(cardIdx - 1) * rotateDeg}deg)`;
+        cardIdx -= 1;
+        setCurrentIndex(cardIdx);
+        setNewTransform({transform: newTs});
+    };
+
+    const prevSlide = () => {
+        resetTimer();
+        const newTs =`translateZ(-325px) rotateX(${(cardIdx + 1) * rotateDeg}deg)`;
+        cardIdx += 1;
+        setCurrentIndex(cardIdx);
+        setNewTransform({transform: newTs});
+    };
+
+    useEffect(() => {
+        if (!isVisible) {
+            clearInterval(timer);
+        }
+        if (itemList.length !== 0 && isVisible) {
+            cardIdx = Math.floor(Math.random() * cardLen);
+            const newinitialTs =`translateZ(-325px) rotateX(${cardIdx * rotateDeg}deg)`;
+            console.log(cardIdx);
+            setCurrentIndex(cardIdx);
+            setNewTransform({transform: newinitialTs});
+            startTimer();
+        }
+        return () => clearInterval(timer);
+    }, [isVisible]);
+
+    return (
+        <HeroListContainer>
+            <div className='upButton' onClick={prevSlide}>
+                <div class="arrowUp"></div>
+            </div>
+            <div className='downButton' onClick={nextSlide}>
+                <div class="arrowDown"></div>
+            </div>
+            <div className='triangleLarge' />
+            <HeroList>
+                <div className='blurTop' />
+                <div className='blurBottom' />
+                <div className='activeFrame' onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}} />
+                <div className='whiteTriangle'>
+                    <svg  width="250" height="250" viewBox="-75 -75 300 300">
+                        <polygon class="wtriangle" stroke-linejoin="round" points="100,0 0,200 200,200"/>
+                    </svg>
+                </div>
+                <div className='smTriangle'>
+                    <svg  width="250" height="250" viewBox="-72 -72 300 300">
+                        <polygon class="triangle" stroke-linejoin="round" points="100,0 0,200 200,200"/>
+                    </svg>
+                </div>
+                <div class="scene">
+                    <div class="carousel" style={newTransform}>
+                        {repeatList.map((item, idx) => {
+                            const key = `carousel_${idx}`;
+                            const style = { transform: "rotateX( "+ idx * rotateDeg + "deg) translateZ(325px)" };
+                            console.log(currentIndex);
+                            console.log("positive index:" + Math.abs( currentIndex % 14 ));
+                            console.log("html index:" + idx);
+                            let trueIdx = 0;
+                            if (currentIndex % 14 == 0) {
+                                trueIdx = 0;
+                            } else {
+                                if (currentIndex > 14) {
+                                    trueIdx = 14 - currentIndex % 14;
+                                }
+                                else if(currentIndex < 14 && currentIndex > 0) {
+                                    trueIdx = 14 - currentIndex;
+                                } else {
+                                    trueIdx = Math.abs(currentIndex % 14);
+                                }
+                            }
+                            const isActiveCard = trueIdx === idx;
+                            const noBorderLine = Math.abs( currentIndex % 14 ) - 1 === idx || Math.abs( currentIndex % 14 ) + 1 === idx;
+                            return (
+                                <div key={key} className={isActiveCard ? "carousel__cell activeCard" : "carousel__cell"} style={style} onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}}>
+                                    <div className='listItemImg'><img src={item.img}/></div>
+                                    <div className='listItemContent'>{item.content}</div>
+                                    <div className={isActiveCard ? "exportContainer" : "exportContainerInactive"}>
+                                        <img className='exportIcon' src={exportIcon} />
+                                        <div className='exportText'>Go to site</div>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+
+            </HeroList>
+
+
+        </HeroListContainer>
+    );
+};
+
+export default Carousel;

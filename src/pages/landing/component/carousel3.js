@@ -171,6 +171,90 @@ const HeroList = styled.div`
         border-bottom: none;
     }
 
+    .activeCardPrev {
+        transform: perspective(1000px) rotateX(0.5deg) scale(1);
+    }
+
+    .activeCardPrev2 {
+        transform: perspective(1000px) rotateX(3deg) scale(0.99);
+    }
+
+    .activeCardPrev3 {
+        transform: perspective(1000px) rotateX(4.5deg) scale(0.98);
+    }
+
+
+    .activeCardNext {
+        transform: perspective(1000px) rotateX(-0.5deg) scale(1);
+    }
+
+    .activeCardNext2 {
+        transform: perspective(1000px) rotateX(-3deg) scale(0.99);
+    }
+
+    .activeCardNext3 {
+        transform: perspective(1000px) rotateX(-4.5deg) scale(0.98);
+    }
+
+    // .activeCardNext {
+    //     transform: perspective(500px) rotateX(-2.5deg) scale(0.98);
+    // }
+
+    // .activeCardNext2 {
+    //     transform: perspective(500px) rotateX(-5deg) scale(0.96);
+    // }
+
+    // .activeCardNext3 {
+    //     transform: perspective(500px) rotateX(-7.5deg) scale(0.94);
+    // }
+
+    // .activeCard + .listItem {
+    //     transform: perspective(500px) rotateX(-2.5deg) scale(0.98);
+    // }
+
+    // .activeCard + .listItem + .listItem {
+    //     transform: perspective(500px) rotateX(-5deg) scale(0.96);
+    // }
+    // .activeCard + .listItem + .listItem + .listItem {
+    //     transform: perspective(500px) rotateX(-7.5deg) scale(0.94);
+    // }
+
+    .activeCardHidePrev {
+        transform: perspective(1000px) rotateX(-0.5deg) scale(1);
+    }
+
+    .activeCardHidePrev2 {
+        transform: perspective(1000px) rotateX(-3deg) scale(0.99);
+    }
+
+    .activeCardHidePrev3 {
+        transform: perspective(1000px) rotateX(-4.5deg) scale(0.98);
+    }
+
+    // .activeCardHidePrev {
+    //     transform: perspective(500px) rotateX(-2.5deg) scale(0.98);
+    // }
+
+    // .activeCardHidePrev2 {
+    //     transform: perspective(500px) rotateX(-5deg) scale(0.96);
+    // }
+
+    // .activeCardHidePrev3 {
+    //     transform: perspective(500px) rotateX(-5deg) scale(0.96);
+    // }
+
+    .activeCardHideNext {
+        transform: perspective(1000px) rotateX(-1.5deg) scale(1);
+    }
+
+    .activeCardHideNext2 {
+        transform: perspective(1000px) rotateX(-3deg) scale(0.99);
+    }
+
+    .activeCardHideNext3 {
+        transform: perspective(1000px) rotateX(-4.5deg) scale(0.98);
+    }
+
     .exportIcon {
         margin-left: 15px;
     }
@@ -305,7 +389,7 @@ const Carousel = () => {
             cardIdx += 1;
             setCurrentIndex(cardIdx);
             setTransform({transform: ts, transition: ".5s ease-out"});
-        }, 3000);
+        }, 300000);
     };
 
     const resetTimer = () => {
@@ -411,9 +495,8 @@ const Carousel = () => {
             </div>
             <div className='triangleLarge' />
             <HeroList onTouchStart={handleTouchStart} onTouchMove={handleTouchMove}>
-                <div className='blurTop' />
-                <div className='blurBottom' />
-                <div className="overlay" />
+                {/* <div className='blurTop' />
+                <div className='blurBottom' /> */}
                 <div className='activeFrame' onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}} />
                 {/* <div className='smallTriangle' /> */}
                 <div className='whiteTriangle'>
@@ -431,9 +514,10 @@ const Carousel = () => {
                     {itemList.slice(itemList.length - showCount).map((item, idx) => {
                         const key = `carousel_${idx}_last_clone`;
                         const isActiveCard = ( currentIndex + 2 ) === idx;
+                        // const isActiveCardParent = ( currentIndex + 2 ) === idx + 1;
                         const noBorderLine = ( currentIndex + 1 ) === idx;
                         return (
-                            <div key={key} className={isActiveCard ? "listItem activeCard" : "listItem"} onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}}>
+                            <div key={key} data="last_clone" className={isActiveCard ? "listItem activeCard" : "listItem"} onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}}>
                                 <div className='listItemImg'><img src={item.img}/></div>
                                 <div className={noBorderLine ? 'listItemContentNoLine' : 'listItemContent'}>{item.content}</div>
                                 <div className={isActiveCard ? "exportContainer" : "exportContainerInactive"}>
@@ -447,8 +531,28 @@ const Carousel = () => {
                         const key = `carousel_${idx}`;
                         const isActiveCard = ( currentIndex + 2 ) === (idx + showCount);
                         const noBorderLine = ( currentIndex + 1 ) === (idx + showCount);
+
+                        const isActiveCardHidePrev = ( currentIndex + 2 ) === (idx + showCount + 6);
+                        const isActiveCardHidePrev2 = ( currentIndex + 2 ) === (idx + showCount + 5);
+                        const isActiveCardHidePrev3 = ( currentIndex + 2 ) === (idx + showCount + 4);
+
+                        const isActiveCardPrev = ( currentIndex + 2 ) === (idx + showCount + 1);
+                        const isActiveCardPrev2 = ( currentIndex + 2 ) === (idx + showCount + 2);
+                        const isActiveCardPrev3 = ( currentIndex + 2 ) === (idx + showCount + 3);
+
+                        const isActiveCardNext = ( currentIndex + 2 ) === (idx + showCount - 1);
+                        const isActiveCardNext2 = ( currentIndex + 2 ) === (idx + showCount - 2);
+                        const isActiveCardNext3 = ( currentIndex + 2 ) === (idx + showCount - 3);
+
+                        const isActiveCardHideNext = ( currentIndex + 2 ) === (idx + showCount - 6);
+                        const isActiveCardHideNext2 = ( currentIndex + 2 ) === (idx + showCount - 5);
+                        const isActiveCardHideNext3 = ( currentIndex + 2 ) === (idx + showCount - 4);
                         return (
-                            <div key={key} className={isActiveCard ? "listItem activeCard" : "listItem"} onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}}>
+                            <div key={key} 
+                                data="item_clone"
+                                className={`${isActiveCard ? "listItem activeCard" : "listItem"}${isActiveCardPrev ? " activeCardPrev":""}${isActiveCardPrev2 ? " activeCardPrev2":""}${isActiveCardPrev3 ? " activeCardPrev3":""}${isActiveCardHidePrev ? " activeCardHidePrev":""}${isActiveCardHidePrev2 ? " activeCardHidePrev2":""}${isActiveCardHidePrev3 ? " activeCardHidePrev3":""}${isActiveCardNext ? " activeCardNext":""}${isActiveCardNext2 ? " activeCardNext2":""}${isActiveCardNext3 ? " activeCardNext3":""}`}
+                                onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}}
+                            >
                                 <div className='listItemImg'><img src={item.img}/></div>
                                 <div className={noBorderLine ? 'listItemContentNoLine' : 'listItemContent'}>{item.content}</div>
                                 <div className={isActiveCard ? "exportContainer" : "exportContainerInactive"}>
@@ -462,8 +566,21 @@ const Carousel = () => {
                         const key = `carousel_${idx}_first_clone`;
                         const isActiveCard = ( currentIndex + 2 ) === (idx + itemList.length + showCount);
                         const noBorderLine = ( currentIndex + 1 ) === (idx + itemList.length + showCount);
+
+                        const isActiveCardPrev = ( currentIndex + 2 ) === (idx + itemList.length + showCount + 1);
+                        const isActiveCardPrev2 = ( currentIndex + 2 ) === (idx + itemList.length + showCount + 2);
+                        const isActiveCardPrev3 = ( currentIndex + 2 ) === (idx + itemList.length + showCount + 3);
+
+                        const isActiveCardNext = ( currentIndex + 2 ) === (idx + itemList.length + showCount - 1);
+                        const isActiveCardNext2 = ( currentIndex + 2 ) === (idx + itemList.length + showCount - 2);
+                        const isActiveCardNext3 = ( currentIndex + 2 ) === (idx + itemList.length + showCount - 3);
+
+                        const isActiveCardHideNext = ( currentIndex + 2 ) === (idx + itemList.length + showCount - 6);
+                        const isActiveCardHideNext2 = ( currentIndex + 2 ) === (idx + itemList.length + showCount - 5);
+                        const isActiveCardHideNext3 = ( currentIndex + 2 ) === (idx + itemList.length + showCount - 4);
+
                         return (
-                            <div key={key} className={isActiveCard ? "listItem activeCard" : "listItem"} onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}}>
+                            <div key={key} data="first_clone" className={`${isActiveCard ? "listItem activeCard" : "listItem"}${isActiveCardPrev ? " activeCardPrev":""}${isActiveCardPrev2 ? " activeCardPrev2":""}${isActiveCardPrev3 ? " activeCardPrev3":""}${isActiveCardNext ? " activeCardNext":""}${isActiveCardNext2 ? " activeCardNext2":""}${isActiveCardNext3 ? " activeCardNext3":""}`} onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}}>
                                 <div className='listItemImg'><img src={item.img}/></div>
                                 <div className={noBorderLine ? 'listItemContentNoLine' : 'listItemContent'}>{item.content}</div>
                                 <div className={isActiveCard ? "exportContainer" : "exportContainerInactive"}>

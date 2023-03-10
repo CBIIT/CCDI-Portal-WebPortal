@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useQuery } from '@apollo/client';
 import { GET_LANDING_PAGE_DATA_QUERY,introData, titleData, statsData, latestUpdatesData, resourcesAppliationsListData, resourcesCloudListData, aboutContainerData } from '../../bento/landingPageData';
 import resourcesItemLogo from '../../assets/landing/Resources_Logo.svg';
-import Carousel from '../landing/component/carousel1'
+import Carousel from '../landing/component/carousel2'
 
 const LandingViewContainer = styled.div`
     width: 1440px;
@@ -376,7 +376,6 @@ const LandingView = () => {
   const [activeAbooutItem, setActiveAboutItem] = useState('MCI');
 
   useEffect(() => {
-    console.log(data);
   },[data]);
 
   return (

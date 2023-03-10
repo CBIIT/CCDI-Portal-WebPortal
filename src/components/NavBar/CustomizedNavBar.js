@@ -57,6 +57,7 @@ const LiSection = styled.li`
     margin: 0 45px 0 5px;
     padding: 0 15px;
     border-bottom: 4px solid transparent;
+    user-select:none;
   }
 
   .clicked {
@@ -91,6 +92,10 @@ const LiSection = styled.li`
     border-right: 1px solid #FFFFFF;
     margin: 0 0 0 8px
   }
+
+  .directLink::after {
+    display: none;
+  }
 `;
 
 const Dropdown = styled.div`
@@ -116,15 +121,25 @@ const DropdownContainer = styled.div`
       background: #1A5255;
       display: grid;
       grid-column-gap: 50px;
-      grid-template-columns: auto auto auto;
-      padding: 10px;
+      grid-template-columns: 33% 33% 33%;
+      padding: 0 140px;
     }
 
     .dropdownItem {
-      border: 1px solid rgba(0, 0, 0, 0.8);
-      padding: 20px;
+      // border: 1px solid rgba(0, 0, 0, 0.8);
+      padding: 32px 20px;
       font-size: 30px;
-      text-align: center;
+      text-align: left;
+      font-family: poppins;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 110%;
+      color: #FFFFFF;
+      text-decoration: none;
+  }
+
+  .dropdownItem:hover {
+    text-decoration: underline;
   }
 `;
 
@@ -163,6 +178,17 @@ const NavBar = () => {
   const [clickedTitle, setClickedTitle] = useState("");
   const dropdownSelection = useRef(null);
   useOutsideAlerter(dropdownSelection);
+  const navbarLists = {
+    Applications: [
+      {id:"ccdc", name:'Childhood Cancer Data Catalog'},
+      {id:"civic", name:'Clinical Interpretation of Variants in Cancer'},
+      {id:'mci', name: 'Molecular Characterization Initiative for Childhood Cancers'},
+      {id:'mtp', name: 'Molecular Targets Platform'},
+      {id:'nccr', name:'National Childhood Cancer Registry Explorer'}],
+    "Other Applications": [
+      {id:"cgc", name:'Cancer Genomics Cloud'}, 
+      {id:'dbgap', name:'Database of Genotypes and Phenotypes'}],
+  };
 
   const handleMenuClick = (e) => {
     if (e.target.innerText === clickedTitle || e.target.innerText === "About" || e.target.innerText === "News") {
@@ -182,7 +208,7 @@ const NavBar = () => {
       <NavContainer>
         <UlContainer>
           <LiSection onClick={handleMenuClick}>
-            <NavLink to="/about"><div className='navTitle' style={path === '/about' ? activeStyle : null}>About</div></NavLink>
+            <NavLink to="/about"><div className='navTitle directLink' style={path === '/about' ? activeStyle : null}>About</div></NavLink>
           </LiSection>
           <LiSection onClick={handleMenuClick}>
             <div className={clickedTitle === 'Applications' ? 'navTitle clicked' : 'navTitle'}>Applications</div>
@@ -191,19 +217,23 @@ const NavBar = () => {
             <div className={clickedTitle === 'Other Applications' ? 'navTitle clicked' : 'navTitle'}>Other Applications</div>
           </LiSection>
           <LiSection onClick={handleMenuClick}>
-            <NavLink to="/news"><div className='navTitle' style={path === '/news' ? activeStyle : null}>News</div></NavLink>
+            <NavLink to="/news"><div className='navTitle directLink' style={path === '/news' ? activeStyle : null}>News</div></NavLink>
           </LiSection>
         </UlContainer>
       </NavContainer>
     </Nav>
     <Dropdown ref={dropdownSelection} style={clickedTitle === '' ? dropdownInvisibleStyle : null}>
       <DropdownContainer>
-          <div className='dropdownList'>
-            <div class="dropdownItem">1</div>
-            <div class="dropdownItem">2</div>
-            <div class="dropdownItem">3</div>
-            <div class="dropdownItem">4</div>
-            <div class="dropdownItem">5</div>
+          <div className="dropdownList">
+            {
+              clickedTitle !== "" ? navbarLists[clickedTitle].map((dropItem, idx) => {
+                const dropkey = `drop_${idx}`;
+                return (
+                  <a href={'/#' + dropItem.id} className="dropdownItem" key={dropkey}>{dropItem.name}</a>
+                )
+              })
+              :null
+            }
           </div>
       </DropdownContainer>
     </Dropdown>

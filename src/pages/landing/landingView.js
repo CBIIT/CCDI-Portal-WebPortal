@@ -463,7 +463,7 @@ const LandingView = () => {
               resourcesAppliationsListData.map((appItem, appidx) => {
                 const appkey = `app_${appidx}`;
                 return (
-                  <div className='resourceListItem' key={appkey}>
+                  <div id={appItem.id} className='resourceListItem' key={appkey}>
                     <div className='resourceListItemLogo' style={{background: '#0095A2'}}><img src={resourcesItemLogo} alt='resourcesItemLogo' /></div>
                     <div className='resourceListItemText'>
                       <div className='resourceListItemTitle'>{appItem.title}<span className='resourceListItemTitleSmall'>{appItem.subtitle}</span></div>
@@ -489,7 +489,7 @@ const LandingView = () => {
               resourcesCloudListData.map((cloudItem, cloudidx) => {
                 const cloudkey = `cloud_${cloudidx}`;
                 return (
-                  <div className='resourceListItem' key={cloudkey}>
+                  <div id={cloudItem.id} className='resourceListItem' key={cloudkey}>
                     <div className='resourceListItemLogo' style={{background: '#455299'}}><img src={resourcesItemLogo} alt='resourcesItemLogo' /></div>
                     <div className='resourceListItemText'>
                       <div className='resourceListItemTitle'>{cloudItem.title}<span className='resourceListItemTitleSmall'>{cloudItem.subtitle}</span></div>

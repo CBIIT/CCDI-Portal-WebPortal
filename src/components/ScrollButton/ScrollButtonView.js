@@ -8,7 +8,7 @@ const Button = styled.div`
    bottom: 0;
    height: 80px;
    width: 80px;
-   z-index: 1;
+   z-index: 10;
    cursor: pointer;
 `;
 

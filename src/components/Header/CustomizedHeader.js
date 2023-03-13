@@ -25,6 +25,7 @@ const HeaderContainer = styled.div`
     .searchBarContainer {
       padding-right: 60px;
       margin-left: auto;
+      display: flex;
     }
 
     .searchBar {
@@ -32,38 +33,53 @@ const HeaderContainer = styled.div`
       margin-top: 30px;
       margin-left: auto;
       width: 300px;
-      height: 36px;
-      border: 1px solid #004A8B;
-      border-radius: 18px;
+      height: 46px;
+      border: 1px solid #71767A;
     }
 
-    .searchIcon {
+    .clearIcon {
       margin-left: auto;
       margin-right: 13px;
-      height: 20px;
-      width: 20px;
-      padding-top: 8px;
+      padding-top: 13px;
     }
 
-    .searchIconImg {
-      height: 18px;
-      width: 18px;
+    .clearIconImg {
+      height: 10px;
+      width: 10px;
     }
 
-    .searchIconImg:hover {
+    .clearIconImg:hover {
+      cursor: pointer;
+    }
+
+    .searchButton {
+      height: 46px;
+      font-family: Open Sans;
+      font-weight: 700;
+      font-size: 22px;
+      line-height: 46px;
+      text-align: center;
+      color: #FFFFFF;
+      background: #007BBD;
+      margin-top: 30px;
+      padding: 0 17px;
+      border-radius: 0px 5px 5px 0px;
+    }
+
+    .searchButton:hover {
       cursor: pointer;
     }
 `;
 
 const SearchInput = styled.input`
-  margin-left: 20px;
+  margin-left: 7px;
   border: none;
-  font-family: Inter;
+  font-family: Open Sans;
   font-weight: 400;
-  font-size: 10px;
-  line-height: 36px;
-  color: #004A8B;
-  width: 225px;
+  font-size: 25px;
+  line-height: 42px;
+  color: #1b1b1b;
+  width: 265px;
   background: transparent;
 
   ::placeholder {
@@ -97,6 +113,10 @@ const Header = () => {
     setLocalText("");
   };
 
+  const handleClear = () => {
+    setLocalText("");
+  };
+
   return (
     <>
       <HeaderBanner role="banner">
@@ -109,11 +129,12 @@ const Header = () => {
             && (
               <div className='searchBarContainer'>
                 <div className='searchBar'>
-                  <SearchInput type="text" value={localText} placeholder="SEARCH" onChange={handleTextInputChange} onKeyPress={handleKeyPress} />
-                  <div className='searchIcon' onClick={handleSearch}>
-                    <img className="searchIconImg" src={headerData.globalHeaderSearchIcon} alt={headerData.globalHeaderSearchIconAltText}/>
+                  <SearchInput type="text" value={localText} placeholder="" onChange={handleTextInputChange} onKeyPress={handleKeyPress} />
+                  <div className='clearIcon' onClick={handleClear}>
+                    {localText ? <img className="clearIconImg" src='https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/globalSearchDelete.svg' alt="clearButton"/> : null}
                   </div>
                 </div>
+                <div className='searchButton'  onClick={handleSearch}>Search</div>
               </div>
             )
           }

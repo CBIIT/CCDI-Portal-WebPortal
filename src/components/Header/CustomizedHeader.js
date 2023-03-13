@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import {useLocation, useHistory} from 'react-router-dom';
 import headerData from '../../bento/globalHeaderData';
@@ -68,6 +68,7 @@ const HeaderContainer = styled.div`
 
     .searchButton:hover {
       cursor: pointer;
+      background: #004971;
     }
 `;
 
@@ -115,7 +116,17 @@ const Header = () => {
 
   const handleClear = () => {
     setLocalText("");
+    setInputFocus();
   };
+
+  const useFocus = () => {
+    const htmlElRef = useRef(null)
+    const setFocus = () => {htmlElRef.current &&  htmlElRef.current.focus()}
+
+    return [ htmlElRef, setFocus ] 
+  };
+
+  const [inputRef, setInputFocus] = useFocus();
 
   return (
     <>
@@ -129,7 +140,7 @@ const Header = () => {
             && (
               <div className='searchBarContainer'>
                 <div className='searchBar'>
-                  <SearchInput type="text" value={localText} placeholder="" onChange={handleTextInputChange} onKeyPress={handleKeyPress} />
+                  <SearchInput ref={inputRef} type="text" value={localText} placeholder="" onChange={handleTextInputChange} onKeyPress={handleKeyPress} />
                   <div className='clearIcon' onClick={handleClear}>
                     {localText ? <img className="clearIconImg" src='https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/globalSearchDelete.svg' alt="clearButton"/> : null}
                   </div>

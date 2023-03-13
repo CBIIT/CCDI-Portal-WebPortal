@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef} from 'react';
 import styled from 'styled-components';
 import {
   useLocation,
@@ -105,6 +105,19 @@ function searchComponent({
     setInputValue(text);
   };
 
+  const handleClear = () => {
+    setInputValue("");
+    setInputFocus();
+  };
+
+  const useFocus = () => {
+    const htmlElRef = useRef(null)
+    const setFocus = () => {htmlElRef.current &&  htmlElRef.current.focus()}
+    return [ htmlElRef, setFocus ] 
+  };
+
+  const [inputRef, setInputFocus] = useFocus();
+
   async function handleKeyPress(event) {
     if (event.key === "Enter") {
     const searchResp = await getAuthorizedResultQuery(inputValue);
@@ -185,11 +198,11 @@ function searchComponent({
           />
         </div> */}
         <SearchBar onMouseOver={() => setDeleteIconShow('block')} onMouseOut={() => setDeleteIconShow('none')}>
-          <SearchInput type="text" value={inputValue} placeholder="SEARCH" onChange={handleTextInputChange} onKeyPress={handleKeyPress} />
+          <SearchInput ref={inputRef} type="text" value={inputValue} placeholder="SEARCH" onChange={handleTextInputChange} onKeyPress={handleKeyPress} />
           <div className='searchIcon' onClick={() => onChange(inputValue)}>
               <img className="searchIconImg" src='https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/globalSearchSearch.svg' alt='search icon' />
           </div>
-          <div className='deleteIcon' onClick={() => setInputValue('')} >
+          <div className='deleteIcon' onClick={handleClear} >
               <img className="deleteIconImg" style={{display:deleteIconShow}} src='https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/globalSearchDelete.svg' alt='clear icon' />
           </div>
         </SearchBar>

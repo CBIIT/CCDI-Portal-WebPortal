@@ -9,7 +9,8 @@ import About from '../../pages/about/aboutView';
 import News from '../../pages/news/newsView';
 import Ccdi from '../../pages/ccdi/ccdiView';
 import Error from '../../pages/error/Error';
-import Search from '../../pages/search/searchView'
+import Search from '../../pages/search/searchView';
+import ScrollButton from '../ScrollButton/ScrollButtonView';
 
 const Layout = () => {
     return (
@@ -28,6 +29,7 @@ const Layout = () => {
           <Route component={Error} />
         </Switch>
         <Footer />
+        <ScrollButton />
       </Router>
     </>
     )

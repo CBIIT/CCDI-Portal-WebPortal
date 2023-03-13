@@ -31,7 +31,7 @@ const HeaderContainer = styled.div`
 
     .searchBar {
       display: flex;
-      margin-top: 30px;
+      margin-top: 20px;
       margin-left: auto;
       width: 300px;
       height: 46px;
@@ -62,7 +62,7 @@ const HeaderContainer = styled.div`
       text-align: center;
       color: #FFFFFF;
       background: #007BBD;
-      margin-top: 30px;
+      margin-top: 20px;
       padding: 0 17px;
       border-radius: 0px 5px 5px 0px;
     }

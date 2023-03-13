@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import {useLocation, useHistory} from 'react-router-dom';
 import headerData from '../../bento/globalHeaderData';
+import clearIcon from '../../assets/header/Clear_Icon.svg'
 
 const HeaderBanner = styled.div`
   width: 100%;
@@ -122,7 +123,6 @@ const Header = () => {
   const useFocus = () => {
     const htmlElRef = useRef(null)
     const setFocus = () => {htmlElRef.current &&  htmlElRef.current.focus()}
-
     return [ htmlElRef, setFocus ] 
   };
 
@@ -142,7 +142,7 @@ const Header = () => {
                 <div className='searchBar'>
                   <SearchInput ref={inputRef} type="text" value={localText} placeholder="" onChange={handleTextInputChange} onKeyPress={handleKeyPress} />
                   <div className='clearIcon' onClick={handleClear}>
-                    {localText ? <img className="clearIconImg" src='https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/globalSearchDelete.svg' alt="clearButton"/> : null}
+                    {localText ? <img className="clearIconImg" src={clearIcon} alt="clearButton"/> : null}
                   </div>
                 </div>
                 <div className='searchButton'  onClick={handleSearch}>Search</div>

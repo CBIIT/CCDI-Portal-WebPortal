@@ -459,7 +459,7 @@ const LandingView = () => {
                   <div id={appItem.id} className='resourceListItem' key={appkey}>
                     <div className='resourceListItemLogo' style={{background: '#0095A2'}}><img src={resourcesItemLogo} alt='resourcesItemLogo' /></div>
                     <div className='resourceListItemText'>
-                      <div className='resourceListItemTitle'>{appItem.title}<span className='resourceListItemTitleSmall'>{appItem.subtitle}</span></div>
+                      <div className='resourceListItemTitle'>{appItem.title}<span className='resourceListItemTitleSmall'>{'(' + appItem.subtitle + ')'}</span></div>
                       <div className='resourceListItemContext'>{appItem.content}</div>
                     </div>
                   </div>
@@ -485,7 +485,7 @@ const LandingView = () => {
                   <div id={cloudItem.id} className='resourceListItem' key={cloudkey}>
                     <div className='resourceListItemLogo' style={{background: '#455299'}}><img src={resourcesItemLogo} alt='resourcesItemLogo' /></div>
                     <div className='resourceListItemText'>
-                      <div className='resourceListItemTitle'>{cloudItem.title}<span className='resourceListItemTitleSmall'>{cloudItem.subtitle}</span></div>
+                      <div className='resourceListItemTitle'>{cloudItem.title}<span className='resourceListItemTitleSmall'>{'(' + cloudItem.subtitle + ')'}</span></div>
                       <div className='resourceListItemContext'>{cloudItem.content}</div>
                     </div>
                   </div>

@@ -90,6 +90,8 @@ const LiSection = styled.li`
   .clicked::after {
     border-top: 1px solid #FFFFFF;
     border-right: 1px solid #FFFFFF;
+    border-bottom: 0;
+    border-left: 0;
     margin: 0 0 0 8px
   }
 

@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import usePageVisibility from "./PageVisibility";
 import styled from 'styled-components';
-import wheel1 from '../../../assets/landing/Wheel_1.png';
 import wheel2 from '../../../assets/landing/Wheel_2.png';
 import wheel3 from '../../../assets/landing/Wheel_3.png';
 import wheel4 from '../../../assets/landing/Wheel_4.png';
-import wheel5 from '../../../assets/landing/Wheel_5.png';
 import exportIcon from '../../../assets/landing/Export_Icon.svg';
 
 let cardIdx = 0;
@@ -434,10 +432,10 @@ const Carousel = () => {
                         const noBorderLine = ( currentIndex + 1 ) === idx;
                         return (
                             <div key={key} className={isActiveCard ? "listItem activeCard" : "listItem"} onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}}>
-                                <div className='listItemImg'><img src={item.img}/></div>
+                                <div className='listItemImg'><img src={item.img} alt=""/></div>
                                 <div className={noBorderLine ? 'listItemContentNoLine' : 'listItemContent'}>{item.content}</div>
                                 <div className={isActiveCard ? "exportContainer" : "exportContainerInactive"}>
-                                    <img className='exportIcon' src={exportIcon} />
+                                    <img className='exportIcon' src={exportIcon}  alt=""/>
                                     <div className='exportText'>Go to site</div>
                                 </div>
                             </div>
@@ -449,10 +447,10 @@ const Carousel = () => {
                         const noBorderLine = ( currentIndex + 1 ) === (idx + showCount);
                         return (
                             <div key={key} className={isActiveCard ? "listItem activeCard" : "listItem"} onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}}>
-                                <div className='listItemImg'><img src={item.img}/></div>
+                                <div className='listItemImg'><img src={item.img} alt=""/></div>
                                 <div className={noBorderLine ? 'listItemContentNoLine' : 'listItemContent'}>{item.content}</div>
                                 <div className={isActiveCard ? "exportContainer" : "exportContainerInactive"}>
-                                    <img className='exportIcon' src={exportIcon} />
+                                    <img className='exportIcon' src={exportIcon} alt=""/>
                                     <div className='exportText'>Go to site</div>
                                 </div>
                             </div>
@@ -464,10 +462,10 @@ const Carousel = () => {
                         const noBorderLine = ( currentIndex + 1 ) === (idx + itemList.length + showCount);
                         return (
                             <div key={key} className={isActiveCard ? "listItem activeCard" : "listItem"} onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}}>
-                                <div className='listItemImg'><img src={item.img}/></div>
+                                <div className='listItemImg'><img src={item.img}  alt=""/></div>
                                 <div className={noBorderLine ? 'listItemContentNoLine' : 'listItemContent'}>{item.content}</div>
                                 <div className={isActiveCard ? "exportContainer" : "exportContainerInactive"}>
-                                    <img className='exportIcon' src={exportIcon} />
+                                    <img className='exportIcon' src={exportIcon} alt=""/>
                                     <div className='exportText'>Go to site</div>
                                 </div>
                             </div>

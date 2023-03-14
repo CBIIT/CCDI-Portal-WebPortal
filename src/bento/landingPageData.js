@@ -64,26 +64,31 @@ export const latestUpdatesData = [
 
 export const resourcesAppliationsListData = [
   {
+    id: 'ccdc',
     title: 'Childhood Cancer Data Catalog',
     subtitle: '(CCDC)',
     content:'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
   },
   {
+    id: 'civic',
     title: 'Clinical Interpretation of Variants in Cancer (civicdb.org)',
     subtitle: '(CIViC)',
     content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
   },
   {
+    id: 'mci',
     title: 'Molecular Characterization Initiative for Childhood Cancers - NCI',
     subtitle: '(MCI Data)',
     content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
   },
   {
+    id: 'mtp',
     title: 'Molecular Targets Platform',
     subtitle: '(MTP)',
     content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
   },
   {
+    id: 'nccr',
     title: 'National Childhood Cancer Registry Explorer',
     subtitle: '(NCCR Explorer)',
     content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
@@ -92,19 +97,16 @@ export const resourcesAppliationsListData = [
 
 export const resourcesCloudListData = [
   {
+    id: 'cgc',
     title: 'Seven Bridges Cancer Genomics Cloud',
     subtitle: '(SB–CGC)',
     content: 'Explore and analyze large datasets alongside secure and scalable analytical resources for large-scale computational research.',
   },
   {
+    id: 'dbgap',
     title: 'Database of Genotypes and Phenotypes',
     subtitle: '(dbGap)',
     content: 'Developed to archive and distribute the data and results from studies that have investigated the interaction of genotype and phenotype in Humans.',
-  },
-  {
-    title: 'St. Jude Cloud',
-    subtitle: '(St. Jude)',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
   },
 ];
 

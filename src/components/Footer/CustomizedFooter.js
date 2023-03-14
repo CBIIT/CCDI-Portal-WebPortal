@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import FooterData from '../../bento/globalFooterData';
 
@@ -86,6 +86,11 @@ const FooterEmailSignupContainer = styled.form`
 
   .signUpButton:hover {
     cursor: pointer;
+  }
+
+  .errorEmail {
+    background: #e41154;
+    padding: 10px 5px 5px 5px;
   }
 `;
 
@@ -209,6 +214,28 @@ const GlobalFooterContainer = styled.div`
 `;
 
 const Footer = () => {
+  const [errorClass,setErrorClass] = useState("");
+  const [emailContent, setEmailContent] = useState("");
+  const emailForm = useRef();
+
+  function validateEmail (email) {
+    var reg = /^[A-Za-z0-9]+([_\.][A-Za-z0-9]+)*@([A-Za-z0-9\-]+\.)+[A-Za-z]{2,6}$/;
+    return reg.test(email);
+  }
+
+  const handleClick = () => {
+    if (!validateEmail(emailContent)) {
+      setErrorClass("errorEmail");
+    } else {
+      setErrorClass("");
+      emailForm.current.submit();
+    }
+  }
+
+  const handleChange = (e) => {
+    setEmailContent(e.target.value);
+  }
+
   return (
     <>
       <FooterStyled role="contentinfo">
@@ -240,7 +267,7 @@ const Footer = () => {
                     })
                 }
             </FooterLinksContainer>
-            <FooterEmailSignupContainer action="https://public.govdelivery.com/accounts/USNIHNCI/subscribers/qualify" ariaLabel="Footer subscribe" method="post" target="_blank" id="signup">
+            <FooterEmailSignupContainer ref={emailForm} action="https://public.govdelivery.com/accounts/USNIHNCI/subscribers/qualify" ariaLabel="Footer subscribe" method="post" target="_blank" id="signup" noValidate>
               <input type="hidden" name="topic_id" id="topic_id" value="USNIHNCI_223" />
               <div className='signUpTitle'>
                 Sign up for email updates
@@ -248,10 +275,11 @@ const Footer = () => {
               <div className='enterTitle'>
                 Enter your email address
               </div>
-              <div>
-                <input id="email" name="email" type="email" className='signUpInputBox' />
+              <div className={errorClass}>
+                {errorClass !== "" ? <div className='enterTitle'>Enter a valid email address</div> : null}
+                <input id="email" type="email" name="email" className='signUpInputBox' value={emailContent} onChange={e => handleChange(e)} />
               </div>
-              <button type="submit" className='signUpButton'>
+              <button type="button" className='signUpButton' onClick={handleClick}>
                 Sign up
               </button>
             </FooterEmailSignupContainer>

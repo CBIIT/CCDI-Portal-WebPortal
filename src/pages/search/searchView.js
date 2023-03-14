@@ -1,14 +1,11 @@
-import React from 'react';
+import React, { useRef} from 'react';
 import styled from 'styled-components';
 import {
   useLocation,
 } from "react-router-dom";
 import {
-  TextField, CircularProgress, withStyles, Box, Popper,
+  withStyles, Box,
 } from '@material-ui/core';
-import {
-  Autocomplete,
-} from '@material-ui/lab';
 import { useHistory } from 'react-router-dom'; // version 5.2.0
 
 import {
@@ -84,8 +81,6 @@ function searchComponent({
   const [inputValue, setInputValue] = React.useState('');
   const [searchText, setSearchText] = React.useState('');
   const [searchResults, setSearchResults] = React.useState([]);
-  const loading = open;
-  const [value] = React.useState([]);
   const [deleteIconShow, setDeleteIconShow] = React.useState('none');
 
   const getAuthorizedResultQuery = (strValue) => {
@@ -101,8 +96,6 @@ function searchComponent({
     history.push(`/sitesearch?keyword=${newValue}`);
   }
 
-  const CustomPopper = (props) => <Popper {...props} className={classes.root} placement="bottom" />;
-
   async function getAutoCompleteRes(newValue = []) {
     setInputValue(newValue);
   }
@@ -111,6 +104,19 @@ function searchComponent({
     const text = event.target.value;
     setInputValue(text);
   };
+
+  const handleClear = () => {
+    setInputValue("");
+    setInputFocus();
+  };
+
+  const useFocus = () => {
+    const htmlElRef = useRef(null)
+    const setFocus = () => {htmlElRef.current &&  htmlElRef.current.focus()}
+    return [ htmlElRef, setFocus ] 
+  };
+
+  const [inputRef, setInputFocus] = useFocus();
 
   async function handleKeyPress(event) {
     if (event.key === "Enter") {
@@ -192,11 +198,11 @@ function searchComponent({
           />
         </div> */}
         <SearchBar onMouseOver={() => setDeleteIconShow('block')} onMouseOut={() => setDeleteIconShow('none')}>
-          <SearchInput type="text" value={inputValue} placeholder="SEARCH" onChange={handleTextInputChange} onKeyPress={handleKeyPress} />
+          <SearchInput ref={inputRef} type="text" value={inputValue} placeholder="SEARCH" onChange={handleTextInputChange} onKeyPress={handleKeyPress} />
           <div className='searchIcon' onClick={() => onChange(inputValue)}>
               <img className="searchIconImg" src='https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/globalSearchSearch.svg' alt='search icon' />
           </div>
-          <div className='deleteIcon' onClick={() => setInputValue('')} >
+          <div className='deleteIcon' onClick={handleClear} >
               <img className="deleteIconImg" style={{display:deleteIconShow}} src='https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/globalSearchDelete.svg' alt='clear icon' />
           </div>
         </SearchBar>

@@ -411,6 +411,7 @@ const Carousel = () => {
             <HeroList onTouchStart={handleTouchStart} onTouchMove={handleTouchMove}>
                 <div className='blurTop' />
                 <div className='blurBottom' />
+                <div className="overlay" />
                 <div className='activeFrame' onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}} />
                 {/* <div className='smallTriangle' /> */}
                 <div className='whiteTriangle'>

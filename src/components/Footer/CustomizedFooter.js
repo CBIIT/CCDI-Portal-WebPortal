@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import FooterData from '../../bento/globalFooterData';
 
@@ -86,6 +86,11 @@ const FooterEmailSignupContainer = styled.form`
 
   .signUpButton:hover {
     cursor: pointer;
+  }
+
+  .errorEmail {
+    background: #e41154;
+    padding: 10px 5px 5px 5px;
   }
 `;
 
@@ -209,6 +214,20 @@ const GlobalFooterContainer = styled.div`
 `;
 
 const Footer = () => {
+  const [errorClass,setErrorClass] = useState("");
+  function validateEmail (email) {
+    var reg = /^[A-Za-z0-9]+([_\.][A-Za-z0-9]+)*@([A-Za-z0-9\-]+\.)+[A-Za-z]{2,6}$/;
+    return reg.test(email);
+  }
+
+  const handleClick = (e) => {
+    const emailTxt = document.getElementById("email").value;
+    if (!validateEmail(emailTxt)) {
+      console.log("emailTxt:", emailTxt);
+      setErrorClass("errorEmail");
+    }
+  }
+
   return (
     <>
       <FooterStyled role="contentinfo">
@@ -248,10 +267,11 @@ const Footer = () => {
               <div className='enterTitle'>
                 Enter your email address
               </div>
-              <div>
-                <input id="email" name="email" type="email" className='signUpInputBox' />
+              <div className={errorClass}>
+                {errorClass != "" ? <div className='enterTitle'>Enter a valid email address</div> : null}
+                <input id="email" type="email" name="email" className='signUpInputBox' />
               </div>
-              <button type="submit" className='signUpButton'>
+              <button type="submit" className='signUpButton' onClick={handleClick}>
                 Sign up
               </button>
             </FooterEmailSignupContainer>

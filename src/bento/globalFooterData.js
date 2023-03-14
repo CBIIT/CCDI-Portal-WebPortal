@@ -33,31 +33,6 @@ export default {
           text: 'Contact CCDI Hub',
           link: 'mailto:nciofficeofdatasharing@mail.nih.gov?Subject=Index%20of%20NCI%20Studies%20feedback',
         },
-        {
-          text: 'Resources',
-          link: '/home',
-        },
-      ],
-    },
-    {
-      title: 'Resoures',
-      items: [
-        {
-          text: 'Contact Us',
-          link: 'https://www.cancer.gov/contact',
-        },
-        {
-          text: 'Publications',
-          link: 'https://www.cancer.gov/publications',
-        },
-        {
-          text: 'Dictionary of Cancer Terms',
-          link: 'https://www.cancer.gov/publications/dictionaries/cancer-terms',
-        },
-        {
-          text: 'Find a Clinical Trial',
-          link: 'https://www.cancer.gov/about-cancer/treatment/clinical-trials/search',
-        },
       ],
     },
     {

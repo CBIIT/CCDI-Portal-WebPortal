@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { introData, titleData, statsData, latestUpdatesData, resourcesAppliationsListData, resourcesCloudListData } from '../../bento/landingPageData';
 import resourcesItemLogo from '../../assets/landing/Resources_Logo.svg';
-import Carousel from '../landing/component/carousel2'
+import Carousel from '../landing/component/carousel1'
 
 const LandingViewContainer = styled.div`
     width: 1440px;

@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import usePageVisibility from "./PageVisibility";
 import styled from 'styled-components';
-import wheel1 from '../../../assets/landing/card_ccdc.png';
-import wheel2 from '../../../assets/landing/card_civic.png';
-import wheel3 from '../../../assets/landing/card_mci.png';
-import wheel4 from '../../../assets/landing/card_mtp.png';
-import wheel5 from '../../../assets/landing/card_nccr.png';
-import wheel6 from '../../../assets/landing/card_cgc.png';
-import wheel7 from '../../../assets/landing/card_dbgap.png';
+import { carouselList } from '../../../bento/landingPageData'
 import exportIcon from '../../../assets/landing/Export_Icon.svg';
 
 let cardIdx = 0;
@@ -291,13 +285,7 @@ const HeroList = styled.div`
 `;
 
 const Carousel = () => {
-    const itemList = [{img: wheel1, content: 'Childhood Cancer Data Catalog'},
-                      {img: wheel2, content: 'Clinical Interpretation of Variants in Cancer'},
-                      {img: wheel3, content: 'Molecular Characterization Initiative for Childhood Cancer'},
-                      {img: wheel4, content: 'Molecular Targets Platform'},
-                      {img: wheel5, content: 'National Childhood Cancer Registry Explorer'},
-                      {img: wheel6, content: 'Cancer Genomics Cloud'},
-                      {img: wheel7, content: 'Database of Genotypes and Phenotypes'}];
+    const itemList = carouselList;
 
     const repeatList = [].concat(...new Array(Math.floor(15/itemList.length )).fill(itemList));
 

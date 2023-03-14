@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import usePageVisibility from "./PageVisibility";
 import styled from 'styled-components';
-import wheel2 from '../../../assets/landing/Wheel_2.png';
-import wheel3 from '../../../assets/landing/Wheel_3.png';
-import wheel4 from '../../../assets/landing/Wheel_4.png';
+import { carouselList } from '../../../bento/landingPageData'
 import exportIcon from '../../../assets/landing/Export_Icon.svg';
 
 let cardIdx = 0;
@@ -283,13 +281,7 @@ const HeroList = styled.div`
 `;
 
 const Carousel = () => {
-    const itemList = [{img: wheel3, content: 'Resource A. Lorem ipsum dolor sit amet consectetur'},
-                      {img: wheel2, content: 'Resource B. Lorem ipsum dolor sit amet consectetur'},
-                      {img: wheel3, content: 'Resource C. Lorem ipsum dolor sit amet consectetur'},
-                      {img: wheel4, content: 'Resource D. Lorem ipsum dolor sit amet consectetur'},
-                      {img: wheel2, content: 'Resource E. Lorem ipsum dolor sit amet consectetur'},
-                      {img: wheel3, content: 'Resource F. Lorem ipsum dolor sit amet consectetur'},
-                      {img: wheel3, content: 'Resource G. Lorem ipsum dolor sit amet consectetur'}];
+    const itemList = carouselList;
     const [currentIndex, setCurrentIndex] = useState(0);
     const showCount = 5;
     const [touchPosition, setTouchPosition] = useState(null);

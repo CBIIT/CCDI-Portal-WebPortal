@@ -136,7 +136,7 @@ export const carouselList = [
   {
     img: wheel2,
     content: 'Clinical Interpretation of Variants in Cancer',
-    link: 'https://civicdb.org/welcome',
+    link: 'https://civicdb.org',
   },
   {
     img: wheel3,
@@ -146,7 +146,7 @@ export const carouselList = [
   {
     img: wheel4,
     content: 'Molecular Targets Platform',
-    link: 'https://ccr.cancer.gov/molecular-targets-program',
+    link: 'https://moleculartargets.ccdi.cancer.gov',
   },
   {
     img: wheel5,

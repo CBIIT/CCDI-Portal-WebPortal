@@ -335,9 +335,15 @@ const ResourcesContainer = styled.div`
       height: 125px;
       border-radius: 20px;
       display: flex;
+      color: #FFFFFF;
+      font-family: Reem Kufi;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 25px;
+      line-height: 28px;
       align-items: center;
       justify-content: center;
-      padding: 25px;
+      text-align: center;
     }
 
     .resourceListItemText {
@@ -457,7 +463,7 @@ const LandingView = () => {
                 const appkey = `app_${appidx}`;
                 return (
                   <div id={appItem.id} className='resourceListItem' key={appkey}>
-                    <div className='resourceListItemLogo' style={{background: '#0095A2'}}><img src={resourcesItemLogo} alt='resourcesItemLogo' /></div>
+                    <div className='resourceListItemLogo' style={{background: '#0095A2'}}>{appItem.subtitle}</div>
                     <div className='resourceListItemText'>
                       <div className='resourceListItemTitle'>{appItem.title}<span className='resourceListItemTitleSmall'>{'(' + appItem.subtitle + ')'}</span></div>
                       <div className='resourceListItemContext'>{appItem.content}</div>
@@ -483,7 +489,7 @@ const LandingView = () => {
                 const cloudkey = `cloud_${cloudidx}`;
                 return (
                   <div id={cloudItem.id} className='resourceListItem' key={cloudkey}>
-                    <div className='resourceListItemLogo' style={{background: '#455299'}}><img src={resourcesItemLogo} alt='resourcesItemLogo' /></div>
+                    <div className='resourceListItemLogo' style={{background: '#455299'}}>{cloudItem.subtitle}</div>
                     <div className='resourceListItemText'>
                       <div className='resourceListItemTitle'>{cloudItem.title}<span className='resourceListItemTitleSmall'>{'(' + cloudItem.subtitle + ')'}</span></div>
                       <div className='resourceListItemContext'>{cloudItem.content}</div>

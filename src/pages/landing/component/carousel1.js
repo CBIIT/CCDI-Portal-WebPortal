@@ -134,22 +134,22 @@ const HeroList = styled.div`
     }
 
     .listItemContentNoLine {
-        color: #000000;
-        font-family: poppins;
-        font-weight: 400;
+        color: #817979;
+        font-family: Inter;
+        font-weight: 600;
         font-size: 24px;
-        line-height: 25px;
+        line-height: 27px;
         width: 394px;
         margin-left: 31px;
         margin-top: 37px;
     }
 
     .listItemContent {
-        color: #000000;
-        font-family: poppins;
-        font-weight: 400;
+        color: #817979;
+        font-family: Inter;
+        font-weight: 600;
         font-size: 24px;
-        line-height: 25px;
+        line-height: 27px;
         width: 394px;
         margin-left: 31px;
         margin-top: 37px;
@@ -157,11 +157,11 @@ const HeroList = styled.div`
     }
 
     .activeCard .listItemContent {
-        color: #298085;
-        font-family: poppins;
-        font-weight: 500;
+        color: #009EAA;
+        font-family: Inter;
+        font-weight: 600;
         font-size: 28px;
-        line-height: 30px;
+        line-height: 28px;
         width: 334px;
         margin: 17px 0 0 31px;
         border-bottom: none;

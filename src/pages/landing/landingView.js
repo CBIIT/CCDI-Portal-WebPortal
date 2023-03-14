@@ -342,7 +342,7 @@ const ResourcesContainer = styled.div`
 
     .resourceListItemText {
       margin: 5px 0 0 20px;
-      width: 385px;
+      width: 396px;
       height: 125px;
     }
 
@@ -352,7 +352,7 @@ const ResourcesContainer = styled.div`
       font-weight: 400;
       font-size: 20px;
       margin-bottom: 4px;
-      line-height: 99%;
+      line-height: 20px;
     }
 
     .resourceListItemTitleSmall {
@@ -367,6 +367,7 @@ const ResourcesContainer = styled.div`
       font-family: Poppins;
       font-weight: 400;
       font-size: 16px;
+      letter-spacing: 0.02em;
     }
 `;
 
@@ -442,7 +443,7 @@ const LandingView = () => {
       <ResourcesContainer>
         <div className='resourceTitle'>{titleData.resourceTitle}</div>
         <div className='resourceItem'>
-          <div className='resourceSubtitle' style={{color: '#7CCFD6'}}>
+          <div className='resourceSubtitle' style={{color: '#2A8189'}}>
             <div className='resourceSubtitleText'>{titleData.applicationsTitle}</div>
             <div className='titleLine'>
               <div className='titleLineLong' />
@@ -468,7 +469,7 @@ const LandingView = () => {
           </div>
         </div>
         <div className='resourceItem'>
-          <div className='resourceSubtitle' style={{color: '#7884CA'}}>
+          <div className='resourceSubtitle' style={{color: '#5666BD'}}>
             <div className='resourceSubtitleText'>{titleData.cloudResourcesTitle}</div>
             <div className='titleLine'>
               <div className='titleLineLong' />

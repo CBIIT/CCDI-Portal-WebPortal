@@ -223,8 +223,9 @@ const Footer = () => {
   const handleClick = (e) => {
     const emailTxt = document.getElementById("email").value;
     if (!validateEmail(emailTxt)) {
-      console.log("emailTxt:", emailTxt);
       setErrorClass("errorEmail");
+    } else {
+      setErrorClass("");
     }
   }
 
@@ -268,7 +269,7 @@ const Footer = () => {
                 Enter your email address
               </div>
               <div className={errorClass}>
-                {errorClass != "" ? <div className='enterTitle'>Enter a valid email address</div> : null}
+                {errorClass !== "" ? <div className='enterTitle'>Enter a valid email address</div> : null}
                 <input id="email" type="email" name="email" className='signUpInputBox' />
               </div>
               <button type="submit" className='signUpButton' onClick={handleClick}>

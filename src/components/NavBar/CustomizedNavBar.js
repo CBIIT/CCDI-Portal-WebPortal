@@ -191,7 +191,7 @@ const NavBar = () => {
   };
 
   const handleMenuClick = (e) => {
-    if (e.target.innerText === clickedTitle || e.target.innerText === "About" || e.target.innerText === "News") {
+    if (e.target.innerText === clickedTitle || e.target.innerText === "Home" || e.target.innerText === "About" || e.target.innerText === "News") {
       setClickedTitle("");
     } else {
       setClickedTitle(e.target.innerText);
@@ -207,6 +207,9 @@ const NavBar = () => {
     <Nav>
       <NavContainer>
         <UlContainer>
+          <LiSection onClick={handleMenuClick}>
+            <NavLink to="/home"><div className='navTitle directLink' style={path === '/' || path === '/home' ? activeStyle : null}>Home</div></NavLink>
+          </LiSection>
           <LiSection onClick={handleMenuClick}>
             <NavLink to="/about"><div className='navTitle directLink' style={path === '/about' ? activeStyle : null}>About</div></NavLink>
           </LiSection>

@@ -138,38 +138,30 @@ const HeroList = styled.div`
         border-radius: 12px;
     }
 
-    .listItemImg img{
-        width: 264px;
-        height: 121px;
-        border-radius: 12px;
-    }
-
     .listItemContent {
         color: #817979;
         font-family: Inter;
         font-weight: 600;
         font-size: 24px;
-        line-height: 27px;
-        width: 394px;
-        margin-left: 15px
-        padding-left:  0 16px 0 16px;
-        border-bottom: 1px solid #898989;
+        line-height: 24px;
+        width: 370px;
+        padding-left: 14px;
         transition: color 1s;
         display: flex;
         justify-content: left;
         align-items: center;
-        flex: 0 0 394px;
+        flex: 0 0 370px;
     }
 
     .activeCard .listItemContent {
-        color: #009EAA;
+        color: #298085;
         font-family: Inter;
         font-weight: 600;
-        font-size: 28px;
-        line-height: 28px;
-        width: 350px;
+        font-size: 26px;
+        line-height: 26px;
+        width: 370px;
         border-bottom: none;
-        flex: 0 0 350px;
+        flex: 0 0 370px;
     }
 
     .exportIcon {
@@ -180,15 +172,16 @@ const HeroList = styled.div`
         padding: 38px 0 0 10px;
         visibility: visible;
         opacity: 1;
-        transition: visibility 0.5s, opacity 0.5s linear;
+        transition: visibility 1s, opacity 1s linear;
     }
     .exportContainerInactive {
+        padding: 38px 0 0 10px;
         visibility: hidden;
         opacity: 0;
-        transition: visibility 0.5s, opacity 0.5s linear;
+        transition: visibility 1s, opacity 1s linear;
     }
     .exportText {
-        color: #01828C;
+        color: #298085;
         font-family: poppins;
         font-weight: 400;
         font-size: 14px;
@@ -220,62 +213,23 @@ const HeroList = styled.div`
 
     .activeFrame {
         position: absolute;
-        top: 254px
+        top: 254px;
         left: 8px;
-        width: 787px;
+        width: 100%;
         height: 145px;
         border: 3px solid #FFFFFF;
         border-radius: 20px 0 0 20px;
-        box-shadow: 0px 4px 24px rgba(0, 0, 0);
+        box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.45);
         z-index: 60;
     }
 
-    .smallTriangle {
+    .internalTriangle {
         position: absolute;
-        top: 293px;
-        left: -3px;
-        // width: 40px;
-        // height: 65px;
-        background: #3fc0ac;
-        z-index: 6;
-        display: block;
-        height: 65px;
-        width: 65px;
-        clip-path: polygon(20% 20%, 80% 80%, 0% 100%);
-        transform: rotate(225deg);
-        // border-radius: 0 0 0 25%;
-    }
-
-    .smTriangle {
-        position: absolute;
-        top: 179px;
-        left: 0;
+        top: 255px;
+        left: -55px;
         width: 40px;
         height: 65px;
         z-index: 6;
-    }
-
-    .triangle {
-        fill: #3fc0ac;
-        stroke: #3fc0ac;
-        stroke-width: 20;
-        transform: rotate(90deg);
-    }
-
-    .whiteTriangle {
-        position: absolute;
-        top: 176.5px;
-        left: 0;
-        width: 40px;
-        height: 65px;
-        z-index: 5;
-    }
-
-    .wtriangle {
-        fill: #FFFFFF;
-        stroke: #FFFFFF;
-        stroke-width: 20;
-        transform: rotate(90deg);
     }
 
     .scene {
@@ -291,17 +245,45 @@ const HeroList = styled.div`
         width: 100%;
         height: 100%;
         position: absolute;
-        transform: translateZ(-190px);
+        transform: translateZ(-305px);
         transform-style: preserve-3d;
         transition: transform 1s;
+      }
+
+      .textBox {
+        position: relative;
+        display: flex;
+        margin-left: 17px;
+      }
+
+      .separateLine {
+        width: 100%;
+        position: absolute;
+        left: 0;
+        bottom: -11px;
+        border-bottom: 1.5px solid #898989;
+        visibility: visible;
+        opacity: 1;
+        transition: visibility 1s, opacity 1s linear;
+      }
+
+      .separateLineHide {
+        width: 100%;
+        position: absolute;
+        left: 0;
+        bottom: -11px;
+        border-bottom: 1.5px solid #898989;
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 1s, opacity 1s linear;
       }
       
       .carousel__cell {
         position: absolute;
         display: flex;
-        width: 765px;
+        width: 780px;
         height: 149px;
-        left: 15px;
+        left: 21px;
         padding: 14px 0;
         transition: transform 1s, opacity 1s;
         background: #fff;
@@ -322,16 +304,16 @@ const Carousel = () => {
     const cardLen = repeatList.length;
     const rotateDeg = 360 / cardLen ;
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [newTransform, setNewTransform] = useState({ transform: "translateZ(-325px) rotateX(0deg)" });
+    const [newTransform, setNewTransform] = useState({ transform: "translateZ(-305px) rotateX(0deg)" });
     const isVisible = usePageVisibility();
 
     const startTimer = () => {
         timer = setInterval(() => {
-            const newTs =`translateZ(-325px) rotateX(${(cardIdx - 1) * rotateDeg}deg)`;
+            const newTs =`translateZ(-305px) rotateX(${(cardIdx - 1) * rotateDeg}deg)`;
             cardIdx -= 1;
             setCurrentIndex(cardIdx);
             setNewTransform({transform: newTs});
-        }, 3000000);
+        }, 3000);
     };
 
     const resetTimer = () => {
@@ -341,7 +323,7 @@ const Carousel = () => {
 
     const nextSlide = () => {
         resetTimer();
-        const newTs =`translateZ(-325px) rotateX(${(cardIdx - 1) * rotateDeg}deg)`;
+        const newTs =`translateZ(-305px) rotateX(${(cardIdx - 1) * rotateDeg}deg)`;
         cardIdx -= 1;
         setCurrentIndex(cardIdx);
         setNewTransform({transform: newTs});
@@ -349,7 +331,7 @@ const Carousel = () => {
 
     const prevSlide = () => {
         resetTimer();
-        const newTs =`translateZ(-325px) rotateX(${(cardIdx + 1) * rotateDeg}deg)`;
+        const newTs =`translateZ(-305px) rotateX(${(cardIdx + 1) * rotateDeg}deg)`;
         cardIdx += 1;
         setCurrentIndex(cardIdx);
         setNewTransform({transform: newTs});
@@ -361,7 +343,7 @@ const Carousel = () => {
         }
         if (itemList.length !== 0 && isVisible) {
             cardIdx = Math.floor(Math.random() * cardLen);
-            const newinitialTs =`translateZ(-325px) rotateX(${cardIdx * rotateDeg}deg)`;
+            const newinitialTs =`translateZ(-305px) rotateX(${cardIdx * rotateDeg}deg)`;
             console.log(cardIdx);
             setCurrentIndex(cardIdx);
             setNewTransform({transform: newinitialTs});
@@ -383,14 +365,11 @@ const Carousel = () => {
                 <div className='blurTop' />
                 <div className='blurBottom' />
                 <div className='activeFrame' onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}} />
-                <div className='whiteTriangle'>
-                    <svg  width="250" height="250" viewBox="-75 -75 300 300">
-                        <polygon class="wtriangle" stroke-linejoin="round" points="100,0 0,200 200,200"/>
-                    </svg>
-                </div>
-                <div className='smTriangle'>
-                    <svg  width="250" height="250" viewBox="-72 -72 300 300">
-                        <polygon class="triangle" stroke-linejoin="round" points="100,0 0,200 200,200"/>
+                <div className='internalTriangle'>
+                    <svg height="135" width="135">
+                        <polygon points="120,75 120,60 0,0 0,135" fill="#fff" stroke="#fff" stroke-width="4"></polygon>
+                        <circle cx="116.6" cy="67.5" r="9.1" fill="#3fc0ac" stroke="#fff" stroke-width="2"></circle>
+                        <polygon points="120,75 120,60 0,0 0,135" fill="#3fc0ac"></polygon>
                     </svg>
                 </div>
                 <div class="scene">
@@ -398,9 +377,6 @@ const Carousel = () => {
                         {repeatList.map((item, idx) => {
                             const key = `carousel_${idx}`;
                             const style = { transform: "rotateX( "+ idx * rotateDeg + "deg) translateZ(325px)" };
-                            console.log(currentIndex);
-                            console.log("positive index:" + Math.abs( currentIndex % 14 ));
-                            console.log("html index:" + idx);
                             let trueIdx = 0;
                             if (currentIndex % 14 == 0) {
                                 trueIdx = 0;
@@ -414,15 +390,25 @@ const Carousel = () => {
                                     trueIdx = Math.abs(currentIndex % 14);
                                 }
                             }
+                            const hideArr = [];
+                            hideArr.push(trueIdx);
+                            if (trueIdx + 1 == cardLen) {
+                                hideArr.push(0);
+                            } else {
+                                hideArr.push(trueIdx + 1);
+                            }
+                            const isHided = hideArr.indexOf(idx) > -1;
                             const isActiveCard = trueIdx === idx;
-                            const noBorderLine = Math.abs( currentIndex % 14 ) - 1 === idx || Math.abs( currentIndex % 14 ) + 1 === idx;
                             return (
                                 <div key={key} className={isActiveCard ? "carousel__cell activeCard" : "carousel__cell"} style={style} onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}}>
                                     <div className='listItemImg'><img src={item.img}/></div>
-                                    <div className='listItemContent'>{item.content}</div>
-                                    <div className={isActiveCard ? "exportContainer" : "exportContainerInactive"}>
-                                        <img className='exportIcon' src={exportIcon} />
-                                        <div className='exportText'>Go to site</div>
+                                    <div className="textBox">
+                                        <div className='listItemContent'>{item.content}</div>
+                                        <div className={isActiveCard ? "exportContainer" : "exportContainerInactive"}>
+                                            <img className='exportIcon' src={exportIcon} />
+                                            <div className='exportText'>Go to site</div>
+                                        </div>
+                                        <div className={isHided ? "separateLineHide" : "separateLine"} />
                                     </div>
                                 </div>
                             );

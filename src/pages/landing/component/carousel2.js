@@ -133,11 +133,11 @@ const HeroList = styled.div`
     }
 
     .listItemContent {
-        color: #817979;
-        font-family: Inter;
-        font-weight: 600;
+        color: #000000;
+        font-family: poppins;
+        font-weight: 400;
         font-size: 24px;
-        line-height: 24px;
+        line-height: 25px;
         width: 370px;
         padding-left: 14px;
         transition: color 1s;
@@ -149,10 +149,10 @@ const HeroList = styled.div`
 
     .activeCard .listItemContent {
         color: #298085;
-        font-family: Inter;
-        font-weight: 600;
-        font-size: 26px;
-        line-height: 26px;
+        font-family: poppins;
+        font-weight: 500;
+        font-size: 28px;
+        line-height: 30px;
         width: 370px;
         border-bottom: none;
         flex: 0 0 370px;

@@ -25,7 +25,7 @@ const IntroTextContainer = styled.div`
     
     .introTextTitle1 {
       text-align: left;
-      color: #05555C;
+      color: #00444A;
       font-family: poppins;
       font-weight: 600;
       font-size: 35px;

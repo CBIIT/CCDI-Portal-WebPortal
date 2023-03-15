@@ -233,7 +233,7 @@ const NavBar = () => {
               clickedTitle !== "" ? navbarLists[clickedTitle].map((dropItem, idx) => {
                 const dropkey = `drop_${idx}`;
                 return (
-                  <a href={'/#' + dropItem.id} className="dropdownItem" key={dropkey}>{dropItem.name}</a>
+                  <a href={'/#' + dropItem.id} className="dropdownItem" key={dropkey} onClick={() => setClickedTitle("")}>{dropItem.name}</a>
                 )
               })
               :null

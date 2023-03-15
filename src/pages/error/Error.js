@@ -23,7 +23,7 @@ const ErrorContainer = styled.div`
     .titleFirst {
       font-family: poppins;
       font-weight: 700;
-      font-size: 65px;
+      font-size: 40px;
       color: #05555C;
       margin-bottom: 28px;
     }
@@ -31,15 +31,12 @@ const ErrorContainer = styled.div`
     .titleSecond {
       font-family: poppins;
       font-weight: 500;
-      font-size: 35px;
+      font-size: 20px;
       color: #05555C;
     }
 
-    .returnButtonContainer {
-      text-decoration: none;
-    }
-
     .returnButton {
+      display: block;
       margin: 50px auto 0 auto;
       width: 176px;
       height: 40px;
@@ -48,10 +45,11 @@ const ErrorContainer = styled.div`
       font-size: 16px;
       line-height: 40px;
       text-transform: uppercase;
-      color: #FFFFFF;
-      background: #4BBFC6;
+      color: #033135;
+      background: #7CCFD6;
       border-radius: 5px;
       text-align: center;
+      text-decoration: none;
     }
 `;
 
@@ -62,12 +60,11 @@ const Error = () => {
       <div className='textContainer'>
         <div className='titleFirst'>{errorData.titleFirst}</div>
         <div className='titleSecond'>
-          <div>{errorData.titleSecond1}</div>
-          <div>{errorData.titleSecond2}</div>
+          <div>{errorData.titleSecond}</div>
         </div>
-        <a className='returnButtonContainer' href='/'>
-           <div className='returnButton'>{errorData.buttonTitle}</div>
-        </a>
+        <div>
+           <a className='returnButton' href='/'>{errorData.buttonTitle}</a>
+        </div>
       </div>
     </ErrorContainer>
   )

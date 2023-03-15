@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import wheel1 from '../../../assets/landing/Wheel_1.png';
-import wheel2 from '../../../assets/landing/Wheel_2.png';
-import wheel3 from '../../../assets/landing/Wheel_3.png';
-import wheel4 from '../../../assets/landing/Wheel_4.png';
-import wheel5 from '../../../assets/landing/Wheel_5.png';
+import { carouselList } from '../../../bento/landingPageData'
 import exportIcon from '../../../assets/landing/Export_Icon.svg'
 
 const HeroListContainer = styled.div`
@@ -201,13 +197,7 @@ const HeroList = styled.div`
 let timer = null;
 
 const Carousel = () => {
-    const heroList = [{img: wheel1, content: 'Resource A. Lorem ipsum dolor sit amet consectetur'},
-                      {img: wheel2, content: 'Resource B. Lorem ipsum dolor sit amet consectetur'},
-                      {img: wheel3, content: 'Resource C. Lorem ipsum dolor sit amet consectetur'},
-                      {img: wheel4, content: 'Resource D. Lorem ipsum dolor sit amet consectetur'},
-                      {img: wheel5, content: 'Resource E. Lorem ipsum dolor sit amet consectetur'},
-                      {img: wheel3, content: 'Resource F. Lorem ipsum dolor sit amet consectetur'},
-                      {img: wheel3, content: 'Resource G. Lorem ipsum dolor sit amet consectetur'}];
+    const heroList = carouselList;
     
     const [indexList, setIndexList] = useState([0,1,2,3,4]);
 

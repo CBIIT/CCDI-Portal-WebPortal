@@ -60,3 +60,8 @@
   font-family:"Open Sans";
   src:url(./fonts/OpenSans-VariableFont.ttf);
 }
+
+@font-face {
+  font-family:"Reem Kufi";
+  src:url(./fonts/ReemKufi-VariableFont_wght.ttf);
+}

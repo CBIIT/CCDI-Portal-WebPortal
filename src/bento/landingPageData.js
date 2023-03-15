@@ -24,7 +24,7 @@ export const titleData = {
   latestUpdatesTitle: 'Latest Updates',
   resourceTitle: 'Resources',
   applicationsTitle: 'APPLICATIONS',
-  cloudResourcesTitle: 'ANALYTIC TOOLS',
+  cloudResourcesTitle: 'OTHER APPLICATIONS',
   aboutTitle: 'About the CCDI Community',
 };
 

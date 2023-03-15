@@ -239,7 +239,7 @@ const HeroList = styled.div`
         width: 100%;
         height: 100%;
         position: absolute;
-        transform: translateZ(-305px);
+        transform: translateZ(-125px);
         transform-style: preserve-3d;
         transition: transform 1s;
       }
@@ -292,12 +292,12 @@ const Carousel = () => {
     const cardLen = repeatList.length;
     const rotateDeg = 360 / cardLen ;
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [newTransform, setNewTransform] = useState({ transform: "translateZ(-305px) rotateX(0deg)" });
+    const [newTransform, setNewTransform] = useState({ transform: "translateZ(-125px) rotateX(0deg)" });
     const isVisible = usePageVisibility();
 
     const startTimer = () => {
         timer = setInterval(() => {
-            const newTs =`translateZ(-305px) rotateX(${(cardIdx - 1) * rotateDeg}deg)`;
+            const newTs =`translateZ(-125px) rotateX(${(cardIdx - 1) * rotateDeg}deg)`;
             cardIdx -= 1;
             setCurrentIndex(cardIdx);
             setNewTransform({transform: newTs});
@@ -311,7 +311,7 @@ const Carousel = () => {
 
     const nextSlide = () => {
         resetTimer();
-        const newTs =`translateZ(-305px) rotateX(${(cardIdx - 1) * rotateDeg}deg)`;
+        const newTs =`translateZ(-125px) rotateX(${(cardIdx - 1) * rotateDeg}deg)`;
         cardIdx -= 1;
         setCurrentIndex(cardIdx);
         setNewTransform({transform: newTs});
@@ -319,7 +319,7 @@ const Carousel = () => {
 
     const prevSlide = () => {
         resetTimer();
-        const newTs =`translateZ(-305px) rotateX(${(cardIdx + 1) * rotateDeg}deg)`;
+        const newTs =`translateZ(-125px) rotateX(${(cardIdx + 1) * rotateDeg}deg)`;
         cardIdx += 1;
         setCurrentIndex(cardIdx);
         setNewTransform({transform: newTs});
@@ -330,9 +330,8 @@ const Carousel = () => {
             clearInterval(timer);
         }
         if (itemList.length !== 0 && isVisible) {
-            cardIdx = Math.floor(Math.random() * cardLen);
-            const newinitialTs =`translateZ(-305px) rotateX(${cardIdx * rotateDeg}deg)`;
-            console.log(cardIdx);
+            cardIdx = Math.floor(Math.random() * (cardLen/2));
+            const newinitialTs =`translateZ(-125px) rotateX(${cardIdx * rotateDeg}deg)`;
             setCurrentIndex(cardIdx);
             setNewTransform({transform: newinitialTs});
             startTimer();

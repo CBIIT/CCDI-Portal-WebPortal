@@ -366,7 +366,7 @@ const Carousel = () => {
                             const key = `carousel_${idx}`;
                             const style = { transform: "rotateX( "+ idx * rotateDeg + "deg) translateZ(325px)" };
                             let trueIdx = 0;
-                            if (currentIndex % 14 == 0) {
+                            if (currentIndex % 14 === 0) {
                                 trueIdx = 0;
                             } else {
                                 if (currentIndex > 14) {
@@ -380,7 +380,7 @@ const Carousel = () => {
                             }
                             const hideArr = [];
                             hideArr.push(trueIdx);
-                            if (trueIdx + 1 == cardLen) {
+                            if (trueIdx + 1 === cardLen) {
                                 hideArr.push(0);
                             } else {
                                 hideArr.push(trueIdx + 1);
@@ -389,11 +389,11 @@ const Carousel = () => {
                             const isActiveCard = trueIdx === idx;
                             return (
                                 <div key={key} className={isActiveCard ? "carousel__cell activeCard" : "carousel__cell"} style={style} onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}}>
-                                    <div className='listItemImg'><img src={item.img}/></div>
+                                    <div className='listItemImg'><img src={item.img} alt="" /></div>
                                     <div className="textBox">
                                         <div className='listItemContent'>{item.content}</div>
                                         <div className={isActiveCard ? "exportContainer" : "exportContainerInactive"}>
-                                            <img className='exportIcon' src={exportIcon} />
+                                            <img className='exportIcon' src={exportIcon} alt="" />
                                             <div className='exportText'>Go to site</div>
                                         </div>
                                         <div className={isHided ? "separateLineHide" : "separateLine"} />

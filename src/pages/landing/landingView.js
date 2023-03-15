@@ -56,7 +56,7 @@ const IntroTextContainer = styled.div`
       display:inline-block;
       width: 421px;
       border-bottom: 0.5px solid #FFFFFF;
-      margin: 18px 0 13px 0;
+      margin: 18px 0 45px 0;
     }
 
 `;
@@ -69,24 +69,26 @@ const IntroAboutButtonContainer = styled.div`
     display: flex;
 
     .introAboutButton {
-      margin-top: 30px;
-      margin-right: 20px;
-      border: 1px solid #ffffff;
-      height: 57px;
-      width: 164px;
-      border-radius: 5px;
-      color: #033135;
-      font-family: Poppins;
-      font-weight: 600;
-      font-size: 16px;
-      text-align: center;
-      line-height: 57px;
+        display: block;
+        text-decoration: none;
+        color: #033135;
+        margin-right: 30px;
+        width: 176px;
+        height: 57px;
+        border: 1px solid #ffffff;
+        border-radius: 5px;
+        color: #033135;
+        font-family: poppins;
+        font-weight: 600;
+        font-size: 16px;
+        text-align: center;
+        line-height: 57px;
     }
 
-    .hover {
-      background: #078893;
-      color: #FFFFFF;
-      border: transparent;
+    .introAboutButton:hover {
+        color: #FFFFFF;
+        background: #127176;
+        cursor: pointer;
     }
 `;
 
@@ -391,8 +393,8 @@ const LandingView = () => {
             <div className='introTextTitle2'>an available resource on the Hub Wheel</div>
             <div className='lowerLine' />
             <IntroAboutButtonContainer>
-              <div className='introAboutButton'>{introData.introTitle3}</div>
-              <div className='introAboutButton hover'>{introData.introButtonTitle}</div>
+              <div><a className='introAboutButton' href="/about">{introData.introTitle3}</a></div>
+              <div><a className='introAboutButton' href="https://www.cancer.gov/research/areas/childhood/childhood-cancer-data-initiative" target="_blank" rel="noopener noreferrer">{introData.introButtonTitle}</a></div>
             </IntroAboutButtonContainer>
           </IntroTextContainer>
         </IntroContainer>

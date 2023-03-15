@@ -101,13 +101,12 @@ const LiSection = styled.li`
 `;
 
 const Dropdown = styled.div`
-    top: 0;
+    top: 150px;
     left: 0;
     width: 100%;
     background: #1A5255;
     z-index: 1100;
     position: absolute;
-    top: 151px;
     // visibility: hidden;
     // outline: none;
     // opacity: 0;

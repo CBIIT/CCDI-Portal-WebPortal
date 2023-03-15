@@ -25,7 +25,7 @@ const IntroTextContainer = styled.div`
     
     .introTextTitle1 {
       text-align: left;
-      color: #05555C;
+      color: #00444A;
       font-family: poppins;
       font-weight: 600;
       font-size: 35px;
@@ -56,7 +56,7 @@ const IntroTextContainer = styled.div`
       display:inline-block;
       width: 421px;
       border-bottom: 0.5px solid #FFFFFF;
-      margin: 18px 0 13px 0;
+      margin: 18px 0 45px 0;
     }
 
 `;
@@ -69,24 +69,26 @@ const IntroAboutButtonContainer = styled.div`
     display: flex;
 
     .introAboutButton {
-      margin-top: 30px;
-      margin-right: 20px;
-      border: 1px solid #ffffff;
-      height: 57px;
-      width: 164px;
-      border-radius: 5px;
-      color: #033135;
-      font-family: Poppins;
-      font-weight: 600;
-      font-size: 16px;
-      text-align: center;
-      line-height: 57px;
+        display: block;
+        text-decoration: none;
+        color: #033135;
+        margin-right: 30px;
+        width: 176px;
+        height: 57px;
+        border: 1px solid #ffffff;
+        border-radius: 5px;
+        color: #033135;
+        font-family: poppins;
+        font-weight: 600;
+        font-size: 16px;
+        text-align: center;
+        line-height: 57px;
     }
 
-    .hover {
-      background: #078893;
-      color: #FFFFFF;
-      border: transparent;
+    .introAboutButton:hover {
+        color: #FFFFFF;
+        background: #127176;
+        cursor: pointer;
     }
 `;
 
@@ -324,9 +326,9 @@ const ResourcesContainer = styled.div`
 
     .resourceListItem {
       display: flex;
-      width: 50%;
-      padding: 17px;
-      // background: blue;
+      width: 47%;
+      margin: 17px;
+      text-decoration: none;
     }
 
     .resourceListItemLogo {
@@ -391,8 +393,8 @@ const LandingView = () => {
             <div className='introTextTitle2'>an available resource on the Hub Wheel</div>
             <div className='lowerLine' />
             <IntroAboutButtonContainer>
-              <div className='introAboutButton'>{introData.introTitle3}</div>
-              <div className='introAboutButton hover'>{introData.introButtonTitle}</div>
+              <div><a className='introAboutButton' href="/about">{introData.introTitle3}</a></div>
+              <div><a className='introAboutButton' href="https://www.cancer.gov/research/areas/childhood/childhood-cancer-data-initiative" target="_blank" rel="noopener noreferrer">{introData.introButtonTitle}</a></div>
             </IntroAboutButtonContainer>
           </IntroTextContainer>
         </IntroContainer>
@@ -461,13 +463,13 @@ const LandingView = () => {
               resourcesAppliationsListData.map((appItem, appidx) => {
                 const appkey = `app_${appidx}`;
                 return (
-                  <div id={appItem.id} className='resourceListItem' key={appkey}>
+                  <a id={appItem.id} className='resourceListItem' key={appkey} href={appItem.link} target="_blank" rel="noopener noreferrer">
                     <div className='resourceListItemLogo' style={{background: '#0095A2'}}>{appItem.subtitle}</div>
                     <div className='resourceListItemText'>
                       <div className='resourceListItemTitle'>{appItem.title}<span className='resourceListItemTitleSmall'>{'(' + appItem.subtitle + ')'}</span></div>
                       <div className='resourceListItemContext'>{appItem.content}</div>
                     </div>
-                  </div>
+                  </a>
                 )
               })
             }
@@ -487,13 +489,13 @@ const LandingView = () => {
               resourcesCloudListData.map((cloudItem, cloudidx) => {
                 const cloudkey = `cloud_${cloudidx}`;
                 return (
-                  <div id={cloudItem.id} className='resourceListItem' key={cloudkey}>
+                  <a id={cloudItem.id} className='resourceListItem' key={cloudkey} href={cloudItem.link} target="_blank" rel="noopener noreferrer">
                     <div className='resourceListItemLogo' style={{background: '#455299'}}>{cloudItem.subtitle}</div>
                     <div className='resourceListItemText'>
                       <div className='resourceListItemTitle'>{cloudItem.title}<span className='resourceListItemTitleSmall'>{'(' + cloudItem.subtitle + ')'}</span></div>
                       <div className='resourceListItemContext'>{cloudItem.content}</div>
                     </div>
-                  </div>
+                  </a>
                 )
               })
             }

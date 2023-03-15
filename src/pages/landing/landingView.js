@@ -331,6 +331,10 @@ const ResourcesContainer = styled.div`
       text-decoration: none;
     }
 
+    .resourceListItem:focus-visible {
+      outline: none;
+  }
+
     .resourceListItemLogo {
       width: 133px;
       height: 125px;

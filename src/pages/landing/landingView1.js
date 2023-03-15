@@ -326,9 +326,9 @@ const ResourcesContainer = styled.div`
 
     .resourceListItem {
       display: flex;
-      width: 50%;
-      padding: 17px;
-      // background: blue;
+      width: 47%;
+      margin: 17px;
+      text-decoration: none;
     }
 
     .resourceListItemLogo {
@@ -463,13 +463,13 @@ const LandingView = () => {
               resourcesAppliationsListData.map((appItem, appidx) => {
                 const appkey = `app_${appidx}`;
                 return (
-                  <div id={appItem.id} className='resourceListItem' key={appkey}>
+                  <a id={appItem.id} className='resourceListItem' key={appkey} href={appItem.link} target="_blank" rel="noopener noreferrer">
                     <div className='resourceListItemLogo' style={{background: '#0095A2'}}>{appItem.subtitle}</div>
                     <div className='resourceListItemText'>
                       <div className='resourceListItemTitle'>{appItem.title}<span className='resourceListItemTitleSmall'>{'(' + appItem.subtitle + ')'}</span></div>
                       <div className='resourceListItemContext'>{appItem.content}</div>
                     </div>
-                  </div>
+                  </a>
                 )
               })
             }
@@ -489,13 +489,13 @@ const LandingView = () => {
               resourcesCloudListData.map((cloudItem, cloudidx) => {
                 const cloudkey = `cloud_${cloudidx}`;
                 return (
-                  <div id={cloudItem.id} className='resourceListItem' key={cloudkey}>
+                  <a id={cloudItem.id} className='resourceListItem' key={cloudkey} href={cloudItem.link} target="_blank" rel="noopener noreferrer">
                     <div className='resourceListItemLogo' style={{background: '#455299'}}>{cloudItem.subtitle}</div>
                     <div className='resourceListItemText'>
                       <div className='resourceListItemTitle'>{cloudItem.title}<span className='resourceListItemTitleSmall'>{'(' + cloudItem.subtitle + ')'}</span></div>
                       <div className='resourceListItemContext'>{cloudItem.content}</div>
                     </div>
-                  </div>
+                  </a>
                 )
               })
             }

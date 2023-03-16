@@ -145,6 +145,7 @@ const HeroList = styled.div`
         justify-content: left;
         align-items: center;
         flex: 0 0 370px;
+        text-decoration: none;
     }
 
     .activeCard .listItemContent {
@@ -393,7 +394,7 @@ const Carousel = () => {
                                 <div key={key} className={isActiveCard ? "carousel__cell activeCard" : "carousel__cell"} style={style} onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}}>
                                     <div className='listItemImg'><img src={item.img} alt="" /></div>
                                     <div className="textBox">
-                                        <div className='listItemContent'>{item.content}</div>
+                                        <a className='listItemContent' href={item.link} target="_blank" rel="noopener noreferrer">{item.content}</a>
                                         <a className={isActiveCard ? "exportContainer" : "exportContainerInactive"} href={item.link} target="_blank" rel="noopener noreferrer">
                                             <img className='exportIcon' src={exportIcon} alt="" />
                                             <div className='exportText'>Go to site</div>

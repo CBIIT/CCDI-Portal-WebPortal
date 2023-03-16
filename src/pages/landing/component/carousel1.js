@@ -75,7 +75,7 @@ const HeroListContainer = styled.div`
     .triangleLarge {
         position: absolute;
         top: 258px;
-        left: 0;
+        left: -1px;
         width: 0; 
         height: 0; 
         border-top: 67px solid transparent;
@@ -142,6 +142,7 @@ const HeroList = styled.div`
         width: 394px;
         margin-left: 31px;
         margin-top: 37px;
+        text-decoration: none;
     }
 
     .listItemContent {
@@ -154,6 +155,7 @@ const HeroList = styled.div`
         margin-left: 31px;
         margin-top: 37px;
         border-bottom: 1px solid #898989;
+        text-decoration: none;
     }
 
     .activeCard .listItemContent {
@@ -173,9 +175,11 @@ const HeroList = styled.div`
 
     .exportContainer {
         padding: 38px 0 0 10px;
+        text-decoration: none;
     }
     .exportContainerInactive {
         display: none;
+        text-decoration: none;
     }
     .exportText {
         color: #01828C;
@@ -218,6 +222,7 @@ const HeroList = styled.div`
         border-radius: 20px 0 0 20px;
         box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.35);
         z-index: 60;
+        pointer-events: none; 
     }
 
     .smallTriangle {
@@ -455,11 +460,11 @@ const Carousel = () => {
                         return (
                             <div key={key} className={isActiveCard ? "listItem activeCard" : "listItem"} onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}}>
                                 <div className='listItemImg'><img src={item.img}  alt=""/></div>
-                                <div className={noBorderLine ? 'listItemContentNoLine' : 'listItemContent'}>{item.content}</div>
-                                <div className={isActiveCard ? "exportContainer" : "exportContainerInactive"}>
+                                <a className={noBorderLine ? 'listItemContentNoLine' : 'listItemContent'} href={item.link} target="_blank" rel="noopener noreferrer">{item.content}</a>
+                                <a className={isActiveCard ? "exportContainer" : "exportContainerInactive"} href={item.link} target="_blank" rel="noopener noreferrer">
                                     <img className='exportIcon' src={exportIcon} alt=""/>
                                     <div className='exportText'>Go to site</div>
-                                </div>
+                                </a>
                             </div>
                         );
                     })}

@@ -121,14 +121,14 @@ const DropdownContainer = styled.div`
     .dropdownList {
       background: #1A5255;
       display: grid;
-      grid-column-gap: 50px;
-      grid-template-columns: 33% 33% 33%;
-      padding: 0 140px;
+      grid-column-gap: 30px;
+      grid-template-columns: 32% 32% 32%;
+      padding: 32px 140px 0 140px;
     }
 
     .dropdownItem {
       // border: 1px solid rgba(0, 0, 0, 0.8);
-      padding: 32px 20px;
+      padding: 0 10px 32px 10px;
       font-size: 30px;
       text-align: left;
       font-family: poppins;

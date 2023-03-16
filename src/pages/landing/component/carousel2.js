@@ -74,12 +74,12 @@ const HeroListContainer = styled.div`
 
     .triangleLarge {
         position: absolute;
-        top: 258px;
-        left: 0;
+        top: 257px;
+        left: -1px;
         width: 0; 
         height: 0; 
-        border-top: 67px solid transparent;
-        border-bottom: 67px solid transparent;
+        border-top: 68px solid transparent;
+        border-bottom: 68px solid transparent;
         border-left: 130px solid #3fc0ac;
     }
 `;
@@ -145,6 +145,7 @@ const HeroList = styled.div`
         justify-content: left;
         align-items: center;
         flex: 0 0 370px;
+        text-decoration: none;
     }
 
     .activeCard .listItemContent {
@@ -167,12 +168,14 @@ const HeroList = styled.div`
         visibility: visible;
         opacity: 1;
         transition: visibility 1s, opacity 1s linear;
+        text-decoration: none;
     }
     .exportContainerInactive {
         padding: 38px 0 0 10px;
         visibility: hidden;
         opacity: 0;
         transition: visibility 1s, opacity 1s linear;
+        text-decoration: none;
     }
     .exportText {
         color: #298085;
@@ -215,6 +218,7 @@ const HeroList = styled.div`
         border-radius: 20px 0 0 20px;
         box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.45);
         z-index: 60;
+        pointer-events: none; 
     }
 
     .internalTriangle {
@@ -390,11 +394,11 @@ const Carousel = () => {
                                 <div key={key} className={isActiveCard ? "carousel__cell activeCard" : "carousel__cell"} style={style} onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}}>
                                     <div className='listItemImg'><img src={item.img} alt="" /></div>
                                     <div className="textBox">
-                                        <div className='listItemContent'>{item.content}</div>
-                                        <div className={isActiveCard ? "exportContainer" : "exportContainerInactive"}>
+                                        <a className='listItemContent' href={item.link} target="_blank" rel="noopener noreferrer">{item.content}</a>
+                                        <a className={isActiveCard ? "exportContainer" : "exportContainerInactive"} href={item.link} target="_blank" rel="noopener noreferrer">
                                             <img className='exportIcon' src={exportIcon} alt="" />
                                             <div className='exportText'>Go to site</div>
-                                        </div>
+                                        </a>
                                         <div className={isHided ? "separateLineHide" : "separateLine"} />
                                     </div>
                                 </div>

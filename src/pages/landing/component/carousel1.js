@@ -142,6 +142,7 @@ const HeroList = styled.div`
         width: 394px;
         margin-left: 31px;
         margin-top: 37px;
+        text-decoration: none;
     }
 
     .listItemContent {
@@ -154,6 +155,7 @@ const HeroList = styled.div`
         margin-left: 31px;
         margin-top: 37px;
         border-bottom: 1px solid #898989;
+        text-decoration: none;
     }
 
     .activeCard .listItemContent {
@@ -458,7 +460,7 @@ const Carousel = () => {
                         return (
                             <div key={key} className={isActiveCard ? "listItem activeCard" : "listItem"} onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}}>
                                 <div className='listItemImg'><img src={item.img}  alt=""/></div>
-                                <div className={noBorderLine ? 'listItemContentNoLine' : 'listItemContent'}>{item.content}</div>
+                                <a className={noBorderLine ? 'listItemContentNoLine' : 'listItemContent'} href={item.link} target="_blank" rel="noopener noreferrer">{item.content}</a>
                                 <a className={isActiveCard ? "exportContainer" : "exportContainerInactive"} href={item.link} target="_blank" rel="noopener noreferrer">
                                     <img className='exportIcon' src={exportIcon} alt=""/>
                                     <div className='exportText'>Go to site</div>

@@ -212,9 +212,6 @@ const NavBar = () => {
             <NavLink to="/home"><div className='navTitle directLink' style={path === '/' || path === '/home' ? activeStyle : null}>Home</div></NavLink>
           </LiSection>
           <LiSection onClick={handleMenuClick}>
-            <NavLink to="/about"><div className='navTitle directLink' style={path === '/about' ? activeStyle : null}>About</div></NavLink>
-          </LiSection>
-          <LiSection onClick={handleMenuClick}>
             <div className={clickedTitle === 'Applications' ? 'navTitle clicked' : 'navTitle'}>Applications</div>
           </LiSection>
           <LiSection onClick={handleMenuClick}>
@@ -222,6 +219,9 @@ const NavBar = () => {
           </LiSection>
           <LiSection onClick={handleMenuClick}>
             <NavLink to="/news"><div className='navTitle directLink' style={path === '/news' ? activeStyle : null}>News</div></NavLink>
+          </LiSection>
+          <LiSection onClick={handleMenuClick}>
+            <NavLink to="/about"><div className='navTitle directLink' style={path === '/about' ? activeStyle : null}>About</div></NavLink>
           </LiSection>
         </UlContainer>
       </NavContainer>

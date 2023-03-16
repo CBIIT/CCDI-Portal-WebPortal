@@ -44,7 +44,7 @@ const FooterLogo = styled.div`
 `;
 
 const FooterEmailSignupContainer = styled.form`
-  margin: 54px 62px 0 auto;
+  margin: 54px auto 0 280px;
 
   .signUpTitle {
     font-family: poppins;

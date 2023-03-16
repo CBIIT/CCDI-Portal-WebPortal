@@ -1,14 +1,13 @@
 import {
-    ApolloClient, InMemoryCache, HttpLink,
+    ApolloClient, InMemoryCache,
 } from '@apollo/client';
+import env from './env';
 
-const link = new HttpLink({
-  uri: "http://localhost:8080/v1/graphql/",
-});
+const BACKEND = env.REACT_APP_BACKEND_API;
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  link: link,
+  uri: BACKEND,
 });
 
 export default client;

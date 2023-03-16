@@ -88,7 +88,6 @@ function searchComponent({
   };
 
   async function onChange(newValue = []) {
-    console.log("changed!");
     const searchResp = await getAuthorizedResultQuery(newValue);
     setSearchResults(searchResp);
     // setTab('1');
@@ -129,7 +128,6 @@ function searchComponent({
   };
 
   React.useEffect(() => {
-    console.log("re-rendered!");
     getAutoCompleteRes(searchparam);
     onChange(searchparam);
   }, [open]);

@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { introData, titleData, statsData, latestUpdatesData, resourcesAppliationsListData, resourcesCloudListData } from '../../bento/landingPageData';
-import Carousel from '../landing/component/carousel2'
+import Carousel from '../landing/component/carousel2';
+import exportIcon from '../../assets/landing/Export_Icon_Black.svg';
 
 const LandingViewContainer = styled.div`
     width: 1440px;
@@ -371,6 +372,8 @@ const ResourcesContainer = styled.div`
       font-weight: 400;
       font-size: 14px;
       margin-left: 8px;
+      padding-right: 23px;
+      background: url(${exportIcon}) right center no-repeat;
     }
 
     .resourceListItemContext {

@@ -74,12 +74,12 @@ const HeroListContainer = styled.div`
 
     .triangleLarge {
         position: absolute;
-        top: 258px;
-        left: 0;
+        top: 257px;
+        left: -1px;
         width: 0; 
         height: 0; 
-        border-top: 67px solid transparent;
-        border-bottom: 67px solid transparent;
+        border-top: 68px solid transparent;
+        border-bottom: 68px solid transparent;
         border-left: 130px solid #3fc0ac;
     }
 `;

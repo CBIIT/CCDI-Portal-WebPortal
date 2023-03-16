@@ -75,7 +75,7 @@ const HeroListContainer = styled.div`
     .triangleLarge {
         position: absolute;
         top: 258px;
-        left: 0;
+        left: -1px;
         width: 0; 
         height: 0; 
         border-top: 67px solid transparent;

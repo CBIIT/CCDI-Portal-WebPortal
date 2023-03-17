@@ -341,7 +341,7 @@ const Carousel = () => {
             startTimer();
         }
         return () => clearInterval(timer);
-    }, [isVisible]);
+    }, []);
 
     return (
         <HeroListContainer>

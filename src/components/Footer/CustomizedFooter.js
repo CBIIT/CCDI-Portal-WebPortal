@@ -93,6 +93,11 @@ const FooterEmailSignupContainer = styled.form`
     background: #e41154;
     padding: 10px 5px 5px 5px;
   }
+
+  .ErrorBorder {
+    border-left: 0.25rem solid #e41154;
+    padding-left: 1rem;
+  }
 `;
 
 const FooterLinksContainer = styled.div`
@@ -273,12 +278,14 @@ const Footer = () => {
               <div className='signUpTitle'>
                 Sign up for email updates
               </div>
-              <div className='enterTitle'>
-                Enter your email address
-              </div>
-              <div className={errorClass}>
-                {errorClass !== "" ? <div className='enterTitle'>Enter a valid email address</div> : null}
-                <input id="email" type="email" name="email" className='signUpInputBox' value={emailContent} onChange={e => handleChange(e)} />
+              <div className={errorClass !== "" ? 'ErrorBorder' : null}>
+                <div className='enterTitle'>
+                  Enter your email address
+                </div>
+                <div className={errorClass}>
+                  {errorClass !== "" ? <div className='enterTitle'>Enter a valid email address</div> : null}
+                  <input id="email" type="email" name="email" className='signUpInputBox' value={emailContent} onChange={e => handleChange(e)} />
+                </div>
               </div>
               <button type="button" className='signUpButton' onClick={handleClick}>
                 Sign up

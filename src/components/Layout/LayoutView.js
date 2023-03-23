@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Header from '../Header/CustomizedHeader';
 import NavBar from '../NavBar/CustomizedNavBar';
 import Footer from '../Footer/CustomizedFooter';
-import Home from '../../pages/landing/landingView';
+import Home from '../../pages/landing/landingView3';
 import About from '../../pages/about/aboutView';
 // import News from '../../pages/news/newsView';
 import News from '../../pages/landing/landingView1';

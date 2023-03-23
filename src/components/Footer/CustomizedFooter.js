@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import FooterData from '../../bento/globalFooterData';
 
 const FooterStyled = styled.footer`
-  background-color: #6D8586;
+  background-color: #1B496E;
   border-top: 1px solid #6C727B;
   bottom: 0;
   width: 100%;
@@ -12,8 +12,7 @@ const FooterStyled = styled.footer`
 `;
 
 const GlobalFooterStyled = styled.footer`
-  background-color: #115154;
-  border-top: 1px solid #6C727B;
+  background-color: #14315C;
   bottom: 0;
   width: 100%;
 `;
@@ -135,7 +134,7 @@ const FooterLinksContainer = styled.div`
 const GlobalFooterContainer = styled.div`
   padding: 20px 62px 26px 61px;
   display: flex;
-  background: #115154;
+  background: #14315C;
   width: 1440px;
   margin: 0 auto;
 

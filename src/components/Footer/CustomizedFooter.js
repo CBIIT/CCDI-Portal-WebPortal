@@ -7,6 +7,8 @@ const FooterStyled = styled.footer`
   border-top: 1px solid #6C727B;
   bottom: 0;
   width: 100%;
+  z-index: 10;
+  position: relative;
 `;
 
 const GlobalFooterStyled = styled.footer`

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import FooterData from '../../bento/globalFooterData';
 
 const FooterStyled = styled.footer`
-  background-color: #6D8586;
+  background-color: #1B496E;
   border-top: 1px solid #6C727B;
   bottom: 0;
   width: 100%;
@@ -12,8 +12,7 @@ const FooterStyled = styled.footer`
 `;
 
 const GlobalFooterStyled = styled.footer`
-  background-color: #115154;
-  border-top: 1px solid #6C727B;
+  background-color: #14315C;
   bottom: 0;
   width: 100%;
 `;
@@ -94,6 +93,11 @@ const FooterEmailSignupContainer = styled.form`
     background: #e41154;
     padding: 10px 5px 5px 5px;
   }
+
+  .ErrorBorder {
+    border-left: 0.25rem solid #e41154;
+    padding-left: 1rem;
+  }
 `;
 
 const FooterLinksContainer = styled.div`
@@ -135,7 +139,7 @@ const FooterLinksContainer = styled.div`
 const GlobalFooterContainer = styled.div`
   padding: 20px 62px 26px 61px;
   display: flex;
-  background: #115154;
+  background: #14315C;
   width: 1440px;
   margin: 0 auto;
 
@@ -274,12 +278,14 @@ const Footer = () => {
               <div className='signUpTitle'>
                 Sign up for email updates
               </div>
-              <div className='enterTitle'>
-                Enter your email address
-              </div>
-              <div className={errorClass}>
-                {errorClass !== "" ? <div className='enterTitle'>Enter a valid email address</div> : null}
-                <input id="email" type="email" name="email" className='signUpInputBox' value={emailContent} onChange={e => handleChange(e)} />
+              <div className={errorClass !== "" ? 'ErrorBorder' : null}>
+                <div className='enterTitle'>
+                  Enter your email address
+                </div>
+                <div className={errorClass}>
+                  {errorClass !== "" ? <div className='enterTitle'>Enter a valid email address</div> : null}
+                  <input id="email" type="email" name="email" className='signUpInputBox' value={emailContent} onChange={e => handleChange(e)} />
+                </div>
               </div>
               <button type="button" className='signUpButton' onClick={handleClick}>
                 Sign up

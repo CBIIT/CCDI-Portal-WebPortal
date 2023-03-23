@@ -24,7 +24,7 @@ const HeaderContainer = styled.div`
     }
 
     .searchBarContainer {
-      padding-right: 60px;
+      padding: 5px 60px 0 0;
       margin-left: auto;
       display: flex;
     }
@@ -33,15 +33,15 @@ const HeaderContainer = styled.div`
       display: flex;
       margin-top: 23px;
       margin-left: auto;
-      width: 300px;
-      height: 46px;
+      width: 224px;
+      height: 32px;
       border: 1px solid #71767A;
     }
 
     .clearIcon {
       margin-left: auto;
       margin-right: 13px;
-      padding-top: 13px;
+      padding-top: 6px;
     }
 
     .clearIconImg {
@@ -54,16 +54,16 @@ const HeaderContainer = styled.div`
     }
 
     .searchButton {
-      height: 46px;
+      height: 32px;
       font-family: Open Sans;
       font-weight: 700;
-      font-size: 22px;
-      line-height: 46px;
+      font-size: 1rem;
+      line-height: 33px;
       text-align: center;
       color: #FFFFFF;
       background: #007BBD;
       margin-top: 23px;
-      padding: 0 17px;
+      padding: 0 13px;
       border-radius: 0px 5px 5px 0px;
     }
 
@@ -78,7 +78,7 @@ const SearchInput = styled.input`
   border: none;
   font-family: Open Sans;
   font-weight: 400;
-  font-size: 18px;
+  font-size: 1rem;
   line-height: 42px;
   color: #1b1b1b;
   width: 265px;

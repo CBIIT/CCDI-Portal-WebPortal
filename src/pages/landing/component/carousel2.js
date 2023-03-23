@@ -284,7 +284,7 @@ const HeroList = styled.div`
         left: 21px;
         padding: 14px 0;
         transition: transform 1s, opacity 1s;
-        background: #fff;
+        background: #fafafa;
       }
 `;
 
@@ -301,8 +301,8 @@ const Carousel = () => {
 
     const startTimer = () => {
         timer = setInterval(() => {
-            const newTs =`translateZ(-125px) rotateX(${(cardIdx - 1) * rotateDeg}deg)`;
-            cardIdx -= 1;
+            const newTs =`translateZ(-125px) rotateX(${(cardIdx + 1) * rotateDeg}deg)`;
+            cardIdx += 1;
             setCurrentIndex(cardIdx);
             setNewTransform({transform: newTs});
         }, 3000);
@@ -330,18 +330,25 @@ const Carousel = () => {
     };
 
     useEffect(() => {
-        if (!isVisible) {
-            clearInterval(timer);
-        }
         if (itemList.length !== 0 && isVisible) {
             cardIdx = Math.floor(Math.random() * (cardLen/2));
             const newinitialTs =`translateZ(-125px) rotateX(${cardIdx * rotateDeg}deg)`;
             setCurrentIndex(cardIdx);
             setNewTransform({transform: newinitialTs});
+            // startTimer();
+        }
+        // return () => clearInterval(timer);
+    }, []);
+
+    useEffect(() => {
+        if (!isVisible) {
+            clearInterval(timer);
+        }
+        if (itemList.length !== 0 && isVisible) {
             startTimer();
         }
         return () => clearInterval(timer);
-    }, []);
+    }, [isVisible]);
 
     return (
         <HeroListContainer>

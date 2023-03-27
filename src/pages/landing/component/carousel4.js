@@ -153,7 +153,7 @@ const HeroList = styled.div`
         position: absolute;
         width: 652px;
         height: 102px;
-        margin: 9px 49px;
+        margin: 0 49px;
         background: #F7F7F7;
         box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.15);
         border-radius: 20px;
@@ -161,6 +161,10 @@ const HeroList = styled.div`
         will-change: transform, opacity;
         transition: 0.5s;
         // animation: carousel-animate-vertical 27s linear infinite;
+
+        .exportContainer {
+            display: none;
+        }
     }
 
     .carousel__item:nth-child(1) {
@@ -171,13 +175,13 @@ const HeroList = styled.div`
 
     .carousel__item:nth-child(2) {
         transform: translateY(-250%) scale(1);
-        opacity: 0.8;
+        opacity: 1;
         visibility: visible;
     }
 
     .carousel__item:nth-child(3) {
         transform: translateY(-135%) scale(1);
-        opacity: 0.9;
+        opacity: 1;
         visibility: visible;
     }
 
@@ -189,17 +193,47 @@ const HeroList = styled.div`
         width: 700px;
         height: 140px;
         margin: 9px 25px;
+
+        .itemImgBox {
+            margin-left: 30px;
+        }
+
+        .itemImg {
+            width: 270px;
+            height: 140px;
+        }
+
+        .listItemContent {
+            color: #01828C;
+            font-family: poppins;
+            font-weight: 600;
+            font-size: 28px;
+            line-height: 30px;
+            width: 334px;
+            letter-spacing: -0.002em;
+            margin-left: 27px;
+        }
+
+        .exportIcon {
+            margin-top: 100px;
+            width: 24.8px;
+            height: 24.8px;
+        }
+
+        .exportContainer {
+            display: block;
+        }
     }
 
     .carousel__item:nth-child(5) {
         transform: translateY(135%) scale(1);
-        opacity: 0.9;
+        opacity: 1;
         visibility: visible;
     }
 
     .carousel__item:nth-child(6) {
         transform: translateY(250%) scale(1);
-        opacity: 0.8;
+        opacity: 1;
         visibility: visible;
     }
 
@@ -209,32 +243,32 @@ const HeroList = styled.div`
         visibility: hidden;
     }
 
-    .carousel__item-head {
-        border-radius: 50%;
-        background-color: #d7f7fc;
-        width: 90px;
-        height: 90px;
-        padding: 14px;
-        position: relative;
-        margin-right: -45px;
-        flex-shrink: 0;
+    .itemImgBox {
+        margin-left: 19px;
+        margin-top: 6px;
+    }
+
+    .itemImg {
+        width: 243px;
+        height: 102px;
+    }
+
+    .listItemContent {
+        color: #000000;
+        font-family: poppins;
+        font-weight: 400;
+        font-size: 22px;
+        line-height: 25px;
+        width: 329px;
+        text-decoration: none;
         display: flex;
         align-items: center;
-        justify-content: center;
-        font-size: 50px;
+        letter-spacing: -0.01em;
+        margin-left: 41px;
     }
 
-    .carousel__item-body {
-        width: 100%;
-        background-color: #fff;
-        border-radius: 8px;
-        padding: 16px 20px 16px 70px;
-    }
-
-    .title {
-        text-transform: uppercase;
-        font-size: 20px;
-        margin-top: 10px;
+    .exportContainer {
+        text-decoration: none;
     }
 `;
 
@@ -296,73 +330,17 @@ const Carousel = () => {
                 <div className='blurBottom' />
                 <div className='activeFrame' onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}} />
                     <div id="carouselList" class='carousel'>
-                        {/* <div class='carousel__item'>
-                            <div class='carousel__item-head'>
-                                🐳
-                            </div>
-                            <div class='carousel__item-body'>
-                                <p class='title'>1</p>
-                                <p>Unicode: U+1F433</p>
-                            </div>
-                        </div>
-                        <div class='carousel__item'>
-                            <div class='carousel__item-head'>
-                                🐋
-                            </div>
-                            <div class='carousel__item-body'>
-                                <p class='title'>2</p>
-                                <p>Unicode: U+1F40B</p>
-                            </div>
-                        </div>
-                        <div class='carousel__item'>
-                            <div class='carousel__item-head'>
-                                🐬
-                            </div>
-                            <div class='carousel__item-body'>
-                                <p class='title'>3</p>
-                                <p>Unicode: U+1F42C</p>
-                            </div>
-                        </div>
-                        <div class='carousel__item'>
-                            <div class='carousel__item-head'>
-                                🐟
-                            </div>
-                            <div class='carousel__item-body'>
-                                <p class='title'>4</p>
-                                <p>Unicode: U+1F41F</p>
-                            </div>
-                        </div>
-                        <div class='carousel__item'>
-                            <div class='carousel__item-head'>
-                                🐠
-                            </div>
-                            <div class='carousel__item-body'>
-                                <p class='title'>5</p>
-                                <p>Unicode: U+1F420</p>
-                            </div>
-                        </div>
-                        <div class='carousel__item'>
-                            <div class='carousel__item-head'>
-                                🐡
-                            </div>
-                            <div class='carousel__item-body'>
-                                <p class='title'>6</p>
-                                <p>Unicode: U+1F421</p>
-                            </div>
-                        </div>
-                        <div class='carousel__item'>
-                            <div class='carousel__item-head'>
-                                🦈
-                            </div>
-                            <div class='carousel__item-body'>
-                                <p class='title'>7</p>
-                                <p>Unicode: U+1F988</p>
-                            </div>
-                        </div> */}
                         {
-                            carouselList.map((carouseItem, idx) => {
+                            carouselList.map((item, idx) => {
+                                const key = `carousel_${idx}_last_clone`;
                                 return (
-                                    <div className='carousel__item'>{idx}</div>
+                                    <div key={key} className='carousel__item'>
+                                        <div className='itemImgBox'><img className='itemImg' src={item.img} alt="" width="243px" height="102px" /></div>
+                                        <a className='listItemContent' href={item.link} target="_blank" rel="noopener noreferrer">{item.content}</a>
+                                        <a className="exportContainer" href={item.link} target="_blank" rel="noopener noreferrer">
+                                            <img className='exportIcon' src={exportIcon} alt=""/>
+                                        </a>
+                                    </div>
                                 )
                             })
                         }

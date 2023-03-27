@@ -127,7 +127,7 @@ const HeroList = styled.div`
 
     .activeFrame {
         position: absolute;
-        top: 248px;
+        top: 244px;
         left: 25px;
         width: 700px;
         height: 144px;
@@ -151,29 +151,32 @@ const HeroList = styled.div`
         display: flex;
         align-items: center;
         position: absolute;
-        width: 100%;
-        padding: 0 12px;
+        width: 652px;
+        height: 102px;
+        margin: 9px 49px;
+        background: #F7F7F7;
+        box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.15);
+        border-radius: 20px;
         opacity: 1;
-        filter: drop-shadow(0 2px 2px #555);
         will-change: transform, opacity;
         transition: 0.5s;
         // animation: carousel-animate-vertical 27s linear infinite;
     }
 
     .carousel__item:nth-child(1) {
-        transform: translateY(-300%) scale(0.9);
+        transform: translateY(-365%) scale(1);
         opacity: 0;
         visibility: hidden;
     }
 
     .carousel__item:nth-child(2) {
-        transform: translateY(-200%) scale(0.9);
+        transform: translateY(-250%) scale(1);
         opacity: 0.8;
         visibility: visible;
     }
 
     .carousel__item:nth-child(3) {
-        transform: translateY(-100%) scale(0.9);
+        transform: translateY(-135%) scale(1);
         opacity: 0.9;
         visibility: visible;
     }
@@ -182,22 +185,26 @@ const HeroList = styled.div`
         transform: translateY(0) scale(1);
         opacity: 1;
         visibility: visible;
+        border-radius: 20px;
+        width: 700px;
+        height: 140px;
+        margin: 9px 25px;
     }
 
     .carousel__item:nth-child(5) {
-        transform: translateY(100%) scale(0.9);
+        transform: translateY(135%) scale(1);
         opacity: 0.9;
         visibility: visible;
     }
 
     .carousel__item:nth-child(6) {
-        transform: translateY(200%) scale(0.9);
+        transform: translateY(250%) scale(1);
         opacity: 0.8;
         visibility: visible;
     }
 
     .carousel__item:last-child {
-        transform: translateY(300%) scale(0.9);
+        transform: translateY(365%) scale(1);
         opacity: 0;
         visibility: hidden;
     }
@@ -289,7 +296,7 @@ const Carousel = () => {
                 <div className='blurBottom' />
                 <div className='activeFrame' onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}} />
                     <div id="carouselList" class='carousel'>
-                        <div class='carousel__item'>
+                        {/* <div class='carousel__item'>
                             <div class='carousel__item-head'>
                                 🐳
                             </div>
@@ -351,7 +358,14 @@ const Carousel = () => {
                                 <p class='title'>7</p>
                                 <p>Unicode: U+1F988</p>
                             </div>
-                        </div>
+                        </div> */}
+                        {
+                            carouselList.map((carouseItem, idx) => {
+                                return (
+                                    <div className='carousel__item'>{idx}</div>
+                                )
+                            })
+                        }
                     </div>
 
             </HeroList>

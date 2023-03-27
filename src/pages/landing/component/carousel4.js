@@ -163,7 +163,8 @@ const HeroList = styled.div`
         // animation: carousel-animate-vertical 27s linear infinite;
 
         .exportContainer {
-            display: none;
+            opacity: 0;
+            visibility: hidden;
         }
     }
 
@@ -221,7 +222,8 @@ const HeroList = styled.div`
         }
 
         .exportContainer {
-            display: block;
+            opacity: 1;
+            visibility: visible;
         }
     }
 
@@ -328,13 +330,13 @@ const Carousel = () => {
             <HeroList>
                 <div className='blurTop' />
                 <div className='blurBottom' />
-                <div className='activeFrame' onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}} />
+                <div className='activeFrame'/>
                     <div id="carouselList" class='carousel'>
                         {
                             carouselList.map((item, idx) => {
                                 const key = `carousel_${idx}_last_clone`;
                                 return (
-                                    <div key={key} className='carousel__item'>
+                                    <div key={key} className='carousel__item' onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}}>
                                         <div className='itemImgBox'><img className='itemImg' src={item.img} alt="" width="243px" height="102px" /></div>
                                         <a className='listItemContent' href={item.link} target="_blank" rel="noopener noreferrer">{item.content}</a>
                                         <a className="exportContainer" href={item.link} target="_blank" rel="noopener noreferrer">

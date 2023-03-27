@@ -366,25 +366,15 @@ const Carousel = () => {
     const nextSlide = () => {
         const list = document.getElementById("carouselList");
         const lastitem = list.lastChild;
-        console.log("lastitem:", lastitem);
         list.removeChild(lastitem);
         list.insertBefore(lastitem, list.firstChild);
     };
 
     const prevSlide = () => {
-        if(btnDisabled) return;
-        resetTimer();
-        const ts = `translateY(-${(cardIdx - 1) * distance}px)`;
-        cardIdx -= 1;
-        if (cardIdx === 0) {
-            setBtnDisabled(true);
-            setTimeout(() => {
-                setBtnDisabled(false);
-            }, 500);
-        }
-        console.log("index at:"+cardIdx);
-        setCurrentIndex(cardIdx);
-        setTransform({transform: ts, transition: "0.5s ease-out"});
+        const list = document.getElementById("carouselList");
+        const firstitem = list.firstChild;
+        list.removeChild(firstitem);
+        list.appendChild(firstitem);
     };
 
     useEffect(() => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import usePageVisibility from "./PageVisibility";
 import styled from 'styled-components';
 import { carouselList } from '../../../bento/landingPageData'
@@ -132,7 +132,7 @@ const HeroList = styled.div`
         width: 700px;
         height: 144px;
         border: 3px solid #FFFFFF;
-        border-radius: 20px;
+        border-radius: 22px;
         box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.35);
         z-index: 60;
         pointer-events: none; 
@@ -158,14 +158,48 @@ const HeroList = styled.div`
         box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.15);
         border-radius: 20px;
         opacity: 1;
-        will-change: transform, opacity;
         transition: 0.5s;
-        // animation: carousel-animate-vertical 27s linear infinite;
+    }
 
-        .exportContainer {
-            opacity: 0;
-            visibility: hidden;
-        }
+    .itemImgBox {
+        margin-left: 19px;
+        margin-top: 6px;
+        transition: 0.5s;
+    }
+
+    .itemImg {
+        width: 243px;
+        height: 102px;
+    }
+
+    .listItemContent {
+        color: #000000;
+        font-family: poppins;
+        font-weight: 600;
+        font-size: 22px;
+        line-height: 25px;
+        width: 300px;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        letter-spacing: -0.01em;
+        margin-left: 41px;
+        transition: 0.5s;
+    }
+
+    .exportContainer {
+        text-decoration: none;
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .exportIcon {
+        position: absolute;
+        top: 62px;
+        right: 20px;
+        width: 24px;
+        height: 24px;
+        transition: 0.5s;
     }
 
     .carousel__item:nth-child(1) {
@@ -187,38 +221,22 @@ const HeroList = styled.div`
     }
 
     .carousel__item:nth-child(4) {
-        transform: translateY(0) scale(1);
+        transform: translateY(0) scale(1.07, 1.37);
         opacity: 1;
         visibility: visible;
         border-radius: 20px;
-        width: 700px;
-        height: 140px;
-        margin: 9px 25px;
 
         .itemImgBox {
-            margin-left: 30px;
-        }
-
-        .itemImg {
-            width: 270px;
-            height: 140px;
+            transform: translateX(12px) translateY(0) scale(1.04, 1);
         }
 
         .listItemContent {
             color: #01828C;
-            font-family: poppins;
-            font-weight: 600;
-            font-size: 28px;
-            line-height: 30px;
-            width: 334px;
-            letter-spacing: -0.002em;
-            margin-left: 27px;
+            transform: translateY(0) scale(1, 0.82);
         }
 
         .exportIcon {
-            margin-top: 100px;
-            width: 24.8px;
-            height: 24.8px;
+            transform: translateY(0) scale(1, 0.82);
         }
 
         .exportContainer {
@@ -244,34 +262,6 @@ const HeroList = styled.div`
         opacity: 0;
         visibility: hidden;
     }
-
-    .itemImgBox {
-        margin-left: 19px;
-        margin-top: 6px;
-    }
-
-    .itemImg {
-        width: 243px;
-        height: 102px;
-    }
-
-    .listItemContent {
-        color: #000000;
-        font-family: poppins;
-        font-weight: 400;
-        font-size: 22px;
-        line-height: 25px;
-        width: 329px;
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        letter-spacing: -0.01em;
-        margin-left: 41px;
-    }
-
-    .exportContainer {
-        text-decoration: none;
-    }
 `;
 
 const Carousel = () => {
@@ -280,7 +270,7 @@ const Carousel = () => {
     const startTimer = () => {
         timer = setInterval(() => {
             nextItem();
-        }, 3000);
+        }, 30000000);
     };
 
     const resetTimer = () => {

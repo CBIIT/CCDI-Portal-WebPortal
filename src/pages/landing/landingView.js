@@ -1,28 +1,107 @@
 import React from 'react';
 import styled from 'styled-components';
 import { introData, titleData, statsData, latestUpdatesData, resourcesAppliationsListData, resourcesCloudListData } from '../../bento/landingPageData';
-import Carousel from '../landing/component/carousel2';
+import Carousel from '../landing/component/carousel';
 import exportIcon from '../../assets/landing/Export_Icon_Black.svg';
+import waterMark from '../../assets/landing/landingBackground.png';
 
 const LandingViewContainer = styled.div`
-    width: 1440px;
-    margin: 0 auto;
     font-family: Poppins;
+    position: relative;
+    overflow: hidden;
+`;
+
+const BackgroundFirst = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1084px;
+  background-image: url(${waterMark});
+  z-index: 3;
+  background-repeat: no-repeat;
+  background-size: cover;
+`;
+
+const BackgroundSecond = styled.div`
+  position: absolute;
+  top: 1090px;
+  left: 0;
+  width: 100%;
+  height: 1084px;
+  background-image: url(${waterMark});
+  z-index: 2;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transform: rotate(180deg);
+`;
+
+const BackgroundThird = styled.div`
+  position: absolute;
+  top: 2174px;
+  left: 0;
+  width: 100%;
+  height: 1084px;
+  background-image: url(${waterMark});
+  z-index: 1;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transform: scaleX(-1);
+`;
+
+const HeroSection = styled.div`
+  position: relative;
+  height: 760px;
+  z-index: 5;
+`;
+
+const Banner = styled.div`
+  position: absolute;
+  top: 120px;
+  left: 0;
+  height: 492px;
+  width: 100%;
+
+  background: linear-gradient(180deg, #1CA0A8 0%, rgba(69, 182, 189, 0.955183) 43.29%, rgba(82, 182, 152, 0.95) 100%);
+  border: 2px solid #7CCFD6;
+  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.05);
+  z-index: 8;
+`;
+
+const StatsSection = styled.div`
+  position: relative;
+  z-index: 5;
+`;
+
+const LatestUpdatesSection = styled.div`
+  position: relative;
+  z-index: 5;
+  margin-top: 80px;
+`;
+
+const ResourcesSection = styled.div`
+  position: relative;
+  z-index: 5;
+  margin-top: 120px;
+  margin-bottom: 75px;
 `;
 
 const FirstContainer = styled.div`
+    width: 1440px;
+    margin: 0 auto;
     display: flex;
+    z-index: 10;
+    position: relative;
 `;
 
 const IntroContainer = styled.div`
-    width: 41%;
-    margin-top: 115px;
+    margin-top: 120px;
+    width: 616px;
+    height: 492px;
 `;
 
 const IntroTextContainer = styled.div`
     padding: 54px 0 85px 135px;
-    background: linear-gradient(#3cb8c3, 20%, #3fc0ac, 80%, #4bb48e);
-    border-radius: 0 20px 20px 0;
     
     .introTextTitle1 {
       text-align: left;
@@ -63,7 +142,9 @@ const IntroTextContainer = styled.div`
 `;
 
 const ListContainer = styled.div`
-    width: 59%;
+    margin: 60px 33px;    
+    width: 758px;
+    height: 640px;
 `;
 
 const IntroAboutButtonContainer = styled.div`
@@ -72,68 +153,63 @@ const IntroAboutButtonContainer = styled.div`
     .introAboutButton {
         display: block;
         text-decoration: none;
-        color: #033135;
+        color: #ffffff;
         margin-right: 30px;
         width: 176px;
         height: 57px;
         border: 1px solid #ffffff;
         border-radius: 5px;
-        color: #033135;
         font-family: poppins;
         font-weight: 600;
         font-size: 16px;
         text-align: center;
         line-height: 57px;
+        background: #05555C;
     }
 
     .introAboutButton:hover {
-        color: #FFFFFF;
-        background: #127176;
-        cursor: pointer;
-    }
+      color: #05555C;
+      background: #FFFFFF;
+      cursor: pointer;
+      border: 1px solid #05555C;
+  }
 `;
 
 const StatsContainer = styled.div`
     width: 1440px;
-    margin: 80px auto;
+    margin: 0 auto;
     justify-content: center;
     position: relative;
 
     .leftbox {
       position: absolute;
       top: 0;
-      left: 0;
-      width: 270px;
+      left: calc(1440px - 100vw - 200px);
+      width: calc(100vw - 1440px + 400px);
       height: 400px;
       z-index: 9;
-      background: linear-gradient(to right, #fafafa, 70%, transparent);
+      background: white;
+      filter: blur(50px);
     }
 
     .rightbox {
       position: absolute;
-      right: 0;
+      right: calc(1440px - 100vw - 200px);
       top: 0;
-      width: 270px;
+      width: calc(100vw - 1440px + 400px);
       height: 400px;
       z-index: 9;
-      background: linear-gradient(to left, #fafafa, 70%, transparent);
+      background: white;
+      filter: blur(50px);
     }
 
     .borderTop {
       height: 72px;
-      // border-bottom: 2px solid;
-      // border-image: linear-gradient(
-      //   90deg,
-      //   rgba(255, 255, 255, 0) 0%,
-      //   #7CCFD6 50%,
-      //   rgba(255, 255, 255, 0) 99%
-      // )
-      // 2 2 2 2;
-
       background: linear-gradient(180deg, rgba(153, 153, 153, 0.2) 0%, rgba(255, 255, 255, 0) 94.44%);
       backdrop-filter: blur(2.5px);
       transform: matrix(1, 0, 0, -1, 0, 0);
       border-top: 1.4px solid #7CCFD6;
+      position: relative;
     }
 
     .borderBottom {
@@ -144,20 +220,23 @@ const StatsContainer = styled.div`
     }
 
     .statGlance {
-      margin: 41px 0 39px 0;
+      position: relative;
+      padding: 40px 0;
       text-align: center;
       font-family: poppins;
       font-style: normal;
       font-weight: 600;
       font-size: 35px;
-      color: #8CCCD0;
+      color: #298085;
       line-height: 38px;
+      background-color: white;
     }
 
     .statList {
       display: flex;
       justify-content: center;
-      margin-bottom: 50px;
+      padding-bottom: 50px;
+      background-color: white;
     }
 
     .statItem {
@@ -193,8 +272,14 @@ const StatsContainer = styled.div`
     }
 `;
 
+const StatsBox = styled.div`
+    margin: 0 55px;
+    position: relative;
+`;
+
 const LatestUpdatesContainer = styled.div`
-    margin-top: 67px;
+    width: 1440px;
+    margin: 0 auto;
     position: relative;
 
     .latestUpdatesList {
@@ -269,8 +354,23 @@ const TitleContainer = styled.div`
     }
 `;
 
+const ResourcesOverlay = styled.div`
+  position: absolute;
+  width: calc(100% - 120px);
+  height: calc(100% - 40px);
+  left: 60px;
+  top: 0;
+
+  background: rgba(255, 255, 255, 0.85);
+  filter: blur(50px);
+  z-index: 5;
+`;
+
 const ResourcesContainer = styled.div`
-    margin: 139px 0 136px 0;
+    width: 1440px;
+    margin: 0 auto;
+    z-index: 10;
+    position: relative;
 
     .resourceTitle {
       margin-left: 160px;
@@ -281,7 +381,7 @@ const ResourcesContainer = styled.div`
     }
 
     .resourceItem {
-      margin-bottom: 70px;
+      padding-bottom: 70px;
     }
 
     .resourceSubtitle {
@@ -388,127 +488,142 @@ const ResourcesContainer = styled.div`
 const LandingView = () => {
   return (
     <LandingViewContainer>
-      <FirstContainer>
-        <IntroContainer>
-          <IntroTextContainer>
-            <div className='introTextTitle1'>Discover CCDI</div>
-            <div className='introTextTitle1'>applications, data,</div>
-            <div className='introTextTitle1'>resources, and</div>
-            <div className='introTextTitle1'>other tools</div>
-            <div className='upperLine' />
-            <div className='introTextTitle2'>Explore the CCDI Hub by selecting</div>
-            <div className='introTextTitle2'>an available resource on the Hub Wheel</div>
-            <div className='lowerLine' />
-            <IntroAboutButtonContainer>
-              <div><a className='introAboutButton' href="/about">{introData.introTitle3}</a></div>
-              <div><a className='introAboutButton' href="https://www.cancer.gov/research/areas/childhood/childhood-cancer-data-initiative" target="_blank" rel="noopener noreferrer">{introData.introButtonTitle}</a></div>
-            </IntroAboutButtonContainer>
-          </IntroTextContainer>
-        </IntroContainer>
-        <ListContainer>
-          <Carousel />
-        </ListContainer>
-      </FirstContainer>
-      <StatsContainer>
-        <div className='leftbox' />
-        <div className='rightbox' />
-        <div className='borderTop' />
-        <div className='statGlance'>CCDI Stats At a Glance</div>
-        <div className='statList'>
-        {
-          statsData.map((statItem, statidx) => {
-            const statkey = `stat_${statidx}`;
-            return (
-              <div className='statItem' key={statkey}>
-                <div className='statNum'>{statItem.num}</div>
-                <div className='statTitle'>{statItem.title}</div>
-                <div className='statDetail'>{statItem.detail}</div>
+      <BackgroundFirst />
+      <BackgroundSecond />
+      <BackgroundThird />
+      <HeroSection>
+        <Banner />
+        <FirstContainer>
+          <IntroContainer>
+            <IntroTextContainer>
+              <div className='introTextTitle1'>Discover CCDI</div>
+              <div className='introTextTitle1'>applications, data,</div>
+              <div className='introTextTitle1'>resources, and</div>
+              <div className='introTextTitle1'>other tools</div>
+              <div className='upperLine' />
+              <div className='introTextTitle2'>Explore the CCDI Hub by selecting</div>
+              <div className='introTextTitle2'>an available resource on the Hub Wheel</div>
+              <div className='lowerLine' />
+              <IntroAboutButtonContainer>
+                <div><a className='introAboutButton' href="/about">{introData.introTitle3}</a></div>
+                <div><a className='introAboutButton' href="https://www.cancer.gov/research/areas/childhood/childhood-cancer-data-initiative" target="_blank" rel="noopener noreferrer">{introData.introButtonTitle}</a></div>
+              </IntroAboutButtonContainer>
+            </IntroTextContainer>
+          </IntroContainer>
+          <ListContainer>
+            <Carousel />
+          </ListContainer>
+        </FirstContainer>
+      </HeroSection>
+      <StatsSection>
+        <StatsContainer>
+          <StatsBox>
+            <div className='leftbox' />
+            <div className='rightbox' />
+            <div className='borderTop' />
+            <div className='statGlance'>CCDI Stats At a Glance</div>
+            <div className='statList'>
+            {
+              statsData.map((statItem, statidx) => {
+                const statkey = `stat_${statidx}`;
+                return (
+                  <div className='statItem' key={statkey}>
+                    <div className='statNum'>{statItem.num}</div>
+                    <div className='statTitle'>{statItem.title}</div>
+                    <div className='statDetail'>{statItem.detail}</div>
+                  </div>
+                )
+              })
+            }
+            </div>
+            <div className='borderBottom' />
+          </StatsBox>
+        </StatsContainer>
+      </StatsSection>
+      <LatestUpdatesSection>
+        <LatestUpdatesContainer>
+          <TitleContainer>
+            <div className='titleLine'>
+              <div className='titleLineShort' />
+              <div className='titleLineShort' />
+              <div className='titleLineLong' />
+            </div>
+            <div className='titleText'>{titleData.latestUpdatesTitle}</div>
+          </TitleContainer>
+          <div className='latestUpdatesList'>
+            {
+              latestUpdatesData.map((updateItem, updateidx) => {
+                const updatekey = `update_${updateidx}`;
+                return (
+                  <div className='latestUpdatesListItem' key={updatekey}>
+                    <div className='latestUpdatesListItemPic' style={{ backgroundImage: `url(${updateItem.img})` }} />
+                    <div className='latestUpdatesListTitle'>{updateItem.title}</div>
+                    <div className='latestUpdatesListContent'>{updateItem.content}</div>
+                  </div>
+                )
+              })
+            }
+          </div>
+        </LatestUpdatesContainer>
+      </LatestUpdatesSection>
+      <ResourcesSection>
+        <ResourcesOverlay />
+        <ResourcesContainer>
+          <div className='resourceTitle'>{titleData.resourceTitle}</div>
+          <div className='resourceItem'>
+            <div className='resourceSubtitle' style={{color: '#2A8189'}}>
+              <div className='resourceSubtitleText'>{titleData.applicationsTitle}</div>
+              <div className='titleLine'>
+                <div className='titleLineLong' />
+                <div className='titleLineShort' />
+                <div className='titleLineShort' />
               </div>
-            )
-          })
-        }
-        </div>
-        <div className='borderBottom' />
-      </StatsContainer>
-      <LatestUpdatesContainer>
-        <TitleContainer>
-          <div className='titleLine'>
-            <div className='titleLineShort' />
-            <div className='titleLineShort' />
-            <div className='titleLineLong' />
-          </div>
-          <div className='titleText'>{titleData.latestUpdatesTitle}</div>
-        </TitleContainer>
-        <div className='latestUpdatesList'>
-          {
-            latestUpdatesData.map((updateItem, updateidx) => {
-              const updatekey = `update_${updateidx}`;
-              return (
-                <div className='latestUpdatesListItem' key={updatekey}>
-                  <div className='latestUpdatesListItemPic' style={{ backgroundImage: `url(${updateItem.img})` }} />
-                  <div className='latestUpdatesListTitle'>{updateItem.title}</div>
-                  <div className='latestUpdatesListContent'>{updateItem.content}</div>
-                </div>
-              )
-            })
-          }
-        </div>
-      </LatestUpdatesContainer>
-      <ResourcesContainer>
-        <div className='resourceTitle'>{titleData.resourceTitle}</div>
-        <div className='resourceItem'>
-          <div className='resourceSubtitle' style={{color: '#2A8189'}}>
-            <div className='resourceSubtitleText'>{titleData.applicationsTitle}</div>
-            <div className='titleLine'>
-              <div className='titleLineLong' />
-              <div className='titleLineShort' />
-              <div className='titleLineShort' />
+            </div>
+            <div className='resourceList'>
+              {
+                resourcesAppliationsListData.map((appItem, appidx) => {
+                  const appkey = `app_${appidx}`;
+                  return (
+                    <a id={appItem.id} className='resourceListItem' key={appkey} href={appItem.link} target="_blank" rel="noopener noreferrer">
+                      <div className='resourceListItemLogo' style={{background: '#0095A2'}}>{appItem.subtitle}</div>
+                      <div className='resourceListItemText'>
+                        <div className='resourceListItemTitle'>{appItem.title}<span className='resourceListItemTitleSmall'>{'(' + appItem.subtitle + ')'}</span></div>
+                        <div className='resourceListItemContext'>{appItem.content}</div>
+                      </div>
+                    </a>
+                  )
+                })
+              }
             </div>
           </div>
-          <div className='resourceList'>
-            {
-              resourcesAppliationsListData.map((appItem, appidx) => {
-                const appkey = `app_${appidx}`;
-                return (
-                  <a id={appItem.id} className='resourceListItem' key={appkey} href={appItem.link} target="_blank" rel="noopener noreferrer">
-                    <div className='resourceListItemLogo' style={{background: '#0095A2'}}>{appItem.subtitle}</div>
-                    <div className='resourceListItemText'>
-                      <div className='resourceListItemTitle'>{appItem.title}<span className='resourceListItemTitleSmall'>{'(' + appItem.subtitle + ')'}</span></div>
-                      <div className='resourceListItemContext'>{appItem.content}</div>
-                    </div>
-                  </a>
-                )
-              })
-            }
-          </div>
-        </div>
-        <div className='resourceItem'>
-          <div className='resourceSubtitle' style={{color: '#5666BD'}}>
-            <div className='resourceSubtitleText'>{titleData.cloudResourcesTitle}</div>
-            <div className='titleLine'>
-              <div className='titleLineLong' />
-              <div className='titleLineShort' />
-              <div className='titleLineShort' />
+          <div className='resourceItem'>
+            <div className='resourceSubtitle' style={{color: '#5666BD'}}>
+              <div className='resourceSubtitleText'>{titleData.cloudResourcesTitle}</div>
+              <div className='titleLine'>
+                <div className='titleLineLong' />
+                <div className='titleLineShort' />
+                <div className='titleLineShort' />
+              </div>
+            </div>
+            <div className='resourceList'>
+              {
+                resourcesCloudListData.map((cloudItem, cloudidx) => {
+                  const cloudkey = `cloud_${cloudidx}`;
+                  return (
+                    <a id={cloudItem.id} className='resourceListItem' key={cloudkey} href={cloudItem.link} target="_blank" rel="noopener noreferrer">
+                      <div className='resourceListItemLogo' style={{background: '#455299'}}>{cloudItem.subtitle}</div>
+                      <div className='resourceListItemText'>
+                        <div className='resourceListItemTitle'>{cloudItem.title}<span className='resourceListItemTitleSmall'>{'(' + cloudItem.subtitle + ')'}</span></div>
+                        <div className='resourceListItemContext'>{cloudItem.content}</div>
+                      </div>
+                    </a>
+                  )
+                })
+              }
             </div>
           </div>
-          <div className='resourceList'>
-            {
-              resourcesCloudListData.map((cloudItem, cloudidx) => {
-                const cloudkey = `cloud_${cloudidx}`;
-                return (
-                  <a id={cloudItem.id} className='resourceListItem' key={cloudkey} href={cloudItem.link} target="_blank" rel="noopener noreferrer">
-                    <div className='resourceListItemLogo' style={{background: '#455299'}}>{cloudItem.subtitle}</div>
-                    <div className='resourceListItemText'>
-                      <div className='resourceListItemTitle'>{cloudItem.title}<span className='resourceListItemTitleSmall'>{'(' + cloudItem.subtitle + ')'}</span></div>
-                      <div className='resourceListItemContext'>{cloudItem.content}</div>
-                    </div>
-                  </a>
-                )
-              })
-            }
-          </div>
-        </div>
-      </ResourcesContainer>
+        </ResourcesContainer>
+      </ResourcesSection>
     </LandingViewContainer>
   )
 };

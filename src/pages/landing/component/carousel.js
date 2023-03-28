@@ -1,7 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import usePageVisibility from "./PageVisibility";
 import styled from 'styled-components';
 import { carouselList } from '../../../bento/landingPageData'
-import exportIcon from '../../../assets/landing/Export_Icon.svg'
+import exportIcon from '../../../assets/landing/Export_Icon.svg';
+import arrowIcon from '../../../assets/landing/arrow.svg';
+
+let timer = null;
 
 const HeroListContainer = styled.div`
     position: relative;
@@ -14,24 +18,24 @@ const HeroListContainer = styled.div`
         height: 63px;
         width: 63px;
         border-radius: 50%;
-        border: 1px solid #C2DEDB;
+        border: 1.5px solid #C2DEDB;
         box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
         z-index: 9;
     }
 
     .upButton:hover {
         cursor: pointer;
-        border: 1.5px solid #2ADEC7;
+        border: 1.5px solid #4BBFC6;
         box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.45);
         .arrowUp {
-            border-bottom: 17px solid #A0A8A9;
+            border-bottom: 17px solid #3D4551;
         }
     }
 
     .downButton {
         position: absolute;
         background: #FFFFFF;
-        top: 618px;
+        top: 598px;
         right: 348px;
         height: 63px;
         width: 63px;
@@ -43,10 +47,10 @@ const HeroListContainer = styled.div`
 
     .downButton:hover {
         cursor: pointer;
-        border: 1.5px solid #2ADEC7;
+        border: 1.5px solid #4BBFC6;
         box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.45);
         .arrowDown {
-            border-top: 17px solid #A0A8A9;
+            border-top: 17px solid #3D4551;
         }
     }
 
@@ -56,8 +60,8 @@ const HeroListContainer = styled.div`
         height: 0; 
         border-left: 13px solid transparent;
         border-right: 13px solid transparent;
-        border-bottom: 17px solid #D6DDDD;
-    }
+        border-bottom: 17px solid #B8BBBE;
+      }
 
     .arrowDown {
         margin: 23px 0 0 18px;
@@ -65,111 +69,39 @@ const HeroListContainer = styled.div`
         height: 0; 
         border-left: 13px solid transparent;
         border-right: 13px solid transparent;
-        border-top: 17px solid #D6DDDD;
+        border-top: 17px solid #B8BBBE;
     }
-
-    .triangleLarge {
+    .arrowLeft {
         position: absolute;
-        top: 250px;
         left: 0;
-        width: 0; 
-        height: 0; 
-        border-top: 78px solid transparent;
-        border-bottom: 78px solid transparent;
-        border-left: 130px solid #3fc0ac;
+        top: 300px;
+        width: 30px;
+        height: 40px;
+        background-image: url(${arrowIcon});
+        background-size: cover;
+        z-index: 50;
+    }
+    .arrowRight {
+        background-image: url(${arrowIcon});
+        position: absolute;
+        right: 0;
+        top: 300px;
+        width: 30px;
+        height: 40px;
+        transform: scaleX(-1);
+        background-size: cover;
+        z-index: 50;
     }
 `;
 const HeroList = styled.div`
     position: relative;
-    margin-top: 57px;
-    height: 660px;
-    margin-left: 6%;
-    border: 2.5px solid #00A8B3;
-    border-right: 0;
-    box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.35);
-    border-radius: 40px 0 0 40px;
-
-    .listItemSide {
-        margin-left: 38px;
-        display: flex;
-    }
-
-    .listItemCenter {
-        margin: 8px 0 8px 24px;
-        display: flex;
-        padding: 12px;
-        border: 3px solid #FFFFFF;
-        border-radius: 20px 0 0 20px;
-        box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.35);
-    }
-
-    .listItemImgEdge {
-        width: 266px;
-        height: 112px;
-        border-radius: 12px;
-    }
-
-    .listItemImg {
-        width: 266px;
-        height: 115px;
-        border-radius: 12px;
-    }
-
-    .listItemContentEdge {
-        color: #817979;
-        font-family: Inter;
-        font-weight: 600;
-        font-size: 24px;
-        line-height: 23px;
-        width: 394px;
-        margin-left: 31px;
-        margin-top: 37px;
-    }
-
-    .listItemContent {
-        color: #817979;
-        font-family: Inter;
-        font-weight: 600;
-        font-size: 24px;
-        line-height: 27px;
-        width: 394px;
-        margin-left: 31px;
-        margin-top: 37px;
-    }
-
-    .listItemContentCenter {
-        color: #009EAA;
-        font-family: Inter;
-        font-weight: 600;
-        font-size: 28px;
-        line-height: 28px;
-        width: 334px;
-        margin: 17px 0 0 31px;
-    }
-
-    .exportIcon {
-        margin-left: 15px;
-    }
-
-    .exportContainer {
-        padding: 38px 0 0 10px;
-    }
-    .exportText {
-        color: #01828C;
-        font-family: poppins;
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 14px;
-        letter-spacing: -0.02em;
-    }
-
-    .separateLine {
-        content:'';
-        display:inline-block;
-        width: 432px;
-        border-bottom: 1px solid #898989;
-        margin: 5px 0 5px 321px;
-    }
+    width: 758px;
+    height: 640px;
+    background: #ECECEC;
+    border: 4px solid #05555C;
+    filter: drop-shadow(0px 4px 24px rgba(0, 0, 0, 0.35));
+    border-radius: 40px;
+    overflow: hidden;
 
     .blurTop {
         position: absolute;
@@ -177,7 +109,7 @@ const HeroList = styled.div`
         top: 0;
         left: 0;
         width: 100%;
-        height: 100px;
+        height: 120px;
         z-index: 6;
         border-radius: 40px 0 0 0;
     }
@@ -188,38 +120,156 @@ const HeroList = styled.div`
         bottom: 0;
         left: 0;
         width: 100%;
-        height: 100px;
+        height: 120px;
         z-index: 6;
         border-radius: 0 0 0 40px;
     }
+
+    .activeFrame {
+        position: absolute;
+        top: 244px;
+        left: 25px;
+        width: 700px;
+        height: 144px;
+        border: 3px solid #FFFFFF;
+        border-radius: 22px;
+        box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.35);
+        z-index: 60;
+        pointer-events: none; 
+    }
+
+    .carousel {
+        position: relative;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .carousel__item {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        width: 652px;
+        height: 102px;
+        margin: 0 49px;
+        background: #F7F7F7;
+        box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.15);
+        border-radius: 20px;
+        opacity: 1;
+        transition: 0.5s;
+    }
+
+    .itemImgBox {
+        margin-left: 19px;
+        margin-top: 6px;
+        transition: 0.5s;
+    }
+
+    .itemImg {
+        width: 243px;
+        height: 102px;
+    }
+
+    .listItemContent {
+        color: #000000;
+        font-family: poppins;
+        font-weight: 600;
+        font-size: 22px;
+        line-height: 25px;
+        width: 300px;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        letter-spacing: -0.01em;
+        margin-left: 41px;
+        transition: 0.5s;
+    }
+
+    .exportContainer {
+        text-decoration: none;
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .exportIcon {
+        position: absolute;
+        top: 62px;
+        right: 20px;
+        width: 24px;
+        height: 24px;
+        transition: 0.5s;
+    }
+
+    .carousel__item:nth-child(1) {
+        transform: translateY(-365%) scale(1);
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .carousel__item:nth-child(2) {
+        transform: translateY(-250%) scale(1);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .carousel__item:nth-child(3) {
+        transform: translateY(-135%) scale(1);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .carousel__item:nth-child(4) {
+        transform: translateY(0) scale(1.07, 1.37);
+        opacity: 1;
+        visibility: visible;
+        border-radius: 20px;
+
+        .itemImgBox {
+            transform: translateX(12px) translateY(0) scale(1.04, 1);
+        }
+
+        .listItemContent {
+            color: #01828C;
+            transform: translateY(0) scale(1, 0.82);
+        }
+
+        .exportIcon {
+            transform: translateY(0) scale(1, 0.82);
+        }
+
+        .exportContainer {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
+    .carousel__item:nth-child(5) {
+        transform: translateY(135%) scale(1);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .carousel__item:nth-child(6) {
+        transform: translateY(250%) scale(1);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .carousel__item:last-child {
+        transform: translateY(365%) scale(1);
+        opacity: 0;
+        visibility: hidden;
+    }
 `;
 
-let timer = null;
-
 const Carousel = () => {
-    const heroList = carouselList;
-    
-    const [indexList, setIndexList] = useState([0,1,2,3,4]);
-
-    const moveUp = () => {
-        const newIndexList = [];
-        indexList.forEach(item => {
-            newIndexList.push((item + heroList.length -1) % heroList.length);
-        })
-        setIndexList(newIndexList);
-    }
-
-    const moveDown = () => {
-        const newIndexList = [];
-        indexList.forEach(item => {
-            newIndexList.push((item + 1) % heroList.length);
-        })
-        setIndexList(newIndexList);
-    }
+    const isVisible = usePageVisibility();
 
     const startTimer = () => {
         timer = setInterval(() => {
-            moveDown();
+            nextItem();
         }, 3000);
     };
 
@@ -228,60 +278,69 @@ const Carousel = () => {
         startTimer();
     };
 
-    useEffect(() => {
-        const randomInt = Math.floor(Math.random() * heroList.length);
-        const newIndexList = [];
-        for (let i=0; i<5; i++) {
-            newIndexList.push((randomInt + i) % heroList.length);
-        }
-        setIndexList(newIndexList);
-    }, [])
+    const nextItem = () => {
+        const list = document.getElementById("carouselList");
+        const lastitem = list.lastChild;
+        list.removeChild(lastitem);
+        list.insertBefore(lastitem, list.firstChild);
+    };
+
+    const nextSlide = () => {
+        resetTimer();
+        nextItem();
+    };
+
+    const prevSlide = () => {
+        resetTimer();
+        const list = document.getElementById("carouselList");
+        const firstitem = list.firstChild;
+        list.removeChild(firstitem);
+        list.appendChild(firstitem);
+    };
 
     useEffect(() => {
-        resetTimer();
+        if (!isVisible) {
+            clearInterval(timer);
+        } else {
+            startTimer();
+        }
         return () => clearInterval(timer);
-    }, [indexList])
-    
+    }, [isVisible]);
+
     return (
         <HeroListContainer>
-            <div className='upButton' onClick={moveUp}>
+            <div className='upButton' onClick={prevSlide}>
                 <div class="arrowUp"></div>
             </div>
-            <div className='downButton' onClick={moveDown}>
+            <div className='downButton' onClick={nextSlide}>
                 <div class="arrowDown"></div>
             </div>
-            <div className='triangleLarge' />
+            <div className="arrowLeft" />
+            <div className="arrowRight" />
             <HeroList>
                 <div className='blurTop' />
                 <div className='blurBottom' />
-                <div className='listItemSide'>
-                    <div className='listItemImgEdge'><img className='listItemImgEdge' src={heroList[indexList[0]].img} alt='img0' /></div>
-                    <div className='listItemContentEdge'>{heroList[indexList[0]].content}</div>
-                </div>
-                <div className='separateLine' />
-                <div className='listItemSide' onMouseOver={() => clearInterval(timer)} onMouseOut={() => startTimer()}>
-                    <div className='listItemImg'><img className='listItemImg' src={heroList[indexList[1]].img} alt='img1' /></div>
-                    <div className='listItemContent'>{heroList[indexList[1]].content}</div>
-                </div>
-                <div className='listItemCenter' onMouseOver={() => clearInterval(timer)} onMouseOut={() => startTimer()}>
-                    <div className='listItemImg' ><img className='listItemImg' src={heroList[indexList[2]].img} alt='img2' /></div>
-                    <div className='listItemContentCenter'>{heroList[indexList[2]].content}</div>
-                    <div className='exportContainer'>
-                        <img className='exportIcon' src={exportIcon} alt='exportIcon' />
-                        <div className='exportText'>Go to site</div>
+                <div className='activeFrame'/>
+                    <div id="carouselList" class='carousel'>
+                        {
+                            carouselList.map((item, idx) => {
+                                const key = `carousel_${idx}_last_clone`;
+                                return (
+                                    <div key={key} className='carousel__item' onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}}>
+                                        <div className='itemImgBox'><img className='itemImg' src={item.img} alt="" width="243px" height="102px" /></div>
+                                        <a className='listItemContent' href={item.link} target="_blank" rel="noopener noreferrer">{item.content}</a>
+                                        <a className="exportContainer" href={item.link} target="_blank" rel="noopener noreferrer">
+                                            <img className='exportIcon' src={exportIcon} alt=""/>
+                                        </a>
+                                    </div>
+                                )
+                            })
+                        }
                     </div>
-                </div>
-                <div className='listItemSide' onMouseOver={() => clearInterval(timer)} onMouseOut={() => startTimer()}>
-                    <div className='listItemImg'><img className='listItemImg' src={heroList[indexList[3]].img} alt='img3' /></div>
-                    <div className='listItemContent'>{heroList[indexList[3]].content}</div>
-                </div>
-                <div className='separateLine' />
-                <div className='listItemSide'>
-                    <div className='listItemImgEdge'><img className='listItemImgEdge' src={heroList[indexList[4]].img} alt='img4' /></div>
-                    <div className='listItemContentEdge'>{heroList[indexList[4]].content}</div>
-                </div>
+
             </HeroList>
         </HeroListContainer>
-    )
-  };
-  export default Carousel;
+    );
+};
+
+export default Carousel;

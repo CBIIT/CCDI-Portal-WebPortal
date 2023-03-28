@@ -270,7 +270,7 @@ const Carousel = () => {
     const startTimer = () => {
         timer = setInterval(() => {
             nextItem();
-        }, 30000000);
+        }, 3000);
     };
 
     const resetTimer = () => {

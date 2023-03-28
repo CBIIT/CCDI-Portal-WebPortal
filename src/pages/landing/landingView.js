@@ -8,7 +8,6 @@ import waterMark from '../../assets/landing/landingBackground.png';
 const LandingViewContainer = styled.div`
     font-family: Poppins;
     position: relative;
-    overflow: hidden;
 `;
 
 const BackgroundFirst = styled.div`

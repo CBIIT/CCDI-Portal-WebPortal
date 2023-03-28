@@ -153,25 +153,26 @@ const IntroAboutButtonContainer = styled.div`
     .introAboutButton {
         display: block;
         text-decoration: none;
-        color: #033135;
+        color: #ffffff;
         margin-right: 30px;
         width: 176px;
         height: 57px;
         border: 1px solid #ffffff;
         border-radius: 5px;
-        color: #033135;
         font-family: poppins;
         font-weight: 600;
         font-size: 16px;
         text-align: center;
         line-height: 57px;
+        background: #05555C;
     }
 
     .introAboutButton:hover {
-        color: #FFFFFF;
-        background: #127176;
-        cursor: pointer;
-    }
+      color: #05555C;
+      background: #FFFFFF;
+      cursor: pointer;
+      border: 1px solid #05555C;
+  }
 `;
 
 const StatsContainer = styled.div`

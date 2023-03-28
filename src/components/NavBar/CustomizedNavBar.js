@@ -7,7 +7,7 @@ const Nav = styled.div`
     left: 0;
     width: 100%;
     background: #fafafa;
-    box-shadow: -0.1px 6px 9px -6px #1B1C1C57;
+    box-shadow: -0.1px 6px 9px -6px rgba(0, 0, 0, 0.8);;
     z-index: 1100;
 
     .dropdownContainer {

@@ -13,6 +13,38 @@ import {
 } from './store/sitesearchReducer';
 
 import PublicTabView from './components/tabs/publicTabView';
+import searchImg from '../../assets/search/Search_Img.png'
+
+const SearchViewContainer = styled.div`
+  width: 1440px;
+  margin: 0 auto;
+  position: relative;
+
+  .backgroundImg {
+    position: absolute;
+    top: -80px;
+    right: 0;
+    height: 356px;
+    width: 604px;
+  }
+`;
+
+const SearchbarContainer = styled.div`
+  position: relative;
+  margin: 80px 402px 42px 149px;
+  background: #08838D;
+  border-radius: 0px 20px;
+  padding: 32px 158px 38px 69px;
+
+  .searchResultTitle {
+    font-family: poppins;
+    font-weight: 600;
+    font-size: 35px;
+    line-height: 45px;
+    letter-spacing: 0.02em;
+    color: #FFFFFF;
+  }
+`;
 
 const SearchBar = styled.div`
   display: flex;
@@ -90,7 +122,6 @@ function searchComponent({
   async function onChange(newValue = []) {
     const searchResp = await getAuthorizedResultQuery(newValue);
     setSearchResults(searchResp);
-    // setTab('1');
     setSearchText(newValue);
     history.push(`/sitesearch?keyword=${newValue}`);
   }
@@ -121,7 +152,6 @@ function searchComponent({
     if (event.key === "Enter") {
     const searchResp = await getAuthorizedResultQuery(inputValue);
     setSearchResults(searchResp);
-    // setTab('1');
     setSearchText(inputValue);
     history.push(`/sitesearch?keyword=${inputValue}`);
     }
@@ -133,68 +163,10 @@ function searchComponent({
   }, [open]);
 
   return (
-    <>
-      <div className={classes.heroArea}>
-        {/* <div>
-          <Autocomplete
-            className={classes.autocomplete}
-            closeIcon={(
-              <img
-                className={classes.clearIcon}
-                src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/globalSearchDelete.svg"
-                alt="clear icon"
-              />
-)}
-            classes={{ root: classes.inputRoot }}
-            freeSolo
-            id="search"
-            onChange={(event, newValue) => onChange(newValue)}
-            inputValue={inputValue}
-            onInputChange={(event, newInputValue) => {
-              console.log("here!");
-              getAutoCompleteRes(newInputValue);
-            }}
-            PopperComponent={CustomPopper}
-            value={value}
-            style={{ width: 750 }}
-            options={[]}
-            getOptionLabel={(option) => option}
-            loading={loading}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                variant="outlined"
-                hiddenLabel
-                InputProps={{
-                  style: {
-                    paddingLeft: '20px',
-                    paddingTop: '2px',
-                    paddingBottom: '3px',
-                    color: '#1479D3',
-                  },
-                  classes: {
-                    root: classes.input,
-                    notchedOutline: classes.notchedOutline,
-                  },
-                  ...params.InputProps,
-                  endAdornment: (
-                    <>
-                      {loading ? <CircularProgress color="inherit" size={20} /> : null}
-                      {params.InputProps.endAdornment}
-                      <span onClick={() => onChange(inputValue)} className={classes.searchIconSpan}>
-                        <img
-                          className={classes.searchIcon}
-                          src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/globalSearchSearch.svg"
-                          alt="search icon"
-                        />
-                      </span>
-                    </>
-                  ),
-                }}
-              />
-            )}
-          />
-        </div> */}
+    <SearchViewContainer>
+      <img className='backgroundImg' src={searchImg}/>
+      <SearchbarContainer>
+        <div className='searchResultTitle'>Search Results</div>
         <SearchBar onMouseOver={() => setDeleteIconShow('block')} onMouseOut={() => setDeleteIconShow('none')}>
           <SearchInput ref={inputRef} type="text" value={inputValue} placeholder="SEARCH" onChange={handleTextInputChange} onKeyPress={handleKeyPress} />
           <div className='searchIcon' onClick={() => onChange(inputValue)}>
@@ -204,7 +176,7 @@ function searchComponent({
               <img className="deleteIconImg" style={{display:deleteIconShow}} src='https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/globalSearchDelete.svg' alt='clear icon' />
           </div>
         </SearchBar>
-      </div>
+      </SearchbarContainer>
       <div className={classes.bodyContainer}>
         <Box sx={{ width: '100%', typography: 'body1' }}>
           <PublicTabView
@@ -214,7 +186,7 @@ function searchComponent({
           />
         </Box>
       </div>
-    </>
+    </SearchViewContainer>
   );
 }
 

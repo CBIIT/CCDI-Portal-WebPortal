@@ -24,7 +24,7 @@ const BackgroundFirst = styled.div`
 
 const BackgroundSecond = styled.div`
   position: absolute;
-  top: 1090px;
+  top: 1085px;
   left: 0;
   width: 100%;
   height: 1084px;
@@ -37,7 +37,7 @@ const BackgroundSecond = styled.div`
 
 const BackgroundThird = styled.div`
   position: absolute;
-  top: 2174px;
+  top: 2170px;
   left: 0;
   width: 100%;
   height: 1084px;
@@ -61,8 +61,9 @@ const Banner = styled.div`
   height: 492px;
   width: 100%;
 
-  background: linear-gradient(180deg, #1CA0A8 0%, rgba(69, 182, 189, 0.955183) 43.29%, rgba(82, 182, 152, 0.95) 100%);
-  border: 2px solid #7CCFD6;
+  background: linear-gradient(180deg, #1CA0A8 0%, rgba(69, 182, 189, 0.955183) 43.29%, rgba(82, 182, 152, 0.95) 100%),
+              linear-gradient(180deg, rgba(17, 196, 212, 0.4) 0%, rgba(120, 233, 117, 0.38) 100%),
+              linear-gradient(0deg, #56B0B8, #56B0B8), #2ADEC7;
   box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.05);
   z-index: 8;
 `;
@@ -189,33 +190,47 @@ const StatsContainer = styled.div`
       z-index: 9;
       background: white;
       filter: blur(50px);
+
+      @media (min-width: 1440px) {
+        left: calc(1440px - 100vw - 200px);
+        width: calc(100vw - 1440px + 400px);
+      }
+      
+      @media (max-width: 1440px) {
+        left: -200px;
+        width: 400px;
+      }
     }
 
     .rightbox {
       position: absolute;
-      right: calc(1440px - 100vw - 200px);
       top: 0;
-      width: calc(100vw - 1440px + 400px);
       height: 400px;
       z-index: 9;
       background: white;
       filter: blur(50px);
+    
+      @media (min-width: 1440px) {
+        right: calc(1440px - 100vw - 200px);
+        width: calc(100vw - 1440px + 400px);
+      }
+      
+      @media (max-width: 1440px) {
+        right: -200px;
+        width: 400px;
+      }
     }
 
     .borderTop {
       height: 72px;
-      background: linear-gradient(180deg, rgba(153, 153, 153, 0.2) 0%, rgba(255, 255, 255, 0) 94.44%);
-      backdrop-filter: blur(2.5px);
       transform: matrix(1, 0, 0, -1, 0, 0);
-      border-top: 1.4px solid #7CCFD6;
+      border-top: 1.8px solid #4BBFC6;
       position: relative;
     }
 
     .borderBottom {
       height: 72px;
-      background: linear-gradient(180deg, rgba(153, 153, 153, 0.2) 0%, rgba(255, 255, 255, 0) 94.44%);
-      backdrop-filter: blur(2.5px);
-      border-top: 1.4px solid #7CCFD6;
+      border-top: 1.8px solid #4BBFC6;
     }
 
     .statGlance {

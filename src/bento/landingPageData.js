@@ -22,9 +22,9 @@ export const introData = {
 
 export const titleData = {
   latestUpdatesTitle: 'Latest Updates',
-  resourceTitle: 'Resources',
+  resourceTitle: 'Explore',
   applicationsTitle: 'APPLICATIONS',
-  cloudResourcesTitle: 'OTHER APPLICATIONS',
+  cloudResourcesTitle: 'OTHER RESOURCES',
   aboutTitle: 'About the CCDI Community',
 };
 

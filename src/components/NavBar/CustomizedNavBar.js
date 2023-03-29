@@ -7,8 +7,9 @@ const Nav = styled.div`
     left: 0;
     width: 100%;
     background: #fafafa;
-    box-shadow: -0.1px 6px 9px -6px #1B1C1C57;
+    box-shadow: -0.1px 6px 9px -6px rgba(0, 0, 0, 0.5);;
     z-index: 1100;
+    position: relative
 
     .dropdownContainer {
       // outline: none;
@@ -186,7 +187,7 @@ const NavBar = () => {
       {id:'mci', name: 'Molecular Characterization Initiative for Childhood Cancers'},
       {id:'mtp', name: 'Molecular Targets Platform'},
       {id:'nccr', name:'National Childhood Cancer Registry Explorer'}],
-    "Other Applications": [
+    "Other Resources": [
       {id:"cgc", name:'Cancer Genomics Cloud'}, 
       {id:'dbgap', name:'Database of Genotypes and Phenotypes'}],
   };
@@ -215,7 +216,7 @@ const NavBar = () => {
             <div className={clickedTitle === 'Applications' ? 'navTitle clicked' : 'navTitle'}>Applications</div>
           </LiSection>
           <LiSection onClick={handleMenuClick}>
-            <div className={clickedTitle === 'Other Applications' ? 'navTitle clicked' : 'navTitle'}>Other Applications</div>
+            <div className={clickedTitle === 'Other Resources' ? 'navTitle clicked' : 'navTitle'}>Other Resources</div>
           </LiSection>
           <LiSection onClick={handleMenuClick}>
             <NavLink to="/news"><div className='navTitle directLink' style={path === '/news' ? activeStyle : null}>News</div></NavLink>

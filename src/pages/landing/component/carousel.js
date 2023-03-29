@@ -173,10 +173,10 @@ const HeroList = styled.div`
     }
 
     .listItemContent {
-        color: #000000;
+        color: rgba(0, 0, 0, 0.7);
         font-family: poppins;
         font-weight: 600;
-        font-size: 22px;
+        font-size: 18px;
         line-height: 25px;
         width: 300px;
         text-decoration: none;
@@ -203,7 +203,7 @@ const HeroList = styled.div`
     }
 
     .carousel__item:nth-child(1) {
-        transform: translateY(-365%) scale(1);
+        transform: translateY(-365%) scale(0.8);
         opacity: 0;
         visibility: hidden;
     }
@@ -232,11 +232,11 @@ const HeroList = styled.div`
 
         .listItemContent {
             color: #01828C;
-            transform: translateY(0) scale(1, 0.82);
+            transform: translateX(10px) scale(1.05, 0.82);
         }
 
         .exportIcon {
-            transform: translateY(0) scale(1, 0.82);
+            transform: translateY(0) scale(1.024, 0.80);
         }
 
         .exportContainer {
@@ -258,13 +258,20 @@ const HeroList = styled.div`
     }
 
     .carousel__item:last-child {
-        transform: translateY(365%) scale(1);
+        transform: translateY(365%) scale(0.8);
         opacity: 0;
         visibility: hidden;
     }
 `;
 
+const getRandomList = (itemList) => {
+    //todo
+    const newItemList = itemList;
+    return newItemList;
+};
+
 const Carousel = () => {
+    const randomCarouselList = getRandomList(carouselList);
     const isVisible = usePageVisibility();
 
     const startTimer = () => {
@@ -323,7 +330,7 @@ const Carousel = () => {
                 <div className='activeFrame'/>
                     <div id="carouselList" class='carousel'>
                         {
-                            carouselList.map((item, idx) => {
+                            randomCarouselList.map((item, idx) => {
                                 const key = `carousel_${idx}_last_clone`;
                                 return (
                                     <div key={key} className='carousel__item' onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}}>

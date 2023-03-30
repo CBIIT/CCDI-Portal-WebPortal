@@ -265,8 +265,12 @@ const HeroList = styled.div`
 `;
 
 const getRandomList = (itemList) => {
-    //todo
-    const newItemList = itemList;
+    const randomInt = Math.floor(Math.random() * itemList.length);
+    const newItemList = [];
+    for(let i = 0; i < itemList.length; i++) {
+        const newidx = (randomInt+i)%itemList.length;
+        newItemList.push(itemList[newidx]);
+    }
     return newItemList;
 };
 

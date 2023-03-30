@@ -136,6 +136,11 @@ export const aboutContainerData = {
 
 export const carouselList = [
   {
+    img: wheel6,
+    content: 'Cancer Genomics Cloud',
+    link: 'https://www.cancergenomicscloud.org',
+  },
+  {
     img: wheel1,
     content: 'Childhood Cancer Data Catalog',
     link: 'https://datacatalog.ccdi.cancer.gov',
@@ -144,6 +149,11 @@ export const carouselList = [
     img: wheel2,
     content: 'Clinical Interpretation of Variants in Cancer',
     link: 'https://civicdb.org',
+  },
+  {
+    img: wheel7,
+    content: 'Database of Genotypes and Phenotypes',
+    link: 'https://www.ncbi.nlm.nih.gov/gap'
   },
   {
     img: wheel3,
@@ -160,16 +170,6 @@ export const carouselList = [
     content: 'National Childhood Cancer Registry Explorer',
     link: 'https://nccrexplorer.ccdi.cancer.gov',
   },
-  {
-    img: wheel6,
-    content: 'Cancer Genomics Cloud',
-    link: 'https://www.cancergenomicscloud.org',
-  },
-  {
-    img: wheel7,
-    content: 'Database of Genotypes and Phenotypes',
-    link: 'https://www.ncbi.nlm.nih.gov/gap'
-  }
 ];
 
 export const GET_LANDING_PAGE_DATA_QUERY = gql`{

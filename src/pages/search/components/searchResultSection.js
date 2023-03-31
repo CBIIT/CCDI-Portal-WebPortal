@@ -114,7 +114,7 @@ function SearchPagination({
       <div className={classes.totalResults}>
         <span className={classes.totalCount}>{count}</span>
         {' '}
-        Results
+        results
       </div>
       ) }
       <Grid className={classes.subsection}>
@@ -255,15 +255,15 @@ const styles = {
   totalResults: {
     // margin: '0 auto',
     maxWidth: '900px',
-    fontFamily: 'Nunito',
-    color: '#000',
+    fontFamily: 'Poppins',
+    color: '#13666A',
     fontSize: '20px',
-    fontWeight: '300',
-    margin: '16px auto',
-    paddingLeft: '32px',
+    fontWeight: '500',
+    margin: '0 0 71px 220px',
+    paddingLeft: '-50px',
   },
   totalCount: {
-    fontFamily: 'Inter',
+    fontFamily: 'Poppins',
   },
   loadingMessageWrapper: {
     textAlign: 'center',

@@ -15,7 +15,7 @@ function SearchPagination({
 }) {
   const [page, setPage] = useState(1);
 
-  const pageSize = 1;
+  const pageSize = 2;
   const [data, setdata] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -226,10 +226,7 @@ const styles = {
     fontSize: '12px',
   },
   subsectionBody: {
-    margin: '0 auto',
-    maxWidth: '800px',
-    // borderBottom: '1px solid #8DCAFF',
-    paddingBottom: '15px',
+    margin: '0 180px 0 219px',
   },
   subsection: {
     '&:last-child $subsectionBody': {
@@ -253,7 +250,6 @@ const styles = {
     },
   },
   totalResults: {
-    // margin: '0 auto',
     maxWidth: '900px',
     fontFamily: 'Poppins',
     color: '#13666A',

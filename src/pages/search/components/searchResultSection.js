@@ -100,7 +100,7 @@ function SearchPagination({
       );
     }
 
-    if (data && data.length <= 0) return <div>No data</div>;
+    if (data && data.length <= 0) return <div className={classes.noticeContainer}>{searchText ? "No results" : "Please input keywords"}</div>;
 
     return data.map(
       // eslint-disable-next-line max-len
@@ -268,6 +268,12 @@ const styles = {
     paddingLeft: '10px',
     fontSize: '18px',
   },
+  noticeContainer: {
+    fontFamily: 'Poppins',
+    color: '#13666A',
+    fontSize: '20px',
+    marginBottom: '100px',
+  }
 };
 
 export default withStyles(styles)(SearchPagination);

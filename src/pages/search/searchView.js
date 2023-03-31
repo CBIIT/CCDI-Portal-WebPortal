@@ -43,34 +43,41 @@ const SearchbarContainer = styled.div`
     line-height: 45px;
     letter-spacing: 0.02em;
     color: #FFFFFF;
+    margin-bottom: 15px;
   }
 `;
 
 const SearchBar = styled.div`
   display: flex;
   margin: 0 auto;
-  width: 750px;
+  width: 662px;
   height: 53px;
-  border: 2px solid #616161;
-  border-radius: 8px;
+  // border: 2px solid #616161;
+  // border-radius: 8px;
   background: white;
+  border-radius: 4px;
 
-  .searchIcon {
+  .searchButton {
+    font-family: 'Open Sans';
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 16px;
     margin-left: auto;
-    margin-right: 13px;
-    height: 22px;
-    width: 22px;
-    padding-top: 15px;
+    padding: 16px 20px;
+    background: #05555C;
+    color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+    border-radius: 0px 4px 4px 0px;
   }
 
-  .searchIconImg:hover {
+  .searchButton:hover {
     cursor: pointer;
   }
 
   .deleteIcon {
     height: 18px;
     width: 18px;
-    padding-top: 17px;
+    padding-top: 19px;
     margin-right: 13px;
   }
 
@@ -168,13 +175,11 @@ function searchComponent({
       <SearchbarContainer>
         <div className='searchResultTitle'>Search Results</div>
         <SearchBar onMouseOver={() => setDeleteIconShow('block')} onMouseOut={() => setDeleteIconShow('none')}>
-          <SearchInput ref={inputRef} type="text" value={inputValue} placeholder="SEARCH" onChange={handleTextInputChange} onKeyPress={handleKeyPress} />
-          <div className='searchIcon' onClick={() => onChange(inputValue)}>
-              <img className="searchIconImg" src='https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/globalSearchSearch.svg' alt='search icon' />
-          </div>
+          <SearchInput ref={inputRef} type="text" value={inputValue} onChange={handleTextInputChange} onKeyPress={handleKeyPress} />
           <div className='deleteIcon' onClick={handleClear} >
               <img className="deleteIconImg" style={{display:deleteIconShow}} src='https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/globalSearchDelete.svg' alt='clear icon' />
           </div>
+          <div className='searchButton' onClick={() => onChange(inputValue)}>Search</div>
         </SearchBar>
       </SearchbarContainer>
       <div className={classes.bodyContainer}>

@@ -131,8 +131,8 @@ const HeroList = styled.div`
         left: 25px;
         width: 700px;
         height: 144px;
-        border: 3px solid #FFFFFF;
-        border-radius: 22px;
+        border: 3px solid #F7F7F7;
+        border-radius: 23px;
         box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.35);
         z-index: 60;
         pointer-events: none; 

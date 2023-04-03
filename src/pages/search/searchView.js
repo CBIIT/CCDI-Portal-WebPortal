@@ -171,7 +171,7 @@ function searchComponent({
 
   return (
     <SearchViewContainer>
-      <img className='backgroundImg' src={searchImg}/>
+      <img className='backgroundImg' src={searchImg} alt="" />
       <SearchbarContainer>
         <div className='searchResultTitle'>Search Results</div>
         <SearchBar onMouseOver={() => setDeleteIconShow('block')} onMouseOut={() => setDeleteIconShow('none')}>

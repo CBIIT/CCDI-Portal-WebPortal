@@ -35,16 +35,16 @@ const AboutCard = ({
   return (
     <>
       <Grid item container className={classes.card}>
-        <Grid item xs={1} className={classes.indexContainer}>
-          {index + 1 }
-        </Grid>
-        <Grid item xs={11} className={classes.propertyContainer}>
+        {/* <Grid item xs={1} className={classes.indexContainer}>
+          {index + 10 }
+        </Grid> */}
+        <Grid item xs={12} className={classes.propertyContainer}>
           <div>
             {/* <span className={classes.detailContainerHeader}>ABOUT</span> */}
             <a href={`${window.location.origin}${data.page}`} className={classes.cardTitle}>{data.title}</a>
           </div>
           <div className={classes.text}>{getHighlightedText(results, searchText)}</div>
-          <div className={classes.linkText}><a href={`${window.location.origin}${data.page}`}>{`${window.location.origin}${data.page}`}</a></div>
+          <div><a className={classes.linkText} href={`${window.location.origin}${data.page}`}>{`${window.location.origin}${data.page}`}</a></div>
         </Grid>
       </Grid>
 
@@ -57,9 +57,18 @@ const styles = (theme) => ({
     height: '22px',
     margin: '0px 0px 0px 6px',
   },
+  text: {
+    fontFamily: 'Inter',
+    fontWeight: '300',
+    fontSize: '16px',
+    lineHeight: '24px',
+  },
   linkText: {
-    fontFamily: 'Nunito',
-    color: theme.palette.text.link,
+    fontFamily: 'Inter',
+    fontWeight: '400',
+    fontSize: '15px',
+    lineHeight: '24px',
+    color: '#067781',
     textDecoration: 'none',
   },
   indexContainer: {
@@ -69,15 +78,14 @@ const styles = (theme) => ({
     fontSize: '13px',
   },
   propertyContainer: {
-    padding: '16px 16px 16px 0px',
-    borderBottom: '2px solid #E7EEF5',
+    padding: '0 0 52px 0px',
   },
   cardTitle: {
-    color: theme.palette.text.link,
+    color: '#0095A2',
     textDecoration: 'none',
-    fontSize: '16px',
-    fontFamily: 'Nunito',
-    // paddingLeft: '9px',
+    fontSize: '18px',
+    fontFamily: 'Poppins',
+    fontWeight: '500',
     verticalAlign: 'middle',
   },
   content: {

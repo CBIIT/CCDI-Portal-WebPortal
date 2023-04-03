@@ -15,7 +15,7 @@ function SearchPagination({
 }) {
   const [page, setPage] = useState(1);
 
-  const pageSize = 1;
+  const pageSize = 2;
   const [data, setdata] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -100,7 +100,7 @@ function SearchPagination({
       );
     }
 
-    if (data && data.length <= 0) return <div>No data</div>;
+    if (data && data.length <= 0) return <div className={classes.noticeContainer}>{searchText ? "No results" : "Please input keywords"}</div>;
 
     return data.map(
       // eslint-disable-next-line max-len
@@ -114,7 +114,7 @@ function SearchPagination({
       <div className={classes.totalResults}>
         <span className={classes.totalCount}>{count}</span>
         {' '}
-        Results
+        results
       </div>
       ) }
       <Grid className={classes.subsection}>
@@ -226,10 +226,7 @@ const styles = {
     fontSize: '12px',
   },
   subsectionBody: {
-    margin: '0 auto',
-    maxWidth: '800px',
-    // borderBottom: '1px solid #8DCAFF',
-    paddingBottom: '15px',
+    margin: '0 180px 0 219px',
   },
   subsection: {
     '&:last-child $subsectionBody': {
@@ -253,17 +250,16 @@ const styles = {
     },
   },
   totalResults: {
-    // margin: '0 auto',
     maxWidth: '900px',
-    fontFamily: 'Nunito',
-    color: '#000',
+    fontFamily: 'Poppins',
+    color: '#13666A',
     fontSize: '20px',
-    fontWeight: '300',
-    margin: '16px auto',
-    paddingLeft: '32px',
+    fontWeight: '500',
+    margin: '0 0 71px 220px',
+    paddingLeft: '-50px',
   },
   totalCount: {
-    fontFamily: 'Inter',
+    fontFamily: 'Poppins',
   },
   loadingMessageWrapper: {
     textAlign: 'center',
@@ -272,6 +268,12 @@ const styles = {
     paddingLeft: '10px',
     fontSize: '18px',
   },
+  noticeContainer: {
+    fontFamily: 'Poppins',
+    color: '#13666A',
+    fontSize: '20px',
+    marginBottom: '100px',
+  }
 };
 
 export default withStyles(styles)(SearchPagination);

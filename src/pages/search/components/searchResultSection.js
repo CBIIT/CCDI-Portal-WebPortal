@@ -14,10 +14,11 @@ function SearchPagination({
   datafield, classes, searchText, count, isPublic,
 }) {
   const [page, setPage] = useState(1);
-
-  const pageSize = 2;
+  const [pageSize, setPageSize] = useState(1);
   const [data, setdata] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [pageListVisible, setPageListVisible] = useState(0);
+  const sizelist = [1,2,3];
 
   function getPublicQuery(field) {
     switch (field) {
@@ -61,7 +62,7 @@ function SearchPagination({
     setPage(1);
     setdata([]);
     onChange(searchText);
-  }, [searchText, datafield]);
+  }, [searchText, datafield, pageSize]);
 
   const onNext = () => {
     if (page < Math.ceil(count / pageSize)) {
@@ -88,6 +89,11 @@ function SearchPagination({
     onChange(searchText, newPage);
     setPage(newPage);
     scrollToTop();
+  };
+
+  const onPageSizeClick = (e) => {
+    setPageSize(e.target.innerText);
+    setPageListVisible(!pageListVisible)
   };
 
   const renderCards = () => {
@@ -124,6 +130,23 @@ function SearchPagination({
       </Grid>
       {Math.ceil(count / pageSize) > 1 && (
       <div className={classes.paginationContainer}>
+        <div className={classes.perPageContainer}>
+          <div>Results per Page:</div>
+          <div className={classes.pageSizeContainer} onClick={() => setPageListVisible(!pageListVisible)}>{pageSize}</div>
+          <div className={pageListVisible ? classes.pageSizeList : classes.pageSizeListHidden}>
+            {
+              sizelist.map((sizeItem, idx) => {
+                const key = `size_${idx}`;
+                return (
+                  <div key={key} className={classes.pageSizeItem} onClick={onPageSizeClick}>{sizeItem}</div>
+                )
+              })
+            }
+            {/* <div className={classes.pageSizeItem} onClick={onPageSizeClick}>1</div>
+            <div className={classes.pageSizeItem} onClick={onPageSizeClick}>2</div>
+            <div className={classes.pageSizeItem} onClick={onPageSizeClick}>3</div> */}
+          </div>
+        </div>
         <Button sx={{ borderRadius: 100 }} onClick={onPrevious} className={classes.prevButton}>
           <span>
             <img
@@ -195,9 +218,45 @@ const styles = {
     justifyContent: 'center',
     maxWidth: '680px',
     margin: '0 auto',
-    paddingBottom: '20px',
+    paddingBottom: '30px',
     '& > *': {
       marginTop: '8px',
+    },
+  },
+  perPageContainer: {
+    display: 'flex',
+    fontFamily: 'Poppins',
+    fontWeight: '300',
+    fontSize: '14px',
+    color: '#045B80',
+  },
+  pageSizeContainer: {
+    marginLeft: '10px',
+    '&:hover': {
+      cursor: 'pointer',
+    },
+  },
+  pageSizeList: {
+    position: 'relative',
+    top: '25px',
+    left: '-10px',
+    width: '45px',
+    padding: '5px 9px',
+    background: '#F5F5F5',
+    border: '1px solid #99A1B7',
+  },
+  pageSizeListHidden: {
+    position: 'relative',
+    top: '25px',
+    left: '-10px',
+    width: '45px',
+    padding: '5px 9px',
+    border: '1px solid #99A1B7',
+    visibility: 'hidden',
+  },
+  pageSizeItem: {
+    '&:hover': {
+      cursor: 'pointer',
     },
   },
   ul: {

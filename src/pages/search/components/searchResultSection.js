@@ -1,5 +1,5 @@
 /* eslint-disable no-await-in-loop */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   withStyles, Button, Grid, CircularProgress,
 } from '@material-ui/core';
@@ -10,6 +10,26 @@ import {
   SEARCH_PAGE_RESULT_ABOUT_PUBLIC,
 } from '../../../bento/sitesearch';
 
+const useOutsideAlerter = (ref) => {
+  useEffect(() => {
+      function handleClickOutside(event) {
+        console.log("???", event.target);
+          if (!event.target || !event.target.getAttribute("class") || (event.target.getAttribute("class") && !event.target.getAttribute("class").includes("pageSizeItem") && ref.current && !ref.current.contains(event.target))) {
+            const toggle = document.getElementById("resultNumber");
+            // console.log("???", event.target.getAttribute("class"));
+            if (toggle && !document.getElementById("pagelist").className.includes("pageSizeListHidden")) {
+              toggle.click();
+            }
+          }
+      }
+
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+          document.removeEventListener("mousedown", handleClickOutside);
+      };
+  }, [ref]);
+};
+
 function SearchPagination({
   datafield, classes, searchText, count, isPublic,
 }) {
@@ -19,6 +39,8 @@ function SearchPagination({
   const [loading, setLoading] = useState(false);
   const [pageListVisible, setPageListVisible] = useState(0);
   const sizelist = [1,2,3];
+  const perPageSelection = useRef(null);
+  useOutsideAlerter(perPageSelection);
 
   function getPublicQuery(field) {
     switch (field) {
@@ -131,9 +153,9 @@ function SearchPagination({
       {Math.ceil(count / pageSize) > 1 && (
       <div className={classes.paginationContainer}>
         <div className={classes.perPageContainer}>
-          <div>Results per Page:</div>
-          <div className={classes.pageSizeContainer} onClick={() => setPageListVisible(!pageListVisible)}>{pageSize}</div>
-          <div className={pageListVisible ? classes.pageSizeList : classes.pageSizeListHidden}>
+          Results per Page:
+          <div id="resultNumber" className={classes.pageSizeContainer} onClick={() => setPageListVisible(!pageListVisible)}>{pageSize}</div>
+          <div ref={perPageSelection} id="pagelist" className={pageListVisible ? classes.pageSizeList : classes.pageSizeListHidden}>
             {
               sizelist.map((sizeItem, idx) => {
                 const key = `size_${idx}`;
@@ -142,9 +164,6 @@ function SearchPagination({
                 )
               })
             }
-            {/* <div className={classes.pageSizeItem} onClick={onPageSizeClick}>1</div>
-            <div className={classes.pageSizeItem} onClick={onPageSizeClick}>2</div>
-            <div className={classes.pageSizeItem} onClick={onPageSizeClick}>3</div> */}
           </div>
         </div>
         <Button sx={{ borderRadius: 100 }} onClick={onPrevious} className={classes.prevButton}>

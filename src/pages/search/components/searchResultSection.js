@@ -14,7 +14,7 @@ const useOutsideAlerter = (ref) => {
   useEffect(() => {
       function handleClickOutside(event) {
         console.log("???", event.target);
-          if (!event.target || !event.target.getAttribute("class") || (event.target.getAttribute("class") && !event.target.getAttribute("class").includes("pageSizeItem") && ref.current && !ref.current.contains(event.target))) {
+          if (!event.target || !event.target.getAttribute("class") || (event.target.getAttribute("class") && !event.target.getAttribute("class").includes("pageSizeItem") && !event.target.getAttribute("class").includes("pageSizeContainer") && ref.current && !ref.current.contains(event.target))) {
             const toggle = document.getElementById("resultNumber");
             // console.log("???", event.target.getAttribute("class"));
             if (toggle && !document.getElementById("pagelist").className.includes("pageSizeListHidden")) {
@@ -150,7 +150,6 @@ function SearchPagination({
           {renderCards()}
         </Grid>
       </Grid>
-      {Math.ceil(count / pageSize) > 1 && (
       <div className={classes.paginationContainer}>
         <div className={classes.perPageContainer}>
           Results per Page:
@@ -173,11 +172,8 @@ function SearchPagination({
               src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/globalSearchPrevious.svg"
               alt="previous button"
             />
-
           </span>
-          previous
         </Button>
-
         <Pagination
           classes={{ ul: classes.paginationUl }}
           className={classes.paginationRoot}
@@ -191,7 +187,6 @@ function SearchPagination({
           onChange={handleChangePage}
         />
         <Button sx={{ borderRadius: 100 }} onClick={onNext} className={classes.nextButton}>
-          next
           <span>
             <img
               className={classes.nextIcon}
@@ -200,16 +195,13 @@ function SearchPagination({
             />
           </span>
         </Button>
-
       </div>
-      )}
     </>
   );
 }
 
 const styles = {
   prevButton: {
-    marginRight: '44px',
     fontFamily: '"Open Sans", sans-serif',
     fontWeight: 'bold',
     fontSize: '12px',
@@ -218,10 +210,8 @@ const styles = {
     marginTop: '6px',
   },
   nextButton: {
-    marginLeft: '44px',
     fontFamily: '"Open Sans", sans-serif',
     fontWeight: 'bold',
-
     fontSize: '12px',
   },
   nextIcon: {
@@ -289,15 +279,16 @@ const styles = {
   paginationUl: {
     padding: '2px',
     '& .MuiPaginationItem-root': {
-      color: '#565656',
-      fontFamily: '"Open Sans", sans-serif',
-      fontSize: '11px',
-      fontWeight: 'bold',
+      color: '#045B80',
+      fontFamily: 'Poppins',
+      fontSize: '14px',
+      fontWeight: '300',
     },
   },
   paginationRoot: {
     '& .Mui-selected': {
       backgroundColor: '#D9E8F8',
+      fontWeight: '600',
     },
   },
   content: {
@@ -310,12 +301,6 @@ const styles = {
     '&:last-child $subsectionBody': {
       borderBottom: 'none',
     },
-  },
-  descriptionPart: {
-    paddingBottom: '26px',
-  },
-  description: {
-    fontWeight: 'bold',
   },
   link: {
     color: '#DD401C',

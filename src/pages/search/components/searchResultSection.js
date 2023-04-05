@@ -165,13 +165,7 @@ function SearchPagination({
             }
           </div>
         </div>
-        <div sx={{ borderRadius: 100 }} onClick={onPrevious} className={classes.prevButton}>
-            <img
-              className={classes.prevIcon}
-              src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/globalSearchPrevious.svg"
-              alt="previous button"
-            />
-        </div>
+        <div onClick={onPrevious} className={classes.prevButton} />
         <Pagination
           classes={{ ul: classes.paginationUl }}
           className={classes.paginationRoot}
@@ -184,13 +178,7 @@ function SearchPagination({
           hidePrevButton
           onChange={handleChangePage}
         />
-        <div sx={{ borderRadius: 100 }} onClick={onNext} className={classes.nextButton}>
-            <img
-              className={classes.nextIcon}
-              src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/globalSearchNext.svg"
-              alt="previous button"
-            />
-        </div>
+        <div onClick={onNext} className={classes.nextButton} />
       </div>
     </>
   );
@@ -198,28 +186,34 @@ function SearchPagination({
 
 const styles = {
   prevButton: {
-    fontFamily: '"Open Sans", sans-serif',
-    fontWeight: 'bold',
-    fontSize: '12px',
+    content: "",
+    display: 'inline-block',
+    width: '6px',
+    height: '6px',
+    borderBottom: '1px solid #99A1B7',
+    borderLeft: '1px solid #99A1B7',
+    margin: '0 0 4px 8px',
+    transform: 'rotate(45deg)',
     '&:hover': {
       cursor: 'pointer',
+      borderBottom: '1px solid #045B80',
+      borderLeft: '1px solid #045B80',
     },
   },
   nextButton: {
-    fontFamily: '"Open Sans", sans-serif',
-    fontWeight: 'bold',
-    fontSize: '12px',
+    content: "",
+    display: 'inline-block',
+    width: '6px',
+    height: '6px',
+    borderBottom: '1px solid #99A1B7',
+    borderLeft: '1px solid #99A1B7',
+    margin: '0 0 4px 8px',
+    transform: 'rotate(225deg)',
     '&:hover': {
       cursor: 'pointer',
+      borderBottom: '1px solid #045B80',
+      borderLeft: '1px solid #045B80',
     },
-  },
-  nextIcon: {
-    height: '12px',
-    margin: '6px 6px 0px 12px',
-  },
-  prevIcon: {
-    height: '12px',
-    margin: '6px 12px 0px 12px',
   },
   paginationContainer: {
     display: 'flex',

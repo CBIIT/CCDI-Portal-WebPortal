@@ -3,20 +3,25 @@ import styled from 'styled-components';
 import { introData, titleData, statsData, latestUpdatesData, resourcesAppliationsListData, resourcesCloudListData } from '../../bento/landingPageData';
 import Carousel from '../landing/component/carousel';
 import exportIcon from '../../assets/landing/Export_Icon_Black.svg';
-import waterMark from '../../assets/landing/landingBackground.png';
+import bg1 from '../../assets/landing/bg_1.png';
+import bg2 from '../../assets/landing/bg_2.png';
+import bg3 from '../../assets/landing/bg_3.png';
 
 const LandingViewContainer = styled.div`
     font-family: Poppins;
     position: relative;
+    background: white;
+    height: 2970px;
 `;
 
 const BackgroundFirst = styled.div`
   position: absolute;
-  top: 0;
+  top: -1px;
   left: 0;
-  width: 100%;
-  height: 1084px;
-  background-image: url(${waterMark});
+  margin-left: calc(50% - 720px);
+  width: 1440px;
+  height: 900px;
+  background-image: url(${bg1});
   z-index: 3;
   background-repeat: no-repeat;
   background-size: cover;
@@ -26,26 +31,26 @@ const BackgroundSecond = styled.div`
   position: absolute;
   top: 1085px;
   left: 0;
-  width: 100%;
-  height: 1084px;
-  background-image: url(${waterMark});
+  margin-left: calc(50% - 720px);
+  width: 1440px;
+  height: 900px;
+  background-image: url(${bg2});
   z-index: 2;
   background-repeat: no-repeat;
   background-size: cover;
-  transform: rotate(180deg);
 `;
 
 const BackgroundThird = styled.div`
   position: absolute;
-  top: 2170px;
+  top: 1980px;
   left: 0;
-  width: 100%;
-  height: 1084px;
-  background-image: url(${waterMark});
+  margin-left: calc(50% - 720px);
+  width: 1440px;
+  height: 1000px;
+  background-image: url(${bg3});
   z-index: 1;
   background-repeat: no-repeat;
   background-size: cover;
-  transform: scaleX(-1);
 `;
 
 const HeroSection = styled.div`

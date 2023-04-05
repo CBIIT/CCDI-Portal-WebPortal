@@ -1,7 +1,7 @@
 /* eslint-disable no-await-in-loop */
 import React, { useState, useEffect, useRef } from 'react';
 import {
-  withStyles, Button, Grid, CircularProgress,
+  withStyles, Grid, CircularProgress,
 } from '@material-ui/core';
 import Pagination from '@material-ui/lab/Pagination';
 import Components from './component';
@@ -165,15 +165,13 @@ function SearchPagination({
             }
           </div>
         </div>
-        <Button sx={{ borderRadius: 100 }} onClick={onPrevious} className={classes.prevButton}>
-          <span>
+        <div sx={{ borderRadius: 100 }} onClick={onPrevious} className={classes.prevButton}>
             <img
               className={classes.prevIcon}
               src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/globalSearchPrevious.svg"
               alt="previous button"
             />
-          </span>
-        </Button>
+        </div>
         <Pagination
           classes={{ ul: classes.paginationUl }}
           className={classes.paginationRoot}
@@ -186,15 +184,13 @@ function SearchPagination({
           hidePrevButton
           onChange={handleChangePage}
         />
-        <Button sx={{ borderRadius: 100 }} onClick={onNext} className={classes.nextButton}>
-          <span>
+        <div sx={{ borderRadius: 100 }} onClick={onNext} className={classes.nextButton}>
             <img
               className={classes.nextIcon}
               src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/globalSearchNext.svg"
               alt="previous button"
             />
-          </span>
-        </Button>
+        </div>
       </div>
     </>
   );
@@ -205,14 +201,17 @@ const styles = {
     fontFamily: '"Open Sans", sans-serif',
     fontWeight: 'bold',
     fontSize: '12px',
-  },
-  iconSpan: {
-    marginTop: '6px',
+    '&:hover': {
+      cursor: 'pointer',
+    },
   },
   nextButton: {
     fontFamily: '"Open Sans", sans-serif',
     fontWeight: 'bold',
     fontSize: '12px',
+    '&:hover': {
+      cursor: 'pointer',
+    },
   },
   nextIcon: {
     height: '12px',
@@ -287,7 +286,7 @@ const styles = {
   },
   paginationRoot: {
     '& .Mui-selected': {
-      backgroundColor: '#D9E8F8',
+      backgroundColor: 'transparent',
       fontWeight: '600',
     },
   },

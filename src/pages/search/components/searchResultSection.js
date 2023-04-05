@@ -38,7 +38,7 @@ function SearchPagination({
   const [data, setdata] = useState([]);
   const [loading, setLoading] = useState(false);
   const [pageListVisible, setPageListVisible] = useState(0);
-  const sizelist = [1,2,3];
+  const sizelist = [1,2,3,10,25,50,100,250];
   const perPageSelection = useRef(null);
   useOutsideAlerter(perPageSelection);
 
@@ -164,6 +164,14 @@ function SearchPagination({
               })
             }
           </div>
+          Showing
+          <div className={classes.pageNumber}>
+            {pageSize*(page-1)+1}
+            -
+            {pageSize*page < count ? pageSize*page : count}
+          </div>
+          of
+          <div className={classes.pageNumber}>{count}</div>
         </div>
         <div onClick={onPrevious} className={classes.prevButton} />
         <Pagination
@@ -218,7 +226,6 @@ const styles = {
   paginationContainer: {
     display: 'flex',
     justifyContent: 'center',
-    maxWidth: '680px',
     margin: '0 auto',
     paddingBottom: '30px',
     '& > *': {
@@ -329,6 +336,9 @@ const styles = {
     color: '#13666A',
     fontSize: '20px',
     marginBottom: '100px',
+  },
+  pageNumber: {
+    margin: '0 5px',
   }
 };
 

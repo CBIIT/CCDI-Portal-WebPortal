@@ -105,7 +105,7 @@ const HeroList = styled.div`
 
     .blurTop {
         position: absolute;
-        background: linear-gradient(to bottom, #FFFFFF, 70%, transparent);
+        background: linear-gradient(to bottom, #ECECEC, 70%, transparent);
         top: 0;
         left: 0;
         width: 100%;
@@ -116,7 +116,7 @@ const HeroList = styled.div`
 
     .blurBottom {
         position: absolute;
-        background: linear-gradient(to top, #FFFFFF, 70%, transparent);
+        background: linear-gradient(to top, #ECECEC, 70%, transparent);
         bottom: 0;
         left: 0;
         width: 100%;
@@ -158,13 +158,13 @@ const HeroList = styled.div`
         box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.15);
         border-radius: 20px;
         opacity: 1;
-        transition: 0.5s;
+        transition: 650ms;
     }
 
     .itemImgBox {
         margin-left: 19px;
         margin-top: 6px;
-        transition: 0.5s;
+        transition: 650ms;
     }
 
     .itemImg {
@@ -184,7 +184,7 @@ const HeroList = styled.div`
         align-items: center;
         letter-spacing: -0.01em;
         margin-left: 41px;
-        transition: 0.5s;
+        transition: 650ms;
     }
 
     .exportContainer {
@@ -199,7 +199,7 @@ const HeroList = styled.div`
         right: 20px;
         width: 24px;
         height: 24px;
-        transition: 0.5s;
+        transition: 650ms;
     }
 
     .carousel__item:nth-child(1) {

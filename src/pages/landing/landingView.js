@@ -231,11 +231,13 @@ const StatsContainer = styled.div`
       transform: matrix(1, 0, 0, -1, 0, 0);
       border-top: 1.8px solid #4BBFC6;
       position: relative;
+      background: linear-gradient(180deg, rgba(153, 153, 153, 0.2) 0%, rgba(255, 255, 255, 0) 94.44%);
     }
 
     .borderBottom {
       height: 72px;
       border-top: 1.8px solid #4BBFC6;
+      background: linear-gradient(180deg, rgba(153, 153, 153, 0.2) 0%, rgba(255, 255, 255, 0) 94.44%);
     }
 
     .statGlance {

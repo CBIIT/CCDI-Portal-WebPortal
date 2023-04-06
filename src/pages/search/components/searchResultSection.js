@@ -38,7 +38,7 @@ function SearchPagination({
   const [data, setdata] = useState([]);
   const [loading, setLoading] = useState(false);
   const [pageListVisible, setPageListVisible] = useState(0);
-  const sizelist = [1,2,3,10,25,50,100,250];
+  const sizelist = [1,2,3,10,25];
   const perPageSelection = useRef(null);
   useOutsideAlerter(perPageSelection);
 
@@ -159,7 +159,7 @@ function SearchPagination({
               sizelist.map((sizeItem, idx) => {
                 const key = `size_${idx}`;
                 return (
-                  <div key={key} className={classes.pageSizeItem} onClick={onPageSizeClick}>{sizeItem}</div>
+                  sizeItem == pageSize ? null : <div key={key} className={classes.pageSizeItem} onClick={onPageSizeClick}>{sizeItem}</div>
                 )
               })
             }

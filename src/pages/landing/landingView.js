@@ -188,40 +188,40 @@ const StatsContainer = styled.div`
 
     .leftbox {
       position: absolute;
-      top: 0;
+      top: -20px;
       left: calc(1440px - 100vw - 200px);
       width: calc(100vw - 1440px + 400px);
-      height: 400px;
+      height: 520px;
       z-index: 9;
       background: white;
       filter: blur(50px);
 
       @media (min-width: 1440px) {
-        left: calc(1440px - 100vw - 200px);
+        left: calc(1440px - 100vw - 300px);
         width: calc(100vw - 1440px + 400px);
       }
       
       @media (max-width: 1440px) {
-        left: -200px;
+        left: -300px;
         width: 400px;
       }
     }
 
     .rightbox {
       position: absolute;
-      top: 0;
-      height: 400px;
+      top: -20px;
+      height: 520px;
       z-index: 9;
       background: white;
       filter: blur(50px);
     
       @media (min-width: 1440px) {
-        right: calc(1440px - 100vw - 200px);
+        right: calc(1440px - 100vw - 300px);
         width: calc(100vw - 1440px + 400px);
       }
       
       @media (max-width: 1440px) {
-        right: -200px;
+        right: -300px;
         width: 400px;
       }
     }

@@ -173,7 +173,7 @@ function SearchPagination({
           of
           <div className={classes.pageNumber}>{count}</div>
         </div>
-        <div onClick={onPrevious} className={classes.prevButton} />
+        <div className={classes.prevButtonContainer} onClick={onPrevious}><div className={classes.prevButton} /></div>
         <Pagination
           classes={{ ul: classes.paginationUl }}
           className={classes.paginationRoot}
@@ -186,13 +186,21 @@ function SearchPagination({
           hidePrevButton
           onChange={handleChangePage}
         />
-        <div onClick={onNext} className={classes.nextButton} />
+        <div className={classes.nextButtonContainer} onClick={onNext}><div className={classes.nextButton} /></div>
       </div>
     </>
   );
 }
 
 const styles = {
+  prevButtonContainer: {
+    marginLeft: '10px',
+    border: '1px solid #99A1B7',
+    height: '32px',
+    '&:hover': {
+      cursor: 'pointer',
+    },
+  },
   prevButton: {
     content: "",
     display: 'inline-block',
@@ -200,12 +208,21 @@ const styles = {
     height: '6px',
     borderBottom: '1px solid #99A1B7',
     borderLeft: '1px solid #99A1B7',
-    margin: '0 0 4px 8px',
+    margin: '13px 9px 0 11px',
     transform: 'rotate(45deg)',
     '&:hover': {
       cursor: 'pointer',
       borderBottom: '1px solid #045B80',
       borderLeft: '1px solid #045B80',
+    },
+  },
+  nextButtonContainer: {
+    borderTop: '1px solid #99A1B7',
+    borderRight: '1px solid #99A1B7',
+    borderBottom: '1px solid #99A1B7',
+    height: '32px',
+    '&:hover': {
+      cursor: 'pointer',
     },
   },
   nextButton: {
@@ -215,7 +232,7 @@ const styles = {
     height: '6px',
     borderBottom: '1px solid #99A1B7',
     borderLeft: '1px solid #99A1B7',
-    margin: '0 0 4px 8px',
+    margin: '13px 11px 0 9px',
     transform: 'rotate(225deg)',
     '&:hover': {
       cursor: 'pointer',
@@ -229,7 +246,7 @@ const styles = {
     margin: '0 auto',
     paddingBottom: '30px',
     '& > *': {
-      marginTop: '8px',
+      marginTop: '10px',
     },
   },
   perPageContainer: {
@@ -238,6 +255,7 @@ const styles = {
     fontWeight: '300',
     fontSize: '14px',
     color: '#045B80',
+    marginTop: '15px',
   },
   pageSizeContainer: {
     marginLeft: '10px',
@@ -283,12 +301,25 @@ const styles = {
       fontFamily: 'Poppins',
       fontSize: '14px',
       fontWeight: '300',
+      padding: '0',
+      minWidth: '18px',
+    },
+    '& .MuiPaginationItem-page': {
+      transition: 'none',
     },
   },
   paginationRoot: {
-    '& .Mui-selected': {
+    '& .Mui-selected:hover': {
       backgroundColor: 'transparent',
-      fontWeight: '600',
+    },
+    '& .MuiPagination-ul': {
+      padding: '0',
+    },
+    '& .MuiPagination-ul > li' : {
+      height: '32px;',
+      borderTop: '1px solid #99A1B7',
+      borderRight: '1px solid #99A1B7',
+      borderBottom: '1px solid #99A1B7',
     },
   },
   content: {

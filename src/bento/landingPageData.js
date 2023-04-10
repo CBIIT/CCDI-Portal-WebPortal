@@ -118,7 +118,7 @@ export const resourcesCloudListData = [
   {
     id: 'dbgap',
     title: 'Database of Genotypes and Phenotypes',
-    subtitle: 'dbGap',
+    subtitle: 'dbGaP',
     content: 'A database to archive and distribute the data and results from studies of the interaction of genotype and phenotype in Humans.',
     link: 'https://www.ncbi.nlm.nih.gov/gap',
   },

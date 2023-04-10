@@ -127,12 +127,12 @@ const HeroList = styled.div`
 
     .activeFrame {
         position: absolute;
-        top: 244px;
+        top: 243.5px;
         left: 25px;
         width: 700px;
-        height: 144px;
+        height: 145px;
         border: 3px solid #F7F7F7;
-        border-radius: 23px;
+        border-radius: 23.5px;
         box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.35);
         z-index: 60;
         pointer-events: none; 

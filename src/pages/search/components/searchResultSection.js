@@ -14,7 +14,7 @@ const useOutsideAlerter = (ref) => {
   useEffect(() => {
       function handleClickOutside(event) {
         console.log("???", event.target);
-          if (!event.target || !event.target.getAttribute("class") || (event.target.getAttribute("class") && !event.target.getAttribute("class").includes("pageSizeItem") && !event.target.getAttribute("class").includes("pageSizeContainer") && ref.current && !ref.current.contains(event.target))) {
+          if (!event.target || !event.target.getAttribute("class") || (event.target.getAttribute("class") && !event.target.getAttribute("class").includes("pageSizeItem") && !event.target.getAttribute("class").includes("pageSizeArrow") && !event.target.getAttribute("class").includes("pageSizeContainer") && ref.current && !ref.current.contains(event.target))) {
             const toggle = document.getElementById("resultNumber");
             // console.log("???", event.target.getAttribute("class"));
             if (toggle && !document.getElementById("pagelist").className.includes("pageSizeListHidden")) {
@@ -153,7 +153,10 @@ function SearchPagination({
       <div className={classes.paginationContainer}>
         <div className={classes.perPageContainer}>
           Results per Page:
-          <div id="resultNumber" className={classes.pageSizeContainer} onClick={() => setPageListVisible(!pageListVisible)}>{pageSize}</div>
+          <div id="resultNumber" className={classes.pageSizeContainer} onClick={() => setPageListVisible(!pageListVisible)}>
+            {pageSize}
+            <span className={pageListVisible? classes.pageSizeArrowUp : classes.pageSizeArrowDown}></span>
+          </div>
           <div ref={perPageSelection} id="pagelist" className={pageListVisible ? classes.pageSizeList : classes.pageSizeListHidden}>
             {
               sizelist.map((sizeItem, idx) => {
@@ -263,10 +266,30 @@ const styles = {
       cursor: 'pointer',
     },
   },
+  pageSizeArrowUp: {
+    content: "",
+    display: 'inline-block',
+    width: '6px',
+    height: '6px',
+    borderBottom: '1.5px solid #045B80',
+    borderLeft: '1.5px solid #045B80',
+    margin: '1px 3px 1px 10px',
+    transform: 'rotate(135deg)',
+  },
+  pageSizeArrowDown: {
+    content: "",
+    display: 'inline-block',
+    width: '6px',
+    height: '6px',
+    borderBottom: '1.5px solid #045B80',
+    borderLeft: '1.5px solid #045B80',
+    margin: '1px 3px 3px 10px',
+    transform: 'rotate(-45deg)',
+  },
   pageSizeList: {
     position: 'relative',
     top: '25px',
-    left: '-10px',
+    left: '-30px',
     width: '45px',
     padding: '5px 9px',
     background: '#F5F5F5',
@@ -275,7 +298,7 @@ const styles = {
   pageSizeListHidden: {
     position: 'relative',
     top: '25px',
-    left: '-10px',
+    left: '-30px',
     width: '45px',
     padding: '5px 9px',
     border: '1px solid #99A1B7',

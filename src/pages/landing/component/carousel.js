@@ -228,7 +228,7 @@ const HeroList = styled.div`
         border-radius: 20px;
 
         .itemImgBox {
-            transform: translateX(12px) translateY(0) scale(1.04, 1);
+            transform: translateX(11px) translateY(0) scale(1.1, 0.98);
         }
 
         .listItemContent {

@@ -6,6 +6,7 @@ import exportIcon from '../../../assets/landing/Export_Icon.svg';
 import arrowIcon from '../../../assets/landing/arrow.svg';
 
 let timer = null;
+let direction = "d";
 
 const HeroListContainer = styled.div`
     position: relative;
@@ -203,7 +204,7 @@ const HeroList = styled.div`
     }
 
     .carousel__item:nth-child(1) {
-        transform: translateY(-365%) scale(0.8);
+        transform: translateY(-365%) scale(1);
         opacity: 0;
         visibility: hidden;
     }
@@ -258,7 +259,7 @@ const HeroList = styled.div`
     }
 
     .carousel__item:last-child {
-        transform: translateY(365%) scale(0.8);
+        transform: translateY(365%) scale(1);
         opacity: 0;
         visibility: hidden;
     }
@@ -280,8 +281,12 @@ const Carousel = () => {
 
     const startTimer = () => {
         timer = setInterval(() => {
-            nextItem();
-        }, 3000);
+            if (direction === "d") {
+                nextItem();
+            } else {
+                prevItem();
+            }
+        }, 5000);
     };
 
     const resetTimer = () => {
@@ -297,16 +302,22 @@ const Carousel = () => {
     };
 
     const nextSlide = () => {
+        direction = "d";
         resetTimer();
         nextItem();
     };
 
-    const prevSlide = () => {
-        resetTimer();
+    const prevItem = () => {
         const list = document.getElementById("carouselList");
         const firstitem = list.firstChild;
         list.removeChild(firstitem);
         list.appendChild(firstitem);
+    };
+
+    const prevSlide = () => {
+        direction = "u";
+        resetTimer();
+        prevItem();
     };
 
     useEffect(() => {

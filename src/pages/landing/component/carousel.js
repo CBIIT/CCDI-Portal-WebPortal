@@ -320,14 +320,14 @@ const Carousel = () => {
 
     return (
         <HeroListContainer>
-            <div className='upButton' onClick={prevSlide}>
+            <div className='upButton' onClick={prevSlide} onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}}>
                 <div class="arrowUp"></div>
             </div>
-            <div className='downButton' onClick={nextSlide}>
+            <div className='downButton' onClick={nextSlide} onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}}>
                 <div class="arrowDown"></div>
             </div>
-            <div className="arrowLeft" />
-            <div className="arrowRight" />
+            <div className="arrowLeft" onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}}/>
+            <div className="arrowRight" onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}}/>
             <HeroList onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}}>
                 <div className='blurTop' />
                 <div className='blurBottom' />

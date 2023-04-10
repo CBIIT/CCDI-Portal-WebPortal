@@ -32,22 +32,22 @@ export const statsData = [
   {
     num: '203',
     title: 'Cataloged Datasets',
-    detail: 'CCDC',
+    detail: 'Childhood Cancer Data Catalog',
   },
   {
     num: '756',
     title: 'Participants',
-    detail: 'MCI',
+    detail: 'Molecular Characterization Initiative for Childhood Cancer',
   },
   {
     num: '40,929',
     title: 'Molecular Targets',
-    detail: 'MTP',
+    detail: 'Molecular Targets Platform',
   },
   {
     num: '218,246',
     title: 'Cases',
-    detail: 'NCCR Explorer',
+    detail: 'National Childhood Cancer Registry Explorer',
   },
 ];
 

@@ -309,18 +309,30 @@ const styles = {
     },
   },
   paginationRoot: {
+    '& .Mui-selected': {
+      backgroundColor: 'transparent',
+      fontWeight: '600',
+    },
     '& .Mui-selected:hover': {
       backgroundColor: 'transparent',
     },
     '& .MuiPagination-ul': {
       padding: '0',
     },
-    '& .MuiPagination-ul > li' : {
+    '& .MuiPagination-ul > li': {
       height: '32px;',
       borderTop: '1px solid #99A1B7',
       borderRight: '1px solid #99A1B7',
       borderBottom: '1px solid #99A1B7',
+      '&:hover': {
+        backgroundColor: 'transparent',
+      },
     },
+    '& .MuiPaginationItem-page': {
+      '&:hover': {
+        backgroundColor: 'transparent',
+      },
+    }
   },
   content: {
     fontSize: '12px',

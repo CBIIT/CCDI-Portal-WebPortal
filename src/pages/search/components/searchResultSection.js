@@ -180,6 +180,7 @@ function SearchPagination({
         </div>
         <div className={classes.prevButtonContainer} onClick={onPrevious}><div className={classes.prevButton} /></div>
         <Pagination
+          disableTouchRipple
           classes={{ ul: classes.paginationUl }}
           className={classes.paginationRoot}
           count={Math.ceil(count / pageSize)}
@@ -407,7 +408,7 @@ const styles = {
     marginBottom: '100px',
   },
   pageNumber: {
-    marginLeft: '5px',
+    margin: '0 5px',
   },
   showingContainer: {
     display: 'flex',

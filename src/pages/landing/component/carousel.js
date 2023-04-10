@@ -319,15 +319,15 @@ const Carousel = () => {
     }, [isVisible]);
 
     return (
-        <HeroListContainer>
+        <HeroListContainer onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}}>
             <div className='upButton' onClick={prevSlide}>
                 <div class="arrowUp"></div>
             </div>
             <div className='downButton' onClick={nextSlide}>
                 <div class="arrowDown"></div>
             </div>
-            <div className="arrowLeft" />
-            <div className="arrowRight" />
+            <div className="arrowLeft"/>
+            <div className="arrowRight"/>
             <HeroList>
                 <div className='blurTop' />
                 <div className='blurBottom' />
@@ -337,7 +337,7 @@ const Carousel = () => {
                             randomCarouselList.map((item, idx) => {
                                 const key = `carousel_${idx}_last_clone`;
                                 return (
-                                    <div key={key} className='carousel__item' onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}}>
+                                    <div key={key} className='carousel__item'>
                                         <div className='itemImgBox'><img className='itemImg' src={item.img} alt="" width="243px" height="102px" /></div>
                                         <a className='listItemContent' href={item.link} target="_blank" rel="noopener noreferrer">{item.content}</a>
                                         <a className="exportContainer" href={item.link} target="_blank" rel="noopener noreferrer">

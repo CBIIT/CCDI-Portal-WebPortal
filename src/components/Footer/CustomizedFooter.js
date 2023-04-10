@@ -45,7 +45,7 @@ const FooterLogo = styled.div`
 `;
 
 const FooterEmailSignupContainer = styled.form`
-  margin: 54px auto 0 280px;
+  margin: 54px auto 0 330px;
 
   .signUpTitle {
     font-family: poppins;
@@ -95,8 +95,10 @@ const FooterEmailSignupContainer = styled.form`
   }
 
   .ErrorBorder {
+    position: relative;
     border-left: 0.25rem solid #e41154;
     padding-left: 1rem;
+    left: -20px;
   }
 `;
 

@@ -89,7 +89,7 @@ const SearchBar = styled.div`
 const SearchInput = styled.input`
   margin-left: 20px;
   border: none;
-  font-family: Lato;
+  font-family: 'Open Sans';
   font-weight: 400;
   font-size: 25px;
   line-height: 53px;

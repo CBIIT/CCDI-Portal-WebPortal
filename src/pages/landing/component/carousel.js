@@ -319,16 +319,16 @@ const Carousel = () => {
     }, [isVisible]);
 
     return (
-        <HeroListContainer>
-            <div className='upButton' onClick={prevSlide} onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}}>
+        <HeroListContainer onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}}>
+            <div className='upButton' onClick={prevSlide}>
                 <div class="arrowUp"></div>
             </div>
-            <div className='downButton' onClick={nextSlide} onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}}>
+            <div className='downButton' onClick={nextSlide}>
                 <div class="arrowDown"></div>
             </div>
-            <div className="arrowLeft" onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}}/>
-            <div className="arrowRight" onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}}/>
-            <HeroList onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}}>
+            <div className="arrowLeft"/>
+            <div className="arrowRight"/>
+            <HeroList>
                 <div className='blurTop' />
                 <div className='blurBottom' />
                 <div className='activeFrame'/>

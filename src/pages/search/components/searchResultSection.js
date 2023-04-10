@@ -167,14 +167,16 @@ function SearchPagination({
               })
             }
           </div>
-          Showing
-          <div className={classes.pageNumber}>
-            {pageSize*(page-1)+1}
-            -
-            {pageSize*page < count ? pageSize*page : count}
+          <div className={classes.showingContainer}>
+            Showing
+            <div className={classes.pageNumber}>
+              {pageSize*(page-1)+1}
+              -
+              {pageSize*page < count ? pageSize*page : count}
+            </div>
+            of
+            <div className={classes.pageNumber}>{count}</div>
           </div>
-          of
-          <div className={classes.pageNumber}>{count}</div>
         </div>
         <div className={classes.prevButtonContainer} onClick={onPrevious}><div className={classes.prevButton} /></div>
         <Pagination
@@ -262,6 +264,7 @@ const styles = {
   },
   pageSizeContainer: {
     marginLeft: '10px',
+    userSelect: 'none',
     '&:hover': {
       cursor: 'pointer',
     },
@@ -404,7 +407,12 @@ const styles = {
     marginBottom: '100px',
   },
   pageNumber: {
-    margin: '0 5px',
+    marginLeft: '5px',
+  },
+  showingContainer: {
+    display: 'flex',
+    position: 'relative',
+    left: '-14px',
   }
 };
 

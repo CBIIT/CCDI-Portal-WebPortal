@@ -168,14 +168,12 @@ function SearchPagination({
             }
           </div>
           <div className={classes.showingContainer}>
-            Showing
-            <div className={classes.pageNumber}>
-              {pageSize*(page-1)+1}
-              -
-              {pageSize*page < count ? pageSize*page : count}
-            </div>
-            of
-            <div className={classes.pageNumber}>{count}</div>
+            Showing&nbsp;
+            {pageSize*(page-1)+1}
+            -
+            {pageSize*page < count ? pageSize*page : count}&nbsp;
+            of&nbsp;
+            {count}
           </div>
         </div>
         <div className={classes.prevButtonContainer} onClick={onPrevious}><div className={classes.prevButton} /></div>

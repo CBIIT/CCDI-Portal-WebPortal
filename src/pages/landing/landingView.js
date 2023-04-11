@@ -188,40 +188,40 @@ const StatsContainer = styled.div`
 
     .leftbox {
       position: absolute;
-      top: 0;
+      top: -20px;
       left: calc(1440px - 100vw - 200px);
       width: calc(100vw - 1440px + 400px);
-      height: 400px;
+      height: 520px;
       z-index: 9;
       background: white;
-      filter: blur(50px);
+      filter: blur(30px);
 
       @media (min-width: 1440px) {
-        left: calc(1440px - 100vw - 200px);
+        left: calc(1440px - 100vw - 270px);
         width: calc(100vw - 1440px + 400px);
       }
       
       @media (max-width: 1440px) {
-        left: -200px;
+        left: -270px;
         width: 400px;
       }
     }
 
     .rightbox {
       position: absolute;
-      top: 0;
-      height: 400px;
+      top: -20px;
+      height: 520px;
       z-index: 9;
       background: white;
-      filter: blur(50px);
+      filter: blur(30px);
     
       @media (min-width: 1440px) {
-        right: calc(1440px - 100vw - 200px);
+        right: calc(1440px - 100vw - 270px);
         width: calc(100vw - 1440px + 400px);
       }
       
       @media (max-width: 1440px) {
-        right: -200px;
+        right: -270px;
         width: 400px;
       }
     }
@@ -231,13 +231,13 @@ const StatsContainer = styled.div`
       transform: matrix(1, 0, 0, -1, 0, 0);
       border-top: 1.8px solid #4BBFC6;
       position: relative;
-      background: linear-gradient(180deg, rgba(153, 153, 153, 0.2) 0%, rgba(255, 255, 255, 0) 94.44%);
+      background: linear-gradient(180deg, rgba(158, 158, 158, 0.1) 0%, rgba(255, 255, 255, 0) 34.44%);
     }
 
     .borderBottom {
       height: 72px;
       border-top: 1.8px solid #4BBFC6;
-      background: linear-gradient(180deg, rgba(153, 153, 153, 0.2) 0%, rgba(255, 255, 255, 0) 94.44%);
+      background: linear-gradient(180deg, rgba(158, 158, 158, 0.1) 0%, rgba(255, 255, 255, 0) 34.44%);
     }
 
     .statGlance {
@@ -373,6 +373,18 @@ const TitleContainer = styled.div`
       font-weight: 600;
       font-size: 35px;
     }
+`;
+
+const ResourcesOverlayRight = styled.div`
+  position: absolute;
+  width: 50%;
+  height: 100px;
+  right: 60px;
+  top: -100px;
+
+  background: rgba(255, 255, 255, 0.85);
+  filter: blur(20px);
+  z-index: 5;
 `;
 
 const ResourcesOverlay = styled.div`
@@ -588,6 +600,7 @@ const LandingView = () => {
         </LatestUpdatesContainer>
       </LatestUpdatesSection>
       <ResourcesSection>
+        <ResourcesOverlayRight />
         <ResourcesOverlay />
         <ResourcesContainer>
           <div className='resourceTitle'>{titleData.resourceTitle}</div>

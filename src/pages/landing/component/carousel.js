@@ -6,6 +6,7 @@ import exportIcon from '../../../assets/landing/Export_Icon.svg';
 import arrowIcon from '../../../assets/landing/arrow.svg';
 
 let timer = null;
+let direction = "d";
 
 const HeroListContainer = styled.div`
     position: relative;
@@ -127,12 +128,12 @@ const HeroList = styled.div`
 
     .activeFrame {
         position: absolute;
-        top: 244px;
+        top: 243.5px;
         left: 25px;
         width: 700px;
-        height: 144px;
+        height: 145px;
         border: 3px solid #F7F7F7;
-        border-radius: 23px;
+        border-radius: 23.5px;
         box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.35);
         z-index: 60;
         pointer-events: none; 
@@ -203,7 +204,7 @@ const HeroList = styled.div`
     }
 
     .carousel__item:nth-child(1) {
-        transform: translateY(-365%) scale(0.8);
+        transform: translateY(-365%) scale(1);
         opacity: 0;
         visibility: hidden;
     }
@@ -227,7 +228,7 @@ const HeroList = styled.div`
         border-radius: 20px;
 
         .itemImgBox {
-            transform: translateX(12px) translateY(0) scale(1.04, 1);
+            transform: translateX(11px) translateY(0) scale(1.1, 0.98);
         }
 
         .listItemContent {
@@ -258,7 +259,7 @@ const HeroList = styled.div`
     }
 
     .carousel__item:last-child {
-        transform: translateY(365%) scale(0.8);
+        transform: translateY(365%) scale(1);
         opacity: 0;
         visibility: hidden;
     }
@@ -280,8 +281,12 @@ const Carousel = () => {
 
     const startTimer = () => {
         timer = setInterval(() => {
-            nextItem();
-        }, 3000);
+            if (direction === "d") {
+                nextItem();
+            } else {
+                prevItem();
+            }
+        }, 5000);
     };
 
     const resetTimer = () => {
@@ -297,16 +302,22 @@ const Carousel = () => {
     };
 
     const nextSlide = () => {
+        direction = "d";
         resetTimer();
         nextItem();
     };
 
-    const prevSlide = () => {
-        resetTimer();
+    const prevItem = () => {
         const list = document.getElementById("carouselList");
         const firstitem = list.firstChild;
         list.removeChild(firstitem);
         list.appendChild(firstitem);
+    };
+
+    const prevSlide = () => {
+        direction = "u";
+        resetTimer();
+        prevItem();
     };
 
     useEffect(() => {
@@ -319,15 +330,15 @@ const Carousel = () => {
     }, [isVisible]);
 
     return (
-        <HeroListContainer>
+        <HeroListContainer onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}}>
             <div className='upButton' onClick={prevSlide}>
                 <div class="arrowUp"></div>
             </div>
             <div className='downButton' onClick={nextSlide}>
                 <div class="arrowDown"></div>
             </div>
-            <div className="arrowLeft" />
-            <div className="arrowRight" />
+            <div className="arrowLeft"/>
+            <div className="arrowRight"/>
             <HeroList>
                 <div className='blurTop' />
                 <div className='blurBottom' />
@@ -337,7 +348,7 @@ const Carousel = () => {
                             randomCarouselList.map((item, idx) => {
                                 const key = `carousel_${idx}_last_clone`;
                                 return (
-                                    <div key={key} className='carousel__item' onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}}>
+                                    <div key={key} className='carousel__item'>
                                         <div className='itemImgBox'><img className='itemImg' src={item.img} alt="" width="243px" height="102px" /></div>
                                         <a className='listItemContent' href={item.link} target="_blank" rel="noopener noreferrer">{item.content}</a>
                                         <a className="exportContainer" href={item.link} target="_blank" rel="noopener noreferrer">

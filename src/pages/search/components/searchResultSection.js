@@ -328,6 +328,8 @@ const styles = {
       fontWeight: '300',
       padding: '0',
       minWidth: '18px',
+      margin: '0',
+      padding: '0 7px',
     },
     '& .MuiPaginationItem-page': {
       transition: 'none',
@@ -343,6 +345,9 @@ const styles = {
     },
     '& .MuiPagination-ul': {
       padding: '0',
+    },
+    '& .MuiPagination-ul:hover': {
+      cursor: 'pointer',
     },
     '& .MuiPagination-ul > li': {
       height: '32px;',

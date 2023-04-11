@@ -33,12 +33,12 @@ const useOutsideAlerter = (ref) => {
 function SearchPagination({
   datafield, classes, searchText, count, isPublic,
 }) {
+  const sizelist = [10,25,50,100,250];
   const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(1);
+  const [pageSize, setPageSize] = useState(sizelist[0]);
   const [data, setdata] = useState([]);
   const [loading, setLoading] = useState(false);
   const [pageListVisible, setPageListVisible] = useState(0);
-  const sizelist = [1,2,3,10,25];
   const perPageSelection = useRef(null);
   useOutsideAlerter(perPageSelection);
 
@@ -293,22 +293,28 @@ const styles = {
     top: '25px',
     left: '-30px',
     width: '45px',
-    padding: '5px 9px',
     background: '#F5F5F5',
     border: '1px solid #99A1B7',
+    '&:hover': {
+      cursor: 'pointer',
+    },
   },
   pageSizeListHidden: {
     position: 'relative',
     top: '25px',
     left: '-30px',
     width: '45px',
-    padding: '5px 9px',
     border: '1px solid #99A1B7',
     visibility: 'hidden',
-  },
-  pageSizeItem: {
     '&:hover': {
       cursor: 'pointer',
+    },
+  },
+  pageSizeItem: {
+    padding: '2px 8px',
+    '&:hover': {
+      cursor: 'pointer',
+      color: '#000000',
     },
   },
   ul: {

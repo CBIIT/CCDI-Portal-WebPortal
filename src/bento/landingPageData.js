@@ -4,13 +4,13 @@ import updateImg1 from '../assets/landing/Updates_1.png';
 import updateImg2 from '../assets/landing/Updates_2.png';
 import updateImg3 from '../assets/landing/Updates_3.png';
 import aboutImg from '../assets/landing/About_1.png';
-import wheel1 from '../assets/landing/card_ccdc.svg';
-import wheel2 from '../assets/landing/card_civic.svg';
-import wheel3 from '../assets/landing/card_mci.svg';
-import wheel4 from '../assets/landing/card_mtp.svg';
-import wheel5 from '../assets/landing/card_nccr.svg';
-import wheel6 from '../assets/landing/card_cgc.svg';
-import wheel7 from '../assets/landing/card_dbgap.svg';
+import wheel1 from '../assets/landing/ccdc_carousel.svg';
+import wheel2 from '../assets/landing/civic_carousel.svg';
+import wheel3 from '../assets/landing/mci_carousel.svg';
+import wheel4 from '../assets/landing/mtp_carousel.svg';
+import wheel5 from '../assets/landing/nccr_carousel.svg';
+import wheel6 from '../assets/landing/cgc_carousel.svg';
+import wheel7 from '../assets/landing/dbgap_carousel.svg';
 
 export const introData = {
   landingIntroPic: landingImg,

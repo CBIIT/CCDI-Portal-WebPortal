@@ -132,11 +132,11 @@ const HeroList = styled.div`
         left: 25px;
         width: 700px;
         height: 145px;
-        border: 3px solid #F7F7F7;
+        border: 3px solid #FFFFFF;
         border-radius: 23.5px;
         box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.35);
         z-index: 60;
-        pointer-events: none; 
+        pointer-events: none;
     }
 
     .carousel {
@@ -226,6 +226,7 @@ const HeroList = styled.div`
         opacity: 1;
         visibility: visible;
         border-radius: 20px;
+        background: #FFFFFF;
 
         .itemImgBox {
             transform: translateX(11px) translateY(0) scale(1.1, 0.98);

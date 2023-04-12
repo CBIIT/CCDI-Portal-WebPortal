@@ -150,6 +150,7 @@ function SearchPagination({
           {renderCards()}
         </Grid>
       </Grid>
+      { !loading && data && data.length > 0 &&
       <div className={classes.paginationContainer}>
         <div className={classes.perPageContainer}>
           Results per Page:
@@ -162,7 +163,7 @@ function SearchPagination({
               sizelist.map((sizeItem, idx) => {
                 const key = `size_${idx}`;
                 return (
-                  sizeItem == pageSize ? null : <div key={key} className={classes.pageSizeItem} onClick={onPageSizeClick}>{sizeItem}</div>
+                  sizeItem === pageSize ? null : <div key={key} className={classes.pageSizeItem} onClick={onPageSizeClick}>{sizeItem}</div>
                 )
               })
             }
@@ -192,6 +193,7 @@ function SearchPagination({
         />
         <div className={classes.nextButtonContainer} onClick={onNext}><div className={ page === Math.ceil(count / pageSize) ? classes.nextButtonDisabled : classes.nextButton} /></div>
       </div>
+      }
     </>
   );
 }
@@ -348,7 +350,6 @@ const styles = {
       fontFamily: 'Poppins',
       fontSize: '14px',
       fontWeight: '300',
-      padding: '0',
       minWidth: '18px',
       margin: '0',
       padding: '0 7px',

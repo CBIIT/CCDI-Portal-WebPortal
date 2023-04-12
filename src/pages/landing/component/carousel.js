@@ -100,13 +100,14 @@ const HeroList = styled.div`
     height: 640px;
     background: #ECECEC;
     border: 4px solid #05555C;
-    filter: drop-shadow(0px 4px 24px rgba(0, 0, 0, 0.35));
+    box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.35);
     border-radius: 40px;
     overflow: hidden;
 
     .blurTop {
         position: absolute;
         background: linear-gradient(to bottom, #ECECEC, 70%, transparent);
+        background: -moz-linear-gradient(top, #ECECEC, transparent);
         top: 0;
         left: 0;
         width: 100%;
@@ -118,6 +119,7 @@ const HeroList = styled.div`
     .blurBottom {
         position: absolute;
         background: linear-gradient(to top, #ECECEC, 70%, transparent);
+        background: -moz-linear-gradient(bottom, #ECECEC, transparent);
         bottom: 0;
         left: 0;
         width: 100%;
@@ -331,10 +333,10 @@ const Carousel = () => {
     return (
         <HeroListContainer onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}}>
             <div className='upButton' onClick={prevSlide}>
-                <div class="arrowUp"></div>
+                <div className="arrowUp"></div>
             </div>
             <div className='downButton' onClick={nextSlide}>
-                <div class="arrowDown"></div>
+                <div className="arrowDown"></div>
             </div>
             <div className="arrowLeft"/>
             <div className="arrowRight"/>
@@ -342,7 +344,7 @@ const Carousel = () => {
                 <div className='blurTop' />
                 <div className='blurBottom' />
                 <div className='activeFrame'/>
-                    <div id="carouselList" class='carousel'>
+                    <div id="carouselList" className='carousel'>
                         {
                             randomCarouselList.map((item, idx) => {
                                 const key = `carousel_${idx}_last_clone`;

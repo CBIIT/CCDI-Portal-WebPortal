@@ -176,7 +176,7 @@ function SearchPagination({
             {count}
           </div>
         </div>
-        <div className={classes.prevButtonContainer} onClick={onPrevious}><div className={classes.prevButton} /></div>
+        <div className={classes.prevButtonContainer} onClick={onPrevious}><div className={ page === 1 ? classes.prevButtonDisabled : classes.prevButton } /></div>
         <Pagination
           disableTouchRipple
           classes={{ ul: classes.paginationUl }}
@@ -190,7 +190,7 @@ function SearchPagination({
           hidePrevButton
           onChange={handleChangePage}
         />
-        <div className={classes.nextButtonContainer} onClick={onNext}><div className={classes.nextButton} /></div>
+        <div className={classes.nextButtonContainer} onClick={onNext}><div className={ page === Math.ceil(count / pageSize) ? classes.nextButtonDisabled : classes.nextButton} /></div>
       </div>
     </>
   );
@@ -210,15 +210,23 @@ const styles = {
     display: 'inline-block',
     width: '6px',
     height: '6px',
-    borderBottom: '1px solid #99A1B7',
-    borderLeft: '1px solid #99A1B7',
+    borderBottom: '1px solid #045B80',
+    borderLeft: '1px solid #045B80',
     margin: '13px 9px 0 11px',
     transform: 'rotate(45deg)',
     '&:hover': {
       cursor: 'pointer',
-      borderBottom: '1px solid #045B80',
-      borderLeft: '1px solid #045B80',
     },
+  },
+  prevButtonDisabled: {
+    content: "",
+    display: 'inline-block',
+    width: '6px',
+    height: '6px',
+    borderBottom: '1px solid #99A1B7',
+    borderLeft: '1px solid #99A1B7',
+    margin: '13px 9px 0 11px',
+    transform: 'rotate(45deg)',
   },
   nextButtonContainer: {
     borderTop: '1px solid #99A1B7',
@@ -234,15 +242,23 @@ const styles = {
     display: 'inline-block',
     width: '6px',
     height: '6px',
-    borderBottom: '1px solid #99A1B7',
-    borderLeft: '1px solid #99A1B7',
+    borderBottom: '1px solid #045B80',
+      borderLeft: '1px solid #045B80',
     margin: '13px 11px 0 9px',
     transform: 'rotate(225deg)',
     '&:hover': {
       cursor: 'pointer',
-      borderBottom: '1px solid #045B80',
-      borderLeft: '1px solid #045B80',
     },
+  },
+  nextButtonDisabled: {
+    content: "",
+    display: 'inline-block',
+    width: '6px',
+    height: '6px',
+    borderBottom: '1px solid #99A1B7',
+    borderLeft: '1px solid #99A1B7',
+    margin: '13px 11px 0 9px',
+    transform: 'rotate(225deg)',
   },
   paginationContainer: {
     display: 'flex',

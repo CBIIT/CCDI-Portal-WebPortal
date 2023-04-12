@@ -270,6 +270,9 @@ const styles = {
     '& > *': {
       marginTop: '10px',
     },
+    '&:hover': {
+      cursor: 'pointer',
+    },
   },
   perPageContainer: {
     display: 'flex',

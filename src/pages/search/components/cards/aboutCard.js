@@ -22,7 +22,7 @@ const AboutCard = ({
       <span>
         {' '}
         { parts.map((part, i) => (
-          <span id={i} style={part.toLowerCase() === highlight.toLowerCase() ? { color: '#0467BD' } : {}}>
+          <span id={i} style={part.toLowerCase() === highlight.toLowerCase() ? { color: '#05555C', fontWeight: '700' } : {}}>
             { part }
           </span>
         ))}

@@ -1,7 +1,7 @@
 /* eslint-disable no-await-in-loop */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
-  withStyles, Button, Grid, CircularProgress,
+  withStyles, Grid, CircularProgress,
 } from '@material-ui/core';
 import Pagination from '@material-ui/lab/Pagination';
 import Components from './component';
@@ -10,14 +10,37 @@ import {
   SEARCH_PAGE_RESULT_ABOUT_PUBLIC,
 } from '../../../bento/sitesearch';
 
+const useOutsideAlerter = (ref) => {
+  useEffect(() => {
+      function handleClickOutside(event) {
+        console.log("???", event.target);
+          if (!event.target || !event.target.getAttribute("class") || (event.target.getAttribute("class") && !event.target.getAttribute("class").includes("pageSizeItem") && !event.target.getAttribute("class").includes("pageSizeArrow") && !event.target.getAttribute("class").includes("pageSizeContainer") && ref.current && !ref.current.contains(event.target))) {
+            const toggle = document.getElementById("resultNumber");
+            // console.log("???", event.target.getAttribute("class"));
+            if (toggle && !document.getElementById("pagelist").className.includes("pageSizeListHidden")) {
+              toggle.click();
+            }
+          }
+      }
+
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+          document.removeEventListener("mousedown", handleClickOutside);
+      };
+  }, [ref]);
+};
+
 function SearchPagination({
   datafield, classes, searchText, count, isPublic,
 }) {
+  const sizelist = [10,25,50,100,250];
   const [page, setPage] = useState(1);
-
-  const pageSize = 2;
+  const [pageSize, setPageSize] = useState(sizelist[0]);
   const [data, setdata] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [pageListVisible, setPageListVisible] = useState(0);
+  const perPageSelection = useRef(null);
+  useOutsideAlerter(perPageSelection);
 
   function getPublicQuery(field) {
     switch (field) {
@@ -61,7 +84,7 @@ function SearchPagination({
     setPage(1);
     setdata([]);
     onChange(searchText);
-  }, [searchText, datafield]);
+  }, [searchText, datafield, pageSize]);
 
   const onNext = () => {
     if (page < Math.ceil(count / pageSize)) {
@@ -88,6 +111,11 @@ function SearchPagination({
     onChange(searchText, newPage);
     setPage(newPage);
     scrollToTop();
+  };
+
+  const onPageSizeClick = (e) => {
+    setPageSize(e.target.innerText);
+    setPageListVisible(!pageListVisible)
   };
 
   const renderCards = () => {
@@ -122,82 +150,208 @@ function SearchPagination({
           {renderCards()}
         </Grid>
       </Grid>
-      {Math.ceil(count / pageSize) > 1 && (
+      { !loading && data && data.length > 0 &&
       <div className={classes.paginationContainer}>
-        <Button sx={{ borderRadius: 100 }} onClick={onPrevious} className={classes.prevButton}>
-          <span>
-            <img
-              className={classes.prevIcon}
-              src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/globalSearchPrevious.svg"
-              alt="previous button"
-            />
-
-          </span>
-          previous
-        </Button>
-
-        <Pagination
-          classes={{ ul: classes.paginationUl }}
-          className={classes.paginationRoot}
-          count={Math.ceil(count / pageSize)}
-          page={page}
-          siblingCount={2}
-          boundaryCount={1}
-          shape="rounded"
-          hideNextButton
-          hidePrevButton
-          onChange={handleChangePage}
-        />
-        <Button sx={{ borderRadius: 100 }} onClick={onNext} className={classes.nextButton}>
-          next
-          <span>
-            <img
-              className={classes.nextIcon}
-              src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/globalSearchNext.svg"
-              alt="previous button"
-            />
-          </span>
-        </Button>
-
+        <div className={classes.perPageContainer}>
+          Results per Page:
+          <div id="resultNumber" className={classes.pageSizeContainer} onClick={() => setPageListVisible(!pageListVisible)}>
+            {pageSize}
+            <span className={pageListVisible? classes.pageSizeArrowUp : classes.pageSizeArrowDown}></span>
+          </div>
+          <div ref={perPageSelection} id="pagelist" className={pageListVisible ? classes.pageSizeList : classes.pageSizeListHidden}>
+            {
+              sizelist.map((sizeItem, idx) => {
+                const key = `size_${idx}`;
+                return (
+                  sizeItem === pageSize ? null : <div key={key} className={classes.pageSizeItem} onClick={onPageSizeClick}>{sizeItem}</div>
+                )
+              })
+            }
+          </div>
+          <div className={classes.showingContainer}>
+            Showing&nbsp;
+            {pageSize*(page-1)+1}
+            -
+            {pageSize*page < count ? pageSize*page : count}&nbsp;
+            of&nbsp;
+            {count}
+          </div>
+        </div>
+        <div className={classes.pageContainer}>
+          <div className={ page === 1 ? classes.prevButtonDisabledContainer : classes.prevButtonContainer} onClick={onPrevious}><div className={ page === 1 ? classes.prevButtonDisabled : classes.prevButton } /></div>
+          <Pagination
+            disableTouchRipple
+            classes={{ ul: classes.paginationUl }}
+            className={classes.paginationRoot}
+            count={Math.ceil(count / pageSize)}
+            page={page}
+            siblingCount={2}
+            boundaryCount={1}
+            shape="rounded"
+            hideNextButton
+            hidePrevButton
+            onChange={handleChangePage}
+          />
+          <div className={page === Math.ceil(count / pageSize) ? classes.nextButtonDisabledContainer : classes.nextButtonContainer} onClick={onNext}><div className={ page === Math.ceil(count / pageSize) ? classes.nextButtonDisabled : classes.nextButton} /></div>
+        </div>
       </div>
-      )}
+      }
     </>
   );
 }
 
 const styles = {
-  prevButton: {
-    marginRight: '44px',
-    fontFamily: '"Open Sans", sans-serif',
-    fontWeight: 'bold',
-    fontSize: '12px',
+  prevButtonContainer: {
+    marginLeft: '10px',
+    border: '1px solid #99A1B7',
+    height: '32px',
+    '&:hover': {
+      cursor: 'pointer',
+    },
   },
-  iconSpan: {
-    marginTop: '6px',
+  prevButtonDisabledContainer: {
+    marginLeft: '10px',
+    border: '1px solid #99A1B7',
+    height: '32px',
+    '&:hover': {
+      cursor: 'default',
+    },
+  },
+  prevButton: {
+    content: "",
+    display: 'inline-block',
+    width: '6px',
+    height: '6px',
+    borderBottom: '1px solid #045B80',
+    borderLeft: '1px solid #045B80',
+    margin: '13px 9px 0 11px',
+    transform: 'rotate(45deg)',
+    '&:hover': {
+      cursor: 'pointer',
+    },
+  },
+  prevButtonDisabled: {
+    content: "",
+    display: 'inline-block',
+    width: '6px',
+    height: '6px',
+    borderBottom: '1px solid #99A1B7',
+    borderLeft: '1px solid #99A1B7',
+    margin: '13px 9px 0 11px',
+    transform: 'rotate(45deg)',
+  },
+  nextButtonContainer: {
+    borderTop: '1px solid #99A1B7',
+    borderRight: '1px solid #99A1B7',
+    borderBottom: '1px solid #99A1B7',
+    height: '32px',
+    '&:hover': {
+      cursor: 'pointer',
+    },
+  },
+  nextButtonDisabledContainer: {
+    borderTop: '1px solid #99A1B7',
+    borderRight: '1px solid #99A1B7',
+    borderBottom: '1px solid #99A1B7',
+    height: '32px',
+    '&:hover': {
+      cursor: 'default',
+    },
   },
   nextButton: {
-    marginLeft: '44px',
-    fontFamily: '"Open Sans", sans-serif',
-    fontWeight: 'bold',
-
-    fontSize: '12px',
+    content: "",
+    display: 'inline-block',
+    width: '6px',
+    height: '6px',
+    borderBottom: '1px solid #045B80',
+      borderLeft: '1px solid #045B80',
+    margin: '13px 11px 0 9px',
+    transform: 'rotate(225deg)',
+    '&:hover': {
+      cursor: 'pointer',
+    },
   },
-  nextIcon: {
-    height: '12px',
-    margin: '6px 6px 0px 12px',
-  },
-  prevIcon: {
-    height: '12px',
-    margin: '6px 12px 0px 12px',
+  nextButtonDisabled: {
+    content: "",
+    display: 'inline-block',
+    width: '6px',
+    height: '6px',
+    borderBottom: '1px solid #99A1B7',
+    borderLeft: '1px solid #99A1B7',
+    margin: '13px 11px 0 9px',
+    transform: 'rotate(225deg)',
   },
   paginationContainer: {
     display: 'flex',
     justifyContent: 'center',
-    maxWidth: '680px',
     margin: '0 auto',
-    paddingBottom: '20px',
+    paddingBottom: '30px',
     '& > *': {
-      marginTop: '8px',
+      marginTop: '10px',
+    },
+  },
+  perPageContainer: {
+    display: 'flex',
+    fontFamily: 'Poppins',
+    fontWeight: '300',
+    fontSize: '14px',
+    color: '#045B80',
+    marginTop: '15px',
+  },
+  pageSizeContainer: {
+    marginLeft: '10px',
+    userSelect: 'none',
+    '&:hover': {
+      cursor: 'pointer',
+    },
+  },
+  pageSizeArrowUp: {
+    content: "",
+    display: 'inline-block',
+    width: '6px',
+    height: '6px',
+    borderBottom: '1.5px solid #045B80',
+    borderLeft: '1.5px solid #045B80',
+    margin: '1px 3px 1px 10px',
+    transform: 'rotate(135deg)',
+  },
+  pageSizeArrowDown: {
+    content: "",
+    display: 'inline-block',
+    width: '6px',
+    height: '6px',
+    borderBottom: '1.5px solid #045B80',
+    borderLeft: '1.5px solid #045B80',
+    margin: '1px 3px 3px 10px',
+    transform: 'rotate(-45deg)',
+  },
+  pageSizeList: {
+    position: 'relative',
+    top: '25px',
+    left: '-30px',
+    width: '45px',
+    background: '#F5F5F5',
+    border: '1px solid #99A1B7',
+    '&:hover': {
+      cursor: 'pointer',
+    },
+  },
+  pageSizeListHidden: {
+    position: 'relative',
+    top: '25px',
+    left: '-30px',
+    width: '45px',
+    border: '1px solid #99A1B7',
+    visibility: 'hidden',
+    '&:hover': {
+      cursor: 'pointer',
+    },
+  },
+  pageSizeItem: {
+    padding: '2px 8px',
+    '&:hover': {
+      cursor: 'pointer',
+      color: '#000000',
     },
   },
   ul: {
@@ -211,16 +365,46 @@ const styles = {
   paginationUl: {
     padding: '2px',
     '& .MuiPaginationItem-root': {
-      color: '#565656',
-      fontFamily: '"Open Sans", sans-serif',
-      fontSize: '11px',
-      fontWeight: 'bold',
+      color: '#045B80',
+      fontFamily: 'Poppins',
+      fontSize: '14px',
+      fontWeight: '300',
+      minWidth: '18px',
+      margin: '0',
+      padding: '0 7px',
+    },
+    '& .MuiPaginationItem-page': {
+      transition: 'none',
     },
   },
   paginationRoot: {
     '& .Mui-selected': {
-      backgroundColor: '#D9E8F8',
+      backgroundColor: 'transparent',
+      fontWeight: '600',
     },
+    '& .Mui-selected:hover': {
+      backgroundColor: 'transparent',
+    },
+    '& .MuiPagination-ul': {
+      padding: '0',
+    },
+    '& .MuiPagination-ul:hover': {
+      cursor: 'pointer',
+    },
+    '& .MuiPagination-ul > li': {
+      height: '32px;',
+      borderTop: '1px solid #99A1B7',
+      borderRight: '1px solid #99A1B7',
+      borderBottom: '1px solid #99A1B7',
+      '&:hover': {
+        backgroundColor: 'transparent',
+      },
+    },
+    '& .MuiPaginationItem-page': {
+      '&:hover': {
+        backgroundColor: 'transparent',
+      },
+    }
   },
   content: {
     fontSize: '12px',
@@ -232,12 +416,6 @@ const styles = {
     '&:last-child $subsectionBody': {
       borderBottom: 'none',
     },
-  },
-  descriptionPart: {
-    paddingBottom: '26px',
-  },
-  description: {
-    fontWeight: 'bold',
   },
   link: {
     color: '#DD401C',
@@ -273,6 +451,21 @@ const styles = {
     color: '#13666A',
     fontSize: '20px',
     marginBottom: '100px',
+  },
+  pageNumber: {
+    margin: '0 5px',
+  },
+  showingContainer: {
+    display: 'flex',
+    position: 'relative',
+    left: '-14px',
+  },
+  pageContainer: {
+    display: 'flex',
+    height: '32px',
+    '&:hover': {
+      cursor: 'pointer',
+    },
   }
 };
 

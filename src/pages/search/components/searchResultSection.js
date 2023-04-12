@@ -177,21 +177,23 @@ function SearchPagination({
             {count}
           </div>
         </div>
-        <div className={classes.prevButtonContainer} onClick={onPrevious}><div className={ page === 1 ? classes.prevButtonDisabled : classes.prevButton } /></div>
-        <Pagination
-          disableTouchRipple
-          classes={{ ul: classes.paginationUl }}
-          className={classes.paginationRoot}
-          count={Math.ceil(count / pageSize)}
-          page={page}
-          siblingCount={2}
-          boundaryCount={1}
-          shape="rounded"
-          hideNextButton
-          hidePrevButton
-          onChange={handleChangePage}
-        />
-        <div className={classes.nextButtonContainer} onClick={onNext}><div className={ page === Math.ceil(count / pageSize) ? classes.nextButtonDisabled : classes.nextButton} /></div>
+        <div className={classes.pageContainer}>
+          <div className={classes.prevButtonContainer} onClick={onPrevious}><div className={ page === 1 ? classes.prevButtonDisabled : classes.prevButton } /></div>
+          <Pagination
+            disableTouchRipple
+            classes={{ ul: classes.paginationUl }}
+            className={classes.paginationRoot}
+            count={Math.ceil(count / pageSize)}
+            page={page}
+            siblingCount={2}
+            boundaryCount={1}
+            shape="rounded"
+            hideNextButton
+            hidePrevButton
+            onChange={handleChangePage}
+          />
+          <div className={classes.nextButtonContainer} onClick={onNext}><div className={ page === Math.ceil(count / pageSize) ? classes.nextButtonDisabled : classes.nextButton} /></div>
+        </div>
       </div>
       }
     </>
@@ -269,9 +271,6 @@ const styles = {
     paddingBottom: '30px',
     '& > *': {
       marginTop: '10px',
-    },
-    '&:hover': {
-      cursor: 'pointer',
     },
   },
   perPageContainer: {
@@ -443,6 +442,12 @@ const styles = {
     display: 'flex',
     position: 'relative',
     left: '-14px',
+  },
+  pageContainer: {
+    display: 'flex',
+    '&:hover': {
+      cursor: 'pointer',
+    },
   }
 };
 

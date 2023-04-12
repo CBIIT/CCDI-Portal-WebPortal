@@ -128,12 +128,12 @@ const HeroList = styled.div`
 
     .activeFrame {
         position: absolute;
-        top: 243.5px;
+        top: 244px;
         left: 25px;
         width: 700px;
-        height: 145px;
+        height: 144px;
         border: 3px solid #FFFFFF;
-        border-radius: 23.5px;
+        border-radius: 24px;
         box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.35);
         z-index: 60;
         pointer-events: none;
@@ -150,7 +150,6 @@ const HeroList = styled.div`
 
     .carousel__item {
         display: flex;
-        align-items: center;
         position: absolute;
         width: 652px;
         height: 102px;
@@ -164,7 +163,6 @@ const HeroList = styled.div`
 
     .itemImgBox {
         margin-left: 19px;
-        margin-top: 6px;
         transition: 650ms;
     }
 

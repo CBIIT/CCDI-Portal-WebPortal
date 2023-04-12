@@ -178,7 +178,7 @@ function SearchPagination({
           </div>
         </div>
         <div className={classes.pageContainer}>
-          <div className={classes.prevButtonContainer} onClick={onPrevious}><div className={ page === 1 ? classes.prevButtonDisabled : classes.prevButton } /></div>
+          <div className={ page === 1 ? classes.prevButtonDisabledContainer : classes.prevButtonContainer} onClick={onPrevious}><div className={ page === 1 ? classes.prevButtonDisabled : classes.prevButton } /></div>
           <Pagination
             disableTouchRipple
             classes={{ ul: classes.paginationUl }}
@@ -192,7 +192,7 @@ function SearchPagination({
             hidePrevButton
             onChange={handleChangePage}
           />
-          <div className={classes.nextButtonContainer} onClick={onNext}><div className={ page === Math.ceil(count / pageSize) ? classes.nextButtonDisabled : classes.nextButton} /></div>
+          <div className={page === Math.ceil(count / pageSize) ? classes.nextButtonDisabledContainer : classes.nextButtonContainer} onClick={onNext}><div className={ page === Math.ceil(count / pageSize) ? classes.nextButtonDisabled : classes.nextButton} /></div>
         </div>
       </div>
       }
@@ -207,6 +207,14 @@ const styles = {
     height: '32px',
     '&:hover': {
       cursor: 'pointer',
+    },
+  },
+  prevButtonDisabledContainer: {
+    marginLeft: '10px',
+    border: '1px solid #99A1B7',
+    height: '32px',
+    '&:hover': {
+      cursor: 'default',
     },
   },
   prevButton: {
@@ -239,6 +247,15 @@ const styles = {
     height: '32px',
     '&:hover': {
       cursor: 'pointer',
+    },
+  },
+  nextButtonDisabledContainer: {
+    borderTop: '1px solid #99A1B7',
+    borderRight: '1px solid #99A1B7',
+    borderBottom: '1px solid #99A1B7',
+    height: '32px',
+    '&:hover': {
+      cursor: 'default',
     },
   },
   nextButton: {
@@ -445,6 +462,7 @@ const styles = {
   },
   pageContainer: {
     display: 'flex',
+    height: '32px',
     '&:hover': {
       cursor: 'pointer',
     },

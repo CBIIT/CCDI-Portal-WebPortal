@@ -60,17 +60,24 @@ const NewsContainer = styled.div`
   }
 
   .newsList {
-    width: 1047px;
+    width: 1440px;
     margin: 0 auto;
   }
 
   .newsItem {
     display: flex;
+    width: 1047px;
     height: 248px;
-    border: 0.25px solid #78AEB3;
+    border: 1.5px solid transparent;
     border-radius: 0px 20px;
+    margin: 0 auto;
     margin-bottom: 29px;
     padding: 23px 32px 0 38px;
+    box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.25);
+  }
+
+  .newsItem:hover {
+    border: 1.5px solid #00BDCD;
   }
 
   .newsItemTextContainer {

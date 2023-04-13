@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import newsImg from '../../assets/news/News_Header.jpg';
+import newsImg1 from '../../assets/news/NewsItem_1.png';
 
 const NewsContainer = styled.div`
   width: 1440px;
@@ -23,7 +24,7 @@ const NewsContainer = styled.div`
 
   .tabList {
     display: flex;
-    margin: 17px 0 40px 150px;
+    margin: 20px 0 40px 150px;
   }
 
   .tabListItem {
@@ -103,6 +104,10 @@ const NewsContainer = styled.div`
     line-height: 24px;
     color: #000000;
   }
+
+  .newsItemImgContainer {
+    margin: 12px 0 0 33px;
+  }
 `;
 
 const NewsView = () => {
@@ -128,6 +133,7 @@ const NewsView = () => {
             <div className='newsItemDate'>APRIL 4, 2023</div>
             <div className='newsItemContent'>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
           </div>
+          <div className='newsItemImgContainer'><img src={newsImg1} /></div>
         </div>
       </div>
     </NewsContainer>

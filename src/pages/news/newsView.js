@@ -35,6 +35,24 @@ const NewsContainer = styled.div`
     margin-left: 60px;
   }
 
+  .tabListItemActive {
+    font-family: 'Poppins';
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 16px;
+    color: #0A5E63;
+    margin-left: 60px;
+    border-bottom: 3px solid #0A5E63;
+  }
+
+  .tabListItemActive:hover {
+    cursor: default;
+  }
+
+  .tabListItem:hover {
+    color: #0A5E63;
+  }
+
   .tabListItem:hover {
     cursor: pointer;
   }
@@ -42,7 +60,7 @@ const NewsContainer = styled.div`
 
 const NewsView = () => {
   const [selectedTab, setSelectedTab] = useState("All");
-  const newsTabList = ['All', 'Spotlights', 'News', 'News', 'Site Updates', 'Staff Recipes'];
+  const newsTabList = ['All', 'Announcements', 'News & Other', 'Application Updates', 'Site Updates'];
   return (
     <NewsContainer>
       <div className='newsHeader'>Hub News and Updates</div>
@@ -51,7 +69,7 @@ const NewsView = () => {
           newsTabList.map((newsTabItem, idx) => {
             const tabkey = `tabkey_${idx}`;
             return (
-            <div key={tabkey} className='tabListItem' onClick={(() => setSelectedTab(newsTabItem))}>{newsTabItem}</div>
+            <div key={tabkey} className={selectedTab === newsTabItem ? 'tabListItemActive' : 'tabListItem'} onClick={(() => setSelectedTab(newsTabItem))}>{newsTabItem}</div>
             )
           })
         }

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import styled from 'styled-components';
 import newsImg from '../../assets/news/News_Header.jpg';
 import newsImg1 from '../../assets/news/NewsItem_1.png';
+import { newsList } from '../../bento/newsData'
 
 const NewsContainer = styled.div`
   width: 1440px;
@@ -134,14 +135,21 @@ const NewsView = () => {
         }
       </div>
       <div className='newsList'>
-        <div className='newsItem'>
-          <div className='newsItemTextContainer'>
-            <div className='newsItemTitle'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam, quis nostrud exercitation ullamco</div>
-            <div className='newsItemDate'>APRIL 4, 2023</div>
-            <div className='newsItemContent'>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-          </div>
-          <div className='newsItemImgContainer'><img src={newsImg1} /></div>
-        </div>
+        {
+          newsList.map((newsItem, idx) => {
+            const newskey = `news_${idx}`;
+            return (
+              <div key={newskey} className='newsItem'>
+                <div className='newsItemTextContainer'>
+                  <div className='newsItemTitle'>{newsItem.title}</div>
+                  <div className='newsItemDate'>{newsItem.date}</div>
+                  <div className='newsItemContent'>{newsItem.content}</div>
+                </div>
+                <div className='newsItemImgContainer'><img src={newsImg1} /></div>
+              </div>
+            )
+          })
+        }
       </div>
     </NewsContainer>
   )

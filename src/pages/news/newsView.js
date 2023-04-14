@@ -139,13 +139,14 @@ const NewsView = () => {
           newsList.map((newsItem, idx) => {
             const newskey = `news_${idx}`;
             return (
-              <div key={newskey} className='newsItem'>
+              (selectedTab === 'All' || selectedTab === newsItem.type)
+              && <div key={newskey} className='newsItem'>
                 <div className='newsItemTextContainer'>
                   <div className='newsItemTitle'>{newsItem.title}</div>
                   <div className='newsItemDate'>{newsItem.date}</div>
                   <div className='newsItemContent'>{newsItem.content}</div>
                 </div>
-                <div className='newsItemImgContainer'><img src={newsImg1} /></div>
+                {newsItem.img && <div className='newsItemImgContainer'><img src={newsItem.img} /></div>}
               </div>
             )
           })

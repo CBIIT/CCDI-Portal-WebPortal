@@ -106,7 +106,7 @@ const IntroContainer = styled.div`
 `;
 
 const IntroTextContainer = styled.div`
-    padding: 54px 0 85px 135px;
+    padding: 94px 0 85px 135px;
     
     .introTextTitle1 {
       text-align: left;
@@ -530,12 +530,11 @@ const LandingView = () => {
           <IntroContainer>
             <IntroTextContainer>
               <div className='introTextTitle1'>Discover CCDI</div>
-              <div className='introTextTitle1'>applications, data,</div>
-              <div className='introTextTitle1'>resources, and</div>
-              <div className='introTextTitle1'>other tools</div>
+              <div className='introTextTitle1'>Resources</div>
               <div className='upperLine' />
-              <div className='introTextTitle2'>Explore the CCDI Hub by selecting</div>
-              <div className='introTextTitle2'>an available resource on the Hub Wheel</div>
+              <div className='introTextTitle2'>Explore the CCDI Hub, its applications,</div>
+              <div className='introTextTitle2'>and analytic tools by selecting an</div>
+              <div className='introTextTitle2'>available resource</div>
               <div className='lowerLine' />
               <IntroAboutButtonContainer>
                 <div><a className='introAboutButton' href="/about">{introData.introTitle3}</a></div>

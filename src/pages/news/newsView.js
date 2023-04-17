@@ -144,19 +144,29 @@ const useOutsideAlerter = (ref) => {
 const NewsView = ({classes}) => {
   const [selectedTab, setSelectedTab] = useState("All");
   const newsTabList = ['All', 'Announcements', 'News & Other', 'Application Updates', 'Site Updates'];
-  const sizelist = [10,25,50,100,250];
+  const sizelist = [1,2,10,25,50];
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(sizelist[0]);
   const [data, setdata] = useState([]);
   const [pageListVisible, setPageListVisible] = useState(0);
   const perPageSelection = useRef(null);
   useOutsideAlerter(perPageSelection);
-  const count=10;
+  const [count, setCount] = useState(newsList['All'].length);
 
   const onPageSizeClick = (e) => {
     setPageSize(e.target.innerText);
     setPageListVisible(!pageListVisible)
   };
+
+  useEffect(() => {
+    setCount(newsList[selectedTab].length);
+  }, [selectedTab]);
+
+  useEffect(() => {
+    setPage(1);
+    setCount(newsList[selectedTab].length);
+    // onChange(searchText);
+  }, [selectedTab, pageSize]);
 
   return (
     <NewsContainer>

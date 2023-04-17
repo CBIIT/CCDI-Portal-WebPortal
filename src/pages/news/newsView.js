@@ -155,6 +155,7 @@ const NewsView = ({classes}) => {
   const getPageResults = (newPage) => {
     const allids = [];
     const indexStart = pageSize*(newPage-1);
+    console.log("indexStart", indexStart);
     const indexEnd = pageSize*newPage < count ? pageSize*newPage-1 : count-1;
     for (let i = indexStart; i<= indexEnd; i++) {
       allids.push(newsList[selectedTab][i]);
@@ -199,11 +200,22 @@ const NewsView = ({classes}) => {
     setPageListVisible(!pageListVisible)
   };
 
+  const onClickTab = (newsTabItem) => {
+    setSelectedTab(newsTabItem);
+    const allids = [];
+    const indexStart = 0;
+    const indexEnd = pageSize < count ? pageSize-1 : count-1;
+    for (let i = indexStart; i<= indexEnd; i++) {
+      allids.push(newsList[newsTabItem][i]);
+    }
+    setdata(allids);
+  };
+
   useEffect(() => {
     setPage(1);
     setCount(newsList[selectedTab].length);
     onChange();
-  }, [selectedTab, pageSize]);
+  }, []);
 
   return (
     <NewsContainer>
@@ -213,15 +225,16 @@ const NewsView = ({classes}) => {
           newsTabList.map((newsTabItem, idx) => {
             const tabkey = `tabkey_${idx}`;
             return (
-            <div key={tabkey} className={selectedTab === newsTabItem ? 'tabListItemActive' : 'tabListItem'} onClick={(() => setSelectedTab(newsTabItem))}>{newsTabItem}</div>
+            <div key={tabkey} className={selectedTab === newsTabItem ? 'tabListItemActive' : 'tabListItem'} onClick={() => onClickTab(newsTabItem)}>{newsTabItem}</div>
             )
           })
         }
       </div>
       <div className='newsList'>
         {
-          data.map((newsItem, idx) => {
+          data && data.map((newsItem, idx) => {
             const newskey = `news_${idx}`;
+            console.log("newsItem:", newsItem);
             return (
               <div key={newskey} className='newsItem'>
                 <div className='newsItemTextContainer'>

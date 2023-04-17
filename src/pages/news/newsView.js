@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import newsImg from '../../assets/news/News_Header.jpg';
-import newsImg1 from '../../assets/news/NewsItem_1.png';
 import { newsList } from '../../bento/newsData'
 
 const NewsContainer = styled.div`
@@ -136,11 +135,10 @@ const NewsView = () => {
       </div>
       <div className='newsList'>
         {
-          newsList.map((newsItem, idx) => {
+          newsList[selectedTab].map((newsItem, idx) => {
             const newskey = `news_${idx}`;
             return (
-              (selectedTab === 'All' || selectedTab === newsItem.type)
-              && <div key={newskey} className='newsItem'>
+              <div key={newskey} className='newsItem'>
                 <div className='newsItemTextContainer'>
                   <div className='newsItemTitle'>{newsItem.title}</div>
                   <div className='newsItemDate'>{newsItem.date}</div>

@@ -13,10 +13,8 @@ import {
 const useOutsideAlerter = (ref) => {
   useEffect(() => {
       function handleClickOutside(event) {
-        console.log("???", event.target);
           if (!event.target || !event.target.getAttribute("class") || (event.target.getAttribute("class") && !event.target.getAttribute("class").includes("pageSizeItem") && !event.target.getAttribute("class").includes("pageSizeArrow") && !event.target.getAttribute("class").includes("pageSizeContainer") && ref.current && !ref.current.contains(event.target))) {
             const toggle = document.getElementById("resultNumber");
-            // console.log("???", event.target.getAttribute("class"));
             if (toggle && !document.getElementById("pagelist").className.includes("pageSizeListHidden")) {
               toggle.click();
             }
@@ -163,7 +161,7 @@ function SearchPagination({
               sizelist.map((sizeItem, idx) => {
                 const key = `size_${idx}`;
                 return (
-                  sizeItem === pageSize ? null : <div key={key} className={classes.pageSizeItem} onClick={onPageSizeClick}>{sizeItem}</div>
+                  sizeItem !== pageSize && <div key={key} className={classes.pageSizeItem} onClick={onPageSizeClick}>{sizeItem}</div>
                 )
               })
             }

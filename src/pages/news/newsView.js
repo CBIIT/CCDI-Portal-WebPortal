@@ -124,10 +124,8 @@ const NewsContainer = styled.div`
 const useOutsideAlerter = (ref) => {
   useEffect(() => {
       function handleClickOutside(event) {
-        console.log("???", event.target);
           if (!event.target || !event.target.getAttribute("class") || (event.target.getAttribute("class") && !event.target.getAttribute("class").includes("pageSizeItem") && !event.target.getAttribute("class").includes("pageSizeArrow") && !event.target.getAttribute("class").includes("pageSizeContainer") && ref.current && !ref.current.contains(event.target))) {
             const toggle = document.getElementById("resultNumber");
-            // console.log("???", event.target.getAttribute("class"));
             if (toggle && !document.getElementById("pagelist").className.includes("pageSizeListHidden")) {
               toggle.click();
             }
@@ -160,9 +158,6 @@ const NewsView = ({classes}) => {
     for (let i = indexStart; i<= indexEnd; i++) {
       allids.push(newsList[selectedTab][i]);
     }
-    console.log("indexStart:", indexStart);
-    console.log("page:", newPage);
-
     return allids;
   }
 
@@ -170,6 +165,20 @@ const NewsView = ({classes}) => {
     const searchResp = getPageResults(newPage);
     setdata(searchResp);
   }
+
+  const onNext = () => {
+    if (page < Math.ceil(count / pageSize)) {
+      onChange(page + 1);
+      setPage(page + 1);
+    }
+  };
+
+  const onPrevious = () => {
+    if (page > 1) {
+      onChange(page - 1);
+      setPage(page - 1);
+    }
+  };
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -219,7 +228,7 @@ const NewsView = ({classes}) => {
                   <div className='newsItemDate'>{newsItem.date}</div>
                   <div className='newsItemContent'>{newsItem.content}</div>
                 </div>
-                {newsItem.img && <div className='newsItemImgContainer'><img src={newsItem.img} /></div>}
+                {newsItem.img && <div className='newsItemImgContainer'><img src={newsItem.img} alt={newsItem.title}/></div>}
               </div>
             )
           })
@@ -252,7 +261,7 @@ const NewsView = ({classes}) => {
           </div>
         </div>
         <div className={classes.pageContainer}>
-          <div className={ page === 1 ? classes.prevButtonDisabledContainer : classes.prevButtonContainer}><div className={ page === 1 ? classes.prevButtonDisabled : classes.prevButton } /></div>
+          <div className={ page === 1 ? classes.prevButtonDisabledContainer : classes.prevButtonContainer} onClick={onPrevious}><div className={ page === 1 ? classes.prevButtonDisabled : classes.prevButton } /></div>
           <Pagination
             disableTouchRipple
             classes={{ ul: classes.paginationUl }}
@@ -266,7 +275,7 @@ const NewsView = ({classes}) => {
             hidePrevButton
             onChange={handleChangePage}
           />
-          <div className={page === Math.ceil(count / pageSize) ? classes.nextButtonDisabledContainer : classes.nextButtonContainer}><div className={ page === Math.ceil(count / pageSize) ? classes.nextButtonDisabled : classes.nextButton} /></div>
+          <div className={page === Math.ceil(count / pageSize) ? classes.nextButtonDisabledContainer : classes.nextButtonContainer} onClick={onNext}><div className={ page === Math.ceil(count / pageSize) ? classes.nextButtonDisabled : classes.nextButton} /></div>
         </div>
       </div>
     </NewsContainer>

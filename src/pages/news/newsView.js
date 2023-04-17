@@ -1,4 +1,8 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect, useRef }from 'react';
+import {
+  withStyles,
+} from '@material-ui/core';
+import Pagination from '@material-ui/lab/Pagination';
 import styled from 'styled-components';
 import newsImg from '../../assets/news/News_Header.jpg';
 import { newsList } from '../../bento/newsData'
@@ -117,9 +121,43 @@ const NewsContainer = styled.div`
   }
 `;
 
-const NewsView = () => {
+const useOutsideAlerter = (ref) => {
+  useEffect(() => {
+      function handleClickOutside(event) {
+        console.log("???", event.target);
+          if (!event.target || !event.target.getAttribute("class") || (event.target.getAttribute("class") && !event.target.getAttribute("class").includes("pageSizeItem") && !event.target.getAttribute("class").includes("pageSizeArrow") && !event.target.getAttribute("class").includes("pageSizeContainer") && ref.current && !ref.current.contains(event.target))) {
+            const toggle = document.getElementById("resultNumber");
+            // console.log("???", event.target.getAttribute("class"));
+            if (toggle && !document.getElementById("pagelist").className.includes("pageSizeListHidden")) {
+              toggle.click();
+            }
+          }
+      }
+
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+          document.removeEventListener("mousedown", handleClickOutside);
+      };
+  }, [ref]);
+};
+
+const NewsView = ({classes}) => {
   const [selectedTab, setSelectedTab] = useState("All");
   const newsTabList = ['All', 'Announcements', 'News & Other', 'Application Updates', 'Site Updates'];
+  const sizelist = [10,25,50,100,250];
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(sizelist[0]);
+  const [data, setdata] = useState([]);
+  const [pageListVisible, setPageListVisible] = useState(0);
+  const perPageSelection = useRef(null);
+  useOutsideAlerter(perPageSelection);
+  const count=10;
+
+  const onPageSizeClick = (e) => {
+    setPageSize(e.target.innerText);
+    setPageListVisible(!pageListVisible)
+  };
+
   return (
     <NewsContainer>
       <div className='newsHeader'>Hub News and Updates</div>
@@ -150,8 +188,321 @@ const NewsView = () => {
           })
         }
       </div>
+      <div className={classes.paginationContainer}>
+        <div className={classes.perPageContainer}>
+          Results per Page:
+          <div id="resultNumber" className={classes.pageSizeContainer} onClick={() => setPageListVisible(!pageListVisible)}>
+            {pageSize}
+            <span className={pageListVisible? classes.pageSizeArrowUp : classes.pageSizeArrowDown}></span>
+          </div>
+          <div ref={perPageSelection} id="pagelist" className={pageListVisible ? classes.pageSizeList : classes.pageSizeListHidden}>
+            {
+              sizelist.map((sizeItem, idx) => {
+                const key = `size_${idx}`;
+                return (
+                  sizeItem === pageSize ? null : <div key={key} className={classes.pageSizeItem} onClick={onPageSizeClick}>{sizeItem}</div>
+                )
+              })
+            }
+          </div>
+          <div className={classes.showingContainer}>
+            Showing&nbsp;
+            {pageSize*(page-1)+1}
+            -
+            {pageSize*page < count ? pageSize*page : count}&nbsp;
+            of&nbsp;
+            {count}
+          </div>
+        </div>
+        <div className={classes.pageContainer}>
+          <div className={ page === 1 ? classes.prevButtonDisabledContainer : classes.prevButtonContainer}><div className={ page === 1 ? classes.prevButtonDisabled : classes.prevButton } /></div>
+          <Pagination
+            disableTouchRipple
+            classes={{ ul: classes.paginationUl }}
+            className={classes.paginationRoot}
+            count={Math.ceil(count / pageSize)}
+            page={page}
+            siblingCount={2}
+            boundaryCount={1}
+            shape="rounded"
+            hideNextButton
+            hidePrevButton
+            // onChange={handleChangePage}
+          />
+          <div className={page === Math.ceil(count / pageSize) ? classes.nextButtonDisabledContainer : classes.nextButtonContainer}><div className={ page === Math.ceil(count / pageSize) ? classes.nextButtonDisabled : classes.nextButton} /></div>
+        </div>
+      </div>
     </NewsContainer>
   )
 };
 
-export default NewsView;
+const styles = {
+  prevButtonContainer: {
+    marginLeft: '10px',
+    border: '1px solid #99A1B7',
+    height: '32px',
+    '&:hover': {
+      cursor: 'pointer',
+    },
+  },
+  prevButtonDisabledContainer: {
+    marginLeft: '10px',
+    border: '1px solid #99A1B7',
+    height: '32px',
+    '&:hover': {
+      cursor: 'default',
+    },
+  },
+  prevButton: {
+    content: "",
+    display: 'inline-block',
+    width: '6px',
+    height: '6px',
+    borderBottom: '1px solid #045B80',
+    borderLeft: '1px solid #045B80',
+    margin: '13px 9px 0 11px',
+    transform: 'rotate(45deg)',
+    '&:hover': {
+      cursor: 'pointer',
+    },
+  },
+  prevButtonDisabled: {
+    content: "",
+    display: 'inline-block',
+    width: '6px',
+    height: '6px',
+    borderBottom: '1px solid #99A1B7',
+    borderLeft: '1px solid #99A1B7',
+    margin: '13px 9px 0 11px',
+    transform: 'rotate(45deg)',
+  },
+  nextButtonContainer: {
+    borderTop: '1px solid #99A1B7',
+    borderRight: '1px solid #99A1B7',
+    borderBottom: '1px solid #99A1B7',
+    height: '32px',
+    '&:hover': {
+      cursor: 'pointer',
+    },
+  },
+  nextButtonDisabledContainer: {
+    borderTop: '1px solid #99A1B7',
+    borderRight: '1px solid #99A1B7',
+    borderBottom: '1px solid #99A1B7',
+    height: '32px',
+    '&:hover': {
+      cursor: 'default',
+    },
+  },
+  nextButton: {
+    content: "",
+    display: 'inline-block',
+    width: '6px',
+    height: '6px',
+    borderBottom: '1px solid #045B80',
+      borderLeft: '1px solid #045B80',
+    margin: '13px 11px 0 9px',
+    transform: 'rotate(225deg)',
+    '&:hover': {
+      cursor: 'pointer',
+    },
+  },
+  nextButtonDisabled: {
+    content: "",
+    display: 'inline-block',
+    width: '6px',
+    height: '6px',
+    borderBottom: '1px solid #99A1B7',
+    borderLeft: '1px solid #99A1B7',
+    margin: '13px 11px 0 9px',
+    transform: 'rotate(225deg)',
+  },
+  paginationContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    margin: '0 auto',
+    paddingBottom: '30px',
+    '& > *': {
+      marginTop: '10px',
+    },
+  },
+  perPageContainer: {
+    display: 'flex',
+    fontFamily: 'Poppins',
+    fontWeight: '300',
+    fontSize: '14px',
+    color: '#045B80',
+    marginTop: '15px',
+  },
+  pageSizeContainer: {
+    marginLeft: '10px',
+    userSelect: 'none',
+    '&:hover': {
+      cursor: 'pointer',
+    },
+  },
+  pageSizeArrowUp: {
+    content: "",
+    display: 'inline-block',
+    width: '6px',
+    height: '6px',
+    borderBottom: '1.5px solid #045B80',
+    borderLeft: '1.5px solid #045B80',
+    margin: '1px 3px 1px 10px',
+    transform: 'rotate(135deg)',
+  },
+  pageSizeArrowDown: {
+    content: "",
+    display: 'inline-block',
+    width: '6px',
+    height: '6px',
+    borderBottom: '1.5px solid #045B80',
+    borderLeft: '1.5px solid #045B80',
+    margin: '1px 3px 3px 10px',
+    transform: 'rotate(-45deg)',
+  },
+  pageSizeList: {
+    position: 'relative',
+    top: '25px',
+    left: '-30px',
+    width: '45px',
+    background: '#F5F5F5',
+    border: '1px solid #99A1B7',
+    '&:hover': {
+      cursor: 'pointer',
+    },
+  },
+  pageSizeListHidden: {
+    position: 'relative',
+    top: '25px',
+    left: '-30px',
+    width: '45px',
+    border: '1px solid #99A1B7',
+    visibility: 'hidden',
+    '&:hover': {
+      cursor: 'pointer',
+    },
+  },
+  pageSizeItem: {
+    padding: '2px 8px',
+    '&:hover': {
+      cursor: 'pointer',
+      color: '#000000',
+    },
+  },
+  ul: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    padding: 0,
+    margin: 0,
+    listStyle: 'none',
+  },
+  paginationUl: {
+    padding: '2px',
+    '& .MuiPaginationItem-root': {
+      color: '#045B80',
+      fontFamily: 'Poppins',
+      fontSize: '14px',
+      fontWeight: '300',
+      minWidth: '18px',
+      margin: '0',
+      padding: '0 7px',
+    },
+    '& .MuiPaginationItem-page': {
+      transition: 'none',
+    },
+  },
+  paginationRoot: {
+    '& .Mui-selected': {
+      backgroundColor: 'transparent',
+      fontWeight: '600',
+    },
+    '& .Mui-selected:hover': {
+      backgroundColor: 'transparent',
+    },
+    '& .MuiPagination-ul': {
+      padding: '0',
+    },
+    '& .MuiPagination-ul:hover': {
+      cursor: 'pointer',
+    },
+    '& .MuiPagination-ul > li': {
+      height: '32px;',
+      borderTop: '1px solid #99A1B7',
+      borderRight: '1px solid #99A1B7',
+      borderBottom: '1px solid #99A1B7',
+      '&:hover': {
+        backgroundColor: 'transparent',
+      },
+    },
+    '& .MuiPaginationItem-page': {
+      '&:hover': {
+        backgroundColor: 'transparent',
+      },
+    }
+  },
+  content: {
+    fontSize: '12px',
+  },
+  subsectionBody: {
+    margin: '0 180px 0 219px',
+  },
+  subsection: {
+    '&:last-child $subsectionBody': {
+      borderBottom: 'none',
+    },
+  },
+  link: {
+    color: '#DD401C',
+    textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'underline',
+    },
+    '&:visited': {
+      color: '#9F3D26',
+    },
+  },
+  totalResults: {
+    maxWidth: '900px',
+    fontFamily: 'Poppins',
+    color: '#13666A',
+    fontSize: '20px',
+    fontWeight: '500',
+    margin: '0 0 71px 220px',
+    paddingLeft: '-50px',
+  },
+  totalCount: {
+    fontFamily: 'Poppins',
+  },
+  loadingMessageWrapper: {
+    textAlign: 'center',
+  },
+  loadingMessage: {
+    paddingLeft: '10px',
+    fontSize: '18px',
+  },
+  noticeContainer: {
+    fontFamily: 'Poppins',
+    color: '#13666A',
+    fontSize: '20px',
+    marginBottom: '100px',
+  },
+  pageNumber: {
+    margin: '0 5px',
+  },
+  showingContainer: {
+    display: 'flex',
+    position: 'relative',
+    left: '-14px',
+  },
+  pageContainer: {
+    display: 'flex',
+    height: '32px',
+    '&:hover': {
+      cursor: 'pointer',
+    },
+  }
+};
+
+export default withStyles(styles)(NewsView);

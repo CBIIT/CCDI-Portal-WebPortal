@@ -148,6 +148,7 @@ const NewsView = ({classes}) => {
   const [data, setdata] = useState([]);
   const [pageListVisible, setPageListVisible] = useState(0);
   const perPageSelection = useRef(null);
+  // const announcementsArray = newsList.filter(item => item.type === 'Announcements');
   useOutsideAlerter(perPageSelection);
   const [count, setCount] = useState(newsList['All'].length);
 
@@ -194,7 +195,7 @@ const NewsView = ({classes}) => {
   };
 
   const onPageSizeClick = (e) => {
-    setPageSize(e.target.innerText);
+    setPageSize(Number(e.target.innerText));
     setPageListVisible(!pageListVisible)
   };
 

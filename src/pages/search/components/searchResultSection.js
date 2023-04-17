@@ -112,7 +112,7 @@ function SearchPagination({
   };
 
   const onPageSizeClick = (e) => {
-    setPageSize(e.target.innerText);
+    setPageSize(Number(e.target.innerText));
     setPageListVisible(!pageListVisible)
   };
 

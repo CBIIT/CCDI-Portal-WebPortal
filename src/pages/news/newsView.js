@@ -139,46 +139,51 @@ const useOutsideAlerter = (ref) => {
   }, [ref]);
 };
 
+const getResultList = (tabName) => {
+  if (tabName === "All") {
+    return newsList;
+  } else {
+    return newsList.filter(item => item.type === tabName);
+  }
+};
+
+const getPageResults = (selectedTab, pageInfo) => {
+  const resultList = getResultList(selectedTab);
+  const allids = [];
+  const indexStart = pageInfo.pageSize*(pageInfo.page-1);
+  const indexEnd = pageInfo.pageSize*pageInfo.page < pageInfo.pageTotal ? pageInfo.pageSize*pageInfo.page - 1 : pageInfo.pageTotal - 1;
+  for (let i = indexStart; i<= indexEnd; i++) {
+    allids.push(resultList[i]);
+  }
+  return allids;
+}
+
 const NewsView = ({classes}) => {
   const [selectedTab, setSelectedTab] = useState("All");
   const newsTabList = ['All', 'Announcements', 'News & Other', 'Application Updates', 'Site Updates'];
   const sizelist = [1,2,10,25,50];
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(sizelist[0]);
-  const [data, setdata] = useState([]);
+  const [pageTotal, setPageTotal] = useState(getResultList(selectedTab).length);
+  const [data, setdata] = useState(getPageResults(selectedTab, {page: page, pageTotal: pageTotal, pageSize: pageSize}));
   const [pageListVisible, setPageListVisible] = useState(0);
   const perPageSelection = useRef(null);
   // const announcementsArray = newsList.filter(item => item.type === 'Announcements');
   useOutsideAlerter(perPageSelection);
-  const [count, setCount] = useState(newsList['All'].length);
-
-  const getPageResults = (newPage) => {
-    const allids = [];
-    const indexStart = pageSize*(newPage-1);
-    console.log("indexStart", indexStart);
-    const indexEnd = pageSize*newPage < count ? pageSize*newPage-1 : count-1;
-    for (let i = indexStart; i<= indexEnd; i++) {
-      allids.push(newsList[selectedTab][i]);
-    }
-    return allids;
-  }
-
-  const onChange = (newPage = 1) => {
-    const searchResp = getPageResults(newPage);
-    setdata(searchResp);
-  }
 
   const onNext = () => {
-    if (page < Math.ceil(count / pageSize)) {
-      onChange(page + 1);
-      setPage(page + 1);
+    if (page < Math.ceil(pageTotal / pageSize)) {
+      let tmp = page + 1;
+      setPage(tmp);
+      setdata(getPageResults(selectedTab, {page: tmp, pageTotal: pageTotal, pageSize: pageSize}));
     }
   };
 
   const onPrevious = () => {
     if (page > 1) {
-      onChange(page - 1);
-      setPage(page - 1);
+      let tmp = page - 1;
+      setPage(tmp);
+      setdata(getPageResults(selectedTab, {page: tmp, pageTotal: pageTotal, pageSize: pageSize}));
     }
   };
 
@@ -190,32 +195,41 @@ const NewsView = ({classes}) => {
   };
 
   const handleChangePage = (event, newPage) => {
-    onChange(newPage);
     setPage(newPage);
+    setdata(getPageResults(selectedTab, {page: newPage, pageTotal: pageTotal, pageSize: pageSize}));
     scrollToTop();
   };
 
   const onPageSizeClick = (e) => {
-    setPageSize(Number(e.target.innerText));
+    let newPageSize = Number(e.target.innerText);
+    setPageSize(newPageSize);
+    setPage(1);
+    setdata(getPageResults(selectedTab, {page: 1, pageTotal: pageTotal, pageSize: newPageSize}));
     setPageListVisible(!pageListVisible)
   };
 
   const onClickTab = (newsTabItem) => {
     setSelectedTab(newsTabItem);
+    const resultList = getResultList(newsTabItem);
+    const total = resultList.length;
     const allids = [];
     const indexStart = 0;
-    const indexEnd = pageSize < count ? pageSize-1 : count-1;
+    const indexEnd = pageSize < total ? pageSize - 1 : total - 1;
+    for (let i = indexStart; i<= indexEnd; i++) {
+      allids.push(resultList[i]);
+    }
+    setdata(allids);
+    setPage(1);
+    setPageTotal(total);
+    /*
+    const allids = [];
+    const indexStart = 0;
+    const indexEnd = pageSize < pageTotal ? pageSize-1 : pageTotal-1;
     for (let i = indexStart; i<= indexEnd; i++) {
       allids.push(newsList[newsTabItem][i]);
     }
-    setdata(allids);
+    */
   };
-
-  useEffect(() => {
-    setPage(1);
-    setCount(newsList[selectedTab].length);
-    onChange();
-  }, []);
 
   return (
     <NewsContainer>
@@ -269,9 +283,9 @@ const NewsView = ({classes}) => {
             Showing&nbsp;
             {pageSize*(page-1)+1}
             -
-            {pageSize*page < count ? pageSize*page : count}&nbsp;
+            {pageSize*page < pageTotal ? pageSize*page : pageTotal}&nbsp;
             of&nbsp;
-            {count}
+            {pageTotal}
           </div>
         </div>
         <div className={classes.pageContainer}>
@@ -280,7 +294,7 @@ const NewsView = ({classes}) => {
             disableTouchRipple
             classes={{ ul: classes.paginationUl }}
             className={classes.paginationRoot}
-            count={Math.ceil(count / pageSize)}
+            count={Math.ceil(pageTotal / pageSize)}
             page={page}
             siblingCount={2}
             boundaryCount={1}
@@ -289,7 +303,7 @@ const NewsView = ({classes}) => {
             hidePrevButton
             onChange={handleChangePage}
           />
-          <div className={page === Math.ceil(count / pageSize) ? classes.nextButtonDisabledContainer : classes.nextButtonContainer} onClick={onNext}><div className={ page === Math.ceil(count / pageSize) ? classes.nextButtonDisabled : classes.nextButton} /></div>
+          <div className={page === Math.ceil(pageTotal / pageSize) ? classes.nextButtonDisabledContainer : classes.nextButtonContainer} onClick={onNext}><div className={ page === Math.ceil(pageTotal / pageSize) ? classes.nextButtonDisabled : classes.nextButton} /></div>
         </div>
       </div>
     </NewsContainer>

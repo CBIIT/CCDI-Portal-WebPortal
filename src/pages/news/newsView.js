@@ -153,19 +153,46 @@ const NewsView = ({classes}) => {
   useOutsideAlerter(perPageSelection);
   const [count, setCount] = useState(newsList['All'].length);
 
+  const getPageResults = (newPage) => {
+    const allids = [];
+    const indexStart = pageSize*(newPage-1);
+    const indexEnd = pageSize*newPage < count ? pageSize*newPage-1 : count-1;
+    for (let i = indexStart; i<= indexEnd; i++) {
+      allids.push(newsList[selectedTab][i]);
+    }
+    console.log("indexStart:", indexStart);
+    console.log("page:", newPage);
+
+    return allids;
+  }
+
+  const onChange = (newPage = 1) => {
+    const searchResp = getPageResults(newPage);
+    setdata(searchResp);
+  }
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 54,
+      behavior: 'smooth',
+    });
+  };
+
+  const handleChangePage = (event, newPage) => {
+    onChange(newPage);
+    setPage(newPage);
+    scrollToTop();
+  };
+
   const onPageSizeClick = (e) => {
     setPageSize(e.target.innerText);
     setPageListVisible(!pageListVisible)
   };
 
   useEffect(() => {
-    setCount(newsList[selectedTab].length);
-  }, [selectedTab]);
-
-  useEffect(() => {
     setPage(1);
     setCount(newsList[selectedTab].length);
-    // onChange(searchText);
+    onChange();
   }, [selectedTab, pageSize]);
 
   return (
@@ -183,7 +210,7 @@ const NewsView = ({classes}) => {
       </div>
       <div className='newsList'>
         {
-          newsList[selectedTab].map((newsItem, idx) => {
+          data.map((newsItem, idx) => {
             const newskey = `news_${idx}`;
             return (
               <div key={newskey} className='newsItem'>
@@ -237,7 +264,7 @@ const NewsView = ({classes}) => {
             shape="rounded"
             hideNextButton
             hidePrevButton
-            // onChange={handleChangePage}
+            onChange={handleChangePage}
           />
           <div className={page === Math.ceil(count / pageSize) ? classes.nextButtonDisabledContainer : classes.nextButtonContainer}><div className={ page === Math.ceil(count / pageSize) ? classes.nextButtonDisabled : classes.nextButton} /></div>
         </div>

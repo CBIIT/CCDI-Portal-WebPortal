@@ -221,14 +221,6 @@ const NewsView = ({classes}) => {
     setdata(allids);
     setPage(1);
     setPageTotal(total);
-    /*
-    const allids = [];
-    const indexStart = 0;
-    const indexEnd = pageSize < pageTotal ? pageSize-1 : pageTotal-1;
-    for (let i = indexStart; i<= indexEnd; i++) {
-      allids.push(newsList[newsTabItem][i]);
-    }
-    */
   };
 
   return (

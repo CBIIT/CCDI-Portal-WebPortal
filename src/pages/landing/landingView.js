@@ -343,6 +343,7 @@ const LatestUpdatesContainer = styled.div`
       font-size: 14px;
       color: #AFF1FF;
       border-bottom: 1px solid #AFF1FF;
+      text-decoration: none;
     }
 
     .readMoreContainer:hover{
@@ -610,7 +611,7 @@ const LandingView = () => {
                     <div className='latestUpdatesListTitle'>{updateItem.title}</div>
                     <div className='latestUpdatesListContent'>
                       {updateItem.content.slice(0, 134)+' ... '}
-                      <a className='readMoreContainer'>Read More</a>
+                      <a className='readMoreContainer' href={`/newsdetail/${updateItem.id}`}>Read More</a>
                     </div>
                   </div>
                 )

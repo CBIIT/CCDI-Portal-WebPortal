@@ -79,6 +79,7 @@ const NewsContainer = styled.div`
     margin-bottom: 29px;
     padding: 23px 32px 0 38px;
     box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.25);
+    text-decoration: none;
   }
 
   .newsItem:hover {
@@ -253,7 +254,7 @@ const NewsView = ({classes}) => {
           data.length > 0 ? data.map((newsItem, idx) => {
             const newskey = `news_${idx}`;
             return (
-              <div key={newskey} className='newsItem'>
+              <a key={newskey} href={`/newsdetail/${newsItem.id}`} className='newsItem'>
                 <div className='newsItemTextContainer'>
                   <div className='newsItemTitle'>{newsItem.title}</div>
                   <div className='newsItemDate'>{newsItem.date}</div>
@@ -276,7 +277,7 @@ const NewsView = ({classes}) => {
                   }</div>
                 </div>
                 {newsItem.img && <div><img className='newsItemImgContainer' src={newsItem.img} alt={newsItem.title}/></div>}
-              </div>
+              </a>
             )
           }) :
           <div className={classes.noticeText}>Currently no {selectedTab}</div>

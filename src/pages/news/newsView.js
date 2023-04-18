@@ -120,6 +120,8 @@ const NewsContainer = styled.div`
     margin: 12px 0 0 33px;
     border-radius: 12px;
     border: 2px solid #848484;
+    width: 197px;
+    height: 172px;
   }
 
   .newsContentLink {
@@ -171,7 +173,7 @@ const getPageResults = (selectedTab, pageInfo) => {
 const NewsView = ({classes}) => {
   const [selectedTab, setSelectedTab] = useState("All");
   const newsTabList = ['All', 'Announcements', 'News & Other', 'Application Updates', 'Site Updates'];
-  const sizelist = [2,10,25,50];
+  const sizelist = [10,25,50,100,250];
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(sizelist[0]);
   const [pageTotal, setPageTotal] = useState(getResultList(selectedTab).length);

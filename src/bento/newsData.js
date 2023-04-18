@@ -1,4 +1,5 @@
 import newsCCDC from '../assets/news/News_CCDC.png';
+import newsMolecular from '../assets/news/News_Molecular.png';
 import newsSymposium from '../assets/news/News_Symposium.png';
 import newsCancerPlan from '../assets/news/News_CancerPlan.png';
 
@@ -15,7 +16,7 @@ export const newsList = [
         date: 'APRIL 5, 2023',
         content: 'In March, enrollment in the |CCDI Molecular Characterization Initiative@https://www.cancer.gov/research/areas/childhood/childhood-cancer-data-initiative/data-ecosystem/molecular-characterization?cid=eb_govdel| reached 1,000 children, adolescents, and young adults (AYAs) participants newly diagnosed with certain types of cancer. ',
         type: 'Application Updates',
-        img: '',
+        img: newsMolecular,
     },
     {
         title: '2023 CCDI Symposium ',

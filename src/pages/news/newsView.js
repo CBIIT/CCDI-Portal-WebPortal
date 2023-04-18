@@ -605,7 +605,7 @@ const styles = {
     color: '#13666A',
     fontSize: '20px',
     marginBottom: '100px',
-    marginLeft: '190px',
+    marginLeft: '205px',
   },
 };
 

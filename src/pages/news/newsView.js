@@ -118,6 +118,8 @@ const NewsContainer = styled.div`
 
   .newsItemImgContainer {
     margin: 12px 0 0 33px;
+    border-radius: 12px;
+    border: 2px solid #848484;
   }
 `;
 
@@ -248,7 +250,7 @@ const NewsView = ({classes}) => {
                   <div className='newsItemDate'>{newsItem.date}</div>
                   <div className='newsItemContent'>{newsItem.content}</div>
                 </div>
-                {newsItem.img && <div className='newsItemImgContainer'><img src={newsItem.img} alt={newsItem.title}/></div>}
+                {newsItem.img && <div><img className='newsItemImgContainer' src={newsItem.img} alt={newsItem.title}/></div>}
               </div>
             )
           }) :

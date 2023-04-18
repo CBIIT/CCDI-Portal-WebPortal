@@ -5,6 +5,7 @@ import {
 import Pagination from '@material-ui/lab/Pagination';
 import styled from 'styled-components';
 import newsImg from '../../assets/news/News_Header.jpg';
+import exportIcon from '../../assets/about/Export_Icon.svg';
 import { newsList } from '../../bento/newsData'
 
 const NewsContainer = styled.div`
@@ -109,7 +110,6 @@ const NewsContainer = styled.div`
 
   .newsItemContent {
     font-family: 'Inter';
-    font-style: normal;
     font-weight: 300;
     font-size: 16px;
     line-height: 24px;
@@ -120,6 +120,14 @@ const NewsContainer = styled.div`
     margin: 12px 0 0 33px;
     border-radius: 12px;
     border: 2px solid #848484;
+  }
+
+  .newsContentLink {
+    color: #455299;
+    font-family: 'Inter';
+    font-weight: 600;
+    padding-right: 20px;
+    background: url(${exportIcon}) right center no-repeat;
   }
 `;
 
@@ -242,7 +250,6 @@ const NewsView = ({classes}) => {
         {
           data.length > 0 ? data.map((newsItem, idx) => {
             const newskey = `news_${idx}`;
-            console.log("newsItem:", newsItem);
             return (
               <div key={newskey} className='newsItem'>
                 <div className='newsItemTextContainer'>
@@ -257,7 +264,7 @@ const NewsView = ({classes}) => {
                         linkTitle = item.split('@')[0];
                         link = item.split('@')[1];
                         return(
-                          <a key={itemkey} href={link} target="_blank" rel="noopener noreferrer">{linkTitle}</a>
+                          <a className="newsContentLink" key={itemkey} href={link} target="_blank" rel="noopener noreferrer">{linkTitle}</a>
                         )
                       }
                       return(

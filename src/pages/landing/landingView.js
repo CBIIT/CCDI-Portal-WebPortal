@@ -338,6 +338,23 @@ const LatestUpdatesContainer = styled.div`
       font-weight: 400;
       font-size: 16px;
     }
+
+    .readMoreContainer {
+      font-size: 14px;
+      color: #AFF1FF;
+      border-bottom: 1px solid #AFF1FF;
+    }
+
+    .readMoreContainer:hover{
+      color: #5EF2FF;
+      border-bottom: 1px solid #5EF2FF;
+      cursor: pointer;
+    }
+
+    .readMoreContainer::after {
+      content: '>';
+      margin-left: 4px;
+    }
 `;
 
 const TitleContainer = styled.div`
@@ -591,7 +608,10 @@ const LandingView = () => {
                   <div className='latestUpdatesListItem' key={updatekey}>
                     <div className='latestUpdatesListItemPic' style={{ backgroundImage: `url(${updateItem.img})` }} />
                     <div className='latestUpdatesListTitle'>{updateItem.title}</div>
-                    <div className='latestUpdatesListContent'>{updateItem.content}</div>
+                    <div className='latestUpdatesListContent'>
+                      {updateItem.content.slice(0, 134)+' ... '}
+                      <a className='readMoreContainer'>Read More</a>
+                    </div>
                   </div>
                 )
               })

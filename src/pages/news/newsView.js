@@ -163,7 +163,7 @@ const getPageResults = (selectedTab, pageInfo) => {
 const NewsView = ({classes}) => {
   const [selectedTab, setSelectedTab] = useState("All");
   const newsTabList = ['All', 'Announcements', 'News & Other', 'Application Updates', 'Site Updates'];
-  const sizelist = [1,2,10,25,50];
+  const sizelist = [2,10,25,50];
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(sizelist[0]);
   const [pageTotal, setPageTotal] = useState(getResultList(selectedTab).length);
@@ -248,7 +248,23 @@ const NewsView = ({classes}) => {
                 <div className='newsItemTextContainer'>
                   <div className='newsItemTitle'>{newsItem.title}</div>
                   <div className='newsItemDate'>{newsItem.date}</div>
-                  <div className='newsItemContent'>{newsItem.content}</div>
+                  <div className='newsItemContent'>{
+                    newsItem.content.split('|').map((item, idx) => {
+                      const itemkey = `item_${idx}`;
+                      let link = '';
+                      let linkTitle = '';
+                      if (item.includes('http')) {
+                        linkTitle = item.split('@')[0];
+                        link = item.split('@')[1];
+                        return(
+                          <a key={itemkey} href={link} target="_blank" rel="noopener noreferrer">{linkTitle}</a>
+                        )
+                      }
+                      return(
+                        <span key={itemkey}>{item}</span>
+                      )
+                    })
+                  }</div>
                 </div>
                 {newsItem.img && <div><img className='newsItemImgContainer' src={newsItem.img} alt={newsItem.title}/></div>}
               </div>

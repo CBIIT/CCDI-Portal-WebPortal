@@ -238,7 +238,7 @@ const NewsView = ({classes}) => {
       </div>
       <div className='newsList'>
         {
-          data && data.map((newsItem, idx) => {
+          data.length > 0 ? data.map((newsItem, idx) => {
             const newskey = `news_${idx}`;
             console.log("newsItem:", newsItem);
             return (
@@ -251,54 +251,58 @@ const NewsView = ({classes}) => {
                 {newsItem.img && <div className='newsItemImgContainer'><img src={newsItem.img} alt={newsItem.title}/></div>}
               </div>
             )
-          })
+          }) :
+          <div className={classes.noticeText}>Currently no {selectedTab}</div>
         }
       </div>
-      <div className={classes.paginationContainer}>
-        <div className={classes.perPageContainer}>
-          Results per Page:
-          <div id="resultNumber" className={classes.pageSizeContainer} onClick={() => setPageListVisible(!pageListVisible)}>
-            {pageSize}
-            <span className={pageListVisible? classes.pageSizeArrowUp : classes.pageSizeArrowDown}></span>
+      { data.length > 0 &&
+        <div className={classes.paginationContainer}>
+          <div className={classes.perPageContainer}>
+            Results per Page:
+            <div id="resultNumber" className={classes.pageSizeContainer} onClick={() => setPageListVisible(!pageListVisible)}>
+              {pageSize}
+              <span className={pageListVisible? classes.pageSizeArrowUp : classes.pageSizeArrowDown}></span>
+            </div>
+            <div ref={perPageSelection} id="pagelist" className={pageListVisible ? classes.pageSizeList : classes.pageSizeListHidden}>
+              {
+                sizelist.map((sizeItem, idx) => {
+                  const key = `size_${idx}`;
+                  return (
+                    sizeItem === pageSize ? null : <div key={key} className={classes.pageSizeItem} onClick={onPageSizeClick}>{sizeItem}</div>
+                  )
+                })
+              }
+            </div>
+            <div className={classes.showingContainer}>
+              Showing&nbsp;
+              {pageSize*(page-1)+1}
+              -
+              {pageSize*page < pageTotal ? pageSize*page : pageTotal}&nbsp;
+              of&nbsp;
+              {pageTotal}
+            </div>
           </div>
-          <div ref={perPageSelection} id="pagelist" className={pageListVisible ? classes.pageSizeList : classes.pageSizeListHidden}>
-            {
-              sizelist.map((sizeItem, idx) => {
-                const key = `size_${idx}`;
-                return (
-                  sizeItem === pageSize ? null : <div key={key} className={classes.pageSizeItem} onClick={onPageSizeClick}>{sizeItem}</div>
-                )
-              })
-            }
-          </div>
-          <div className={classes.showingContainer}>
-            Showing&nbsp;
-            {pageSize*(page-1)+1}
-            -
-            {pageSize*page < pageTotal ? pageSize*page : pageTotal}&nbsp;
-            of&nbsp;
-            {pageTotal}
+          <div className={classes.pageContainer}>
+            <div className={ page === 1 ? classes.prevButtonDisabledContainer : classes.prevButtonContainer} onClick={onPrevious}><div className={ page === 1 ? classes.prevButtonDisabled : classes.prevButton } /></div>
+            <Pagination
+              disableTouchRipple
+              classes={{ ul: classes.paginationUl }}
+              className={classes.paginationRoot}
+              count={Math.ceil(pageTotal / pageSize)}
+              page={page}
+              siblingCount={2}
+              boundaryCount={1}
+              shape="rounded"
+              hideNextButton
+              hidePrevButton
+              onChange={handleChangePage}
+            />
+            <div className={page === Math.ceil(pageTotal / pageSize) ? classes.nextButtonDisabledContainer : classes.nextButtonContainer} onClick={onNext}><div className={ page === Math.ceil(pageTotal / pageSize) ? classes.nextButtonDisabled : classes.nextButton} /></div>
           </div>
         </div>
-        <div className={classes.pageContainer}>
-          <div className={ page === 1 ? classes.prevButtonDisabledContainer : classes.prevButtonContainer} onClick={onPrevious}><div className={ page === 1 ? classes.prevButtonDisabled : classes.prevButton } /></div>
-          <Pagination
-            disableTouchRipple
-            classes={{ ul: classes.paginationUl }}
-            className={classes.paginationRoot}
-            count={Math.ceil(pageTotal / pageSize)}
-            page={page}
-            siblingCount={2}
-            boundaryCount={1}
-            shape="rounded"
-            hideNextButton
-            hidePrevButton
-            onChange={handleChangePage}
-          />
-          <div className={page === Math.ceil(pageTotal / pageSize) ? classes.nextButtonDisabledContainer : classes.nextButtonContainer} onClick={onNext}><div className={ page === Math.ceil(pageTotal / pageSize) ? classes.nextButtonDisabled : classes.nextButton} /></div>
-        </div>
-      </div>
+      }
     </NewsContainer>
+    
   )
 };
 
@@ -568,7 +572,14 @@ const styles = {
     '&:hover': {
       cursor: 'pointer',
     },
-  }
+  },
+  noticeText: {
+    fontFamily: 'Poppins',
+    color: '#13666A',
+    fontSize: '20px',
+    marginBottom: '100px',
+    marginLeft: '190px',
+  },
 };
 
 export default withStyles(styles)(NewsView);

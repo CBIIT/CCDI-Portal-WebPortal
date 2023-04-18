@@ -11,6 +11,7 @@ import Ccdi from '../../pages/ccdi/ccdiView';
 import Error from '../../pages/error/Error';
 import Search from '../../pages/search/searchView';
 import ScrollButton from '../ScrollButton/ScrollButtonView';
+import NewsDetail from '../../pages/news/newsDetailView';
 
 const Layout = () => {
     return (
@@ -26,6 +27,7 @@ const Layout = () => {
           <Route exact path="/news" component={News} />
           <Route exact path="/ccdi" component={Ccdi} />
           <Route path="/sitesearch" component={Search} />
+          <Route path="/newsdetail/:id" component={NewsDetail} />
           <Route component={Error} />
         </Switch>
         <Footer />

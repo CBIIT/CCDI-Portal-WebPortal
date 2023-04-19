@@ -3,7 +3,7 @@ import {
   withStyles,
 } from '@material-ui/core';
 import { useNavigate } from 'react-router-dom';
-import ReactHtmlParser from 'react-html-parser';
+import ReactHtmlParser from 'html-react-parser';
 import Pagination from '@material-ui/lab/Pagination';
 import styled from 'styled-components';
 import newsImg from '../../assets/news/News_Header.jpg';

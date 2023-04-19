@@ -8,7 +8,7 @@ export const newsList = [
         id: 'ccdc',
         title: 'Childhood Cancer Data Catalog April Update ',
         date: 'APRIL 19, 2023',
-        content: 'The |Childhood Cancer Data Catalog@https://datacatalog.ccdi.cancer.gov/| is pleased to announce an April update which includes 1 new resource, 8 new datasets, and many other data updates. This update includes the addition of the Xena Browser, a powerful online exploration tool that allows users to investigate functional genomic data sets for correlations between genomic and/or phenotypic variables, as a new analytic tool resource.  Additionally, 7 new datasets have been incorporated into 8 existing resources, with 5 of these coming from The Cancer Imaging Archive (TCIA).',
+        content: 'The |Childhood Cancer Data Catalog@https://datacatalog.ccdi.cancer.gov/| is pleased to announce an April update which includes 1 new resource, 8 new datasets, and many other data updates.',
         type: 'Application Updates',
         img: newsCCDC,
     },

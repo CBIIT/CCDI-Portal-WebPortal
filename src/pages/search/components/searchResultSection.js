@@ -31,7 +31,7 @@ const useOutsideAlerter = (ref) => {
 function SearchPagination({
   datafield, classes, searchText, count, isPublic,
 }) {
-  const sizelist = [10,25,50,100,250];
+  const sizelist = [10,20,50,100];
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(sizelist[0]);
   const [data, setdata] = useState([]);

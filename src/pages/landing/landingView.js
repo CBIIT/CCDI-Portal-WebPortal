@@ -609,7 +609,7 @@ const LandingView = () => {
                     <div className='latestUpdatesListItemPic' style={{ backgroundImage: `url(${updateItem.img})` }} />
                     <div className='latestUpdatesListTitle'>{updateItem.title}</div>
                     <div className='latestUpdatesListContent'>
-                      {updateItem.content.slice(0, 134)+' ... '}
+                      {updateItem.content.slice(0, 130)+' ... '}
                       <a className='readMoreContainer' href={`/newsdetail/${updateItem.id}`}>Read More</a>
                     </div>
                   </div>

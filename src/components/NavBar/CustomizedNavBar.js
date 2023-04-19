@@ -64,7 +64,7 @@ const LiSection = styled.li`
   .clicked {
     color: #FFFFFF;
     background: #1A5255;
-    border-bottom: 4px solid #1A5255;
+    // border-bottom: 4px solid #1A5255;
   }
 
   .navTitle:hover {
@@ -72,12 +72,16 @@ const LiSection = styled.li`
     // border-bottom: 4px solid #298085;
   }
 
+  .navText {
+    border-bottom: 4px solid transparent;
+  }
+
   .navText:hover {
     cursor: pointer;
     border-bottom: 4px solid #298085;
   }
 
-  .navTitle::after {
+  .navText::after {
     content: "";
     display: inline-block;
     width: 6px;
@@ -103,7 +107,7 @@ const LiSection = styled.li`
 `;
 
 const Dropdown = styled.div`
-    top: 141px;
+    top: 140.5px;
     left: 0;
     width: 100%;
     background: #1A5255;
@@ -162,7 +166,7 @@ const useOutsideAlerter = (ref) => {
       function handleClickOutside(event) {
           if (!event.target || (event.target.getAttribute("class") !== "dropdownList" && ref.current && !ref.current.contains(event.target))) {
             const toggle = document.getElementsByClassName("navTitle clicked");
-            if (toggle[0] && event.target.getAttribute("class") !== "navTitle clicked") {
+            if (toggle[0] && event.target.getAttribute("class") !== "navTitle clicked" && event.target.getAttribute("class") !== "navText clicked") {
               toggle[0].click();
             }
           }
@@ -214,10 +218,10 @@ const NavBar = () => {
             <NavLink to="/home"><div className='navTitle directLink'><div className='navText directLink' style={path === '/' || path === '/home' ? activeStyle : null}>Home</div></div></NavLink>
           </LiSection>
           <LiSection onClick={handleMenuClick}>
-            <div className={clickedTitle === 'Applications' ? 'navTitle clicked' : 'navTitle'}>Applications</div>
+            <div className={clickedTitle === 'Applications' ? 'navTitle clicked' : 'navTitle'}><div className={clickedTitle === 'Applications' ? 'navText clicked' : 'navText'}>Applications</div></div>
           </LiSection>
           <LiSection onClick={handleMenuClick}>
-            <div className={clickedTitle === 'Other Resources' ? 'navTitle clicked' : 'navTitle'}>Other Resources</div>
+            <div className={clickedTitle === 'Other Resources' ? 'navTitle clicked' : 'navTitle'}><div className={clickedTitle === 'Other Resources' ? 'navText clicked' : 'navText'}>Other Resources</div></div>
           </LiSection>
           <LiSection onClick={handleMenuClick}>
             <NavLink to="/news"><div className='navTitle directLink'><div className='navText directLink' style={path === '/news' ? activeStyle : null}>News</div></div></NavLink>

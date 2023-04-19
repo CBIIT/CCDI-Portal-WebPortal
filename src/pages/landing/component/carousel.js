@@ -287,7 +287,7 @@ const Carousel = () => {
             } else {
                 prevItem();
             }
-        }, 5000);
+        }, 4000);
     };
 
     const resetTimer = () => {

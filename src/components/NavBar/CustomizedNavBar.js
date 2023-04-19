@@ -53,7 +53,7 @@ const LiSection = styled.li`
     font-size: 17px;
     font-weight: 600;
     line-height: 50px;
-    letter-spacing: 1px;
+    letter-spacing: normal;
     text-decoration: none;
     margin: 0 45px 0 5px;
     padding: 0 15px;

@@ -299,6 +299,7 @@ const styles = {
   pageSizeContainer: {
     marginLeft: '10px',
     userSelect: 'none',
+    height: '20px',
     '&:hover': {
       cursor: 'pointer',
     },
@@ -326,7 +327,7 @@ const styles = {
   pageSizeList: {
     position: 'relative',
     top: '25px',
-    left: '-30px',
+    left: '-40px',
     width: '45px',
     background: '#F5F5F5',
     border: '1px solid #99A1B7',

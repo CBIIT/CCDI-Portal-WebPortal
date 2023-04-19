@@ -56,19 +56,19 @@ export const latestUpdatesData = [
     id: 'ccdc',
     img: updateImgCCDC,
     title: 'Childhood Cancer Data Catalog April Update',
-    content: 'The Childhood Cancer Data Catalog is pleased to announce an April update which includes 1 new resource, 8 new datasets, and many other data updates. This update includes the addition of the Xena Browser, a powerful online exploration tool that allows users to investigate functional genomic data sets for correlations between genomic and/or phenotypic variables, as a new analytic tool resource.  Additionally, 7 new datasets have been incorporated into 8 existing resources, with 5 of these coming from The Cancer Imaging Archive (TCIA). Explore the Catalog to check out all the changes.',
+    content: 'The Childhood Cancer Data Catalog is pleased to announce an April update which includes 1 new resource, 8 new datasets, and many other data updates.',
   },
   {
     id: 'molecular',
     img: updateImgMolecular,
     title: 'Molecular characterization results returned to more than 1,000 participants',
-    content: 'In March, enrollment in the CCDI Molecular Characterization Initiative reached 1,000 children, adolescents, and young adults (AYAs) participants newly diagnosed with certain types of cancer.',
+    content: 'The CCDI Molecular Characterization Initiative reached 1K children, adolescents, and young adults (AYAs) newly diagnosed with certain types of cancer. ',
   },
   {
     id: 'symposium',
     img: updateImgSymposium,
     title: '2023 CCDI Symposium',
-    content: 'On March 24, 2023, NCI hosted the Childhood Cancer Data Initiative Annual Symposium. More than 800 researchers, clinicians, survivors, and families from the community gathered to discuss how enhanced data connection and sharing can address current issues and possibilities in childhood cancer research.',
+    content: 'The CCDI Annual Symposium, hosted by NCI on March 24, 2023, brought together over 800 members of the research, clinical, survivor, and family communities.',
   },
 ];
 

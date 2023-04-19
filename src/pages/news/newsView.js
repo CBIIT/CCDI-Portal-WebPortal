@@ -3,6 +3,7 @@ import {
   withStyles,
 } from '@material-ui/core';
 import { useNavigate } from 'react-router-dom';
+import ReactHtmlParser from 'react-html-parser';
 import Pagination from '@material-ui/lab/Pagination';
 import styled from 'styled-components';
 import newsImg from '../../assets/news/News_Header.jpg';
@@ -117,6 +118,13 @@ const NewsContainer = styled.div`
     font-size: 16px;
     line-height: 24px;
     color: #000000;
+    a {
+      color: #455299;
+      font-family: 'Inter';
+      font-weight: 600;
+      padding-right: 20px;
+      background: url(${exportIcon}) right center no-repeat;
+    }
   }
 
   .newsItemImgContainer {
@@ -125,14 +133,6 @@ const NewsContainer = styled.div`
     border: 2px solid #848484;
     width: 197px;
     height: 172px;
-  }
-
-  .newsContentLink {
-    color: #455299;
-    font-family: 'Inter';
-    font-weight: 600;
-    padding-right: 20px;
-    background: url(${exportIcon}) right center no-repeat;
   }
 `;
 
@@ -239,8 +239,10 @@ const NewsView = ({classes}) => {
     setPageTotal(total);
   };
 
-  const gotoNewsDetail = (newsID) => {
-    navigate(`/newsdetail/${newsID.trim()}`);
+  const gotoNewsDetail = (e, newsID) => {
+    if (e.target.tagName !== 'A') {
+      navigate(`/newsdetail/${newsID.trim()}`);
+    }
   };
 
   return (
@@ -261,27 +263,11 @@ const NewsView = ({classes}) => {
           data.length > 0 ? data.map((newsItem, idx) => {
             const newskey = `news_${idx}`;
             return (
-              <div key={newskey} onClick={() => gotoNewsDetail(newsItem.id)} className='newsItem'>
+              <div key={newskey} onClick={(e) => gotoNewsDetail(e, newsItem.id)} className='newsItem'>
                 <div className='newsItemTextContainer'>
                   <div className='newsItemTitle'>{newsItem.title}</div>
                   <div className='newsItemDate'>{newsItem.date}</div>
-                  <div className='newsItemContent'>{
-                    newsItem.content.split('|').map((item, idx) => {
-                      const itemkey = `item_${idx}`;
-                      let link = '';
-                      let linkTitle = '';
-                      if (item.includes('http')) {
-                        linkTitle = item.split('@')[0];
-                        link = item.split('@')[1];
-                        return(
-                          <a className="newsContentLink" key={itemkey} href={link} target="_blank" rel="noopener noreferrer">{linkTitle}</a>
-                        )
-                      }
-                      return(
-                        <span key={itemkey}>{item}</span>
-                      )
-                    })
-                  }</div>
+                  <div className='newsItemContent'>{ReactHtmlParser(newsItem.content)}</div>
                 </div>
                 {newsItem.img && <div><img className='newsItemImgContainer' src={newsItem.img} alt={newsItem.title}/></div>}
               </div>

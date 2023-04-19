@@ -52,28 +52,29 @@ const LiSection = styled.li`
     font-family: poppins;
     font-size: 17px;
     font-weight: 600;
-    line-height: 50px;
+    line-height: 40px;
     letter-spacing: normal;
     text-decoration: none;
     margin: 0 45px 0 5px;
     padding: 0 15px;
-    border-bottom: 4px solid transparent;
+    // border-bottom: 4px solid transparent;
     user-select:none;
   }
 
   .clicked {
     color: #FFFFFF;
     background: #1A5255;
-    border-bottom: 4px solid #1A5255,
+    border-bottom: 4px solid #1A5255;
   }
 
   .navTitle:hover {
     cursor: pointer;
-    border-bottom: 4px solid #298085;
+    // border-bottom: 4px solid #298085;
   }
 
-  .clicked:hover {
-    border-bottom: 4px solid transparent;
+  .navText:hover {
+    cursor: pointer;
+    border-bottom: 4px solid #298085;
   }
 
   .navTitle::after {
@@ -102,7 +103,7 @@ const LiSection = styled.li`
 `;
 
 const Dropdown = styled.div`
-    top: 150px;
+    top: 141px;
     left: 0;
     width: 100%;
     background: #1A5255;
@@ -210,7 +211,7 @@ const NavBar = () => {
       <NavContainer>
         <UlContainer>
           <LiSection onClick={handleMenuClick}>
-            <NavLink to="/home"><div className='navTitle directLink' style={path === '/' || path === '/home' ? activeStyle : null}>Home</div></NavLink>
+            <NavLink to="/home"><div className='navTitle directLink'><div className='navText directLink' style={path === '/' || path === '/home' ? activeStyle : null}>Home</div></div></NavLink>
           </LiSection>
           <LiSection onClick={handleMenuClick}>
             <div className={clickedTitle === 'Applications' ? 'navTitle clicked' : 'navTitle'}>Applications</div>
@@ -219,10 +220,10 @@ const NavBar = () => {
             <div className={clickedTitle === 'Other Resources' ? 'navTitle clicked' : 'navTitle'}>Other Resources</div>
           </LiSection>
           <LiSection onClick={handleMenuClick}>
-            <NavLink to="/news"><div className='navTitle directLink' style={path === '/news' ? activeStyle : null}>News</div></NavLink>
+            <NavLink to="/news"><div className='navTitle directLink'><div className='navText directLink' style={path === '/news' ? activeStyle : null}>News</div></div></NavLink>
           </LiSection>
           <LiSection onClick={handleMenuClick}>
-            <NavLink to="/about"><div className='navTitle directLink' style={path === '/about' ? activeStyle : null}>About</div></NavLink>
+            <NavLink to="/about"><div className='navTitle directLink'><div className='navText directLink' style={path === '/about' ? activeStyle : null}>About</div></div></NavLink>
           </LiSection>
         </UlContainer>
       </NavContainer>

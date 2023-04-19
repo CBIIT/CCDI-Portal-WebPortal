@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef }from 'react';
 import {
   withStyles,
 } from '@material-ui/core';
+import { useNavigate } from 'react-router-dom';
 import Pagination from '@material-ui/lab/Pagination';
 import styled from 'styled-components';
 import newsImg from '../../assets/news/News_Header.jpg';
@@ -80,6 +81,7 @@ const NewsContainer = styled.div`
     padding: 23px 32px 0 38px;
     box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.25);
     text-decoration: none;
+    cursor: pointer;
   }
 
   .newsItem:hover {
@@ -172,6 +174,7 @@ const getPageResults = (selectedTab, pageInfo) => {
 }
 
 const NewsView = ({classes}) => {
+  const navigate = useNavigate();
   const [selectedTab, setSelectedTab] = useState("All");
   const newsTabList = ['All', 'Announcements', 'News & Other', 'Application Updates', 'Site Updates'];
   const sizelist = [10,25,50,100,250];
@@ -236,6 +239,10 @@ const NewsView = ({classes}) => {
     setPageTotal(total);
   };
 
+  const gotoNewsDetail = (newsID) => {
+    navigate(`/newsdetail/${newsID.trim()}`);
+  };
+
   return (
     <NewsContainer>
       <div className='newsHeader'>Hub News and Updates</div>
@@ -254,7 +261,7 @@ const NewsView = ({classes}) => {
           data.length > 0 ? data.map((newsItem, idx) => {
             const newskey = `news_${idx}`;
             return (
-              <a key={newskey} href={`/newsdetail/${newsItem.id}`} className='newsItem'>
+              <div key={newskey} onClick={() => gotoNewsDetail(newsItem.id)} className='newsItem'>
                 <div className='newsItemTextContainer'>
                   <div className='newsItemTitle'>{newsItem.title}</div>
                   <div className='newsItemDate'>{newsItem.date}</div>
@@ -277,7 +284,7 @@ const NewsView = ({classes}) => {
                   }</div>
                 </div>
                 {newsItem.img && <div><img className='newsItemImgContainer' src={newsItem.img} alt={newsItem.title}/></div>}
-              </a>
+              </div>
             )
           }) :
           <div className={classes.noticeText}>Currently no {selectedTab}</div>
@@ -313,7 +320,7 @@ const NewsView = ({classes}) => {
           <div className={classes.pageContainer}>
             <div className={ page === 1 ? classes.prevButtonDisabledContainer : classes.prevButtonContainer} onClick={onPrevious}><div className={ page === 1 ? classes.prevButtonDisabled : classes.prevButton } /></div>
             <Pagination
-              disableTouchRipple
+              disabletouchripple="true"
               classes={{ ul: classes.paginationUl }}
               className={classes.paginationRoot}
               count={Math.ceil(pageTotal / pageSize)}

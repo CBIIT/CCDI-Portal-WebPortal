@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
-import {useLocation, useHistory} from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 import headerData from '../../bento/globalHeaderData';
 import clearIcon from '../../assets/header/Clear_Icon.svg'
 
@@ -95,7 +95,7 @@ const SearchInput = styled.input`
 
 const Header = () => {
   const path = useLocation().pathname;
-  const navigate = useHistory().push;
+  const navigate = useNavigate();
   const [localText, setLocalText] = useState("");
 
   const handleTextInputChange = (event) => {

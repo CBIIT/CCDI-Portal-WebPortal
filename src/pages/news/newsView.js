@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef }from 'react';
 import {
   withStyles,
 } from '@material-ui/core';
+import { useNavigate } from 'react-router-dom';
+import ReactHtmlParser from 'html-react-parser';
 import Pagination from '@material-ui/lab/Pagination';
 import styled from 'styled-components';
 import newsImg from '../../assets/news/News_Header.jpg';
@@ -80,6 +82,7 @@ const NewsContainer = styled.div`
     padding: 23px 32px 0 38px;
     box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.25);
     text-decoration: none;
+    cursor: pointer;
   }
 
   .newsItem:hover {
@@ -115,6 +118,13 @@ const NewsContainer = styled.div`
     font-size: 16px;
     line-height: 24px;
     color: #000000;
+    a {
+      color: #455299;
+      font-family: 'Inter';
+      font-weight: 600;
+      padding-right: 20px;
+      background: url(${exportIcon}) right center no-repeat;
+    }
   }
 
   .newsItemImgContainer {
@@ -123,14 +133,6 @@ const NewsContainer = styled.div`
     border: 2px solid #848484;
     width: 197px;
     height: 172px;
-  }
-
-  .newsContentLink {
-    color: #455299;
-    font-family: 'Inter';
-    font-weight: 600;
-    padding-right: 20px;
-    background: url(${exportIcon}) right center no-repeat;
   }
 `;
 
@@ -172,9 +174,10 @@ const getPageResults = (selectedTab, pageInfo) => {
 }
 
 const NewsView = ({classes}) => {
+  const navigate = useNavigate();
   const [selectedTab, setSelectedTab] = useState("All");
   const newsTabList = ['All', 'Announcements', 'News & Other', 'Application Updates', 'Site Updates'];
-  const sizelist = [10,25,50,100,250];
+  const sizelist = [10,20,50,100];
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(sizelist[0]);
   const [pageTotal, setPageTotal] = useState(getResultList(selectedTab).length);
@@ -236,6 +239,12 @@ const NewsView = ({classes}) => {
     setPageTotal(total);
   };
 
+  const gotoNewsDetail = (e, newsID) => {
+    if (e.target.tagName !== 'A') {
+      navigate(`/newsdetail/${newsID.trim()}`);
+    }
+  };
+
   return (
     <NewsContainer>
       <div className='newsHeader'>Hub News and Updates</div>
@@ -254,30 +263,14 @@ const NewsView = ({classes}) => {
           data.length > 0 ? data.map((newsItem, idx) => {
             const newskey = `news_${idx}`;
             return (
-              <a key={newskey} href={`/newsdetail/${newsItem.id}`} className='newsItem'>
+              <div key={newskey} onClick={(e) => gotoNewsDetail(e, newsItem.id)} className='newsItem'>
                 <div className='newsItemTextContainer'>
                   <div className='newsItemTitle'>{newsItem.title}</div>
                   <div className='newsItemDate'>{newsItem.date}</div>
-                  <div className='newsItemContent'>{
-                    newsItem.content.split('|').map((item, idx) => {
-                      const itemkey = `item_${idx}`;
-                      let link = '';
-                      let linkTitle = '';
-                      if (item.includes('http')) {
-                        linkTitle = item.split('@')[0];
-                        link = item.split('@')[1];
-                        return(
-                          <a className="newsContentLink" key={itemkey} href={link} target="_blank" rel="noopener noreferrer">{linkTitle}</a>
-                        )
-                      }
-                      return(
-                        <span key={itemkey}>{item}</span>
-                      )
-                    })
-                  }</div>
+                  <div className='newsItemContent'>{ReactHtmlParser(newsItem.content)}</div>
                 </div>
                 {newsItem.img && <div><img className='newsItemImgContainer' src={newsItem.img} alt={newsItem.title}/></div>}
-              </a>
+              </div>
             )
           }) :
           <div className={classes.noticeText}>Currently no {selectedTab}</div>
@@ -313,7 +306,7 @@ const NewsView = ({classes}) => {
           <div className={classes.pageContainer}>
             <div className={ page === 1 ? classes.prevButtonDisabledContainer : classes.prevButtonContainer} onClick={onPrevious}><div className={ page === 1 ? classes.prevButtonDisabled : classes.prevButton } /></div>
             <Pagination
-              disableTouchRipple
+              disabletouchripple="true"
               classes={{ ul: classes.paginationUl }}
               className={classes.paginationRoot}
               count={Math.ceil(pageTotal / pageSize)}
@@ -435,6 +428,7 @@ const styles = {
   pageSizeContainer: {
     marginLeft: '10px',
     userSelect: 'none',
+    height: '20px',
     '&:hover': {
       cursor: 'pointer',
     },
@@ -462,7 +456,7 @@ const styles = {
   pageSizeList: {
     position: 'relative',
     top: '25px',
-    left: '-30px',
+    left: '-40px',
     width: '45px',
     background: '#F5F5F5',
     border: '1px solid #99A1B7',

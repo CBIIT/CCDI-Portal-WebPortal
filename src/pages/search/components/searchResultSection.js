@@ -31,7 +31,7 @@ const useOutsideAlerter = (ref) => {
 function SearchPagination({
   datafield, classes, searchText, count, isPublic,
 }) {
-  const sizelist = [10,25,50,100,250];
+  const sizelist = [10,20,50,100];
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(sizelist[0]);
   const [data, setdata] = useState([]);
@@ -299,6 +299,7 @@ const styles = {
   pageSizeContainer: {
     marginLeft: '10px',
     userSelect: 'none',
+    height: '20px',
     '&:hover': {
       cursor: 'pointer',
     },
@@ -326,7 +327,7 @@ const styles = {
   pageSizeList: {
     position: 'relative',
     top: '25px',
-    left: '-30px',
+    left: '-40px',
     width: '45px',
     background: '#F5F5F5',
     border: '1px solid #99A1B7',

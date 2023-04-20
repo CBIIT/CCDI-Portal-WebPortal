@@ -52,31 +52,28 @@ const LiSection = styled.li`
     font-family: poppins;
     font-size: 17px;
     font-weight: 600;
-    line-height: 50px;
-    letter-spacing: 1px;
+    line-height: 40px;
+    letter-spacing: normal;
     text-decoration: none;
     margin: 0 45px 0 5px;
     padding: 0 15px;
-    border-bottom: 4px solid transparent;
     user-select:none;
-  }
-
-  .clicked {
-    color: #FFFFFF;
-    background: #1A5255;
-    border-bottom: 4px solid #1A5255,
   }
 
   .navTitle:hover {
     cursor: pointer;
-    border-bottom: 4px solid #298085;
   }
 
-  .clicked:hover {
+  .navText {
     border-bottom: 4px solid transparent;
   }
 
-  .navTitle::after {
+  .navText:hover {
+    cursor: pointer;
+    border-bottom: 4px solid #298085;
+  }
+
+  .navText::after {
     content: "";
     display: inline-block;
     width: 6px;
@@ -88,6 +85,11 @@ const LiSection = styled.li`
     -webkit-transform: rotate(-45deg);
   }
 
+  .clicked {
+    color: #FFFFFF;
+    background: #1A5255;
+  }
+
   .clicked::after {
     border-top: 1px solid #FFFFFF;
     border-right: 1px solid #FFFFFF;
@@ -96,13 +98,32 @@ const LiSection = styled.li`
     margin: 0 0 0 8px
   }
 
+  .clicked:hover {
+    border-bottom: 4px solid #1A5255;
+  }
+
   .directLink::after {
     display: none;
+  }
+
+  .navTitleClicked {
+    display: block;
+    color: #FFFFFF;
+    font-family: poppins;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 40px;
+    letter-spacing: normal;
+    text-decoration: none;
+    margin: 0 45px 0 5px;
+    padding: 0 15px;
+    user-select:none;
+    background: #1A5255;
   }
 `;
 
 const Dropdown = styled.div`
-    top: 150px;
+    top: 140.5px;
     left: 0;
     width: 100%;
     background: #1A5255;
@@ -148,7 +169,6 @@ const DropdownContainer = styled.div`
 
 const activeStyle = {
   color: '#252222',
-  // backgroundColor: '#E8EDF5',
   borderBottom: '4px solid #298085',
 };
 
@@ -160,8 +180,8 @@ const useOutsideAlerter = (ref) => {
   useEffect(() => {
       function handleClickOutside(event) {
           if (!event.target || (event.target.getAttribute("class") !== "dropdownList" && ref.current && !ref.current.contains(event.target))) {
-            const toggle = document.getElementsByClassName("navTitle clicked");
-            if (toggle[0] && event.target.getAttribute("class") !== "navTitle clicked") {
+            const toggle = document.getElementsByClassName("navTitleClicked");
+            if (toggle[0] && event.target.getAttribute("class") !== "navTitleClicked" && event.target.getAttribute("class") !== "navText clicked") {
               toggle[0].click();
             }
           }
@@ -210,19 +230,19 @@ const NavBar = () => {
       <NavContainer>
         <UlContainer>
           <LiSection onClick={handleMenuClick}>
-            <NavLink to="/home"><div className='navTitle directLink' style={path === '/' || path === '/home' ? activeStyle : null}>Home</div></NavLink>
+            <NavLink to="/home"><div className='navTitle directLink'><div className='navText directLink' style={path === '/' || path === '/home' ? activeStyle : null}>Home</div></div></NavLink>
           </LiSection>
           <LiSection onClick={handleMenuClick}>
-            <div className={clickedTitle === 'Applications' ? 'navTitle clicked' : 'navTitle'}>Applications</div>
+            <div className={clickedTitle === 'Applications' ? 'navTitleClicked' : 'navTitle'}><div className={clickedTitle === 'Applications' ? 'navText clicked' : 'navText'}>Applications</div></div>
           </LiSection>
           <LiSection onClick={handleMenuClick}>
-            <div className={clickedTitle === 'Other Resources' ? 'navTitle clicked' : 'navTitle'}>Other Resources</div>
+            <div className={clickedTitle === 'Other Resources' ? 'navTitleClicked' : 'navTitle'}><div className={clickedTitle === 'Other Resources' ? 'navText clicked' : 'navText'}>Other Resources</div></div>
           </LiSection>
           <LiSection onClick={handleMenuClick}>
-            <NavLink to="/news"><div className='navTitle directLink' style={path === '/news' ? activeStyle : null}>News</div></NavLink>
+            <NavLink to="/news"><div className='navTitle directLink'><div className='navText directLink' style={path === '/news' ? activeStyle : null}>News</div></div></NavLink>
           </LiSection>
           <LiSection onClick={handleMenuClick}>
-            <NavLink to="/about"><div className='navTitle directLink' style={path === '/about' ? activeStyle : null}>About</div></NavLink>
+            <NavLink to="/about"><div className='navTitle directLink'><div className='navText directLink' style={path === '/about' ? activeStyle : null}>About</div></div></NavLink>
           </LiSection>
         </UlContainer>
       </NavContainer>

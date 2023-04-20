@@ -1,12 +1,11 @@
 import React, { useRef} from 'react';
 import styled from 'styled-components';
 import {
-  useLocation,
+  useLocation, useNavigate
 } from "react-router-dom";
 import {
   withStyles, Box,
 } from '@material-ui/core';
-import { useHistory } from 'react-router-dom'; // version 5.2.0
 
 import {
   getPublicSearchPageResults,
@@ -113,7 +112,7 @@ const useQuery = () => {
 function searchComponent({
   classes,
 }) {
-  const history = useHistory();
+  const navigate = useNavigate();
   const query = useQuery();
   const searchparam = query.get("keyword") ? query.get("keyword").trim() : "";
   const [open] = React.useState(false);
@@ -130,7 +129,7 @@ function searchComponent({
     const searchResp = await getAuthorizedResultQuery(newValue);
     setSearchResults(searchResp);
     setSearchText(newValue);
-    history.push(`/sitesearch?keyword=${newValue}`);
+    navigate(`/sitesearch?keyword=${newValue}`);
   }
 
   async function getAutoCompleteRes(newValue = []) {
@@ -160,7 +159,7 @@ function searchComponent({
     const searchResp = await getAuthorizedResultQuery(inputValue);
     setSearchResults(searchResp);
     setSearchText(inputValue);
-    history.push(`/sitesearch?keyword=${inputValue}`);
+    navigate(`/sitesearch?keyword=${inputValue}`);
     }
   };
 

@@ -169,7 +169,6 @@ const DropdownContainer = styled.div`
 
 const activeStyle = {
   color: '#252222',
-  // backgroundColor: '#E8EDF5',
   borderBottom: '4px solid #298085',
 };
 
@@ -181,8 +180,8 @@ const useOutsideAlerter = (ref) => {
   useEffect(() => {
       function handleClickOutside(event) {
           if (!event.target || (event.target.getAttribute("class") !== "dropdownList" && ref.current && !ref.current.contains(event.target))) {
-            const toggle = document.getElementsByClassName("navTitle clicked");
-            if (toggle[0] && event.target.getAttribute("class") !== "navTitle clicked" && event.target.getAttribute("class") !== "navText clicked") {
+            const toggle = document.getElementsByClassName("navTitleClicked");
+            if (toggle[0] && event.target.getAttribute("class") !== "navTitleClicked" && event.target.getAttribute("class") !== "navText clicked") {
               toggle[0].click();
             }
           }

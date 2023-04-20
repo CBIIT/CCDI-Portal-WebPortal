@@ -2,6 +2,7 @@ import React from 'react';
 import newsImg from '../../assets/news/News_Header.jpg';
 import arrowIcon from '../../assets/news/News_Long_Arrow.svg';
 import styled from 'styled-components';
+import { newsList } from '../../bento/newsData'
 
 const NewsDetailContainer = styled.div`
     width: 1440px;
@@ -38,13 +39,75 @@ const NewsDetailContainer = styled.div`
     }
 `;
 
+const NewsContentContainer = styled.div`
+    width: 775px;
+    margin: 0 auto;
+
+    .tabContainer {
+        display: flex;
+    }
+
+    .tabItem {
+        padding: 0 12px;
+        height: 24px;
+        background: #E6F2F5;
+        border: 1.5px solid #7CCFD6;
+        border-radius: 8px;
+        font-family: 'Inter';
+        font-weight: 300;
+        font-size: 11px;
+        line-height: 21px;
+        color: #314E51;
+    }
+
+    .tabItem:hover {
+        border: 1.5px solid #0095A2;
+        cursor: pointer;
+    }
+
+    .splitLine {
+        content:'';
+        width: 100%;
+        display:inline-block;
+        border-bottom: 1px solid #7CCFD6;
+        margin: 15px 0 26px 0;
+    }
+    
+    .newsItemTitle {
+        font-family: 'Poppins';
+        font-weight: 600;
+        font-size: 26px;
+        line-height: 24px;
+        color: #00727B;
+    }
+
+    .newsItemDate {
+        font-family: 'Inter';
+        font-weight: 300;
+        font-size: 13px;
+        line-height: 24px;
+        text-transform: uppercase;
+        color: #000000;
+        margin: 15px 0;
+    }
+`;
+
 const NewsDetailView = () => {
+
     return (
         <NewsDetailContainer>
             <div className='newsHeader'>Hub News and Updates</div>
             <div className='backButtonContainer'>
                 <a className='backButton' href="/news">Back to News and Updates Page</a>
             </div>
+            <NewsContentContainer>
+                <div className='tabContainer'>
+                    <div className='tabItem'>Application Update</div>
+                </div>
+                <div className='splitLine' />
+                <div className='newsItemTitle'>Childhood Cancer Data Catalog April Update </div>
+                <div className='newsItemDate'>APRIL 19, 2023</div>
+            </NewsContentContainer>
             <div style={{margin:"50px", fontSize:"30px"}}>{window.location.pathname.split('/')[2]}</div>
         </NewsDetailContainer>
     )

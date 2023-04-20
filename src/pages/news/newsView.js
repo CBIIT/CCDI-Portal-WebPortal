@@ -141,7 +141,7 @@ const useOutsideAlerter = (ref) => {
       function handleClickOutside(event) {
           if (!event.target || !event.target.getAttribute("class") || (event.target.getAttribute("class") && !event.target.getAttribute("class").includes("pageSizeItem") && !event.target.getAttribute("class").includes("pageSizeArrow") && !event.target.getAttribute("class").includes("pageSizeContainer") && ref.current && !ref.current.contains(event.target))) {
             const toggle = document.getElementById("resultNumber");
-            if (toggle && !document.getElementById("pagelist").className.includes("pageSizeListHidden")) {
+            if (toggle && document.getElementById("pagelist").style.visibility !== "hidden") {
               toggle.click();
             }
           }
@@ -284,7 +284,7 @@ const NewsView = ({classes}) => {
               {pageSize}
               <span className={pageListVisible? classes.pageSizeArrowUp : classes.pageSizeArrowDown}></span>
             </div>
-            <div ref={perPageSelection} id="pagelist" className={pageListVisible ? classes.pageSizeList : classes.pageSizeListHidden}>
+            <div ref={perPageSelection} id="pagelist" className={classes.pageSizeList} style={pageListVisible ? null : {visibility: "hidden"}}>
               {
                 sizelist.map((sizeItem, idx) => {
                   const key = `size_${idx}`;

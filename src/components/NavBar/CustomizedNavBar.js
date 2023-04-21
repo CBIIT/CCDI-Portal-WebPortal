@@ -123,7 +123,7 @@ const LiSection = styled.li`
 `;
 
 const Dropdown = styled.div`
-    top: 140.5px;
+    top: 50.5px;
     left: 0;
     width: 100%;
     background: #1A5255;
@@ -246,22 +246,22 @@ const NavBar = () => {
           </LiSection>
         </UlContainer>
       </NavContainer>
+      <Dropdown ref={dropdownSelection} style={clickedTitle === '' ? dropdownInvisibleStyle : null}>
+        <DropdownContainer>
+            <div className="dropdownList">
+              {
+                clickedTitle !== "" ? navbarLists[clickedTitle].map((dropItem, idx) => {
+                  const dropkey = `drop_${idx}`;
+                  return (
+                    <a href={'/#' + dropItem.id} className="dropdownItem" key={dropkey} onClick={() => setClickedTitle("")}>{dropItem.name}</a>
+                  )
+                })
+                :null
+              }
+            </div>
+        </DropdownContainer>
+      </Dropdown>
     </Nav>
-    <Dropdown ref={dropdownSelection} style={clickedTitle === '' ? dropdownInvisibleStyle : null}>
-      <DropdownContainer>
-          <div className="dropdownList">
-            {
-              clickedTitle !== "" ? navbarLists[clickedTitle].map((dropItem, idx) => {
-                const dropkey = `drop_${idx}`;
-                return (
-                  <a href={'/#' + dropItem.id} className="dropdownItem" key={dropkey} onClick={() => setClickedTitle("")}>{dropItem.name}</a>
-                )
-              })
-              :null
-            }
-          </div>
-      </DropdownContainer>
-    </Dropdown>
     </>
   );
 };

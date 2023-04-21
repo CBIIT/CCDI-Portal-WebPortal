@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import newsImg from '../../assets/news/News_Header.jpg';
 import arrowIcon from '../../assets/news/News_Long_Arrow.svg';
 import styled from 'styled-components';
@@ -90,6 +90,27 @@ const NewsContentContainer = styled.div`
         color: #000000;
         margin: 15px 0;
     }
+
+    .newsItemImgContainer{
+        margin-bottom: 42px;
+    }
+
+    .newsItemImg {
+        width: 100%;
+        border: 2px solid #848484;
+        border-radius: 12px 12px 0px 0px;
+    }
+
+    .newsImgDescription {
+        margin-top: -5px;
+        background: #4C4C4C;
+        font-family: 'Inter';
+        font-weight: 600;
+        font-size: 13px;
+        line-height: 15px;
+        color: #FFFFFF;
+        padding: 8px 10px;
+    }
 `;
 
 const getNewsItem = (newsId) => {
@@ -103,6 +124,18 @@ const getNewsItem = (newsId) => {
 const NewsDetailView = () => {
     const newsId = window.location.pathname.split('/')[2];
     const newsItem = getNewsItem(newsId)[0];
+
+    const scrollToTop = () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
+    };
+
+    useEffect(() => {
+        scrollToTop();
+    }, []);
+
     return (
         <NewsDetailContainer>
             <div className='newsHeader'>Hub News and Updates</div>
@@ -116,6 +149,13 @@ const NewsDetailView = () => {
                 <div className='splitLine' />
                 <div className='newsItemTitle'>{newsItem.title} </div>
                 <div className='newsItemDate'>{newsItem.date}</div>
+                { 
+                    newsItem.img && 
+                    <div className='newsItemImgContainer'>
+                        <img className='newsItemImg' src={newsItem.img} />
+                        <div className='newsImgDescription'>{newsItem.slug}</div>
+                    </div>
+                }
             </NewsContentContainer>
             <div style={{margin:"50px", fontSize:"30px"}}>{window.location.pathname.split('/')[2]}</div>
         </NewsDetailContainer>

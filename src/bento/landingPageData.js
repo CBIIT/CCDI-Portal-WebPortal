@@ -89,7 +89,7 @@ export const resourcesAppliationsListData = [
   },
   {
     id: 'mci',
-    title: 'Molecular Characterization Initiative for Childhood Cancers',
+    title: 'CCDI Molecular Characterization Initiative',
     subtitle: 'MCI',
     content: 'A program providing molecular testing for children, adolescents, and young adults with certain cancer types.',
     link: 'https://www.cancer.gov/research/areas/childhood/childhood-cancer-data-initiative/data-ecosystem/molecular-characterization',

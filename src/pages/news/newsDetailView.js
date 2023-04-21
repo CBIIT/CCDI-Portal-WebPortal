@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import newsImg from '../../assets/news/News_Header.jpg';
 import arrowIcon from '../../assets/news/News_Long_Arrow.svg';
 import styled from 'styled-components';
@@ -92,8 +92,17 @@ const NewsContentContainer = styled.div`
     }
 `;
 
-const NewsDetailView = () => {
+const getNewsItem = (newsId) => {
+    if (newsId == "") {
+      return {};
+    } else {
+      return newsList.filter((item) => item.id == newsId);
+    }
+  };
 
+const NewsDetailView = () => {
+    const newsId = window.location.pathname.split('/')[2];
+    const newsItem = getNewsItem(newsId)[0];
     return (
         <NewsDetailContainer>
             <div className='newsHeader'>Hub News and Updates</div>
@@ -102,11 +111,11 @@ const NewsDetailView = () => {
             </div>
             <NewsContentContainer>
                 <div className='tabContainer'>
-                    <div className='tabItem'>Application Update</div>
+                    <div className='tabItem'>{newsItem.type}</div>
                 </div>
                 <div className='splitLine' />
-                <div className='newsItemTitle'>Childhood Cancer Data Catalog April Update </div>
-                <div className='newsItemDate'>APRIL 19, 2023</div>
+                <div className='newsItemTitle'>{newsItem.title} </div>
+                <div className='newsItemDate'>{newsItem.date}</div>
             </NewsContentContainer>
             <div style={{margin:"50px", fontSize:"30px"}}>{window.location.pathname.split('/')[2]}</div>
         </NewsDetailContainer>

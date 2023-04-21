@@ -13,9 +13,9 @@ import {
 const useOutsideAlerter = (ref) => {
   useEffect(() => {
       function handleClickOutside(event) {
-          if (!event.target || !event.target.getAttribute("class") || (event.target.getAttribute("class") && !event.target.getAttribute("class").includes("pageSizeItem") && !event.target.getAttribute("class").includes("pageSizeArrow") && !event.target.getAttribute("class").includes("pageSizeContainer") && ref.current && !ref.current.contains(event.target))) {
-            const toggle = document.getElementById("resultNumber");
-            if (toggle && !document.getElementById("pagelist").className.includes("pageSizeListHidden")) {
+          if (!event.target || (event.target.getAttribute("id") !== "pageSizeBlock" && event.target.getAttribute("id") !== "pageSizeArrow" && ref.current && !ref.current.contains(event.target))) {
+            const toggle = document.getElementById("pageSizeBlock");
+            if (document.getElementById("pagelist").style.visibility !== "hidden") {
               toggle.click();
             }
           }
@@ -152,11 +152,11 @@ function SearchPagination({
       <div className={classes.paginationContainer}>
         <div className={classes.perPageContainer}>
           Results per Page:
-          <div id="resultNumber" className={classes.pageSizeContainer} onClick={() => setPageListVisible(!pageListVisible)}>
+          <div id="pageSizeBlock" className={classes.pageSizeContainer} onClick={() => setPageListVisible(!pageListVisible)}>
             {pageSize}
-            <span className={pageListVisible? classes.pageSizeArrowUp : classes.pageSizeArrowDown}></span>
+            <span id="pageSizeArrow" className={pageListVisible? classes.pageSizeArrowUp : classes.pageSizeArrowDown}></span>
           </div>
-          <div ref={perPageSelection} id="pagelist" className={pageListVisible ? classes.pageSizeList : classes.pageSizeListHidden}>
+          <div ref={perPageSelection} id="pagelist" className={classes.pageSizeList} style={pageListVisible ? null : {visibility: "hidden"}}>
             {
               sizelist.map((sizeItem, idx) => {
                 const key = `size_${idx}`;

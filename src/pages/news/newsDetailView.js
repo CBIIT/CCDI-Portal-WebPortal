@@ -121,6 +121,7 @@ const NewsContentContainer = styled.div`
         font-size: 16px;
         line-height: 24px;
         color: #000000;
+        margin-bottom: 80px;
         a {
             color: #455299;
             font-family: 'Inter';

@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import styled from 'styled-components';
+import ReactHtmlParser from 'html-react-parser';
+import { newsList } from '../../bento/newsData'
 import newsImg from '../../assets/news/News_Header.jpg';
 import arrowIcon from '../../assets/news/News_Long_Arrow.svg';
-import styled from 'styled-components';
-import { newsList } from '../../bento/newsData'
+import exportIcon from '../../assets/about/Export_Icon.svg';
 
 const NewsDetailContainer = styled.div`
     width: 1440px;
@@ -97,6 +99,7 @@ const NewsContentContainer = styled.div`
 
     .newsItemImg {
         width: 100%;
+        height: 420px;
         border: 2px solid #848484;
         border-radius: 12px 12px 0px 0px;
     }
@@ -111,13 +114,29 @@ const NewsContentContainer = styled.div`
         color: #FFFFFF;
         padding: 8px 10px;
     }
+
+    .newsFullText {
+        font-family: 'Inter';
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 24px;
+        color: #000000;
+        a {
+            color: #455299;
+            font-family: 'Inter';
+            font-weight: 600;
+            padding-right: 20px;
+            background: url(${exportIcon}) right center no-repeat;
+          }
+        }
+    }
 `;
 
 const getNewsItem = (newsId) => {
-    if (newsId == "") {
+    if (newsId === "") {
       return {};
     } else {
-      return newsList.filter((item) => item.id == newsId);
+      return newsList.filter((item) => item.id === newsId);
     }
   };
 
@@ -152,12 +171,12 @@ const NewsDetailView = () => {
                 { 
                     newsItem.img && 
                     <div className='newsItemImgContainer'>
-                        <img className='newsItemImg' src={newsItem.img} />
+                        <img className='newsItemImg' src={newsItem.img} alt={newsItem.title} />
                         <div className='newsImgDescription'>{newsItem.slug}</div>
                     </div>
                 }
+                <div className='newsFullText'>{ReactHtmlParser(newsItem.fullText)}</div>
             </NewsContentContainer>
-            <div style={{margin:"50px", fontSize:"30px"}}>{window.location.pathname.split('/')[2]}</div>
         </NewsDetailContainer>
     )
 };

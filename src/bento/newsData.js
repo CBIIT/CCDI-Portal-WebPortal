@@ -2,6 +2,9 @@ import newsCCDC from '../assets/news/News_CCDC.png';
 import newsMolecular from '../assets/news/News_Molecular.png';
 import newsSymposium from '../assets/news/News_Symposium.png';
 import newsCancerPlan from '../assets/news/News_CancerPlan.png';
+import newsMolecularDetail from '../assets/news/News_MCI_Detail.png';
+import newsSymposiumDetail from '../assets/news/News_Symposium_Detail.png';
+import newsCancerPlanDetail from '../assets/news/News_CancerPlan_Detail.png';
 
 export const newsList = [
     {
@@ -13,6 +16,7 @@ export const newsList = [
         fullText: '',
         type: 'Application Updates',
         img: newsCCDC,
+        detailImg: '',
     },
     {
         id: 'molecular',
@@ -24,6 +28,7 @@ export const newsList = [
         +'learn more about what drives various cancers, develop better clinical trials, and develop more effective treatments for childhood cancer.&nbsp;</p> <p>To join at this time, a child or AYA must:&nbsp;</p><ul><li><p>be newly diagnosed (have not had any treatments for their cancer yet)&nbsp;</p></li><li><p>be 25 years old or younger&nbsp;</p></li><li><p>be diagnosed with a central nervous system tumor (tumors of the brain and spine), soft tissue sarcoma, or rare tumor* (childhood cancers with a low number of patients, which have been hard to study and understand)&nbsp;</p></li><li><p>get cancer care from a hospital affiliated with the Children&rsquo;s Oncology Group&nbsp;</p></li></ul><p>If a child or AYA meets the above criteria, they can get more information on how to participate by talking with their Children &#39;s Oncology Group&ndash;affiliated doctor. &nbsp</p>',
         type: 'Application Updates',
         img: newsMolecular,
+        detailImg: newsMolecularDetail,
     },
     {
         id: 'symposium',
@@ -36,6 +41,7 @@ export const newsList = [
         +'<p><a href="https://www.cancer.gov/research/areas/childhood/childhood-cancer-data-initiative/events-webinars/symposium-0" rel="noreferrer noopener" target="_blank">View the event presentation</a> and <a href="https://videocast.nih.gov/watch=49171" rel="noreferrer noopener" target="_blank">watch the recording</a>.&nbsp;</p>',
         type: 'News & Other',
         img: newsSymposium,
+        detailImg: newsSymposiumDetail,
     },
     {
         id: 'national_cancer_plan',
@@ -50,5 +56,6 @@ export const newsList = [
         +'<p>Everything at NCI helps to drive progress toward these goals. The National Cancer Plan helps to describe ongoing and emerging initiatives and invites others to do the same.&nbsp; The better NCI and its partners can identify gaps in cancer prevention, detection, treatment, and care, the better all communities are able to work across society to address them.&nbsp;</p>',
         type: 'News & Other',
         img: newsCancerPlan,
+        detailImg: newsCancerPlanDetail,
     },
 ]

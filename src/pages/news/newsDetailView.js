@@ -99,7 +99,6 @@ const NewsContentContainer = styled.div`
 
     .newsItemImg {
         width: 100%;
-        height: 420px;
         border: 2px solid #848484;
         border-radius: 12px 12px 0px 0px;
     }
@@ -170,9 +169,9 @@ const NewsDetailView = () => {
                 <div className='newsItemTitle'>{newsItem.title} </div>
                 <div className='newsItemDate'>{newsItem.date}</div>
                 { 
-                    newsItem.img && 
+                    newsItem.detailImg && 
                     <div className='newsItemImgContainer'>
-                        <img className='newsItemImg' src={newsItem.img} alt={newsItem.title} />
+                        <img className='newsItemImg' src={newsItem.detailImg} alt={newsItem.title} />
                         <div className='newsImgDescription'>{newsItem.slug}</div>
                     </div>
                 }

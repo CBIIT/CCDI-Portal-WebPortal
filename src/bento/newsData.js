@@ -13,7 +13,21 @@ export const newsList = [
         date: 'APRIL 19, 2023',
         slug: 'The Childhood Cancer Data Catalog is pleased to announce an April update which includes 1 new resource, 8 new datasets, and many other data updates.',
         content: 'The <a href="https://datacatalog.ccdi.cancer.gov/" target="_blank" rel="noopener noreferrer">Childhood Cancer Data Catalog</a> is pleased to announce an April update which includes 1 new resource, 8 new datasets, and many other data updates.This update includes the addition of the Xena Browser, a powerful online exploration tool that allows users to investigate functional genomic data sets for correlations between genomic and/or phenotypic variables, as a new analytic tool resource.  Additionally, 7 new datasets have been incorporated into 8 existing resources. Explore the Catalog to check out all the changes.',
-        fullText: '',
+        fullText: '<p>The National Cancer Institute is pleased to announce an update to the Childhood Cancer Data Catalog website: <a href="https://datacatalog.ccdi.cancer.gov/" rel="noreferrer noopener" target="_blank">https://datacatalog.ccdi.cancer.gov/</a>.&nbsp;&nbsp;</p>'
+        +'<p>This update includes the addition of the Xena Browser as a new analytic tool resource.&nbsp; Xena Browser is an online exploration tool that allows users to investigate functional genomic data sets for correlations between genomic and/or phenotypic variables.&nbsp; Additionally, 7 new datasets have been incorporated into 8 existing resources, with 5 of these coming from The Cancer Imaging Archive (TCIA).&nbsp;</p>'
+        +'<p>Explore the data and site updates in more detail below.&nbsp;</p>'
+        +'<h1>Data Updates&nbsp;</h1>'
+        +'<h2>New Participating Resource and Dataset&nbsp;</h2>'
+        +'<p>The CCDC has added 1 new analytic tool resource.&nbsp;</p>'
+        +'<ul><li><p>Xena Browser&nbsp;</p></li></ul>'
+        +'<h2>Existing Participating Resources and Datasets&nbsp;</h2>'
+        +'<p>8 existing resources have been updated with additional data and information, including 7 new datasets.&nbsp;&nbsp;</p>'
+        +'<ul><li><p>Central Brain Tumor Registry of the United States (CBTRUS)&nbsp;</p><ul><li>New dataset - CBTRUS Fact Sheet 2022&nbsp;</li></ul></li></ul>'
+        +'<ul><li><p>Clinical Interpretation of Variants in Cancer (CIViC)&nbsp;</p><ul><li>Added case disease diagnosis information&nbsp;</li></ul></li></ul>'
+        +'<ul><li><p>The database of Genotypes and Phenotypes (dbGaP)&nbsp;</p><ul><li>New dataset - NSD2 E1099K Drives Relapse in Pediatric Acute Lymphoblastic Leukemia by Disrupting 3D Chromatin&nbsp;&nbsp;</li></ul></li></ul>'
+        +'<ul><li><p>The Jackson Laboratory PDX Models&nbsp;&nbsp;</p><ul><li>Updated case counts&nbsp;&nbsp;</li></ul></li></ul>'
+        +'<ul><li><p>Kids First Data Resource&nbsp;</p><ul><li>Updated case counts and case disease diagnosis information for Pediatric Brain Tumor Atlas&rsquo;s Children&#39;s Brain Tumor Network (CBTN) and Pacific Pediatric Neuro-Oncology Consortium (PNOC) datasets&nbsp;</li></ul></li></ul>'
+        ,
         type: 'Application Updates',
         img: newsCCDC,
         detailImg: '',

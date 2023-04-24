@@ -63,14 +63,20 @@ const Banner = styled.div`
   position: absolute;
   top: 120px;
   left: 0;
-  height: 492px;
+  height: 489px;
   width: 100%;
-
-  background: linear-gradient(180deg, #1CA0A8 0%, rgba(69, 182, 189, 0.955183) 43.29%, rgba(82, 182, 152, 0.95) 100%),
-              linear-gradient(180deg, rgba(17, 196, 212, 0.4) 0%, rgba(120, 233, 117, 0.38) 100%),
-              linear-gradient(0deg, #56B0B8, #56B0B8), #2ADEC7;
+  background: linear-gradient(180deg, rgba(17, 196, 212, 0.4) 0%, rgba(55, 210, 176, 0.392465) 37.67%, rgba(120, 233, 117, 0.38) 100%), linear-gradient(0deg, #56B0B8, #56B0B8), #2ADEC7;
   box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.05);
   z-index: 8;
+`;
+
+const BannerDarker = styled.div`
+  position: absolute;
+  top: 338px;
+  height: 98px;
+  width: 50%
+  background: #087D6F;
+  z-index: 9;
 `;
 
 const StatsSection = styled.div`
@@ -106,14 +112,15 @@ const IntroContainer = styled.div`
 `;
 
 const IntroTextContainer = styled.div`
-    padding: 94px 0 85px 135px;
+    padding: 115px 0 0 135px;
     
     .introTextTitle1 {
       text-align: left;
-      color: #00444A;
+      color: #002A2E;
       font-family: poppins;
       font-weight: 600;
       font-size: 35px;
+      letter-spacing: 0.02em;
       line-height: 35px;
     }
 
@@ -125,25 +132,11 @@ const IntroTextContainer = styled.div`
       font-weight: 500;
       font-size: 16px;
       text-transform: uppercase;
-      line-height: 20px;
+      line-height: 24px;
+      background: #087D6F;
+      padding: 13px 0;
+      margin: 33px 0 43px 0;
     }
-
-    .upperLine {
-      content:'';
-      display:inline-block;
-      width: 421px;
-      border-bottom: 0.5px solid #FFFFFF;
-      margin: 43px 0 11px 0;
-    }
-
-    .lowerLine {
-      content:'';
-      display:inline-block;
-      width: 421px;
-      border-bottom: 0.5px solid #FFFFFF;
-      margin: 18px 0 45px 0;
-    }
-
 `;
 
 const ListContainer = styled.div`
@@ -544,16 +537,17 @@ const LandingView = () => {
       <BackgroundThird />
       <HeroSection>
         <Banner />
+        <BannerDarker />
         <FirstContainer>
           <IntroContainer>
             <IntroTextContainer>
               <div className='introTextTitle1'>Discover CCDI</div>
               <div className='introTextTitle1'>Resources</div>
-              <div className='upperLine' />
-              <div className='introTextTitle2'>Explore the CCDI Hub, its applications,</div>
-              <div className='introTextTitle2'>and analytic tools by selecting an</div>
-              <div className='introTextTitle2'>available resource</div>
-              <div className='lowerLine' />
+              <div className='introTextTitle2'>
+                <div>Explore the CCDI Hub, its applications,</div>
+                <div>and analytic tools by selecting an</div>
+                <div>available resource</div>
+              </div>
               <IntroAboutButtonContainer>
                 <div><a className='introAboutButton' href="/about">{introData.introTitle3}</a></div>
                 <div><a className='introAboutButton' href="https://www.cancer.gov/research/areas/childhood/childhood-cancer-data-initiative" target="_blank" rel="noopener noreferrer">{introData.introButtonTitle}</a></div>

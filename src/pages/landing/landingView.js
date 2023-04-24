@@ -259,7 +259,7 @@ const StatsContainer = styled.div`
     }
 
     .statNum {
-      color: #078893;
+      color: #00838F;
       font-family: Inter;
       font-weight: 800;
       font-size: 32px;

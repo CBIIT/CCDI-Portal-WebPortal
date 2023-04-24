@@ -129,6 +129,29 @@ const NewsContentContainer = styled.div`
             background: url(${exportIcon}) right center no-repeat;
           }
         }
+        h1 {
+            font-family: 'Inter';
+            font-weight: 700;
+            font-size: 22px;
+            line-height: 24px;
+            color: #00838F;
+        }
+        h2 {
+            font-family: 'Inter';
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 24px;
+            color: #000000;
+        }
+        p {
+            margin: 0;
+        }
+        ol {
+            margin: 0;
+        }
+        ul {
+            margin: 0;
+        }
     }
 `;
 

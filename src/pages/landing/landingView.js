@@ -316,12 +316,17 @@ const LatestUpdatesContainer = styled.div`
     }
 
     .latestUpdatesListTitle {
-      color: #63D6C7;
+      color: #72F9FB;
       padding: 14px 23px 0 23px;
       font-family: Poppins;
       font-weight: 600;
       font-size: 14px;
       height: 57px
+    }
+
+    .latestUpdatesListTitle:hover{
+      color: #88DCDD;
+      cursor: pointer;
     }
 
     .latestUpdatesListContent {
@@ -619,7 +624,7 @@ const LandingView = () => {
         <ResourcesContainer>
           <div className='resourceTitle'>{titleData.resourceTitle}</div>
           <div className='resourceItem'>
-            <div className='resourceSubtitle' style={{color: '#2A8189'}}>
+            <div className='resourceSubtitle' style={{color: '#00838F'}}>
               <div className='resourceSubtitleText'>{titleData.applicationsTitle}</div>
               <div className='titleLine'>
                 <div className='titleLineLong' />
@@ -633,7 +638,7 @@ const LandingView = () => {
                   const appkey = `app_${appidx}`;
                   return (
                     <a id={appItem.id} className='resourceListItem' key={appkey} href={appItem.link} target="_blank" rel="noopener noreferrer">
-                      <div className='resourceListItemLogo' style={{background: '#0095A2'}}>{appItem.subtitle}</div>
+                      <div className='resourceListItemLogo' style={{background: '#00838F'}}>{appItem.subtitle}</div>
                       <div className='resourceListItemText'>
                         <div className='resourceListItemTitle'>{appItem.title}<span className='resourceListItemTitleSmall'>{'(' + appItem.subtitle + ')'}</span></div>
                         <div className='resourceListItemContext'>{appItem.content}</div>

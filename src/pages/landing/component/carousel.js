@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import usePageVisibility from "./PageVisibility";
 import styled from 'styled-components';
 import { carouselList } from '../../../bento/landingPageData'
@@ -277,8 +277,10 @@ const getRandomList = (itemList) => {
 };
 
 const Carousel = () => {
-    const randomCarouselList = getRandomList(carouselList);
+    const [rCarouselList, setRCarouselList] = useState([]);
     const isVisible = usePageVisibility();
+
+    console.log(rCarouselList);
 
     const startTimer = () => {
         timer = setInterval(() => {
@@ -322,9 +324,13 @@ const Carousel = () => {
     };
 
     useEffect(() => {
+        if (rCarouselList.length === 0) {
+            setRCarouselList(getRandomList(carouselList));
+        }
         if (!isVisible) {
             clearInterval(timer);
-        } else {
+        }
+        else {
             startTimer();
         }
         return () => clearInterval(timer);
@@ -346,7 +352,7 @@ const Carousel = () => {
                 <div className='activeFrame'/>
                     <div id="carouselList" className='carousel'>
                         {
-                            randomCarouselList.map((item, idx) => {
+                            rCarouselList.map((item, idx) => {
                                 const key = `carousel_${idx}_last_clone`;
                                 return (
                                     <div key={key} className='carousel__item'>

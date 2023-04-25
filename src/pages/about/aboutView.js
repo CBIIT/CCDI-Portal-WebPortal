@@ -12,7 +12,7 @@ const AboutContainer = styled.div`
     font-family: poppins;
     font-weight: 600;
     font-size: 35px;
-    color: #298085;
+    color: #206165;
     margin: 48px 0;
     text-align: center;
   }
@@ -25,10 +25,10 @@ const AboutContainer = styled.div`
   }
 
   .aboutSubtitle {
-    font-family: Inter;
-    font-weight: 600;
+    font-family: 'Poppins';
+    font-weight: 400;
     font-size: 21px;
-    color: #298085;
+    color: #007A85;
   }
 
   .aboutBodyUpperContainer {

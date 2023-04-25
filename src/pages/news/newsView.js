@@ -7,6 +7,7 @@ import ReactHtmlParser from 'html-react-parser';
 import Pagination from '@material-ui/lab/Pagination';
 import styled from 'styled-components';
 import exportIcon from '../../assets/about/Export_Icon.svg';
+import newsImg from '../../assets/news/News_Header.jpg';
 import { newsList } from '../../bento/newsData'
 
 const NewsContainer = styled.div`
@@ -17,7 +18,8 @@ const NewsContainer = styled.div`
     width: 1142px;
     height: 214px;
     margin: 0 auto;
-    background: linear-gradient(90deg, rgba(5, 85, 92, 0.8) 12.17%, rgba(135, 215, 220, 0.8) 94.57%), url(AdobeStock_461357028);
+    background-image: url(${newsImg});
+    // background: linear-gradient(90deg, rgba(5, 85, 92, 0.8) 12.17%, rgba(135, 215, 220, 0.8) 94.57%), url(AdobeStock_461357028);
     border-radius: 0px 0px 20px 20px;
     font-family: 'Poppins';
     font-weight: 600;

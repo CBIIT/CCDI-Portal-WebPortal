@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import ReactHtmlParser from 'html-react-parser';
 import { newsList } from '../../bento/newsData'
+import newsImg from '../../assets/news/News_Header.jpg';
 import arrowIcon from '../../assets/news/News_Long_Arrow.svg';
 import exportIcon from '../../assets/about/Export_Icon.svg';
 
@@ -13,7 +14,8 @@ const NewsDetailContainer = styled.div`
         width: 1142px;
         height: 214px;
         margin: 0 auto;
-        background: linear-gradient(90deg, rgba(5, 85, 92, 0.8) 12.17%, rgba(135, 215, 220, 0.8) 94.57%), url(AdobeStock_461357028);
+        background-image: url(${newsImg});
+        // background: linear-gradient(90deg, rgba(5, 85, 92, 0.8) 12.17%, rgba(135, 215, 220, 0.8) 94.57%), url(AdobeStock_461357028);
         border-radius: 0px 0px 20px 20px;
         font-family: 'Poppins';
         font-weight: 600;

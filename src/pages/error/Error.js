@@ -39,14 +39,14 @@ const ErrorContainer = styled.div`
       display: block;
       margin: 50px auto 0 auto;
       width: 176px;
-      height: 40px;
+      height: 57px;
       font-family: poppins;
       font-weight: 600;
       font-size: 16px;
-      line-height: 40px;
+      line-height: 57px;
       text-transform: uppercase;
-      color: #033135;
-      background: #7CCFD6;
+      color: #FFFFFF;
+      background: #05555C;
       border-radius: 5px;
       text-align: center;
       text-decoration: none;

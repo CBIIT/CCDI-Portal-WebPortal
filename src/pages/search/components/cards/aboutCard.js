@@ -62,6 +62,7 @@ const styles = (theme) => ({
     fontWeight: '300',
     fontSize: '16px',
     lineHeight: '24px',
+    margin: '5px 0',
   },
   linkText: {
     fontFamily: 'Inter',
@@ -81,7 +82,7 @@ const styles = (theme) => ({
     padding: '0 0 52px 0px',
   },
   cardTitle: {
-    color: '#0095A2',
+    color: '#00838F',
     textDecoration: 'none',
     fontSize: '18px',
     fontFamily: 'Poppins',

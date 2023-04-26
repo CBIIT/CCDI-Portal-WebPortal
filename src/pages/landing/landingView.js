@@ -72,7 +72,7 @@ const Banner = styled.div`
 
 const BannerDarker = styled.div`
   position: absolute;
-  top: 338px;
+  top: 332px;
   height: 98px;
   width: 50%
   background: #087D6F;
@@ -112,16 +112,16 @@ const IntroContainer = styled.div`
 `;
 
 const IntroTextContainer = styled.div`
-    padding: 115px 0 0 135px;
+    padding: 51px 0 0 135px;
     
     .introTextTitle1 {
       text-align: left;
       color: #002A2E;
       font-family: poppins;
       font-weight: 600;
-      font-size: 35px;
+      font-size: 50px;
       letter-spacing: 0.02em;
-      line-height: 35px;
+      line-height: 45px;
     }
 
     .introTextTitle2 {
@@ -135,7 +135,7 @@ const IntroTextContainer = styled.div`
       line-height: 24px;
       background: #087D6F;
       padding: 13px 0;
-      margin: 33px 0 43px 0;
+      margin: 26px 0 43px 0;
     }
 `;
 
@@ -550,8 +550,7 @@ const LandingView = () => {
         <FirstContainer>
           <IntroContainer>
             <IntroTextContainer>
-              <div className='introTextTitle1'>Discover CCDI</div>
-              <div className='introTextTitle1'>Resources</div>
+              <div className='introTextTitle1'><div>Discover</div><div>CCDI</div><div>Resources</div></div>
               <div className='introTextTitle2'>
                 <div>Explore the CCDI Hub, its applications,</div>
                 <div>and analytic tools by selecting an</div>

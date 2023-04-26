@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { introData, titleData, statsData, latestUpdatesData, resourcesAppliationsListData, resourcesCloudListData } from '../../bento/landingPageData';
+import { introData, titleData, statsData, resourcesAppliationsListData, resourcesCloudListData } from '../../bento/landingPageData';
+import { newsList } from '../../bento/newsData';
 import ReactHtmlParser from 'html-react-parser';
 import Carousel from '../landing/component/carousel';
 import exportIcon from '../../assets/landing/Export_Icon_Black.svg';
@@ -617,14 +618,14 @@ const LandingView = () => {
           </TitleContainer>
           <div className='latestUpdatesList'>
             {
-              latestUpdatesData.map((updateItem, updateidx) => {
+              newsList.slice(0,3).map((updateItem, updateidx) => {
                 const updatekey = `update_${updateidx}`;
                 return (
                   <div className='latestUpdatesListItem' key={updatekey}>
-                    <a href={`/news/#${updateItem.id}`} ><div className='latestUpdatesListItemPic' style={{ backgroundImage: `url(${updateItem.img})` }} /></a>
+                    <a href={`/news/#${updateItem.id}`} ><div className='latestUpdatesListItemPic' style={{ backgroundImage: `url(${updateItem.updateImg})` }} /></a>
                     <a className='latestUpdatesListTitleContainer' href={`/news/#${updateItem.id}`}><div className='latestUpdatesListTitle'>{updateItem.title}</div></a>
                     <div className='latestUpdatesListContent'>
-                      <span className='latestUpdatesTextContent'>{ReactHtmlParser(updateItem.content)}</span>
+                      <span className='latestUpdatesTextContent'>{ReactHtmlParser(updateItem.slug)}</span>
                       <a className='readMoreContainer' href={`/news/#${updateItem.id}`}>Read More</a>
                     </div>
                   </div>

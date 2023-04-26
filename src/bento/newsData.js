@@ -5,6 +5,9 @@ import newsCancerPlan from '../assets/news/News_CancerPlan.png';
 import newsMolecularDetail from '../assets/news/News_MCI_Detail.png';
 import newsSymposiumDetail from '../assets/news/News_Symposium_Detail.png';
 import newsCancerPlanDetail from '../assets/news/News_CancerPlan_Detail.png';
+import updateImgCCDC from '../assets/landing/Updates_CCDC.png';
+import updateImgMolecular from '../assets/landing/Updates_Molecular.png';
+import updateImgSymposium from '../assets/landing/Updates_Symposium.png';
 
 export const newsList = [
     {
@@ -44,6 +47,7 @@ export const newsList = [
         ,
         type: 'Application Updates',
         img: newsCCDC,
+        updateImg: updateImgCCDC,
         detailImg: '',
     },
     {
@@ -62,6 +66,7 @@ export const newsList = [
         +'<p>If a child or AYA meets the above criteria, they can get more information on how to participate by talking with their Children &#39;s Oncology Group&ndash;affiliated doctor. &nbsp</p>',
         type: 'Application Updates',
         img: newsMolecular,
+        updateImg: updateImgMolecular,
         detailImg: newsMolecularDetail,
     },
     {
@@ -77,6 +82,7 @@ export const newsList = [
         +'<p><a href="https://www.cancer.gov/research/areas/childhood/childhood-cancer-data-initiative/events-webinars/symposium-0" rel="noreferrer noopener" target="_blank">View the event presentation</a> and <a href="https://videocast.nih.gov/watch=49171" rel="noreferrer noopener" target="_blank">watch the recording</a>.&nbsp;</p>',
         type: 'News & Other',
         img: newsSymposium,
+        updateImg: updateImgSymposium,
         detailImg: newsSymposiumDetail,
     },
     {
@@ -94,6 +100,7 @@ export const newsList = [
         +'<p>Everything at NCI helps to drive progress toward these goals. The National Cancer Plan helps to describe ongoing and emerging initiatives and invites others to do the same.&nbsp; The better NCI and its partners can identify gaps in cancer prevention, detection, treatment, and care, the better all communities are able to work across society to address them.&nbsp;</p>',
         type: 'News & Other',
         img: newsCancerPlan,
+        updateImg: '',
         detailImg: newsCancerPlanDetail,
     },
 ]

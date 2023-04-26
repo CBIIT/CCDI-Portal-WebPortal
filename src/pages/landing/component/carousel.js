@@ -130,7 +130,7 @@ const HeroList = styled.div`
 
     .activeFrame {
         position: absolute;
-        top: 244px;
+        top: 244.2px;
         left: 25px;
         width: 700px;
         height: 144px;
@@ -222,14 +222,14 @@ const HeroList = styled.div`
     }
 
     .carousel__item:nth-child(4) {
-        transform: translateY(0) scale(1.07, 1.37);
+        transform: translateY(0) scale(1.07, 1.412);
         opacity: 1;
         visibility: visible;
         border-radius: 20px;
         background: #FFFFFF;
-
+        
         .itemImgBox {
-            transform: translateX(11px) translateY(0) scale(1.1, 0.98);
+            transform: translateX(11px) translateY(0) scale(1.1, 0.93);
         }
 
         .listItemContent {

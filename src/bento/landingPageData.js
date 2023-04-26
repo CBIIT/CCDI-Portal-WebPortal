@@ -56,19 +56,19 @@ export const latestUpdatesData = [
     id: 'ccdc',
     img: updateImgCCDC,
     title: 'Childhood Cancer Data Catalog April Update',
-    content: 'The Childhood Cancer Data Catalog announced an update which includes 1 new resource, 8 new datasets, and many other updates.',
+    content: 'The <a href="https://datacatalog.ccdi.cancer.gov/" target="_blank" rel="noopener noreferrer">Childhood Cancer Data Catalog</a> announced an update which includes 1 new resource, 8 new datasets, and many other updates.',
   },
   {
     id: 'molecular',
     img: updateImgMolecular,
     title: 'Molecular characterization results returned to more than 1,000 participants',
-    content: 'The CCDI’s MCI  enrolled & returned results for more than 1,000 children &AYAs newly diagnosed with CNS, STS, & rare cancers.',
+    content: 'The <a href="https://www.cancer.gov/research/areas/childhood/childhood-cancer-data-initiative/data-ecosystem/molecular-characterization?cid=eb_govdel" target="_blank" rel="noopener noreferrer">CCDI’s MCI</a> enrolled & returned results for more than 1,000 children &AYAs newly diagnosed with CNS, STS, & rare cancers.',
   },
   {
     id: 'symposium',
     img: updateImgSymposium,
     title: '2023 CCDI Symposium',
-    content: 'More than 800 people attended the CCDI Annual Symposium, on March 24, 2023 showing their support for childhood cancer research.',
+    content: 'More than 800 people attended the <a href="https://www.cancer.gov/research/areas/childhood/childhood-cancer-data-initiative/events-webinars/past-symposiums">CCDI Annual Symposium</a>, on March 24, 2023 showing their support for childhood cancer research.',
   },
 ];
 

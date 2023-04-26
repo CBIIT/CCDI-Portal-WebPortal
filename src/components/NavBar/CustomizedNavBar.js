@@ -146,7 +146,7 @@ const LiSection = styled.li`
     color: #FFFFFF;
     font-family: poppins;
     font-size: 17px;
-    font-weight: 600;
+    font-weight: 700;
     line-height: 40px;
     letter-spacing: normal;
     text-decoration: none;

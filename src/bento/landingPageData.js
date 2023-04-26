@@ -1,8 +1,5 @@
 import gql from 'graphql-tag';
 import landingImg from '../assets/landing/Hero_1.png'
-import updateImgCCDC from '../assets/landing/Updates_CCDC.png';
-import updateImgMolecular from '../assets/landing/Updates_Molecular.png';
-import updateImgSymposium from '../assets/landing/Updates_Symposium.png';
 import aboutImg from '../assets/landing/About_1.png';
 import wheel1 from '../assets/landing/ccdc_carousel.svg';
 import wheel2 from '../assets/landing/civic_carousel.svg';
@@ -48,27 +45,6 @@ export const statsData = [
     num: '218,246',
     title: 'Cases',
     detail: 'National Childhood Cancer Registry Explorer',
-  },
-];
-
-export const latestUpdatesData = [
-  {
-    id: 'ccdc',
-    img: updateImgCCDC,
-    title: 'Childhood Cancer Data Catalog April Update',
-    content: 'The <a href="https://datacatalog.ccdi.cancer.gov/" target="_blank" rel="noopener noreferrer">Childhood Cancer Data Catalog</a> announced an update which includes 1 new resource, 8 new datasets, and many other updates.',
-  },
-  {
-    id: 'molecular',
-    img: updateImgMolecular,
-    title: 'Molecular characterization results returned to more than 1,000 participants',
-    content: 'The <a href="https://www.cancer.gov/research/areas/childhood/childhood-cancer-data-initiative/data-ecosystem/molecular-characterization?cid=eb_govdel" target="_blank" rel="noopener noreferrer">CCDI’s MCI</a> enrolled & returned results for more than 1,000 children &AYAs newly diagnosed with CNS, STS, & rare cancers.',
-  },
-  {
-    id: 'symposium',
-    img: updateImgSymposium,
-    title: '2023 CCDI Symposium',
-    content: 'More than 800 people attended the <a href="https://www.cancer.gov/research/areas/childhood/childhood-cancer-data-initiative/events-webinars/past-symposiums">CCDI Annual Symposium</a>, on March 24, 2023 showing their support for childhood cancer research.',
   },
 ];
 

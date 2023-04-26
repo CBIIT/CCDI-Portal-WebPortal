@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef }from 'react';
 import {
   withStyles,
 } from '@material-ui/core';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import ReactHtmlParser from 'html-react-parser';
 import Pagination from '@material-ui/lab/Pagination';
 import styled from 'styled-components';
@@ -83,12 +83,11 @@ const NewsContainer = styled.div`
     padding: 23px 32px 0 38px;
     box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.25);
     text-decoration: none;
-    cursor: pointer;
   }
 
-  .newsItem:hover {
-    border: 1.5px solid #00BDCD;
-  }
+  // .newsItem:hover {
+  //   border: 1.5px solid #00BDCD;
+  // }
 
   .newsItemTextContainer {
     width: 76%;
@@ -175,7 +174,7 @@ const getPageResults = (selectedTab, pageInfo) => {
 }
 
 const NewsView = ({classes}) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [selectedTab, setSelectedTab] = useState("All");
   const newsTabList = ['All', 'Announcements', 'News & Other', 'Application Updates', 'Site Updates'];
   const sizelist = [10,20,50,100];
@@ -240,11 +239,11 @@ const NewsView = ({classes}) => {
     setPageTotal(total);
   };
 
-  const gotoNewsDetail = (e, newsID) => {
-    if (e.target.tagName !== 'A') {
-      navigate(`/newsdetail/${newsID.trim()}`);
-    }
-  };
+  // const gotoNewsDetail = (e, newsID) => {
+  //   if (e.target.tagName !== 'A') {
+  //     navigate(`/newsdetail/${newsID.trim()}`);
+  //   }
+  // };
 
   return (
     <NewsContainer>
@@ -264,7 +263,8 @@ const NewsView = ({classes}) => {
           data.length > 0 ? data.map((newsItem, idx) => {
             const newskey = `news_${idx}`;
             return (
-              <div key={newskey} onClick={(e) => gotoNewsDetail(e, newsItem.id)} className='newsItem'>
+              // <div key={newskey} onClick={(e) => gotoNewsDetail(e, newsItem.id)} className='newsItem'>
+              <div id={newsItem.id} key={newskey} className='newsItem'>
                 <div className='newsItemTextContainer'>
                   <div className='newsItemTitle'>{newsItem.title}</div>
                   <div className='newsItemDate'>{newsItem.date}</div>

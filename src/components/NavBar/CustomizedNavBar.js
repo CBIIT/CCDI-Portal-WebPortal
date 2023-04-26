@@ -43,15 +43,16 @@ const LiSection = styled.li`
   transition:all 0.3s ease-in-out;
 
   a {
+    color: #585C65;
     text-decoration: none;
   }
 
   .navTitle {
     display: block;
-    color: #3D4551;
+    color: #585C65;
     font-family: poppins;
     font-size: 17px;
-    font-weight: 600;
+    font-weight: 700;
     line-height: 40px;
     letter-spacing: normal;
     text-decoration: none;
@@ -70,7 +71,20 @@ const LiSection = styled.li`
 
   .navText:hover {
     cursor: pointer;
+    color: #298085;
     border-bottom: 4px solid #298085;
+
+    ::after {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-bottom: 1px solid #298085;
+      border-left: 1px solid #298085;
+      margin: 0 0 4px 8px
+      transform: rotate(-45deg);
+      -webkit-transform: rotate(-45deg);
+    }
   }
 
   .navText::after {
@@ -78,8 +92,8 @@ const LiSection = styled.li`
     display: inline-block;
     width: 6px;
     height: 6px;
-    border-bottom: 1px solid #3D4551;
-    border-left: 1px solid #3D4551;
+    border-bottom: 1px solid #585C65;
+    border-left: 1px solid #585C65;
     margin: 0 0 4px 8px
     transform: rotate(-45deg);
     -webkit-transform: rotate(-45deg);
@@ -100,10 +114,31 @@ const LiSection = styled.li`
 
   .clicked:hover {
     border-bottom: 4px solid #1A5255;
+    color: #FFFFFF;
+
+    ::after {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-top: 1px solid #FFFFFF;
+      border-right: 1px solid #FFFFFF;
+      border-bottom: 0;
+      border-left: 0;
+      margin: 0 0 0 8px
+      transform: rotate(-45deg);
+      -webkit-transform: rotate(-45deg);
+    }
   }
 
   .directLink::after {
     display: none;
+  }
+
+  .directLink:hover {
+    ::after {
+      display: none;
+    }
   }
 
   .navTitleClicked {
@@ -168,7 +203,7 @@ const DropdownContainer = styled.div`
 
 
 const activeStyle = {
-  color: '#252222',
+  color: '#298085',
   borderBottom: '4px solid #298085',
 };
 
@@ -180,8 +215,8 @@ const useOutsideAlerter = (ref) => {
   useEffect(() => {
       function handleClickOutside(event) {
           if (!event.target || (event.target.getAttribute("class") !== "dropdownList" && ref.current && !ref.current.contains(event.target))) {
-            const toggle = document.getElementsByClassName("navTitleClicked");
-            if (toggle[0] && event.target.getAttribute("class") !== "navTitleClicked" && event.target.getAttribute("class") !== "navText clicked") {
+            const toggle = document.getElementsByClassName("navText clicked");
+            if (toggle[0] && event.target.getAttribute("class") !== "navText clicked" && event.target.getAttribute("class") !== "navText clicked") {
               toggle[0].click();
             }
           }
@@ -229,20 +264,20 @@ const NavBar = () => {
     <Nav>
       <NavContainer>
         <UlContainer>
-          <LiSection onClick={handleMenuClick}>
-            <NavLink to="/home"><div className='navTitle directLink'><div className='navText directLink' style={path === '/' || path === '/home' ? activeStyle : null}>Home</div></div></NavLink>
+          <LiSection>
+            <div className='navTitle directLink'><NavLink to="/home"><div className='navText directLink' onClick={handleMenuClick} style={path === '/' || path === '/home' ? activeStyle : null}>Home</div></NavLink></div>
           </LiSection>
-          <LiSection onClick={handleMenuClick}>
-            <div className={clickedTitle === 'Applications' ? 'navTitleClicked' : 'navTitle'}><div className={clickedTitle === 'Applications' ? 'navText clicked' : 'navText'}>Applications</div></div>
+          <LiSection>
+            <div className={clickedTitle === 'Applications' ? 'navTitleClicked' : 'navTitle'}><div className={clickedTitle === 'Applications' ? 'navText clicked' : 'navText'} onClick={handleMenuClick}>Applications</div></div>
           </LiSection>
-          <LiSection onClick={handleMenuClick}>
-            <div className={clickedTitle === 'Other Resources' ? 'navTitleClicked' : 'navTitle'}><div className={clickedTitle === 'Other Resources' ? 'navText clicked' : 'navText'}>Other Resources</div></div>
+          <LiSection>
+            <div className={clickedTitle === 'Other Resources' ? 'navTitleClicked' : 'navTitle'}><div className={clickedTitle === 'Other Resources' ? 'navText clicked' : 'navText'} onClick={handleMenuClick}>Other Resources</div></div>
           </LiSection>
-          <LiSection onClick={handleMenuClick}>
-            <NavLink to="/news"><div className='navTitle directLink'><div className='navText directLink' style={path === '/news' ? activeStyle : null}>News</div></div></NavLink>
+          <LiSection>
+            <div className='navTitle directLink'><NavLink to="/news"><div className='navText directLink' style={path === '/news' ? activeStyle : null} onClick={handleMenuClick}>News</div></NavLink></div>
           </LiSection>
-          <LiSection onClick={handleMenuClick}>
-            <NavLink to="/about"><div className='navTitle directLink'><div className='navText directLink' style={path === '/about' ? activeStyle : null}>About</div></div></NavLink>
+          <LiSection>
+            <div className='navTitle directLink'><NavLink to="/about"><div className='navText directLink' style={path === '/about' ? activeStyle : null} onClick={handleMenuClick}>About</div></NavLink></div>
           </LiSection>
         </UlContainer>
       </NavContainer>

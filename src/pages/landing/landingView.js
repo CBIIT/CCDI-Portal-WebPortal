@@ -315,6 +315,10 @@ const LatestUpdatesContainer = styled.div`
       height: 310px;
     }
 
+    .latestUpdatesListTitleContainer {
+      text-decoration: none;
+    }
+
     .latestUpdatesListTitle {
       color: #72F9FB;
       padding: 14px 23px 0 23px;
@@ -605,11 +609,11 @@ const LandingView = () => {
                 const updatekey = `update_${updateidx}`;
                 return (
                   <div className='latestUpdatesListItem' key={updatekey}>
-                    <div className='latestUpdatesListItemPic' style={{ backgroundImage: `url(${updateItem.img})` }} />
-                    <div className='latestUpdatesListTitle'>{updateItem.title}</div>
+                    <a href={`/news/#${updateItem.id}`} ><div className='latestUpdatesListItemPic' style={{ backgroundImage: `url(${updateItem.img})` }} /></a>
+                    <a className='latestUpdatesListTitleContainer' href={`/news/#${updateItem.id}`}><div className='latestUpdatesListTitle'>{updateItem.title}</div></a>
                     <div className='latestUpdatesListContent'>
                       {updateItem.content.slice(0, 130)+'... '}
-                      <a className='readMoreContainer' href={`/newsdetail/${updateItem.id}`}>Read More</a>
+                      <a className='readMoreContainer' href={`/news/#${updateItem.id}`}>Read More</a>
                     </div>
                   </div>
                 )

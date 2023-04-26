@@ -10,7 +10,7 @@ import News from '../../pages/news/newsView';
 import Error from '../../pages/error/Error';
 import Search from '../../pages/search/searchView';
 import ScrollButton from '../ScrollButton/ScrollButtonView';
-import NewsDetail from '../../pages/news/newsDetailView';
+// import NewsDetail from '../../pages/news/newsDetailView';
 
 const Layout = () => {
     return (
@@ -24,7 +24,7 @@ const Layout = () => {
           <Route path="/about" element={<About />} />
           <Route path="/news" element={<News />} />
           <Route path="/sitesearch" element={<Search />} />
-          <Route path="/newsdetail/:id" element={<NewsDetail />} />
+          {/* <Route path="/newsdetail/:id" element={<NewsDetail />} /> */}
           <Route path="*" element={<Error />} />
         </Routes>
         <Footer />

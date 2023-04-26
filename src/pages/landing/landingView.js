@@ -346,6 +346,7 @@ const LatestUpdatesContainer = styled.div`
       color: #AFF1FF;
       border-bottom: 1px solid #AFF1FF;
       text-decoration: none;
+      margin-left: 12px;
     }
 
     .readMoreContainer:hover{
@@ -612,7 +613,7 @@ const LandingView = () => {
                     <a href={`/news/#${updateItem.id}`} ><div className='latestUpdatesListItemPic' style={{ backgroundImage: `url(${updateItem.img})` }} /></a>
                     <a className='latestUpdatesListTitleContainer' href={`/news/#${updateItem.id}`}><div className='latestUpdatesListTitle'>{updateItem.title}</div></a>
                     <div className='latestUpdatesListContent'>
-                      {updateItem.content.slice(0, 130)+'... '}
+                      {updateItem.content.slice(0, 130)}
                       <a className='readMoreContainer' href={`/news/#${updateItem.id}`}>Read More</a>
                     </div>
                   </div>

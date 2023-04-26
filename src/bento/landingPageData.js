@@ -56,19 +56,19 @@ export const latestUpdatesData = [
     id: 'ccdc',
     img: updateImgCCDC,
     title: 'Childhood Cancer Data Catalog April Update',
-    content: 'The Childhood Cancer Data Catalog is pleased to announce an April update which includes 1 new resource, 8 new datasets, and many other data updates.',
+    content: 'The Childhood Cancer Data Catalog announced an update which includes 1 new resource, 8 new datasets, and many other updates.',
   },
   {
     id: 'molecular',
     img: updateImgMolecular,
     title: 'Molecular characterization results returned to more than 1,000 participants',
-    content: 'The CCDI Molecular Characterization Initiative reached 1K children, adolescents, and young adults (AYAs) newly diagnosed with certain types of cancer. ',
+    content: 'The CCDI’s MCI  enrolled & returned results for more than 1,000 children &AYAs newly diagnosed with CNS, STS, & rare cancers.',
   },
   {
     id: 'symposium',
     img: updateImgSymposium,
     title: '2023 CCDI Symposium',
-    content: 'The CCDI Annual Symposium, hosted by NCI on March 24, 2023, brought together over 800 members of the research, clinical, survivor, and family communities.',
+    content: 'More than 800 people attended the CCDI Annual Symposium, on March 24, 2023 showing their support for childhood cancer research.',
   },
 ];
 

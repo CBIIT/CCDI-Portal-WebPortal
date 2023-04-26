@@ -268,7 +268,7 @@ const NewsView = ({classes}) => {
                 <div className='newsItemTextContainer'>
                   <div className='newsItemTitle'>{newsItem.title}</div>
                   <div className='newsItemDate'>{newsItem.date}</div>
-                  <div className='newsItemContent'>{ReactHtmlParser(newsItem.content)}</div>
+                  <div className='newsItemContent'>{ReactHtmlParser(newsItem.highlight)}</div>
                 </div>
                 {newsItem.img && <div><img className='newsItemImgContainer' src={newsItem.img} alt={newsItem.title}/></div>}
               </div>

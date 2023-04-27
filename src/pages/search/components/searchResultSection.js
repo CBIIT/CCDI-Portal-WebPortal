@@ -1,7 +1,7 @@
 /* eslint-disable no-await-in-loop */
 import React, { useState, useEffect, useRef } from 'react';
 import {
-  withStyles, Grid, CircularProgress,
+  withStyles, Grid,
 } from '@material-ui/core';
 import Pagination from '@material-ui/lab/Pagination';
 import Components from './component';
@@ -35,7 +35,7 @@ function SearchPagination({
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(sizelist[0]);
   const [data, setdata] = useState([]);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [pageListVisible, setPageListVisible] = useState(0);
   const perPageSelection = useRef(null);
   useOutsideAlerter(perPageSelection);
@@ -72,9 +72,9 @@ function SearchPagination({
   }
 
   async function onChange(newValue = [], newPage = 1) {
-    setLoading(true);
+    // setLoading(true);
     const searchResp = await getPageResults(newValue, newPage);
-    setLoading(false);
+    // setLoading(false);
     setdata(searchResp);
   }
 
@@ -88,6 +88,7 @@ function SearchPagination({
     if (page < Math.ceil(count / pageSize)) {
       onChange(searchText, page + 1);
       setPage(page + 1);
+      // scrollToTop();
     }
   };
 
@@ -95,20 +96,21 @@ function SearchPagination({
     if (page > 1) {
       onChange(searchText, page - 1);
       setPage(page - 1);
+      // scrollToTop();
     }
   };
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 54,
-      behavior: 'smooth',
-    });
-  };
+  // const scrollToTop = () => {
+  //   window.scrollTo({
+  //     top: 54,
+  //     behavior: 'smooth',
+  //   });
+  // };
 
   const handleChangePage = (event, newPage) => {
     onChange(searchText, newPage);
     setPage(newPage);
-    scrollToTop();
+    // scrollToTop();
   };
 
   const onPageSizeClick = (e) => {
@@ -117,14 +119,14 @@ function SearchPagination({
   };
 
   const renderCards = () => {
-    if (loading) {
-      return (
-        <div className={classes.loadingMessageWrapper}>
-          <CircularProgress />
-          {/* <div className={classes.loadingMessage}>Loading...</div> */}
-        </div>
-      );
-    }
+    // if (loading) {
+    //   return (
+    //     <div className={classes.loadingMessageWrapper}>
+    //       <CircularProgress />
+    //       {/* <div className={classes.loadingMessage}>Loading...</div> */}
+    //     </div>
+    //   );
+    // }
 
     if (data && data.length <= 0) return <div className={classes.noticeContainer}>{searchText ? "No results" : "Please input keywords"}</div>;
 
@@ -148,7 +150,7 @@ function SearchPagination({
           {renderCards()}
         </Grid>
       </Grid>
-      { !loading && data && data.length > 0 &&
+      { data && data.length > 0 &&
       <div className={classes.paginationContainer}>
         <div className={classes.perPageContainer}>
           Results per Page:

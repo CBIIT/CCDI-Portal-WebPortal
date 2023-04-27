@@ -1,8 +1,5 @@
 import gql from 'graphql-tag';
 import landingImg from '../assets/landing/Hero_1.png'
-import updateImgCCDC from '../assets/landing/Updates_CCDC.png';
-import updateImgMolecular from '../assets/landing/Updates_Molecular.png';
-import updateImgSymposium from '../assets/landing/Updates_Symposium.png';
 import aboutImg from '../assets/landing/About_1.png';
 import wheel1 from '../assets/landing/ccdc_carousel.svg';
 import wheel2 from '../assets/landing/civic_carousel.svg';
@@ -48,27 +45,6 @@ export const statsData = [
     num: '218,246',
     title: 'Cases',
     detail: 'National Childhood Cancer Registry Explorer',
-  },
-];
-
-export const latestUpdatesData = [
-  {
-    id: 'ccdc',
-    img: updateImgCCDC,
-    title: 'Childhood Cancer Data Catalog April Update',
-    content: 'The Childhood Cancer Data Catalog is pleased to announce an April update which includes 1 new resource, 8 new datasets, and many other data updates.',
-  },
-  {
-    id: 'molecular',
-    img: updateImgMolecular,
-    title: 'Molecular characterization results returned to more than 1,000 participants',
-    content: 'The CCDI Molecular Characterization Initiative reached 1K children, adolescents, and young adults (AYAs) newly diagnosed with certain types of cancer. ',
-  },
-  {
-    id: 'symposium',
-    img: updateImgSymposium,
-    title: '2023 CCDI Symposium',
-    content: 'The CCDI Annual Symposium, hosted by NCI on March 24, 2023, brought together over 800 members of the research, clinical, survivor, and family communities.',
   },
 ];
 

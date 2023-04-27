@@ -1,8 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { introData, titleData, statsData, latestUpdatesData, resourcesAppliationsListData, resourcesCloudListData } from '../../bento/landingPageData';
+import { introData, titleData, statsData, resourcesAppliationsListData, resourcesCloudListData } from '../../bento/landingPageData';
+import { newsList } from '../../bento/newsData';
+import ReactHtmlParser from 'html-react-parser';
 import Carousel from '../landing/component/carousel';
 import exportIcon from '../../assets/landing/Export_Icon_Black.svg';
+import exportIconText from '../../assets/landing/Export_Icon_White.svg';
 import bg1 from '../../assets/landing/bg_1.png';
 import bg2 from '../../assets/landing/bg_2.png';
 import bg3 from '../../assets/landing/bg_3.png';
@@ -341,11 +344,21 @@ const LatestUpdatesContainer = styled.div`
       font-size: 16px;
     }
 
+    .latestUpdatesTextContent {
+      a {
+        color: #FFFFFF;
+        padding-right: 20px;
+        background: url(${exportIconText}) right center no-repeat;
+        text-underline-offset: 5px;
+      }
+    }
+
     .readMoreContainer {
       font-size: 14px;
       color: #AFF1FF;
       border-bottom: 1px solid #AFF1FF;
       text-decoration: none;
+      margin-left: 12px;
     }
 
     .readMoreContainer:hover{
@@ -604,14 +617,14 @@ const LandingView = () => {
           </TitleContainer>
           <div className='latestUpdatesList'>
             {
-              latestUpdatesData.map((updateItem, updateidx) => {
+              newsList.slice(0,3).map((updateItem, updateidx) => {
                 const updatekey = `update_${updateidx}`;
                 return (
                   <div className='latestUpdatesListItem' key={updatekey}>
-                    <a href={`/news/#${updateItem.id}`} ><div className='latestUpdatesListItemPic' style={{ backgroundImage: `url(${updateItem.img})` }} /></a>
+                    <a href={`/news/#${updateItem.id}`} ><div className='latestUpdatesListItemPic' style={{ backgroundImage: `url(${updateItem.updateImg})` }} /></a>
                     <a className='latestUpdatesListTitleContainer' href={`/news/#${updateItem.id}`}><div className='latestUpdatesListTitle'>{updateItem.title}</div></a>
                     <div className='latestUpdatesListContent'>
-                      {updateItem.content.slice(0, 130)+'... '}
+                      <span className='latestUpdatesTextContent'>{ReactHtmlParser(updateItem.slug)}</span>
                       <a className='readMoreContainer' href={`/news/#${updateItem.id}`}>Read More</a>
                     </div>
                   </div>

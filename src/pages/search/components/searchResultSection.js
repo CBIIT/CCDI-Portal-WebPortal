@@ -370,7 +370,7 @@ const styles = {
       fontFamily: 'Poppins',
       fontSize: '14px',
       fontWeight: '300',
-      minWidth: '18px',
+      minWidth: '25px',
       margin: '0',
       padding: '0 7px',
     },

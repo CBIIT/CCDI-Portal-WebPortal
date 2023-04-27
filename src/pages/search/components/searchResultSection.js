@@ -51,7 +51,6 @@ function SearchPagination({
 
   async function getPageResults(inputVlaue, newPage) {
     if (count > 0) { // no need network calls if count is zero
-      console.log(datafield);
       const { QUERY, field } = getPublicQuery(datafield);
       const allids = await client
         .query({

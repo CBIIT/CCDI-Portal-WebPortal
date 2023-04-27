@@ -170,9 +170,11 @@ function SearchPagination({
           </div>
           <div className={classes.showingContainer}>
             Showing&nbsp;
-            {pageSize*(page-1)+1}
-            -
-            {pageSize*page < count ? pageSize*page : count}&nbsp;
+            <div className={classes.showingRangeContainer}>
+              {pageSize*(page-1)+1}
+              -
+              {pageSize*page < count ? pageSize*page : count}&nbsp;
+            </div>
             of&nbsp;
             {count}
           </div>
@@ -460,6 +462,10 @@ const styles = {
     display: 'flex',
     position: 'relative',
     left: '-14px',
+  },
+  showingRangeContainer: {
+    minWidth: '40px',
+    textAlign: 'center',
   },
   pageContainer: {
     display: 'flex',

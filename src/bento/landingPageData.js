@@ -42,8 +42,8 @@ export const statsData = [
     detail: 'Molecular Targets Platform',
   },
   {
-    num: '218,246',
-    title: 'Cases',
+    num: '1,496,577',
+    title: 'Reported Cases',
     detail: 'National Childhood Cancer Registry Explorer',
   },
 ];

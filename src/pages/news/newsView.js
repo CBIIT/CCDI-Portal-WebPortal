@@ -297,9 +297,11 @@ const NewsView = ({classes}) => {
             </div>
             <div className={classes.showingContainer}>
               Showing&nbsp;
-              {pageSize*(page-1)+1}
-              -
-              {pageSize*page < pageTotal ? pageSize*page : pageTotal}&nbsp;
+              <div className={classes.showingRangeContainer}>
+                {pageSize*(page-1)+1}
+                -
+                {pageSize*page < pageTotal ? pageSize*page : pageTotal}&nbsp;
+              </div>
               of&nbsp;
               {pageTotal}
             </div>
@@ -588,6 +590,10 @@ const styles = {
     display: 'flex',
     position: 'relative',
     left: '-14px',
+  },
+  showingRangeContainer: {
+    minWidth: '40px',
+    textAlign: 'center',
   },
   pageContainer: {
     display: 'flex',

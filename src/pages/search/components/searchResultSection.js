@@ -131,7 +131,7 @@ function SearchPagination({
 
     return data.map(
       // eslint-disable-next-line max-len
-      (block, index) => <Components searchText={searchText} data={block} classes index={(page - 1) * pageSize + index} />,
+      (block, index) => <Components key={`data_${index}`}searchText={searchText} data={block} classes index={(page - 1) * pageSize + index} />,
     );
   };
 
@@ -181,7 +181,7 @@ function SearchPagination({
         <div className={classes.pageContainer}>
           <div className={ page === 1 ? classes.prevButtonDisabledContainer : classes.prevButtonContainer} onClick={onPrevious}><div className={ page === 1 ? classes.prevButtonDisabled : classes.prevButton } /></div>
           <Pagination
-            disableTouchRipple
+            disabletouchripple="true"
             classes={{ ul: classes.paginationUl }}
             className={classes.paginationRoot}
             count={Math.ceil(count / pageSize)}

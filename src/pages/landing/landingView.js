@@ -1,8 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { introData, titleData, statsData, latestUpdatesData, resourcesAppliationsListData, resourcesCloudListData } from '../../bento/landingPageData';
+import { introData, titleData, statsData, resourcesAppliationsListData, resourcesCloudListData } from '../../bento/landingPageData';
+import { newsList } from '../../bento/newsData';
+import ReactHtmlParser from 'html-react-parser';
 import Carousel from '../landing/component/carousel';
 import exportIcon from '../../assets/landing/Export_Icon_Black.svg';
+import exportIconText from '../../assets/landing/Export_Icon_White.svg';
 import bg1 from '../../assets/landing/bg_1.png';
 import bg2 from '../../assets/landing/bg_2.png';
 import bg3 from '../../assets/landing/bg_3.png';
@@ -72,7 +75,7 @@ const Banner = styled.div`
 
 const BannerDarker = styled.div`
   position: absolute;
-  top: 338px;
+  top: 332px;
   height: 98px;
   width: 50%
   background: #087D6F;
@@ -112,16 +115,16 @@ const IntroContainer = styled.div`
 `;
 
 const IntroTextContainer = styled.div`
-    padding: 115px 0 0 135px;
+    padding: 51px 0 0 135px;
     
     .introTextTitle1 {
       text-align: left;
       color: #002A2E;
       font-family: poppins;
       font-weight: 600;
-      font-size: 35px;
+      font-size: 50px;
       letter-spacing: 0.02em;
-      line-height: 35px;
+      line-height: 45px;
     }
 
     .introTextTitle2 {
@@ -135,7 +138,7 @@ const IntroTextContainer = styled.div`
       line-height: 24px;
       background: #087D6F;
       padding: 13px 0;
-      margin: 33px 0 43px 0;
+      margin: 26px 0 43px 0;
     }
 `;
 
@@ -341,11 +344,21 @@ const LatestUpdatesContainer = styled.div`
       font-size: 16px;
     }
 
+    .latestUpdatesTextContent {
+      a {
+        color: #FFFFFF;
+        padding-right: 20px;
+        background: url(${exportIconText}) right center no-repeat;
+        text-underline-offset: 5px;
+      }
+    }
+
     .readMoreContainer {
       font-size: 14px;
       color: #AFF1FF;
       border-bottom: 1px solid #AFF1FF;
       text-decoration: none;
+      margin-left: 12px;
     }
 
     .readMoreContainer:hover{
@@ -550,8 +563,7 @@ const LandingView = () => {
         <FirstContainer>
           <IntroContainer>
             <IntroTextContainer>
-              <div className='introTextTitle1'>Discover CCDI</div>
-              <div className='introTextTitle1'>Resources</div>
+              <div className='introTextTitle1'><div>Discover</div><div>CCDI</div><div>Resources</div></div>
               <div className='introTextTitle2'>
                 <div>Explore the CCDI Hub, its applications,</div>
                 <div>and analytic tools by selecting an</div>
@@ -605,14 +617,14 @@ const LandingView = () => {
           </TitleContainer>
           <div className='latestUpdatesList'>
             {
-              latestUpdatesData.map((updateItem, updateidx) => {
+              newsList.slice(0,3).map((updateItem, updateidx) => {
                 const updatekey = `update_${updateidx}`;
                 return (
                   <div className='latestUpdatesListItem' key={updatekey}>
-                    <a href={`/news/#${updateItem.id}`} ><div className='latestUpdatesListItemPic' style={{ backgroundImage: `url(${updateItem.img})` }} /></a>
+                    <a href={`/news/#${updateItem.id}`} ><div className='latestUpdatesListItemPic' style={{ backgroundImage: `url(${updateItem.updateImg})` }} /></a>
                     <a className='latestUpdatesListTitleContainer' href={`/news/#${updateItem.id}`}><div className='latestUpdatesListTitle'>{updateItem.title}</div></a>
                     <div className='latestUpdatesListContent'>
-                      {updateItem.content.slice(0, 130)+'... '}
+                      <span className='latestUpdatesTextContent'>{ReactHtmlParser(updateItem.slug)}</span>
                       <a className='readMoreContainer' href={`/news/#${updateItem.id}`}>Read More</a>
                     </div>
                   </div>

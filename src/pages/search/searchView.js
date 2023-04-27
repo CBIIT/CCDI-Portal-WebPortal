@@ -92,12 +92,12 @@ const SearchInput = styled.input`
   font-weight: 400;
   font-size: 25px;
   line-height: 53px;
-  color: #004A8B;
+  color: #000000;
   width: 650px;
   background: transparent;
 
   ::placeholder {
-    color: #004A8B;
+    color: #000000;
   }
 
   :focus {

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {aboutData} from '../../bento/aboutPageData';
 import aboutImg from '../../assets/about/About_Img.png';
 import exportIcon from '../../assets/about/Export_Icon.svg';
+import ReactHtmlParser from 'html-react-parser';
 
 const AboutContainer = styled.div`
   width: 1440px;
@@ -17,11 +18,13 @@ const AboutContainer = styled.div`
     text-align: center;
   }
   .aboutBody {
+    width: 1080px;
     font-family: Inter;
     font-weight: 400;
     font-size: 16px;
     color: #000000;
-    margin: 0 251px 60px 318px;
+    margin: 0 auto;
+    margin-bottom: 50px;
   }
 
   .aboutSubtitle {
@@ -36,14 +39,14 @@ const AboutContainer = styled.div`
   }
 
   .upperText {
-    width: 432px;
-    margin-right: 70px;
+    width: 671px;
+    margin-right: 42px;
     letter-spacing: 0.02em;
-    line-height: 27px;
+    line-height: 24px;
   }
 
   .textParagraph {
-    margin-top: 25px;
+    margin: 25px 0 50px 0;
   }
 
   .upperImg {
@@ -74,15 +77,12 @@ const AboutView = () => {
       <div className='aboutBody'>
         <div className='aboutBodyUpperContainer'>
           <div className='upperText'>
-            <div className='aboutSubtitle'>Childhood Cancer Data Initiative Hub</div>
-            <div className='textParagraph'>{aboutData.upperText1}</div>
-            <div className='textParagraph'>{aboutData.upperText2}</div>
+            <div className='aboutSubtitle'>{aboutData.upperTitle}</div>
+            <div className='textParagraph'>{ReactHtmlParser(aboutData.upperText)}</div>
+            <div className='aboutSubtitle'>{aboutData.lowerTitle}</div>
+            <div className='textParagraph'>{ReactHtmlParser(aboutData.lowerText)}</div>
           </div>
           <div className='upperImg'></div>
-        </div>
-        <div className='aboutBodyLowerContainer'>
-          <div className='aboutSubtitle'>Childhood Cancer Data Initiative</div>
-          <div className='textParagraph'>The <a className='aboutLink' href='https://www.cancer.gov/research/areas/childhood/childhood-cancer-data-initiative' target="_blank" rel="noopener noreferrer">NCI's Childhood Cancer Data Initiative (CCDI)</a> is building a community centered around childhood cancer care and research data. By connecting, analyzing, and easily sharing data among researchers, we can increase our understanding of childhood cancers and improve treatment, quality of life, and survivorship for all children, adolescents, and young adults with cancer.</div>
         </div>
       </div>
     </AboutContainer>

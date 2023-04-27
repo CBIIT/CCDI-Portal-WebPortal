@@ -52,7 +52,7 @@ export const newsList = [
     },
     {
         id: 'molecular',
-        title: 'Molecular characterization results returned to more than 1,000 participants ',
+        title: 'Molecular Characterization Initiative enrolled more than 1,000 participants',
         date: 'APRIL 5, 2023',
         slug: 'The <a href="https://www.cancer.gov/research/areas/childhood/childhood-cancer-data-initiative/data-ecosystem/molecular-characterization?cid=eb_govdel" target="_blank" rel="noopener noreferrer">CCDI’s MCI</a> enrolled & returned results for more than 1,000 children &AYAs newly diagnosed with CNS, STS, & rare cancers.',
         highlight: 'The <a href="https://www.cancer.gov/research/areas/childhood/childhood-cancer-data-initiative/data-ecosystem/molecular-characterization?cid=eb_govdel" target="_blank" rel="noopener noreferrer">CCDI Molecular Characterization Initiative</a> MCI)  enrolled over 1,000 children, adolescent, and young adults (AYAs) diagnosed with brain, soft tissue sarcomas  and certain types of rare cancers. This increases the accessibility to clinical genomic testing, which can aid healthcare providers to confirm diagnoses and in planning their treatment.',

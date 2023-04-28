@@ -51,7 +51,6 @@ function SearchPagination({
 
   async function getPageResults(inputVlaue, newPage) {
     if (count > 0) { // no need network calls if count is zero
-      console.log(datafield);
       const { QUERY, field } = getPublicQuery(datafield);
       const allids = await client
         .query({
@@ -132,7 +131,7 @@ function SearchPagination({
 
     return data.map(
       // eslint-disable-next-line max-len
-      (block, index) => <Components searchText={searchText} data={block} classes index={(page - 1) * pageSize + index} />,
+      (block, index) => <Components key={`data_${index}`}searchText={searchText} data={block} index={(page - 1) * pageSize + index} />,
     );
   };
 
@@ -182,7 +181,7 @@ function SearchPagination({
         <div className={classes.pageContainer}>
           <div className={ page === 1 ? classes.prevButtonDisabledContainer : classes.prevButtonContainer} onClick={onPrevious}><div className={ page === 1 ? classes.prevButtonDisabled : classes.prevButton } /></div>
           <Pagination
-            disableTouchRipple
+            disabletouchripple="true"
             classes={{ ul: classes.paginationUl }}
             className={classes.paginationRoot}
             count={Math.ceil(count / pageSize)}

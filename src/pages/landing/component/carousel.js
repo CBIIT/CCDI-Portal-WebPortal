@@ -280,8 +280,6 @@ const Carousel = () => {
     const [rCarouselList, setRCarouselList] = useState([]);
     const isVisible = usePageVisibility();
 
-    console.log(rCarouselList);
-
     const startTimer = () => {
         timer = setInterval(() => {
             if (direction === "d") {

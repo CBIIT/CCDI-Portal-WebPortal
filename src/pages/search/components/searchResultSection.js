@@ -131,7 +131,7 @@ function SearchPagination({
 
     return data.map(
       // eslint-disable-next-line max-len
-      (block, index) => <Components key={`data_${index}`}searchText={searchText} data={block} classes index={(page - 1) * pageSize + index} />,
+      (block, index) => <Components key={`data_${index}`}searchText={searchText} data={block} index={(page - 1) * pageSize + index} />,
     );
   };
 

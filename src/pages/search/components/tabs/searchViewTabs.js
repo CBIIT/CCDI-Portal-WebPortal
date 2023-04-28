@@ -6,8 +6,9 @@ const SearchViewTabs = ({
 }) => {
   const { properties } = options;
 
-  return properties.map((prop) => (
+  return properties.map((prop, index) => (
           <Subsection
+            key = {`Subsection_${index}`}
             isPublic={isPublic}
             searchText={searchText}
             count={prop.count}

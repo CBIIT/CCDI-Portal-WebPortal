@@ -72,6 +72,10 @@ const FooterEmailSignupContainer = styled.form`
     padding-left: 8px;
   }
 
+  .signUpInputBox:focus {
+    outline: 0.25rem solid #2491ff;
+  }
+
   .signUpButton {
     background: #FACE00;
     border-radius: 8px;
@@ -92,6 +96,11 @@ const FooterEmailSignupContainer = styled.form`
   .errorEmail {
     background: #e41154;
     padding: 10px 5px 5px 5px;
+
+    .signUpInputBox {
+      outline: 0.25rem solid #2491ff;
+      outline-offset: 5px;
+    }
   }
 
   .ErrorBorder {

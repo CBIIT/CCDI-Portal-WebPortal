@@ -14,7 +14,7 @@ const LandingViewContainer = styled.div`
     font-family: Poppins;
     position: relative;
     background: white;
-    height: 2970px;
+    height: 2870px;
 `;
 
 const BackgroundFirst = styled.div`
@@ -58,7 +58,7 @@ const BackgroundThird = styled.div`
 
 const HeroSection = styled.div`
   position: relative;
-  height: 760px;
+  height: 730px;
   z-index: 5;
 `;
 
@@ -90,13 +90,13 @@ const StatsSection = styled.div`
 const LatestUpdatesSection = styled.div`
   position: relative;
   z-index: 5;
-  margin-top: 80px;
+  margin-top: 23px;
 `;
 
 const ResourcesSection = styled.div`
   position: relative;
   z-index: 5;
-  margin-top: 120px;
+  margin-top: 94px;
   margin-bottom: 75px;
 `;
 
@@ -143,7 +143,7 @@ const IntroTextContainer = styled.div`
 `;
 
 const ListContainer = styled.div`
-    margin: 60px 33px;    
+    margin: 60px 33px 30px 33px;    
     width: 758px;
     height: 640px;
 `;
@@ -413,7 +413,7 @@ const ResourcesOverlayRight = styled.div`
   width: 50%;
   height: 100px;
   right: 60px;
-  top: -100px;
+  top: -30px;
 
   background: rgba(255, 255, 255, 0.85);
   filter: blur(20px);

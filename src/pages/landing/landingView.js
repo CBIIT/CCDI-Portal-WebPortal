@@ -625,7 +625,7 @@ const LandingView = () => {
                     <a className='latestUpdatesListTitleContainer' href={`/news/#${updateItem.id}`}><div className='latestUpdatesListTitle'>{updateItem.title}</div></a>
                     <div className='latestUpdatesListContent'>
                       <span className='latestUpdatesTextContent'>{ReactHtmlParser(updateItem.slug)}</span>
-                      <a className='readMoreContainer' href={`/news/#${updateItem.id}`}>Read More</a>
+                      <a className='readMoreContainer' href={`/news#${updateItem.id}`}>Read More</a>
                     </div>
                   </div>
                 )

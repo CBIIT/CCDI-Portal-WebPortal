@@ -12,7 +12,7 @@ export const newsList = [
         id: 'ccdc',
         title: 'Childhood Cancer Data Catalog April Update ',
         date: 'APRIL 19, 2023',
-        slug: 'The update includes one new resource, eight new datasets, and many other changes',
+        slug: 'The update includes one new resource, eight new datasets, and many other changes.',
         highlight: 'The <a href="https://datacatalog.ccdi.cancer.gov/" target="_blank" rel="noopener noreferrer">Childhood Cancer Data Catalog</a> is pleased to announce the addition of the Xena Browser, a powerful online exploration tool that allows users to investigate functional genomic data sets for correlations between genomic and/or phenotypic variables. Also, seven new datasets have been incorporated into eight existing resources. <a href="https://datacatalog.ccdi.cancer.gov/" rel="noreferrer noopener" target="_blank">Explore the Catalog</a> to check out all the changes.',
         fullText: '<p>The National Cancer Institute is pleased to announce an update to the Childhood Cancer Data Catalog website: <a href="https://datacatalog.ccdi.cancer.gov/" rel="noreferrer noopener" target="_blank">https://datacatalog.ccdi.cancer.gov/</a>.&nbsp;&nbsp;</p>'
         +'<p>&nbsp;</p>'

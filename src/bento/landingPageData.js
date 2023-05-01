@@ -32,13 +32,13 @@ export const statsData = [
     detail: 'Childhood Cancer Data Catalog',
   },
   {
-    num: '1145',
+    num: '1,145',
     title: 'Participants',
     detail: 'Molecular Characterization Initiative for Childhood Cancer',
   },
   {
-    num: '40,929',
-    title: 'Molecular Targets',
+    num: '51,618',
+    title: 'Pediatric Targets',
     detail: 'Molecular Targets Platform',
   },
   {

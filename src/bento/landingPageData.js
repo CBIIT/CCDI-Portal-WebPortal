@@ -38,7 +38,7 @@ export const statsData = [
   },
   {
     num: '51,618',
-    title: 'Pediatric Targets',
+    title: 'Pediatric Molecular Targets',
     detail: 'Molecular Targets Platform',
   },
   {

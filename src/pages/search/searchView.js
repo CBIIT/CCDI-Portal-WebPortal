@@ -31,7 +31,7 @@ const SearchViewContainer = styled.div`
 const SearchbarContainer = styled.div`
   position: relative;
   margin: 80px 402px 42px 149px;
-  background: #08838F;
+  background: #00838F;
   border-radius: 0px 20px;
   padding: 32px 158px 38px 69px;
 

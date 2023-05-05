@@ -6,7 +6,6 @@ import exportIcon from '../../assets/about/Export_Icon.svg';
 import ReactHtmlParser from 'html-react-parser';
 
 const AboutContainer = styled.div`
-  width: 1440px;
   margin: 0 auto;
 
   .aboutHeader {
@@ -18,13 +17,14 @@ const AboutContainer = styled.div`
     text-align: center;
   }
   .aboutBody {
-    width: 1080px;
     font-family: Inter;
     font-weight: 400;
     font-size: 16px;
     color: #000000;
-    margin: 0 auto;
-    margin-bottom: 50px;
+    margin: 0 8%;
+    margin-bottom: 150px;
+    letter-spacing: 0.02em;
+    line-height: 24px;
   }
 
   .aboutSubtitle {
@@ -34,19 +34,12 @@ const AboutContainer = styled.div`
     color: #007A85;
   }
 
-  .aboutBodyContainer {
-    letter-spacing: 0.02em;
-    line-height: 24px;
-  }
-
   .textParagraph {
     margin: 25px 0 50px 0;
   }
 
   .upperImg {
-    background-image: url(${aboutImg});
-    width: 367px;
-    height: 438px;
+    width: 34%;
     float: right;
     margin-left: 42px;
   }
@@ -65,13 +58,11 @@ const AboutView = () => {
     <AboutContainer>
       <div className='aboutHeader'>About</div>
       <div className='aboutBody'>
-        <div className='aboutBodyContainer'>
-          <div className='upperImg'></div>
+          <img className='upperImg' src={aboutImg} />
           <div className='aboutSubtitle'>{aboutData.upperTitle}</div>
           <div className='textParagraph'>{ReactHtmlParser(aboutData.upperText)}</div>
           <div className='aboutSubtitle'>{aboutData.lowerTitle}</div>
           <div className='textParagraph'>{ReactHtmlParser(aboutData.lowerText)}</div>
-        </div>
       </div>
     </AboutContainer>
   )

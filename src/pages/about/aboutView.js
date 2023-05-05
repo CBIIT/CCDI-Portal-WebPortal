@@ -34,13 +34,7 @@ const AboutContainer = styled.div`
     color: #007A85;
   }
 
-  .aboutBodyUpperContainer {
-    display: flex;
-  }
-
-  .upperText {
-    width: 671px;
-    margin-right: 42px;
+  .aboutBodyContainer {
     letter-spacing: 0.02em;
     line-height: 24px;
   }
@@ -53,12 +47,8 @@ const AboutContainer = styled.div`
     background-image: url(${aboutImg});
     width: 367px;
     height: 438px;
-  }
-
-  .aboutBodyLowerContainer {
-    margin: 64px 0 120px 0;
-    letter-spacing: 0.02em;
-    line-height: 27px;
+    float: right;
+    margin-left: 42px;
   }
 
   .aboutLink {
@@ -75,14 +65,12 @@ const AboutView = () => {
     <AboutContainer>
       <div className='aboutHeader'>About</div>
       <div className='aboutBody'>
-        <div className='aboutBodyUpperContainer'>
-          <div className='upperText'>
-            <div className='aboutSubtitle'>{aboutData.upperTitle}</div>
-            <div className='textParagraph'>{ReactHtmlParser(aboutData.upperText)}</div>
-            <div className='aboutSubtitle'>{aboutData.lowerTitle}</div>
-            <div className='textParagraph'>{ReactHtmlParser(aboutData.lowerText)}</div>
-          </div>
+        <div className='aboutBodyContainer'>
           <div className='upperImg'></div>
+          <div className='aboutSubtitle'>{aboutData.upperTitle}</div>
+          <div className='textParagraph'>{ReactHtmlParser(aboutData.upperText)}</div>
+          <div className='aboutSubtitle'>{aboutData.lowerTitle}</div>
+          <div className='textParagraph'>{ReactHtmlParser(aboutData.lowerText)}</div>
         </div>
       </div>
     </AboutContainer>

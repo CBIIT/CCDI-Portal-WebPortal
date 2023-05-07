@@ -39,9 +39,11 @@ const AboutContainer = styled.div`
   }
 
   .upperImg {
-    width: 34%;
+    width: 40%;
     float: right;
-    margin-left: 42px;
+    margin-left: 2%;
+    border: 2.5px solid #4BBFC6;
+    border-radius: 0 20px;
   }
 
   .aboutLink {
@@ -51,6 +53,36 @@ const AboutContainer = styled.div`
     padding-right: 20px;
     background: url(${exportIcon}) right center no-repeat;
   }
+
+  @media (max-width: 375px) {
+    .aboutHeader {
+      color: #FFFFFF;
+      background: rgba(0, 95, 103, 0.85);
+    }
+    .upperImg {
+      position: absolute;
+      width: 100%;
+      height: 406px;
+      left: 0;
+      top: 130px;
+      margin: 0;
+      z-index: -1;
+      border: none;
+      border-radius: 0;
+      object-fit: fill;
+      // display: none;
+    }
+    .aboutHeader {
+      margin: 160px 0 190px 0;
+    }
+  }
+
+  @media (min-width: 1300px) {
+    .aboutBody {
+      width: 1080px;
+      margin: 0 auto 150px auto;
+    }
+  }
 `;
 
 const AboutView = () => {
@@ -58,7 +90,7 @@ const AboutView = () => {
     <AboutContainer>
       <div className='aboutHeader'>About</div>
       <div className='aboutBody'>
-          <img className='upperImg' src={aboutImg} />
+          <img className='upperImg' src={aboutImg} alt="about_img" />
           <div className='aboutSubtitle'>{aboutData.upperTitle}</div>
           <div className='textParagraph'>{ReactHtmlParser(aboutData.upperText)}</div>
           <div className='aboutSubtitle'>{aboutData.lowerTitle}</div>

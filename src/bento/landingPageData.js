@@ -38,12 +38,12 @@ export const statsData = [
   },
   {
     num: '51,618',
-    title: 'Pediatric Molecular Targets',
+    title: 'Potential Pediatric Molecular Targets',
     detail: 'Molecular Targets Platform',
   },
   {
     num: '1,496,577',
-    title: 'Reported Cases',
+    title: 'Entries',
     detail: 'National Childhood Cancer Registry Explorer',
   },
 ];

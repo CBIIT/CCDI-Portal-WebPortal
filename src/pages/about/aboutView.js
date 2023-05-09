@@ -54,7 +54,14 @@ const AboutContainer = styled.div`
     background: url(${exportIcon}) right center no-repeat;
   }
 
-  @media (max-width: 375px) {
+  @media (max-width: 890px) {
+    .upperImg {
+      width: 296px;
+      margin-left: 37px;
+    }
+  }
+
+  @media (max-width: 540px) {
     .aboutHeader {
       color: #FFFFFF;
       background: rgba(0, 95, 103, 0.85);

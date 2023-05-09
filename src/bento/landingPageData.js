@@ -68,7 +68,7 @@ export const resourcesAppliationsListData = [
     title: 'Molecular Characterization Initiative for Childhood Cancers',
     subtitle: 'MCI',
     content: 'A program providing molecular testing for children, adolescents, and young adults with certain cancer types.',
-    link: 'https://www.cancer.gov/research/areas/childhood/childhood-cancer-data-initiative/data-ecosystem/molecular-characterization',
+    link: 'https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs002790.v2.p1',
   },
   {
     id: 'mtp',
@@ -137,7 +137,7 @@ export const carouselList = [
   {
     img: wheel3,
     content: 'Molecular Characterization Initiative for Childhood Cancer',
-    link: 'https://www.cancer.gov/research/areas/childhood/childhood-cancer-data-initiative/data-ecosystem/molecular-characterization',
+    link: 'https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs002790.v2.p1',
   },
   {
     img: wheel4,

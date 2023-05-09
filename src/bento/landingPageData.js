@@ -43,7 +43,7 @@ export const statsData = [
   },
   {
     num: '1,496,577',
-    title: 'Entries',
+    title: 'Reported Cases Under Age 40<br>(1995-2020)',
     detail: 'National Childhood Cancer Registry Explorer',
   },
 ];

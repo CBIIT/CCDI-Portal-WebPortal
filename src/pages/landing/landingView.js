@@ -594,7 +594,7 @@ const LandingView = () => {
                 return (
                   <div className='statItem' key={statkey}>
                     <div className='statNum'>{statItem.num}</div>
-                    <div className='statTitle'>{statItem.title}</div>
+                    <div className='statTitle'>{ReactHtmlParser(statItem.title)}</div>
                     <div className='statDetail'>{statItem.detail}</div>
                   </div>
                 )

@@ -77,7 +77,7 @@ const AboutContainer = styled.div`
       background: rgba(0, 95, 103, 0.85);
       height: 141px;
       line-height: 141px;
-      margin: 132px 0 182px 0;
+      margin: 120px 0 182px 0;
     }
     .upperImg {
       position: absolute;

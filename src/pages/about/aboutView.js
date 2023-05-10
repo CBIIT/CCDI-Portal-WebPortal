@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {aboutData} from '../../bento/aboutPageData';
-import aboutImg from '../../assets/about/About_Img.png';
+import aboutImg from '../../assets/about/About_Img_Large.png';
 import exportIcon from '../../assets/about/Export_Icon.svg';
 import ReactHtmlParser from 'html-react-parser';
 
@@ -48,6 +48,7 @@ const AboutContainer = styled.div`
     margin-left: 41px;
     border: 2.5px solid #4BBFC6;
     border-radius: 0 20px;
+    object-fit: cover;
   }
 
   .aboutLink {
@@ -88,8 +89,6 @@ const AboutContainer = styled.div`
       z-index: -1;
       border: none;
       border-radius: 0;
-      object-fit: fill;
-      // display: none;
     }
     .aboutBody {
       margin: 0 6.5%;

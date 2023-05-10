@@ -21,10 +21,14 @@ const AboutContainer = styled.div`
     font-weight: 400;
     font-size: 16px;
     color: #000000;
-    margin: 0 8%;
+    margin: 0 50px;
     margin-bottom: 150px;
     letter-spacing: 0.02em;
     line-height: 24px;
+  }
+
+  .upperContainer {
+    display: flex;
   }
 
   .aboutSubtitle {
@@ -39,9 +43,9 @@ const AboutContainer = styled.div`
   }
 
   .upperImg {
-    width: 40%;
-    float: right;
-    margin-left: 2%;
+    width: 432px;
+    height: 416px;
+    margin-left: 41px;
     border: 2.5px solid #4BBFC6;
     border-radius: 0 20px;
   }
@@ -52,19 +56,27 @@ const AboutContainer = styled.div`
     font-weight: 600;
     padding-right: 20px;
     background: url(${exportIcon}) right center no-repeat;
+    text-underline-offset: 4px;
   }
 
-  @media (max-width: 890px) {
+  @media (max-width: 1364px) {
     .upperImg {
-      width: 296px;
+      width: 300px;
+      height: 353px;
       margin-left: 37px;
+    }
+    .secondParagraph {
+      display: none;
     }
   }
 
-  @media (max-width: 540px) {
+  @media (max-width: 767px) {
     .aboutHeader {
       color: #FFFFFF;
       background: rgba(0, 95, 103, 0.85);
+      height: 141px;
+      line-height: 141px;
+      margin: 132px 0 182px 0;
     }
     .upperImg {
       position: absolute;
@@ -79,15 +91,15 @@ const AboutContainer = styled.div`
       object-fit: fill;
       // display: none;
     }
-    .aboutHeader {
-      margin: 160px 0 190px 0;
-    }
   }
 
-  @media (min-width: 1300px) {
+  @media (min-width: 1365px) {
     .aboutBody {
-      width: 1080px;
+      width: 1265px;
       margin: 0 auto 150px auto;
+    }
+    .lowerContainer {
+      display: none;
     }
   }
 `;
@@ -97,11 +109,21 @@ const AboutView = () => {
     <AboutContainer>
       <div className='aboutHeader'>About</div>
       <div className='aboutBody'>
+        <div className='upperContainer'>
+          <div className='upperContentContainer'>
+            <div className='aboutSubtitle'>{aboutData.upperTitle}</div>
+            <div className='textParagraph'>{ReactHtmlParser(aboutData.upperText)}</div>
+            <div className='secondParagraph'>
+              <div className='aboutSubtitle'>{aboutData.lowerTitle}</div>
+              <div className='textParagraph'>{ReactHtmlParser(aboutData.lowerText)}</div>
+            </div>
+          </div>
           <img className='upperImg' src={aboutImg} alt="about_img" />
-          <div className='aboutSubtitle'>{aboutData.upperTitle}</div>
-          <div className='textParagraph'>{ReactHtmlParser(aboutData.upperText)}</div>
+        </div>
+        <div className='lowerContainer'>
           <div className='aboutSubtitle'>{aboutData.lowerTitle}</div>
           <div className='textParagraph'>{ReactHtmlParser(aboutData.lowerText)}</div>
+        </div>
       </div>
     </AboutContainer>
   )

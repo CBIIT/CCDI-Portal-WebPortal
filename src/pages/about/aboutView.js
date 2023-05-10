@@ -91,6 +91,9 @@ const AboutContainer = styled.div`
       object-fit: fill;
       // display: none;
     }
+    .aboutBody {
+      margin: 0 6.5%;
+    }
   }
 
   @media (min-width: 1365px) {

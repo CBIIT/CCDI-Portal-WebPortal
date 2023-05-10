@@ -91,7 +91,7 @@ const AboutContainer = styled.div`
       border-radius: 0;
     }
     .aboutBody {
-      margin: 0 6.5%;
+      margin: 0 6.5% 150px 6.5%;
     }
   }
 

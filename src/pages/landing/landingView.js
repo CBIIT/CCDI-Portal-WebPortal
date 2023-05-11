@@ -455,7 +455,7 @@ const ResourcesContainer = styled.div`
     }
 
     .resourceSubtitleText {
-      margin: 10px 0 10px 170px;
+      margin: 10px 0 10px 160px;
       font-family: Poppins;
       font-weight: bold;
       font-size: 17px;

@@ -1,4 +1,9 @@
 import env from '../utils/env';
+import instagramIcon from '../assets/footer/Instgram_Logo.svg';
+import twitterIcon from '../assets/footer/Twitter_Logo.svg';
+import facebookIcon from '../assets/footer/Facebook_Logo.svg';
+import youtubeIcon from '../assets/footer/Youtube_Logo.svg';
+import linkedInIcon from '../assets/footer/LinkedIn_Logo.svg';
 // footerLogoImage ideal image size 310x80 px
 
 export default {
@@ -14,37 +19,25 @@ export default {
   // Ideal size for icon is 20x20 px
   link_sections: [
     {
-      title: 'More Information',
+      title: 'About',
       items: [
         {
-          text: 'About CCDI Portal',
+          text: 'About CCDI Hub',
           link: '/about',
         },
         {
           text: 'About CCDI',
-          link: '/ccdi',
+          link: 'https://www.cancer.gov/research/areas/childhood/childhood-cancer-data-initiative',
         },
         {
-          text: 'Contact CCDI Portal',
-          link: 'nciofficeofdatasharing@mail.nih.gov?Subject=Index%20of%20NCI%20Studies%20feedback',
-        },
-        {
-          text: 'Resources',
-          link: '/home',
+          text: 'Contact CCDI Hub',
+          link: 'mailto:NCIChildhoodCancerDataInitiative@mail.nih.gov',
         },
       ],
     },
     {
-      title: 'NIH Policies',
+      title: 'Policies',
       items: [
-        {
-          text: 'Policies',
-          link: 'https://www.cancer.gov/policies',
-        },
-        {
-          text: 'Disclaimer',
-          link: 'https://www.cancer.gov/policies/disclaimer',
-        },
         {
           text: 'Accessibility',
           link: 'https://www.cancer.gov/policies/accessibility',
@@ -54,10 +47,46 @@ export default {
           link: 'https://www.cancer.gov/policies/foia',
         },
         {
-          text: 'HHS Vulnerability Disclosure',
+          text: 'Privacy & Security',
+          link: 'https://www.cancer.gov/policies/privacy-security',
+        },
+        {
+          text: 'Disclaimer',
+          link: 'https://www.cancer.gov/policies/disclaimer',
+        },
+        {
+          text: 'Vulnerability Disclosure',
           link: 'https://www.hhs.gov/vulnerability-disclosure-policy/index.html',
         },
       ],
+    },
+  ],
+  followUs_links: [
+    {
+      img: instagramIcon,
+      link: 'https://www.instagram.com/nationalcancerinstitute/',
+    },
+    {
+      img: twitterIcon,
+      link: 'https://twitter.com/thenci',
+    },
+    {
+      img: facebookIcon,
+      link: 'https://www.facebook.com/cancer.gov',
+    },
+    {
+      img: youtubeIcon,
+      link: 'https://www.youtube.com/NCIgov',
+    },
+    {
+      img: linkedInIcon,
+      link: 'https://www.linkedin.com/company/nationalcancerinstitute/',
+    }
+  ],
+  contact_links: [
+    {
+      text: 'NCIChildhoodCancerDataInitiative@mail.nih.gov',
+      link: 'mailto:NCIChildhoodCancerDataInitiative@mail.nih.gov',
     },
   ],
   global_footer_links: [

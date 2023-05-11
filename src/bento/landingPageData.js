@@ -1,109 +1,153 @@
 import gql from 'graphql-tag';
-import landingImg from '../assets/landing/Landing_Intro_Pic.png'
-import updateImg1 from '../assets/landing/Updates-1.jpg';
-import updateImg2 from '../assets/landing/Updates-2.jpg';
-import updateImg3 from '../assets/landing/Updates-3.jpg';
+import landingImg from '../assets/landing/Hero_1.png'
+import aboutImg from '../assets/landing/About_1.png';
+import wheel1 from '../assets/landing/ccdc_carousel.svg';
+import wheel2 from '../assets/landing/civic_carousel.svg';
+import wheel3 from '../assets/landing/mci_carousel.svg';
+import wheel4 from '../assets/landing/mtp_carousel.svg';
+import wheel5 from '../assets/landing/nccr_carousel.svg';
+import wheel6 from '../assets/landing/cgc_carousel.svg';
+import wheel7 from '../assets/landing/dbgap_carousel.svg';
 
 export const introData = {
   landingIntroPic: landingImg,
-  introTitle1: 'LOREM IPSUM DOLOR SIT AMET',
-  introTitle2: 'Discover one access point for CCDI data resources and tools',
+  introTitle1: 'Discover CCDI applications, data, resources, and other tools',
+  introTitle2: 'Explore the CCDI Hub by selecting an available resource on the Hub Wheel',
   introTitle3: 'ABOUT CCDI HUB',
   introButtonTitle: 'ABOUT CCDI',
 };
 
 export const titleData = {
   latestUpdatesTitle: 'Latest Updates',
-  resourceTitle: 'Resources',
-  applicationsTitle: 'APPLICATIONS',
-  cloudResourcesTitle: 'CLOUD RESOURCES',
+  resourceTitle: 'Explore',
+  applicationsTitle: 'CCDI APPLICATIONS',
+  cloudResourcesTitle: 'OTHER RESOURCES',
   aboutTitle: 'About the CCDI Community',
 };
 
 export const statsData = [
   {
-    num: '33',
-    title: 'CCDC',
-    detail: 'RESOURCES',
+    num: '222',
+    title: 'Cataloged Datasets',
+    detail: 'Childhood Cancer Data Catalog',
   },
   {
-    num: '1.4M',
-    title: 'MTP',
-    detail: 'DISEASE/TARGET COMBINATIONS',
+    num: '1,145',
+    title: 'Participants',
+    detail: 'Molecular Characterization Initiative for Childhood Cancer',
   },
   {
-    num: '512',
-    title: 'MTP',
-    detail: 'PEDIATRIC MOLECULAR TARGETS',
+    num: '51,618',
+    title: 'Potential Pediatric Molecular Targets',
+    detail: 'Molecular Targets Platform',
   },
   {
-    num: '158',
-    title: 'CCDC',
-    detail: 'PEDIATRIC CANCER SPECIFIC DATASETS',
-  }
-];
-
-export const latestUpdatesData = [
-  {
-    img: updateImg1,
-    title: 'NEW RELEASE FROM CCDC LOREM IPSUM DOLOR SIT AMET CON',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna',
-  },
-  {
-    img: updateImg2,
-    title: 'CCDI IS ON THE NEWS!',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna',
-  },
-  {
-    img: updateImg3,
-    title: 'LEARN MORE ABOUT LOREM IPSUM DOLOR SIT AMET CON',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna',
+    num: '1,496,577',
+    title: 'Reported Cases Under Age 40<br>(1995-2020)',
+    detail: 'National Childhood Cancer Registry Explorer',
   },
 ];
 
 export const resourcesAppliationsListData = [
   {
+    id: 'ccdc',
     title: 'Childhood Cancer Data Catalog',
-    subtitle: '(CCDC)',
-    content:'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    subtitle: 'CCDC',
+    content: 'A searchable inventory of childhood cancer resources.',
+    link: 'https://datacatalog.ccdi.cancer.gov',
   },
   {
-    title: 'Clinical Interpretation of Variants in Cancer (civicdb.org)',
-    subtitle: '(CIViC)',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    id: 'civic',
+    title: 'Clinical Interpretation of Variants in Cancer',
+    subtitle: 'CIViC',
+    content: 'An open access, open source, community-driven web resource for clinical interpretations of mutations related to cancer.',
+    link: 'https://civicdb.org',
   },
   {
-    title: 'Molecular Characterization Initiative for Childhood Cancers - NCI',
-    subtitle: '(MCI Data)',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    id: 'mci',
+    title: 'Molecular Characterization Initiative for Childhood Cancers',
+    subtitle: 'MCI',
+    content: 'A program providing molecular testing for children, adolescents, and young adults with certain cancer types.',
+    link: 'https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs002790.v2.p1',
   },
   {
+    id: 'mtp',
     title: 'Molecular Targets Platform',
-    subtitle: '(MTP)',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    subtitle: 'MTP',
+    content: 'An instance of the Open Targets Platform with a focus on childhood cancer data that allows users to browse and identify associations between molecular targets, diseases, and drugs.',
+    link: 'https://moleculartargets.ccdi.cancer.gov',
   },
   {
+    id: 'nccr',
     title: 'National Childhood Cancer Registry Explorer',
-    subtitle: '(NCCR Explorer)',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    subtitle: 'NCCR Explorer',
+    content: 'A tool to browse demographic, incidence, and survival statistics for cancers in children, adolescent, and young adults.',
+    link: 'https://nccrexplorer.ccdi.cancer.gov',
   },
 ];
 
 export const resourcesCloudListData = [
   {
-    title: 'Seven Bridges Cancer Genomics Cloud',
-    subtitle: '(SB–CGC)',
-    content: 'Explore and analyze large datasets alongside secure and scalable analytical resources for large-scale computational research.',
+    id: 'cgc',
+    title: 'Cancer Genomics Cloud',
+    subtitle: 'CGC',
+    content: 'A cloud-based platform to access and analyze cancer research data.',
+    link: 'https://www.cancergenomicscloud.org',
   },
   {
+    id: 'dbgap',
     title: 'Database of Genotypes and Phenotypes',
-    subtitle: '(dbGap)',
-    content: 'Developed to archive and distribute the data and results from studies that have investigated the interaction of genotype and phenotype in Humans.',
+    subtitle: 'dbGaP',
+    content: 'A database to store and distribute data and results from studies examining the interaction of genotypes and phenotypes.',
+    link: 'https://www.ncbi.nlm.nih.gov/gap',
+  },
+];
+
+export const aboutContainerData = {
+  img: aboutImg,
+  aboutButtonlist: ['CCDI HUB', 'CCDI', 'MCI'],
+  aboutList: {
+      'CCDI HUB': 'CCDI HUB',
+      'CCDI': 'HELL0',
+      'MCI': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque.',
+  },
+};
+
+export const carouselList = [
+  {
+    img: wheel6,
+    content: 'Cancer Genomics Cloud',
+    link: 'https://www.cancergenomicscloud.org',
   },
   {
-    title: 'St. Jude Cloud',
-    subtitle: '(St. Jude)',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    img: wheel1,
+    content: 'Childhood Cancer Data Catalog',
+    link: 'https://datacatalog.ccdi.cancer.gov',
+  },
+  {
+    img: wheel2,
+    content: 'Clinical Interpretation of Variants in Cancer',
+    link: 'https://civicdb.org',
+  },
+  {
+    img: wheel7,
+    content: 'Database of Genotypes and Phenotypes',
+    link: 'https://www.ncbi.nlm.nih.gov/gap'
+  },
+  {
+    img: wheel3,
+    content: 'Molecular Characterization Initiative for Childhood Cancer',
+    link: 'https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs002790.v2.p1',
+  },
+  {
+    img: wheel4,
+    content: 'Molecular Targets Platform',
+    link: 'https://moleculartargets.ccdi.cancer.gov',
+  },
+  {
+    img: wheel5,
+    content: 'National Childhood Cancer Registry Explorer',
+    link: 'https://nccrexplorer.ccdi.cancer.gov',
   },
 ];
 

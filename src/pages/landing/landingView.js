@@ -275,8 +275,9 @@ const StatsContainer = styled.div`
       font-family: Poppins;
       font-weight: 300;
       font-size: 19px;
-      line-height: 23px;
+      line-height: 21px;
       text-align: left;
+      margin-bottom: 2px;
     }
 
     .statDetail {
@@ -284,7 +285,7 @@ const StatsContainer = styled.div`
       font-family: Poppins;
       font-weight: 600;
       font-size: 19px;
-      line-height: 23px;
+      line-height: 21px;
       text-align: left;
     }
 `;
@@ -308,7 +309,7 @@ const LatestUpdatesContainer = styled.div`
       margin: 16px;
       width: 367px;
       height: 476px;
-      background-color: #05555C;
+      background-color: #044249;
       box-shadow: 0px 0px 16px #1B1C1C80;
       border-radius: 0px 20px;
     }
@@ -323,16 +324,16 @@ const LatestUpdatesContainer = styled.div`
     }
 
     .latestUpdatesListTitle {
-      color: #72F9FB;
+      color: #88DCDD;
       padding: 14px 23px 0 23px;
       font-family: Poppins;
       font-weight: 600;
       font-size: 14px;
-      height: 57px
+      height: 57px;
     }
 
     .latestUpdatesListTitle:hover{
-      color: #88DCDD;
+      color: #72F9FB;
       cursor: pointer;
     }
 

@@ -621,7 +621,7 @@ const LandingView = () => {
                 const updatekey = `update_${updateidx}`;
                 return (
                   <div className='latestUpdatesListItem' key={updatekey}>
-                    <a href={`/news#${updateItem.id}`} ><div className='latestUpdatesListItemPic' style={{ backgroundImage: `url(${updateItem.updateImg})` }} /></a>
+                    <a href={`/news#${updateItem.id}`} ><div className='latestUpdatesListItemPic' style={{ backgroundImage: `url(${updateItem.updateImg})` }} /><span style={{display:'none'}}>latestUpdates text</span></a>
                     <a className='latestUpdatesListTitleContainer' href={`/news#${updateItem.id}`}><div className='latestUpdatesListTitle'>{updateItem.title}</div></a>
                     <div className='latestUpdatesListContent'>
                       <span className='latestUpdatesTextContent'>{ReactHtmlParser(updateItem.slug)}</span>

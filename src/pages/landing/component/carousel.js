@@ -354,10 +354,10 @@ const Carousel = () => {
                                 const key = `carousel_${idx}_last_clone`;
                                 return (
                                     <div key={key} className='carousel__item'>
-                                        <div className='itemImgBox'><img className='itemImg' src={item.img} alt="" width="243px" height="102px" /></div>
+                                        <div className='itemImgBox'><img className='itemImg' src={item.img} alt={key} width="243px" height="102px" /></div>
                                         <a className='listItemContent' href={item.link} target="_blank" rel="noopener noreferrer">{item.content}</a>
                                         <a className="exportContainer" href={item.link} target="_blank" rel="noopener noreferrer">
-                                            <img className='exportIcon' src={exportIcon} alt=""/>
+                                            <img className='exportIcon' src={exportIcon} alt="exportIcon"/>
                                         </a>
                                     </div>
                                 )

@@ -136,7 +136,10 @@ const Header = () => {
             && (
               <div className='searchBarContainer'>
                 <div className='searchBar'>
-                  <SearchInput type="search" value={localText} placeholder="" onChange={handleTextInputChange} onKeyPress={handleKeyPress} />
+                  <label>
+                    <div style={{display:"none"}}>search</div>
+                    <SearchInput type="search" value={localText} placeholder="" onChange={handleTextInputChange} onKeyPress={handleKeyPress} />
+                  </label>
                 </div>
                 <div className='searchButton'  onClick={handleSearch}>Search</div>
               </div>

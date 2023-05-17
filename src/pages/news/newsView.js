@@ -75,7 +75,7 @@ const NewsContainer = styled.div`
   .newsItem {
     display: flex;
     width: 1047px;
-    height: 248px;
+    min-height: 248px;
     border: 1.5px solid transparent;
     border-radius: 0px 20px;
     margin: 0 auto;
@@ -118,6 +118,7 @@ const NewsContainer = styled.div`
     font-size: 16px;
     line-height: 24px;
     color: #000000;
+    margin-bottom: 48px;
     a {
       color: #455299;
       font-family: 'Inter';

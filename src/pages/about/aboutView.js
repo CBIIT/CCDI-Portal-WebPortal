@@ -1,12 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import {aboutData} from '../../bento/aboutPageData';
-import aboutImg from '../../assets/about/About_Img.png';
+import aboutImg from '../../assets/about/About_Img_Large.png';
 import exportIcon from '../../assets/about/Export_Icon.svg';
 import ReactHtmlParser from 'html-react-parser';
 
 const AboutContainer = styled.div`
-  width: 1440px;
   margin: 0 auto;
 
   .aboutHeader {
@@ -18,13 +17,18 @@ const AboutContainer = styled.div`
     text-align: center;
   }
   .aboutBody {
-    width: 1080px;
     font-family: Inter;
     font-weight: 400;
     font-size: 16px;
     color: #000000;
-    margin: 0 auto;
-    margin-bottom: 50px;
+    margin: 0 50px;
+    margin-bottom: 150px;
+    letter-spacing: 0.02em;
+    line-height: 24px;
+  }
+
+  .upperContainer {
+    display: flex;
   }
 
   .aboutSubtitle {
@@ -34,31 +38,17 @@ const AboutContainer = styled.div`
     color: #007A85;
   }
 
-  .aboutBodyUpperContainer {
-    display: flex;
-  }
-
-  .upperText {
-    width: 671px;
-    margin-right: 42px;
-    letter-spacing: 0.02em;
-    line-height: 24px;
-  }
-
   .textParagraph {
     margin: 25px 0 50px 0;
   }
 
   .upperImg {
-    background-image: url(${aboutImg});
-    width: 367px;
-    height: 438px;
-  }
-
-  .aboutBodyLowerContainer {
-    margin: 64px 0 120px 0;
-    letter-spacing: 0.02em;
-    line-height: 27px;
+    width: 432px;
+    height: 416px;
+    margin-left: 41px;
+    border: 2.5px solid #4BBFC6;
+    border-radius: 0 20px;
+    object-fit: cover;
   }
 
   .aboutLink {
@@ -67,6 +57,52 @@ const AboutContainer = styled.div`
     font-weight: 600;
     padding-right: 20px;
     background: url(${exportIcon}) right center no-repeat;
+    text-underline-offset: 4px;
+  }
+
+  @media (max-width: 1364px) {
+    .upperImg {
+      width: 300px;
+      height: 353px;
+      margin-left: 37px;
+    }
+    .secondParagraph {
+      display: none;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .aboutHeader {
+      color: #FFFFFF;
+      background: rgba(0, 95, 103, 0.85);
+      height: 141px;
+      line-height: 141px;
+      margin: 120px 0 182px 0;
+    }
+    .upperImg {
+      position: absolute;
+      width: 100%;
+      height: 406px;
+      left: 0;
+      top: 130px;
+      margin: 0;
+      z-index: -1;
+      border: none;
+      border-radius: 0;
+    }
+    .aboutBody {
+      margin: 0 6.5% 150px 6.5%;
+    }
+  }
+
+  @media (min-width: 1365px) {
+    .aboutBody {
+      width: 1265px;
+      margin: 0 auto 150px auto;
+    }
+    .lowerContainer {
+      display: none;
+    }
   }
 `;
 
@@ -75,14 +111,20 @@ const AboutView = () => {
     <AboutContainer>
       <div className='aboutHeader'>About</div>
       <div className='aboutBody'>
-        <div className='aboutBodyUpperContainer'>
-          <div className='upperText'>
+        <div className='upperContainer'>
+          <div className='upperContentContainer'>
             <div className='aboutSubtitle'>{aboutData.upperTitle}</div>
             <div className='textParagraph'>{ReactHtmlParser(aboutData.upperText)}</div>
-            <div className='aboutSubtitle'>{aboutData.lowerTitle}</div>
-            <div className='textParagraph'>{ReactHtmlParser(aboutData.lowerText)}</div>
+            <div className='secondParagraph'>
+              <div className='aboutSubtitle'>{aboutData.lowerTitle}</div>
+              <div className='textParagraph'>{ReactHtmlParser(aboutData.lowerText)}</div>
+            </div>
           </div>
-          <div className='upperImg'></div>
+          <img className='upperImg' src={aboutImg} alt="about_img" />
+        </div>
+        <div className='lowerContainer'>
+          <div className='aboutSubtitle'>{aboutData.lowerTitle}</div>
+          <div className='textParagraph'>{ReactHtmlParser(aboutData.lowerText)}</div>
         </div>
       </div>
     </AboutContainer>

@@ -1,5 +1,5 @@
 import React from "react";
-import { CssBaseline } from '@material-ui/core';
+import { withStyles, CssBaseline } from '@material-ui/core';
 import { Route, Routes, } from 'react-router-dom';
 import Header from '../Header/CustomizedHeader';
 import NavBar from '../NavBar/CustomizedNavBar';
@@ -33,4 +33,12 @@ const Layout = () => {
     )
 }
 
-export default Layout;
+const styles = (theme) => ({
+  '@global': {
+    body:{
+      backgroundColor:"#ffffff"
+    }
+  },
+});
+
+export default withStyles(styles)(Layout);

@@ -326,9 +326,10 @@ const LatestUpdatesContainer = styled.div`
     .latestUpdatesListTitle {
       color: #88DCDD;
       padding: 14px 23px 0 23px;
+      margin-bottom: 10px;
       font-family: Poppins;
-      font-weight: 600;
-      font-size: 14px;
+      font-weight: 500;
+      font-size: 16px;
       height: 57px;
     }
 
@@ -343,6 +344,7 @@ const LatestUpdatesContainer = styled.div`
       font-family: Inter;
       font-weight: 400;
       font-size: 16px;
+      line-height: 22px;
     }
 
     .latestUpdatesTextContent {

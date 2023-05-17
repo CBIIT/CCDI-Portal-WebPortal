@@ -6,7 +6,7 @@ const Nav = styled.div`
     top: 0;
     left: 0;
     width: 100%;
-    background: #fafafa;
+    background: #ffffff;
     box-shadow: -0.1px 6px 9px -6px rgba(0, 0, 0, 0.5);;
     z-index: 1100;
     position: relative

@@ -14,7 +14,7 @@ const LandingViewContainer = styled.div`
     font-family: Poppins;
     position: relative;
     background: white;
-    height: 2870px;
+    height: 2980px;
 `;
 
 const BackgroundFirst = styled.div`
@@ -506,8 +506,8 @@ const ResourcesContainer = styled.div`
   }
 
     .resourceListItemLogo {
-      width: 133px;
-      height: 125px;
+      width: 169px;
+      height: 159px;
       border-radius: 20px;
       display: flex;
       color: #FFFFFF;

@@ -330,6 +330,7 @@ const LatestUpdatesContainer = styled.div`
       font-family: Poppins;
       font-weight: 500;
       font-size: 16px;
+      line-height: 18px;
       height: 57px;
     }
 

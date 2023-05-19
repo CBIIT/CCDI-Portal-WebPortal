@@ -320,7 +320,7 @@ const Footer = () => {
                   const followkey = `follow_${followidx}`;
                   return (
                     <div className='followItem' key={followkey}>
-                      <a href={followItem.link} target="_blank" rel="noopener noreferrer"><img className='followItemImg' src={followItem.img} alt="facebookIcon" /></a>
+                      <a href={followItem.link} target="_blank" rel="noopener noreferrer"><img className='followItemImg' src={followItem.img} alt={followItem.description} /></a>
                     </div>
                   )
                 })

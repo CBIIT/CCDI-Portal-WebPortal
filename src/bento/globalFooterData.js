@@ -63,22 +63,27 @@ export default {
   ],
   followUs_links: [
     {
+      description: 'Instagram icon',
       img: instagramIcon,
       link: 'https://www.instagram.com/nationalcancerinstitute/',
     },
     {
+      description: 'Twitter icon',
       img: twitterIcon,
       link: 'https://twitter.com/thenci',
     },
     {
+      description: 'Facebook icon',
       img: facebookIcon,
       link: 'https://www.facebook.com/cancer.gov',
     },
     {
+      description: 'YouTube icon',
       img: youtubeIcon,
       link: 'https://www.youtube.com/NCIgov',
     },
     {
+      description: 'LinkedIn icon',
       img: linkedInIcon,
       link: 'https://www.linkedin.com/company/nationalcancerinstitute/',
     }

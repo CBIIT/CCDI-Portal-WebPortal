@@ -1,13 +1,19 @@
-import newsCCDC from '../assets/news/News_CCDC.png';
-import newsMolecular from '../assets/news/News_Molecular.png';
-import newsSymposium from '../assets/news/News_Symposium.png';
-import newsMolecularDetail from '../assets/news/News_MCI_Detail.png';
-import newsSymposiumDetail from '../assets/news/News_Symposium_Detail.png';
 import updateImgCCDC from '../assets/landing/Updates_CCDC.png';
 import updateImgMolecular from '../assets/landing/Updates_Molecular.png';
 import updateImgSymposium from '../assets/landing/Updates_Symposium.png';
+import updateImgMTP from '../assets/news/News_MTP.png';
 
 export const newsList = [
+    {
+        id: 'mtp',
+        title: 'Molecular Targets Platform releases data updates and enhanced features',
+        date: 'TBD, but estimated 5/16/23 and 5/31/23',
+        slug: 'The latest update to the Molecular Targets Platform includes new data and enhanced features. Learn about the recent release.',
+        highlight: '<p>The <a href="https://moleculartargets.ccdi.cancer.gov/" target="_blank" rel="noopener noreferrer">Molecular Targets Platform</a> (MTP) expanded with new data and enhanced features. Researchers will find new and updated data from the Pediatric Brain Tumor Atlas and TARGET cohorts, including sequencing and methylation data. Improved features include enhanced gene expression graphs for childhood cancer data and a new widget to capture methylation data. Finally, the latest coding updates ensure that the data can be easily viewed and queried. <a href="https://moleculartargets.ccdi.cancer.gov/about" target="_blank" rel="noopener noreferrer">Learn more about how the MTP is helping advance childhood cancer research</a>.</p>',
+        fullText: '',
+        type: 'Application Updates',
+        img: updateImgMTP,
+    },
     {
         id: 'ccdc',
         title: 'Childhood Cancer Data Catalog April Update ',
@@ -44,9 +50,7 @@ export const newsList = [
         +'<ul><li><p>Selecting an email point of contact for resource with multiple identified contacts will now only mail to the selected contact.&nbsp;</p></li><li><p>Selecting a point of contact that links to a website will now open in a new tab and not in an email.&nbsp;&nbsp;&nbsp;</p></li></ul>'
         ,
         type: 'Application Updates',
-        img: newsCCDC,
-        updateImg: updateImgCCDC,
-        detailImg: '',
+        img: updateImgCCDC,
     },
     {
         id: 'molecular',
@@ -63,9 +67,7 @@ export const newsList = [
         +'<p>&nbsp;</p>'
         +'<p>If a child or AYA meets the above criteria, they can get more information on how to participate by talking with their Children &#39;s Oncology Group&ndash;affiliated doctor. &nbsp</p>',
         type: 'Application Updates',
-        img: newsMolecular,
-        updateImg: updateImgMolecular,
-        detailImg: newsMolecularDetail,
+        img: updateImgMolecular,
     },
     {
         id: 'symposium',
@@ -79,8 +81,6 @@ export const newsList = [
         +'<p>&nbsp;</p>'
         +'<p><a href="https://www.cancer.gov/research/areas/childhood/childhood-cancer-data-initiative/events-webinars/symposium-0" rel="noreferrer noopener" target="_blank">View the event presentation</a> and <a href="https://videocast.nih.gov/watch=49171" rel="noreferrer noopener" target="_blank">watch the recording</a>.&nbsp;</p>',
         type: 'News & Other',
-        img: newsSymposium,
-        updateImg: updateImgSymposium,
-        detailImg: newsSymposiumDetail,
+        img: updateImgSymposium,
     },
 ]

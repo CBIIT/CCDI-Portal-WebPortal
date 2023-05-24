@@ -2,12 +2,13 @@ import updateImgCCDC from '../assets/landing/Updates_CCDC.png';
 import updateImgMolecular from '../assets/landing/Updates_Molecular.png';
 import updateImgSymposium from '../assets/landing/Updates_Symposium.png';
 import updateImgMTP from '../assets/news/News_MTP.png';
+import updateImgMolecularCharacterization from '../assets/news/News_Molecular_Characterization.png';
 
 export const newsList = [
     {
         id: 'mtp',
         title: 'Molecular Targets Platform releases data updates and enhanced features',
-        date: 'TBD, but estimated 5/16/23 and 5/31/23',
+        date: 'JUNE 2, 2023',
         slug: 'The latest update to the Molecular Targets Platform includes new data and enhanced features. Learn about the recent release.',
         highlight: '<p>The <a href="https://moleculartargets.ccdi.cancer.gov/" target="_blank" rel="noopener noreferrer">Molecular Targets Platform</a> (MTP) expanded with new data and enhanced features. Researchers will find new and updated data from the Pediatric Brain Tumor Atlas and TARGET cohorts, including sequencing and methylation data. Improved features include enhanced gene expression graphs for childhood cancer data and a new widget to capture methylation data. Finally, the latest coding updates ensure that the data can be easily viewed and queried. <a href="https://moleculartargets.ccdi.cancer.gov/about" target="_blank" rel="noopener noreferrer">Learn more about how the MTP is helping advance childhood cancer research</a>.</p>',
         fullText: '',
@@ -17,7 +18,7 @@ export const newsList = [
     {
         id: 'ccdc',
         title: 'Childhood Cancer Data Catalog update includes new resource',
-        date: 'May 17, 2023',
+        date: 'MAY 17, 2023',
         slug: 'The Cancer Dependency Map provides open access to tools that can aid drug target and biomarker discovery.',
         highlight: '<p>The CCDI Childhood Cancer Data Catalog (CCDC) now includes the Cancer Dependency Map, which provides open access to analytical and visualization tools related to key cancer dependencies. These tools can be used in the discovery of drug targets and biomarkers. In addition to this, six existing CCDC resources have been updated.</p><p><a href="https://datacatalog.ccdi.cancer.gov/" rel="noreferrer noopener" target="_blank">Access the catalog today</a>.</p>',
         fullText: '<p>The National Cancer Institute is pleased to announce an update to the Childhood Cancer Data Catalog website: <a href="https://datacatalog.ccdi.cancer.gov/" rel="noreferrer noopener" target="_blank">https://datacatalog.ccdi.cancer.gov/</a>.&nbsp;&nbsp;</p>'
@@ -51,6 +52,16 @@ export const newsList = [
         ,
         type: 'Application Updates',
         img: updateImgCCDC,
+    },
+    {
+        id: 'molecularcharacterization',
+        title: 'Molecular Characterization and Clinical Data from Multiple Organizations Released',
+        date: 'MAY 12, 2023',
+        slug: 'Pediatric brain tumor data from several organizations are available pre-publication and without embargo. ',
+        highlight: '<p>CCDI has facilitated the release of data from children and young adults diagnosed with pediatric brain tumors and other solid and hematologic malignancies. The data was collected from the Children’s Brain Tumor Network, the Pacific Pediatric Neuro-Oncology Consortium, and the Children’s Hospital of Philadelphia Division for Genomic Diagnostics. They include tumor and germline WGS, RNA-Seq, Clinical Panel Sequencing, and other omics and molecular data. <a href="https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs002517.v1.p1" rel="noreferrer noopener" target="_blank">Access these data through dbGaP</a>.</p>',
+        fullText: '',
+        type: 'News & Other',
+        img: updateImgMolecularCharacterization,
     },
     {
         id: 'molecular',

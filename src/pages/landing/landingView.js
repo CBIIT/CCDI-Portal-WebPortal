@@ -524,7 +524,7 @@ const ResourcesContainer = styled.div`
 
     .resourceListItemText {
       margin: 5px 0 0 20px;
-      width: 396px;
+      width: 353px;
       height: 125px;
     }
 

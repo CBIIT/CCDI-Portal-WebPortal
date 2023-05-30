@@ -326,7 +326,7 @@ const LatestUpdatesContainer = styled.div`
     .latestUpdatesListTitle {
       color: #88DCDD;
       padding: 14px 23px 0 23px;
-      margin-bottom: 10px;
+      margin-bottom: 7px;
       font-family: Poppins;
       font-weight: 500;
       font-size: 16px;
@@ -346,6 +346,7 @@ const LatestUpdatesContainer = styled.div`
       font-weight: 400;
       font-size: 16px;
       line-height: 22px;
+      letter-spacing: -0.02em;
     }
 
     .latestUpdatesTextContent {
@@ -524,7 +525,7 @@ const ResourcesContainer = styled.div`
 
     .resourceListItemText {
       margin: 5px 0 0 20px;
-      width: 396px;
+      width: 353px;
       height: 125px;
     }
 

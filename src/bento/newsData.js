@@ -6,7 +6,7 @@ import updateImgMolecularCharacterization from '../assets/news/News_Molecular_Ch
 
 export const newsList = [
     {
-        id: 'mtp',
+        id: 'mtp_06022023',
         title: 'Molecular Targets Platform releases data updates and enhanced features',
         date: 'JUNE 2, 2023',
         slug: 'The latest update to the Molecular Targets Platform includes new data and enhanced features. Learn about the recent release.',
@@ -16,7 +16,7 @@ export const newsList = [
         img: updateImgMTP,
     },
     {
-        id: 'ccdc',
+        id: 'ccdc_05172023',
         title: 'Childhood Cancer Data Catalog update includes new resource',
         date: 'MAY 17, 2023',
         slug: 'The Cancer Dependency Map provides open access to tools that can aid drug target and biomarker discovery.',
@@ -54,7 +54,7 @@ export const newsList = [
         img: updateImgCCDC,
     },
     {
-        id: 'molecularcharacterization',
+        id: 'molecularcharacterization_05122023',
         title: 'Molecular Characterization and Clinical Data from Multiple Organizations Released',
         date: 'MAY 12, 2023',
         slug: 'Pediatric brain tumor data from several organizations are available pre-publication and without embargo. ',
@@ -64,7 +64,17 @@ export const newsList = [
         img: updateImgMolecularCharacterization,
     },
     {
-        id: 'molecular',
+        id: 'ccdc_04192023',
+        title: 'Childhood Cancer Data Catalog April Update',
+        date: 'APRIL 19, 2023',
+        slug: 'The update includes one new resource, eight new datasets, and many other changes.',
+        highlight: '<p>The <a href="https://datacatalog.ccdi.cancer.gov/" target="_blank" rel="noopener noreferrer">Childhood Cancer Data Catalog</a> is pleased to announce the addition of the Xena Browser, a powerful online exploration tool that allows users to investigate functional genomic data sets for correlations between genomic and/or phenotypic variables. Also, seven new datasets have been incorporated into eight existing resources.</p><p><a href="https://datacatalog.ccdi.cancer.gov/" rel="noreferrer noopener" target="_blank">Explore the Catalog</a> to check out all the changes.</p>',
+        fullText: '',
+        type: 'Application Updates',
+        img: updateImgCCDC,
+    },
+    {
+        id: 'molecular_04052023',
         title: 'Molecular Characterization Initiative releases initial data',
         date: 'APRIL 5, 2023',
         slug: 'Genomics and clinical data for MCI participants is housed in NCI’s Cancer Data Service and accessible through CGC.',
@@ -81,7 +91,7 @@ export const newsList = [
         img: updateImgMolecular,
     },
     {
-        id: 'symposium',
+        id: 'symposium_03242023',
         title: 'CCDI Symposium features Data Ecosystem progress',
         date: 'MARCH 24, 2023',
         slug: 'More than 800 people came together to discuss CCDI progress, including in the Data Ecosystem.',

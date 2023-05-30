@@ -1,19 +1,26 @@
-import newsCCDC from '../assets/news/News_CCDC.png';
-import newsMolecular from '../assets/news/News_Molecular.png';
-import newsSymposium from '../assets/news/News_Symposium.png';
-import newsMolecularDetail from '../assets/news/News_MCI_Detail.png';
-import newsSymposiumDetail from '../assets/news/News_Symposium_Detail.png';
 import updateImgCCDC from '../assets/landing/Updates_CCDC.png';
 import updateImgMolecular from '../assets/landing/Updates_Molecular.png';
 import updateImgSymposium from '../assets/landing/Updates_Symposium.png';
+import updateImgMTP from '../assets/news/News_MTP.png';
+import updateImgMolecularCharacterization from '../assets/news/News_Molecular_Characterization.png';
 
 export const newsList = [
     {
+        id: 'mtp',
+        title: 'Molecular Targets Platform releases data updates and enhanced features',
+        date: 'JUNE 2, 2023',
+        slug: 'The latest update to the Molecular Targets Platform includes new data and enhanced features. Learn about the recent release.',
+        highlight: '<p>The <a href="https://moleculartargets.ccdi.cancer.gov/" target="_blank" rel="noopener noreferrer">Molecular Targets Platform</a> (MTP) expanded with new data and enhanced features. Researchers will find new and updated data from the Pediatric Brain Tumor Atlas and TARGET cohorts, including sequencing and methylation data. Improved features include enhanced gene expression graphs for childhood cancer data and a new widget to capture methylation data. Finally, the latest coding updates ensure that the data can be easily viewed and queried. <a href="https://moleculartargets.ccdi.cancer.gov/about" target="_blank" rel="noopener noreferrer">Learn more about how the MTP is helping advance childhood cancer research</a>.</p>',
+        fullText: '',
+        type: 'Application Updates',
+        img: updateImgMTP,
+    },
+    {
         id: 'ccdc',
-        title: 'Childhood Cancer Data Catalog April Update ',
-        date: 'APRIL 19, 2023',
-        slug: 'The update includes one new resource, eight new datasets, and many other changes.',
-        highlight: '<p>The <a href="https://datacatalog.ccdi.cancer.gov/" target="_blank" rel="noopener noreferrer">Childhood Cancer Data Catalog</a> is pleased to announce the addition of the Xena Browser, a powerful online exploration tool that allows users to investigate functional genomic data sets for correlations between genomic and/or phenotypic variables. Also, seven new datasets have been incorporated into eight existing resources.</p><p><a href="https://datacatalog.ccdi.cancer.gov/" rel="noreferrer noopener" target="_blank">Explore the Catalog</a> to check out all the changes.</p>',
+        title: 'Childhood Cancer Data Catalog update includes new resource',
+        date: 'MAY 17, 2023',
+        slug: 'The Cancer Dependency Map provides open access to tools that can aid drug target and biomarker discovery.',
+        highlight: '<p>The CCDI Childhood Cancer Data Catalog (CCDC) now includes the Cancer Dependency Map, which provides open access to analytical and visualization tools related to key cancer dependencies. These tools can be used in the discovery of drug targets and biomarkers. In addition to this, six existing CCDC resources have been updated.</p><p><a href="https://datacatalog.ccdi.cancer.gov/" rel="noreferrer noopener" target="_blank">Access the catalog today</a>.</p>',
         fullText: '<p>The National Cancer Institute is pleased to announce an update to the Childhood Cancer Data Catalog website: <a href="https://datacatalog.ccdi.cancer.gov/" rel="noreferrer noopener" target="_blank">https://datacatalog.ccdi.cancer.gov/</a>.&nbsp;&nbsp;</p>'
         +'<p>&nbsp;</p>'
         +'<p>This update includes the addition of the Xena Browser as a new analytic tool resource.&nbsp; Xena Browser is an online exploration tool that allows users to investigate functional genomic data sets for correlations between genomic and/or phenotypic variables.&nbsp; Additionally, 7 new datasets have been incorporated into 8 existing resources, with 5 of these coming from The Cancer Imaging Archive (TCIA).&nbsp;</p>'
@@ -44,9 +51,17 @@ export const newsList = [
         +'<ul><li><p>Selecting an email point of contact for resource with multiple identified contacts will now only mail to the selected contact.&nbsp;</p></li><li><p>Selecting a point of contact that links to a website will now open in a new tab and not in an email.&nbsp;&nbsp;&nbsp;</p></li></ul>'
         ,
         type: 'Application Updates',
-        img: newsCCDC,
-        updateImg: updateImgCCDC,
-        detailImg: '',
+        img: updateImgCCDC,
+    },
+    {
+        id: 'molecularcharacterization',
+        title: 'Molecular Characterization and Clinical Data from Multiple Organizations Released',
+        date: 'MAY 12, 2023',
+        slug: 'Pediatric brain tumor data from several organizations are available pre-publication and without embargo. ',
+        highlight: '<p>CCDI has facilitated the release of data from children and young adults diagnosed with pediatric brain tumors and other solid and hematologic malignancies. The data was collected from the Children’s Brain Tumor Network, the Pacific Pediatric Neuro-Oncology Consortium, and the Children’s Hospital of Philadelphia Division for Genomic Diagnostics. They include tumor and germline WGS, RNA-Seq, Clinical Panel Sequencing, and other omics and molecular data. <a href="https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs002517.v1.p1" rel="noreferrer noopener" target="_blank">Access these data through dbGaP</a>.</p>',
+        fullText: '',
+        type: 'News & Other',
+        img: updateImgMolecularCharacterization,
     },
     {
         id: 'molecular',
@@ -63,9 +78,7 @@ export const newsList = [
         +'<p>&nbsp;</p>'
         +'<p>If a child or AYA meets the above criteria, they can get more information on how to participate by talking with their Children &#39;s Oncology Group&ndash;affiliated doctor. &nbsp</p>',
         type: 'Application Updates',
-        img: newsMolecular,
-        updateImg: updateImgMolecular,
-        detailImg: newsMolecularDetail,
+        img: updateImgMolecular,
     },
     {
         id: 'symposium',
@@ -79,8 +92,6 @@ export const newsList = [
         +'<p>&nbsp;</p>'
         +'<p><a href="https://www.cancer.gov/research/areas/childhood/childhood-cancer-data-initiative/events-webinars/symposium-0" rel="noreferrer noopener" target="_blank">View the event presentation</a> and <a href="https://videocast.nih.gov/watch=49171" rel="noreferrer noopener" target="_blank">watch the recording</a>.&nbsp;</p>',
         type: 'News & Other',
-        img: newsSymposium,
-        updateImg: updateImgSymposium,
-        detailImg: newsSymposiumDetail,
+        img: updateImgSymposium,
     },
 ]

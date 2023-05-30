@@ -330,7 +330,7 @@ const LatestUpdatesContainer = styled.div`
       font-family: Poppins;
       font-weight: 500;
       font-size: 16px;
-      line-height: 18px;
+      line-height: 16px;
       height: 57px;
     }
 
@@ -625,11 +625,13 @@ const LandingView = () => {
                 const updatekey = `update_${updateidx}`;
                 return (
                   <div className='latestUpdatesListItem' key={updatekey}>
-                    <a href={`/news#${updateItem.id}`} ><div className='latestUpdatesListItemPic' style={{ backgroundImage: `url(${updateItem.updateImg})` }} /><span style={{display:'none'}}>latestUpdates text</span></a>
+                    <a href={`/news#${updateItem.id}`} ><div className='latestUpdatesListItemPic' style={{ backgroundImage: `url(${updateItem.img})` }} /><span style={{display:'none'}}>latestUpdates text</span></a>
                     <a className='latestUpdatesListTitleContainer' href={`/news#${updateItem.id}`}><div className='latestUpdatesListTitle'>{updateItem.title}</div></a>
                     <div className='latestUpdatesListContent'>
                       <span className='latestUpdatesTextContent'>{ReactHtmlParser(updateItem.slug)}</span>
-                      <a className='readMoreContainer' href={`/news#${updateItem.id}`}>Read More</a>
+                      { updateItem.slug.length > 100 && updateItem.slug.length < 110
+                      ? <div><a className='readMoreContainer' href={`/news#${updateItem.id}`} style={{marginLeft: 0}}>Read More</a></div>
+                      : <a className='readMoreContainer' href={`/news#${updateItem.id}`}>Read More</a>}
                     </div>
                   </div>
                 )

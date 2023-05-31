@@ -27,17 +27,17 @@ export const titleData = {
 
 export const statsData = [
   {
-    num: '222',
+    num: '223',
     title: 'Cataloged Datasets',
     detail: 'Childhood Cancer Data Catalog',
   },
   {
-    num: '1,145',
+    num: '1,303',
     title: 'Participants',
     detail: 'Molecular Characterization Initiative for Childhood Cancer',
   },
   {
-    num: '51,618',
+    num: '58,867',
     title: 'Potential Pediatric Molecular Targets',
     detail: 'Molecular Targets Platform',
   },

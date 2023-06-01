@@ -7,7 +7,7 @@ import NavBar from '../Header/components/Navbar';
 
 const HeaderBanner = styled.div`
   width: 100%;
-  box-shadow: 10px 5px 5px red;
+//   box-shadow: 10px 5px 5px red;
 
 //   @media (max-width: 768px) {
 //     .navBarArea {

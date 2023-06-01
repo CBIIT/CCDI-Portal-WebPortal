@@ -184,7 +184,7 @@ const StatsContainer = styled.div`
 
     .leftbox {
       position: absolute;
-      top: -20px;
+      top: 8px;
       left: calc(1440px - 100vw - 200px);
       width: calc(100vw - 1440px + 400px);
       height: 520px;
@@ -205,7 +205,7 @@ const StatsContainer = styled.div`
 
     .rightbox {
       position: absolute;
-      top: -20px;
+      top: 8px;
       height: 520px;
       z-index: 9;
       background: white;

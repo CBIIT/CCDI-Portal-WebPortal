@@ -7,7 +7,6 @@ const SearchBarContainer = styled.div`
     display: flex;
 
     .searchBar {
-      margin-top: 23px;
       margin-left: auto;
       width: 224px;
       height: 32px;
@@ -23,7 +22,6 @@ const SearchBarContainer = styled.div`
       text-align: center;
       color: #FFFFFF;
       background: #007BBD;
-      margin-top: 23px;
       padding: 0 13px;
       border-radius: 0px 5px 5px 0px;
     }
@@ -108,7 +106,7 @@ const SearchBar = () => {
                     <SearchInput type="search" value={localText} placeholder="" onChange={handleTextInputChange} onKeyPress={handleKeyPress} />
                   </label>
                 </div>
-            <div className='searchButton'  onClick={handleSearch}>Search</div>
+            <div className='searchButton' onClick={handleSearch}>Search</div>
         </SearchBarContainer>
   );
 };

@@ -3,7 +3,7 @@ import { withStyles, CssBaseline } from '@material-ui/core';
 import { Route, Routes, } from 'react-router-dom';
 // import Header from '../Header/CustomizedHeader';
 import Header from '../Header/Header';
-import NavBar from '../NavBar/CustomizedNavBar';
+// import NavBar from '../NavBar/CustomizedNavBar';
 import Footer from '../Footer/CustomizedFooter';
 import Home from '../../pages/landing/landingView';
 import About from '../../pages/about/aboutView';
@@ -18,7 +18,7 @@ const Layout = () => {
     <>
       <CssBaseline />
         <Header />
-        <NavBar />
+        {/* <NavBar /> */}
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />

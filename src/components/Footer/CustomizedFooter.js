@@ -291,7 +291,7 @@ const Footer = () => {
               </div>
               <div className={errorClass !== "" ? 'ErrorBorder' : null}>
                 <div className='enterTitle'>
-                  Enter your email address
+                  <label for="email"> Enter your email address</label>
                 </div>
                 <div className={errorClass}>
                   {errorClass !== "" ? <div className='enterTitle'>Enter a valid email address</div> : null}
@@ -320,7 +320,7 @@ const Footer = () => {
                   const followkey = `follow_${followidx}`;
                   return (
                     <div className='followItem' key={followkey}>
-                      <a href={followItem.link} target="_blank" rel="noopener noreferrer"><img className='followItemImg' src={followItem.img} alt="facebookIcon" /></a>
+                      <a href={followItem.link} target="_blank" rel="noopener noreferrer"><img className='followItemImg' src={followItem.img} alt={followItem.description} /></a>
                     </div>
                   )
                 })

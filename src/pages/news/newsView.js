@@ -19,7 +19,7 @@ const NewsContainer = styled.div`
     height: 214px;
     margin: 0 auto;
     background-image: url(${newsImg});
-    // background: linear-gradient(90deg, rgba(5, 85, 92, 0.8) 12.17%, rgba(135, 215, 220, 0.8) 94.57%), url(AdobeStock_461357028);
+    background-color: #87D7DCCC; 
     border-radius: 0px 0px 20px 20px;
     font-family: 'Poppins';
     font-weight: 600;
@@ -75,7 +75,7 @@ const NewsContainer = styled.div`
   .newsItem {
     display: flex;
     width: 1047px;
-    height: 248px;
+    min-height: 248px;
     border: 1.5px solid transparent;
     border-radius: 0px 20px;
     margin: 0 auto;
@@ -118,6 +118,7 @@ const NewsContainer = styled.div`
     font-size: 16px;
     line-height: 24px;
     color: #000000;
+    margin-bottom: 48px;
     a {
       color: #455299;
       font-family: 'Inter';

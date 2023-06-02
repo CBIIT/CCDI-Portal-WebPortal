@@ -14,7 +14,7 @@ const LandingViewContainer = styled.div`
     font-family: Poppins;
     position: relative;
     background: white;
-    height: 2870px;
+    height: 2980px;
 `;
 
 const BackgroundFirst = styled.div`
@@ -275,8 +275,9 @@ const StatsContainer = styled.div`
       font-family: Poppins;
       font-weight: 300;
       font-size: 19px;
-      line-height: 23px;
+      line-height: 21px;
       text-align: left;
+      margin-bottom: 2px;
     }
 
     .statDetail {
@@ -284,7 +285,7 @@ const StatsContainer = styled.div`
       font-family: Poppins;
       font-weight: 600;
       font-size: 19px;
-      line-height: 23px;
+      line-height: 21px;
       text-align: left;
     }
 `;
@@ -308,7 +309,7 @@ const LatestUpdatesContainer = styled.div`
       margin: 16px;
       width: 367px;
       height: 476px;
-      background-color: #05555C;
+      background-color: #044249;
       box-shadow: 0px 0px 16px #1B1C1C80;
       border-radius: 0px 20px;
     }
@@ -323,16 +324,18 @@ const LatestUpdatesContainer = styled.div`
     }
 
     .latestUpdatesListTitle {
-      color: #72F9FB;
+      color: #88DCDD;
       padding: 14px 23px 0 23px;
+      margin-bottom: 7px;
       font-family: Poppins;
-      font-weight: 600;
-      font-size: 14px;
-      height: 57px
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 16px;
+      height: 57px;
     }
 
     .latestUpdatesListTitle:hover{
-      color: #88DCDD;
+      color: #72F9FB;
       cursor: pointer;
     }
 
@@ -342,6 +345,8 @@ const LatestUpdatesContainer = styled.div`
       font-family: Inter;
       font-weight: 400;
       font-size: 16px;
+      line-height: 22px;
+      letter-spacing: -0.02em;
     }
 
     .latestUpdatesTextContent {
@@ -455,7 +460,7 @@ const ResourcesContainer = styled.div`
     }
 
     .resourceSubtitleText {
-      margin: 10px 0 10px 170px;
+      margin: 10px 0 10px 160px;
       font-family: Poppins;
       font-weight: bold;
       font-size: 17px;
@@ -503,8 +508,8 @@ const ResourcesContainer = styled.div`
   }
 
     .resourceListItemLogo {
-      width: 133px;
-      height: 125px;
+      width: 169px;
+      height: 159px;
       border-radius: 20px;
       display: flex;
       color: #FFFFFF;
@@ -520,7 +525,7 @@ const ResourcesContainer = styled.div`
 
     .resourceListItemText {
       margin: 5px 0 0 20px;
-      width: 396px;
+      width: 353px;
       height: 125px;
     }
 
@@ -621,11 +626,13 @@ const LandingView = () => {
                 const updatekey = `update_${updateidx}`;
                 return (
                   <div className='latestUpdatesListItem' key={updatekey}>
-                    <a href={`/news#${updateItem.id}`} ><div className='latestUpdatesListItemPic' style={{ backgroundImage: `url(${updateItem.updateImg})` }} /></a>
+                    <a href={`/news#${updateItem.id}`} ><div className='latestUpdatesListItemPic' style={{ backgroundImage: `url(${updateItem.img})` }} /><span style={{display:'none'}}>latestUpdates text</span></a>
                     <a className='latestUpdatesListTitleContainer' href={`/news#${updateItem.id}`}><div className='latestUpdatesListTitle'>{updateItem.title}</div></a>
                     <div className='latestUpdatesListContent'>
                       <span className='latestUpdatesTextContent'>{ReactHtmlParser(updateItem.slug)}</span>
-                      <a className='readMoreContainer' href={`/news#${updateItem.id}`}>Read More</a>
+                      { updateItem.slug.length > 100 && updateItem.slug.length < 110
+                      ? <div><a className='readMoreContainer' href={`/news#${updateItem.id}`} style={{marginLeft: 0}}>Read More</a></div>
+                      : <a className='readMoreContainer' href={`/news#${updateItem.id}`}>Read More</a>}
                     </div>
                   </div>
                 )

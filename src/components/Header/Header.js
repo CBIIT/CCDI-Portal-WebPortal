@@ -7,13 +7,14 @@ import NavBar from '../Header/components/Navbar';
 
 const HeaderBanner = styled.div`
   width: 100%;
-//   box-shadow: 10px 5px 5px red;
+//   height: 1px;
 
-//   @media (max-width: 768px) {
-//     .navBarArea {
-//         display: none;
-//     }
-//   }
+  @media (max-width: 1023px) {
+    box-shadow: -0.1px 6px 9px -6px rgba(0, 0, 0, 0.5);
+    .navBarArea {
+        display: none;
+    }
+  }
 `;
 
 const HeaderContainer = styled.div`
@@ -25,7 +26,7 @@ const HeaderContainer = styled.div`
         margin-left: auto;
     }
 
-    @media (min-width: 768px) {
+    @media (min-width: 1024px) {
         display: flex;
 
         .searchBarArea {

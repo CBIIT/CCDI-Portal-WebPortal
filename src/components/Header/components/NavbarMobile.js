@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import menuClearIcon from '../../../assets/header/Menu_Cancel_Icon.svg'
 import rightArrowIcon from '../../../assets/header/Right_Arrow.svg'
@@ -37,6 +38,12 @@ const MenuArea = styled.div`
         line-height: 16px;
         border-top: 1px solid #F0F0F0;
         border-bottom: 1px solid #F0F0F0;
+        color: #3D4551;
+
+        a {
+            text-decoration: none;
+            color: #3D4551;
+        }
     }
 
     .clickable {
@@ -50,11 +57,11 @@ const NavbarMobile = () => {
         <div className='menuContainer'>
             <div className='closeIcon'><img src={menuClearIcon} alt="menuClearButton" /></div>
             <div className='navMobileContainer'>
-                <div className='navMobileItem'>Home</div>
+                <div className='navMobileItem'><NavLink to='/home'>Home</NavLink></div>
                 <div className='navMobileItem clickable'>Applications</div>
                 <div className='navMobileItem clickable'>Other Resources</div>
-                <div className='navMobileItem'>News</div>
-                <div className='navMobileItem'>About</div>
+                <div className='navMobileItem'><NavLink to='/news'>News</NavLink></div>
+                <div className='navMobileItem'><NavLink to='/about'>About</NavLink></div>
             </div>
         </div>
         <div className='greyContainer' />

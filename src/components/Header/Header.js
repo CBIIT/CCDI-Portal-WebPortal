@@ -58,6 +58,7 @@ const NavMobileContainer = styled.div`
     left: 0;
     top: 0;
     height: 100%;
+    width: 100%;
     z-index: 1200;
 `;
 

@@ -4,6 +4,8 @@ import { useLocation } from 'react-router-dom';
 import Logo from '../Header/components/Logo'
 import SearchBar from '../Header/components/SearchBar'
 import NavBar from '../Header/components/Navbar';
+import NavbarButton from './components/NavbarButton';
+import NavbarMobile from './components/NavbarMobile';
 
 const HeaderBanner = styled.div`
   width: 100%;
@@ -11,7 +13,7 @@ const HeaderBanner = styled.div`
 
   @media (max-width: 1023px) {
     box-shadow: -0.1px 6px 9px -6px rgba(0, 0, 0, 0.5);
-    .navBarArea {
+    .navbarContainer {
         display: none;
     }
   }
@@ -23,7 +25,18 @@ const HeaderContainer = styled.div`
 
     .searchBarArea {
         padding: 5px 60px 0 0;
+    }
+
+    .headerLowerContainer {
+        display: flex;
         margin-left: auto;
+    }
+
+    @media (max-width: 1023px) {
+        .searchBarArea {
+            margin-left: auto;
+        }
+        padding-left: 16px;
     }
 
     @media (min-width: 1024px) {
@@ -39,6 +52,15 @@ const HeaderContainer = styled.div`
     }
 `;
 
+const NavMobileContainer = styled.div`
+    // display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    z-index: 1200;
+`;
+
 const Header = () => {
   const path = useLocation().pathname;
 
@@ -47,10 +69,16 @@ const Header = () => {
       <HeaderBanner role="banner">
         <HeaderContainer>
           <Logo />
-          { path !== "/sitesearch" && <div className='searchBarArea'><SearchBar /></div> }
+          <div className='headerLowerContainer'>
+            <NavbarButton />
+            { path !== "/sitesearch" && <div className='searchBarArea'><SearchBar /></div> }
+          </div>
         </HeaderContainer>
-        <div className='navBarArea'><NavBar /></div>
+        <div className='navbarContainer'><NavBar /></div>
       </HeaderBanner>
+      <NavMobileContainer>
+        <NavbarMobile />
+      </NavMobileContainer>
     </>
   );
 };

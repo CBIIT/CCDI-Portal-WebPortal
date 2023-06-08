@@ -19,7 +19,7 @@ const Nav = styled.div`
       position: relative;
       width: 1440px;
     }
-`;
+ `;
 
 const NavContainer = styled.div`
     margin: 0 auto;

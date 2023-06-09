@@ -82,3 +82,31 @@ export const navBarstyling = {
     cartIcon: '',
     cartIconAlt: ''
   };
+
+  export const navMobileList = [
+    {
+        name: 'Home',
+        link: '/home',
+        className: 'navMobileItem',
+    },
+    {
+        name: 'Applications',
+        link: '',
+        className: 'navMobileItem clickable',
+    },
+    {
+        name: 'Other Resources',
+        link: '',
+        className: 'navMobileItem clickable',
+    },
+    {
+        name: 'News',
+        link: '/news',
+        className: 'navMobileItem',
+    },
+    {
+        name: 'About',
+        link: '/about',
+        className: 'navMobileItem',
+    },
+];

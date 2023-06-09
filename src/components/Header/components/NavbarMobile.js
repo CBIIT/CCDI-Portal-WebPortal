@@ -1,8 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import menuClearIcon from '../../../assets/header/Menu_Cancel_Icon.svg'
-import rightArrowIcon from '../../../assets/header/Right_Arrow.svg'
+import menuClearIcon from '../../../assets/header/Menu_Cancel_Icon.svg';
+import rightArrowIcon from '../../../assets/header/Right_Arrow.svg';
+import { navMobileList } from '../../../bento/navigationBarData'
 
 const MenuArea = styled.div`
     height: 100%;
@@ -52,16 +53,23 @@ const MenuArea = styled.div`
 `;
 
 const NavbarMobile = () => {
+    const navbarMobileList = navMobileList;
+
     return (
       <MenuArea>
         <div className='menuContainer'>
             <div className='closeIcon'><img src={menuClearIcon} alt="menuClearButton" /></div>
             <div className='navMobileContainer'>
-                <NavLink to='/home'><div className='navMobileItem'>Home</div></NavLink>
-                <div className='navMobileItem clickable'>Applications</div>
-                <div className='navMobileItem clickable'>Other Resources</div>
-                <NavLink to='/news'><div className='navMobileItem'>News</div></NavLink>
-                <NavLink to='/about'><div className='navMobileItem'>About</div></NavLink>
+                {
+                    navbarMobileList.map((navMobileItem, idx) => {
+                        const mobilekey = `mobile_${idx}`;
+                        return (
+                            navMobileItem.className === 'navMobileItem'
+                            ? <NavLink to={navMobileItem.link} key={mobilekey}><div className='navMobileItem'>{navMobileItem.name}</div></NavLink>
+                            : <div key={mobilekey} className='navMobileItem clickable'>{navMobileItem.name}</div>
+                        )
+                    })
+                }
             </div>
         </div>
         <div className='greyContainer' />

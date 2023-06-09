@@ -28,6 +28,11 @@ const MenuArea = styled.div`
 
     .navMobileContainer {
         margin: 88px 16px 0 16px;
+
+        a {
+            text-decoration: none;
+            color: #3D4551;
+        }
     }
 
     .navMobileItem {
@@ -39,11 +44,6 @@ const MenuArea = styled.div`
         border-top: 1px solid #F0F0F0;
         border-bottom: 1px solid #F0F0F0;
         color: #3D4551;
-
-        a {
-            text-decoration: none;
-            color: #3D4551;
-        }
     }
 
     .clickable {
@@ -57,11 +57,11 @@ const NavbarMobile = () => {
         <div className='menuContainer'>
             <div className='closeIcon'><img src={menuClearIcon} alt="menuClearButton" /></div>
             <div className='navMobileContainer'>
-                <div className='navMobileItem'><NavLink to='/home'>Home</NavLink></div>
+                <NavLink to='/home'><div className='navMobileItem'>Home</div></NavLink>
                 <div className='navMobileItem clickable'>Applications</div>
                 <div className='navMobileItem clickable'>Other Resources</div>
-                <div className='navMobileItem'><NavLink to='/news'>News</NavLink></div>
-                <div className='navMobileItem'><NavLink to='/about'>About</NavLink></div>
+                <NavLink to='/news'><div className='navMobileItem'>News</div></NavLink>
+                <NavLink to='/about'><div className='navMobileItem'>About</div></NavLink>
             </div>
         </div>
         <div className='greyContainer' />

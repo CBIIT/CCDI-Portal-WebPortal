@@ -72,6 +72,10 @@ const MenuArea = styled.div`
         color: #3D4551;
     }
 
+    .navMobileItem:hover {
+        background-color: #f9f9f7;
+    }
+
     .clickable {
         background: url(${rightArrowIcon}) 90% no-repeat;
     }

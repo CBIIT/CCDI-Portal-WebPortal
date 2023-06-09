@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import menuClearIcon from '../../../assets/header/Menu_Cancel_Icon.svg';
 import rightArrowIcon from '../../../assets/header/Right_Arrow.svg';
-import { navMobileList } from '../../../bento/navigationBarData'
+import { navMobileList, navbarSublists } from '../../../bento/navigationBarData'
 
 const MenuArea = styled.div`
     height: 100%;
@@ -53,7 +53,13 @@ const MenuArea = styled.div`
 `;
 
 const NavbarMobile = () => {
-    const navbarMobileList = navMobileList;
+    const [navbarMobileList, setNavbarMobileList] = useState(navMobileList);
+
+    const clickNavItem = (e) => {
+        console.log(e.target.innerText);
+        const clickTitle = e.target.innerText;
+        setNavbarMobileList(navbarSublists[clickTitle]);
+    }
 
     return (
       <MenuArea>
@@ -64,9 +70,11 @@ const NavbarMobile = () => {
                     navbarMobileList.map((navMobileItem, idx) => {
                         const mobilekey = `mobile_${idx}`;
                         return (
-                            navMobileItem.className === 'navMobileItem'
-                            ? <NavLink to={navMobileItem.link} key={mobilekey}><div className='navMobileItem'>{navMobileItem.name}</div></NavLink>
-                            : <div key={mobilekey} className='navMobileItem clickable'>{navMobileItem.name}</div>
+                            <>
+                                {navMobileItem.className === 'navMobileItem' && <NavLink to={navMobileItem.link} key={mobilekey}><div className='navMobileItem'>{navMobileItem.name}</div></NavLink>}
+                                {navMobileItem.className === 'navMobileItem clickable' && <div key={mobilekey} className='navMobileItem clickable' onClick={clickNavItem}>{navMobileItem.name}</div>}
+                                {navMobileItem.className === 'navMobileSubItem' && <a href={navMobileItem.link} key={mobilekey}><div className='navMobileItem'>{navMobileItem.name}</div></a>}
+                            </>
                         )
                     })
                 }

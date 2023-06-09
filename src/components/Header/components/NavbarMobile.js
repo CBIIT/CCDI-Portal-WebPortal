@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import menuClearIcon from '../../../assets/header/Menu_Cancel_Icon.svg';
 import rightArrowIcon from '../../../assets/header/Right_Arrow.svg';
+import leftArrowIcon from '../../../assets/header/Left_Arrow.svg';
 import { navMobileList, navbarSublists } from '../../../bento/navigationBarData'
 
 const MenuArea = styled.div`
@@ -14,6 +15,7 @@ const MenuArea = styled.div`
         background: #ffffff;
         width: 385px;
         height: 100%;
+        padding: 21px 16px;
     }
 
     .greyContainer {
@@ -23,12 +25,34 @@ const MenuArea = styled.div`
     }
 
     .closeIcon {
-        margin: 21px 21px 0 0;
+        height: 14px;
+        margin-bottom: 29px;
+    }
+
+    .closeIconImg {
         float: right;
     }
 
+    .closeIconImg:hover {
+        cursor: pointer;
+    }
+
+    .backButton {
+        font-family: Open Sans;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 16px;
+        color: #007BBD;
+        padding-left: 16px;
+        background: url(${leftArrowIcon}) left no-repeat;
+    }
+
+    .backButton:hover {
+        cursor: pointer;
+    }
+
     .navMobileContainer {
-        margin: 88px 16px 0 16px;
+        padding: 24px 0 0 0;
 
         a {
             text-decoration: none;
@@ -37,6 +61,7 @@ const MenuArea = styled.div`
     }
 
     .navMobileItem {
+        width: 353px;
         padding: 8px 24px 8px 16px;
         font-family: Open Sans;
         font-weight: 400;
@@ -49,6 +74,10 @@ const MenuArea = styled.div`
 
     .clickable {
         background: url(${rightArrowIcon}) 90% no-repeat;
+    }
+
+    .clickable {
+        cursor: pointer;
     }
 `;
 
@@ -64,7 +93,8 @@ const NavbarMobile = () => {
     return (
       <MenuArea>
         <div className='menuContainer'>
-            <div className='closeIcon'><img src={menuClearIcon} alt="menuClearButton" /></div>
+            <div className='closeIcon'><img className='closeIconImg' src={menuClearIcon} alt="menuClearButton" /></div>
+            { navbarMobileList !== navMobileList && <div className='backButton' onClick={() => setNavbarMobileList(navMobileList)}>Main Menu</div>}
             <div className='navMobileContainer'>
                 {
                     navbarMobileList.map((navMobileItem, idx) => {

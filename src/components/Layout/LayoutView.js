@@ -2,7 +2,7 @@ import React from "react";
 import { withStyles, CssBaseline } from '@material-ui/core';
 import { Route, Routes, } from 'react-router-dom';
 // import Header from '../Header/CustomizedHeader';
-import Header from '../Header/Header';
+import Header from '../ResponsiveHeader/index';
 // import NavBar from '../NavBar/CustomizedNavBar';
 import Footer from '../Footer/CustomizedFooter';
 import Home from '../../pages/landing/landingView';

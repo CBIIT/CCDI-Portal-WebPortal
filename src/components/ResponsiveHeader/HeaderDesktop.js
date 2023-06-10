@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
-import Logo from '../Header/components/Logo'
-import SearchBar from '../Header/components/SearchBar'
-import NavBar from '../Header/components/Navbar';
+import Logo from '../ResponsiveHeader/components/LogoDesktop'
+import SearchBar from './components/SearchBarDesktop'
+import NavBar from './components/NavbarDesktop';
 
 const HeaderBanner = styled.div`
   width: 100%;

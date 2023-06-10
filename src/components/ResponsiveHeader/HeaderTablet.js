@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import { useLocation } from 'react-router-dom';
 import Logo from '../ResponsiveHeader/components/LogoTablet';
 import SearchBar from '../ResponsiveHeader/components/SearchBarTablet';
 import menuClearIcon from '../../assets/header/Menu_Cancel_Icon.svg';

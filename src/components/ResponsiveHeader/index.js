@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import HeaderDesktop from './HeaderDesktop';
-// import HeaderTablet from './HeaderTablet';
+import HeaderTablet from './HeaderTablet';
 // import HeaderMobile from './HeaderMobile';
 
 const HeaderContainer = styled.div`
@@ -9,9 +9,9 @@ const HeaderContainer = styled.div`
     .desktop {
       display: block;
     }
-    // .tablet {
-    //   display: none;
-    // }
+    .tablet {
+      display: none;
+    }
     // .mobile {
     //   display: none;
     // }
@@ -21,9 +21,9 @@ const HeaderContainer = styled.div`
     .desktop {
       display: none;
     }
-    // .tablet {
-    //   display: block;
-    // }
+    .tablet {
+      display: block;
+    }
     // .mobile {
     //   display: none;
     // }
@@ -33,9 +33,9 @@ const HeaderContainer = styled.div`
     .desktop {
       display: none;
     }
-    // .tablet {
-    //   display: none;
-    // }
+    .tablet {
+      display: none;
+    }
     // .mobile {
     //   display: block;
     // }
@@ -48,9 +48,9 @@ const Header = () => {
       <div class="desktop">
         <HeaderDesktop />
       </div>
-      {/* <div class="tablet">
+      <div class="tablet">
         <HeaderTablet />
-      </div> */}
+      </div>
       {/* <div class="mobile">
         <HeaderMobile />
       </div> */}

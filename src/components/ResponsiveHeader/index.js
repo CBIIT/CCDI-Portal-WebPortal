@@ -40,6 +40,18 @@ const HeaderContainer = styled.div`
       display: block;
     }
   }
+
+  @media (max-width: 375px) {
+    .desktop {
+      display: none;
+    }
+    .tablet {
+      display: none;
+    }
+    .mobile {
+      display: block;
+    }
+  }
 `;
 
 const Header = () => {

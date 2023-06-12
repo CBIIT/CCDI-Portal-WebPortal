@@ -18,7 +18,7 @@ const HeaderContainer = styled.div`
     box-shadow: -0.1px 6px 9px -6px rgba(0, 0, 0, 0.5);
 
     .searchBarArea {
-        padding: 5px 16px 0 0;
+        padding: 0 16px 0 0;
         margin-left: auto;
     }
 

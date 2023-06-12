@@ -10,12 +10,12 @@ const SearchBarContainer = styled.div`
     .searchBar {
       margin-left: auto;
       width: 224px;
-      height: 32px;
+      height: 45px;
       border: 1px solid #71767A;
     }
 
     .searchButton {
-      height: 32px;
+      height: 45px;
       font-family: Open Sans;
       font-weight: 700;
       font-size: 1rem;
@@ -23,7 +23,7 @@ const SearchBarContainer = styled.div`
       text-align: center;
       color: #FFFFFF;
       background: #007BBD;
-      padding: 4px 13px;
+      padding: 10px 13px;
       border-radius: 0px 5px 5px 0px;
     }
 
@@ -39,11 +39,11 @@ const SearchInput = styled.input`
   border: none;
   font-family: Open Sans;
   font-weight: 400;
-  font-size: 1rem;
-  line-height: 42px;
+  font-size: 1.27rem;
+  line-height: 47px;
   color: #1b1b1b;
   width: 224px;
-  height: 32px;
+  height: 45px;
   background: transparent;
 
   ::placeholder {

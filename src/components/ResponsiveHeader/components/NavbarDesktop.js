@@ -31,7 +31,7 @@ const NavContainer = styled.div`
 const UlContainer = styled.ul`
   list-style: none;
   margin: 0;
-  padding-top: 7px;
+  padding-top: 17px;
   padding-left: 11px;
 `;
 
@@ -159,7 +159,7 @@ const LiSection = styled.li`
 `;
 
 const Dropdown = styled.div`
-    top: 50.5px;
+    top: 60.5px;
     left: 0;
     width: 100%;
     background: #1A5255;

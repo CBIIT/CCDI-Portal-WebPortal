@@ -111,6 +111,11 @@ const MenuArea = styled.div`
         cursor: pointer;
     }
 
+    .backButton:active {
+        outline: 0.25rem solid #2491ff;
+        outline-offset: 0.5rem;
+    }
+
     .navMobileContainer {
         padding: 24px 0 0 0;
 

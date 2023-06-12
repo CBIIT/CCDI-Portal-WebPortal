@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useLocation, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+import { navbarSublists } from '../../../bento/navigationBarData';
 
 const Nav = styled.div`
     top: 0;
@@ -236,17 +237,6 @@ const NavBar = () => {
   const [clickedTitle, setClickedTitle] = useState("");
   const dropdownSelection = useRef(null);
   useOutsideAlerter(dropdownSelection);
-  const navbarLists = {
-    Applications: [
-      {id:"ccdc", name:'Childhood Cancer Data Catalog'},
-      {id:"civic", name:'Clinical Interpretation of Variants in Cancer'},
-      {id:'mci', name: 'Molecular Characterization Initiative for Childhood Cancers'},
-      {id:'mtp', name: 'Molecular Targets Platform'},
-      {id:'nccr', name:'National Childhood Cancer Registry Explorer'}],
-    "Other Resources": [
-      {id:"cgc", name:'Cancer Genomics Cloud'}, 
-      {id:'dbgap', name:'Database of Genotypes and Phenotypes'}],
-  };
 
   const handleMenuClick = (e) => {
     if (e.target.innerText === clickedTitle || e.target.innerText === "Home" || e.target.innerText === "About" || e.target.innerText === "News") {
@@ -286,10 +276,10 @@ const NavBar = () => {
         <DropdownContainer>
             <div className="dropdownList">
               {
-                clickedTitle !== "" ? navbarLists[clickedTitle].map((dropItem, idx) => {
+                clickedTitle !== "" ? navbarSublists[clickedTitle].map((dropItem, idx) => {
                   const dropkey = `drop_${idx}`;
                   return (
-                    <a href={'/#' + dropItem.id} className="dropdownItem" key={dropkey} onClick={() => setClickedTitle("")}>{dropItem.name}</a>
+                    dropItem.link && <a href={dropItem.link} className="dropdownItem" key={dropkey} onClick={() => setClickedTitle("")}>{dropItem.name}</a>
                   )
                 })
                 :null

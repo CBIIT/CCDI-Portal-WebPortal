@@ -89,7 +89,6 @@ const NavbarMobile = () => {
     const [navbarMobileList, setNavbarMobileList] = useState(navMobileList);
 
     const clickNavItem = (e) => {
-        console.log(e.target.innerText);
         const clickTitle = e.target.innerText;
         setNavbarMobileList(navbarSublists[clickTitle]);
     }

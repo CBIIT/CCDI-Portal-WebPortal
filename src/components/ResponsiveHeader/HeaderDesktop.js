@@ -12,6 +12,8 @@ const HeaderBanner = styled.div`
 const HeaderContainer = styled.div`
     margin: 0 auto;
     padding-left: 32px;
+    max-width: 1420px;
+    display: flex;
 
     .searchBarArea {
         padding: 5px 32px 0 0;
@@ -22,17 +24,9 @@ const HeaderContainer = styled.div`
         margin-left: auto;
     }
 
-    @media (min-width: 1024px) {
-        display: flex;
-
-        .searchBarArea {
-            margin-top: 23px;
-        }
-    }
-
-    @media (min-width: 1420px) {
-        width: 1420px;
-    }
+    .searchBarArea {
+      margin-top: 23px;
+  }
 `;
 
 const Header = () => {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useLocation, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import { navbarSublists } from '../../../bento/navigationBarData';
+import { navMobileList, navbarSublists } from '../../../bento/navigationBarData';
 
 const Nav = styled.div`
     top: 0;
@@ -175,6 +175,7 @@ const DropdownContainer = styled.div`
     margin: 0 auto;
     text-align: left;
     position: relative;
+    max-width: 1440px;
 
     .dropdownList {
       background: #1A5255;
@@ -235,10 +236,12 @@ const NavBar = () => {
   const path = useLocation().pathname;
   const [clickedTitle, setClickedTitle] = useState("");
   const dropdownSelection = useRef(null);
+  const clickableObject = navMobileList.filter(item => item.className === 'navMobileItem clickable');
+  const clickableTitle = clickableObject.map(item => item.name);
   useOutsideAlerter(dropdownSelection);
 
   const handleMenuClick = (e) => {
-    if (e.target.innerText === clickedTitle || e.target.innerText === "Home" || e.target.innerText === "About" || e.target.innerText === "News") {
+    if (e.target.innerText === clickedTitle || !clickableTitle.includes(e.target.innerText)) {
       setClickedTitle("");
     } else {
       setClickedTitle(e.target.innerText);
@@ -254,21 +257,16 @@ const NavBar = () => {
     <Nav>
       <NavContainer>
         <UlContainer>
-          <LiSection>
-            <div className='navTitle directLink'><NavLink to="/home"><div className='navText directLink' onClick={handleMenuClick} style={path === '/' || path === '/home' ? activeStyle : null}>Home</div></NavLink></div>
-          </LiSection>
-          <LiSection>
-            <div className={clickedTitle === 'Applications' ? 'navTitleClicked' : 'navTitle'}><div className={clickedTitle === 'Applications' ? 'navText clicked' : 'navText'} onClick={handleMenuClick}>Applications</div></div>
-          </LiSection>
-          <LiSection>
-            <div className={clickedTitle === 'Other Resources' ? 'navTitleClicked' : 'navTitle'}><div className={clickedTitle === 'Other Resources' ? 'navText clicked' : 'navText'} onClick={handleMenuClick}>Other Resources</div></div>
-          </LiSection>
-          <LiSection>
-            <div className='navTitle directLink'><NavLink to="/news"><div className='navText directLink' style={path === '/news' ? activeStyle : null} onClick={handleMenuClick}>News</div></NavLink></div>
-          </LiSection>
-          <LiSection>
-            <div className='navTitle directLink'><NavLink to="/about"><div className='navText directLink' style={path === '/about' ? activeStyle : null} onClick={handleMenuClick}>About</div></NavLink></div>
-          </LiSection>
+          {
+            navMobileList.map((navMobileItem, idx) => {
+              const navkey = `nav_${idx}`;
+              return (
+                navMobileItem.className === 'navMobileItem'
+                ? <LiSection key={navkey}><div className='navTitle directLink'><NavLink to={navMobileItem.link}><div className='navText directLink' onClick={handleMenuClick} style={path === navMobileItem.link || (path === '/' && navMobileItem.link === '/home') ? activeStyle : null}>{navMobileItem.name}</div></NavLink></div></LiSection>
+                : <LiSection key={navkey}><div className={clickedTitle === navMobileItem.name ? 'navTitleClicked' : 'navTitle'}><div className={clickedTitle === navMobileItem.name ? 'navText clicked' : 'navText'} onClick={handleMenuClick}>{navMobileItem.name}</div></div></LiSection>
+              )
+            })
+          }
         </UlContainer>
       </NavContainer>
       <Dropdown ref={dropdownSelection} style={clickedTitle === '' ? dropdownInvisibleStyle : null}>

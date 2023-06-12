@@ -61,23 +61,6 @@ export default {
         
       ],
     },
-    {
-      title: 'About',
-      items: [
-        {
-          text: 'About CCDI Hub',
-          link: '/about',
-        },
-        {
-          text: 'About CCDI',
-          link: 'https://www.cancer.gov/research/areas/childhood/childhood-cancer-data-initiative',
-        },
-        {
-          text: 'Contact CCDI Hub',
-          link: 'mailto:NCIChildhoodCancerDataInitiative@mail.nih.gov',
-        },
-      ],
-    },
   ],
   followUs_links: [
     {

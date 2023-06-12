@@ -138,12 +138,6 @@ const FooterLinksContainer = styled.div`
     cursor: pointer;
   }
 
-  /* Dropdown button on hover & focus */
-  .dropbtn:hover, .dropbtn:focus {
-    // background-color: #2980B9;
-  }
-
-  /* The container <div> - needed to position the dropdown content */
   .dropdown {
     position: relative;
     display: inline-block;
@@ -151,13 +145,11 @@ const FooterLinksContainer = styled.div`
     padding 0 0.5rem 0 0.5rem;
   }
 
-  /* Dropdown Content (Hidden by Default) */
   .dropdown-content {
     display: none;
     z-index: 1;
   }
 
-  /* Links inside the dropdown */
   .dropdown-content a {
     color: white;
     padding: 0 0 1rem 1rem;
@@ -166,10 +158,7 @@ const FooterLinksContainer = styled.div`
     width: fit-content;
   }
 
-  /* Change color of dropdown links on hover */
-  // .dropdown-content a:hover {background-color: #ddd;}
 
-  /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
   .show {
     display:block;
   }
@@ -335,8 +324,6 @@ const FooterMobile = () => {
   const handleChange = (e) => {
     setEmailContent(e.target.value);
   }
-  /* When the user clicks on the button,
-  toggle between hiding and showing the dropdown content */
   const handleDropdown = (param) => {
     document.getElementById(`${param}Dropdown`).classList.toggle("show");
     document.getElementById(`${param}Arrow`).classList.toggle("rotate");
@@ -347,22 +334,6 @@ const FooterMobile = () => {
       <FooterStyled role="contentinfo">
         <FooterContainer>
           <FooterLinksContainer>
-            {/* <div class="dropdown">
-            <button onClick={() => handleDropdown("About")} class="dropbtn">Dropdown</button>
-            <div id="AboutDropdown" class="dropdown-content">
-              <a href="#/">Link 1</a>
-              <a href="#/">Link 2</a>
-              <a href="#/">Link 3</a>
-            </div>
-          </div>
-          <div class="dropdown">
-            <button onClick={() => handleDropdown("Test")} class="dropbtn">Dropdown</button>
-            <div id="TestDropdown" class="dropdown-content">
-              <a href="#/">Link 1</a>
-              <a href="#/">Link 2</a>
-              <a href="#/">Link 3</a>
-            </div>
-          </div> */}
             {
               FooterData.link_sections.map((linkItem, linkidx) => {
                 const linkkey = `link_${linkidx}`;

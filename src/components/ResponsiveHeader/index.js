@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import HeaderDesktop from './HeaderDesktop';
 import HeaderTablet from './HeaderTablet';
-// import HeaderMobile from './HeaderMobile';
+import HeaderMobile from './HeaderMobile';
 
 const HeaderContainer = styled.div`
  @media (min-width: 1024px) {
@@ -12,9 +12,9 @@ const HeaderContainer = styled.div`
     .tablet {
       display: none;
     }
-    // .mobile {
-    //   display: none;
-    // }
+    .mobile {
+      display: none;
+    }
   }
 
   @media (min-width:768px) and (max-width: 1023px) {
@@ -24,9 +24,9 @@ const HeaderContainer = styled.div`
     .tablet {
       display: block;
     }
-    // .mobile {
-    //   display: none;
-    // }
+    .mobile {
+      display: none;
+    }
   }
 
   @media (min-width: 375px) and (max-width: 767px) {
@@ -36,9 +36,9 @@ const HeaderContainer = styled.div`
     .tablet {
       display: none;
     }
-    // .mobile {
-    //   display: block;
-    // }
+    .mobile {
+      display: block;
+    }
   }
 `;
 
@@ -51,9 +51,9 @@ const Header = () => {
       <div class="tablet">
         <HeaderTablet />
       </div>
-      {/* <div class="mobile">
+      <div class="mobile">
         <HeaderMobile />
-      </div> */}
+      </div>
     </HeaderContainer>
   )
 };

@@ -5,11 +5,6 @@ import headerData from '../../../bento/globalHeaderData';
 const LogoArea = styled.div`
     display: flex;
 
-    img {
-      width: 455px;
-      height: 56px;
-    }
-
     .logoContainer {
       margin-top: 20px;
     }

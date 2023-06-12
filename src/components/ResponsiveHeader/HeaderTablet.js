@@ -15,10 +15,10 @@ const HeaderBanner = styled.div`
 
 const HeaderContainer = styled.div`
     margin: 0 auto;
-    padding-left: 32px;
+    padding-left: 16px;
 
     .searchBarArea {
-        padding: 5px 32px 0 0;
+        padding: 5px 16px 0 0;
         margin-left: auto;
     }
 

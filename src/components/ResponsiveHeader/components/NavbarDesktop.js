@@ -32,6 +32,7 @@ const UlContainer = styled.ul`
   list-style: none;
   margin: 0;
   padding-top: 7px;
+  padding-left: 11px;
 `;
 
 const LiSection = styled.li`

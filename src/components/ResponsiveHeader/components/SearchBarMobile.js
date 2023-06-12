@@ -9,7 +9,7 @@ const SearchBarContainer = styled.div`
 
     .searchBar {
       margin-left: auto;
-      width: 168px;
+      width: 224px;
       height: 45px;
       border: 1px solid #71767A;
     }
@@ -31,6 +31,12 @@ const SearchBarContainer = styled.div`
       cursor: pointer;
       background: #004971;
     }
+
+    @media (max-width: 431px) {
+      .searchBar {
+        width: calc(100vw - 200px);
+      }
+    }
 `;
 
 const SearchInput = styled.input`
@@ -42,9 +48,14 @@ const SearchInput = styled.input`
   font-size: 1.27rem;
   line-height: 47px;
   color: #1b1b1b;
-  width: 168px;
+  // width: 168px;
+  width: 224px;
   height: 45px;
   background: transparent;
+
+  @media (max-width: 431px) {
+    width: calc(100vw - 200px);
+  }
 
   ::placeholder {
     color: #004A8B;

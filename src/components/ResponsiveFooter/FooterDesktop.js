@@ -11,49 +11,25 @@ const FooterStyled = styled.footer`
   position: relative;
 `;
 
-const GlobalFooterStyled = styled.footer`
-  background-color: #14315C;
-  bottom: 0;
-  width: 100%;
-`;
-
 const FooterContainer = styled.div`
-  width: 1440px;
-  margin: 0 auto;
+  padding 2rem 3rem 2rem 3rem;
+  max-width: 1420px;
+  margin-left: auto;
+  margin-right: auto;  
   display: flex;
-`;
+  justify-content: space-between;
 
-const FooterLogo = styled.div`
-  .logoText {
-    text-decoration: none;
-  }
-
-  .logoUpperText {
-    font-family: poppins;
-    font-weight: 700;
-    font-size: 24.96px;
-    line-height: 37px;
-    color: #FFFFFF;
-  }
-
-  .logoLowerText {
-    font-family: poppins;
-    font-weight: 400;
-    font-size: 18.72px;
-    color: #FFFFFF;
-  }
 `;
 
 const FooterEmailSignupContainer = styled.form`
-  margin: 54px auto 0 330px;
-
+  width: 479px;
   .signUpTitle {
     font-family: poppins;
     font-weight: 700;
     font-size: 22.88px;
     line-height: 34px;
     color: #FFFFFF;
-    margin-bottom: 28px;
+    margin-bottom: 1rem;
   }
 
   .enterTitle {
@@ -66,7 +42,7 @@ const FooterEmailSignupContainer = styled.form`
   }
 
   .signUpInputBox {
-    width: 479px;
+    width: 100%;
     height: 47px;
     font-size: 25px;
     padding-left: 8px;
@@ -112,7 +88,6 @@ const FooterEmailSignupContainer = styled.form`
 `;
 
 const FooterLinksContainer = styled.div`
-  margin: 54px 0 98px 62px;
   display: flex;
 
   .footItem {
@@ -147,86 +122,159 @@ const FooterLinksContainer = styled.div`
   }
 `;
 
-const GlobalFooterContainer = styled.div`
-  padding: 20px 62px 26px 61px;
-  display: flex;
-  background: #14315C;
-  width: 1440px;
-  margin: 0 auto;
+const BottomFooter = styled.div`
+ background: #14315C;
 
-  .followUsTitle {
-    margin: 24px 0 18px 0;
+  span {
+    display: block;
+  }
+
+  .bottom-footer-container {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: space-between;
+    max-width: 1420px;
+    margin-left: auto;
+    margin-right: auto;
+    height: fit-content;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  .break {
+    order: 2;
+    width: 100%;
+    flex-basis: 100%;
+    height: 2rem;
+    margin: 0;
+    border: 0;
+  }
+
+  .logoText {
+    text-decoration: none;
+  }
+
+  .logoUpperText {
     font-family: poppins;
     font-weight: 700;
-    font-size: 22.88px;
-    line-height: 34px;
+    font-size: 24.96px;
+    line-height: 37px;
     color: #FFFFFF;
   }
 
-  .followUsList {
-    display: flex;
-  }
-
-  .followItem {
-    margin-right: 14.64px;
-  }
-
-  .followItemImg {
-    width: 29.29px;
-    height: 29.29px;
-  }
-
-  .contactUs {
-    margin-left: auto;
-  }
-
-  .contactUsTitle {
+  .logoLowerText {
     font-family: poppins;
+    font-weight: 400;
+    font-size: 18.72px;
+    color: #FFFFFF;
+  }
+
+  #bottom-footer-contact-us {
+    font-family: 'Poppins';
     font-style: normal;
     font-weight: 700;
     font-size: 22.88px;
     line-height: 34px;
     text-align: right;
     color: #FFFFFF;
+    order: 1;
   }
 
-  .contactList {
-    display: flex;
-    margin: 6px 0 35px 0;
-  }
-
-  .contactListItem {
-    margin-left: 35px;
-  }
-
-  .contactListItemLink{
-    color: #FFFFFF;
-    text-decoration: none;
-    font-family: Open Sans;
+  #bottom-footer-contact-links {
+    font-family: 'Open Sans';
+    font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 22px;
-  }
-
-  .contactListItemLink:hover {
-    text-decoration: underline;
-  }
-
-  .globalFooterItem {
-    text-align: right;
-  }
-
-  .globalFooterItemLink{
     color: #FFFFFF;
-    text-decoration: none;
-    font-family: Open Sans;
-    font-weight: 400;
-    font-size: 14.24px;
-    line-height: 18px;
+    margin-top: 0.25rem;
   }
 
-  .globalFooterItemLink:hover {
-    text-decoration: underline;
+  #bottom-footer-contact-links a {
+    text-decoration: none;
+    color: #FFFFFF;
+    margin-left: 1rem;
+  }
+
+  #bottom-footer-follow-us {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22.88px;
+    line-height: 34px;
+    color: #FFFFFF;
+    order: 3;
+  }
+
+  #bottom-footer-follow-us-links {
+    margin-top: 1rem;
+  }
+
+  .bottom-footer-social-media-imgs {
+    margin-left: 10px;
+  }
+
+  #bottom-footer-gov-links {
+    order: 4;
+  }
+
+  #bottom-footer-gov-links a {
+    text-decoration: none;
+    display: block;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.01rem;    
+    line-height: 1.6;
+    text-align: right;
+    color: #FFFFFF;
+  }
+
+  @media (max-width: 1023px) {
+    #bottom-footer-header {
+        margin-left: 1rem;
+    }
+
+    .bottom-footer-container {
+        flex-direction: column;
+    }
+
+    .break {
+        display: none;
+    }
+
+    #bottom-footer-contact-us {
+        margin-left: 1rem;
+        margin-top: 0.5rem;
+        text-align: left;
+    }
+
+    #bottom-footer-contact-links a {
+        display: block;
+        margin-left: 0px;
+        margin-right: 10px;
+        white-space: nowrap;
+    }
+    #bottom-footer-gov-links {
+        text-align: left;
+    }
+    #bottom-footer-follow-us-links {
+        margin-top: 0.75rem;
+    }
+    #bottom-footer-follow-us {
+        margin-top: 0.75rem;
+        margin-left: 1rem;
+    }
+    #bottom-footer-gov-links {
+        margin-right: 0px;
+        margin-top: 0.75rem;
+        margin-left: 1rem;
+    }
+    #bottom-footer-gov-links a {
+        text-align: left;
+    }
   }
 `;
 
@@ -240,9 +288,11 @@ const FooterDesktop = () => {
     return reg.test(email);
   }
 
-  const handleClick = () => {
+  const handleSubmit = (e) => {
+    console.log("Handle click")
     if (!validateEmail(emailContent)) {
       setErrorClass("errorEmail");
+      e.preventDefault();
     } else {
       setErrorClass("");
       emailForm.current.submit();
@@ -252,7 +302,6 @@ const FooterDesktop = () => {
   const handleChange = (e) => {
     setEmailContent(e.target.value);
   }
-
   return (
     <>
       <FooterStyled role="contentinfo">
@@ -284,7 +333,7 @@ const FooterDesktop = () => {
                     })
                 }
             </FooterLinksContainer>
-            <FooterEmailSignupContainer ref={emailForm} action="https://public.govdelivery.com/accounts/USNIHNCI/subscribers/qualify" ariaLabel="Footer subscribe" method="post" target="_blank" id="signup" noValidate>
+            <FooterEmailSignupContainer  onSubmit={handleSubmit} ref={emailForm} action="https://public.govdelivery.com/accounts/USNIHNCI/subscribers/qualify" ariaLabel="Footer subscribe" method="post" target="_blank" id="signup" noValidate>
               <input type="hidden" name="topic_id" id="topic_id" value="USNIHNCI_223" />
               <div className='signUpTitle'>
                 Sign up for email updates
@@ -298,67 +347,62 @@ const FooterDesktop = () => {
                   <input id="email" type="email" name="email" className='signUpInputBox' value={emailContent} onChange={e => handleChange(e)} />
                 </div>
               </div>
-              <button type="button" className='signUpButton' onClick={handleClick}>
+              <button type="submit" className='signUpButton'>
                 Sign up
               </button>
             </FooterEmailSignupContainer>
           </FooterContainer>
       </FooterStyled>
-      <GlobalFooterStyled>
-        <GlobalFooterContainer>
-          <div className='lowerFooterLeftContainer'>
-            <FooterLogo>
-              <a className='logoText' href="https://www.cancer.gov" target="_blank" rel="noopener noreferrer">
-                <div className='logoUpperText'>National Cancer Institute</div>
-                <div className='logoLowerText'>at the National Institutes of Health</div>
-              </a>
-            </FooterLogo>
-            <div className='followUsTitle'>Follow us</div>
-            <div className='followUsList'>
-              {
-                FooterData.followUs_links.map((followItem, followidx) => {
-                  const followkey = `follow_${followidx}`;
-                  return (
-                    <div className='followItem' key={followkey}>
-                      <a href={followItem.link} target="_blank" rel="noopener noreferrer"><img className='followItemImg' src={followItem.img} alt={followItem.description} /></a>
-                    </div>
-                  )
-                })
-              }
-            </div>
+      <BottomFooter>
+        <div className="bottom-footer-container">
+          <div id="bottom-footer-header">
+            <a className='logoText' href="https://www.cancer.gov" target="_blank" rel="noopener noreferrer">
+              <div className='logoUpperText'>National Cancer Institute</div>
+              <div className='logoLowerText'>at the National Institutes of Health</div>
+            </a>
           </div>
-          <div className='contactUs'>
-            <div className='contactUsTitle'>Contact Us</div>
-            <div className='contactList'>
+          <div id="bottom-footer-contact-us">
+            Contact Us
+            <div id="bottom-footer-contact-links">
               {
                 FooterData.contact_links.map((contactItem, contactidx) => {
                   const contactkey = `contact_${contactidx}`;
                   return (
-                    <div className='contactListItem' key={contactkey}>
-                      {
-                        contactItem.link.includes('http') ? 
-                        <a className='contactListItemLink' href={contactItem.link} target="_blank" rel="noopener noreferrer">{contactItem.text}</a>
-                        :
-                        <a className='contactListItemLink' href={contactItem.link}>{contactItem.text}</a>
-                      }
-                    </div>
+                    contactItem.link.includes('http') ?
+                      <a key={contactkey} href={contactItem.link} target="_blank" rel="noopener noreferrer">{contactItem.text}</a>
+                      :
+                      <a key={contactkey} href={contactItem.link}>{contactItem.text}</a>
                   )
                 })
               }
             </div>
+          </div>
+          <div className="break"></div>
+          <div id="bottom-footer-follow-us">
+            Follow Us
+            <div id="bottom-footer-follow-us-links">
+              {
+                FooterData.followUs_links.map((followItem, followidx) => {
+                  const followkey = `follow_${followidx}`;
+                  return (
+                    <a key={followkey} className={followidx !== 0 ? "bottom-footer-social-media-imgs" : ""} href={followItem.link} target="_blank" rel="noopener noreferrer"><img src={followItem.img} alt={followItem.description} /></a>
+                  )
+                })
+              }
+            </div>
+          </div>
+          <div id="bottom-footer-gov-links">
             {
               FooterData.global_footer_links.map((linkItem, idx) => {
-                  const linkitemkey = `linkitem_${idx}`;
-                  return (
-                      <div className='globalFooterItem' key={linkitemkey}>
-                          <a className='globalFooterItemLink' href={linkItem.link} target="_blank" rel="noopener noreferrer">{linkItem.text}</a>
-                      </div>
-                  )
+                const linkitemkey = `linkitem_${idx}`;
+                return (
+                  <a key={linkitemkey} href={linkItem.link} target="_blank" rel="noopener noreferrer">{linkItem.text}</a>
+                )
               })
             }
           </div>
-        </GlobalFooterContainer>
-      </GlobalFooterStyled>
+        </div>
+      </BottomFooter>
     </>
   )
 };

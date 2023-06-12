@@ -1,59 +1,32 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import FooterData from '../../bento/globalFooterData';
-
 const FooterStyled = styled.footer`
   background-color: #1B496E;
-  border-top: 1px solid #6C727B;
   bottom: 0;
   width: 100%;
   z-index: 10;
   position: relative;
 `;
 
-const GlobalFooterStyled = styled.footer`
-  background-color: #14315C;
-  bottom: 0;
-  width: 100%;
-`;
 
 const FooterContainer = styled.div`
-  width: 1440px;
+  max-width: 1440px;
   margin: 0 auto;
   display: flex;
-`;
-
-const FooterLogo = styled.div`
-  .logoText {
-    text-decoration: none;
-  }
-
-  .logoUpperText {
-    font-family: poppins;
-    font-weight: 700;
-    font-size: 24.96px;
-    line-height: 37px;
-    color: #FFFFFF;
-  }
-
-  .logoLowerText {
-    font-family: poppins;
-    font-weight: 400;
-    font-size: 18.72px;
-    color: #FFFFFF;
-  }
+  justify-content: space-between;
+  flex-direction: column;
 `;
 
 const FooterEmailSignupContainer = styled.form`
-  margin: 54px auto 0 330px;
-
+  padding 1rem 1rem 2rem 1rem;
   .signUpTitle {
     font-family: poppins;
     font-weight: 700;
     font-size: 22.88px;
     line-height: 34px;
     color: #FFFFFF;
-    margin-bottom: 28px;
+    margin-bottom: 1rem;
   }
 
   .enterTitle {
@@ -66,7 +39,7 @@ const FooterEmailSignupContainer = styled.form`
   }
 
   .signUpInputBox {
-    width: 479px;
+    width: 100%;
     height: 47px;
     font-size: 25px;
     padding-left: 8px;
@@ -77,6 +50,7 @@ const FooterEmailSignupContainer = styled.form`
   }
 
   .signUpButton {
+    width:100%;
     background: #FACE00;
     border-radius: 8px;
     border: 0;
@@ -112,9 +86,8 @@ const FooterEmailSignupContainer = styled.form`
 `;
 
 const FooterLinksContainer = styled.div`
-  margin: 54px 0 98px 62px;
   display: flex;
-
+  flex-direction: column;
   .footItem {
     width: 253px; 
   }
@@ -145,146 +118,281 @@ const FooterLinksContainer = styled.div`
   .footItemLink:hover {
     text-decoration: underline;
   }
+
+  .dropbtn {
+    display:flex;
+    flex-direction: row;
+    vertical-align: middle
+    text-align: left;
+    background-color: #1B496E;
+    width: 100%;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    color: #FFFFFF;
+    padding: 1rem 0 1rem 0rem;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+
+  /* Dropdown button on hover & focus */
+  .dropbtn:hover, .dropbtn:focus {
+    // background-color: #2980B9;
+  }
+
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px solid black;
+    padding 0 0.5rem 0 0.5rem;
+  }
+
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;
+    z-index: 1;
+  }
+
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: white;
+    padding: 0 0 1rem 1rem;
+    text-decoration: none;
+    display: block;
+    width: fit-content;
+  }
+
+  /* Change color of dropdown links on hover */
+  // .dropdown-content a:hover {background-color: #ddd;}
+
+  /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+  .show {
+    display:block;
+  }
+
+  .arrow {
+    margin-right: 0.25rem;
+  }
+  .rotate{
+    transform: rotate(90deg); 
+  }
 `;
 
-const GlobalFooterContainer = styled.div`
-  padding: 20px 62px 26px 61px;
-  display: flex;
-  background: #14315C;
-  width: 1440px;
-  margin: 0 auto;
+const BottomFooter = styled.div`
+ background: #14315C;
 
-  .followUsTitle {
-    margin: 24px 0 18px 0;
+  span {
+    display: block;
+  }
+
+  .bottom-footer-container {
+    display: flex;
+    flex-flow: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 1420px;
+    margin-left: auto;
+    margin-right: auto;
+    height: fit-content;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+    padding-left: 1rem;
+  }
+
+  .break {
+    order: 2;
+    width: 100%;
+    flex-basis: 100%;
+    height: 2rem;
+    margin: 0;
+    border: 0;
+    display: none;
+  }
+
+  .logoText {
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .logoUpperText {
     font-family: poppins;
     font-weight: 700;
-    font-size: 22.88px;
-    line-height: 34px;
+    font-size: 24.96px;
+    line-height: 37px;
     color: #FFFFFF;
   }
 
-  .followUsList {
-    display: flex;
-  }
-
-  .followItem {
-    margin-right: 14.64px;
-  }
-
-  .followItemImg {
-    width: 29.29px;
-    height: 29.29px;
-  }
-
-  .contactUs {
-    margin-left: auto;
-  }
-
-  .contactUsTitle {
+  .logoLowerText {
     font-family: poppins;
+    font-weight: 400;
+    font-size: 18.72px;
+    color: #FFFFFF;
+  }
+
+  #bottom-footer-contact-us {
+    font-family: 'Poppins';
     font-style: normal;
     font-weight: 700;
     font-size: 22.88px;
     line-height: 34px;
-    text-align: right;
+    text-align: left;
     color: #FFFFFF;
+    order: 1;
+    margin-top: 1.5rem;
   }
 
-  .contactList {
-    display: flex;
-    margin: 6px 0 35px 0;
-  }
-
-  .contactListItem {
-    margin-left: 35px;
-  }
-
-  .contactListItemLink{
-    color: #FFFFFF;
-    text-decoration: none;
-    font-family: Open Sans;
+  #bottom-footer-contact-links {
+    font-family: 'Open Sans';
+    font-style: normal;
     font-weight: 400;
     font-size: 16px;
-    line-height: 22px;
-  }
-
-  .contactListItemLink:hover {
-    text-decoration: underline;
-  }
-
-  .globalFooterItem {
-    text-align: right;
-  }
-
-  .globalFooterItemLink{
+    line-height: 1.6;
     color: #FFFFFF;
-    text-decoration: none;
-    font-family: Open Sans;
-    font-weight: 400;
-    font-size: 14.24px;
-    line-height: 18px;
+    margin-top: 0.25rem;
   }
 
-  .globalFooterItemLink:hover {
-    text-decoration: underline;
+  #bottom-footer-contact-links a {
+    text-decoration: none;
+    color: #FFFFFF;
+    display: block;
+    margin-left: 0px;
+    margin-right: 10px;
+  }
+
+
+  #bottom-footer-follow-us {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22.88px;
+    line-height: 34px;
+    color: #FFFFFF;
+    order: 3;
+    margin-top: 1rem;
+  }
+
+  #bottom-footer-follow-us-links {
+    margin-top: 1rem;
+  }
+
+  .bottom-footer-social-media-imgs {
+    margin-left: 10px;
+  }
+
+  #bottom-footer-gov-links {
+    order: 4;
+  }
+
+  #bottom-footer-gov-links a {
+    text-decoration: none;
+    display: block;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.6;
+    text-align: left;
+    color: #FFFFFF;
+  }
+
+  #bottom-footer-follow-us-links {
+        margin-top: 0.75rem;
+  }
+
+  #bottom-footer-gov-links {
+      margin-right: 0px;
+      margin-top: 0.75rem;
+  }
   }
 `;
 
 const FooterMobile = () => {
-  const [errorClass,setErrorClass] = useState("");
+  const [errorClass, setErrorClass] = useState("");
   const [emailContent, setEmailContent] = useState("");
   const emailForm = useRef();
 
-  function validateEmail (email) {
+  function validateEmail(email) {
     var reg = /^[A-Za-z0-9]+([_.-][A-Za-z0-9]+)*@([A-Za-z0-9-]+\.)+[A-Za-z]{2,6}$/;
     return reg.test(email);
   }
 
-  const handleClick = () => {
+  const handleSubmit = (e) => {
+    console.log("Handle click")
     if (!validateEmail(emailContent)) {
       setErrorClass("errorEmail");
+      e.preventDefault();
     } else {
       setErrorClass("");
       emailForm.current.submit();
     }
   }
 
+
   const handleChange = (e) => {
     setEmailContent(e.target.value);
+  }
+  /* When the user clicks on the button,
+  toggle between hiding and showing the dropdown content */
+  const handleDropdown = (param) => {
+    document.getElementById(`${param}Dropdown`).classList.toggle("show");
+    document.getElementById(`${param}Arrow`).classList.toggle("rotate");
   }
 
   return (
     <>
       <FooterStyled role="contentinfo">
-          <FooterContainer>
-            <FooterLinksContainer>
-                {
-                    FooterData.link_sections.map((linkItem, linkidx) => {
-                        const linkkey =  `link_${linkidx}`;
-                        return (
-                            <div className='footItem' key={linkkey}>
-                                <div className='footItemTitle'>{linkItem.title}</div>
-                                {
-                                    linkItem.items.map((item, itemidx) => {
-                                        const itemkey =  `item_${itemidx}`;
-                                        return (
-                                            <div className='footItemSubtitle' key={itemkey}>
-                                                {
-                                                    item.link.includes('http') ? 
-                                                    <a className='footItemLink' href={item.link} target="_blank" rel="noopener noreferrer">{item.text}</a>
-                                                    :
-                                                    <a className='footItemLink' href={item.link}>{item.text}</a>
-                                                }
-                                            </div>
-                                        )
-                                    })
-                                }
-                            </div>
-                        )
-                    })
-                }
-            </FooterLinksContainer>
-            <FooterEmailSignupContainer ref={emailForm} action="https://public.govdelivery.com/accounts/USNIHNCI/subscribers/qualify" ariaLabel="Footer subscribe" method="post" target="_blank" id="signup" noValidate>
+        <FooterContainer>
+          <FooterLinksContainer>
+            {/* <div class="dropdown">
+            <button onClick={() => handleDropdown("About")} class="dropbtn">Dropdown</button>
+            <div id="AboutDropdown" class="dropdown-content">
+              <a href="#/">Link 1</a>
+              <a href="#/">Link 2</a>
+              <a href="#/">Link 3</a>
+            </div>
+          </div>
+          <div class="dropdown">
+            <button onClick={() => handleDropdown("Test")} class="dropbtn">Dropdown</button>
+            <div id="TestDropdown" class="dropdown-content">
+              <a href="#/">Link 1</a>
+              <a href="#/">Link 2</a>
+              <a href="#/">Link 3</a>
+            </div>
+          </div> */}
+            {
+              FooterData.link_sections.map((linkItem, linkidx) => {
+                const linkkey = `link_${linkidx}`;
+                return (
+                  <div className='dropdown' key={linkkey}>
+                    <button onClick={() => handleDropdown(linkkey)} className="dropbtn">
+                      <svg id = {linkkey + "Arrow"} className = "arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+                      </svg>
+                      {linkItem.title}
+                    </button>
+                    <div id={linkkey + "Dropdown"} class="dropdown-content">
+                      {
+                        linkItem.items.map((item, itemidx) => {
+                          const itemkey = `item_${itemidx}`;
+                          return (
+                            item.link.includes('http') ?
+                              <a className='footItemLink' key={itemkey} href={item.link} target="_blank" rel="noopener noreferrer">{item.text}</a>
+                              :
+                              <a className='footItemLink' key={itemkey} href={item.link}>{item.text}</a>
+                          )
+                        })
+                      }
+                    </div>
+                  </div>
+                )
+              })
+            }
+          </FooterLinksContainer>
+          <FooterEmailSignupContainer  onSubmit={handleSubmit} ref={emailForm} action="https://public.govdelivery.com/accounts/USNIHNCI/subscribers/qualify" ariaLabel="Footer subscribe" method="post" target="_blank" id="signup" noValidate>
               <input type="hidden" name="topic_id" id="topic_id" value="USNIHNCI_223" />
               <div className='signUpTitle'>
                 Sign up for email updates
@@ -298,67 +406,62 @@ const FooterMobile = () => {
                   <input id="email" type="email" name="email" className='signUpInputBox' value={emailContent} onChange={e => handleChange(e)} />
                 </div>
               </div>
-              <button type="button" className='signUpButton' onClick={handleClick}>
+              <button type="submit" className='signUpButton'>
                 Sign up
               </button>
             </FooterEmailSignupContainer>
-          </FooterContainer>
+        </FooterContainer>
       </FooterStyled>
-      <GlobalFooterStyled>
-        <GlobalFooterContainer>
-          <div className='lowerFooterLeftContainer'>
-            <FooterLogo>
-              <a className='logoText' href="https://www.cancer.gov" target="_blank" rel="noopener noreferrer">
-                <div className='logoUpperText'>National Cancer Institute</div>
-                <div className='logoLowerText'>at the National Institutes of Health</div>
-              </a>
-            </FooterLogo>
-            <div className='followUsTitle'>Follow us</div>
-            <div className='followUsList'>
-              {
-                FooterData.followUs_links.map((followItem, followidx) => {
-                  const followkey = `follow_${followidx}`;
-                  return (
-                    <div className='followItem' key={followkey}>
-                      <a href={followItem.link} target="_blank" rel="noopener noreferrer"><img className='followItemImg' src={followItem.img} alt={followItem.description} /></a>
-                    </div>
-                  )
-                })
-              }
-            </div>
+      <BottomFooter>
+        <div className="bottom-footer-container">
+          <div id="bottom-footer-header">
+            <a className='logoText' href="https://www.cancer.gov" target="_blank" rel="noopener noreferrer">
+              <div className='logoUpperText'>National Cancer Institute</div>
+              <div className='logoLowerText'>at the National Institutes of Health</div>
+            </a>
           </div>
-          <div className='contactUs'>
-            <div className='contactUsTitle'>Contact Us</div>
-            <div className='contactList'>
+          <div id="bottom-footer-contact-us">
+            Contact Us
+            <div id="bottom-footer-contact-links">
               {
                 FooterData.contact_links.map((contactItem, contactidx) => {
                   const contactkey = `contact_${contactidx}`;
                   return (
-                    <div className='contactListItem' key={contactkey}>
-                      {
-                        contactItem.link.includes('http') ? 
-                        <a className='contactListItemLink' href={contactItem.link} target="_blank" rel="noopener noreferrer">{contactItem.text}</a>
-                        :
-                        <a className='contactListItemLink' href={contactItem.link}>{contactItem.text}</a>
-                      }
-                    </div>
+                    contactItem.link.includes('http') ?
+                      <a key={contactkey} href={contactItem.link} target="_blank" rel="noopener noreferrer">{contactItem.text}</a>
+                      :
+                      <a key={contactkey} href={contactItem.link}>{contactItem.text}</a>
                   )
                 })
               }
             </div>
+          </div>
+          <div className="break"></div>
+          <div id="bottom-footer-follow-us">
+            Follow Us
+            <div id="bottom-footer-follow-us-links">
+              {
+                FooterData.followUs_links.map((followItem, followidx) => {
+                  const followkey = `follow_${followidx}`;
+                  return (
+                    <a key={followkey} className={followidx !== 0 ? "bottom-footer-social-media-imgs" : ""} href={followItem.link} target="_blank" rel="noopener noreferrer"><img src={followItem.img} alt={followItem.description} /></a>
+                  )
+                })
+              }
+            </div>
+          </div>
+          <div id="bottom-footer-gov-links">
             {
               FooterData.global_footer_links.map((linkItem, idx) => {
-                  const linkitemkey = `linkitem_${idx}`;
-                  return (
-                      <div className='globalFooterItem' key={linkitemkey}>
-                          <a className='globalFooterItemLink' href={linkItem.link} target="_blank" rel="noopener noreferrer">{linkItem.text}</a>
-                      </div>
-                  )
+                const linkitemkey = `linkitem_${idx}`;
+                return (
+                  <a key={linkitemkey} href={linkItem.link} target="_blank" rel="noopener noreferrer">{linkItem.text}</a>
+                )
               })
             }
           </div>
-        </GlobalFooterContainer>
-      </GlobalFooterStyled>
+        </div>
+      </BottomFooter>
     </>
   )
 };

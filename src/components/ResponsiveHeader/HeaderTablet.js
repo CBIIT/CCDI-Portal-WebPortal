@@ -31,7 +31,7 @@ const HeaderContainer = styled.div`
     .menuButton {
         width: 89px;
         height: 45px;
-        background: #14315C;
+        background: #1F4671;
         border-radius: 5px;
         font-family: 'Open Sans';
         font-weight: 700;
@@ -43,6 +43,10 @@ const HeaderContainer = styled.div`
 
     .menuButton:hover {
         cursor: pointer;
+    }
+
+    .menuButton:focus {
+        outline: 0.25rem solid #2491ff;
     }
 `;
 

@@ -31,7 +31,7 @@ const HeaderContainer = styled.div`
     .menuButton {
         width: 89px;
         height: 45px;
-        background: #14315C;
+        background: #1F4671;
         border-radius: 5px;
         font-family: 'Open Sans';
         font-weight: 700;

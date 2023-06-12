@@ -10,12 +10,12 @@ import { navMobileList, navbarSublists } from '../../bento/navigationBarData'
 
 const HeaderBanner = styled.div`
   width: 100%;
-  box-shadow: -0.1px 6px 9px -6px rgba(0, 0, 0, 0.5);
 `;
 
 const HeaderContainer = styled.div`
     margin: 0 auto;
     padding-left: 16px;
+    box-shadow: -0.1px 6px 9px -6px rgba(0, 0, 0, 0.5);
 
     .searchBarArea {
         padding: 5px 16px 0 0;
@@ -24,7 +24,8 @@ const HeaderContainer = styled.div`
 
     .headerLowerContainer {
         display: flex;
-        margin: 10px 0;
+        margin: 16px 0 5px 0;
+        height: 56px;
     }
 
     .menuButton {

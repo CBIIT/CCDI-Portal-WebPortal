@@ -114,6 +114,11 @@ export const navBarstyling = {
 export const navbarSublists = {
   Applications: [
     {
+      name:'Applications',
+      link: '',
+      className: 'navMobileSubTitle',
+    },
+    {
       name:'Childhood Cancer Data Catalog',
       link: '/#ccdc',
       className: 'navMobileSubItem',
@@ -139,6 +144,11 @@ export const navbarSublists = {
       className: 'navMobileSubItem',
     }],
   "Other Resources": [
+    {
+      name:'Other Resources',
+      link: '',
+      className: 'navMobileSubTitle',
+    },
     {
       name:'Cancer Genomics Cloud',
       link: '/#cgc',

@@ -45,8 +45,9 @@ const HeaderContainer = styled.div`
         cursor: pointer;
     }
 
-    .menuButton:focus {
+    .menuButton:active {
         outline: 0.25rem solid #2491ff;
+        outline-offset: 0.25rem
     }
 `;
 

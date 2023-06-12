@@ -44,6 +44,11 @@ const HeaderContainer = styled.div`
     .menuButton:hover {
         cursor: pointer;
     }
+
+    .menuButton:active {
+        outline: 0.25rem solid #2491ff;
+        outline-offset: 0.25rem
+    }
 `;
 
 const NavMobileContainer = styled.div`

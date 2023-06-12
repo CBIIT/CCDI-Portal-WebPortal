@@ -173,14 +173,13 @@ const Dropdown = styled.div`
 
 const DropdownContainer = styled.div`
     margin: 0 auto;
-    width: 1440px;
     text-align: left;
     position: relative;
 
     .dropdownList {
       background: #1A5255;
       display: grid;
-      grid-column-gap: 30px;
+      grid-column-gap: 2%;
       grid-template-columns: 32% 32% 32%;
       padding: 32px 140px 0 140px;
     }

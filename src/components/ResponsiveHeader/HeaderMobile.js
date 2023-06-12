@@ -96,7 +96,7 @@ const MenuArea = styled.div`
         outline: 0.25rem solid #2491ff;
         outline-offset: 0.5rem
     }
-    
+
     .backButton {
         font-family: Open Sans;
         font-weight: 600;
@@ -134,6 +134,10 @@ const MenuArea = styled.div`
 
     .navMobileItem:hover {
         background-color: #f9f9f7;
+    }
+
+    .navMobileItem:active {
+        outline: 0.25rem solid #2491ff;
     }
 
     .SubItem {

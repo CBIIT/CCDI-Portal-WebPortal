@@ -136,6 +136,10 @@ const MenuArea = styled.div`
         background-color: #f9f9f7;
     }
 
+    .navMobileItem:active {
+        outline: 0.25rem solid #2491ff;
+    }
+
     .SubItem {
         padding-left: 24px;
     }

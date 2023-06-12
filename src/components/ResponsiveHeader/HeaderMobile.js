@@ -92,6 +92,11 @@ const MenuArea = styled.div`
         cursor: pointer;
     }
 
+    .closeIconImg: active {
+        outline: 0.25rem solid #2491ff;
+        outline-offset: 0.5rem
+    }
+    
     .backButton {
         font-family: Open Sans;
         font-weight: 600;

@@ -132,7 +132,7 @@ const FooterLinksContainer = styled.div`
     font-size: 16px;
     line-height: 20px;
     color: #FFFFFF;
-    padding: 1rem 0 1rem 0rem;
+    padding: 1rem 0.5rem 1rem 0.5rem;
     font-size: 16px;
     border: none;
     cursor: pointer;
@@ -142,7 +142,6 @@ const FooterLinksContainer = styled.div`
     position: relative;
     display: inline-block;
     border-bottom: 1px solid black;
-    padding 0 0.5rem 0 0.5rem;
   }
 
   .dropdown-content {

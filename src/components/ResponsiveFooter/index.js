@@ -17,7 +17,7 @@ const FooterContainer = styled.div`
     }
   }
 
-  @media (min-width:768px) and (max-width: 1203px) {
+  @media (min-width:768px) and (max-width: 1204px) {
     .desktop {
       display: none;
     }
@@ -29,7 +29,7 @@ const FooterContainer = styled.div`
     }
   }
 
-  @media (min-width: 375px) and (max-width: 767px) {
+  @media (max-width: 767px) {
     .desktop {
       display: none;
     }

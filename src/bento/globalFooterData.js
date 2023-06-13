@@ -58,6 +58,7 @@ export default {
           text: 'Vulnerability Disclosure',
           link: 'https://www.hhs.gov/vulnerability-disclosure-policy/index.html',
         },
+        
       ],
     },
   ],
@@ -91,6 +92,14 @@ export default {
   contact_links: [
     {
       text: 'NCIChildhoodCancerDataInitiative@mail.nih.gov',
+      link: 'mailto:NCIChildhoodCancerDataInitiative@mail.nih.gov',
+    },
+    {
+      text: 'test@mail.nih.gov',
+      link: 'mailto:NCIChildhoodCancerDataInitiative@mail.nih.gov',
+    },
+    {
+      text: 'test@mail.nih.gov',
       link: 'mailto:NCIChildhoodCancerDataInitiative@mail.nih.gov',
     },
   ],

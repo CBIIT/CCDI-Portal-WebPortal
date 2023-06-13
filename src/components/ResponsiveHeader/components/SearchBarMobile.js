@@ -9,13 +9,13 @@ const SearchBarContainer = styled.div`
 
     .searchBar {
       margin-left: auto;
-      width: 224px;
-      height: 45px;
+      width: 303px;
+      height: 43px;
       border: 1px solid #71767A;
     }
 
     .searchButton {
-      height: 45px;
+      height: 43px;
       font-family: Open Sans;
       font-weight: 700;
       font-size: 1rem;
@@ -23,7 +23,7 @@ const SearchBarContainer = styled.div`
       text-align: center;
       color: #FFFFFF;
       background: #007BBD;
-      padding: 10px 13px;
+      padding: 10px 14px;
       border-radius: 0px 5px 5px 0px;
     }
 
@@ -32,9 +32,9 @@ const SearchBarContainer = styled.div`
       background: #004971;
     }
 
-    @media (max-width: 431px) {
+    @media (max-width: 512px) {
       .searchBar {
-        width: calc(100vw - 200px);
+        width: calc(100vw - 210px);
       }
     }
 `;
@@ -49,12 +49,12 @@ const SearchInput = styled.input`
   line-height: 47px;
   color: #1b1b1b;
   // width: 168px;
-  width: 224px;
-  height: 45px;
+  width: 303px;
+  height: 43px;
   background: transparent;
 
-  @media (max-width: 431px) {
-    width: calc(100vw - 200px);
+  @media (max-width: 512px) {
+    width: calc(100vw - 210px);
   }
 
   ::placeholder {

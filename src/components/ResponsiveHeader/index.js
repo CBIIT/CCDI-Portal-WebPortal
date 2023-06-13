@@ -5,7 +5,7 @@ import HeaderTablet from './HeaderTablet';
 import HeaderMobile from './HeaderMobile';
 
 const HeaderContainer = styled.div`
- @media (min-width: 1204px) {
+ @media (min-width: 1024px) {
     .desktop {
       display: block;
     }
@@ -17,7 +17,7 @@ const HeaderContainer = styled.div`
     }
   }
 
-  @media (min-width:768px) and (max-width: 1203px) {
+  @media (min-width:768px) and (max-width: 1023px) {
     .desktop {
       display: none;
     }
@@ -30,6 +30,18 @@ const HeaderContainer = styled.div`
   }
 
   @media (min-width: 375px) and (max-width: 767px) {
+    .desktop {
+      display: none;
+    }
+    .tablet {
+      display: none;
+    }
+    .mobile {
+      display: block;
+    }
+  }
+
+  @media (max-width: 375px) {
     .desktop {
       display: none;
     }

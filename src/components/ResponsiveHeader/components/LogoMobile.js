@@ -6,12 +6,12 @@ const LogoArea = styled.div`
     display: flex;
 
     .logoContainer {
-      margin-top: 20px;
+      margin-top: 32px;
     }
 
     .imgContainer {
-        width: 319px;
-        height: 52px;
+        width: 230px;
+        height: 37.5px;
         background-image: url(${headerData.globalHeaderLogoSmall});
         background-size: contain;
     }
@@ -23,7 +23,6 @@ const Logo = () => {
     <LogoArea>
         <a className='logoContainer' href={headerData.globalHeaderLogoLink}>
             <div className='imgContainer' />
-            {/* <img src={headerData.globalHeaderLogo} alt={headerData.globalHeaderLogoAltText} /> */}
         </a>
     </LogoArea>
   );

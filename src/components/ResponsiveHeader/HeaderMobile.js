@@ -24,8 +24,8 @@ const HeaderContainer = styled.div`
 
     .headerLowerContainer {
         display: flex;
-        margin: 16px 0 5px 0;
-        height: 56px;
+        margin: 16px 0 4px 0;
+        height: 51px;
     }
 
     .menuButton {

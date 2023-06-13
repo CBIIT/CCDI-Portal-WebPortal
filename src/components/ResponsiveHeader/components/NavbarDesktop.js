@@ -18,13 +18,13 @@ const Nav = styled.div`
       // opacity: 0;
       margin: 0 auto;
       position: relative;
-      width: 1440px;
+      width: 1420px;
     }
  `;
 
 const NavContainer = styled.div`
     margin: 0 auto;
-    width: 1440px;
+    width: 1420px;
     text-align: left;
     position: relative;
 `;

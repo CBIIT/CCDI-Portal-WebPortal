@@ -83,7 +83,7 @@ const LiSection = styled.li`
       height: 6px;
       border-bottom: 1px solid #298085;
       border-left: 1px solid #298085;
-      margin: 0 0 4px 8px
+      margin: 0 0 4px 8px;
       transform: rotate(-45deg);
       -webkit-transform: rotate(-45deg);
     }

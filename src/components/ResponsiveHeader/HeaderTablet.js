@@ -1,154 +1,210 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import {useLocation, useNavigate} from 'react-router-dom';
-import headerData from '../../bento/globalHeaderData';
-import clearIcon from '../../assets/header/Clear_Icon.svg'
+import Logo from '../ResponsiveHeader/components/LogoTablet';
+import SearchBar from '../ResponsiveHeader/components/SearchBarTablet';
+import menuClearIcon from '../../assets/header/Menu_Cancel_Icon.svg';
+import rightArrowIcon from '../../assets/header/Right_Arrow.svg';
+import leftArrowIcon from '../../assets/header/Left_Arrow.svg';
+import { navMobileList, navbarSublists } from '../../bento/navigationBarData'
 
 const HeaderBanner = styled.div`
   width: 100%;
 `;
 
 const HeaderContainer = styled.div`
-    display: flex;
-    width: 1440px;
-    height: 90px;
     margin: 0 auto;
-    padding-left: 60px;
-    img {
-      width: 455px;
-      height: 56px;
+    padding-left: 16px;
+    box-shadow: -0.1px 6px 9px -6px rgba(0, 0, 0, 0.5);
+
+    .searchBarArea {
+        padding: 0 16px 0 0;
+        margin-left: auto;
     }
 
-    .logoContainer {
-      margin-top: 20px;
+    .headerLowerContainer {
+        display: flex;
+        margin: 16px 0 4px 0;
+        height: 51px;
     }
 
-    .searchBarContainer {
-      padding: 5px 60px 0 0;
-      margin-left: auto;
-      display: flex;
+    .menuButton {
+        width: 89px;
+        height: 45px;
+        background: #1F4671;
+        border-radius: 5px;
+        font-family: 'Open Sans';
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 45px;
+        color: #FFFFFF;
+        text-align: center;
     }
 
-    .searchBar {
-      margin-top: 23px;
-      margin-left: auto;
-      width: 224px;
-      height: 32px;
-      border: 1px solid #71767A;
+    .menuButton:hover {
+        cursor: pointer;
     }
 
-    .searchButton {
-      height: 32px;
-      font-family: Open Sans;
-      font-weight: 700;
-      font-size: 1rem;
-      line-height: 33px;
-      text-align: center;
-      color: #FFFFFF;
-      background: #007BBD;
-      margin-top: 23px;
-      padding: 0 13px;
-      border-radius: 0px 5px 5px 0px;
-    }
-
-    .searchButton:hover {
-      cursor: pointer;
-      background: #004971;
+    .menuButton:active {
+        outline: 0.25rem solid #2491ff;
+        outline-offset: 0.25rem
     }
 `;
 
-const SearchInput = styled.input`
-  margin: -1px 0 0 -1px;
-  padding: 0 7px;
-  border: none;
-  font-family: Open Sans;
-  font-weight: 400;
-  font-size: 1rem;
-  line-height: 42px;
-  color: #1b1b1b;
-  width: 224px;
-  height: 32px;
-  background: transparent;
-
-  ::placeholder {
-    color: #004A8B;
-  }
-
-  :focus {
-    outline: 0.25rem solid #2491ff;
-  }
-
-  input[type="search"]::-webkit-search-cancel-button {
-    position: relative;
-    -webkit-appearance: none;
-    height: 20px;
-    width: 20px;
-    background: url(${clearIcon}) right center no-repeat;
-    background-image: url(${clearIcon}) red;
-    background-size: 20px;
-    cursor: pointer;
-  }
-
-  input[type="search"]:focus::-webkit-search-cancel-button {
-    position: relative;
-    -webkit-appearance: none;
-    height: 20px;
-    width: 20px;
-    background: url(${clearIcon}) right center no-repeat;
-    background-image: url(${clearIcon}) red;
-    background-size: 20px;
-    cursor: pointer;
-  }
-}
+const NavMobileContainer = styled.div`
+    // display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1200;
 `;
 
-const HeaderTablet = () => {
+const MenuArea = styled.div`
+    height: 100%;
+    width: 100%;
+    display: flex;
+
+    .menuContainer {
+        background: #ffffff;
+        width: 385px;
+        height: 100%;
+        padding: 21px 16px;
+    }
+
+    .greyContainer {
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,.2);
+    }
+
+    .closeIcon {
+        height: 14px;
+        margin-bottom: 29px;
+    }
+
+    .closeIconImg {
+        float: right;
+    }
+
+    .closeIconImg:hover {
+        cursor: pointer;
+    }
+
+    .closeIconImg: active {
+        outline: 0.25rem solid #2491ff;
+        outline-offset: 0.5rem
+    }
+
+    .backButton {
+        font-family: Open Sans;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 16px;
+        color: #007BBD;
+        padding-left: 16px;
+        background: url(${leftArrowIcon}) left no-repeat;
+    }
+
+    .backButton:hover {
+        cursor: pointer;
+    }
+
+    .backButton:active {
+        outline: 0.25rem solid #2491ff;
+        outline-offset: 0.5rem;
+    }
+
+    .navMobileContainer {
+        padding: 24px 0 0 0;
+
+        a {
+            text-decoration: none;
+            color: #3D4551;
+        }
+    }
+
+    .navMobileItem {
+        width: 353px;
+        padding: 8px 24px 8px 16px;
+        font-family: Open Sans;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 16px;
+        border-top: 1px solid #F0F0F0;
+        border-bottom: 1px solid #F0F0F0;
+        color: #3D4551;
+    }
+
+    .navMobileItem:hover {
+        background-color: #f9f9f7;
+    }
+
+    .navMobileItem:active {
+        outline: 0.25rem solid #2491ff;
+    }
+
+    .SubItem {
+        padding-left: 24px;
+    }
+
+    .clickable {
+        background: url(${rightArrowIcon}) 90% no-repeat;
+    }
+
+    .clickable {
+        cursor: pointer;
+    }
+`;
+
+const Header = () => {
   const path = useLocation().pathname;
-  const navigate = useNavigate();
-  const [localText, setLocalText] = useState("");
-
-  const handleTextInputChange = (event) => {
-    const text = event.target.value;
-    setLocalText(text);
-  };
-
-  const handleKeyPress = (event) => {
-    if (event.key === "Enter") {
-      navigate(`/sitesearch?keyword=${localText.trim()}`);
-      setLocalText("");
-    }
-  };
-
-  const handleSearch = () => {
-    navigate(`/sitesearch?keyword=${localText.trim()}`);
-    setLocalText("");
-  };
-
+  const [navMobileDisplay, setNavMobileDisplay] = useState('none');
+  const [navbarMobileList, setNavbarMobileList] = useState(navMobileList);
+  
+  const clickNavItem = (e) => {
+    const clickTitle = e.target.innerText;
+    setNavbarMobileList(navbarSublists[clickTitle]);
+  }
+  
   return (
     <>
       <HeaderBanner role="banner">
         <HeaderContainer>
-          <a className='logoContainer' href={headerData.globalHeaderLogoLink}>
-            <img src={headerData.globalHeaderLogo} alt={headerData.globalHeaderLogoAltText} />
-          </a>
-          {
-            path !== "/sitesearch"
-            && (
-              <div className='searchBarContainer'>
-                <div className='searchBar'>
-                  <label>
-                    <div style={{display:"none"}}>search</div>
-                    <SearchInput type="search" value={localText} placeholder="" onChange={handleTextInputChange} onKeyPress={handleKeyPress} />
-                  </label>
-                </div>
-                <div className='searchButton'  onClick={handleSearch}>Search</div>
-              </div>
-            )
-          }
+          <Logo />
+          <div className='headerLowerContainer'>
+            <div className='menuButton' onClick={() => setNavMobileDisplay('block')}>Menu</div>
+            { path !== "/sitesearch" && <div className='searchBarArea'><SearchBar /></div> }
+          </div>
         </HeaderContainer>
       </HeaderBanner>
+      <NavMobileContainer style={{display: navMobileDisplay}}>
+        <MenuArea>
+            <div className='menuContainer'>
+                <div className='closeIcon' onClick={() => setNavMobileDisplay('none')}><img className='closeIconImg' src={menuClearIcon} alt="menuClearButton" /></div>
+                { navbarMobileList !== navMobileList && <div className='backButton' onClick={() => setNavbarMobileList(navMobileList)}>Main Menu</div>}
+                <div className='navMobileContainer'>
+                    {
+                        navbarMobileList.map((navMobileItem, idx) => {
+                            const mobilekey = `mobile_${idx}`;
+                            return (
+                                <>
+                                    {navMobileItem.className === 'navMobileItem' && <NavLink to={navMobileItem.link} key={mobilekey} onClick={() => setNavMobileDisplay('none')}><div className='navMobileItem'>{navMobileItem.name}</div></NavLink>}
+                                    {navMobileItem.className === 'navMobileItem clickable' && <div key={mobilekey} className='navMobileItem clickable' onClick={clickNavItem}>{navMobileItem.name}</div>}
+                                    {navMobileItem.className === 'navMobileSubItem' && <a href={navMobileItem.link} key={mobilekey}><div className='navMobileItem SubItem' onClick={() => setNavMobileDisplay('none')}>{navMobileItem.name}</div></a>}
+                                    {navMobileItem.className === 'navMobileSubTitle' && <div key={mobilekey} className='navMobileItem'>{navMobileItem.name}</div>}
+                                </>
+                            )
+                        })
+                    }
+                </div>
+            </div>
+            <div className='greyContainer' onClick={() => setNavMobileDisplay('none')}/>
+        </MenuArea>
+      </NavMobileContainer>
     </>
   );
 };
 
-export default HeaderTablet;
+export default Header;

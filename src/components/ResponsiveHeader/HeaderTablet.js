@@ -167,7 +167,7 @@ const Header = () => {
     const clickTitle = e.target.innerText;
     setNavbarMobileList(navbarSublists[clickTitle]);
   }
-
+  
   return (
     <>
       <HeaderBanner role="banner">

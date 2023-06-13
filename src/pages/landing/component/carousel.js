@@ -8,6 +8,25 @@ import arrowIcon from '../../../assets/landing/arrow.svg';
 let timer = null;
 let direction = "d";
 
+const HeroListWholeContainer = styled.div`
+    .pauseButton {
+        position: absolute;
+        right: 60px;
+        top: 705px;
+        color: #05555C;
+        font-family: Inter;
+        font-weight: 600;
+        font-size: 13px;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        z-index: 500;
+    }
+
+    .pauseButton:hover {
+        cursor: pointer;
+    }
+`;
+
 const HeroListContainer = styled.div`
     position: relative;
 
@@ -278,6 +297,7 @@ const getRandomList = (itemList) => {
 
 const Carousel = () => {
     const [rCarouselList, setRCarouselList] = useState([]);
+    const [pause, setPause] = useState(false);
     const isVisible = usePageVisibility();
 
     const startTimer = () => {
@@ -304,7 +324,9 @@ const Carousel = () => {
 
     const nextSlide = () => {
         direction = "d";
-        resetTimer();
+        if (!pause) {
+            resetTimer();
+        }
         nextItem();
     };
 
@@ -317,9 +339,36 @@ const Carousel = () => {
 
     const prevSlide = () => {
         direction = "u";
-        resetTimer();
+        if (!pause) {
+            resetTimer();
+        }
         prevItem();
     };
+
+    const clickPause = () => {
+        if (pause) {
+            resetTimer();
+        } else {
+            clearInterval(timer);
+        }
+        setPause(!pause);
+    }
+
+    const keyDownPause = (e) => {
+        if (e.code === 'Enter') {
+            clickPause();
+        }
+    }
+
+    const mouseIn = () => {
+        clearInterval(timer);
+        setPause(true);
+    }
+
+    const mouseOut = () => {
+        resetTimer();
+        setPause(false);
+    }
 
     useEffect(() => {
         if (rCarouselList.length === 0) {
@@ -335,38 +384,41 @@ const Carousel = () => {
     }, [isVisible]);
 
     return (
-        <HeroListContainer onMouseEnter={() => clearInterval(timer)} onMouseLeave={()=>{resetTimer()}}>
-            <div className='upButton' onClick={prevSlide}>
-                <div className="arrowUp"></div>
-            </div>
-            <div className='downButton' onClick={nextSlide}>
-                <div className="arrowDown"></div>
-            </div>
-            <div className="arrowLeft"/>
-            <div className="arrowRight"/>
-            <HeroList>
-                <div className='blurTop' />
-                <div className='blurBottom' />
-                <div className='activeFrame'/>
-                    <div id="carouselList" className='carousel'>
-                        {
-                            rCarouselList.map((item, idx) => {
-                                const key = `carousel_${idx}_last_clone`;
-                                return (
-                                    <div key={key} className='carousel__item'>
-                                        <div className='itemImgBox'><img className='itemImg' src={item.img} alt={key} width="243px" height="102px" /></div>
-                                        <a className='listItemContent' href={item.link} target="_blank" rel="noopener noreferrer">{item.content}</a>
-                                        <a className="exportContainer" href={item.link} target="_blank" rel="noopener noreferrer">
-                                            <img className='exportIcon' src={exportIcon} alt="exportIcon"/>
-                                        </a>
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
+        <HeroListWholeContainer>
+            <div className='pauseButton' onClick={clickPause} onKeyPress={keyDownPause} tabindex="0">PAUSE</div>
+            <HeroListContainer onMouseEnter={mouseIn} onMouseLeave={mouseOut}>
+                <div className='upButton' onClick={prevSlide}>
+                    <div className="arrowUp"></div>
+                </div>
+                <div className='downButton' onClick={nextSlide}>
+                    <div className="arrowDown"></div>
+                </div>
+                <div className="arrowLeft"/>
+                <div className="arrowRight"/>
+                <HeroList>
+                    <div className='blurTop' />
+                    <div className='blurBottom' />
+                    <div className='activeFrame'/>
+                        <div id="carouselList" className='carousel'>
+                            {
+                                rCarouselList.map((item, idx) => {
+                                    const key = `carousel_${idx}_last_clone`;
+                                    return (
+                                        <div key={key} className='carousel__item'>
+                                            <div className='itemImgBox'><img className='itemImg' src={item.img} alt={key} width="243px" height="102px" /></div>
+                                            <a className='listItemContent' href={item.link} target="_blank" rel="noopener noreferrer">{item.content}</a>
+                                            <a className="exportContainer" href={item.link} target="_blank" rel="noopener noreferrer">
+                                                <img className='exportIcon' src={exportIcon} alt="exportIcon"/>
+                                            </a>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
 
-            </HeroList>
-        </HeroListContainer>
+                </HeroList>
+            </HeroListContainer>
+        </HeroListWholeContainer>
     );
 };
 

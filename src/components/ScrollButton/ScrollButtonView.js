@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { ReactComponent as ScrollToTopButton } from '../../assets/icons/Scroll_to_top.svg';
+import backToTopButton from '../../assets/icons/Scroll_to_top.svg';
+import arrowUpButton from '../../assets/icons/Arrow_Up.svg';
 
 const Button = styled.div`
    position: fixed; 
@@ -11,6 +12,11 @@ const Button = styled.div`
    z-index: 10;
    cursor: pointer;
    transition: all 0.25s ease-out;
+   background-image: url(${backToTopButton});
+
+   @media (max-width: 1023px) {
+    background-image: url(${arrowUpButton});
+   }
 `;
 
 const ScrollButton = () => {
@@ -45,9 +51,7 @@ const ScrollButton = () => {
                     : {
                         opacity: 0,
                         visibility: "hidden",
-                    }}>
-            <ScrollToTopButton />
-        </Button>
+                    }} />
     );
 };
 

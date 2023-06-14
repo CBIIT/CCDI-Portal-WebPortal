@@ -22,7 +22,7 @@ const FooterContainer = styled.div`
 `;
 
 const FooterEmailSignupContainer = styled.form`
-  width: 479px;
+  width: 33.3%;
   .signUpTitle {
     font-family: poppins;
     font-weight: 700;
@@ -88,10 +88,14 @@ const FooterEmailSignupContainer = styled.form`
 `;
 
 const FooterLinksContainer = styled.div`
+  width: 66.7%;
   display: flex;
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
 
   .footItem {
-    width: 253px; 
+    padding: 0 16px 32px 16px;
+    margin-bottom: 24px;
   }
 
   .footItemTitle {
@@ -226,55 +230,10 @@ const BottomFooter = styled.div`
     font-family: 'Open Sans';
     font-style: normal;
     font-weight: 400;
-    font-size: 1.01rem;    
+    font-size: 14px;    
     line-height: 1.6;
     text-align: right;
     color: #FFFFFF;
-  }
-
-  @media (max-width: 1023px) {
-    #bottom-footer-header {
-        margin-left: 1rem;
-    }
-
-    .bottom-footer-container {
-        flex-direction: column;
-    }
-
-    .break {
-        display: none;
-    }
-
-    #bottom-footer-contact-us {
-        margin-left: 1rem;
-        margin-top: 0.5rem;
-        text-align: left;
-    }
-
-    #bottom-footer-contact-links a {
-        display: block;
-        margin-left: 0px;
-        margin-right: 10px;
-        white-space: nowrap;
-    }
-    #bottom-footer-gov-links {
-        text-align: left;
-    }
-    #bottom-footer-follow-us-links {
-        margin-top: 0.75rem;
-    }
-    #bottom-footer-follow-us {
-        margin-top: 0.75rem;
-        margin-left: 1rem;
-    }
-    #bottom-footer-gov-links {
-        margin-right: 0px;
-        margin-top: 0.75rem;
-        margin-left: 1rem;
-    }
-    #bottom-footer-gov-links a {
-        text-align: left;
-    }
   }
 `;
 

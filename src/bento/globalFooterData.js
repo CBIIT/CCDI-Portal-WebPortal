@@ -94,14 +94,6 @@ export default {
       text: 'NCIChildhoodCancerDataInitiative@mail.nih.gov',
       link: 'mailto:NCIChildhoodCancerDataInitiative@mail.nih.gov',
     },
-    {
-      text: 'test@mail.nih.gov',
-      link: 'mailto:NCIChildhoodCancerDataInitiative@mail.nih.gov',
-    },
-    {
-      text: 'test@mail.nih.gov',
-      link: 'mailto:NCIChildhoodCancerDataInitiative@mail.nih.gov',
-    },
   ],
   global_footer_links: [
     {

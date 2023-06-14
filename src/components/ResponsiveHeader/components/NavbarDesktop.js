@@ -10,7 +10,7 @@ const Nav = styled.div`
     background: #ffffff;
     box-shadow: -0.1px 6px 9px -6px rgba(0, 0, 0, 0.5);
     z-index: 1100;
-    position: relative
+    position: relative;
 
     .dropdownContainer {
       // outline: none;
@@ -96,7 +96,7 @@ const LiSection = styled.li`
     height: 6px;
     border-bottom: 1px solid #585C65;
     border-left: 1px solid #585C65;
-    margin: 0 0 4px 8px
+    margin: 0 0 4px 8px;
     transform: rotate(-45deg);
     -webkit-transform: rotate(-45deg);
   }
@@ -111,7 +111,7 @@ const LiSection = styled.li`
     border-right: 1px solid #FFFFFF;
     border-bottom: 0;
     border-left: 0;
-    margin: 0 0 0 8px
+    margin: 0 0 0 8px;
   }
 
   .clicked:hover {
@@ -127,7 +127,7 @@ const LiSection = styled.li`
       border-right: 1px solid #FFFFFF;
       border-bottom: 0;
       border-left: 0;
-      margin: 0 0 0 8px
+      margin: 0 0 0 8px;
       transform: rotate(-45deg);
       -webkit-transform: rotate(-45deg);
     }

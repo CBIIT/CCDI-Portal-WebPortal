@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useLocation, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import { navMobileList, navbarSublists } from '../../../bento/navigationBarData';
+import { navMobileList, navbarSublists } from '../../../bento/globalHeaderData';
 
 const Nav = styled.div`
     top: 0;
@@ -83,7 +83,7 @@ const LiSection = styled.li`
       height: 6px;
       border-bottom: 1px solid #298085;
       border-left: 1px solid #298085;
-      margin: 0 0 4px 8px
+      margin: 0 0 4px 8px;
       transform: rotate(-45deg);
       -webkit-transform: rotate(-45deg);
     }
@@ -175,7 +175,7 @@ const DropdownContainer = styled.div`
     margin: 0 auto;
     text-align: left;
     position: relative;
-    max-width: 1440px;
+    max-width: 1420px;
 
     .dropdownList {
       background: #1A5255;

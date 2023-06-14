@@ -11,7 +11,7 @@ const FooterStyled = styled.footer`
 
 
 const FooterContainer = styled.div`
-  max-width: 1440px;
+  max-width: 1420px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -249,6 +249,7 @@ const BottomFooter = styled.div`
     display: block;
     margin-left: 0px;
     margin-right: 10px;
+    line-break: anywhere;
   }
 
 
@@ -294,7 +295,6 @@ const BottomFooter = styled.div`
   #bottom-footer-gov-links {
       margin-right: 0px;
       margin-top: 0.75rem;
-  }
   }
 `;
 

@@ -6,7 +6,7 @@ import SearchBar from '../ResponsiveHeader/components/SearchBarMobile';
 import menuClearIcon from '../../assets/header/Menu_Cancel_Icon.svg';
 import rightArrowIcon from '../../assets/header/Right_Arrow.svg';
 import leftArrowIcon from '../../assets/header/Left_Arrow.svg';
-import { navMobileList, navbarSublists } from '../../bento/navigationBarData'
+import { navMobileList, navbarSublists } from '../../bento/globalHeaderData'
 
 const HeaderBanner = styled.div`
   width: 100%;
@@ -45,10 +45,10 @@ const HeaderContainer = styled.div`
         cursor: pointer;
     }
 
-    .menuButton:active {
-        outline: 0.25rem solid #2491ff;
-        outline-offset: 0.25rem
-    }
+    // .menuButton:active {
+    //     outline: 0.25rem solid #2491ff;
+    //     outline-offset: 0.25rem
+    // }
 `;
 
 const NavMobileContainer = styled.div`
@@ -92,10 +92,10 @@ const MenuArea = styled.div`
         cursor: pointer;
     }
 
-    .closeIconImg: active {
-        outline: 0.25rem solid #2491ff;
-        outline-offset: 0.5rem
-    }
+    // .closeIconImg:active {
+    //     outline: 0.25rem solid #2491ff;
+    //     outline-offset: 0.5rem
+    // }
 
     .backButton {
         font-family: Open Sans;
@@ -111,10 +111,10 @@ const MenuArea = styled.div`
         cursor: pointer;
     }
 
-    .backButton:active {
-        outline: 0.25rem solid #2491ff;
-        outline-offset: 0.5rem;
-    }
+    // .backButton:active {
+    //     outline: 0.25rem solid #2491ff;
+    //     outline-offset: 0.5rem;
+    // }
 
     .navMobileContainer {
         padding: 24px 0 0 0;
@@ -141,9 +141,9 @@ const MenuArea = styled.div`
         background-color: #f9f9f7;
     }
 
-    .navMobileItem:active {
-        outline: 0.25rem solid #2491ff;
-    }
+    // .navMobileItem:active {
+    //     outline: 0.25rem solid #2491ff;
+    // }
 
     .SubItem {
         padding-left: 24px;

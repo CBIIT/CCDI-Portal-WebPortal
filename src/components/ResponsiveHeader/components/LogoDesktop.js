@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import headerData from '../../../bento/globalHeaderData';
+import { headerData } from '../../../bento/globalHeaderData';
 
 const LogoArea = styled.div`
     display: flex;

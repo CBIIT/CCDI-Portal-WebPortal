@@ -4,7 +4,7 @@ import searchbarIcon from '../assets/header/Search_Icon.svg';
 
 // globalHeaderLogo image 468x100
 // globalHeaderImage: image 2200x100
-export default {
+export const headerData = {
   globalHeaderLogo: Logo,
   globalHeaderLogoSmall: LogoSmall,
   globalHeaderLogoLink: '/',

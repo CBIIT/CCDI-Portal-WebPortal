@@ -6,7 +6,7 @@ import SearchBar from '../ResponsiveHeader/components/SearchBarTablet';
 import menuClearIcon from '../../assets/header/Menu_Cancel_Icon.svg';
 import rightArrowIcon from '../../assets/header/Right_Arrow.svg';
 import leftArrowIcon from '../../assets/header/Left_Arrow.svg';
-import { navMobileList, navbarSublists } from '../../bento/navigationBarData'
+import { navMobileList, navbarSublists } from '../../bento/globalHeaderData'
 
 const HeaderBanner = styled.div`
   width: 100%;

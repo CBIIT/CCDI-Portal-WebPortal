@@ -12,7 +12,7 @@ const FooterStyled = styled.footer`
 `;
 
 const FooterContainer = styled.div`
-  padding 2rem 1rem 2rem 1rem;
+  padding 2rem 1rem 0 1rem;
   max-width: 1420px;
   margin-left: auto;
   margin-right: auto;  
@@ -22,7 +22,7 @@ const FooterContainer = styled.div`
 `;
 
 const FooterEmailSignupContainer = styled.form`
-  width: 479px;
+  width: 33.3%;
   .signUpTitle {
     font-family: poppins;
     font-weight: 700;
@@ -88,10 +88,14 @@ const FooterEmailSignupContainer = styled.form`
 `;
 
 const FooterLinksContainer = styled.div`
-  display: flex;
+  width: 66.7%;
+  display: grid;
+  grid-column-gap: 4%;
+  grid-template-columns: 46% 46%;
 
   .footItem {
-    width: 253px; 
+    padding-bottom: 32px;
+    margin-bottom: 24px;
   }
 
   .footItemTitle {
@@ -246,7 +250,6 @@ const BottomFooter = styled.div`
   #bottom-footer-gov-links {
       margin-right: 0px;
       margin-top: 0.75rem;
-  }
   }
 `;
 

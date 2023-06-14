@@ -230,7 +230,7 @@ const BottomFooter = styled.div`
     font-family: 'Open Sans';
     font-style: normal;
     font-weight: 400;
-    font-size: 1.01rem;    
+    font-size: 14px;    
     line-height: 1.6;
     text-align: right;
     color: #FFFFFF;

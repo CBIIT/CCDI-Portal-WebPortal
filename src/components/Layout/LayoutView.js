@@ -16,7 +16,6 @@ const Layout = () => {
     <>
       <CssBaseline />
         <Header />
-        {/* <NavBar /> */}
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />

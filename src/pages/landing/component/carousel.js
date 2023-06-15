@@ -361,13 +361,15 @@ const Carousel = () => {
     }
 
     const mouseIn = () => {
-        clearInterval(timer);
-        setPause(true);
+        if (!pause) {
+            clearInterval(timer);
+        }
     }
 
     const mouseOut = () => {
-        resetTimer();
-        setPause(false);
+        if (!pause) {
+            resetTimer();
+        }
     }
 
     useEffect(() => {
@@ -385,7 +387,7 @@ const Carousel = () => {
 
     return (
         <HeroListWholeContainer>
-            <div className='pauseButton' onClick={clickPause} onKeyPress={keyDownPause} tabindex="0">PAUSE</div>
+            <div className='pauseButton' onClick={clickPause} onKeyPress={keyDownPause} tabindex="0">{pause ? 'START' : 'PAUSE'}</div>
             <HeroListContainer onMouseEnter={mouseIn} onMouseLeave={mouseOut}>
                 <div className='upButton' onClick={prevSlide}>
                     <div className="arrowUp"></div>

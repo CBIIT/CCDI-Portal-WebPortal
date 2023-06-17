@@ -8,6 +8,8 @@ import About from '../../pages/about/aboutView';
 import News from '../../pages/news/newsView';
 import Error from '../../pages/error/Error';
 import Search from '../../pages/search/searchView';
+import Inventory from '../../pages/inventory/inventoryView';
+import Cart from '../../pages/cart/cartController';
 import ScrollButton from '../ScrollButton/ScrollButtonView';
 // import NewsDetail from '../../pages/news/newsDetailView';
 
@@ -22,7 +24,8 @@ const Layout = () => {
           <Route path="/about" element={<About />} />
           <Route path="/news" element={<News />} />
           <Route path="/sitesearch" element={<Search />} />
-          {/* <Route path="/newsdetail/:id" element={<NewsDetail />} /> */}
+          <Route path="/inventory" element={<Inventory />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="*" element={<Error />} />
         </Routes>
         <Footer />

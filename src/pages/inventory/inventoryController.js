@@ -14,20 +14,11 @@ const getDashData = (states) => {
 
   const client = useApolloClient();
   async function getData(activeFilters) {
-    // let result = await client.query({
-    //   query: DASHBOARD_QUERY_NEW,
-    //   variables: activeFilters,
-    // })
-    //   .then((response) => response.data);
-    const result = {
-      "numberOfPrograms": 1,
-      "numberOfStudies": 1,
-      "numberOfSubjects": 2,
-      "numberOfSamples": 3,
-      "numberOfLabProcedures": 4,
-      "numberOfFiles": 5
-    }
-    console.log(result);
+    let result = await client.query({
+      query: DASHBOARD_QUERY_NEW,
+      variables: activeFilters,
+    })
+      .then((response) => response.data);
     return result;
   }
 
@@ -56,7 +47,7 @@ const getDashData = (states) => {
 const InventoryController = ((props) => {
   const { dashData, activeFilters } = getDashData(props);
 
-  console.log("adfasdf");
+  console.log(dashData);
 
   if (!dashData) {
     return (<CircularProgress />);

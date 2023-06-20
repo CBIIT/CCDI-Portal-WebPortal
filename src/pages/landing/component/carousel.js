@@ -385,7 +385,7 @@ const Carousel = () => {
 
     return (
         <HeroListWholeContainer>
-            <div className='pauseButton' onClick={clickPause} onKeyPress={keyDownPause} tabindex="0">PAUSE</div>
+            <div className='pauseButton' onClick={clickPause} onKeyPress={keyDownPause} tabIndex="0">PAUSE</div>
             <HeroListContainer onMouseEnter={mouseIn} onMouseLeave={mouseOut}>
                 <div className='upButton' onClick={prevSlide}>
                     <div className="arrowUp"></div>

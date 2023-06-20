@@ -344,7 +344,7 @@ const FooterMobile = () => {
                       </svg>
                       {linkItem.title}
                     </button>
-                    <div id={linkkey + "Dropdown"} class="dropdown-content">
+                    <div id={linkkey + "Dropdown"} className="dropdown-content">
                       {
                         linkItem.items.map((item, itemidx) => {
                           const itemkey = `item_${itemidx}`;
@@ -369,7 +369,7 @@ const FooterMobile = () => {
               </div>
               <div className={errorClass !== "" ? 'ErrorBorder' : null}>
                 <div className='enterTitle'>
-                  <label for="email"> Enter your email address</label>
+                  <label htmlFor="email"> Enter your email address</label>
                 </div>
                 <div className={errorClass}>
                   {errorClass !== "" ? <div className='enterTitle'>Enter a valid email address</div> : null}

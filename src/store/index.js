@@ -2,9 +2,21 @@ import { createStore, applyMiddleware, combineReducers } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import stats from './StatsState';
+import { sideBarReducerGenerator } from '@bento-core/facet-filter';
+import layout from '../components/Layout/LayoutState';
+import stats from '../components/Stats/StatsState';
+import { cartReducerGenerator } from '@bento-core/cart';
+import { LocalFindReducerGenerator } from '@bento-core/local-find';
+
+const { localFind } = LocalFindReducerGenerator();
+const { statusReducer } = sideBarReducerGenerator();
+const { cartReducer } = cartReducerGenerator();
 
 const reducers = {
+  localFind,
+  cartReducer,
+  statusReducer,
+  layout,
   stats,
 };
 const loggerMiddleware = createLogger();
@@ -20,3 +32,4 @@ store.injectReducer = (key, reducer) => {
 };
 
 export default store;
+

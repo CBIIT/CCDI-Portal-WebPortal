@@ -5,7 +5,9 @@ export const statsStyling = {
     horizontalStyle: false,
     statTitleFirst: false,
     height: '56px',
-    background: '#8DCAFF',
+    background: '#29B3BC',
+    top: '1px',
+    position: 'relative',
   },
   statsGroup: {
     margin: '6px 9.25px',

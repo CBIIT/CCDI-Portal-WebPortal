@@ -14,7 +14,7 @@ const Inventory = ({
 }) => (
   <div className={classes.dashboardContainer}>
     <StatsView data={dashData} />
-    <div>
+    <div className={classes.contentBox}>
       <div className={classes.content}>
         <div className={classes.sideBar}>
           <BentoFacetFilter

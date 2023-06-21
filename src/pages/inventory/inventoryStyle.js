@@ -2,6 +2,9 @@ export default () => ({
   dashboardContainer: {
     backgroundColor: '#FFFFFF',
   },
+  contentBox: {
+    paddingTop: '0px',
+  },
   content: {
     display: 'flex',
     maxWidth: '1800px',

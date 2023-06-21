@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import Logo from '../ResponsiveHeader/components/LogoDesktop'
 import SearchBar from './components/SearchBarDesktop'
 import NavBar from './components/NavbarDesktop';
+import Cart from './components/CartDesktop';
 
 const HeaderBanner = styled.div`
   width: 100%;
@@ -29,6 +30,10 @@ const HeaderContainer = styled.div`
   }
 `;
 
+const NavBarContainer = styled.div`
+  position: relative;
+`;
+
 const Header = () => {
   const path = useLocation().pathname;
 
@@ -41,7 +46,10 @@ const Header = () => {
             { path !== "/sitesearch" && <div className='searchBarArea'><SearchBar /></div> }
           </div>
         </HeaderContainer>
-        <div className='navbarContainer'><NavBar /></div>
+        <NavBarContainer>
+          <NavBar />
+          <Cart />
+        </NavBarContainer>
       </HeaderBanner>
     </>
   );

@@ -95,3 +95,11 @@ Applications: [
     className: 'navMobileSubItem',
   }],
 };
+
+export const navBarCartData = {
+  cartLabel: '',
+  cartLink: '/fileCentricCart',
+  cartIcon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/Icon-Cart-Navbar.svg',
+  cartIconAlt: 'cart_logo',
+  cartLabelType: 'labelUnderCount',
+};

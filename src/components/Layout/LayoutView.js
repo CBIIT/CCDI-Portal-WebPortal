@@ -25,7 +25,7 @@ const Layout = () => {
           <Route path="/news" element={<News />} />
           <Route path="/sitesearch" element={<Search />} />
           <Route path="/inventory" element={<Inventory />} />
-          <Route path="/cart" element={<Cart />} />
+          <Route path="/fileCentricCart" element={<Cart />} />
           <Route path="*" element={<Error />} />
         </Routes>
         <Footer />

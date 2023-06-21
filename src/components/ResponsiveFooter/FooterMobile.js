@@ -19,7 +19,7 @@ const FooterContainer = styled.div`
 `;
 
 const FooterEmailSignupContainer = styled.form`
-  padding 1rem 1rem 2rem 1rem;
+  padding: 1rem 1rem 2rem 1rem;
   .signUpTitle {
     font-family: poppins;
     font-weight: 700;
@@ -122,7 +122,7 @@ const FooterLinksContainer = styled.div`
   .dropbtn {
     display:flex;
     flex-direction: row;
-    vertical-align: middle
+    vertical-align: middle;
     text-align: left;
     background-color: #1B496E;
     width: 100%;

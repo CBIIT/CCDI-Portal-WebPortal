@@ -27,7 +27,7 @@ const HeaderContainer = styled.div`
 
     .searchBarArea {
       margin-top: 23px;
-  }
+    }
 `;
 
 const NavBarContainer = styled.div`

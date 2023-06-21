@@ -10,7 +10,7 @@ const Nav = styled.div`
     background: #ffffff;
     box-shadow: -0.1px 6px 9px -6px rgba(0, 0, 0, 0.5);
     z-index: 1100;
-    position: relative
+    position: relative;
 
     .dropdownContainer {
       // outline: none;
@@ -73,16 +73,16 @@ const LiSection = styled.li`
 
   .navText:hover {
     cursor: pointer;
-    color: #298085;
-    border-bottom: 4px solid #298085;
+    color: #3A75BD;
+    border-bottom: 4px solid #3A75BD;
 
     ::after {
       content: "";
       display: inline-block;
       width: 6px;
       height: 6px;
-      border-bottom: 1px solid #298085;
-      border-left: 1px solid #298085;
+      border-bottom: 1px solid #3A75BD;
+      border-left: 1px solid #3A75BD;
       margin: 0 0 4px 8px;
       transform: rotate(-45deg);
       -webkit-transform: rotate(-45deg);
@@ -96,14 +96,14 @@ const LiSection = styled.li`
     height: 6px;
     border-bottom: 1px solid #585C65;
     border-left: 1px solid #585C65;
-    margin: 0 0 4px 8px
+    margin: 0 0 4px 8px;
     transform: rotate(-45deg);
     -webkit-transform: rotate(-45deg);
   }
 
   .clicked {
     color: #FFFFFF;
-    background: #1A5255;
+    background: #1F4671;
   }
 
   .clicked::after {
@@ -111,11 +111,11 @@ const LiSection = styled.li`
     border-right: 1px solid #FFFFFF;
     border-bottom: 0;
     border-left: 0;
-    margin: 0 0 0 8px
+    margin: 0 0 0 8px;
   }
 
   .clicked:hover {
-    border-bottom: 4px solid #1A5255;
+    border-bottom: 4px solid #1F4671;
     color: #FFFFFF;
 
     ::after {
@@ -127,7 +127,7 @@ const LiSection = styled.li`
       border-right: 1px solid #FFFFFF;
       border-bottom: 0;
       border-left: 0;
-      margin: 0 0 0 8px
+      margin: 0 0 0 8px;
       transform: rotate(-45deg);
       -webkit-transform: rotate(-45deg);
     }
@@ -155,7 +155,7 @@ const LiSection = styled.li`
     margin: 0 45px 0 5px;
     padding: 0 15px;
     user-select:none;
-    background: #1A5255;
+    background: #1F4671;
   }
 `;
 
@@ -163,7 +163,7 @@ const Dropdown = styled.div`
     top: 60.5px;
     left: 0;
     width: 100%;
-    background: #1A5255;
+    background: #1F4671;
     z-index: 1100;
     position: absolute;
     // visibility: hidden;
@@ -178,7 +178,7 @@ const DropdownContainer = styled.div`
     max-width: 1420px;
 
     .dropdownList {
-      background: #1A5255;
+      background: #1F4671;
       display: grid;
       grid-column-gap: 2%;
       grid-template-columns: 32% 32% 32%;
@@ -205,8 +205,8 @@ const DropdownContainer = styled.div`
 
 
 const activeStyle = {
-  color: '#298085',
-  borderBottom: '4px solid #298085',
+  color: '#3A75BD',
+  borderBottom: '4px solid #3A75BD',
 };
 
 const dropdownInvisibleStyle = {

@@ -86,7 +86,6 @@ const SearchInput = styled.input`
     background-size: 20px;
     cursor: pointer;
   }
-}
 `;
 
 const SearchBar = () => {

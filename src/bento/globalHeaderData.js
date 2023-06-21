@@ -20,6 +20,11 @@ export const navMobileList = [
       className: 'navMobileItem',
   },
   {
+    name: 'Inventory',
+    link: '/inventory',
+    className: 'navMobileItem',
+  },
+  {
       name: 'Applications',
       link: '',
       className: 'navMobileItem clickable',
@@ -89,4 +94,12 @@ Applications: [
     link: '/#dbgap',
     className: 'navMobileSubItem',
   }],
+};
+
+export const navBarCartData = {
+  cartLabel: '',
+  cartLink: '/fileCentricCart',
+  cartIcon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/Icon-Cart-Navbar.svg',
+  cartIconAlt: 'cart_logo',
+  cartLabelType: 'labelUnderCount',
 };

@@ -57,13 +57,13 @@ const HeaderContainer = styled.div`
 const Header = () => {
   return (
     <HeaderContainer>
-      <div class="desktop">
+      <div className="desktop">
         <HeaderDesktop />
       </div>
-      <div class="tablet">
+      <div className="tablet">
         <HeaderTablet />
       </div>
-      <div class="mobile">
+      <div className="mobile">
         <HeaderMobile />
       </div>
     </HeaderContainer>

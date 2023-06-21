@@ -46,13 +46,13 @@ const Footer = () => {
 
   return (
     <FooterContainer>
-      <div class="desktop">
+      <div className="desktop">
         <FooterDesktop />
       </div>
-      <div class="tablet">
+      <div className="tablet">
         <FooterTablet />
       </div>
-      <div class="mobile">
+      <div className="mobile">
         <FooterMobile />
       </div>
     </FooterContainer>

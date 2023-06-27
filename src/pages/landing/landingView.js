@@ -438,13 +438,12 @@ const ResourcesOverlay = styled.div`
 `;
 
 const ResourcesContainer = styled.div`
-    width: 1440px;
     margin: 0 auto;
     z-index: 10;
     position: relative;
 
     .resourceTitle {
-      margin-left: 160px;
+      margin-left: 135px;
       font-family: Poppins;
       font-weight: 600;
       font-size: 35px;
@@ -460,7 +459,7 @@ const ResourcesContainer = styled.div`
     }
 
     .resourceSubtitleText {
-      margin: 10px 0 10px 160px;
+      margin: 10px 0 10px 135px;
       font-family: Poppins;
       font-weight: bold;
       font-size: 17px;
@@ -489,23 +488,14 @@ const ResourcesContainer = styled.div`
       margin-left: 3px;
     }
 
-    .resourceList {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: left;
-      margin: 0 143px 0 143px;
-    }
-
     .resourceListItem {
-      display: flex;
-      width: 47%;
-      margin: 17px;
+      margin: 17px 0;
       text-decoration: none;
     }
 
     .resourceListItem:focus-visible {
       outline: none;
-  }
+    }
 
     .resourceListItemLogo {
       width: 169px;
@@ -521,12 +511,6 @@ const ResourcesContainer = styled.div`
       align-items: center;
       justify-content: center;
       text-align: center;
-    }
-
-    .resourceListItemText {
-      margin: 5px 0 0 20px;
-      width: 353px;
-      height: 125px;
     }
 
     .resourceListItemTitle {
@@ -553,6 +537,152 @@ const ResourcesContainer = styled.div`
       font-weight: 400;
       font-size: 16px;
       letter-spacing: 0.02em;
+    }
+
+    @media (min-width: 1420px) {
+      width: 1420px;
+
+      .resourceListItem {
+        display: flex;
+        margin: 17px;
+        text-decoration: none;
+      }
+
+      .resourceList {
+        display: grid;
+        grid-column-gap: 40px;
+        grid-template-columns: 570px 570px;
+        justify-content: center;
+      }
+
+      .resourceListItemText {
+        margin: 5px 0 0 20px;
+        width: 353px;
+        height: 125px;
+      }
+
+      .upper {
+        display: none;
+      }
+
+      .lower {
+        display: block;
+      }
+    }
+
+    @media (min-width: 1200px) and (max-width: 1419px) {
+      .resourceTitle {
+        margin-left: calc(50vw - 575px);
+      }
+
+      .resourceSubtitle {
+        margin: 0 calc(50vw - 710px);
+      }
+
+      .resourceListItem {
+        display: flex;
+        margin: 17px;
+        text-decoration: none;
+      }
+
+      .resourceList {
+        display: grid;
+        grid-column-gap: 40px;
+        grid-template-columns: 570px 570px;
+        justify-content: center;
+      }
+
+      .resourceListItemText {
+        margin: 5px 0 0 20px;
+        width: 353px;
+        height: 125px;
+      }
+
+      .upper {
+        display: none;
+      }
+
+      .lower {
+        display: block;
+      }
+    }
+
+    @media (max-width: 1199px) {
+      .resourceList {
+        display: grid;
+        grid-column-gap: 6%;
+        grid-template-columns: 47% 47%;
+        margin: 0 5%;
+      }
+
+      .upper {
+        display: block;
+      }
+
+      .lower {
+        display: none;
+      }
+
+      .resourceListItem {
+        max-width: 344px;
+      }
+      .resourceListItemLogo {
+        width: 78px;
+        height: 73px;
+        font-size: 18px;
+        line-height: 20px;
+      }
+
+      .resourceListItemTitle {
+        font-size: 18px;
+      }
+
+      .resourceSubtitleText {
+        margin: 10px 0 10px 5%;
+        font-size: 14px;
+        line-height: 17px;
+        letter-spacing: 0.02em;
+      }
+
+      .resourceTitle {
+        margin-left: 5%;
+        font-size: 14px;
+        line-height: 17px;
+        letter-spacing: 0.02em;
+      }
+
+      .resourceListItem {
+        margin: 12px 0;
+      }
+
+      .resourceListItemUpper {
+        display: grid;
+        grid-template-columns: 90px auto;
+      }
+
+      .resourceListItemContext {
+        margin-top: 10px;
+      }
+
+      .resourceItem {
+        padding-bottom: 40px;
+      }
+    }
+
+    @media (max-width: 699px) {
+      .resourceList {
+        display: grid;
+        grid-template-columns: 90%;
+        margin: 0 5%;
+      }
+
+      .resourceItem {
+        padding-bottom: 40px;
+      }
+
+      .resourceListItem {
+        max-width: 344px;
+      }
     }
 `;
 
@@ -661,9 +791,12 @@ const LandingView = () => {
                   const appkey = `app_${appidx}`;
                   return (
                     <a id={appItem.id} className='resourceListItem' key={appkey} href={appItem.link} target="_blank" rel="noopener noreferrer">
-                      <div className='resourceListItemLogo' style={{background: '#00838F'}}>{appItem.subtitle}</div>
+                      <div className='resourceListItemUpper'>
+                        <div className='resourceListItemLogo' style={{background: '#00838F'}}>{appItem.subtitle}</div>
+                        <div className='resourceListItemTitle upper'>{appItem.title}<span className='resourceListItemTitleSmall'>{'(' + appItem.subtitle + ')'}</span></div>
+                      </div>
                       <div className='resourceListItemText'>
-                        <div className='resourceListItemTitle'>{appItem.title}<span className='resourceListItemTitleSmall'>{'(' + appItem.subtitle + ')'}</span></div>
+                        <div className='resourceListItemTitle lower'>{appItem.title}<span className='resourceListItemTitleSmall'>{'(' + appItem.subtitle + ')'}</span></div>
                         <div className='resourceListItemContext'>{appItem.content}</div>
                       </div>
                     </a>
@@ -687,9 +820,12 @@ const LandingView = () => {
                   const cloudkey = `cloud_${cloudidx}`;
                   return (
                     <a id={cloudItem.id} className='resourceListItem' key={cloudkey} href={cloudItem.link} target="_blank" rel="noopener noreferrer">
-                      <div className='resourceListItemLogo' style={{background: '#455299'}}>{cloudItem.subtitle}</div>
+                      <div className='resourceListItemUpper'>
+                        <div className='resourceListItemLogo' style={{background: '#455299'}}>{cloudItem.subtitle}</div>
+                        <div className='resourceListItemTitle upper'>{cloudItem.title}<span className='resourceListItemTitleSmall'>{'(' + cloudItem.subtitle + ')'}</span></div>
+                      </div>
                       <div className='resourceListItemText'>
-                        <div className='resourceListItemTitle'>{cloudItem.title}<span className='resourceListItemTitleSmall'>{'(' + cloudItem.subtitle + ')'}</span></div>
+                        <div className='resourceListItemTitle lower'>{cloudItem.title}<span className='resourceListItemTitleSmall'>{'(' + cloudItem.subtitle + ')'}</span></div>
                         <div className='resourceListItemContext'>{cloudItem.content}</div>
                       </div>
                     </a>

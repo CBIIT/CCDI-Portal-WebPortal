@@ -443,7 +443,7 @@ const ResourcesContainer = styled.div`
     position: relative;
 
     .resourceTitle {
-      margin-left: 135px;
+      margin-left: 136px;
       font-family: Poppins;
       font-weight: 600;
       font-size: 35px;
@@ -557,7 +557,7 @@ const ResourcesContainer = styled.div`
 
       .resourceListItemText {
         margin: 5px 0 0 20px;
-        width: 353px;
+        // width: 353px;
         height: 125px;
       }
 
@@ -572,11 +572,11 @@ const ResourcesContainer = styled.div`
 
     @media (min-width: 1200px) and (max-width: 1419px) {
       .resourceTitle {
-        margin-left: calc(50vw - 575px);
+        margin-left: calc(50vw - 580px);
       }
 
       .resourceSubtitle {
-        margin: 0 calc(50vw - 710px);
+        margin: 0 calc(50vw - 715px);
       }
 
       .resourceListItem {

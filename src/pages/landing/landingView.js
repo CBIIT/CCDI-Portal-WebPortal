@@ -192,12 +192,12 @@ const StatsContainer = styled.div`
       filter: blur(30px);
 
       @media (min-width: 1440px) {
-        left: calc(1440px - 100vw - 270px);
+        left: calc(1440px - 100vw - 230px);
         width: calc(100vw - 1440px + 400px);
       }
       
       @media (max-width: 1440px) {
-        left: -270px;
+        left: calc(50vw - 950px);
         width: 400px;
       }
 
@@ -215,12 +215,12 @@ const StatsContainer = styled.div`
       filter: blur(30px);
     
       @media (min-width: 1440px) {
-        right: calc(1440px - 100vw - 270px);
+        right: calc(1440px - 100vw - 230px);
         width: calc(100vw - 1440px + 400px);
       }
       
       @media (max-width: 1440px) {
-        right: -270px;
+        right: calc(50vw - 950px);
         width: 400px;
       }
 

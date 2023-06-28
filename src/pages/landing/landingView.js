@@ -636,14 +636,14 @@ const ResourcesContainer = styled.div`
       }
 
       .resourceSubtitleText {
-        margin: 10px 0 10px calc(50vw - 398px);
+        margin: 10px 0 10px calc(50vw - 405px);
         font-size: 14px;
         line-height: 17px;
         letter-spacing: 0.02em;
       }
 
       .resourceTitle {
-        margin-left: calc(50vw - 398px);
+        margin-left: calc(50vw - 405px);
         font-size: 14px;
         line-height: 17px;
         letter-spacing: 0.02em;
@@ -681,15 +681,15 @@ const ResourcesContainer = styled.div`
         grid-column-gap: 55px;
         grid-template-columns: auto auto;
         justify-content: center;
-        margin: 0 28px;
+        margin: 0 20px;
       }
 
       .resourceSubtitleText {
-        margin: 10px 0 10px 28px;
+        margin: 10px 0 10px 20px;
       }
 
       .resourceTitle {
-        margin-left: 28px;
+        margin-left: 20px;
       }
     }
 
@@ -697,7 +697,7 @@ const ResourcesContainer = styled.div`
       .resourceList {
         display: grid;
         grid-template-columns: 100%;
-        margin: 0 28px;
+        margin: 0 20px;
       }
 
       .resourceItem {

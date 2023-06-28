@@ -675,11 +675,29 @@ const ResourcesContainer = styled.div`
       }
     }
 
-    @media (max-width: 699px) {
+    @media (max-width: 852px) {
       .resourceList {
         display: grid;
-        grid-template-columns: 90%;
-        margin: 0 5%;
+        grid-column-gap: 55px;
+        grid-template-columns: auto auto;
+        justify-content: center;
+        margin: 0 28px;
+      }
+
+      .resourceSubtitleText {
+        margin: 10px 0 10px 28px;
+      }
+
+      .resourceTitle {
+        margin-left: 28px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .resourceList {
+        display: grid;
+        grid-template-columns: 100%;
+        margin: 0 28px;
       }
 
       .resourceItem {
@@ -687,7 +705,8 @@ const ResourcesContainer = styled.div`
       }
 
       .resourceListItem {
-        max-width: 344px;
+        // max-width: 344px;
+        margin: 15px 0;
       }
     }
 `;

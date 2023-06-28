@@ -610,22 +610,11 @@ const ResourcesContainer = styled.div`
     @media (max-width: 1199px) {
       .resourceList {
         display: grid;
-        grid-column-gap: 6%;
-        grid-template-columns: 47% 47%;
-        margin: 0 5%;
+        grid-column-gap: 55px;
+        grid-template-columns: 371px 371px;
+        justify-content: center;
       }
 
-      .upper {
-        display: block;
-      }
-
-      .lower {
-        display: none;
-      }
-
-      .resourceListItem {
-        max-width: 344px;
-      }
       .resourceListItemLogo {
         width: 78px;
         height: 73px;
@@ -633,7 +622,16 @@ const ResourcesContainer = styled.div`
         line-height: 20px;
       }
 
-      .resourceListItemTitle {
+      .upper {
+        display: block;
+      }
+
+      .resourceListItemTitleContainer {
+        display: flex;
+        align-items: center;
+      }
+
+      .resourceListItemTitle{
         font-size: 18px;
       }
 
@@ -666,6 +664,14 @@ const ResourcesContainer = styled.div`
 
       .resourceItem {
         padding-bottom: 40px;
+      }
+
+      .upper {
+        display: block;
+      }
+
+      .lower {
+        display: none;
       }
     }
 
@@ -793,7 +799,9 @@ const LandingView = () => {
                     <a id={appItem.id} className='resourceListItem' key={appkey} href={appItem.link} target="_blank" rel="noopener noreferrer">
                       <div className='resourceListItemUpper'>
                         <div className='resourceListItemLogo' style={{background: '#00838F'}}>{appItem.subtitle}</div>
-                        <div className='resourceListItemTitle upper'>{appItem.title}<span className='resourceListItemTitleSmall'>{'(' + appItem.subtitle + ')'}</span></div>
+                        <div className='resourceListItemTitleContainer'>
+                          <div className='resourceListItemTitle upper'>{appItem.title}<span className='resourceListItemTitleSmall'>{'(' + appItem.subtitle + ')'}</span></div>
+                        </div>
                       </div>
                       <div className='resourceListItemText'>
                         <div className='resourceListItemTitle lower'>{appItem.title}<span className='resourceListItemTitleSmall'>{'(' + appItem.subtitle + ')'}</span></div>
@@ -822,7 +830,9 @@ const LandingView = () => {
                     <a id={cloudItem.id} className='resourceListItem' key={cloudkey} href={cloudItem.link} target="_blank" rel="noopener noreferrer">
                       <div className='resourceListItemUpper'>
                         <div className='resourceListItemLogo' style={{background: '#455299'}}>{cloudItem.subtitle}</div>
-                        <div className='resourceListItemTitle upper'>{cloudItem.title}<span className='resourceListItemTitleSmall'>{'(' + cloudItem.subtitle + ')'}</span></div>
+                        <div className='resourceListItemTitleContainer'>
+                          <div className='resourceListItemTitle upper'>{cloudItem.title}<span className='resourceListItemTitleSmall'>{'(' + cloudItem.subtitle + ')'}</span></div>
+                        </div>
                       </div>
                       <div className='resourceListItemText'>
                         <div className='resourceListItemTitle lower'>{cloudItem.title}<span className='resourceListItemTitleSmall'>{'(' + cloudItem.subtitle + ')'}</span></div>

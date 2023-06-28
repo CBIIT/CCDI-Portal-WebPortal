@@ -636,14 +636,14 @@ const ResourcesContainer = styled.div`
       }
 
       .resourceSubtitleText {
-        margin: 10px 0 10px 5%;
+        margin: 10px 0 10px calc(50vw - 398px);
         font-size: 14px;
         line-height: 17px;
         letter-spacing: 0.02em;
       }
 
       .resourceTitle {
-        margin-left: 5%;
+        margin-left: calc(50vw - 398px);
         font-size: 14px;
         line-height: 17px;
         letter-spacing: 0.02em;

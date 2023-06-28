@@ -177,7 +177,6 @@ const IntroAboutButtonContainer = styled.div`
 `;
 
 const StatsContainer = styled.div`
-    width: 1440px;
     margin: 0 auto;
     justify-content: center;
     position: relative;
@@ -201,6 +200,10 @@ const StatsContainer = styled.div`
         left: -270px;
         width: 400px;
       }
+
+      @media (max-width: 1199px) {
+        display: none;
+      }
     }
 
     .rightbox {
@@ -219,6 +222,10 @@ const StatsContainer = styled.div`
       @media (max-width: 1440px) {
         right: -270px;
         width: 400px;
+      }
+
+      @media (max-width: 1199px) {
+        display: none;
       }
     }
 
@@ -288,10 +295,92 @@ const StatsContainer = styled.div`
       line-height: 21px;
       text-align: left;
     }
+
+    @media (min-width: 1420px) {
+      width: 1420px;
+    }
+
+    @media (max-width: 1199px) {
+      .borderTop {
+        display: none;
+      }
+
+      .borderBottom {
+        display: none;
+      }
+
+      .statGlance {
+        padding: 12px 0;
+        text-align: left;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 17px;
+        color: #255B5E;
+        margin-left: calc(50vw - 405px);
+      }
+
+      .statList {
+        display: grid;
+        grid-column-gap: 75px;
+        grid-template-columns: 143px 143px 143px 143px;
+        // margin: 0 calc(50vw - 405px);
+      }
+
+      .statItem {
+        padding: 0;
+      }
+
+      .statNum {
+        font-family: Inter;
+        font-weight: 800;
+        font-size: 22px;
+        line-height: 40px;
+      }
+
+      .statTitle {
+        color: #0095A2;
+        font-size: 14px;
+        line-height: 13px;
+      }
+
+      .statDetail {
+        color: #0095A2;
+        font-size: 14px;
+        line-height: 13px;
+      }
+    }
+
+    @media (max-width: 872px) {
+      .statGlance {
+        margin-left: 30px;
+      }
+
+      .statList {
+        display: grid;
+        grid-column-gap: 8%;
+        grid-template-columns: 19% 19% 19% 19%;
+        margin: 0 30px;
+      }
+
+      .statItem {
+        width: 143px;
+      }
+    }
+
+    @media (max-width: 699px) {
+      .statList {
+        display: grid;
+        grid-column-gap: 29px;
+        grid-row-gap: 10%;
+        grid-template-columns: 143px 143px;
+        margin: 0 30px;
+        justify-content: left;
+      }
+    }
 `;
 
 const StatsBox = styled.div`
-    margin: 0 55px;
+    // margin: 0 55px;
     position: relative;
 `;
 
@@ -675,29 +764,29 @@ const ResourcesContainer = styled.div`
       }
     }
 
-    @media (max-width: 852px) {
+    @media (max-width: 872px) {
       .resourceList {
         display: grid;
         grid-column-gap: 55px;
         grid-template-columns: auto auto;
         justify-content: center;
-        margin: 0 20px;
+        margin: 0 30px;
       }
 
       .resourceSubtitleText {
-        margin: 10px 0 10px 20px;
+        margin: 10px 0 10px 30px;
       }
 
       .resourceTitle {
-        margin-left: 20px;
+        margin-left: 30px;
       }
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 699px) {
       .resourceList {
         display: grid;
         grid-template-columns: 100%;
-        margin: 0 20px;
+        margin: 0 30px;
       }
 
       .resourceItem {
@@ -705,7 +794,7 @@ const ResourcesContainer = styled.div`
       }
 
       .resourceListItem {
-        // max-width: 344px;
+        max-width: 315px;
         margin: 15px 0;
       }
     }

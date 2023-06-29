@@ -385,7 +385,6 @@ const StatsBox = styled.div`
 `;
 
 const LatestUpdatesContainer = styled.div`
-    width: 1440px;
     margin: 0 auto;
     position: relative;
 
@@ -470,7 +469,7 @@ const LatestUpdatesContainer = styled.div`
 const TitleContainer = styled.div`
     display: flex;
     color: #05555C;
-    margin: 0 149px 38px 0;
+    margin: 0 calc(50vw - 580px) 38px 0;
     justify-content: flex-end;
 
     .titleLine {
@@ -499,6 +498,20 @@ const TitleContainer = styled.div`
       font-family: Poppins;
       font-weight: 600;
       font-size: 35px;
+    }
+
+    @media (max-width: 1199px) {
+      justify-content: left;
+      margin: 0 0 10px calc(50vw - 405px);
+
+      .titleLine {
+        display: none;
+      }
+
+      .titleText {
+        font-size: 14px;
+        font-line: 17px;
+      }
     }
 `;
 

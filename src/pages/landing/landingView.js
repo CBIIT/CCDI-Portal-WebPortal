@@ -404,6 +404,7 @@ const LatestUpdatesContainer = styled.div`
 
     .latestUpdatesListItemPic {
       border-radius: 0px 20px 0 0;
+      width: 367px;
       height: 310px;
     }
 
@@ -464,6 +465,43 @@ const LatestUpdatesContainer = styled.div`
       content: '>';
       margin-left: 4px;
     }
+
+    @media (max-width: 1199px) {
+      .latestUpdatesList {
+        display: grid;
+        grid-column-gap: 30px;
+        grid-template-columns: 214px 214px 214px;
+        justify-content: left;
+        margin-left: calc(50vw - 405px);
+      }
+
+      .latestUpdatesListItem {
+        width: 214px;
+        height: 279px;
+        margin: 0;
+      }
+
+      .latestUpdatesListItemPic {
+        width: 214px;
+        height: 181px;
+        object-fit: contain;
+      }
+
+      .latestUpdatesListTitle {
+        padding: 6px 14px;
+        font-size: 14px;
+      }
+
+      .latestUpdatesListContent {
+        display: none;
+      }
+    }
+
+    @media (max-width: 872px) {
+      .latestUpdatesList {
+        margin-left: 30px;
+      }
+    }
 `;
 
 const TitleContainer = styled.div`
@@ -502,7 +540,7 @@ const TitleContainer = styled.div`
 
     @media (max-width: 1199px) {
       justify-content: left;
-      margin: 0 0 10px calc(50vw - 405px);
+      margin: 0 0 20px calc(50vw - 405px);
 
       .titleLine {
         display: none;
@@ -512,6 +550,10 @@ const TitleContainer = styled.div`
         font-size: 14px;
         font-line: 17px;
       }
+    }
+
+    @media (max-width: 872px) {
+      margin: 0 0 20px 30px;
     }
 `;
 
@@ -883,7 +925,7 @@ const LandingView = () => {
                 const updatekey = `update_${updateidx}`;
                 return (
                   <div className='latestUpdatesListItem' key={updatekey}>
-                    <a href={`/news#${updateItem.id}`} ><div className='latestUpdatesListItemPic' style={{ backgroundImage: `url(${updateItem.img})` }} /><span style={{display:'none'}}>latestUpdates text</span></a>
+                    <a href={`/news#${updateItem.id}`} ><img className='latestUpdatesListItemPic' src={updateItem.img} alt="updateItemImg"/><span style={{display:'none'}}>latestUpdates text</span></a>
                     <a className='latestUpdatesListTitleContainer' href={`/news#${updateItem.id}`}><div className='latestUpdatesListTitle'>{updateItem.title}</div></a>
                     <div className='latestUpdatesListContent'>
                       <span className='latestUpdatesTextContent'>{ReactHtmlParser(updateItem.slug)}</span>

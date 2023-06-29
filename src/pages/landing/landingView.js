@@ -466,6 +466,10 @@ const LatestUpdatesContainer = styled.div`
       margin-left: 4px;
     }
 
+    .hoverTextContentContainer {
+      display: none;
+    }
+
     @media (max-width: 1199px) {
       .latestUpdatesList {
         display: grid;
@@ -494,6 +498,31 @@ const LatestUpdatesContainer = styled.div`
 
       .latestUpdatesListContent {
         display: none;
+      }
+
+      .hoverTextContentContainer {
+        display: block;
+        position: absolute;
+        top: 40px;
+        width: 214px;
+        height: 279px;
+        background: rgb(25, 33, 39, .8);
+        border-radius: 0px 20px;
+        padding: 40px 16px;
+      }
+
+      .hoverTextContent {
+        color: #FFFFFF;
+        font-family: Inter;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 22px;
+        letter-spacing: -0.02em;
+        margin-bottom: 20px;
+      }
+
+      .hover {
+        margin-left: 0;
       }
     }
 
@@ -932,6 +961,10 @@ const LandingView = () => {
                       { updateItem.slug.length > 100 && updateItem.slug.length < 110
                       ? <div><a className='readMoreContainer' href={`/news#${updateItem.id}`} style={{marginLeft: 0}}>Read More</a></div>
                       : <a className='readMoreContainer' href={`/news#${updateItem.id}`}>Read More</a>}
+                    </div>
+                    <div className='hoverTextContentContainer'>
+                      <div className='hoverTextContent'>{ReactHtmlParser(updateItem.slug)}</div>
+                      <a className='readMoreContainer hover' href={`/news#${updateItem.id}`}>Read More</a>
                     </div>
                   </div>
                 )

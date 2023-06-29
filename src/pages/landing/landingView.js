@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { introData, titleData, statsData, resourcesAppliationsListData, resourcesCloudListData } from '../../bento/landingPageData';
 import { newsList } from '../../bento/newsData';
@@ -501,7 +501,7 @@ const LatestUpdatesContainer = styled.div`
       }
 
       .hoverTextContentContainer {
-        display: block;
+        // display: block;
         position: absolute;
         top: 40px;
         width: 214px;
@@ -885,6 +885,7 @@ const ResourcesContainer = styled.div`
 `;
 
 const LandingView = () => {
+  const [hoverItem, setHoverItem] = useState(""); 
   return (
     <LandingViewContainer>
       <BackgroundFirst />
@@ -953,7 +954,7 @@ const LandingView = () => {
               newsList.slice(0,3).map((updateItem, updateidx) => {
                 const updatekey = `update_${updateidx}`;
                 return (
-                  <div className='latestUpdatesListItem' key={updatekey}>
+                  <div className='latestUpdatesListItem' key={updatekey} onMouseEnter={() => setHoverItem(updateItem.id)} onMouseLeave={() => setHoverItem("")}>
                     <a href={`/news#${updateItem.id}`} ><img className='latestUpdatesListItemPic' src={updateItem.img} alt="updateItemImg"/><span style={{display:'none'}}>latestUpdates text</span></a>
                     <a className='latestUpdatesListTitleContainer' href={`/news#${updateItem.id}`}><div className='latestUpdatesListTitle'>{updateItem.title}</div></a>
                     <div className='latestUpdatesListContent'>
@@ -962,7 +963,7 @@ const LandingView = () => {
                       ? <div><a className='readMoreContainer' href={`/news#${updateItem.id}`} style={{marginLeft: 0}}>Read More</a></div>
                       : <a className='readMoreContainer' href={`/news#${updateItem.id}`}>Read More</a>}
                     </div>
-                    <div className='hoverTextContentContainer'>
+                    <div className='hoverTextContentContainer' style={hoverItem === updateItem.id ? {display: "block"} : {display: "none"}}>
                       <div className='hoverTextContent'>{ReactHtmlParser(updateItem.slug)}</div>
                       <a className='readMoreContainer hover' href={`/news#${updateItem.id}`}>Read More</a>
                     </div>

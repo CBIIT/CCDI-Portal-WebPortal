@@ -109,6 +109,7 @@ const ResourcesSection = styled.div`
 
   @media (max-width: 1199px) {
     margin-top: 380px;
+    margin-bottom: 20px;
   }
 `;
 

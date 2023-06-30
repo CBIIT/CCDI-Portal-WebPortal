@@ -282,8 +282,9 @@ const LatestUpdate = () => {
     const [rLatestlList, setRLatestlList] = useState([]);
 
     const getFirstList = () => {
-        let newItemList = newsList.slice(0,3)
+        let newItemList = [newsList[2]]
         newItemList = newItemList.concat(newsList.slice(0,3));
+        newItemList = newItemList.concat(newsList.slice(0,2));
         return newItemList;
     }
 

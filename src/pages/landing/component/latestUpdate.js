@@ -278,7 +278,7 @@ const TitleContainer = styled.div`
 
 const LatestUpdate = () => {
     const [hoverItem, setHoverItem] = useState("");
-    // const [pause, setPause] = useState(true);
+    const [pause, setPause] = useState(true);
     const [rLatestlList, setRLatestlList] = useState([]);
 
     const getFirstList = () => {
@@ -294,7 +294,9 @@ const LatestUpdate = () => {
 
     const mouseOut = () => {
         setHoverItem("");
-        resetTimer();
+        if (!pause) {
+            resetTimer();
+        }
     }
 
     const resetTimer = () => {
@@ -318,15 +320,20 @@ const LatestUpdate = () => {
     const carouselStart = () => {
         const scrolled = document.documentElement.clientWidth;
         if (scrolled < 700) {
+            setPause(false);
             resetTimer();
         } else {
+            setPause(true);
             clearInterval(timer);
         }
     };
 
     useEffect(() => {
         window.addEventListener('resize', carouselStart);
-        console.log(document.documentElement.clientWidth);
+        if (document.documentElement.clientWidth < 700) {
+            resetTimer();
+            setPause(false);
+        }
         if (rLatestlList.length === 0) {
             setRLatestlList(getFirstList());
         }

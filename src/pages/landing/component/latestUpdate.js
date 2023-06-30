@@ -366,10 +366,13 @@ const LatestUpdate = () => {
                                 ? <div><a className='readMoreContainer' href={`/news#${updateItem.id}`} style={{marginLeft: 0}}>Read More</a></div>
                                 : <a className='readMoreContainer' href={`/news#${updateItem.id}`}>Read More</a>}
                             </div>
-                            <div className='hoverTextContentContainer' style={hoverItem === updateItem.id ? {opacity: 1, visibility: "visible"} : {opacity: 0, visibility: "hidden"}}>
-                                <div className='hoverTextContent'>{ReactHtmlParser(updateItem.slug)}</div>
-                                <a className='readMoreContainer hover' href={`/news#${updateItem.id}`}>Read More</a>
-                            </div>
+                            {
+                                updateidx !== 0 && updateidx !== 4 && updateidx !== 5
+                                && <div className='hoverTextContentContainer' style={hoverItem === updateItem.id ? {opacity: 1, visibility: "visible"} : {opacity: 0, visibility: "hidden"}}>
+                                        <div className='hoverTextContent'>{ReactHtmlParser(updateItem.slug)}</div>
+                                        <a className='readMoreContainer hover' href={`/news#${updateItem.id}`}>Read More</a>
+                                    </div>
+                            }
                         </div>
                         )
                     })

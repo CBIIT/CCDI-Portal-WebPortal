@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ReactHtmlParser from 'html-react-parser';
 import { newsList } from '../../../bento/newsData';
 import { titleData } from '../../../bento/landingPageData';
 import exportIconText from '../../../assets/landing/Export_Icon_White.svg';
+
+let timer = null;
 
 const LatestUpdatesSection = styled.div`
   position: relative;
@@ -98,58 +100,79 @@ const LatestUpdatesContainer = styled.div`
     }
 
     @media (max-width: 1199px) {
-      .latestUpdatesList {
-        display: grid;
-        grid-column-gap: 30px;
-        grid-template-columns: 214px 214px 214px;
-        justify-content: left;
-        margin-left: calc(50vw - 405px);
-      }
+        .latestUpdatesList {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: left;
+            flex-direction: row;
+            margin-left: calc(50vw - 405px);
+        }
 
+        .latestUpdatesListItem {
+            position: absolute;
+            width: 214px;
+            height: 279px;
+            margin: 0;
+        }
+
+        .latestUpdatesListItem:nth-child(1) {
+            transform: translateX(0);
+          }
+    
+          .latestUpdatesListItem:nth-child(2) {
+            transform: translateX(115%);
+          }
+    
+          .latestUpdatesListItem:last-child {
+            transform: translateX(230%);
+          }
+
+        .latestUpdatesListItemPic {
+            width: 214px;
+            height: 181px;
+            object-fit: contain;
+          }
+    
+          .latestUpdatesListTitle {
+            padding: 6px 14px;
+            font-size: 14px;
+          }
+    
+          .latestUpdatesListContent {
+            display: none;
+          }
+    
+          .hoverTextContentContainer {
+            // display: block;
+            position: absolute;
+            top: 0;
+            width: 214px;
+            height: 279px;
+            background: rgb(25, 33, 39, .8);
+            border-radius: 0px 20px;
+            padding: 40px 16px;
+          }
+    
+          .hoverTextContent {
+            color: #FFFFFF;
+            font-family: Inter;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 22px;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+          }
+    
+          .hover {
+            margin-left: 0;
+          }
+    }
+
+    @media (max-width: 700px) {
       .latestUpdatesListItem {
-        width: 214px;
-        height: 279px;
-        margin: 0;
-      }
-
-      .latestUpdatesListItemPic {
-        width: 214px;
-        height: 181px;
-        object-fit: contain;
-      }
-
-      .latestUpdatesListTitle {
-        padding: 6px 14px;
-        font-size: 14px;
-      }
-
-      .latestUpdatesListContent {
-        display: none;
-      }
-
-      .hoverTextContentContainer {
-        // display: block;
-        position: absolute;
-        top: 40px;
-        width: 214px;
-        height: 279px;
-        background: rgb(25, 33, 39, .8);
-        border-radius: 0px 20px;
-        padding: 40px 16px;
-      }
-
-      .hoverTextContent {
-        color: #FFFFFF;
-        font-family: Inter;
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 22px;
-        letter-spacing: -0.02em;
-        margin-bottom: 20px;
-      }
-
-      .hover {
-        margin-left: 0;
+        transition: 650ms;
       }
     }
 
@@ -215,6 +238,40 @@ const TitleContainer = styled.div`
 
 const LatestUpdate = () => {
     const [hoverItem, setHoverItem] = useState(""); 
+
+    const mouseIn = (id) => {
+        setHoverItem(id);
+        clearInterval(timer);
+    }
+
+    const mouseOut = () => {
+        setHoverItem("");
+        resetTimer();
+    }
+
+    const resetTimer = () => {
+        clearInterval(timer);
+        startTimer();
+    };
+
+    const nextItem = () => {
+        const list = document.getElementById("latestList");
+        const firstitem = list.firstChild;
+        list.removeChild(firstitem);
+        list.appendChild(firstitem);
+    };
+
+    const startTimer = () => {
+        timer = setInterval(() => {
+            nextItem();
+        }, 4000);
+    };
+
+    useEffect(() => {
+        // startTimer();
+        return () => clearInterval(timer);
+    }, []);
+
     return (
         <LatestUpdatesSection>
             <LatestUpdatesContainer>
@@ -226,27 +283,28 @@ const LatestUpdate = () => {
                 </div>
                 <div className='titleText'>{titleData.latestUpdatesTitle}</div>
             </TitleContainer>
-            <div className='latestUpdatesList'>
+            <div id="latestList" className='latestUpdatesList'>
                 {
-                newsList.slice(0,3).map((updateItem, updateidx) => {
-                    const updatekey = `update_${updateidx}`;
-                    return (
-                    <div className='latestUpdatesListItem' key={updatekey} onMouseEnter={() => setHoverItem(updateItem.id)} onMouseLeave={() => setHoverItem("")}>
-                        <a href={`/news#${updateItem.id}`} ><img className='latestUpdatesListItemPic' src={updateItem.img} alt="updateItemImg"/><span style={{display:'none'}}>latestUpdates text</span></a>
-                        <a className='latestUpdatesListTitleContainer' href={`/news#${updateItem.id}`}><div className='latestUpdatesListTitle'>{updateItem.title}</div></a>
-                        <div className='latestUpdatesListContent'>
-                        <span className='latestUpdatesTextContent'>{ReactHtmlParser(updateItem.slug)}</span>
-                        { updateItem.slug.length > 100 && updateItem.slug.length < 110
-                        ? <div><a className='readMoreContainer' href={`/news#${updateItem.id}`} style={{marginLeft: 0}}>Read More</a></div>
-                        : <a className='readMoreContainer' href={`/news#${updateItem.id}`}>Read More</a>}
+                    newsList.slice(0,3).map((updateItem, updateidx) => {
+                        const updatekey = `update_${updateidx}`;
+                        return (
+                        // <div className='latestUpdatesListItem' key={updatekey} onMouseEnter={() => setHoverItem(updateItem.id)} onMouseLeave={() => setHoverItem("")}>
+                        <div className='latestUpdatesListItem' key={updatekey} onMouseEnter={() => mouseIn(updateItem.id)} onMouseLeave={mouseOut}>
+                            <a href={`/news#${updateItem.id}`}><img className='latestUpdatesListItemPic' src={updateItem.img} alt={updateItem.id} /><span style={{display:'none'}}>latestUpdates text</span></a>
+                            <a className='latestUpdatesListTitleContainer' href={`/news#${updateItem.id}`}><div className='latestUpdatesListTitle'>{updateItem.title}</div></a>
+                            <div className='latestUpdatesListContent'>
+                                <span className='latestUpdatesTextContent'>{ReactHtmlParser(updateItem.slug)}</span>
+                                { updateItem.slug.length > 100 && updateItem.slug.length < 110
+                                ? <div><a className='readMoreContainer' href={`/news#${updateItem.id}`} style={{marginLeft: 0}}>Read More</a></div>
+                                : <a className='readMoreContainer' href={`/news#${updateItem.id}`}>Read More</a>}
+                            </div>
+                            <div className='hoverTextContentContainer' style={hoverItem === updateItem.id ? {display: "block"} : {display: "none"}}>
+                                <div className='hoverTextContent'>{ReactHtmlParser(updateItem.slug)}</div>
+                                <a className='readMoreContainer hover' href={`/news#${updateItem.id}`}>Read More</a>
+                            </div>
                         </div>
-                        <div className='hoverTextContentContainer' style={hoverItem === updateItem.id ? {display: "block"} : {display: "none"}}>
-                        <div className='hoverTextContent'>{ReactHtmlParser(updateItem.slug)}</div>
-                        <a className='readMoreContainer hover' href={`/news#${updateItem.id}`}>Read More</a>
-                        </div>
-                    </div>
-                    )
-                })
+                        )
+                    })
                 }
             </div>
             </LatestUpdatesContainer>

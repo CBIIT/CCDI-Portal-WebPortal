@@ -89,7 +89,7 @@ const StatsSection = styled.div`
 const ResourcesSection = styled.div`
   position: relative;
   z-index: 5;
-  margin-top: 94px;
+  margin-top: 380px;
   margin-bottom: 75px;
 `;
 

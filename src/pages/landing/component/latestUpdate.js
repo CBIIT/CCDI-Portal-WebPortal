@@ -289,8 +289,8 @@ const LatestUpdate = () => {
         return newItemList;
     }
 
-    const mouseIn = (id) => {
-        setHoverItem(id);
+    const mouseIn = (key) => {
+        setHoverItem(key);
         clearInterval(timer);
     }
 
@@ -357,7 +357,7 @@ const LatestUpdate = () => {
                     rLatestlList && rLatestlList.map((updateItem, updateidx) => {
                         const updatekey = `update_${updateidx}`;
                         return (
-                        <div className='latestUpdatesListItem' key={updatekey} onMouseEnter={() => mouseIn(updateItem.id)} onMouseLeave={mouseOut}>
+                        <div className='latestUpdatesListItem' key={updatekey} onMouseEnter={() => mouseIn(updatekey)} onMouseLeave={mouseOut}>
                             <a href={`/news#${updateItem.id}`}><img className='latestUpdatesListItemPic' src={updateItem.img} alt={updateItem.id} /><span style={{display:'none'}}>latestUpdates text</span></a>
                             <a className='latestUpdatesListTitleContainer' href={`/news#${updateItem.id}`}><div className='latestUpdatesListTitle'>{updateItem.title}</div></a>
                             <div className='latestUpdatesListContent'>
@@ -367,11 +367,10 @@ const LatestUpdate = () => {
                                 : <a className='readMoreContainer' href={`/news#${updateItem.id}`}>Read More</a>}
                             </div>
                             {
-                                updateidx !== 0 && updateidx !== 4 && updateidx !== 5
-                                && <div className='hoverTextContentContainer' style={hoverItem === updateItem.id ? {opacity: 1, visibility: "visible"} : {opacity: 0, visibility: "hidden"}}>
-                                        <div className='hoverTextContent'>{ReactHtmlParser(updateItem.slug)}</div>
-                                        <a className='readMoreContainer hover' href={`/news#${updateItem.id}`}>Read More</a>
-                                    </div>
+                                <div className='hoverTextContentContainer' style={hoverItem === updatekey ? {opacity: 1, visibility: "visible"} : {opacity: 0, visibility: "hidden"}}>
+                                    <div className='hoverTextContent'>{ReactHtmlParser(updateItem.slug)}</div>
+                                    <a className='readMoreContainer hover' href={`/news#${updateItem.id}`}>Read More</a>
+                                </div>
                             }
                         </div>
                         )

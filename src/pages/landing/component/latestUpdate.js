@@ -185,7 +185,7 @@ const LatestUpdatesContainer = styled.div`
           }
     
           .hoverTextContentContainer {
-            // display: block;
+            display: block;
             position: absolute;
             top: 0;
             width: 214px;
@@ -193,6 +193,7 @@ const LatestUpdatesContainer = styled.div`
             background: rgb(25, 33, 39, .8);
             border-radius: 0px 20px;
             padding: 40px 16px;
+            transition: all 0.25s ease-out;
           }
     
           .hoverTextContent {
@@ -365,7 +366,7 @@ const LatestUpdate = () => {
                                 ? <div><a className='readMoreContainer' href={`/news#${updateItem.id}`} style={{marginLeft: 0}}>Read More</a></div>
                                 : <a className='readMoreContainer' href={`/news#${updateItem.id}`}>Read More</a>}
                             </div>
-                            <div className='hoverTextContentContainer' style={hoverItem === updateItem.id ? {display: "block"} : {display: "none"}}>
+                            <div className='hoverTextContentContainer' style={hoverItem === updateItem.id ? {opacity: 1, visibility: "visible"} : {opacity: 0, visibility: "hidden"}}>
                                 <div className='hoverTextContent'>{ReactHtmlParser(updateItem.slug)}</div>
                                 <a className='readMoreContainer hover' href={`/news#${updateItem.id}`}>Read More</a>
                             </div>

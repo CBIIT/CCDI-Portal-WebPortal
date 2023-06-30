@@ -89,8 +89,12 @@ const StatsSection = styled.div`
 const ResourcesSection = styled.div`
   position: relative;
   z-index: 5;
-  margin-top: 380px;
+  margin-top: 94px;
   margin-bottom: 75px;
+
+  @media (max-width: 1199px) {
+    margin-top: 380px;
+  }
 `;
 
 const FirstContainer = styled.div`

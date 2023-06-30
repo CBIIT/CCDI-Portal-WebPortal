@@ -22,6 +22,18 @@ const LatestUpdatesContainer = styled.div`
       justify-content: center;
     }
 
+    .latestUpdatesListItem:nth-child(1) {
+        display: none;
+    }
+
+    .latestUpdatesListItem:nth-child(5) {
+        display: none;
+    }
+
+    .latestUpdatesListItem:nth-child(6) {
+        display: none;
+    }
+
     .latestUpdatesListItem {
       margin: 16px;
       width: 367px;
@@ -99,6 +111,16 @@ const LatestUpdatesContainer = styled.div`
       display: none;
     }
 
+    @media (min-width: 1200px) {
+        .hoverTextContent {
+            display: none;
+        }
+
+        .hover {
+            display: none;
+        }
+    }
+
     @media (max-width: 1199px) {
         .latestUpdatesList {
             position: relative;
@@ -118,15 +140,33 @@ const LatestUpdatesContainer = styled.div`
         }
 
         .latestUpdatesListItem:nth-child(1) {
+            transform: translateX(-115%);
+            display: block;
+            visibility: hidden;
+          }
+
+        .latestUpdatesListItem:nth-child(2) {
             transform: translateX(0);
           }
     
-          .latestUpdatesListItem:nth-child(2) {
+          .latestUpdatesListItem:nth-child(3) {
             transform: translateX(115%);
           }
     
-          .latestUpdatesListItem:last-child {
+          .latestUpdatesListItem:nth-child(4) {
             transform: translateX(230%);
+          }
+
+          .latestUpdatesListItem:nth-child(5) {
+            transform: translateX(345%);
+            display: block;
+            visibility: hidden;
+          }
+
+          .latestUpdatesListItem:nth-child(6) {
+            transform: translateX(345%);
+            display: block;
+            visibility: hidden;
           }
 
         .latestUpdatesListItemPic {
@@ -238,6 +278,13 @@ const TitleContainer = styled.div`
 
 const LatestUpdate = () => {
     const [hoverItem, setHoverItem] = useState(""); 
+    const [rLatestlList, setRLatestlList] = useState([]);
+
+    const getFirstList = () => {
+        let newItemList = newsList.slice(0,3)
+        newItemList = newItemList.concat(newsList.slice(0,3));
+        return newItemList;
+    }
 
     const mouseIn = (id) => {
         setHoverItem(id);
@@ -268,7 +315,9 @@ const LatestUpdate = () => {
     };
 
     useEffect(() => {
-        // startTimer();
+        if (rLatestlList.length === 0) {
+            setRLatestlList(getFirstList());
+        }
         return () => clearInterval(timer);
     }, []);
 
@@ -285,10 +334,9 @@ const LatestUpdate = () => {
             </TitleContainer>
             <div id="latestList" className='latestUpdatesList'>
                 {
-                    newsList.slice(0,3).map((updateItem, updateidx) => {
+                    rLatestlList && rLatestlList.map((updateItem, updateidx) => {
                         const updatekey = `update_${updateidx}`;
                         return (
-                        // <div className='latestUpdatesListItem' key={updatekey} onMouseEnter={() => setHoverItem(updateItem.id)} onMouseLeave={() => setHoverItem("")}>
                         <div className='latestUpdatesListItem' key={updatekey} onMouseEnter={() => mouseIn(updateItem.id)} onMouseLeave={mouseOut}>
                             <a href={`/news#${updateItem.id}`}><img className='latestUpdatesListItemPic' src={updateItem.img} alt={updateItem.id} /><span style={{display:'none'}}>latestUpdates text</span></a>
                             <a className='latestUpdatesListTitleContainer' href={`/news#${updateItem.id}`}><div className='latestUpdatesListTitle'>{updateItem.title}</div></a>

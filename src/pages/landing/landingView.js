@@ -13,7 +13,10 @@ const LandingViewContainer = styled.div`
     font-family: Poppins;
     position: relative;
     background: white;
-    height: 2980px;
+    
+    @media (min-width: 1200px) {
+      height: 2980px;
+    }
 `;
 
 const BackgroundFirst = styled.div`
@@ -27,6 +30,10 @@ const BackgroundFirst = styled.div`
   z-index: 3;
   background-repeat: no-repeat;
   background-size: cover;
+
+  @media (max-width: 1199px) {
+    display: none;
+  }
 `;
 
 const BackgroundSecond = styled.div`
@@ -40,6 +47,10 @@ const BackgroundSecond = styled.div`
   z-index: 2;
   background-repeat: no-repeat;
   background-size: cover;
+
+  @media (max-width: 1199px) {
+    display: none;
+  }
 `;
 
 const BackgroundThird = styled.div`
@@ -53,6 +64,10 @@ const BackgroundThird = styled.div`
   z-index: 1;
   background-repeat: no-repeat;
   background-size: cover;
+
+  @media (max-width: 1199px) {
+    display: none;
+  }
 `;
 
 const HeroSection = styled.div`

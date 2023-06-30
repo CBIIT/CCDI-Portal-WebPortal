@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { introData, titleData, statsData, resourcesAppliationsListData, resourcesCloudListData } from '../../bento/landingPageData';
 import ReactHtmlParser from 'html-react-parser';
 import Carousel from '../landing/component/carousel';
+import HeroMobile from '../landing/component/heroMobile'
 import LatestUpdate from '../landing/component/latestUpdate'
 import exportIcon from '../../assets/landing/Export_Icon_Black.svg';
 import bg1 from '../../assets/landing/bg_1.png';
@@ -74,6 +75,10 @@ const HeroSection = styled.div`
   position: relative;
   height: 730px;
   z-index: 5;
+
+  @media (max-width: 1199px) {
+    display: none;
+  }
 `;
 
 const Banner = styled.div`
@@ -724,6 +729,7 @@ const LandingView = () => {
           </ListContainer>
         </FirstContainer>
       </HeroSection>
+      <HeroMobile />
       <StatsSection>
         <StatsContainer>
           <StatsBox>

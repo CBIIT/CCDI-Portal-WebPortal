@@ -277,7 +277,8 @@ const TitleContainer = styled.div`
 `;
 
 const LatestUpdate = () => {
-    const [hoverItem, setHoverItem] = useState(""); 
+    const [hoverItem, setHoverItem] = useState("");
+    // const [pause, setPause] = useState(true);
     const [rLatestlList, setRLatestlList] = useState([]);
 
     const getFirstList = () => {
@@ -314,11 +315,21 @@ const LatestUpdate = () => {
         }, 4000);
     };
 
+    const carouselStart = () => {
+        const scrolled = document.documentElement.clientWidth;
+        if (scrolled < 700) {
+            resetTimer();
+        } else {
+            clearInterval(timer);
+        }
+    };
+
     useEffect(() => {
+        window.addEventListener('resize', carouselStart);
+        console.log(document.documentElement.clientWidth);
         if (rLatestlList.length === 0) {
             setRLatestlList(getFirstList());
         }
-        return () => clearInterval(timer);
     }, []);
 
     return (

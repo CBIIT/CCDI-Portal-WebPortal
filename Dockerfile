@@ -1,12 +1,12 @@
-FROM node:16-bullseye  as build
+FROM node:16.14.2-alpine  as build
 
 WORKDIR /usr/src/app
 
 COPY . .
 
-RUN NODE_OPTIONS="--max-old-space-size=4096" npm install
-
-RUN NODE_OPTIONS="--max-old-space-size=4096" npx lerna run build
+RUN NODE_OPTIONS="--max-old-space-size=4096" npm set progress=false
+RUN NODE_OPTIONS="--max-old-space-size=4096" npm ci
+RUN NODE_OPTIONS="--max-old-space-size=4096" npm run build --silent
 
 FROM nginx:1.23.3-alpine
 

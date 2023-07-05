@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ReactHtmlParser from 'html-react-parser';
+import usePageVisibility from "./PageVisibility";
 import { newsList } from '../../../bento/newsData';
 import { titleData } from '../../../bento/landingPageData';
 import exportIconText from '../../../assets/landing/Export_Icon_White.svg';
@@ -281,6 +282,7 @@ const LatestUpdate = () => {
     const [hoverItem, setHoverItem] = useState("");
     const [pause, setPause] = useState(true);
     const [rLatestlList, setRLatestlList] = useState([]);
+    const isVisible = usePageVisibility();
 
     const getFirstList = () => {
         let newItemList = [newsList[2]]
@@ -341,6 +343,16 @@ const LatestUpdate = () => {
         }
         return () => clearInterval(timer);
     }, []);
+
+    useEffect(() => {
+        if (!isVisible) {
+            clearInterval(timer);
+        }
+        else {
+            resetTimer();
+        }
+        return () => clearInterval(timer);
+    }, [isVisible]);
 
     return (
         <LatestUpdatesSection>

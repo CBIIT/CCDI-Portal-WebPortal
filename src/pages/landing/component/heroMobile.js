@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import usePageVisibility from "./PageVisibility";
 import { carouselList } from '../../../bento/landingPageData';
 import exportIconText from '../../../assets/landing/Export_Icon_White.svg';
 
@@ -121,6 +122,8 @@ const HeroMobileSection = styled.div`
 `;
 
 const HeroMobile = () => {
+    const isVisible = usePageVisibility();
+
     const mouseIn = (key) => {
         clearInterval(timer);
     }
@@ -148,9 +151,14 @@ const HeroMobile = () => {
     };
 
     useEffect(() => {
-        resetTimer();
+        if (!isVisible) {
+            clearInterval(timer);
+        }
+        else {
+            resetTimer();
+        }
         return () => clearInterval(timer);
-    }, []);
+    }, [isVisible]);
 
 
     return (

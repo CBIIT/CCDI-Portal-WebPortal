@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-// import ReactHtmlParser from 'html-react-parser';
-// import { carouselList } from '../../../bento/landingPageData'
+import { carouselList } from '../../../bento/landingPageData';
+import exportIconText from '../../../assets/landing/Export_Icon_White.svg';
 
 const HeroMobileSection = styled.div`
   position: relative;
@@ -45,12 +45,33 @@ const HeroMobileSection = styled.div`
   }
 
   .carouselMobileItem {
-    display: flex;
     position: absolute;
     width: 210px;
     height: 390px;
     background: #1C2537;
     border-radius: 20px;
+  }
+
+  .itemImgContainer {
+    width: 210px;
+    height: 235px;
+    border-radius: 20px 20px 0 0;
+    object-fit: cover;
+  }
+
+  .itemTitleContainer {
+    padding: 10px 15px;
+    font-family: poppins;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 0.02em;
+    color: #FFFFFF;
+    height: 118px;
+  }
+
+  .exportIcon {
+    padding: 0 20px;
   }
 
   .carouselMobileItem:nth-child(1) {
@@ -59,22 +80,22 @@ const HeroMobileSection = styled.div`
   }
   .carouselMobileItem:nth-child(2) {
     transform: translateX(0);
-    // visibility: visible;
   }
   .carouselMobileItem:nth-child(3) {
     transform: translateX(115%);
-    // visibility: visible;
   }
   .carouselMobileItem:nth-child(4) {
     transform: translateX(230%);
-    // visibility: visible;
   }
-
-  .itemImgContainer {
-    width: 210px;
-    height: 235px;
-    border-radius: 20px 20px 0 0;
-    background: white;
+  .carouselMobileItem:nth-child(5) {
+    transform: translateX(345%);
+  }
+  .carouselMobileItem:nth-child(6) {
+    transform: translateX(460%);
+  }
+  .carouselMobileItem:nth-child(7) {
+    transform: translateX(575%);
+    visibility: hidden;
   }
 
 
@@ -99,18 +120,18 @@ const HeroMobile = () => {
                 </div>
                 <div className='introTitle2'>Explore the CCDI Hub </div>
                 <div className='carouselMobileList'>
-                    <div className='carouselMobileItem'>
-                        <div className='itemImgContainer'></div>
-                    </div>
-                    <div className='carouselMobileItem'>
-                        <div className='itemImgContainer'></div>
-                    </div>
-                    <div className='carouselMobileItem'>
-                        <div className='itemImgContainer'></div>
-                    </div>
-                    <div className='carouselMobileItem'>
-                        <div className='itemImgContainer'></div>
-                    </div>
+                    {
+                        carouselList.map((mcarouselItem, idx) => {
+                            const mcarouselkey = `mcarousel_${idx}`;
+                            return (
+                                <div key={mcarouselkey} className='carouselMobileItem'>
+                                    <img className='itemImgContainer' src={mcarouselItem.img} alt="carousel_img"/>
+                                    <div className="itemTitleContainer">{mcarouselItem.content}</div>
+                                    <img className='exportIcon' src={exportIconText} alt="export_icon"/>
+                                </div>
+                            )
+                        })
+                    }
                 </div>
             </div>
         </HeroMobileSection>

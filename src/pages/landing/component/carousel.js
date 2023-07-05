@@ -380,7 +380,9 @@ const Carousel = () => {
             clearInterval(timer);
         }
         else {
-            startTimer();
+            if (!pause) {
+                startTimer();
+            }
         }
         return () => clearInterval(timer);
     }, [isVisible]);

@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { carouselList } from '../../../bento/landingPageData';
 import exportIconText from '../../../assets/landing/Export_Icon_White.svg';
+
+let timer = null;
 
 const HeroMobileSection = styled.div`
   position: relative;
@@ -50,6 +52,7 @@ const HeroMobileSection = styled.div`
     height: 390px;
     background: #1C2537;
     border-radius: 22px;
+    transition: 650ms;
   }
 
   .itemImgContainer {
@@ -82,9 +85,11 @@ const HeroMobileSection = styled.div`
   .carouselMobileItem:nth-child(1) {
     transform: translateX(-115%);
     visibility: hidden;
+    opacity: 0;
   }
   .carouselMobileItem:nth-child(2) {
     transform: translateX(0);
+    opacity: 1;
   }
   .carouselMobileItem:nth-child(3) {
     transform: translateX(115%);
@@ -116,6 +121,38 @@ const HeroMobileSection = styled.div`
 `;
 
 const HeroMobile = () => {
+    const mouseIn = (key) => {
+        clearInterval(timer);
+    }
+
+    const mouseOut = () => {
+        resetTimer();
+    }
+
+    const resetTimer = () => {
+        clearInterval(timer);
+        startTimer();
+    };
+
+    const nextItem = () => {
+        const list = document.getElementById("mcarouselList");
+        const firstitem = list.firstChild;
+        list.removeChild(firstitem);
+        list.appendChild(firstitem);
+    };
+
+    const startTimer = () => {
+        timer = setInterval(() => {
+            nextItem();
+        }, 4000);
+    };
+
+    useEffect(() => {
+        resetTimer();
+        return () => clearInterval(timer);
+    }, []);
+
+
     return (
         <HeroMobileSection>
             <div className='backgroundContainer'>
@@ -129,7 +166,7 @@ const HeroMobile = () => {
                         carouselList.map((mcarouselItem, idx) => {
                             const mcarouselkey = `mcarousel_${idx}`;
                             return (
-                                <div key={mcarouselkey} className='carouselMobileItem'>
+                                <div key={mcarouselkey} className='carouselMobileItem' onMouseEnter={mouseIn} onMouseLeave={mouseOut}>
                                     <img className='itemImgContainer' src={mcarouselItem.mobile} alt="carousel_img"/>
                                     <div className="itemTitleContainer"><a href={mcarouselItem.link} target="_blank" rel="noopener noreferrer">{mcarouselItem.content}</a></div>
                                     <a className="exportIconContainer" href={mcarouselItem.link} target="_blank" rel="noopener noreferrer"><img src={exportIconText} alt="export_icon"/></a>

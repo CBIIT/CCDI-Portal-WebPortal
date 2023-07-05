@@ -49,7 +49,7 @@ const HeroMobileSection = styled.div`
     width: 210px;
     height: 390px;
     background: #1C2537;
-    border-radius: 20px;
+    border-radius: 22px;
   }
 
   .itemImgContainer {
@@ -130,7 +130,7 @@ const HeroMobile = () => {
                             const mcarouselkey = `mcarousel_${idx}`;
                             return (
                                 <div key={mcarouselkey} className='carouselMobileItem'>
-                                    <img className='itemImgContainer' src={mcarouselItem.img} alt="carousel_img"/>
+                                    <img className='itemImgContainer' src={mcarouselItem.mobile} alt="carousel_img"/>
                                     <div className="itemTitleContainer"><a href={mcarouselItem.link} target="_blank" rel="noopener noreferrer">{mcarouselItem.content}</a></div>
                                     <a className="exportIconContainer" href={mcarouselItem.link} target="_blank" rel="noopener noreferrer"><img src={exportIconText} alt="export_icon"/></a>
                                 </div>

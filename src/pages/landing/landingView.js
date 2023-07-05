@@ -128,12 +128,15 @@ const FirstContainer = styled.div`
 
 const IntroContainer = styled.div`
     margin-top: 120px;
-    width: 616px;
+    width: calc(50vw - 160px);
     height: 492px;
+    @media (min-width: 1420px) {
+      width: 550px;
+    }
 `;
 
 const IntroTextContainer = styled.div`
-    padding: 51px 0 0 135px;
+    padding: 51px 0 0 calc(50vw - 573px);
     
     .introTextTitle1 {
       text-align: left;
@@ -158,12 +161,18 @@ const IntroTextContainer = styled.div`
       padding: 13px 0;
       margin: 26px 0 43px 0;
     }
+
+    @media (min-width: 1420px) {
+      padding: 51px 0 0 135px;
+    }
 `;
 
 const ListContainer = styled.div`
-    margin: 60px 33px 30px 33px;    
-    width: 758px;
-    height: 640px;
+    margin: 60px 33px 0 calc(50vw - 620px);;
+
+    @media (min-width: 1420px) {
+      margin: 60px 33px 0 90px;
+    }
 `;
 
 const IntroAboutButtonContainer = styled.div`

@@ -10,9 +10,6 @@ let direction = "d";
 
 const HeroListWholeContainer = styled.div`
     .pauseButton {
-        position: absolute;
-        right: 60px;
-        top: 705px;
         color: #05555C;
         font-family: Inter;
         font-weight: 600;
@@ -20,6 +17,7 @@ const HeroListWholeContainer = styled.div`
         letter-spacing: 0.02em;
         text-transform: uppercase;
         z-index: 500;
+        margin: 5px 0 0 690px;
     }
 
     .pauseButton:hover {
@@ -387,7 +385,6 @@ const Carousel = () => {
 
     return (
         <HeroListWholeContainer>
-            <div className='pauseButton' onClick={clickPause} onKeyPress={keyDownPause} tabindex="0">{pause ? 'START' : 'PAUSE'}</div>
             <HeroListContainer onMouseEnter={mouseIn} onMouseLeave={mouseOut}>
                 <div className='upButton' onClick={prevSlide}>
                     <div className="arrowUp"></div>
@@ -420,6 +417,7 @@ const Carousel = () => {
 
                 </HeroList>
             </HeroListContainer>
+            <div className='pauseButton' onClick={clickPause} onKeyPress={keyDownPause} tabindex="0">{pause ? 'START' : 'PAUSE'}</div>
         </HeroListWholeContainer>
     );
 };

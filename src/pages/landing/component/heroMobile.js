@@ -68,10 +68,15 @@ const HeroMobileSection = styled.div`
     letter-spacing: 0.02em;
     color: #FFFFFF;
     height: 118px;
+
+    a {
+        text-decoration: none;
+        color: #FFFFFF;
+    }
   }
 
-  .exportIcon {
-    padding: 0 20px;
+  .exportIconContainer {
+    margin: 0 20px;
   }
 
   .carouselMobileItem:nth-child(1) {
@@ -119,15 +124,15 @@ const HeroMobile = () => {
                     <div>CCDI Resources</div>
                 </div>
                 <div className='introTitle2'>Explore the CCDI Hub </div>
-                <div className='carouselMobileList'>
+                <div id="mcarouselList" className='carouselMobileList'>
                     {
                         carouselList.map((mcarouselItem, idx) => {
                             const mcarouselkey = `mcarousel_${idx}`;
                             return (
                                 <div key={mcarouselkey} className='carouselMobileItem'>
                                     <img className='itemImgContainer' src={mcarouselItem.img} alt="carousel_img"/>
-                                    <div className="itemTitleContainer">{mcarouselItem.content}</div>
-                                    <img className='exportIcon' src={exportIconText} alt="export_icon"/>
+                                    <div className="itemTitleContainer"><a href={mcarouselItem.link} target="_blank" rel="noopener noreferrer">{mcarouselItem.content}</a></div>
+                                    <a className="exportIconContainer" href={mcarouselItem.link} target="_blank" rel="noopener noreferrer"><img src={exportIconText} alt="export_icon"/></a>
                                 </div>
                             )
                         })

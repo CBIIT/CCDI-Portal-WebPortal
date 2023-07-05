@@ -339,6 +339,7 @@ const LatestUpdate = () => {
         if (rLatestlList.length === 0) {
             setRLatestlList(getFirstList());
         }
+        return () => clearInterval(timer);
     }, []);
 
     return (

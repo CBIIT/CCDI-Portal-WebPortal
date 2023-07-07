@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { introData, titleData, statsData, resourcesAppliationsListData, resourcesCloudListData } from '../../bento/landingPageData';
-import { newsList } from '../../bento/newsData';
 import ReactHtmlParser from 'html-react-parser';
 import Carousel from '../landing/component/carousel';
+import HeroMobile from '../landing/component/heroMobile'
+import LatestUpdate from '../landing/component/latestUpdate'
 import exportIcon from '../../assets/landing/Export_Icon_Black.svg';
-import exportIconText from '../../assets/landing/Export_Icon_White.svg';
 import bg1 from '../../assets/landing/bg_1.png';
 import bg2 from '../../assets/landing/bg_2.png';
 import bg3 from '../../assets/landing/bg_3.png';
@@ -14,7 +14,10 @@ const LandingViewContainer = styled.div`
     font-family: Poppins;
     position: relative;
     background: white;
-    height: 2980px;
+    
+    @media (min-width: 1200px) {
+      height: 2980px;
+    }
 `;
 
 const BackgroundFirst = styled.div`
@@ -28,6 +31,10 @@ const BackgroundFirst = styled.div`
   z-index: 3;
   background-repeat: no-repeat;
   background-size: cover;
+
+  @media (max-width: 1199px) {
+    display: none;
+  }
 `;
 
 const BackgroundSecond = styled.div`
@@ -41,6 +48,10 @@ const BackgroundSecond = styled.div`
   z-index: 2;
   background-repeat: no-repeat;
   background-size: cover;
+
+  @media (max-width: 1199px) {
+    display: none;
+  }
 `;
 
 const BackgroundThird = styled.div`
@@ -54,12 +65,20 @@ const BackgroundThird = styled.div`
   z-index: 1;
   background-repeat: no-repeat;
   background-size: cover;
+
+  @media (max-width: 1199px) {
+    display: none;
+  }
 `;
 
 const HeroSection = styled.div`
   position: relative;
   height: 730px;
   z-index: 5;
+
+  @media (max-width: 1199px) {
+    display: none;
+  }
 `;
 
 const Banner = styled.div`
@@ -87,17 +106,16 @@ const StatsSection = styled.div`
   z-index: 5;
 `;
 
-const LatestUpdatesSection = styled.div`
-  position: relative;
-  z-index: 5;
-  margin-top: 23px;
-`;
-
 const ResourcesSection = styled.div`
   position: relative;
   z-index: 5;
   margin-top: 94px;
   margin-bottom: 75px;
+
+  @media (max-width: 1199px) {
+    margin-top: 380px;
+    margin-bottom: 20px;
+  }
 `;
 
 const FirstContainer = styled.div`
@@ -110,12 +128,15 @@ const FirstContainer = styled.div`
 
 const IntroContainer = styled.div`
     margin-top: 120px;
-    width: 616px;
+    width: calc(50vw - 160px);
     height: 492px;
+    @media (min-width: 1420px) {
+      width: 550px;
+    }
 `;
 
 const IntroTextContainer = styled.div`
-    padding: 51px 0 0 135px;
+    padding: 51px 0 0 calc(50vw - 573px);
     
     .introTextTitle1 {
       text-align: left;
@@ -140,12 +161,18 @@ const IntroTextContainer = styled.div`
       padding: 13px 0;
       margin: 26px 0 43px 0;
     }
+
+    @media (min-width: 1420px) {
+      padding: 51px 0 0 135px;
+    }
 `;
 
 const ListContainer = styled.div`
-    margin: 60px 33px 30px 33px;    
-    width: 758px;
-    height: 640px;
+    margin: 60px 33px 0 calc(50vw - 620px);;
+
+    @media (min-width: 1420px) {
+      margin: 60px 33px 0 90px;
+    }
 `;
 
 const IntroAboutButtonContainer = styled.div`
@@ -177,7 +204,6 @@ const IntroAboutButtonContainer = styled.div`
 `;
 
 const StatsContainer = styled.div`
-    width: 1440px;
     margin: 0 auto;
     justify-content: center;
     position: relative;
@@ -193,13 +219,17 @@ const StatsContainer = styled.div`
       filter: blur(30px);
 
       @media (min-width: 1440px) {
-        left: calc(1440px - 100vw - 270px);
+        left: calc(1440px - 100vw - 230px);
         width: calc(100vw - 1440px + 400px);
       }
       
       @media (max-width: 1440px) {
-        left: -270px;
+        left: calc(50vw - 950px);
         width: 400px;
+      }
+
+      @media (max-width: 1199px) {
+        display: none;
       }
     }
 
@@ -212,13 +242,17 @@ const StatsContainer = styled.div`
       filter: blur(30px);
     
       @media (min-width: 1440px) {
-        right: calc(1440px - 100vw - 270px);
+        right: calc(1440px - 100vw - 230px);
         width: calc(100vw - 1440px + 400px);
       }
       
       @media (max-width: 1440px) {
-        right: -270px;
+        right: calc(50vw - 950px);
         width: 400px;
+      }
+
+      @media (max-width: 1199px) {
+        display: none;
       }
     }
 
@@ -288,129 +322,93 @@ const StatsContainer = styled.div`
       line-height: 21px;
       text-align: left;
     }
-`;
 
-const StatsBox = styled.div`
-    margin: 0 55px;
-    position: relative;
-`;
-
-const LatestUpdatesContainer = styled.div`
-    width: 1440px;
-    margin: 0 auto;
-    position: relative;
-
-    .latestUpdatesList {
-      display: flex;
-      justify-content: center;
+    @media (min-width: 1420px) {
+      width: 1420px;
     }
 
-    .latestUpdatesListItem {
-      margin: 16px;
-      width: 367px;
-      height: 476px;
-      background-color: #044249;
-      box-shadow: 0px 0px 16px #1B1C1C80;
-      border-radius: 0px 20px;
-    }
+    @media (max-width: 1199px) {
+      .borderTop {
+        display: none;
+      }
 
-    .latestUpdatesListItemPic {
-      border-radius: 0px 20px 0 0;
-      height: 310px;
-    }
+      .borderBottom {
+        display: none;
+      }
 
-    .latestUpdatesListTitleContainer {
-      text-decoration: none;
-    }
+      .statGlance {
+        padding: 12px 0;
+        text-align: left;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 17px;
+        color: #255B5E;
+        margin-left: calc(50vw - 405px);
+      }
 
-    .latestUpdatesListTitle {
-      color: #88DCDD;
-      padding: 14px 23px 0 23px;
-      margin-bottom: 7px;
-      font-family: Poppins;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 16px;
-      height: 57px;
-    }
+      .statList {
+        display: grid;
+        grid-column-gap: 75px;
+        grid-template-columns: 143px 143px 143px 143px;
+        // margin: 0 calc(50vw - 405px);
+      }
 
-    .latestUpdatesListTitle:hover{
-      color: #72F9FB;
-      cursor: pointer;
-    }
+      .statItem {
+        padding: 0;
+      }
 
-    .latestUpdatesListContent {
-      color: #FFFFFF;
-      padding: 0 23px 0 23px;
-      font-family: Inter;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 22px;
-      letter-spacing: -0.02em;
-    }
+      .statNum {
+        font-family: Inter;
+        font-weight: 800;
+        font-size: 22px;
+        line-height: 40px;
+      }
 
-    .latestUpdatesTextContent {
-      a {
-        color: #FFFFFF;
-        padding-right: 20px;
-        background: url(${exportIconText}) right center no-repeat;
-        text-underline-offset: 5px;
+      .statTitle {
+        color: #0095A2;
+        font-size: 14px;
+        line-height: 13px;
+      }
+
+      .statDetail {
+        color: #0095A2;
+        font-size: 14px;
+        line-height: 13px;
       }
     }
 
-    .readMoreContainer {
-      font-size: 14px;
-      color: #AFF1FF;
-      border-bottom: 1px solid #AFF1FF;
-      text-decoration: none;
-      margin-left: 12px;
+    @media (max-width: 872px) {
+      .statGlance {
+        margin-left: 30px;
+      }
+
+      .statList {
+        display: grid;
+        grid-column-gap: 8%;
+        grid-template-columns: 19% 19% 19% 19%;
+        margin: 0 30px;
+      }
+
+      .statItem {
+        width: 143px;
+      }
     }
 
-    .readMoreContainer:hover{
-      color: #5EF2FF;
-      border-bottom: 1px solid #5EF2FF;
-      cursor: pointer;
-    }
-
-    .readMoreContainer::after {
-      content: '>';
-      margin-left: 4px;
+    @media (max-width: 699px) {
+      .statList {
+        display: grid;
+        grid-column-gap: 29px;
+        grid-row-gap: 10%;
+        grid-template-columns: 143px 143px;
+        margin: 0 30px;
+        justify-content: left;
+      }
     }
 `;
 
-const TitleContainer = styled.div`
-    display: flex;
-    color: #05555C;
-    margin: 0 149px 38px 0;
-    justify-content: flex-end;
-
-    .titleLine {
-      margin-right: 15px;
-      display: flex;
-      height: 32px;
-    }
-
-    .titleLineLong {
-      content:'';
-      display:inline-block;
-      width: 100px; 
-      border-bottom: 3px solid #05555C;
-      margin-left: 2px;
-    }
-
-    .titleLineShort {
-      content:'';
-      display:inline-block;
-      width: 7px; 
-      border-bottom: 3px solid #05555C;
-      margin-right: 3px;
-    }
-
-    .titleText {
-      font-family: Poppins;
-      font-weight: 600;
-      font-size: 35px;
-    }
+const StatsBox = styled.div`
+    // margin: 0 55px;
+    position: relative;
 `;
 
 const ResourcesOverlayRight = styled.div`
@@ -438,13 +436,12 @@ const ResourcesOverlay = styled.div`
 `;
 
 const ResourcesContainer = styled.div`
-    width: 1440px;
     margin: 0 auto;
     z-index: 10;
     position: relative;
 
     .resourceTitle {
-      margin-left: 160px;
+      margin-left: 136px;
       font-family: Poppins;
       font-weight: 600;
       font-size: 35px;
@@ -460,7 +457,7 @@ const ResourcesContainer = styled.div`
     }
 
     .resourceSubtitleText {
-      margin: 10px 0 10px 160px;
+      margin: 10px 0 10px 135px;
       font-family: Poppins;
       font-weight: bold;
       font-size: 17px;
@@ -489,23 +486,14 @@ const ResourcesContainer = styled.div`
       margin-left: 3px;
     }
 
-    .resourceList {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: left;
-      margin: 0 143px 0 143px;
-    }
-
     .resourceListItem {
-      display: flex;
-      width: 47%;
-      margin: 17px;
+      margin: 17px 0;
       text-decoration: none;
     }
 
     .resourceListItem:focus-visible {
       outline: none;
-  }
+    }
 
     .resourceListItemLogo {
       width: 169px;
@@ -521,12 +509,6 @@ const ResourcesContainer = styled.div`
       align-items: center;
       justify-content: center;
       text-align: center;
-    }
-
-    .resourceListItemText {
-      margin: 5px 0 0 20px;
-      width: 353px;
-      height: 125px;
     }
 
     .resourceListItemTitle {
@@ -553,6 +535,177 @@ const ResourcesContainer = styled.div`
       font-weight: 400;
       font-size: 16px;
       letter-spacing: 0.02em;
+    }
+
+    @media (min-width: 1420px) {
+      width: 1420px;
+
+      .resourceListItem {
+        display: flex;
+        margin: 17px;
+        text-decoration: none;
+      }
+
+      .resourceList {
+        display: grid;
+        grid-column-gap: 40px;
+        grid-template-columns: 570px 570px;
+        justify-content: center;
+      }
+
+      .resourceListItemText {
+        margin: 5px 0 0 20px;
+        // width: 353px;
+        height: 125px;
+      }
+
+      .upper {
+        display: none;
+      }
+
+      .lower {
+        display: block;
+      }
+    }
+
+    @media (min-width: 1200px) and (max-width: 1419px) {
+      .resourceTitle {
+        margin-left: calc(50vw - 580px);
+      }
+
+      .resourceSubtitle {
+        margin: 0 calc(50vw - 715px);
+      }
+
+      .resourceListItem {
+        display: flex;
+        margin: 17px;
+        text-decoration: none;
+      }
+
+      .resourceList {
+        display: grid;
+        grid-column-gap: 40px;
+        grid-template-columns: 570px 570px;
+        justify-content: center;
+      }
+
+      .resourceListItemText {
+        margin: 5px 0 0 20px;
+        width: 353px;
+        height: 125px;
+      }
+
+      .upper {
+        display: none;
+      }
+
+      .lower {
+        display: block;
+      }
+    }
+
+    @media (max-width: 1199px) {
+      .resourceList {
+        display: grid;
+        grid-column-gap: 55px;
+        grid-template-columns: 371px 371px;
+        justify-content: center;
+      }
+
+      .resourceListItemLogo {
+        width: 78px;
+        height: 73px;
+        font-size: 18px;
+        line-height: 20px;
+      }
+
+      .upper {
+        display: block;
+      }
+
+      .resourceListItemTitleContainer {
+        display: flex;
+        align-items: center;
+      }
+
+      .resourceListItemTitle{
+        font-size: 18px;
+      }
+
+      .resourceSubtitleText {
+        margin: 10px 0 10px calc(50vw - 405px);
+        font-size: 14px;
+        line-height: 17px;
+        letter-spacing: 0.02em;
+      }
+
+      .resourceTitle {
+        margin-left: calc(50vw - 405px);
+        font-size: 14px;
+        line-height: 17px;
+        letter-spacing: 0.02em;
+      }
+
+      .resourceListItem {
+        margin: 12px 0;
+      }
+
+      .resourceListItemUpper {
+        display: grid;
+        grid-template-columns: 90px auto;
+      }
+
+      .resourceListItemContext {
+        margin-top: 10px;
+      }
+
+      .resourceItem {
+        padding-bottom: 40px;
+      }
+
+      .upper {
+        display: block;
+      }
+
+      .lower {
+        display: none;
+      }
+    }
+
+    @media (max-width: 872px) {
+      .resourceList {
+        display: grid;
+        grid-column-gap: 55px;
+        grid-template-columns: auto auto;
+        justify-content: center;
+        margin: 0 30px;
+      }
+
+      .resourceSubtitleText {
+        margin: 10px 0 10px 30px;
+      }
+
+      .resourceTitle {
+        margin-left: 30px;
+      }
+    }
+
+    @media (max-width: 699px) {
+      .resourceList {
+        display: grid;
+        grid-template-columns: 100%;
+        margin: 0 30px;
+      }
+
+      .resourceItem {
+        padding-bottom: 40px;
+      }
+
+      .resourceListItem {
+        max-width: 315px;
+        margin: 15px 0;
+      }
     }
 `;
 
@@ -585,6 +738,7 @@ const LandingView = () => {
           </ListContainer>
         </FirstContainer>
       </HeroSection>
+      <HeroMobile />
       <StatsSection>
         <StatsContainer>
           <StatsBox>
@@ -610,37 +764,7 @@ const LandingView = () => {
           </StatsBox>
         </StatsContainer>
       </StatsSection>
-      <LatestUpdatesSection>
-        <LatestUpdatesContainer>
-          <TitleContainer>
-            <div className='titleLine'>
-              <div className='titleLineShort' />
-              <div className='titleLineShort' />
-              <div className='titleLineLong' />
-            </div>
-            <div className='titleText'>{titleData.latestUpdatesTitle}</div>
-          </TitleContainer>
-          <div className='latestUpdatesList'>
-            {
-              newsList.slice(0,3).map((updateItem, updateidx) => {
-                const updatekey = `update_${updateidx}`;
-                return (
-                  <div className='latestUpdatesListItem' key={updatekey}>
-                    <a href={`/news#${updateItem.id}`} ><div className='latestUpdatesListItemPic' style={{ backgroundImage: `url(${updateItem.img})` }} /><span style={{display:'none'}}>latestUpdates text</span></a>
-                    <a className='latestUpdatesListTitleContainer' href={`/news#${updateItem.id}`}><div className='latestUpdatesListTitle'>{updateItem.title}</div></a>
-                    <div className='latestUpdatesListContent'>
-                      <span className='latestUpdatesTextContent'>{ReactHtmlParser(updateItem.slug)}</span>
-                      { updateItem.slug.length > 100 && updateItem.slug.length < 110
-                      ? <div><a className='readMoreContainer' href={`/news#${updateItem.id}`} style={{marginLeft: 0}}>Read More</a></div>
-                      : <a className='readMoreContainer' href={`/news#${updateItem.id}`}>Read More</a>}
-                    </div>
-                  </div>
-                )
-              })
-            }
-          </div>
-        </LatestUpdatesContainer>
-      </LatestUpdatesSection>
+      <LatestUpdate />
       <ResourcesSection>
         <ResourcesOverlayRight />
         <ResourcesOverlay />
@@ -661,9 +785,14 @@ const LandingView = () => {
                   const appkey = `app_${appidx}`;
                   return (
                     <a id={appItem.id} className='resourceListItem' key={appkey} href={appItem.link} target="_blank" rel="noopener noreferrer">
-                      <div className='resourceListItemLogo' style={{background: '#00838F'}}>{appItem.subtitle}</div>
+                      <div className='resourceListItemUpper'>
+                        <div className='resourceListItemLogo' style={{background: '#00838F'}}>{appItem.subtitle}</div>
+                        <div className='resourceListItemTitleContainer'>
+                          <div className='resourceListItemTitle upper'>{appItem.title}<span className='resourceListItemTitleSmall'>{'(' + appItem.subtitle + ')'}</span></div>
+                        </div>
+                      </div>
                       <div className='resourceListItemText'>
-                        <div className='resourceListItemTitle'>{appItem.title}<span className='resourceListItemTitleSmall'>{'(' + appItem.subtitle + ')'}</span></div>
+                        <div className='resourceListItemTitle lower'>{appItem.title}<span className='resourceListItemTitleSmall'>{'(' + appItem.subtitle + ')'}</span></div>
                         <div className='resourceListItemContext'>{appItem.content}</div>
                       </div>
                     </a>
@@ -687,9 +816,14 @@ const LandingView = () => {
                   const cloudkey = `cloud_${cloudidx}`;
                   return (
                     <a id={cloudItem.id} className='resourceListItem' key={cloudkey} href={cloudItem.link} target="_blank" rel="noopener noreferrer">
-                      <div className='resourceListItemLogo' style={{background: '#455299'}}>{cloudItem.subtitle}</div>
+                      <div className='resourceListItemUpper'>
+                        <div className='resourceListItemLogo' style={{background: '#455299'}}>{cloudItem.subtitle}</div>
+                        <div className='resourceListItemTitleContainer'>
+                          <div className='resourceListItemTitle upper'>{cloudItem.title}<span className='resourceListItemTitleSmall'>{'(' + cloudItem.subtitle + ')'}</span></div>
+                        </div>
+                      </div>
                       <div className='resourceListItemText'>
-                        <div className='resourceListItemTitle'>{cloudItem.title}<span className='resourceListItemTitleSmall'>{'(' + cloudItem.subtitle + ')'}</span></div>
+                        <div className='resourceListItemTitle lower'>{cloudItem.title}<span className='resourceListItemTitleSmall'>{'(' + cloudItem.subtitle + ')'}</span></div>
                         <div className='resourceListItemContext'>{cloudItem.content}</div>
                       </div>
                     </a>

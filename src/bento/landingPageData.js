@@ -8,6 +8,13 @@ import wheel4 from '../assets/landing/mtp_carousel.svg';
 import wheel5 from '../assets/landing/nccr_carousel.svg';
 import wheel6 from '../assets/landing/cgc_carousel.svg';
 import wheel7 from '../assets/landing/dbgap_carousel.svg';
+import ccdcMobile from '../assets/landing/ccdc_mobile.png';
+import civicMobile from '../assets/landing/civic_mobile.png';
+import mciMobile from '../assets/landing/mci_mobile.png';
+import mtpMobile from '../assets/landing/mtp_mobile.png';
+import nccrMobile from '../assets/landing/nccr_mobile.png';
+import cgcMobile from '../assets/landing/cgc_mobile.png';
+import dbgapMobile from '../assets/landing/dbgap_mobile.png';
 
 export const introData = {
   landingIntroPic: landingImg,
@@ -116,36 +123,43 @@ export const aboutContainerData = {
 export const carouselList = [
   {
     img: wheel6,
+    mobile: cgcMobile,
     content: 'Cancer Genomics Cloud',
     link: 'https://www.cancergenomicscloud.org',
   },
   {
     img: wheel1,
+    mobile: ccdcMobile,
     content: 'Childhood Cancer Data Catalog',
     link: 'https://datacatalog.ccdi.cancer.gov',
   },
   {
     img: wheel2,
+    mobile: civicMobile,
     content: 'Clinical Interpretation of Variants in Cancer',
     link: 'https://civicdb.org',
   },
   {
     img: wheel7,
+    mobile: dbgapMobile,
     content: 'Database of Genotypes and Phenotypes',
     link: 'https://www.ncbi.nlm.nih.gov/gap'
   },
   {
     img: wheel3,
+    mobile: mciMobile,
     content: 'Molecular Characterization Initiative for Childhood Cancer',
     link: 'https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs002790.v2.p1',
   },
   {
     img: wheel4,
+    mobile: mtpMobile,
     content: 'Molecular Targets Platform',
     link: 'https://moleculartargets.ccdi.cancer.gov',
   },
   {
     img: wheel5,
+    mobile: nccrMobile,
     content: 'National Childhood Cancer Registry Explorer',
     link: 'https://nccrexplorer.ccdi.cancer.gov',
   },

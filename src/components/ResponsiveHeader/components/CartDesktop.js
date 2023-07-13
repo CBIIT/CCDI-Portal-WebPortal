@@ -14,13 +14,17 @@ const CartContainer = styled.div`
   right: calc(50% - 710px);
   z-index: 9999;
 
+  @media (max-width: 1430px) {
+    right: 0;
+  }
+
   .logotype {
     white-space: nowrap;
     border: 0px;
     cursor: pointer;
     margin: 0px;
     display: inline-flex;
-    padding: 6px 20px 0px 5px;
+    padding: 6px 32px 0px 5px;
     position: relative;
     align-items: center;
     line-height: 1.75;
@@ -38,11 +42,12 @@ const CartContainer = styled.div`
   .cartIcon {
     height: 55px;
     margin: 0px 0px 0px 6px;
+    z-index: 10000;
   }
 
   .cartLabelText {
     text-decoration: none;
-    color: #137E87;
+    color: #FFFFFF;
     font-family: poppins;
     text-transform: UPPERCASE;
     font-size: 13px;
@@ -56,21 +61,26 @@ const CartContainer = styled.div`
 
   .cartCounter2Wrapper {
     margin-top: 6px;
-    margin-left: 6px;
+    margin-left: 3px;
   }
 
   .cartCounter2 {
-    height: 20px;
-    font-size: 16px;
-    min-width: 16px;
-    text-align: start;
+    height: 15px;
+    font-size: 11px;
+    line-height: 16px;
+    min-width: 17px;
+    text-align: center;
     font-weight: 600;
+    background: #24415C;
+    border-radius: 5px;
+    margin: 2px 6px 0 -19px;
+    padding-left: 3px;
   }
 
   .cartLabel {
-    height: 16px;
+    height: 14px;
     min-width: 16px;
-    color: #137E87;
+    color: #717A7A;
     font-weight: 600;
     letter-spacing: 0.8px;
     text-align: start;

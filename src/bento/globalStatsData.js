@@ -1,4 +1,8 @@
 import gql from 'graphql-tag';
+import studiesLogo from '../assets/stats/Studies_Logo.svg';
+import participantsLogo from '../assets/stats/Participants_Logo.svg';
+import samplesLogo from '../assets/stats/Samples_Logo.svg';
+import fileLogo from '../assets/stats/Files_Logo.svg';
 
 export const statsStyling = {
   global: {
@@ -23,11 +27,11 @@ export const statsStyling = {
   statsIcon: {
     width: '40px',
     height: '45px',
-    margin: '2px 0px 0px -45px',
+    margin: '7px 0px 0px -45px',
     position: 'relative',
   },
   statCount: {
-    color: '#0467BD',
+    color: '#FFFFFF',
     fontFamily: 'Oswald',
     fontSize: '20px',
     lineHeight: '17px',
@@ -54,14 +58,15 @@ export const globalStatsData = [
     statTitle: 'Programs',
     type: 'field',
     statAPI: 'numberOfPrograms',
-    statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/Programs.svg',
+    statIconSrc: studiesLogo,
     statIconAlt: 'Data Volume Stats Bar Icon',
   },
   {
     statTitle: 'Arms',
     type: 'field',
     statAPI: 'numberOfStudies',
-    statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/Arms.svg',
+    statIconSrc: participantsLogo,
+    statIconAlt: 'Participant Logo'
   },
   {
     statTitle: 'Cases',
@@ -73,7 +78,7 @@ export const globalStatsData = [
     statTitle: 'Samples',
     type: 'field',
     statAPI: 'numberOfSamples',
-    statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/Samples.svg',
+    statIconSrc: samplesLogo,
   },
   {
     statTitle: 'Assays',
@@ -85,7 +90,7 @@ export const globalStatsData = [
     statTitle: 'Files',
     type: 'field',
     statAPI: 'numberOfFiles',
-    statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/Files.svg',
+    statIconSrc: fileLogo,
   },
 ];
 

@@ -79,3 +79,8 @@
   font-family:"Reem Kufi";
   src:url(./fonts/ReemKufi-VariableFont_wght.ttf);
 }
+
+@font-face {
+  font-family:"Nunito";
+  src:url(./fonts/Nunito-VariableFont_wght.ttf);
+}

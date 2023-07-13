@@ -58,7 +58,7 @@ const LiSection = styled.li`
     line-height: 40px;
     letter-spacing: normal;
     text-decoration: none;
-    margin: 0 45px 0 5px;
+    margin: 0 13px 0 5px;
     padding: 0 15px;
     user-select:none;
   }
@@ -152,7 +152,7 @@ const LiSection = styled.li`
     line-height: 40px;
     letter-spacing: normal;
     text-decoration: none;
-    margin: 0 45px 0 5px;
+    margin: 0 13px 0 5px;
     padding: 0 15px;
     user-select:none;
     background: #1F4671;

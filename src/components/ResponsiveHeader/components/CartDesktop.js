@@ -39,6 +39,15 @@ const CartContainer = styled.div`
     },
   }
 
+  .myFilesText {
+    color: #717A7A;
+    font-family: poppins;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 21px;
+    padding-top: 10px;
+  }
+
   .cartIcon {
     height: 55px;
     margin: 0px 0px 0px 6px;
@@ -106,6 +115,7 @@ const Cart = (props) => {
                 {navBarCartData.cartLabel}
                 <Tooltip title="Files" placement="bottom-end">
                   <span className="badge">
+                    <div className='myFilesText'>MY FILES</div>
                     <img
                       className="cartIcon"
                       src={navBarCartData.cartIcon}

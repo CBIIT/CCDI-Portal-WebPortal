@@ -1,5 +1,7 @@
 import { sortType, InputTypes } from '@bento-core/facet-filter';
 
+const DEMOGRAPHIC = 'Demographic';
+const DIAGNOSIS = 'Diagnosis';
 const CASES = 'Cases';
 const SAMPLES = 'Samples';
 const FILES = 'Files';
@@ -15,6 +17,13 @@ export const resetIcon = {
 
 // --------------- Dashboard Sidebar Sections styling --------------
 export const facetSectionVariables = {
+  Demographic: {
+    isExpanded: true,
+    hasSearch: true,
+  },
+  Diagnosis: {
+    isExpanded: true,
+  },
   Cases: {
     isExpanded: true,
     hasSearch: true,
@@ -28,6 +37,88 @@ export const facetSectionVariables = {
 };
 
 export const facetsConfig = [
+  {
+    section: DEMOGRAPHIC,
+    label: 'Gender',
+    apiPath: 'participantCountByGender',
+    apiForFiltering: 'filterParticipantCountByGender',
+    datafield: 'genders',
+    field: GROUP,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: DEMOGRAPHIC,
+    label: 'Race',
+    apiPath: 'participantCountByRace',
+    apiForFiltering: 'filterParticipantCountByRace',
+    datafield: 'races',
+    field: GROUP,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: DEMOGRAPHIC,
+    label: 'Ethnicity',
+    apiPath: 'participantCountByEthnicity',
+    apiForFiltering: 'filterParticipantCountByEthnicity',
+    datafield: 'ethnicities',
+    field: GROUP,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: DIAGNOSIS,
+    label: 'Age at diagnois',
+    apiPath: 'filterParticipantCountByDiagnosisAge',
+    apiForFiltering: 'filterParticipantCountByDiagnosisAge',
+    datafield: 'age_at_diagnois',
+    ApiLowerBoundName: 'lowerBound',
+    ApiUpperBoundName: 'upperBound',
+    show: true,
+    slider: true,
+    type: InputTypes.SLIDER,
+    sort_type: 'none',
+    minLowerBound: 0,
+    maxUpperBound: 100,
+    quantifier: 'Years',
+  },
+  {
+    section: DIAGNOSIS,
+    label: 'Anatomic Site',
+    apiPath: 'participantCountByAnatomicSite',
+    apiForFiltering: 'filterParticipantCountByDiagnosisAnatomicSite',
+    datafield: 'anatomic_sites',
+    field: GROUP,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: DIAGNOSIS,
+    label: 'Disease Phase',
+    apiPath: 'participantCountByDiseasePhase',
+    apiForFiltering: 'filterParticipantCountByDiseasePhase',
+    datafield: 'disease_phases',
+    field: GROUP,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: DIAGNOSIS,
+    label: 'Vital Status',
+    apiPath: 'participantCountByVitalStatus',
+    apiForFiltering: 'filterParticipantCountByVitalStatus',
+    datafield: 'vital_status',
+    field: GROUP,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
   {
     section: CASES,
     label: 'Program',

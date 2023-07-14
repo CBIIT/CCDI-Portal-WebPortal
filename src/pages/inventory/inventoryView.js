@@ -14,7 +14,7 @@ const Inventory = ({
 }) => (
   <div className={classes.dashboardContainer}>
     <StatsView data={dashData} />
-    {/* <div className={classes.contentBox}>
+    <div className={classes.contentBox}>
       <div className={classes.content}>
         <div className={classes.sideBar}>
           <BentoFacetFilter
@@ -22,7 +22,7 @@ const Inventory = ({
             activeFilters={activeFilters}
           />
         </div>
-        <div className={classes.rightContent}>
+        {/* <div className={classes.rightContent}>
           <div className={classes.widgetsContainer}>
             <QueryBarView data={dashData} />
             <WidgetView
@@ -33,9 +33,9 @@ const Inventory = ({
               activeFilters={activeFilters}
             />
           </div>
-        </div>
+        </div> */}
       </div>
-    </div> */}
+    </div>
   </div>
 );
 

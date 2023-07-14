@@ -51,6 +51,11 @@ const CustomExpansionPanelSummary = withStyles({
 
 // Generate SearchBox Component
 const { SearchBox } = SearchBoxGenerator({
+  config: {
+    inputPlaceholder: 'e.g. R000006. R0000022',
+    noOptionsText: 'No matching items found',
+    searchType: 'participantIds',
+  },
   functions: {
     getSuggestions: async (searchType) => {
       try {

@@ -1,6 +1,7 @@
 import Logo from '../assets/header/Portal_Logo.svg';
 import LogoSmall from '../assets/header/Portal_Logo_Small.svg';
 import searchbarIcon from '../assets/header/Search_Icon.svg';
+import cartLogo from '../assets/header/Cart_Logo.svg';
 
 // globalHeaderLogo image 468x100
 // globalHeaderImage: image 2200x100
@@ -99,7 +100,7 @@ Applications: [
 export const navBarCartData = {
   cartLabel: '',
   cartLink: '/fileCentricCart',
-  cartIcon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/Icon-Cart-Navbar.svg',
+  cartIcon: cartLogo,
   cartIconAlt: 'cart_logo',
   cartLabelType: 'labelUnderCount',
 };

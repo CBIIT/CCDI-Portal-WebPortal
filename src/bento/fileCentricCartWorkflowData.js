@@ -2,11 +2,12 @@ import gql from 'graphql-tag';
 import { cellTypes, dataFormatTypes } from '@bento-core/table';
 import { types, btnTypes } from '@bento-core/paginated-table';
 import { customMyFilesTabDownloadCSV } from './tableDownloadCSV';
+import cartLogo from '../assets/header/Cart_Logo.svg';
 
 export const navBarCartData = {
   cartLabel: 'Cart',
   cartLink: '/fileCentricCart',
-  cartIcon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/Icon-Cart-Navbar.svg',
+  cartIcon: cartLogo,
   cartIconAlt: 'cart_logo',
 };
 

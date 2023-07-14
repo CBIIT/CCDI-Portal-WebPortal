@@ -111,12 +111,10 @@ query search (
         file_type: $file_type,
         age_at_index: $age_at_index
     ) {
-        numberOfPrograms
-        numberOfStudies
-        numberOfSubjects
-        numberOfSamples
-        numberOfLabProcedures
         numberOfFiles
+        numberOfParticipants
+        numberOfSamples
+        numberOfStudies
         armsByPrograms {
             program
             caseSize

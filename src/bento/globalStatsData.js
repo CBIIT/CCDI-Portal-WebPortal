@@ -57,34 +57,22 @@ export const globalStatsData = [
   {
     statTitle: 'Programs',
     type: 'field',
-    statAPI: 'numberOfPrograms',
+    statAPI: 'numberOfStudies',
     statIconSrc: studiesLogo,
     statIconAlt: 'Data Volume Stats Bar Icon',
   },
   {
     statTitle: 'Arms',
     type: 'field',
-    statAPI: 'numberOfStudies',
+    statAPI: 'numberOfParticipants',
     statIconSrc: participantsLogo,
     statIconAlt: 'Participant Logo'
-  },
-  {
-    statTitle: 'Cases',
-    type: 'field',
-    statAPI: 'numberOfSubjects',
-    statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Cases_.svg',
   },
   {
     statTitle: 'Samples',
     type: 'field',
     statAPI: 'numberOfSamples',
     statIconSrc: samplesLogo,
-  },
-  {
-    statTitle: 'Assays',
-    type: 'field',
-    statAPI: 'numberOfLabProcedures',
-    statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/Assays.svg',
   },
   {
     statTitle: 'Files',

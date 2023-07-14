@@ -92,7 +92,7 @@ query search (
     $file_type: [String],
     $age_at_index: [Float]
 ){
-    searchSubjects (          
+    searchParticipants (          
         subject_ids: $subject_ids,
         programs: $programs,
         studies: $studies,
@@ -272,7 +272,7 @@ export const DASHBOARD_QUERY = gql`
       $file_type: [String],
       $age_at_index: [Float]
   ){
-      searchSubjects (          
+      searchParticipants (          
           programs: $programs,
           studies: $studies,
           diagnoses: $diagnoses,

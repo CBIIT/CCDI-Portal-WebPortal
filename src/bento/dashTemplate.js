@@ -5,7 +5,8 @@ const DIAGNOSIS = 'Diagnosis';
 // const CASES = 'Cases';
 const SAMPLES = 'Samples';
 const ASSAYTYPE = 'Assay Type';
-const FILES = 'Files';
+// const FILES = 'Files';
+const STUDY = 'Study';
 const LIBRARY = 'Library';
 const GROUP = 'group';
 
@@ -36,12 +37,15 @@ export const facetSectionVariables = {
   'Assay Type': {
     isExpanded: true,
   },
+  Study: {
+    isExpanded: true,
+  },
   Library: {
     isExpanded: true,
   },
-  Files: {
-    isExpanded: true,
-  },
+  // Files: {
+  //   isExpanded: true,
+  // },
 };
 
 export const facetsConfig = [
@@ -166,6 +170,61 @@ export const facetsConfig = [
     apiPath: 'ParticipantCountByAssayMethod',
     apiForFiltering: 'filterParticipantCountByAssayMethod',
     datafield: 'assay_type',
+    field: GROUP,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: STUDY,
+    label: 'dbGaP phs accession',
+    apiPath: 'participantCountByLibrarySelection',
+    apiForFiltering: 'filterParticipantCountByLibrarySelection',
+    datafield: 'phs_accession',
+    field: GROUP,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: STUDY,
+    label: 'Funding Grant ID',
+    apiPath: 'participantCountByGrantID',
+    apiForFiltering: 'filterParticipantCountByGrantID',
+    datafield: 'grant_id',
+    field: GROUP,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: STUDY,
+    label: 'Institution',
+    apiPath: 'participantCountByInstitution',
+    apiForFiltering: 'filterParticipantCountByInstitution',
+    datafield: 'institution',
+    field: GROUP,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: STUDY,
+    label: 'Name',
+    apiPath: 'participantCountByName',
+    apiForFiltering: 'filterParticipantCountByName',
+    datafield: 'study_name',
+    field: GROUP,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: STUDY,
+    label: 'Acronym',
+    apiPath: 'participantCountByAcronym',
+    apiForFiltering: 'filterParticipantCountByAcronym',
+    datafield: 'study_acronym',
     field: GROUP,
     type: InputTypes.CHECKBOX,
     sort_type: sortType.ALPHABET,
@@ -363,28 +422,28 @@ export const facetsConfig = [
   //   sort_type: sortType.ALPHABET,
   //   show: true,
   // },
-  {
-    section: FILES,
-    label: 'File Association',
-    apiPath: 'subjectCountByFileAssociation',
-    apiForFiltering: 'filterSubjectCountByFileAssociation',
-    datafield: 'association',
-    field: GROUP,
-    type: InputTypes.CHECKBOX,
-    sort_type: sortType.ALPHABET,
-    show: true,
-  },
-  {
-    section: FILES,
-    label: 'File Type',
-    apiPath: 'subjectCountByFileType',
-    apiForFiltering: 'filterSubjectCountByFileType',
-    datafield: 'file_type',
-    field: GROUP,
-    type: InputTypes.CHECKBOX,
-    sort_type: sortType.ALPHABET,
-    show: true,
-  },
+  // {
+  //   section: FILES,
+  //   label: 'File Association',
+  //   apiPath: 'subjectCountByFileAssociation',
+  //   apiForFiltering: 'filterSubjectCountByFileAssociation',
+  //   datafield: 'association',
+  //   field: GROUP,
+  //   type: InputTypes.CHECKBOX,
+  //   sort_type: sortType.ALPHABET,
+  //   show: true,
+  // },
+  // {
+  //   section: FILES,
+  //   label: 'File Type',
+  //   apiPath: 'subjectCountByFileType',
+  //   apiForFiltering: 'filterSubjectCountByFileType',
+  //   datafield: 'file_type',
+  //   field: GROUP,
+  //   type: InputTypes.CHECKBOX,
+  //   sort_type: sortType.ALPHABET,
+  //   show: true,
+  // },
 ];
 
 // --------------- Dashboard Widgets configuration --------------

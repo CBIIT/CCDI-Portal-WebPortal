@@ -6,6 +6,7 @@ const DIAGNOSIS = 'Diagnosis';
 const SAMPLES = 'Samples';
 const ASSAYTYPE = 'Assay Type';
 const FILES = 'Files';
+const LIBRARY = 'Library';
 const GROUP = 'group';
 
 // --------------- Facet resetIcon link configuration --------------
@@ -33,6 +34,9 @@ export const facetSectionVariables = {
     isExpanded: true,
   },
   'Assay Type': {
+    isExpanded: true,
+  },
+  Library: {
     isExpanded: true,
   },
   Files: {
@@ -162,6 +166,39 @@ export const facetsConfig = [
     apiPath: 'ParticipantCountByAssayMethod',
     apiForFiltering: 'filterParticipantCountByAssayMethod',
     datafield: 'assay_type',
+    field: GROUP,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: LIBRARY,
+    label: 'Library selection',
+    apiPath: 'participantCountByLibrarySelection',
+    apiForFiltering: 'filterParticipantCountByLibrarySelection',
+    datafield: 'library_selection',
+    field: GROUP,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: LIBRARY,
+    label: 'Library source',
+    apiPath: 'participantCountByLibrarySource',
+    apiForFiltering: 'filterParticipantCountByLibrarySource',
+    datafield: 'library_source',
+    field: GROUP,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: LIBRARY,
+    label: 'Library strategy',
+    apiPath: 'participantCountByLibraryStrategy',
+    apiForFiltering: 'filterParticipantCountByLibraryStrategy',
+    datafield: 'library_strategy',
     field: GROUP,
     type: InputTypes.CHECKBOX,
     sort_type: sortType.ALPHABET,

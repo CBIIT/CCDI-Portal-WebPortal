@@ -4,6 +4,7 @@ const DEMOGRAPHIC = 'Demographic';
 const DIAGNOSIS = 'Diagnosis';
 // const CASES = 'Cases';
 const SAMPLES = 'Samples';
+const ASSAYTYPE = 'Assay Type';
 const FILES = 'Files';
 const GROUP = 'group';
 
@@ -29,6 +30,9 @@ export const facetSectionVariables = {
   //   hasSearch: true,
   // },
   Samples: {
+    isExpanded: true,
+  },
+  'Assay Type': {
     isExpanded: true,
   },
   Files: {
@@ -147,6 +151,17 @@ export const facetsConfig = [
     apiPath: 'participantCountByTumorClassification',
     apiForFiltering: 'filterParticipantCountByTumorClassification',
     datafield: 'tumor_classification',
+    field: GROUP,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: ASSAYTYPE,
+    label: 'Assay Type',
+    apiPath: 'ParticipantCountByAssayMethod',
+    apiForFiltering: 'filterParticipantCountByAssayMethod',
+    datafield: 'assay_type',
     field: GROUP,
     type: InputTypes.CHECKBOX,
     sort_type: sortType.ALPHABET,

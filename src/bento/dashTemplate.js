@@ -536,19 +536,10 @@ export const widgetConfig = [
   //   datatable_level2_colors: SUNBURST_COLORS_LEVEL_2,
   // },
   {
-    type: 'sunburst',
+    type: 'donut',
     title: 'Study',
     dataName: 'participantCountByStudy',
-    datatable_level1_field: 'category',
-    datatable_level1_colors: SUNBURST_COLORS_LEVEL_1,
-    datatable_level2_field: 'study',
-    datatable_level2_colors: SUNBURST_COLORS_LEVEL_2,
   },
-  // {
-  //   type: 'donut',
-  //   title: 'Study',
-  //   dataName: 'participantCountByStudy',
-  // },
   {
     type: 'donut',
     title: 'Race',

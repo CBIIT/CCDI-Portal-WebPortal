@@ -4,7 +4,7 @@ const DEMOGRAPHIC = 'Demographic';
 const DIAGNOSIS = 'Diagnosis';
 // const CASES = 'Cases';
 const SAMPLES = 'Samples';
-const ASSAYTYPE = 'Assay Type';
+const ASSAYMETHOD = 'Assay Method';
 // const FILES = 'Files';
 const STUDY = 'Study';
 const LIBRARY = 'Library';
@@ -34,7 +34,7 @@ export const facetSectionVariables = {
   Samples: {
     isExpanded: true,
   },
-  'Assay Type': {
+  'Assay Method': {
     isExpanded: true,
   },
   Study: {
@@ -122,6 +122,17 @@ export const facetsConfig = [
   },
   {
     section: DIAGNOSIS,
+    label: 'ICD-O',
+    apiPath: 'participantCountByICDO',
+    apiForFiltering: 'filterParticipantCountByICDO',
+    datafield: 'diagnosis_icd_o',
+    field: GROUP,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: DIAGNOSIS,
     label: 'Vital Status',
     apiPath: 'participantCountByVitalStatus',
     apiForFiltering: 'filterParticipantCountByVitalStatus',
@@ -141,6 +152,22 @@ export const facetsConfig = [
     type: InputTypes.CHECKBOX,
     sort_type: sortType.ALPHABET,
     show: true,
+  },
+  {
+    section: SAMPLES,
+    label: 'Age at collection',
+    apiPath: 'filterParticipantCountBySampleAge',
+    apiForFiltering: 'filterParticipantCountBySampleAge',
+    datafield: 'participant_age_at_collection',
+    ApiLowerBoundName: 'lowerBound',
+    ApiUpperBoundName: 'upperBound',
+    show: true,
+    slider: true,
+    type: InputTypes.SLIDER,
+    sort_type: 'none',
+    minLowerBound: 0,
+    maxUpperBound: 100,
+    quantifier: 'Years',
   },
   {
     section: SAMPLES,
@@ -165,11 +192,22 @@ export const facetsConfig = [
     show: true,
   },
   {
-    section: ASSAYTYPE,
-    label: 'Assay Type',
+    section: ASSAYMETHOD,
+    label: 'Assay Method',
     apiPath: 'ParticipantCountByAssayMethod',
     apiForFiltering: 'filterParticipantCountByAssayMethod',
-    datafield: 'assay_type',
+    datafield: 'assay_method',
+    field: GROUP,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: ASSAYMETHOD,
+    label: 'File Type',
+    apiPath: 'participantCountByFileType',
+    apiForFiltering: 'filterParticipantCountByFileType',
+    datafield: 'file_type',
     field: GROUP,
     type: InputTypes.CHECKBOX,
     sort_type: sortType.ALPHABET,
@@ -225,6 +263,17 @@ export const facetsConfig = [
     apiPath: 'participantCountByAcronym',
     apiForFiltering: 'filterParticipantCountByAcronym',
     datafield: 'study_acronym',
+    field: GROUP,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: STUDY,
+    label: 'Study short title',
+    apiPath: 'participantCountByStudyTitle',
+    apiForFiltering: 'filterParticipantCountByStudyTitle',
+    datafield: 'study_short_title',
     field: GROUP,
     type: InputTypes.CHECKBOX,
     sort_type: sortType.ALPHABET,

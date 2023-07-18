@@ -4,7 +4,7 @@ const DEMOGRAPHIC = 'Demographic';
 const DIAGNOSIS = 'Diagnosis';
 // const CASES = 'Cases';
 const SAMPLES = 'Samples';
-const ASSAYMETHOD = 'Assay Method';
+const ASSAYMETHOD = 'Assay';
 // const FILES = 'Files';
 const STUDY = 'Study';
 const LIBRARY = 'Library';
@@ -34,7 +34,7 @@ export const facetSectionVariables = {
   Samples: {
     isExpanded: true,
   },
-  'Assay Method': {
+  Assay: {
     isExpanded: true,
   },
   Study: {

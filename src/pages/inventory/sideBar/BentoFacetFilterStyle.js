@@ -107,11 +107,25 @@ export default () => ({
     color: '#4D889E',
     fontWeight: 600,
   },
-  activeFacetSamples: {
-    color: '#10beff',
+  activeFacetDiagnosis: {
+    color: '#974599',
+    fontWeight: 600,
   },
-  activeFacetFiles: {
-    color: '#e636e4',
+  activeFacetSamples: {
+    color: '#BEAA83',
+    fontWeight: 600,
+  },
+  activeFacetAssay: {
+    color: '#CD5C4E',
+    fontWeight: 600,
+  },
+  activeFacetStudy: {
+    color: '#1F6BBF',
+    fontWeight: 600,
+  },
+  activeFacetLibrary: {
+    color: '#60C4A1',
+    fontWeight: 600,
   },
   searchContainer: {
     paddingTop: '15px',

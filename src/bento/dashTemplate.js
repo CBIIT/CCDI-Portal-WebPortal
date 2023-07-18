@@ -526,38 +526,52 @@ export const SUNBURST_COLORS_LEVEL_2 = [
 // datatable_level2_colors: string[]
 // sliceTitle: string (optional)
 export const widgetConfig = [
+  // {
+  //   type: 'sunburst',
+  //   title: 'Programs and Arms',
+  //   dataName: 'armsByPrograms',
+  //   datatable_level1_field: 'program',
+  //   datatable_level1_colors: SUNBURST_COLORS_LEVEL_1,
+  //   datatable_level2_field: 'arm',
+  //   datatable_level2_colors: SUNBURST_COLORS_LEVEL_2,
+  // },
   {
     type: 'sunburst',
-    title: 'Programs and Arms',
-    dataName: 'armsByPrograms',
-    datatable_level1_field: 'program',
+    title: 'Study',
+    dataName: 'participantCountByStudy',
+    datatable_level1_field: 'category',
     datatable_level1_colors: SUNBURST_COLORS_LEVEL_1,
-    datatable_level2_field: 'arm',
+    datatable_level2_field: 'study',
     datatable_level2_colors: SUNBURST_COLORS_LEVEL_2,
+  },
+  // {
+  //   type: 'donut',
+  //   title: 'Study',
+  //   dataName: 'participantCountByStudy',
+  // },
+  {
+    type: 'donut',
+    title: 'Race',
+    dataName: 'participantCountByRace',
+  },
+  {
+    type: 'donut',
+    title: 'Ethnicity',
+    dataName: 'participantCountByEthnicity',
+  },
+  {
+    type: 'donut',
+    title: 'Diagnosis Age',
+    dataName: 'participantCountByDiagnosisAge',
   },
   {
     type: 'donut',
     title: 'Diagnosis',
-    dataName: 'subjectCountByDiagnoses',
+    dataName: 'participantCountByDiagnosis',
   },
   {
     type: 'donut',
-    title: 'Recurrence Score',
-    dataName: 'subjectCountByRecurrenceScore',
-  },
-  {
-    type: 'donut',
-    title: 'Tumor Size',
-    dataName: 'subjectCountByTumorSize',
-  },
-  {
-    type: 'donut',
-    title: 'Chemotherapy',
-    dataName: 'subjectCountByChemotherapyRegimen',
-  },
-  {
-    type: 'donut',
-    title: 'Endocrine Therapy',
-    dataName: 'subjectCountByEndocrineTherapy',
+    title: 'Gender',
+    dataName: 'participantCountByGender',
   },
 ];

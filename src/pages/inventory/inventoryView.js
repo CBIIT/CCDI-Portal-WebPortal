@@ -22,18 +22,18 @@ const Inventory = ({
             activeFilters={activeFilters}
           />
         </div>
-        {/* <div className={classes.rightContent}>
+        <div className={classes.rightContent}>
           <div className={classes.widgetsContainer}>
             <QueryBarView data={dashData} />
             <WidgetView
               data={dashData}
             />
-            <TabsView
+            {/* <TabsView
               dashboardStats={dashData}
               activeFilters={activeFilters}
-            />
+            /> */}
           </div>
-        </div> */}
+        </div>
       </div>
     </div>
   </div>

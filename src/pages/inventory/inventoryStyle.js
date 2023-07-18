@@ -11,7 +11,7 @@ export default () => ({
     margin: 'auto',
   },
   sideBar: {
-    width: '250px',
+    width: '265px',
     maxHeight: '1300px',
     overflowX: 'hidden',
     backgroundColor: 'transparent',

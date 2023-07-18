@@ -104,15 +104,24 @@ const theme = {
         marginRight: '0px',
       },
       root: {
-        height: '5px',
+        height: '8px',
         '&.divider0': {
-          backgroundColor: '#0d8461',
+          backgroundColor: '#4D889E',
         },
         '&.divider1': {
-          backgroundColor: '#10beff',
+          backgroundColor: '#974599',
         },
         '&.divider2': {
-          backgroundColor: '#e636e4',
+          backgroundColor: '#E9B34A',
+        },
+        '&.divider3': {
+          backgroundColor: '#CD5C4E',
+        },
+        '&.divider4': {
+          backgroundColor: '#1F6BBF',
+        },
+        '&.divider5': {
+          backgroundColor: '#60C4A1',
         },
       },
     },

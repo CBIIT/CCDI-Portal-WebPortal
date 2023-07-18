@@ -52,7 +52,7 @@ export default () => ({
     backgroundColor: '#e636e4',
   },
   sectionSummaryText: {
-    fontSize: '14px',
+    fontSize: '16px',
     flexShrink: '0',
     fontFamily: 'Poppins',
     fontWeight: 400,
@@ -60,6 +60,7 @@ export default () => ({
     marginLeft: '5px',
     letterSpacing: '0',
     textTransform: 'uppercase',
+    letterSpacing: '-0.02em',
   },
   dropDownIconSubSection: {
     marginLeft: '0px',
@@ -102,8 +103,9 @@ export default () => ({
     fontSize: '14px',
     marginRight: '0px',
   },
-  activeFacetCases: {
-    color: '#10a075',
+  activeFacetDemographic: {
+    color: '#4D889E',
+    fontWeight: 600,
   },
   activeFacetSamples: {
     color: '#10beff',

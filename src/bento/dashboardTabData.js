@@ -34,7 +34,7 @@ export const tabs = [
     id: 'case_tab',
     title: 'Cases',
     dataField: 'dataCase',
-    count: 'numberOfSubjects',
+    count: 'numberOfParticipants',
   },
   {
     id: 'sample_tab',
@@ -224,6 +224,10 @@ query search (
           subjects
         }
         filterParticipantCountByTumorClassification{
+          group
+          subjects
+        }
+        filterParticipantCountByTumorStatus{
           group
           subjects
         }
@@ -668,7 +672,7 @@ export const tabContainers = [
     dataField: 'dataCase',
     api: GET_PARTICIPANTS_OVERVIEW_QUERY,
     paginationAPIField: 'participantOverview',
-    count: 'numberOfSubjects',
+    count: 'numberOfParticipants',
     dataKey: 'participant_id',
     defaultSortField: 'participant_id',
     defaultSortDirection: 'asc',

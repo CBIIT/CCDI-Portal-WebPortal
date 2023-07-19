@@ -43,23 +43,41 @@ const theme = {
     },
     MuiListItem: {
       root: {
-        '&.casesCheckedEven': {
-          backgroundColor: '#e8f7dc',
+        '&.demographicCheckedEven': {
+          backgroundColor: '#4D889E',
         },
-        '&.casesCheckedOdd': {
-          backgroundColor: '#f5FDEE',
+        '&.demographicCheckedOdd': {
+          backgroundColor: '#E4ECE9',
+        },
+        '&.diagnosisCheckedEven': {
+          backgroundColor: '#974599',
+        },
+        '&.diagnosisCheckedOdd': {
+          backgroundColor: '#E1C9E1',
         },
         '&.samplesCheckedEven': {
-          backgroundColor: '#C9EBF7',
+          backgroundColor: '#E9B34A',
         },
         '&.samplesCheckedOdd': {
-          backgroundColor: '#E8F8FE',
+          backgroundColor: '#F0DFBD',
         },
-        '&.filesCheckedEven': {
-          backgroundColor: '#FBE3FB',
+        '&.assayCheckedEven': {
+          backgroundColor: '#CD5C4E',
         },
-        '&.filesCheckedOdd': {
-          backgroundColor: '#FFF2FF',
+        '&.assayCheckedOdd': {
+          backgroundColor: '#F8D7D2',
+        },
+        '&.studyCheckedEven': {
+          backgroundColor: '#1F6BBF',
+        },
+        '&.studyCheckedOdd': {
+          backgroundColor: '#CEDEF0',
+        },
+        '&.libraryCheckedEven': {
+          backgroundColor: '#60C4A1',
+        },
+        '&.libraryCheckedOdd': {
+          backgroundColor: '#DDEAE5',
         },
       },
     },

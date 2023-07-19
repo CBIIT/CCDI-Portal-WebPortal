@@ -74,188 +74,180 @@ export const tabIndex = [
 
 export const DASHBOARD_QUERY_NEW = gql`
 query search (          
-    $subject_ids: [String],
-    $programs: [String] ,
-    $studies: [String] ,
-    $diagnoses: [String] ,
-    $rc_scores: [String] ,
-    $tumor_sizes: [String] ,
-    $chemo_regimen: [String] ,
-    $tumor_grades: [String] ,
-    $er_status: [String] ,
-    $pr_status: [String] ,
-    $endo_therapies: [String] ,
-    $meno_status: [String] ,
-    $tissue_type: [String],
-    $composition: [String],
-    $association: [String],
+    $participant_ids: [String],
+    $race: [String] ,
+    $ethnicity: [String] ,
+    $age_at_diagnois: [Float] ,
+    $anatomic_site: [String] ,
+    $disease_phase: [String] ,
+    $diagnosis_icd_o: [String] ,
+    $vital_status: [String] ,
+    $anatomic_site: [String] ,
+    $participant_age_at_collection: [Float] ,
+    $sample_tumor_status: [String] ,
+    $tumor_classification: [String] ,
+    $assay_method: [String],
     $file_type: [String],
-    $age_at_index: [Float]
+    $phs_accession: [String],
+    $grant_id: [String],
+    $institution: [String],
+    $study_name: [String],
+    $study_acronym: [String],
+    $study_short_title: [String],
+    $library_selection: [String],
+    $library_source: [String],
+    $library_strategy: [String],
 ){
     searchParticipants (          
-        subject_ids: $subject_ids,
-        programs: $programs,
-        studies: $studies,
-        diagnoses: $diagnoses,
-        rc_scores: $rc_scores,
-        tumor_sizes: $tumor_sizes,
-        chemo_regimen: $chemo_regimen,
-        tumor_grades: $tumor_grades,
-        er_status: $er_status,
-        pr_status: $pr_status,
-        endo_therapies: $endo_therapies,
-        meno_status: $meno_status,
-        tissue_type: $tissue_type,
-        composition: $composition,
-        association: $association,       
+        participant_ids: $participant_ids,
+        race: $race,
+        ethnicity: $ethnicity,
+        age_at_diagnois: $age_at_diagnois,
+        anatomic_site: $anatomic_site,
+        disease_phase: $disease_phase,
+        diagnosis_icd_o: $diagnosis_icd_o,
+        vital_status: $vital_status,
+        anatomic_site: $anatomic_site,
+        participant_age_at_collection: $participant_age_at_collection,
+        sample_tumor_status: $sample_tumor_status,
+        tumor_classification: $tumor_classification,
+        assay_method: $assay_method,
         file_type: $file_type,
-        age_at_index: $age_at_index
+        phs_accession: $phs_accession,       
+        grant_id: $grant_id,
+        institution: $institution,
+        study_name: $study_name,
+        study_acronym: $study_acronym,
+        study_short_title: $study_short_title,
+        library_selection: $library_selection,
+        library_source: $library_source,
+        library_strategy: $library_strategy,
     ) {
         numberOfFiles
         numberOfParticipants
         numberOfSamples
         numberOfStudies
-        armsByPrograms {
-            program
-            caseSize
-            children {
-                arm
-                caseSize
-                size
-            }
-        }
-        subjectCountByProgram {
+        participantCountByDiagnosis {
             group
             subjects
         }
-        subjectCountByStudy {
+        participantCountByDiagnosisAge {
             group
             subjects
         }
-        subjectCountByDiagnoses {
+        participantCountByEthnicity {
             group
             subjects
         }
-        subjectCountByRecurrenceScore {
+        participantCountByGender {
             group
             subjects
         }
-        subjectCountByTumorSize {
+        participantCountByRace {
             group
             subjects
         }
-        subjectCountByChemotherapyRegimen {
+        participantCountByStudy {
             group
             subjects
         }
-        subjectCountByEndocrineTherapy {
+        filterParticipantCountByAcronym {
             group
             subjects
         }
-        subjectCountByTumorGrade{
+        filterParticipantCountByAssayMethod{
             group
             subjects
         }
-        subjectCountByErStatus{
+        filterParticipantCountByDiagnosisAnatomicSite{
             group
             subjects
         }
-        subjectCountByPrStatus{
+        filterParticipantCountByDiseasePhase{
             group
             subjects
         }
-        subjectCountByMenopauseStatus{
+        filterParticipantCountByEthnicity{
             group
             subjects
         }
-        subjectCountByFileType {
+        filterParticipantCountByFileType{
             group
             subjects
         }
-        subjectCountByFileAssociation {
+        filterParticipantCountByGender{
             group
             subjects
         }
-        subjectCountByTissueComposition {
+        filterParticipantCountByGrantID{
             group
             subjects
         }
-        subjectCountByTissueType {
+        filterParticipantCountByICDO{
             group
             subjects
         }
-        filterSubjectCountByProgram {
+        filterParticipantCountByInstitution{
             group
             subjects
         }
-        filterSubjectCountByStudy{
+        filterParticipantCountByLibrarySelection{
             group
             subjects
         }
-        filterSubjectCountByDiagnoses{
+        filterParticipantCountByLibrarySource{
             group
             subjects
         }
-        filterSubjectCountByRecurrenceScore{
+        filterParticipantCountByLibraryStrategy{
             group
             subjects
         }
-        filterSubjectCountByTumorSize{
+        filterParticipantCountByName{
             group
             subjects
         }
-        filterSubjectCountByTumorGrade{
+        filterParticipantCountByPHSAccession{
             group
             subjects
         }
-        filterSubjectCountByErStatus{
-            group
-            subjects
+        filterParticipantCountByRace{
+          group
+          subjects
         }
-        filterSubjectCountByPrStatus{
-            group
-            subjects
+        filterParticipantCountBySampleAnatomicSite{
+          group
+          subjects
         }
-        filterSubjectCountByChemotherapyRegimen{
-            group
-            subjects
+        filterParticipantCountByStudyTitle{
+          group
+          subjects
         }
-        filterSubjectCountByEndocrineTherapy{
-            group
-            subjects
+        filterParticipantCountByTumorClassification{
+          group
+          subjects
         }
-        filterSubjectCountByMenopauseStatus{
-            group
-            subjects
+        filterParticipantCountByVitalStatus{
+          group
+          subjects
         }
-        filterSubjectCountByTissueType{
-            group
-            subjects
-        }
-        filterSubjectCountByTissueComposition{
-            group
-            subjects
-        }
-        filterSubjectCountByFileAssociation{
-            group
-            subjects
-        }
-        filterSubjectCountByFileType{
-            group
-            subjects
-        }
-        filterSubjectCountByAge{
+        filterParticipantCountByDiagnosisAge{
             lowerBound
             upperBound
             subjects
         }
+        filterParticipantCountBySampleAge{
+          lowerBound
+          upperBound
+          subjects
+      }
     }
 }
 `;
 
 export const GET_FILES_OVERVIEW_QUERY = gql`
 query fileOverview(
-    $subject_ids: [String],
+    $participant_ids: [String],
     $file_ids: [String],
     $programs: [String] ,
     $studies: [String] ,
@@ -278,7 +270,7 @@ query fileOverview(
     $order_by:  String
     $sort_direction: String ){
     fileOverview(
-        subject_ids: $subject_ids,
+        participant_ids: $participant_ids,
         file_ids: $file_ids,
         programs: $programs,
         studies: $studies,
@@ -311,7 +303,7 @@ query fileOverview(
         program,
         arm,
         acl,
-        subject_id,
+        participant_id,
         sample_id,
         diagnosis,
     }
@@ -320,7 +312,7 @@ query fileOverview(
 
 export const GET_SAMPLES_OVERVIEW_QUERY = gql`
 query sampleOverview(
-    $subject_ids: [String],
+    $participant_ids: [String],
     $sample_ids: [String],
     $programs: [String] ,
     $studies: [String] ,
@@ -343,7 +335,7 @@ query sampleOverview(
     $order_by:  String
     $sort_direction: String ){
     sampleOverview(
-        subject_ids: $subject_ids,
+        participant_ids: $participant_ids,
         sample_ids: $sample_ids,
         programs: $programs,
         studies: $studies,
@@ -367,7 +359,7 @@ query sampleOverview(
         sort_direction: $sort_direction
     ){
         sample_id,
-        subject_id,
+        participant_id,
         program,
         program_id,
         arm,
@@ -383,8 +375,8 @@ query sampleOverview(
 `;
 
 export const GET_PARTICIPANTS_OVERVIEW_QUERY = gql`
-query subjectOverview(
-    $subject_ids: [String],
+query participantOverview(
+    $participant_ids: [String],
     $programs: [String] ,
     $studies: [String] ,
     $diagnoses: [String] ,
@@ -405,8 +397,8 @@ query subjectOverview(
     $offset: Int, 
     $order_by:  String
     $sort_direction: String ){
-    subjectOverview(
-        subject_ids: $subject_ids,
+    participantOverview(
+        participant_ids: $participant_ids,
         programs: $programs,
         studies: $studies,
         diagnoses: $diagnoses,
@@ -429,7 +421,7 @@ query subjectOverview(
         sort_direction: $sort_direction
         
         ) {
-        subject_id
+        participant_id
         program
         program_id
         study_acronym
@@ -456,20 +448,20 @@ query subjectOverview(
 
 export const GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL = gql`
 query search (          
-  $subject_ids: [String],
+  $participant_ids: [String],
 ){
   fileIDsFromList (          
-      subject_ids: $subject_ids,
+      participant_ids: $participant_ids,
   ) 
 }
   `;
 
 export const GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL = gql`
 query search (          
-  $sample_ids: [String],
+  $participant_ids: [String],
 ){
   fileIDsFromList (          
-    sample_ids: $sample_ids,
+      participant_ids: $participant_ids,
   ) 
 }
   `;
@@ -486,7 +478,7 @@ query search (
 
 export const GET_ALL_FILEIDS_FROM_CASESTAB_FOR_ADD_ALL_CART = gql`
 query subjectsAddAllToCart(
-  $subject_ids: [String],
+  $participant_ids: [String],
   $programs: [String] ,
   $studies: [String] ,
   $diagnoses: [String] ,
@@ -508,8 +500,8 @@ query subjectsAddAllToCart(
   $order_by: String = "file_id",
   $sort_direction: String = "asc" 
   ){
-  subjectOverview(
-      subject_ids: $subject_ids,
+    participantOverview(
+      participant_ids: $participant_ids,
       programs: $programs,
       studies: $studies,
       diagnoses: $diagnoses,
@@ -538,7 +530,7 @@ query subjectsAddAllToCart(
 
 export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
     query samplesAddAllToCart(
-      $subject_ids: [String],
+      $participant_ids: [String],
       $sample_ids: [String],
       $programs: [String] ,
       $studies: [String] ,
@@ -561,7 +553,7 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
       $order_by: String = "file_id",
       $sort_direction: String = "asc" ){
       sampleOverview(
-          subject_ids: $subject_ids,
+          participant_ids: $participant_ids,
           sample_ids: $sample_ids,
           programs: $programs,
           studies: $studies,
@@ -591,7 +583,7 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
 
 export const GET_ALL_FILEIDS_FROM_FILESTAB_FOR_ADD_ALL_CART = gql`
 query fileAddAllToCart(
-  $subject_ids: [String],
+  $participant_ids: [String],
   $programs: [String] ,
   $studies: [String] ,
   $diagnoses: [String] ,
@@ -614,7 +606,7 @@ query fileAddAllToCart(
   $sort_direction: String = "asc"
  ){
   fileOverview(
-      subject_ids:$subject_ids,
+      participant_ids:$participant_ids,
       programs: $programs,
       studies: $studies,
       diagnoses: $diagnoses,
@@ -675,10 +667,10 @@ export const tabContainers = [
     name: 'Participants',
     dataField: 'dataCase',
     api: GET_PARTICIPANTS_OVERVIEW_QUERY,
-    paginationAPIField: 'subjectOverview',
+    paginationAPIField: 'participantOverview',
     count: 'numberOfSubjects',
-    dataKey: 'subject_id',
-    defaultSortField: 'subject_id',
+    dataKey: 'participant_id',
+    defaultSortField: 'participant_id',
     defaultSortDirection: 'asc',
     buttonText: 'Add Selected Files',
     tableID: 'case_tab_table',
@@ -693,12 +685,12 @@ export const tabContainers = [
         role: cellTypes.CHECKBOX,
       },
       {
-        dataField: 'subject_id',
+        dataField: 'participant_id',
         header: 'Case ID',
         cellType: cellTypes.LINK,
         linkAttr : {
           rootPath: '/case',
-          pathParams: ['subject_id'],
+          pathParams: ['participant_id'],
         },
         display: true,
         tooltipText: 'sort',
@@ -794,9 +786,9 @@ export const tabContainers = [
     tableMsg: {
       noMatch: 'No Matching Records Found',
     },
-    addFilesRequestVariableKey: 'subject_ids',
+    addFilesRequestVariableKey: 'participant_ids',
     addFilesResponseKeys: ['fileIDsFromList'],
-    addAllFilesResponseKeys: ['subjectOverview', 'files'],
+    addAllFilesResponseKeys: ['participantOverview', 'files'],
     addAllFileQuery: GET_ALL_FILEIDS_FROM_CASESTAB_FOR_ADD_ALL_CART,
     addSelectedFilesQuery: GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL,
   },
@@ -844,13 +836,13 @@ export const tabContainers = [
         tooltipText: 'sort',
       },
       {
-        dataField: 'subject_id',
+        dataField: 'participant_id',
         header: 'Case ID',
-        link: '/case/{subject_id}',
+        link: '/case/{participant_id}',
         cellType: cellTypes.LINK,
         linkAttr : {
           rootPath: '/case',
-          pathParams: ['subject_id'],
+          pathParams: ['participant_id'],
         },
         display: true,
         tooltipText: 'sort',
@@ -1030,7 +1022,7 @@ export const tabContainers = [
           // datafield where file format exists in the table
           fileFormatColumn: 'file_format',
           // datafield where file case id exists in the table which is used to get file information
-          caseIdColumn: 'subject_id',
+          caseIdColumn: 'participant_id',
           // Unauthenticated lock icon
           iconUnauthenticated: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/Access_Lock.svg',
           // file download icon
@@ -1077,13 +1069,13 @@ export const tabContainers = [
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'subject_id',
+        dataField: 'participant_id',
         header: 'Case ID',
-        link: '/case/{subject_id}',
+        link: '/case/{participant_id}',
         cellType: cellTypes.LINK,
         linkAttr : {
           rootPath: '/case',
-          pathParams: ['subject_id'],
+          pathParams: ['participant_id'],
         },
         display: true,
         tooltipText: 'sort',

@@ -21,8 +21,8 @@ export const navMobileList = [
       className: 'navMobileItem',
   },
   {
-    name: 'Inventory',
-    link: '/inventory',
+    name: 'Explore',
+    link: '/explore',
     className: 'navMobileItem',
   },
   {

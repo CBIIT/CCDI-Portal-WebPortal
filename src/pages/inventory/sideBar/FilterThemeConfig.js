@@ -44,37 +44,37 @@ const theme = {
     MuiListItem: {
       root: {
         '&.demographicCheckedEven': {
-          backgroundColor: '#4D889E',
+          backgroundColor: '#CBDFE0',
         },
         '&.demographicCheckedOdd': {
           backgroundColor: '#E4ECE9',
         },
         '&.diagnosisCheckedEven': {
-          backgroundColor: '#974599',
+          backgroundColor: '#C8A4C8',
         },
         '&.diagnosisCheckedOdd': {
           backgroundColor: '#E1C9E1',
         },
         '&.samplesCheckedEven': {
-          backgroundColor: '#E9B34A',
+          backgroundColor: '#D9C5A0',
         },
         '&.samplesCheckedOdd': {
           backgroundColor: '#F0DFBD',
         },
         '&.assayCheckedEven': {
-          backgroundColor: '#CD5C4E',
+          backgroundColor: '#E1B4AD',
         },
         '&.assayCheckedOdd': {
           backgroundColor: '#F8D7D2',
         },
         '&.studyCheckedEven': {
-          backgroundColor: '#1F6BBF',
+          backgroundColor: '#9FBCDD',
         },
         '&.studyCheckedOdd': {
           backgroundColor: '#CEDEF0',
         },
         '&.libraryCheckedEven': {
-          backgroundColor: '#60C4A1',
+          backgroundColor: '#95C6B3',
         },
         '&.libraryCheckedOdd': {
           backgroundColor: '#DDEAE5',
@@ -96,20 +96,42 @@ const theme = {
     },
     MuiTypography: {
       root: {
-        '&.casesSubjects': {
-          color: '#10a075',
+        '&.demographicSubjects': {
+          color: '#357288',
           fontSize: '12px',
           fontFamily: 'Nunito',
           marginRight: '0px',
+          fontWeight: '600',
+        },
+        '&.diagnosisSubjects': {
+          color: '#7D267E',
+          fontSize: '12px',
+          fontFamily: 'Nunito',
+          marginRight: '0px',
+          fontWeight: '600',
         },
         '&.samplesSubjects': {
-          color: '#10beff',
+          color: '#897E67',
+          fontSize: '12px',
+          fontFamily: 'Nunito',
+          marginRight: '0px',
+          fontWeight: '600',
+        },
+        '&.assaySubjects': {
+          color: '#A85348',
+          fontSize: '12px',
+          fontFamily: 'Nunito',
+          marginRight: '0px',
+          fontWeight: '600',
+        },
+        '&.studySubjects': {
+          color: '#24568E',
           fontSize: '12px',
           fontFamily: 'Nunito',
           marginRight: '0px',
         },
-        '&.filesSubjects': {
-          color: '#e636e4',
+        '&.librarySubjects': {
+          color: '#14835C',
           fontSize: '12px',
           fontFamily: 'Nunito',
           marginRight: '0px',

@@ -104,19 +104,19 @@ export default () => ({
     marginRight: '0px',
   },
   activeFacetDemographic: {
-    color: '#4D889E',
+    color: '#357288',
     fontWeight: 600,
   },
   activeFacetDiagnosis: {
-    color: '#974599',
+    color: '#8C3F8D',
     fontWeight: 600,
   },
   activeFacetSamples: {
-    color: '#BEAA83',
+    color: '#907642',
     fontWeight: 600,
   },
   activeFacetAssay: {
-    color: '#CD5C4E',
+    color: '#A85348',
     fontWeight: 600,
   },
   activeFacetStudy: {
@@ -124,7 +124,7 @@ export default () => ({
     fontWeight: 600,
   },
   activeFacetLibrary: {
-    color: '#60C4A1',
+    color: '#14A773',
     fontWeight: 600,
   },
   searchContainer: {

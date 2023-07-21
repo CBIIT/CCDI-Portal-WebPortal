@@ -50,47 +50,56 @@ const theme = {
           backgroundColor: '#E4ECE9',
         },
         '&.diagnosisCheckedEven': {
-          backgroundColor: '#C8A4C8',
+          backgroundColor: '#C8A4C840',
         },
         '&.diagnosisCheckedOdd': {
-          backgroundColor: '#E1C9E1',
+          backgroundColor: '#E1C9E140',
         },
         '&.samplesCheckedEven': {
-          backgroundColor: '#D9C5A0',
+          backgroundColor: '#D9C5A040',
         },
         '&.samplesCheckedOdd': {
-          backgroundColor: '#F0DFBD',
+          backgroundColor: '#F0DFBD40',
         },
         '&.assayCheckedEven': {
-          backgroundColor: '#E1B4AD',
+          backgroundColor: '#E1B4AD40',
         },
         '&.assayCheckedOdd': {
-          backgroundColor: '#F8D7D2',
+          backgroundColor: '#F8D7D240',
         },
         '&.studyCheckedEven': {
-          backgroundColor: '#9FBCDD',
+          backgroundColor: '#9FBCDD40',
         },
         '&.studyCheckedOdd': {
-          backgroundColor: '#CEDEF0',
+          backgroundColor: '#CEDEF040',
         },
         '&.libraryCheckedEven': {
-          backgroundColor: '#95C6B3',
+          backgroundColor: '#95C6B340',
         },
         '&.libraryCheckedOdd': {
-          backgroundColor: '#DDEAE5',
+          backgroundColor: '#DDEAE540',
         },
       },
     },
     MuiSvgIcon: {
       root: {
-        '&.casesCheckedIcon': {
-          color: '#10a075',
+        '&.demographicCheckedIcon': {
+          color: '#6D5F5B',
+        },
+        '&.diagnosisCheckedIcon': {
+          color: '#6D5F5B',
         },
         '&.samplesCheckedIcon': {
-          color: '#10beff',
+          color: '#6D5F5B',
         },
-        '&.filesCheckedIcon': {
-          color: '#e636e4',
+        '&.assayCheckedIcon': {
+          color: '#6D5F5B',
+        },
+        '&.studyCheckedIcon': {
+          color: '#6D5F5B',
+        },
+        '&.libraryCheckedIcon': {
+          color: '#6D5F5B',
         },
       },
     },

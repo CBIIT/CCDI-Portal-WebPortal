@@ -55,7 +55,7 @@ const WidgetView = ({
               </Button>
             )}
           />
-          <Switch
+          {/* <Switch
             classes={{
               root: classes.switchRoot,
               switchBase: classes.switchBase,
@@ -67,7 +67,7 @@ const WidgetView = ({
             disableRipple
             checked={themeChanger.dark}
             onChange={themeChanger.toggleTheme}
-          />
+          /> */}
         </div>
       </div>
       <Collapse in={collapse} className={classes.backgroundWidgets}>

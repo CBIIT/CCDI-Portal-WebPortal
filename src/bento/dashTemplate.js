@@ -96,7 +96,7 @@ export const facetsConfig = [
     sort_type: 'none',
     minLowerBound: 0,
     maxUpperBound: 100,
-    quantifier: 'Years',
+    quantifier: 'Days',
   },
   {
     section: DIAGNOSIS,
@@ -167,7 +167,7 @@ export const facetsConfig = [
     sort_type: 'none',
     minLowerBound: 0,
     maxUpperBound: 100,
-    quantifier: 'Years',
+    quantifier: 'Days',
   },
   {
     section: SAMPLES,

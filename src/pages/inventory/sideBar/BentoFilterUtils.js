@@ -1,7 +1,7 @@
 
 import { clearAllAndSelectFacet } from '@bento-core/facet-filter';
 import {
-  GET_IDS_BY_TYPE, GET_SUBJECT_IDS,
+  GET_IDS_BY_TYPE, GET_PARTICIPANT_IDS,
 } from '../../../bento/localSearchData';
 import store from '../../../store';
 import client from '../../../utils/graphqlClient';
@@ -40,15 +40,15 @@ export async function getAllIds(type) {
  * @param {string[]} subjectIdsArray
  * @returns {Promise<string[]>}
  */
-export async function getAllSubjectIds(subjectIdsArray) {
+export async function getAllParticipantIds(participantIdsArray) {
   const allids = await client
     .query({
-      query: GET_SUBJECT_IDS,
+      query: GET_PARTICIPANT_IDS,
       variables: {
-        subject_ids: subjectIdsArray,
+        participant_ids: participantIdsArray,
       },
     })
-    .then((result) => result.data.findSubjectIdsInList)
+    .then((result) => result.data.findParticipantIdsInList)
     .catch(() => []);
   return allids;
 }

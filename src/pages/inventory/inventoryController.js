@@ -26,8 +26,8 @@ const getDashData = (states) => {
 
   const activeFilters = {
     ...getFilters(filterState),
-    subject_ids: [
-      ...(localFindUpload || []).map((obj) => obj.subject_id),
+    participant_ids: [
+      ...(localFindUpload || []).map((obj) => obj.participant_id),
       ...(localFindAutocomplete || []).map((obj) => obj.title),
     ],
   };

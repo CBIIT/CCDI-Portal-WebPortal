@@ -67,8 +67,13 @@ export default () => ({
     fill: '#000000',
   },
   customExpansionPanelSummaryRoot: {
+    height: '42px',
+    padding: '0',
     flexDirection: 'row-reverse',
-    paddingLeft: 4,
+    paddingLeft: 0,
+  },
+  sortGroup: {
+    padding: '10px',
   },
   sectionSummaryTextContainer: {
     display: 'flex',
@@ -134,11 +139,11 @@ export default () => ({
   },
   findCaseButton: {
     // marginLeft: '105px',
-    backgroundColor: '#10A075',
+    backgroundColor: '#4D889E',
     boxSizing: 'border-box',
     height: 30,
     width: 40,
-    border: '1.25px solid #0D8461',
+    border: '1.25px solid #4D889E',
     cursor: 'pointer',
     borderRadius: 11,
     display: 'flex',
@@ -186,6 +191,13 @@ export default () => ({
     height: '2px',
     marginLeft: 0,
     marginRight: 0,
-    marginBottom: 6,
+    // marginBottom: 6,
   },
+  searchResultDetailText: {
+    color: '#5E3F14',
+    fontFamily: 'Open Sans',
+    fontSize: 11,
+    fontWeight: '400',
+    fontStyle: 'normal',
+  }
 });

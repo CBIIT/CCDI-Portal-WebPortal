@@ -287,7 +287,7 @@ export const facetsConfig = [
     quantifier: 'Days',
     style: {
       sliderRoot: {
-        marginTop: '40px',
+        marginTop: '1px',
         marginLeft: '20px',
         marginRight: 'Auto',
         paddingRight: '20px',
@@ -327,7 +327,7 @@ export const facetsConfig = [
       thumb: {
         height: 16,
         width: 16,
-        background: '#10A075',
+        background: '#E9B34A',
       },
       invalidThumb: {
         height: 16,
@@ -337,7 +337,7 @@ export const facetsConfig = [
       track: {
         borderRadius: 4,
         height: 6,
-        background: '#10A075',
+        background: '#E9B34A',
         '&~&': {
           background: '#142D64',
         },
@@ -369,14 +369,14 @@ export const facetsConfig = [
         marginBottom: '15px',
       },
       sliderText: {
-        color: '#10a075',
+        color: '#897E67',
         lineHeight: '120%',
         fontFamily: 'Nunito',
         fontSize: '14px',
         padding: '5px 15px 5px 0px',
         width: '100%',
         textAlign: 'right',
-        background: '#f5fdee',
+        background: '#D9C5A040',
         marginTop: '10px',
       },
       invalidSliderText: {

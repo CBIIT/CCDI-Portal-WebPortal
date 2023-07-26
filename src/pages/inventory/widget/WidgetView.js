@@ -4,10 +4,10 @@ import {
   Collapse,
   FormControlLabel,
   Grid,
-  Switch,
+  // Switch,
   withStyles,
 } from '@material-ui/core';
-import { useTheme } from '../../../components/ThemeContext';
+// import { useTheme } from '../../../components/ThemeContext';
 import styles from './WidgetStyle';
 import { WidgetGenerator } from '@bento-core/widgets';
 import { widgetConfig } from '../../../bento/dashTemplate';
@@ -22,7 +22,7 @@ const WidgetView = ({
 }) => {
   const displayWidgets = formatWidgetData(data, widgetConfig);
   const [collapse, setCollapse] = React.useState(true);
-  const themeChanger = useTheme();
+  // const themeChanger = useTheme();
   const handleChange = () => setCollapse((prev) => !prev);
 
   const widgetGeneratorConfig = {

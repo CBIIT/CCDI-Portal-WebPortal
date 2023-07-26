@@ -1,4 +1,10 @@
 export default () => ({
+  inputRoot: {
+    '& fieldset': {
+      borderWidth: '2.25px !important',
+      borderColor: 'red !important',
+    },
+  },
   clearAllButtonRoot: {
     margin: 'auto',
   },

@@ -98,6 +98,9 @@ export const facetsConfig = [
     maxUpperBound: 100,
     quantifier: 'Days',
     style: {
+      colorPrimary: {
+        color: '#AC6AAD',
+      },
       sliderRoot: {
         marginTop: '1px',
         marginLeft: '20px',
@@ -286,6 +289,9 @@ export const facetsConfig = [
     maxUpperBound: 100,
     quantifier: 'Days',
     style: {
+      colorPrimary: {
+        color: '#E9B34A',
+      },
       sliderRoot: {
         marginTop: '1px',
         marginLeft: '20px',

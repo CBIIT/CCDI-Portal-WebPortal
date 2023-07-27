@@ -15,7 +15,7 @@ const LogoArea = styled.div`
     }
 
     .imgContainer {
-        width: 468px;
+        width: 465px;
         height: 50px;
         background-image: url(${headerData.globalHeaderLogo});
         background-size: contain;

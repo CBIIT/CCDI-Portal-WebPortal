@@ -87,10 +87,11 @@ export default () => ({
     justifyContent: 'space-between',
     zIndex: 2,
     fontFamily: 'Poppins',
-    fontSize: 20,
+    fontSize: 18.5,
     fontWeight: 500,
     marginLeft: 3,
     color: '#000000',
+    letterSpacing: '-0.02em',
   },
   CasesCheckbox: {
     color: '#10A075',

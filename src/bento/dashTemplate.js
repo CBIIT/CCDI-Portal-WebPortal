@@ -1,6 +1,6 @@
 import { sortType, InputTypes } from '@bento-core/facet-filter';
 
-const DEMOGRAPHIC = 'Demographic';
+const DEMOGRAPHICS = 'Demographics';
 const DIAGNOSIS = 'Diagnosis';
 // const CASES = 'Cases';
 const SAMPLES = 'Samples';
@@ -20,7 +20,7 @@ export const resetIcon = {
 
 // --------------- Dashboard Sidebar Sections styling --------------
 export const facetSectionVariables = {
-  Demographic: {
+  Demographics: {
     isExpanded: true,
     hasSearch: true,
   },
@@ -50,7 +50,7 @@ export const facetSectionVariables = {
 
 export const facetsConfig = [
   {
-    section: DEMOGRAPHIC,
+    section: DEMOGRAPHICS,
     label: 'Gender',
     apiPath: 'participantCountByGender',
     apiForFiltering: 'filterParticipantCountByGender',
@@ -61,7 +61,7 @@ export const facetsConfig = [
     show: true,
   },
   {
-    section: DEMOGRAPHIC,
+    section: DEMOGRAPHICS,
     label: 'Race',
     apiPath: 'participantCountByRace',
     apiForFiltering: 'filterParticipantCountByRace',
@@ -72,7 +72,7 @@ export const facetsConfig = [
     show: true,
   },
   {
-    section: DEMOGRAPHIC,
+    section: DEMOGRAPHICS,
     label: 'Ethnicity',
     apiPath: 'participantCountByEthnicity',
     apiForFiltering: 'filterParticipantCountByEthnicity',

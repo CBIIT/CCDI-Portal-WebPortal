@@ -43,10 +43,10 @@ const theme = {
     },
     MuiListItem: {
       root: {
-        '&.demographicCheckedEven': {
+        '&.demographicsCheckedEven': {
           backgroundColor: '#CBDFE0',
         },
-        '&.demographicCheckedOdd': {
+        '&.demographicsCheckedOdd': {
           backgroundColor: '#E4ECE9',
         },
         '&.diagnosisCheckedEven': {
@@ -83,7 +83,7 @@ const theme = {
     },
     MuiSvgIcon: {
       root: {
-        '&.demographicCheckedIcon': {
+        '&.demographicsCheckedIcon': {
           color: '#6D5F5B',
         },
         '&.diagnosisCheckedIcon': {
@@ -105,7 +105,7 @@ const theme = {
     },
     MuiTypography: {
       root: {
-        '&.demographicSubjects': {
+        '&.demographicsSubjects': {
           color: '#357288',
           fontSize: '12px',
           fontFamily: 'Nunito',

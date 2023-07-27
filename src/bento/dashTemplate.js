@@ -782,13 +782,8 @@ export const widgetConfig = [
   },
   {
     type: 'donut',
-    title: 'Race',
-    dataName: 'participantCountByRace',
-  },
-  {
-    type: 'donut',
-    title: 'Ethnicity',
-    dataName: 'participantCountByEthnicity',
+    title: 'Diagnosis',
+    dataName: 'participantCountByDiagnosis',
   },
   {
     type: 'bar',
@@ -797,12 +792,17 @@ export const widgetConfig = [
   },
   {
     type: 'donut',
-    title: 'Diagnosis',
-    dataName: 'participantCountByDiagnosis',
+    title: 'Race',
+    dataName: 'participantCountByRace',
   },
   {
     type: 'donut',
     title: 'Gender',
     dataName: 'participantCountByGender',
+  },
+  {
+    type: 'donut',
+    title: 'Ethnicity',
+    dataName: 'participantCountByEthnicity',
   },
 ];

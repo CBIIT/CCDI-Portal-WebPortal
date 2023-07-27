@@ -55,14 +55,14 @@ export const statsStyling = {
 export const globalStatsData = [
   // A maximum of 6 stats are allowed
   {
-    statTitle: 'Programs',
+    statTitle: 'Studies',
     type: 'field',
     statAPI: 'numberOfStudies',
     statIconSrc: studiesLogo,
     statIconAlt: 'Data Volume Stats Bar Icon',
   },
   {
-    statTitle: 'Arms',
+    statTitle: 'Participants',
     type: 'field',
     statAPI: 'numberOfParticipants',
     statIconSrc: participantsLogo,

@@ -1,5 +1,10 @@
 export default () => ({
   inputRoot: {
+    height: '26px',
+    borderRadius: '8px',
+    color: '#646464',
+    fontFamily: 'Nunito',
+    fontSize: 9,
     '& fieldset': {
       borderWidth: '1px !important',
       borderColor: '#003F74 !important',

@@ -89,3 +89,8 @@
   font-family:"Oswald";
   src:url(./fonts/Oswald-VariableFont_wght.ttf);
 }
+
+@font-face {
+  font-family:"Montserrat";
+  src:url(./fonts/Montserrat-VariableFont_wght.ttf);
+}

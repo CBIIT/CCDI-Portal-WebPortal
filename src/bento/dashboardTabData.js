@@ -32,7 +32,7 @@ export const externalLinkIcon = {
 export const tabs = [
   {
     id: 'case_tab',
-    title: 'Cases',
+    title: 'Participants',
     dataField: 'dataCase',
     count: 'numberOfParticipants',
   },

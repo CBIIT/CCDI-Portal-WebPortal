@@ -779,30 +779,36 @@ export const widgetConfig = [
     type: 'donut',
     title: 'Study',
     dataName: 'participantCountByStudy',
+    sliceTitle: 'Participants',
   },
   {
     type: 'donut',
     title: 'Diagnosis',
     dataName: 'participantCountByDiagnosis',
+    sliceTitle: 'Participants',
   },
   {
     type: 'bar',
     title: 'Diagnosis Age',
     dataName: 'participantCountByDiagnosisAge',
+    sliceTitle: 'Participants',
   },
   {
     type: 'donut',
     title: 'Race',
     dataName: 'participantCountByRace',
+    sliceTitle: 'Participants',
   },
   {
     type: 'donut',
     title: 'Gender',
     dataName: 'participantCountByGender',
+    sliceTitle: 'Participants',
   },
   {
     type: 'donut',
     title: 'Ethnicity',
     dataName: 'participantCountByEthnicity',
+    sliceTitle: 'Participants',
   },
 ];

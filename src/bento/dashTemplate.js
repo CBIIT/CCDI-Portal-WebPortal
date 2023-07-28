@@ -791,7 +791,8 @@ export const widgetConfig = [
     type: 'bar',
     title: 'Diagnosis Age',
     dataName: 'participantCountByDiagnosisAge',
-    sliceTitle: 'Participants',
+    width: 250,
+    height: 210,
   },
   {
     type: 'donut',

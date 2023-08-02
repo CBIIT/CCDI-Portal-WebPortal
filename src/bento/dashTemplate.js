@@ -4,7 +4,7 @@ const DEMOGRAPHICS = 'Demographics';
 const DIAGNOSIS = 'Diagnosis';
 // const CASES = 'Cases';
 const SAMPLES = 'Samples';
-const ASSAYMETHOD = 'Assay';
+const DATACATEGORY = 'Data Category';
 // const FILES = 'Files';
 const STUDY = 'Study';
 const LIBRARY = 'Library';
@@ -34,7 +34,7 @@ export const facetSectionVariables = {
   Samples: {
     isExpanded: true,
   },
-  Assay: {
+  'Data Category': {
     isExpanded: true,
   },
   Study: {
@@ -444,8 +444,8 @@ export const facetsConfig = [
     show: true,
   },
   {
-    section: ASSAYMETHOD,
-    label: 'Assay Method',
+    section: DATACATEGORY,
+    label: 'Assay Type',
     apiPath: 'ParticipantCountByAssayMethod',
     apiForFiltering: 'filterParticipantCountByAssayMethod',
     datafield: 'assay_method',
@@ -455,7 +455,7 @@ export const facetsConfig = [
     show: true,
   },
   {
-    section: ASSAYMETHOD,
+    section: DATACATEGORY,
     label: 'File Type',
     apiPath: 'participantCountByFileType',
     apiForFiltering: 'filterParticipantCountByFileType',
@@ -469,7 +469,7 @@ export const facetsConfig = [
     section: STUDY,
     label: 'dbGaP phs accession',
     apiPath: 'participantCountByLibrarySelection',
-    apiForFiltering: 'filterParticipantCountByLibrarySelection',
+    apiForFiltering: 'filterParticipantCountByPHSAccession',
     datafield: 'phs_accession',
     field: GROUP,
     type: InputTypes.CHECKBOX,
@@ -493,17 +493,6 @@ export const facetsConfig = [
     apiPath: 'participantCountByInstitution',
     apiForFiltering: 'filterParticipantCountByInstitution',
     datafield: 'institution',
-    field: GROUP,
-    type: InputTypes.CHECKBOX,
-    sort_type: sortType.ALPHABET,
-    show: true,
-  },
-  {
-    section: STUDY,
-    label: 'Name',
-    apiPath: 'participantCountByName',
-    apiForFiltering: 'filterParticipantCountByName',
-    datafield: 'study_name',
     field: GROUP,
     type: InputTypes.CHECKBOX,
     sort_type: sortType.ALPHABET,

@@ -75,15 +75,16 @@ export const tabIndex = [
 export const DASHBOARD_QUERY_NEW = gql`
 query search (          
     $participant_ids: [String],
+    $gender: [String] ,
     $race: [String] ,
     $ethnicity: [String] ,
-    $age_at_diagnois: [Float] ,
-    $anatomic_site: [String] ,
+    $age_at_diagnosis: [Int] ,
+    $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
     $diagnosis_icd_o: [String] ,
     $vital_status: [String] ,
-    $anatomic_site: [String] ,
-    $participant_age_at_collection: [Float] ,
+    $sample_anatomic_site: [String] ,
+    $participant_age_at_collection: [Int] ,
     $sample_tumor_status: [String] ,
     $tumor_classification: [String] ,
     $assay_method: [String],
@@ -100,14 +101,15 @@ query search (
 ){
     searchParticipants (          
         participant_ids: $participant_ids,
+        gender: $gender,
         race: $race,
         ethnicity: $ethnicity,
-        age_at_diagnois: $age_at_diagnois,
-        anatomic_site: $anatomic_site,
+        age_at_diagnosis: $age_at_diagnosis,
+        diagnosis_anatomic_site: $diagnosis_anatomic_site,
         disease_phase: $disease_phase,
         diagnosis_icd_o: $diagnosis_icd_o,
         vital_status: $vital_status,
-        anatomic_site: $anatomic_site,
+        sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
         sample_tumor_status: $sample_tumor_status,
         tumor_classification: $tumor_classification,
@@ -200,10 +202,6 @@ query search (
             subjects
         }
         filterParticipantCountByLibraryStrategy{
-            group
-            subjects
-        }
-        filterParticipantCountByName{
             group
             subjects
         }

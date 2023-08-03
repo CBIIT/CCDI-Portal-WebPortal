@@ -27,7 +27,7 @@ export const titleData = {
 
 export const statsData = [
   {
-    num: '223',
+    num: '240',
     title: 'Cataloged Datasets',
     detail: 'Childhood Cancer Data Catalog',
   },

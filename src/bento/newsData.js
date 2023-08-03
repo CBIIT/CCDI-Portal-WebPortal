@@ -6,6 +6,36 @@ import updateImgMolecularCharacterization from '../assets/news/News_Molecular_Ch
 
 export const newsList = [
     {
+        id: 'mtp_07212023',
+        title: 'Molecular Targets Platform (MTP) release allows interactive data visualizations',
+        date: 'JULY 21, 2023',
+        slug: 'New interactive plot displays and updates to the About page are part of the MTP 2.1 release.',
+        highlight: '<p>The Molecular Targets Platform (MTP) is now live with interactive visualizations of data via the Pediatric Data Navigation page <a href="https://moleculartargets.ccdi.cancer.gov/pediatric-cancer-data-navigation" target="_blank" rel="noopener noreferrer">Pediatric Data Navigation page</a>. There is also improved plot generation for the OpenPedCan Gene Expression and Differential Expression widgets, along with updated descriptions in the “Pediatric Cancer Data Visualizations” section on the <a href="https://moleculartargets.ccdi.cancer.gov/about" target="_blank" rel="noopener noreferrer">About page</a> regarding the chart types added in the previous MTP release.</p>',
+        fullText: '',
+        type: 'Application Updates',
+        img: updateImgMTP,
+    },
+    {
+        id: 'ccdc_07192023',
+        title: 'Childhood Cancer Data Catalog (CCDC) updates include a guide for accessing CCDI data',
+        date: 'JULY 19, 2023',
+        slug: 'The latest CCDC update also provides updated data sets, a new registry, and new analytical tools.',
+        highlight: '<p>The Childhood Cancer Data Catalog now has three new resources. One is the Childhood Cancer Registry, which banks and distributes cell lines and patient-derived xenografts. The other two are analytical tools—The Cancer Research Institute iAtlas, which includes tools for studying tumor and immune microenvironment interactions, and The Cancer Proteome Atlas, through which users can access proteomics data. Importantly, there is also a new guide on how to access, query, and process CCDI data stored at NCI’s Cancer Data Service.</p>',
+        fullText: '',
+        type: 'Application Updates',
+        img: updateImgCCDC,
+    },
+    {
+        id: 'ccdc_06142023',
+        title: 'Childhood Cancer Data Catalog updates with new resources and datasets',
+        date: 'JUNE 14, 2023',
+        slug: 'Cancermodels.org has over 7,000 patient-derived cancer models available to the community.',
+        highlight: '<p>The Cancermodels.org resource has been added to the CCDI Childhood Cancer Data Catalog. This is a free, open-source platform that collects clinical, genomic, and functional data from patient-derived xenografts, organoids, and cell lines. The catalog update also includes 13 new datasets, eight of which are from the Single-cell Pediatric Cancer Atlas Portal (ScPCA).</p>',
+        fullText: '',
+        type: 'Application Updates',
+        img: updateImgCCDC,
+    },
+    {
         id: 'mtp_06022023',
         title: 'Molecular Targets Platform releases data updates and enhanced features',
         date: 'JUNE 2, 2023',

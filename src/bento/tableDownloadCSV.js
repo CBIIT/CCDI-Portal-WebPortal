@@ -48,25 +48,23 @@ export const customSamplesTabDownloadCSV = {
 export const GET_FILES_TAB = gql`
 query fileOverview($file_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String ="file_name"){
   fileOverview(file_ids: $file_ids, offset: $offset,first: $first, order_by: $order_by) {
-    file_id
     file_name
-    association
+    file_category
     file_description
-    file_format
+    file_type
     file_size
-    program
-    program_id
-    arm
-    subject_id
+    study_id
+    participant_id
     sample_id
-    diagnosis
+    file_id
+    md5sum
   }
 }
 `;
 
 export const customFilesTabDownloadCSV = {
-  keysToInclude: ['file_name', 'association', 'file_description', 'file_format', 'file_size', 'program', 'arm', 'subject_id', 'sample_id', 'diagnosis'],
-  header: ['File Name', 'Association', 'Description', 'File Format', 'Size', 'Program Code', 'Arm', 'Case Id', 'Sample ID', 'Diagnosis'],
+  keysToInclude: ['file_name', 'file_category', 'file_description', 'file_type', 'file_size', 'study_id', 'participant_id', 'sample_id', 'file_id', 'md5sum'],
+  header: ['File Name', 'File Category', 'File Description', 'File Type', 'File Size', 'Study ID', 'Participant ID', 'Sample ID', 'File ID', 'MD5sum'],
   query: GET_FILES_TAB,
   apiVariable: 'fileOverview',
   fileName: 'tableDownload',

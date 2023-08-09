@@ -24,25 +24,21 @@ export const customParticipantsTabDownloadCSV = {
 export const GET_SAMPLES_TAB = gql`
 query sampleOverview($sample_ids: [String], $offset: Int = 0, $first: Int = 1000, $order_by:String =""){
   sampleOverview(sample_ids: $sample_ids, offset: $offset,first: $first, order_by: $order_by) {
-    sample_id
-    subject_id
-    program
-    program_id
-    arm
-    diagnosis
-    tissue_type
-    tissue_composition
-    sample_anatomic_site
-    sample_procurement_method
-    platform
-    files 
-}
+    sample_id,
+    participant_id
+    study_id
+    anatomic_site
+    participant_age_at_collection
+    diagnosis_icd_o
+    sample_tumor_status
+    tumor_classification
+  }
 }
 `;
 
 export const customSamplesTabDownloadCSV = {
-  keysToInclude: ['sample_id', 'subject_id', 'program', 'arm', 'diagnosis', 'tissue_type', 'tissue_composition', 'sample_anatomic_site', 'sample_procurement_method', 'platform'],
-  header: ['Sample ID', 'Case Id', 'Program Code', 'Arm', 'Diagnosis', 'Tissue Type', 'Tissue Composition', 'Sample Anatomic Site', 'Sample Procurement Method', 'Platform'],
+  keysToInclude: ['sample_id', 'participant_id', 'study_id', 'anatomic_site', 'participant_age_at_collection', 'diagnosis_icd_o', 'sample_tumor_status', 'tumor_classification'],
+  header: ['Sample ID', 'Particpant ID', 'Study ID', 'Anatomic Site', 'Age at Sample Collection', 'Sample ICD-O Morphology', 'Sample Tumor Status', 'Sample Tumor Classification'],
   query: GET_SAMPLES_TAB,
   apiVariable: 'sampleOverview',
   fileName: 'tableDownload',

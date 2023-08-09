@@ -1,7 +1,9 @@
 import updateImgCCDC from '../assets/landing/Updates_CCDC.png';
+import updateImgCCDC2 from '../assets/news/News_CCDC_2.png';
 import updateImgMolecular from '../assets/landing/Updates_Molecular.png';
 import updateImgSymposium from '../assets/landing/Updates_Symposium.png';
 import updateImgMTP from '../assets/news/News_MTP.png';
+import updateImgMTP2 from '../assets/news/News_MTP_2.png';
 import updateImgMolecularCharacterization from '../assets/news/News_Molecular_Characterization.png';
 
 export const newsList = [
@@ -13,7 +15,7 @@ export const newsList = [
         highlight: '<p>The Molecular Targets Platform (MTP) is now live with interactive visualizations of data via the Pediatric Data Navigation page <a href="https://moleculartargets.ccdi.cancer.gov/pediatric-cancer-data-navigation" target="_blank" rel="noopener noreferrer">Pediatric Data Navigation page</a>. There is also improved plot generation for the OpenPedCan Gene Expression and Differential Expression widgets, along with updated descriptions in the “Pediatric Cancer Data Visualizations” section on the <a href="https://moleculartargets.ccdi.cancer.gov/about" target="_blank" rel="noopener noreferrer">About page</a> regarding the chart types added in the previous MTP release.</p>',
         fullText: '',
         type: 'Application Updates',
-        img: updateImgMTP,
+        img: updateImgMTP2,
     },
     {
         id: 'ccdc_07192023',
@@ -23,7 +25,7 @@ export const newsList = [
         highlight: '<p>The Childhood Cancer Data Catalog now has three new resources. One is the Childhood Cancer Registry, which banks and distributes cell lines and patient-derived xenografts. The other two are analytical tools—The Cancer Research Institute iAtlas, which includes tools for studying tumor and immune microenvironment interactions, and The Cancer Proteome Atlas, through which users can access proteomics data. Importantly, there is also a new guide on how to access, query, and process CCDI data stored at NCI’s Cancer Data Service.</p>',
         fullText: '',
         type: 'Application Updates',
-        img: updateImgCCDC,
+        img: updateImgCCDC2,
     },
     {
         id: 'ccdc_06142023',

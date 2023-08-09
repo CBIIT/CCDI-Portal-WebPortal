@@ -1,7 +1,7 @@
 /* eslint-disable */
 import gql from 'graphql-tag';
 import { cellTypes } from '@bento-core/table';
-import { customParticipantsTabDownloadCSV, customFilesTabDownloadCSV, customSamplesTabDownloadCSV } from './tableDownloadCSV';
+import { customParticipantsTabDownloadCSV, customFilesTabDownloadCSV, customSamplesTabDownloadCSV, customDiagnosisTabDownloadCSV } from './tableDownloadCSV';
 import { dataFormatTypes } from '@bento-core/table';
 
 // --------------- Tooltip configuration --------------
@@ -535,10 +535,10 @@ query search (
 
 export const GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL = gql`
 query search (          
-  $participant_ids: [String],
+  $sample_ids: [String],
 ){
   fileIDsFromList (          
-      participant_ids: $participant_ids,
+    sample_ids: $sample_ids,
   ) 
 }
   `;
@@ -552,6 +552,16 @@ query search (
   ) 
 }
   `;
+
+  export const GET_ALL_FILEIDS_DIAGNOSISTAB_FOR_SELECT_ALL = gql`
+  query search (          
+    $participant_ids: [String] 
+  ){
+    fileIDsFromList (          
+        participant_ids: $participant_ids
+    ) 
+  }
+    `;
 
 export const GET_ALL_FILEIDS_FROM_PARTICIPANTSTAB_FOR_ADD_ALL_CART = gql`
 query participantsAddAllToCart(
@@ -743,6 +753,69 @@ query fileAddAllToCart(
   }
 }
             `;
+
+export const GET_ALL_FILEIDS_FROM_DIAGNOSISTAB_FOR_ADD_ALL_CART = gql`
+query diagnosisAddAllToCart(
+  $participant_ids: [String],
+  $gender: [String] ,
+  $race: [String] ,
+  $ethnicity: [String] ,
+  $age_at_diagnosis: [Int] ,
+  $diagnosis_anatomic_site: [String] ,
+  $disease_phase: [String] ,
+  $diagnosis_icd_o: [String] ,
+  $vital_status: [String] ,
+  $sample_anatomic_site: [String] ,
+  $participant_age_at_collection: [Int] ,
+  $sample_tumor_status: [String] ,
+  $tumor_classification: [String] ,
+  $assay_method: [String],
+  $file_type: [String],
+  $phs_accession: [String],
+  $grant_id: [String],
+  $institution: [String],
+  $study_acronym: [String],
+  $study_short_title: [String],
+  $library_selection: [String],
+  $library_source: [String],
+  $library_strategy: [String],
+  $first: Int,
+  $offset: Int= 0, 
+  $order_by: String = "file_id",
+  $sort_direction: String = "asc" ){
+  diagnosisOverview(
+      participant_ids: $participant_ids,
+      gender: $gender,
+      race: $race,
+      ethnicity: $ethnicity,
+      age_at_diagnosis: $age_at_diagnosis,
+      diagnosis_anatomic_site: $diagnosis_anatomic_site,
+      disease_phase: $disease_phase,
+      diagnosis_icd_o: $diagnosis_icd_o,
+      vital_status: $vital_status,
+      sample_anatomic_site: $sample_anatomic_site,
+      participant_age_at_collection: $participant_age_at_collection,
+      sample_tumor_status: $sample_tumor_status,
+      tumor_classification: $tumor_classification,
+      assay_method: $assay_method,
+      file_type: $file_type,
+      phs_accession: $phs_accession,       
+      grant_id: $grant_id,
+      institution: $institution,
+      study_acronym: $study_acronym,
+      study_short_title: $study_short_title,
+      library_selection: $library_selection,
+      library_source: $library_source,
+      library_strategy: $library_strategy,
+      first: $first,
+      offset: $offset,
+      order_by: $order_by,
+      sort_direction: $sort_direction
+      ) {
+      participant_id
+  }
+}
+    `;
 
 // --------------- GraphQL query - Retrieve files tab details --------------
 export const GET_FILES_NAME_QUERY = gql`
@@ -1069,6 +1142,90 @@ export const tabContainers = [
     addAllFilesResponseKeys: ['fileOverview', 'file_id'],
     addAllFileQuery: GET_ALL_FILEIDS_FROM_FILESTAB_FOR_ADD_ALL_CART,
     addSelectedFilesQuery: GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL,
+  },
+  {
+    name: 'Diagnosis',
+    dataField: 'dataDiagnosis',
+    api: GET_DIAGNOSIS_OVERVIEW_QUERY,
+    paginationAPIField: 'diagnosisOverview',
+    defaultSortField: 'participant_id',
+    defaultSortDirection: 'asc',
+    count: 'numberOfDiagnosis',
+    dataKey: 'participant_id',
+    tableID: 'diagnosis_tab_table',
+    extendedViewConfig: {
+      pagination: true,
+      manageViewColumns: false,
+    },
+    columns: [
+      {
+        cellType: cellTypes.CHECKBOX,
+        display: true,
+        role: cellTypes.CHECKBOX,
+      },
+      {
+        dataField: 'participant_id',
+        header: 'Participant ID',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'phs_accession',
+        header: 'Study Accession',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'diagnosis_icd_o',
+        header: 'ICD-O Morphology',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'disease_phase',
+        header: 'Disease Phase',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'anatomic_site',
+        header: 'Anatomic Site',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'age_at_diagnosis',
+        header: 'Age at Diagnosis (days)',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'vital_status',
+        header: 'Vital Status',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+    ],
+    id: 'diagnosis_tab',
+    tableID: 'diagnosis_tab_table',
+    selectableRows: true,
+    tableDownloadCSV: customDiagnosisTabDownloadCSV,
+    downloadFileName: 'Bento_Dashboard_participants_download',
+    tableMsg: {
+      noMatch: 'No Matching Records Found',
+    },
+    addFilesRequestVariableKey: 'diagnosis_names',
+    addFilesResponseKeys: ['fileIDsFromList'],
+    addAllFilesResponseKeys: ['diagnosisOverview', 'files'],
+    addAllFileQuery: GET_ALL_FILEIDS_FROM_DIAGNOSISTAB_FOR_ADD_ALL_CART,
+    addSelectedFilesQuery: GET_ALL_FILEIDS_DIAGNOSISTAB_FOR_SELECT_ALL,
   },
 ];
 

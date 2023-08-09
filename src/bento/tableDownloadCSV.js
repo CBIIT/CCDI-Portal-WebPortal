@@ -71,6 +71,29 @@ export const customFilesTabDownloadCSV = {
   defaultFullTableDownload: false,
 };
 
+export const GET_DIAGNOSIS_TAB = gql`
+query diagnosisOverview($participant_id: [String], $offset: Int = 0, $first: Int = 1000, $order_by:String =""){
+  diagnosisOverview(participant_id: $participant_id, offset: $offset,first: $first, order_by: $order_by) {
+    participant_id
+    phs_accession
+    diagnosis_icd_o
+    disease_phase
+    anatomic_site
+    age_at_diagnosis
+    vital_status
+  }
+}
+`;
+
+export const customDiagnosisTabDownloadCSV = {
+  keysToInclude: ['participant_id', 'phs_accession', 'diagnosis_icd_o', 'disease_phase', 'anatomic_site', 'age_at_diagnosis', 'vital_status'],
+  header: ['Participant ID', 'Study Accession', 'ICD-O Morphology', 'Disease Phase', 'Anatomic Site', 'Age at Diagnosis (days)', 'Vital Status'],
+  query: GET_DIAGNOSIS_TAB,
+  apiVariable: 'diagnosisOverview',
+  fileName: 'tableDownload',
+  defaultFullTableDownload: false,
+};
+
 export const MY_CART = gql`
 query filesInList($file_ids: [String], $offset: Int = 0, $first: Int = 1000, $order_by:String ="") {
     filesInList(file_ids: $file_ids, offset: $offset,first: $first, order_by: $order_by) {

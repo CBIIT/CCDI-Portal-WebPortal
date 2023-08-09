@@ -303,16 +303,16 @@ query fileOverview(
         order_by: $order_by,
         sort_direction: $sort_direction
     ){
-        file_name,
-        file_category,
-        file_description,
-        file_type,
-        file_size,
-        study_id,
-        participant_id,
-        sample_id,
-        file_id,
-        md5sum,
+        file_name
+        file_category
+        file_description
+        file_type
+        file_size
+        study_id
+        participant_id
+        sample_id
+        file_id
+        md5sum
     }
 }
 `;
@@ -375,14 +375,14 @@ query sampleOverview(
         order_by: $order_by,
         sort_direction: $sort_direction
     ){
-        sample_id,
-        participant_id,
-        study_id,
-        anatomic_site,
-        participant_age_at_collection,
-        diagnosis_icd_o,
-        sample_tumor_status,
-        tumor_classification,
+        sample_id
+        participant_id
+        study_id
+        anatomic_site
+        participant_age_at_collection
+        diagnosis_icd_o
+        sample_tumor_status
+        tumor_classification
     }
 }
 `;

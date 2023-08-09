@@ -1,7 +1,7 @@
 /* eslint-disable */
 import gql from 'graphql-tag';
 import { cellTypes } from '@bento-core/table';
-import { customCasesTabDownloadCSV, customFilesTabDownloadCSV, customSamplesTabDownloadCSV } from './tableDownloadCSV';
+import { customParticipantsTabDownloadCSV, customFilesTabDownloadCSV, customSamplesTabDownloadCSV } from './tableDownloadCSV';
 import { dataFormatTypes } from '@bento-core/table';
 
 // --------------- Tooltip configuration --------------
@@ -523,7 +523,7 @@ query participantOverview(
 }
 `;
 
-export const GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL = gql`
+export const GET_ALL_FILEIDS_PARTICIPANTSTAB_FOR_SELECT_ALL = gql`
 query search (          
   $participant_ids: [String],
 ){
@@ -553,54 +553,66 @@ query search (
 }
   `;
 
-export const GET_ALL_FILEIDS_FROM_CASESTAB_FOR_ADD_ALL_CART = gql`
-query subjectsAddAllToCart(
-  $participant_ids: [String],
-  $programs: [String] ,
-  $studies: [String] ,
-  $diagnoses: [String] ,
-  $rc_scores: [String] ,
-  $tumor_sizes: [String] ,
-  $chemo_regimen: [String] ,
-  $tumor_grades: [String] ,
-  $er_status: [String] ,
-  $pr_status: [String] ,
-  $endo_therapies: [String] ,
-  $meno_status: [String] ,
-  $tissue_type: [String],
-  $composition: [String],
-  $association: [String],
-  $file_type: [String],
-  $age_at_index: [Float],
-  $first: Int,
-  $offset: Int= 0, 
-  $order_by: String = "file_id",
-  $sort_direction: String = "asc" 
+export const GET_ALL_FILEIDS_FROM_PARTICIPANTSTAB_FOR_ADD_ALL_CART = gql`
+query participantsAddAllToCart(
+    $participant_ids: [String],
+    $gender: [String] ,
+    $race: [String] ,
+    $ethnicity: [String] ,
+    $age_at_diagnosis: [Int] ,
+    $diagnosis_anatomic_site: [String] ,
+    $disease_phase: [String] ,
+    $diagnosis_icd_o: [String] ,
+    $vital_status: [String] ,
+    $sample_anatomic_site: [String] ,
+    $participant_age_at_collection: [Int] ,
+    $sample_tumor_status: [String] ,
+    $tumor_classification: [String] ,
+    $assay_method: [String],
+    $file_type: [String],
+    $phs_accession: [String],
+    $grant_id: [String],
+    $institution: [String],
+    $study_acronym: [String],
+    $study_short_title: [String],
+    $library_selection: [String],
+    $library_source: [String],
+    $library_strategy: [String],
+    $first: Int,
+    $offset: Int= 0, 
+    $order_by: String = "file_id",
+    $sort_direction: String = "asc" 
   ){
     participantOverview(
       participant_ids: $participant_ids,
-      programs: $programs,
-      studies: $studies,
-      diagnoses: $diagnoses,
-      rc_scores: $rc_scores,
-      tumor_sizes: $tumor_sizes,
-      chemo_regimen: $chemo_regimen,
-      tumor_grades: $tumor_grades,
-      er_status: $er_status,
-      pr_status: $pr_status,
-      endo_therapies: $endo_therapies,
-      meno_status: $meno_status,
-      tissue_type: $tissue_type,
-      composition: $composition,
-      association: $association,
+      gender: $gender,
+      race: $race,
+      ethnicity: $ethnicity,
+      age_at_diagnosis: $age_at_diagnosis,
+      diagnosis_anatomic_site: $diagnosis_anatomic_site,
+      disease_phase: $disease_phase,
+      diagnosis_icd_o: $diagnosis_icd_o,
+      vital_status: $vital_status,
+      sample_anatomic_site: $sample_anatomic_site,
+      participant_age_at_collection: $participant_age_at_collection,
+      sample_tumor_status: $sample_tumor_status,
+      tumor_classification: $tumor_classification,
+      assay_method: $assay_method,
       file_type: $file_type,
-      age_at_index: $age_at_index,
+      phs_accession: $phs_accession,       
+      grant_id: $grant_id,
+      institution: $institution,
+      study_acronym: $study_acronym,
+      study_short_title: $study_short_title,
+      library_selection: $library_selection,
+      library_source: $library_source,
+      library_strategy: $library_strategy,
       first: $first,
       offset: $offset,
       order_by: $order_by,
       sort_direction: $sort_direction
       ) {
-      files
+      participant_id
   }
 }
     `;
@@ -803,7 +815,7 @@ export const tabContainers = [
     ],
     id: 'participant_tab',
     tableID: 'participant_tab_table',
-    tableDownloadCSV: customCasesTabDownloadCSV,
+    tableDownloadCSV: customParticipantsTabDownloadCSV,
     tabIndex: '0',
     downloadFileName: 'Bento_Dashboard_participants_download',
     tableMsg: {
@@ -812,8 +824,8 @@ export const tabContainers = [
     addFilesRequestVariableKey: 'participant_ids',
     addFilesResponseKeys: ['fileIDsFromList'],
     addAllFilesResponseKeys: ['participantOverview', 'files'],
-    addAllFileQuery: GET_ALL_FILEIDS_FROM_CASESTAB_FOR_ADD_ALL_CART,
-    addSelectedFilesQuery: GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL,
+    addAllFileQuery: GET_ALL_FILEIDS_FROM_PARTICIPANTSTAB_FOR_ADD_ALL_CART,
+    addSelectedFilesQuery: GET_ALL_FILEIDS_PARTICIPANTSTAB_FOR_SELECT_ALL,
   },
   {
     name: 'Samples',

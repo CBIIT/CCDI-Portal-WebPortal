@@ -1,38 +1,22 @@
 import gql from 'graphql-tag';
 
-export const GET_CASES_TAB = gql`
-query subjectOverViewPaged($subject_ids: [String], $offset: Int = 0, $first: Int = 1000, $order_by:String =""){
-  subjectOverViewPaged(subject_ids: $subject_ids, first: $first, offset: $offset, order_by: $order_by) {
-      subject_id
-      program
-      program_id
-      study_acronym
-      study_short_description
-      study_info
-      diagnosis
-      recurrence_score
-      tumor_size
-      tumor_grade
-      er_status
-      pr_status
-      chemotherapy
-      endocrine_therapy
-      menopause_status
-      age_at_index
-      survival_time
-      files {
-            file_id
-      }
-      lab_procedures
+export const GET_PARTICIPANTS_TAB = gql`
+query participantOverViewPaged($participant_ids: [String], $offset: Int = 0, $first: Int = 1000, $order_by:String =""){
+  participantOverViewPaged(participant_ids: $participant_ids, first: $first, offset: $offset, order_by: $order_by) {
+    participant_id
+    phs_accession
+    race
+    gender
+    ethnicity
   }
 }
 `;
 
-export const customCasesTabDownloadCSV = {
-  keysToInclude: ['subject_id', 'program', 'program_id', 'study_acronym', 'diagnosis', 'tumor_size', 'er_status', 'pr_status', 'age_at_index', 'survival_time'],
-  header: ['Case ID', 'Program Code', 'Program ID', 'Arm', 'Diagnosis', 'Tumor Size', 'ER Status', 'PR Status', 'Age', 'Survival'],
-  query: GET_CASES_TAB,
-  apiVariable: 'subjectOverViewPaged',
+export const customParticipantsTabDownloadCSV = {
+  keysToInclude: ['participant_id', 'phs_accession', 'race', 'gender', 'ethnicity'],
+  header: ['Participant ID', 'Study Accession', 'Race', 'Gender', 'Ethnicity'],
+  query: GET_PARTICIPANTS_TAB,
+  apiVariable: 'participantOverView',
   fileName: 'tableDownload',
   defaultFullTableDownload: false,
 };

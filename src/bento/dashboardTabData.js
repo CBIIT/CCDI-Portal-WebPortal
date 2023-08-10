@@ -54,6 +54,12 @@ export const tabs = [
     dataField: 'dataDiagnosis',
     count: 'numberOfDiagnosis',
   },
+  {
+    id: 'study_tab',
+    title: 'Studies',
+    dataField: 'dataStudy',
+    count: 'numberOfStudies',
+  },
 ];
 
 // --------------- Tabs Header Style configuration --------------
@@ -78,6 +84,12 @@ export const tabIndex = [
   },
   {
     title: 'Diagnosis',
+    primaryColor: '#F7D7F7',
+    secondaryColor: '#86D6F0',
+    selectedColor: '#C92EC7',
+  },
+  {
+    title: 'Studies',
     primaryColor: '#F7D7F7',
     secondaryColor: '#86D6F0',
     selectedColor: '#C92EC7',

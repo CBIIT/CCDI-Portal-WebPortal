@@ -536,6 +536,80 @@ query participantOverview(
 }
 `;
 
+export const GET_STUDY_OVERVIEW_QUERY = gql`
+query participantOverview(
+    $participant_ids: [String],
+    $gender: [String] ,
+    $race: [String] ,
+    $ethnicity: [String] ,
+    $age_at_diagnosis: [Int] ,
+    $diagnosis_anatomic_site: [String] ,
+    $disease_phase: [String] ,
+    $diagnosis_icd_o: [String] ,
+    $vital_status: [String] ,
+    $sample_anatomic_site: [String] ,
+    $participant_age_at_collection: [Int] ,
+    $sample_tumor_status: [String] ,
+    $tumor_classification: [String] ,
+    $assay_method: [String],
+    $file_type: [String],
+    $phs_accession: [String],
+    $grant_id: [String],
+    $institution: [String],
+    $study_acronym: [String],
+    $study_short_title: [String],
+    $library_selection: [String],
+    $library_source: [String],
+    $library_strategy: [String],
+    $first: Int, 
+    $offset: Int, 
+    $order_by: String,
+    $sort_direction: String ){
+    participantOverview(
+        participant_ids: $participant_ids,
+        gender: $gender,
+        race: $race,
+        ethnicity: $ethnicity,
+        age_at_diagnosis: $age_at_diagnosis,
+        diagnosis_anatomic_site: $diagnosis_anatomic_site,
+        disease_phase: $disease_phase,
+        diagnosis_icd_o: $diagnosis_icd_o,
+        vital_status: $vital_status,
+        sample_anatomic_site: $sample_anatomic_site,
+        participant_age_at_collection: $participant_age_at_collection,
+        sample_tumor_status: $sample_tumor_status,
+        tumor_classification: $tumor_classification,
+        assay_method: $assay_method,
+        file_type: $file_type,
+        phs_accession: $phs_accession,       
+        grant_id: $grant_id,
+        institution: $institution,
+        study_acronym: $study_acronym,
+        study_short_title: $study_short_title,
+        library_selection: $library_selection,
+        library_source: $library_source,
+        library_strategy: $library_strategy,
+        first: $first, 
+        offset: $offset, 
+        order_by: $order_by,
+        sort_direction: $sort_direction
+    ) {
+        study_id
+        pubmed_id
+        grant_id
+        phs_accession
+        study_short_title
+        personnel_name
+        participant_id
+        diagnosis
+        sample_id
+        anatomic_site
+        number_of_files
+        file_type
+    }
+}
+`;
+
 export const GET_ALL_FILEIDS_PARTICIPANTSTAB_FOR_SELECT_ALL = gql`
 query search (          
   $participant_ids: [String],

@@ -41,7 +41,7 @@ export const customTheme = {
       '&.add_selected_button': {
         marginRight: '10px',
       },
-      '&.add_selected_button_Cases': {
+      '&.add_selected_button_Participants': {
         backgroundColor: '#10A075',
       },
       '&.add_selected_button_Samples': {
@@ -50,9 +50,15 @@ export const customTheme = {
       '&.add_selected_button_Files': {
         backgroundColor: '#C92EC7',
       },
+      '&.add_selected_button_Diagnosis': {
+        backgroundColor: '#10A075',
+      },
+      '&.add_selected_button_Studies': {
+        backgroundColor: '#10A075',
+      },
       '&.Mui-disabled': {
         color: '#fff',
-        '&.add_selected_button_Cases': {
+        '&.add_selected_button_Participants': {
           backgroundColor: '#D6F2EA',
         },
         '&.add_selected_button_Samples': {
@@ -60,6 +66,12 @@ export const customTheme = {
         },
         '&.add_selected_button_Files': {
           backgroundColor: '#F7D7F7',
+        },
+        '&.add_selected_button_Diagnosis': {
+          backgroundColor: '#D6F2EA',
+        },
+        '&.add_selected_button_Studies': {
+          backgroundColor: '#D6F2EA',
         },
       },
       '&.yesBtn': {

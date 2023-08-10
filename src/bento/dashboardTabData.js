@@ -1,7 +1,7 @@
 /* eslint-disable */
 import gql from 'graphql-tag';
 import { cellTypes } from '@bento-core/table';
-import { customParticipantsTabDownloadCSV, customFilesTabDownloadCSV, customSamplesTabDownloadCSV, customDiagnosisTabDownloadCSV } from './tableDownloadCSV';
+import { customParticipantsTabDownloadCSV, customFilesTabDownloadCSV, customSamplesTabDownloadCSV, customDiagnosisTabDownloadCSV, customStudyTabDownloadCSV } from './tableDownloadCSV';
 import { dataFormatTypes } from '@bento-core/table';
 
 // --------------- Tooltip configuration --------------
@@ -600,10 +600,10 @@ query participantOverview(
         phs_accession
         study_short_title
         personnel_name
-        participant_id
         diagnosis
-        sample_id
         anatomic_site
+        number_of_participants
+        number_of_samples
         number_of_files
         file_type
     }
@@ -640,15 +640,24 @@ query search (
 }
   `;
 
-  export const GET_ALL_FILEIDS_DIAGNOSISTAB_FOR_SELECT_ALL = gql`
-  query search (          
-    $participant_ids: [String] 
-  ){
-    fileIDsFromList (          
-        participant_ids: $participant_ids
-    ) 
-  }
-    `;
+export const GET_ALL_FILEIDS_DIAGNOSISTAB_FOR_SELECT_ALL = gql`
+query search (          
+  $participant_ids: [String] 
+){
+  fileIDsFromList (          
+      participant_ids: $participant_ids
+  ) 
+}
+  `;
+export const GET_ALL_FILEIDS_STUDYISTAB_FOR_SELECT_ALL = gql`
+query search (          
+  $study_ids: [String] 
+){
+  fileIDsFromList (          
+      study_ids: $study_ids
+  ) 
+}
+  `;
 
 export const GET_ALL_FILEIDS_FROM_PARTICIPANTSTAB_FOR_ADD_ALL_CART = gql`
 query participantsAddAllToCart(
@@ -900,6 +909,69 @@ query diagnosisAddAllToCart(
       sort_direction: $sort_direction
       ) {
       participant_id
+  }
+}
+    `;
+
+export const GET_ALL_FILEIDS_FROM_STUDYTAB_FOR_ADD_ALL_CART = gql`
+query diagnosisAddAllToCart(
+  $participant_ids: [String],
+  $gender: [String] ,
+  $race: [String] ,
+  $ethnicity: [String] ,
+  $age_at_diagnosis: [Int] ,
+  $diagnosis_anatomic_site: [String] ,
+  $disease_phase: [String] ,
+  $diagnosis_icd_o: [String] ,
+  $vital_status: [String] ,
+  $sample_anatomic_site: [String] ,
+  $participant_age_at_collection: [Int] ,
+  $sample_tumor_status: [String] ,
+  $tumor_classification: [String] ,
+  $assay_method: [String],
+  $file_type: [String],
+  $phs_accession: [String],
+  $grant_id: [String],
+  $institution: [String],
+  $study_acronym: [String],
+  $study_short_title: [String],
+  $library_selection: [String],
+  $library_source: [String],
+  $library_strategy: [String],
+  $first: Int,
+  $offset: Int= 0, 
+  $order_by: String = "file_id",
+  $sort_direction: String = "asc" ){
+  diagnosisOverview(
+      participant_ids: $participant_ids,
+      gender: $gender,
+      race: $race,
+      ethnicity: $ethnicity,
+      age_at_diagnosis: $age_at_diagnosis,
+      diagnosis_anatomic_site: $diagnosis_anatomic_site,
+      disease_phase: $disease_phase,
+      diagnosis_icd_o: $diagnosis_icd_o,
+      vital_status: $vital_status,
+      sample_anatomic_site: $sample_anatomic_site,
+      participant_age_at_collection: $participant_age_at_collection,
+      sample_tumor_status: $sample_tumor_status,
+      tumor_classification: $tumor_classification,
+      assay_method: $assay_method,
+      file_type: $file_type,
+      phs_accession: $phs_accession,       
+      grant_id: $grant_id,
+      institution: $institution,
+      study_acronym: $study_acronym,
+      study_short_title: $study_short_title,
+      library_selection: $library_selection,
+      library_source: $library_source,
+      library_strategy: $library_strategy,
+      first: $first,
+      offset: $offset,
+      order_by: $order_by,
+      sort_direction: $sort_direction
+      ) {
+      study_id
   }
 }
     `;
@@ -1307,6 +1379,125 @@ export const tabContainers = [
     addAllFilesResponseKeys: ['diagnosisOverview', 'files'],
     addAllFileQuery: GET_ALL_FILEIDS_FROM_DIAGNOSISTAB_FOR_ADD_ALL_CART,
     addSelectedFilesQuery: GET_ALL_FILEIDS_DIAGNOSISTAB_FOR_SELECT_ALL,
+  },
+  {
+    name: 'Studies',
+    dataField: 'dataStudy',
+    api: GET_STUDY_OVERVIEW_QUERY,
+    paginationAPIField: 'studyOverview',
+    defaultSortField: 'study_id',
+    defaultSortDirection: 'asc',
+    count: 'numberOfStudies',
+    dataKey: 'study_id',
+    tableID: 'study_tab_table',
+    extendedViewConfig: {
+      pagination: true,
+      manageViewColumns: false,
+    },
+    columns: [
+      {
+        cellType: cellTypes.CHECKBOX,
+        display: true,
+        role: cellTypes.CHECKBOX,
+      },
+      {
+        dataField: 'study_id',
+        header: 'Study ID',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'pubmed_id',
+        header: 'PubMed ID',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'grant_id',
+        header: 'Grant ID',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'phs_accession',
+        header: 'Study Accession',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'study_short_title',
+        header: 'Study Short Title',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'personnel_name',
+        header: 'Principle Investigator(s)',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'number_of_participants',
+        header: 'Number of Particpants',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'diagnosis',
+        header: 'Diagnosis',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'number_of_samples',
+        header: 'Number of Samples',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'anatomic_site',
+        header: 'Diagnosis Anatomic Site',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'number_of_files',
+        header: 'Number of Files',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'file_type',
+        header: 'File Type',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+    ],
+    id: 'study_tab',
+    tableID: 'study_tab_table',
+    selectableRows: true,
+    tableDownloadCSV: customStudyTabDownloadCSV,
+    downloadFileName: 'Bento_Dashboard_participants_download',
+    tableMsg: {
+      noMatch: 'No Matching Records Found',
+    },
+    addFilesRequestVariableKey: 'study_id',
+    addFilesResponseKeys: ['fileIDsFromList'],
+    addAllFilesResponseKeys: ['studyOverview', 'files'],
+    addAllFileQuery: GET_ALL_FILEIDS_FROM_STUDYTAB_FOR_ADD_ALL_CART,
+    addSelectedFilesQuery: GET_ALL_FILEIDS_STUDYISTAB_FOR_SELECT_ALL,
   },
 ];
 

@@ -94,6 +94,29 @@ export const customDiagnosisTabDownloadCSV = {
   defaultFullTableDownload: false,
 };
 
+export const GET_STUDY_TAB = gql`
+query studyOverview($study_id: [String], $offset: Int = 0, $first: Int = 1000, $order_by:String =""){
+  studyOverview(study_id: $participant_id, offset: $offset,first: $first, order_by: $order_by) {
+    participant_id
+    phs_accession
+    diagnosis_icd_o
+    disease_phase
+    anatomic_site
+    age_at_diagnosis
+    vital_status
+  }
+}
+`;
+
+export const customStudyTabDownloadCSV = {
+  keysToInclude: ['study_id', 'pubmed_id', 'grant_id', 'phs_accession', 'study_short_title', 'personnel_name', 'number_of_participants', 'diagnosis', 'number_of_samples', 'anatomic_site', 'number_of_files', 'file_type'],
+  header: ['Study ID', 'PubMed ID', 'Grant ID', 'Study Accession', 'Study Short Title', 'Principle Investigator(s)', 'Number of Particpants', 'Diagnosis', 'Number of Samples', 'Diagnosis Anatomic Site', 'Number of Files', 'File Type'],
+  query: GET_STUDY_TAB,
+  apiVariable: 'studyOverview',
+  fileName: 'tableDownload',
+  defaultFullTableDownload: false,
+};
+
 export const MY_CART = gql`
 query filesInList($file_ids: [String], $offset: Int = 0, $first: Int = 1000, $order_by:String ="") {
     filesInList(file_ids: $file_ids, offset: $offset,first: $first, order_by: $order_by) {

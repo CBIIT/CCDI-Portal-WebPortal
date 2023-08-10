@@ -969,12 +969,6 @@ export const tabContainers = [
       {
         dataField: 'participant_id',
         header: 'Particpant ID',
-        // link: '/participant/{participant_id}',
-        cellType: cellTypes.LINK,
-        // linkAttr : {
-        //   rootPath: '/participant',
-        //   pathParams: ['participant_id'],
-        // },
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,

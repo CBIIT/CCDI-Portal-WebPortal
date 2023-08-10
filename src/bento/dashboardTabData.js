@@ -48,6 +48,12 @@ export const tabs = [
     dataField: 'dataFile',
     count: 'numberOfFiles',
   },
+  {
+    id: 'diagnosis_tab',
+    title: 'Diagnosis',
+    dataField: 'dataDiagnosis',
+    count: 'numberOfDiagnosis',
+  },
 ];
 
 // --------------- Tabs Header Style configuration --------------
@@ -66,6 +72,12 @@ export const tabIndex = [
   },
   {
     title: 'Files',
+    primaryColor: '#F7D7F7',
+    secondaryColor: '#86D6F0',
+    selectedColor: '#C92EC7',
+  },
+  {
+    title: 'Diagnosis',
     primaryColor: '#F7D7F7',
     secondaryColor: '#86D6F0',
     selectedColor: '#C92EC7',
@@ -123,6 +135,7 @@ query search (
         library_source: $library_source,
         library_strategy: $library_strategy,
     ) {
+        numberOfDiagnosis
         numberOfFiles
         numberOfParticipants
         numberOfSamples

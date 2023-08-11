@@ -1,7 +1,7 @@
 export const customTheme = {
   MuiTabs: {
     root: {
-      borderBottom: '10px solid #40789c',
+      borderBottom: '2px solid #71767A',
     },
   },
   MuiTab: {
@@ -10,47 +10,73 @@ export const customTheme = {
       color: '#6E6E6E',
       height: '45px',
       overflow: 'hidden',
-      background: '#EAEAEA',
-      borderTop: '1px solid black',
-      borderLeft: '1px solid black',
-      borderRight: '1px solid black',
+      background: '#D7D7D7',
+      borderTop: '6px solid #8B8B8B',
+      borderLeft: '1px solid #8B8B8B',
+      borderRight: '1px solid #8B8B8B',
       fontWeight: '400',
-      lineHeight: '18px',
+      lineHeight: '19px',
       letterSpacing: '0.25px',
       marginRight: '10px',
-      fontSize: '21px',
-      width: '250px',
+      fontSize: '18px',
+      width: '203px',
       textTransform: 'none',
-      fontFamily: 'Lato',
+      fontFamily: 'Poppins',
       '&.Mui-selected': {
-        fontWeight: 'bolder',
-        '&.cases': {
-          background: '#d6f2ea',
-          color: '#10a075',
+        fontWeight: '500',
+        '&.participants': {
+          background: '#B3D6EA',
+          color: '#000000',
+          borderTop: '6px solid #07679C',
         },
         '&.samples': {
-          background: '#cfedf9',
-          color: '#0dafec',
+          background: '#B3D6EA',
+          color: '#000000',
+          borderTop: '6px solid #07679C',
         },
         '&.files': {
-          background: '#f7d7f7',
-          color: '#c92ec7',
+          background: '#B3D6EA',
+          color: '#000000',
+          borderTop: '6px solid #07679C',
+        },
+        '&.diagnosis': {
+          background: '#B3D6EA',
+          color: '#000000',
+          borderTop: '6px solid #07679C',
+        },
+        '&.studies': {
+          background: '#B3D6EA',
+          color: '#000000',
+          borderTop: '6px solid #07679C',
         },
         '&.MuiTypography-body1': {
           color: 'red',
         },
       },
-      '& span.cases_count': {
+      '& span.participants_count': {
         marginLeft: '5px',
-        fontSize: '17px',
+        fontSize: '16px',
+        fontWeight: '300',
       },
       '& span.samples_count': {
         marginLeft: '5px',
-        fontSize: '17px',
+        fontSize: '16px',
+        fontWeight: '300',
       },
       '& span.files_count': {
         marginLeft: '5px',
-        fontSize: '17px',
+        fontSize: '16px',
+        fontWeight: '300',
+      },
+      '& span.diagnosis_count': {
+        marginLeft: '5px',
+        fontSize: '16px',
+        fontWeight: '300',
+      },
+      '& span.studies_count': {
+        marginLeft: '5px',
+        fontSize: '16px',
+        fontWeight: '300',
       },
     },
   },

@@ -8,14 +8,34 @@ import updateImgMolecularCharacterization from '../assets/news/News_Molecular_Ch
 
 export const newsList = [
     {
+        id: 'ccdc_08172023',
+        title: 'August Childhood Cancer Data Catalog release goes live',
+        date: 'August 17, 2023',
+        slug: 'The catalog now includes four new resources, ten new data sets, and a new resource type.',
+        highlight: 'Users of the Childhood Cancer Data Catalog can now filter by the resource type, “Biorepository.” As part of this resource type, four new resources have been added, including Norwegian Childhood Cancer Biobank, Swedish Childhood Tumor Biobank, The Biopathology Center, and VIVO Biobank. There are also ten additional data sets available and several updates to existing resources.',
+        fullText: '',
+        type: 'Application Updates',
+        img: updateImgCCDC2,
+    },
+    {
         id: 'mtp_07212023',
         title: 'Molecular Targets Platform (MTP) release allows interactive data visualizations',
         date: 'JULY 21, 2023',
         slug: 'New interactive plot displays and updates to the About page are part of the MTP 2.1 release.',
-        highlight: '<p>The Molecular Targets Platform (MTP) is now live with interactive visualizations of data via the Pediatric Data Navigation page <a href="https://moleculartargets.ccdi.cancer.gov/pediatric-cancer-data-navigation" target="_blank" rel="noopener noreferrer">Pediatric Data Navigation page</a>. There is also improved plot generation for the OpenPedCan Gene Expression and Differential Expression widgets, along with updated descriptions in the “Pediatric Cancer Data Visualizations” section on the <a href="https://moleculartargets.ccdi.cancer.gov/about" target="_blank" rel="noopener noreferrer">About page</a> regarding the chart types added in the previous MTP release.</p>',
+        highlight: '<p>The Molecular Targets Platform (MTP) is now live with interactive visualizations of data via the <a href="https://moleculartargets.ccdi.cancer.gov/pediatric-cancer-data-navigation" target="_blank" rel="noopener noreferrer">Pediatric Data Navigation page</a>. There is also improved plot generation for the OpenPedCan Gene Expression and Differential Expression widgets, along with updated descriptions in the “Pediatric Cancer Data Visualizations” section on the <a href="https://moleculartargets.ccdi.cancer.gov/about" target="_blank" rel="noopener noreferrer">About page</a> regarding the chart types added in the previous MTP release.</p>',
         fullText: '',
         type: 'Application Updates',
         img: updateImgMTP2,
+    },
+    {
+        id: 'molecularcharacterization_07202023',
+        title: 'Molecular Characterization and Clinical Data from Multiple Organizations Released',
+        date: 'JULY 20, 2023',
+        slug: 'Pediatric brain tumor data from several organizations are available pre-publication and without embargo. ',
+        highlight: '<p>CCDI has facilitated the release of data from children and young adults diagnosed with pediatric brain tumors and other solid and hematologic malignancies. The data was collected from the Children’s Brain Tumor Network, the Pacific Pediatric Neuro-Oncology Consortium, and the Children’s Hospital of Philadelphia Division for Genomic Diagnostics. They include tumor and germline WGS, RNA-Seq, Clinical Panel Sequencing, and other omics and molecular data. <a href="https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs002517.v1.p1" rel="noreferrer noopener" target="_blank">Access these data through dbGaP</a>.</p>',
+        fullText: '',
+        type: 'News & Other',
+        img: updateImgMolecularCharacterization,
     },
     {
         id: 'ccdc_07192023',
@@ -25,7 +45,7 @@ export const newsList = [
         highlight: '<p>The Childhood Cancer Data Catalog now has three new resources. One is the Childhood Cancer Registry, which banks and distributes cell lines and patient-derived xenografts. The other two are analytical tools—The Cancer Research Institute iAtlas, which includes tools for studying tumor and immune microenvironment interactions, and The Cancer Proteome Atlas, through which users can access proteomics data. Importantly, there is also a new guide on how to access, query, and process CCDI data stored at NCI’s Cancer Data Service.</p>',
         fullText: '',
         type: 'Application Updates',
-        img: updateImgCCDC2,
+        img: updateImgCCDC,
     },
     {
         id: 'ccdc_06142023',
@@ -84,16 +104,6 @@ export const newsList = [
         ,
         type: 'Application Updates',
         img: updateImgCCDC,
-    },
-    {
-        id: 'molecularcharacterization_05122023',
-        title: 'Molecular Characterization and Clinical Data from Multiple Organizations Released',
-        date: 'MAY 12, 2023',
-        slug: 'Pediatric brain tumor data from several organizations are available pre-publication and without embargo. ',
-        highlight: '<p>CCDI has facilitated the release of data from children and young adults diagnosed with pediatric brain tumors and other solid and hematologic malignancies. The data was collected from the Children’s Brain Tumor Network, the Pacific Pediatric Neuro-Oncology Consortium, and the Children’s Hospital of Philadelphia Division for Genomic Diagnostics. They include tumor and germline WGS, RNA-Seq, Clinical Panel Sequencing, and other omics and molecular data. <a href="https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs002517.v1.p1" rel="noreferrer noopener" target="_blank">Access these data through dbGaP</a>.</p>',
-        fullText: '',
-        type: 'News & Other',
-        img: updateImgMolecularCharacterization,
     },
     {
         id: 'ccdc_04192023',

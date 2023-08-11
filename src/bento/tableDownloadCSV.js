@@ -64,7 +64,7 @@ query fileOverview($file_ids: [String], $offset: Int = 0, $first: Int = 10, $ord
 
 export const customFilesTabDownloadCSV = {
   keysToInclude: ['file_name', 'file_category', 'file_description', 'file_type', 'file_size', 'study_id', 'participant_id', 'sample_id', 'file_id', 'md5sum'],
-  header: ['File Name', 'File Category', 'File Description', 'File Type', 'File Size', 'Study ID', 'Participant ID', 'Sample ID', 'File ID', 'MD5sum'],
+  header: ['File Name', 'File Category', 'File Description', 'File Type', 'File Size', 'Study ID', 'Participant ID', 'Sample ID', 'GUID', 'MD5sum'],
   query: GET_FILES_TAB,
   apiVariable: 'fileOverview',
   fileName: 'tableDownload',
@@ -72,8 +72,9 @@ export const customFilesTabDownloadCSV = {
 };
 
 export const GET_DIAGNOSIS_TAB = gql`
-query diagnosisOverview($participant_id: [String], $offset: Int = 0, $first: Int = 1000, $order_by:String =""){
-  diagnosisOverview(participant_id: $participant_id, offset: $offset,first: $first, order_by: $order_by) {
+query diagnosisOverview($diagnosis_id: [String], $offset: Int = 0, $first: Int = 1000, $order_by:String =""){
+  diagnosisOverview(diagnosis_id: $diagnosis_id, offset: $offset,first: $first, order_by: $order_by) {
+    diagnosis_id
     participant_id
     phs_accession
     diagnosis_icd_o
@@ -86,8 +87,8 @@ query diagnosisOverview($participant_id: [String], $offset: Int = 0, $first: Int
 `;
 
 export const customDiagnosisTabDownloadCSV = {
-  keysToInclude: ['participant_id', 'phs_accession', 'diagnosis_icd_o', 'disease_phase', 'anatomic_site', 'age_at_diagnosis', 'vital_status'],
-  header: ['Participant ID', 'Study Accession', 'ICD-O Morphology', 'Disease Phase', 'Anatomic Site', 'Age at Diagnosis (days)', 'Vital Status'],
+  keysToInclude: ['diagnosis_id', 'participant_id', 'phs_accession', 'diagnosis_icd_o', 'disease_phase', 'anatomic_site', 'age_at_diagnosis', 'vital_status'],
+  header: ['Diagnosis ID', 'Participant ID', 'Study Accession', 'ICD-O Morphology', 'Disease Phase', 'Anatomic Site', 'Age at Diagnosis (days)', 'Vital Status'],
   query: GET_DIAGNOSIS_TAB,
   apiVariable: 'diagnosisOverview',
   fileName: 'tableDownload',

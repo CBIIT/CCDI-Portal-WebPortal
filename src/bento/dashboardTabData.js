@@ -654,10 +654,10 @@ query search (
 
 export const GET_ALL_FILEIDS_DIAGNOSISTAB_FOR_SELECT_ALL = gql`
 query search (          
-  $participant_ids: [String] 
+  $diagnosis_ids: [String] 
 ){
   fileIDsFromList (          
-      participant_ids: $participant_ids
+      diagnosis_ids: $diagnosis_ids
   ) 
 }
   `;
@@ -730,7 +730,7 @@ query participantsAddAllToCart(
       order_by: $order_by,
       sort_direction: $sort_direction
       ) {
-      participant_id
+      files
   }
 }
     `;
@@ -793,7 +793,7 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
           order_by: $order_by,
           sort_direction: $sort_direction
           ) {
-          sample_id
+          files
       }
     }
         `;
@@ -857,7 +857,7 @@ query fileAddAllToCart(
       order_by: $order_by,
       sort_direction: $sort_direction
   ){
-      file_id,
+      file_id
   }
 }
             `;
@@ -920,7 +920,7 @@ query diagnosisAddAllToCart(
       order_by: $order_by,
       sort_direction: $sort_direction
       ) {
-      participant_id
+      files
   }
 }
     `;
@@ -983,7 +983,7 @@ query diagnosisAddAllToCart(
       order_by: $order_by,
       sort_direction: $sort_direction
       ) {
-      study_id
+      files
   }
 }
     `;
@@ -1281,7 +1281,7 @@ export const tabContainers = [
       },
       {
         dataField: 'file_id',
-        header: 'File ID',
+        header: 'GUID',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
@@ -1314,7 +1314,7 @@ export const tabContainers = [
     dataField: 'dataDiagnosis',
     api: GET_DIAGNOSIS_OVERVIEW_QUERY,
     paginationAPIField: 'diagnosisOverview',
-    defaultSortField: 'participant_id',
+    defaultSortField: 'diagnosis_id',
     defaultSortDirection: 'asc',
     count: 'numberOfDiagnosis',
     dataKey: 'participant_id',
@@ -1328,6 +1328,13 @@ export const tabContainers = [
         cellType: cellTypes.CHECKBOX,
         display: true,
         role: cellTypes.CHECKBOX,
+      },
+      {
+        dataField: 'diagnosis_id',
+        header: 'Diagnosis ID',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
       },
       {
         dataField: 'participant_id',
@@ -1388,7 +1395,7 @@ export const tabContainers = [
     tableMsg: {
       noMatch: 'No Matching Records Found',
     },
-    addFilesRequestVariableKey: 'diagnosis_names',
+    addFilesRequestVariableKey: 'diagnosis_ids',
     addFilesResponseKeys: ['fileIDsFromList'],
     addAllFilesResponseKeys: ['diagnosisOverview', 'files'],
     addAllFileQuery: GET_ALL_FILEIDS_FROM_DIAGNOSISTAB_FOR_ADD_ALL_CART,
@@ -1508,7 +1515,7 @@ export const tabContainers = [
     tableMsg: {
       noMatch: 'No Matching Records Found',
     },
-    addFilesRequestVariableKey: 'study_id',
+    addFilesRequestVariableKey: 'study_ids',
     addFilesResponseKeys: ['fileIDsFromList'],
     addAllFilesResponseKeys: ['studyOverview', 'files'],
     addAllFileQuery: GET_ALL_FILEIDS_FROM_STUDYTAB_FOR_ADD_ALL_CART,

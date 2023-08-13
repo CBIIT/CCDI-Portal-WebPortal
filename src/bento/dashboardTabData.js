@@ -480,7 +480,7 @@ query participantOverview(
 `;
 
 export const GET_DIAGNOSIS_OVERVIEW_QUERY = gql`
-query participantOverview(
+query diagnosisOverview(
     $participant_ids: [String],
     $gender: [String] ,
     $race: [String] ,
@@ -508,7 +508,7 @@ query participantOverview(
     $offset: Int, 
     $order_by: String,
     $sort_direction: String ){
-    participantOverview(
+      diagnosisOverview(
         participant_ids: $participant_ids,
         gender: $gender,
         race: $race,
@@ -537,6 +537,7 @@ query participantOverview(
         order_by: $order_by,
         sort_direction: $sort_direction
     ) {
+        diagnosis_id
         participant_id
         phs_accession
         diagnosis_icd_o
@@ -1317,7 +1318,7 @@ export const tabContainers = [
     defaultSortField: 'diagnosis_id',
     defaultSortDirection: 'asc',
     count: 'numberOfDiagnosis',
-    dataKey: 'participant_id',
+    dataKey: 'diagnosis_id',
     tableID: 'diagnosis_tab_table',
     extendedViewConfig: {
       pagination: true,

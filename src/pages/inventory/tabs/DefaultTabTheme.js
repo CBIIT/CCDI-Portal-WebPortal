@@ -6,7 +6,7 @@ export const customTheme = {
   },
   MuiTab: {
     root: {
-      marginTop: '15px',
+      marginTop: '40px',
       color: '#6E6E6E',
       height: '45px',
       overflow: 'hidden',

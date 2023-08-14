@@ -1,11 +1,11 @@
 export const tblHeader = {
   MuiTableSortLabel: {
     root: {
-      color: '#13344A',
+      color: '#0F253A',
       position: 'relative',
-      fontSize: '11pt',
-      fontFamily: 'Lato Regular,Raleway, sans-serif',
-      fontWeight: 'bold',
+      fontSize: '15px',
+      fontFamily: 'Open Sans',
+      fontWeight: '700',
       letterSpacing: '0.06em',
       textDecoration: 'none',
       '&:hover': {
@@ -18,7 +18,7 @@ export const tblHeader = {
   MuiTableRow: {
     head: {
       height: '40px',
-      borderBottom: '3px solid #42779a',
+      borderBottom: '1px solid #000000',
     },
   },
 };
@@ -36,7 +36,9 @@ const tblBody = {
       padding: '0 0 0 5px',
     },
     body: {
-      color: '#13344A',
+      fontFamily: 'Open Sans',
+      fontSize: '14px',
+      color: '#24415C',
       '&.file_name': {
         maxWidth: '300px',
         '& p': {
@@ -55,7 +57,7 @@ export const extendedView = {
     MuiTablePagination: {
       root: {
         paddingRight: '50px',
-        borderTop: '3px solid #42779a',
+        borderTop: '1px solid #8A7F7C',
       },
     },
   },
@@ -65,8 +67,8 @@ export const tblPgn = {
   MuiTablePagination: {
     root: {
       paddingRight: '50px',
-      borderTop: '5px solid #e7e5e5',
-      borderBottom: '3px solid #e7e5e5',
+      borderTop: '3px solid #8A7F7C',
+      borderBottom: '1px solid #8A7F7C',
       '&:last-child': {
         paddingRight: '50px',
       }
@@ -94,7 +96,7 @@ export const tblContainer = {
       display: 'table',
       borderSpacing: '0',
       borderCollapse: 'collapse',
-      borderTop: '3px solid #42779a',
+      borderTop: '3px solid #8A7F7C',
     },
   },
 };

@@ -94,3 +94,9 @@
   font-family:"Montserrat";
   src:url(./fonts/Montserrat-VariableFont_wght.ttf);
 }
+
+@font-face {
+  font-family:"Lato";
+  src:url(./fonts/Lato-Medium.ttf);
+  font-weight:500;
+}

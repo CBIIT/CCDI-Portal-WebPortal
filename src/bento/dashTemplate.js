@@ -271,8 +271,8 @@ export const facetsConfig = [
   {
     section: SAMPLES,
     label: 'Anatomic site',
-    apiPath: 'participantCountByDiagnosisAnatomicSite',
-    apiForFiltering: 'filterParticipantCountByDiagnosisAnatomicSite',
+    apiPath: 'participantCountBySampleAnatomicSite',
+    apiForFiltering: 'filterParticipantCountBySampleAnatomicSite',
     datafield: 'sample_anatomic_site',
     field: GROUP,
     type: InputTypes.CHECKBOX,

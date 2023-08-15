@@ -550,7 +550,7 @@ query diagnosisOverview(
 `;
 
 export const GET_STUDY_OVERVIEW_QUERY = gql`
-query participantOverview(
+query studyOverview(
     $participant_ids: [String],
     $gender: [String] ,
     $race: [String] ,
@@ -578,7 +578,7 @@ query participantOverview(
     $offset: Int, 
     $order_by: String,
     $sort_direction: String ){
-    participantOverview(
+    studyOverview(
         participant_ids: $participant_ids,
         gender: $gender,
         race: $race,
@@ -615,9 +615,9 @@ query participantOverview(
         personnel_name
         diagnosis
         anatomic_site
-        number_of_participants
-        number_of_samples
-        number_of_files
+        num_of_participants
+        num_of_samples
+        num_of_files
         file_type
     }
 }
@@ -1465,7 +1465,7 @@ export const tabContainers = [
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'number_of_participants',
+        dataField: 'num_of_participants',
         header: 'Number of Particpants',
         display: true,
         tooltipText: 'sort',
@@ -1479,7 +1479,7 @@ export const tabContainers = [
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'number_of_samples',
+        dataField: 'num_of_samples',
         header: 'Number of Samples',
         display: true,
         tooltipText: 'sort',
@@ -1493,7 +1493,7 @@ export const tabContainers = [
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'number_of_files',
+        dataField: 'num_of_files',
         header: 'Number of Files',
         display: true,
         tooltipText: 'sort',

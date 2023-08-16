@@ -1040,16 +1040,23 @@ export const tabContainers = [
         display: true,
         role: cellTypes.CHECKBOX,
       },
+      // {
+      //   dataField: 'participant_id',
+      //   header: 'Participant ID',
+      //   cellType: cellTypes.LINK,
+      //   linkAttr : {
+      //     rootPath: '/participant',
+      //     pathParams: ['participant_id'],
+      //   },
+      //   display: true,
+      //   tooltipText: 'sort',
+      // },
       {
         dataField: 'participant_id',
         header: 'Participant ID',
-        cellType: cellTypes.LINK,
-        linkAttr : {
-          rootPath: '/participant',
-          pathParams: ['participant_id'],
-        },
         display: true,
         tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
       },
       {
         dataField: 'phs_accession',

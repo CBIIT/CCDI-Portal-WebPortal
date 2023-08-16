@@ -70,6 +70,9 @@ export const extendedView = {
       select: {
         fontFamily: 'Open Sans',
         fontSize: '12px',
+      },
+      toolbar: {
+        minHeight: '40px',
       }
     },
   },
@@ -86,7 +89,7 @@ export const toolbar = {
     },
     regular: {
       '@media (min-width: 600px)': {
-        minHeight: '30px',
+        minHeight: '35px',
       },
     },
   },
@@ -112,6 +115,9 @@ export const tblPgn = {
     select: {
       fontFamily: 'Open Sans',
       fontSize: '12px',
+    },
+    toolbar: {
+      minHeight: '40px',
     }
   },
 };

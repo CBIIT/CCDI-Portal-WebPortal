@@ -39,6 +39,10 @@ const tblBody = {
       fontFamily: 'Open Sans',
       fontSize: '14px',
       color: '#24415C',
+      '& p': {
+        fontFamily: 'Open Sans',
+        fontSize: '14px',
+      },
       '&.file_name': {
         maxWidth: '300px',
         '& p': {
@@ -67,6 +71,23 @@ export const extendedView = {
         fontFamily: 'Open Sans',
         fontSize: '12px',
       }
+    },
+  },
+};
+
+export const toolbar = {
+  MuiToolbar: {
+    root: {
+      borderTop: '2px solid #e7e5e5',
+      '& div' :{
+        fontFamily: 'Open Sans',
+        fontSize: '14px',
+      }
+    },
+    regular: {
+      '@media (min-width: 600px)': {
+        minHeight: '30px',
+      },
     },
   },
 };
@@ -123,4 +144,5 @@ export const themeConfig = {
   tblContainer,
   tblPgn,
   extendedView,
+  toolbar,
 };

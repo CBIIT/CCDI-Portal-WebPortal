@@ -22,6 +22,9 @@ export const customTheme = {
       width: '203px',
       textTransform: 'none',
       fontFamily: 'Poppins',
+      '& span': {
+        color: '#000000',
+      },
       '&.Mui-selected': {
         fontWeight: '500',
         '&.participants': {

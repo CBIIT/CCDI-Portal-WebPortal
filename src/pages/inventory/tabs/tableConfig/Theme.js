@@ -59,6 +59,14 @@ export const extendedView = {
         paddingRight: '50px',
         borderTop: '1px solid #8A7F7C',
       },
+      caption: {
+        fontFamily: 'Open Sans',
+        fontSize: '12px',
+      },
+      select: {
+        fontFamily: 'Open Sans',
+        fontSize: '12px',
+      }
     },
   },
 };
@@ -76,6 +84,14 @@ export const tblPgn = {
     toolbar: {
       minHeight: '45px',
     },
+    caption: {
+      fontFamily: 'Open Sans',
+      fontSize: '12px',
+    },
+    select: {
+      fontFamily: 'Open Sans',
+      fontSize: '12px',
+    }
   },
 };
 

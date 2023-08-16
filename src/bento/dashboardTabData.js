@@ -645,10 +645,10 @@ query search (
 
 export const GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL = gql`
 query search (          
-  $file_names: [String] 
+  $file_ids: [String] 
 ){
   fileIDsFromList (          
-      file_names: $file_names
+      file_ids: $file_ids
   ) 
 }
   `;
@@ -927,7 +927,7 @@ query diagnosisAddAllToCart(
     `;
 
 export const GET_ALL_FILEIDS_FROM_STUDYTAB_FOR_ADD_ALL_CART = gql`
-query diagnosisAddAllToCart(
+query studyAddAllToCart(
   $participant_ids: [String],
   $gender: [String] ,
   $race: [String] ,
@@ -955,7 +955,7 @@ query diagnosisAddAllToCart(
   $offset: Int= 0, 
   $order_by: String = "file_id",
   $sort_direction: String = "asc" ){
-  diagnosisOverview(
+  studyOverview(
       participant_ids: $participant_ids,
       gender: $gender,
       race: $race,
@@ -1210,7 +1210,7 @@ export const tabContainers = [
     defaultSortField: 'file_name',
     defaultSortDirection: 'asc',
     count: 'numberOfFiles',
-    dataKey: 'file_name',
+    dataKey: 'file_id',
     tableID: 'file_tab_table',
     extendedViewConfig: {
       pagination: true,
@@ -1304,7 +1304,7 @@ export const tabContainers = [
     tableMsg: {
       noMatch: 'No Matching Records Found',
     },
-    addFilesRequestVariableKey: 'file_names',
+    addFilesRequestVariableKey: 'file_ids',
     addFilesResponseKeys: ['fileIDsFromList'],
     addAllFilesResponseKeys: ['fileOverview', 'file_id'],
     addAllFileQuery: GET_ALL_FILEIDS_FROM_FILESTAB_FOR_ADD_ALL_CART,

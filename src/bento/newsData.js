@@ -45,7 +45,7 @@ export const newsList = [
         highlight: '<p>The Childhood Cancer Data Catalog now has three new resources. One is the Childhood Cancer Registry, which banks and distributes cell lines and patient-derived xenografts. The other two are analytical tools—The Cancer Research Institute iAtlas, which includes tools for studying tumor and immune microenvironment interactions, and The Cancer Proteome Atlas, through which users can access proteomics data. Importantly, there is also a new guide on how to access, query, and process CCDI data stored at NCI’s Cancer Data Service.</p>',
         fullText: '',
         type: 'Application Updates',
-        img: updateImgCCDC,
+        img: updateImgCCDC2,
     },
     {
         id: 'ccdc_06142023',

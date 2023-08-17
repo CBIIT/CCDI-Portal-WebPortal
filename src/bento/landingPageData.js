@@ -1,4 +1,3 @@
-import gql from 'graphql-tag';
 import landingImg from '../assets/landing/Hero_1.png'
 import aboutImg from '../assets/landing/About_1.png';
 import wheel1 from '../assets/landing/ccdc_carousel.svg';
@@ -164,12 +163,3 @@ export const carouselList = [
     link: 'https://nccrexplorer.ccdi.cancer.gov',
   },
 ];
-
-export const GET_LANDING_PAGE_DATA_QUERY = gql`{
-  numberOfPrograms
-  numberOfStudies
-  numberOfSubjects
-  numberOfSamples
-  numberOfFiles
-  }
-  `;

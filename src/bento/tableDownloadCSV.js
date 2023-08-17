@@ -1,38 +1,22 @@
 import gql from 'graphql-tag';
 
-export const GET_CASES_TAB = gql`
-query subjectOverViewPaged($subject_ids: [String], $offset: Int = 0, $first: Int = 1000, $order_by:String =""){
-  subjectOverViewPaged(subject_ids: $subject_ids, first: $first, offset: $offset, order_by: $order_by) {
-      subject_id
-      program
-      program_id
-      study_acronym
-      study_short_description
-      study_info
-      diagnosis
-      recurrence_score
-      tumor_size
-      tumor_grade
-      er_status
-      pr_status
-      chemotherapy
-      endocrine_therapy
-      menopause_status
-      age_at_index
-      survival_time
-      files {
-            file_id
-      }
-      lab_procedures
+export const GET_PARTICIPANTS_TAB = gql`
+query participantOverViewPaged($participant_ids: [String], $offset: Int = 0, $first: Int = 1000, $order_by:String =""){
+  participantOverViewPaged(participant_ids: $participant_ids, first: $first, offset: $offset, order_by: $order_by) {
+    participant_id
+    phs_accession
+    race
+    gender
+    ethnicity
   }
 }
 `;
 
-export const customCasesTabDownloadCSV = {
-  keysToInclude: ['subject_id', 'program', 'program_id', 'study_acronym', 'diagnosis', 'tumor_size', 'er_status', 'pr_status', 'age_at_index', 'survival_time'],
-  header: ['Case ID', 'Program Code', 'Program ID', 'Arm', 'Diagnosis', 'Tumor Size', 'ER Status', 'PR Status', 'Age', 'Survival'],
-  query: GET_CASES_TAB,
-  apiVariable: 'subjectOverViewPaged',
+export const customParticipantsTabDownloadCSV = {
+  keysToInclude: ['participant_id', 'phs_accession', 'race', 'gender', 'ethnicity'],
+  header: ['Participant ID', 'Study Accession', 'Race', 'Gender', 'Ethnicity'],
+  query: GET_PARTICIPANTS_TAB,
+  apiVariable: 'participantOverView',
   fileName: 'tableDownload',
   defaultFullTableDownload: false,
 };
@@ -40,25 +24,21 @@ export const customCasesTabDownloadCSV = {
 export const GET_SAMPLES_TAB = gql`
 query sampleOverview($sample_ids: [String], $offset: Int = 0, $first: Int = 1000, $order_by:String =""){
   sampleOverview(sample_ids: $sample_ids, offset: $offset,first: $first, order_by: $order_by) {
-    sample_id
-    subject_id
-    program
-    program_id
-    arm
-    diagnosis
-    tissue_type
-    tissue_composition
-    sample_anatomic_site
-    sample_procurement_method
-    platform
-    files 
-}
+    sample_id,
+    participant_id
+    study_id
+    anatomic_site
+    participant_age_at_collection
+    diagnosis_icd_o
+    sample_tumor_status
+    tumor_classification
+  }
 }
 `;
 
 export const customSamplesTabDownloadCSV = {
-  keysToInclude: ['sample_id', 'subject_id', 'program', 'arm', 'diagnosis', 'tissue_type', 'tissue_composition', 'sample_anatomic_site', 'sample_procurement_method', 'platform'],
-  header: ['Sample ID', 'Case Id', 'Program Code', 'Arm', 'Diagnosis', 'Tissue Type', 'Tissue Composition', 'Sample Anatomic Site', 'Sample Procurement Method', 'Platform'],
+  keysToInclude: ['sample_id', 'participant_id', 'study_id', 'anatomic_site', 'participant_age_at_collection', 'diagnosis_icd_o', 'sample_tumor_status', 'tumor_classification'],
+  header: ['Sample ID', 'Particpant ID', 'Study ID', 'Anatomic Site', 'Age at Sample Collection', 'Sample ICD-O Morphology', 'Sample Tumor Status', 'Sample Tumor Classification'],
   query: GET_SAMPLES_TAB,
   apiVariable: 'sampleOverview',
   fileName: 'tableDownload',
@@ -68,27 +48,72 @@ export const customSamplesTabDownloadCSV = {
 export const GET_FILES_TAB = gql`
 query fileOverview($file_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String ="file_name"){
   fileOverview(file_ids: $file_ids, offset: $offset,first: $first, order_by: $order_by) {
-    file_id
     file_name
-    association
+    file_category
     file_description
-    file_format
+    file_type
     file_size
-    program
-    program_id
-    arm
-    subject_id
+    study_id
+    participant_id
     sample_id
-    diagnosis
+    file_id
+    md5sum
   }
 }
 `;
 
 export const customFilesTabDownloadCSV = {
-  keysToInclude: ['file_name', 'association', 'file_description', 'file_format', 'file_size', 'program', 'arm', 'subject_id', 'sample_id', 'diagnosis'],
-  header: ['File Name', 'Association', 'Description', 'File Format', 'Size', 'Program Code', 'Arm', 'Case Id', 'Sample ID', 'Diagnosis'],
+  keysToInclude: ['file_name', 'file_category', 'file_description', 'file_type', 'file_size', 'study_id', 'participant_id', 'sample_id', 'file_id', 'md5sum'],
+  header: ['File Name', 'File Category', 'File Description', 'File Type', 'File Size', 'Study ID', 'Participant ID', 'Sample ID', 'GUID', 'MD5sum'],
   query: GET_FILES_TAB,
   apiVariable: 'fileOverview',
+  fileName: 'tableDownload',
+  defaultFullTableDownload: false,
+};
+
+export const GET_DIAGNOSIS_TAB = gql`
+query diagnosisOverview($diagnosis_id: [String], $offset: Int = 0, $first: Int = 1000, $order_by:String =""){
+  diagnosisOverview(diagnosis_id: $diagnosis_id, offset: $offset,first: $first, order_by: $order_by) {
+    diagnosis_id
+    participant_id
+    phs_accession
+    diagnosis_icd_o
+    disease_phase
+    anatomic_site
+    age_at_diagnosis
+    vital_status
+  }
+}
+`;
+
+export const customDiagnosisTabDownloadCSV = {
+  keysToInclude: ['diagnosis_id', 'participant_id', 'phs_accession', 'diagnosis_icd_o', 'disease_phase', 'anatomic_site', 'age_at_diagnosis', 'vital_status'],
+  header: ['Diagnosis ID', 'Participant ID', 'Study Accession', 'ICD-O Morphology', 'Disease Phase', 'Anatomic Site', 'Age at Diagnosis (days)', 'Vital Status'],
+  query: GET_DIAGNOSIS_TAB,
+  apiVariable: 'diagnosisOverview',
+  fileName: 'tableDownload',
+  defaultFullTableDownload: false,
+};
+
+export const GET_STUDY_TAB = gql`
+query studyOverview($study_id: [String], $offset: Int = 0, $first: Int = 1000, $order_by:String =""){
+  studyOverview(study_id: $participant_id, offset: $offset,first: $first, order_by: $order_by) {
+    participant_id
+    phs_accession
+    diagnosis_icd_o
+    disease_phase
+    anatomic_site
+    age_at_diagnosis
+    vital_status
+  }
+}
+`;
+
+export const customStudyTabDownloadCSV = {
+  keysToInclude: ['study_id', 'pubmed_id', 'grant_id', 'phs_accession', 'study_short_title', 'personnel_name', 'number_of_participants', 'diagnosis', 'number_of_samples', 'anatomic_site', 'number_of_files', 'file_type'],
+  header: ['Study ID', 'PubMed ID', 'Grant ID', 'Study Accession', 'Study Short Title', 'Principle Investigator(s)', 'Number of Particpants', 'Diagnosis', 'Number of Samples', 'Diagnosis Anatomic Site', 'Number of Files', 'File Type'],
+  query: GET_STUDY_TAB,
+  apiVariable: 'studyOverview',
   fileName: 'tableDownload',
   defaultFullTableDownload: false,
 };

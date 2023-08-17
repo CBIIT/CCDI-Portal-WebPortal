@@ -1,4 +1,15 @@
 export default () => ({
+  inputRoot: {
+    height: '26px',
+    borderRadius: '8px',
+    color: '#646464',
+    fontFamily: 'Nunito',
+    fontSize: 9,
+    '& fieldset': {
+      borderWidth: '1px !important',
+      borderColor: '#003F74 !important',
+    },
+  },
   clearAllButtonRoot: {
     margin: 'auto',
   },
@@ -52,33 +63,39 @@ export default () => ({
     backgroundColor: '#e636e4',
   },
   sectionSummaryText: {
-    fontSize: '14px',
+    fontSize: '16px',
     flexShrink: '0',
-    fontFamily: 'Open Sans',
-    fontWeight: '600',
+    fontFamily: 'Poppins',
+    fontWeight: 400,
     lineHeight: '0',
     marginLeft: '5px',
-    letterSpacing: '0',
     textTransform: 'uppercase',
+    letterSpacing: '-0.02em',
   },
   dropDownIconSubSection: {
     marginLeft: '0px',
     fill: '#000000',
   },
   customExpansionPanelSummaryRoot: {
+    height: '42px',
+    padding: '0',
     flexDirection: 'row-reverse',
-    paddingLeft: 4,
+    paddingLeft: 0,
+  },
+  sortGroup: {
+    padding: '10px',
   },
   sectionSummaryTextContainer: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
     zIndex: 2,
-    fontFamily: 'Open Sans, Lato',
-    fontSize: 20,
-    fontWeight: 300,
+    fontFamily: 'Poppins',
+    fontSize: 18.5,
+    fontWeight: 500,
     marginLeft: 3,
     color: '#000000',
+    letterSpacing: '-0.02em',
   },
   CasesCheckbox: {
     color: '#10A075',
@@ -102,14 +119,29 @@ export default () => ({
     fontSize: '14px',
     marginRight: '0px',
   },
-  activeFacetCases: {
-    color: '#10a075',
+  activeFacetDemographic: {
+    color: '#357288',
+    fontWeight: 600,
+  },
+  activeFacetDiagnosis: {
+    color: '#8C3F8D',
+    fontWeight: 600,
   },
   activeFacetSamples: {
-    color: '#10beff',
+    color: '#907642',
+    fontWeight: 600,
   },
-  activeFacetFiles: {
-    color: '#e636e4',
+  activeFacetAssay: {
+    color: '#A85348',
+    fontWeight: 600,
+  },
+  activeFacetStudy: {
+    color: '#1F6BBF',
+    fontWeight: 600,
+  },
+  activeFacetLibrary: {
+    color: '#14A773',
+    fontWeight: 600,
   },
   searchContainer: {
     paddingTop: '15px',
@@ -117,12 +149,12 @@ export default () => ({
     marginRight: 6,
   },
   findCaseButton: {
-    marginLeft: '105px',
-    backgroundColor: '#10A075',
+    // marginLeft: '105px',
+    backgroundColor: '#4D889E',
     boxSizing: 'border-box',
     height: 30,
     width: 40,
-    border: '1.25px solid #0D8461',
+    border: '1.25px solid #4D889E',
     cursor: 'pointer',
     borderRadius: 11,
     display: 'flex',
@@ -139,7 +171,7 @@ export default () => ({
     fontWeight: '400',
     height: 32,
     width: '100%',
-    display: 'flex',
+    // display: 'flex',
     justifyContent: 'space-between',
     backgroundColor: '#10A075',
     color: '#fff',
@@ -150,6 +182,7 @@ export default () => ({
     boxShadow: 'none',
     paddingLeft: 16,
     paddingRight: 12,
+    display: 'none',
     '&:hover': {
       backgroundColor: '#10A075',
     },
@@ -169,6 +202,13 @@ export default () => ({
     height: '2px',
     marginLeft: 0,
     marginRight: 0,
-    marginBottom: 6,
+    // marginBottom: 6,
   },
+  searchResultDetailText: {
+    color: '#5E3F14',
+    fontFamily: 'Open Sans',
+    fontSize: 11,
+    fontWeight: '400',
+    fontStyle: 'normal',
+  }
 });

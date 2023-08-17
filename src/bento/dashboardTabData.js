@@ -1,17 +1,17 @@
 /* eslint-disable */
 import gql from 'graphql-tag';
 import { cellTypes } from '@bento-core/table';
-import { customCasesTabDownloadCSV, customFilesTabDownloadCSV, customSamplesTabDownloadCSV } from './tableDownloadCSV';
+import { customParticipantsTabDownloadCSV, customFilesTabDownloadCSV, customSamplesTabDownloadCSV, customDiagnosisTabDownloadCSV, customStudyTabDownloadCSV } from './tableDownloadCSV';
 import { dataFormatTypes } from '@bento-core/table';
 
 // --------------- Tooltip configuration --------------
 export const tooltipContent = {
   icon: 'https://raw.githubusercontent.com/google/material-design-icons/master/src/action/help/materialicons/24px.svg',
   alt: 'tooltipIcon',
-  0: 'Click button to add selected files associated with the selected case(s).',
+  0: 'Click button to add selected files associated with the selected participant(s).',
   1: 'Click button to add selected files associated with the selected sample(s).',
   2: 'Click button to add selected files.',
-  Cases: 'Click button to add selected files associated with the selected case(s).',
+  Participants: 'Click button to add selected files associated with the selected participant(s).',
   Samples: 'Click button to add selected files associated with the selected sample(s).',
   Files: 'Click button to add selected files.',
   arrow: true,
@@ -31,10 +31,10 @@ export const externalLinkIcon = {
 // --------------- Tabs Header Data configuration --------------
 export const tabs = [
   {
-    id: 'case_tab',
-    title: 'Cases',
-    dataField: 'dataCase',
-    count: 'numberOfSubjects',
+    id: 'participant_tab',
+    title: 'Participants',
+    dataField: 'dataParticipant',
+    count: 'numberOfParticipants',
   },
   {
     id: 'sample_tab',
@@ -48,12 +48,24 @@ export const tabs = [
     dataField: 'dataFile',
     count: 'numberOfFiles',
   },
+  {
+    id: 'diagnosis_tab',
+    title: 'Diagnosis',
+    dataField: 'dataDiagnosis',
+    count: 'numberOfDiagnosis',
+  },
+  {
+    id: 'study_tab',
+    title: 'Studies',
+    dataField: 'dataStudy',
+    count: 'numberOfStudies',
+  },
 ];
 
 // --------------- Tabs Header Style configuration --------------
 export const tabIndex = [
   {
-    title: 'Cases',
+    title: 'Participants',
     primaryColor: '#D6F2EA',
     secondaryColor: '#FFDFB8',
     selectedColor: '#10A075',
@@ -70,804 +82,553 @@ export const tabIndex = [
     secondaryColor: '#86D6F0',
     selectedColor: '#C92EC7',
   },
+  {
+    title: 'Diagnosis',
+    primaryColor: '#F7D7F7',
+    secondaryColor: '#86D6F0',
+    selectedColor: '#C92EC7',
+  },
+  {
+    title: 'Studies',
+    primaryColor: '#F7D7F7',
+    secondaryColor: '#86D6F0',
+    selectedColor: '#C92EC7',
+  },
 ];
 
 export const DASHBOARD_QUERY_NEW = gql`
 query search (          
-    $subject_ids: [String],
-    $programs: [String] ,
-    $studies: [String] ,
-    $diagnoses: [String] ,
-    $rc_scores: [String] ,
-    $tumor_sizes: [String] ,
-    $chemo_regimen: [String] ,
-    $tumor_grades: [String] ,
-    $er_status: [String] ,
-    $pr_status: [String] ,
-    $endo_therapies: [String] ,
-    $meno_status: [String] ,
-    $tissue_type: [String],
-    $composition: [String],
-    $association: [String],
+    $participant_ids: [String],
+    $gender: [String] ,
+    $race: [String] ,
+    $ethnicity: [String] ,
+    $age_at_diagnosis: [Int] ,
+    $diagnosis_anatomic_site: [String] ,
+    $disease_phase: [String] ,
+    $diagnosis_icd_o: [String] ,
+    $vital_status: [String] ,
+    $sample_anatomic_site: [String] ,
+    $participant_age_at_collection: [Int] ,
+    $sample_tumor_status: [String] ,
+    $tumor_classification: [String] ,
+    $assay_method: [String],
     $file_type: [String],
-    $age_at_index: [Float]
+    $phs_accession: [String],
+    $grant_id: [String],
+    $institution: [String],
+    $study_acronym: [String],
+    $study_short_title: [String],
+    $library_selection: [String],
+    $library_source: [String],
+    $library_strategy: [String],
 ){
-    searchSubjects (          
-        subject_ids: $subject_ids,
-        programs: $programs,
-        studies: $studies,
-        diagnoses: $diagnoses,
-        rc_scores: $rc_scores,
-        tumor_sizes: $tumor_sizes,
-        chemo_regimen: $chemo_regimen,
-        tumor_grades: $tumor_grades,
-        er_status: $er_status,
-        pr_status: $pr_status,
-        endo_therapies: $endo_therapies,
-        meno_status: $meno_status,
-        tissue_type: $tissue_type,
-        composition: $composition,
-        association: $association,       
+    searchParticipants (          
+        participant_ids: $participant_ids,
+        gender: $gender,
+        race: $race,
+        ethnicity: $ethnicity,
+        age_at_diagnosis: $age_at_diagnosis,
+        diagnosis_anatomic_site: $diagnosis_anatomic_site,
+        disease_phase: $disease_phase,
+        diagnosis_icd_o: $diagnosis_icd_o,
+        vital_status: $vital_status,
+        sample_anatomic_site: $sample_anatomic_site,
+        participant_age_at_collection: $participant_age_at_collection,
+        sample_tumor_status: $sample_tumor_status,
+        tumor_classification: $tumor_classification,
+        assay_method: $assay_method,
         file_type: $file_type,
-        age_at_index: $age_at_index
+        phs_accession: $phs_accession,       
+        grant_id: $grant_id,
+        institution: $institution,
+        study_acronym: $study_acronym,
+        study_short_title: $study_short_title,
+        library_selection: $library_selection,
+        library_source: $library_source,
+        library_strategy: $library_strategy,
     ) {
-        numberOfPrograms
-        numberOfStudies
-        numberOfSubjects
-        numberOfSamples
-        numberOfLabProcedures
+        numberOfDiagnosis
         numberOfFiles
-        armsByPrograms {
-            program
-            caseSize
-            children {
-                arm
-                caseSize
-                size
-            }
-        }
-        subjectCountByProgram {
+        numberOfParticipants
+        numberOfSamples
+        numberOfStudies
+        participantCountByDiagnosis {
             group
             subjects
         }
-        subjectCountByStudy {
+        participantCountByDiagnosisAge {
             group
             subjects
         }
-        subjectCountByDiagnoses {
+        participantCountByEthnicity {
             group
             subjects
         }
-        subjectCountByRecurrenceScore {
+        participantCountByGender {
             group
             subjects
         }
-        subjectCountByTumorSize {
+        participantCountByRace {
             group
             subjects
         }
-        subjectCountByChemotherapyRegimen {
+        participantCountByStudy {
             group
             subjects
         }
-        subjectCountByEndocrineTherapy {
+        filterParticipantCountByAcronym {
             group
             subjects
         }
-        subjectCountByTumorGrade{
+        filterParticipantCountByAssayMethod{
             group
             subjects
         }
-        subjectCountByErStatus{
+        filterParticipantCountByDiagnosisAnatomicSite{
             group
             subjects
         }
-        subjectCountByPrStatus{
+        filterParticipantCountByDiseasePhase{
             group
             subjects
         }
-        subjectCountByMenopauseStatus{
+        filterParticipantCountByEthnicity{
             group
             subjects
         }
-        subjectCountByFileType {
+        filterParticipantCountByFileType{
             group
             subjects
         }
-        subjectCountByFileAssociation {
+        filterParticipantCountByGender{
             group
             subjects
         }
-        subjectCountByTissueComposition {
+        filterParticipantCountByGrantID{
             group
             subjects
         }
-        subjectCountByTissueType {
+        filterParticipantCountByICDO{
             group
             subjects
         }
-        filterSubjectCountByProgram {
+        filterParticipantCountByInstitution{
             group
             subjects
         }
-        filterSubjectCountByStudy{
+        filterParticipantCountByLibrarySelection{
             group
             subjects
         }
-        filterSubjectCountByDiagnoses{
+        filterParticipantCountByLibrarySource{
             group
             subjects
         }
-        filterSubjectCountByRecurrenceScore{
+        filterParticipantCountByLibraryStrategy{
             group
             subjects
         }
-        filterSubjectCountByTumorSize{
+        filterParticipantCountByPHSAccession{
             group
             subjects
         }
-        filterSubjectCountByTumorGrade{
-            group
-            subjects
+        filterParticipantCountByRace{
+          group
+          subjects
         }
-        filterSubjectCountByErStatus{
-            group
-            subjects
+        filterParticipantCountBySampleAnatomicSite{
+          group
+          subjects
         }
-        filterSubjectCountByPrStatus{
-            group
-            subjects
+        filterParticipantCountByStudyTitle{
+          group
+          subjects
         }
-        filterSubjectCountByChemotherapyRegimen{
-            group
-            subjects
+        filterParticipantCountByTumorClassification{
+          group
+          subjects
         }
-        filterSubjectCountByEndocrineTherapy{
-            group
-            subjects
+        filterParticipantCountByTumorStatus{
+          group
+          subjects
         }
-        filterSubjectCountByMenopauseStatus{
-            group
-            subjects
+        filterParticipantCountByVitalStatus{
+          group
+          subjects
         }
-        filterSubjectCountByTissueType{
-            group
-            subjects
-        }
-        filterSubjectCountByTissueComposition{
-            group
-            subjects
-        }
-        filterSubjectCountByFileAssociation{
-            group
-            subjects
-        }
-        filterSubjectCountByFileType{
-            group
-            subjects
-        }
-        filterSubjectCountByAge{
+        filterParticipantCountByDiagnosisAge{
             lowerBound
             upperBound
             subjects
         }
+        filterParticipantCountBySampleAge{
+          lowerBound
+          upperBound
+          subjects
+      }
     }
-}
-`;
-
-export const DASHBOARD_QUERY = gql`
-    query search (          
-      $programs: [String] ,
-      $studies: [String] ,
-      $diagnoses: [String] ,
-      $rc_scores: [String] ,
-      $tumor_sizes: [String] ,
-      $chemo_regimen: [String] ,
-      $tumor_grades: [String] ,
-      $er_status: [String] ,
-      $pr_status: [String] ,
-      $endo_therapies: [String] ,
-      $meno_status: [String] ,
-      $tissue_type: [String],
-      $composition: [String],
-      $association: [String],
-      $file_type: [String],
-      $age_at_index: [Float]
-  ){
-      searchSubjects (          
-          programs: $programs,
-          studies: $studies,
-          diagnoses: $diagnoses,
-          rc_scores: $rc_scores,
-          tumor_sizes: $tumor_sizes,
-          chemo_regimen: $chemo_regimen,
-          tumor_grades: $tumor_grades,
-          er_status: $er_status,
-          pr_status: $pr_status,
-          endo_therapies: $endo_therapies,
-          meno_status: $meno_status,
-          tissue_type: $tissue_type,
-          composition: $composition,
-          association: $association,       
-          file_type: $file_type,
-          age_at_index: $age_at_index
-      ) {
-          numberOfPrograms
-          numberOfStudies
-          numberOfSubjects
-          numberOfSamples
-          numberOfLabProcedures
-          numberOfFiles
-          armsByPrograms {
-              program
-              caseSize
-              children {
-                  arm
-                  caseSize
-                  size
-              }
-  
-          }
-  
-      subjectCountByProgram {
-              group
-              subjects
-          }
-          subjectCountByStudy {
-              group
-              subjects
-          }
-          subjectCountByDiagnoses {
-              group
-              subjects
-          }
-          subjectCountByRecurrenceScore {
-              group
-              subjects
-          }
-          subjectCountByTumorSize {
-              group
-              subjects
-          }
-          subjectCountByChemotherapyRegimen {
-              group
-              subjects
-          }
-          subjectCountByEndocrineTherapy {
-              group
-              subjects
-          }
-          subjectCountByTumorGrade{
-              group
-              subjects
-          }
-          subjectCountByErStatus{
-              group
-              subjects
-          }
-          subjectCountByPrStatus{
-              group
-              subjects
-          }
-          subjectCountByMenopauseStatus{
-              group
-              subjects
-          }
-          subjectCountByFileType {
-              group
-              subjects
-          }
-          subjectCountByFileAssociation {
-              group
-              subjects
-          }
-          subjectCountByTissueComposition {
-              group
-              subjects
-          }
-          subjectCountByTissueType {
-              group
-              subjects
-          }
-  
-          filterSubjectCountByProgram {
-              group
-              subjects
-          }
-          filterSubjectCountByStudy{
-              group
-              subjects
-          }
-          filterSubjectCountByDiagnoses{
-              group
-              subjects
-          }
-          filterSubjectCountByRecurrenceScore{
-              group
-              subjects
-          }
-          filterSubjectCountByTumorSize{
-              group
-              subjects
-          }
-          filterSubjectCountByTumorGrade{
-              group
-              subjects
-          }
-          filterSubjectCountByErStatus{
-              group
-              subjects
-          }
-          filterSubjectCountByPrStatus{
-              group
-              subjects
-          }
-          filterSubjectCountByChemotherapyRegimen{
-              group
-              subjects
-          }
-          filterSubjectCountByEndocrineTherapy{
-              group
-              subjects
-          }
-          filterSubjectCountByMenopauseStatus{
-              group
-              subjects
-          }
-          filterSubjectCountByTissueType{
-              group
-              subjects
-          }
-          filterSubjectCountByTissueComposition{
-              group
-              subjects
-          }
-          filterSubjectCountByFileAssociation{
-              group
-              subjects
-          }
-          filterSubjectCountByFileType{
-              group
-              subjects
-          }
-          filterSubjectCountByAge{
-            lowerBound
-            upperBound
-            subjects
-        }
-  
-      }
-  }
-  
-   `;
-
-export const FILTER_GROUP_QUERY = gql`
-  query groupCounts($subject_ids: [String]){
-   armsByPrograms(subject_ids: $subject_ids) {
-     program
-     caseSize
-     children {
-         arm
-         caseSize
-         size
-     }
- }
- subjectCountByDiagnoses (subject_ids: $subject_ids){
-  group
-  subjects
-}
-subjectCountByRecurrenceScore (subject_ids: $subject_ids){
-  group
-  subjects
-}
-subjectCountByTumorSize(subject_ids: $subject_ids) {
-  group
-  subjects
-}
-subjectCountByChemotherapyRegimen(subject_ids: $subject_ids) {
-  group
-  subjects
-}
-subjectCountByEndocrineTherapy (subject_ids: $subject_ids){
-  group
-  subjects
-}
-   
-}
- `;
-
-export const FILTER_QUERY = gql`
-query search (          
-  $programs: [String] ,
-  $studies: [String] ,
-  $diagnoses: [String] ,
-  $rc_scores: [String] ,
-  $tumor_sizes: [String] ,
-  $chemo_regimen: [String] ,
-  $tumor_grades: [String] ,
-  $er_status: [String] ,
-  $pr_status: [String] ,
-  $endo_therapies: [String] ,
-  $meno_status: [String] ,
-  $tissue_type: [String],
-  $composition: [String],
-  $association: [String],
-  $file_type: [String],
-  $age_at_index: [Float]
-){
-  searchSubjects (          
-      programs: $programs,
-      studies: $studies,
-      diagnoses: $diagnoses,
-      rc_scores: $rc_scores,
-      tumor_sizes: $tumor_sizes,
-      chemo_regimen: $chemo_regimen,
-      tumor_grades: $tumor_grades,
-      er_status: $er_status,
-      pr_status: $pr_status,
-      endo_therapies: $endo_therapies,
-      meno_status: $meno_status,
-      tissue_type: $tissue_type,
-      composition: $composition,
-      association: $association,       
-      file_type: $file_type,
-      age_at_index: $age_at_index
-  ) {
-      numberOfPrograms
-      numberOfStudies
-      numberOfSubjects
-      numberOfSamples
-      numberOfLabProcedures
-      numberOfFiles
-      armsByPrograms {
-          program
-          caseSize
-          children {
-              arm
-              caseSize
-              size
-          }
-
-      }
-
-  subjectCountByProgram {
-          group
-          subjects
-      }
-      subjectCountByStudy {
-          group
-          subjects
-      }
-      subjectCountByDiagnoses {
-          group
-          subjects
-      }
-      subjectCountByRecurrenceScore {
-          group
-          subjects
-      }
-      subjectCountByTumorSize {
-          group
-          subjects
-      }
-      subjectCountByChemotherapyRegimen {
-          group
-          subjects
-      }
-      subjectCountByEndocrineTherapy {
-          group
-          subjects
-      }
-      subjectCountByTumorGrade{
-          group
-          subjects
-      }
-      subjectCountByErStatus{
-          group
-          subjects
-      }
-      subjectCountByPrStatus{
-          group
-          subjects
-      }
-      subjectCountByMenopauseStatus{
-          group
-          subjects
-      }
-      subjectCountByFileType {
-          group
-          subjects
-      }
-      subjectCountByFileAssociation {
-          group
-          subjects
-      }
-      subjectCountByTissueComposition {
-          group
-          subjects
-      }
-      subjectCountByTissueType {
-          group
-          subjects
-      }
-
-      filterSubjectCountByProgram {
-          group
-          subjects
-      }
-      filterSubjectCountByStudy{
-          group
-          subjects
-      }
-      filterSubjectCountByDiagnoses{
-          group
-          subjects
-      }
-      filterSubjectCountByRecurrenceScore{
-          group
-          subjects
-      }
-      filterSubjectCountByTumorSize{
-          group
-          subjects
-      }
-      filterSubjectCountByTumorGrade{
-          group
-          subjects
-      }
-      filterSubjectCountByErStatus{
-          group
-          subjects
-      }
-      filterSubjectCountByPrStatus{
-          group
-          subjects
-      }
-      filterSubjectCountByChemotherapyRegimen{
-          group
-          subjects
-      }
-      filterSubjectCountByEndocrineTherapy{
-          group
-          subjects
-      }
-      filterSubjectCountByMenopauseStatus{
-          group
-          subjects
-      }
-      filterSubjectCountByTissueType{
-          group
-          subjects
-      }
-      filterSubjectCountByTissueComposition{
-          group
-          subjects
-      }
-      filterSubjectCountByFileAssociation{
-          group
-          subjects
-      }
-      filterSubjectCountByFileType{
-          group
-          subjects
-      }
-      filterSubjectCountByAge{
-        lowerBound
-        upperBound
-        subjects
-      }
-
-  }
 }
 `;
 
 export const GET_FILES_OVERVIEW_QUERY = gql`
 query fileOverview(
-    $subject_ids: [String],
-    $file_ids: [String],
-    $programs: [String] ,
-    $studies: [String] ,
-    $diagnoses: [String] ,
-    $rc_scores: [String] ,
-    $tumor_sizes: [String] ,
-    $chemo_regimen: [String] ,
-    $tumor_grades: [String] ,
-    $er_status: [String] ,
-    $pr_status: [String] ,
-    $endo_therapies: [String] ,
-    $meno_status: [String] ,
-    $tissue_type: [String],
-    $composition: [String],
-    $association: [String],
+    $participant_ids: [String],
+    $gender: [String] ,
+    $race: [String] ,
+    $ethnicity: [String] ,
+    $age_at_diagnosis: [Int] ,
+    $diagnosis_anatomic_site: [String] ,
+    $disease_phase: [String] ,
+    $diagnosis_icd_o: [String] ,
+    $vital_status: [String] ,
+    $sample_anatomic_site: [String] ,
+    $participant_age_at_collection: [Int] ,
+    $sample_tumor_status: [String] ,
+    $tumor_classification: [String] ,
+    $assay_method: [String],
     $file_type: [String],
-    $age_at_index: [Float],
+    $phs_accession: [String],
+    $grant_id: [String],
+    $institution: [String],
+    $study_acronym: [String],
+    $study_short_title: [String],
+    $library_selection: [String],
+    $library_source: [String],
+    $library_strategy: [String],
     $first: Int, 
     $offset: Int, 
-    $order_by:  String
+    $order_by: String,
     $sort_direction: String ){
     fileOverview(
-        subject_ids: $subject_ids,
-        file_ids: $file_ids,
-        programs: $programs,
-        studies: $studies,
-        diagnoses: $diagnoses,
-        rc_scores: $rc_scores,
-        tumor_sizes: $tumor_sizes,
-        chemo_regimen: $chemo_regimen,
-        tumor_grades: $tumor_grades,
-        er_status: $er_status,
-        pr_status: $pr_status,
-        endo_therapies: $endo_therapies,
-        meno_status: $meno_status,
-        tissue_type: $tissue_type,
-        composition: $composition,
-        association: $association,       
+        participant_ids: $participant_ids,
+        gender: $gender,
+        race: $race,
+        ethnicity: $ethnicity,
+        age_at_diagnosis: $age_at_diagnosis,
+        diagnosis_anatomic_site: $diagnosis_anatomic_site,
+        disease_phase: $disease_phase,
+        diagnosis_icd_o: $diagnosis_icd_o,
+        vital_status: $vital_status,
+        sample_anatomic_site: $sample_anatomic_site,
+        participant_age_at_collection: $participant_age_at_collection,
+        sample_tumor_status: $sample_tumor_status,
+        tumor_classification: $tumor_classification,
+        assay_method: $assay_method,
         file_type: $file_type,
-        age_at_index: $age_at_index,
+        phs_accession: $phs_accession,       
+        grant_id: $grant_id,
+        institution: $institution,
+        study_acronym: $study_acronym,
+        study_short_title: $study_short_title,
+        library_selection: $library_selection,
+        library_source: $library_source,
+        library_strategy: $library_strategy,
         first: $first, 
         offset: $offset, 
         order_by: $order_by,
         sort_direction: $sort_direction
     ){
-        file_id,
-        program_id,
-        file_name,
-        association,
-        file_description,
-        file_format,
-        file_size,
-        program,
-        arm,
-        acl,
-        subject_id,
-        sample_id,
-        diagnosis,
+        file_name
+        file_category
+        file_description
+        file_type
+        file_size
+        study_id
+        participant_id
+        sample_id
+        file_id
+        md5sum
     }
 }
 `;
 
 export const GET_SAMPLES_OVERVIEW_QUERY = gql`
 query sampleOverview(
-    $subject_ids: [String],
-    $sample_ids: [String],
-    $programs: [String] ,
-    $studies: [String] ,
-    $diagnoses: [String] ,
-    $rc_scores: [String] ,
-    $tumor_sizes: [String] ,
-    $chemo_regimen: [String] ,
-    $tumor_grades: [String] ,
-    $er_status: [String] ,
-    $pr_status: [String] ,
-    $endo_therapies: [String] ,
-    $meno_status: [String] ,
-    $tissue_type: [String],
-    $composition: [String],
-    $association: [String],
+    $participant_ids: [String],
+    $gender: [String] ,
+    $race: [String] ,
+    $ethnicity: [String] ,
+    $age_at_diagnosis: [Int] ,
+    $diagnosis_anatomic_site: [String] ,
+    $disease_phase: [String] ,
+    $diagnosis_icd_o: [String] ,
+    $vital_status: [String] ,
+    $sample_anatomic_site: [String] ,
+    $participant_age_at_collection: [Int] ,
+    $sample_tumor_status: [String] ,
+    $tumor_classification: [String] ,
+    $assay_method: [String],
     $file_type: [String],
-    $age_at_index: [Float],
+    $phs_accession: [String],
+    $grant_id: [String],
+    $institution: [String],
+    $study_acronym: [String],
+    $study_short_title: [String],
+    $library_selection: [String],
+    $library_source: [String],
+    $library_strategy: [String],
     $first: Int, 
     $offset: Int, 
-    $order_by:  String
+    $order_by: String,
     $sort_direction: String ){
     sampleOverview(
-        subject_ids: $subject_ids,
-        sample_ids: $sample_ids,
-        programs: $programs,
-        studies: $studies,
-        diagnoses: $diagnoses,
-        rc_scores: $rc_scores,
-        tumor_sizes: $tumor_sizes,
-        chemo_regimen: $chemo_regimen,
-        tumor_grades: $tumor_grades,
-        er_status: $er_status,
-        pr_status: $pr_status,
-        endo_therapies: $endo_therapies,
-        meno_status: $meno_status,
-        tissue_type: $tissue_type,
-        composition: $composition,
-        association: $association,       
+        participant_ids: $participant_ids,
+        gender: $gender,
+        race: $race,
+        ethnicity: $ethnicity,
+        age_at_diagnosis: $age_at_diagnosis,
+        diagnosis_anatomic_site: $diagnosis_anatomic_site,
+        disease_phase: $disease_phase,
+        diagnosis_icd_o: $diagnosis_icd_o,
+        vital_status: $vital_status,
+        sample_anatomic_site: $sample_anatomic_site,
+        participant_age_at_collection: $participant_age_at_collection,
+        sample_tumor_status: $sample_tumor_status,
+        tumor_classification: $tumor_classification,
+        assay_method: $assay_method,
         file_type: $file_type,
-        age_at_index: $age_at_index,
+        phs_accession: $phs_accession,       
+        grant_id: $grant_id,
+        institution: $institution,
+        study_acronym: $study_acronym,
+        study_short_title: $study_short_title,
+        library_selection: $library_selection,
+        library_source: $library_source,
+        library_strategy: $library_strategy,
         first: $first, 
         offset: $offset, 
         order_by: $order_by,
         sort_direction: $sort_direction
     ){
-        sample_id,
-        subject_id,
-        program,
-        program_id,
-        arm,
-        diagnosis,
-        tissue_type,
-        tissue_composition,
-        sample_anatomic_site,
-        sample_procurement_method,
-        platform,
-        files 
+        sample_id
+        participant_id
+        study_id
+        anatomic_site
+        participant_age_at_collection
+        diagnosis_icd_o
+        sample_tumor_status
+        tumor_classification
     }
 }
 `;
 
-export const GET_CASES_OVERVIEW_QUERY = gql`
-query subjectOverview(
-    $subject_ids: [String],
-    $programs: [String] ,
-    $studies: [String] ,
-    $diagnoses: [String] ,
-    $rc_scores: [String] ,
-    $tumor_sizes: [String] ,
-    $chemo_regimen: [String] ,
-    $tumor_grades: [String] ,
-    $er_status: [String] ,
-    $pr_status: [String] ,
-    $endo_therapies: [String] ,
-    $meno_status: [String] ,
-    $tissue_type: [String],
-    $composition: [String],
-    $association: [String],
+export const GET_PARTICIPANTS_OVERVIEW_QUERY = gql`
+query participantOverview(
+    $participant_ids: [String],
+    $gender: [String] ,
+    $race: [String] ,
+    $ethnicity: [String] ,
+    $age_at_diagnosis: [Int] ,
+    $diagnosis_anatomic_site: [String] ,
+    $disease_phase: [String] ,
+    $diagnosis_icd_o: [String] ,
+    $vital_status: [String] ,
+    $sample_anatomic_site: [String] ,
+    $participant_age_at_collection: [Int] ,
+    $sample_tumor_status: [String] ,
+    $tumor_classification: [String] ,
+    $assay_method: [String],
     $file_type: [String],
-    $age_at_index: [Float],
+    $phs_accession: [String],
+    $grant_id: [String],
+    $institution: [String],
+    $study_acronym: [String],
+    $study_short_title: [String],
+    $library_selection: [String],
+    $library_source: [String],
+    $library_strategy: [String],
     $first: Int, 
     $offset: Int, 
-    $order_by:  String
+    $order_by: String,
     $sort_direction: String ){
-    subjectOverview(
-        subject_ids: $subject_ids,
-        programs: $programs,
-        studies: $studies,
-        diagnoses: $diagnoses,
-        rc_scores: $rc_scores,
-        tumor_sizes: $tumor_sizes,
-        chemo_regimen: $chemo_regimen,
-        tumor_grades: $tumor_grades,
-        er_status: $er_status,
-        pr_status: $pr_status,
-        endo_therapies: $endo_therapies,
-        meno_status: $meno_status,
-        tissue_type: $tissue_type,
-        composition: $composition,
-        association: $association,       
+    participantOverview(
+        participant_ids: $participant_ids,
+        gender: $gender,
+        race: $race,
+        ethnicity: $ethnicity,
+        age_at_diagnosis: $age_at_diagnosis,
+        diagnosis_anatomic_site: $diagnosis_anatomic_site,
+        disease_phase: $disease_phase,
+        diagnosis_icd_o: $diagnosis_icd_o,
+        vital_status: $vital_status,
+        sample_anatomic_site: $sample_anatomic_site,
+        participant_age_at_collection: $participant_age_at_collection,
+        sample_tumor_status: $sample_tumor_status,
+        tumor_classification: $tumor_classification,
+        assay_method: $assay_method,
         file_type: $file_type,
-        age_at_index: $age_at_index,
+        phs_accession: $phs_accession,       
+        grant_id: $grant_id,
+        institution: $institution,
+        study_acronym: $study_acronym,
+        study_short_title: $study_short_title,
+        library_selection: $library_selection,
+        library_source: $library_source,
+        library_strategy: $library_strategy,
         first: $first, 
         offset: $offset, 
         order_by: $order_by,
         sort_direction: $sort_direction
-        
-        ) {
-        subject_id
-        program
-        program_id
-        study_acronym
-        study_short_description
-        study_info
-        diagnosis
-        recurrence_score
-        tumor_size
-        tumor_grade
-        er_status
-        pr_status
-        chemotherapy
-        endocrine_therapy
-        menopause_status
-        age_at_index
-        survival_time
-        survival_time_unit
-        files
-        lab_procedures
-        samples
+    ) {
+        participant_id
+        phs_accession
+        race
+        gender
+        ethnicity
     }
 }
 `;
 
-export const GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL = gql`
+export const GET_DIAGNOSIS_OVERVIEW_QUERY = gql`
+query diagnosisOverview(
+    $participant_ids: [String],
+    $gender: [String] ,
+    $race: [String] ,
+    $ethnicity: [String] ,
+    $age_at_diagnosis: [Int] ,
+    $diagnosis_anatomic_site: [String] ,
+    $disease_phase: [String] ,
+    $diagnosis_icd_o: [String] ,
+    $vital_status: [String] ,
+    $sample_anatomic_site: [String] ,
+    $participant_age_at_collection: [Int] ,
+    $sample_tumor_status: [String] ,
+    $tumor_classification: [String] ,
+    $assay_method: [String],
+    $file_type: [String],
+    $phs_accession: [String],
+    $grant_id: [String],
+    $institution: [String],
+    $study_acronym: [String],
+    $study_short_title: [String],
+    $library_selection: [String],
+    $library_source: [String],
+    $library_strategy: [String],
+    $first: Int, 
+    $offset: Int, 
+    $order_by: String,
+    $sort_direction: String ){
+      diagnosisOverview(
+        participant_ids: $participant_ids,
+        gender: $gender,
+        race: $race,
+        ethnicity: $ethnicity,
+        age_at_diagnosis: $age_at_diagnosis,
+        diagnosis_anatomic_site: $diagnosis_anatomic_site,
+        disease_phase: $disease_phase,
+        diagnosis_icd_o: $diagnosis_icd_o,
+        vital_status: $vital_status,
+        sample_anatomic_site: $sample_anatomic_site,
+        participant_age_at_collection: $participant_age_at_collection,
+        sample_tumor_status: $sample_tumor_status,
+        tumor_classification: $tumor_classification,
+        assay_method: $assay_method,
+        file_type: $file_type,
+        phs_accession: $phs_accession,       
+        grant_id: $grant_id,
+        institution: $institution,
+        study_acronym: $study_acronym,
+        study_short_title: $study_short_title,
+        library_selection: $library_selection,
+        library_source: $library_source,
+        library_strategy: $library_strategy,
+        first: $first, 
+        offset: $offset, 
+        order_by: $order_by,
+        sort_direction: $sort_direction
+    ) {
+        diagnosis_id
+        participant_id
+        phs_accession
+        diagnosis_icd_o
+        disease_phase
+        anatomic_site
+        age_at_diagnosis
+        vital_status
+    }
+}
+`;
+
+export const GET_STUDY_OVERVIEW_QUERY = gql`
+query studyOverview(
+    $participant_ids: [String],
+    $gender: [String] ,
+    $race: [String] ,
+    $ethnicity: [String] ,
+    $age_at_diagnosis: [Int] ,
+    $diagnosis_anatomic_site: [String] ,
+    $disease_phase: [String] ,
+    $diagnosis_icd_o: [String] ,
+    $vital_status: [String] ,
+    $sample_anatomic_site: [String] ,
+    $participant_age_at_collection: [Int] ,
+    $sample_tumor_status: [String] ,
+    $tumor_classification: [String] ,
+    $assay_method: [String],
+    $file_type: [String],
+    $phs_accession: [String],
+    $grant_id: [String],
+    $institution: [String],
+    $study_acronym: [String],
+    $study_short_title: [String],
+    $library_selection: [String],
+    $library_source: [String],
+    $library_strategy: [String],
+    $first: Int, 
+    $offset: Int, 
+    $order_by: String,
+    $sort_direction: String ){
+    studyOverview(
+        participant_ids: $participant_ids,
+        gender: $gender,
+        race: $race,
+        ethnicity: $ethnicity,
+        age_at_diagnosis: $age_at_diagnosis,
+        diagnosis_anatomic_site: $diagnosis_anatomic_site,
+        disease_phase: $disease_phase,
+        diagnosis_icd_o: $diagnosis_icd_o,
+        vital_status: $vital_status,
+        sample_anatomic_site: $sample_anatomic_site,
+        participant_age_at_collection: $participant_age_at_collection,
+        sample_tumor_status: $sample_tumor_status,
+        tumor_classification: $tumor_classification,
+        assay_method: $assay_method,
+        file_type: $file_type,
+        phs_accession: $phs_accession,       
+        grant_id: $grant_id,
+        institution: $institution,
+        study_acronym: $study_acronym,
+        study_short_title: $study_short_title,
+        library_selection: $library_selection,
+        library_source: $library_source,
+        library_strategy: $library_strategy,
+        first: $first, 
+        offset: $offset, 
+        order_by: $order_by,
+        sort_direction: $sort_direction
+    ) {
+        study_id
+        pubmed_id
+        grant_id
+        phs_accession
+        study_short_title
+        personnel_name
+        diagnosis
+        anatomic_site
+        num_of_participants
+        num_of_samples
+        num_of_files
+        file_type
+    }
+}
+`;
+
+export const GET_ALL_FILEIDS_PARTICIPANTSTAB_FOR_SELECT_ALL = gql`
 query search (          
-  $subject_ids: [String],
+  $participant_ids: [String],
 ){
   fileIDsFromList (          
-      subject_ids: $subject_ids,
+      participant_ids: $participant_ids,
   ) 
 }
   `;
@@ -884,56 +645,87 @@ query search (
 
 export const GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL = gql`
 query search (          
-  $file_names: [String] 
+  $file_ids: [String] 
 ){
   fileIDsFromList (          
-      file_names: $file_names
+      file_ids: $file_ids
   ) 
 }
   `;
 
-export const GET_ALL_FILEIDS_FROM_CASESTAB_FOR_ADD_ALL_CART = gql`
-query subjectsAddAllToCart(
-  $subject_ids: [String],
-  $programs: [String] ,
-  $studies: [String] ,
-  $diagnoses: [String] ,
-  $rc_scores: [String] ,
-  $tumor_sizes: [String] ,
-  $chemo_regimen: [String] ,
-  $tumor_grades: [String] ,
-  $er_status: [String] ,
-  $pr_status: [String] ,
-  $endo_therapies: [String] ,
-  $meno_status: [String] ,
-  $tissue_type: [String],
-  $composition: [String],
-  $association: [String],
-  $file_type: [String],
-  $age_at_index: [Float],
-  $first: Int,
-  $offset: Int= 0, 
-  $order_by: String = "file_id",
-  $sort_direction: String = "asc" 
+export const GET_ALL_FILEIDS_DIAGNOSISTAB_FOR_SELECT_ALL = gql`
+query search (          
+  $diagnosis_ids: [String] 
+){
+  fileIDsFromList (          
+      diagnosis_ids: $diagnosis_ids
+  ) 
+}
+  `;
+export const GET_ALL_FILEIDS_STUDYISTAB_FOR_SELECT_ALL = gql`
+query search (          
+  $study_ids: [String] 
+){
+  fileIDsFromList (          
+      study_ids: $study_ids
+  ) 
+}
+  `;
+
+export const GET_ALL_FILEIDS_FROM_PARTICIPANTSTAB_FOR_ADD_ALL_CART = gql`
+query participantsAddAllToCart(
+    $participant_ids: [String],
+    $gender: [String] ,
+    $race: [String] ,
+    $ethnicity: [String] ,
+    $age_at_diagnosis: [Int] ,
+    $diagnosis_anatomic_site: [String] ,
+    $disease_phase: [String] ,
+    $diagnosis_icd_o: [String] ,
+    $vital_status: [String] ,
+    $sample_anatomic_site: [String] ,
+    $participant_age_at_collection: [Int] ,
+    $sample_tumor_status: [String] ,
+    $tumor_classification: [String] ,
+    $assay_method: [String],
+    $file_type: [String],
+    $phs_accession: [String],
+    $grant_id: [String],
+    $institution: [String],
+    $study_acronym: [String],
+    $study_short_title: [String],
+    $library_selection: [String],
+    $library_source: [String],
+    $library_strategy: [String],
+    $first: Int,
+    $offset: Int= 0, 
+    $order_by: String = "file_id",
+    $sort_direction: String = "asc" 
   ){
-  subjectOverview(
-      subject_ids: $subject_ids,
-      programs: $programs,
-      studies: $studies,
-      diagnoses: $diagnoses,
-      rc_scores: $rc_scores,
-      tumor_sizes: $tumor_sizes,
-      chemo_regimen: $chemo_regimen,
-      tumor_grades: $tumor_grades,
-      er_status: $er_status,
-      pr_status: $pr_status,
-      endo_therapies: $endo_therapies,
-      meno_status: $meno_status,
-      tissue_type: $tissue_type,
-      composition: $composition,
-      association: $association,
+    participantOverview(
+      participant_ids: $participant_ids,
+      gender: $gender,
+      race: $race,
+      ethnicity: $ethnicity,
+      age_at_diagnosis: $age_at_diagnosis,
+      diagnosis_anatomic_site: $diagnosis_anatomic_site,
+      disease_phase: $disease_phase,
+      diagnosis_icd_o: $diagnosis_icd_o,
+      vital_status: $vital_status,
+      sample_anatomic_site: $sample_anatomic_site,
+      participant_age_at_collection: $participant_age_at_collection,
+      sample_tumor_status: $sample_tumor_status,
+      tumor_classification: $tumor_classification,
+      assay_method: $assay_method,
       file_type: $file_type,
-      age_at_index: $age_at_index,
+      phs_accession: $phs_accession,       
+      grant_id: $grant_id,
+      institution: $institution,
+      study_acronym: $study_acronym,
+      study_short_title: $study_short_title,
+      library_selection: $library_selection,
+      library_source: $library_source,
+      library_strategy: $library_strategy,
       first: $first,
       offset: $offset,
       order_by: $order_by,
@@ -946,47 +738,57 @@ query subjectsAddAllToCart(
 
 export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
     query samplesAddAllToCart(
-      $subject_ids: [String],
-      $sample_ids: [String],
-      $programs: [String] ,
-      $studies: [String] ,
-      $diagnoses: [String] ,
-      $rc_scores: [String] ,
-      $tumor_sizes: [String] ,
-      $chemo_regimen: [String] ,
-      $tumor_grades: [String] ,
-      $er_status: [String] ,
-      $pr_status: [String] ,
-      $endo_therapies: [String] ,
-      $meno_status: [String] ,
-      $tissue_type: [String],
-      $composition: [String],
-      $association: [String],
+      $participant_ids: [String],
+      $gender: [String] ,
+      $race: [String] ,
+      $ethnicity: [String] ,
+      $age_at_diagnosis: [Int] ,
+      $diagnosis_anatomic_site: [String] ,
+      $disease_phase: [String] ,
+      $diagnosis_icd_o: [String] ,
+      $vital_status: [String] ,
+      $sample_anatomic_site: [String] ,
+      $participant_age_at_collection: [Int] ,
+      $sample_tumor_status: [String] ,
+      $tumor_classification: [String] ,
+      $assay_method: [String],
       $file_type: [String],
-      $age_at_index: [Float],
+      $phs_accession: [String],
+      $grant_id: [String],
+      $institution: [String],
+      $study_acronym: [String],
+      $study_short_title: [String],
+      $library_selection: [String],
+      $library_source: [String],
+      $library_strategy: [String],
       $first: Int,
       $offset: Int= 0, 
       $order_by: String = "file_id",
       $sort_direction: String = "asc" ){
       sampleOverview(
-          subject_ids: $subject_ids,
-          sample_ids: $sample_ids,
-          programs: $programs,
-          studies: $studies,
-          diagnoses: $diagnoses,
-          rc_scores: $rc_scores,
-          tumor_sizes: $tumor_sizes,
-          chemo_regimen: $chemo_regimen,
-          tumor_grades: $tumor_grades,
-          er_status: $er_status,
-          pr_status: $pr_status,
-          endo_therapies: $endo_therapies,
-          meno_status: $meno_status,
-          tissue_type: $tissue_type,
-          composition: $composition,
-          association: $association,
+          participant_ids: $participant_ids,
+          gender: $gender,
+          race: $race,
+          ethnicity: $ethnicity,
+          age_at_diagnosis: $age_at_diagnosis,
+          diagnosis_anatomic_site: $diagnosis_anatomic_site,
+          disease_phase: $disease_phase,
+          diagnosis_icd_o: $diagnosis_icd_o,
+          vital_status: $vital_status,
+          sample_anatomic_site: $sample_anatomic_site,
+          participant_age_at_collection: $participant_age_at_collection,
+          sample_tumor_status: $sample_tumor_status,
+          tumor_classification: $tumor_classification,
+          assay_method: $assay_method,
           file_type: $file_type,
-          age_at_index: $age_at_index,
+          phs_accession: $phs_accession,       
+          grant_id: $grant_id,
+          institution: $institution,
+          study_acronym: $study_acronym,
+          study_short_title: $study_short_title,
+          library_selection: $library_selection,
+          library_source: $library_source,
+          library_strategy: $library_strategy,
           first: $first,
           offset: $offset,
           order_by: $order_by,
@@ -999,55 +801,193 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
 
 export const GET_ALL_FILEIDS_FROM_FILESTAB_FOR_ADD_ALL_CART = gql`
 query fileAddAllToCart(
-  $subject_ids: [String],
-  $programs: [String] ,
-  $studies: [String] ,
-  $diagnoses: [String] ,
-  $rc_scores: [String] ,
-  $tumor_sizes: [String] ,
-  $chemo_regimen: [String] ,
-  $tumor_grades: [String] ,
-  $er_status: [String] ,
-  $pr_status: [String] ,
-  $endo_therapies: [String] ,
-  $meno_status: [String] ,
-  $tissue_type: [String],
-  $composition: [String],
-  $association: [String],
+  $participant_ids: [String],
+  $gender: [String] ,
+  $race: [String] ,
+  $ethnicity: [String] ,
+  $age_at_diagnosis: [Int] ,
+  $diagnosis_anatomic_site: [String] ,
+  $disease_phase: [String] ,
+  $diagnosis_icd_o: [String] ,
+  $vital_status: [String] ,
+  $sample_anatomic_site: [String] ,
+  $participant_age_at_collection: [Int] ,
+  $sample_tumor_status: [String] ,
+  $tumor_classification: [String] ,
+  $assay_method: [String],
   $file_type: [String],
-  $age_at_index: [Float],
+  $phs_accession: [String],
+  $grant_id: [String],
+  $institution: [String],
+  $study_acronym: [String],
+  $study_short_title: [String],
+  $library_selection: [String],
+  $library_source: [String],
+  $library_strategy: [String],
   $first: Int,
   $offset: Int= 0, 
   $order_by: String = "file_id",
   $sort_direction: String = "asc"
  ){
   fileOverview(
-      subject_ids:$subject_ids,
-      programs: $programs,
-      studies: $studies,
-      diagnoses: $diagnoses,
-      rc_scores: $rc_scores,
-      tumor_sizes: $tumor_sizes,
-      chemo_regimen: $chemo_regimen,
-      tumor_grades: $tumor_grades,
-      er_status: $er_status,
-      pr_status: $pr_status,
-      endo_therapies: $endo_therapies,
-      meno_status: $meno_status,
-      tissue_type: $tissue_type,
-      composition: $composition,
-      association: $association,       
+      participant_ids: $participant_ids,
+      gender: $gender,
+      race: $race,
+      ethnicity: $ethnicity,
+      age_at_diagnosis: $age_at_diagnosis,
+      diagnosis_anatomic_site: $diagnosis_anatomic_site,
+      disease_phase: $disease_phase,
+      diagnosis_icd_o: $diagnosis_icd_o,
+      vital_status: $vital_status,
+      sample_anatomic_site: $sample_anatomic_site,
+      participant_age_at_collection: $participant_age_at_collection,
+      sample_tumor_status: $sample_tumor_status,
+      tumor_classification: $tumor_classification,
+      assay_method: $assay_method,
       file_type: $file_type,
-      age_at_index: $age_at_index,
-      first: $first, 
-      offset: $offset, 
+      phs_accession: $phs_accession,       
+      grant_id: $grant_id,
+      institution: $institution,
+      study_acronym: $study_acronym,
+      study_short_title: $study_short_title,
+      library_selection: $library_selection,
+      library_source: $library_source,
+      library_strategy: $library_strategy,
+      first: $first,
+      offset: $offset,
       order_by: $order_by,
       sort_direction: $sort_direction
   ){
-      file_id,
+      file_id
   }
 }
             `;
+
+export const GET_ALL_FILEIDS_FROM_DIAGNOSISTAB_FOR_ADD_ALL_CART = gql`
+query diagnosisAddAllToCart(
+  $participant_ids: [String],
+  $gender: [String] ,
+  $race: [String] ,
+  $ethnicity: [String] ,
+  $age_at_diagnosis: [Int] ,
+  $diagnosis_anatomic_site: [String] ,
+  $disease_phase: [String] ,
+  $diagnosis_icd_o: [String] ,
+  $vital_status: [String] ,
+  $sample_anatomic_site: [String] ,
+  $participant_age_at_collection: [Int] ,
+  $sample_tumor_status: [String] ,
+  $tumor_classification: [String] ,
+  $assay_method: [String],
+  $file_type: [String],
+  $phs_accession: [String],
+  $grant_id: [String],
+  $institution: [String],
+  $study_acronym: [String],
+  $study_short_title: [String],
+  $library_selection: [String],
+  $library_source: [String],
+  $library_strategy: [String],
+  $first: Int,
+  $offset: Int= 0, 
+  $order_by: String = "file_id",
+  $sort_direction: String = "asc" ){
+  diagnosisOverview(
+      participant_ids: $participant_ids,
+      gender: $gender,
+      race: $race,
+      ethnicity: $ethnicity,
+      age_at_diagnosis: $age_at_diagnosis,
+      diagnosis_anatomic_site: $diagnosis_anatomic_site,
+      disease_phase: $disease_phase,
+      diagnosis_icd_o: $diagnosis_icd_o,
+      vital_status: $vital_status,
+      sample_anatomic_site: $sample_anatomic_site,
+      participant_age_at_collection: $participant_age_at_collection,
+      sample_tumor_status: $sample_tumor_status,
+      tumor_classification: $tumor_classification,
+      assay_method: $assay_method,
+      file_type: $file_type,
+      phs_accession: $phs_accession,       
+      grant_id: $grant_id,
+      institution: $institution,
+      study_acronym: $study_acronym,
+      study_short_title: $study_short_title,
+      library_selection: $library_selection,
+      library_source: $library_source,
+      library_strategy: $library_strategy,
+      first: $first,
+      offset: $offset,
+      order_by: $order_by,
+      sort_direction: $sort_direction
+      ) {
+      files
+  }
+}
+    `;
+
+export const GET_ALL_FILEIDS_FROM_STUDYTAB_FOR_ADD_ALL_CART = gql`
+query studyAddAllToCart(
+  $participant_ids: [String],
+  $gender: [String] ,
+  $race: [String] ,
+  $ethnicity: [String] ,
+  $age_at_diagnosis: [Int] ,
+  $diagnosis_anatomic_site: [String] ,
+  $disease_phase: [String] ,
+  $diagnosis_icd_o: [String] ,
+  $vital_status: [String] ,
+  $sample_anatomic_site: [String] ,
+  $participant_age_at_collection: [Int] ,
+  $sample_tumor_status: [String] ,
+  $tumor_classification: [String] ,
+  $assay_method: [String],
+  $file_type: [String],
+  $phs_accession: [String],
+  $grant_id: [String],
+  $institution: [String],
+  $study_acronym: [String],
+  $study_short_title: [String],
+  $library_selection: [String],
+  $library_source: [String],
+  $library_strategy: [String],
+  $first: Int,
+  $offset: Int= 0, 
+  $order_by: String = "file_id",
+  $sort_direction: String = "asc" ){
+  studyOverview(
+      participant_ids: $participant_ids,
+      gender: $gender,
+      race: $race,
+      ethnicity: $ethnicity,
+      age_at_diagnosis: $age_at_diagnosis,
+      diagnosis_anatomic_site: $diagnosis_anatomic_site,
+      disease_phase: $disease_phase,
+      diagnosis_icd_o: $diagnosis_icd_o,
+      vital_status: $vital_status,
+      sample_anatomic_site: $sample_anatomic_site,
+      participant_age_at_collection: $participant_age_at_collection,
+      sample_tumor_status: $sample_tumor_status,
+      tumor_classification: $tumor_classification,
+      assay_method: $assay_method,
+      file_type: $file_type,
+      phs_accession: $phs_accession,       
+      grant_id: $grant_id,
+      institution: $institution,
+      study_acronym: $study_acronym,
+      study_short_title: $study_short_title,
+      library_selection: $library_selection,
+      library_source: $library_source,
+      library_strategy: $library_strategy,
+      first: $first,
+      offset: $offset,
+      order_by: $order_by,
+      sort_direction: $sort_direction
+      ) {
+      files
+  }
+}
+    `;
 
 // --------------- GraphQL query - Retrieve files tab details --------------
 export const GET_FILES_NAME_QUERY = gql`
@@ -1080,16 +1020,16 @@ export const GET_FILE_IDS_FROM_FILE_NAME = gql`
 // --------------- Tabs Table configuration --------------
 export const tabContainers = [
   {
-    name: 'Cases',
-    dataField: 'dataCase',
-    api: GET_CASES_OVERVIEW_QUERY,
-    paginationAPIField: 'subjectOverview',
-    count: 'numberOfSubjects',
-    dataKey: 'subject_id',
-    defaultSortField: 'subject_id',
+    name: 'Participants',
+    dataField: 'dataParticipant',
+    api: GET_PARTICIPANTS_OVERVIEW_QUERY,
+    paginationAPIField: 'participantOverview',
+    count: 'numberOfParticipants',
+    dataKey: 'participant_id',
+    defaultSortField: 'participant_id',
     defaultSortDirection: 'asc',
     buttonText: 'Add Selected Files',
-    tableID: 'case_tab_table',
+    tableID: 'participant_tab_table',
     extendedViewConfig: {
       pagination: true,
       manageViewColumns: false,
@@ -1100,113 +1040,66 @@ export const tabContainers = [
         display: true,
         role: cellTypes.CHECKBOX,
       },
+      // {
+      //   dataField: 'participant_id',
+      //   header: 'Participant ID',
+      //   cellType: cellTypes.LINK,
+      //   linkAttr : {
+      //     rootPath: '/participant',
+      //     pathParams: ['participant_id'],
+      //   },
+      //   display: true,
+      //   tooltipText: 'sort',
+      // },
       {
-        dataField: 'subject_id',
-        header: 'Case ID',
-        cellType: cellTypes.LINK,
-        linkAttr : {
-          rootPath: '/case',
-          pathParams: ['subject_id'],
-        },
-        display: true,
-        tooltipText: 'sort',
-      },
-      {
-        dataField: 'program',
-        header: 'Program Code',
-        cellType: cellTypes.LINK,
-        linkAttr : {
-          rootPath: '/program',
-          pathParams: ['program_id'],
-        },
+        dataField: 'participant_id',
+        header: 'Participant ID',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'program_id',
-        header: 'Program ID',
+        dataField: 'phs_accession',
+        header: 'Study Accession',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'study_acronym',
-        header: 'Arm',
-        cellType: cellTypes.LINK,
-        linkAttr : {
-          rootPath: '/arm',
-          pathParams: ['study_acronym'],
-        },
+        dataField: 'race',
+        header: 'Race',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'diagnosis',
-        header: 'Diagnosis',
+        dataField: 'gender',
+        header: 'Gender',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'recurrence_score',
-        header: 'Recurrence Score',
+        dataField: 'ethnicity',
+        header: 'Ethnicity',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'tumor_size',
-        header: 'Tumor Size (cm)',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'er_status',
-        header: 'ER Status',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'pr_status',
-        header: 'PR Status',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'age_at_index',
-        header: 'Age (years)',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'survival_time',
-        header: 'Survival (days)',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-        cellType: cellTypes.CUSTOM_ELEM,
-        displayEmpty: false,
       },
     ],
-    id: 'case_tab',
-    tableID: 'case_tab_table',
-    tableDownloadCSV: customCasesTabDownloadCSV,
+    id: 'participant_tab',
+    tableID: 'participant_tab_table',
+    tableDownloadCSV: customParticipantsTabDownloadCSV,
     tabIndex: '0',
-    downloadFileName: 'Bento_Dashboard_cases_download',
+    downloadFileName: 'Bento_Dashboard_participants_download',
     tableMsg: {
       noMatch: 'No Matching Records Found',
     },
-    addFilesRequestVariableKey: 'subject_ids',
+    addFilesRequestVariableKey: 'participant_ids',
     addFilesResponseKeys: ['fileIDsFromList'],
-    addAllFilesResponseKeys: ['subjectOverview', 'files'],
-    addAllFileQuery: GET_ALL_FILEIDS_FROM_CASESTAB_FOR_ADD_ALL_CART,
-    addSelectedFilesQuery: GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL,
+    addAllFilesResponseKeys: ['participantOverview', 'files'],
+    addAllFileQuery: GET_ALL_FILEIDS_FROM_PARTICIPANTSTAB_FOR_ADD_ALL_CART,
+    addSelectedFilesQuery: GET_ALL_FILEIDS_PARTICIPANTSTAB_FOR_SELECT_ALL,
   },
   {
     name: 'Samples',
@@ -1250,90 +1143,53 @@ export const tabContainers = [
         header: 'Sample ID',
         display: true,
         tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'subject_id',
-        header: 'Case ID',
-        link: '/case/{subject_id}',
-        cellType: cellTypes.LINK,
-        linkAttr : {
-          rootPath: '/case',
-          pathParams: ['subject_id'],
-        },
+        dataField: 'participant_id',
+        header: 'Particpant ID',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'program',
-        header: 'Program Code',
-        cellType: cellTypes.LINK,
-        tooltipText: 'sort',
-        linkAttr : {
-          rootPath: '/program',
-          pathParams: ['program_id'],
-        },
-        display: true,
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'program_id',
-        header: 'Program ID',
-        display: false,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'arm',
-        header: 'Arm',
-        link: '/arm/{arm}',
-        cellType: cellTypes.LINK,
-        linkAttr : {
-          rootPath: '/arm',
-          pathParams: ['arm'],
-        },
+        dataField: 'study_id',
+        header: 'Study ID',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'diagnosis',
-        header: 'Diagnosis',
+        dataField: 'anatomic_site',
+        header: 'Anatomic Site',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'tissue_type',
-        header: 'Tissue Type',
+        dataField: 'participant_age_at_collection',
+        header: 'Age at Sample Collection',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'tissue_composition',
-        header: 'Tissue Composition',
+        dataField: 'diagnosis_icd_o',
+        header: 'Sample ICD-O Morphology',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'sample_anatomic_site',
-        header: 'Sample Anatomic Site',
+        dataField: 'sample_tumor_status',
+        header: 'Sample Tumor Status',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'sample_procurement_method',
-        header: 'Sample Procurement Method',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'platform',
-        header: 'platform',
+        dataField: 'tumor_classification',
+        header: 'Sample Tumor Classification',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
@@ -1343,7 +1199,7 @@ export const tabContainers = [
     tableID: 'sample_tab_table',
     tabIndex: '1',
     tableDownloadCSV: customSamplesTabDownloadCSV,
-    downloadFileName: 'Bento_Dashboard_cases_download',
+    downloadFileName: 'Bento_Dashboard_participants_download',
     tableMsg: {
       noMatch: 'No Matching Records Found',
     },
@@ -1361,7 +1217,7 @@ export const tabContainers = [
     defaultSortField: 'file_name',
     defaultSortDirection: 'asc',
     count: 'numberOfFiles',
-    dataKey: 'file_name',
+    dataKey: 'file_id',
     tableID: 'file_tab_table',
     extendedViewConfig: {
       pagination: true,
@@ -1378,38 +1234,32 @@ export const tabContainers = [
         header: 'File Name',
         display: true,
         tooltipText: 'sort',
-      },
-      {
-        dataField: 'file_id',
-        header: 'File ID',
-        display: false,
-        tooltipText: 'sort',
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'association',
-        header: 'Association',
+        dataField: 'file_category',
+        header: 'File Category',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
       },
       {
         dataField: 'file_description',
-        header: 'Description',
+        header: 'File Description',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'file_format',
-        header: 'File Format',
+        dataField: 'file_type',
+        header: 'File Type',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
       },
       {
         dataField: 'file_size',
-        header: 'Size',
+        header: 'File Size',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
@@ -1417,82 +1267,15 @@ export const tabContainers = [
         cellType: cellTypes.FORMAT_DATA,
       },
       {
-        dataField: 'acl', // This need to left empty if no data need to be displayed before file download icon
-        header: 'Access',
-        display: true,
-        cellType: cellTypes.CUSTOM_ELEM,
-        downloadDocument: true, // To indicate that column is document donwload
-        documentDownloadProps: {
-          // Max file size needs to bin Bytes to seperate two support file preview and download
-          maxFileSize: 315,
-          // Tool top text for Unauthenticated users
-          toolTipTextUnauthenticated: 'Controlled access file',
-          // Tool top text for file download
-          toolTipTextFileDownload: 'Download a copy of this file',
-          // Tool top text for file preview
-          toolTipTextFilePreview: 'Because of its size and/or format, this file is unavailable for download and must be accessed via the My Files workflow',
-          // datafield where file file column exists in the table
-          fileSizeColumn: 'file_size',
-          // datafield where file file id exists in the table which is used to get file location
-          fileLocationColumn: 'file_id',
-          // datafield where file format exists in the table
-          fileFormatColumn: 'file_format',
-          // datafield where file case id exists in the table which is used to get file information
-          caseIdColumn: 'subject_id',
-          // Unauthenticated lock icon
-          iconUnauthenticated: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/Access_Lock.svg',
-          // file download icon
-          iconFileDownload: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadPDF.svg',
-          // file preview icon
-          iconFilePreview: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadCloud.svg',
-          // file viewer icon JBrowse
-          iconFileViewer: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadBAM.svg',
-        },
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'program',
-        header: 'Program Code',
-        link: '/program/{program_id}',
-        cellType: cellTypes.LINK,
-        linkAttr : {
-          rootPath: '/program',
-          pathParams: ['program_id'],
-        },
+        dataField: 'study_id',
+        header: 'Study ID',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'program_id',
-        header: 'Program ID',
-        display: false,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'arm',
-        header: 'Arm',
-        link: '/arm/{arm}',
-        cellType: cellTypes.LINK,
-        linkAttr : {
-          rootPath: '/arm',
-          pathParams: ['arm'],
-        },
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'subject_id',
-        header: 'Case ID',
-        link: '/case/{subject_id}',
-        cellType: cellTypes.LINK,
-        linkAttr : {
-          rootPath: '/case',
-          pathParams: ['subject_id'],
-        },
+        dataField: 'participant_id',
+        header: 'Participant ID',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
@@ -1505,26 +1288,246 @@ export const tabContainers = [
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'diagnosis',
-        header: 'Diagnosis',
-        display: false,
+        dataField: 'file_id',
+        header: 'GUID',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'md5sum',
+        header: 'MD5sum',
+        display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
       },
     ],
     id: 'file_tab',
     tableID: 'file_tab_table',
+    tabIndex: '2',
     selectableRows: true,
     tableDownloadCSV: customFilesTabDownloadCSV,
-    downloadFileName: 'Bento_Dashboard_cases_download',
+    downloadFileName: 'Bento_Dashboard_participants_download',
     tableMsg: {
       noMatch: 'No Matching Records Found',
     },
-    addFilesRequestVariableKey: 'file_names',
+    addFilesRequestVariableKey: 'file_ids',
     addFilesResponseKeys: ['fileIDsFromList'],
     addAllFilesResponseKeys: ['fileOverview', 'file_id'],
     addAllFileQuery: GET_ALL_FILEIDS_FROM_FILESTAB_FOR_ADD_ALL_CART,
     addSelectedFilesQuery: GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL,
+  },
+  {
+    name: 'Diagnosis',
+    dataField: 'dataDiagnosis',
+    api: GET_DIAGNOSIS_OVERVIEW_QUERY,
+    paginationAPIField: 'diagnosisOverview',
+    defaultSortField: 'diagnosis_id',
+    defaultSortDirection: 'asc',
+    count: 'numberOfDiagnosis',
+    dataKey: 'diagnosis_id',
+    tableID: 'diagnosis_tab_table',
+    extendedViewConfig: {
+      pagination: true,
+      manageViewColumns: false,
+    },
+    columns: [
+      {
+        cellType: cellTypes.CHECKBOX,
+        display: true,
+        role: cellTypes.CHECKBOX,
+      },
+      {
+        dataField: 'diagnosis_id',
+        header: 'Diagnosis ID',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'participant_id',
+        header: 'Participant ID',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'phs_accession',
+        header: 'Study Accession',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'diagnosis_icd_o',
+        header: 'ICD-O Morphology',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'disease_phase',
+        header: 'Disease Phase',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'anatomic_site',
+        header: 'Anatomic Site',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'age_at_diagnosis',
+        header: 'Age at Diagnosis (days)',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'vital_status',
+        header: 'Vital Status',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+    ],
+    id: 'diagnosis_tab',
+    tableID: 'diagnosis_tab_table',
+    tabIndex: '3',
+    selectableRows: true,
+    tableDownloadCSV: customDiagnosisTabDownloadCSV,
+    downloadFileName: 'Bento_Dashboard_participants_download',
+    tableMsg: {
+      noMatch: 'No Matching Records Found',
+    },
+    addFilesRequestVariableKey: 'diagnosis_ids',
+    addFilesResponseKeys: ['fileIDsFromList'],
+    addAllFilesResponseKeys: ['diagnosisOverview', 'files'],
+    addAllFileQuery: GET_ALL_FILEIDS_FROM_DIAGNOSISTAB_FOR_ADD_ALL_CART,
+    addSelectedFilesQuery: GET_ALL_FILEIDS_DIAGNOSISTAB_FOR_SELECT_ALL,
+  },
+  {
+    name: 'Studies',
+    dataField: 'dataStudy',
+    api: GET_STUDY_OVERVIEW_QUERY,
+    paginationAPIField: 'studyOverview',
+    defaultSortField: 'study_id',
+    defaultSortDirection: 'asc',
+    count: 'numberOfStudies',
+    dataKey: 'study_id',
+    tableID: 'study_tab_table',
+    extendedViewConfig: {
+      pagination: true,
+      manageViewColumns: false,
+    },
+    columns: [
+      {
+        cellType: cellTypes.CHECKBOX,
+        display: true,
+        role: cellTypes.CHECKBOX,
+      },
+      {
+        dataField: 'study_id',
+        header: 'Study ID',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'pubmed_id',
+        header: 'PubMed ID',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'grant_id',
+        header: 'Grant ID',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'phs_accession',
+        header: 'Study Accession',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'study_short_title',
+        header: 'Study Short Title',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'personnel_name',
+        header: 'Principle Investigator(s)',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'num_of_participants',
+        header: 'Number of Particpants',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'diagnosis',
+        header: 'Diagnosis',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'num_of_samples',
+        header: 'Number of Samples',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'anatomic_site',
+        header: 'Diagnosis Anatomic Site',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'num_of_files',
+        header: 'Number of Files',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'file_type',
+        header: 'File Type',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+    ],
+    id: 'study_tab',
+    tableID: 'study_tab_table',
+    tabIndex: '4',
+    selectableRows: true,
+    tableDownloadCSV: customStudyTabDownloadCSV,
+    downloadFileName: 'Bento_Dashboard_participants_download',
+    tableMsg: {
+      noMatch: 'No Matching Records Found',
+    },
+    addFilesRequestVariableKey: 'study_ids',
+    addFilesResponseKeys: ['fileIDsFromList'],
+    addAllFilesResponseKeys: ['studyOverview', 'files'],
+    addAllFileQuery: GET_ALL_FILEIDS_FROM_STUDYTAB_FOR_ADD_ALL_CART,
+    addSelectedFilesQuery: GET_ALL_FILEIDS_STUDYISTAB_FOR_SELECT_ALL,
   },
 ];
 

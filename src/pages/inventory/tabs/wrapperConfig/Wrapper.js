@@ -25,7 +25,7 @@ export const wrapperConfig = [{
   clsName: 'container_header',
   items: [
     {
-      title: 'ADD ALL FILES',
+      title: 'ADD ALL FILTERED FILES',
       clsName: 'add_all_button',
       type: types.BUTTON,
       role: btnTypes.ADD_ALL_FILES,
@@ -41,6 +41,7 @@ export const wrapperConfig = [{
       btnType: btnTypes.ADD_SELECTED_FILES,
       tooltipCofig: tooltipContent,
       conditional: true,
+      alertMessage,
     }],
 },
 {
@@ -53,6 +54,15 @@ export const wrapperConfig = [{
   clsName: 'container_footer',
   items: [
     {
+      title: 'ADD ALL FILTERED FILES',
+      clsName: 'add_all_button',
+      type: types.BUTTON,
+      role: btnTypes.ADD_ALL_FILES,
+      btnType: btnTypes.ADD_ALL_FILES,
+      conditional: false,
+      alertMessage,
+    },
+    {
       title: 'ADD SELECTED FILES',
       clsName: 'add_selected_button',
       type: types.BUTTON,
@@ -60,6 +70,7 @@ export const wrapperConfig = [{
       btnType: btnTypes.ADD_SELECTED_FILES,
       tooltipCofig: tooltipContent,
       conditional: true,
+      alertMessage,
     }],
 },
 {

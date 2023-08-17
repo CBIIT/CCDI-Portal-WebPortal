@@ -29,37 +29,50 @@ export const customTheme = {
       color: '#fff',
       fontSize: '12px',
       marginTop: '6px',
-      fontFamily: 'Lato',
-      borderRadius: '10px',
+      fontFamily: 'Poppins',
+      fontWeight: '600',
+      borderRadius: '5px',
       marginBottom: '10px',
       textTransform: 'uppercase',
       '&.add_all_button': {
         marginRight: '24px',
         // width: '120px',
-        backgroundColor: '#142D64',
+        backgroundColor: '#536D70',
       },
       '&.add_selected_button': {
         marginRight: '10px',
       },
-      '&.add_selected_button_Cases': {
-        backgroundColor: '#10A075',
+      '&.add_selected_button_Participants': {
+        backgroundColor: '#2A6E93',
       },
       '&.add_selected_button_Samples': {
-        backgroundColor: '#0DAFEC',
+        backgroundColor: '#2A6E93',
       },
       '&.add_selected_button_Files': {
-        backgroundColor: '#C92EC7',
+        backgroundColor: '#2A6E93',
+      },
+      '&.add_selected_button_Diagnosis': {
+        backgroundColor: '#2A6E93',
+      },
+      '&.add_selected_button_Studies': {
+        backgroundColor: '#2A6E93',
       },
       '&.Mui-disabled': {
         color: '#fff',
-        '&.add_selected_button_Cases': {
-          backgroundColor: '#D6F2EA',
+        '&.add_selected_button_Participants': {
+          backgroundColor: '#B3D6EA',
         },
         '&.add_selected_button_Samples': {
-          backgroundColor: '#CFEDF9',
+          backgroundColor: '#B3D6EA',
         },
         '&.add_selected_button_Files': {
-          backgroundColor: '#F7D7F7',
+          backgroundColor: '#B3D6EA',
+        },
+        '&.add_selected_button_Diagnosis': {
+          backgroundColor: '#B3D6EA',
+        },
+        '&.add_selected_button_Studies': {
+          backgroundColor: '#B3D6EA',
         },
       },
       '&.yesBtn': {

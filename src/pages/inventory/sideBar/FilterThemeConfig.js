@@ -43,55 +43,104 @@ const theme = {
     },
     MuiListItem: {
       root: {
-        '&.casesCheckedEven': {
-          backgroundColor: '#e8f7dc',
+        '&.demographicsCheckedEven': {
+          backgroundColor: '#CBDFE0',
         },
-        '&.casesCheckedOdd': {
-          backgroundColor: '#f5FDEE',
+        '&.demographicsCheckedOdd': {
+          backgroundColor: '#E4ECE9',
+        },
+        '&.diagnosisCheckedEven': {
+          backgroundColor: '#C8A4C840',
+        },
+        '&.diagnosisCheckedOdd': {
+          backgroundColor: '#E1C9E140',
         },
         '&.samplesCheckedEven': {
-          backgroundColor: '#C9EBF7',
+          backgroundColor: '#D9C5A040',
         },
         '&.samplesCheckedOdd': {
-          backgroundColor: '#E8F8FE',
+          backgroundColor: '#F0DFBD40',
         },
-        '&.filesCheckedEven': {
-          backgroundColor: '#FBE3FB',
+        '&.assayCheckedEven': {
+          backgroundColor: '#E1B4AD40',
         },
-        '&.filesCheckedOdd': {
-          backgroundColor: '#FFF2FF',
+        '&.assayCheckedOdd': {
+          backgroundColor: '#F8D7D240',
+        },
+        '&.studyCheckedEven': {
+          backgroundColor: '#9FBCDD40',
+        },
+        '&.studyCheckedOdd': {
+          backgroundColor: '#CEDEF040',
+        },
+        '&.libraryCheckedEven': {
+          backgroundColor: '#95C6B340',
+        },
+        '&.libraryCheckedOdd': {
+          backgroundColor: '#DDEAE540',
         },
       },
     },
     MuiSvgIcon: {
       root: {
-        '&.casesCheckedIcon': {
-          color: '#10a075',
+        '&.demographicsCheckedIcon': {
+          color: '#6D5F5B',
+        },
+        '&.diagnosisCheckedIcon': {
+          color: '#6D5F5B',
         },
         '&.samplesCheckedIcon': {
-          color: '#10beff',
+          color: '#6D5F5B',
         },
-        '&.filesCheckedIcon': {
-          color: '#e636e4',
+        '&.assayCheckedIcon': {
+          color: '#6D5F5B',
+        },
+        '&.studyCheckedIcon': {
+          color: '#6D5F5B',
+        },
+        '&.libraryCheckedIcon': {
+          color: '#6D5F5B',
         },
       },
     },
     MuiTypography: {
       root: {
-        '&.casesSubjects': {
-          color: '#10a075',
+        '&.demographicsSubjects': {
+          color: '#357288',
           fontSize: '12px',
           fontFamily: 'Nunito',
           marginRight: '0px',
+          fontWeight: '600',
+        },
+        '&.diagnosisSubjects': {
+          color: '#7D267E',
+          fontSize: '12px',
+          fontFamily: 'Nunito',
+          marginRight: '0px',
+          fontWeight: '600',
         },
         '&.samplesSubjects': {
-          color: '#10beff',
+          color: '#897E67',
+          fontSize: '12px',
+          fontFamily: 'Nunito',
+          marginRight: '0px',
+          fontWeight: '600',
+        },
+        '&.assaySubjects': {
+          color: '#A85348',
+          fontSize: '12px',
+          fontFamily: 'Nunito',
+          marginRight: '0px',
+          fontWeight: '600',
+        },
+        '&.studySubjects': {
+          color: '#24568E',
           fontSize: '12px',
           fontFamily: 'Nunito',
           marginRight: '0px',
         },
-        '&.filesSubjects': {
-          color: '#e636e4',
+        '&.librarySubjects': {
+          color: '#14835C',
           fontSize: '12px',
           fontFamily: 'Nunito',
           marginRight: '0px',
@@ -104,15 +153,24 @@ const theme = {
         marginRight: '0px',
       },
       root: {
-        height: '5px',
+        height: '8px',
         '&.divider0': {
-          backgroundColor: '#0d8461',
+          backgroundColor: '#4D889E',
         },
         '&.divider1': {
-          backgroundColor: '#10beff',
+          backgroundColor: '#974599',
         },
         '&.divider2': {
-          backgroundColor: '#e636e4',
+          backgroundColor: '#E9B34A',
+        },
+        '&.divider3': {
+          backgroundColor: '#CD5C4E',
+        },
+        '&.divider4': {
+          backgroundColor: '#1F6BBF',
+        },
+        '&.divider5': {
+          backgroundColor: '#60C4A1',
         },
       },
     },

@@ -98,16 +98,15 @@ export const manifestData = {
 // --------------- GraphQL query - Retrieve selected cases info --------------
 export const GET_MY_CART_DATA_QUERY = gql`
 query filesInList($file_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String ="file_name", $sort_direction:String="asc") {
-    filesInList(file_ids: $file_ids, offset: $offset,first: $first, order_by: $order_by, sort_direction: $sort_direction) {
-        study_code
-        subject_id
-        file_name
-        file_type
-        association
-        file_description
-        file_format
-        file_size
+    filesInList(file_id: $file_ids, offset: $offset,first: $first, order_by: $order_by, sort_direction: $sort_direction) {
         file_id
+        file_name
+        study_short_title
+        phs_accession
+        participant_id
+        sample_id
+        file_type
+        file_size
         md5sum
     }
 }`;
@@ -131,26 +130,32 @@ export const table = {
       tooltipText: 'sort',
     },
     {
+      dataField: 'study_short_title',
+      header: 'Study Short Title',
+      display: true,
+      tooltipText: 'sort',
+    },
+    {
+      dataField: 'phs_accession',
+      header: 'Study Accession',
+      display: true,
+      tooltipText: 'sort',
+    },
+    {
+      dataField: 'participant_id',
+      header: 'Participant ID',
+      display: true,
+      tooltipText: 'sort',
+    },
+    {
+      dataField: 'sample_id',
+      header: 'Sample ID',
+      display: true,
+      tooltipText: 'sort',
+    },
+    {
       dataField: 'file_type',
       header: 'File Type',
-      display: true,
-      tooltipText: 'sort',
-    },
-    {
-      dataField: 'association',
-      header: 'Association',
-      display: true,
-      tooltipText: 'sort',
-    },
-    {
-      dataField: 'file_description',
-      header: 'Description',
-      display: true,
-      tooltipText: 'sort',
-    },
-    {
-      dataField: 'file_format',
-      header: 'Format',
       display: true,
       tooltipText: 'sort',
     },
@@ -164,26 +169,8 @@ export const table = {
       tooltipText: 'sort',
     },
     {
-      dataField: 'subject_id',
-      header: 'Case ID',
-      display: true,
-      tooltipText: 'sort',
-    },
-    {
-      dataField: 'study_code',
-      header: 'Study Code',
-      display: true,
-      tooltipText: 'sort',
-    },
-    {
       dataField: 'file_id',
       header: 'UUID',
-      display: false,
-      tooltipText: 'sort',
-    },
-    {
-      dataField: 'md5sum',
-      header: 'Md5Sum',
       display: false,
       tooltipText: 'sort',
     },

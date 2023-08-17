@@ -26,7 +26,7 @@ import { FacetFilter, ClearAllFiltersBtn } from '@bento-core/facet-filter';
 import { facetsConfig, facetSectionVariables, resetIcon } from '../../../bento/dashTemplate';
 import FacetFilterThemeProvider from './FilterThemeConfig';
 import {
-  getAllSubjectIds, getAllIds,
+  getAllParticipantIds, getAllIds,
 } from './BentoFilterUtils';
 
 const CustomExpansionPanelSummary = withStyles({
@@ -42,15 +42,21 @@ const CustomExpansionPanelSummary = withStyles({
   },
   content: {
     display: 'block',
-    '&$expanded': {
-      margin: '4px 0px 15px 0px',
-    },
+    textTransform: 'uppercase',
+    // '&$expanded': {
+    //   margin: '4px 0px 15px 0px',
+    // },
   },
   expanded: {},
 })(AccordionSummary);
 
 // Generate SearchBox Component
 const { SearchBox } = SearchBoxGenerator({
+  config: {
+    inputPlaceholder: 'e.g. R000006. R0000022',
+    noOptionsText: 'No matching items found',
+    searchType: 'participantIds',
+  },
   functions: {
     getSuggestions: async (searchType) => {
       try {
@@ -72,7 +78,7 @@ const { UploadModal } = UploadModalGenerator({
       try {
         // Split the search terms into chunks of 500
         const caseChunks = chunkSplit(inputArray, 500);
-        const matched = (await Promise.allSettled(caseChunks.map((chunk) => getAllSubjectIds(chunk))))
+        const matched = (await Promise.allSettled(caseChunks.map((chunk) => getAllParticipantIds(chunk))))
           .filter((result) => result.status === 'fulfilled')
           .map((result) => result.value || [])
           .flat(1);

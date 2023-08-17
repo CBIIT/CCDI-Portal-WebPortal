@@ -4,10 +4,10 @@ import {
   Collapse,
   FormControlLabel,
   Grid,
-  Switch,
+  // Switch,
   withStyles,
 } from '@material-ui/core';
-import { useTheme } from '../../../components/ThemeContext';
+// import { useTheme } from '../../../components/ThemeContext';
 import styles from './WidgetStyle';
 import { WidgetGenerator } from '@bento-core/widgets';
 import { widgetConfig } from '../../../bento/dashTemplate';
@@ -22,7 +22,7 @@ const WidgetView = ({
 }) => {
   const displayWidgets = formatWidgetData(data, widgetConfig);
   const [collapse, setCollapse] = React.useState(true);
-  const themeChanger = useTheme();
+  // const themeChanger = useTheme();
   const handleChange = () => setCollapse((prev) => !prev);
 
   const widgetGeneratorConfig = {
@@ -55,7 +55,7 @@ const WidgetView = ({
               </Button>
             )}
           />
-          <Switch
+          {/* <Switch
             classes={{
               root: classes.switchRoot,
               switchBase: classes.switchBase,
@@ -67,7 +67,7 @@ const WidgetView = ({
             disableRipple
             checked={themeChanger.dark}
             onChange={themeChanger.toggleTheme}
-          />
+          /> */}
         </div>
       </div>
       <Collapse in={collapse} className={classes.backgroundWidgets}>
@@ -97,6 +97,8 @@ const WidgetView = ({
                   sliceTitle={widget.sliceTitle}
                   chartTitleLocation="bottom"
                   chartTitleAlignment="center"
+                  width={widget.width}
+                  height={widget.height}
                 />
               </Grid>
             );

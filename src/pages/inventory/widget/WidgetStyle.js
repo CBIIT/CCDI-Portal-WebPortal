@@ -72,7 +72,7 @@ const styles = (theme) => ({
     backgroundColor: '#566672',
     marginRight: '4px',
     fontFamily: theme.custom.fontFamilySans,
-    marginTop: '-4px',
+    // marginTop: '-4px',
     '&:hover': {
       backgroundColor: '#566672',
     },

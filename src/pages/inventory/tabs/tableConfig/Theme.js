@@ -106,7 +106,7 @@ export const tblPgn = {
       }
     },
     toolbar: {
-      minHeight: '45px',
+      minHeight: '40px',
     },
     caption: {
       fontFamily: 'Open Sans',
@@ -116,9 +116,6 @@ export const tblPgn = {
       fontFamily: 'Open Sans',
       fontSize: '12px',
     },
-    toolbar: {
-      minHeight: '40px',
-    }
   },
 };
 

@@ -77,17 +77,18 @@ export const myFilesPageData = {
     container: 'paginatedTable',
     paginatedTable: true,
   },
-  {
-    container: 'buttons',
-    size: 'xl',
-    clsName: 'container_footer',
-    items: [
-      {
-        clsName: 'manifest_comments',
-        type: types.TEXT_INPUT,
-        placeholder: 'Please add a description for the CSV file you are about to download.',
-      }],
-  }]
+  // {
+  //   container: 'buttons',
+  //   size: 'xl',
+  //   clsName: 'container_footer',
+  //   items: [
+  //     {
+  //       clsName: 'manifest_comments',
+  //       type: types.TEXT_INPUT,
+  //       placeholder: 'Please add a description for the CSV file you are about to download.',
+  //     }],
+  // }
+  ]
 };
 
 

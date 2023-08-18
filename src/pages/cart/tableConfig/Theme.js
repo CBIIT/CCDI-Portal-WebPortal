@@ -83,6 +83,14 @@ export const tblPgn = {
     toolbar: {
       minHeight: '45px',
     },
+    caption: {
+      fontFamily: 'Open Sans',
+      fontSize: '14px',
+    },
+    select: {
+      fontFamily: 'Open Sans',
+      fontSize: '14px',
+    },
   },
 };
 
@@ -97,6 +105,11 @@ export const tblBody = {
     body: {
       color: '#004C73',
       borderBottom: 'none',
+      '& p': {
+        fontFamily: 'Open Sans',
+        fontSize: '14px',
+        fontWeight: '400',
+      },
       '&.file_name': {
         maxWidth: '300px',
         '& p': {

@@ -3,6 +3,7 @@ import { cellTypes, dataFormatTypes } from '@bento-core/table';
 import { types, btnTypes } from '@bento-core/paginated-table';
 import { customMyFilesTabDownloadCSV } from './tableDownloadCSV';
 import cartLogo from '../assets/header/Cart_Logo.svg';
+import cartPageLogo from '../assets/cart/Cart_Page_Icon.svg';
 
 export const navBarCartData = {
   cartLabel: 'Cart',
@@ -43,17 +44,17 @@ export const myFilesPageData = {
         {
           clsName: 'cart_icon',
           type: types.ICON,
-          src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/Icon-Cart-Workflow.svg',
+          src: cartPageLogo,
           alt: 'Bento MyFiles header logo',
         },
-        {
-          clsName: 'cart_header_text',
-          text: 'Cart >',
-          type: types.TEXT,
-        },
+        // {
+        //   clsName: 'cart_header_text',
+        //   text: 'Cart >',
+        //   type: types.TEXT,
+        // },
         {
           clsName: 'cart_sel_files_text',
-          text: 'Selected Files',
+          text: 'MY FILES',
           type: types.TEXT,
         },
       ],
@@ -91,8 +92,8 @@ export const myFilesPageData = {
 
 
 export const manifestData = {
-  keysToInclude: ['study_code', 'subject_id', 'file_name', 'file_id', 'md5sum'],
-  header: ['Study Code', 'Case ID', 'File Name', 'File ID', 'Md5sum', 'User Comments'],
+  keysToInclude: ['participant_id', 'file_name', 'file_id', 'md5sum'],
+  header: ['Participant Id', 'File Name', 'File ID', 'Md5sum', 'User Comments'],
 };
 
 // --------------- GraphQL query - Retrieve selected cases info --------------

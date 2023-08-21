@@ -1,9 +1,12 @@
 export default () => ({
+  backgroundContainer: {
+    background: '#E7EEF5',
+    paddingTop: '70px',
+    paddingBottom: '80px',
+  },
   myFilesWrapper: {
     border: '#4555AB 4px solid',
     borderRadius: '35px',
-    marginTop: '70px',
-    marginBottom: '80px',
     marginLeft: '3%',
     marginRight: '3%',
     paddingBottom: '20px',

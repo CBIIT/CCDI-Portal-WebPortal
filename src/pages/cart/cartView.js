@@ -34,7 +34,7 @@ const CartView = (props) => {
   const variables = {};
   variables.file_ids = filesId;
   return (
-    <Grid>
+    <Grid className={classes.backgroundContainer}>
       <Grid item xs={12}>
         <div className={classes.myFilesWrapper}>
           <CartWrapper

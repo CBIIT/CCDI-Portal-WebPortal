@@ -1,14 +1,15 @@
 import React from "react";
 import { withStyles, CssBaseline } from '@material-ui/core';
 import { Route, Routes, } from 'react-router-dom';
-import Header from '../Header/CustomizedHeader';
-import NavBar from '../NavBar/CustomizedNavBar';
-import Footer from '../Footer/CustomizedFooter';
+import Footer from '../ResponsiveFooter/';
+import Header from '../ResponsiveHeader/';
 import Home from '../../pages/landing/landingView';
 import About from '../../pages/about/aboutView';
 import News from '../../pages/news/newsView';
 import Error from '../../pages/error/Error';
 import Search from '../../pages/search/searchView';
+import Inventory from '../../pages/inventory/inventoryController';
+import Cart from '../../pages/cart/cartController';
 import ScrollButton from '../ScrollButton/ScrollButtonView';
 // import NewsDetail from '../../pages/news/newsDetailView';
 
@@ -17,14 +18,14 @@ const Layout = () => {
     <>
       <CssBaseline />
         <Header />
-        <NavBar />
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/news" element={<News />} />
           <Route path="/sitesearch" element={<Search />} />
-          {/* <Route path="/newsdetail/:id" element={<NewsDetail />} /> */}
+          <Route path="/explore" element={<Inventory />} />
+          <Route path="/fileCentricCart" element={<Cart />} />
           <Route path="*" element={<Error />} />
         </Routes>
         <Footer />

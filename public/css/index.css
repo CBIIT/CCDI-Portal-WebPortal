@@ -79,3 +79,24 @@
   font-family:"Reem Kufi";
   src:url(./fonts/ReemKufi-VariableFont_wght.ttf);
 }
+
+@font-face {
+  font-family:"Nunito";
+  src:url(./fonts/Nunito-VariableFont_wght.ttf);
+}
+
+@font-face {
+  font-family:"Oswald";
+  src:url(./fonts/Oswald-VariableFont_wght.ttf);
+}
+
+@font-face {
+  font-family:"Montserrat";
+  src:url(./fonts/Montserrat-VariableFont_wght.ttf);
+}
+
+@font-face {
+  font-family:"Lato";
+  src:url(./fonts/Lato-Medium.ttf);
+  font-weight:500;
+}

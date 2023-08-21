@@ -2,6 +2,10 @@ export const customTheme = {
   MuiContainer: {
     root: {
       paddingTop: '5px',
+      '& img': {
+        position:'relative',
+        top: '-10px',
+      },
       '&.container_header': {
         textAlign: 'right',
       },
@@ -35,12 +39,13 @@ export const customTheme = {
       marginBottom: '10px',
       textTransform: 'uppercase',
       '&.add_all_button': {
-        marginRight: '24px',
+        marginRight: '6px',
         // width: '120px',
         backgroundColor: '#536D70',
       },
       '&.add_selected_button': {
-        marginRight: '10px',
+        marginRight: '6px',
+        marginLeft: '15px',
       },
       '&.add_selected_button_Participants': {
         backgroundColor: '#2A6E93',

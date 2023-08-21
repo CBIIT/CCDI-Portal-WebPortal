@@ -3,17 +3,31 @@ import gql from 'graphql-tag';
 import { cellTypes } from '@bento-core/table';
 import { customParticipantsTabDownloadCSV, customFilesTabDownloadCSV, customSamplesTabDownloadCSV, customDiagnosisTabDownloadCSV, customStudyTabDownloadCSV } from './tableDownloadCSV';
 import { dataFormatTypes } from '@bento-core/table';
+import questionIcon from '../assets/icons/Question_Icon.svg';
 
 // --------------- Tooltip configuration --------------
-export const tooltipContent = {
-  icon: 'https://raw.githubusercontent.com/google/material-design-icons/master/src/action/help/materialicons/24px.svg',
+export const tooltipContentAddAll = {
+  icon: questionIcon,
   alt: 'tooltipIcon',
-  0: 'Click button to add selected files associated with the selected participant(s).',
-  1: 'Click button to add selected files associated with the selected sample(s).',
-  2: 'Click button to add selected files.',
-  Participants: 'Click button to add selected files associated with the selected participant(s).',
-  Samples: 'Click button to add selected files associated with the selected sample(s).',
-  Files: 'Click button to add selected files.',
+  Participants: 'Click button to add all files associated with the filtered row(s).',
+  Diagnosis: 'Click button to add all files associated with the filtered row(s).',
+  Studies: 'Click button to add all files associated with the filtered row(s).',
+  Samples: 'Click button to add all files associated with the filtered row(s).',
+  Files: 'Click button to add all files associated with the filtered row(s).',
+  arrow: true,
+  styles: {
+    border: '#03A383 1px solid',
+  }
+};
+
+export const tooltipContent = {
+  icon: questionIcon,
+  alt: 'tooltipIcon',
+  Participants: 'Click button to add files associated with the selected row(s).',
+  Diagnosis: 'Click button to add files associated with the selected row(s).',
+  Studies: 'Click button to add files associated with the selected row(s).',
+  Samples: 'Click button to add files associated with the selected row(s).',
+  Files: 'Click button to add files associated with the selected row(s).',
   arrow: true,
   styles: {
     border: '#03A383 1px solid',

@@ -4,6 +4,7 @@ import { types, btnTypes } from '@bento-core/paginated-table';
 import { customMyFilesTabDownloadCSV } from './tableDownloadCSV';
 import cartLogo from '../assets/header/Cart_Logo.svg';
 import cartPageLogo from '../assets/cart/Cart_Page_Icon.svg';
+import cartQuestionIcon from '../assets/cart/Question_Icon.svg';
 
 export const navBarCartData = {
   cartLabel: 'Cart',
@@ -18,7 +19,7 @@ export const maximumNumberOfFilesAllowedInTheCart = 1000;
 
 // --------------- Tooltip configuration --------------
 export const tooltipContent = {
-  icon: 'https://raw.githubusercontent.com/google/material-design-icons/master/src/action/help/materialicons/24px.svg',
+  icon: cartQuestionIcon,
   alt: 'tooltipIcon',
   clsName: 'tooltip_icon',
   myFiles: 'To access and analyze files: select and remove unwanted files,  click the “Download Manifest” button, and upload the resulting Manifest file to your Seven Bridges Genomics account.',

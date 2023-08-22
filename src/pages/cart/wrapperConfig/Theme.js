@@ -32,13 +32,13 @@ export const customTheme = {
       '&.container_header': {
         maxWidth: '100%',
         height: '75px',
-        padding: '10px 0px 15px 0px',
+        padding: '15px 0px 15px 0px',
         marginRight: '-5px',
         position: 'relative',
         textAlign: 'right',
         '& img.tooltip_icon': {
-          width: '20px',
           marginLeft: '5px',
+          marginRight: '7px',
           verticalAlign: 'top',
         },
       },

@@ -9,7 +9,7 @@ export default () => ({
     borderRadius: '35px',
     marginLeft: '3%',
     marginRight: '3%',
-    paddingBottom: '20px',
+    paddingBottom: '82px',
     background: 'white',
     paddingRight: '3%',
     paddingLeft: '3%',

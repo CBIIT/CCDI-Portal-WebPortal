@@ -109,6 +109,7 @@ export const tblBody = {
         fontFamily: 'Open Sans',
         fontSize: '14px',
         fontWeight: '400',
+        color: '#0F253A',
       },
       '&.file_name': {
         maxWidth: '300px',

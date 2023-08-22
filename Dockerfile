@@ -1,5 +1,7 @@
 FROM node:16.20.1-alpine  as build
 
+RUN apk update && apk upgrade -no-cache openssl libx11 tiff nghttp2 libwebp ncurses
+
 WORKDIR /usr/src/app
 
 COPY . .

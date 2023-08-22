@@ -342,14 +342,15 @@ query fileOverview(
         order_by: $order_by,
         sort_direction: $sort_direction
     ){
+        id
         file_name
         file_category
         file_description
         file_type
         file_size
-        study_id
-        participant_id
-        sample_id
+        link_study_id
+        link_participant_id
+        link_sample_id
         file_id
         md5sum
     }
@@ -414,6 +415,7 @@ query sampleOverview(
         order_by: $order_by,
         sort_direction: $sort_direction
     ){
+        id
         sample_id
         participant_id
         study_id
@@ -484,6 +486,7 @@ query participantOverview(
         order_by: $order_by,
         sort_direction: $sort_direction
     ) {
+        id
         participant_id
         phs_accession
         race
@@ -551,6 +554,7 @@ query diagnosisOverview(
         order_by: $order_by,
         sort_direction: $sort_direction
     ) {
+        id
         diagnosis_id
         participant_id
         phs_accession
@@ -621,6 +625,7 @@ query studyOverview(
         order_by: $order_by,
         sort_direction: $sort_direction
     ) {
+        id
         study_id
         pubmed_id
         grant_id
@@ -872,7 +877,7 @@ query fileAddAllToCart(
       order_by: $order_by,
       sort_direction: $sort_direction
   ){
-      file_id
+      id
   }
 }
             `;
@@ -1039,7 +1044,7 @@ export const tabContainers = [
     api: GET_PARTICIPANTS_OVERVIEW_QUERY,
     paginationAPIField: 'participantOverview',
     count: 'numberOfParticipants',
-    dataKey: 'participant_id',
+    dataKey: 'id',
     defaultSortField: 'participant_id',
     defaultSortDirection: 'asc',
     buttonText: 'Add Selected Files',
@@ -1123,7 +1128,7 @@ export const tabContainers = [
     defaultSortField: 'diagnosis_id',
     defaultSortDirection: 'asc',
     count: 'numberOfDiagnosis',
-    dataKey: 'diagnosis_id',
+    dataKey: 'id',
     tableID: 'diagnosis_tab_table',
     extendedViewConfig: {
       pagination: true,
@@ -1215,7 +1220,7 @@ export const tabContainers = [
     defaultSortField: 'study_id',
     defaultSortDirection: 'asc',
     count: 'numberOfStudies',
-    dataKey: 'study_id',
+    dataKey: 'id',
     tableID: 'study_tab_table',
     extendedViewConfig: {
       pagination: true,
@@ -1333,7 +1338,7 @@ export const tabContainers = [
     api: GET_SAMPLES_OVERVIEW_QUERY,
     count: 'numberOfSamples',
     paginationAPIField: 'sampleOverview',
-    dataKey: 'sample_id',
+    dataKey: 'id',
     defaultSortField: 'sample_id',
     defaultSortDirection: 'asc',
     tableID: 'sample_tab_table',
@@ -1443,7 +1448,7 @@ export const tabContainers = [
     defaultSortField: 'file_name',
     defaultSortDirection: 'asc',
     count: 'numberOfFiles',
-    dataKey: 'file_id',
+    dataKey: 'id',
     tableID: 'file_tab_table',
     extendedViewConfig: {
       pagination: true,
@@ -1493,21 +1498,21 @@ export const tabContainers = [
         cellType: cellTypes.FORMAT_DATA,
       },
       {
-        dataField: 'study_id',
+        dataField: 'link_study_id',
         header: 'Study ID',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'participant_id',
+        dataField: 'link_participant_id',
         header: 'Participant ID',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'sample_id',
+        dataField: 'link_sample_id',
         header: 'Sample ID',
         display: true,
         tooltipText: 'sort',

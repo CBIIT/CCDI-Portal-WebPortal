@@ -98,13 +98,14 @@ export const manifestData = {
 // --------------- GraphQL query - Retrieve selected cases info --------------
 export const GET_MY_CART_DATA_QUERY = gql`
 query filesInList($file_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String ="file_name", $sort_direction:String="asc") {
-    filesInList(file_id: $file_ids, offset: $offset,first: $first, order_by: $order_by, sort_direction: $sort_direction) {
+    filesInList(id: $file_ids, offset: $offset,first: $first, order_by: $order_by, sort_direction: $sort_direction) {
+        id
         file_id
         file_name
         study_short_title
         phs_accession
         participant_id
-        sample_id
+        link_sample_id
         file_type
         file_size
         md5sum
@@ -148,7 +149,7 @@ export const table = {
       tooltipText: 'sort',
     },
     {
-      dataField: 'sample_id',
+      dataField: 'link_sample_id',
       header: 'Sample ID',
       display: true,
       tooltipText: 'sort',

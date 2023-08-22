@@ -3,17 +3,31 @@ import gql from 'graphql-tag';
 import { cellTypes } from '@bento-core/table';
 import { customParticipantsTabDownloadCSV, customFilesTabDownloadCSV, customSamplesTabDownloadCSV, customDiagnosisTabDownloadCSV, customStudyTabDownloadCSV } from './tableDownloadCSV';
 import { dataFormatTypes } from '@bento-core/table';
+import questionIcon from '../assets/icons/Question_Icon.svg';
 
 // --------------- Tooltip configuration --------------
-export const tooltipContent = {
-  icon: 'https://raw.githubusercontent.com/google/material-design-icons/master/src/action/help/materialicons/24px.svg',
+export const tooltipContentAddAll = {
+  icon: questionIcon,
   alt: 'tooltipIcon',
-  0: 'Click button to add selected files associated with the selected participant(s).',
-  1: 'Click button to add selected files associated with the selected sample(s).',
-  2: 'Click button to add selected files.',
-  Participants: 'Click button to add selected files associated with the selected participant(s).',
-  Samples: 'Click button to add selected files associated with the selected sample(s).',
-  Files: 'Click button to add selected files.',
+  Participants: 'Click button to add all files associated with the filtered row(s).',
+  Diagnosis: 'Click button to add all files associated with the filtered row(s).',
+  Studies: 'Click button to add all files associated with the filtered row(s).',
+  Samples: 'Click button to add all files associated with the filtered row(s).',
+  Files: 'Click button to add all files associated with the filtered row(s).',
+  arrow: true,
+  styles: {
+    border: '#03A383 1px solid',
+  }
+};
+
+export const tooltipContent = {
+  icon: questionIcon,
+  alt: 'tooltipIcon',
+  Participants: 'Click button to add files associated with the selected row(s).',
+  Diagnosis: 'Click button to add files associated with the selected row(s).',
+  Studies: 'Click button to add files associated with the selected row(s).',
+  Samples: 'Click button to add files associated with the selected row(s).',
+  Files: 'Click button to add files associated with the selected row(s).',
   arrow: true,
   styles: {
     border: '#03A383 1px solid',
@@ -37,18 +51,6 @@ export const tabs = [
     count: 'numberOfParticipants',
   },
   {
-    id: 'sample_tab',
-    title: 'Samples',
-    dataField: 'dataSample',
-    count: 'numberOfSamples',
-  },
-  {
-    id: 'file_tab',
-    title: 'Files',
-    dataField: 'dataFile',
-    count: 'numberOfFiles',
-  },
-  {
     id: 'diagnosis_tab',
     title: 'Diagnosis',
     dataField: 'dataDiagnosis',
@@ -59,6 +61,18 @@ export const tabs = [
     title: 'Studies',
     dataField: 'dataStudy',
     count: 'numberOfStudies',
+  },
+  {
+    id: 'sample_tab',
+    title: 'Samples',
+    dataField: 'dataSample',
+    count: 'numberOfSamples',
+  },
+  {
+    id: 'file_tab',
+    title: 'Files',
+    dataField: 'dataFile',
+    count: 'numberOfFiles',
   },
 ];
 
@@ -328,14 +342,15 @@ query fileOverview(
         order_by: $order_by,
         sort_direction: $sort_direction
     ){
+        id
         file_name
         file_category
         file_description
         file_type
         file_size
-        study_id
-        participant_id
-        sample_id
+        link_study_id
+        link_participant_id
+        link_sample_id
         file_id
         md5sum
     }
@@ -400,6 +415,7 @@ query sampleOverview(
         order_by: $order_by,
         sort_direction: $sort_direction
     ){
+        id
         sample_id
         participant_id
         study_id
@@ -470,6 +486,7 @@ query participantOverview(
         order_by: $order_by,
         sort_direction: $sort_direction
     ) {
+        id
         participant_id
         phs_accession
         race
@@ -537,6 +554,7 @@ query diagnosisOverview(
         order_by: $order_by,
         sort_direction: $sort_direction
     ) {
+        id
         diagnosis_id
         participant_id
         phs_accession
@@ -607,6 +625,7 @@ query studyOverview(
         order_by: $order_by,
         sort_direction: $sort_direction
     ) {
+        id
         study_id
         pubmed_id
         grant_id
@@ -858,7 +877,7 @@ query fileAddAllToCart(
       order_by: $order_by,
       sort_direction: $sort_direction
   ){
-      file_id
+      id
   }
 }
             `;
@@ -1025,7 +1044,7 @@ export const tabContainers = [
     api: GET_PARTICIPANTS_OVERVIEW_QUERY,
     paginationAPIField: 'participantOverview',
     count: 'numberOfParticipants',
-    dataKey: 'participant_id',
+    dataKey: 'id',
     defaultSortField: 'participant_id',
     defaultSortDirection: 'asc',
     buttonText: 'Add Selected Files',
@@ -1102,222 +1121,6 @@ export const tabContainers = [
     addSelectedFilesQuery: GET_ALL_FILEIDS_PARTICIPANTSTAB_FOR_SELECT_ALL,
   },
   {
-    name: 'Samples',
-    dataField: 'dataSample',
-    api: GET_SAMPLES_OVERVIEW_QUERY,
-    count: 'numberOfSamples',
-    paginationAPIField: 'sampleOverview',
-    dataKey: 'sample_id',
-    defaultSortField: 'sample_id',
-    defaultSortDirection: 'asc',
-    tableID: 'sample_tab_table',
-    extendedViewConfig: {
-      pagination: true,
-      manageViewColumns: false,
-    },
-    saveButtonDefaultStyle: {
-      color: '#fff',
-      backgroundColor: '#00AEEF',
-      opacity: '1',
-      border: '0px',
-      cursor: 'pointer',
-    },
-    DeactiveSaveButtonDefaultStyle: {
-      opacity: '0.3',
-      cursor: 'auto',
-    },
-    ActiveSaveButtonDefaultStyle: {
-      cursor: 'pointer',
-      opacity: 'unset',
-      border: 'unset',
-    },
-
-    columns: [
-      {
-        cellType: cellTypes.CHECKBOX,
-        display: true,
-        role: cellTypes.CHECKBOX,
-      },
-      {
-        dataField: 'sample_id',
-        header: 'Sample ID',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'participant_id',
-        header: 'Particpant ID',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'study_id',
-        header: 'Study ID',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'anatomic_site',
-        header: 'Anatomic Site',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'participant_age_at_collection',
-        header: 'Age at Sample Collection',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'diagnosis_icd_o',
-        header: 'Sample ICD-O Morphology',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'sample_tumor_status',
-        header: 'Sample Tumor Status',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'tumor_classification',
-        header: 'Sample Tumor Classification',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-    ],
-    id: 'sample_tab',
-    tableID: 'sample_tab_table',
-    tabIndex: '1',
-    tableDownloadCSV: customSamplesTabDownloadCSV,
-    downloadFileName: 'Bento_Dashboard_participants_download',
-    tableMsg: {
-      noMatch: 'No Matching Records Found',
-    },
-    addFilesRequestVariableKey: 'sample_ids',
-    addFilesResponseKeys: ['fileIDsFromList'],
-    addAllFilesResponseKeys: ['sampleOverview', 'files'],
-    addAllFileQuery: GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART,
-    addSelectedFilesQuery: GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL,
-  },
-  {
-    name: 'Files',
-    dataField: 'dataFile',
-    api: GET_FILES_OVERVIEW_QUERY,
-    paginationAPIField: 'fileOverview',
-    defaultSortField: 'file_name',
-    defaultSortDirection: 'asc',
-    count: 'numberOfFiles',
-    dataKey: 'file_id',
-    tableID: 'file_tab_table',
-    extendedViewConfig: {
-      pagination: true,
-      manageViewColumns: false,
-    },
-    columns: [
-      {
-        cellType: cellTypes.CHECKBOX,
-        display: true,
-        role: cellTypes.CHECKBOX,
-      },
-      {
-        dataField: 'file_name',
-        header: 'File Name',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'file_category',
-        header: 'File Category',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'file_description',
-        header: 'File Description',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'file_type',
-        header: 'File Type',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'file_size',
-        header: 'File Size',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-        dataFormatType: dataFormatTypes.FORMAT_BYTES,
-        cellType: cellTypes.FORMAT_DATA,
-      },
-      {
-        dataField: 'study_id',
-        header: 'Study ID',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'participant_id',
-        header: 'Participant ID',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'sample_id',
-        header: 'Sample ID',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'file_id',
-        header: 'GUID',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'md5sum',
-        header: 'MD5sum',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-    ],
-    id: 'file_tab',
-    tableID: 'file_tab_table',
-    tabIndex: '2',
-    selectableRows: true,
-    tableDownloadCSV: customFilesTabDownloadCSV,
-    downloadFileName: 'Bento_Dashboard_participants_download',
-    tableMsg: {
-      noMatch: 'No Matching Records Found',
-    },
-    addFilesRequestVariableKey: 'file_ids',
-    addFilesResponseKeys: ['fileIDsFromList'],
-    addAllFilesResponseKeys: ['fileOverview', 'file_id'],
-    addAllFileQuery: GET_ALL_FILEIDS_FROM_FILESTAB_FOR_ADD_ALL_CART,
-    addSelectedFilesQuery: GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL,
-  },
-  {
     name: 'Diagnosis',
     dataField: 'dataDiagnosis',
     api: GET_DIAGNOSIS_OVERVIEW_QUERY,
@@ -1325,7 +1128,7 @@ export const tabContainers = [
     defaultSortField: 'diagnosis_id',
     defaultSortDirection: 'asc',
     count: 'numberOfDiagnosis',
-    dataKey: 'diagnosis_id',
+    dataKey: 'id',
     tableID: 'diagnosis_tab_table',
     extendedViewConfig: {
       pagination: true,
@@ -1417,7 +1220,7 @@ export const tabContainers = [
     defaultSortField: 'study_id',
     defaultSortDirection: 'asc',
     count: 'numberOfStudies',
-    dataKey: 'study_id',
+    dataKey: 'id',
     tableID: 'study_tab_table',
     extendedViewConfig: {
       pagination: true,
@@ -1528,6 +1331,222 @@ export const tabContainers = [
     addAllFilesResponseKeys: ['studyOverview', 'files'],
     addAllFileQuery: GET_ALL_FILEIDS_FROM_STUDYTAB_FOR_ADD_ALL_CART,
     addSelectedFilesQuery: GET_ALL_FILEIDS_STUDYISTAB_FOR_SELECT_ALL,
+  },
+  {
+    name: 'Samples',
+    dataField: 'dataSample',
+    api: GET_SAMPLES_OVERVIEW_QUERY,
+    count: 'numberOfSamples',
+    paginationAPIField: 'sampleOverview',
+    dataKey: 'id',
+    defaultSortField: 'sample_id',
+    defaultSortDirection: 'asc',
+    tableID: 'sample_tab_table',
+    extendedViewConfig: {
+      pagination: true,
+      manageViewColumns: false,
+    },
+    saveButtonDefaultStyle: {
+      color: '#fff',
+      backgroundColor: '#00AEEF',
+      opacity: '1',
+      border: '0px',
+      cursor: 'pointer',
+    },
+    DeactiveSaveButtonDefaultStyle: {
+      opacity: '0.3',
+      cursor: 'auto',
+    },
+    ActiveSaveButtonDefaultStyle: {
+      cursor: 'pointer',
+      opacity: 'unset',
+      border: 'unset',
+    },
+
+    columns: [
+      {
+        cellType: cellTypes.CHECKBOX,
+        display: true,
+        role: cellTypes.CHECKBOX,
+      },
+      {
+        dataField: 'sample_id',
+        header: 'Sample ID',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'participant_id',
+        header: 'Particpant ID',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'study_id',
+        header: 'Study ID',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'anatomic_site',
+        header: 'Anatomic Site',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'participant_age_at_collection',
+        header: 'Age at Sample Collection',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'diagnosis_icd_o',
+        header: 'Sample ICD-O Morphology',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'sample_tumor_status',
+        header: 'Sample Tumor Status',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'tumor_classification',
+        header: 'Sample Tumor Classification',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+    ],
+    id: 'sample_tab',
+    tableID: 'sample_tab_table',
+    tabIndex: '1',
+    tableDownloadCSV: customSamplesTabDownloadCSV,
+    downloadFileName: 'Bento_Dashboard_participants_download',
+    tableMsg: {
+      noMatch: 'No Matching Records Found',
+    },
+    addFilesRequestVariableKey: 'sample_ids',
+    addFilesResponseKeys: ['fileIDsFromList'],
+    addAllFilesResponseKeys: ['sampleOverview', 'files'],
+    addAllFileQuery: GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART,
+    addSelectedFilesQuery: GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL,
+  },
+  {
+    name: 'Files',
+    dataField: 'dataFile',
+    api: GET_FILES_OVERVIEW_QUERY,
+    paginationAPIField: 'fileOverview',
+    defaultSortField: 'file_name',
+    defaultSortDirection: 'asc',
+    count: 'numberOfFiles',
+    dataKey: 'id',
+    tableID: 'file_tab_table',
+    extendedViewConfig: {
+      pagination: true,
+      manageViewColumns: false,
+    },
+    columns: [
+      {
+        cellType: cellTypes.CHECKBOX,
+        display: true,
+        role: cellTypes.CHECKBOX,
+      },
+      {
+        dataField: 'file_name',
+        header: 'File Name',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'file_category',
+        header: 'File Category',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'file_description',
+        header: 'File Description',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'file_type',
+        header: 'File Type',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'file_size',
+        header: 'File Size',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+        dataFormatType: dataFormatTypes.FORMAT_BYTES,
+        cellType: cellTypes.FORMAT_DATA,
+      },
+      {
+        dataField: 'link_study_id',
+        header: 'Study ID',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'link_participant_id',
+        header: 'Participant ID',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'link_sample_id',
+        header: 'Sample ID',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'file_id',
+        header: 'GUID',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'md5sum',
+        header: 'MD5sum',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+    ],
+    id: 'file_tab',
+    tableID: 'file_tab_table',
+    tabIndex: '2',
+    selectableRows: true,
+    tableDownloadCSV: customFilesTabDownloadCSV,
+    downloadFileName: 'Bento_Dashboard_participants_download',
+    tableMsg: {
+      noMatch: 'No Matching Records Found',
+    },
+    addFilesRequestVariableKey: 'file_ids',
+    addFilesResponseKeys: ['fileIDsFromList'],
+    addAllFilesResponseKeys: ['fileOverview', 'file_id'],
+    addAllFileQuery: GET_ALL_FILEIDS_FROM_FILESTAB_FOR_ADD_ALL_CART,
+    addSelectedFilesQuery: GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL,
   },
 ];
 

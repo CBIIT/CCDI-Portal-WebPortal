@@ -1,6 +1,6 @@
 FROM node:16.20.1-alpine  as build
 
-RUN apk update && apk upgrade -no-cache \
+RUN apk update && apk upgrade  \
     openssl \ 
     libx11 \
     tiff \ 

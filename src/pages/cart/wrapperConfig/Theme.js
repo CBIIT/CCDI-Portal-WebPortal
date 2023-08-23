@@ -71,7 +71,6 @@ export const customTheme = {
     root: {
       color: '#fff',
       backgroundColor: '#2A6E93',
-      fontSize: '0.875rem',
       fontFamily: 'Poppins',
       fontWeight: '600',
       fontSize: '12px',

@@ -1,12 +1,5 @@
 FROM node:16.20.1-alpine  as build
 
-RUN apk update && apk upgrade  \
-    openssl \ 
-    libx11 \
-    tiff \ 
-    nghttp2 \ 
-    libwebp \
-    ncurses
 
 WORKDIR /usr/src/app
 
@@ -17,6 +10,14 @@ RUN NODE_OPTIONS="--max-old-space-size=4096" npm ci
 RUN NODE_OPTIONS="--max-old-space-size=4096" npm run build --silent
 
 FROM nginx:1.23.3-alpine
+
+RUN apk update && apk upgrade  \
+    openssl \ 
+    libx11 \
+    tiff \ 
+    nghttp2 \ 
+    libwebp \
+    ncurses
 
 COPY --from=build /usr/src/app/dist /usr/share/nginx/html
 COPY --from=build /usr/src/app/config/inject.template.js /usr/share/nginx/html/inject.template.js

@@ -90,6 +90,13 @@ export const resourcesAppliationsListData = [
     content: 'A tool to browse demographic, incidence, and survival statistics for cancers in children, adolescent, and young adults.',
     link: 'https://nccrexplorer.ccdi.cancer.gov',
   },
+  {
+    id: 'inventory',
+    title: 'Childhood Cancer Data Initiative Data Inventory',
+    subtitle: 'CCDI Data Inventory',
+    content: 'A searchable catalog of annotated data submissions at the participant-level, serving as the primary CCDI data reference.',
+    link: '/explore',
+  },
 ];
 
 export const resourcesCloudListData = [

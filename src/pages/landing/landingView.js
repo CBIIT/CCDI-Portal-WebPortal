@@ -784,7 +784,7 @@ const LandingView = () => {
                 resourcesAppliationsListData.map((appItem, appidx) => {
                   const appkey = `app_${appidx}`;
                   return (
-                    <a id={appItem.id} className='resourceListItem' key={appkey} href={appItem.link} target="_blank" rel="noopener noreferrer">
+                    <a id={appItem.id} className='resourceListItem' key={appkey} href={appItem.link} target={appItem.link.includes('http') ? "_blank" : ""} rel="noopener noreferrer">
                       <div className='resourceListItemUpper'>
                         <div className='resourceListItemLogo' style={{background: '#00838F'}}>{appItem.subtitle}</div>
                         <div className='resourceListItemTitleContainer'>

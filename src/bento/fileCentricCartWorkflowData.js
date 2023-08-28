@@ -3,6 +3,8 @@ import { cellTypes, dataFormatTypes } from '@bento-core/table';
 import { types, btnTypes } from '@bento-core/paginated-table';
 import { customMyFilesTabDownloadCSV } from './tableDownloadCSV';
 import cartLogo from '../assets/header/Cart_Logo.svg';
+import cartPageLogo from '../assets/cart/Cart_Page_Icon.svg';
+import cartQuestionIcon from '../assets/cart/Question_Icon.svg';
 
 export const navBarCartData = {
   cartLabel: 'Cart',
@@ -17,7 +19,7 @@ export const maximumNumberOfFilesAllowedInTheCart = 1000;
 
 // --------------- Tooltip configuration --------------
 export const tooltipContent = {
-  icon: 'https://raw.githubusercontent.com/google/material-design-icons/master/src/action/help/materialicons/24px.svg',
+  icon: cartQuestionIcon,
   alt: 'tooltipIcon',
   clsName: 'tooltip_icon',
   myFiles: 'To access and analyze files: select and remove unwanted files,  click the “Download Manifest” button, and upload the resulting Manifest file to your Seven Bridges Genomics account.',
@@ -43,17 +45,17 @@ export const myFilesPageData = {
         {
           clsName: 'cart_icon',
           type: types.ICON,
-          src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/Icon-Cart-Workflow.svg',
+          src: cartPageLogo,
           alt: 'Bento MyFiles header logo',
         },
-        {
-          clsName: 'cart_header_text',
-          text: 'Cart >',
-          type: types.TEXT,
-        },
+        // {
+        //   clsName: 'cart_header_text',
+        //   text: 'Cart >',
+        //   type: types.TEXT,
+        // },
         {
           clsName: 'cart_sel_files_text',
-          text: 'Selected Files',
+          text: 'MY FILES',
           type: types.TEXT,
         },
       ],
@@ -76,23 +78,24 @@ export const myFilesPageData = {
     container: 'paginatedTable',
     paginatedTable: true,
   },
-  {
-    container: 'buttons',
-    size: 'xl',
-    clsName: 'container_footer',
-    items: [
-      {
-        clsName: 'manifest_comments',
-        type: types.TEXT_INPUT,
-        placeholder: 'Please add a description for the CSV file you are about to download.',
-      }],
-  }]
+  // {
+  //   container: 'buttons',
+  //   size: 'xl',
+  //   clsName: 'container_footer',
+  //   items: [
+  //     {
+  //       clsName: 'manifest_comments',
+  //       type: types.TEXT_INPUT,
+  //       placeholder: 'Please add a description for the CSV file you are about to download.',
+  //     }],
+  // }
+  ]
 };
 
 
 export const manifestData = {
-  keysToInclude: ['study_code', 'subject_id', 'file_name', 'file_id', 'md5sum'],
-  header: ['Study Code', 'Case ID', 'File Name', 'File ID', 'Md5sum', 'User Comments'],
+  keysToInclude: ['participant_id', 'file_name', 'file_id', 'md5sum'],
+  header: ['Participant Id', 'File Name', 'File ID', 'Md5sum'],
 };
 
 // --------------- GraphQL query - Retrieve selected cases info --------------

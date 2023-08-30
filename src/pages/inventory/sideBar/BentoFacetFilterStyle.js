@@ -119,7 +119,7 @@ export default () => ({
     fontSize: '14px',
     marginRight: '0px',
   },
-  activeFacetDemographic: {
+  activeFacetDemographics: {
     color: '#357288',
     fontWeight: 600,
   },
@@ -131,7 +131,7 @@ export default () => ({
     color: '#907642',
     fontWeight: 600,
   },
-  activeFacetAssay: {
+  activeFacetDatacategory: {
     color: '#A85348',
     fontWeight: 600,
   },

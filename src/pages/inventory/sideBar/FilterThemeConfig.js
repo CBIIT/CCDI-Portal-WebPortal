@@ -61,10 +61,10 @@ const theme = {
         '&.samplesCheckedOdd': {
           backgroundColor: '#F0DFBD40',
         },
-        '&.assayCheckedEven': {
+        '&.datacategoryCheckedEven': {
           backgroundColor: '#E1B4AD40',
         },
-        '&.assayCheckedOdd': {
+        '&.datacategoryCheckedOdd': {
           backgroundColor: '#F8D7D240',
         },
         '&.studyCheckedEven': {
@@ -92,7 +92,7 @@ const theme = {
         '&.samplesCheckedIcon': {
           color: '#6D5F5B',
         },
-        '&.assayCheckedIcon': {
+        '&.datacategoryCheckedIcon': {
           color: '#6D5F5B',
         },
         '&.studyCheckedIcon': {
@@ -126,7 +126,7 @@ const theme = {
           marginRight: '0px',
           fontWeight: '600',
         },
-        '&.assaySubjects': {
+        '&.datacategorySubjects': {
           color: '#A85348',
           fontSize: '12px',
           fontFamily: 'Nunito',

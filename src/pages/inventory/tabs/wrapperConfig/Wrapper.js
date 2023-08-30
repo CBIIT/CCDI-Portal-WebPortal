@@ -83,7 +83,7 @@ export const wrapperConfig = [{
     {
       title: 'Go to Cart >',
       clsName: 'go_to_cart',
-      url: '#/fileCentricCart',
+      url: '/fileCentricCart',
       type: types.LINK,
     }],
 },

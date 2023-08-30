@@ -492,6 +492,7 @@ query participantOverview(
         race
         gender
         ethnicity
+        alternate_participant_id
     }
 }
 `;
@@ -1101,6 +1102,13 @@ export const tabContainers = [
       {
         dataField: 'ethnicity',
         header: 'Ethnicity',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'alternate_participant_id',
+        header: 'Alternate ID',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,

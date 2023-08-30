@@ -11,7 +11,7 @@ export default () => ({
     margin: 'auto',
   },
   sideBar: {
-    width: '265px',
+    width: '270px',
     maxHeight: '1300px',
     overflowX: 'hidden',
     backgroundColor: 'transparent',
@@ -20,7 +20,7 @@ export default () => ({
     zIndex: '99',
   },
   rightContent: {
-    width: 'calc(100% - 250px)',
+    width: 'calc(100% - 270px)',
     position: 'relative',
     borderRight: 'thin solid #B1B1B1',
     borderLeft: 'thin solid #B1B1B1',

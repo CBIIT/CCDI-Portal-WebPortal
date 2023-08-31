@@ -4,7 +4,7 @@ const DEMOGRAPHICS = 'Demographics';
 const DIAGNOSIS = 'Diagnosis';
 // const CASES = 'Cases';
 const SAMPLES = 'Samples';
-const DATACATEGORY = 'Data Category';
+const DATACATEGORY = 'Datacategory';
 // const FILES = 'Files';
 const STUDY = 'Study';
 const LIBRARY = 'Library';
@@ -34,7 +34,7 @@ export const facetSectionVariables = {
   Samples: {
     isExpanded: true,
   },
-  'Data Category': {
+  Datacategory: {
     isExpanded: true,
   },
   Study: {

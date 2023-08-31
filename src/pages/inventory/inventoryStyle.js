@@ -16,6 +16,7 @@ export default () => ({
     overflowX: 'hidden',
     backgroundColor: 'transparent',
     borderLeft: 'thin solid #B1B1B1',
+    borderBottom: 'thin solid #B1B1B1',
     overflow: 'auto',
     zIndex: '99',
   },

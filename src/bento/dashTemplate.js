@@ -784,13 +784,13 @@ export const widgetConfig = [
   },
   {
     type: 'donut',
-    title: 'Diagnosis',
+    title: 'Diagnosis (ICD-O)',
     dataName: 'participantCountByDiagnosis',
     sliceTitle: 'Participants',
   },
   {
     type: 'bar',
-    title: 'Diagnosis Age',
+    title: 'Age at Diagnosis (years)',
     dataName: 'participantCountByDiagnosisAge',
     width: '100%',
     height: 210,

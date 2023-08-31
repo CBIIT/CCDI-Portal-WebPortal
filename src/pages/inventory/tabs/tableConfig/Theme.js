@@ -55,6 +55,24 @@ const tblBody = {
           lineBreak: 'anywhere',
         },
       },
+      '&.diagnosis': {
+        minWidth: '250px',
+        '& p': {
+          lineBreak: 'anywhere',
+        },
+      },
+      '&.anatomic_site': {
+        minWidth: '250px',
+        '& p': {
+          lineBreak: 'anywhere',
+        },
+      },
+      '&.file_type': {
+        minWidth: '150px',
+        '& p': {
+          lineBreak: 'anywhere',
+        },
+      },
       '&.acl': {
         textAlign: 'center',
       },

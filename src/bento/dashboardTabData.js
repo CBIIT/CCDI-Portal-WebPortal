@@ -352,6 +352,7 @@ query fileOverview(
         link_participant_id
         link_sample_id
         file_id
+        guid
         md5sum
     }
 }
@@ -1527,7 +1528,7 @@ export const tabContainers = [
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'file_id',
+        dataField: 'guid',
         header: 'GUID',
         display: true,
         tooltipText: 'sort',

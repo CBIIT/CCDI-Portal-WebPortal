@@ -81,6 +81,7 @@ export default () => ({
     padding: '0',
     flexDirection: 'row-reverse',
     paddingLeft: 0,
+    borderBottom: '1px solid #D2D2D2',
   },
   sortGroup: {
     padding: '10px',

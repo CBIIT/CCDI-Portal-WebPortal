@@ -25,23 +25,23 @@ export const facetSectionVariables = {
     hasSearch: true,
   },
   Diagnosis: {
-    isExpanded: true,
+    isExpanded: false,
   },
   // Cases: {
   //   isExpanded: true,
   //   hasSearch: true,
   // },
   Samples: {
-    isExpanded: true,
+    isExpanded: false,
   },
   Datacategory: {
-    isExpanded: true,
+    isExpanded: false,
   },
   Study: {
-    isExpanded: true,
+    isExpanded: false,
   },
   Library: {
-    isExpanded: true,
+    isExpanded: false,
   },
   // Files: {
   //   isExpanded: true,

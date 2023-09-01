@@ -113,7 +113,7 @@ export const facetsConfig = [
         color: '#000000',
         marginBottom: '0px',
         float: 'left',
-        width: '75px',
+        width: '50%',
         display: 'flex',
       },
       maxValue: {
@@ -122,6 +122,7 @@ export const facetsConfig = [
         color: '#000000',
         float: 'right',
         marginBottom: '0px',
+        width: '50%',
         display: 'flex',
       },
       rail: {

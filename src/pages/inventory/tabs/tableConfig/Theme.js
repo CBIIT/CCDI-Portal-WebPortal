@@ -44,7 +44,31 @@ const tblBody = {
         fontSize: '14px',
       },
       '&.file_name': {
-        maxWidth: '300px',
+        minWidth: '300px',
+        '& p': {
+          lineBreak: 'anywhere',
+        },
+      },
+      '&.md5sum': {
+        minWidth: '160px',
+        '& p': {
+          lineBreak: 'anywhere',
+        },
+      },
+      '&.diagnosis': {
+        minWidth: '250px',
+        '& p': {
+          lineBreak: 'anywhere',
+        },
+      },
+      '&.anatomic_site': {
+        minWidth: '250px',
+        '& p': {
+          lineBreak: 'anywhere',
+        },
+      },
+      '&.file_type': {
+        minWidth: '150px',
         '& p': {
           lineBreak: 'anywhere',
         },

@@ -1,4 +1,15 @@
 export const tblHeader = {
+  MuiTableCell: {
+    head: {
+      color: '#0F253A',
+      position: 'relative',
+      fontSize: '15px',
+      fontFamily: 'Open Sans',
+      fontWeight: '700',
+      letterSpacing: '0.06em',
+      textDecoration: 'none',
+    },
+  },
   MuiTableSortLabel: {
     root: {
       color: '#0F253A',

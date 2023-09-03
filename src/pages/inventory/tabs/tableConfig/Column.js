@@ -1,31 +1,14 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
 import { cellTypes, headerTypes } from '@bento-core/table';
-import DocumentDownloadView from '../../../../components/DocumentDownload/DocumentDownloadView';
+import ReactHtmlParser from "html-react-parser";
 
 export const CustomCellView = (props) => {
   const {
-    downloadDocument, documentDownloadProps,
-    displayEmpty, dataField,
+    dataField, dataFormatter,
   } = props;
-  if (downloadDocument) {
-    return (
-      <DocumentDownloadView
-        fileSize={props.file_size}
-        caseId={props[documentDownloadProps.caseIdColumn]}
-        fileFormat={props[documentDownloadProps.fileFormatColumn]}
-        fileLocation={props[documentDownloadProps.fileLocationColumn]}
-        {...documentDownloadProps}
-        {...props}
-        requiredACLs={props[dataField]}
-      />
-    );
-  } else if (typeof displayEmpty === "boolean") {
-    return (<Typography>{displayEmpty || props[dataField] ? props[dataField] : ""}</Typography>);
-  }
-
+  const content = dataFormatter(props[dataField]);
   // other custom elem
-  return (<></>);
+  return (<>{ReactHtmlParser(content)}</>);
 };
 
 export const CustomHeaderCellView = () => (<></>);

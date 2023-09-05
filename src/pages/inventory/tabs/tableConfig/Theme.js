@@ -44,7 +44,7 @@ const tblBody = {
     },
     paddingCheckbox: {
       width: '48px',
-      padding: '0 0 0 5px',
+      padding: '0 0 0 16px',
     },
     body: {
       fontFamily: 'Open Sans',

@@ -1340,7 +1340,7 @@ export const tabContainers = [
         sortable: false,
         cellType: cellTypes.CUSTOM_ELEM,
         dataFormatter: (dt) => {
-          return dt.join(";");
+          return dt.join("<br>");
         },
         role: cellTypes.DISPLAY,
       },

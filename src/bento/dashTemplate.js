@@ -18,6 +18,10 @@ export const resetIcon = {
   size: '12 px',
 };
 
+export const sectionLabel = {
+  Datacategory: "Data Category",
+};
+
 // --------------- Dashboard Sidebar Sections styling --------------
 export const facetSectionVariables = {
   Demographics: {

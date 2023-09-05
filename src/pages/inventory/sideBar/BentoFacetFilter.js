@@ -23,7 +23,7 @@ import {
 import store from '../../../store';
 import styles from './BentoFacetFilterStyle';
 import { FacetFilter, ClearAllFiltersBtn } from '@bento-core/facet-filter';
-import { facetsConfig, facetSectionVariables, resetIcon } from '../../../bento/dashTemplate';
+import { facetsConfig, facetSectionVariables, resetIcon, sectionLabel } from '../../../bento/dashTemplate';
 import FacetFilterThemeProvider from './FilterThemeConfig';
 import {
   getAllParticipantIds, getAllIds,
@@ -161,7 +161,7 @@ const BentoFacetFilter = ({
       <>
         <CustomExpansionPanelSummary onClick={collapseHandler} id={section}>
           <div className={classes.sectionSummaryTextContainer}>
-            {name}
+            {sectionLabel[name] !== undefined ? sectionLabel[name] : name}
             {hasSearch && (
               <div className={classes.findCaseButton} onClick={toggleSearch}>
                 <img src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/FacetLocalFindSearchIcon.svg" className={classes.findCaseIcon} alt="search" />

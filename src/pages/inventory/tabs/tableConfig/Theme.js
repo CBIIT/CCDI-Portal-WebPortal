@@ -92,10 +92,10 @@ const tblBody = {
 }
 
 export const extendedView = {
-  root: {
-    '&.downloadArea': {
-      color: 'red',
-    }
+  MuiIconButton: {
+    root: {
+      padding: '0 0 0 0',
+    },
   },
   tblTopPgn: {
     MuiTablePagination: {

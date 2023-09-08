@@ -1292,7 +1292,7 @@ export const tabContainers = [
       },
       {
         dataField: 'diagnosis',
-        header: 'Diagnosis',
+        header: 'Diagnosis (Top 5)',
         display: true,
         sortable: false,
         headerType: cellTypes.CUSTOM_ELEM,
@@ -1314,7 +1314,7 @@ export const tabContainers = [
       },
       {
         dataField: 'anatomic_site',
-        header: 'Diagnosis Anatomic Site',
+        header: 'Diagnosis Anatomic Site (Top 5)',
         display: true,
         sortable: false,
         cellType: cellTypes.CUSTOM_ELEM,

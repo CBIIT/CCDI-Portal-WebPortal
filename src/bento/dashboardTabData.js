@@ -1335,11 +1335,14 @@ export const tabContainers = [
       },
       {
         dataField: 'file_type',
-        header: 'File Type',
+        header: 'File Type (Top 5)',
         display: true,
         sortable: false,
         cellType: cellTypes.CUSTOM_ELEM,
         dataFormatter: (dt) => {
+          if (dt.length > 5) {
+            return dt.slice(0, 5).join("<br>") + "<br><span title='For more information on file type please see Files tab'>...</span>";
+          }
           return dt.join("<br>");
         },
         role: cellTypes.DISPLAY,

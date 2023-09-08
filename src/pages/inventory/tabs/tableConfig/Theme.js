@@ -54,6 +54,24 @@ const tblBody = {
         fontFamily: 'Open Sans',
         fontSize: '14px',
       },
+      '&.pubmed_id': {
+        minWidth: '150px',
+        '& p': {
+          lineBreak: 'anywhere',
+        },
+      },
+      '&.grant_id': {
+        minWidth: '150px',
+        '& p': {
+          lineBreak: 'anywhere',
+        },
+      },
+      '&.study_id': {
+        minWidth: '150px',
+        '& p': {
+          lineBreak: 'anywhere',
+        },
+      },
       '&.file_name': {
         minWidth: '300px',
         '& p': {
@@ -66,20 +84,38 @@ const tblBody = {
           lineBreak: 'anywhere',
         },
       },
+      '&.num_of_participants': {
+        minWidth: '150px',
+        '& p': {
+          lineBreak: 'anywhere',
+        },
+      },
+      '&.num_of_samples': {
+        minWidth: '150px',
+        '& p': {
+          lineBreak: 'anywhere',
+        },
+      },
+      '&.num_of_files': {
+        minWidth: '150px',
+        '& p': {
+          lineBreak: 'anywhere',
+        },
+      },
       '&.diagnosis': {
-        minWidth: '250px',
+        minWidth: '300px',
         '& p': {
           lineBreak: 'anywhere',
         },
       },
       '&.anatomic_site': {
-        minWidth: '250px',
+        minWidth: '300px',
         '& p': {
           lineBreak: 'anywhere',
         },
       },
       '&.file_type': {
-        minWidth: '150px',
+        minWidth: '200px',
         '& p': {
           lineBreak: 'anywhere',
         },

@@ -19,7 +19,7 @@ export default () => ({
     position: 'absolute',
     top: '90px',
     left: '70px',
-    width: '520px',
+    width: '550px',
     fontFamily: 'Inter',
     fontSize: '16px',
     fontWeight: '400',
@@ -30,6 +30,9 @@ export default () => ({
       fontWeight: '600',
       color: '#004C73',
     },
+    '& p': {
+      margin: '6px 0 6px 0',
+    }
   },
   customTooltip: {
     border: '#03A383 1px solid',

@@ -38,7 +38,8 @@ const CartView = (props) => {
       <Grid item xs={12}>
         <div className={classes.myFilesWrapper}>
           <div className={classes.textContainer}>
-            To access and analyze files: select and remove unwanted files, click the “Download File Manifest” button, and upload the resulting Manifest file to your <a href="https://www.cancergenomicscloud.org/" target="_blank" rel="noopener noreferrer">Seven Bridges Genomics</a> account.
+            <p>Thank you for your interest in CCDI supported data.</p>
+            Selecting the “Download Manifest” button will produce a manifest of assay files for items within the cart.  This manifest file can be uploaded in the <a href="https://www.cancergenomicscloud.org/" target="_blank" rel="noopener noreferrer">Cancer Genomics Cloud</a> to access and analyze controlled access information. Additional help and information about the CGC use and access is available at the <a href="https://docs.cancergenomicscloud.org/" target="_blank" rel="noopener noreferrer">CGC Knowledge Center</a>.
           </div>
           <CartWrapper
             classes={classes}

@@ -31,11 +31,12 @@ export const customTheme = {
       },
       '&.container_header': {
         maxWidth: '100%',
-        padding: '68px 0px 68px 0px',
+        padding: '45px 0px',
         marginRight: '-5px',
         position: 'relative',
         textAlign: 'right',
         '& img.tooltip_icon': {
+          marginTop: '5px',
           marginLeft: '5px',
           marginRight: '7px',
           verticalAlign: 'top',
@@ -75,7 +76,7 @@ export const customTheme = {
       fontWeight: '600',
       fontSize: '12px',
       borderRadius: '5px',
-      marginBottom: '10px',
+      margin: '5px 0px',
       textTransform: 'uppercase',
       '&:hover': {
         backgroundColor: '#2A6E93',

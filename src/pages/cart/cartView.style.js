@@ -19,7 +19,7 @@ export default () => ({
     position: 'absolute',
     top: '90px',
     left: '70px',
-    width: '550px',
+    width: '1000px',
     fontFamily: 'Inter',
     fontSize: '16px',
     fontWeight: '400',

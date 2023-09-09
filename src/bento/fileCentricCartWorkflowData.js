@@ -22,7 +22,7 @@ export const tooltipContent = {
   icon: cartQuestionIcon,
   alt: 'tooltipIcon',
   clsName: 'tooltip_icon',
-  myFiles: 'To access and analyze files: select and remove unwanted files,  click the “Download Manifest” button, and upload the resulting Manifest file to your Seven Bridges Genomics account.',
+  myFiles: 'To access and analyze files: select and remove unwanted files, click the "Download Manifest" button, and upload the resulting manifest file to your Cancer Genomics Cloud (CGC) account.',
   arrow: true,
   styles: {
     border: '#03A383 1px solid',
@@ -31,10 +31,10 @@ export const tooltipContent = {
 
 //BENTO-2455 Configuration set for Bento 4.0.
 export const myFilesPageData = {
-  manifestFileName: 'BENTO File Manifest',
+  manifestFileName: 'CCID Inventory File Manifest',
   tooltipIcon: 'https://raw.githubusercontent.com/google/material-design-icons/master/src/action/help/materialicons/24px.svg',
   tooltipAlt: 'tooltip icon',
-  tooltipMessage: 'To access and analyze files: select and remove unwanted files,  click the “Download Manifest” button, and upload the resulting Manifest file to your Seven Bridges Genomics account.',
+  tooltipMessage: 'To access and analyze files: select and remove unwanted files, click the "Download Manifest" button, and upload the resulting manifest file to your Cancer Genomics Cloud (CGC) account.',
   errorMessage: 'An error has occurred in loading CART',
   layout: [
     {

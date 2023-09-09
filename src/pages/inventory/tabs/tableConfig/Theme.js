@@ -128,11 +128,17 @@ const tblBody = {
 }
 
 export const extendedView = {
+  MuiIconButton: {
+    root: {
+      padding: '0 0 0 0',
+    },
+  },
   tblTopPgn: {
     MuiTablePagination: {
       root: {
         paddingRight: '50px',
-        borderTop: '1px solid #8A7F7C',
+        // borderTop: '1px solid #8A7F7C',
+        marginLeft: 'auto',
       },
       caption: {
         fontFamily: 'Open Sans',
@@ -152,7 +158,7 @@ export const extendedView = {
 export const toolbar = {
   MuiToolbar: {
     root: {
-      borderTop: '2px solid #e7e5e5',
+      // borderTop: '2px solid #e7e5e5',
       '& div' :{
         fontFamily: 'Open Sans',
         fontSize: '14px',
@@ -170,8 +176,8 @@ export const tblPgn = {
   MuiTablePagination: {
     root: {
       paddingRight: '50px',
-      borderTop: '3px solid #8A7F7C',
-      borderBottom: '1px solid #8A7F7C',
+      marginLeft: 'auto',
+      // borderBottom: '1px solid #8A7F7C',
       '&:last-child': {
         paddingRight: '50px',
       }
@@ -208,6 +214,7 @@ export const tblContainer = {
       borderSpacing: '0',
       borderCollapse: 'collapse',
       borderTop: '3px solid #8A7F7C',
+      borderBottom: '2px solid #8A7F7C',
     },
   },
 };

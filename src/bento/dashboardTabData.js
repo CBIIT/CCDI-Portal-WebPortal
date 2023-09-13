@@ -1196,6 +1196,13 @@ export const tabContainers = [
         header: 'Age at Diagnosis (days)',
         display: true,
         tooltipText: 'sort',
+        cellType: cellTypes.CUSTOM_ELEM,
+        dataFormatter: (dt) => {
+          if (dt === -999) {
+            return 'Not Reported';
+          }
+          return dt.toString();
+        },
         role: cellTypes.DISPLAY,
       },
       {
@@ -1433,6 +1440,13 @@ export const tabContainers = [
         header: 'Age at Sample Collection',
         display: true,
         tooltipText: 'sort',
+        cellType: cellTypes.CUSTOM_ELEM,
+        dataFormatter: (dt) => {
+          if (dt === -999) {
+            return 'Not Reported';
+          }
+          return dt.toString();
+        },
         role: cellTypes.DISPLAY,
       },
       {

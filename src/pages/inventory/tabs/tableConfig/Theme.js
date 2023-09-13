@@ -158,7 +158,7 @@ export const extendedView = {
 export const toolbar = {
   MuiToolbar: {
     root: {
-      // borderTop: '2px solid #e7e5e5',
+      borderTop: '1px solid #8A7F7C',
       '& div' :{
         fontFamily: 'Open Sans',
         fontSize: '14px',

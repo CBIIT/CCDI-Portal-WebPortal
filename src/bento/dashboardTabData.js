@@ -879,7 +879,7 @@ query fileAddAllToCart(
       order_by: $order_by,
       sort_direction: $sort_direction
   ){
-      id
+    files
   }
 }
             `;
@@ -1575,7 +1575,7 @@ export const tabContainers = [
     },
     addFilesRequestVariableKey: 'file_ids',
     addFilesResponseKeys: ['fileIDsFromList'],
-    addAllFilesResponseKeys: ['fileOverview', 'file_id'],
+    addAllFilesResponseKeys: ['fileOverview', 'files'],
     addAllFileQuery: GET_ALL_FILEIDS_FROM_FILESTAB_FOR_ADD_ALL_CART,
     addSelectedFilesQuery: GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL,
   },

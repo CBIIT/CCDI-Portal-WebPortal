@@ -47,7 +47,7 @@ const SearchInput = styled.input`
   background: transparent;
 
   ::placeholder {
-    color: #004A8B;
+    color: #a9b2b9;
   }
 
   :focus {
@@ -101,9 +101,9 @@ const SearchBar = () => {
   return (
         <SearchBarContainer>
             <div className='searchBar'>
-                <label>
+                <label htmlFor="search">
                     <div style={{display:"none"}}>search</div>
-                    <SearchInput type="search" value={localText} placeholder="" onChange={handleTextInputChange} onKeyPress={handleKeyPress} />
+                    <SearchInput id="search" type="search" value={localText} placeholder="search" onChange={handleTextInputChange} onKeyPress={handleKeyPress} />
                   </label>
                 </div>
             <div className='searchButton' onClick={handleSearch}><img src={searchIcon} alt="searchIcon" /></div>

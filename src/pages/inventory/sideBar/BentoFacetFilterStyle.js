@@ -67,7 +67,7 @@ export default () => ({
     flexShrink: '0',
     fontFamily: 'Poppins',
     fontWeight: 400,
-    lineHeight: '0',
+    lineHeight: '18px',
     marginLeft: '5px',
     textTransform: 'uppercase',
     letterSpacing: '-0.02em',

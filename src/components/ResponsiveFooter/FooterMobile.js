@@ -362,7 +362,7 @@ const FooterMobile = () => {
               })
             }
           </FooterLinksContainer>
-          <FooterEmailSignupContainer  onSubmit={handleSubmit} ref={emailForm} action="https://public.govdelivery.com/accounts/USNIHNCI/subscribers/qualify" ariaLabel="Footer subscribe" method="post" target="_blank" id="signup" noValidate>
+          <FooterEmailSignupContainer  onSubmit={handleSubmit} ref={emailForm} action="https://public.govdelivery.com/accounts/USNIHNCI/subscribers/qualify" ariaLabel="Footer subscribe" method="post" target="_blank" id="signup_mobile" noValidate>
               <input type="hidden" name="topic_id" id="topic_id" value="USNIHNCI_223" />
               <div className='signUpTitle'>
                 Sign up for email updates

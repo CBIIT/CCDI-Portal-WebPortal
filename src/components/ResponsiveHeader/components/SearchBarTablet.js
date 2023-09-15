@@ -101,9 +101,9 @@ const SearchBar = () => {
   return (
         <SearchBarContainer>
             <div className='searchBar'>
-                <label htmlFor="search">
+                <label htmlFor="search_tablet">
                     <div style={{display:"none"}}>search</div>
-                    <SearchInput id="search" type="search" value={localText} placeholder="search" onChange={handleTextInputChange} onKeyPress={handleKeyPress} />
+                    <SearchInput id="search_tablet" type="search" value={localText} placeholder="search" onChange={handleTextInputChange} onKeyPress={handleKeyPress} />
                   </label>
                 </div>
             <div className='searchButton' onClick={handleSearch}><img src={searchIcon} alt="searchIcon" /></div>

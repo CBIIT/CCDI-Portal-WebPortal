@@ -345,14 +345,14 @@ const LatestUpdate = () => {
     }, []);
 
     useEffect(() => {
-        if (!isVisible) {
+        if (!isVisible || pause) {
             clearInterval(timer);
         }
-        else {
+        else if (isVisible && !pause){
             resetTimer();
         }
         return () => clearInterval(timer);
-    }, [isVisible]);
+    }, [isVisible, pause]);
 
     return (
         <LatestUpdatesSection>

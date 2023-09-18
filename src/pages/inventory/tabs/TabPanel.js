@@ -73,6 +73,7 @@ const TabView = (props) => {
         classes={classes}
         section={config.name}
         activeFilters={activeFilters}
+        fileCount={dashboardStats['numberOfFiles']}
       >
         <Grid container>
           <Grid item xs={12} id={config.tableID}>

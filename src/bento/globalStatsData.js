@@ -59,26 +59,28 @@ export const globalStatsData = [
     type: 'field',
     statAPI: 'numberOfStudies',
     statIconSrc: studiesLogo,
-    statIconAlt: 'Data Volume Stats Bar Icon',
+    statIconAlt: 'An open notebook representing studies',
   },
   {
     statTitle: 'Participants',
     type: 'field',
     statAPI: 'numberOfParticipants',
     statIconSrc: participantsLogo,
-    statIconAlt: 'Participant Logo'
+    statIconAlt: 'A teddy bear representing participants'
   },
   {
     statTitle: 'Samples',
     type: 'field',
     statAPI: 'numberOfSamples',
     statIconSrc: samplesLogo,
+    statIconAlt: 'A test tube holder with three test tubes in the holder representing samples'
   },
   {
     statTitle: 'Files',
     type: 'field',
     statAPI: 'numberOfFiles',
     statIconSrc: fileLogo,
+    statIconAlt: 'An open file drawer representing files'
   },
 ];
 

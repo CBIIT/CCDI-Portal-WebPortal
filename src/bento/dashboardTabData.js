@@ -166,6 +166,11 @@ query search (
         numberOfParticipants
         numberOfSamples
         numberOfStudies
+        participantsFileCount
+        diagnosisFileCount
+        samplesFileCount
+        studiesFileCount
+        filesFileCount
         participantCountByDiagnosis {
             group
             subjects
@@ -1046,6 +1051,7 @@ export const tabContainers = [
     api: GET_PARTICIPANTS_OVERVIEW_QUERY,
     paginationAPIField: 'participantOverview',
     count: 'numberOfParticipants',
+    fileCount: 'participantsFileCount',
     dataKey: 'id',
     defaultSortField: 'participant_id',
     defaultSortDirection: 'asc',
@@ -1137,6 +1143,7 @@ export const tabContainers = [
     defaultSortField: 'diagnosis_id',
     defaultSortDirection: 'asc',
     count: 'numberOfDiagnosis',
+    fileCount: 'diagnosisFileCount',
     dataKey: 'id',
     tableID: 'diagnosis_tab_table',
     extendedViewConfig: {
@@ -1236,6 +1243,7 @@ export const tabContainers = [
     defaultSortField: 'study_id',
     defaultSortDirection: 'asc',
     count: 'numberOfStudies',
+    fileCount: 'studiesFileCount',
     dataKey: 'id',
     tableID: 'study_tab_table',
     extendedViewConfig: {
@@ -1375,6 +1383,7 @@ export const tabContainers = [
     dataField: 'dataSample',
     api: GET_SAMPLES_OVERVIEW_QUERY,
     count: 'numberOfSamples',
+    fileCount: 'samplesFileCount',
     paginationAPIField: 'sampleOverview',
     dataKey: 'id',
     defaultSortField: 'sample_id',
@@ -1493,6 +1502,7 @@ export const tabContainers = [
     defaultSortField: 'file_name',
     defaultSortDirection: 'asc',
     count: 'numberOfFiles',
+    fileCount: 'filesFileCount',
     dataKey: 'id',
     tableID: 'file_tab_table',
     extendedViewConfig: {

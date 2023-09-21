@@ -24,8 +24,9 @@ export default () => ({
     textTransform: 'none',
     color: '#3d4241',
     marginLeft: '0px',
+    border: '1px solid #60797B',
     '&:hover': {
-      backgroundColor: '#566672',
+      backgroundColor: '#60797B',
       color: 'white',
     },
   },
@@ -35,13 +36,13 @@ export default () => ({
   resetText: {
     marginTop: '0px',
     marginLeft: '8px',
-    color: '#638fb5',
+    color: '#60797B',
     fontSize: 14,
   },
   resetTextDisabled: {
     marginTop: '0px',
     marginLeft: '8px',
-    color: '#a9b2b9',
+    color: '#AEBDBE',
     fontSize: 14,
   },
   cases: {

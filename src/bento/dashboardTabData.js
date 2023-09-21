@@ -353,9 +353,9 @@ query fileOverview(
         file_description
         file_type
         file_size
-        link_study_id
-        link_participant_id
-        link_sample_id
+        study_id
+        participant_id
+        sample_id
         file_id
         guid
         md5sum
@@ -1553,21 +1553,21 @@ export const tabContainers = [
         cellType: cellTypes.FORMAT_DATA,
       },
       {
-        dataField: 'link_study_id',
+        dataField: 'study_id',
         header: 'Study ID',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'link_participant_id',
+        dataField: 'participant_id',
         header: 'Participant ID',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'link_sample_id',
+        dataField: 'sample_id',
         header: 'Sample ID',
         display: true,
         tooltipText: 'sort',

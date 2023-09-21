@@ -108,7 +108,7 @@ query filesInList($file_ids: [String], $offset: Int = 0, $first: Int = 10, $orde
         study_short_title
         phs_accession
         participant_id
-        link_sample_id
+        sample_id
         file_type
         file_size
         md5sum
@@ -152,7 +152,7 @@ export const table = {
       tooltipText: 'sort',
     },
     {
-      dataField: 'link_sample_id',
+      dataField: 'sample_id',
       header: 'Sample ID',
       display: true,
       tooltipText: 'sort',

@@ -1293,7 +1293,7 @@ export const tabContainers = [
       },
       {
         dataField: 'personnel_name',
-        header: 'Principle Investigator(s)',
+        header: 'Principal Investigator(s)',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,

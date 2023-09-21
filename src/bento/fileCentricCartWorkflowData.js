@@ -165,7 +165,7 @@ export const table = {
     },
     {
       dataField: 'file_size',
-      header: 'Size',
+      header: 'File Size',
       // set formatBytes to true to display file size (in bytes) in a more human readable format
       display: true,
       dataFormatType: dataFormatTypes.FORMAT_BYTES,

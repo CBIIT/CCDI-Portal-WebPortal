@@ -107,6 +107,7 @@ const BentoFacetFilter = ({
   * 2. disable - true/ false
   */
   const CustomClearAllFiltersBtn = ({ onClearAllFilters, disable }) => {
+    const [isHover, setIsHover] = useState(false);
     return (
       <div className={classes.floatRight}>
         <Button
@@ -119,9 +120,12 @@ const BentoFacetFilter = ({
           }}
           className={classes.customButton}
           classes={{ root: classes.clearAllButtonRoot }}
+          onMouseEnter={() => setIsHover(true)}
+          onMouseLeave={() => setIsHover(false)}
+          style= { disable ? { border: '1px solid #AEBDBE' } : {}}
         >
           <img
-            src={resetIcon.src}
+            src={ disable ? resetIcon.src : ( isHover ? resetIcon.srcActiveHover : resetIcon.srcActive ) }
             height={resetIcon.size}
             width={resetIcon.size}
             alt={resetIcon.alt}

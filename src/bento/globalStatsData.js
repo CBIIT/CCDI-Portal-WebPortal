@@ -31,7 +31,7 @@ export const statsStyling = {
     position: 'relative',
   },
   statCount: {
-    color: '#FFFFFF',
+    color: '#003D3D',
     fontFamily: 'Oswald',
     fontSize: '20px',
     lineHeight: '17px',

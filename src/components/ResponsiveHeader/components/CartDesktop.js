@@ -40,7 +40,7 @@ const CartContainer = styled.div`
   }
 
   .myFilesText {
-    color: #717A7A;
+    color: #585C65;
     font-family: poppins;
     font-size: 14px;
     font-weight: 600;
@@ -89,7 +89,7 @@ const CartContainer = styled.div`
   .cartLabel {
     height: 14px;
     min-width: 16px;
-    color: #717A7A;
+    color: #585C65;
     font-weight: 600;
     letter-spacing: 0.8px;
     text-align: start;

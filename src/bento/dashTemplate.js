@@ -1,4 +1,7 @@
 import { sortType, InputTypes } from '@bento-core/facet-filter';
+import clearButton from '../assets/icons/Clear_Icon.svg';
+import clearButtonActive from '../assets/icons/Clear_Icon_Active.svg';
+import clearButtonActiveHover from '../assets/icons/Clear_Icon_White.svg';
 
 const DEMOGRAPHICS = 'Demographics';
 const DIAGNOSIS = 'Diagnosis';
@@ -13,9 +16,11 @@ const GROUP = 'group';
 // --------------- Facet resetIcon link configuration --------------
 // Ideal size for resetIcon is 16x16 px
 export const resetIcon = {
-  src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/Clear-icon.svg',
+  src: clearButton,
+  srcActive: clearButtonActive,
+  srcActiveHover: clearButtonActiveHover,
   alt: 'Reset icon',
-  size: '12 px',
+  size: '12px',
 };
 
 export const sectionLabel = {

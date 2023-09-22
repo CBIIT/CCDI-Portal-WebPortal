@@ -1125,7 +1125,7 @@ export const tabContainers = [
     tableID: 'participant_tab_table',
     tableDownloadCSV: customParticipantsTabDownloadCSV,
     tabIndex: '0',
-    downloadFileName: 'Bento_Dashboard_participants_download',
+    downloadFileName: 'CCDI Inventory Participants Download',
     tableMsg: {
       noMatch: 'No Matching Records Found',
     },
@@ -1225,7 +1225,7 @@ export const tabContainers = [
     tabIndex: '3',
     selectableRows: true,
     tableDownloadCSV: customDiagnosisTabDownloadCSV,
-    downloadFileName: 'Bento_Dashboard_participants_download',
+    downloadFileName: 'CCDI Inventory Diagnosis Download',
     tableMsg: {
       noMatch: 'No Matching Records Found',
     },
@@ -1308,6 +1308,7 @@ export const tabContainers = [
       {
         dataField: 'diagnosis',
         header: 'Diagnosis (Top 5)',
+        downloadHeader: 'Diagnosis',
         display: true,
         sortable: false,
         headerType: cellTypes.CUSTOM_ELEM,
@@ -1330,6 +1331,7 @@ export const tabContainers = [
       {
         dataField: 'anatomic_site',
         header: 'Diagnosis Anatomic Site (Top 5)',
+        downloadHeader: 'Diagnosis Anatomic Site',
         display: true,
         sortable: false,
         cellType: cellTypes.CUSTOM_ELEM,
@@ -1351,6 +1353,7 @@ export const tabContainers = [
       {
         dataField: 'file_type',
         header: 'File Type (Top 5)',
+        downloadHeader: 'File Type',
         display: true,
         sortable: false,
         cellType: cellTypes.CUSTOM_ELEM,
@@ -1368,7 +1371,7 @@ export const tabContainers = [
     tabIndex: '4',
     selectableRows: true,
     tableDownloadCSV: customStudyTabDownloadCSV,
-    downloadFileName: 'Bento_Dashboard_participants_download',
+    downloadFileName: 'CCDI Inventory Study Download',
     tableMsg: {
       noMatch: 'No Matching Records Found',
     },
@@ -1484,7 +1487,7 @@ export const tabContainers = [
     tableID: 'sample_tab_table',
     tabIndex: '1',
     tableDownloadCSV: customSamplesTabDownloadCSV,
-    downloadFileName: 'Bento_Dashboard_participants_download',
+    downloadFileName: 'CCDI Inventory Samples Download',
     tableMsg: {
       noMatch: 'No Matching Records Found',
     },
@@ -1593,7 +1596,7 @@ export const tabContainers = [
     tabIndex: '2',
     selectableRows: true,
     tableDownloadCSV: customFilesTabDownloadCSV,
-    downloadFileName: 'Bento_Dashboard_participants_download',
+    downloadFileName: 'CCDI Inventory Files Download',
     tableMsg: {
       noMatch: 'No Matching Records Found',
     },

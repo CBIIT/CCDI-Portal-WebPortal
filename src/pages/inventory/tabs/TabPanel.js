@@ -23,6 +23,7 @@ const TabView = (props) => {
     activeFilters,
     classes,
     activeTab,
+    tab,
   } = props;
   /*
   * useReducer table state
@@ -63,6 +64,7 @@ const TabView = (props) => {
     extendedViewConfig: config.extendedViewConfig,
     rowsPerPage: 10,
     page: 0,
+    downloadFileName: tab.downloadFileName,
   });
 
   return (

@@ -1140,7 +1140,7 @@ export const tabContainers = [
     dataField: 'dataDiagnosis',
     api: GET_DIAGNOSIS_OVERVIEW_QUERY,
     paginationAPIField: 'diagnosisOverview',
-    defaultSortField: 'diagnosis_id',
+    defaultSortField: 'participant_id',
     defaultSortDirection: 'asc',
     count: 'numberOfDiagnosis',
     fileCount: 'diagnosisFileCount',
@@ -1155,13 +1155,6 @@ export const tabContainers = [
         cellType: cellTypes.CHECKBOX,
         display: true,
         role: cellTypes.CHECKBOX,
-      },
-      {
-        dataField: 'diagnosis_id',
-        header: 'Diagnosis ID',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
       },
       {
         dataField: 'participant_id',

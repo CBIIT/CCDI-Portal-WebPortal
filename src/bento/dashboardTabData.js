@@ -1278,13 +1278,6 @@ export const tabContainers = [
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'phs_accession',
-        header: 'Study Accession',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
         dataField: 'study_short_title',
         header: 'Study Short Title',
         display: true,

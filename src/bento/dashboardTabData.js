@@ -1233,7 +1233,7 @@ export const tabContainers = [
     dataField: 'dataStudy',
     api: GET_STUDY_OVERVIEW_QUERY,
     paginationAPIField: 'studyOverview',
-    defaultSortField: 'study_id',
+    defaultSortField: 'study_short_title',
     defaultSortDirection: 'asc',
     count: 'numberOfStudies',
     fileCount: 'studiesFileCount',
@@ -1250,27 +1250,6 @@ export const tabContainers = [
         role: cellTypes.CHECKBOX,
       },
       {
-        dataField: 'study_id',
-        header: 'Study ID',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'pubmed_id',
-        header: 'PubMed ID',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'grant_id',
-        header: 'Grant ID',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
         dataField: 'study_short_title',
         header: 'Study Short Title',
         display: true,
@@ -1278,15 +1257,8 @@ export const tabContainers = [
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'personnel_name',
-        header: 'Principal Investigator(s)',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'num_of_participants',
-        header: 'Number of Particpants',
+        dataField: 'study_id',
+        header: 'Study ID',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
@@ -1308,13 +1280,6 @@ export const tabContainers = [
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'num_of_samples',
-        header: 'Number of Samples',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
         dataField: 'anatomic_site',
         header: 'Diagnosis Anatomic Site (Top 5)',
         downloadHeader: 'Diagnosis Anatomic Site',
@@ -1327,6 +1292,20 @@ export const tabContainers = [
           }
           return dt.join("<br>");
         },
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'num_of_participants',
+        header: 'Number of Particpants',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'num_of_samples',
+        header: 'Number of Samples',
+        display: true,
+        tooltipText: 'sort',
         role: cellTypes.DISPLAY,
       },
       {
@@ -1349,6 +1328,27 @@ export const tabContainers = [
           }
           return dt.join("<br>");
         },
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'pubmed_id',
+        header: 'PubMed ID',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'personnel_name',
+        header: 'Principal Investigator(s)',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'grant_id',
+        header: 'Grant ID',
+        display: true,
+        tooltipText: 'sort',
         role: cellTypes.DISPLAY,
       },
     ],

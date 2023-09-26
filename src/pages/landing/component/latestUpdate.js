@@ -138,6 +138,7 @@ const LatestUpdatesContainer = styled.div`
             width: 214px;
             height: 279px;
             margin: 0;
+            box-shadow: none;
         }
 
         .latestUpdatesListItem:nth-child(1) {
@@ -257,6 +258,7 @@ const TitleContainer = styled.div`
       font-family: Poppins;
       font-weight: 600;
       font-size: 35px;
+      text-transform: uppercase;
     }
 
     @media (max-width: 1199px) {

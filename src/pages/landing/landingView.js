@@ -281,6 +281,7 @@ const StatsContainer = styled.div`
       color: #298085;
       line-height: 38px;
       background-color: white;
+      text-transform: uppercase;
     }
 
     .statList {
@@ -446,6 +447,7 @@ const ResourcesContainer = styled.div`
       font-weight: 600;
       font-size: 35px;
       color: #05555C;
+      text-transform: uppercase;
     }
 
     .resourceItem {
@@ -473,6 +475,7 @@ const ResourcesContainer = styled.div`
     .titleLineLong {
       content:'';
       display:inline-block;
+      height: 23px;
       width: 120px; 
       border-bottom: 3px solid;
       margin-right: 2px;
@@ -481,6 +484,7 @@ const ResourcesContainer = styled.div`
     .titleLineShort {
       content:'';
       display:inline-block;
+      height: 23px;
       width: 8px; 
       border-bottom: 3px solid;
       margin-left: 3px;

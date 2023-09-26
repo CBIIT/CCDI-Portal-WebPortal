@@ -136,7 +136,7 @@ const LatestUpdatesContainer = styled.div`
         .latestUpdatesListItem {
             position: absolute;
             width: 214px;
-            height: 279px;
+            height: 284px;
             margin: 0;
             box-shadow: none;
         }
@@ -191,7 +191,7 @@ const LatestUpdatesContainer = styled.div`
             position: absolute;
             top: 0;
             width: 214px;
-            height: 279px;
+            height: 284px;
             background: rgb(25, 33, 39, .8);
             border-radius: 0px 20px;
             padding: 40px 16px;

@@ -18,6 +18,27 @@ const HeroMobileSection = styled.div`
     background: linear-gradient(180deg, rgba(17, 196, 212, 0.4) 0%, rgba(55, 210, 176, 0.392465) 37.67%, rgba(120, 233, 117, 0.38) 100%), linear-gradient(0deg, #56B0B8, #56B0B8), #2ADEC7;
   }
 
+  .carouselMobileListCover {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: calc(50vw - 405px);
+    height: 600px;
+    background: #FFFFFF;
+    z-index: 5;
+  }
+
+  .carouselMobileListCoverColor {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: calc(50vw - 405px);
+    height: 476px;
+    background: linear-gradient(180deg, rgba(17, 196, 212, 0.4) 0%, rgba(55, 210, 176, 0.392465) 37.67%, rgba(120, 233, 117, 0.38) 100%), linear-gradient(0deg, #56B0B8, #56B0B8), #2ADEC7;;
+    border-radius: 0 0 0 40px;
+    z-index: 6;
+  }
+
   .introTitle1 {
     text-align: left;
     color: #002A2E;
@@ -92,7 +113,6 @@ const HeroMobileSection = styled.div`
   .carouselMobileItem:nth-child(1) {
     transform: translateX(-115%);
     visibility: hidden;
-    opacity: 0;
   }
   .carouselMobileItem:nth-child(2) {
     transform: translateX(0);
@@ -123,6 +143,13 @@ const HeroMobileSection = styled.div`
   @media (max-width: 872px) {
     .backgroundContainer {
         padding: 46px 30px;
+    }
+    .carouselMobileListCover {
+      width: 30px;
+    }
+    .carouselMobileListCoverColor {
+      width: 30px;
+      height: 475px;
     }
   }
 `;
@@ -170,6 +197,8 @@ const HeroMobile = () => {
     return (
         <HeroMobileSection>
             <div className='backgroundContainer'>
+                <div className='carouselMobileListCover' />
+                <div className='carouselMobileListCoverColor' />
                 <div className='introTitle1'>
                     <div>Discover</div>
                     <div>CCDI</div>

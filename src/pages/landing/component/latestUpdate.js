@@ -223,6 +223,14 @@ const LatestUpdatesContainer = styled.div`
       .latestUpdatesList {
         margin-left: 30px;
       }
+
+      .latestUpdatesListCover {
+        position: absolute;
+        background: #FFFFFF;
+        width: 30px;
+        height: 300px;
+        z-index: 20;
+      }
     }
 `;
 
@@ -367,6 +375,7 @@ const LatestUpdate = () => {
                 </div>
                 <div className='titleText'>{titleData.latestUpdatesTitle}</div>
             </TitleContainer>
+            <div className='latestUpdatesListCover' />
             <div id="latestList" className='latestUpdatesList'>
                 {
                     rLatestlList && rLatestlList.map((updateItem, updateidx) => {

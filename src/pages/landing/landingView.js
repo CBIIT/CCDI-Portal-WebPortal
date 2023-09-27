@@ -528,7 +528,6 @@ const ResourcesContainer = styled.div`
       font-family: Poppins;
       font-weight: 400;
       font-size: 14px;
-      margin-left: 8px;
       padding-right: 23px;
       background: url(${exportIcon}) right center no-repeat;
     }
@@ -792,11 +791,11 @@ const LandingView = () => {
                       <div className='resourceListItemUpper'>
                         <div className='resourceListItemLogo' style={{background: '#00838F'}}>{appItem.subtitle}</div>
                         <div className='resourceListItemTitleContainer'>
-                          <div className='resourceListItemTitle upper'>{appItem.title}<span className='resourceListItemTitleSmall'>{'(' + appItem.subtitle + ')'}</span></div>
+                          <div className='resourceListItemTitle upper'>{appItem.title}<span className='resourceListItemTitleSmall'>{'  (' + appItem.subtitle + ')'}</span></div>
                         </div>
                       </div>
                       <div className='resourceListItemText'>
-                        <div className='resourceListItemTitle lower'>{appItem.title}<span className='resourceListItemTitleSmall'>{'(' + appItem.subtitle + ')'}</span></div>
+                        <div className='resourceListItemTitle lower'>{appItem.title}<span className='resourceListItemTitleSmall'>{'  (' + appItem.subtitle + ')'}</span></div>
                         <div className='resourceListItemContext'>{appItem.content}</div>
                       </div>
                     </a>
@@ -823,11 +822,11 @@ const LandingView = () => {
                       <div className='resourceListItemUpper'>
                         <div className='resourceListItemLogo' style={{background: '#455299'}}>{cloudItem.subtitle}</div>
                         <div className='resourceListItemTitleContainer'>
-                          <div className='resourceListItemTitle upper'>{cloudItem.title}<span className='resourceListItemTitleSmall'>{'(' + cloudItem.subtitle + ')'}</span></div>
+                          <div className='resourceListItemTitle upper'>{cloudItem.title}<span className='resourceListItemTitleSmall'>{'  (' + cloudItem.subtitle + ')'}</span></div>
                         </div>
                       </div>
                       <div className='resourceListItemText'>
-                        <div className='resourceListItemTitle lower'>{cloudItem.title}<span className='resourceListItemTitleSmall'>{'(' + cloudItem.subtitle + ')'}</span></div>
+                        <div className='resourceListItemTitle lower'>{cloudItem.title}<span className='resourceListItemTitleSmall'>{'  (' + cloudItem.subtitle + ')'}</span></div>
                         <div className='resourceListItemContext'>{cloudItem.content}</div>
                       </div>
                     </a>

@@ -281,7 +281,6 @@ const StatsContainer = styled.div`
       color: #298085;
       line-height: 38px;
       background-color: white;
-      text-transform: uppercase;
     }
 
     .statList {
@@ -404,6 +403,9 @@ const StatsContainer = styled.div`
         margin: 0 30px;
         justify-content: left;
       }
+      .statItem {
+        width: 125px;
+      }
     }
 `;
 
@@ -447,7 +449,6 @@ const ResourcesContainer = styled.div`
       font-weight: 600;
       font-size: 35px;
       color: #05555C;
-      text-transform: uppercase;
     }
 
     .resourceItem {
@@ -475,7 +476,6 @@ const ResourcesContainer = styled.div`
     .titleLineLong {
       content:'';
       display:inline-block;
-      height: 23px;
       width: 120px; 
       border-bottom: 3px solid;
       margin-right: 2px;
@@ -484,7 +484,6 @@ const ResourcesContainer = styled.div`
     .titleLineShort {
       content:'';
       display:inline-block;
-      height: 23px;
       width: 8px; 
       border-bottom: 3px solid;
       margin-left: 3px;
@@ -528,6 +527,7 @@ const ResourcesContainer = styled.div`
       font-family: Poppins;
       font-weight: 400;
       font-size: 14px;
+      margin-left: 8px;
       padding-right: 23px;
       background: url(${exportIcon}) right center no-repeat;
     }
@@ -791,11 +791,11 @@ const LandingView = () => {
                       <div className='resourceListItemUpper'>
                         <div className='resourceListItemLogo' style={{background: '#00838F'}}>{appItem.subtitle}</div>
                         <div className='resourceListItemTitleContainer'>
-                          <div className='resourceListItemTitle upper'>{appItem.title}<span className='resourceListItemTitleSmall'>{'  (' + appItem.subtitle + ')'}</span></div>
+                          <div className='resourceListItemTitle upper'>{appItem.title}<span className='resourceListItemTitleSmall'>{'(' + appItem.subtitle + ')'}</span></div>
                         </div>
                       </div>
                       <div className='resourceListItemText'>
-                        <div className='resourceListItemTitle lower'>{appItem.title}<span className='resourceListItemTitleSmall'>{'  (' + appItem.subtitle + ')'}</span></div>
+                        <div className='resourceListItemTitle lower'>{appItem.title}<span className='resourceListItemTitleSmall'>{'(' + appItem.subtitle + ')'}</span></div>
                         <div className='resourceListItemContext'>{appItem.content}</div>
                       </div>
                     </a>
@@ -822,11 +822,11 @@ const LandingView = () => {
                       <div className='resourceListItemUpper'>
                         <div className='resourceListItemLogo' style={{background: '#455299'}}>{cloudItem.subtitle}</div>
                         <div className='resourceListItemTitleContainer'>
-                          <div className='resourceListItemTitle upper'>{cloudItem.title}<span className='resourceListItemTitleSmall'>{'  (' + cloudItem.subtitle + ')'}</span></div>
+                          <div className='resourceListItemTitle upper'>{cloudItem.title}<span className='resourceListItemTitleSmall'>{'(' + cloudItem.subtitle + ')'}</span></div>
                         </div>
                       </div>
                       <div className='resourceListItemText'>
-                        <div className='resourceListItemTitle lower'>{cloudItem.title}<span className='resourceListItemTitleSmall'>{'  (' + cloudItem.subtitle + ')'}</span></div>
+                        <div className='resourceListItemTitle lower'>{cloudItem.title}<span className='resourceListItemTitleSmall'>{'(' + cloudItem.subtitle + ')'}</span></div>
                         <div className='resourceListItemContext'>{cloudItem.content}</div>
                       </div>
                     </a>

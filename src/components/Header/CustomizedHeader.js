@@ -14,7 +14,7 @@ const HeaderBannerContainer =styled.div`
     padding: 15px;
 
     .nci-shutdown-banner__body {
-      max-width: 1024px;
+      max-width: 1334px;
       margin: 0 auto;
       color: white;
       font-size: 17px;

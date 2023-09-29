@@ -78,6 +78,9 @@ const tblBody = {
           lineBreak: 'anywhere',
         },
       },
+      '&.study_short_title': {
+        minWidth: '300px',
+      },
       '&.md5sum': {
         minWidth: '160px',
         '& p': {

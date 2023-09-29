@@ -136,8 +136,9 @@ const LatestUpdatesContainer = styled.div`
         .latestUpdatesListItem {
             position: absolute;
             width: 214px;
-            height: 279px;
+            height: 284px;
             margin: 0;
+            box-shadow: none;
         }
 
         .latestUpdatesListItem:nth-child(1) {
@@ -190,7 +191,7 @@ const LatestUpdatesContainer = styled.div`
             position: absolute;
             top: 0;
             width: 214px;
-            height: 279px;
+            height: 284px;
             background: rgb(25, 33, 39, .8);
             border-radius: 0px 20px;
             padding: 40px 16px;
@@ -221,6 +222,14 @@ const LatestUpdatesContainer = styled.div`
     @media (max-width: 872px) {
       .latestUpdatesList {
         margin-left: 30px;
+      }
+
+      .latestUpdatesListCover {
+        position: absolute;
+        background: #FFFFFF;
+        width: 30px;
+        height: 300px;
+        z-index: 20;
       }
     }
 `;
@@ -257,6 +266,7 @@ const TitleContainer = styled.div`
       font-family: Poppins;
       font-weight: 600;
       font-size: 35px;
+      text-transform: uppercase;
     }
 
     @media (max-width: 1199px) {
@@ -365,6 +375,7 @@ const LatestUpdate = () => {
                 </div>
                 <div className='titleText'>{titleData.latestUpdatesTitle}</div>
             </TitleContainer>
+            <div className='latestUpdatesListCover' />
             <div id="latestList" className='latestUpdatesList'>
                 {
                     rLatestlList && rLatestlList.map((updateItem, updateidx) => {

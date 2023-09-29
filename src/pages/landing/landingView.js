@@ -403,6 +403,9 @@ const StatsContainer = styled.div`
         margin: 0 30px;
         justify-content: left;
       }
+      .statItem {
+        width: 125px;
+      }
     }
 `;
 

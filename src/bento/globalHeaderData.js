@@ -45,6 +45,11 @@ export const navMobileList = [
       link: '/about',
       className: 'navMobileItem',
   },
+  {
+    name: 'My File',
+    link: '/fileCentricCart',
+    className: 'cart',
+},
 ];
 
 export const navbarSublists = {

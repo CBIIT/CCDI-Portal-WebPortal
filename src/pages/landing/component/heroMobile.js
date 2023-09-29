@@ -12,10 +12,31 @@ const HeroMobileSection = styled.div`
   height: 650px;
 
   .backgroundContainer {
-    padding: 60px calc(50vw - 405px);
+    padding: 46px calc(50vw - 405px);
     height: 476px;
     border-radius: 0 0 0 40px;
     background: linear-gradient(180deg, rgba(17, 196, 212, 0.4) 0%, rgba(55, 210, 176, 0.392465) 37.67%, rgba(120, 233, 117, 0.38) 100%), linear-gradient(0deg, #56B0B8, #56B0B8), #2ADEC7;
+  }
+
+  .carouselMobileListCover {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: calc(50vw - 405px);
+    height: 600px;
+    background: #FFFFFF;
+    z-index: 5;
+  }
+
+  .carouselMobileListCoverColor {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: calc(50vw - 405px);
+    height: 476px;
+    background: linear-gradient(180deg, rgba(17, 196, 212, 0.4) 0%, rgba(55, 210, 176, 0.392465) 37.67%, rgba(120, 233, 117, 0.38) 100%), linear-gradient(0deg, #56B0B8, #56B0B8), #2ADEC7;;
+    border-radius: 0 0 0 40px;
+    z-index: 6;
   }
 
   .introTitle1 {
@@ -36,6 +57,7 @@ const HeroMobileSection = styled.div`
     font-weight: 600;
     font-size: 14px;
     line-height: 17px;
+    text-transform: uppercase;
   }
 
   .carouselMobileList {
@@ -83,10 +105,14 @@ const HeroMobileSection = styled.div`
     margin: 0 20px;
   }
 
+  .exportIconMobile {
+    width: 18px;
+    height: 18px;
+  }
+
   .carouselMobileItem:nth-child(1) {
     transform: translateX(-115%);
     visibility: hidden;
-    opacity: 0;
   }
   .carouselMobileItem:nth-child(2) {
     transform: translateX(0);
@@ -116,7 +142,14 @@ const HeroMobileSection = styled.div`
 
   @media (max-width: 872px) {
     .backgroundContainer {
-        padding: 60px 30px;
+        padding: 46px 30px;
+    }
+    .carouselMobileListCover {
+      width: 30px;
+    }
+    .carouselMobileListCoverColor {
+      width: 30px;
+      height: 475px;
     }
   }
 `;
@@ -164,9 +197,12 @@ const HeroMobile = () => {
     return (
         <HeroMobileSection>
             <div className='backgroundContainer'>
+                <div className='carouselMobileListCover' />
+                <div className='carouselMobileListCoverColor' />
                 <div className='introTitle1'>
                     <div>Discover</div>
-                    <div>CCDI Resources</div>
+                    <div>CCDI</div>
+                    <div>Resources</div>
                 </div>
                 <div className='introTitle2'>Explore the CCDI Hub </div>
                 <div id="mcarouselList" className='carouselMobileList'>
@@ -177,7 +213,9 @@ const HeroMobile = () => {
                                 <div key={mcarouselkey} className='carouselMobileItem' onMouseEnter={mouseIn} onMouseLeave={mouseOut}>
                                     <img className='itemImgContainer' src={mcarouselItem.mobile} alt="carousel_img"/>
                                     <div className="itemTitleContainer"><a href={mcarouselItem.link} target="_blank" rel="noopener noreferrer">{mcarouselItem.content}</a></div>
-                                    <a className="exportIconContainer" href={mcarouselItem.link} target="_blank" rel="noopener noreferrer"><img src={exportIconText} alt="export_icon"/></a>
+                                    <a className="exportIconContainer" href={mcarouselItem.link} target="_blank" rel="noopener noreferrer">
+                                      <img className='exportIconMobile' src={exportIconText} alt="export_icon"/>
+                                    </a>
                                 </div>
                             )
                         })

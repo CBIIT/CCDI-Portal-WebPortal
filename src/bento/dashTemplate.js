@@ -258,7 +258,7 @@ export const facetsConfig = [
   },
   {
     section: DIAGNOSIS,
-    label: 'ICD-O DIAGNOSIS',
+    label: 'Diagnosis (ICD-O)',
     apiPath: 'participantCountByICDO',
     apiForFiltering: 'filterParticipantCountByICDO',
     datafield: 'diagnosis_icd_o',
@@ -794,7 +794,7 @@ export const widgetConfig = [
   },
   {
     type: 'donut',
-    title: 'ICD-O Diagnosis',
+    title: 'Diagnosis (ICD-O)',
     dataName: 'participantCountByDiagnosis',
     sliceTitle: 'Participants',
   },

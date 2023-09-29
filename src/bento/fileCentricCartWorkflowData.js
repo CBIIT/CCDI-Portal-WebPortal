@@ -94,7 +94,7 @@ export const myFilesPageData = {
 
 
 export const manifestData = {
-  keysToInclude: ['participant_id', 'file_name', 'file_id', 'md5sum'],
+  keysToInclude: ['participant_id', 'file_name', 'guid', 'md5sum'],
   header: ['Participant Id', 'File Name', 'File ID', 'Md5sum'],
 };
 
@@ -112,6 +112,7 @@ query filesInList($file_ids: [String], $offset: Int = 0, $first: Int = 10, $orde
         file_type
         file_size
         md5sum
+        guid
     }
 }`;
 

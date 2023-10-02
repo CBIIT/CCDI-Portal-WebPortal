@@ -33,12 +33,12 @@ export const titleData = {
 
 export const statsData = [
   {
-    num: '250',
+    num: '253',
     title: 'Cataloged Datasets',
     detail: 'Childhood Cancer Data Catalog',
   },
   {
-    num: '1,552',
+    num: '1,862',
     title: 'Participants',
     detail: 'Molecular Characterization Initiative for Childhood Cancer',
   },
@@ -48,7 +48,7 @@ export const statsData = [
     detail: 'Molecular Targets Platform',
   },
   {
-    num: '1,496,577',
+    num: '1,700,440',
     title: 'Reported Cases Under Age 40<br>(1995-2020)',
     detail: 'National Childhood Cancer Registry Explorer',
   },

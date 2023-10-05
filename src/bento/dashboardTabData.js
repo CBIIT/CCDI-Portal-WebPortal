@@ -1296,7 +1296,7 @@ export const tabContainers = [
       },
       {
         dataField: 'num_of_participants',
-        header: 'Number of Particpants',
+        header: 'Number of Participants',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,

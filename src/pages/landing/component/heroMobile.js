@@ -47,6 +47,7 @@ const HeroMobileSection = styled.div`
     font-size: 35px;
     line-height: 30px;
     letter-spacing: 0.02em;
+    margin: 0;
   }
 
   .introTitle2 {
@@ -199,11 +200,11 @@ const HeroMobile = () => {
             <div className='backgroundContainer'>
                 <div className='carouselMobileListCover' />
                 <div className='carouselMobileListCoverColor' />
-                <div className='introTitle1'>
-                    <div>Discover</div>
-                    <div>CCDI</div>
-                    <div>Resources</div>
-                </div>
+                <h1 className='introTitle1'>
+                    Discover<br/>
+                    CCDI<br/>
+                    Resources
+                </h1>
                 <div className='introTitle2'>Explore the CCDI Hub </div>
                 <div id="mcarouselList" className='carouselMobileList'>
                     {

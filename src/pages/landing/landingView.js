@@ -146,6 +146,7 @@ const IntroTextContainer = styled.div`
       font-size: 50px;
       letter-spacing: 0.02em;
       line-height: 45px;
+      margin: 0;
     }
 
     .introTextTitle2 {
@@ -281,6 +282,7 @@ const StatsContainer = styled.div`
       color: #298085;
       line-height: 38px;
       background-color: white;
+      margin: 0;
     }
 
     .statList {
@@ -302,6 +304,7 @@ const StatsContainer = styled.div`
       font-size: 32px;
       line-height: 40px;
       text-align: left;
+      margin: 0;
     }
 
     .statTitle {
@@ -444,6 +447,8 @@ const ResourcesContainer = styled.div`
     position: relative;
 
     .resourceTitle {
+      margin-top: 0;
+      margin-bottom: 0;
       margin-left: 136px;
       font-family: Poppins;
       font-weight: 600;
@@ -462,14 +467,14 @@ const ResourcesContainer = styled.div`
     .resourceSubtitleText {
       margin: 10px 0 10px 135px;
       font-family: Poppins;
-      font-weight: bold;
+      font-weight: 600;
       font-size: 17px;
     }
 
     .titleLine {
       margin-left: 10px;
       display: flex;
-      height: 32px;
+      height: 34px;
       padding-bottom: 5px;
     }
     
@@ -673,6 +678,10 @@ const ResourcesContainer = styled.div`
       .lower {
         display: none;
       }
+
+      .titleLine {
+        height: 27px;
+      }
     }
 
     @media (max-width: 872px) {
@@ -723,7 +732,7 @@ const LandingView = () => {
         <FirstContainer>
           <IntroContainer>
             <IntroTextContainer>
-              <div className='introTextTitle1'><div>Discover</div><div>CCDI</div><div>Resources</div></div>
+              <h1 className='introTextTitle1'>Discover<br/>CCDI<br/>Resources</h1>
               <div className='introTextTitle2'>
                 <div>Explore the CCDI Hub, its applications,</div>
                 <div>and analytic tools by selecting an</div>
@@ -747,14 +756,14 @@ const LandingView = () => {
             <div className='leftbox' />
             <div className='rightbox' />
             <div className='borderTop' />
-            <div className='statGlance'>CCDI Stats At a Glance</div>
+            <h2 className='statGlance'>CCDI Stats At a Glance</h2>
             <div className='statList'>
             {
               statsData.map((statItem, statidx) => {
                 const statkey = `stat_${statidx}`;
                 return (
                   <div className='statItem' key={statkey}>
-                    <div className='statNum'>{statItem.num}</div>
+                    <h5 className='statNum'>{statItem.num}</h5>
                     <div className='statTitle'>{ReactHtmlParser(statItem.title)}</div>
                     <div className='statDetail'>{statItem.detail}</div>
                   </div>
@@ -771,10 +780,10 @@ const LandingView = () => {
         <ResourcesOverlayRight />
         <ResourcesOverlay />
         <ResourcesContainer>
-          <div className='resourceTitle'>{titleData.resourceTitle}</div>
+          <h2 className='resourceTitle'>{titleData.resourceTitle}</h2>
           <div className='resourceItem'>
             <div className='resourceSubtitle' style={{color: '#00838F'}}>
-              <div className='resourceSubtitleText'>{titleData.applicationsTitle}</div>
+              <h3 className='resourceSubtitleText'>{titleData.applicationsTitle}</h3>
               <div className='titleLine'>
                 <div className='titleLineLong' />
                 <div className='titleLineShort' />
@@ -805,7 +814,7 @@ const LandingView = () => {
           </div>
           <div className='resourceItem'>
             <div className='resourceSubtitle' style={{color: '#5666BD'}}>
-              <div className='resourceSubtitleText'>{titleData.cloudResourcesTitle}</div>
+              <h3 className='resourceSubtitleText'>{titleData.cloudResourcesTitle}</h3>
               <div className='titleLine'>
                 <div className='titleLineLong' />
                 <div className='titleLineShort' />

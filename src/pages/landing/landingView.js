@@ -797,7 +797,7 @@ const LandingView = () => {
                   return (
                     <a id={appItem.id} className='resourceListItem' key={appkey} href={appItem.link} target={appItem.link.includes('http') ? "_blank" : ""} rel="noopener noreferrer">
                       <div className='resourceListItemUpper'>
-                        <div className='resourceListItemLogo' style={{background: '#00838F'}}>{appItem.subtitle}</div>
+                        <div className='resourceListItemLogo' style={{background: `url(${appItem.img})`, backgroundSize: 'cover'}} />
                         <div className='resourceListItemTitleContainer'>
                           <div className='resourceListItemTitle upper'>{appItem.title}<span className='resourceListItemTitleSmall'>{'  (' + appItem.subtitle + ')'}</span></div>
                         </div>
@@ -828,7 +828,7 @@ const LandingView = () => {
                   return (
                     <a id={cloudItem.id} className='resourceListItem' key={cloudkey} href={cloudItem.link} target="_blank" rel="noopener noreferrer">
                       <div className='resourceListItemUpper'>
-                        <div className='resourceListItemLogo' style={{background: '#455299'}}>{cloudItem.subtitle}</div>
+                        <div className='resourceListItemLogo' style={{background: `url(${cloudItem.img})`, backgroundSize: 'cover'}} />
                         <div className='resourceListItemTitleContainer'>
                           <div className='resourceListItemTitle upper'>{cloudItem.title}<span className='resourceListItemTitleSmall'>{'  (' + cloudItem.subtitle + ')'}</span></div>
                         </div>

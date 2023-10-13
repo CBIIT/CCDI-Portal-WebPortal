@@ -267,8 +267,10 @@ const NavBar = () => {
             navMobileList.map((navMobileItem, idx) => {
               const navkey = `nav_${idx}`;
               return (
-                navMobileItem.className === 'navMobileItem'
-                ? (
+                <>
+                {
+                  navMobileItem.className === 'navMobileItem'
+                  &&
                   <LiSection key={navkey}>
                     <div className='navTitle directLink'>
                       <NavLink to={navMobileItem.link}>
@@ -276,7 +278,6 @@ const NavBar = () => {
                           className='navText directLink'
                           onKeyDown={onKeyPressHandler}
                           role="button"
-                          tabIndex={0}
                           onClick={handleMenuClick}
                           style={path === navMobileItem.link || (path === '/' && navMobileItem.link === '/home') ? activeStyle : null}
                         >
@@ -285,8 +286,10 @@ const NavBar = () => {
                         </NavLink>
                       </div>
                     </LiSection>
-                )
-                : (
+                }
+                {
+                  navMobileItem.className === 'navMobileItem clickable'
+                  &&
                   <LiSection key={navkey}>
                     <div className={clickedTitle === navMobileItem.name ? 'navTitleClicked' : 'navTitle'}>
                       <div
@@ -300,7 +303,8 @@ const NavBar = () => {
                       </div>
                     </div>
                   </LiSection>
-                )
+                }
+                </>
               )
             })
           }

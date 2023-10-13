@@ -1296,7 +1296,7 @@ export const tabContainers = [
       },
       {
         dataField: 'num_of_participants',
-        header: 'Number of Particpants',
+        header: 'Number of Participants',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
@@ -1357,7 +1357,7 @@ export const tabContainers = [
     tabIndex: '4',
     selectableRows: true,
     tableDownloadCSV: customStudyTabDownloadCSV,
-    downloadFileName: 'CCDI Inventory Study Download',
+    downloadFileName: 'CCDI Inventory Studies Download',
     tableMsg: {
       noMatch: 'No Matching Records Found',
     },
@@ -1414,7 +1414,7 @@ export const tabContainers = [
       },
       {
         dataField: 'participant_id',
-        header: 'Particpant ID',
+        header: 'Participant ID',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,

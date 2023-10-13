@@ -27,6 +27,7 @@ const FooterEmailSignupContainer = styled.form`
     line-height: 34px;
     color: #FFFFFF;
     margin-bottom: 1rem;
+    margin-top: 0;
   }
 
   .enterTitle {
@@ -212,6 +213,7 @@ const BottomFooter = styled.div`
     font-size: 24.96px;
     line-height: 37px;
     color: #FFFFFF;
+    margin: 0;
   }
 
   .logoLowerText {
@@ -296,6 +298,10 @@ const BottomFooter = styled.div`
       margin-right: 0px;
       margin-top: 0.75rem;
   }
+
+  .contactUs {
+    margin: 0;
+  }
 `;
 
 const FooterMobile = () => {
@@ -364,9 +370,9 @@ const FooterMobile = () => {
           </FooterLinksContainer>
           <FooterEmailSignupContainer  onSubmit={handleSubmit} ref={emailForm} action="https://public.govdelivery.com/accounts/USNIHNCI/subscribers/qualify" ariaLabel="Footer subscribe" method="post" target="_blank" id="signup_mobile" noValidate>
               <input type="hidden" name="topic_id" id="topic_id" value="USNIHNCI_223" />
-              <div className='signUpTitle'>
+              <h4 className='signUpTitle'>
                 Sign up for email updates
-              </div>
+              </h4>
               <div className={errorClass !== "" ? 'ErrorBorder' : null}>
                 <div className='enterTitle'>
                   <label htmlFor="email_mobile"> Enter your email address</label>
@@ -386,12 +392,12 @@ const FooterMobile = () => {
         <div className="bottom-footer-container">
           <div id="bottom-footer-header">
             <a className='logoText' href="https://www.cancer.gov" target="_blank" rel="noopener noreferrer">
-              <div className='logoUpperText'>National Cancer Institute</div>
+              <h4 className='logoUpperText'>National Cancer Institute</h4>
               <div className='logoLowerText'>at the National Institutes of Health</div>
             </a>
           </div>
           <div id="bottom-footer-contact-us">
-            Contact Us
+            <h4 className='contactUs'>Contact Us</h4>
             <div id="bottom-footer-contact-links">
               {
                 FooterData.contact_links.map((contactItem, contactidx) => {

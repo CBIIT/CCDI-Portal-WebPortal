@@ -267,6 +267,7 @@ const TitleContainer = styled.div`
       font-weight: 600;
       font-size: 35px;
       text-transform: uppercase;
+      margin: 0;
     }
 
     @media (max-width: 1199px) {
@@ -373,7 +374,7 @@ const LatestUpdate = () => {
                 <div className='titleLineShort' />
                 <div className='titleLineLong' />
                 </div>
-                <div className='titleText'>{titleData.latestUpdatesTitle}</div>
+                <h2 className='titleText'>{titleData.latestUpdatesTitle}</h2>
             </TitleContainer>
             <div className='latestUpdatesListCover' />
             <div id="latestList" className='latestUpdatesList'>

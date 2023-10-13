@@ -1357,7 +1357,7 @@ export const tabContainers = [
     tabIndex: '4',
     selectableRows: true,
     tableDownloadCSV: customStudyTabDownloadCSV,
-    downloadFileName: 'CCDI Inventory Study Download',
+    downloadFileName: 'CCDI Inventory Studies Download',
     tableMsg: {
       noMatch: 'No Matching Records Found',
     },

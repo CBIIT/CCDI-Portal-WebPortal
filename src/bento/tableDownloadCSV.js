@@ -38,7 +38,7 @@ query sampleOverview($sample_ids: [String], $offset: Int = 0, $first: Int = 1000
 
 export const customSamplesTabDownloadCSV = {
   keysToInclude: ['sample_id', 'participant_id', 'study_id', 'anatomic_site', 'participant_age_at_collection', 'diagnosis_icd_o', 'sample_tumor_status', 'tumor_classification'],
-  header: ['Sample ID', 'Particpant ID', 'Study ID', 'Anatomic Site', 'Age at Sample Collection', 'Sample ICD-O Morphology', 'Sample Tumor Status', 'Sample Tumor Classification'],
+  header: ['Sample ID', 'Participant ID', 'Study ID', 'Anatomic Site', 'Age at Sample Collection', 'Sample ICD-O Morphology', 'Sample Tumor Status', 'Sample Tumor Classification'],
   query: GET_SAMPLES_TAB,
   apiVariable: 'sampleOverview',
   fileName: 'tableDownload',
@@ -111,7 +111,7 @@ query studyOverview($study_id: [String], $offset: Int = 0, $first: Int = 1000, $
 
 export const customStudyTabDownloadCSV = {
   keysToInclude: ['study_id', 'pubmed_id', 'grant_id', 'phs_accession', 'study_short_title', 'personnel_name', 'number_of_participants', 'diagnosis', 'number_of_samples', 'anatomic_site', 'number_of_files', 'file_type'],
-  header: ['Study ID', 'PubMed ID', 'Grant ID', 'Study Accession', 'Study Short Title', 'Principle Investigator(s)', 'Number of Particpants', 'Diagnosis', 'Number of Samples', 'Diagnosis Anatomic Site', 'Number of Files', 'File Type'],
+  header: ['Study ID', 'PubMed ID', 'Grant ID', 'Study Accession', 'Study Short Title', 'Principle Investigator(s)', 'Number of Participants', 'Diagnosis', 'Number of Samples', 'Diagnosis Anatomic Site', 'Number of Files', 'File Type'],
   query: GET_STUDY_TAB,
   apiVariable: 'studyOverview',
   fileName: 'tableDownload',

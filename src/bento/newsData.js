@@ -5,8 +5,19 @@ import updateImgSymposium from '../assets/landing/Updates_Symposium.png';
 import updateImgMTP from '../assets/news/News_MTP.png';
 import updateImgMTP2 from '../assets/news/News_MTP_2.png';
 import updateImgMolecularCharacterization from '../assets/news/News_Molecular_Characterization.png';
+import updateImgDashboard from '../assets/news/News_Dashboard.png';
 
 export const newsList = [
+    {
+        id: 'ccdc_10272023',
+        title: 'CCDI Hub Explore Dashboard Release',
+        date: 'October 27, 2023',
+        slug: 'Navigate through detailed pediatric cancer data, create synthetic cohorts, and enable cross-study discoveries with the Hub’s new Explore Dashboard.',
+        highlight: 'The CCDI Hub’s Explore Dashboard is a new tool for exploring individual-level participant, sample, and file information for CCDI-managed datasets.  This new tool enables users to explore data in novel ways and establish connections to create synthetic cohorts or cross-study discoveries.  The initial release includes eight studies and information on over 4,100 participants, 10,350 samples, and 132,000 files.',
+        fullText: '',
+        type: 'Application Updates',
+        img: updateImgDashboard,
+    },
     {
         id: 'ccdc_08172023',
         title: 'August Childhood Cancer Data Catalog release goes live',

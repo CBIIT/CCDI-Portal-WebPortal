@@ -11,7 +11,7 @@ import newsImg from '../../assets/news/News_Header.jpg';
 import { newsList } from '../../bento/newsData'
 
 const NewsContainer = styled.div`
-  width: 1440px;
+  width: 100%;
   margin: 0 auto;
 
   .newsHeader {
@@ -19,6 +19,7 @@ const NewsContainer = styled.div`
     height: 214px;
     margin: 0 auto;
     background-image: url(${newsImg});
+    background-repeat: no-repeat;
     background-color: #87D7DCCC; 
     border-radius: 0px 0px 20px 20px;
     font-family: 'Poppins';
@@ -67,13 +68,16 @@ const NewsContainer = styled.div`
     cursor: pointer;
   }
 
+  .UpperContainer {
+    display: flex;
+  }
+
   .newsList {
-    width: 1440px;
+    width: 100%;
     margin: 0 auto;
   }
 
   .newsItem {
-    display: flex;
     width: 1047px;
     min-height: 248px;
     border: 1.5px solid transparent;
@@ -96,7 +100,7 @@ const NewsContainer = styled.div`
   .newsItemTitle {
     font-family: 'Poppins';
     font-weight: 500;
-    font-size: 18px;
+    font-size: 20px;
     line-height: 22px;
     color: #00838F;
     margin-bottom: 8px;
@@ -134,6 +138,76 @@ const NewsContainer = styled.div`
     border: 2px solid #848484;
     width: 197px;
     height: 172px;
+  }
+
+  .Lower {
+    display: none;
+  }
+
+  @media (min-width: 1420px) {
+    width: 1420px;
+  }
+
+  @media (max-width: 1186px) {
+    .newsHeader {
+      width: auto;
+      margin: 0 16px;
+    }
+  }
+
+  @media (max-width: 1079px) {
+    .newsList {
+      width: auto;
+      margin: 0 16px;
+    }
+
+    .newsItem {
+      width: auto;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    p {
+      margin-top: 5px;
+    }
+
+    .newsHeaderText {
+      line-height: 30px;
+      width: 250px;
+      padding-top: 70px;
+      margin: 0 auto;
+    }
+
+    .UpperContainer {
+      width: 100%;
+    }
+    .imgContainer {
+      margin-left: auto;
+    }
+    .newsItemImgContainer {
+      width: 99px;
+      height: 86px;
+      margin-top: 0;
+    }
+    .Upper {
+      display: none;
+    }
+    .Lower {
+      display: block;
+      margin-bottom: 25px;
+    }
+    .newsItem {
+      padding: 18px 18px 0 18px;
+    }
+    .newsItemTitle {
+      min-height: 50px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .newsItemTitle {
+      font-size: 18px;
+    }
   }
 `;
 
@@ -248,7 +322,7 @@ const NewsView = ({classes}) => {
 
   return (
     <NewsContainer>
-      <div className='newsHeader'>Hub News and Updates</div>
+      <div className='newsHeader'><div className='newsHeaderText'>Hub News and Updates</div></div>
       <div className='tabList'>
         {
           newsTabList.map((newsTabItem, idx) => {
@@ -264,14 +338,16 @@ const NewsView = ({classes}) => {
           data.length > 0 ? data.map((newsItem, idx) => {
             const newskey = `news_${idx}`;
             return (
-              // <div key={newskey} onClick={(e) => gotoNewsDetail(e, newsItem.id)} className='newsItem'>
               <div id={newsItem.id} key={newskey} className='newsItem'>
-                <div className='newsItemTextContainer'>
-                  <div className='newsItemTitle'>{newsItem.title}</div>
-                  <div className='newsItemDate'>{newsItem.date}</div>
-                  <div className='newsItemContent'>{ReactHtmlParser(newsItem.highlight)}</div>
+                <div className="UpperContainer">
+                  <div className='newsItemTextContainer'>
+                    <div className='newsItemTitle'>{newsItem.title}</div>
+                    <div className='newsItemDate'>{newsItem.date}</div>
+                    <div className='newsItemContent Upper'>{ReactHtmlParser(newsItem.highlight)}</div>
+                  </div>
+                  {newsItem.img && <div className='imgContainer'><img className='newsItemImgContainer' src={newsItem.img} alt={newsItem.title}/></div>}
                 </div>
-                {newsItem.img && <div><img className='newsItemImgContainer' src={newsItem.img} alt={newsItem.title}/></div>}
+                <div className='newsItemContent Lower'>{ReactHtmlParser(newsItem.highlight)}</div>
               </div>
             )
           }) :

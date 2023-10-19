@@ -229,9 +229,9 @@ const NewsContainer = styled.div`
     .tabList {
       display: grid;
       grid-column-gap: 2%;
-      grid-template-columns: auto auto 50px auto auto;
+      grid-template-columns: auto auto 50px 72px auto;
       justify-content: center;
-      margin-left: 12px;
+      margin-left: 16px;
       margin-right: 12px;
     }
   }

@@ -12,13 +12,7 @@ RUN NODE_OPTIONS="--max-old-space-size=4096" npm run build --silent
 # FROM nginx:1.23.3-alpine
 FROM nginx:1.25.2
 
-# RUN apk update && apk upgrade  \
-#     openssl \ 
-#     libx11 \
-#     tiff \ 
-#     nghttp2 \ 
-#     libwebp \
-#     ncurses
+RUN apt-get update && apt-get upgrade
 
 COPY --from=build /usr/src/app/dist /usr/share/nginx/html
 COPY --from=build /usr/src/app/config/inject.template.js /usr/share/nginx/html/inject.template.js

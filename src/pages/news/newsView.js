@@ -383,20 +383,22 @@ const NewsView = ({classes}) => {
       { data.length > 0 &&
         <div className={classes.paginationContainer}>
           <div className={classes.perPageContainer}>
-            Results per Page:
-            <div id="pageSizeBlock" className={classes.pageSizeContainer} onClick={() => setPageListVisible(!pageListVisible)}>
-              {pageSize}
-              <span id="pageSizeArrow" className={pageListVisible? classes.pageSizeArrowUp : classes.pageSizeArrowDown}></span>
-            </div>
-            <div ref={perPageSelection} id="pagelist" className={classes.pageSizeList} style={pageListVisible ? null : {visibility: "hidden"}}>
-              {
-                sizelist.map((sizeItem, idx) => {
-                  const key = `size_${idx}`;
-                  return (
-                    sizeItem === pageSize ? null : <div key={key} className={classes.pageSizeItem} onClick={onPageSizeClick}>{sizeItem}</div>
-                  )
-                })
-              }
+            <div className={classes.flexPageContainer}>
+              Results per Page:
+              <div id="pageSizeBlock" className={classes.pageSizeContainer} onClick={() => setPageListVisible(!pageListVisible)}>
+                {pageSize}
+                <span id="pageSizeArrow" className={pageListVisible? classes.pageSizeArrowUp : classes.pageSizeArrowDown}></span>
+              </div>
+              <div ref={perPageSelection} id="pagelist" className={classes.pageSizeList} style={pageListVisible ? null : {visibility: "hidden"}}>
+                {
+                  sizelist.map((sizeItem, idx) => {
+                    const key = `size_${idx}`;
+                    return (
+                      sizeItem === pageSize ? null : <div key={key} className={classes.pageSizeItem} onClick={onPageSizeClick}>{sizeItem}</div>
+                    )
+                  })
+                }
+              </div>
             </div>
             <div className={classes.showingContainer}>
               Showing&nbsp;
@@ -522,14 +524,24 @@ const styles = {
     '& > *': {
       marginTop: '10px',
     },
+    '@media (max-width: 767px)': {
+      justifyContent: 'left',
+      paddingLeft: '30px',
+      paddingBottom: '10px',
+    }
   },
   perPageContainer: {
-    display: 'flex',
     fontFamily: 'Poppins',
     fontWeight: '300',
     fontSize: '14px',
     color: '#045B80',
     marginTop: '15px',
+    '@media (min-width: 768px)': {
+      display: 'flex',
+    },
+  },
+  flexPageContainer: {
+    display: 'flex',
   },
   pageSizeContainer: {
     marginLeft: '10px',
@@ -564,8 +576,10 @@ const styles = {
     top: '25px',
     left: '-40px',
     width: '45px',
+    height: '76px',
     background: '#F5F5F5',
     border: '1px solid #99A1B7',
+    zIndex: '2',
     '&:hover': {
       cursor: 'pointer',
     },
@@ -693,6 +707,10 @@ const styles = {
     display: 'flex',
     position: 'relative',
     left: '-14px',
+    '@media (max-width: 767px)': {
+      left: '0',
+      top: '-31px',
+    }
   },
   showingRangeContainer: {
     minWidth: '40px',
@@ -704,6 +722,10 @@ const styles = {
     '&:hover': {
       cursor: 'pointer',
     },
+    '@media (max-width: 767px)': {
+      marginTop: '56px',
+      marginLeft: '-68px',
+    }
   },
   noticeText: {
     fontFamily: 'Poppins',

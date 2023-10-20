@@ -524,10 +524,9 @@ const styles = {
     '& > *': {
       marginTop: '10px',
     },
-    '@media (max-width: 767px)': {
+    '@media (max-width: 500px)': {
       justifyContent: 'left',
       paddingLeft: '30px',
-      paddingBottom: '10px',
     }
   },
   perPageContainer: {
@@ -536,7 +535,7 @@ const styles = {
     fontSize: '14px',
     color: '#045B80',
     marginTop: '15px',
-    '@media (min-width: 768px)': {
+    '@media (min-width: 500px)': {
       display: 'flex',
     },
   },
@@ -707,7 +706,7 @@ const styles = {
     display: 'flex',
     position: 'relative',
     left: '-14px',
-    '@media (max-width: 767px)': {
+    '@media (max-width: 499px)': {
       left: '0',
       top: '-31px',
     }
@@ -722,7 +721,7 @@ const styles = {
     '&:hover': {
       cursor: 'pointer',
     },
-    '@media (max-width: 767px)': {
+    '@media (max-width: 499px)': {
       marginTop: '56px',
       marginLeft: '-68px',
     }

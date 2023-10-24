@@ -83,11 +83,6 @@ Applications: [
     name:'National Childhood Cancer Registry Explorer',
     link: '/#nccr',
     className: 'navMobileSubItem',
-  },
-  {
-    name:'Childhood Cancer Data Initiative Data Inventory',
-    link: '/#inventory',
-    className: 'navMobileSubItem',
   }],
 "Other Resources": [
   {

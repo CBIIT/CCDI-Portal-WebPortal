@@ -14,6 +14,14 @@ import mtpMobile from '../assets/landing/mtp_mobile.png';
 import nccrMobile from '../assets/landing/nccr_mobile.png';
 import cgcMobile from '../assets/landing/cgc_mobile.png';
 import dbgapMobile from '../assets/landing/dbgap_mobile.png';
+import ccdcLogo from '../assets/landing/ccdc_logo.svg';
+import civicLogo from '../assets/landing/civic_logo.svg';
+import mciLogo from '../assets/landing/mci_logo.svg';
+import mtpLogo from '../assets/landing/mtp_logo.svg';
+import nccrLogo from '../assets/landing/nccr_logo.svg';
+import inventoryLogo from '../assets/landing/inventory_logo.svg';
+import cgcLogo from '../assets/landing/cgc_logo.svg';
+import dbgapLogo from '../assets/landing/dbgap_logo.svg';
 
 export const introData = {
   landingIntroPic: landingImg,
@@ -61,6 +69,7 @@ export const resourcesAppliationsListData = [
     subtitle: 'CCDC',
     content: 'A searchable inventory of childhood cancer resources.',
     link: 'https://datacatalog.ccdi.cancer.gov',
+    img: ccdcLogo,
   },
   {
     id: 'civic',
@@ -68,6 +77,7 @@ export const resourcesAppliationsListData = [
     subtitle: 'CIViC',
     content: 'An open access, open source, community-driven web resource for clinical interpretations of mutations related to cancer.',
     link: 'https://civicdb.org',
+    img: civicLogo,
   },
   {
     id: 'mci',
@@ -75,6 +85,7 @@ export const resourcesAppliationsListData = [
     subtitle: 'MCI',
     content: 'A program providing molecular testing for children, adolescents, and young adults with certain cancer types.',
     link: 'https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs002790.v2.p1',
+    img: mciLogo,
   },
   {
     id: 'mtp',
@@ -82,6 +93,7 @@ export const resourcesAppliationsListData = [
     subtitle: 'MTP',
     content: 'An instance of the Open Targets Platform with a focus on childhood cancer data that allows users to browse and identify associations between molecular targets, diseases, and drugs.',
     link: 'https://moleculartargets.ccdi.cancer.gov',
+    img: mtpLogo,
   },
   {
     id: 'nccr',
@@ -89,6 +101,7 @@ export const resourcesAppliationsListData = [
     subtitle: 'NCCR Explorer',
     content: 'A tool to browse demographic, incidence, and survival statistics for cancers in children, adolescent, and young adults.',
     link: 'https://nccrexplorer.ccdi.cancer.gov',
+    img: nccrLogo,
   },
 ];
 
@@ -99,6 +112,7 @@ export const resourcesCloudListData = [
     subtitle: 'CGC',
     content: 'A cloud-based platform to access and analyze cancer research data.',
     link: 'https://www.cancergenomicscloud.org',
+    img: cgcLogo,
   },
   {
     id: 'dbgap',
@@ -106,6 +120,7 @@ export const resourcesCloudListData = [
     subtitle: 'dbGaP',
     content: 'A database to store and distribute data and results from studies examining the interaction of genotypes and phenotypes.',
     link: 'https://www.ncbi.nlm.nih.gov/gap',
+    img: dbgapLogo,
   },
 ];
 

@@ -248,6 +248,12 @@ const NavBar = () => {
     }
   };
 
+  const onKeyPressHandler = (e) => {
+    if (e.key === "Enter") {
+      handleMenuClick(e);
+    }
+  };
+
   useEffect(() => {
     setClickedTitle("");
   }, []);
@@ -262,8 +268,42 @@ const NavBar = () => {
               const navkey = `nav_${idx}`;
               return (
                 <>
-                  {navMobileItem.className === 'navMobileItem' && <LiSection key={navkey}><div className='navTitle directLink'><NavLink to={navMobileItem.link}><div className='navText directLink' onClick={handleMenuClick} style={path === navMobileItem.link || (path === '/' && navMobileItem.link === '/home') ? activeStyle : null}>{navMobileItem.name}</div></NavLink></div></LiSection>}
-                  {navMobileItem.className === 'navMobileItem clickable' && <LiSection key={navkey}><div className={clickedTitle === navMobileItem.name ? 'navTitleClicked' : 'navTitle'}><div className={clickedTitle === navMobileItem.name ? 'navText clicked' : 'navText'} onClick={handleMenuClick}>{navMobileItem.name}</div></div></LiSection>}
+                {
+                  navMobileItem.className === 'navMobileItem'
+                  &&
+                  <LiSection key={navkey}>
+                    <div className='navTitle directLink'>
+                      <NavLink to={navMobileItem.link}>
+                        <div
+                          className='navText directLink'
+                          onKeyDown={onKeyPressHandler}
+                          role="button"
+                          onClick={handleMenuClick}
+                          style={path === navMobileItem.link || (path === '/' && navMobileItem.link === '/home') ? activeStyle : null}
+                        >
+                          {navMobileItem.name}
+                          </div>
+                        </NavLink>
+                      </div>
+                    </LiSection>
+                }
+                {
+                  navMobileItem.className === 'navMobileItem clickable'
+                  &&
+                  <LiSection key={navkey}>
+                    <div className={clickedTitle === navMobileItem.name ? 'navTitleClicked' : 'navTitle'}>
+                      <div
+                        className={clickedTitle === navMobileItem.name ? 'navText clicked' : 'navText'}
+                        onClick={handleMenuClick}
+                        onKeyDown={onKeyPressHandler}
+                        role="button"
+                        tabIndex={0}
+                      >
+                        {navMobileItem.name}
+                      </div>
+                    </div>
+                  </LiSection>
+                }
                 </>
               )
             })

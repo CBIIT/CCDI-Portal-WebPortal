@@ -26,7 +26,7 @@ const LogoArea = styled.div`
 const Logo = () => {
   return (
     <LogoArea>
-        <a className='logoContainer' href={headerData.globalHeaderLogoLink}>
+        <a className='logoContainer' href={headerData.globalHeaderLogoLink} aria-label="logoPortal">
             <div className='imgContainer' />
             {/* <img src={headerData.globalHeaderLogo} alt={headerData.globalHeaderLogoAltText} /> */}
         </a>

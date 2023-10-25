@@ -23,7 +23,7 @@ export const newsList = [
         title: 'August Childhood Cancer Data Catalog release goes live',
         date: 'August 17, 2023',
         slug: 'The catalog now includes four new resources, ten new data sets, and a new resource type.',
-        highlight: 'Users of the Childhood Cancer Data Catalog can now filter by the resource type, “Biorepository.” As part of this resource type, four new resources have been added, including Norwegian Childhood Cancer Biobank, Swedish Childhood Tumor Biobank, The Biopathology Center, and VIVO Biobank. There are also ten additional data sets available and several updates to existing resources.',
+        highlight: '<p>Users of the Childhood Cancer Data Catalog can now filter by the resource type, “Biorepository.” As part of this resource type, four new resources have been added, including Norwegian Childhood Cancer Biobank, Swedish Childhood Tumor Biobank, The Biopathology Center, and VIVO Biobank. There are also ten additional data sets available and several updates to existing resources.</p>',
         fullText: '',
         type: 'Application Updates',
         img: updateImgCCDC2,

@@ -11,7 +11,7 @@ import newsImg from '../../assets/news/News_Header.jpg';
 import { newsList } from '../../bento/newsData'
 
 const NewsContainer = styled.div`
-  width: 1440px;
+  width: 100%;
   margin: 0 auto;
 
   .newsHeader {
@@ -19,6 +19,7 @@ const NewsContainer = styled.div`
     height: 214px;
     margin: 0 auto;
     background-image: url(${newsImg});
+    background-repeat: no-repeat;
     background-color: #87D7DCCC; 
     border-radius: 0px 0px 20px 20px;
     font-family: 'Poppins';
@@ -32,7 +33,7 @@ const NewsContainer = styled.div`
 
   .tabList {
     display: flex;
-    margin: 20px 0 40px 150px;
+    margin: 20px 0 35px calc(45% - 490px);;
   }
 
   .tabListItem {
@@ -67,13 +68,16 @@ const NewsContainer = styled.div`
     cursor: pointer;
   }
 
+  .UpperContainer {
+    display: flex;
+  }
+
   .newsList {
-    width: 1440px;
+    width: 100%;
     margin: 0 auto;
   }
 
   .newsItem {
-    display: flex;
     width: 1047px;
     min-height: 248px;
     border: 1.5px solid transparent;
@@ -96,7 +100,7 @@ const NewsContainer = styled.div`
   .newsItemTitle {
     font-family: 'Poppins';
     font-weight: 500;
-    font-size: 18px;
+    font-size: 20px;
     line-height: 22px;
     color: #00838F;
     margin-bottom: 8px;
@@ -134,6 +138,102 @@ const NewsContainer = styled.div`
     border: 2px solid #848484;
     width: 197px;
     height: 172px;
+  }
+
+  .Lower {
+    display: none;
+  }
+
+  @media (min-width: 1420px) {
+    width: 1420px;
+  }
+
+  @media (max-width: 1186px) {
+    .newsHeader {
+      width: auto;
+      margin: 0 16px;
+    }
+  }
+
+  @media (max-width: 1090px) {
+    .newsList {
+      width: auto;
+      margin: 0 16px;
+    }
+
+    .newsItem {
+      width: auto;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    p {
+      margin-top: 5px;
+    }
+
+    .newsHeaderText {
+      line-height: 30px;
+      width: 250px;
+      padding-top: 70px;
+      margin: 0 auto;
+    }
+
+    .UpperContainer {
+      width: 100%;
+    }
+    .imgContainer {
+      margin-left: auto;
+    }
+    .newsItemImgContainer {
+      width: 99px;
+      height: 86px;
+      margin-top: 0;
+    }
+    .Upper {
+      display: none;
+    }
+    .Lower {
+      display: block;
+      margin-bottom: 25px;
+    }
+    .newsItem {
+      padding: 18px 18px 0 18px;
+    }
+    .newsItemTitle {
+      min-height: 50px;
+    }
+    .tabListItem {
+      font-size: 12px;
+      margin-left: 0;
+    }
+    .tabListItemActive {
+      font-size: 12px;
+      margin-left: 0;
+    }
+    .tabList {
+      display: grid;
+      grid-column-gap: 4%;
+      grid-template-columns: auto auto auto auto auto;
+      justify-content: center;
+      margin: 20px auto 25px auto;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .newsItemTitle {
+      font-size: 18px;
+    }
+  }
+
+  @media (max-width: 530px) {
+    .tabList {
+      display: grid;
+      grid-column-gap: 2%;
+      grid-template-columns: auto auto 50px 72px auto;
+      justify-content: center;
+      margin-left: 16px;
+      margin-right: 12px;
+    }
   }
 `;
 
@@ -248,7 +348,7 @@ const NewsView = ({classes}) => {
 
   return (
     <NewsContainer>
-      <div className='newsHeader'>Hub News and Updates</div>
+      <div className='newsHeader'><div className='newsHeaderText'>Hub News and Updates</div></div>
       <div className='tabList'>
         {
           newsTabList.map((newsTabItem, idx) => {
@@ -264,14 +364,16 @@ const NewsView = ({classes}) => {
           data.length > 0 ? data.map((newsItem, idx) => {
             const newskey = `news_${idx}`;
             return (
-              // <div key={newskey} onClick={(e) => gotoNewsDetail(e, newsItem.id)} className='newsItem'>
               <div id={newsItem.id} key={newskey} className='newsItem'>
-                <div className='newsItemTextContainer'>
-                  <div className='newsItemTitle'>{newsItem.title}</div>
-                  <div className='newsItemDate'>{newsItem.date}</div>
-                  <div className='newsItemContent'>{ReactHtmlParser(newsItem.highlight)}</div>
+                <div className="UpperContainer">
+                  <div className='newsItemTextContainer'>
+                    <div className='newsItemTitle'>{newsItem.title}</div>
+                    <div className='newsItemDate'>{newsItem.date}</div>
+                    <div className='newsItemContent Upper'>{ReactHtmlParser(newsItem.highlight)}</div>
+                  </div>
+                  {newsItem.img && <div className='imgContainer'><img className='newsItemImgContainer' src={newsItem.img} alt={newsItem.title}/></div>}
                 </div>
-                {newsItem.img && <div><img className='newsItemImgContainer' src={newsItem.img} alt={newsItem.title}/></div>}
+                <div className='newsItemContent Lower'>{ReactHtmlParser(newsItem.highlight)}</div>
               </div>
             )
           }) :
@@ -281,20 +383,22 @@ const NewsView = ({classes}) => {
       { data.length > 0 &&
         <div className={classes.paginationContainer}>
           <div className={classes.perPageContainer}>
-            Results per Page:
-            <div id="pageSizeBlock" className={classes.pageSizeContainer} onClick={() => setPageListVisible(!pageListVisible)}>
-              {pageSize}
-              <span id="pageSizeArrow" className={pageListVisible? classes.pageSizeArrowUp : classes.pageSizeArrowDown}></span>
-            </div>
-            <div ref={perPageSelection} id="pagelist" className={classes.pageSizeList} style={pageListVisible ? null : {visibility: "hidden"}}>
-              {
-                sizelist.map((sizeItem, idx) => {
-                  const key = `size_${idx}`;
-                  return (
-                    sizeItem === pageSize ? null : <div key={key} className={classes.pageSizeItem} onClick={onPageSizeClick}>{sizeItem}</div>
-                  )
-                })
-              }
+            <div className={classes.flexPageContainer}>
+              Results per Page:
+              <div id="pageSizeBlock" className={classes.pageSizeContainer} onClick={() => setPageListVisible(!pageListVisible)}>
+                {pageSize}
+                <span id="pageSizeArrow" className={pageListVisible? classes.pageSizeArrowUp : classes.pageSizeArrowDown}></span>
+              </div>
+              <div ref={perPageSelection} id="pagelist" className={classes.pageSizeList} style={pageListVisible ? null : {visibility: "hidden"}}>
+                {
+                  sizelist.map((sizeItem, idx) => {
+                    const key = `size_${idx}`;
+                    return (
+                      sizeItem === pageSize ? null : <div key={key} className={classes.pageSizeItem} onClick={onPageSizeClick}>{sizeItem}</div>
+                    )
+                  })
+                }
+              </div>
             </div>
             <div className={classes.showingContainer}>
               Showing&nbsp;
@@ -420,14 +524,23 @@ const styles = {
     '& > *': {
       marginTop: '10px',
     },
+    '@media (max-width: 500px)': {
+      justifyContent: 'left',
+      paddingLeft: '30px',
+    }
   },
   perPageContainer: {
-    display: 'flex',
     fontFamily: 'Poppins',
     fontWeight: '300',
     fontSize: '14px',
     color: '#045B80',
     marginTop: '15px',
+    '@media (min-width: 500px)': {
+      display: 'flex',
+    },
+  },
+  flexPageContainer: {
+    display: 'flex',
   },
   pageSizeContainer: {
     marginLeft: '10px',
@@ -462,8 +575,10 @@ const styles = {
     top: '25px',
     left: '-40px',
     width: '45px',
+    height: '76px',
     background: '#F5F5F5',
     border: '1px solid #99A1B7',
+    zIndex: '2',
     '&:hover': {
       cursor: 'pointer',
     },
@@ -591,6 +706,10 @@ const styles = {
     display: 'flex',
     position: 'relative',
     left: '-14px',
+    '@media (max-width: 499px)': {
+      left: '0',
+      top: '-31px',
+    }
   },
   showingRangeContainer: {
     minWidth: '40px',
@@ -602,6 +721,10 @@ const styles = {
     '&:hover': {
       cursor: 'pointer',
     },
+    '@media (max-width: 499px)': {
+      marginTop: '56px',
+      marginLeft: '-68px',
+    }
   },
   noticeText: {
     fontFamily: 'Poppins',

@@ -1093,15 +1093,15 @@ export const tabContainers = [
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'race',
-        header: 'Race',
+        dataField: 'gender',
+        header: 'Gender',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'gender',
-        header: 'Gender',
+        dataField: 'race',
+        header: 'Race',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
@@ -1172,7 +1172,7 @@ export const tabContainers = [
       },
       {
         dataField: 'diagnosis_icd_o',
-        header: 'ICD-O Morphology',
+        header: 'Diagnosis (ICD-O)',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,

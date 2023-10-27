@@ -75,18 +75,6 @@ export const wrapperConfig = [{
       alertMessage,
     }],
 },
-{
-  container: 'buttons',
-  size: 'xl',
-  clsName: 'container_footer_link',
-  items: [
-    {
-      title: 'Go to Cart >',
-      clsName: 'go_to_cart',
-      url: '/fileCentricCart',
-      type: types.LINK,
-    }],
-},
 ];
 
 

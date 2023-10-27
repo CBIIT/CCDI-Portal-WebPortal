@@ -1,3 +1,5 @@
+import exportIcon from '../../assets/cart/Export_Icon.svg';
+
 export default () => ({
   backgroundContainer: {
     background: '#E7EEF5',
@@ -37,4 +39,8 @@ export default () => ({
   customTooltip: {
     border: '#03A383 1px solid',
   },
+  cartIntroLink: {
+    paddingRight: '20px',
+    background: `url(${exportIcon}) right center no-repeat`,
+  }
 });

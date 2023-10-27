@@ -19,7 +19,6 @@ import civicLogo from '../assets/landing/civic_logo.svg';
 import mciLogo from '../assets/landing/mci_logo.svg';
 import mtpLogo from '../assets/landing/mtp_logo.svg';
 import nccrLogo from '../assets/landing/nccr_logo.svg';
-import inventoryLogo from '../assets/landing/inventory_logo.svg';
 import cgcLogo from '../assets/landing/cgc_logo.svg';
 import dbgapLogo from '../assets/landing/dbgap_logo.svg';
 

@@ -81,6 +81,10 @@ export const customTheme = {
       '&:hover': {
         backgroundColor: '#2A6E93',
       },
+      '&.Mui-disabled': {
+        color: '#fff',
+        backgroundColor: '#B3D6EA',
+      },
     },
   },
   MuiLink: {

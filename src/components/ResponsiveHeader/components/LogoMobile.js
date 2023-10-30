@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { headerData } from '../../../bento/globalHeaderData';
 
@@ -21,9 +22,9 @@ const LogoArea = styled.div`
 const Logo = () => {
   return (
     <LogoArea>
-        <a className='logoContainer' href={headerData.globalHeaderLogoLink} aria-label="logoPortal">
+        <NavLink className='logoContainer' to={headerData.globalHeaderLogoLink} aria-label="logoPortal">
             <div className='imgContainer' />
-        </a>
+        </NavLink>
     </LogoArea>
   );
 };

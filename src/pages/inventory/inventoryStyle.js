@@ -26,4 +26,19 @@ export default () => ({
     borderRight: 'thin solid #B1B1B1',
     borderLeft: 'thin solid #B1B1B1',
   },
+  goToCartLink: {
+    fontFamily: 'Lato',
+    fontSize: '12px',
+    textAlign: 'right',
+    height: '65px',
+    padding: '5px 100px 0 0',
+    '& a': {
+      color: '#3E6886',
+      borderBottom: '1px solid #3E6886',
+      textDecoration: 'none',
+      '&:hover': {
+        textDecoration: 'underline',
+      }
+    }
+  },
 });

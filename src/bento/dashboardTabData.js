@@ -1273,12 +1273,6 @@ export const tabContainers = [
         headerType: cellTypes.CUSTOM_ELEM,
         cellType: cellTypes.CUSTOM_ELEM,
         cellStyle: cellStyles.EXPAND,
-        dataFormatter: (dt) => {
-          if (dt.length > 5) {
-            return dt.slice(0, 5).join("<br>") + "<br><span title='For more information on diagnosis please see Diagnosis tab'>...</span>";
-          }
-          return dt.join("<br>");
-        },
         role: cellTypes.DISPLAY,
       },
       {
@@ -1289,12 +1283,6 @@ export const tabContainers = [
         sortable: false,
         cellType: cellTypes.CUSTOM_ELEM,
         cellStyle: cellStyles.EXPAND,
-        dataFormatter: (dt) => {
-          if (dt.length > 5) {
-            return dt.slice(0, 5).join("<br>") + "<br><span title='For more information on diagnosis anatomic site please see Diagnosis tab'>...</span>";
-          }
-          return dt.join("<br>");
-        },
         role: cellTypes.DISPLAY,
       },
       {
@@ -1326,12 +1314,6 @@ export const tabContainers = [
         sortable: false,
         cellType: cellTypes.CUSTOM_ELEM,
         cellStyle: cellStyles.EXPAND,
-        dataFormatter: (dt) => {
-          if (dt.length > 5) {
-            return dt.slice(0, 5).join("<br>") + "<br><span title='For more information on file type please see Files tab'>...</span>";
-          }
-          return dt.join("<br>");
-        },
         role: cellTypes.DISPLAY,
       },
       {

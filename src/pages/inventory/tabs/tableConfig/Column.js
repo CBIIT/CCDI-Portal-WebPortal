@@ -1,14 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { cellTypes, headerTypes } from '@bento-core/table';
 import ReactHtmlParser from "html-react-parser";
 
 export const CustomCellView = (props) => {
   const {
-    dataField, dataFormatter,
+    dataField, dataFormatter, cellStyle,
   } = props;
-  const content = dataFormatter(props[dataField]);
-  // other custom elem
-  return (<>{ReactHtmlParser(content)}</>);
+  const [top5, setTop5] = useState(true);
+  if (cellStyle === 'TRANSFORM') {
+    const content = dataFormatter(props[dataField]);
+    return (<>{ReactHtmlParser(content)}</>);
+  } else if (cellStyle === 'EXPAND') {
+    const completeData = props[dataField].join("<br>");
+    if (props[dataField].length <= 5) {
+      return (<>{ReactHtmlParser(completeData)}</>);
+    } else {
+      const top5Data = props[dataField].slice(0, 5).join("<br>");
+      return (<>{ReactHtmlParser(top5 ? top5Data : completeData)}<div onClick={() => setTop5(!top5)} title='Click to expand for more information'>...</div></>);
+    }
+  }
 };
 
 export const CustomHeaderCellView = () => (<></>);

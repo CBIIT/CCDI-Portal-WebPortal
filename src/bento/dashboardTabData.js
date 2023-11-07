@@ -1,6 +1,6 @@
 /* eslint-disable */
 import gql from 'graphql-tag';
-import { cellTypes } from '@bento-core/table';
+import { cellTypes, cellStyles } from '@bento-core/table';
 import { customParticipantsTabDownloadCSV, customFilesTabDownloadCSV, customSamplesTabDownloadCSV, customDiagnosisTabDownloadCSV, customStudyTabDownloadCSV } from './tableDownloadCSV';
 import { dataFormatTypes } from '@bento-core/table';
 import questionIcon from '../assets/icons/Question_Icon.svg';
@@ -1197,6 +1197,7 @@ export const tabContainers = [
         display: true,
         tooltipText: 'sort',
         cellType: cellTypes.CUSTOM_ELEM,
+        cellStyle: cellStyles.TRANSFORM,
         dataFormatter: (dt) => {
           if (dt === -999) {
             return 'Not Reported';
@@ -1271,12 +1272,7 @@ export const tabContainers = [
         sortable: false,
         headerType: cellTypes.CUSTOM_ELEM,
         cellType: cellTypes.CUSTOM_ELEM,
-        dataFormatter: (dt) => {
-          if (dt.length > 5) {
-            return dt.slice(0, 5).join("<br>") + "<br><span title='For more information on diagnosis please see Diagnosis tab'>...</span>";
-          }
-          return dt.join("<br>");
-        },
+        cellStyle: cellStyles.EXPAND,
         role: cellTypes.DISPLAY,
       },
       {
@@ -1286,12 +1282,7 @@ export const tabContainers = [
         display: true,
         sortable: false,
         cellType: cellTypes.CUSTOM_ELEM,
-        dataFormatter: (dt) => {
-          if (dt.length > 5) {
-            return dt.slice(0, 5).join("<br>") + "<br><span title='For more information on diagnosis anatomic site please see Diagnosis tab'>...</span>";
-          }
-          return dt.join("<br>");
-        },
+        cellStyle: cellStyles.EXPAND,
         role: cellTypes.DISPLAY,
       },
       {
@@ -1322,12 +1313,7 @@ export const tabContainers = [
         display: true,
         sortable: false,
         cellType: cellTypes.CUSTOM_ELEM,
-        dataFormatter: (dt) => {
-          if (dt.length > 5) {
-            return dt.slice(0, 5).join("<br>") + "<br><span title='For more information on file type please see Files tab'>...</span>";
-          }
-          return dt.join("<br>");
-        },
+        cellStyle: cellStyles.EXPAND,
         role: cellTypes.DISPLAY,
       },
       {
@@ -1439,6 +1425,7 @@ export const tabContainers = [
         display: true,
         tooltipText: 'sort',
         cellType: cellTypes.CUSTOM_ELEM,
+        cellStyle: cellStyles.TRANSFORM,
         dataFormatter: (dt) => {
           if (dt === -999) {
             return 'Not Reported';

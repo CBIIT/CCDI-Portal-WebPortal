@@ -85,12 +85,59 @@ export const tblPgn = {
       minHeight: '45px',
     },
     caption: {
+      textTransform: 'none',
       fontFamily: 'Open Sans',
       fontSize: '14px',
     },
     select: {
       fontFamily: 'Open Sans',
       fontSize: '14px',
+    },
+  },
+  MuiSelect: {
+    root: {
+      fontFamily: 'Open Sans',
+      fontSize: '14px',
+    },
+    select: {
+      '&:focus': {
+        backgroundColor: '#FFFFFF'
+      }
+    },
+    icon: {
+      padding: '2px 0 0 3px',
+    },
+    iconOpen: {
+      padding: '2px 0 0 3px',
+    },
+  },
+  MuiMenu: {
+    paper: {
+      boxShadow: 'none',
+      border: '1px solid #99A1B7',
+      background: '#F5F5F5',
+    },
+    list: {
+      paddingTop: '0',
+      paddingBottom: '0',
+    }
+  },
+  MuiMenuItem: {
+    root: {
+      fontFamily: 'Open Sans',
+      fontSize: '14px',
+      padding: '2px 8px',
+      paddingTop: '2px',
+      paddingBottom: '2px',
+      minHeight: '24px',
+    }
+  },
+  MuiListItem: {
+    button: {
+      '&:hover': {
+        backgroundColor: '#F5F5F5',
+        color: 'rgb(96, 121, 123)',
+      }
     },
   },
 };

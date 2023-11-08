@@ -495,6 +495,7 @@ query participantOverview(
         id
         participant_id
         phs_accession
+        study_id
         race
         gender
         ethnicity
@@ -570,6 +571,7 @@ query diagnosisOverview(
         anatomic_site
         age_at_diagnosis
         vital_status
+        study_id
     }
 }
 `;
@@ -1086,15 +1088,8 @@ export const tabContainers = [
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'phs_accession',
-        header: 'Study Accession',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'race',
-        header: 'Race',
+        dataField: 'study_id',
+        header: 'Study ID',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
@@ -1102,6 +1097,13 @@ export const tabContainers = [
       {
         dataField: 'gender',
         header: 'Gender',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'race',
+        header: 'Race',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
@@ -1164,15 +1166,15 @@ export const tabContainers = [
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'phs_accession',
-        header: 'Study Accession',
+        dataField: 'study_id',
+        header: 'Study ID',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
       },
       {
         dataField: 'diagnosis_icd_o',
-        header: 'ICD-O Morphology',
+        header: 'Diagnosis (ICD-O)',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,

@@ -7,6 +7,13 @@ export const CustomCellView = (props) => {
     dataField, dataFormatter, cellStyle,
   } = props;
   const [top5, setTop5] = useState(true);
+  const newStyle = {
+    color: "#60797B",
+    fontSize: "12px",
+    cursor: 'pointer',
+    textDecoration: 'underline',
+    height: '23px',
+  };
   if (cellStyle === 'TRANSFORM') {
     const content = dataFormatter(props[dataField]);
     return (<>{ReactHtmlParser(content)}</>);
@@ -16,7 +23,12 @@ export const CustomCellView = (props) => {
       return (<>{ReactHtmlParser(completeData)}</>);
     } else {
       const top5Data = props[dataField].slice(0, 5).join("<br>");
-      return (<>{ReactHtmlParser(top5 ? top5Data : completeData)}<div onClick={() => setTop5(!top5)} title='Click to expand for more information'>...</div></>);
+      return (
+        <>
+          {ReactHtmlParser(top5 ? top5Data : completeData)}
+          <div onClick={() => setTop5(!top5)} style={newStyle}>{top5 ? "Read More" : "Read Less"}</div>
+        </>
+      );
     }
   }
 };

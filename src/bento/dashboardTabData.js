@@ -495,6 +495,7 @@ query participantOverview(
         id
         participant_id
         phs_accession
+        study_id
         race
         gender
         ethnicity
@@ -570,6 +571,7 @@ query diagnosisOverview(
         anatomic_site
         age_at_diagnosis
         vital_status
+        study_id
     }
 }
 `;
@@ -1086,8 +1088,8 @@ export const tabContainers = [
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'phs_accession',
-        header: 'Study Accession',
+        dataField: 'study_id',
+        header: 'Study ID',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
@@ -1164,8 +1166,8 @@ export const tabContainers = [
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'phs_accession',
-        header: 'Study Accession',
+        dataField: 'study_id',
+        header: 'Study ID',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,

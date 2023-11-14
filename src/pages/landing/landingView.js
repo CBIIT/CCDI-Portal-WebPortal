@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { useApolloClient } from '@apollo/client';
-import { DASHBOARD_QUERY_NEW } from '../../bento/dashboardTabData';
-import { introData, titleData, statsData, resourcesAppliationsListData, resourcesCloudListData } from '../../bento/landingPageData';
+import { introData, titleData, resourcesAppliationsListData, resourcesCloudListData } from '../../bento/landingPageData';
 import ReactHtmlParser from 'html-react-parser';
 import Carousel from '../landing/component/carousel';
 import HeroMobile from '../landing/component/heroMobile'
@@ -722,29 +720,9 @@ const ResourcesContainer = styled.div`
     }
 `;
 
-const LandingView = () => {
-  const client = useApolloClient();
-  const [statsDataNew, setStatsDataNew] = useState([]);
-  
-  async function getData() {
-    let result = await client.query({
-      query: DASHBOARD_QUERY_NEW,
-      variables: {"phs_accession": ['phs002790'], "participant_ids": []},
-    })
-      .then((response) => response.data);
-    return result;
-  }
-  useEffect(() => {
-    const controller = new AbortController();
-    getData().then((result) => {
-      let newStatList = statsData;
-      const participantsNum = result.searchParticipants.numberOfParticipants;
-      newStatList[1].num = participantsNum;
-      setStatsDataNew([...newStatList]);
-    });
-    return () => controller.abort();
-  },[]);
-
+const LandingView = ({
+  statsData
+}) => {
   return (
     <LandingViewContainer>
       <BackgroundFirst />
@@ -783,7 +761,7 @@ const LandingView = () => {
             <h2 className='statGlance'>CCDI Stats At a Glance</h2>
             <div className='statList'>
             {
-              statsDataNew.map((statItem, statidx) => {
+              statsData.map((statItem, statidx) => {
                 const statkey = `stat_${statidx}`;
                 return (
                   <div className='statItem' key={statkey}>

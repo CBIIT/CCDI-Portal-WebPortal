@@ -3,7 +3,7 @@ import { withStyles, CssBaseline } from '@material-ui/core';
 import { Route, Routes, } from 'react-router-dom';
 import Footer from '../ResponsiveFooter/';
 import Header from '../ResponsiveHeader/';
-import Home from '../../pages/landing/landingView';
+import Home from '../../pages/landing/landingController';
 import About from '../../pages/about/aboutView';
 import News from '../../pages/news/newsView';
 import Error from '../../pages/error/Error';

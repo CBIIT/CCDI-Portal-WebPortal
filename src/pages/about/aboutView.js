@@ -73,22 +73,23 @@ const AboutContainer = styled.div`
 
   @media (max-width: 767px) {
     .aboutHeader {
+      position: relative;
+      background-image: url(${aboutImg});
+      height: 406px;
+      margin: 0 0 32px 0;
+    }
+    .aboutHeaderText {
+      position: absolute;
+      top: 34%;
+      left: 0;
+      width: 100%;
       color: #FFFFFF;
       background: rgba(0, 95, 103, 0.85);
       height: 141px;
       line-height: 141px;
-      margin: 120px 0 182px 0;
     }
     .upperImg {
-      position: absolute;
-      width: 100%;
-      height: 406px;
-      left: 0;
-      top: 143px;
-      margin: 0;
-      z-index: -1;
-      border: none;
-      border-radius: 0;
+      display: none;
     }
     .aboutBody {
       margin: 0 6.5% 150px 6.5%;
@@ -109,7 +110,9 @@ const AboutContainer = styled.div`
 const AboutView = () => {
   return (
     <AboutContainer>
-      <div className='aboutHeader'>About</div>
+      <div className='aboutHeader'>
+        <div className='aboutHeaderText'>About</div>
+      </div>
       <div className='aboutBody'>
         <div className='upperContainer'>
           <div className='upperContentContainer'>

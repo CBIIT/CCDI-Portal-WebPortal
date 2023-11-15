@@ -42,6 +42,9 @@
   <!-- Adobe Analytics and DAP analytics -->
   <script src=https://assets.adobedtm.com/6a4249cd0a2c/f4e387f9e3a3/launch-13b63a2d928c.min.js> </script>
 
+  <!-- Import web component -->
+  <script src="https://cbiit.github.io/ccdi-alert-elements/components/include-html.js"></script>
+
   <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -64,6 +67,10 @@
 </head>
 
 <body>
+  <header>
+    <!-- Set component's src attribute to url of html snippet -->
+    <include-html src="https://cbiit.github.io/ccdi-alert-elements/banners/government-shutdown.html" data='{"banner_width": "1334px", "lower_tier_identifier": ["localhost:", "-dev.", "-dev2.", "-qa.", "-qa2."]}'></include-html>
+  </header>
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
   <!--

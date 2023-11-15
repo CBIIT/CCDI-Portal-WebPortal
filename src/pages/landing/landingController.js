@@ -4,14 +4,14 @@ import { connect } from 'react-redux';
 import { CircularProgress } from '@material-ui/core';
 import { statsData } from '../../bento/landingPageData';
 import LandingView from './landingView';
-import { DASHBOARD_QUERY_NEW } from '../../bento/dashboardTabData';
+import { LANDING_DATA_QUERY } from '../../bento/landingPageData';
 
 const getDashData = () => {
   const client = useApolloClient();
   async function getData() {
     let result = await client.query({
-      query: DASHBOARD_QUERY_NEW,
-      variables: {"phs_accession": ['phs002790'], "participant_ids": []},
+      query: LANDING_DATA_QUERY,
+      variables: {},
     })
       .then((response) => response.data);
     return result;
@@ -23,8 +23,8 @@ const getDashData = () => {
     const controller = new AbortController();
     getData().then((result) => {
       let newStatList = statsData;
-      const participantsNum = result.searchParticipants.numberOfParticipants;
-      newStatList[1].num = participantsNum;
+      const MCICount = result.numberOfMCICount;
+      newStatList[1].num = MCICount;
       setStatsDataNew([...newStatList]);
     });
     return () => controller.abort();

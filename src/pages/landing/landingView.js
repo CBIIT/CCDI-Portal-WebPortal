@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { introData, titleData, statsData, resourcesAppliationsListData, resourcesCloudListData } from '../../bento/landingPageData';
+import { introData, titleData, resourcesAppliationsListData, resourcesCloudListData } from '../../bento/landingPageData';
 import ReactHtmlParser from 'html-react-parser';
 import Carousel from '../landing/component/carousel';
 import HeroMobile from '../landing/component/heroMobile'
@@ -720,7 +720,9 @@ const ResourcesContainer = styled.div`
     }
 `;
 
-const LandingView = () => {
+const LandingView = ({
+  statsData
+}) => {
   return (
     <LandingViewContainer>
       <BackgroundFirst />
@@ -763,7 +765,7 @@ const LandingView = () => {
                 const statkey = `stat_${statidx}`;
                 return (
                   <div className='statItem' key={statkey}>
-                    <h5 className='statNum'>{statItem.num}</h5>
+                    <h5 className='statNum'>{statItem.num.toLocaleString('en-US')}</h5>
                     <div className='statTitle'>{ReactHtmlParser(statItem.title)}</div>
                     <div className='statDetail'>{statItem.detail}</div>
                   </div>

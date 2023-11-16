@@ -1,3 +1,4 @@
+import gql from 'graphql-tag';
 import landingImg from '../assets/landing/Hero_1.png'
 import aboutImg from '../assets/landing/About_1.png';
 import wheel1 from '../assets/landing/ccdc_carousel.svg';
@@ -40,22 +41,22 @@ export const titleData = {
 
 export const statsData = [
   {
-    num: '253',
+    num: 253,
     title: 'Cataloged Datasets',
     detail: 'Childhood Cancer Data Catalog',
   },
   {
-    num: '1,862',
+    num: 1862,
     title: 'Participants',
     detail: 'Molecular Characterization Initiative for Childhood Cancer',
   },
   {
-    num: '58,867',
+    num: 58867,
     title: 'Potential Pediatric Molecular Targets',
     detail: 'Molecular Targets Platform',
   },
   {
-    num: '1,700,440',
+    num: 1700440,
     title: 'Reported Cases Under Age 40<br>(1995-2020)',
     detail: 'National Childhood Cancer Registry Explorer',
   },
@@ -177,3 +178,8 @@ export const carouselList = [
     link: 'https://nccrexplorer.ccdi.cancer.gov',
   },
 ];
+
+export const LANDING_DATA_QUERY = gql`{
+    numberOfMCICount
+  }
+`;

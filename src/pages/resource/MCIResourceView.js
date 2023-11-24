@@ -47,6 +47,8 @@ const MCIResourceContainer = styled.div`
     }
 
     .goToSiteText {
+        color: #FFFFFF;
+        text-decoration: none;
         padding-right: 34px;
         letter-spacing: 0.02em;
         background: url(${exportIcon}) right center no-repeat;
@@ -71,12 +73,17 @@ const MCIResourceBody = styled.div`
     }
 
     .navTopicItem {
-        font-family: Inter;
-        font-weight: 400;
-        font-size: 16px;
-        letter-spacing: 0.01em;
-        line-height: 19px;
         margin-bottom: 20px;
+
+        a {
+            color: #4D889E;
+            text-decoration: none;
+            font-family: Inter;
+            font-weight: 400;
+            font-size: 16px;
+            letter-spacing: 0.01em;
+            line-height: 19px;
+        }
     }
 
     .contentSection {
@@ -116,7 +123,7 @@ const MCIResourceView = () => {
             <div className='resourceTitle'>
                 Molecular Characterization Initiative
                 <div className='goToSiteButton'>
-                    <div className='goToSiteText'>Go to site</div>
+                    <a className='goToSiteText' href="https://www.cancer.gov/research/areas/childhood/childhood-cancer-data-initiative/data-ecosystem/molecular-characterization" target="_blank" rel="noopener noreferrer">Go to site</a>
                 </div>
             </div>
             <MCIResourceBody>
@@ -126,8 +133,9 @@ const MCIResourceView = () => {
                         {
                             MCIContent.map((mciItem, topicid) => {
                                 const topickey = `topic_${topicid}`;
+                                const mciItemLink = '/MCI/#' + mciItem.id;
                                 return (
-                                    <div className='navTopicItem' key={topickey}>{mciItem.topic}</div>
+                                    <div className='navTopicItem' key={topickey}><a href={mciItemLink} className='navTopicItem' key={topickey}>{mciItem.topic}</a></div>
                                 )
                             })
                         }
@@ -140,7 +148,7 @@ const MCIResourceView = () => {
                                 const mcikey = `mci_${mciid}`;
                                 return (
                                     <div key={mcikey}>
-                                        { mciItem.topic !== 'Introduction' && <div className='mciTitle'>{mciItem.topic}</div>}
+                                        { mciItem.topic !== 'Introduction' && <div id={mciItem.id} className='mciTitle'>{mciItem.topic}</div>}
                                         <div className='mciContentContainer'>{ReactHtmlParser(mciItem.content)}</div>
                                     </div>
                                 )

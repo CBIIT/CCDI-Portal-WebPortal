@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import ReactHtmlParser from 'html-react-parser';
 import { MCIContent } from '../../bento/mciData';
 import headerImg from '../../assets/resources/resource_header.svg';
 import exportIcon from '../../assets/resources/Explore_Icon.svg';
+import exportIconBlue from '../../assets/icons/Export_Icon.svg';
 
 const MCIResourceContainer = styled.div`
     width: 1420px;
@@ -83,6 +84,19 @@ const MCIResourceBody = styled.div`
         line-height: 19px;
     }
 
+    .selected {
+        font-family: Inter;
+        font-weight: 600;
+        color: #05555C;
+    }
+
+    .navTopicItem:hover {
+        cursor: pointer;
+        font-family: Inter;
+        font-weight: 600;
+        color: #05555C;
+    }
+
     .contentSection {
         display: flex;
         width: 80%;
@@ -109,19 +123,31 @@ const MCIResourceBody = styled.div`
         font-size: 16px;
         line-height: 22px;
         margin-bottom: 60px;
+
+        a {
+            color: #455299;
+            font-weight: 600;
+            text-decoration: underline;
+            text-underline-position: under;
+            padding-right: 20px;
+            background: url(${exportIconBlue}) right center no-repeat;
+        }
     }
 `;
 
-const scrollToId = (event) => {
-    const id = event.target.getAttribute('name');
-    const element = document.getElementById(id);
-    window.scrollTo({ 
-        top: element.offsetTop, 
-        behavior: "smooth" 
-    });
-}
-
 const MCIResourceView = () => {
+    const [selectedNavTitle, setSelectedNavTitle] = useState('');
+
+    const handleClickEvent = (event) => {
+        const id = event.target.getAttribute('name');
+        setSelectedNavTitle(id);
+        const element = document.getElementById(id);
+        window.scrollTo({ 
+            top: element.offsetTop, 
+            behavior: "smooth" 
+        });
+    }
+
     return (
         <MCIResourceContainer>
             <div className='resourceBreadcrumb'>Explore Applications / Molecular Characterization Initative</div>
@@ -140,7 +166,7 @@ const MCIResourceView = () => {
                             MCIContent.map((mciItem, topicid) => {
                                 const topickey = `topic_${topicid}`;
                                 return (
-                                    <div name={mciItem.id} className='navTopicItem' key={topickey} onClick={scrollToId}>{mciItem.topic}</div>
+                                    <div name={mciItem.id} className={selectedNavTitle === mciItem.id ? 'navTopicItem selected' : 'navTopicItem'} key={topickey} onClick={handleClickEvent}>{mciItem.topic}</div>
                                 )
                             })
                         }

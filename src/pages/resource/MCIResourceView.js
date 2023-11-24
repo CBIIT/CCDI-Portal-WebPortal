@@ -129,6 +129,17 @@ const MCIResourceBody = styled.div`
             font-weight: 600;
             text-decoration: underline;
             text-underline-position: under;
+        }
+
+        h4 {
+            font-family: Poppins;
+            font-weight: 400;
+            font-size: 19px;
+            line-height: 21px;
+            letter-spacing: 0.02em;
+        }
+
+        .link {
             padding-right: 20px;
             background: url(${exportIconBlue}) right center no-repeat;
         }

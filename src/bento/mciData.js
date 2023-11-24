@@ -3,7 +3,7 @@ export const MCIContent = [
         id: 'mciContent1',
         topic: 'Introduction',
         content: '<p>The CCDI Molecular Characterization Initiative (MCI) provides free, state-of-the-art molecular testing to newly diagnosed children, adolescents, and young adults (AYAs) with central nervous system (CNS) tumors, soft tissue sarcomas (STS), and certain rare (RAR) childhood cancers being treated at a Children’s Oncology Group (COG)-affiliated hospital. The goal of this initiative is to enhance the understanding of the genetic factors involved in pediatric cancers and to provide timely, clinically relevant findings to doctors and families. This project uses Project:EveryChild (APEC14B1) to enroll participants, collect specimens, and annotate clinical data. The results of genetic testing will be shared with the treating physician and participants or their family, aiding in treatment decisions. This will also determine eligibility for certain planned COG clinical trials.</p>'
-                +'<p>For an overview of this initiative, access the <a href="https://www.cancer.gov/research/areas/childhood/childhood-cancer-data-initiative/data-ecosystem/molecular-characterization" target="_blank" rel="noopener noreferrer">MCI web page on cancer.gov</a>.</p>'
+                +'<p>For an overview of this initiative, access the <a class="link" href="https://www.cancer.gov/research/areas/childhood/childhood-cancer-data-initiative/data-ecosystem/molecular-characterization" target="_blank" rel="noopener noreferrer">MCI web page on cancer.gov</a>.</p>'
     },
     {
         id: 'mciContent2',
@@ -57,6 +57,14 @@ export const MCIContent = [
     {
         id: 'mciContent10',
         topic: 'Who should I contact with questions about MCI results and data?',
-        content: '',
+        content: '<h4>MCI Results Contacts</h4>'
+        +'<p>Technical questions about accessing results or result availability should be directed to IGM by phone at 614-722-5321 or email at <a href="mailto:IGMMCI@nationwidechildrens.org">IGMMCI@nationwidechildrens.org</a>.</p>'
+        +'<p>Questions about results unrelated to a COG treatment trial should go to the following as appropriate:</p>'
+        +'<ul><li>Central nervous system group: <a href="mailto:MCICNS@childrensoncologygroup.org">MCICNS@childrensoncologygroup.org</a></li>'
+        +'<li>Soft tissue sarcoma group: <a href="mailto:MCISTS@childrensoncologygroup.org">MCISTS@childrensoncologygroup.org</a></li>'
+        +'<li>Rare tumor group email: <a href="mailto:MCIRAR@childrensoncologygroup.org">MCIRAR@childrensoncologygroup.org</li></a></ul>'
+        +'<p>Questions about results as they relate to a COG treatment trial should go to the treatment study Chair and Research Coordinator? See the [insert name of contact form] for these contacts.</p>'
+        +'<h4>MCI Data Contact</h4>'
+        +'<p>For questions related to MCI data or accessing the CCDI Data Ecosystem, contact <a href="mailto:ncichildhoodcancerdatainitiative@mail.nih.gov">ncichildhoodcancerdatainitiative@mail.nih.gov</a>.</p>',
     },
 ]

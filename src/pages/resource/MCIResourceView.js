@@ -7,8 +7,12 @@ import exportIcon from '../../assets/resources/Explore_Icon.svg';
 import exportIconBlue from '../../assets/icons/Export_Icon.svg';
 
 const MCIResourceContainer = styled.div`
-    width: 1420px;
-    margin: 0 auto;
+    width: 100%;
+
+    .resourceBreadcrumbContainer {
+        width: 1420px;
+        margin: 0 auto;
+    }
 
     .resourceBreadcrumb {
         margin-left: 32px;
@@ -20,6 +24,13 @@ const MCIResourceContainer = styled.div`
         width: 100%;
         height: 214px;
         background-image: url(${headerImg});
+        background-size: cover;
+    }
+
+    .resourceHeaderText {
+        width: 1420px;
+        margin: 0 auto;
+        height: 214px;
         padding: 150px 0 0 75px;
         color: #19676D;
         font-family: Poppins;
@@ -27,7 +38,13 @@ const MCIResourceContainer = styled.div`
         font-weight: 400;
     }
 
+    .resourceTitleContainer {
+        background: #087D6F;
+    }
+
     .resourceTitle {
+        width: 1420px;
+        margin: 0 auto;
         display: flex;
         line-height: 64px;
         background: #087D6F;
@@ -57,6 +74,8 @@ const MCIResourceContainer = styled.div`
 `;
 
 const MCIResourceBody = styled.div`
+    width: 1420px;
+    margin: 0 auto;
     display: flex;
     padding: 55px 32px; 
     .navSection {
@@ -161,12 +180,16 @@ const MCIResourceView = () => {
 
     return (
         <MCIResourceContainer>
-            <div className='resourceBreadcrumb'>Explore Applications / Molecular Characterization Initative</div>
-            <div className='resourceHeader'>CCDI Hub</div>
-            <div className='resourceTitle'>
-                Molecular Characterization Initiative
-                <div className='goToSiteButton'>
-                    <a className='goToSiteText' href="https://www.cancer.gov/research/areas/childhood/childhood-cancer-data-initiative/data-ecosystem/molecular-characterization" target="_blank" rel="noopener noreferrer">Go to site</a>
+            <div className='resourceBreadcrumbContainer'>
+                <div className='resourceBreadcrumb'>Explore Applications / Molecular Characterization Initative</div>
+            </div>
+            <div className='resourceHeader'><div className='resourceHeaderText'>CCDI Hub</div></div>
+            <div className='resourceTitleContainer'>
+                <div className='resourceTitle'>
+                    Molecular Characterization Initiative
+                    <div className='goToSiteButton'>
+                        <a className='goToSiteText' href="https://www.cancer.gov/research/areas/childhood/childhood-cancer-data-initiative/data-ecosystem/molecular-characterization" target="_blank" rel="noopener noreferrer">Go to site</a>
+                    </div>
                 </div>
             </div>
             <MCIResourceBody>

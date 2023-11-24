@@ -74,16 +74,13 @@ const MCIResourceBody = styled.div`
 
     .navTopicItem {
         margin-bottom: 20px;
-
-        a {
-            color: #4D889E;
-            text-decoration: none;
-            font-family: Inter;
-            font-weight: 400;
-            font-size: 16px;
-            letter-spacing: 0.01em;
-            line-height: 19px;
-        }
+        color: #4D889E;
+        text-decoration: none;
+        font-family: Inter;
+        font-weight: 400;
+        font-size: 16px;
+        letter-spacing: 0.01em;
+        line-height: 19px;
     }
 
     .contentSection {
@@ -115,6 +112,15 @@ const MCIResourceBody = styled.div`
     }
 `;
 
+const scrollToId = (event) => {
+    const id = event.target.getAttribute('name');
+    const element = document.getElementById(id);
+    window.scrollTo({ 
+        top: element.offsetTop, 
+        behavior: "smooth" 
+    });
+}
+
 const MCIResourceView = () => {
     return (
         <MCIResourceContainer>
@@ -133,9 +139,8 @@ const MCIResourceView = () => {
                         {
                             MCIContent.map((mciItem, topicid) => {
                                 const topickey = `topic_${topicid}`;
-                                const mciItemLink = '/MCI/#' + mciItem.id;
                                 return (
-                                    <div className='navTopicItem' key={topickey}><a href={mciItemLink} className='navTopicItem' key={topickey}>{mciItem.topic}</a></div>
+                                    <div name={mciItem.id} className='navTopicItem' key={topickey} onClick={scrollToId}>{mciItem.topic}</div>
                                 )
                             })
                         }
@@ -149,7 +154,7 @@ const MCIResourceView = () => {
                                 return (
                                     <div key={mcikey}>
                                         { mciItem.topic !== 'Introduction' && <div id={mciItem.id} className='mciTitle'>{mciItem.topic}</div>}
-                                        <div className='mciContentContainer'>{ReactHtmlParser(mciItem.content)}</div>
+                                        <div id={ mciItem.topic === 'Introduction' && mciItem.id } className='mciContentContainer'>{ReactHtmlParser(mciItem.content)}</div>
                                     </div>
                                 )
                             })

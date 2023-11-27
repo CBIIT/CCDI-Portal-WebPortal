@@ -225,7 +225,6 @@ const BentoFacetFilter = ({
         />
         <FacetFilter
           data={searchData}
-          activeFilters={activeFilters}
           facetSectionConfig={facetSectionVariables}
           facetsConfig={facetsConfig}
           CustomFacetSection={CustomFacetSection}

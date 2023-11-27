@@ -7,20 +7,13 @@ import WidgetView from './widget/WidgetView';
 import StatsView from '../../components/Stats/StatsView';
 import TabsView from './tabs/TabsView';
 import QueryBarView from './filterQueryBar/QueryBarView';
-import { CircularProgress } from '@material-ui/core';
 
 const Inventory = ({
   classes,
-  dashData,
-  activeFilters,
 }) => {
-  if (!dashData) {
-    return (<div style={{"height": "1200px","paddingTop": "10px"}}><div style={{"margin": "auto","display": "flex","maxWidth": "1800px"}}><CircularProgress /></div></div>);
-  }
-
   return (
     <div className={classes.dashboardContainer}>
-      <StatsView data={dashData} />
+      <StatsView />
       <div className={classes.contentBox}>
         <div className={classes.content}>
           <div className={classes.sideBar}>

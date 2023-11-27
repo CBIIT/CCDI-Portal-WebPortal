@@ -5,6 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { sideBarReducerGenerator } from '@bento-core/facet-filter';
 import layout from '../components/Layout/LayoutState';
 import stats from '../components/Stats/StatsState';
+import inventoryReducer from '../components/Inventory/InventoryState';
 import { cartReducerGenerator } from '@bento-core/cart';
 import { LocalFindReducerGenerator } from '@bento-core/local-find';
 
@@ -14,6 +15,7 @@ const { cartReducer } = cartReducerGenerator();
 
 const reducers = {
   localFind,
+  inventoryReducer,
   cartReducer,
   statusReducer,
   layout,
@@ -21,10 +23,17 @@ const reducers = {
 };
 const loggerMiddleware = createLogger();
 
-const store = createStore(
-  combineReducers(reducers),
-  composeWithDevTools(applyMiddleware(ReduxThunk, loggerMiddleware)),
-);
+let store;
+if (process.env.NODE_ENV === 'development') {
+  store = createStore(
+    combineReducers(reducers),
+    composeWithDevTools(applyMiddleware(ReduxThunk, loggerMiddleware)),
+  );
+} else {
+  store = createStore(
+    combineReducers(reducers),
+  );
+}
 
 store.injectReducer = (key, reducer) => {
   reducers[key] = reducer;

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import ReactHtmlParser from 'html-react-parser';
 import { MCIContent } from '../../bento/mciData';
-import headerImg from '../../assets/resources/resource_header.svg';
+import headerImg from '../../assets/resources/resource_header_new.png';
 import exportIcon from '../../assets/resources/Explore_Icon.svg';
 import exportIconBlue from '../../assets/icons/Export_Icon.svg';
 
@@ -23,19 +23,20 @@ const MCIResourceContainer = styled.div`
     .resourceHeader {
         width: 100%;
         height: 214px;
-        background-image: url(${headerImg});
-        background-size: cover;
+        background: #769aa9;  
+        // background-size: cover;
     }
 
     .resourceHeaderText {
-        width: 1420px;
-        margin: 0 auto;
         height: 214px;
         padding: 150px 0 0 75px;
         color: #19676D;
         font-family: Poppins;
         font-size: 40px;
         font-weight: 400;
+        background-image: url(${headerImg});
+        background-repeat:no-repeat;
+        background-position:center; 
     }
 
     .resourceTitleContainer {

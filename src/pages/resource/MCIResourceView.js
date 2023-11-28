@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import ReactHtmlParser from 'html-react-parser';
 import { MCIContent } from '../../bento/mciData';
-import headerImg from '../../assets/resources/resource_header_new.png';
+import headerImg from '../../assets/resources/MCI_header_white.png';
 import exportIcon from '../../assets/resources/Explore_Icon.svg';
 import exportIconBlue from '../../assets/icons/Export_Icon.svg';
 import ccdiDataEcosystemImg from '../../assets/resources/MCI_CCDI_Data_Ecosystem.png';
@@ -223,7 +223,7 @@ const MCIResourceView = () => {
                                         { mciItem.topic !== 'Introduction' && <div id={mciItem.id} className='mciTitle'>{mciItem.topic}</div>}
                                         <div id={ mciItem.topic === 'Introduction' && mciItem.id } className='mciContentContainer'>
                                             {ReactHtmlParser(mciItem.content)}
-                                            { mciItem.topic.includes('CCDI Data Ecosystem') && <img src={ccdiDataEcosystemImg} alt="CCDI Data Ecosystem"/>}
+                                            {mciItem.topic.includes('CCDI Data Ecosystem') && <img src={ccdiDataEcosystemImg} alt="CCDI Data Ecosystem"/>}
                                         </div>
                                     </div>
                                 )

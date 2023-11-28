@@ -17,8 +17,28 @@ const MCISearchTableContainer = styled.div`
     }
 
     .mciTableHeader {
+        display: flex;
+        padding: 20px 0;
         border-top: 3px solid #42779A;
         border-bottom: 3px solid #42779A;
+        justify-content: center;
+    }
+
+    .mciTableHeaderTitle {
+        font-family: Open Sans;
+        font-size: 17px;
+        font-weight: 700;
+        line-height: 23px;
+        letter-spacing: -0.02em;
+        color: #4D889E;
+    }
+
+    .searchboxContainer {
+        width: 229px;
+        height: 28px;
+        border: 1.5px solid #4D889E;
+        border-radius: 8px;
+        margin-left: 10px;
     }
 
     .mciTableBodyList {
@@ -48,16 +68,43 @@ const MCISearchTableContainer = styled.div`
     .mciTableBodyList .mciTableBodyListItem:nth-child(16n+8){
         background: #F4F5F5;
     }
-      
+`;
+
+const SearchInput = styled.input`
+  margin-left: 10px;
+  border: none;
+  font-family: 'Open Sans';
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
+  width: 200px;
+  background: transparent;
+
+  ::placeholder {
+    font-family: Nunito;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    color: #646464;
+  }
+
+  :focus {
+    outline: none;
+  }
 `;
 
 const MCISearchTable = ( {table} ) => {
     const tableList = table.body.split(", ");
+
     return (
         <MCISearchTableContainer>
             <div className='mciTableTitle'>{table.title}</div>
             <div className='mciTableHeader'>
-                search
+                <div className='mciTableHeaderTitle'>Search</div>
+                <div className='searchboxContainer'>
+                    <SearchInput type="text" placeholder='e.g. A1CF, CREB3L1, PIK3CA' />
+                </div>
             </div>
             <div className='mciTableBodyList'>
                 {

@@ -6,6 +6,7 @@ import headerImg from '../../assets/resources/MCI_header_white.png';
 import exportIcon from '../../assets/resources/Explore_Icon.svg';
 import exportIconBlue from '../../assets/icons/Export_Icon.svg';
 import ccdiDataEcosystemImg from '../../assets/resources/MCI_CCDI_Data_Ecosystem.png';
+import MCITable from './components/MCITable';
 
 const MCIResourceContainer = styled.div`
     width: 100%;
@@ -224,6 +225,7 @@ const MCIResourceView = () => {
                                         <div id={ mciItem.topic === 'Introduction' && mciItem.id } className='mciContentContainer'>
                                             {ReactHtmlParser(mciItem.content)}
                                             {mciItem.topic.includes('CCDI Data Ecosystem') && <img src={ccdiDataEcosystemImg} alt="CCDI Data Ecosystem"/>}
+                                            {mciItem.table && <MCITable table={mciItem.table} /> }
                                         </div>
                                     </div>
                                 )

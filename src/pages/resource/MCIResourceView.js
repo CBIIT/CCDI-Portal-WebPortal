@@ -7,6 +7,7 @@ import exportIcon from '../../assets/resources/Explore_Icon.svg';
 import exportIconBlue from '../../assets/icons/Export_Icon.svg';
 import ccdiDataEcosystemImg from '../../assets/resources/MCI_CCDI_Data_Ecosystem.png';
 import MCITable from './components/MCITable';
+import MCISearchTable from './components/MCISearchTable';
 
 const MCIResourceContainer = styled.div`
     width: 100%;
@@ -226,6 +227,7 @@ const MCIResourceView = () => {
                                             {ReactHtmlParser(mciItem.content)}
                                             {mciItem.topic.includes('CCDI Data Ecosystem') && <img src={ccdiDataEcosystemImg} alt="CCDI Data Ecosystem"/>}
                                             {mciItem.table && <MCITable table={mciItem.table} /> }
+                                            {mciItem.searchTable && <MCISearchTable table={mciItem.searchTable} /> }
                                         </div>
                                     </div>
                                 )

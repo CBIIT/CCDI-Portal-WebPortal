@@ -1,17 +1,17 @@
 export const MCIContent = [
     {
-        id: 'mciContent1',
+        id: 'MCI_Introduction',
         topic: 'Introduction',
         content: '<p>The CCDI Molecular Characterization Initiative (MCI) provides free, state-of-the-art molecular testing to newly diagnosed children, adolescents, and young adults (AYAs) with central nervous system (CNS) tumors, soft tissue sarcomas (STS), and certain rare (RAR) childhood cancers being treated at a Children’s Oncology Group (COG)–affiliated hospital. The goal of this initiative is to enhance the understanding of the genetic factors involved in pediatric cancers and to provide timely, clinically relevant findings to doctors and families. This project uses Project:EveryChild (APEC14B1) to enroll participants, collect specimens, and annotate clinical data. The results of genetic testing will be shared with the treating physician and participants or their family, aiding in treatment decisions. This will also determine eligibility for certain planned COG clinical trials.</p>'
                 +'<p>For an overview of this initiative, <a class="link" href="https://www.cancer.gov/research/areas/childhood/childhood-cancer-data-initiative/data-ecosystem/molecular-characterization" target="_blank" rel="noopener noreferrer">access the MCI web page on cancer.gov</a>.</p>'
     },
     {
-        id: 'mciContent2',
+        id: 'What_does_MCI_participation_involve?',
         topic: 'What does MCI participation involve?',
         content: '<p>Patients are required to enroll in APEC14B1 before participating in MCI, and those eligible to participate need to enroll in MCI and consent to molecular characterization. Currently, only patients with newly diagnosed CNS, STS and RAR tumors will be eligible to participate. Patients enrolling in APEC14B1 with secondary or second malignancy are not eligible to participate in MCI.</p>',
     },
     {
-        id: 'mciContent3',
+        id: 'specimens_submitted_for_MCI',
         topic: 'What types of testing will be conducted on the specimens submitted for MCI?',
         content: '<p>The Steve and Cindy Rasmussen Institute for Genomic Medicine (IGM) at Nationwide Children’s Hospital in Columbus, OH, will conduct:</p>'
                 +'<ul><li>Enhanced paired tumor–normal exome sequencing (ES)</li>'
@@ -19,17 +19,12 @@ export const MCIContent = [
                 +'<li>A DNA-based methylation array assay for CNS tumor classification</li></ul>',
     },
     {
-        id: 'mciContent4',
-        topic: 'Clinical Molecular Characterization Initiative Assays and Analytics',
-        content: '<p>Abbreviations: ES, exome sequencing; AWS, Amazon Web Services; SNV, single-nucleotide variant; INDEL, insertion/deletion; CNV, copy number variation; LOH, loss of heterozygosity; ITD, internal tandem duplication [PMID: 29539639].</p>',
-    },
-    {
-        id: 'mciContent5',
+        id: 'When_and_how_are_MCI_results_provided',
         topic: 'When and how are MCI results provided?',
         content: '<p>Results from molecular testing are returned within 21 days of receipt of all required materials at the COG Biobank hosted by the Biopathology Center (BPC) at Nationwide Children’s Hospital. Once nucleic acid has been received within IGM from the BPC, results will be issued into the portal within 14 days. As each test is resulted, an email will be sent to the clinician and clinical research associate contacts listed on a contact form filled out by the participant’s care team. The email will include a link to the secure web portal where results can be accessed. Participants will receive results from their treating physician.</p>',
     },
     {
-        id: 'mciContent6',
+        id: 'MCI_data_CCDI_Data_Ecosystem?',
         topic: 'How can MCI data be accessed through the CCDI Data Ecosystem?',
         content: '<p>Separately, molecular characterization data and deidentified clinical reports are submitted to the CCDI Data Ecosystem, along with additional data encompassing demographics, diagnosis, treatment, and follow-up directly from COG. Data are hosted in the '
                 +'<a class="link" href="https://datacommons.cancer.gov/repository/cancer-data-service" target="_blank" rel="noopener noreferrer">Cancer Data Service (CDS)</a>'
@@ -51,7 +46,7 @@ export const MCIContent = [
                 +' in the CCDI Childhood Cancer Data Catalog.</p>',
     },
     {
-        id: 'mciContent7',
+        id: 'type_of_results_exome_sequencing',
         topic: 'What type of results will be reported for exome sequencing (ES)?',
         content: '<p>Somatic disease–germline comparator sequencing is a paired tumor–normal exome analysis which incorporates an exome reagent assaying the coding regions of more than 19,000 protein-coding genes. In the setting of both germline and somatic analysis, only cancer-related genomic variation is reported.</p>'
                 +'<p>For germline analysis, the report is focused on pathogenic or likely pathogenic variation in cancer-associated genes; however, variants of uncertain significance in genes with clear association to the cancer type under study may be reported. Germline variants are classified using the ACMG/AMP guidelines (PMID: 25741868). Secondary or incidental findings are not reported. For somatic analysis, the report is focused on Tier I and Tier II variants (strong or potential significance, respectively) as classified according to the AMP/ASCO/CAP guidelines (PMID: 27993330). Cancer-associated copy number variation from either germline or somatic analysis is classified in accordance with ACMG/CGC guidelines with reporting of Tier 1 and Tier 2 variants (strong or some known clinical significance, respectively; PMID: 31138931).</p>'
@@ -59,24 +54,24 @@ export const MCIContent = [
                 +'<p>Here is a list of genes that are reviewed for germline and somatic variation in the setting of this analysis (as of August 3, 2023). These cancer-associated genes have been curated from medical and scientific literature, databases, and professional guidelines.</p>',
     },
     {
-        id: 'mciContent8',
+        id: 'targeted_RNA_Solid_Fusion_assay',
         topic: 'What genes are included in the targeted RNA Solid Fusion assay?',
         content: '<p>The gene targets below are included in the Solid Tumor fusion assay (v2), which utilizes anchored multiplex PCR (ArcherDx) followed by next-generation sequencing to identify gene fusions or intragenic structural rearrangements, such as internal tandem duplications. Based on the methodology, if one fusion partner is encompassed in the assay, there is a high sensitivity to detect the other partner. For example, the assay targets critical regions within BRAF known to be involved in gene fusion events, which would allow this test to detect a fusion with a common partner such as KIAA1549. This assay would also enable detection of more rare or novel gene partners associated with a BRAF fusion if the tumor harbored such an event.</p>'
                 +'<p>Here are the gene targets included in this assay.</p>',
     },
     {
-        id: 'mciContent9',
+        id: 'DNA_methylation_results',
         topic: 'Will DNA methylation results be returned for all patients?',
         content: '<p>For CNS patients only, a tumor classification by DNA methylation will have a clinical result returned to contacts indicated on the MCI Site Contact Form. For STS and RAR patients, DNA methylation array data will be banked for research submission into CCDI without return of results to sites.</p>'
                 +'<p>DNA methylation results will be returned for CNS patients with tissue submitted from a primary site or a metastatic site in the CNS only. Results from non-CNS metastatic tissue will be banked without return of results to sites.</p>',
     },
     {
-        id: 'mciContent10',
+        id: 'steps_germline_findings',
         topic: 'What steps should be taken if germline findings are detected?',
         content: '<p>The participant’s physician should coordinate a referral for the participant and their family to do local genetic counseling. In this setting, familial cascade testing for the observed germline variant may be offered to the family where appropriate. Such testing typically takes the form of targeted Sanger or microarray analysis, performed in concert with pre and post-test genetic counseling on the significance of the genetic variant. Familial testing may be performed by the institutional molecular laboratory (if those services are available locally) or through typical send-out testing channels familiar to the clinician and counselor.</p>',
     },
     {
-        id: 'mciContent11',
+        id: 'contact_about_MCI_results_an_data',
         topic: 'Who should I contact with questions about MCI results and data?',
         content: '<h4>MCI Results Contacts</h4>'
         +'<p>Technical questions about specimen submission should be directed to the Biopathology Center by email at <a href="mailto:BPCBank@nationwidechildrens.org">BPCBank@nationwidechildrens.org</a>.</p>'

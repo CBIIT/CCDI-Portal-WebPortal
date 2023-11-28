@@ -5,6 +5,7 @@ import { MCIContent } from '../../bento/mciData';
 import headerImg from '../../assets/resources/resource_header_new.png';
 import exportIcon from '../../assets/resources/Explore_Icon.svg';
 import exportIconBlue from '../../assets/icons/Export_Icon.svg';
+import ccdiDataEcosystemImg from '../../assets/resources/MCI_CCDI_Data_Ecosystem.png';
 
 const MCIResourceContainer = styled.div`
     width: 100%;
@@ -23,20 +24,25 @@ const MCIResourceContainer = styled.div`
     .resourceHeader {
         width: 100%;
         height: 214px;
-        background: #769aa9;  
-        // background-size: cover;
+        background: #e6ebee;
+    }
+
+    .resourceHeaderBackground {
+        width: 100%;
+        height: 214px;
+        background-image: url(${headerImg});
+        background-repeat:no-repeat;
+        background-position:center; 
     }
 
     .resourceHeaderText {
-        height: 214px;
+        width: 1420px;
+        margin: 0 auto;
         padding: 150px 0 0 75px;
         color: #19676D;
         font-family: Poppins;
         font-size: 40px;
         font-weight: 400;
-        background-image: url(${headerImg});
-        background-repeat:no-repeat;
-        background-position:center; 
     }
 
     .resourceTitleContainer {
@@ -184,12 +190,12 @@ const MCIResourceView = () => {
             <div className='resourceBreadcrumbContainer'>
                 <div className='resourceBreadcrumb'>Explore Applications / Molecular Characterization Initative</div>
             </div>
-            <div className='resourceHeader'><div className='resourceHeaderText'>CCDI Hub</div></div>
+            <div className='resourceHeader'><div className='resourceHeaderBackground'><div className='resourceHeaderText'>CCDI Hub</div></div></div>
             <div className='resourceTitleContainer'>
                 <div className='resourceTitle'>
                     Molecular Characterization Initiative
                     <div className='goToSiteButton'>
-                        <a className='goToSiteText' href="https://www.cancer.gov/research/areas/childhood/childhood-cancer-data-initiative/data-ecosystem/molecular-characterization" target="_blank" rel="noopener noreferrer">Go to site</a>
+                        <a className='goToSiteText' href="https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs002790" target="_blank" rel="noopener noreferrer">Go to site</a>
                     </div>
                 </div>
             </div>
@@ -215,7 +221,10 @@ const MCIResourceView = () => {
                                 return (
                                     <div key={mcikey}>
                                         { mciItem.topic !== 'Introduction' && <div id={mciItem.id} className='mciTitle'>{mciItem.topic}</div>}
-                                        <div id={ mciItem.topic === 'Introduction' && mciItem.id } className='mciContentContainer'>{ReactHtmlParser(mciItem.content)}</div>
+                                        <div id={ mciItem.topic === 'Introduction' && mciItem.id } className='mciContentContainer'>
+                                            {ReactHtmlParser(mciItem.content)}
+                                            { mciItem.topic.includes('CCDI Data Ecosystem') && <img src={ccdiDataEcosystemImg} alt="CCDI Data Ecosystem"/>}
+                                        </div>
                                     </div>
                                 )
                             })

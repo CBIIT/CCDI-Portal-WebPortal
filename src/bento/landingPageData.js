@@ -84,7 +84,7 @@ export const resourcesAppliationsListData = [
     title: 'Molecular Characterization Initiative for Childhood Cancers',
     subtitle: 'MCI',
     content: 'A program providing molecular testing for children, adolescents, and young adults with certain cancer types.',
-    link: 'https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs002790.v2.p1',
+    link: '/MCI',
     img: mciLogo,
   },
   {

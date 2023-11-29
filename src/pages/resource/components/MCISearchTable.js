@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import clearIcon from '../../../assets/resources/ClearAll_Inactive.svg';
+import clearIconHover from '../../../assets/resources/ClearAll_Hover.svg';
+import clearIconActive from '../../../assets/resources/ClearAll_Active.svg';
 
 const MCISearchTableContainer = styled.div`
     margin: 40px 74px;
@@ -28,17 +31,32 @@ const MCISearchTableContainer = styled.div`
         font-family: Open Sans;
         font-size: 17px;
         font-weight: 700;
-        line-height: 23px;
+        line-height: 30px;
         letter-spacing: -0.02em;
         color: #4D889E;
     }
 
     .searchboxContainer {
         width: 229px;
-        height: 28px;
+        height: 30px;
         border: 1.5px solid #4D889E;
         border-radius: 8px;
-        margin-left: 10px;
+        margin: 0 10px;
+    }
+
+    .clearIconContainer {
+        height: 30px;
+        width: 32px;
+        background-image: url(${clearIcon});
+    }
+
+    .active {
+        background-image: url(${clearIconActive});
+    }
+
+    .clearIconContainer:hover {
+        background-image: url(${clearIconHover});
+        cursor: pointer;
     }
 
     .mciTableBodyList {
@@ -77,6 +95,7 @@ const SearchInput = styled.input`
   font-size: 16px;
   line-height: 20px;
   color: #000000;
+  height: 26px;
   width: 200px;
   background: transparent;
 
@@ -116,6 +135,7 @@ const MCISearchTable = ( {table} ) => {
                 <div className='searchboxContainer'>
                     <SearchInput type="text" value={inputValue} placeholder='e.g. A1CF, CREB3L1, PIK3CA' onChange={handleTextInputChange} />
                 </div>
+                <div className={inputValue !== '' ? 'clearIconContainer active' : 'clearIconContainer'} onClick={() => setInputValue("")} />
             </div>
             <div className='mciTableBodyList'>
                 {

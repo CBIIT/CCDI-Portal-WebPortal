@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { introData, titleData, resourcesAppliationsListData, resourcesCloudListData } from '../../bento/landingPageData';
 import ReactHtmlParser from 'html-react-parser';
@@ -796,6 +797,22 @@ const LandingView = ({
               {
                 resourcesAppliationsListData.map((appItem, appidx) => {
                   const appkey = `app_${appidx}`;
+                  if (!appItem.link.includes('http')) {
+                    return (
+                      <NavLink id={appItem.id} key={appkey}  className='resourceListItem' to={appItem.link}>
+                        <div className='resourceListItemUpper'>
+                          <div className='resourceListItemLogo' style={{background: `url(${appItem.img})`, backgroundSize: 'cover'}} />
+                          <div className='resourceListItemTitleContainer'>
+                            <div className='resourceListItemTitle upper'>{appItem.title}<span className='resourceListItemTitleSmall'>{'  (' + appItem.subtitle + ')'}</span></div>
+                          </div>
+                        </div>
+                        <div className='resourceListItemText'>
+                          <div className='resourceListItemTitle lower'>{appItem.title}<span className='resourceListItemTitleSmall'>{'  (' + appItem.subtitle + ')'}</span></div>
+                          <div className='resourceListItemContext'>{appItem.content}</div>
+                        </div>
+                      </NavLink>
+                    );
+                  }
                   return (
                     <a id={appItem.id} className='resourceListItem' key={appkey} href={appItem.link} target={appItem.link.includes('http') ? "_blank" : ""} rel="noopener noreferrer">
                       <div className='resourceListItemUpper'>

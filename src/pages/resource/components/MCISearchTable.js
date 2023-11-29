@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import clearIcon from '../../../assets/resources/ClearAll_Inactive.svg';
 import clearIconHover from '../../../assets/resources/ClearAll_Hover.svg';
 import clearIconActive from '../../../assets/resources/ClearAll_Active.svg';
+import searchIcon from '../../../assets/resources/Search_Icon.svg';
 
 const MCISearchTableContainer = styled.div`
     margin: 40px 74px;
@@ -42,6 +43,8 @@ const MCISearchTableContainer = styled.div`
         border: 1.5px solid #4D889E;
         border-radius: 8px;
         margin: 0 10px;
+        padding-right: 5px;
+        background: url(${searchIcon}) right 5px center no-repeat;
     }
 
     .clearIconContainer {
@@ -96,7 +99,7 @@ const SearchInput = styled.input`
   line-height: 20px;
   color: #000000;
   height: 26px;
-  width: 200px;
+  width: 192px;
   background: transparent;
 
   ::placeholder {

@@ -64,7 +64,8 @@ const MCISearchTableContainer = styled.div`
 
     .mciTableBodyList {
         height: 285px;
-        overflow: auto;
+        overflow: scroll;
+        overflow-x: hidden;
         display: grid;
         grid-template-columns: repeat(8, 1fr);
         grid-template-rows: repeat(8, 1fr);
@@ -132,7 +133,22 @@ const MCISearchTable = ( {table} ) => {
     };
 
     useEffect(() => {
-        const newTableList = tableListAll.filter((item) => item.includes(inputValue));
+        let newTableList = [];
+        const keyList = inputValue.toUpperCase().split(',').filter((item) => item.trim() !== '');
+        if (keyList.length === 0) {
+            newTableList = tableListAll;
+        } else {
+            for (let i = 0; i < tableListAll.length; i++) {
+                const tableItem = tableListAll[i];
+                for (let j = 0; j < keyList.length; j++) {
+                    const key = keyList[j].trim();
+                    if (key === '' || tableItem.toUpperCase().includes(key)) {
+                        newTableList.push(tableItem);
+                        break;
+                    }
+                }
+            }
+        }
         setTableList(newTableList);
     }, [inputValue]);
 

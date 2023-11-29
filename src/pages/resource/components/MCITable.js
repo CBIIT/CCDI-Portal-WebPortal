@@ -55,12 +55,13 @@ const MCITableContainer = styled.div`
         line-height: 17px;
         letter-spacing: 0em;
         text-align: left;
+        background: #F4F5F5;
     }
 
     .mciTableBodyList .mciTableBodyListItem:nth-child(6n+1),
     .mciTableBodyList .mciTableBodyListItem:nth-child(6n+2),
     .mciTableBodyList .mciTableBodyListItem:nth-child(6n+3){
-        background: #F4F5F5;
+        background: #FFFFFF;
     }
       
 `;

@@ -537,6 +537,10 @@ const ResourcesContainer = styled.div`
       background: url(${exportIcon}) right center no-repeat;
     }
 
+    .noLinkIcon {
+      background: none;
+    }
+
     .resourceListItemContext {
       color: #000000;
       font-family: Poppins;
@@ -803,11 +807,11 @@ const LandingView = ({
                         <div className='resourceListItemUpper'>
                           <div className='resourceListItemLogo' style={{background: `url(${appItem.img})`, backgroundSize: 'cover'}} />
                           <div className='resourceListItemTitleContainer'>
-                            <div className='resourceListItemTitle upper'>{appItem.title}<span className='resourceListItemTitleSmall'>{'  (' + appItem.subtitle + ')'}</span></div>
+                            <div className='resourceListItemTitle upper'>{appItem.title}<span className='resourceListItemTitleSmall noLinkIcon'>{'  (' + appItem.subtitle + ')'}</span></div>
                           </div>
                         </div>
                         <div className='resourceListItemText'>
-                          <div className='resourceListItemTitle lower'>{appItem.title}<span className='resourceListItemTitleSmall'>{'  (' + appItem.subtitle + ')'}</span></div>
+                          <div className='resourceListItemTitle lower'>{appItem.title}<span className='resourceListItemTitleSmall noLinkIcon'>{'  (' + appItem.subtitle + ')'}</span></div>
                           <div className='resourceListItemContext'>{appItem.content}</div>
                         </div>
                       </NavLink>

@@ -46,7 +46,7 @@ const MCISearchTableContainer = styled.div`
         overflow: auto;
         display: grid;
         grid-template-columns: repeat(8, 1fr);
-        grid-template-rows: repeat(18, 35px);
+        grid-template-rows: repeat(8, 1fr);
     }
 
     .mciTableBodyListItem {
@@ -55,7 +55,6 @@ const MCISearchTableContainer = styled.div`
         font-weight: 400;
         line-height: 35px;
         text-align: center;
-
     }
 
     .mciTableBodyList .mciTableBodyListItem:nth-child(16n+1),
@@ -105,7 +104,7 @@ const MCISearchTable = ( {table} ) => {
     };
 
     useEffect(() => {
-        const newTableList = tableList.filter((item) => item.includes(inputValue));
+        const newTableList = tableListAll.filter((item) => item.includes(inputValue));
         setTableList(newTableList);
     }, [inputValue]);
 

@@ -63,7 +63,7 @@ const MCISearchTableContainer = styled.div`
     }
 
     .mciTableBodyList {
-        height: 285px;
+        height: 285.5px;
         overflow: scroll;
         overflow-x: hidden;
         display: grid;

@@ -63,7 +63,7 @@ const MCISearchTableContainer = styled.div`
     }
 
     .mciTableBodyList {
-        height: 281px;
+        height: 285px;
         overflow: auto;
         display: grid;
         grid-template-columns: repeat(8, 1fr);
@@ -76,6 +76,12 @@ const MCISearchTableContainer = styled.div`
         font-weight: 400;
         line-height: 35px;
         text-align: center;
+        border-right: 0.5px solid #000000;
+        border-bottom: 0.5px solid #000000;
+    }
+
+    .mciTableBodyList .mciTableBodyListItem:nth-child(8n+1){
+        border-left: 0.5px solid #000000;
     }
 
     .mciTableBodyList .mciTableBodyListItem:nth-child(16n+1),

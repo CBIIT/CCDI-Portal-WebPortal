@@ -10,7 +10,7 @@ const MCISearchTableContainer = styled.div`
     border: 1px solid #BDBDBD;
 
     .mciTableTitle {
-        padding: 15px 230px;
+        padding: 15px 200px;
         font-family: Poppins;
         font-size: 19px;
         font-weight: 400;
@@ -22,7 +22,7 @@ const MCISearchTableContainer = styled.div`
 
     .mciTableHeader {
         display: flex;
-        padding: 20px 0;
+        padding: 12px 0;
         border-top: 3px solid #42779A;
         border-bottom: 3px solid #42779A;
         justify-content: center;
@@ -69,6 +69,18 @@ const MCISearchTableContainer = styled.div`
         display: grid;
         grid-template-columns: repeat(8, 1fr);
         grid-template-rows: repeat(8, 1fr);
+    }
+
+    .mciTableBodyList::-webkit-scrollbar {
+        width: 16px;
+        padding: 3px;
+    }
+
+    .mciTableBodyList::-webkit-scrollbar-thumb {
+        border: 4px solid transparent;
+        background: #4D889E;
+        border-radius: 20px;
+        background-clip: content-box;
     }
 
     .mciTableBodyListItem {

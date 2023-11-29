@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ReactHtmlParser from 'html-react-parser';
 import { MCIContent } from '../../bento/mciData';
@@ -176,6 +176,10 @@ const MCIResourceBody = styled.div`
 
 const MCIResourceView = () => {
     const [selectedNavTitle, setSelectedNavTitle] = useState('');
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [])
 
     const handleClickEvent = (event) => {
         const id = event.target.getAttribute('name');

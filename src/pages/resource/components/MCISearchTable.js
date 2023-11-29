@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const MCISearchTableContainer = styled.div`
@@ -95,7 +95,19 @@ const SearchInput = styled.input`
 `;
 
 const MCISearchTable = ( {table} ) => {
-    const tableList = table.body.split(", ");
+    const tableListAll = table.body.split(", ");
+    const [inputValue, setInputValue] = useState('');
+    const [tableList, setTableList] = useState(tableListAll);
+
+    const handleTextInputChange = (event) => {
+        const text = event.target.value;
+        setInputValue(text);
+    };
+
+    useEffect(() => {
+        const newTableList = tableList.filter((item) => item.includes(inputValue));
+        setTableList(newTableList);
+    }, [inputValue]);
 
     return (
         <MCISearchTableContainer>
@@ -103,7 +115,7 @@ const MCISearchTable = ( {table} ) => {
             <div className='mciTableHeader'>
                 <div className='mciTableHeaderTitle'>Search</div>
                 <div className='searchboxContainer'>
-                    <SearchInput type="text" placeholder='e.g. A1CF, CREB3L1, PIK3CA' />
+                    <SearchInput type="text" value={inputValue} placeholder='e.g. A1CF, CREB3L1, PIK3CA' onChange={handleTextInputChange} />
                 </div>
             </div>
             <div className='mciTableBodyList'>

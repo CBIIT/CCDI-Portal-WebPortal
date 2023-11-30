@@ -86,11 +86,21 @@ const MCIResourceBody = styled.div`
     width: 1420px;
     margin: 0 auto;
     display: flex;
-    padding: 55px 32px; 
+    padding: 55px 32px 100px 32px; 
     .navSection {
-        display: flex;
         width: 20%;
         color: #4D889E;
+        position: relative;
+    }
+
+    .navList {
+        position: static;
+    }
+
+    .navListSticky {
+        position: fixed;
+        top: 55px;
+        width: 272px;
     }
 
     .navTitle {
@@ -176,9 +186,23 @@ const MCIResourceBody = styled.div`
 
 const MCIResourceView = () => {
     const [selectedNavTitle, setSelectedNavTitle] = useState('');
+    const [stickyNavStyle, setStickyNavStyle] = useState('navList');
+    const handleScroll = () => {
+        const bodyElement = document.getElementById("MCIBody");
+        const scrolled = document.documentElement.scrollTop;
+        if (scrolled > bodyElement.offsetTop) {
+            setStickyNavStyle("navListSticky");
+        } else {
+            setStickyNavStyle("navList");
+        }
+    }
 
     useEffect(() => {
         window.scrollTo(0, 0);
+        document.addEventListener("scroll", handleScroll);
+        return () => {
+            document.removeEventListener("scroll", handleScroll);
+        };
     }, [])
 
     const handleClickEvent = (event) => {
@@ -186,7 +210,7 @@ const MCIResourceView = () => {
         setSelectedNavTitle(id);
         const element = document.getElementById(id);
         window.scrollTo({ 
-            top: element.offsetTop, 
+            top: element.offsetTop - 55,
             behavior: "smooth" 
         });
     }
@@ -205,9 +229,9 @@ const MCIResourceView = () => {
                     </div>
                 </div>
             </div>
-            <MCIResourceBody>
+            <MCIResourceBody id='MCIBody'>
                 <div className='navSection'>
-                    <div className='navList'>
+                    <div className={stickyNavStyle}>
                         <div className='navTitle'>TOPICS</div>
                         {
                             MCIContent.map((mciItem, topicid) => {

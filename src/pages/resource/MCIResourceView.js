@@ -86,7 +86,7 @@ const MCIResourceBody = styled.div`
     width: 1420px;
     margin: 0 auto;
     display: flex;
-    padding: 55px 32px 100px 32px; 
+    padding: 55px 32px 0 32px; 
     .navSection {
         width: 20%;
         color: #4D889E;
@@ -102,13 +102,18 @@ const MCIResourceBody = styled.div`
         top: 55px;
         width: 272px;
     }
+    .navListAbsolute {
+        position: absolute;
+        bottom: 0;
+        width: 272px;
+    }
 
     .navTitle {
         font-family: Poppins;
         font-weight: 600;
         font-size: 17px;
         letter-spacing: 0.02em;
-        margin-bottom: 20px;
+        margin-bottom: 29px;
     }
 
     .navTopicItem {
@@ -139,6 +144,7 @@ const MCIResourceBody = styled.div`
         display: flex;
         width: 80%;
         padding: 0 32px 0 50px;
+        margin-bottom: 100px;
     }
 
     .mciTitle {
@@ -188,10 +194,16 @@ const MCIResourceView = () => {
     const [selectedNavTitle, setSelectedNavTitle] = useState('');
     const [stickyNavStyle, setStickyNavStyle] = useState('navList');
     const handleScroll = () => {
-        const bodyElement = document.getElementById("MCIBody");
+        const bodyElement = document.getElementById('MCIBody');
+        const footer = document.getElementsByTagName('footer')[0];
+        const footerToTop = footer.getBoundingClientRect().top;
+        const leftNavHeight = document.getElementById('leftNav').offsetHeight;
         const scrolled = document.documentElement.scrollTop;
         if (scrolled > bodyElement.offsetTop) {
             setStickyNavStyle("navListSticky");
+            if (footerToTop < leftNavHeight + 55) {
+                setStickyNavStyle("navListAbsolute");
+            }
         } else {
             setStickyNavStyle("navList");
         }
@@ -231,7 +243,7 @@ const MCIResourceView = () => {
             </div>
             <MCIResourceBody id='MCIBody'>
                 <div className='navSection'>
-                    <div className={stickyNavStyle}>
+                    <div className={stickyNavStyle} id='leftNav'>
                         <div className='navTitle'>TOPICS</div>
                         {
                             MCIContent.map((mciItem, topicid) => {

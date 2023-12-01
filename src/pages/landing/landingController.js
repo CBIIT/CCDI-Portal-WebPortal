@@ -6,6 +6,8 @@ import { statsData } from '../../bento/landingPageData';
 import LandingView from './landingView';
 import { LANDING_DATA_QUERY } from '../../bento/landingPageData';
 
+const CCDCurl ='http://localhost:3000/service/datasets/count';
+
 const getDashData = () => {
   const client = useApolloClient();
   async function getData() {
@@ -17,12 +19,23 @@ const getDashData = () => {
     return result;
   }
 
-  const [statsDataNew, setStatsDataNew] = useState([]);
+  async function getCCDC() {
+    const response = await fetch(CCDCurl);
+    const result = await response.json();
+    return result;
+  }
+
+  const [statsDataNew, setStatsDataNew] = useState(statsData);
 
   useEffect(() => {
     const controller = new AbortController();
+    getCCDC().then((result) => {
+      let newStatList = statsDataNew;
+      newStatList[0].num = result.data;
+      setStatsDataNew([...newStatList]);
+    });
     getData().then((result) => {
-      let newStatList = statsData;
+      let newStatList = statsDataNew;
       const MCICount = result.numberOfMCICount;
       newStatList[1].num = MCICount;
       setStatsDataNew([...newStatList]);

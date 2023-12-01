@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ReactHtmlParser from 'html-react-parser';
+import { NavLink } from 'react-router-dom';
 import { MCIContent } from '../../bento/mciData';
 import headerImg from '../../assets/resources/MCI_header_white.png';
 import exportIcon from '../../assets/resources/Explore_Icon.svg';
@@ -8,6 +9,7 @@ import exportIconBlue from '../../assets/icons/Export_Icon.svg';
 import ccdiDataEcosystemImg from '../../assets/resources/MCI_CCDI_Data_Ecosystem.png';
 import MCITable from './components/MCITable';
 import MCISearchTable from './components/MCISearchTable';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 const MCIResourceContainer = styled.div`
     width: 100%;
@@ -18,9 +20,24 @@ const MCIResourceContainer = styled.div`
     }
 
     .resourceBreadcrumb {
-        margin-left: 32px;
+        font-family: Public Sans;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 26px;
+        margin: 3px 0 3px 32px;
         line-height: 27px;
-        color: #5666BD;
+        color: #1B1B1B;
+    }
+
+    .breadcrumbLink:hover {
+        color: #004e7a;
+    }
+
+    .arrowIcon {
+        font-size: medium;
+        padding-top: 7px;
+        margin: 0 3px;
+        color: #71767a;
     }
 
     .resourceHeader {
@@ -86,11 +103,26 @@ const MCIResourceBody = styled.div`
     width: 1420px;
     margin: 0 auto;
     display: flex;
-    padding: 55px 32px; 
+    padding: 55px 32px 0 32px; 
     .navSection {
-        display: flex;
         width: 20%;
         color: #4D889E;
+        position: relative;
+    }
+
+    .navList {
+        position: static;
+    }
+
+    .navListSticky {
+        position: fixed;
+        top: 55px;
+        width: 272px;
+    }
+    .navListAbsolute {
+        position: absolute;
+        bottom: 0;
+        width: 272px;
     }
 
     .navTitle {
@@ -98,7 +130,7 @@ const MCIResourceBody = styled.div`
         font-weight: 600;
         font-size: 17px;
         letter-spacing: 0.02em;
-        margin-bottom: 20px;
+        margin-bottom: 29px;
     }
 
     .navTopicItem {
@@ -129,6 +161,7 @@ const MCIResourceBody = styled.div`
         display: flex;
         width: 80%;
         padding: 0 32px 0 50px;
+        margin-bottom: 100px;
     }
 
     .mciTitle {
@@ -176,9 +209,29 @@ const MCIResourceBody = styled.div`
 
 const MCIResourceView = () => {
     const [selectedNavTitle, setSelectedNavTitle] = useState('');
+    const [stickyNavStyle, setStickyNavStyle] = useState('navList');
+    const handleScroll = () => {
+        const bodyElement = document.getElementById('MCIBody');
+        const footer = document.getElementsByTagName('footer')[0];
+        const footerToTop = footer.getBoundingClientRect().top;
+        const leftNavHeight = document.getElementById('leftNav').offsetHeight;
+        const scrolled = document.documentElement.scrollTop;
+        if (scrolled > bodyElement.offsetTop) {
+            setStickyNavStyle("navListSticky");
+            if (footerToTop < leftNavHeight + 55) {
+                setStickyNavStyle("navListAbsolute");
+            }
+        } else {
+            setStickyNavStyle("navList");
+        }
+    }
 
     useEffect(() => {
         window.scrollTo(0, 0);
+        document.addEventListener("scroll", handleScroll);
+        return () => {
+            document.removeEventListener("scroll", handleScroll);
+        };
     }, [])
 
     const handleClickEvent = (event) => {
@@ -186,7 +239,7 @@ const MCIResourceView = () => {
         setSelectedNavTitle(id);
         const element = document.getElementById(id);
         window.scrollTo({ 
-            top: element.offsetTop, 
+            top: element.offsetTop - 55,
             behavior: "smooth" 
         });
     }
@@ -194,7 +247,11 @@ const MCIResourceView = () => {
     return (
         <MCIResourceContainer>
             <div className='resourceBreadcrumbContainer'>
-                <div className='resourceBreadcrumb'>Explore Applications / Molecular Characterization Initative</div>
+                <div className='resourceBreadcrumb'>
+                    <NavLink className="breadcrumbLink" to='/'>Home</NavLink>
+                    <ArrowForwardIosIcon className='arrowIcon' alt="arrowIcon"/>
+                    <span>Molecular Characterization Initative</span>
+                    </div>
             </div>
             <div className='resourceHeader'><div className='resourceHeaderBackground'><div className='resourceHeaderText'>CCDI Hub</div></div></div>
             <div className='resourceTitleContainer'>
@@ -205,9 +262,9 @@ const MCIResourceView = () => {
                     </div>
                 </div>
             </div>
-            <MCIResourceBody>
+            <MCIResourceBody id='MCIBody'>
                 <div className='navSection'>
-                    <div className='navList'>
+                    <div className={stickyNavStyle} id='leftNav'>
                         <div className='navTitle'>TOPICS</div>
                         {
                             MCIContent.map((mciItem, topicid) => {

@@ -289,6 +289,7 @@ const MCIResourceView = () => {
                                             {mciItem.topic.includes('CCDI Data Ecosystem') && <img src={ccdiDataEcosystemImg} alt="CCDI Data Ecosystem"/>}
                                             {mciItem.table && <MCITable table={mciItem.table} /> }
                                             {mciItem.searchTable && <MCISearchTable table={mciItem.searchTable} /> }
+                                            {mciItem.content2 && ReactHtmlParser(mciItem.content2)}
                                         </div>
                                     </div>
                                 )

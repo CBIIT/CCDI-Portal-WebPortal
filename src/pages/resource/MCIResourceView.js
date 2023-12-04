@@ -283,8 +283,8 @@ const MCIResourceView = () => {
                                 const mcikey = `mci_${mciid}`;
                                 return (
                                     <div key={mcikey}>
-                                        { mciItem.topic !== 'Introduction' && <div id={mciItem.id} className='mciTitle'>{mciItem.topic}</div>}
-                                        <div id={ mciItem.topic === 'Introduction' && mciItem.id } className='mciContentContainer'>
+                                        <div id={mciItem.id} className='mciTitle'>{mciItem.topic}</div>
+                                        <div className='mciContentContainer'>
                                             {ReactHtmlParser(mciItem.content)}
                                             {mciItem.topic.includes('CCDI Data Ecosystem') && <img src={ccdiDataEcosystemImg} alt="CCDI Data Ecosystem"/>}
                                             {mciItem.table && <MCITable table={mciItem.table} /> }

@@ -1,43 +1,46 @@
 import React from 'react';
 import styled from 'styled-components';
-import errImg from '../../assets/error/PageNotFound.png';
+import errIcon from '../../assets/error/404_Icon.svg';
 import { errorData } from '../../bento/pageNotFoundData';
 
 const ErrorContainer = styled.div`
-    width: 1440px;
-    margin: 0 auto;
-    display: flex;
-
-    .picContainer {
-      margin: 88px 99px 103px 0;
-      width: 676px;
-      height: 545px;
-      background-image: url(${errImg});
-    }
+    background: #24415CE5;
 
     .textContainer {
-      margin-top: 203px;
+      margin: 0 auto;
+      padding-top: 100px;
       text-align: center;
+    }
+
+    .errIconContainer {
+      margin-bottom: 25px;
     }
 
     .titleFirst {
       font-family: poppins;
-      font-weight: 700;
-      font-size: 40px;
-      color: #05555C;
-      margin-bottom: 28px;
+      font-weight: 500;
+      font-size: 30px;
+      line-height: 65px;
+      color: #CCCED1;
     }
 
     .titleSecond {
-      font-family: poppins;
-      font-weight: 500;
-      font-size: 20px;
-      color: #05555C;
+      font-family: Poppins;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 25px;
+      letter-spacing: 0.02em;
+      text-align: center;
+      color: #FFFFFF;
+      margin-bottom: 15px;
+    }
+
+    .returnButtonContainer {
+      padding-bottom: 150px;
     }
 
     .returnButton {
-      display: block;
-      margin: 50px auto 0 auto;
+      padding: 12px 30px;
       width: 176px;
       height: 57px;
       font-family: poppins;
@@ -46,23 +49,29 @@ const ErrorContainer = styled.div`
       line-height: 57px;
       text-transform: uppercase;
       color: #FFFFFF;
-      background: #05555C;
+      background: #4D889E;
       border-radius: 5px;
       text-align: center;
       text-decoration: none;
+    }
+
+    @media (min-width: 1440px) {
+      .textContainer {
+        width: 1440px;
+      }
     }
 `;
 
 const Error = () => {
   return (
     <ErrorContainer>
-      <div className='picContainer'></div>
       <div className='textContainer'>
+        <div className='errIconContainer'><img src={errIcon} alt='404 Error Icon' /></div>
         <div className='titleFirst'>{errorData.titleFirst}</div>
         <div className='titleSecond'>
           <div>{errorData.titleSecond}</div>
         </div>
-        <div>
+        <div className='returnButtonContainer'>
            <a className='returnButton' href='/'>{errorData.buttonTitle}</a>
         </div>
       </div>

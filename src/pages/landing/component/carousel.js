@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 import usePageVisibility from "./PageVisibility";
 import styled from 'styled-components';
 import { carouselList } from '../../../bento/landingPageData'
@@ -404,6 +405,17 @@ const Carousel = () => {
                             {
                                 rCarouselList.map((item, idx) => {
                                     const key = `carousel_${idx}_last_clone`;
+                                    if (!item.link.includes('http')) {
+                                        return (
+                                            <div key={key} className='carousel__item'>
+                                                <div className='itemImgBox'><img className='itemImg' src={item.img} alt={key} width="243px" height="102px" /></div>
+                                                <NavLink className='listItemContent' to={item.link}>{item.content}</NavLink>
+                                                <NavLink className="exportContainer" to={item.link}>
+                                                    <img className='exportIcon' src={exportIcon} alt="exportIcon"/>
+                                                </NavLink>
+                                            </div>
+                                        )
+                                    }
                                     return (
                                         <div key={key} className='carousel__item'>
                                             <div className='itemImgBox'><img className='itemImg' src={item.img} alt={key} width="243px" height="102px" /></div>

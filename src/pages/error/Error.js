@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import errIcon from '../../assets/error/404_Icon.svg';
 import { errorData } from '../../bento/pageNotFoundData';
+import { NavLink } from 'react-router-dom';
 
 const ErrorContainer = styled.div`
     background: #24415CE5;
@@ -60,19 +61,32 @@ const ErrorContainer = styled.div`
         width: 1440px;
       }
     }
+    @media (max-width: 767px) {
+      .titleSecond {
+        width: 200px;
+        margin: 0 auto;
+        line-height: 20px;
+        margin-bottom: 15px;
+      }
+
+      .errImg {
+        width: 204px;
+        height: 204px;
+      }
+    }
 `;
 
 const Error = () => {
   return (
     <ErrorContainer>
       <div className='textContainer'>
-        <div className='errIconContainer'><img src={errIcon} alt='404 Error Icon' /></div>
+        <div className='errIconContainer'><img className='errImg' src={errIcon} alt='404 Error Icon' /></div>
         <div className='titleFirst'>{errorData.titleFirst}</div>
         <div className='titleSecond'>
           <div>{errorData.titleSecond}</div>
         </div>
         <div className='returnButtonContainer'>
-           <a className='returnButton' href='/'>{errorData.buttonTitle}</a>
+           <NavLink className='returnButton' to='/'>{errorData.buttonTitle}</NavLink>
         </div>
       </div>
     </ErrorContainer>

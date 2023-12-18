@@ -6,7 +6,7 @@ import { statsData } from '../../bento/landingPageData';
 import LandingView from './landingView';
 import { LANDING_DATA_QUERY } from '../../bento/landingPageData';
 
-const CCDCurl ='https://datacatalog-dev.ccdi.cancer.gov/service/datasets/count';
+const CCDCurl ='https://datacatalog.ccdi.cancer.gov/service/datasets/count';
 
 const getDashData = () => {
   const client = useApolloClient();

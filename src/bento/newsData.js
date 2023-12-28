@@ -12,7 +12,7 @@ export const newsList = [
     {
         id: 'ehr_01112024',
         title: 'Respond to our latest RFI on automated EHR data entry and extraction capabilities',
-        date: '1/11/24',
+        date: 'January 11, 2024',
         slug: 'Attention research, informatics, health care communities, vendors, and developers! The CCDI wants to hear from you.',
         highlight: '<p>Do you have capabilities in automated electronic health record (EHR) data entry and extraction? If so, please respond to our latest Request for Information and share your tools, clinical workflows, and approaches for entering and extracting EHR data in a structured format. Your input could help NCI plan a workshop on this topic. '
                   +'<a class="link" href="https://grants.nih.gov/grants/guide/notice-files/NOT-CA-24-021.html" target="_blank" rel="noopener noreferrer">Submit responses by February 29, 2024. https://grants.nih.gov/grants/guide/notice-files/NOT-CA-24-021.html</a></p>',

@@ -212,7 +212,15 @@ const MCIResourceView = () => {
     const [stickyNavStyle, setStickyNavStyle] = useState('navList');
     const handleScroll = () => {
         const bodyElement = document.getElementById('MCIBody');
-        const footer = document.getElementsByTagName('footer')[0];
+        const footerList = document.getElementsByTagName('footer');
+        let footer;
+        if (window.innerWidth > 1204) {
+            footer = footerList[0];
+        } else if (window.innerWidth > 767) {
+            footer = footerList[1];
+        } else {
+            footer = footerList[2];
+        }
         const footerToTop = footer.getBoundingClientRect().top;
         const leftNavHeight = document.getElementById('leftNav').offsetHeight;
         const scrolled = document.documentElement.scrollTop;

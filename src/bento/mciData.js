@@ -7,7 +7,7 @@ export const MCIContent = [
     },
     {
         id: 'MCI_Metrics_at_a_glace',
-        topic: 'MCI Metrics at a glace',
+        topic: 'Metrics',
         content: '<p>The MCI enrollment metrics are based on counts of patients enrolled with MCI through Project:EveryChild (APEC14B1) and are based on monthly COG reporting.</p>',
         numberTable: {
             title: 'List of Institutions for Enrollments in APEC14B1-MCI with STS Diagnosis',

@@ -6,6 +6,69 @@ export const MCIContent = [
                 +'<p>For an overview of this initiative, <a class="link" href="https://www.cancer.gov/research/areas/childhood/childhood-cancer-data-initiative/data-ecosystem/molecular-characterization" target="_blank" rel="noopener noreferrer">access the MCI web page on cancer.gov</a>.</p>',
     },
     {
+        id: 'MCI_Metrics_at_a_glace',
+        topic: 'MCI Metrics at a glace',
+        content: '<p>The MCI enrollment metrics are based on counts of patients enrolled with MCI through Project:EveryChild (APEC14B1) and are based on monthly COG reporting.</p>',
+        numberTable: {
+            title: 'List of Institutions for Enrollments in APEC14B1-MCI with STS Diagnosis',
+            header: ['Institution Name', 'Number of Enrollments'],
+            body: [
+                {
+                    name: 'CNS',
+                    number: '2085',
+                },
+                {
+                    name: 'Ewing Sarcoma',
+                    number: '7',
+                },
+                {
+                    name: 'Germ Cell Tumor',
+                    number: '7',
+                },
+                {
+                    name: 'Liver Tumor',
+                    number: '2',
+                },
+                {
+                    name: 'Lymphoblastic Leukemia',
+                    number: '1',
+                },
+                {
+                    name: 'Myeloid Leukemia',
+                    number: '4',
+                },
+                {
+                    name: 'Neuroblastoma',
+                    number: '3',
+                },
+                {
+                    name: 'Non-Hodgkin Lymphoma',
+                    number: '3',
+                },
+                {
+                    name: 'Osteosarcoma',
+                    number: '5',
+                },
+                {
+                    name: 'Rare Tumor',
+                    number: '251',
+                },
+                {
+                    name: 'Rental',
+                    number: '1',
+                },
+                {
+                    name: 'Soft Tissue Sarcoma',
+                    number: '623',
+                },
+                {
+                    name: 'Total',
+                    number: '2994',
+                },
+            ]
+        }
+    },
+    {
         id: 'What_does_MCI_participation_involve?',
         topic: 'What does MCI participation involve?',
         content: '<p>Patients are required to enroll in APEC14B1 before participating in MCI, and those eligible to participate need to enroll in MCI and consent to molecular characterization. Currently, only patients with newly diagnosed CNS, STS and RAR tumors will be eligible to participate. Patients enrolling in APEC14B1 with secondary or second malignancy are not eligible to participate in MCI.</p>',

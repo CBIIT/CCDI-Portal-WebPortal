@@ -6,17 +6,69 @@ import updateImgMTP from '../assets/news/News_MTP.png';
 import updateImgMTP2 from '../assets/news/News_MTP_2.png';
 import updateImgMolecularCharacterization from '../assets/news/News_Molecular_Characterization.png';
 import updateImgDashboard from '../assets/news/News_Dashboard.png';
+import updateImgEHR from '../assets/news/News_EHR.png';
 
 export const newsList = [
     {
-        id: 'ccdc_10272023',
+        id: 'ehr_01112024',
+        title: 'Respond to our latest RFI on automated EHR data entry and extraction capabilities',
+        date: 'January 11, 2024',
+        slug: 'Attention research, informatics, health care communities, vendors, and developers! The CCDI wants to hear from you.',
+        highlight: '<p>Do you have capabilities in automated electronic health record (EHR) data entry and extraction? If so, please respond to our latest Request for Information and share your tools, clinical workflows, and approaches for entering and extracting EHR data in a structured format. Your input could help NCI plan a workshop on this topic. '
+                  +'<a class="link" href="https://grants.nih.gov/grants/guide/notice-files/NOT-CA-24-021.html" target="_blank" rel="noopener noreferrer">Submit responses by February 29, 2024. https://grants.nih.gov/grants/guide/notice-files/NOT-CA-24-021.html</a></p>',
+        fullText: '',
+        type: 'Announcements',
+        img: updateImgEHR,
+    },
+    {
+        id: 'hub_12182023',
+        title: 'Molecular Characterization Initiative (MCI) Page Added to CCDI Hub',
+        date: 'December 18, 2023',
+        slug: 'A new MCI page is among the latest updates to the CCDI Hub website.',
+        highlight: 'The CCDI Hub’s new MCI page includes frequently asked questions about MCI, a dataflow diagram of the study, searchable tables, and contact information for results and data. In addition to the MCI page, updates have been made to the “My Files” shopping cart manifest, making it directly importable in the Cancer Genomics Cloud. Other enhancements to the site and Explore Dashboard further improve the user experience.',
+        fullText: '',
+        type: 'Site Updates',
+        img: updateImgDashboard,
+    },
+    {
+        id: 'ccdc_12132023',
+        title: 'New to the Childhood Cancer Data Catalog (CCDC): Osteosarcoma Explorer',
+        date: 'December 13, 2023',
+        slug: 'The Osteosarcoma Explorer analytical tool is part of the latest CCDC release, which also includes updates to six existing resources.',
+        highlight: 'The December Childhood Cancer Data Catalog (CCDC) release includes a new analytical tool, updates to six existing resources, and numerous other data updates. The new tool, Osteosarcoma Explorer, is a web portal that incorporates an array of clinical, genomic, proteomic, and pathological imaging data for use with patient query, online analysis, and digital pathology visualization tools.',
+        fullText: '',
+        type: 'Application Updates',
+        img: updateImgCCDC,
+    },
+    {
+        id: 'hub_10272023',
         title: 'CCDI Hub Explore Dashboard Release',
         date: 'October 27, 2023',
         slug: 'Navigate through detailed pediatric cancer data, create synthetic cohorts, and enable cross-study discoveries with the Hub’s new Explore Dashboard.',
         highlight: 'The CCDI Hub’s Explore Dashboard is a new tool for exploring individual-level participant, sample, and file information for CCDI-managed datasets.  This new tool enables users to explore data in novel ways and establish connections to create synthetic cohorts or cross-study discoveries.  The initial release includes eight studies and information on over 4,100 participants, 10,350 samples, and 132,000 files.',
         fullText: '',
-        type: 'Application Updates',
+        type: 'Site Updates',
         img: updateImgDashboard,
+    },
+    {
+        id: 'ccdc_10192023',
+        title: 'New resource added to Childhood Cancer Data Catalog (CCDC)',
+        date: 'October 19, 2023',
+        slug: 'The latest CCDC release includes the addition of the Imaging Data Commons, along with updates to several existing resources.',
+        highlight: 'The Childhood Cancer Data Catalog now includes the Imaging Data Commons (IDC), a cloud-based repository of publicly available cancer imaging data, which also adds the Rhabdomyosarcoma Mutation Prediction data set. Updates to seven existing CCDC resources have also been performed, adding four data sets. Additionally, the Search Catalog export file has been updated to be more accessible and useful.',
+        fullText: '',
+        type: 'Application Updates',
+        img: updateImgCCDC2,
+    },
+    {
+        id: 'ccdc_09202023',
+        title: 'CCDC release includes new tool to browse The Cancer Imaging Archive resource',
+        date: 'September 20, 2023',
+        slug: 'The Childhood Cancer Data Catalog adds the TCIABrowser and two new data sets, along with several resource updates.',
+        highlight: 'The catalog has a new tool called TCIABrowser, which connects users to The Cancer Imaging Archive (TCIA) to browse different collections, patient subjects, studies, and series. Users can also download the images and visualize them in a 3D slicer. Two new database of Genotypes and Phenotypes data sets have also been added, and five other resources have been updated with new data set information.',
+        fullText: '',
+        type: 'Application Updates',
+        img: updateImgCCDC,
     },
     {
         id: 'ccdc_08172023',

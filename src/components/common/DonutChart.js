@@ -44,7 +44,7 @@ const DonutChart = ({
               <g>
                   <text
                     x={cx}
-                    y={cy+6}
+                    y={cy}
                     dy="0"
                     textAnchor="middle"
                     fill={textColor}
@@ -53,6 +53,18 @@ const DonutChart = ({
                     fontFamily="Nunito"
                   >
                       {value}
+                  </text>
+                  <text
+                    x={cx}
+                    y={cy+16}
+                    dy="0"
+                    textAnchor="middle"
+                    fill={textColor}
+                    fontSize="14px"
+                    fontWeight="400"
+                    fontFamily="Nunito"
+                  >
+                      Participants
                   </text>
                   <text
                     x={cx}

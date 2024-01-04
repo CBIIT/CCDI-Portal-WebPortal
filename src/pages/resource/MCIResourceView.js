@@ -207,6 +207,26 @@ const MCIResourceBody = styled.div`
             background: url(${exportIconBlue}) right center no-repeat;
         }
     }
+
+    .donutContainer {
+        display: flex;
+    }
+
+    .donutTitleContainer {
+        width: 100%;
+        font-family: Poppins;
+        font-size: 19px;
+        font-weight: 400;
+        line-height: 21px;
+        letter-spacing: 0.02em;
+        text-align: center;
+
+        h4 {
+            width: 400px;
+            margin: 120px 0 0 150px;
+        }
+
+    }
 `;
 
 const MCIResourceView = () => {
@@ -302,13 +322,16 @@ const MCIResourceView = () => {
                                             {mciItem.content2 && ReactHtmlParser(mciItem.content2)}
                                             {mciItem.numberTable && <MCINumberTable table={mciItem.numberTable} /> }
                                             {mciItem.donut && 
-                                              <DonutChart
-                                                data={mciItem.donut}
-                                                innerRadiusP={65}
-                                                outerRadiusP={115}
-                                                paddingSpace={mciItem.donut.length === 1 ? 0 : 0.5}
-                                                textColor="black"
-                                              />
+                                            <div className='donutContainer'>
+                                                <div className='donutTitleContainer'><h4>{mciItem.donut.title}</h4></div>
+                                                <DonutChart
+                                                    data={mciItem.donut.data}
+                                                    innerRadiusP={65}
+                                                    outerRadiusP={115}
+                                                    paddingSpace={mciItem.donut.length === 1 ? 0 : 0.5}
+                                                    textColor="black"
+                                                />
+                                            </div>
                                             }
                                         </div>
                                     </div>

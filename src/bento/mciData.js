@@ -67,7 +67,10 @@ export const MCIContent = [
                 },
             ]
         },
-        donut: [{name: 'Central Nervous System', value: 25}, {name: 'Ewing Sarcoma', value: 7}, {name: 'Germ Cell Tumor', value: 7}, {name: 'Liver Tumor', value: 2}, {name: 'Lymphoblastic Leukemia', value: 1}, {name: 'Myeloid Leukemia', value: 4}, {name: 'Neuroblastoma', value: 3}, {name: 'Non-Hodgkin Lymphoma', value: 3}, {name: 'Osteosarcoma', value: 5}, {name: 'Rare Tumors', value: 25}, {name: 'Renal', value: 1}, {name: 'Soft Tissue Sarcoma', value: 63}],
+        donut: {
+            title: 'List of Institutions for Enrollments in MCI (APEC14B1-MCI) by Diagnosis Type',
+            data: [{name: 'Central Nervous System', value: 25}, {name: 'Ewing Sarcoma', value: 7}, {name: 'Germ Cell Tumor', value: 7}, {name: 'Liver Tumor', value: 2}, {name: 'Lymphoblastic Leukemia', value: 1}, {name: 'Myeloid Leukemia', value: 4}, {name: 'Neuroblastoma', value: 3}, {name: 'Non-Hodgkin Lymphoma', value: 3}, {name: 'Osteosarcoma', value: 5}, {name: 'Rare Tumors', value: 25}, {name: 'Renal', value: 1}, {name: 'Soft Tissue Sarcoma', value: 63}],
+        }
     },
     {
         id: 'What_does_MCI_participation_involve?',

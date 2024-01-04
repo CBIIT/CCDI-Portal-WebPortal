@@ -11,6 +11,7 @@ import MCITable from './components/MCITable';
 import MCISearchTable from './components/MCISearchTable';
 import MCINumberTable from './components/MCINumberTable';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import DonutChart from '../../components/common/DonutChart';
 
 const MCIResourceContainer = styled.div`
     width: 100%;
@@ -300,6 +301,15 @@ const MCIResourceView = () => {
                                             {mciItem.searchTable && <MCISearchTable table={mciItem.searchTable} /> }
                                             {mciItem.content2 && ReactHtmlParser(mciItem.content2)}
                                             {mciItem.numberTable && <MCINumberTable table={mciItem.numberTable} /> }
+                                            {mciItem.donut && 
+                                              <DonutChart
+                                                data={mciItem.donut}
+                                                innerRadiusP={65}
+                                                outerRadiusP={115}
+                                                paddingSpace={mciItem.donut.length === 1 ? 0 : 0.5}
+                                                textColor="black"
+                                              />
+                                            }
                                         </div>
                                     </div>
                                 )

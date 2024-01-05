@@ -56,6 +56,18 @@ const MCINumberTableContainer = styled.div`
         grid-template-columns: 500px 120px 120px 120px;
     }
 
+    .mciTableBodyList::-webkit-scrollbar {
+        width: 16px;
+        padding: 3px;
+    }
+
+    .mciTableBodyList::-webkit-scrollbar-thumb {
+        border: 3px solid transparent;
+        background: #4D889E;
+        border-radius: 20px;
+        background-clip: content-box;
+    }
+
     .mciTableBodyListItem {
         padding: 6px 16.5px;
         font-family: Open Sans;
@@ -110,10 +122,10 @@ const MCINumberTable = ( {table} ) => {
                         const key =  `mcitable_${idx}`;
                         return (
                             <>
-                                <div className='mciTableBodyListItem Name' key={key}>{bodyItem.name}</div>
-                                <div className='mciTableBodyListItem Number' key={key}>{bodyItem.cds}</div>
-                                <div className='mciTableBodyListItem Number' key={key}>{bodyItem.tumor}</div>
-                                <div className='mciTableBodyListItem Last' key={key}>{bodyItem.sts}</div>
+                                <div className='mciTableBodyListItem Name' key={key}>{bodyItem[0]}</div>
+                                <div className='mciTableBodyListItem Number' key={key}>{bodyItem[1]}</div>
+                                <div className='mciTableBodyListItem Number' key={key}>{bodyItem[2]}</div>
+                                <div className='mciTableBodyListItem Last' key={key}>{bodyItem[3]}</div>
                             </>
                         )
                     })

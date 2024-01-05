@@ -320,7 +320,12 @@ const MCIResourceView = () => {
                                             {mciItem.table && <MCITable table={mciItem.table} /> }
                                             {mciItem.searchTable && <MCISearchTable table={mciItem.searchTable} /> }
                                             {mciItem.content2 && ReactHtmlParser(mciItem.content2)}
-                                            {mciItem.numberTable && <MCINumberTable table={mciItem.numberTable} /> }
+                                            {mciItem.numberTable && 
+                                            <>
+                                                <MCINumberTable table={mciItem.numberTable} />
+                                                <div>{mciItem.numberTable.footer}</div>
+                                            </>
+                                            }
                                             {mciItem.donut && 
                                             <div className='donutContainer'>
                                                 <div className='donutTitleContainer'><h4>{mciItem.donut.title}</h4></div>

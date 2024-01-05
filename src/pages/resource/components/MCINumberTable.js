@@ -23,11 +23,10 @@ const MCINumberTableContainer = styled.div`
 
     .mciTableHeaderList {
         display: grid;
-        grid-template-columns: 70% 30%;
+        grid-template-columns: 500px 120px 120px 120px;
     }
 
     .mciTableHeaderListItem {
-        padding: 10px 0;
         font-family: Open Sans;
         font-size: 15px;
         font-weight: 700;
@@ -35,16 +34,26 @@ const MCINumberTableContainer = styled.div`
         letter-spacing: -0.02em;
         text-align: center;
         border-right: 1px solid #42779A;
-
     }
 
     .mciTableHeaderListItem:last-child {
         border-right: 0;
     }
 
+    .headerText {
+        position: relative;
+        float: left;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
     .mciTableBodyList {
+        height: 175px;
+        overflow: scroll;
+        overflow-x: hidden;
         display: grid;
-        grid-template-columns: 70% 30%;
+        grid-template-columns: 500px 120px 120px 120px;
     }
 
     .mciTableBodyListItem {
@@ -59,16 +68,23 @@ const MCINumberTableContainer = styled.div`
     }
 
     .Name {
-        padding-left: 80px;
+        padding-left: 30px;
         border-right: 1px solid #42779A;
     }
 
     .Number {
         text-align: center;
+        border-right: 1px solid #42779A;
     }
 
-    .mciTableBodyList .mciTableBodyListItem:nth-child(4n+1),
-    .mciTableBodyList .mciTableBodyListItem:nth-child(4n+2){
+    .Last {
+        text-align: center;
+    }
+
+    .mciTableBodyList .mciTableBodyListItem:nth-child(8n+1),
+    .mciTableBodyList .mciTableBodyListItem:nth-child(8n+2),
+    .mciTableBodyList .mciTableBodyListItem:nth-child(8n+3),
+    .mciTableBodyList .mciTableBodyListItem:nth-child(8n+4){
         background: #FFFFFF;
     }
       
@@ -83,7 +99,7 @@ const MCINumberTable = ( {table} ) => {
                     {table.header.map((headerItem, idx) => {
                         const key =  `mcitable_${idx}`;
                         return (
-                            <div className='mciTableHeaderListItem' key={key}>{headerItem}</div>
+                            <div className='mciTableHeaderListItem' key={key}><p className='headerText'>{headerItem}</p></div>
                         )
                     })}
                 </div>
@@ -95,7 +111,9 @@ const MCINumberTable = ( {table} ) => {
                         return (
                             <>
                                 <div className='mciTableBodyListItem Name' key={key}>{bodyItem.name}</div>
-                                <div className='mciTableBodyListItem Number' key={key}>{bodyItem.number}</div>
+                                <div className='mciTableBodyListItem Number' key={key}>{bodyItem.cds}</div>
+                                <div className='mciTableBodyListItem Number' key={key}>{bodyItem.tumor}</div>
+                                <div className='mciTableBodyListItem Last' key={key}>{bodyItem.sts}</div>
                             </>
                         )
                     })

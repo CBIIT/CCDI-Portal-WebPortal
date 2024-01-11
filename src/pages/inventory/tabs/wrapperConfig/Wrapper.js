@@ -53,6 +53,8 @@ export const wrapperConfig = [{
   container: 'buttons',
   size: 'xl',
   clsName: 'container_footer',
+  textTitle: 'Note: ',
+  text: 'Participants may have participated in one or more studies and uniquely identified participants may not be unique and counts may represent duplicate information.',
   items: [
     {
       title: 'ADD ALL FILTERED FILES',

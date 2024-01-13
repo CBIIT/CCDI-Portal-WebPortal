@@ -12,6 +12,23 @@ export const customTheme = {
       '&.container_footer': {
         paddingTop: '10px',
         textAlign: 'right',
+        display:  'flex',
+        '& p': {
+          minWidth: '300px',
+          maxWidth: '700px',
+          paddingRight: '24px',
+          margin: '0',
+          textAlign: 'left',
+          '& span': {
+            fontWeight: '600',
+          }
+        },
+        '& img': {
+          position:'relative',
+          top: '8px',
+          width: '13px',
+          height: '13px',
+        },
       },
       '&.container_footer_link': {
         textAlign: 'right',
@@ -39,13 +56,17 @@ export const customTheme = {
       marginBottom: '10px',
       textTransform: 'uppercase',
       '&.add_all_button': {
+        marginLeft: 'auto',
         marginRight: '6px',
-        // width: '120px',
+        minWidth: '200px',
+        height: '41px',
         backgroundColor: '#536D70',
       },
       '&.add_selected_button': {
         marginRight: '6px',
         marginLeft: '15px',
+        minWidth: '200px',
+        height: '41px',
       },
       '&.add_selected_button_Participants': {
         backgroundColor: '#2A6E93',

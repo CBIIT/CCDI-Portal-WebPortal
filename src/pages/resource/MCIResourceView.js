@@ -11,7 +11,7 @@ import MCITable from './components/MCITable';
 import MCISearchTable from './components/MCISearchTable';
 import MCINumberTable from './components/MCINumberTable';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-// import DonutChart from '../../components/common/DonutChart';
+import DonutChart from '../../components/common/DonutChart';
 
 const MCIResourceContainer = styled.div`
     width: 100%;
@@ -326,7 +326,7 @@ const MCIResourceView = () => {
                                                 <div>{mciItem.numberTable.footer}</div>
                                             </>
                                             }
-                                            {/* {mciItem.donut && 
+                                            {mciItem.donut && 
                                             <div className='donutContainer'>
                                                 <div className='donutTitleContainer'><h4>{mciItem.donut.title}</h4></div>
                                                 <DonutChart
@@ -337,7 +337,7 @@ const MCIResourceView = () => {
                                                     textColor="black"
                                                 />
                                             </div>
-                                            } */}
+                                            }
                                         </div>
                                     </div>
                                 )

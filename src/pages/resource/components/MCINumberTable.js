@@ -49,7 +49,7 @@ const MCINumberTableContainer = styled.div`
     }
 
     .mciTableBodyList {
-        height: 175px;
+        height: 348px;
         overflow: scroll;
         overflow-x: hidden;
         display: grid;

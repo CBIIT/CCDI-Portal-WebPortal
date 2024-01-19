@@ -79,7 +79,13 @@ const styles = (theme) => ({
     fontSize: '13px',
   },
   propertyContainer: {
-    padding: '0 0 52px 0px',
+    margin: '0 0 30px 0px',
+    padding: '10px 15px',
+    border: '1.5px solid #ffffff',
+    '&:hover': {
+      border: '1.5px solid #00BDCD',
+      borderRadius: '0 20px 0 20px',
+    },
   },
   cardTitle: {
     color: '#00838F',

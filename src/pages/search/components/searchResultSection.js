@@ -412,7 +412,12 @@ const styles = {
     fontSize: '12px',
   },
   subsectionBody: {
-    margin: '0 180px 0 219px',
+    maxWidth: '1070px',
+    margin: '0 auto',
+    '@media (max-width: 1120px)': {
+      width: 'auto',
+      margin: '0 15px',
+    }
   },
   subsection: {
     '&:last-child $subsectionBody': {
@@ -430,13 +435,22 @@ const styles = {
     },
   },
   totalResults: {
-    maxWidth: '900px',
+    maxWidth: '1040px',
     fontFamily: 'Poppins',
     color: '#13666A',
     fontSize: '20px',
     fontWeight: '500',
-    margin: '0 0 71px 220px',
+    margin: '0 auto',
+    marginBottom: '60px',
     paddingLeft: '-50px',
+    '@media (max-width: 1120px)': {
+      width: 'auto',
+      margin: '0 30px',
+      marginBottom: '60px',
+    },
+    '@media (max-width: 1023px)': {
+      marginBottom: '30px',
+    },
   },
   totalCount: {
     fontFamily: 'Poppins',

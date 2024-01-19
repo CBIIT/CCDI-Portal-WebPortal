@@ -15,7 +15,7 @@ import PublicTabView from './components/tabs/publicTabView';
 import searchImg from '../../assets/search/Search_Img.png'
 
 const SearchViewContainer = styled.div`
-  width: 1440px;
+  width: 100%;
   margin: 0 auto;
   position: relative;
 
@@ -26,14 +26,27 @@ const SearchViewContainer = styled.div`
     height: 356px;
     width: 604px;
   }
+
+  @media (min-width: 1420px) {
+    width: 1420px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 1023px) {
+    .backgroundImg {
+      display: none;
+    }
+  }
 `;
 
 const SearchbarContainer = styled.div`
   position: relative;
-  margin: 80px 402px 42px 149px;
+  width: 889px;
+  height: 179px;
+  margin: 80px 0 42px 8%;
   background: #00838F;
   border-radius: 0px 20px;
-  padding: 32px 158px 38px 69px;
+  padding: 32px 0 38px 0;
 
   .searchResultTitle {
     font-family: poppins;
@@ -43,12 +56,24 @@ const SearchbarContainer = styled.div`
     letter-spacing: 0.02em;
     color: #FFFFFF;
     margin-bottom: 15px;
+    margin-left: 69px;
+  }
+
+  @media (max-width: 1023px) {
+    width: auto;
+    margin: 0 15px 35px 15px;
+    border-radius: 0 0 20px 20px;
+
+    .searchResultTitle {
+      text-align: center;
+      margin-left: 0;
+    }
   }
 `;
 
 const SearchBar = styled.div`
   display: flex;
-  margin: 0 auto;
+  margin-left: 69px;
   width: 662px;
   height: 53px;
   // border: 2px solid #616161;
@@ -82,6 +107,16 @@ const SearchBar = styled.div`
 
   .deleteIconImg:hover {
     cursor: pointer;
+  }
+
+  @media (max-width: 1023px) {
+    margin: 0 auto;
+    maxWidth: 662px;
+  }
+
+  @media (max-width: 732px) {
+    margin: 0 15px;
+    width: auto;
   }
 `;
 

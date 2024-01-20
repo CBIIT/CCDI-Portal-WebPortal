@@ -12,7 +12,8 @@ import {
 } from './store/sitesearchReducer';
 
 import PublicTabView from './components/tabs/publicTabView';
-import searchImg from '../../assets/search/Search_Img.png'
+import searchImg from '../../assets/search/Search_Img.png';
+import searchIcon from '../../assets/header/Search_Small_Icon.svg';
 
 const SearchViewContainer = styled.div`
   width: 100%;
@@ -99,7 +100,7 @@ const SearchBar = styled.div`
 
   .deleteIcon {
     height: 18px;
-    min-width: 18px;
+    min-width: 15px;
     padding-top: 19px;
     margin-right: 13px;
   }
@@ -108,9 +109,22 @@ const SearchBar = styled.div`
     cursor: pointer;
   }
 
+  .searchButtonIcon {
+    display: none;
+  }
+
   @media (max-width: 1023px) {
     margin: 0 auto;
     maxWidth: 662px;
+  }
+
+  @media (max-width: 767px) {
+    .searchButtonText {
+      display: none;
+    }
+    .searchButtonIcon {
+      display: block;
+    }
   }
 
   @media (max-width: 732px) {
@@ -213,7 +227,10 @@ function searchComponent({
           <div className='deleteIcon' onClick={handleClear} >
               <img className="deleteIconImg" style={{display:deleteIconShow}} src='https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/globalSearchDelete.svg' alt='clear icon' />
           </div>
-          <div className='searchButton' onClick={() => onChange(inputValue)}>Search</div>
+          <div className='searchButton' onClick={() => onChange(inputValue)}>
+            <div className='searchButtonText'>Search</div>
+            <img className='searchButtonIcon' src={searchIcon} alt="searchIcon" />
+          </div>
         </SearchBar>
       </SearchbarContainer>
       <div className={classes.bodyContainer}>

@@ -86,7 +86,6 @@ const SearchBar = styled.div`
     font-weight: 600;
     font-size: 16px;
     line-height: 16px;
-    margin-left: auto;
     padding: 16px 20px;
     background: #05555C;
     color: #FFFFFF;
@@ -100,7 +99,7 @@ const SearchBar = styled.div`
 
   .deleteIcon {
     height: 18px;
-    width: 18px;
+    min-width: 18px;
     padding-top: 19px;
     margin-right: 13px;
   }
@@ -121,7 +120,7 @@ const SearchBar = styled.div`
 `;
 
 const SearchInput = styled.input`
-  margin-left: 20px;
+  margin: 0 20px;
   border: none;
   font-family: 'Open Sans';
   font-weight: 400;
@@ -129,6 +128,7 @@ const SearchInput = styled.input`
   line-height: 53px;
   color: #000000;
   width: 650px;
+  min-width: 0;
   background: transparent;
 
   ::placeholder {

@@ -1,4 +1,4 @@
-import React, { useRef} from 'react';
+import React, { useRef, useEffect} from 'react';
 import styled from 'styled-components';
 import {
   useLocation, useNavigate
@@ -169,6 +169,7 @@ function searchComponent({
   const [searchText, setSearchText] = React.useState('');
   const [searchResults, setSearchResults] = React.useState([]);
   const [deleteIconShow, setDeleteIconShow] = React.useState('none');
+  const [isScreenDestop, setIsScreenDestop] = React.useState(true);
 
   const getAuthorizedResultQuery = (strValue) => {
     return getPublicSearchPageResults(strValue);
@@ -212,7 +213,21 @@ function searchComponent({
     }
   };
 
-  React.useEffect(() => {
+  const resizeHandler = () => {
+    if (window.innerWidth < 1024) {
+      setIsScreenDestop(false);
+    } else {
+      setIsScreenDestop(true);
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', resizeHandler);
+    resizeHandler();
+    return () => window.removeEventListener('resize', resizeHandler);
+  }, []);
+
+  useEffect(() => {
     getAutoCompleteRes(searchparam);
     onChange(searchparam);
   }, [open]);
@@ -239,6 +254,7 @@ function searchComponent({
             options={{ searchResults }}
             classes={classes}
             searchText={searchText}
+            isDesktop={isScreenDestop} 
           />
         </Box>
       </div>

@@ -21,7 +21,7 @@ const getTabProperties = (classes, searchResults, allLabel) => [
 ];
 
 const PublicTabView = ({
-  classes, options, searchText,
+  classes, options, searchText, isDesktop,
 }) => {
   const { searchResults } = options;
   const tabProperties = getTabProperties(classes, searchResults);
@@ -44,6 +44,7 @@ const PublicTabView = ({
       isPublic
       options={{ ...options, properties: tabProperties }}
       searchText={searchText}
+      isDesktop={isDesktop}
     />
   );
 };

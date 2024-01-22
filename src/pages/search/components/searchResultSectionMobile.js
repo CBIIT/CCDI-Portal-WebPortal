@@ -31,10 +31,9 @@ function SearchPagination({
   datafield, classes, searchText, count, isPublic,
 }) {
   const pageSize = 5;
-  const [isFetching, setIsFetching] = useState(false);
   const [page, setPage] = useState(1);
   const [data, setdata] = useState([]);
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const perPageSelection = useRef(null);
   const [fetchMore, setFetchMore] = useState(true);
   useOutsideAlerter(perPageSelection);
@@ -75,9 +74,8 @@ function SearchPagination({
   async function onChange(newValue = [], newPage = 1) {
     // setLoading(true);
     const searchResp = await getPageResults(newValue, newPage);
-    // setLoading(false);
+    setLoading(false);
     setdata([...data, ...searchResp]);
-    setIsFetching(false);
   }
 
   useEffect(() => {
@@ -94,7 +92,6 @@ function SearchPagination({
   // };
 
   const handleLoadMore = () => {
-    console.log("newpage:", page)
     onChange(searchText, page+1);
     setPage(page+1);
     
@@ -121,7 +118,7 @@ function SearchPagination({
 
   const handleScroll = () => {
     if (window.innerHeight + document.documentElement.scrollTop + 600 < document.documentElement.offsetHeight) return;
-    setIsFetching(true);
+    setLoading(true);
   };
 
   useEffect(() => {
@@ -132,12 +129,12 @@ function SearchPagination({
   }, [])
 
   useEffect(() => {
-    if (!isFetching) {
+    if (!loading) {
       return
     } else {
       handleLoadMore()
     }
-  }, [isFetching]);
+  }, [loading]);
 
   return (
     <>

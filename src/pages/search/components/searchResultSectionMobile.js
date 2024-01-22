@@ -117,8 +117,17 @@ function SearchPagination({
   };
 
   const handleScroll = () => {
-    if (window.innerHeight + document.documentElement.scrollTop + 600 < document.documentElement.offsetHeight) return;
-    setLoading(true);
+    const footerList = document.getElementsByTagName('footer');
+    let footer;
+    if (window.innerWidth > 767) {
+      footer = footerList[1];
+    } else {
+        footer = footerList[2];
+    }
+    const footerToTop = footer.getBoundingClientRect().top;
+    if (window.innerHeight - 50 > footerToTop) {
+      setLoading(true);
+    }
   };
 
   useEffect(() => {

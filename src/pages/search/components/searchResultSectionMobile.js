@@ -92,7 +92,7 @@ function SearchPagination({
   // };
 
   const handleLoadMore = () => {
-    onChange(searchText, page);
+    onChange(searchText, page+1);
     setPage(page+1);
     
     // scrollToTop();

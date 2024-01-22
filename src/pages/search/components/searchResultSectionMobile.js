@@ -125,7 +125,7 @@ function SearchPagination({
         footer = footerList[2];
     }
     const footerToTop = footer.getBoundingClientRect().top;
-    if (window.innerHeight - 50 > footerToTop) {
+    if (window.innerHeight - 50 > footerToTop && fetchMore) {
       setLoading(true);
     }
   };

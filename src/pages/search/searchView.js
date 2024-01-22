@@ -222,7 +222,6 @@ function searchComponent({
   }
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
     window.addEventListener('resize', resizeHandler);
     resizeHandler();
     return () => window.removeEventListener('resize', resizeHandler);

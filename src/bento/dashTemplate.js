@@ -60,10 +60,10 @@ export const facetSectionVariables = {
 export const facetsConfig = [
   {
     section: DEMOGRAPHICS,
-    label: 'Gender',
-    apiPath: 'participantCountByGender',
-    apiForFiltering: 'filterParticipantCountByGender',
-    datafield: 'gender',
+    label: 'Sex',
+    apiPath: 'participantCountBySexAtBirth',
+    apiForFiltering: 'filterParticipantCountBySexAtBirth',
+    datafield: 'sex_at_birth',
     field: GROUP,
     type: InputTypes.CHECKBOX,
     sort_type: sortType.ALPHABET,
@@ -813,8 +813,8 @@ export const widgetConfig = [
   },
   {
     type: 'donut',
-    title: 'Gender',
-    dataName: 'participantCountByGender',
+    title: 'Sex',
+    dataName: 'participantCountBySexAtBirth',
     sliceTitle: 'Participants',
   },
   {

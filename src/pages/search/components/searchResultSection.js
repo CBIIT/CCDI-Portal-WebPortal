@@ -298,6 +298,9 @@ const styles = {
     fontSize: '14px',
     color: '#045B80',
     marginTop: '15px',
+    '@media (max-width: 767px)': {
+      display: 'none',
+    },
   },
   pageSizeContainer: {
     marginLeft: '10px',

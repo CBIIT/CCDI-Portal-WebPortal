@@ -82,9 +82,10 @@ const styles = (theme) => ({
     margin: '0 0 30px 0px',
     padding: '10px 15px',
     border: '1.5px solid #ffffff',
+    borderRadius: '0 20px 0 20px',
+    boxShadow: '0px 4px 20px 0px #00000040',
     '&:hover': {
       border: '1.5px solid #00BDCD',
-      borderRadius: '0 20px 0 20px',
     },
   },
   cardTitle: {

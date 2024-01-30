@@ -258,10 +258,10 @@ export const facetsConfig = [
   },
   {
     section: DIAGNOSIS,
-    label: 'Diagnosis (ICD-O)',
-    apiPath: 'participantCountByICDO',
-    apiForFiltering: 'filterParticipantCountByICDO',
-    datafield: 'diagnosis_icd_o',
+    label: 'Diagnosis',
+    apiPath: 'participantCountByDiagnosisClassification',
+    apiForFiltering: 'filterParticipantCountByDiagnosisClassification',
+    datafield: 'diagnosis_classification',
     field: GROUP,
     type: InputTypes.CHECKBOX,
     sort_type: sortType.ALPHABET,
@@ -794,7 +794,7 @@ export const widgetConfig = [
   },
   {
     type: 'donut',
-    title: 'Diagnosis (ICD-O)',
+    title: 'Diagnosis',
     dataName: 'participantCountByDiagnosis',
     sliceTitle: 'Participants',
   },

@@ -119,7 +119,7 @@ query search (
     $age_at_diagnosis: [Int] ,
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
-    $diagnosis_icd_o: [String] ,
+    $diagnosis_classification: [String] ,
     $vital_status: [String] ,
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
@@ -144,7 +144,7 @@ query search (
         age_at_diagnosis: $age_at_diagnosis,
         diagnosis_anatomic_site: $diagnosis_anatomic_site,
         disease_phase: $disease_phase,
-        diagnosis_icd_o: $diagnosis_icd_o,
+        diagnosis_classification: $diagnosis_classification,
         vital_status: $vital_status,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
@@ -227,7 +227,7 @@ query search (
             group
             subjects
         }
-        filterParticipantCountByICDO{
+        filterParticipantCountByDiagnosisClassification{
             group
             subjects
         }
@@ -298,7 +298,7 @@ query fileOverview(
     $age_at_diagnosis: [Int] ,
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
-    $diagnosis_icd_o: [String] ,
+    $diagnosis_classification: [String] ,
     $vital_status: [String] ,
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
@@ -326,7 +326,7 @@ query fileOverview(
         age_at_diagnosis: $age_at_diagnosis,
         diagnosis_anatomic_site: $diagnosis_anatomic_site,
         disease_phase: $disease_phase,
-        diagnosis_icd_o: $diagnosis_icd_o,
+        diagnosis_classification: $diagnosis_classification,
         vital_status: $vital_status,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
@@ -372,7 +372,7 @@ query sampleOverview(
     $age_at_diagnosis: [Int] ,
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
-    $diagnosis_icd_o: [String] ,
+    $diagnosis_classification: [String] ,
     $vital_status: [String] ,
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
@@ -400,7 +400,7 @@ query sampleOverview(
         age_at_diagnosis: $age_at_diagnosis,
         diagnosis_anatomic_site: $diagnosis_anatomic_site,
         disease_phase: $disease_phase,
-        diagnosis_icd_o: $diagnosis_icd_o,
+        diagnosis_classification: $diagnosis_classification,
         vital_status: $vital_status,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
@@ -427,7 +427,7 @@ query sampleOverview(
         study_id
         anatomic_site
         participant_age_at_collection
-        diagnosis_icd_o
+        diagnosis_classification
         sample_tumor_status
         tumor_classification
     }
@@ -443,7 +443,7 @@ query participantOverview(
     $age_at_diagnosis: [Int] ,
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
-    $diagnosis_icd_o: [String] ,
+    $diagnosis_classification: [String] ,
     $vital_status: [String] ,
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
@@ -471,7 +471,7 @@ query participantOverview(
         age_at_diagnosis: $age_at_diagnosis,
         diagnosis_anatomic_site: $diagnosis_anatomic_site,
         disease_phase: $disease_phase,
-        diagnosis_icd_o: $diagnosis_icd_o,
+        diagnosis_classification: $diagnosis_classification,
         vital_status: $vital_status,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
@@ -513,7 +513,7 @@ query diagnosisOverview(
     $age_at_diagnosis: [Int] ,
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
-    $diagnosis_icd_o: [String] ,
+    $diagnosis_classification: [String] ,
     $vital_status: [String] ,
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
@@ -541,7 +541,7 @@ query diagnosisOverview(
         age_at_diagnosis: $age_at_diagnosis,
         diagnosis_anatomic_site: $diagnosis_anatomic_site,
         disease_phase: $disease_phase,
-        diagnosis_icd_o: $diagnosis_icd_o,
+        diagnosis_classification: $diagnosis_classification,
         vital_status: $vital_status,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
@@ -566,7 +566,7 @@ query diagnosisOverview(
         diagnosis_id
         participant_id
         phs_accession
-        diagnosis_icd_o
+        diagnosis_classification
         disease_phase
         anatomic_site
         age_at_diagnosis
@@ -585,7 +585,7 @@ query studyOverview(
     $age_at_diagnosis: [Int] ,
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
-    $diagnosis_icd_o: [String] ,
+    $diagnosis_classification: [String] ,
     $vital_status: [String] ,
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
@@ -613,7 +613,7 @@ query studyOverview(
         age_at_diagnosis: $age_at_diagnosis,
         diagnosis_anatomic_site: $diagnosis_anatomic_site,
         disease_phase: $disease_phase,
-        diagnosis_icd_o: $diagnosis_icd_o,
+        diagnosis_classification: $diagnosis_classification,
         vital_status: $vital_status,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
@@ -709,7 +709,7 @@ query participantsAddAllToCart(
     $age_at_diagnosis: [Int] ,
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
-    $diagnosis_icd_o: [String] ,
+    $diagnosis_classification: [String] ,
     $vital_status: [String] ,
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
@@ -738,7 +738,7 @@ query participantsAddAllToCart(
       age_at_diagnosis: $age_at_diagnosis,
       diagnosis_anatomic_site: $diagnosis_anatomic_site,
       disease_phase: $disease_phase,
-      diagnosis_icd_o: $diagnosis_icd_o,
+      diagnosis_classification: $diagnosis_classification,
       vital_status: $vital_status,
       sample_anatomic_site: $sample_anatomic_site,
       participant_age_at_collection: $participant_age_at_collection,
@@ -773,7 +773,7 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
       $age_at_diagnosis: [Int] ,
       $diagnosis_anatomic_site: [String] ,
       $disease_phase: [String] ,
-      $diagnosis_icd_o: [String] ,
+      $diagnosis_classification: [String] ,
       $vital_status: [String] ,
       $sample_anatomic_site: [String] ,
       $participant_age_at_collection: [Int] ,
@@ -801,7 +801,7 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
           age_at_diagnosis: $age_at_diagnosis,
           diagnosis_anatomic_site: $diagnosis_anatomic_site,
           disease_phase: $disease_phase,
-          diagnosis_icd_o: $diagnosis_icd_o,
+          diagnosis_classification: $diagnosis_classification,
           vital_status: $vital_status,
           sample_anatomic_site: $sample_anatomic_site,
           participant_age_at_collection: $participant_age_at_collection,
@@ -836,7 +836,7 @@ query fileAddAllToCart(
   $age_at_diagnosis: [Int] ,
   $diagnosis_anatomic_site: [String] ,
   $disease_phase: [String] ,
-  $diagnosis_icd_o: [String] ,
+  $diagnosis_classification: [String] ,
   $vital_status: [String] ,
   $sample_anatomic_site: [String] ,
   $participant_age_at_collection: [Int] ,
@@ -865,7 +865,7 @@ query fileAddAllToCart(
       age_at_diagnosis: $age_at_diagnosis,
       diagnosis_anatomic_site: $diagnosis_anatomic_site,
       disease_phase: $disease_phase,
-      diagnosis_icd_o: $diagnosis_icd_o,
+      diagnosis_classification: $diagnosis_classification,
       vital_status: $vital_status,
       sample_anatomic_site: $sample_anatomic_site,
       participant_age_at_collection: $participant_age_at_collection,
@@ -900,7 +900,7 @@ query diagnosisAddAllToCart(
   $age_at_diagnosis: [Int] ,
   $diagnosis_anatomic_site: [String] ,
   $disease_phase: [String] ,
-  $diagnosis_icd_o: [String] ,
+  $diagnosis_classification: [String] ,
   $vital_status: [String] ,
   $sample_anatomic_site: [String] ,
   $participant_age_at_collection: [Int] ,
@@ -928,7 +928,7 @@ query diagnosisAddAllToCart(
       age_at_diagnosis: $age_at_diagnosis,
       diagnosis_anatomic_site: $diagnosis_anatomic_site,
       disease_phase: $disease_phase,
-      diagnosis_icd_o: $diagnosis_icd_o,
+      diagnosis_classification: $diagnosis_classification,
       vital_status: $vital_status,
       sample_anatomic_site: $sample_anatomic_site,
       participant_age_at_collection: $participant_age_at_collection,
@@ -963,7 +963,7 @@ query studyAddAllToCart(
   $age_at_diagnosis: [Int] ,
   $diagnosis_anatomic_site: [String] ,
   $disease_phase: [String] ,
-  $diagnosis_icd_o: [String] ,
+  $diagnosis_classification: [String] ,
   $vital_status: [String] ,
   $sample_anatomic_site: [String] ,
   $participant_age_at_collection: [Int] ,
@@ -991,7 +991,7 @@ query studyAddAllToCart(
       age_at_diagnosis: $age_at_diagnosis,
       diagnosis_anatomic_site: $diagnosis_anatomic_site,
       disease_phase: $disease_phase,
-      diagnosis_icd_o: $diagnosis_icd_o,
+      diagnosis_classification: $diagnosis_classification,
       vital_status: $vital_status,
       sample_anatomic_site: $sample_anatomic_site,
       participant_age_at_collection: $participant_age_at_collection,
@@ -1173,8 +1173,8 @@ export const tabContainers = [
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'diagnosis_icd_o',
-        header: 'Diagnosis (ICD-O)',
+        dataField: 'diagnosis_classification',
+        header: 'Diagnosis',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
@@ -1437,8 +1437,8 @@ export const tabContainers = [
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'diagnosis_icd_o',
-        header: 'Sample ICD-O Morphology',
+        dataField: 'diagnosis_classification',
+        header: 'Diagnosis',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,

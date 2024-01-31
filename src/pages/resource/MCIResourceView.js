@@ -12,6 +12,7 @@ import MCISearchTable from './components/MCISearchTable';
 import MCINumberTable from './components/MCINumberTable';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import DonutChart from '../../components/common/DonutChart';
+import MapView from '../../components/common/mapGenerator';
 
 const MCIResourceContainer = styled.div`
     width: 100%;
@@ -316,6 +317,7 @@ const MCIResourceView = () => {
                                         <div id={mciItem.id} className='mciTitle'>{mciItem.topic}</div>
                                         <div className='mciContentContainer'>
                                             {ReactHtmlParser(mciItem.content)}
+                                            {mciItem.map && <MapView />}
                                             {mciItem.topic.includes('CCDI Data Ecosystem') && <img src={ccdiDataEcosystemImg} alt="CCDI Data Ecosystem"/>}
                                             {mciItem.table && <MCITable table={mciItem.table} /> }
                                             {mciItem.searchTable && <MCISearchTable table={mciItem.searchTable} /> }

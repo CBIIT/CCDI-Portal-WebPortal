@@ -37,7 +37,7 @@ query sampleOverview($sample_ids: [String], $offset: Int = 0, $first: Int = 1000
 `;
 
 export const customSamplesTabDownloadCSV = {
-  keysToInclude: ['sample_id', 'participant_id', 'study_id', 'anatomic_site', 'participant_age_at_collection', 'diagnosis_classification', 'sample_tumor_status', 'tumor_classification'],
+  keysToInclude: ['sample_id', 'participant_id', 'study_id', 'anatomic_site', 'participant_age_at_collection', 'sample_diagnosis_classification', 'sample_tumor_status', 'tumor_classification'],
   header: ['Sample ID', 'Participant ID', 'Study ID', 'Anatomic Site', 'Age at Sample Collection', 'Diagnosis', 'Sample Tumor Status', 'Sample Tumor Classification'],
   query: GET_SAMPLES_TAB,
   apiVariable: 'sampleOverview',

@@ -45,8 +45,8 @@ export const MCIContent = [
             title: 'Clinical Molecular Characterization Initiative Assays and Analytics',
             header: ['Sample', 'Assay', 'Result Type'],
             body: ['Tumor + normal DNA', 'Enhanced ES', 'Germline + somatic SNVs, INDELs, CNV & LOH', 'Tumor RNA', 'Targeted RNA Solid Tumor Fusion assay', 'Fusion/ITD detection', 'Tumor DNA', 'DNA based methylation array for CNS tumor classification', 'Disease classification'],
+            footer: 'Abbreviations: ES, exome sequencing; AWS, Amazon Web Services; SNV, single-nucleotide variant; INDEL, insertion/deletion; CNV, copy number variation; LOH, loss of heterozygosity; ITD, internal tandem duplication [PMID: 29539639].',
         },
-        content2: '<p>Abbreviations: ES, exome sequencing; AWS, Amazon Web Services; SNV, single-nucleotide variant; INDEL, insertion/deletion; CNV, copy number variation; LOH, loss of heterozygosity; ITD, internal tandem duplication [PMID: 29539639].</p>',
     },
     {
         id: 'When_and_how_are_MCI_results_provided',

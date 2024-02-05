@@ -27,6 +27,11 @@ const MapView = () => {
           map: 'usa_svg',
           roam: false
         },
+        title: {
+          text: "Enrollment Counts by State",
+          left: "center",
+          top: "15%",
+        },
         series: {
           type: 'scatter',
           symbol: 'image://./HexagonIcon.svg',

@@ -9,6 +9,7 @@ export const MCIContent = [
         id: 'MCI_Metrics_at_a_glace',
         topic: 'Metrics',
         content: '<p>The MCI enrollment metrics are based on counts of patients enrolled with MCI through Project:EveryChild (APEC14B1) and are based on monthly COG reporting.</p>',
+        map: true,
         numberTable: {
             title: 'List of Institutions for Enrollments in MCI (APEC14B1-MCI) by Diagnosis Type',
             header: ['Institution Name', 'CDS Diagnosis', 'Rare Tumor Diagnosis', 'STS Diagnosis'],
@@ -44,8 +45,8 @@ export const MCIContent = [
             title: 'Clinical Molecular Characterization Initiative Assays and Analytics',
             header: ['Sample', 'Assay', 'Result Type'],
             body: ['Tumor + normal DNA', 'Enhanced ES', 'Germline + somatic SNVs, INDELs, CNV & LOH', 'Tumor RNA', 'Targeted RNA Solid Tumor Fusion assay', 'Fusion/ITD detection', 'Tumor DNA', 'DNA based methylation array for CNS tumor classification', 'Disease classification'],
+            footer: 'Abbreviations: ES, exome sequencing; AWS, Amazon Web Services; SNV, single-nucleotide variant; INDEL, insertion/deletion; CNV, copy number variation; LOH, loss of heterozygosity; ITD, internal tandem duplication [PMID: 29539639].',
         },
-        content2: '<p>Abbreviations: ES, exome sequencing; AWS, Amazon Web Services; SNV, single-nucleotide variant; INDEL, insertion/deletion; CNV, copy number variation; LOH, loss of heterozygosity; ITD, internal tandem duplication [PMID: 29539639].</p>',
     },
     {
         id: 'When_and_how_are_MCI_results_provided',

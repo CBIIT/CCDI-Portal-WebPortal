@@ -120,6 +120,9 @@ query search (
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
     $diagnosis_classification: [String] ,
+    $diagnosis_classification_system: [String] ,
+    $diagnosis_verification_status: [String] ,
+    $diagnosis_basis: [String] ,
     $vital_status: [String] ,
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
@@ -145,6 +148,9 @@ query search (
         diagnosis_anatomic_site: $diagnosis_anatomic_site,
         disease_phase: $disease_phase,
         diagnosis_classification: $diagnosis_classification,
+        diagnosis_classification_system: $diagnosis_classification_system,
+        diagnosis_verification_status: $diagnosis_verification_status,
+        diagnosis_basis: $diagnosis_basis,
         vital_status: $vital_status,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
@@ -231,6 +237,18 @@ query search (
             group
             subjects
         }
+        filterParticipantCountByDiagnosisClassificationSystem{
+            group
+            subjects
+        }
+        filterParticipantCountByDiagnosisVerificationStatus{
+            group
+            subjects
+        }
+        filterParticipantCountByDiagnosisBasis{
+          group
+          subjects
+      }
         filterParticipantCountByInstitution{
             group
             subjects
@@ -514,6 +532,9 @@ query diagnosisOverview(
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
     $diagnosis_classification: [String] ,
+    $diagnosis_classification_system: [String] ,
+    $diagnosis_verification_status: [String] ,
+    $diagnosis_basis: [String] ,
     $vital_status: [String] ,
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
@@ -542,6 +563,9 @@ query diagnosisOverview(
         diagnosis_anatomic_site: $diagnosis_anatomic_site,
         disease_phase: $disease_phase,
         diagnosis_classification: $diagnosis_classification,
+        diagnosis_classification_system: $diagnosis_classification_system,
+        diagnosis_verification_status: $diagnosis_verification_status,
+        diagnosis_basis: $diagnosis_basis,
         vital_status: $vital_status,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
@@ -567,6 +591,9 @@ query diagnosisOverview(
         participant_id
         phs_accession
         diagnosis_classification
+        diagnosis_classification_system
+        diagnosis_verification_status
+        diagnosis_basis
         disease_phase
         anatomic_site
         age_at_diagnosis
@@ -1175,6 +1202,27 @@ export const tabContainers = [
       {
         dataField: 'diagnosis_classification',
         header: 'Diagnosis',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'diagnosis_classification_system',
+        header: 'Diagnosis Classification System',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'diagnosis_verification_status',
+        header: 'Diagnosis Verification Status',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'diagnosis_basis',
+        header: 'Diagnosis Basis',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,

@@ -317,6 +317,18 @@ const MCIResourceView = () => {
                                         <div id={mciItem.id} className='mciTitle'>{mciItem.topic}</div>
                                         <div className='mciContentContainer'>
                                             {ReactHtmlParser(mciItem.content)}
+                                            {mciItem.donut && 
+                                            <div className='donutContainer'>
+                                                <div className='donutTitleContainer'><h4>{mciItem.donut.title}</h4></div>
+                                                <DonutChart
+                                                    data={mciItem.donut.data}
+                                                    innerRadiusP={65}
+                                                    outerRadiusP={115}
+                                                    paddingSpace={mciItem.donut.length === 1 ? 0 : 0.5}
+                                                    textColor="black"
+                                                />
+                                            </div>
+                                            }
                                             {mciItem.map && <MapView />}
                                             {mciItem.topic.includes('CCDI Data Ecosystem') && <img src={ccdiDataEcosystemImg} alt="CCDI Data Ecosystem"/>}
                                             {mciItem.table &&
@@ -331,18 +343,6 @@ const MCIResourceView = () => {
                                                 <MCINumberTable table={mciItem.numberTable} />
                                                 <div>{mciItem.numberTable.footer}</div>
                                             </>
-                                            }
-                                            {mciItem.donut && 
-                                            <div className='donutContainer'>
-                                                <div className='donutTitleContainer'><h4>{mciItem.donut.title}</h4></div>
-                                                <DonutChart
-                                                    data={mciItem.donut.data}
-                                                    innerRadiusP={65}
-                                                    outerRadiusP={115}
-                                                    paddingSpace={mciItem.donut.length === 1 ? 0 : 0.5}
-                                                    textColor="black"
-                                                />
-                                            </div>
                                             }
                                         </div>
                                     </div>

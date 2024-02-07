@@ -391,6 +391,9 @@ query sampleOverview(
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
     $sample_diagnosis_classification: [String] ,
+    $sample_diagnosis_classification_system: [String] ,
+    $sample_diagnosis_verification_status: [String] ,
+    $sample_diagnosis_basis: [String] ,
     $vital_status: [String] ,
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
@@ -419,6 +422,9 @@ query sampleOverview(
         diagnosis_anatomic_site: $diagnosis_anatomic_site,
         disease_phase: $disease_phase,
         sample_diagnosis_classification: $sample_diagnosis_classification,
+        sample_diagnosis_classification_system: $sample_diagnosis_classification_system,
+        sample_diagnosis_verification_status: $sample_diagnosis_verification_status,
+        sample_diagnosis_basis: $sample_diagnosis_basis,
         vital_status: $vital_status,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
@@ -446,6 +452,9 @@ query sampleOverview(
         anatomic_site
         participant_age_at_collection
         sample_diagnosis_classification
+        sample_diagnosis_classification_system
+        sample_diagnosis_verification_status
+        sample_diagnosis_basis
         sample_tumor_status
         tumor_classification
     }
@@ -800,7 +809,10 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
       $age_at_diagnosis: [Int] ,
       $diagnosis_anatomic_site: [String] ,
       $disease_phase: [String] ,
-      $diagnosis_classification: [String] ,
+      $sample_diagnosis_classification: [String] ,
+      $sample_diagnosis_classification_system: [String] ,
+      $sample_diagnosis_verification_status: [String] ,
+      $sample_diagnosis_basis: [String] ,
       $vital_status: [String] ,
       $sample_anatomic_site: [String] ,
       $participant_age_at_collection: [Int] ,
@@ -829,6 +841,9 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
           diagnosis_anatomic_site: $diagnosis_anatomic_site,
           disease_phase: $disease_phase,
           sample_diagnosis_classification: $sample_diagnosis_classification,
+          sample_diagnosis_classification_system: $sample_diagnosis_classification_system,
+          sample_diagnosis_verification_status: $sample_diagnosis_verification_status,
+          sample_diagnosis_basis: $sample_diagnosis_basis,
           vital_status: $vital_status,
           sample_anatomic_site: $sample_anatomic_site,
           participant_age_at_collection: $participant_age_at_collection,
@@ -1487,6 +1502,27 @@ export const tabContainers = [
       {
         dataField: 'sample_diagnosis_classification',
         header: 'Diagnosis',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'sample_diagnosis_classification_system',
+        header: 'Diagnosis Classification System',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'sample_diagnosis_verification_status',
+        header: 'Diagnosis Verification Status',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'sample_diagnosis_basis',
+        header: 'Diagnosis Basis',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,

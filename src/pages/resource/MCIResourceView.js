@@ -289,7 +289,7 @@ const MCIResourceView = () => {
                 <div className='resourceTitle'>
                     Molecular Characterization Initiative
                     <div className='goToSiteButton'>
-                        <a className='goToSiteText' href="https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs002790" target="_blank" rel="noopener noreferrer">Go to site</a>
+                        <a className='goToSiteText' href="https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs002790" target="_blank" rel="noopener noreferrer">Request Access (dbGaP)</a>
                     </div>
                 </div>
             </div>

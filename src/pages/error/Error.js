@@ -84,6 +84,7 @@ const Error = () => {
         <div className='titleFirst'>{errorData.titleFirst}</div>
         <div className='titleSecond'>
           <div>{errorData.titleSecond}</div>
+          <div>peer review</div>
         </div>
         <div className='returnButtonContainer'>
            <NavLink className='returnButton' to='/'>{errorData.buttonTitle}</NavLink>

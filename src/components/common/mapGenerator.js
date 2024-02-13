@@ -11,13 +11,13 @@ const MapView = () => {
                 font: 'Poppins',
                 fontSize: '13px',
                 fontWeight: '400',
-                lineHeight: '18px',
-                letterSpacing: '-0.01em',
+                lineHeight: '15px',
+                letterSpacing: '-1%',
                 color: '#286067',
             },
             extraCssText: "border-radius: 8px;",
             formatter: function (params) {
-                return '<b>' + params.data[2] + ':</b><br/><span>' + params.data[3] + ' enrolled</span>'
+                return '<span style="font-weight: 700; font-size:10px;">' + params.data[2] + ':</span><br/><span>' + params.data[3] + ' enrolled</span>'
             },
         },
         geo: {

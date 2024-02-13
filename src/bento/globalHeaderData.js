@@ -61,27 +61,27 @@ Applications: [
   },
   {
     name:'Childhood Cancer Data Catalog',
-    link: '/#ccdc',
+    link: 'https://datacatalog.ccdi.cancer.gov',
     className: 'navMobileSubItem',
   },
   {
     name:'Clinical Interpretation of Variants in Cancer',
-    link: '/#civic',
+    link: 'https://civicdb.org',
     className: 'navMobileSubItem',
   },
   {
     name: 'Molecular Characterization Initiative for Childhood Cancers',
-    link: '/#mci',
+    link: '/MCI',
     className: 'navMobileSubItem',
   },
   {
     name: 'Molecular Targets Platform',
-    link: '/#mtp',
+    link: 'https://moleculartargets.ccdi.cancer.gov',
     className: 'navMobileSubItem',
   },
   {
     name:'National Childhood Cancer Registry Explorer',
-    link: '/#nccr',
+    link: 'https://nccrexplorer.ccdi.cancer.gov',
     className: 'navMobileSubItem',
   }],
 "Other Resources": [
@@ -92,12 +92,12 @@ Applications: [
   },
   {
     name:'Cancer Genomics Cloud',
-    link: '/#cgc',
+    link: 'https://www.cancergenomicscloud.org',
     className: 'navMobileSubItem',
   }, 
   {
     name:'Database of Genotypes and Phenotypes',
-    link: '/#dbgap',
+    link: 'https://www.ncbi.nlm.nih.gov/gap',
     className: 'navMobileSubItem',
   }],
 };

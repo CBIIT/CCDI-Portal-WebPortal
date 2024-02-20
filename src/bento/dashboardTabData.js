@@ -394,6 +394,7 @@ query sampleOverview(
     $sample_diagnosis_classification_system: [String] ,
     $sample_diagnosis_verification_status: [String] ,
     $sample_diagnosis_basis: [String] ,
+    $sample_diagnosis_comment: [String] ,
     $vital_status: [String] ,
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
@@ -425,6 +426,7 @@ query sampleOverview(
         sample_diagnosis_classification_system: $sample_diagnosis_classification_system,
         sample_diagnosis_verification_status: $sample_diagnosis_verification_status,
         sample_diagnosis_basis: $sample_diagnosis_basis,
+        sample_diagnosis_comment: $sample_diagnosis_comment,
         vital_status: $vital_status,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
@@ -455,6 +457,7 @@ query sampleOverview(
         sample_diagnosis_classification_system
         sample_diagnosis_verification_status
         sample_diagnosis_basis
+        sample_diagnosis_comment
         sample_tumor_status
         tumor_classification
     }
@@ -816,6 +819,7 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
       $sample_diagnosis_classification_system: [String] ,
       $sample_diagnosis_verification_status: [String] ,
       $sample_diagnosis_basis: [String] ,
+      $sample_diagnosis_comment: [String] ,
       $vital_status: [String] ,
       $sample_anatomic_site: [String] ,
       $participant_age_at_collection: [Int] ,
@@ -847,6 +851,7 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
           sample_diagnosis_classification_system: $sample_diagnosis_classification_system,
           sample_diagnosis_verification_status: $sample_diagnosis_verification_status,
           sample_diagnosis_basis: $sample_diagnosis_basis,
+          sample_diagnosis_comment: $sample_diagnosis_comment,
           vital_status: $vital_status,
           sample_anatomic_site: $sample_anatomic_site,
           participant_age_at_collection: $participant_age_at_collection,
@@ -946,6 +951,10 @@ query diagnosisAddAllToCart(
   $diagnosis_anatomic_site: [String] ,
   $disease_phase: [String] ,
   $diagnosis_classification: [String] ,
+  $diagnosis_classification_system: [String] ,
+  $diagnosis_verification_status: [String] ,
+  $diagnosis_basis: [String] ,
+  $diagnosis_comment: [String],
   $vital_status: [String] ,
   $sample_anatomic_site: [String] ,
   $participant_age_at_collection: [Int] ,
@@ -974,6 +983,10 @@ query diagnosisAddAllToCart(
       diagnosis_anatomic_site: $diagnosis_anatomic_site,
       disease_phase: $disease_phase,
       diagnosis_classification: $diagnosis_classification,
+      diagnosis_classification_system: $diagnosis_classification_system,
+      diagnosis_verification_status: $diagnosis_verification_status,
+      diagnosis_basis: $diagnosis_basis,
+      diagnosis_comment: $diagnosis_comment,
       vital_status: $vital_status,
       sample_anatomic_site: $sample_anatomic_site,
       participant_age_at_collection: $participant_age_at_collection,
@@ -1247,7 +1260,7 @@ export const tabContainers = [
       },
       {
         dataField: 'diagnosis_comment',
-        header: 'Diagnosis Comments',
+        header: 'Diagnosis Comment',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
@@ -1533,6 +1546,13 @@ export const tabContainers = [
       {
         dataField: 'sample_diagnosis_basis',
         header: 'Diagnosis Basis',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'sample_diagnosis_comment',
+        header: 'Diagnosis Comment',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,

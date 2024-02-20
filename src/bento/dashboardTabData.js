@@ -541,6 +541,7 @@ query diagnosisOverview(
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
     $diagnosis_classification: [String] ,
+    $diagnosis_comment: [String],
     $diagnosis_classification_system: [String] ,
     $diagnosis_verification_status: [String] ,
     $diagnosis_basis: [String] ,
@@ -572,6 +573,7 @@ query diagnosisOverview(
         diagnosis_anatomic_site: $diagnosis_anatomic_site,
         disease_phase: $disease_phase,
         diagnosis_classification: $diagnosis_classification,
+        diagnosis_comment: $diagnosis_comment,
         diagnosis_classification_system: $diagnosis_classification_system,
         diagnosis_verification_status: $diagnosis_verification_status,
         diagnosis_basis: $diagnosis_basis,
@@ -600,6 +602,7 @@ query diagnosisOverview(
         participant_id
         phs_accession
         diagnosis_classification
+        diagnosis_comment
         diagnosis_classification_system
         diagnosis_verification_status
         diagnosis_basis
@@ -1238,6 +1241,13 @@ export const tabContainers = [
       {
         dataField: 'diagnosis_basis',
         header: 'Diagnosis Basis',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'diagnosis_comment',
+        header: 'Diagnosis Comments',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,

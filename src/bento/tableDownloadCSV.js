@@ -81,6 +81,7 @@ query diagnosisOverview($diagnosis_id: [String], $offset: Int = 0, $first: Int =
     diagnosis_classification_system
     diagnosis_verification_status
     diagnosis_basis
+    diagnosis_comment
     disease_phase
     anatomic_site
     age_at_diagnosis
@@ -90,8 +91,8 @@ query diagnosisOverview($diagnosis_id: [String], $offset: Int = 0, $first: Int =
 `;
 
 export const customDiagnosisTabDownloadCSV = {
-  keysToInclude: ['participant_id', 'phs_accession', 'diagnosis_classification', 'diagnosis_classification_system', 'diagnosis_verification_status', 'diagnosis_basis', 'disease_phase', 'anatomic_site', 'age_at_diagnosis', 'vital_status'],
-  header: ['Participant ID', 'Study Accession', 'Diagnosis', 'Diagnosis Classification System', 'Diagnosis Verification Status', 'Diagnosis Basis', 'Disease Phase', 'Anatomic Site', 'Age at Diagnosis (days)', 'Vital Status'],
+  keysToInclude: ['participant_id', 'phs_accession', 'diagnosis_classification', 'diagnosis_classification_system', 'diagnosis_verification_status', 'diagnosis_basis', 'diagnosis_comment', 'disease_phase', 'anatomic_site', 'age_at_diagnosis', 'vital_status'],
+  header: ['Participant ID', 'Study Accession', 'Diagnosis', 'Diagnosis Classification System', 'Diagnosis Verification Status', 'Diagnosis Basis', 'Diagnosis Comments', 'Disease Phase', 'Anatomic Site', 'Age at Diagnosis (days)', 'Vital Status'],
   query: GET_DIAGNOSIS_TAB,
   apiVariable: 'diagnosisOverview',
   fileName: 'tableDownload',

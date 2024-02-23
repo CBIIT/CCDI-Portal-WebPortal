@@ -141,7 +141,7 @@ export default () => ({
     color: '#1F6BBF',
     fontWeight: 600,
   },
-  activeFacetLibrary: {
+  activeFacetSequencinglibrary: {
     color: '#14A773',
     fontWeight: 600,
   },

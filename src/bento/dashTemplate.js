@@ -8,9 +8,9 @@ const DIAGNOSIS = 'Diagnosis';
 // const CASES = 'Cases';
 const SAMPLES = 'Samples';
 const DATACATEGORY = 'Datacategory';
+const SEQUENCINGLIBRARY = 'Sequencinglibrary';
 // const FILES = 'Files';
 const STUDY = 'Study';
-const LIBRARY = 'Library';
 const GROUP = 'group';
 
 // --------------- Facet resetIcon link configuration --------------
@@ -25,6 +25,7 @@ export const resetIcon = {
 
 export const sectionLabel = {
   Datacategory: "Data Category",
+  Sequencinglibrary: 'Sequencing Library',
 };
 
 // --------------- Dashboard Sidebar Sections styling --------------
@@ -49,7 +50,7 @@ export const facetSectionVariables = {
   Study: {
     isExpanded: false,
   },
-  Library: {
+  Sequencinglibrary: {
     isExpanded: false,
   },
   // Files: {
@@ -247,7 +248,7 @@ export const facetsConfig = [
   },
   {
     section: DIAGNOSIS,
-    label: 'Diagnosis Classification',
+    label: 'Diagnosis',
     apiPath: 'participantCountByDiagnosisClassification',
     apiForFiltering: 'filterParticipantCountByDiagnosisClassification',
     datafield: 'diagnosis_classification',
@@ -564,7 +565,7 @@ export const facetsConfig = [
     show: true,
   },
   {
-    section: LIBRARY,
+    section: SEQUENCINGLIBRARY,
     label: 'Library selection',
     apiPath: 'participantCountByLibrarySelection',
     apiForFiltering: 'filterParticipantCountByLibrarySelection',
@@ -575,7 +576,7 @@ export const facetsConfig = [
     show: true,
   },
   {
-    section: LIBRARY,
+    section: SEQUENCINGLIBRARY,
     label: 'Library source',
     apiPath: 'participantCountByLibrarySource',
     apiForFiltering: 'filterParticipantCountByLibrarySource',
@@ -586,7 +587,7 @@ export const facetsConfig = [
     show: true,
   },
   {
-    section: LIBRARY,
+    section: SEQUENCINGLIBRARY,
     label: 'Library strategy',
     apiPath: 'participantCountByLibraryStrategy',
     apiForFiltering: 'filterParticipantCountByLibraryStrategy',

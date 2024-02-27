@@ -1232,7 +1232,7 @@ export const tabContainers = [
       },
       {
         dataField: 'diagnosis_classification',
-        header: 'Diagnosis',
+        header: 'Diagnosis Classification',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
@@ -1524,7 +1524,7 @@ export const tabContainers = [
       },
       {
         dataField: 'sample_diagnosis_classification',
-        header: 'Diagnosis',
+        header: 'Diagnosis Classification',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,

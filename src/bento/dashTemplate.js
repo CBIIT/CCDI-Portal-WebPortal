@@ -248,7 +248,7 @@ export const facetsConfig = [
   },
   {
     section: DIAGNOSIS,
-    label: 'Diagnosis Classification',
+    label: 'Diagnosis',
     apiPath: 'participantCountByDiagnosisClassification',
     apiForFiltering: 'filterParticipantCountByDiagnosisClassification',
     datafield: 'diagnosis_classification',

@@ -9,7 +9,7 @@ import exportIconBlue from '../../assets/icons/Export_Icon.svg';
 import ccdiDataEcosystemImg from '../../assets/resources/MCI_CCDI_Data_Ecosystem.png';
 import MCITable from './components/MCITable';
 import MCISearchTable from './components/MCISearchTable';
-import MCINumberTable from './components/MCINumberTable';
+//import MCINumberTable from './components/MCINumberTable';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import DonutChart from '../../components/common/DonutChart';
 import MapView from '../../components/common/mapGenerator';
@@ -338,12 +338,12 @@ const MCIResourceView = () => {
                                             </>
                                             }
                                             {mciItem.searchTable && <MCISearchTable table={mciItem.searchTable} /> }
-                                            {mciItem.numberTable && 
+                                            {/*mciItem.numberTable && 
                                             <>
                                                 <MCINumberTable table={mciItem.numberTable} />
                                                 <div>{mciItem.numberTable.footer}</div>
                                             </>
-                                            }
+                                            */}
                                         </div>
                                     </div>
                                 )

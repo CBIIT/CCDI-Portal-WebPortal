@@ -337,7 +337,13 @@ const MCIResourceView = () => {
                                             </>
                                             }
                                             {mciItem.searchTable && <MCISearchTable table={mciItem.searchTable} /> }
-
+                                            {/*mciItem.table &&
+                                            <>
+                                                <MCITable table={mciItem.table} />
+                                                <div>{mciItem.table.footer}</div>
+                                            </>
+                                            }
+                                        {mciItem.searchTable && <MCISearchTable table={mciItem.searchTable} /> */}
                                         </div>
                                     </div>
                                 )

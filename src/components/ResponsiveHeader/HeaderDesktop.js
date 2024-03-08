@@ -61,7 +61,7 @@ const USGovBanner = styled.div`
         font-size: 12px;
         font-weight: 400;
         color: #000000;
-        margin-left: 15px;
+    margin-left: 15px;
     }
     .bannerRight {
         width: 50%;

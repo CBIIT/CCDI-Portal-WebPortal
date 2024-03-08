@@ -79,7 +79,7 @@ const USGovBanner = styled.div`
       letter-spacing: 0em;
       text-align: center;
       line-height: 30px;
-        cursor: pointer;
+      cursor: pointer;
     }
   }
 

@@ -60,7 +60,7 @@ const USGovBanner = styled.div`
     font-family: "Open Sans";
         font-size: 12px;
         font-weight: 400;
-        color: #000000;
+    color: #000000;
     margin-left: 15px;
     }
     .bannerRight {

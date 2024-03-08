@@ -46,7 +46,7 @@ const USGovBanner = styled.div`
     }
 
   img {
-      height: 11px;
+    height: 11px;
       width: 16px;
     }
 

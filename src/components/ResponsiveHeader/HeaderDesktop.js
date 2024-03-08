@@ -39,7 +39,7 @@ const USGovBanner = styled.div`
     .USGovBannerInner {
       padding: 8px 32px;
       display: flex;
-      align-items: center;
+    align-items: center;
       height: 100%;
       margin: 0 auto;
       max-width: 1420px;

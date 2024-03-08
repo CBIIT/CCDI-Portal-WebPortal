@@ -52,7 +52,7 @@ const USGovBanner = styled.div`
 
   .bannerLeft {
     width: 50%;
-        text-align: left;
+    text-align: left;
         display: flex;
     align-items: center;
     }

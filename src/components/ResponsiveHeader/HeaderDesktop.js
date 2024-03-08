@@ -40,7 +40,7 @@ const USGovBanner = styled.div`
       padding: 8px 32px;
       display: flex;
     align-items: center;
-      height: 100%;
+    height: 100%;
       margin: 0 auto;
       max-width: 1420px;
     }

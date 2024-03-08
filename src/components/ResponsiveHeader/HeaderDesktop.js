@@ -68,7 +68,7 @@ const USGovBanner = styled.div`
         text-align: right;
     .bannerButton {
       display: inline-block;
-        background-color: #3b7f84;
+      background-color: #3b7f84;
       width: 72px;
         height: 30px;
       border-radius: 5px;

@@ -76,7 +76,7 @@ const USGovBanner = styled.div`
         font-size: 15px;
         font-weight: 700;
         color: white;
-        letter-spacing: 0em;
+      letter-spacing: 0em;
         text-align: center;
         line-height: 30px; 
         cursor: pointer;

@@ -7,8 +7,70 @@ import updateImgMTP2 from '../assets/news/News_MTP_2.png';
 import updateImgMolecularCharacterization from '../assets/news/News_Molecular_Characterization.png';
 import updateImgDashboard from '../assets/news/News_Dashboard.png';
 import updateImgEHR from '../assets/news/News_EHR.png';
+import updateImgC3DC from '../assets/news/News_C3DC.png';
+import updateImgHub from '../assets/news/News_Hub.png';
 
 export const newsList = [
+    {
+        id: 'hub2_03272024',
+        title: 'Latest CCDI Hub release includes exciting new technical changes',
+        date: 'March 27, 2024',
+        slug: 'An updated data model, new visualizations, and additional updates come to the CCDI Hub',
+        highlight: '<p>The CCDI Hub Explore Dashboard is using an updated model: CCDI Data Model version 1.7.2. This allowed for several updates to the dashboard, including greater precision in filtering by participant diagnosis. It also adds two new data visualizations to the Hub’s Molecular Characterization Initiative (MCI) page—a donut chart showing enrollment by diagnosis type, and a bubble chart map of the U.S. depicting the number of MCI participants by state. Also, many other improvements were made to enhance Hub and Explore Dashboard usability.</p>',
+        fullText: '',
+        type: 'Application Update',
+        img: updateImgDashboard,
+    },
+    {
+        id: 'hub_03272024',
+        title: 'CCDI Hub adds almost 30,000 new files in latest release',
+        date: 'March 27, 2024',
+        slug: 'Four new data sets and updates to two data sets are now part of the CCDI Hub',
+        highlight: '<p>The CCDI Hub has added four new data sets and updated two existing data sets (the CCDI Molecular Characterization Initiative and Pediatric Brain Tumor Atlas). In adding these, the Hub gains new data from over 1,600 participants and 3,100 samples, along with 30,000 new files.</p>',
+        fullText: '',
+        type: 'Application Update',
+        img: updateImgHub,
+    },
+    {
+        id: 'ccdc_03132024',
+        title: 'March CCDC release includes updates to five existing resources',
+        date: 'March 13, 2024',
+        slug: 'Latest CCDC release also adds 11 new data sets',
+        highlight: '<p>The March Childhood Cancer Data Catalog (CCDC) release includes 11 new data sets in five existing resources, plus other data updates. Two of these additions were to the Childhood Cancer Data Initiative resource—a project data set, Genomic Analysis in Pediatric Malignancies, and an analytic tool set called Center for Computational Genomic Medicine Analytic Tools.</p>',
+        fullText: '',
+        type: 'Application Update',
+        img: updateImgCCDC2,
+    },
+    {
+        id: 'c3dc_03082024',
+        title: 'CCDI launches new open-access web application',
+        date: 'March 08, 2024',
+        slug: 'Access the Childhood Cancer Clinical Data Commons (C3DC) today',
+        highlight: '<p>Find harmonized childhood cancer demographics and phenotypic clinical data in this new CCDI resource. Use the C3DC to search for participant-level data, create synthetic cohorts, and export data from the Molecular Characterization Initiative and TARGET Neuroblastoma. As the C3DC matures, new childhood cancer data and more functionalities will be added.</p>',
+        fullText: '',
+        type: 'Announcements',
+        img: updateImgC3DC,
+    },
+    {
+        id: 'ccdc_02142024',
+        title: 'Childhood Cancer Data Catalog (CCDC) Release Provides More Resources for Users',
+        date: 'February 14, 2024',
+        slug: 'Find biospecimens or explore a new cohort study database in this recent CCDC update',
+        highlight: '<p>Search for and request available biospecimens collected from cancer treatment trials in NCI’s National Clinical Trials Network (NCTN) with the NCTN Navigator, one of two resources added to the CCDC. The second, the Cancer Epidemiology Descriptive Cohort Database, is a searchable database with general, biospecimen, and other descriptive cohort study information. Along with these resource additions, nine existing resources were updated, including eight new data sets.</p>',
+        fullText: '',
+        type: 'Application Update',
+        img: updateImgCCDC,
+    },
+    {
+        id: 'ccdc_01172024',
+        title: 'Two new resources added to the Childhood Cancer Data Catalog (CCDC)',
+        date: 'January 17, 2024',
+        slug: 'This CCDC release includes a tool to explore genomics data and a platform to help accelerate pediatric drug development.',
+        highlight: '<p>Now part of the CCDC: the cBioPortal for Cancer Genomics, a tool for interactive exploration of genomics data sets that aims to lower barriers to accessing complex genomic data. This release also includes the Innovative Therapies for Children with Cancer Paediatric Preclinical Proof-of-Concept Platform (ITCC-P4). The ITCC-P4 platform, developed through an academic-industry partnership, aims to establish new patient-derived preclinical models of high-risk pediatric tumors and help speed up drug development for childhood cancers.</p>',
+        fullText: '',
+        type: 'Application Update',
+        img: updateImgCCDC2,
+    },
     {
         id: 'ehr_01112024',
         title: 'Respond to our latest RFI on automated EHR data entry and extraction capabilities',

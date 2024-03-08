@@ -45,7 +45,7 @@ const USGovBanner = styled.div`
       max-width: 1420px;
     }
 
-    img {
+  img {
       height: 11px;
       width: 16px;
     }

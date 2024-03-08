@@ -59,7 +59,7 @@ const USGovBanner = styled.div`
   .bannerText {
     font-family: "Open Sans";
     font-size: 12px;
-        font-weight: 400;
+    font-weight: 400;
     color: #000000;
     margin-left: 15px;
     }

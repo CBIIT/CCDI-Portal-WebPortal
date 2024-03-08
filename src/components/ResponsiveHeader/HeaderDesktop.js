@@ -69,7 +69,7 @@ const USGovBanner = styled.div`
     .bannerButton {
       display: inline-block;
         background-color: #3b7f84;
-        width: 72px;
+      width: 72px;
         height: 30px;
       border-radius: 5px;
       font-family: "Open Sans", sans-serif;

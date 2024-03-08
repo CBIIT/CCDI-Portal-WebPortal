@@ -77,7 +77,7 @@ const USGovBanner = styled.div`
         font-weight: 700;
         color: white;
       letter-spacing: 0em;
-        text-align: center;
+      text-align: center;
         line-height: 30px; 
         cursor: pointer;
     }

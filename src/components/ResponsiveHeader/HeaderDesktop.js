@@ -54,7 +54,7 @@ const USGovBanner = styled.div`
         width: 50%;
         text-align: left;
         display: flex;
-        align-items: center;
+    align-items: center;
     }
   .bannerText {
     font-family: "Open Sans";

@@ -95,7 +95,7 @@ const Header = () => {
   return (
     <>
     <USGovBanner>
-        <div className ='USGovBannerInner'>
+        <div className="USGovBannerInner">
           <div className="bannerLeft">
             <img src={USGovBannerData.logo} alt={"US Flag logo"}></img>
             <span className="bannerText">

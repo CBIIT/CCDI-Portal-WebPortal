@@ -50,7 +50,7 @@ const USGovBanner = styled.div`
       width: 16px;
     }
 
-    .bannerLeft {
+  .bannerLeft {
         width: 50%;
         text-align: left;
         display: flex;

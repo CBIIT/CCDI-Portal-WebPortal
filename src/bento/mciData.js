@@ -74,7 +74,7 @@ export const MCIContent = [
                 +' on how to import CDS data. To see a preview of MCI data prior to going through the data authorization process, '
                 +'<a class="link" href="https://datacatalog.ccdi.cancer.gov/dataset/CCDI-MCI" target="_blank" rel="noopener noreferrer">visit MCI’s page</a>'
                 +' in the CCDI Childhood Cancer Data Catalog.</p>'
-                +'<p>For investigators planning to use data from different resources: If you plan to utilize data from institutions that enroll patients in the Molecular Characterization Initiative, be aware that the data available at this site may be identical to the data collected from the submitting clinical sites.</p>',
+                +'<p>For investigators planning to use data from different resources: If you intend to utilize data from institutions that enroll patients in the Molecular Characterization Initiative, please note that the data available on this site may be identical to the data collected from the submitting clinical sites.</p>',
     },
     {
         id: 'type_of_results_exome_sequencing',

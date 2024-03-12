@@ -26,7 +26,7 @@ export const MCIContent = [
         },
         donut: {
             title: 'Enrollment in MCI (APEC14B1-MCI) by Diagnosis Type',
-            data: [{name: 'Central Nervous System', value: 2465}, {name: 'Rare Tumors', value: 308}, {name: 'Soft Tissue Sarcoma', value: 739}],
+            data: [{name: 'Central Nervous System', value: 2461}, {name: 'Rare Tumors', value: 308}, {name: 'Soft Tissue Sarcoma', value: 739}],
         }
     },
     {

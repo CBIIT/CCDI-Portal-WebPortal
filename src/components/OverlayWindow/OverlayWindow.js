@@ -34,19 +34,15 @@ const OverlayWindow = () => {
     }
   }, [open]);
 
-  const content = text.content.map((item) => (
-    <DialogContentText id="alert-dialog-description">
-      {item}
-    </DialogContentText>
+  const content = text.content.map((item, index) => (
+    <DialogContentText key={`${index}`} id="alert-dialog-description">{item}</DialogContentText>
   ));
   const list = text.list.map((item, index) => (
     <ListItem key={`${index}`}>
       <ListItemIcon>
         <FiberManualRecord style={{ fontSize: 8 }} />
       </ListItemIcon>
-      <ListItemText>
-        {item}
-      </ListItemText>
+      <ListItemText>{item}</ListItemText>
     </ListItem>
   ));
 
@@ -60,9 +56,7 @@ const OverlayWindow = () => {
             aria-describedby="alert-dialog-description"
             maxWidth="md"
           >
-            <DialogTitle id="alert-dialog-title">
-              Warning
-            </DialogTitle>
+            <DialogTitle id="alert-dialog-title">{'Warning'}</DialogTitle>
             <Divider />
             <DialogContent>
               {content}
@@ -73,9 +67,7 @@ const OverlayWindow = () => {
             </DialogContent>
             <Divider />
             <DialogActions>
-              <Button onClick={handleClose}>
-                Continue
-              </Button>
+              <Button onClick={handleClose}>{'Continue'}</Button>
             </DialogActions>
           </Dialog>
         </DialogThemeProvider>

@@ -46,7 +46,7 @@ export const newsList = [
         title: 'CCDI launches new open-access web application',
         date: 'March 08, 2024',
         slug: 'Access the Childhood Cancer Clinical Data Commons (C3DC) today',
-        highlight: '<p>Find harmonized childhood cancer demographics and phenotypic clinical data in this new CCDI resource. Use the C3DC to search for participant-level data, create synthetic cohorts, and export data from the Molecular Characterization Initiative and TARGET Neuroblastoma. As the C3DC matures, new childhood cancer data and more functionalities will be added.</p>',
+        highlight: '<p>Find harmonized childhood cancer demographics and phenotypic clinical data in this new CCDI resource. <a href="https://clinicalcommons.ccdi.cancer.gov/" target="_blank" rel="noopener noreferrer">Use the C3DC</a> to search for participant-level data, create synthetic cohorts, and export data from the Molecular Characterization Initiative and TARGET Neuroblastoma. As the C3DC matures, new childhood cancer data and more functionalities will be added.</p>',
         fullText: '',
         type: 'Announcements',
         img: updateImgC3DC,

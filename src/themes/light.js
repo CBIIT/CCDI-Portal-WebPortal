@@ -465,7 +465,7 @@ export default {
     },
     MuiIconButton: {
       root: {
-        padding: '5px',
+        padding: '0px',
       },
     },
     MuiTablePagination: {

@@ -337,6 +337,11 @@ const MCIResourceView = () => {
                                                 <div>{mciItem.table.footer}</div>
                                             </>
                                             }
+                                            {mciItem.annotation && 
+                                            <>
+                                                <p style={{marginTop: "1em"}}>{mciItem.annotation}</p>
+                                            </>
+                                            }
                                             {mciItem.searchTable && <MCISearchTable table={mciItem.searchTable} /> }
                                             {/*mciItem.numberTable && 
                                             <>

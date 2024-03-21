@@ -83,6 +83,11 @@ Applications: [
     name:'National Childhood Cancer Registry Explorer',
     link: 'https://nccrexplorer.ccdi.cancer.gov',
     className: 'navMobileSubItem',
+  },
+  {
+    name:'Federation',
+    link: '/federation',
+    className: 'navMobileSubItem',
   }],
 "Other Resources": [
   {

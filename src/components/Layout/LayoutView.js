@@ -11,7 +11,8 @@ import Search from '../../pages/search/searchView';
 import Inventory from '../../pages/inventory/inventoryController';
 import Cart from '../../pages/cart/cartController';
 import ScrollButton from '../ScrollButton/ScrollButtonView';
-import MCIResourceView from '../../pages/resource/MCIResourceView'
+import MCIResourceView from '../../pages/resource/MCIResourceView';
+import { FederationView } from '../../pages/federation/federationView';
 // import NewsDetail from '../../pages/news/newsDetailView';
 
 const Layout = () => {
@@ -28,6 +29,7 @@ const Layout = () => {
           <Route path="/explore" element={<Inventory />} />
           <Route path="/fileCentricCart" element={<Cart />} />
           <Route path="/MCI" element={<MCIResourceView />} />
+          <Route path="/federation" element={<FederationView />} />
           <Route path="*" element={<Error />} />
         </Routes>
         <Footer />

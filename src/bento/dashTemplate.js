@@ -841,14 +841,14 @@ export const widgetConfig = [
   },
   {
     type: 'donut',
-    title: 'Race',
-    dataName: 'participantCountByRace',
+    title: 'Sex',
+    dataName: 'participantCountBySexAtBirth',
     sliceTitle: 'Participants',
   },
   {
     type: 'donut',
-    title: 'Sex',
-    dataName: 'participantCountBySexAtBirth',
+    title: 'Race',
+    dataName: 'participantCountByRace',
     sliceTitle: 'Participants',
   },
   {

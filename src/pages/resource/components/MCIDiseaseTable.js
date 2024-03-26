@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import DonutChart from '../../../components/common/DonutChart';
 
 const MCITableContainer = styled.div`
-margin: 40px 74px;
+margin: 20px 74px;
 border: 1px solid #BDBDBD;
 
 .mciTableTitle {

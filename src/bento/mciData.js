@@ -27,7 +27,8 @@ export const MCIContent = [
         diseaseTable: {
             title: 'Enrollment in APEC14B1-MCI Study with Diagnosis Breakdown',
             header: ['', 'Diagnosis', 'Number of Participants'],
-            body: [['CCDI-MCI', 2807], ['Lorem ipsum', 365], ['Lorem ipsum', 89], ['Lorem ipsum', 69], ['Lorem ipsum', 54], ['Lorem ipsum', 41], ['Lorem ipsum', 20], ['Lorem ipsum', 14], ['Lorem ipsum', 8], ['Lorem ipsum', 5], ['Lorem ipsum', 1]]
+            body: [['CCDI-MCI', 2807], ['Lorem ipsum', 365], ['Lorem ipsum', 89], ['Lorem ipsum', 69], ['Lorem ipsum', 54], ['Lorem ipsum', 41], ['Lorem ipsum', 20], ['Lorem ipsum', 14], ['Lorem ipsum', 8], ['Lorem ipsum', 5], ['Lorem ipsum', 1]],
+            footer: 'Lorem impsum dolor sit amet, consectutur adipiscing elit'
         },
         diseaseDonut: {
             title: 'Enrollment',

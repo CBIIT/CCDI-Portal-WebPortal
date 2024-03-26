@@ -331,7 +331,12 @@ const MCIResourceView = () => {
                                             </div>
                                             }
                                             {mciItem.map && <MapView />}
-                                            {mciItem.diseaseTable && mciItem.diseaseDonut && <MCIDiseaseTable table={mciItem.diseaseTable} donut={mciItem.diseaseDonut}/>}
+                                            {mciItem.diseaseTable && mciItem.diseaseDonut && 
+                                            <>
+                                                <MCIDiseaseTable table={mciItem.diseaseTable} donut={mciItem.diseaseDonut}/>
+                                                <div>{mciItem.diseaseTable.footer}</div>
+                                            </>
+                                            }
                                             {mciItem.topic.includes('CCDI Data Ecosystem') && <img src={ccdiDataEcosystemImg} alt="CCDI Data Ecosystem"/>}
                                             {mciItem.table &&
                                             <>

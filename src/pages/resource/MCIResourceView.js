@@ -10,6 +10,7 @@ import ccdiDataEcosystemImg from '../../assets/resources/MCI_CCDI_Data_Ecosystem
 import MCITable from './components/MCITable';
 import MCISearchTable from './components/MCISearchTable';
 import MCINumberTable from './components/MCINumberTable';
+import MCIDiseaseTable from './components/MCIDiseaseTable';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import DonutChart from '../../components/common/DonutChart';
 import MapView from '../../components/common/mapGenerator';
@@ -330,6 +331,12 @@ const MCIResourceView = () => {
                                             </div>
                                             }
                                             {mciItem.map && <MapView />}
+                                            {mciItem.diseaseTable && mciItem.diseaseDonut && 
+                                            <>
+                                                <MCIDiseaseTable table={mciItem.diseaseTable} donut={mciItem.diseaseDonut}/>
+                                                <div>{mciItem.diseaseTable.footer}</div>
+                                            </>
+                                            }
                                             {mciItem.topic.includes('CCDI Data Ecosystem') && <img src={ccdiDataEcosystemImg} alt="CCDI Data Ecosystem"/>}
                                             {mciItem.table &&
                                             <>

@@ -524,10 +524,10 @@ const styles = {
     '& > *': {
       marginTop: '10px',
     },
-    '@media (max-width: 500px)': {
-      justifyContent: 'left',
-      paddingLeft: '30px',
-    }
+    // '@media (max-width: 500px)': {
+    //   justifyContent: 'left',
+    //   paddingLeft: '30px',
+    // }
   },
   perPageContainer: {
     fontFamily: 'Poppins',
@@ -537,6 +537,9 @@ const styles = {
     marginTop: '15px',
     '@media (min-width: 500px)': {
       display: 'flex',
+    },
+    '@media (max-width: 767px)': {
+      display: 'none',
     },
   },
   flexPageContainer: {
@@ -721,10 +724,10 @@ const styles = {
     '&:hover': {
       cursor: 'pointer',
     },
-    '@media (max-width: 499px)': {
-      marginTop: '56px',
-      marginLeft: '-68px',
-    }
+    // '@media (max-width: 499px)': {
+    //   marginTop: '56px',
+    //   marginLeft: '-68px',
+    // }
   },
   noticeText: {
     fontFamily: 'Poppins',

@@ -73,10 +73,10 @@ const theme = {
         '&.studyCheckedOdd': {
           backgroundColor: '#CEDEF040',
         },
-        '&.libraryCheckedEven': {
+        '&.sequencinglibraryCheckedEven': {
           backgroundColor: '#95C6B340',
         },
-        '&.libraryCheckedOdd': {
+        '&.sequencinglibraryCheckedOdd': {
           backgroundColor: '#DDEAE540',
         },
       },
@@ -98,7 +98,7 @@ const theme = {
         '&.studyCheckedIcon': {
           color: '#6D5F5B',
         },
-        '&.libraryCheckedIcon': {
+        '&.sequencinglibraryCheckedIcon': {
           color: '#6D5F5B',
         },
       },
@@ -139,7 +139,7 @@ const theme = {
           fontFamily: 'Nunito',
           marginRight: '0px',
         },
-        '&.librarySubjects': {
+        '&.sequencinglibrarySubjects': {
           color: '#14835C',
           fontSize: '12px',
           fontFamily: 'Nunito',

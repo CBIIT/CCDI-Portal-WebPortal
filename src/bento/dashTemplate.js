@@ -8,9 +8,9 @@ const DIAGNOSIS = 'Diagnosis';
 // const CASES = 'Cases';
 const SAMPLES = 'Samples';
 const DATACATEGORY = 'Datacategory';
+const SEQUENCINGLIBRARY = 'Sequencinglibrary';
 // const FILES = 'Files';
 const STUDY = 'Study';
-const LIBRARY = 'Library';
 const GROUP = 'group';
 
 // --------------- Facet resetIcon link configuration --------------
@@ -25,6 +25,7 @@ export const resetIcon = {
 
 export const sectionLabel = {
   Datacategory: "Data Category",
+  Sequencinglibrary: 'Sequencing Library',
 };
 
 // --------------- Dashboard Sidebar Sections styling --------------
@@ -49,7 +50,7 @@ export const facetSectionVariables = {
   Study: {
     isExpanded: false,
   },
-  Library: {
+  Sequencinglibrary: {
     isExpanded: false,
   },
   // Files: {
@@ -60,10 +61,10 @@ export const facetSectionVariables = {
 export const facetsConfig = [
   {
     section: DEMOGRAPHICS,
-    label: 'Gender',
-    apiPath: 'participantCountByGender',
-    apiForFiltering: 'filterParticipantCountByGender',
-    datafield: 'gender',
+    label: 'Sex',
+    apiPath: 'participantCountBySexAtBirth',
+    apiForFiltering: 'filterParticipantCountBySexAtBirth',
+    datafield: 'sex_at_birth',
     field: GROUP,
     type: InputTypes.CHECKBOX,
     sort_type: sortType.ALPHABET,
@@ -247,6 +248,50 @@ export const facetsConfig = [
   },
   {
     section: DIAGNOSIS,
+    label: 'Diagnosis',
+    apiPath: 'participantCountByDiagnosisClassification',
+    apiForFiltering: 'filterParticipantCountByDiagnosisClassification',
+    datafield: 'diagnosis_classification',
+    field: GROUP,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: DIAGNOSIS,
+    label: 'Diagnosis Classification System',
+    apiPath: 'participantCountByDiagnosisClassificationSystem',
+    apiForFiltering: 'filterParticipantCountByDiagnosisClassificationSystem',
+    datafield: 'diagnosis_classification_system',
+    field: GROUP,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: DIAGNOSIS,
+    label: 'Diagnosis Verification Status',
+    apiPath: 'participantCountByDiagnosisVerificationStatus',
+    apiForFiltering: 'filterParticipantCountByDiagnosisVerificationStatus',
+    datafield: 'diagnosis_verification_status',
+    field: GROUP,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: DIAGNOSIS,
+    label: 'Diagnosis Basis',
+    apiPath: 'participantCountByDiagnosisBasis',
+    apiForFiltering: 'filterParticipantCountByDiagnosisBasis',
+    datafield: 'diagnosis_basis',
+    field: GROUP,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: DIAGNOSIS,
     label: 'Disease Phase',
     apiPath: 'participantCountByDiseasePhase',
     apiForFiltering: 'filterParticipantCountByDiseasePhase',
@@ -258,32 +303,10 @@ export const facetsConfig = [
   },
   {
     section: DIAGNOSIS,
-    label: 'Diagnosis (ICD-O)',
-    apiPath: 'participantCountByICDO',
-    apiForFiltering: 'filterParticipantCountByICDO',
-    datafield: 'diagnosis_icd_o',
-    field: GROUP,
-    type: InputTypes.CHECKBOX,
-    sort_type: sortType.ALPHABET,
-    show: true,
-  },
-  {
-    section: DIAGNOSIS,
     label: 'Vital Status',
     apiPath: 'participantCountByVitalStatus',
     apiForFiltering: 'filterParticipantCountByVitalStatus',
     datafield: 'vital_status',
-    field: GROUP,
-    type: InputTypes.CHECKBOX,
-    sort_type: sortType.ALPHABET,
-    show: true,
-  },
-  {
-    section: SAMPLES,
-    label: 'Anatomic site',
-    apiPath: 'participantCountBySampleAnatomicSite',
-    apiForFiltering: 'filterParticipantCountBySampleAnatomicSite',
-    datafield: 'sample_anatomic_site',
     field: GROUP,
     type: InputTypes.CHECKBOX,
     sort_type: sortType.ALPHABET,
@@ -433,6 +456,17 @@ export const facetsConfig = [
   },
   {
     section: SAMPLES,
+    label: 'Anatomic site',
+    apiPath: 'participantCountBySampleAnatomicSite',
+    apiForFiltering: 'filterParticipantCountBySampleAnatomicSite',
+    datafield: 'sample_anatomic_site',
+    field: GROUP,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: SAMPLES,
     label: 'Sample tumor status',
     apiPath: 'participantCountByTumorStatus',
     apiForFiltering: 'filterParticipantCountByTumorStatus',
@@ -531,7 +565,7 @@ export const facetsConfig = [
     show: true,
   },
   {
-    section: LIBRARY,
+    section: SEQUENCINGLIBRARY,
     label: 'Library selection',
     apiPath: 'participantCountByLibrarySelection',
     apiForFiltering: 'filterParticipantCountByLibrarySelection',
@@ -542,7 +576,7 @@ export const facetsConfig = [
     show: true,
   },
   {
-    section: LIBRARY,
+    section: SEQUENCINGLIBRARY,
     label: 'Library source',
     apiPath: 'participantCountByLibrarySource',
     apiForFiltering: 'filterParticipantCountByLibrarySource',
@@ -553,7 +587,7 @@ export const facetsConfig = [
     show: true,
   },
   {
-    section: LIBRARY,
+    section: SEQUENCINGLIBRARY,
     label: 'Library strategy',
     apiPath: 'participantCountByLibraryStrategy',
     apiForFiltering: 'filterParticipantCountByLibraryStrategy',
@@ -794,7 +828,7 @@ export const widgetConfig = [
   },
   {
     type: 'donut',
-    title: 'Diagnosis (ICD-O)',
+    title: 'Diagnosis',
     dataName: 'participantCountByDiagnosis',
     sliceTitle: 'Participants',
   },
@@ -813,8 +847,8 @@ export const widgetConfig = [
   },
   {
     type: 'donut',
-    title: 'Gender',
-    dataName: 'participantCountByGender',
+    title: 'Sex',
+    dataName: 'participantCountBySexAtBirth',
     sliceTitle: 'Participants',
   },
   {

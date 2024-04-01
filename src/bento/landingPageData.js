@@ -41,12 +41,12 @@ export const titleData = {
 
 export const statsData = [
   {
-    num: 253,
+    num: '',
     title: 'Cataloged Datasets',
     detail: 'Childhood Cancer Data Catalog',
   },
   {
-    num: 1862,
+    num: '',
     title: 'Participants',
     detail: 'Molecular Characterization Initiative for Childhood Cancer',
   },
@@ -163,7 +163,7 @@ export const carouselList = [
     img: wheel3,
     mobile: mciMobile,
     content: 'Molecular Characterization Initiative for Childhood Cancer',
-    link: 'https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs002790.v2.p1',
+    link: '/MCI',
   },
   {
     img: wheel4,

@@ -9,7 +9,10 @@ import exportIconBlue from '../../assets/icons/Export_Icon.svg';
 import ccdiDataEcosystemImg from '../../assets/resources/MCI_CCDI_Data_Ecosystem.png';
 import MCITable from './components/MCITable';
 import MCISearchTable from './components/MCISearchTable';
+//import MCINumberTable from './components/MCINumberTable';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import DonutChart from '../../components/common/DonutChart';
+import MapView from '../../components/common/mapGenerator';
 
 const MCIResourceContainer = styled.div`
     width: 100%;
@@ -205,6 +208,26 @@ const MCIResourceBody = styled.div`
             background: url(${exportIconBlue}) right center no-repeat;
         }
     }
+
+    .donutContainer {
+        display: flex;
+    }
+
+    .donutTitleContainer {
+        width: 100%;
+        font-family: Poppins;
+        font-size: 19px;
+        font-weight: 400;
+        line-height: 21px;
+        letter-spacing: 0.02em;
+        text-align: center;
+
+        h4 {
+            width: 400px;
+            margin: 120px 0 0 150px;
+        }
+
+    }
 `;
 
 const MCIResourceView = () => {
@@ -212,7 +235,15 @@ const MCIResourceView = () => {
     const [stickyNavStyle, setStickyNavStyle] = useState('navList');
     const handleScroll = () => {
         const bodyElement = document.getElementById('MCIBody');
-        const footer = document.getElementsByTagName('footer')[0];
+        const footerList = document.getElementsByTagName('footer');
+        let footer;
+        if (window.innerWidth >= 1024) {
+            footer = footerList[0];
+        } else if (window.innerWidth > 767) {
+            footer = footerList[1];
+        } else {
+            footer = footerList[2];
+        }
         const footerToTop = footer.getBoundingClientRect().top;
         const leftNavHeight = document.getElementById('leftNav').offsetHeight;
         const scrolled = document.documentElement.scrollTop;
@@ -258,7 +289,7 @@ const MCIResourceView = () => {
                 <div className='resourceTitle'>
                     Molecular Characterization Initiative
                     <div className='goToSiteButton'>
-                        <a className='goToSiteText' href="https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs002790" target="_blank" rel="noopener noreferrer">Go to site</a>
+                        <a className='goToSiteText' href="https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs002790" target="_blank" rel="noopener noreferrer">Request Access (dbGaP)</a>
                     </div>
                 </div>
             </div>
@@ -286,10 +317,38 @@ const MCIResourceView = () => {
                                         <div id={mciItem.id} className='mciTitle'>{mciItem.topic}</div>
                                         <div className='mciContentContainer'>
                                             {ReactHtmlParser(mciItem.content)}
+                                            {mciItem.donut && 
+                                            <div className='donutContainer'>
+                                                <div className='donutTitleContainer'><h4>{mciItem.donut.title}</h4></div>
+                                                <DonutChart
+                                                    data={mciItem.donut.data}
+                                                    innerRadiusP={65}
+                                                    outerRadiusP={115}
+                                                    paddingSpace={mciItem.donut.length === 1 ? 0 : 0.5}
+                                                    textColor="black"
+                                                />
+                                            </div>
+                                            }
+                                            {mciItem.map && <MapView />}
                                             {mciItem.topic.includes('CCDI Data Ecosystem') && <img src={ccdiDataEcosystemImg} alt="CCDI Data Ecosystem"/>}
-                                            {mciItem.table && <MCITable table={mciItem.table} /> }
+                                            {mciItem.table &&
+                                            <>
+                                                <MCITable table={mciItem.table} />
+                                                <div>{mciItem.table.footer}</div>
+                                            </>
+                                            }
+                                            {mciItem.annotation && 
+                                            <>
+                                                <p style={{marginTop: "1em"}}>{mciItem.annotation}</p>
+                                            </>
+                                            }
                                             {mciItem.searchTable && <MCISearchTable table={mciItem.searchTable} /> }
-                                            {mciItem.content2 && ReactHtmlParser(mciItem.content2)}
+                                            {/*mciItem.numberTable && 
+                                            <>
+                                                <MCINumberTable table={mciItem.numberTable} />
+                                                <div>{mciItem.numberTable.footer}</div>
+                                            </>
+                                            */}
                                         </div>
                                     </div>
                                 )

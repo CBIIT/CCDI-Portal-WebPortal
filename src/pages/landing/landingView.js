@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { introData, titleData, resourcesAppliationsListData, resourcesCloudListData } from '../../bento/landingPageData';
@@ -728,6 +728,11 @@ const ResourcesContainer = styled.div`
 const LandingView = ({
   statsData
 }) => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
+
   return (
     <LandingViewContainer>
       <BackgroundFirst />

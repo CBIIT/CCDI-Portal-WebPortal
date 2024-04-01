@@ -113,13 +113,16 @@ export const tabIndex = [
 export const DASHBOARD_QUERY_NEW = gql`
 query search (          
     $participant_ids: [String],
-    $gender: [String] ,
+    $sex_at_birth: [String] ,
     $race: [String] ,
     $ethnicity: [String] ,
     $age_at_diagnosis: [Int] ,
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
-    $diagnosis_icd_o: [String] ,
+    $diagnosis_classification: [String] ,
+    $diagnosis_classification_system: [String] ,
+    $diagnosis_verification_status: [String] ,
+    $diagnosis_basis: [String] ,
     $vital_status: [String] ,
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
@@ -138,13 +141,16 @@ query search (
 ){
     searchParticipants (          
         participant_ids: $participant_ids,
-        gender: $gender,
+        sex_at_birth: $sex_at_birth,
         race: $race,
         ethnicity: $ethnicity,
         age_at_diagnosis: $age_at_diagnosis,
         diagnosis_anatomic_site: $diagnosis_anatomic_site,
         disease_phase: $disease_phase,
-        diagnosis_icd_o: $diagnosis_icd_o,
+        diagnosis_classification: $diagnosis_classification,
+        diagnosis_classification_system: $diagnosis_classification_system,
+        diagnosis_verification_status: $diagnosis_verification_status,
+        diagnosis_basis: $diagnosis_basis,
         vital_status: $vital_status,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
@@ -183,7 +189,7 @@ query search (
             group
             subjects
         }
-        participantCountByGender {
+        participantCountBySexAtBirth {
             group
             subjects
         }
@@ -219,7 +225,7 @@ query search (
             group
             subjects
         }
-        filterParticipantCountByGender{
+        filterParticipantCountBySexAtBirth{
             group
             subjects
         }
@@ -227,10 +233,22 @@ query search (
             group
             subjects
         }
-        filterParticipantCountByICDO{
+        filterParticipantCountByDiagnosisClassification{
             group
             subjects
         }
+        filterParticipantCountByDiagnosisClassificationSystem{
+            group
+            subjects
+        }
+        filterParticipantCountByDiagnosisVerificationStatus{
+            group
+            subjects
+        }
+        filterParticipantCountByDiagnosisBasis{
+          group
+          subjects
+      }
         filterParticipantCountByInstitution{
             group
             subjects
@@ -292,13 +310,13 @@ query search (
 export const GET_FILES_OVERVIEW_QUERY = gql`
 query fileOverview(
     $participant_ids: [String],
-    $gender: [String] ,
+    $sex_at_birth: [String] ,
     $race: [String] ,
     $ethnicity: [String] ,
     $age_at_diagnosis: [Int] ,
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
-    $diagnosis_icd_o: [String] ,
+    $diagnosis_classification: [String] ,
     $vital_status: [String] ,
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
@@ -320,13 +338,13 @@ query fileOverview(
     $sort_direction: String ){
     fileOverview(
         participant_ids: $participant_ids,
-        gender: $gender,
+        sex_at_birth: $sex_at_birth,
         race: $race,
         ethnicity: $ethnicity,
         age_at_diagnosis: $age_at_diagnosis,
         diagnosis_anatomic_site: $diagnosis_anatomic_site,
         disease_phase: $disease_phase,
-        diagnosis_icd_o: $diagnosis_icd_o,
+        diagnosis_classification: $diagnosis_classification,
         vital_status: $vital_status,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
@@ -366,13 +384,17 @@ query fileOverview(
 export const GET_SAMPLES_OVERVIEW_QUERY = gql`
 query sampleOverview(
     $participant_ids: [String],
-    $gender: [String] ,
+    $sex_at_birth: [String] ,
     $race: [String] ,
     $ethnicity: [String] ,
     $age_at_diagnosis: [Int] ,
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
-    $diagnosis_icd_o: [String] ,
+    $diagnosis_classification: [String] ,
+    $diagnosis_comment: [String],
+    $diagnosis_classification_system: [String] ,
+    $diagnosis_verification_status: [String] ,
+    $diagnosis_basis: [String] ,
     $vital_status: [String] ,
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
@@ -394,13 +416,17 @@ query sampleOverview(
     $sort_direction: String ){
     sampleOverview(
         participant_ids: $participant_ids,
-        gender: $gender,
+        sex_at_birth: $sex_at_birth,
         race: $race,
         ethnicity: $ethnicity,
         age_at_diagnosis: $age_at_diagnosis,
         diagnosis_anatomic_site: $diagnosis_anatomic_site,
         disease_phase: $disease_phase,
-        diagnosis_icd_o: $diagnosis_icd_o,
+        diagnosis_classification: $diagnosis_classification,
+        diagnosis_classification_system: $diagnosis_classification_system,
+        diagnosis_verification_status: $diagnosis_verification_status,
+        diagnosis_basis: $diagnosis_basis,
+        diagnosis_comment: $diagnosis_comment,
         vital_status: $vital_status,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
@@ -427,7 +453,11 @@ query sampleOverview(
         study_id
         anatomic_site
         participant_age_at_collection
-        diagnosis_icd_o
+        sample_diagnosis_classification
+        sample_diagnosis_classification_system
+        sample_diagnosis_verification_status
+        sample_diagnosis_basis
+        sample_diagnosis_comment
         sample_tumor_status
         tumor_classification
     }
@@ -437,13 +467,13 @@ query sampleOverview(
 export const GET_PARTICIPANTS_OVERVIEW_QUERY = gql`
 query participantOverview(
     $participant_ids: [String],
-    $gender: [String] ,
+    $sex_at_birth: [String] ,
     $race: [String] ,
     $ethnicity: [String] ,
     $age_at_diagnosis: [Int] ,
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
-    $diagnosis_icd_o: [String] ,
+    $diagnosis_classification: [String] ,
     $vital_status: [String] ,
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
@@ -465,13 +495,13 @@ query participantOverview(
     $sort_direction: String ){
     participantOverview(
         participant_ids: $participant_ids,
-        gender: $gender,
+        sex_at_birth: $sex_at_birth,
         race: $race,
         ethnicity: $ethnicity,
         age_at_diagnosis: $age_at_diagnosis,
         diagnosis_anatomic_site: $diagnosis_anatomic_site,
         disease_phase: $disease_phase,
-        diagnosis_icd_o: $diagnosis_icd_o,
+        diagnosis_classification: $diagnosis_classification,
         vital_status: $vital_status,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
@@ -497,7 +527,7 @@ query participantOverview(
         phs_accession
         study_id
         race
-        gender
+        sex_at_birth
         ethnicity
         alternate_participant_id
     }
@@ -507,13 +537,17 @@ query participantOverview(
 export const GET_DIAGNOSIS_OVERVIEW_QUERY = gql`
 query diagnosisOverview(
     $participant_ids: [String],
-    $gender: [String] ,
+    $sex_at_birth: [String] ,
     $race: [String] ,
     $ethnicity: [String] ,
     $age_at_diagnosis: [Int] ,
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
-    $diagnosis_icd_o: [String] ,
+    $diagnosis_classification: [String] ,
+    $diagnosis_comment: [String],
+    $diagnosis_classification_system: [String] ,
+    $diagnosis_verification_status: [String] ,
+    $diagnosis_basis: [String] ,
     $vital_status: [String] ,
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
@@ -535,13 +569,17 @@ query diagnosisOverview(
     $sort_direction: String ){
       diagnosisOverview(
         participant_ids: $participant_ids,
-        gender: $gender,
+        sex_at_birth: $sex_at_birth,
         race: $race,
         ethnicity: $ethnicity,
         age_at_diagnosis: $age_at_diagnosis,
         diagnosis_anatomic_site: $diagnosis_anatomic_site,
         disease_phase: $disease_phase,
-        diagnosis_icd_o: $diagnosis_icd_o,
+        diagnosis_classification: $diagnosis_classification,
+        diagnosis_comment: $diagnosis_comment,
+        diagnosis_classification_system: $diagnosis_classification_system,
+        diagnosis_verification_status: $diagnosis_verification_status,
+        diagnosis_basis: $diagnosis_basis,
         vital_status: $vital_status,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
@@ -566,7 +604,11 @@ query diagnosisOverview(
         diagnosis_id
         participant_id
         phs_accession
-        diagnosis_icd_o
+        diagnosis_classification
+        diagnosis_comment
+        diagnosis_classification_system
+        diagnosis_verification_status
+        diagnosis_basis
         disease_phase
         anatomic_site
         age_at_diagnosis
@@ -579,13 +621,13 @@ query diagnosisOverview(
 export const GET_STUDY_OVERVIEW_QUERY = gql`
 query studyOverview(
     $participant_ids: [String],
-    $gender: [String] ,
+    $sex_at_birth: [String] ,
     $race: [String] ,
     $ethnicity: [String] ,
     $age_at_diagnosis: [Int] ,
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
-    $diagnosis_icd_o: [String] ,
+    $diagnosis_classification: [String] ,
     $vital_status: [String] ,
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
@@ -607,13 +649,13 @@ query studyOverview(
     $sort_direction: String ){
     studyOverview(
         participant_ids: $participant_ids,
-        gender: $gender,
+        sex_at_birth: $sex_at_birth,
         race: $race,
         ethnicity: $ethnicity,
         age_at_diagnosis: $age_at_diagnosis,
         diagnosis_anatomic_site: $diagnosis_anatomic_site,
         disease_phase: $disease_phase,
-        diagnosis_icd_o: $diagnosis_icd_o,
+        diagnosis_classification: $diagnosis_classification,
         vital_status: $vital_status,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
@@ -703,13 +745,13 @@ query search (
 export const GET_ALL_FILEIDS_FROM_PARTICIPANTSTAB_FOR_ADD_ALL_CART = gql`
 query participantsAddAllToCart(
     $participant_ids: [String],
-    $gender: [String] ,
+    $sex_at_birth: [String] ,
     $race: [String] ,
     $ethnicity: [String] ,
     $age_at_diagnosis: [Int] ,
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
-    $diagnosis_icd_o: [String] ,
+    $diagnosis_classification: [String] ,
     $vital_status: [String] ,
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
@@ -732,13 +774,13 @@ query participantsAddAllToCart(
   ){
     participantOverview(
       participant_ids: $participant_ids,
-      gender: $gender,
+      sex_at_birth: $sex_at_birth,
       race: $race,
       ethnicity: $ethnicity,
       age_at_diagnosis: $age_at_diagnosis,
       diagnosis_anatomic_site: $diagnosis_anatomic_site,
       disease_phase: $disease_phase,
-      diagnosis_icd_o: $diagnosis_icd_o,
+      diagnosis_classification: $diagnosis_classification,
       vital_status: $vital_status,
       sample_anatomic_site: $sample_anatomic_site,
       participant_age_at_collection: $participant_age_at_collection,
@@ -767,13 +809,17 @@ query participantsAddAllToCart(
 export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
     query samplesAddAllToCart(
       $participant_ids: [String],
-      $gender: [String] ,
+      $sex_at_birth: [String] ,
       $race: [String] ,
       $ethnicity: [String] ,
       $age_at_diagnosis: [Int] ,
       $diagnosis_anatomic_site: [String] ,
       $disease_phase: [String] ,
-      $diagnosis_icd_o: [String] ,
+      $diagnosis_classification: [String] ,
+      $diagnosis_classification_system: [String] ,
+      $diagnosis_verification_status: [String] ,
+      $diagnosis_basis: [String] ,
+      $diagnosis_comment: [String] ,
       $vital_status: [String] ,
       $sample_anatomic_site: [String] ,
       $participant_age_at_collection: [Int] ,
@@ -795,13 +841,17 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
       $sort_direction: String = "asc" ){
       sampleOverview(
           participant_ids: $participant_ids,
-          gender: $gender,
+          sex_at_birth: $sex_at_birth,
           race: $race,
           ethnicity: $ethnicity,
           age_at_diagnosis: $age_at_diagnosis,
           diagnosis_anatomic_site: $diagnosis_anatomic_site,
           disease_phase: $disease_phase,
-          diagnosis_icd_o: $diagnosis_icd_o,
+          diagnosis_classification: $diagnosis_classification,
+          diagnosis_classification_system: $diagnosis_classification_system,
+          diagnosis_verification_status: $diagnosis_verification_status,
+          diagnosis_basis: $diagnosis_basis,
+          diagnosis_comment: $diagnosis_comment,
           vital_status: $vital_status,
           sample_anatomic_site: $sample_anatomic_site,
           participant_age_at_collection: $participant_age_at_collection,
@@ -830,13 +880,13 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
 export const GET_ALL_FILEIDS_FROM_FILESTAB_FOR_ADD_ALL_CART = gql`
 query fileAddAllToCart(
   $participant_ids: [String],
-  $gender: [String] ,
+  $sex_at_birth: [String] ,
   $race: [String] ,
   $ethnicity: [String] ,
   $age_at_diagnosis: [Int] ,
   $diagnosis_anatomic_site: [String] ,
   $disease_phase: [String] ,
-  $diagnosis_icd_o: [String] ,
+  $diagnosis_classification: [String] ,
   $vital_status: [String] ,
   $sample_anatomic_site: [String] ,
   $participant_age_at_collection: [Int] ,
@@ -859,13 +909,13 @@ query fileAddAllToCart(
  ){
   fileOverview(
       participant_ids: $participant_ids,
-      gender: $gender,
+      sex_at_birth: $sex_at_birth,
       race: $race,
       ethnicity: $ethnicity,
       age_at_diagnosis: $age_at_diagnosis,
       diagnosis_anatomic_site: $diagnosis_anatomic_site,
       disease_phase: $disease_phase,
-      diagnosis_icd_o: $diagnosis_icd_o,
+      diagnosis_classification: $diagnosis_classification,
       vital_status: $vital_status,
       sample_anatomic_site: $sample_anatomic_site,
       participant_age_at_collection: $participant_age_at_collection,
@@ -894,13 +944,17 @@ query fileAddAllToCart(
 export const GET_ALL_FILEIDS_FROM_DIAGNOSISTAB_FOR_ADD_ALL_CART = gql`
 query diagnosisAddAllToCart(
   $participant_ids: [String],
-  $gender: [String] ,
+  $sex_at_birth: [String] ,
   $race: [String] ,
   $ethnicity: [String] ,
   $age_at_diagnosis: [Int] ,
   $diagnosis_anatomic_site: [String] ,
   $disease_phase: [String] ,
-  $diagnosis_icd_o: [String] ,
+  $diagnosis_classification: [String] ,
+  $diagnosis_classification_system: [String] ,
+  $diagnosis_verification_status: [String] ,
+  $diagnosis_basis: [String] ,
+  $diagnosis_comment: [String],
   $vital_status: [String] ,
   $sample_anatomic_site: [String] ,
   $participant_age_at_collection: [Int] ,
@@ -922,13 +976,17 @@ query diagnosisAddAllToCart(
   $sort_direction: String = "asc" ){
   diagnosisOverview(
       participant_ids: $participant_ids,
-      gender: $gender,
+      sex_at_birth: $sex_at_birth,
       race: $race,
       ethnicity: $ethnicity,
       age_at_diagnosis: $age_at_diagnosis,
       diagnosis_anatomic_site: $diagnosis_anatomic_site,
       disease_phase: $disease_phase,
-      diagnosis_icd_o: $diagnosis_icd_o,
+      diagnosis_classification: $diagnosis_classification,
+      diagnosis_classification_system: $diagnosis_classification_system,
+      diagnosis_verification_status: $diagnosis_verification_status,
+      diagnosis_basis: $diagnosis_basis,
+      diagnosis_comment: $diagnosis_comment,
       vital_status: $vital_status,
       sample_anatomic_site: $sample_anatomic_site,
       participant_age_at_collection: $participant_age_at_collection,
@@ -957,13 +1015,13 @@ query diagnosisAddAllToCart(
 export const GET_ALL_FILEIDS_FROM_STUDYTAB_FOR_ADD_ALL_CART = gql`
 query studyAddAllToCart(
   $participant_ids: [String],
-  $gender: [String] ,
+  $sex_at_birth: [String] ,
   $race: [String] ,
   $ethnicity: [String] ,
   $age_at_diagnosis: [Int] ,
   $diagnosis_anatomic_site: [String] ,
   $disease_phase: [String] ,
-  $diagnosis_icd_o: [String] ,
+  $diagnosis_classification: [String] ,
   $vital_status: [String] ,
   $sample_anatomic_site: [String] ,
   $participant_age_at_collection: [Int] ,
@@ -985,13 +1043,13 @@ query studyAddAllToCart(
   $sort_direction: String = "asc" ){
   studyOverview(
       participant_ids: $participant_ids,
-      gender: $gender,
+      sex_at_birth: $sex_at_birth,
       race: $race,
       ethnicity: $ethnicity,
       age_at_diagnosis: $age_at_diagnosis,
       diagnosis_anatomic_site: $diagnosis_anatomic_site,
       disease_phase: $disease_phase,
-      diagnosis_icd_o: $diagnosis_icd_o,
+      diagnosis_classification: $diagnosis_classification,
       vital_status: $vital_status,
       sample_anatomic_site: $sample_anatomic_site,
       participant_age_at_collection: $participant_age_at_collection,
@@ -1095,8 +1153,8 @@ export const tabContainers = [
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'gender',
-        header: 'Gender',
+        dataField: 'sex_at_birth',
+        header: 'Sex',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
@@ -1173,8 +1231,36 @@ export const tabContainers = [
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'diagnosis_icd_o',
-        header: 'Diagnosis (ICD-O)',
+        dataField: 'diagnosis_classification',
+        header: 'Diagnosis',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'diagnosis_classification_system',
+        header: 'Diagnosis Classification System',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'diagnosis_verification_status',
+        header: 'Diagnosis Verification Status',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'diagnosis_basis',
+        header: 'Diagnosis Basis',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'diagnosis_comment',
+        header: 'Diagnosis Comment',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
@@ -1437,8 +1523,36 @@ export const tabContainers = [
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'diagnosis_icd_o',
-        header: 'Sample ICD-O Morphology',
+        dataField: 'sample_diagnosis_classification',
+        header: 'Diagnosis',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'sample_diagnosis_classification_system',
+        header: 'Diagnosis Classification System',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'sample_diagnosis_verification_status',
+        header: 'Diagnosis Verification Status',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'sample_diagnosis_basis',
+        header: 'Diagnosis Basis',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'sample_diagnosis_comment',
+        header: 'Diagnosis Comment',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,

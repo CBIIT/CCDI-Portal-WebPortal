@@ -39,7 +39,7 @@ const MapView = () => {
           geoIndex: 0,
           zlevel: 1,
           symbolSize: function (params) {
-            return Math.log(params[3]) * 4
+            return params[3] > 0 ? Math.max(Math.log(params[3]) * 5, 10) : 0
           },
           itemStyle: {
             color: '#187C85',
@@ -49,55 +49,55 @@ const MapView = () => {
             tooltip: 2
           },
           data: [ 
-            [110, 540, "ALASKA", 126], //AK
-            [638, 420, "ALABAMA", 174], //AL
-            [550, 390, "ARKANSAS", 56], //AR
-            [240, 430, "ARIZONA", 203], //AZ
-            [100, 280, "CALIFORNIA", 1649], //CA
-            [320, 290, "COLORADO", 175], //CO
-            [834, 228, "CONNECTICUT", 208], //CT
-            [790, 305, "DISTRICT OF COLUMBIA", 169], //DC
+            [110, 540, "ALASKA", 1], //AK
+            [638, 420, "ALABAMA", 66], //AL
+            [550, 390, "ARKANSAS", 9], //AR
+            [240, 430, "ARIZONA", 50], //AZ
+            [100, 280, "CALIFORNIA", 254], //CA
+            [320, 290, "COLORADO", 19], //CO
+            [834, 228, "CONNECTICUT", 31], //CT
+            [790, 305, "DISTRICT OF COLUMBIA", 21], //DC
             [810, 290, "DELEWARE", 35], //DE
-            [735, 500, "FLORIDA", 1402], //FL
-            [720, 450, "GEORGIA", 336], //GA
-            [340, 630, "HAWAII", 165], //HI
-            [505, 250, "IOWA", 231], //IA
-            [240, 220, "IDAHO", 74], //ID
-            [600, 320, "ILLINOIS", 702], //IL
-            [638, 285, "INDIANA", 98], //IN
-            [490, 330, "KANSAS", 119], //KS
-            [670, 330, "KENTUCKY", 118], //KY
-            [550, 460, "LOUISIANA", 178], //LA
-            [840, 208, "MASSACHUSETTS", 310], //MA
-            [785, 288, "MARYLAND", 367], //MD
-            [860, 120, "MAINE", 124], //ME
-            [645, 210, "MICHIGAN", 426], //MI
-            [515, 150, "MINNESOTA", 313], //MN
-            [530, 310, "MISSOURI", 416], //MO
-            [600, 420, "MISSISSIPPI", 102], //MS
-            [785, 355, "NORTH CAROLINA", 593], //NC
-            [440, 135, "NORTH DAKOTA", 39], //ND
-            [460, 285, "NEBRASKA", 138], //NE
-            [843, 185, "NEW HAMPSHIRE", 92], //NH
-            [815, 265, "NEW JERSEY", 709], //NJ
-            [330, 430, "NEW MEXICO", 224], //NM
-            [160, 260, "NEVADA", 132], //NV
-            [795, 190, "NEW YORK", 1248], //NY
-            [690, 300, "OHIO", 443], //OH
-            [490, 410, "OKLAHOMA", 185], //OK
-            [150, 200, "OREGON", 161], //OR
-            [780, 245, "PENNSYLVANIA", 490], //PA
-            [853, 222, "RHODE ISLAND", 115], //RI
-            [720, 395, "SOUTH CAROLINA", 195], //SC
-            [410, 195, "SOUTH DAKOTA", 114], //SD
-            [675, 370, "TENNESSEE", 317], //TN
-            [480, 490, "TEXAS", 1355], //TX
-            [240, 275, "UTAH", 114], //UT
-            [765, 310, "VIRGINIA", 533], //VA
-            [825, 170, "VERMONT", 110], //VT
-            [150, 100, "WASHINGTON", 346], //WA
-            [570, 190, "WISCONSIN", 320], //WI
-            [720, 330, "WEST VIRGINIA", 245], //WV
+            [735, 500, "FLORIDA", 203], //FL
+            [720, 450, "GEORGIA", 105], //GA
+            [340, 630, "HAWAII", 8], //HI
+            [505, 250, "IOWA", 55], //IA
+            [240, 220, "IDAHO", 26], //ID
+            [600, 320, "ILLINOIS", 63], //IL
+            [638, 285, "INDIANA", 70], //IN
+            [490, 330, "KANSAS", 0], //KS
+            [670, 330, "KENTUCKY", 29], //KY
+            [550, 460, "LOUISIANA", 30], //LA
+            [840, 208, "MASSACHUSETTS", 27], //MA
+            [785, 288, "MARYLAND", 51], //MD
+            [860, 120, "MAINE", 14], //ME
+            [645, 210, "MICHIGAN", 118], //MI
+            [515, 150, "MINNESOTA", 103], //MN
+            [530, 310, "MISSOURI", 77], //MO
+            [600, 420, "MISSISSIPPI", 30], //MS
+            [785, 355, "NORTH CAROLINA", 100], //NC
+            [440, 135, "NORTH DAKOTA", 7], //ND
+            [460, 285, "NEBRASKA", 35], //NE
+            [843, 185, "NEW HAMPSHIRE", 4], //NH
+            [815, 265, "NEW JERSEY", 43], //NJ
+            [330, 430, "NEW MEXICO", 30], //NM
+            [160, 260, "NEVADA", 3], //NV
+            [795, 190, "NEW YORK", 202], //NY
+            [690, 300, "OHIO", 167], //OH
+            [490, 410, "OKLAHOMA", 48], //OK
+            [150, 200, "OREGON", 24], //OR
+            [780, 245, "PENNSYLVANIA", 125], //PA
+            [853, 222, "RHODE ISLAND", 25], //RI
+            [720, 395, "SOUTH CAROLINA", 42], //SC
+            [410, 195, "SOUTH DAKOTA", 6], //SD
+            [675, 370, "TENNESSEE", 69], //TN
+            [480, 490, "TEXAS", 388], //TX
+            [240, 275, "UTAH", 53], //UT
+            [765, 310, "VIRGINIA", 59], //VA
+            [825, 170, "VERMONT", 16], //VT
+            [150, 100, "WASHINGTON", 169], //WA
+            [570, 190, "WISCONSIN", 108], //WI
+            [720, 330, "WEST VIRGINIA", 5], //WV
           ],
           symbolKeepAspect: true,
         }

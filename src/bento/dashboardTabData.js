@@ -1238,6 +1238,13 @@ export const tabContainers = [
         role: cellTypes.DISPLAY,
       },
       {
+        dataField: 'anatomic_site',
+        header: 'Diagnosis Anatomic Site',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
         dataField: 'diagnosis_classification_system',
         header: 'Diagnosis Classification System',
         display: true,
@@ -1268,13 +1275,6 @@ export const tabContainers = [
       {
         dataField: 'disease_phase',
         header: 'Disease Phase',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'anatomic_site',
-        header: 'Anatomic Site',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
@@ -1502,14 +1502,14 @@ export const tabContainers = [
       },
       {
         dataField: 'anatomic_site',
-        header: 'Anatomic Site',
+        header: 'Sample Anatomic Site',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
       },
       {
         dataField: 'participant_age_at_collection',
-        header: 'Age at Sample Collection',
+        header: 'Age at Sample Collection (days)',
         display: true,
         tooltipText: 'sort',
         cellType: cellTypes.CUSTOM_ELEM,

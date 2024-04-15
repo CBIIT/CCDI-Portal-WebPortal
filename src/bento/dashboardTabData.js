@@ -1185,7 +1185,7 @@ export const tabContainers = [
     tableID: 'participant_tab_table',
     tableDownloadCSV: customParticipantsTabDownloadCSV,
     tabIndex: '0',
-    downloadFileName: 'CCDI Inventory Participants Download',
+    downloadFileName: 'CCDI Hub Participants Download',
     tableMsg: {
       noMatch: 'No Matching Records Found',
     },
@@ -1307,7 +1307,7 @@ export const tabContainers = [
     tabIndex: '3',
     selectableRows: true,
     tableDownloadCSV: customDiagnosisTabDownloadCSV,
-    downloadFileName: 'CCDI Inventory Diagnosis Download',
+    downloadFileName: 'CCDI Hub Diagnosis Download',
     tableMsg: {
       noMatch: 'No Matching Records Found',
     },
@@ -1431,7 +1431,7 @@ export const tabContainers = [
     tabIndex: '4',
     selectableRows: true,
     tableDownloadCSV: customStudyTabDownloadCSV,
-    downloadFileName: 'CCDI Inventory Studies Download',
+    downloadFileName: 'CCDI Hub Studies Download',
     tableMsg: {
       noMatch: 'No Matching Records Found',
     },
@@ -1576,7 +1576,7 @@ export const tabContainers = [
     tableID: 'sample_tab_table',
     tabIndex: '1',
     tableDownloadCSV: customSamplesTabDownloadCSV,
-    downloadFileName: 'CCDI Inventory Samples Download',
+    downloadFileName: 'CCDI Hub Samples Download',
     tableMsg: {
       noMatch: 'No Matching Records Found',
     },
@@ -1685,7 +1685,7 @@ export const tabContainers = [
     tabIndex: '2',
     selectableRows: true,
     tableDownloadCSV: customFilesTabDownloadCSV,
-    downloadFileName: 'CCDI Inventory Files Download',
+    downloadFileName: 'CCDI Hub Files Download',
     tableMsg: {
       noMatch: 'No Matching Records Found',
     },

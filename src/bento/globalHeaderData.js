@@ -3,6 +3,7 @@ import LogoSmall from '../assets/header/Portal_Logo_Small.svg';
 import searchbarIcon from '../assets/header/Search_Icon.svg';
 import cartLogo from '../assets/header/Cart_Logo.svg';
 import usFlagSmall from "../assets/header/us_flag_small.png";
+import dataAccessPDF from "../assets/about/CCDI_CGC_Data_Access_Instructions_2.0.pdf";
 
 // globalHeaderLogo image 468x100
 // globalHeaderImage: image 2200x100
@@ -48,7 +49,7 @@ export const navMobileList = [
   {
       name: 'About',
       link: '/about',
-      className: 'navMobileItem',
+      className: 'navMobileItem clickable',
   },
   {
     name: 'My File',
@@ -105,6 +106,18 @@ Applications: [
     link: 'https://www.ncbi.nlm.nih.gov/gap',
     className: 'navMobileSubItem',
   }],
+  "About": [
+    {
+      name: 'About',
+      link: '/about',
+      className: 'navMobileSubItem',
+    },
+    {
+      name: 'Accessing CCDI Data (PDF)',
+      link: dataAccessPDF,
+      className: 'navMobileSubItem',
+    }
+  ]
 };
 
 export const navBarCartData = {

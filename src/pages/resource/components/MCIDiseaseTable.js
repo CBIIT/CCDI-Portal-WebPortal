@@ -24,7 +24,7 @@ border: 1px solid #BDBDBD;
 
 .mciTableHeaderList {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 33.33% 33.33% 33.33%;
 }
 
 .mciTableHeaderListItem {
@@ -54,12 +54,11 @@ border: 1px solid #BDBDBD;
 }
 
 .mciTableDonut {
-    width: 33.33%
+    width: 33.2%
 }
 
 .mciTableBodyList {
     width: 66.66%
-    overflow: scroll;
     overflow-x: hidden;
     display: grid;
     grid-template-columns: repeat(2, 1fr);

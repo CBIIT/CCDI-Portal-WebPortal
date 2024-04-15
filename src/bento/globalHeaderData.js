@@ -116,8 +116,7 @@ Applications: [
       name: 'Accessing CCDI Data (PDF)',
       link: dataAccessPDF,
       className: 'navMobileSubItem',
-    }
-  ]
+  }],
 };
 
 export const navBarCartData = {

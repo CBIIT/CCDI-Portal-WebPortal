@@ -108,7 +108,7 @@ Applications: [
   }],
   "About": [
     {
-      name: 'About',
+      name: 'About CCDI Hub',
       link: '/about',
       className: 'navMobileSubItem',
     },

@@ -10,7 +10,7 @@ RUN NODE_OPTIONS="--max-old-space-size=4096" npm ci
 RUN NODE_OPTIONS="--max-old-space-size=4096" npm run build --silent
 
 # FROM nginx:1.23.3-alpine
-FROM nginx:1.25.2
+FROM nginx:1.25.5
 
 RUN apt-get update && apt-get -y upgrade
 

@@ -10,9 +10,9 @@ RUN NODE_OPTIONS="--max-old-space-size=4096" npm ci
 RUN NODE_OPTIONS="--max-old-space-size=4096" npm run build --silent
 
 # FROM nginx:1.23.3-alpine
-FROM nginx:1.25.5
-
-RUN apt-get update && apt-get -y upgrade
+#FROM nginx:1.25.5
+FROM nginx:1.25.5-alpine-slim
+#RUN apt-get update && apt-get -y upgrade
 
 COPY --from=build /usr/src/app/dist /usr/share/nginx/html
 COPY --from=build /usr/src/app/config/inject.template.js /usr/share/nginx/html/inject.template.js

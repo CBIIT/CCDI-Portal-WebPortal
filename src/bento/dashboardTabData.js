@@ -353,6 +353,9 @@ query fileOverview(
         file_id
         guid
         md5sum
+        library_selection
+        library_source
+        library_strategy
     }
 }
 `;
@@ -1597,6 +1600,27 @@ export const tabContainers = [
       {
         dataField: 'md5sum',
         header: 'MD5sum',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'library_selection',
+        header: 'Library Selection',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'library_source',
+        header: 'Library Source',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'library_strategy',
+        header: 'Library Strategy',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,

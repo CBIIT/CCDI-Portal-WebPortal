@@ -131,9 +131,6 @@ query search (
     $assay_method: [String],
     $file_type: [String],
     $phs_accession: [String],
-    $grant_id: [String],
-    $institution: [String],
-    $study_acronym: [String],
     $study_short_title: [String],
     $library_selection: [String],
     $library_source: [String],
@@ -159,9 +156,6 @@ query search (
         assay_method: $assay_method,
         file_type: $file_type,
         phs_accession: $phs_accession,       
-        grant_id: $grant_id,
-        institution: $institution,
-        study_acronym: $study_acronym,
         study_short_title: $study_short_title,
         library_selection: $library_selection,
         library_source: $library_source,
@@ -201,10 +195,6 @@ query search (
             group
             subjects
         }
-        filterParticipantCountByAcronym {
-            group
-            subjects
-        }
         filterParticipantCountByAssayMethod{
             group
             subjects
@@ -229,10 +219,6 @@ query search (
             group
             subjects
         }
-        filterParticipantCountByGrantID{
-            group
-            subjects
-        }
         filterParticipantCountByDiagnosisClassification{
             group
             subjects
@@ -249,10 +235,6 @@ query search (
           group
           subjects
       }
-        filterParticipantCountByInstitution{
-            group
-            subjects
-        }
         filterParticipantCountByLibrarySelection{
             group
             subjects
@@ -325,9 +307,6 @@ query fileOverview(
     $assay_method: [String],
     $file_type: [String],
     $phs_accession: [String],
-    $grant_id: [String],
-    $institution: [String],
-    $study_acronym: [String],
     $study_short_title: [String],
     $library_selection: [String],
     $library_source: [String],
@@ -353,9 +332,6 @@ query fileOverview(
         assay_method: $assay_method,
         file_type: $file_type,
         phs_accession: $phs_accession,       
-        grant_id: $grant_id,
-        institution: $institution,
-        study_acronym: $study_acronym,
         study_short_title: $study_short_title,
         library_selection: $library_selection,
         library_source: $library_source,
@@ -403,9 +379,6 @@ query sampleOverview(
     $assay_method: [String],
     $file_type: [String],
     $phs_accession: [String],
-    $grant_id: [String],
-    $institution: [String],
-    $study_acronym: [String],
     $study_short_title: [String],
     $library_selection: [String],
     $library_source: [String],
@@ -435,9 +408,6 @@ query sampleOverview(
         assay_method: $assay_method,
         file_type: $file_type,
         phs_accession: $phs_accession,       
-        grant_id: $grant_id,
-        institution: $institution,
-        study_acronym: $study_acronym,
         study_short_title: $study_short_title,
         library_selection: $library_selection,
         library_source: $library_source,
@@ -482,9 +452,6 @@ query participantOverview(
     $assay_method: [String],
     $file_type: [String],
     $phs_accession: [String],
-    $grant_id: [String],
-    $institution: [String],
-    $study_acronym: [String],
     $study_short_title: [String],
     $library_selection: [String],
     $library_source: [String],
@@ -510,9 +477,6 @@ query participantOverview(
         assay_method: $assay_method,
         file_type: $file_type,
         phs_accession: $phs_accession,       
-        grant_id: $grant_id,
-        institution: $institution,
-        study_acronym: $study_acronym,
         study_short_title: $study_short_title,
         library_selection: $library_selection,
         library_source: $library_source,
@@ -556,9 +520,6 @@ query diagnosisOverview(
     $assay_method: [String],
     $file_type: [String],
     $phs_accession: [String],
-    $grant_id: [String],
-    $institution: [String],
-    $study_acronym: [String],
     $study_short_title: [String],
     $library_selection: [String],
     $library_source: [String],
@@ -588,9 +549,6 @@ query diagnosisOverview(
         assay_method: $assay_method,
         file_type: $file_type,
         phs_accession: $phs_accession,       
-        grant_id: $grant_id,
-        institution: $institution,
-        study_acronym: $study_acronym,
         study_short_title: $study_short_title,
         library_selection: $library_selection,
         library_source: $library_source,
@@ -636,9 +594,6 @@ query studyOverview(
     $assay_method: [String],
     $file_type: [String],
     $phs_accession: [String],
-    $grant_id: [String],
-    $institution: [String],
-    $study_acronym: [String],
     $study_short_title: [String],
     $library_selection: [String],
     $library_source: [String],
@@ -664,9 +619,6 @@ query studyOverview(
         assay_method: $assay_method,
         file_type: $file_type,
         phs_accession: $phs_accession,       
-        grant_id: $grant_id,
-        institution: $institution,
-        study_acronym: $study_acronym,
         study_short_title: $study_short_title,
         library_selection: $library_selection,
         library_source: $library_source,
@@ -760,9 +712,6 @@ query participantsAddAllToCart(
     $assay_method: [String],
     $file_type: [String],
     $phs_accession: [String],
-    $grant_id: [String],
-    $institution: [String],
-    $study_acronym: [String],
     $study_short_title: [String],
     $library_selection: [String],
     $library_source: [String],
@@ -789,9 +738,6 @@ query participantsAddAllToCart(
       assay_method: $assay_method,
       file_type: $file_type,
       phs_accession: $phs_accession,       
-      grant_id: $grant_id,
-      institution: $institution,
-      study_acronym: $study_acronym,
       study_short_title: $study_short_title,
       library_selection: $library_selection,
       library_source: $library_source,
@@ -828,9 +774,6 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
       $assay_method: [String],
       $file_type: [String],
       $phs_accession: [String],
-      $grant_id: [String],
-      $institution: [String],
-      $study_acronym: [String],
       $study_short_title: [String],
       $library_selection: [String],
       $library_source: [String],
@@ -860,9 +803,6 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
           assay_method: $assay_method,
           file_type: $file_type,
           phs_accession: $phs_accession,       
-          grant_id: $grant_id,
-          institution: $institution,
-          study_acronym: $study_acronym,
           study_short_title: $study_short_title,
           library_selection: $library_selection,
           library_source: $library_source,
@@ -895,9 +835,6 @@ query fileAddAllToCart(
   $assay_method: [String],
   $file_type: [String],
   $phs_accession: [String],
-  $grant_id: [String],
-  $institution: [String],
-  $study_acronym: [String],
   $study_short_title: [String],
   $library_selection: [String],
   $library_source: [String],
@@ -924,9 +861,6 @@ query fileAddAllToCart(
       assay_method: $assay_method,
       file_type: $file_type,
       phs_accession: $phs_accession,       
-      grant_id: $grant_id,
-      institution: $institution,
-      study_acronym: $study_acronym,
       study_short_title: $study_short_title,
       library_selection: $library_selection,
       library_source: $library_source,
@@ -963,9 +897,6 @@ query diagnosisAddAllToCart(
   $assay_method: [String],
   $file_type: [String],
   $phs_accession: [String],
-  $grant_id: [String],
-  $institution: [String],
-  $study_acronym: [String],
   $study_short_title: [String],
   $library_selection: [String],
   $library_source: [String],
@@ -995,9 +926,6 @@ query diagnosisAddAllToCart(
       assay_method: $assay_method,
       file_type: $file_type,
       phs_accession: $phs_accession,       
-      grant_id: $grant_id,
-      institution: $institution,
-      study_acronym: $study_acronym,
       study_short_title: $study_short_title,
       library_selection: $library_selection,
       library_source: $library_source,
@@ -1030,9 +958,6 @@ query studyAddAllToCart(
   $assay_method: [String],
   $file_type: [String],
   $phs_accession: [String],
-  $grant_id: [String],
-  $institution: [String],
-  $study_acronym: [String],
   $study_short_title: [String],
   $library_selection: [String],
   $library_source: [String],
@@ -1058,9 +983,6 @@ query studyAddAllToCart(
       assay_method: $assay_method,
       file_type: $file_type,
       phs_accession: $phs_accession,       
-      grant_id: $grant_id,
-      institution: $institution,
-      study_acronym: $study_acronym,
       study_short_title: $study_short_title,
       library_selection: $library_selection,
       library_source: $library_source,

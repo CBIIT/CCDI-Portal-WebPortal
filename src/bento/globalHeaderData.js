@@ -66,6 +66,11 @@ Applications: [
     className: 'navMobileSubTitle',
   },
   {
+    name: 'Childhood Cancer Clinical Data Commons',
+    link: 'https://clinicalcommons.ccdi.cancer.gov/',
+    className: 'navMobileSubItem'
+  },
+  {
     name:'Childhood Cancer Data Catalog',
     link: 'https://datacatalog.ccdi.cancer.gov',
     className: 'navMobileSubItem',

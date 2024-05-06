@@ -8,6 +8,7 @@ import wheel4 from '../assets/landing/mtp_carousel.svg';
 import wheel5 from '../assets/landing/nccr_carousel.svg';
 import wheel6 from '../assets/landing/cgc_carousel.svg';
 import wheel7 from '../assets/landing/dbgap_carousel.svg';
+import c3dcLogo from '../assets/landing/c3dc_logo.svg';
 import ccdcMobile from '../assets/landing/ccdc_mobile.png';
 import civicMobile from '../assets/landing/civic_mobile.png';
 import mciMobile from '../assets/landing/mci_mobile.png';
@@ -63,6 +64,14 @@ export const statsData = [
 ];
 
 export const resourcesAppliationsListData = [
+  {
+    id: 'c3dc',
+    title: 'Childhood Cancer Clinical Data Commons',
+    subtitle: 'C3DC',
+    content: 'A database that houses childhood cancer demographics and phenotypic clinical data.',
+    link: 'https://clinicalcommons.ccdi.cancer.gov/',
+    img: c3dcLogo,
+  },
   {
     id: 'ccdc',
     title: 'Childhood Cancer Data Catalog',

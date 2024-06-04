@@ -54,7 +54,7 @@ export const wrapperConfig = [{
   size: 'xl',
   clsName: 'container_footer',
   textTitle: 'Note: ',
-  text: 'Some participants may be enrolled in more than one study; therefore, the cumulative counts might include duplicate representation of those participants.',
+  text: 'Users of any data provided by CCDI, whether open, registered, or controlled access, agree not to attempt to reidentify any individual participant in any study represented within the CCDI, for any purpose.',
   items: [
     {
       title: 'ADD ALL FILTERED FILES',
@@ -76,6 +76,14 @@ export const wrapperConfig = [{
       conditional: true,
       alertMessage,
     }],
+},
+{
+  container: 'buttons',
+  size: 'xl',
+  clsName: 'container_footer',
+  textTitle: 'Note: ',
+  text: 'Some participants may be enrolled in more than one study; therefore, the cumulative counts might include duplicate representation of those participants.',
+  items: [],
 },
 ];
 

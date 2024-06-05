@@ -267,7 +267,7 @@ const MCIResourceView = () => {
         const bodyElement = document.getElementById('MCIBody');
         const footerList = document.getElementsByTagName('footer');
         let footer;
-        if (window.innerWidth >= 1024) {
+        if (window.innerWidth > 1204) {
             footer = footerList[0];
         } else if (window.innerWidth > 767) {
             footer = footerList[1];

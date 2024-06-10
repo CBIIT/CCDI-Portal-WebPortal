@@ -12,7 +12,7 @@ import MCISearchTable from './components/MCISearchTable';
 import MCIDiseaseTable from './components/MCIDiseaseTable';
 //import MCINumberTable from './components/MCINumberTable';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-import DonutChart from '../../components/common/DonutChart';
+//import DonutChart from '../../components/common/DonutChart';
 import MapView from '../../components/common/mapGenerator';
 
 const MCIResourceContainer = styled.div`
@@ -353,7 +353,7 @@ const MCIResourceView = () => {
                                         <div id={mciItem.id} className='mciSubtitle'>{mciItem.subtopic && mciItem.subtopic}</div>
                                         <div className='mciContentContainer'>
                                             {mciItem.content && ReactHtmlParser(mciItem.content)}
-                                            {mciItem.donut && 
+                                            {/*mciItem.donut && 
                                             <div className='donutContainer'>
                                                 <div className='donutTitleContainer'><h4>{mciItem.donut.title}</h4></div>
                                                 <DonutChart
@@ -364,7 +364,7 @@ const MCIResourceView = () => {
                                                     textColor="black"
                                                 />
                                             </div>
-                                            }
+                                            */}
                                             {mciItem.map && <MapView />}
                                             {mciItem.diseaseTable && mciItem.diseaseDonut && 
                                             <>

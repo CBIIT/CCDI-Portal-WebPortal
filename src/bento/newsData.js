@@ -12,6 +12,36 @@ import updateImgHub from '../assets/news/News_Hub.png';
 
 export const newsList = [
     {
+        id: 'ccdc_05172024',
+        title: 'Two new resources and other updates featured in latest CCDC release',
+        date: 'May 17, 2024',
+        slug: 'Childhood Cancer Data Catalog (CCDC) adds two resources and 13 data sets',
+        highlight: '<p>The CCDC now includes the South African National Cancer Registry (NCR) and the World Health Organization-International Agency for Research on Cancer (WHO-IARC) resources. The NCR has played a critical role in cancer prevention and control policy in South Africa and contains demographic, clinical, and reporting source data. The WHO-IARC resource includes epidemiological data. In addition to these resources, 13 new data sets were added, and several other updates were made.</p>',
+        fullText: '',
+        type: 'Application Updates',
+        img: updateImgCCDC2,
+    },
+    {
+        id: 'c3dc_05032024',
+        title: 'Significant updates made in latest C3DC release',
+        date: 'May 3, 2024',
+        slug: 'The new release represents the harmonization of all clinical data sets in the CCDI Data Ecosystem.',
+        highlight: '<p>Building off its first release, the Childhood Cancer Clinical Data Commons (C3DC) now has nine additional CCDI data sets. These harmonized data sets represent all of the clinical data sets in the CCDI Data Ecosystem, providing a more comprehensive resource for childhood cancer research. The data sets include coverage of study, participant, diagnosis, sample, and survival data. The release also includes updated visuals and enhanced documentation.</p>',
+        fullText: '',
+        type: 'Application Updates',
+        img: updateImgC3DC,
+    },
+    {
+        id: 'ccdc_04102024',
+        title: 'Explore new data sets, a resource, and other CCDC site updates this month',
+        date: 'April 10, 2024',
+        slug: 'Sixteen new data sets and a new registry added to the CCDC',
+        highlight: '<p>The Genomics Evidence Neoplasia Information Exchange (GENIE) was added to the Childhood Cancer Data Catalog (CCDC) this month. This publicly accessible cancer registry includes real-world clinico-genomic data from 19 leading international cancer centers. Along with this new resource, the catalog also added 16 new data sets and a new <a href="https://datacatalog.ccdi.cancer.gov/contribute" target="_blank" rel="noopener noreferrer">Contribute to the CCDC</a> page that provides information about submitting data and getting your resource added to the CCDC.</p>',
+        fullText: '',
+        type: 'Application Updates',
+        img: updateImgCCDC,
+    },
+    {
         id: 'hub2_03272024',
         title: 'Latest CCDI Hub release includes exciting new technical changes',
         date: 'March 27, 2024',

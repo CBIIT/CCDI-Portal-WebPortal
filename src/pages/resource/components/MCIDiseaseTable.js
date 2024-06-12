@@ -5,7 +5,6 @@ import DonutChart from '../../../components/common/DonutChart';
 const MCITableContainer = styled.div`
 margin: 20px 74px;
 border: 1px solid #BDBDBD;
-height: 900;
 
 .mciTableTitle {
     padding: 15px 250px;
@@ -50,6 +49,7 @@ height: 900;
 }
 
 .mciTableBody{
+    height: 348px;  
     display: flex;
 }
 

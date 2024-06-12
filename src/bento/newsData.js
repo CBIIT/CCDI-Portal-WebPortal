@@ -12,6 +12,28 @@ import updateImgHub from '../assets/news/News_Hub.png';
 
 export const newsList = [
     {
+        id: 'hub_06272024',
+        title: 'Latest Hub release includes new studies and enhanced functionality',
+        date: 'June 27, 2024',
+        slug: 'CCDI Hub adds two new studies, updated datasets, and enhanced features in June release',
+        highlight: '<p>The CCDI Hub updated seven datasets and added two new: Pediatric AYA Cancer Touchstone (<a class="link" href="https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs002431.v1.p1" target="_blank" rel="noopener noreferrer">phs002431.v1</a>) and Pediatric Tumor Profiling (<a class="link" href="https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs002677.v1.p1" target="_blank" rel="noopener noreferrer">phs002677.v1</a>) datasets. These encompass 1,600 participants and 2,700 samples, totaling 20,760 new files. The MCI page now features updated visualizations and a streamlined navigation pane. The Files tab on the Explore Dashboard now includes Library Selection, Source, and Strategy. Instructions on how to controlled data and navigate the Explore dashboard.</p>',
+        fullText: '',
+        type: 'Site Updates',
+        img: updateImgHub,
+        latestUpdate: true,
+    },
+    {
+        id: 'ccdc_06122024',
+        title: 'Resource updates featured in this month’s CCDC release',
+        date: 'June 12, 2024',
+        slug: 'Six existing resources in the CCDC have been updated',
+        highlight: '<p>The Childhood Cancer Data Catalog (CCDC) now includes 317 datasets from 60 resources. This release adds four new datasets to cBioPortal for Cancer Genomics, Childhood Cancer Data Initiative, and Gene Expression Omnibus. Also, datasets in the CancerModels.org and Patient-Derived Xenograft and Advanced In Vivo Models resources have updated counts, and the Childhood Cancer and Leukemia International Consortium dataset is now part of the World Health Organization–International Agency for Research on Cancer resource.</p>',
+        fullText: '',
+        type: 'Application Updates',
+        img: updateImgCCDC,
+        latestUpdate: true,
+    },
+    {
         id: 'ccdc_05172024',
         title: 'Two new resources and other updates featured in latest CCDC release',
         date: 'May 17, 2024',
@@ -19,7 +41,7 @@ export const newsList = [
         highlight: '<p>The CCDC now includes the South African National Cancer Registry (NCR) and the World Health Organization-International Agency for Research on Cancer (WHO-IARC) resources. The NCR has played a critical role in cancer prevention and control policy in South Africa and contains demographic, clinical, and reporting source data. The WHO-IARC resource includes epidemiological data. In addition to these resources, 13 new data sets were added, and several other updates were made.</p>',
         fullText: '',
         type: 'Application Updates',
-        img: updateImgCCDC2,
+        img: updateImgCCDC,
     },
     {
         id: 'c3dc_05032024',
@@ -30,6 +52,7 @@ export const newsList = [
         fullText: '',
         type: 'Application Updates',
         img: updateImgC3DC,
+        latestUpdate: true,
     },
     {
         id: 'ccdc_04102024',

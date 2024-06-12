@@ -31,11 +31,11 @@ export const MCIContent = [
         diseaseTable: {
             title: 'Enrollment in APEC14B1-MCI Study with Diagnosis Breakdown',
             header: ['', 'Primary Diagnosis Disease Group', 'Number of Participants'],
-            body: [['Central Nervous System', 2704], ['Soft Tissue Sarcoma', 815], ['Rare Tumors', 355], ['Neuroblastoma', 98], ['Ewing Sarcoma', 9], ['Germ Cell Tumor', 8], ['Myeloid Leukemia', 4], ['Liver Tumor', 3], ['Non-Hodgkin Lymphoma', 3], ['Renal', 3], ['Lymphoblastic Leukemia', 2], ['Lymphoproliferative Disease', 1]],
+            body: [['Central Nervous System', 2704], ['Soft Tissue Sarcoma', 815], ['Rare Tumors', 355], ['Neuroblastoma', 98], ['Ewing Sarcoma', 9], ['Germ Cell Tumor', 8], ['Osteosarcoma', 8], ['Myeloid Leukemia', 4], ['Liver Tumor', 3], ['Non-Hodgkin Lymphoma', 3], ['Renal', 3], ['Lymphoblastic Leukemia', 2], ['Lymphoproliferative Disease', 1]],
         },
         diseaseDonut: {
             title: 'Enrollment',
-            data: [{ name: 'Central Nervous System', value: 2704}, {name: 'Soft Tissue Sarcoma', value: 815}, {name: 'Rare Tumors', value: 355}, {name: 'Neuroblastoma', value: 98}, {name: 'Ewing Sarcoma', value: 9}, {name: 'Germ Cell Tumor', value: 8}, {name: 'Myeloid Leukemia', value: 4}, {name: 'Liver Tumor', value: 3}, {name: 'Non-Hodgkin Lymphoma', value: 3}, {name: 'Renal', value: 3}, {name: 'Lymphoblastic Leukemia', value: 2}, {name: 'Lymphoproliferative Disease', value: 1}]
+            data: [{ name: 'Central Nervous System', value: 2704}, {name: 'Soft Tissue Sarcoma', value: 815}, {name: 'Rare Tumors', value: 355}, {name: 'Neuroblastoma', value: 98}, {name: 'Ewing Sarcoma', value: 9}, {name: 'Germ Cell Tumor', value: 8}, {name: 'Osteosarcoma', value: 8}, {name: 'Myeloid Leukemia', value: 4}, {name: 'Liver Tumor', value: 3}, {name: 'Non-Hodgkin Lymphoma', value: 3}, {name: 'Renal', value: 3}, {name: 'Lymphoblastic Leukemia', value: 2}, {name: 'Lymphoproliferative Disease', value: 1}]
         },
         donut: {
             title: 'Enrollment in MCI (APEC14B1-MCI) by Diagnosis Type',

@@ -8,6 +8,7 @@ import exportIcon from '../../assets/resources/Explore_Icon.svg';
 import exportIconBlue from '../../assets/icons/Export_Icon.svg';
 import ccdiDataEcosystemImg from '../../assets/resources/MCI_CCDI_Data_Ecosystem.png';
 import MCITable from './components/MCITable';
+import MCITableMobile from './components/MCITableMobile';
 import MCISearchTable from './components/MCISearchTable';
 import MCIDiseaseTable from './components/MCIDiseaseTable';
 //import MCINumberTable from './components/MCINumberTable';
@@ -19,7 +20,7 @@ const MCIResourceContainer = styled.div`
     width: 100%;
 
     .resourceBreadcrumbContainer {
-        width: 1420px;
+        // width: 1420px;
         margin: 0 auto;
     }
 
@@ -59,7 +60,7 @@ const MCIResourceContainer = styled.div`
     }
 
     .resourceHeaderText {
-        width: 1420px;
+        // width: 1420px;
         margin: 0 auto;
         padding: 150px 0 0 75px;
         color: #19676D;
@@ -73,15 +74,19 @@ const MCIResourceContainer = styled.div`
     }
 
     .resourceTitle {
-        width: 1420px;
+        // width: 1420px;
         margin: 0 auto;
         display: flex;
-        line-height: 64px;
+        line-height: 38px;
         background: #087D6F;
         font-family: Poppins;
         font-weight: 600;
         color: #ffffff;
         font-size: 35px;
+    }
+
+    .resourceTitleText {
+        padding: 15px 0;
         padding-left: 75px;
     }
 
@@ -91,25 +96,76 @@ const MCIResourceContainer = styled.div`
         background: #035D63;
         font-weight: 400;
         font-size: 19px;
-        padding: 0 38px;
+        line-height: 21px;
+        padding: 0 25px;
     }
 
     .goToSiteText {
         color: #FFFFFF;
         text-decoration: none;
+        padding: 23px 0;
         padding-right: 34px;
         letter-spacing: 0.02em;
         background: url(${exportIcon}) right center no-repeat;
     }
+
+    @media (min-width: 1420px) {
+        .resourceTitle {
+            width: 1420px;
+        }
+
+        .resourceHeaderText {
+            width: 1420px;
+        }
+
+        .resourceBreadcrumbContainer {
+            width: 1420px;
+        }
+    }
+
+    @media (max-width: 1140px) {
+        .resourceTitleText {
+            padding-left: calc(50vw - 500px);
+        }
+    }
+
+    @media (max-width: 1023px) {
+
+        .resourceBreadcrumbContainer {
+            display: none;
+        }
+        .resourceTitle {
+            display: block;
+        }
+        
+        .resourceHeaderText {
+            display: none;
+        }
+
+        .resourceTitleText {
+            padding-left: 16px;
+        }
+
+        .goToSiteButton {
+            padding-left: 16px;
+        }
+
+        .goToSiteText {
+            padding: 15px 34px 15px 0;
+        }
+    }
 `;
 
 const MCIResourceBody = styled.div`
-    width: 1420px;
+    @media (min-width: 1420px) {
+        width: 1420px;
+    }
+
     margin: 0 auto;
     display: flex;
     padding: 55px 32px 0 32px; 
     .navSection {
-        width: 20%;
+        width: 25%;
         color: #4D889E;
         position: relative;
     }
@@ -121,12 +177,13 @@ const MCIResourceBody = styled.div`
     .navListSticky {
         position: fixed;
         top: 55px;
-        width: 272px;
+        // width: 272px;
     }
     .navListAbsolute {
         position: absolute;
         bottom: 0;
-        width: 272px;
+        // width: 25%;
+        // width: 272px;
     }
 
     .navTitle {
@@ -167,8 +224,8 @@ const MCIResourceBody = styled.div`
 
     .contentSection {
         display: flex;
-        width: 80%;
-        padding: 0 32px 0 50px;
+        width: 75%;
+        padding: 0 32px 0 40px;
         margin-bottom: 100px;
     }
 
@@ -197,6 +254,7 @@ const MCIResourceBody = styled.div`
 
     p {
         margin-top: 0;
+        min-width: 0;
     }
 
     h3 {
@@ -258,6 +316,23 @@ const MCIResourceBody = styled.div`
         }
 
     }
+
+    .MCITableMobileContainer {
+        display: none;
+    }
+
+    .ecosystemImg {
+        width: 100%;
+    }
+
+    @media (max-width: 1023px) {
+        .MCITableContainer {
+            display: none;
+        }
+        .MCITableMobileContainer {
+            display: block;
+        }
+    }
 `;
 
 const MCIResourceView = () => {
@@ -317,7 +392,7 @@ const MCIResourceView = () => {
             <div className='resourceHeader'><div className='resourceHeaderBackground'><div className='resourceHeaderText'>CCDI Hub</div></div></div>
             <div className='resourceTitleContainer'>
                 <div className='resourceTitle'>
-                    Molecular Characterization Initiative
+                    <div className='resourceTitleText'>Molecular Characterization Initiative</div>
                     <div className='goToSiteButton'>
                         <a className='goToSiteText' href="https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs002790" target="_blank" rel="noopener noreferrer">Request Access (dbGaP)</a>
                     </div>
@@ -353,7 +428,7 @@ const MCIResourceView = () => {
                                         <div id={mciItem.id} className='mciSubtitle'>{mciItem.subtopic && mciItem.subtopic}</div>
                                         <div className='mciContentContainer'>
                                             {mciItem.content && ReactHtmlParser(mciItem.content)}
-                                            {/*mciItem.donut && 
+                                            {/* {mciItem.donut && 
                                             <div className='donutContainer'>
                                                 <div className='donutTitleContainer'><h4>{mciItem.donut.title}</h4></div>
                                                 <DonutChart
@@ -364,23 +439,24 @@ const MCIResourceView = () => {
                                                     textColor="black"
                                                 />
                                             </div>
-                                            */}
-                                            {mciItem.map && <MapView />}
+                                            } */}
+                                            {/* {mciItem.map && <MapView />}
                                             {mciItem.diseaseTable && mciItem.diseaseDonut && 
                                             <>
                                                 <MCIDiseaseTable table={mciItem.diseaseTable} donut={mciItem.diseaseDonut}/>
                                                 <div>{mciItem.diseaseTable.footer}</div>
                                             </>
-                                            }
+                                            } */}
                                             {mciItem.content && mciItem.content.includes('CCDI Data Ecosystem?') && 
                                             <>
-                                                <img src={ccdiDataEcosystemImg} alt="CCDI Data Ecosystem"/>
+                                                <img className="ecosystemImg" src={ccdiDataEcosystemImg} alt="CCDI Data Ecosystem"/>
                                                 <p style={{marginTop: '24px'}}>MCI assays and data types, and the data flow to patients, providers, and the CCDI Data Ecosystem.</p>
                                             </>
                                             }
                                             {mciItem.table &&
                                             <>
-                                                <MCITable table={mciItem.table} />
+                                                <div className='MCITableContainer'><MCITable table={mciItem.table} /></div>
+                                                <div className='MCITableMobileContainer'><MCITableMobile table={mciItem.table} /></div>
                                                 <div>{mciItem.table.footer}</div>
                                             </>
                                             }
@@ -389,13 +465,13 @@ const MCIResourceView = () => {
                                                 <p style={{marginTop: "1em"}}>{mciItem.annotation}</p>
                                             </>
                                             }
-                                            {mciItem.searchTable && <MCISearchTable table={mciItem.searchTable} /> }
-                                            {/*mciItem.numberTable && 
+                                            {/* {mciItem.searchTable && <MCISearchTable table={mciItem.searchTable} /> } */}
+                                            {/* {mciItem.numberTable && 
                                             <>
                                                 <MCINumberTable table={mciItem.numberTable} />
                                                 <div>{mciItem.numberTable.footer}</div>
                                             </>
-                                            */}
+                                            } */}
                                         </div>
                                         {mciItem.content && <div style={{height: '40px'}} />}
                                     </div>

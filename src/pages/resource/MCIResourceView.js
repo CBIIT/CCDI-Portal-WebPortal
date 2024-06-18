@@ -365,13 +365,14 @@ const MCIResourceView = () => {
                                                 />
                                             </div>
                                             */}
-                                            {mciItem.map && <MapView />}
                                             {mciItem.diseaseTable && mciItem.diseaseDonut && 
                                             <>
                                                 <MCIDiseaseTable table={mciItem.diseaseTable} donut={mciItem.diseaseDonut}/>
                                                 <div>{mciItem.diseaseTable.footer}</div>
                                             </>
                                             }
+                                            {mciItem.map && <MapView />}
+                                            
                                             {mciItem.content && mciItem.content.includes('CCDI Data Ecosystem?') && 
                                             <>
                                                 <img src={ccdiDataEcosystemImg} alt="CCDI Data Ecosystem"/>

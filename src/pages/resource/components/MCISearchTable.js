@@ -6,17 +6,24 @@ import clearIconActive from '../../../assets/resources/ClearAll_Active.svg';
 import searchIcon from '../../../assets/resources/Search_Icon.svg';
 
 const MCISearchTableContainer = styled.div`
-    margin: 40px 74px;
+    margin: 40px auto;
     border: 1px solid #BDBDBD;
+    max-width: 836px;
 
     .mciTableTitle {
-        padding: 15px 200px;
         font-family: Poppins;
         font-size: 19px;
         font-weight: 400;
         line-height: 21px;
         letter-spacing: 0.02em;
         text-align: center;
+        background: #EEF4F8;
+    }
+
+    .mciTableTitleText {
+        max-width: 434px;
+        margin: 0 auto;
+        padding: 15px 0;
         background: #EEF4F8;
     }
 
@@ -166,7 +173,7 @@ const MCISearchTable = ( {table} ) => {
 
     return (
         <MCISearchTableContainer>
-            <div className='mciTableTitle'>{table.title}</div>
+            <div className='mciTableTitle'><div className='mciTableTitleText'>{table.title}</div></div>
             <div className='mciTableHeader'>
                 <div className='mciTableHeaderTitle'>Search</div>
                 <div className='searchboxContainer'>

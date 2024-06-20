@@ -469,7 +469,7 @@ const MCIResourceView = () => {
                                                 <p style={{marginTop: "1em"}}>{mciItem.annotation}</p>
                                             </>
                                             }
-                                            {/* {mciItem.searchTable && <MCISearchTable table={mciItem.searchTable} /> } */}
+                                            {mciItem.searchTable && <MCISearchTable table={mciItem.searchTable} /> }
                                             {/* {mciItem.numberTable && 
                                             <>
                                                 <MCINumberTable table={mciItem.numberTable} />

@@ -127,6 +127,10 @@ const MCIResourceContainer = styled.div`
         .resourceTitleText {
             padding-left: calc(50vw - 500px);
         }
+
+        .resourceHeaderText {
+            padding-left: calc(50vw - 500px);
+        }
     }
 
     @media (max-width: 1023px) {
@@ -139,7 +143,7 @@ const MCIResourceContainer = styled.div`
         }
         
         .resourceHeaderText {
-            display: none;
+            padding-left: 16px;
         }
 
         .resourceTitleText {

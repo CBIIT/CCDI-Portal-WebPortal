@@ -38,7 +38,7 @@ export const MCIContent = [
             data: [{ name: 'Central Nervous System', value: 2704}, {name: 'Soft Tissue Sarcoma', value: 815}, {name: 'Rare Tumors', value: 355}, {name: 'Neuroblastoma', value: 98}, {name: 'Ewing Sarcoma', value: 9}, {name: 'Germ Cell Tumor', value: 8}, {name: 'Osteosarcoma', value: 8}, {name: 'Myeloid Leukemia', value: 4}, {name: 'Liver Tumor', value: 3}, {name: 'Non-Hodgkin Lymphoma', value: 3}, {name: 'Renal', value: 3}, {name: 'Lymphoblastic Leukemia', value: 2}, {name: 'Lymphoproliferative Disease', value: 1}]
         },
         donut: {
-            title: 'Enrollment in MCI (APEC14B1-MCI) by Diagnosis Type',
+            title: 'Enrollments in MCI (APEC14B1-MCI) by Diagnosis Type',
             data: [{name: 'Central Nervous System', value: 2704}, {name: 'Rare Tumors', value: 355}, {name: 'Soft Tissue Sarcoma', value: 815}, {name: 'Neuroblastoma', value: 98}],
         }
     },

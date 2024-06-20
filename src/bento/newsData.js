@@ -9,14 +9,15 @@ import updateImgDashboard from '../assets/news/News_Dashboard.png';
 import updateImgEHR from '../assets/news/News_EHR.png';
 import updateImgC3DC from '../assets/news/News_C3DC.png';
 import updateImgHub from '../assets/news/News_Hub.png';
+import dataAccessPDF from "../assets/about/CCDI_CGC_Data_Access_Instructions_2.0.pdf";
 
 export const newsList = [
     {
         id: 'hub_06272024',
         title: 'Latest Hub release includes new studies and enhanced functionality',
         date: 'June 27, 2024',
-        slug: 'CCDI Hub adds two new studies, updated datasets, and enhanced features in June release',
-        highlight: '<p>The CCDI Hub updated seven datasets and added two new: Pediatric AYA Cancer Touchstone (<a class="link" href="https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs002431.v1.p1" target="_blank" rel="noopener noreferrer">phs002431.v1</a>) and Pediatric Tumor Profiling (<a class="link" href="https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs002677.v1.p1" target="_blank" rel="noopener noreferrer">phs002677.v1</a>) datasets. These encompass 1,600 participants and 2,700 samples, totaling 20,760 new files. The MCI page now features updated visualizations and a streamlined navigation pane. The Files tab on the Explore Dashboard now includes Library Selection, Source, and Strategy. Instructions on how to controlled data and navigate the Explore dashboard.</p>',
+        slug: 'CCDI Hub adds two new studies, updated data sets, and enhanced features in June release',
+        highlight: `<p>The CCDI Hub updated seven data sets and added two new: Pediatric AYA Cancer Touchstone (<a class="link" href="https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs002431.v1.p1" target="_blank" rel="noopener noreferrer">phs002431.v1</a>) and Pediatric Tumor Profiling (<a class="link" href="https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs002677.v1.p1" target="_blank" rel="noopener noreferrer">phs002677.v1</a>) data sets. These encompass 1,600 participants and 2,700 samples, totaling 20,760 new files. The <a href="/MCI" target="_blank">MCI page</a> now features updated visualizations and a streamlined navigation pane. The Files tab on the <a href="/Explore" target="_blank">Explore Dashboard</a> now includes Library Selection, Source, and Strategy. <a href=${dataAccessPDF} target="_blank"}>User Documentation</a> is available, providing instructions for accessing controlled data and navigating the Explore Dashboard.</p>`,
         fullText: '',
         type: 'Site Updates',
         img: updateImgHub,
@@ -27,7 +28,7 @@ export const newsList = [
         title: 'Resource updates featured in this month’s CCDC release',
         date: 'June 12, 2024',
         slug: 'Six existing resources in the CCDC have been updated',
-        highlight: '<p>The Childhood Cancer Data Catalog (CCDC) now includes 317 datasets from 60 resources. This release adds four new datasets to cBioPortal for Cancer Genomics, Childhood Cancer Data Initiative, and Gene Expression Omnibus. Also, datasets in the CancerModels.org and Patient-Derived Xenograft and Advanced In Vivo Models resources have updated counts, and the Childhood Cancer and Leukemia International Consortium dataset is now part of the World Health Organization–International Agency for Research on Cancer resource.</p>',
+        highlight: '<p>The Childhood Cancer Data Catalog (CCDC) now includes 317 data sets from 60 resources. This release adds four new data sets to cBioPortal for Cancer Genomics, Childhood Cancer Data Initiative, and Gene Expression Omnibus. Also, data sets in the CancerModels.org and Patient-Derived Xenograft and Advanced In Vivo Models resources have updated counts, and the Childhood Cancer and Leukemia International Consortium data set is now part of the World Health Organization–International Agency for Research on Cancer resource.</p>',
         fullText: '',
         type: 'Application Updates',
         img: updateImgCCDC,

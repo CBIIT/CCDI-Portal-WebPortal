@@ -10,6 +10,7 @@ import ccdiDataEcosystemImg from '../../assets/resources/MCI_CCDI_Data_Ecosystem
 import MCITable from './components/MCITable';
 import MCITableMobile from './components/MCITableMobile';
 import MCISearchTable from './components/MCISearchTable';
+import MCISearchTableMobile from './components/MCISearchTableMobile';
 import MCIDiseaseTable from './components/MCIDiseaseTable';
 //import MCINumberTable from './components/MCINumberTable';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
@@ -325,6 +326,10 @@ const MCIResourceBody = styled.div`
         display: none;
     }
 
+    .MCISearchTableMobileContainer {
+        display: none;
+    }
+
     .ecosystemImg {
         width: 100%;
     }
@@ -334,6 +339,14 @@ const MCIResourceBody = styled.div`
             display: none;
         }
         .MCITableMobileContainer {
+            display: block;
+        }
+        
+        .MCISearchTableContainer {
+            display: none;
+        }
+
+        .MCISearchTableMobileContainer {
             display: block;
         }
     }
@@ -469,7 +482,11 @@ const MCIResourceView = () => {
                                                 <p style={{marginTop: "1em"}}>{mciItem.annotation}</p>
                                             </>
                                             }
-                                            {mciItem.searchTable && <MCISearchTable table={mciItem.searchTable} /> }
+                                            {mciItem.searchTable &&
+                                            <>
+                                                <div className='MCISearchTableContainer'><MCISearchTable table={mciItem.searchTable} /></div>
+                                                <div className='MCISearchTableMobileContainer'><MCISearchTableMobile table={mciItem.searchTable} /></div>
+                                            </> }
                                             {/* {mciItem.numberTable && 
                                             <>
                                                 <MCINumberTable table={mciItem.numberTable} />

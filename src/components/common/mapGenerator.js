@@ -111,13 +111,16 @@ const MapView = () => {
             echarts.registerMap('usa_svg', { svg: svgText });
             let myChart = echarts.init(document.getElementById('beef'));
             myChart.setOption(option);
+            window.addEventListener('resize', function() {
+              myChart.resize();
+            });
        })
        .catch(e => console.error('fetch error', e));
     }, []);
 
     return (
         <div>
-            <div style={{ width: '1000px', height: '770px' }} id='beef'></div>
+            <div style={{ width: '100%', height: '660px' }} id='beef'></div>
         </div>
     )
 }

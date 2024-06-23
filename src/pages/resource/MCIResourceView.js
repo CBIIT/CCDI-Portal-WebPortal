@@ -136,8 +136,8 @@ const MCIResourceContainer = styled.div`
 
     @media (max-width: 1023px) {
 
-        .resourceBreadcrumbContainer {
-            display: none;
+        .resourceBreadcrumb {
+            margin-left: 16px;
         }
         .resourceTitle {
             display: block;

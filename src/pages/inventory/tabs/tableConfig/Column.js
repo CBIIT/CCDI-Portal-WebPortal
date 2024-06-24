@@ -30,6 +30,10 @@ export const CustomCellView = (props) => {
         </>
       );
     }
+  } else if (cellStyle === 'DBGAP') {
+    return(
+      <a href={`https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=${props[dataField]}`} target="_blank" rel="noreferrer">{props[dataField]}</a>
+    )
   }
 };
 

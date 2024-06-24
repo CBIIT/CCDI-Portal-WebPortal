@@ -171,7 +171,7 @@ const MCIResourceBody = styled.div`
     display: flex;
     padding: 55px 32px 0 32px; 
     .navSection {
-        width: 25%;
+        width: 240px;
         color: #4D889E;
         position: relative;
     }
@@ -183,13 +183,12 @@ const MCIResourceBody = styled.div`
     .navListSticky {
         position: fixed;
         top: 55px;
-        // width: 272px;
+        width: 240px;
     }
     .navListAbsolute {
         position: absolute;
         bottom: 0;
-        // width: 25%;
-        // width: 272px;
+        width: 240px;
     }
 
     .navTitle {
@@ -230,8 +229,8 @@ const MCIResourceBody = styled.div`
 
     .contentSection {
         display: flex;
-        width: 75%;
-        padding: 0 32px 0 40px;
+        width: calc(100% - 240px);
+        padding: 0 32px 0 36px;
         margin-bottom: 100px;
     }
 

@@ -8,7 +8,7 @@ border: 1px solid #BDBDBD;
 height: 900;
 
 .mciTableTitle {
-    padding: 15px 250px;
+    padding: 15px;
     font-family: Poppins;
     font-size: 19px;
     font-weight: 400;
@@ -61,7 +61,7 @@ height: 900;
     width: 66.66%
     overflow-x: hidden;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 50% 50%;
 }
 
 .mciTableBodyList::-webkit-scrollbar {
@@ -133,8 +133,8 @@ const MCIDiseaseTable = ({ table, donut }) => {
                 <div className='mciTableDonut'>
                     <DonutChart
                         data={donut.data}
-                        innerRadiusP={65}
-                        outerRadiusP={115}
+                        innerRadiusP='50%'
+                        outerRadiusP='90%'
                         paddingSpace={donut.length === 1 ? 0 : 0.5}
                         textColor="black"
                     />

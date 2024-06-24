@@ -469,12 +469,12 @@ const MCIResourceView = () => {
                                                 />
                                             </div>
                                             } */}
-                                            {/* {mciItem.diseaseTable && mciItem.diseaseDonut && 
+                                            {mciItem.diseaseTable && mciItem.diseaseDonut && 
                                             <>
                                                 <MCIDiseaseTable table={mciItem.diseaseTable} donut={mciItem.diseaseDonut}/>
                                                 <div>{mciItem.diseaseTable.footer}</div>
                                             </>
-                                            } */}
+                                            }
                                             {mciItem.map &&
                                             <>
                                                 <div className='MapContainer'><MapView mapData={mciItem.map} /></div>

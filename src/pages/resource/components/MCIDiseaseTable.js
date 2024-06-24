@@ -8,7 +8,7 @@ border: 1px solid #BDBDBD;
 height: 900;
 
 .mciTableTitle {
-    padding: 15px 250px;
+    padding: 15px 225px;
     font-family: Poppins;
     font-size: 19px;
     font-weight: 400;

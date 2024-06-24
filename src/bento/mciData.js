@@ -29,7 +29,7 @@ export const MCIContent = [
             ["University of Nebraska Medical Center", 25, 8, 79, ], ["University of New Mexico Cancer Center", 22, 9, 74, ], ["University of Oklahoma Health Sciences Center", 26, 10, 82, ], ["University of Rochester", 22, 4, 84, ], ["University of Texas Health Science Center at San Antonio", 23, 3, 39, ], ["University of Vermont and State Agricultural College", 20, 10, 80, ], ["University of Virginia Cancer Center", 29, 10, 80, ], ["University of Wisconsin Carbone Cancer Center", 29, 11, 28, ], ["University Pediatric Hospital", 29, 9, 1, ], ["USA Health Strada Patient Care Center", 20, 5, 70, ], ["UT Southwestern/Simmons Cancer Center-Dallas", 25, 3, 8, ], ["Valley Children's Hospital", 23, 11, 79, ], ["Vanderbilt University/Ingram Cancer Center", 26, 1, 20, ], ["Vannie Cook Children's Clinic", 28, 4, 93, ], ["Virginia Commonwealth University/Massey Cancer Center", 24, 8, 41, ], ["Wake Forest University Health Sciences", 23, 8, 19, ], ["Walter Reed National Military Medical Center", 22, 5, 22, ], ["Washington University School of Medicine", 22, 1, 88, ], ["Wesley Medical Center", 26, 0, 93, ], ["West Virginia University Charleston Division", 29, 7, 78, ], ["West Virginia University Healthcare", 28, 1, 32, ], ["Women's and Children's Hospital-Adelaide", 20, 7, 55, ], ["Yale University", 20, 9, 97, ], ],
         },
         diseaseTable: {
-            title: 'Enrollment in APEC14B1-MCI Study with Diagnosis Breakdown',
+            title: 'Enrollments in MCI (APEC14B1-MCI) by Diagnosis Type',
             header: ['', 'Primary Diagnosis Disease Group', 'Number of Participants'],
             body: [['Central Nervous System', 2704], ['Soft Tissue Sarcoma', 815], ['Rare Tumors', 355], ['Neuroblastoma', 98], ['Ewing Sarcoma', 9], ['Germ Cell Tumor', 8], ['Osteosarcoma', 8], ['Myeloid Leukemia', 4], ['Liver Tumor', 3], ['Non-Hodgkin Lymphoma', 3], ['Renal', 3], ['Lymphoblastic Leukemia', 2], ['Lymphoproliferative Disease', 1]],
         },
@@ -38,7 +38,7 @@ export const MCIContent = [
             data: [{ name: 'Central Nervous System', value: 2704}, {name: 'Soft Tissue Sarcoma', value: 815}, {name: 'Rare Tumors', value: 355}, {name: 'Neuroblastoma', value: 98}, {name: 'Ewing Sarcoma', value: 9}, {name: 'Germ Cell Tumor', value: 8}, {name: 'Osteosarcoma', value: 8}, {name: 'Myeloid Leukemia', value: 4}, {name: 'Liver Tumor', value: 3}, {name: 'Non-Hodgkin Lymphoma', value: 3}, {name: 'Renal', value: 3}, {name: 'Lymphoblastic Leukemia', value: 2}, {name: 'Lymphoproliferative Disease', value: 1}]
         },
         donut: {
-            title: 'Enrollment in MCI (APEC14B1-MCI) by Diagnosis Type',
+            title: 'Enrollments in MCI (APEC14B1-MCI) by Diagnosis Type',
             data: [{name: 'Central Nervous System', value: 2704}, {name: 'Rare Tumors', value: 355}, {name: 'Soft Tissue Sarcoma', value: 815}, {name: 'Neuroblastoma', value: 98}],
         }
     },

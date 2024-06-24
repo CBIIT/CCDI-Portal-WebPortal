@@ -16,6 +16,7 @@ import MCIDiseaseTable from './components/MCIDiseaseTable';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 //import DonutChart from '../../components/common/DonutChart';
 import MapView from '../../components/common/mapGenerator';
+import MapViewMobile from './components/MapViewMobile';
 
 const MCIResourceContainer = styled.div`
     width: 100%;
@@ -334,6 +335,10 @@ const MCIResourceBody = styled.div`
         width: 100%;
     }
 
+    .MapMobileContainer {
+        display: none;
+    }
+
     @media (max-width: 1023px) {
         .MCITableContainer {
             display: none;
@@ -347,6 +352,14 @@ const MCIResourceBody = styled.div`
         }
 
         .MCISearchTableMobileContainer {
+            display: block;
+        }
+        
+        .MapContainer {
+            display: none;
+        }
+
+        .MapMobileContainer {
             display: block;
         }
     }
@@ -463,7 +476,12 @@ const MCIResourceView = () => {
                                                 <div>{mciItem.diseaseTable.footer}</div>
                                             </>
                                             } */}
-                                            {mciItem.map && <MapView />}
+                                            {mciItem.map &&
+                                            <>
+                                                <div className='MapContainer'><MapView mapData={mciItem.map} /></div>
+                                                <div className='MapMobileContainer'><MapViewMobile mapData={mciItem.map}/></div>
+                                            </>
+                                            }
                                             {mciItem.content && mciItem.content.includes('CCDI Data Ecosystem?') && 
                                             <>
                                                 <img className="ecosystemImg" src={ccdiDataEcosystemImg} alt="CCDI Data Ecosystem"/>

@@ -49,7 +49,7 @@ const MapViewMobileContainer = styled.div`
     }
 
     .mciTableBodyList {
-        height: 295px;
+        height: 228px;
         overflow: scroll;
         overflow-x: hidden;
         display: grid;
@@ -73,7 +73,7 @@ const MapViewMobileContainer = styled.div`
         font-family: Open Sans;
         font-size: 14px;
         font-weight: 400;
-        line-height: 37px;
+        line-height: 26px;
         letter-spacing: 0em;
         text-align: left;
         background: #F4F5F5;

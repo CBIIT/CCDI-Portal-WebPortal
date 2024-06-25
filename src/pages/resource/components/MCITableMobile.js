@@ -39,7 +39,7 @@ const MCITableContainer = styled.div`
     }
 
     .mciTableBodyListItem {
-        padding: 16.5px;
+        padding: 15px 16.5px;
         font-family: Open Sans;
         font-size: 14px;
         font-weight: 400;

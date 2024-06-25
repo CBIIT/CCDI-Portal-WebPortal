@@ -12,6 +12,7 @@ import MCITableMobile from './components/MCITableMobile';
 import MCISearchTable from './components/MCISearchTable';
 import MCISearchTableMobile from './components/MCISearchTableMobile';
 import MCIDiseaseTable from './components/MCIDiseaseTable';
+import MCIDiseaseTableMobile from './components/MCIDiseaseTableMobile';
 //import MCINumberTable from './components/MCINumberTable';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 //import DonutChart from '../../components/common/DonutChart';
@@ -338,6 +339,10 @@ const MCIResourceBody = styled.div`
         display: none;
     }
 
+    .MCIDiseaseTableMobileContainer {
+        display: none;
+    }
+
     @media (max-width: 1023px) {
         .MCITableContainer {
             display: none;
@@ -359,6 +364,14 @@ const MCIResourceBody = styled.div`
         }
 
         .MapMobileContainer {
+            display: block;
+        }
+
+        .MCIDiseaseTableContainer {
+            display: none;
+        }
+
+        .MCIDiseaseTableMobileContainer {
             display: block;
         }
     }
@@ -471,7 +484,8 @@ const MCIResourceView = () => {
                                             } */}
                                             {mciItem.diseaseTable && mciItem.diseaseDonut && 
                                             <>
-                                                <MCIDiseaseTable table={mciItem.diseaseTable} donut={mciItem.diseaseDonut}/>
+                                                <div className='MCIDiseaseTableContainer'><MCIDiseaseTable table={mciItem.diseaseTable} donut={mciItem.diseaseDonut}/></div>
+                                                <div className='MCIDiseaseTableMobileContainer'><MCIDiseaseTableMobile table={mciItem.diseaseTable}/></div>
                                                 <div>{mciItem.diseaseTable.footer}</div>
                                             </>
                                             }

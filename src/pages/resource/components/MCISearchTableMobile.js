@@ -111,6 +111,12 @@ const MCISearchTableContainer = styled.div`
     .mciTableBodyList .mciTableBodyListItem:nth-child(8n+4){
         background: #FFFFFF;
     }
+
+    @media (max-width: 430px) {
+        .mciTableBodyListItem {
+            padding-left: 3px;
+        }
+    }
 `;
 
 const SearchInput = styled.input`

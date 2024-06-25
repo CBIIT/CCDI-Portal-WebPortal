@@ -407,7 +407,7 @@ const MCIResourceBody = styled.div`
 
         .ecosystemImgMobile {
             display: block;
-            width: 343px;
+            width: 310px;
             margin: 10px auto;
         }
     }

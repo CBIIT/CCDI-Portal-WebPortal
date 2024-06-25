@@ -7,6 +7,7 @@ import headerImg from '../../assets/resources/MCI_header_white.png';
 import exportIcon from '../../assets/resources/Explore_Icon.svg';
 import exportIconBlue from '../../assets/icons/Export_Icon.svg';
 import ccdiDataEcosystemImg from '../../assets/resources/MCI_CCDI_Data_Ecosystem.png';
+import ccdiDataEcosystemMobileImg from '../../assets/resources/MCI_CCDI_Data_Ecosystem_Mobile.png';
 import MCITable from './components/MCITable';
 import MCITableMobile from './components/MCITableMobile';
 import MCISearchTable from './components/MCISearchTable';
@@ -335,6 +336,10 @@ const MCIResourceBody = styled.div`
         width: 100%;
     }
 
+    .ecosystemImgMobile {
+        display: none;
+    }
+
     .MapMobileContainer {
         display: none;
     }
@@ -373,6 +378,37 @@ const MCIResourceBody = styled.div`
 
         .MCIDiseaseTableMobileContainer {
             display: block;
+        }
+    }
+
+    @media (max-width: 767px) {
+        padding: 55px 0 0 0;
+
+        .navSection {
+            display: none;
+        }
+
+        .contentSection {
+            width: 100%;
+            padding: 0 16px;
+        }
+
+        .mciSubtitle {
+            margin-left: 0;
+        }
+
+        .mciContentContainer {
+            margin-left: 0;
+        }
+
+        .ecosystemImg {
+            display: none;
+        }
+
+        .ecosystemImgMobile {
+            display: block;
+            width: 343px;
+            margin: 10px auto;
         }
     }
 `;
@@ -498,6 +534,7 @@ const MCIResourceView = () => {
                                             {mciItem.content && mciItem.content.includes('CCDI Data Ecosystem?') && 
                                             <>
                                                 <img className="ecosystemImg" src={ccdiDataEcosystemImg} alt="CCDI Data Ecosystem"/>
+                                                <img className="ecosystemImgMobile" src={ccdiDataEcosystemMobileImg} alt="CCDI Data Ecosystem Mobile"/>
                                                 <p style={{marginTop: '24px'}}>MCI assays and data types, and the data flow to patients, providers, and the CCDI Data Ecosystem.</p>
                                             </>
                                             }

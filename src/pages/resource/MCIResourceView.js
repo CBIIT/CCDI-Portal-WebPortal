@@ -4,6 +4,7 @@ import ReactHtmlParser from 'html-react-parser';
 import { NavLink } from 'react-router-dom';
 import { MCIContent } from '../../bento/mciData';
 import headerImg from '../../assets/resources/MCI_header_white.png';
+import headerMobileImg from '../../assets/resources/MCI_header_white_mobile.png';
 import exportIcon from '../../assets/resources/Explore_Icon.svg';
 import exportIconBlue from '../../assets/icons/Export_Icon.svg';
 import ccdiDataEcosystemImg from '../../assets/resources/MCI_CCDI_Data_Ecosystem.png';
@@ -53,6 +54,21 @@ const MCIResourceContainer = styled.div`
         width: 100%;
         height: 214px;
         background: #e6ebee;
+
+        @media (max-width: 767px) {
+            display: none;
+        }
+    }
+
+    .resourceHeaderMobile {
+        width: 100%;
+        height: 214px;
+        background: #e6ebee;
+        display: none;
+
+        @media (max-width: 767px) {
+            display: block;
+        }
     }
 
     .resourceHeaderBackground {
@@ -60,7 +76,15 @@ const MCIResourceContainer = styled.div`
         height: 214px;
         background-image: url(${headerImg});
         background-repeat:no-repeat;
-        background-position:center; 
+        background-position:center;
+    }
+
+    .resourceHeaderBackgroundMobile {
+        width: 100%;
+        height: 214px;
+        background-image: url(${headerMobileImg});
+        background-repeat:no-repeat;
+        background-position:center;
     }
 
     .resourceHeaderText {
@@ -472,7 +496,12 @@ const MCIResourceView = () => {
                     <span>Molecular Characterization Initative</span>
                     </div>
             </div>
-            <div className='resourceHeader'><div className='resourceHeaderBackground'><div className='resourceHeaderText'>CCDI Hub</div></div></div>
+            <div className='resourceHeader'>
+                <div className='resourceHeaderBackground'><div className='resourceHeaderText'>CCDI Hub</div></div>
+            </div>
+            <div className='resourceHeaderMobile'>
+                <div className='resourceHeaderBackgroundMobile'><div className='resourceHeaderText'>CCDI Hub</div></div>
+            </div>
             <div className='resourceTitleContainer'>
                 <div className='resourceTitle'>
                     <div className='resourceTitleText'>Molecular Characterization Initiative</div>

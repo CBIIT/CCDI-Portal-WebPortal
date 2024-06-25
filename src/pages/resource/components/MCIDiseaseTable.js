@@ -25,7 +25,7 @@ height: 900;
 
 .mciTableHeaderList {
     display: grid;
-    grid-template-columns: 33.33% 33.33% 33.33%;
+    grid-template-columns: repeat(3, 1fr);
 }
 
 .mciTableHeaderListItem {
@@ -55,6 +55,7 @@ height: 900;
 
 .mciTableDonut {
     width: 33.2%
+    min-width: 180px;
 }
 
 .mciTableBodyList {
@@ -107,6 +108,9 @@ height: 900;
     }
 }
 
+.mciTableHeaderList .mciTableHeaderListItem:nth-child(1){
+    min-width: 180px;
+}
 
 .mciTableBodyList .mciTableBodyListItem:nth-child(4n+1),
 .mciTableBodyList .mciTableBodyListItem:nth-child(4n+2)
@@ -134,7 +138,7 @@ const MCIDiseaseTable = ({ table, donut }) => {
                     <DonutChart
                         data={donut.data}
                         innerRadiusP='50%'
-                        outerRadiusP='90%'
+                        outerRadiusP='85%'
                         paddingSpace={donut.length === 1 ? 0 : 0.5}
                         textColor="black"
                     />

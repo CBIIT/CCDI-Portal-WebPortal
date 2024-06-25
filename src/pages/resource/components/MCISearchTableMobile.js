@@ -114,7 +114,7 @@ const MCISearchTableContainer = styled.div`
 
     @media (max-width: 430px) {
         .mciTableBodyListItem {
-            padding-left: 3px;
+            padding-left: 2px;
         }
     }
 `;

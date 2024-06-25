@@ -288,6 +288,7 @@ const MCIResourceBody = styled.div`
             font-weight: 600;
             text-decoration: underline;
             text-underline-position: under;
+            line-break: anywhere;
         }
 
         h4 {
@@ -296,6 +297,10 @@ const MCIResourceBody = styled.div`
             font-size: 19px;
             line-height: 21px;
             letter-spacing: 0.02em;
+        }
+
+        ul {
+            padding-left: 30px;
         }
 
         .link {

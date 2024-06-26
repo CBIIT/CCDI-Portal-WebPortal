@@ -7,6 +7,7 @@ import headerImg from '../../assets/resources/MCI_header_white.png';
 import headerMobileImg from '../../assets/resources/MCI_header_white_mobile.png';
 import exportIcon from '../../assets/resources/Explore_Icon.svg';
 import exportIconBlue from '../../assets/icons/Export_Icon.svg';
+import closeIcon from '../../assets/icons/Close_Icon.svg';
 import ccdiDataEcosystemImg from '../../assets/resources/MCI_CCDI_Data_Ecosystem.png';
 import ccdiDataEcosystemMobileImg from '../../assets/resources/MCI_CCDI_Data_Ecosystem_Mobile.png';
 import MCITable from './components/MCITable';
@@ -284,7 +285,8 @@ const MCIResourceBody = styled.div`
         line-height: 20px;
         text-align: left;
         color: #FFFFFF;
-        background: #187C85;
+        background: url(${closeIcon}) right 10px center no-repeat;
+        background-color: #187C85;
         display: none;
 
         @media (max-width: 767px) {
@@ -452,6 +454,10 @@ const MCIResourceBody = styled.div`
             width: 100%;
         }
 
+        .mciSection {
+            padding: 0 5px;
+        }
+
         .mciSubtitle {
             margin-left: 0;
         }
@@ -589,7 +595,7 @@ const MCIResourceView = () => {
                                     <div key={mcikey}>
                                         <div id={mci.id} className='mciTitle'>{mci.topic && mci.topic}</div>
                                         <div id={mci.id} name={mciidx} className='mciTitleMobile' onClick={handleCollapseSection}>{mci.topic && mci.topic}</div>
-                                        <div style={mciidx === 0 ? {display: 'block'}: {display: 'none'}} ref={sectionList.current[mciidx]}>
+                                        <div className="mciSection" style={mciidx === 0 ? {display: 'block'}: {display: 'none'}} ref={sectionList.current[mciidx]}>
                                         {
                                             mci.list.map((mciItem, idx) => {
                                                 return (

@@ -147,12 +147,13 @@ const MCIDiseaseTable = ({ table, donut }) => {
 
                     {
                         table.body.map((bodyItem, idx) => {
-                            const key = `mcitable_${idx}`;
+                            const key1 =  `diseasetable1_${idx}`;
+                            const key2 =  `diseasetable2_${idx}`;
                             return (
                                 <>
 
-                                    <div className='mciTableBodyListItem' key={key}>{bodyItem[0]}</div>
-                                    <div className='mciTableBodyListItem' key={key}>{bodyItem[1]}</div>
+                                    <div className='mciTableBodyListItem' key={key1}>{bodyItem[0]}</div>
+                                    <div className='mciTableBodyListItem' key={key2}>{bodyItem[1]}</div>
                                 </>
                             )
                         })

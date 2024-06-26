@@ -112,11 +112,12 @@ const MapMobileView = ( {mapData} ) => {
             <div className='mciTableBodyList'>
                 {
                     mapData.data.map((bodyItem, idx) => {
-                        const key =  `mcitable_${idx}`;
+                        const key1 =  `maptable1_${idx}`;
+                        const key2 =  `maptable2_${idx}`;
                         return (
                             <>
-                                <div className='mciTableBodyListItem Name' key={key}>{bodyItem[2]}</div>
-                                <div className='mciTableBodyListItem Number' key={key}>{bodyItem[3]}</div>
+                                <div className='mciTableBodyListItem Name' key={key1}>{bodyItem[2]}</div>
+                                <div className='mciTableBodyListItem Number' key={key2}>{bodyItem[3]}</div>
                             </>
                         )
                     })

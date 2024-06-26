@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, createRef } from 'react';
 import styled from 'styled-components';
 import ReactHtmlParser from 'html-react-parser';
 import { NavLink } from 'react-router-dom';
@@ -268,6 +268,32 @@ const MCIResourceBody = styled.div`
         letter-spacing: -0.02em;
         margin-bottom: 20px;
         color: #05555C;
+
+        @media (max-width: 767px) {
+            display: none;
+        }
+    }
+
+    .mciTitleMobile {
+        width: 100%;
+        padding: 12px 10px;
+        margin-bottom: 20px;
+        font-family: Open Sans;
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 20px;
+        text-align: left;
+        color: #FFFFFF;
+        background: #187C85;
+        display: none;
+
+        @media (max-width: 767px) {
+            display: block;
+        }
+    }
+
+    .mciTitleMobile:hover {
+        cursor: pointer;
     }
 
     .mciSubtitle {
@@ -422,6 +448,10 @@ const MCIResourceBody = styled.div`
             padding: 0 16px;
         }
 
+        .contentList {
+            width: 100%;
+        }
+
         .mciSubtitle {
             margin-left: 0;
         }
@@ -445,6 +475,10 @@ const MCIResourceBody = styled.div`
 const MCIResourceView = () => {
     const [selectedNavTitle, setSelectedNavTitle] = useState('');
     const [stickyNavStyle, setStickyNavStyle] = useState('navList');
+    const sectionList = useRef([]);
+    sectionList.current = MCIContent.map((element, i) => {
+        return sectionList.current[i] || createRef()
+    });
     const handleScroll = () => {
         const bodyElement = document.getElementById('MCIBody');
         const footerList = document.getElementsByTagName('footer');
@@ -485,6 +519,16 @@ const MCIResourceView = () => {
             top: element.offsetTop - 55,
             behavior: "smooth" 
         });
+    }
+
+    const handleCollapseSection = e => {
+        const i = e.target.getAttribute("name")
+        const currentDisplay = sectionList.current[i].current.style.display;
+        if (currentDisplay === 'block') {
+            sectionList.current[i].current.style.display = 'none';
+        } else {
+            sectionList.current[i].current.style.display = 'block';
+        }
     }
 
     return (
@@ -539,15 +583,17 @@ const MCIResourceView = () => {
                 <div className='contentSection'>
                     <div className='contentList'>
                         {
-                            MCIContent.map((mci, mciid) => {
-                                const mcikey = `mci_${mciid}`;
+                            MCIContent.map((mci, mciidx) => {
+                                const mcikey = `mci_${mciidx}`;
                                 return (
                                     <div key={mcikey}>
                                         <div id={mci.id} className='mciTitle'>{mci.topic && mci.topic}</div>
+                                        <div id={mci.id} name={mciidx} className='mciTitleMobile' onClick={handleCollapseSection}>{mci.topic && mci.topic}</div>
+                                        <div style={mciidx === 0 ? {display: 'block'}: {display: 'none'}} ref={sectionList.current[mciidx]}>
                                         {
-                                            mci.list.map((mciItem) => {
+                                            mci.list.map((mciItem, idx) => {
                                                 return (
-                                                    <div>
+                                                    <>
                                                         <div id={mciItem.id} className='mciSubtitle'>{mciItem.subtopic && mciItem.subtopic}</div>
                                                         <div className='mciContentContainer'>
                                                             {mciItem.content && ReactHtmlParser(mciItem.content)}
@@ -608,10 +654,11 @@ const MCIResourceView = () => {
                                                             } */}
                                                         </div>
                                                         {mciItem.content && <div style={{height: '40px'}} />}
-                                                    </div>
+                                                    </>
                                                 )
                                             })
                                         }
+                                        </div>
                                     </div>
                                 )
                             })

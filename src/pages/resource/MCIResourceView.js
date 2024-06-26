@@ -515,15 +515,22 @@ const MCIResourceView = () => {
                     <div className={stickyNavStyle} id='leftNav'>
                         <div className='navTitle'>TOPICS</div>
                         {
-                            MCIContent.map((mciItem, topicid) => {
+                            MCIContent.map((mci, topicid) => {
                                 const topickey = `topic_${topicid}`;
-                                if (mciItem.topic) {
-                                    return (
-                                        <div name={mciItem.id} className={selectedNavTitle === mciItem.id ? 'navTopicItem selected' : 'navTopicItem'} key={topickey} onClick={handleClickEvent}>{mciItem.topic}</div>
-                                    )
-                                }
                                 return (
-                                    <div name={mciItem.id} className={selectedNavTitle === mciItem.id ? 'navTopicItem selected subtitle' : 'navTopicItem subtitle'} key={topickey} onClick={handleClickEvent}>{mciItem.subtopic}</div>
+                                    <>
+                                        <div name={mci.id} className={selectedNavTitle === mci.id ? 'navTopicItem selected' : 'navTopicItem'} key={topickey} onClick={handleClickEvent}>{mci.topic}</div>
+                                        <div>
+                                            {
+                                                mci.list.map((mciItem, idx) => {
+                                                    const listItemKey = `listItem_${idx}`;
+                                                        return (
+                                                            <div name={mciItem.id} className={selectedNavTitle === mciItem.id ? 'navTopicItem selected subtitle' : 'navTopicItem subtitle'} key={listItemKey} onClick={handleClickEvent}>{mciItem.subtopic}</div>
+                                                        )
+                                                })
+                                            }
+                                        </div>
+                                    </>
                                 )
                             })
                         }
@@ -532,71 +539,79 @@ const MCIResourceView = () => {
                 <div className='contentSection'>
                     <div className='contentList'>
                         {
-                            MCIContent.map((mciItem, mciid) => {
+                            MCIContent.map((mci, mciid) => {
                                 const mcikey = `mci_${mciid}`;
                                 return (
                                     <div key={mcikey}>
-                                        <div id={mciItem.id} className='mciTitle'>{mciItem.topic && mciItem.topic}</div>
-                                        <div id={mciItem.id} className='mciSubtitle'>{mciItem.subtopic && mciItem.subtopic}</div>
-                                        <div className='mciContentContainer'>
-                                            {mciItem.content && ReactHtmlParser(mciItem.content)}
-                                            {/* {mciItem.donut && 
-                                            <div className='donutContainer'>
-                                                <div className='donutTitleContainer'><h4>{mciItem.donut.title}</h4></div>
-                                                <DonutChart
-                                                    data={mciItem.donut.data}
-                                                    innerRadiusP={65}
-                                                    outerRadiusP={115}
-                                                    paddingSpace={mciItem.donut.length === 1 ? 0 : 0.5}
-                                                    textColor="black"
-                                                />
-                                            </div>
-                                            } */}
-                                            {mciItem.diseaseTable && mciItem.diseaseDonut && 
-                                            <>
-                                                <div className='MCIDiseaseTableContainer'><MCIDiseaseTable table={mciItem.diseaseTable} donut={mciItem.diseaseDonut}/></div>
-                                                <div className='MCIDiseaseTableMobileContainer'><MCIDiseaseTableMobile table={mciItem.diseaseTable}/></div>
-                                                <div>{mciItem.diseaseTable.footer}</div>
-                                            </>
-                                            }
-                                            {mciItem.map &&
-                                            <>
-                                                <div className='MapContainer'><MapView mapData={mciItem.map} /></div>
-                                                <div className='MapMobileContainer'><MapViewMobile mapData={mciItem.map}/></div>
-                                            </>
-                                            }
-                                            {mciItem.content && mciItem.content.includes('CCDI Data Ecosystem?') && 
-                                            <>
-                                                <img className="ecosystemImg" src={ccdiDataEcosystemImg} alt="CCDI Data Ecosystem"/>
-                                                <img className="ecosystemImgMobile" src={ccdiDataEcosystemMobileImg} alt="CCDI Data Ecosystem Mobile"/>
-                                                <p style={{marginTop: '24px'}}>MCI assays and data types, and the data flow to patients, providers, and the CCDI Data Ecosystem.</p>
-                                            </>
-                                            }
-                                            {mciItem.table &&
-                                            <>
-                                                <div className='MCITableContainer'><MCITable table={mciItem.table} /></div>
-                                                <div className='MCITableMobileContainer'><MCITableMobile table={mciItem.table} /></div>
-                                                <div>{mciItem.table.footer}</div>
-                                            </>
-                                            }
-                                            {mciItem.annotation && 
-                                            <>
-                                                <p style={{marginTop: "1em"}}>{mciItem.annotation}</p>
-                                            </>
-                                            }
-                                            {mciItem.searchTable &&
-                                            <>
-                                                <div className='MCISearchTableContainer'><MCISearchTable table={mciItem.searchTable} /></div>
-                                                <div className='MCISearchTableMobileContainer'><MCISearchTableMobile table={mciItem.searchTable} /></div>
-                                            </> }
-                                            {/* {mciItem.numberTable && 
-                                            <>
-                                                <MCINumberTable table={mciItem.numberTable} />
-                                                <div>{mciItem.numberTable.footer}</div>
-                                            </>
-                                            } */}
-                                        </div>
-                                        {mciItem.content && <div style={{height: '40px'}} />}
+                                        <div id={mci.id} className='mciTitle'>{mci.topic && mci.topic}</div>
+                                        {
+                                            mci.list.map((mciItem) => {
+                                                return (
+                                                    <div>
+                                                        <div id={mciItem.id} className='mciSubtitle'>{mciItem.subtopic && mciItem.subtopic}</div>
+                                                        <div className='mciContentContainer'>
+                                                            {mciItem.content && ReactHtmlParser(mciItem.content)}
+                                                            {/* {mciItem.donut && 
+                                                            <div className='donutContainer'>
+                                                                <div className='donutTitleContainer'><h4>{mciItem.donut.title}</h4></div>
+                                                                <DonutChart
+                                                                    data={mciItem.donut.data}
+                                                                    innerRadiusP={65}
+                                                                    outerRadiusP={115}
+                                                                    paddingSpace={mciItem.donut.length === 1 ? 0 : 0.5}
+                                                                    textColor="black"
+                                                                />
+                                                            </div>
+                                                            } */}
+                                                            {mciItem.diseaseTable && mciItem.diseaseDonut && 
+                                                            <>
+                                                                <div className='MCIDiseaseTableContainer'><MCIDiseaseTable table={mciItem.diseaseTable} donut={mciItem.diseaseDonut}/></div>
+                                                                <div className='MCIDiseaseTableMobileContainer'><MCIDiseaseTableMobile table={mciItem.diseaseTable}/></div>
+                                                                <div>{mciItem.diseaseTable.footer}</div>
+                                                            </>
+                                                            }
+                                                            {mciItem.map &&
+                                                            <>
+                                                                <div className='MapContainer'><MapView mapData={mciItem.map} /></div>
+                                                                <div className='MapMobileContainer'><MapViewMobile mapData={mciItem.map}/></div>
+                                                            </>
+                                                            }
+                                                            {mciItem.content && mciItem.content.includes('CCDI Data Ecosystem?') && 
+                                                            <>
+                                                                <img className="ecosystemImg" src={ccdiDataEcosystemImg} alt="CCDI Data Ecosystem"/>
+                                                                <img className="ecosystemImgMobile" src={ccdiDataEcosystemMobileImg} alt="CCDI Data Ecosystem Mobile"/>
+                                                                <p style={{marginTop: '24px'}}>MCI assays and data types, and the data flow to patients, providers, and the CCDI Data Ecosystem.</p>
+                                                            </>
+                                                            }
+                                                            {mciItem.table &&
+                                                            <>
+                                                                <div className='MCITableContainer'><MCITable table={mciItem.table} /></div>
+                                                                <div className='MCITableMobileContainer'><MCITableMobile table={mciItem.table} /></div>
+                                                                <div>{mciItem.table.footer}</div>
+                                                            </>
+                                                            }
+                                                            {mciItem.annotation && 
+                                                            <>
+                                                                <p style={{marginTop: "1em"}}>{mciItem.annotation}</p>
+                                                            </>
+                                                            }
+                                                            {mciItem.searchTable &&
+                                                            <>
+                                                                <div className='MCISearchTableContainer'><MCISearchTable table={mciItem.searchTable} /></div>
+                                                                <div className='MCISearchTableMobileContainer'><MCISearchTableMobile table={mciItem.searchTable} /></div>
+                                                            </> }
+                                                            {/* {mciItem.numberTable && 
+                                                            <>
+                                                                <MCINumberTable table={mciItem.numberTable} />
+                                                                <div>{mciItem.numberTable.footer}</div>
+                                                            </>
+                                                            } */}
+                                                        </div>
+                                                        {mciItem.content && <div style={{height: '40px'}} />}
+                                                    </div>
+                                                )
+                                            })
+                                        }
                                     </div>
                                 )
                             })

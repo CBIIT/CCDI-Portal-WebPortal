@@ -465,6 +465,7 @@ const MCIResourceBody = styled.div`
         }
 
         .mobileCollapse {
+            display: block;
             @media (max-width: 767px) {
                 display: none;
             }

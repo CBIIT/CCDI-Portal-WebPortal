@@ -8,6 +8,7 @@ import headerMobileImg from '../../assets/resources/MCI_header_white_mobile.png'
 import exportIcon from '../../assets/resources/Explore_Icon.svg';
 import exportIconBlue from '../../assets/icons/Export_Icon.svg';
 import closeIcon from '../../assets/icons/Close_Icon.svg';
+import arrowDownIcon from '../../assets/icons/Arrow_Down.svg';
 import ccdiDataEcosystemImg from '../../assets/resources/MCI_CCDI_Data_Ecosystem.png';
 import ccdiDataEcosystemMobileImg from '../../assets/resources/MCI_CCDI_Data_Ecosystem_Mobile.png';
 import MCITable from './components/MCITable';
@@ -293,6 +294,11 @@ const MCIResourceBody = styled.div`
             display: block;
         }
     }
+    
+    .sectionCollapse {
+        background: url(${arrowDownIcon}) right 10px center no-repeat;
+        background-color: #187C85;
+    }
 
     .mciTitleMobile:hover {
         cursor: pointer;
@@ -458,6 +464,12 @@ const MCIResourceBody = styled.div`
             padding: 0 5px;
         }
 
+        .mobileCollapse {
+            @media (max-width: 767px) {
+                display: none;
+            }
+        }
+
         .mciSubtitle {
             margin-left: 0;
         }
@@ -528,12 +540,14 @@ const MCIResourceView = () => {
     }
 
     const handleCollapseSection = e => {
-        const i = e.target.getAttribute("name")
+        const i = e.target.getAttribute("name");
         const currentDisplay = sectionList.current[i].current.style.display;
         if (currentDisplay === 'block') {
             sectionList.current[i].current.style.display = 'none';
+            e.target.className = 'mciTitleMobile sectionCollapse';
         } else {
             sectionList.current[i].current.style.display = 'block';
+            e.target.className = 'mciTitleMobile';
         }
     }
 
@@ -594,8 +608,8 @@ const MCIResourceView = () => {
                                 return (
                                     <div key={mcikey}>
                                         <div id={mci.id} className='mciTitle'>{mci.topic && mci.topic}</div>
-                                        <div id={mci.id} name={mciidx} className='mciTitleMobile' onClick={handleCollapseSection}>{mci.topic && mci.topic}</div>
-                                        <div className="mciSection" style={mciidx === 0 ? {display: 'block'}: {display: 'none'}} ref={sectionList.current[mciidx]}>
+                                        <div id={mci.id} name={mciidx} className='mciTitleMobile sectionCollapse' onClick={handleCollapseSection}>{mci.topic && mci.topic}</div>
+                                        <div className="mciSection mobileCollapse" ref={sectionList.current[mciidx]}>
                                         {
                                             mci.list.map((mciItem, idx) => {
                                                 return (

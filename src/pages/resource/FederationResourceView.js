@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ReactHtmlParser from 'html-react-parser';
-import { NavLink } from 'react-router-dom';
 import headerImg from '../../assets/resources/MCI_header_white.png';
 import exportIcon from '../../assets/resources/Explore_Icon.svg';
 import { federationContent } from '../../bento/federationData';
 import exportIconBlue from '../../assets/icons/Export_Icon.svg';
 import ccdiDataAccessImg from '../../assets/resources/Federation_CCDI_Data_Access.png';
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 
 const FederationResourceContainer = styled.div`
@@ -302,13 +300,6 @@ const FederationResourceView = () => {
 
     return (
         <FederationResourceContainer>
-            <div className='resourceBreadcrumbContainer'>
-                <div className='resourceBreadcrumb'>
-                    <NavLink className="breadcrumbLink" to='/'>Home</NavLink>
-                    <ArrowForwardIosIcon className='arrowIcon' alt="arrowIcon"/>
-                    <span>CCDI Federated Data Resource</span>
-                    </div>
-            </div>
             <div className='resourceHeader'><div className='resourceHeaderBackground'><div className='resourceHeaderText'>CCDI Hub</div></div></div>
             <div className='resourceTitleContainer'>
                 <div className='resourceTitle'>

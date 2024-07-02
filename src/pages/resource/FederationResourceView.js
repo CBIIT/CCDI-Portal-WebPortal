@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ReactHtmlParser from 'html-react-parser';
-import headerImg from '../../assets/resources/MCI_header_white.png';
+import headerImg from '../../assets/resources/Federation_Header.png';
 import exportIcon from '../../assets/resources/Explore_Icon.svg';
 import { federationContent } from '../../bento/federationData';
 import exportIconBlue from '../../assets/icons/Export_Icon.svg';
@@ -303,7 +303,7 @@ const FederationResourceView = () => {
             <div className='resourceHeader'><div className='resourceHeaderBackground'><div className='resourceHeaderText'>CCDI Hub</div></div></div>
             <div className='resourceTitleContainer'>
                 <div className='resourceTitle'>
-                    Federation
+                    CCDI Hub Federation
                     <div className='goToSiteButton'>
                         <a className='goToSiteText' href="https://cbiit.github.io/ccdi-federation-api-aggregation/" target="_blank" rel="noopener noreferrer">API Access</a>
                     </div>

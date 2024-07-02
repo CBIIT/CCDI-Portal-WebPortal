@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, createRef } from 'react';
 import styled from 'styled-components';
 import ReactHtmlParser from 'html-react-parser';
 import { NavLink } from 'react-router-dom';
-import { MCIContent } from '../../bento/mciData';
+import { MCIContent, introText } from '../../bento/mciData';
 import headerImg from '../../assets/resources/MCI_header_white.png';
 import headerMobileImg from '../../assets/resources/MCI_header_white_mobile.png';
 import exportIcon from '../../assets/resources/Explore_Icon.svg';
@@ -260,6 +260,22 @@ const MCIResourceBody = styled.div`
         width: calc(100% - 240px);
         padding: 0 32px 0 36px;
         margin-bottom: 100px;
+    }
+
+    .introContainer {
+        font-family: Inter;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 22px;
+        margin-bottom: 50px;
+
+        a {
+            color: #455299;
+            font-weight: 600;
+            text-decoration: underline;
+            text-underline-position: under;
+            line-break: anywhere;
+        }
     }
 
     .mciTitle {
@@ -603,6 +619,7 @@ const MCIResourceView = () => {
                 </div>
                 <div className='contentSection'>
                     <div className='contentList'>
+                        <div className='introContainer'>{ReactHtmlParser(introText)}</div>
                         {
                             MCIContent.map((mci, mciidx) => {
                                 const mcikey = `mci_${mciidx}`;

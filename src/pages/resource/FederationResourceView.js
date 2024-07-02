@@ -340,7 +340,7 @@ const FederationResourceView = () => {
                                         <div className='mciContentContainer'>
                                             {federationItem.content && ReactHtmlParser(federationItem.content)}
                                             
-                                            {federationItem.content && federationItem.content.includes('CCDI’s data federation API') && 
+                                            {federationItem.id && federationItem.id.includes('Data_Access') && 
                                             <>
                                                 <img src={ccdiDataAccessImg} alt="Federation CCDI Data Access"/>
                                             </>

@@ -29,6 +29,7 @@ const MCIResourceContainer = styled.div`
     .resourceBreadcrumbContainer {
         // width: 1420px;
         margin: 0 auto;
+        display: none;
     }
 
     .resourceBreadcrumb {

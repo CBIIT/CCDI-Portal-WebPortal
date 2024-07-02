@@ -303,7 +303,7 @@ const FederationResourceView = () => {
             <div className='resourceHeader'><div className='resourceHeaderBackground'><div className='resourceHeaderText'>CCDI Hub</div></div></div>
             <div className='resourceTitleContainer'>
                 <div className='resourceTitle'>
-                    CCDI Hub Federation
+                    CCDI Data Federation Resource 
                     <div className='goToSiteButton'>
                         <a className='goToSiteText' href="https://cbiit.github.io/ccdi-federation-api-aggregation/" target="_blank" rel="noopener noreferrer">API Access</a>
                     </div>

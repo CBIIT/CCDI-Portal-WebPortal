@@ -31,7 +31,7 @@ const Layout = () => {
           <Route path="/explore" element={<Inventory />} />
           <Route path="/fileCentricCart" element={<Cart />} />
           <Route path="/MCI" element={<MCIResourceView />} />
-          <Route path="/federation" element={<FederationResourceView/>} />
+          <Route path="/data_federation_resource" element={<FederationResourceView/>} />
           <Route path="*" element={<Error />} />
         </Routes>
         <Footer />

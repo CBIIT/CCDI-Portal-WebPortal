@@ -96,8 +96,8 @@ Applications: [
     className: 'navMobileSubItem',
   },
   {
-    name:'Federated Data Resource',
-    link: '/federation',
+    name:'Data Federation Resource',
+    link: '/data_federation_resource',
     className: 'navMobileSubItem',
   }],
 "Other Resources": [

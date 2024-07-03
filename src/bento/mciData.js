@@ -4,11 +4,11 @@ export const introText = '<p>The CCDI Molecular Characterization Initiative (MCI
 export const MCIContent = [
     {
         id: 'MCI_Introduction',
-        topic: 'Introduction and Participation',
+        topic: 'Enrollment and Participation',
         list: [
             {
                 id: 'Enrollment_Metrics',
-                subtopic: 'Enrollment Metrics',
+                subtopic: 'APEC14B1-MCI Enrollment Metrics',
                 content: '<p>The MCI enrollment metrics are based on counts of patients enrolled with MCI through Project:EveryChild (APEC14B1) and are based on monthly COG reporting.</p>',
                 numberTable: {
                     title: 'List of Institutions for Enrollments in MCI (APEC14B1-MCI) by Diagnosis Type',

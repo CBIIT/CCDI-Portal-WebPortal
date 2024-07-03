@@ -23,13 +23,12 @@ const MCISearchTableContainer = styled.div`
     .mciTableTitleText {
         max-width: 434px;
         margin: 0 auto;
-        padding: 15px 0;
+        padding: 15px 10px;
         background: #EEF4F8;
     }
 
     .mciTableHeader {
-        display: flex;
-        padding: 12px 0;
+        padding-bottom: 12px;
         border-top: 3px solid #42779A;
         border-bottom: 3px solid #42779A;
         justify-content: center;
@@ -42,10 +41,15 @@ const MCISearchTableContainer = styled.div`
         line-height: 30px;
         letter-spacing: -0.02em;
         color: #4D889E;
+        text-align: center;
+    }
+
+    .searchBox {
+        display: flex;
     }
 
     .searchboxContainer {
-        width: 229px;
+        width: calc(100% - 60px);
         height: 30px;
         border: 1.5px solid #4D889E;
         border-radius: 8px;
@@ -70,12 +74,12 @@ const MCISearchTableContainer = styled.div`
     }
 
     .mciTableBodyList {
-        height: 285.5px;
+        height: 200px;
         overflow: scroll;
         overflow-x: hidden;
         display: grid;
-        grid-template-columns: repeat(8, 1fr);
-        grid-template-rows: repeat(8, 1fr);
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(4, 1fr);
     }
 
     .mciTableBodyList::-webkit-scrollbar {
@@ -94,25 +98,24 @@ const MCISearchTableContainer = styled.div`
         font-family: Open Sans;
         font-size: 14px;
         font-weight: 400;
-        line-height: 35px;
-        text-align: center;
+        line-height: 50px;
+        padding-left: 10px;
         border-right: 0.5px solid #000000;
         border-bottom: 0.5px solid #000000;
-    }
-
-    .mciTableBodyList .mciTableBodyListItem:nth-child(8n+1){
-        border-left: 0.5px solid #000000;
-    }
-
-    .mciTableBodyList .mciTableBodyListItem:nth-child(16n+1),
-    .mciTableBodyList .mciTableBodyListItem:nth-child(16n+2),
-    .mciTableBodyList .mciTableBodyListItem:nth-child(16n+3),
-    .mciTableBodyList .mciTableBodyListItem:nth-child(16n+4),
-    .mciTableBodyList .mciTableBodyListItem:nth-child(16n+5),
-    .mciTableBodyList .mciTableBodyListItem:nth-child(16n+6),
-    .mciTableBodyList .mciTableBodyListItem:nth-child(16n+7),
-    .mciTableBodyList .mciTableBodyListItem:nth-child(16n+8){
         background: #F4F5F5;
+    }
+
+    .mciTableBodyList .mciTableBodyListItem:nth-child(8n+1),
+    .mciTableBodyList .mciTableBodyListItem:nth-child(8n+2),
+    .mciTableBodyList .mciTableBodyListItem:nth-child(8n+3),
+    .mciTableBodyList .mciTableBodyListItem:nth-child(8n+4){
+        background: #FFFFFF;
+    }
+
+    @media (max-width: 430px) {
+        .mciTableBodyListItem {
+            padding-left: 2px;
+        }
     }
 `;
 
@@ -125,7 +128,7 @@ const SearchInput = styled.input`
   line-height: 20px;
   color: #000000;
   height: 26px;
-  width: 192px;
+  width: calc(100% - 23px);
   background: transparent;
 
   ::placeholder {
@@ -134,6 +137,7 @@ const SearchInput = styled.input`
     font-weight: 400;
     line-height: 16px;
     color: #646464;
+    text-align: center;
   }
 
   :focus {
@@ -141,7 +145,7 @@ const SearchInput = styled.input`
   }
 `;
 
-const MCISearchTable = ( {table} ) => {
+const MCISearchTableMobile = ( {table} ) => {
     const tableListAll = table.body.split(", ");
     const [inputValue, setInputValue] = useState('');
     const [tableList, setTableList] = useState(tableListAll);
@@ -176,10 +180,12 @@ const MCISearchTable = ( {table} ) => {
             <div className='mciTableTitle'><div className='mciTableTitleText'>{table.title}</div></div>
             <div className='mciTableHeader'>
                 <div className='mciTableHeaderTitle'>Search</div>
-                <div className='searchboxContainer'>
-                    <SearchInput type="text" value={inputValue} placeholder='e.g. A1CF, CREB3L1, PIK3CA' onChange={handleTextInputChange} />
+                <div className='searchBox'>
+                    <div className='searchboxContainer'>
+                        <SearchInput type="text" value={inputValue} placeholder='e.g. A1CF, CREB3L1, PIK3CA' onChange={handleTextInputChange} />
+                    </div>
+                    <div className={inputValue !== '' ? 'clearIconContainer active' : 'clearIconContainer'} onClick={() => setInputValue("")} />
                 </div>
-                <div className={inputValue !== '' ? 'clearIconContainer active' : 'clearIconContainer'} onClick={() => setInputValue("")} />
             </div>
             <div className='mciTableBodyList'>
                 {
@@ -195,4 +201,4 @@ const MCISearchTable = ( {table} ) => {
     )
 };
 
-export default MCISearchTable;
+export default MCISearchTableMobile;

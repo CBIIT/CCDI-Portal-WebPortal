@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import DonutChart from '../../../components/common/DonutChart';
 
-const MCITableContainer = styled.div`
-margin: 20px 74px;
+const MCITableMobileContainer = styled.div`
+margin: 20px 0;
 border: 1px solid #BDBDBD;
 height: 900;
 
@@ -24,8 +23,9 @@ height: 900;
 }
 
 .mciTableHeaderList {
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 230px auto;
 }
 
 .mciTableHeaderListItem {
@@ -36,10 +36,7 @@ height: 900;
     line-height: 20px;
     letter-spacing: -0.02em;
     text-align: center;
-    border-right: 1px solid #42779A;
 }
-
-
 
 .headerText {
     position: relative;
@@ -49,20 +46,15 @@ height: 900;
     transform: translate(-50%, -50%);
 }
 
-.mciTableBody{
+.mciTableBody {
     display: flex;
 }
 
-.mciTableDonut {
-    width: 33.2%
-    min-width: 180px;
-}
-
 .mciTableBodyList {
-    width: 66.66%
+    width: 100%;
     overflow-x: hidden;
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 230px auto;
 }
 
 .mciTableBodyList::-webkit-scrollbar {
@@ -82,50 +74,34 @@ height: 900;
     font-family: Open Sans;
     font-size: 14px;
     font-weight: 400;
-    line-height: 17px;
+    line-height: 26px;
     letter-spacing: 0em;
-    text-align: center;
     background: #F4F5F5;
-    border-left: 1px solid #42779A;
 }
 
-.donutContainer {
-    display: flex;
-}
-
-.donutTitleContainer {
-    width: 100%;
-    font-family: Poppins;
-    font-size: 19px;
-    font-weight: 400;
-    line-height: 21px;
-    letter-spacing: 0.02em;
-    text-align: center;
-
-    h4 {
-        width: 400px;
-        margin: 120px 0 0 150px;
-    }
-}
-
-.mciTableHeaderList .mciTableHeaderListItem:nth-child(1){
-    min-width: 180px;
+.mciTableHeaderList .mciTableHeaderListItem:nth-child(1) {
+    border-right: 1px solid #42779A;
 }
 
 .mciTableBodyList .mciTableBodyListItem:nth-child(4n+1),
-.mciTableBodyList .mciTableBodyListItem:nth-child(4n+2)
-{
+.mciTableBodyList .mciTableBodyListItem:nth-child(4n+2){
     background: #FFFFFF;
 }
+
+.mciTableBodyList .mciTableBodyListItem:nth-child(even){
+    border-left: 0.5px solid #000000;
+    text-align: center;
+}
+
 `;
 
-const MCIDiseaseTable = ({ table, donut }) => {
+const MCIDiseaseTableMobile = ({ table }) => {
     return (
-        <MCITableContainer>
+        <MCITableMobileContainer>
             <div className='mciTableTitle'>{table.title}</div>
             <div className='mciTableHeader'>
                 <div className='mciTableHeaderList'>
-                    {table.header.map((headerItem, idx) => {
+                    {table.header.filter(headerItem => headerItem).map((headerItem, idx) => {
                         const key = `mcitable_${idx}`;
                         return (
                             <div className='mciTableHeaderListItem' key={key}>{headerItem}</div>
@@ -134,21 +110,12 @@ const MCIDiseaseTable = ({ table, donut }) => {
                 </div>
             </div>
             <div className='mciTableBody'>
-                <div className='mciTableDonut'>
-                    <DonutChart
-                        data={donut.data}
-                        innerRadiusP='50%'
-                        outerRadiusP='85%'
-                        paddingSpace={donut.length === 1 ? 0 : 0.5}
-                        textColor="black"
-                    />
-                </div>
                 <div className='mciTableBodyList'>
 
                     {
                         table.body.map((bodyItem, idx) => {
-                            const key1 =  `diseasetable1_${idx}`;
-                            const key2 =  `diseasetable2_${idx}`;
+                            const key1 =  `diseasemobile1_${idx}`;
+                            const key2 =  `diseasemobile2_${idx}`;
                             return (
                                 <>
 
@@ -161,8 +128,8 @@ const MCIDiseaseTable = ({ table, donut }) => {
                 </div>
             </div>
 
-        </MCITableContainer>
+        </MCITableMobileContainer>
     )
 };
 
-export default MCIDiseaseTable;
+export default MCIDiseaseTableMobile;

@@ -296,10 +296,11 @@ const LatestUpdate = () => {
     const isVisible = usePageVisibility();
 
     const getFirstList = () => {
-        let newItemList = [newsList[2]]
-        newItemList = newItemList.concat(newsList.slice(0,3));
-        newItemList = newItemList.concat(newsList.slice(0,2));
-        return newItemList;
+      const latestUpdateList = newsList.filter((item) => item.latestUpdate);
+      let newItemList = [latestUpdateList[2]]
+      newItemList = newItemList.concat(latestUpdateList.slice(0,3));
+      newItemList = newItemList.concat(latestUpdateList.slice(0,2));
+      return newItemList;
     }
 
     const mouseIn = (key) => {

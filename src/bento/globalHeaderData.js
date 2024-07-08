@@ -2,6 +2,8 @@ import Logo from '../assets/header/Portal_Logo.svg';
 import LogoSmall from '../assets/header/Portal_Logo_Small.svg';
 import searchbarIcon from '../assets/header/Search_Icon.svg';
 import cartLogo from '../assets/header/Cart_Logo.svg';
+import usFlagSmall from "../assets/header/us_flag_small.png";
+import dataAccessPDF from "../assets/about/CCDI_CGC_Data_Access_Instructions_2.0.pdf";
 
 // globalHeaderLogo image 468x100
 // globalHeaderImage: image 2200x100
@@ -12,6 +14,10 @@ export const headerData = {
   globalHeaderLogoAltText: 'Portal Logo',
   globalHeaderSearchIcon: searchbarIcon,
   globalHeaderSearchIconAltText: 'search Icon',
+};
+
+export const USGovBannerData = {
+  logo: usFlagSmall,
 };
 
 export const navMobileList = [
@@ -43,7 +49,7 @@ export const navMobileList = [
   {
       name: 'About',
       link: '/about',
-      className: 'navMobileItem',
+      className: 'navMobileItem clickable',
   },
   {
     name: 'My File',
@@ -58,6 +64,11 @@ Applications: [
     name:'Applications',
     link: '',
     className: 'navMobileSubTitle',
+  },
+  {
+    name: 'Childhood Cancer Clinical Data Commons',
+    link: 'https://clinicalcommons.ccdi.cancer.gov/',
+    className: 'navMobileSubItem'
   },
   {
     name:'Childhood Cancer Data Catalog',
@@ -99,6 +110,17 @@ Applications: [
     name:'Database of Genotypes and Phenotypes',
     link: 'https://www.ncbi.nlm.nih.gov/gap',
     className: 'navMobileSubItem',
+  }],
+  "About": [
+    {
+      name: 'About CCDI Hub',
+      link: '/about',
+      className: 'navMobileSubItem',
+    },
+    {
+      name: 'Accessing CCDI Data (PDF)',
+      link: dataAccessPDF,
+      className: 'navMobileSubItem',
   }],
 };
 

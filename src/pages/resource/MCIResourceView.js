@@ -9,9 +9,10 @@ import exportIconBlue from '../../assets/icons/Export_Icon.svg';
 import ccdiDataEcosystemImg from '../../assets/resources/MCI_CCDI_Data_Ecosystem.png';
 import MCITable from './components/MCITable';
 import MCISearchTable from './components/MCISearchTable';
+import MCIDiseaseTable from './components/MCIDiseaseTable';
 //import MCINumberTable from './components/MCINumberTable';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-import DonutChart from '../../components/common/DonutChart';
+//import DonutChart from '../../components/common/DonutChart';
 import MapView from '../../components/common/mapGenerator';
 
 const MCIResourceContainer = styled.div`
@@ -160,6 +161,10 @@ const MCIResourceBody = styled.div`
         color: #05555C;
     }
 
+    .subtitle {
+        margin-left: 20px;
+    }
+
     .contentSection {
         display: flex;
         width: 80%;
@@ -177,8 +182,33 @@ const MCIResourceBody = styled.div`
         color: #05555C;
     }
 
+    .mciSubtitle {
+        color: #05555C;
+        font-family: Poppins;
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 26px; /* 118.182% */
+        letter-spacing: -0.044px;
+        text-transform: uppercase;
+        margin-left: 20px;
+        margin-bottom: 24px;
+    }
+
     p {
         margin-top: 0;
+    }
+
+    h3 {
+        color: #05555C;
+        font-family: Poppins;
+        font-size: 18px;
+        font-style: italic;
+        font-weight: 500;
+        line-height: 26px; /* 144.444% */
+        letter-spacing: -0.036px;
+        margin-bottom: 24px;
+        margin-top: -12px;
     }
 
     .mciContentContainer {
@@ -186,7 +216,7 @@ const MCIResourceBody = styled.div`
         font-weight: 400;
         font-size: 16px;
         line-height: 22px;
-        margin-bottom: 60px;
+        margin-left: 20px;
 
         a {
             color: #455299;
@@ -237,7 +267,7 @@ const MCIResourceView = () => {
         const bodyElement = document.getElementById('MCIBody');
         const footerList = document.getElementsByTagName('footer');
         let footer;
-        if (window.innerWidth >= 1024) {
+        if (window.innerWidth > 1204) {
             footer = footerList[0];
         } else if (window.innerWidth > 767) {
             footer = footerList[1];
@@ -300,8 +330,13 @@ const MCIResourceView = () => {
                         {
                             MCIContent.map((mciItem, topicid) => {
                                 const topickey = `topic_${topicid}`;
+                                if (mciItem.topic) {
+                                    return (
+                                        <div name={mciItem.id} className={selectedNavTitle === mciItem.id ? 'navTopicItem selected' : 'navTopicItem'} key={topickey} onClick={handleClickEvent}>{mciItem.topic}</div>
+                                    )
+                                }
                                 return (
-                                    <div name={mciItem.id} className={selectedNavTitle === mciItem.id ? 'navTopicItem selected' : 'navTopicItem'} key={topickey} onClick={handleClickEvent}>{mciItem.topic}</div>
+                                    <div name={mciItem.id} className={selectedNavTitle === mciItem.id ? 'navTopicItem selected subtitle' : 'navTopicItem subtitle'} key={topickey} onClick={handleClickEvent}>{mciItem.subtopic}</div>
                                 )
                             })
                         }
@@ -314,10 +349,11 @@ const MCIResourceView = () => {
                                 const mcikey = `mci_${mciid}`;
                                 return (
                                     <div key={mcikey}>
-                                        <div id={mciItem.id} className='mciTitle'>{mciItem.topic}</div>
+                                        <div id={mciItem.id} className='mciTitle'>{mciItem.topic && mciItem.topic}</div>
+                                        <div id={mciItem.id} className='mciSubtitle'>{mciItem.subtopic && mciItem.subtopic}</div>
                                         <div className='mciContentContainer'>
-                                            {ReactHtmlParser(mciItem.content)}
-                                            {mciItem.donut && 
+                                            {mciItem.content && ReactHtmlParser(mciItem.content)}
+                                            {/*mciItem.donut && 
                                             <div className='donutContainer'>
                                                 <div className='donutTitleContainer'><h4>{mciItem.donut.title}</h4></div>
                                                 <DonutChart
@@ -328,9 +364,21 @@ const MCIResourceView = () => {
                                                     textColor="black"
                                                 />
                                             </div>
+                                            */}
+                                            {mciItem.diseaseTable && mciItem.diseaseDonut && 
+                                            <>
+                                                <MCIDiseaseTable table={mciItem.diseaseTable} donut={mciItem.diseaseDonut}/>
+                                                <div>{mciItem.diseaseTable.footer}</div>
+                                            </>
                                             }
                                             {mciItem.map && <MapView />}
-                                            {mciItem.topic.includes('CCDI Data Ecosystem') && <img src={ccdiDataEcosystemImg} alt="CCDI Data Ecosystem"/>}
+                                            
+                                            {mciItem.content && mciItem.content.includes('CCDI Data Ecosystem?') && 
+                                            <>
+                                                <img src={ccdiDataEcosystemImg} alt="CCDI Data Ecosystem"/>
+                                                <p style={{marginTop: '24px'}}>MCI assays and data types, and the data flow to patients, providers, and the CCDI Data Ecosystem.</p>
+                                            </>
+                                            }
                                             {mciItem.table &&
                                             <>
                                                 <MCITable table={mciItem.table} />
@@ -350,6 +398,7 @@ const MCIResourceView = () => {
                                             </>
                                             */}
                                         </div>
+                                        {mciItem.content && <div style={{height: '40px'}} />}
                                     </div>
                                 )
                             })

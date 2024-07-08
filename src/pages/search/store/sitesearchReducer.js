@@ -10,6 +10,7 @@ const storeKey = 'dashboardTab';
 
 const initialState = {
   sitesearch: {},
+  isOverlayOpen: false,
 };
 
 export async function getPublicSearchPageResults(inputValue) {
@@ -23,11 +24,19 @@ export async function getPublicSearchPageResults(inputValue) {
   return allIds;
 }
 
+export function setOverLayWindow(item) {
+  store.dispatch({ type: 'SET_OVERLAY_WINDOW', payload: item });
+}
+
 // reducers
 const reducers = {
   SET_SEARCH_CRITERIA: (state, item) => ({
     ...state,
     searchCriteria: item,
+  }),
+  SET_OVERLAY_WINDOW: (state, item) => ({
+    ...state,
+    isOverlayOpen: item,
   }),
   REQUEST_DASHBOARDTAB: (state) => ({ ...state, isLoading: true }),
   SET_SIDEBAR_LOADING: (state) => ({ ...state, setSideBarLoading: true }),

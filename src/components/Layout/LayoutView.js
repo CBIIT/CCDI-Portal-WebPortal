@@ -12,6 +12,7 @@ import Inventory from '../../pages/inventory/inventoryController';
 import Cart from '../../pages/cart/cartController';
 import ScrollButton from '../ScrollButton/ScrollButtonView';
 import MCIResourceView from '../../pages/resource/MCIResourceView'
+import OverlayWindow from '../OverlayWindow/OverlayWindow';
 // import NewsDetail from '../../pages/news/newsDetailView';
 
 const Layout = () => {
@@ -19,6 +20,7 @@ const Layout = () => {
     <>
       <CssBaseline />
         <Header />
+        <OverlayWindow />
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />

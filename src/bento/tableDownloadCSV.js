@@ -38,7 +38,7 @@ query sampleOverview($sample_ids: [String], $offset: Int = 0, $first: Int = 1000
 
 export const customSamplesTabDownloadCSV = {
   keysToInclude: ['sample_id', 'participant_id', 'study_id', 'anatomic_site', 'participant_age_at_collection', 'sample_diagnosis_classification', 'sample_tumor_status', 'tumor_classification'],
-  header: ['Sample ID', 'Participant ID', 'Study ID', 'Anatomic Site', 'Age at Sample Collection', 'Diagnosis', 'Sample Tumor Status', 'Sample Tumor Classification'],
+  header: ['Sample ID', 'Participant ID', 'Study ID', 'Sample Anatomic Site', 'Age at Sample Collection (days)', 'Diagnosis', 'Sample Tumor Status', 'Sample Tumor Classification'],
   query: GET_SAMPLES_TAB,
   apiVariable: 'sampleOverview',
   fileName: 'tableDownload',
@@ -58,13 +58,16 @@ query fileOverview($file_ids: [String], $offset: Int = 0, $first: Int = 10, $ord
     sample_id
     file_id
     md5sum
+    library_selection
+    library_source
+    library_strategy
   }
 }
 `;
 
 export const customFilesTabDownloadCSV = {
-  keysToInclude: ['file_name', 'file_category', 'file_description', 'file_type', 'file_size', 'study_id', 'participant_id', 'sample_id', 'file_id', 'md5sum'],
-  header: ['File Name', 'File Category', 'File Description', 'File Type', 'File Size', 'Study ID', 'Participant ID', 'Sample ID', 'GUID', 'MD5sum'],
+  keysToInclude: ['file_name', 'file_category', 'file_description', 'file_type', 'file_size', 'study_id', 'participant_id', 'sample_id', 'file_id', 'md5sum', 'library_selection', 'library_source', 'library_strategy'],
+  header: ['File Name', 'File Category', 'File Description', 'File Type', 'File Size', 'Study ID', 'Participant ID', 'Sample ID', 'GUID', 'MD5sum', 'Library Selection', 'Library Source', 'Library Strategy'],
   query: GET_FILES_TAB,
   apiVariable: 'fileOverview',
   fileName: 'tableDownload',
@@ -91,8 +94,8 @@ query diagnosisOverview($diagnosis_id: [String], $offset: Int = 0, $first: Int =
 `;
 
 export const customDiagnosisTabDownloadCSV = {
-  keysToInclude: ['participant_id', 'phs_accession', 'diagnosis_classification', 'diagnosis_classification_system', 'diagnosis_verification_status', 'diagnosis_basis', 'diagnosis_comment', 'disease_phase', 'anatomic_site', 'age_at_diagnosis', 'vital_status'],
-  header: ['Participant ID', 'Study Accession', 'Diagnosis', 'Diagnosis Classification System', 'Diagnosis Verification Status', 'Diagnosis Basis', 'Diagnosis Comments', 'Disease Phase', 'Anatomic Site', 'Age at Diagnosis (days)', 'Vital Status'],
+  keysToInclude: ['participant_id', 'phs_accession', 'diagnosis_classification', 'anatomic_site', 'diagnosis_classification_system', 'diagnosis_verification_status', 'diagnosis_basis', 'diagnosis_comment', 'disease_phase', 'age_at_diagnosis', 'vital_status'],
+  header: ['Participant ID', 'Study Accession', 'Diagnosis', 'Anatomic Site', 'Diagnosis Classification System', 'Diagnosis Verification Status', 'Diagnosis Basis', 'Diagnosis Comments', 'Disease Phase', 'Age at Diagnosis (days)', 'Vital Status'],
   query: GET_DIAGNOSIS_TAB,
   apiVariable: 'diagnosisOverview',
   fileName: 'tableDownload',
@@ -135,6 +138,9 @@ query filesInList($file_ids: [String], $offset: Int = 0, $first: Int = 1000, $or
         file_size
         file_id
         md5sum
+        library_selection
+        library_source
+        library_strategy
     }
 }`;
 

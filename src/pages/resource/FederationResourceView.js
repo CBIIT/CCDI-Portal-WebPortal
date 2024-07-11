@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import ReactHtmlParser from 'html-react-parser';
 import headerImg from '../../assets/resources/Federation_Header.png';
 import exportIcon from '../../assets/resources/Explore_Icon.svg';
-import { federationContent } from '../../bento/federationData';
+import { federationContent, introText } from '../../bento/federationData';
 import exportIconBlue from '../../assets/icons/Export_Icon.svg';
 import ccdiDataAccessImg from '../../assets/resources/Federation_CCDI_Data_Access.png';
 
@@ -105,6 +105,22 @@ const FederationResourceBody = styled.div`
         width: 20%;
         color: #4D889E;
         position: relative;
+    }
+
+    .introContainer {
+        font-family: Inter;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 22px;
+        margin-bottom: 50px;
+
+        a {
+            color: #455299;
+            font-weight: 600;
+            text-decoration: underline;
+            text-underline-position: under;
+            line-break: anywhere;
+        }
     }
 
     .navList {
@@ -292,9 +308,9 @@ const FederationResourceView = () => {
         const id = event.target.getAttribute('name');
         setSelectedNavTitle(id);
         const element = document.getElementById(id);
-        window.scrollTo({ 
+        window.scrollTo({
             top: element.offsetTop - 55,
-            behavior: "smooth" 
+            behavior: "smooth"
         });
     }
 
@@ -303,7 +319,7 @@ const FederationResourceView = () => {
             <div className='resourceHeader'><div className='resourceHeaderBackground'><div className='resourceHeaderText'>CCDI Hub</div></div></div>
             <div className='resourceTitleContainer'>
                 <div className='resourceTitle'>
-                    CCDI Data Federation Resource 
+                    CCDI Data Federation Resource
                     <div className='goToSiteButton'>
                         <a className='goToSiteText' href="https://cbiit.github.io/ccdi-federation-api-aggregation/" target="_blank" rel="noopener noreferrer">API Access</a>
                     </div>
@@ -330,6 +346,7 @@ const FederationResourceView = () => {
                 </div>
                 <div className='contentSection'>
                     <div className='contentList'>
+                        <div className='introContainer'>{ReactHtmlParser(introText)}</div>
                         {
                             federationContent.map((federationItem, mciid) => {
                                 const mcikey = `federation_${mciid}`;
@@ -339,14 +356,14 @@ const FederationResourceView = () => {
                                         <div id={federationItem.id} className='mciSubtitle'>{federationItem.subtopic && federationItem.subtopic}</div>
                                         <div className='mciContentContainer'>
                                             {federationItem.content && ReactHtmlParser(federationItem.content)}
-                                            
-                                            {federationItem.id && federationItem.id.includes('Data_Access') && 
-                                            <>
-                                                <img src={ccdiDataAccessImg} alt="Federation CCDI Data Access"/>
-                                            </>
+
+                                            {federationItem.id && federationItem.id.includes('Data_Access') &&
+                                                <>
+                                                    <img src={ccdiDataAccessImg} alt="Federation CCDI Data Access" />
+                                                </>
                                             }
                                         </div>
-                                        {federationItem.content && <div style={{height: '40px'}} />}
+                                        {federationItem.content && <div style={{ height: '40px' }} />}
                                     </div>
                                 )
                             })

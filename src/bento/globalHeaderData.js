@@ -81,7 +81,7 @@ Applications: [
     className: 'navMobileSubItem',
   },
   {
-    name: 'Molecular Characterization Initiative for Childhood Cancers',
+    name: 'Molecular Characterization Initiative',
     link: '/MCI',
     className: 'navMobileSubItem',
   },

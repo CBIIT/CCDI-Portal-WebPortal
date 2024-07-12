@@ -49,7 +49,7 @@ export const statsData = [
   {
     num: '',
     title: 'Participants',
-    detail: 'Molecular Characterization Initiative for Childhood Cancer',
+    detail: 'Molecular Characterization Initiative',
   },
   {
     num: 58867,
@@ -90,7 +90,7 @@ export const resourcesAppliationsListData = [
   },
   {
     id: 'mci',
-    title: 'Molecular Characterization Initiative for Childhood Cancers',
+    title: 'Molecular Characterization Initiative',
     subtitle: 'MCI',
     content: 'A program providing molecular testing for children, adolescents, and young adults with certain cancer types.',
     link: '/MCI',
@@ -171,7 +171,7 @@ export const carouselList = [
   {
     img: wheel3,
     mobile: mciMobile,
-    content: 'Molecular Characterization Initiative for Childhood Cancer',
+    content: 'Molecular Characterization Initiative',
     link: '/MCI',
   },
   {

@@ -8,18 +8,19 @@ export const federationContent = [
     {
         id: 'Data_Access',
         topic: 'Data Access',
-        content: '<p>Researchers can search for deidentified individual-level data through the API, which provides metadata that aids in the creation of virtual cohorts across multiple data types from participating resources by accessing '
-                +'<a class="link" href="https://cbiit.github.io/ccdi-federation-api-aggregation/" target="_blank" rel="noopener noreferrer">CCDI\'s federation API.</a></p>'
-                +'<p>To access the CCDI’s data federation API, please click '
+        content: '<p>Researchers can search for deidentified individual-level data through the API, which provides metadata that aids in the creation of virtual cohorts across multiple data types from participating resources by accessing CCDI’s Data Federation Resource API.'
+                +'<p>To access the CCDI Data Federation Resource API, please click '
                 +'<a class="link" href="https://cbiit.github.io/ccdi-federation-api-aggregation/" target="_blank" rel="noopener noreferrer">here</a>.</p>'
-                +'<p>To access specific resource nodes please click '
+                +'<p>To access participating nodes API '
                 +'<a class="link" href="https://cbiit.github.io/ccdi-federation-api/" target="_blank" rel="noopener noreferrer">here</a>.</p>'
                 +'<p>The API does not deliver files. Rather, it provides an open-access subset of the metadata (e.g., demographics) that match a user’s search criteria and provides the location of the complete data set. The data are accessible according to the policies at each contributing resource.</p>'
     },
     {
         id: 'Additional_Available_Resources',
         topic: 'Additional Available Resources',
-        content: '<p>The CCDI Data Federation Resource offers a suite of resources including the OpenAPI Specification, Data Dictionaries, and comprehensive documentation on the CCDI Data Federation Resource GitHub Repository. You may also get assistance or report an issue.</p>'
+        content: '<p>The CCDI Data Federation Resource offers a suite of resources including the OpenAPI Specification, '
+                +'<a class="link" href="https://github.com/CBIIT/ccdi-federation-api-spec/wiki" target="_blank" rel="noopener noreferrer">Data Federation Resource Wiki"</a>, '
+                +'and comprehensive documentation on the CCDI Data Federation Resource GitHub Repository. You may also get assistance or report an issue.</p>'
     },
     {
         id: 'Contribute_Federation',

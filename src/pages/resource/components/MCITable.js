@@ -6,7 +6,7 @@ const MCITableContainer = styled.div`
     border: 1px solid #BDBDBD;
 
     .mciTableTitle {
-        padding: 15px 230px;
+        padding: 15px 0;
         font-family: Poppins;
         font-size: 19px;
         font-weight: 400;
@@ -14,6 +14,12 @@ const MCITableContainer = styled.div`
         letter-spacing: 0.02em;
         text-align: center;
         background: #EEF4F8;
+    }
+
+    .mciTableTitleText {
+        display: block;
+        margin: 0 auto;
+        width: 390px;
     }
 
     .mciTableHeader {
@@ -69,7 +75,7 @@ const MCITableContainer = styled.div`
 const MCITable = ( {table} ) => {
     return (
         <MCITableContainer>
-            <div className='mciTableTitle'>{table.title}</div>
+            <div className='mciTableTitle'><span className='mciTableTitleText'>{table.title}</span></div>
             <div className='mciTableHeader'>
                 <div className='mciTableHeaderList'>
                     {table.header.map((headerItem, idx) => {

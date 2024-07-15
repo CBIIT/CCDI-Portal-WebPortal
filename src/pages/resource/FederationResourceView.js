@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import ReactHtmlParser from 'html-react-parser';
 import headerImg from '../../assets/resources/Federation_Header.png';
 import exportIcon from '../../assets/resources/Explore_Icon.svg';
-import { federationContent } from '../../bento/federationData';
+import { federationContent, introText } from '../../bento/federationData';
 import exportIconBlue from '../../assets/icons/Export_Icon.svg';
 import ccdiDataAccessImg from '../../assets/resources/Federation_CCDI_Data_Access.png';
 
@@ -105,6 +105,22 @@ const FederationResourceBody = styled.div`
         width: 20%;
         color: #4D889E;
         position: relative;
+    }
+
+    .introContainer {
+        font-family: Inter;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 22px;
+        margin-bottom: 50px;
+
+        a {
+            color: #455299;
+            font-weight: 600;
+            text-decoration: underline;
+            text-underline-position: under;
+            line-break: anywhere;
+        }
     }
 
     .navList {
@@ -330,6 +346,7 @@ const FederationResourceView = () => {
                 </div>
                 <div className='contentSection'>
                     <div className='contentList'>
+                        <div className='introContainer'>{ReactHtmlParser(introText)}</div>
                         {
                             federationContent.map((federationItem, mciid) => {
                                 const mcikey = `federation_${mciid}`;

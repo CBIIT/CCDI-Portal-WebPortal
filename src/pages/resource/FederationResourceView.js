@@ -308,9 +308,9 @@ const FederationResourceView = () => {
         const id = event.target.getAttribute('name');
         setSelectedNavTitle(id);
         const element = document.getElementById(id);
-        window.scrollTo({
+        window.scrollTo({ 
             top: element.offsetTop - 55,
-            behavior: "smooth"
+            behavior: "smooth" 
         });
     }
 
@@ -319,7 +319,7 @@ const FederationResourceView = () => {
             <div className='resourceHeader'><div className='resourceHeaderBackground'><div className='resourceHeaderText'>CCDI Hub</div></div></div>
             <div className='resourceTitleContainer'>
                 <div className='resourceTitle'>
-                    CCDI Data Federation Resource
+                    CCDI Data Federation Resource 
                     <div className='goToSiteButton'>
                         <a className='goToSiteText' href="https://cbiit.github.io/ccdi-federation-api-aggregation/" target="_blank" rel="noopener noreferrer">API Access</a>
                     </div>
@@ -356,14 +356,14 @@ const FederationResourceView = () => {
                                         <div id={federationItem.id} className='mciSubtitle'>{federationItem.subtopic && federationItem.subtopic}</div>
                                         <div className='mciContentContainer'>
                                             {federationItem.content && ReactHtmlParser(federationItem.content)}
-
-                                            {federationItem.id && federationItem.id.includes('Data_Access') &&
-                                                <>
-                                                    <img src={ccdiDataAccessImg} alt="Federation CCDI Data Access" />
-                                                </>
+                                            
+                                            {federationItem.id && federationItem.id.includes('Data_Access') && 
+                                            <div style={{ justifyContent: 'center', display: 'flex', height: '600px'}}>
+                                                <img src={ccdiDataAccessImg} alt="Federation CCDI Data Access"/>
+                                            </div>
                                             }
                                         </div>
-                                        {federationItem.content && <div style={{ height: '40px' }} />}
+                                        {federationItem.content && <div style={{height: '40px'}} />}
                                     </div>
                                 )
                             })

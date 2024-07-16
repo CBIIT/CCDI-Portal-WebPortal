@@ -5,6 +5,7 @@ import Footer from '../ResponsiveFooter/';
 import Header from '../ResponsiveHeader/';
 import Home from '../../pages/landing/landingController';
 import About from '../../pages/about/aboutView';
+import DataUsagePoliciesView from '../../pages/about/dataUsagePoliciesView';
 import News from '../../pages/news/newsView';
 import Error from '../../pages/error/Error';
 import Search from '../../pages/search/searchView';
@@ -32,6 +33,7 @@ const Layout = () => {
           <Route path="/fileCentricCart" element={<Cart />} />
           <Route path="/MCI" element={<MCIResourceView />} />
           <Route path="/data_federation_resource" element={<FederationResourceView/>} />
+          <Route path="/data-usage-policies" element={<DataUsagePoliciesView />} />
           <Route path="*" element={<Error />} />
         </Routes>
         <Footer />

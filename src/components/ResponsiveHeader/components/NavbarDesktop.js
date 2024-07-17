@@ -335,7 +335,13 @@ const NavBar = () => {
                 clickedTitle !== "" ? navbarSublists[clickedTitle].map((dropItem, idx) => {
                   const dropkey = `drop_${idx}`;
                   return (
-                    dropItem.link && <a href={dropItem.link} className="dropdownItem" target={dropItem.link.includes("http") || dropItem.link.includes("pdf") ? "_blank" : ""} rel="noopener noreferrer" key={dropkey} onClick={() => setClickedTitle("")}>{dropItem.name}</a>
+                    <>
+                      {dropItem.link
+                      ? dropItem.link.includes("http") || dropItem.link.includes("pdf")
+                      ? <a href={dropItem.link} className="dropdownItem" target="_blank" rel="noopener noreferrer" key={dropkey} onClick={() => setClickedTitle("")}>{dropItem.name}</a>
+                      : <NavLink to={dropItem.link} className="dropdownItem" key={dropkey} onClick={() => setClickedTitle("")}>{dropItem.name}</NavLink>
+                      : null}
+                    </>
                   )
                 })
                 :null

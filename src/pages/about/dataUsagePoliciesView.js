@@ -1,78 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ReactHtmlParser from 'html-react-parser';
-import headerImg from '../../assets/resources/Federation_Header.png';
+import headerImg from '../../assets/about/Data_Usage_Policies_Header.jpg';
 import { dataUsagePoliciesContent, introText } from '../../bento/dataUsagePoliciesData';
 import exportIconBlue from '../../assets/icons/Export_Icon.svg';
 
 const DataUsagePoliciesContainer = styled.div`
     width: 100%;
 
-    .resourceBreadcrumbContainer {
-        width: 1420px;
-        margin: 0 auto;
-    }
-
-    .resourceBreadcrumb {
-        font-family: Public Sans;
-        font-size: 16px;
-        font-weight: 400;
-        line-height: 26px;
-        margin: 3px 0 3px 32px;
-        line-height: 27px;
-        color: #1B1B1B;
-    }
-
-    .breadcrumbLink:hover {
-        color: #004e7a;
-    }
-
-    .arrowIcon {
-        font-size: medium;
-        padding-top: 7px;
-        margin: 0 3px;
-        color: #71767a;
-    }
-
-    .resourceHeader {
-        width: 100%;
-        height: 214px;
-        background: #e6ebee;
-    }
-
-    .resourceHeaderBackground {
-        width: 100%;
-        height: 214px;
+    .policiesHeaderContainer {
+        width: 1142px;
+        height: 203px;
+        margin: 0 134px;
         background-image: url(${headerImg});
-        background-repeat:no-repeat;
-        background-position:center; 
-    }
-
-    .resourceHeaderText {
-        width: 1420px;
-        margin: 0 auto;
-        padding: 150px 0 0 75px;
-        color: #19676D;
-        font-family: Poppins;
-        font-size: 40px;
-        font-weight: 400;
-    }
-
-    .resourceTitleContainer {
-        background: #087D6F;
-    }
-
-    .resourceTitle {
-        width: 1420px;
-        margin: 0 auto;
-        display: flex;
-        line-height: 64px;
-        background: #087D6F;
-        font-family: Poppins;
+        background-repeat: no-repeat;
+        background-color: #87D7DCCC; 
+        border-radius: 0px 0px 20px 20px;
+        font-family: 'Poppins';
         font-weight: 600;
-        color: #ffffff;
         font-size: 35px;
-        padding-left: 75px;
+        line-height: 38px;
+        text-align: center;
+        letter-spacing: 0.02em;
+        color: #FFFFFF;
+        padding: 70px 400px;
+
+        @media (min-width: 1420px) {
+            margin: 0 auto;
+        }
     }
 `;
 
@@ -80,9 +35,9 @@ const DataUsagePoliciesBody = styled.div`
     width: 1420px;
     margin: 0 auto;
     display: flex;
-    padding: 55px 32px 0 32px; 
+    padding: 55px 135px 0 135px; 
     .navSection {
-        width: 20%;
+        width: 25%;
         color: #4D889E;
         position: relative;
     }
@@ -156,7 +111,7 @@ const DataUsagePoliciesBody = styled.div`
 
     .contentSection {
         display: flex;
-        width: 80%;
+        width: 75%;
         padding: 0 32px 0 50px;
         margin-bottom: 100px;
     }
@@ -250,7 +205,7 @@ const DataUsagePoliciesBody = styled.div`
     .calloutBox {
         color: #05555C;
         margin: 20px 40px;
-        padding: 20px 40px;
+        padding: 20px 30px;
         font-family: Poppins;
         font-size: 18px;
         font-style: italic;
@@ -320,7 +275,7 @@ const DataUsagePoliciesView = () => {
 
     return (
         <DataUsagePoliciesContainer>
-            <div className='resourceHeader'><div className='resourceHeaderBackground'><div className='resourceHeaderText'>CCDI Data Usage Policies & Terms </div></div></div>
+             <div className='policiesHeaderContainer'>CCDI Data Usage Policies & Terms</div>
             <DataUsagePoliciesBody id='DataUsagePoliciesBody'>
                 <div className='navSection'>
                     <div className={stickyNavStyle} id='leftNav'>

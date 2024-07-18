@@ -9,7 +9,7 @@ import updateImgDashboard from '../assets/news/News_Dashboard.png';
 import updateImgEHR from '../assets/news/News_EHR.png';
 import updateImgC3DC from '../assets/news/News_C3DC.png';
 import updateImgHub from '../assets/news/News_Hub.png';
-import dataAccessPDF from "../assets/about/CCDI_CGC_Data_Access_Instructions_2.0.pdf";
+import dataAccessPDF from "../assets/about/CCDI-CGC-Data-Access-Instructions-2.0.pdf";
 
 export const newsList = [
     {

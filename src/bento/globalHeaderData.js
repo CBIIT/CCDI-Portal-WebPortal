@@ -126,7 +126,12 @@ Applications: [
       name: 'Accessing CCDI Data (PDF)',
       link: dataAccessPDF,
       className: 'navMobileSubItem',
-  }],
+    },
+    {
+      name: 'CCDI Data Usage Policies & Terms',
+      link: '/data-usage-policies',
+      className: 'navMobileSubItem',
+    }],
 };
 
 export const navBarCartData = {

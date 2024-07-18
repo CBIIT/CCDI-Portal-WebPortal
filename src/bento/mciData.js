@@ -11,7 +11,7 @@ export const MCIContent = [
                 subtopic: 'APEC14B1-MCI Enrollment Metrics',
                 content: '<p>The MCI enrollment metrics are based on counts of patients enrolled with MCI through Project:EveryChild (APEC14B1) and are based on monthly COG reporting.</p>',
                 numberTable: {
-                    title: 'List of Institutions for Enrollments in MCI (APEC14B1-MCI) by Diagnosis Type',
+                    title: 'List of Institutions for Enrollments in MCI (APEC14B1-MCI) by Diagnosis Type as of July 10, 2024',
                     header: ['Institution Name', 'CNS Diagnosis', 'Rare Tumor Diagnosis', 'STS Diagnosis'],
                     footer: 'Abbreviations: CNS, Central Nervous System; STS, Soft-tissue Sarcoma',
                     body: [["AdventHealth Orlando", 22, 4, 10, ], ["Advocate Children's Hospital-Oak Lawn", 30, 13, 81, ], ["Advocate Children's Hospital-Park Ridge", 26, 6, 96, ], ["Albany Medical Center", 27, 11, 91, ], ["Alberta Children's Hospital", 28, 5, 1, ], ["Alfred I duPont Hospital for Children", 24, 0, 11, ], ["Alliance for Childhood Diseases/Cure 4 the Kids Foundation", 18, 6, 70, ], ["Ann and Robert H Lurie Children's Hospital of Chicago", 22, 6, 21, ], ["Arkansas Children's Hospital", 26, 0, 30, ], ["Arnold Palmer Hospital for Children", 30, 3, 98, ], ["Ascension Saint Vincent Indianapolis Hospital", 25, 5, 29, ], ["Atrium Health Navicent", 29, 12, 28, ], ["Augusta University Medical Center", 18, 3, 40, ], ["Banner Children's at Desert", 18, 7, 26, ], ["Banner University Medical Center - Tucson", 30, 10, 1, ], ["Baylor College of Medicine/Dan L Duncan Comprehensive Cancer Center", 22, 8, 34, ], ["Baystate Medical Center", 23, 11, 20, ], ["Beaumont Children's Hospital-Royal Oak", 26, 2, 86, ], ["BI-LO Charities Children's Cancer Center", 24, 6, 68, ], ["Blank Children's Hospital", 26, 0, 83, ], ["British Columbia Children's Hospital", 20, 10, 2, ], ["Bronson Methodist Hospital", 28, 2, 42, ], ["Broward Health Medical Center", 27, 9, 58, ], ["C S Mott Children's Hospital", 29, 5, 28, ], ["CancerCare Manitoba", 19, 3, 89, ], ["Cardinal Glennon Children's Medical Center", 23, 3, 89, ], ["Carilion Children's", 25, 10, 0, ],
@@ -25,7 +25,7 @@ export const MCIContent = [
                     ["University of Nebraska Medical Center", 25, 8, 79, ], ["University of New Mexico Cancer Center", 22, 9, 74, ], ["University of Oklahoma Health Sciences Center", 26, 10, 82, ], ["University of Rochester", 22, 4, 84, ], ["University of Texas Health Science Center at San Antonio", 23, 3, 39, ], ["University of Vermont and State Agricultural College", 20, 10, 80, ], ["University of Virginia Cancer Center", 29, 10, 80, ], ["University of Wisconsin Carbone Cancer Center", 29, 11, 28, ], ["University Pediatric Hospital", 29, 9, 1, ], ["USA Health Strada Patient Care Center", 20, 5, 70, ], ["UT Southwestern/Simmons Cancer Center-Dallas", 25, 3, 8, ], ["Valley Children's Hospital", 23, 11, 79, ], ["Vanderbilt University/Ingram Cancer Center", 26, 1, 20, ], ["Vannie Cook Children's Clinic", 28, 4, 93, ], ["Virginia Commonwealth University/Massey Cancer Center", 24, 8, 41, ], ["Wake Forest University Health Sciences", 23, 8, 19, ], ["Walter Reed National Military Medical Center", 22, 5, 22, ], ["Washington University School of Medicine", 22, 1, 88, ], ["Wesley Medical Center", 26, 0, 93, ], ["West Virginia University Charleston Division", 29, 7, 78, ], ["West Virginia University Healthcare", 28, 1, 32, ], ["Women's and Children's Hospital-Adelaide", 20, 7, 55, ], ["Yale University", 20, 9, 97, ], ],
                 },
                 diseaseTable: {
-                    title: 'Enrollments in MCI (APEC14B1-MCI) by Diagnosis Type',
+                    title: 'Enrollments in MCI (APEC14B1-MCI) by Diagnosis Type as of July 10, 2024',
                     header: ['', 'Primary Diagnosis Disease Group', 'Number of Participants'],
                     body: [['Central Nervous System', 2704], ['Soft Tissue Sarcoma', 815], ['Rare Tumors', 355], ['Neuroblastoma', 98], ['Ewing Sarcoma', 9], ['Germ Cell Tumor', 8], ['Osteosarcoma', 8], ['Myeloid Leukemia', 4], ['Liver Tumor', 3], ['Non-Hodgkin Lymphoma', 3], ['Renal', 3], ['Lymphoblastic Leukemia', 2], ['Lymphoproliferative Disease', 1]],
                 },
@@ -34,7 +34,7 @@ export const MCIContent = [
                     data: [{ name: 'Central Nervous System', value: 2704}, {name: 'Soft Tissue Sarcoma', value: 815}, {name: 'Rare Tumors', value: 355}, {name: 'Neuroblastoma', value: 98}, {name: 'Ewing Sarcoma', value: 9}, {name: 'Germ Cell Tumor', value: 8}, {name: 'Osteosarcoma', value: 8}, {name: 'Myeloid Leukemia', value: 4}, {name: 'Liver Tumor', value: 3}, {name: 'Non-Hodgkin Lymphoma', value: 3}, {name: 'Renal', value: 3}, {name: 'Lymphoblastic Leukemia', value: 2}, {name: 'Lymphoproliferative Disease', value: 1}]
                 },
                 donut: {
-                    title: 'Enrollments in MCI (APEC14B1-MCI) by Diagnosis Type',
+                    title: 'Enrollments in MCI (APEC14B1-MCI) by Diagnosis Type as of July 10, 2024',
                     data: [{name: 'Central Nervous System', value: 2704}, {name: 'Rare Tumors', value: 355}, {name: 'Soft Tissue Sarcoma', value: 815}, {name: 'Neuroblastoma', value: 98}],
                 },
                 map: {

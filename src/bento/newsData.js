@@ -13,6 +13,17 @@ import dataAccessPDF from "../assets/about/CCDI-CGC-Data-Access-Instructions-2.0
 
 export const newsList = [
     {
+        id: 'hub_07102024',
+        title: 'Childhood Cancer Data Initiative (CCDI) Data Federation Resource',
+        date: 'July 10, 2024',
+        slug: 'API that facilitates data search from various resources eliminating the need for data consolidation into a single centralized repository.',
+        highlight: `<p>The API provides an open-access subset of metadata including data set location. Data files are accessible according to the policies at each organization. Where possible, metadata have been harmonized to Common Data Elements provided by the Cancer Data Standards Registry and Repository (<a class="link" href="https://cadsr.cancer.gov" target="_blank" rel="noopener noreferrer">https://cadsr.cancer.gov</a>). Current data federation members are the Kids First Data Resource Center, Pediatric Cancer Data Commons, St. Jude Cloud, and Treehouse Childhood Cancer Data Initiative.</p>`,
+        fullText: '',
+        type: 'Announcements',
+        img: updateImgCCDC2,
+        latestUpdate: true,
+    },
+    {
         id: 'hub_06272024',
         title: 'Latest Hub release includes new studies and enhanced functionality',
         date: 'June 27, 2024',
@@ -53,7 +64,6 @@ export const newsList = [
         fullText: '',
         type: 'Application Updates',
         img: updateImgC3DC,
-        latestUpdate: true,
     },
     {
         id: 'ccdc_04102024',

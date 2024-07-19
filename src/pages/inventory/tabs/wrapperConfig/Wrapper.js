@@ -90,7 +90,7 @@ export const wrapperConfig = [{
   size: 'xl',
   clsName: 'container_footer',
   textTitle: 'Note: ',
-  text: 'The CCDI Hub Explore Dashboard is a participant-based file inventory and provides links to diverse data sets. The data may have been assessed for quality based on technology-relevant controls but have not been independently validated. The data are made available to accelerate identification of targets and facilitate discoveries related to understanding cancer biology',
+  text: 'The CCDI Hub Explore Dashboard is a participant-based file inventory and provides links to diverse data sets. The data may have been assessed for quality based on technology-relevant controls but have not been independently validated. The data are made available to accelerate identification of targets and facilitate discoveries related to understanding cancer biology.',
   items: [],
 },
 ];

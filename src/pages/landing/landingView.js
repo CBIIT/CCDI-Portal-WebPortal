@@ -299,6 +299,7 @@ const StatsContainer = styled.div`
     }
 
     .statNum {
+      display: flex;
       color: #00838F;
       font-family: Inter;
       font-weight: 800;
@@ -306,6 +307,14 @@ const StatsContainer = styled.div`
       line-height: 40px;
       text-align: left;
       margin: 0;
+    }
+
+    .statNumIcon {
+      font-family: Poppins;
+      font-size: 25px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-align: left;
     }
 
     .statTitle {
@@ -466,6 +475,9 @@ const StatsContainer = styled.div`
           }
         }
       }
+      .statsNoteContainer {
+        margin-left: calc(50vw - 405px);
+      }
     }
 
     @media (max-width: 872px) {
@@ -482,6 +494,10 @@ const StatsContainer = styled.div`
 
       .statItem {
         width: 144px;
+      }
+
+      .statsNoteContainer {
+        margin-left: 30px;
       }
     }
 
@@ -865,7 +881,10 @@ const LandingView = ({
                 const statkey = `stat_${statidx}`;
                 return (
                   <div className='statItem' key={statkey}>
-                    <h5 className='statNum'>{statItem.num.toLocaleString('en-US')}</h5>
+                    <h5 className='statNum'>
+                      <div>{statItem.num.toLocaleString('en-US')}</div>
+                      {statItem.title.includes("Participants") && <div className='statNumIcon'>*</div>}
+                    </h5>
                     <div className='statTitle'>{ReactHtmlParser(statItem.title)}</div>
                     {
                       statItem.link.includes('http') ?

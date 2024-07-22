@@ -50,7 +50,7 @@ export const statsData = [
   {
     num: '',
     title: 'Participants with Available Genomic and Clinical Data',
-    detail: 'Molecular Characterization Initiative for Childhood Cancer',
+    detail: 'Molecular Characterization Initiative',
     link: '/MCI',
   },
   {

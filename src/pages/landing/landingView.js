@@ -358,17 +358,33 @@ const StatsContainer = styled.div`
     }
 
     .statsNoteContainer {
+      display: flex;
       font-family: Inter;
       font-size: 14px;
       font-weight: 400;
       line-height: 22px;
       letter-spacing: 0.02em;
-      text-align: center;
       margin-bottom: 50px;
+      margin-left: calc(50vw - 320px);
+    }
+
+    .statsNoteIcon {
+      font-family: Poppins;
+      font-size: 25px;
+      font-weight: 600;
+      line-height: 30px;
+      letter-spacing: 0.02em;
+      text-align: left;
+      color: #00838F;
+      margin-right: 5px;
     }
 
     @media (min-width: 1420px) {
       width: 1420px;
+
+      .statsNoteContainer {
+        margin-left: 400px;
+      }
     }
 
     @media (max-width: 1199px) {
@@ -480,6 +496,9 @@ const StatsContainer = styled.div`
       }
       .statItem {
         width: 120px;
+      }
+      .statsNoteContainer {
+        margin: 30px 30px 50px 30px;
       }
     }
 `;
@@ -860,7 +879,10 @@ const LandingView = ({
             }
             </div>
             <div className='borderBottom' />
-            <div className='statsNoteContainer'>{statsNote}</div>
+            <div className='statsNoteContainer'>
+              <div className='statsNoteIcon'>*</div>
+              <div>{statsNote}</div>
+            </div>
           </StatsBox>
         </StatsContainer>
       </StatsSection>

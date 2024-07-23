@@ -17,7 +17,7 @@ const LandingViewContainer = styled.div`
     background: white;
     
     @media (min-width: 1200px) {
-      height: 2980px;
+      height: 3180px;
     }
 `;
 
@@ -930,11 +930,15 @@ const LandingView = ({
                         <div className='resourceListItemUpper'>
                           <div className='resourceListItemLogo' style={{background: `url(${appItem.img})`, backgroundSize: 'cover'}} />
                           <div className='resourceListItemTitleContainer'>
-                            <div className='resourceListItemTitle upper'>{appItem.title}<span className='resourceListItemTitleSmall noLinkIcon'>{'  (' + appItem.subtitle + ')'}</span></div>
+                            <div className='resourceListItemTitle upper'>{appItem.title}
+                              {appItem.subtitle && appItem.subtitle.contains ? <span className='resourceListItemTitleSmall noLinkIcon'>{'  (' + appItem.subtitle + ')'}</span> : <span className='resourceListItemTitleSmall noLinkIcon'></span>}
+                            </div>
                           </div>
                         </div>
                         <div className='resourceListItemText'>
-                          <div className='resourceListItemTitle lower'>{appItem.title}<span className='resourceListItemTitleSmall noLinkIcon'>{'  (' + appItem.subtitle + ')'}</span></div>
+                          <div className='resourceListItemTitle lower'>{appItem.title}
+                            {appItem.subtitle ? <span className='resourceListItemTitleSmall noLinkIcon'>{'  (' + appItem.subtitle + ')'}</span> : <span className='resourceListItemTitleSmall noLinkIcon'></span>}
+                          </div>
                           <div className='resourceListItemContext'>{appItem.content}</div>
                         </div>
                       </NavLink>
@@ -945,11 +949,15 @@ const LandingView = ({
                       <div className='resourceListItemUpper'>
                         <div className='resourceListItemLogo' style={{background: `url(${appItem.img})`, backgroundSize: 'cover'}} />
                         <div className='resourceListItemTitleContainer'>
-                          <div className='resourceListItemTitle upper'>{appItem.title}<span className='resourceListItemTitleSmall'>{'  (' + appItem.subtitle + ')'}</span></div>
+                          <div className='resourceListItemTitle upper'>{appItem.title}
+                            {appItem.subtitle ? <span className='resourceListItemTitleSmall'>{'  (' + appItem.subtitle + ')'}</span> : <span className='resourceListItemTitleSmall'></span>}
+                          </div>
                         </div>
                       </div>
                       <div className='resourceListItemText'>
-                        <div className='resourceListItemTitle lower'>{appItem.title}<span className='resourceListItemTitleSmall'>{'  (' + appItem.subtitle + ')'}</span></div>
+                        <div className='resourceListItemTitle lower'>{appItem.title}
+                          {appItem.subtitle ? <span className='resourceListItemTitleSmall'>{'  (' + appItem.subtitle + ')'}</span> : <span className='resourceListItemTitleSmall'></span>}
+                        </div>
                         <div className='resourceListItemContext'>{appItem.content}</div>
                       </div>
                     </a>

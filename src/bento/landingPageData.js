@@ -8,6 +8,7 @@ import wheel4 from '../assets/landing/mtp_carousel.svg';
 import wheel5 from '../assets/landing/nccr_carousel.svg';
 import wheel6 from '../assets/landing/cgc_carousel.svg';
 import wheel7 from '../assets/landing/dbgap_carousel.svg';
+import wheel8 from '../assets/landing/federation_carousel.svg';
 import c3dcLogo from '../assets/landing/c3dc_logo.svg';
 import ccdcMobile from '../assets/landing/ccdc_mobile.png';
 import civicMobile from '../assets/landing/civic_mobile.png';
@@ -16,6 +17,7 @@ import mtpMobile from '../assets/landing/mtp_mobile.png';
 import nccrMobile from '../assets/landing/nccr_mobile.png';
 import cgcMobile from '../assets/landing/cgc_mobile.png';
 import dbgapMobile from '../assets/landing/dbgap_mobile.png';
+import federationMobile from '../assets/landing/federation_mobile.svg';
 import ccdcLogo from '../assets/landing/ccdc_logo.svg';
 import civicLogo from '../assets/landing/civic_logo.svg';
 import mciLogo from '../assets/landing/mci_logo.svg';
@@ -23,6 +25,8 @@ import mtpLogo from '../assets/landing/mtp_logo.svg';
 import nccrLogo from '../assets/landing/nccr_logo.svg';
 import cgcLogo from '../assets/landing/cgc_logo.svg';
 import dbgapLogo from '../assets/landing/dbgap_logo.svg';
+import federationLogo from '../assets/landing/federation_logo.svg';
+
 
 export const introData = {
   landingIntroPic: landingImg,
@@ -101,6 +105,7 @@ export const resourcesAppliationsListData = [
     content: 'A program providing molecular testing for children, adolescents, and young adults with certain cancer types.',
     link: '/MCI',
     img: mciLogo,
+    noLink: true,
   },
   {
     id: 'mtp',
@@ -117,6 +122,14 @@ export const resourcesAppliationsListData = [
     content: 'A tool to browse demographic, incidence, and survival statistics for cancers in children, adolescent, and young adults.',
     link: 'https://nccrexplorer.ccdi.cancer.gov',
     img: nccrLogo,
+  },
+  {
+    id: 'federation',
+    title: 'Data Federation Resource',
+    content: 'The CCDI Data Federation Resource provides harmonized metadata accessible via an API that facilitates the search across multiple resources. ',
+    link: '/data-federation-resource',
+    img: federationLogo,
+    noLink: true
   },
 ];
 
@@ -191,6 +204,12 @@ export const carouselList = [
     mobile: nccrMobile,
     content: 'National Childhood Cancer Registry Explorer',
     link: 'https://nccrexplorer.ccdi.cancer.gov',
+  },
+  {
+    img: wheel8,
+    mobile: federationMobile,
+    content: 'Data Federation Resource',
+    link: '/data-federation-resource',
   },
 ];
 

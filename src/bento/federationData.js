@@ -27,7 +27,7 @@ export const federationContent = [
         id: 'Contribute_Federation',
         topic: 'Contribute to CCDI Data Federation Resource',
         content: '<p>We invite the community to join us in empowering research through CCDI data federation. Organizations that implement CCDI’s data federation API harmonize data according to CCDI standards to ensure data are searchable.</p>'
-                +'<p>Details can be found on the CCDI Data Federation Resource Wiki page.</p>',
+                +'<p>Details can be found on the <a class="link" href="https://github.com/CBIIT/ccdi-federation-api-spec/wiki" target="_blank" rel="noopener noreferrer">CCDI Data Federation Resource Wiki page</a>.</p>',
 
     },
     {

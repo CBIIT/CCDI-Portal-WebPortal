@@ -62,7 +62,7 @@ const MCITableMobile = ( {table} ) => {
         for (let i = 0; i < table.body.length/3; i++) {
             const newItem = {};
             newItem.header = table.header[i];
-            newItem.items = [table.body[i], table.body[i+1], table.body[i+2]];
+            newItem.items = [table.body[i], table.body[i+3], table.body[i+6]];
             newList.push(newItem);
         }
         return newList

@@ -115,6 +115,7 @@ query search (
     $participant_ids: [String],
     $sex_at_birth: [String] ,
     $race: [String] ,
+    $ethnicity: [String] ,
     $age_at_diagnosis: [Int] ,
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
@@ -139,6 +140,7 @@ query search (
         participant_ids: $participant_ids,
         sex_at_birth: $sex_at_birth,
         race: $race,
+        ethnicity: $ethnicity,
         age_at_diagnosis: $age_at_diagnosis,
         diagnosis_anatomic_site: $diagnosis_anatomic_site,
         disease_phase: $disease_phase,
@@ -177,6 +179,10 @@ query search (
             group
             subjects
         }
+        participantCountByEthnicity {
+            group
+            subjects
+        }
         participantCountBySexAtBirth {
             group
             subjects
@@ -198,6 +204,10 @@ query search (
             subjects
         }
         filterParticipantCountByDiseasePhase{
+            group
+            subjects
+        }
+        filterParticipantCountByEthnicity{
             group
             subjects
         }
@@ -284,6 +294,7 @@ query fileOverview(
     $participant_ids: [String],
     $sex_at_birth: [String] ,
     $race: [String] ,
+    $ethnicity: [String] ,
     $age_at_diagnosis: [Int] ,
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
@@ -308,6 +319,7 @@ query fileOverview(
         participant_ids: $participant_ids,
         sex_at_birth: $sex_at_birth,
         race: $race,
+        ethnicity: $ethnicity,
         age_at_diagnosis: $age_at_diagnosis,
         diagnosis_anatomic_site: $diagnosis_anatomic_site,
         disease_phase: $disease_phase,
@@ -353,6 +365,7 @@ query sampleOverview(
     $participant_ids: [String],
     $sex_at_birth: [String] ,
     $race: [String] ,
+    $ethnicity: [String] ,
     $age_at_diagnosis: [Int] ,
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
@@ -381,6 +394,7 @@ query sampleOverview(
         participant_ids: $participant_ids,
         sex_at_birth: $sex_at_birth,
         race: $race,
+        ethnicity: $ethnicity,
         age_at_diagnosis: $age_at_diagnosis,
         diagnosis_anatomic_site: $diagnosis_anatomic_site,
         disease_phase: $disease_phase,
@@ -428,6 +442,7 @@ query participantOverview(
     $participant_ids: [String],
     $sex_at_birth: [String] ,
     $race: [String] ,
+    $ethnicity: [String] ,
     $age_at_diagnosis: [Int] ,
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
@@ -452,6 +467,7 @@ query participantOverview(
         participant_ids: $participant_ids,
         sex_at_birth: $sex_at_birth,
         race: $race,
+        ethnicity: $ethnicity,
         age_at_diagnosis: $age_at_diagnosis,
         diagnosis_anatomic_site: $diagnosis_anatomic_site,
         disease_phase: $disease_phase,
@@ -479,6 +495,7 @@ query participantOverview(
         study_id
         race
         sex_at_birth
+        ethnicity
         alternate_participant_id
     }
 }
@@ -489,6 +506,7 @@ query diagnosisOverview(
     $participant_ids: [String],
     $sex_at_birth: [String] ,
     $race: [String] ,
+    $ethnicity: [String] ,
     $age_at_diagnosis: [Int] ,
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
@@ -517,6 +535,7 @@ query diagnosisOverview(
         participant_ids: $participant_ids,
         sex_at_birth: $sex_at_birth,
         race: $race,
+        ethnicity: $ethnicity,
         age_at_diagnosis: $age_at_diagnosis,
         diagnosis_anatomic_site: $diagnosis_anatomic_site,
         disease_phase: $disease_phase,
@@ -565,6 +584,7 @@ query studyOverview(
     $participant_ids: [String],
     $sex_at_birth: [String] ,
     $race: [String] ,
+    $ethnicity: [String] ,
     $age_at_diagnosis: [Int] ,
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
@@ -589,6 +609,7 @@ query studyOverview(
         participant_ids: $participant_ids,
         sex_at_birth: $sex_at_birth,
         race: $race,
+        ethnicity: $ethnicity,
         age_at_diagnosis: $age_at_diagnosis,
         diagnosis_anatomic_site: $diagnosis_anatomic_site,
         disease_phase: $disease_phase,
@@ -681,6 +702,7 @@ query participantsAddAllToCart(
     $participant_ids: [String],
     $sex_at_birth: [String] ,
     $race: [String] ,
+    $ethnicity: [String] ,
     $age_at_diagnosis: [Int] ,
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
@@ -706,6 +728,7 @@ query participantsAddAllToCart(
       participant_ids: $participant_ids,
       sex_at_birth: $sex_at_birth,
       race: $race,
+      ethnicity: $ethnicity,
       age_at_diagnosis: $age_at_diagnosis,
       diagnosis_anatomic_site: $diagnosis_anatomic_site,
       disease_phase: $disease_phase,
@@ -737,6 +760,7 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
       $participant_ids: [String],
       $sex_at_birth: [String] ,
       $race: [String] ,
+      $ethnicity: [String] ,
       $age_at_diagnosis: [Int] ,
       $diagnosis_anatomic_site: [String] ,
       $disease_phase: [String] ,
@@ -765,6 +789,7 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
           participant_ids: $participant_ids,
           sex_at_birth: $sex_at_birth,
           race: $race,
+          ethnicity: $ethnicity,
           age_at_diagnosis: $age_at_diagnosis,
           diagnosis_anatomic_site: $diagnosis_anatomic_site,
           disease_phase: $disease_phase,
@@ -800,6 +825,7 @@ query fileAddAllToCart(
   $participant_ids: [String],
   $sex_at_birth: [String] ,
   $race: [String] ,
+  $ethnicity: [String] ,
   $age_at_diagnosis: [Int] ,
   $diagnosis_anatomic_site: [String] ,
   $disease_phase: [String] ,
@@ -825,6 +851,7 @@ query fileAddAllToCart(
       participant_ids: $participant_ids,
       sex_at_birth: $sex_at_birth,
       race: $race,
+      ethnicity: $ethnicity,
       age_at_diagnosis: $age_at_diagnosis,
       diagnosis_anatomic_site: $diagnosis_anatomic_site,
       disease_phase: $disease_phase,
@@ -856,6 +883,7 @@ query diagnosisAddAllToCart(
   $participant_ids: [String],
   $sex_at_birth: [String] ,
   $race: [String] ,
+  $ethnicity: [String] ,
   $age_at_diagnosis: [Int] ,
   $diagnosis_anatomic_site: [String] ,
   $disease_phase: [String] ,
@@ -884,6 +912,7 @@ query diagnosisAddAllToCart(
       participant_ids: $participant_ids,
       sex_at_birth: $sex_at_birth,
       race: $race,
+      ethnicity: $ethnicity,
       age_at_diagnosis: $age_at_diagnosis,
       diagnosis_anatomic_site: $diagnosis_anatomic_site,
       disease_phase: $disease_phase,
@@ -919,6 +948,7 @@ query studyAddAllToCart(
   $participant_ids: [String],
   $sex_at_birth: [String] ,
   $race: [String] ,
+  $ethnicity: [String] ,
   $age_at_diagnosis: [Int] ,
   $diagnosis_anatomic_site: [String] ,
   $disease_phase: [String] ,
@@ -943,6 +973,7 @@ query studyAddAllToCart(
       participant_ids: $participant_ids,
       sex_at_birth: $sex_at_birth,
       race: $race,
+      ethnicity: $ethnicity,
       age_at_diagnosis: $age_at_diagnosis,
       diagnosis_anatomic_site: $diagnosis_anatomic_site,
       disease_phase: $disease_phase,
@@ -1056,6 +1087,13 @@ export const tabContainers = [
       {
         dataField: 'race',
         header: 'Race',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'ethnicity',
+        header: 'Ethnicity',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,

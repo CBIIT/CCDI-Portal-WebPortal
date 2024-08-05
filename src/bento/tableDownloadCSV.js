@@ -7,14 +7,13 @@ query participantOverViewPaged($participant_ids: [String], $offset: Int = 0, $fi
     phs_accession
     race
     sex_at_birth
-    ethnicity
   }
 }
 `;
 
 export const customParticipantsTabDownloadCSV = {
-  keysToInclude: ['participant_id', 'phs_accession', 'race', 'sex_at_birth', 'ethnicity'],
-  header: ['Participant ID', 'Study Accession', 'Race', 'Sex', 'Ethnicity'],
+  keysToInclude: ['participant_id', 'phs_accession', 'race', 'sex_at_birth'],
+  header: ['Participant ID', 'Study Accession', 'Race', 'Sex'],
   query: GET_PARTICIPANTS_TAB,
   apiVariable: 'participantOverView',
   fileName: 'tableDownload',

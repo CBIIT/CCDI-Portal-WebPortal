@@ -82,17 +82,6 @@ export const facetsConfig = [
     show: true,
   },
   {
-    section: DEMOGRAPHICS,
-    label: 'Ethnicity',
-    apiPath: 'participantCountByEthnicity',
-    apiForFiltering: 'filterParticipantCountByEthnicity',
-    datafield: 'ethnicity',
-    field: GROUP,
-    type: InputTypes.CHECKBOX,
-    sort_type: sortType.ALPHABET,
-    show: true,
-  },
-  {
     section: DIAGNOSIS,
     label: 'Age at diagnosis (days)',
     apiPath: 'filterParticipantCountByDiagnosisAge',
@@ -816,12 +805,6 @@ export const widgetConfig = [
     type: 'donut',
     title: 'Race',
     dataName: 'participantCountByRace',
-    sliceTitle: 'Participants',
-  },
-  {
-    type: 'donut',
-    title: 'Ethnicity',
-    dataName: 'participantCountByEthnicity',
     sliceTitle: 'Participants',
   },
 ];

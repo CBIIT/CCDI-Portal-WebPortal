@@ -87,14 +87,14 @@ query diagnosisOverview($diagnosis_id: [String], $offset: Int = 0, $first: Int =
     disease_phase
     anatomic_site
     age_at_diagnosis
-    vital_status
+    last_known_survival_status
   }
 }
 `;
 
 export const customDiagnosisTabDownloadCSV = {
-  keysToInclude: ['participant_id', 'phs_accession', 'diagnosis_classification', 'anatomic_site', 'diagnosis_classification_system', 'diagnosis_verification_status', 'diagnosis_basis', 'diagnosis_comment', 'disease_phase', 'age_at_diagnosis', 'vital_status'],
-  header: ['Participant ID', 'Study Accession', 'Diagnosis', 'Anatomic Site', 'Diagnosis Classification System', 'Diagnosis Verification Status', 'Diagnosis Basis', 'Diagnosis Comments', 'Disease Phase', 'Age at Diagnosis (days)', 'Vital Status'],
+  keysToInclude: ['participant_id', 'phs_accession', 'diagnosis_classification', 'anatomic_site', 'diagnosis_classification_system', 'diagnosis_verification_status', 'diagnosis_basis', 'diagnosis_comment', 'disease_phase', 'age_at_diagnosis', 'last_known_survival_status'],
+  header: ['Participant ID', 'Study Accession', 'Diagnosis', 'Anatomic Site', 'Diagnosis Classification System', 'Diagnosis Verification Status', 'Diagnosis Basis', 'Diagnosis Comments', 'Disease Phase', 'Age at Diagnosis (days)', 'Last Known Survival Status'],
   query: GET_DIAGNOSIS_TAB,
   apiVariable: 'diagnosisOverview',
   fileName: 'tableDownload',
@@ -110,7 +110,7 @@ query studyOverview($study_id: [String], $offset: Int = 0, $first: Int = 1000, $
     disease_phase
     anatomic_site
     age_at_diagnosis
-    vital_status
+    last_known_survival_status
   }
 }
 `;

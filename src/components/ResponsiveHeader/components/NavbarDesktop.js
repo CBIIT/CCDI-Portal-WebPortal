@@ -101,6 +101,23 @@ const LiSection = styled.li`
     -webkit-transform: rotate(-45deg);
   }
 
+  .isAboutSection {
+    color: #3A75BD;
+    border-bottom: 4px solid #3A75BD;
+
+    ::after {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-bottom: 1px solid #3A75BD;
+      border-left: 1px solid #3A75BD;
+      margin: 0 0 4px 8px;
+      transform: rotate(-45deg);
+      -webkit-transform: rotate(-45deg);
+    }
+  }
+
   .clicked {
     color: #FFFFFF;
     background: #1F4671;
@@ -234,6 +251,7 @@ const useOutsideAlerter = (ref) => {
 
 const NavBar = () => {
   const path = useLocation().pathname;
+  const isAbout = path === '/data-usage-policies' || path === '/about';
   const [clickedTitle, setClickedTitle] = useState("");
   const dropdownSelection = useRef(null);
   const clickableObject = navMobileList.filter(item => item.className === 'navMobileItem clickable');
@@ -293,7 +311,7 @@ const NavBar = () => {
                   <LiSection key={navkey}>
                     <div className={clickedTitle === navMobileItem.name ? 'navTitleClicked' : 'navTitle'}>
                       <div
-                        className={clickedTitle === navMobileItem.name ? 'navText clicked' : 'navText'}
+                        className={clickedTitle === navMobileItem.name ? 'navText clicked' : isAbout && navMobileItem.name === 'About' ? 'navText isAboutSection' :  'navText'}
                         onClick={handleMenuClick}
                         onKeyDown={onKeyPressHandler}
                         role="button"
@@ -317,7 +335,13 @@ const NavBar = () => {
                 clickedTitle !== "" ? navbarSublists[clickedTitle].map((dropItem, idx) => {
                   const dropkey = `drop_${idx}`;
                   return (
-                    dropItem.link && <a href={dropItem.link} className="dropdownItem" target={dropItem.link.includes("http") || dropItem.link.includes("pdf") ? "_blank" : ""} rel="noopener noreferrer" key={dropkey} onClick={() => setClickedTitle("")}>{dropItem.name}</a>
+                    <>
+                      {dropItem.link
+                      ? dropItem.link.includes("http") || dropItem.link.includes("pdf")
+                      ? <a href={dropItem.link} className="dropdownItem" target="_blank" rel="noopener noreferrer" key={dropkey} onClick={() => setClickedTitle("")}>{dropItem.name}</a>
+                      : <NavLink to={dropItem.link} className="dropdownItem" key={dropkey} onClick={() => setClickedTitle("")}>{dropItem.name}</NavLink>
+                      : null}
+                    </>
                   )
                 })
                 :null

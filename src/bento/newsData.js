@@ -9,9 +9,30 @@ import updateImgDashboard from '../assets/news/News_Dashboard.png';
 import updateImgEHR from '../assets/news/News_EHR.png';
 import updateImgC3DC from '../assets/news/News_C3DC.png';
 import updateImgHub from '../assets/news/News_Hub.png';
-import dataAccessPDF from "../assets/about/CCDI_CGC_Data_Access_Instructions_2.0.pdf";
+import dataAccessPDF from "../assets/about/CCDI-CGC-Data-Access-Instructions-2.0.pdf";
 
 export const newsList = [
+    {
+        id: 'federation_08052024',
+        title: 'Childhood Cancer Data Initiative (CCDI) Data Federation Resource',
+        date: 'August 5, 2024',
+        slug: 'API that facilitates data search from various resources eliminating the need for data consolidation into a single centralized repository.',
+        highlight: `<p>The API provides an open-access subset of metadata including data set location. Data files are accessible according to the policies at each organization. Where possible, metadata have been harmonized to Common Data Elements provided by the Cancer Data Standards Registry and Repository (<a class="link" href="https://cadsr.cancer.gov" target="_blank" rel="noopener noreferrer">https://cadsr.cancer.gov</a>). Current data federation members are the Kids First Data Resource Center, Pediatric Cancer Data Commons, St. Jude Cloud, and Treehouse Childhood Cancer Data Initiative.</p>`,
+        fullText: '',
+        type: 'Announcements',
+        img: updateImgCCDC2,
+        latestUpdate: true,
+    },
+    {
+        id: 'hub_08052024',
+        title: 'A new resource page and enhanced user support text',
+        date: 'August 5, 2024',
+        slug: 'Release adds CCDI data federation resource page and enhanced user support text',
+        highlight: `<p>In this release, the CCDI Hub added two key pages of interest: a CCDI data federation resource page and a description of data usage policies and terms. Clarifying text was also added to the “Stats at a Glance” summary, Explore Dashboard, and Molecular Characterization Initiative (MCI) enrollment page. Other improvements include hyperlinked dbGaP accessions and fixed column sorting in the Explore Dashboard grids and improved mobile responsiveness of the MCI resource page.</p>`,
+        fullText: '',
+        type: 'Site Updates',
+        img: updateImgDashboard,
+    },
     {
         id: 'hub_06272024',
         title: 'Latest Hub release includes new studies and enhanced functionality',
@@ -53,7 +74,6 @@ export const newsList = [
         fullText: '',
         type: 'Application Updates',
         img: updateImgC3DC,
-        latestUpdate: true,
     },
     {
         id: 'ccdc_04102024',

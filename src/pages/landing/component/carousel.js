@@ -277,6 +277,12 @@ const HeroList = styled.div`
         visibility: visible;
     }
 
+    .carousel__item:nth-child(7) {
+        transform: translateY(360%) scale(1);
+        opacity: 1;
+        visibility: visible;
+    }
+
     .carousel__item:last-child {
         transform: translateY(365%) scale(1);
         opacity: 0;

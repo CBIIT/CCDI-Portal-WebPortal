@@ -76,8 +76,8 @@ const DonutChart = ({
                     fontWeight="500"
                     fontFamily="Nunito"
                   >
-                      {payload.name.length > 35 ? <title>{payload.name}</title> : null}
-                      {payload.name.length > 35 ? `${payload.name.substring(0, 35)}...` : payload.name}
+                      {payload.name.length > 20 ? <title>{payload.name}</title> : null}
+                      {payload.name.length > 20 ? `${payload.name.substring(0, 20)}...` : payload.name}
                   </text>
                   <Sector
                     cx={cx}

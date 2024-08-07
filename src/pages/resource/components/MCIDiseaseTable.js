@@ -8,7 +8,7 @@ border: 1px solid #BDBDBD;
 height: 900;
 
 .mciTableTitle {
-    padding: 15px 225px;
+    padding: 15px;
     font-family: Poppins;
     font-size: 19px;
     font-weight: 400;
@@ -25,7 +25,7 @@ height: 900;
 
 .mciTableHeaderList {
     display: grid;
-    grid-template-columns: 33.33% 33.33% 33.33%;
+    grid-template-columns: repeat(3, 1fr);
 }
 
 .mciTableHeaderListItem {
@@ -55,13 +55,14 @@ height: 900;
 
 .mciTableDonut {
     width: 33.2%
+    min-width: 180px;
 }
 
 .mciTableBodyList {
     width: 66.66%
     overflow-x: hidden;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 50% 50%;
 }
 
 .mciTableBodyList::-webkit-scrollbar {
@@ -107,6 +108,9 @@ height: 900;
     }
 }
 
+.mciTableHeaderList .mciTableHeaderListItem:nth-child(1){
+    min-width: 180px;
+}
 
 .mciTableBodyList .mciTableBodyListItem:nth-child(4n+1),
 .mciTableBodyList .mciTableBodyListItem:nth-child(4n+2)
@@ -133,8 +137,8 @@ const MCIDiseaseTable = ({ table, donut }) => {
                 <div className='mciTableDonut'>
                     <DonutChart
                         data={donut.data}
-                        innerRadiusP={65}
-                        outerRadiusP={115}
+                        innerRadiusP='50%'
+                        outerRadiusP='85%'
                         paddingSpace={donut.length === 1 ? 0 : 0.5}
                         textColor="black"
                     />
@@ -143,12 +147,13 @@ const MCIDiseaseTable = ({ table, donut }) => {
 
                     {
                         table.body.map((bodyItem, idx) => {
-                            const key = `mcitable_${idx}`;
+                            const key1 =  `diseasetable1_${idx}`;
+                            const key2 =  `diseasetable2_${idx}`;
                             return (
                                 <>
 
-                                    <div className='mciTableBodyListItem' key={key}>{bodyItem[0]}</div>
-                                    <div className='mciTableBodyListItem' key={key}>{bodyItem[1]}</div>
+                                    <div className='mciTableBodyListItem' key={key1}>{bodyItem[0]}</div>
+                                    <div className='mciTableBodyListItem' key={key2}>{bodyItem[1]}</div>
                                 </>
                             )
                         })

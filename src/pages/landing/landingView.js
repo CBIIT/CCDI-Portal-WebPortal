@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import { introData, titleData, resourcesAppliationsListData, resourcesCloudListData } from '../../bento/landingPageData';
+import { introData, titleData, statsNote, resourcesAppliationsListData, resourcesCloudListData } from '../../bento/landingPageData';
 import ReactHtmlParser from 'html-react-parser';
 import Carousel from '../landing/component/carousel';
 import HeroMobile from '../landing/component/heroMobile'
@@ -17,7 +17,7 @@ const LandingViewContainer = styled.div`
     background: white;
     
     @media (min-width: 1200px) {
-      height: 2980px;
+      height: 3180px;
     }
 `;
 
@@ -267,7 +267,7 @@ const StatsContainer = styled.div`
     }
 
     .borderBottom {
-      height: 72px;
+      height: 12px;
       border-top: 1.8px solid #4BBFC6;
       background: linear-gradient(180deg, rgba(158, 158, 158, 0.1) 0%, rgba(255, 255, 255, 0) 34.44%);
     }
@@ -299,6 +299,7 @@ const StatsContainer = styled.div`
     }
 
     .statNum {
+      display: flex;
       color: #00838F;
       font-family: Inter;
       font-weight: 800;
@@ -306,6 +307,14 @@ const StatsContainer = styled.div`
       line-height: 40px;
       text-align: left;
       margin: 0;
+    }
+
+    .statNumIcon {
+      font-family: Poppins;
+      font-size: 25px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-align: left;
     }
 
     .statTitle {
@@ -325,10 +334,66 @@ const StatsContainer = styled.div`
       font-size: 19px;
       line-height: 21px;
       text-align: left;
+      text-decoration: none;
+
+      :hover {
+        color: #455299;
+        text-decoration: underline;
+
+        ::after {
+          content: "";
+          display: inline-block;
+          width: 8px;
+          height: 8px;
+          border-bottom: 2px solid #455299;
+          border-left: 2px solid #455299;
+          margin: 0 0 2px 3px;
+          transform: rotate(-135deg);
+          -webkit-transform: rotate(-135deg);
+        }
+      }
+
+      ::after {
+        content: "";
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-bottom: 2px solid #05555C;
+        border-left: 2px solid #05555C;
+        margin: 0 0 2px 3px;
+        transform: rotate(-135deg);
+        -webkit-transform: rotate(-135deg);
+      }
+    }
+
+    .statsNoteContainer {
+      display: flex;
+      font-family: Inter;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 22px;
+      letter-spacing: 0.02em;
+      margin-bottom: 50px;
+      margin-left: calc(50vw - 320px);
+    }
+
+    .statsNoteIcon {
+      font-family: Poppins;
+      font-size: 25px;
+      font-weight: 600;
+      line-height: 30px;
+      letter-spacing: 0.02em;
+      text-align: left;
+      color: #00838F;
+      margin-right: 5px;
     }
 
     @media (min-width: 1420px) {
       width: 1420px;
+
+      .statsNoteContainer {
+        margin-left: 400px;
+      }
     }
 
     @media (max-width: 1199px) {
@@ -355,6 +420,7 @@ const StatsContainer = styled.div`
         grid-column-gap: 75px;
         grid-template-columns: 143px 143px 143px 143px;
         // margin: 0 calc(50vw - 405px);
+        padding-bottom: 30px;
       }
 
       .statItem {
@@ -378,6 +444,39 @@ const StatsContainer = styled.div`
         color: #0095A2;
         font-size: 14px;
         line-height: 13px;
+
+        ::after {
+          content: "";
+          display: inline-block;
+          width: 8px;
+          height: 8px;
+          border-bottom: 2px solid #0095A2;
+          border-left: 2px solid #0095A2;
+          margin: 0 0 1px 3px;
+          transform: rotate(-135deg);
+          -webkit-transform: rotate(-135deg);
+        }
+
+        :hover {
+          color: #455299;
+          text-decoration: underline;
+          cursor: pointer;
+
+          ::after {
+            content: "";
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-bottom: 2px solid #455299;
+            border-left: 2px solid #455299;
+            margin: 0 0 1px 3px;
+            transform: rotate(-135deg);
+            -webkit-transform: rotate(-135deg);
+          }
+        }
+      }
+      .statsNoteContainer {
+        margin-left: calc(50vw - 405px);
       }
     }
 
@@ -394,7 +493,11 @@ const StatsContainer = styled.div`
       }
 
       .statItem {
-        width: 143px;
+        width: 144px;
+      }
+
+      .statsNoteContainer {
+        margin-left: 30px;
       }
     }
 
@@ -408,7 +511,10 @@ const StatsContainer = styled.div`
         justify-content: left;
       }
       .statItem {
-        width: 125px;
+        width: 120px;
+      }
+      .statsNoteContainer {
+        margin: 30px 30px 50px 30px;
       }
     }
 `;
@@ -775,15 +881,27 @@ const LandingView = ({
                 const statkey = `stat_${statidx}`;
                 return (
                   <div className='statItem' key={statkey}>
-                    <h5 className='statNum'>{statItem.num.toLocaleString('en-US')}</h5>
+                    <h5 className='statNum'>
+                      <div>{statItem.num.toLocaleString('en-US')}</div>
+                      {statItem.title.includes("Participants") && <div className='statNumIcon'>*</div>}
+                    </h5>
                     <div className='statTitle'>{ReactHtmlParser(statItem.title)}</div>
-                    <div className='statDetail'>{statItem.detail}</div>
+                    {
+                      statItem.link.includes('http') ?
+                      <a className='statDetail' href={statItem.link} target="_blank" rel="noopener noreferrer">{statItem.detail}</a>
+                      :
+                      <NavLink className='statDetail' to={statItem.link}>{statItem.detail}</NavLink>
+                    }
                   </div>
                 )
               })
             }
             </div>
             <div className='borderBottom' />
+            <div className='statsNoteContainer'>
+              <div className='statsNoteIcon'>*</div>
+              <div>{statsNote}</div>
+            </div>
           </StatsBox>
         </StatsContainer>
       </StatsSection>
@@ -812,11 +930,15 @@ const LandingView = ({
                         <div className='resourceListItemUpper'>
                           <div className='resourceListItemLogo' style={{background: `url(${appItem.img})`, backgroundSize: 'cover'}} />
                           <div className='resourceListItemTitleContainer'>
-                            <div className='resourceListItemTitle upper'>{appItem.title}<span className='resourceListItemTitleSmall noLinkIcon'>{'  (' + appItem.subtitle + ')'}</span></div>
+                            <div className='resourceListItemTitle upper'>{appItem.title}
+                              {appItem.subtitle && appItem.subtitle.contains ? <span className='resourceListItemTitleSmall noLinkIcon'>{'  (' + appItem.subtitle + ')'}</span> : <span className='resourceListItemTitleSmall noLinkIcon'></span>}
+                            </div>
                           </div>
                         </div>
                         <div className='resourceListItemText'>
-                          <div className='resourceListItemTitle lower'>{appItem.title}<span className='resourceListItemTitleSmall noLinkIcon'>{'  (' + appItem.subtitle + ')'}</span></div>
+                          <div className='resourceListItemTitle lower'>{appItem.title}
+                            {appItem.subtitle ? <span className='resourceListItemTitleSmall noLinkIcon'>{'  (' + appItem.subtitle + ')'}</span> : <span className='resourceListItemTitleSmall noLinkIcon'></span>}
+                          </div>
                           <div className='resourceListItemContext'>{appItem.content}</div>
                         </div>
                       </NavLink>
@@ -827,11 +949,15 @@ const LandingView = ({
                       <div className='resourceListItemUpper'>
                         <div className='resourceListItemLogo' style={{background: `url(${appItem.img})`, backgroundSize: 'cover'}} />
                         <div className='resourceListItemTitleContainer'>
-                          <div className='resourceListItemTitle upper'>{appItem.title}<span className='resourceListItemTitleSmall'>{'  (' + appItem.subtitle + ')'}</span></div>
+                          <div className='resourceListItemTitle upper'>{appItem.title}
+                            {appItem.subtitle ? <span className='resourceListItemTitleSmall'>{'  (' + appItem.subtitle + ')'}</span> : <span className='resourceListItemTitleSmall'></span>}
+                          </div>
                         </div>
                       </div>
                       <div className='resourceListItemText'>
-                        <div className='resourceListItemTitle lower'>{appItem.title}<span className='resourceListItemTitleSmall'>{'  (' + appItem.subtitle + ')'}</span></div>
+                        <div className='resourceListItemTitle lower'>{appItem.title}
+                          {appItem.subtitle ? <span className='resourceListItemTitleSmall'>{'  (' + appItem.subtitle + ')'}</span> : <span className='resourceListItemTitleSmall'></span>}
+                        </div>
                         <div className='resourceListItemContext'>{appItem.content}</div>
                       </div>
                     </a>

@@ -8,6 +8,7 @@ import wheel4 from '../assets/landing/mtp_carousel.svg';
 import wheel5 from '../assets/landing/nccr_carousel.svg';
 import wheel6 from '../assets/landing/cgc_carousel.svg';
 import wheel7 from '../assets/landing/dbgap_carousel.svg';
+import wheel8 from '../assets/landing/federation_carousel.svg';
 import c3dcLogo from '../assets/landing/c3dc_logo.svg';
 import ccdcMobile from '../assets/landing/ccdc_mobile.png';
 import civicMobile from '../assets/landing/civic_mobile.png';
@@ -16,6 +17,7 @@ import mtpMobile from '../assets/landing/mtp_mobile.png';
 import nccrMobile from '../assets/landing/nccr_mobile.png';
 import cgcMobile from '../assets/landing/cgc_mobile.png';
 import dbgapMobile from '../assets/landing/dbgap_mobile.png';
+import federationMobile from '../assets/landing/federation_mobile.svg';
 import ccdcLogo from '../assets/landing/ccdc_logo.svg';
 import civicLogo from '../assets/landing/civic_logo.svg';
 import mciLogo from '../assets/landing/mci_logo.svg';
@@ -23,6 +25,8 @@ import mtpLogo from '../assets/landing/mtp_logo.svg';
 import nccrLogo from '../assets/landing/nccr_logo.svg';
 import cgcLogo from '../assets/landing/cgc_logo.svg';
 import dbgapLogo from '../assets/landing/dbgap_logo.svg';
+import federationLogo from '../assets/landing/federation_logo.svg';
+
 
 export const introData = {
   landingIntroPic: landingImg,
@@ -45,23 +49,29 @@ export const statsData = [
     num: '',
     title: 'Cataloged Datasets',
     detail: 'Childhood Cancer Data Catalog',
+    link: 'https://datacatalog.ccdi.cancer.gov',
   },
   {
     num: '',
-    title: 'Participants',
-    detail: 'Molecular Characterization Initiative for Childhood Cancer',
+    title: 'Participants with Available Genomic and Clinical Data',
+    detail: 'Molecular Characterization Initiative',
+    link: '/MCI',
   },
   {
     num: 58867,
     title: 'Potential Pediatric Molecular Targets',
     detail: 'Molecular Targets Platform',
+    link: 'https://moleculartargets.ccdi.cancer.gov',
   },
   {
     num: 1700440,
     title: 'Reported Cases Under Age 40<br>(1995-2020)',
     detail: 'National Childhood Cancer Registry Explorer',
+    link: 'https://nccrexplorer.ccdi.cancer.gov',
   },
 ];
+
+export const statsNote = 'Counts for MCI participants in CCDI Hub and total MCI participants consented may differ.';
 
 export const resourcesAppliationsListData = [
   {
@@ -90,11 +100,12 @@ export const resourcesAppliationsListData = [
   },
   {
     id: 'mci',
-    title: 'Molecular Characterization Initiative for Childhood Cancers',
+    title: 'Molecular Characterization Initiative',
     subtitle: 'MCI',
     content: 'A program providing molecular testing for children, adolescents, and young adults with certain cancer types.',
     link: '/MCI',
     img: mciLogo,
+    noLink: true,
   },
   {
     id: 'mtp',
@@ -111,6 +122,14 @@ export const resourcesAppliationsListData = [
     content: 'A tool to browse demographic, incidence, and survival statistics for cancers in children, adolescent, and young adults.',
     link: 'https://nccrexplorer.ccdi.cancer.gov',
     img: nccrLogo,
+  },
+  {
+    id: 'federation',
+    title: 'Data Federation Resource',
+    content: 'The CCDI Data Federation Resource provides harmonized metadata accessible via an API that facilitates the search across multiple resources. ',
+    link: '/data-federation-resource',
+    img: federationLogo,
+    noLink: true
   },
 ];
 
@@ -171,7 +190,7 @@ export const carouselList = [
   {
     img: wheel3,
     mobile: mciMobile,
-    content: 'Molecular Characterization Initiative for Childhood Cancer',
+    content: 'Molecular Characterization Initiative',
     link: '/MCI',
   },
   {
@@ -185,6 +204,12 @@ export const carouselList = [
     mobile: nccrMobile,
     content: 'National Childhood Cancer Registry Explorer',
     link: 'https://nccrexplorer.ccdi.cancer.gov',
+  },
+  {
+    img: wheel8,
+    mobile: federationMobile,
+    content: 'Data Federation Resource',
+    link: '/data-federation-resource',
   },
 ];
 

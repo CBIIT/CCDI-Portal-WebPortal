@@ -1,90 +1,42 @@
-import gql from 'graphql-tag';
-
-// --------------- Icons configuration --------------
-// Ideal size for programListingIcon is 100x100 px
-// Ideal size for externalLinkIcon is 16x16 px
-const studyListingIcon = {
-  src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/programIcon.svg',
-  alt: 'Bento program logo',
+const studyDownloadLinks = {
+  "phs002790": "https://nci-crdc.datacommons.io/user/data/download/dg.4DFC/92192aee-a4e7-11ee-b42e-1ed67ff2713c",
+  "phs002529": "https://nci-crdc.datacommons.io/user/data/download/dg.4DFC/92192aee-a4e7-11ee-b42e-1ed67ff2713c",
+  "phs002431": "https://nci-crdc.datacommons.io/user/data/download/dg.4DFC/2d835abd-7ac7-491e-aa87-00f021240b17",
+  "phs002430": "https://nci-crdc.datacommons.io/user/data/download/dg.4DFC/ff2f8ab7-92a0-4d0a-bfd1-edf95db91590",
+  "phs002504": "https://nci-crdc.datacommons.io/user/data/download/dg.4DFC/ff2f8ab7-92a0-4d0a-bfd1-edf95db91590",
+  "phs002599": "https://nci-crdc.datacommons.io/user/data/download/dg.4DFC/ff2f8ab7-92a0-4d0a-bfd1-edf95db91590",
+  "phs000720": "https://nci-crdc.datacommons.io/user/data/download/dg.4DFC/ff2f8ab7-92a0-4d0a-bfd1-edf95db91590",
+  "phs002371": "https://nci-crdc.datacommons.io/user/data/download/dg.4DFC/ff2f8ab7-92a0-4d0a-bfd1-edf95db91590",
+  "phs002677": "https://nci-crdc.datacommons.io/user/data/download/dg.4DFC/ff2f8ab7-92a0-4d0a-bfd1-edf95db91590",
+  "phs003111": "https://nci-crdc.datacommons.io/user/data/download/dg.4DFC/ff2f8ab7-92a0-4d0a-bfd1-edf95db91590",
+  "phs002517": "https://nci-crdc.datacommons.io/user/data/download/dg.4DFC/ff2f8ab7-92a0-4d0a-bfd1-edf95db91590",
+  "phs002518": "https://nci-crdc.datacommons.io/user/data/download/dg.4DFC/ff2f8ab7-92a0-4d0a-bfd1-edf95db91590",
+  "phs001437": "https://nci-crdc.datacommons.io/user/data/download/dg.4DFC/ff2f8ab7-92a0-4d0a-bfd1-edf95db91590",
+  "phs002620": "https://nci-crdc.datacommons.io/user/data/download/dg.4DFC/ff2f8ab7-92a0-4d0a-bfd1-edf95db91590",
 };
-
-const externalLinkIcon = {
-  src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/externalLinkIcon.svg',
-  alt: 'External link icon',
-};
-
-// --------------- Table configuration --------------
-const table = {
-  // Set 'display' to false to hide the table entirely
-  display: true,
-  // Table title
-  title: 'Studies',
-  // Field name for table data, need to be updated only when using a different GraphQL query
-  dataField: 'studyInfo',
-  // Value must be one of the 'field' in columns
-  defaultSortField: 'study_acronym',
-  // 'asc' or 'desc'
-  defaultSortDirection: 'asc',
-  // Set 'selectableRows' to true to show the row selection
-  selectableRows: false,
-  // A maximum of 10 columns are allowed
-  columns: [
-    {
-      dataField: 'study_acronym',
-      header: 'Study Code',
-      link: '/study/{study_id}',
-      display: true
-    },
-    {
-      dataField: 'study_id',
-      header: 'Study ID',
-    },
-    {
-      dataField: 'study_name',
-      header: 'Study Name',
-    },
-    {
-      dataField: 'start_date',
-      header: 'Start Date',
-    },
-    {
-      dataField: 'end_date',
-      header: 'End Date',
-    },
-    {
-      dataField: 'pubmed_id',
-      header: 'PubMed ID',
-      link: 'https://pubmed.ncbi.nlm.nih.gov/{pubmed_id}',
-    },
-    {
-      dataField: 'num_studies',
-      header: 'Number of Arms',
-    },
-    {
-      dataField: 'num_subjects',
-      header: 'Associated Cases',
-    },
-  ],
-};
-
-// --------------- GraphQL query - Retrieve study info --------------
-const GET_STUDIES_DATA_QUERY = gql`{
-  studyInfo {
-    study_acronym
-    study_id
-    study_name
-    start_date
-    end_date
-    pubmed_id
-    num_studies
-    num_subjects
-    }
-  }
- `;
 
 export {
-  studyListingIcon,
-  externalLinkIcon,
-  table,
-  GET_STUDIES_DATA_QUERY,
+  studyDownloadLinks
 };
+
+export async function openDoubleLink(url, setError) {
+  try {
+    let urlContent = await fetch(url);
+    if (urlContent.ok) {
+      let finalContent = await urlContent.json();
+      if (typeof finalContent == "object") {
+        if (finalContent.url) {
+          window.location.href = finalContent.url
+        } else {
+          setError("The server response does not contain a valid download link");
+        }
+      } else {
+        setError("Received an invalid response from the server. Please try again later")
+      }
+    } else {
+      setError("Network error. Please check your internet connection and try again");
+    }
+  } catch (e) {
+    setError("Failed to fetch the download URL. Please try again");
+  }
+}

@@ -3,6 +3,7 @@ import { cellTypes, headerTypes } from '@bento-core/table';
 import ReactHtmlParser from "html-react-parser";
 import { studyDownloadLinks, openDoubleLink } from '../../../../bento/studiesData';
 import { CloudDownload } from '@material-ui/icons';
+import { Tooltip } from '@material-ui/core';
 
 export const CustomCellView = (props) => {
   const {
@@ -45,11 +46,13 @@ export const CustomCellView = (props) => {
   } else if (cellStyle === 'STUDY_DOWNLOAD') {
     const study_download_url = studyDownloadLinks[props[dataField]]
     return(
-      <span onClick={()=>{
-        openDoubleLink(study_download_url,(errorMessage) => {})
-      }} style={downloadStyle}>
-        <CloudDownload />
-      </span>
+      <Tooltip title="Download study">
+        <span onClick={()=>{
+          openDoubleLink(study_download_url,(errorMessage) => {})
+        }} style={downloadStyle}>
+          <CloudDownload />
+        </span>
+      </Tooltip>
     )
   }
 };

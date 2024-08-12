@@ -4,7 +4,7 @@ export const GET_PARTICIPANTS_TAB = gql`
 query participantOverViewPaged($participant_ids: [String], $offset: Int = 0, $first: Int = 1000, $order_by:String =""){
   participantOverViewPaged(participant_ids: $participant_ids, first: $first, offset: $offset, order_by: $order_by) {
     participant_id
-    phs_accession
+    dbgap_accession
     race
     sex_at_birth
   }
@@ -12,7 +12,7 @@ query participantOverViewPaged($participant_ids: [String], $offset: Int = 0, $fi
 `;
 
 export const customParticipantsTabDownloadCSV = {
-  keysToInclude: ['participant_id', 'phs_accession', 'race', 'sex_at_birth'],
+  keysToInclude: ['participant_id', 'dbgap_accession', 'race', 'sex_at_birth'],
   header: ['Participant ID', 'Study Accession', 'Race', 'Sex'],
   query: GET_PARTICIPANTS_TAB,
   apiVariable: 'participantOverView',
@@ -78,8 +78,8 @@ query diagnosisOverview($diagnosis_id: [String], $offset: Int = 0, $first: Int =
   diagnosisOverview(diagnosis_id: $diagnosis_id, offset: $offset,first: $first, order_by: $order_by) {
     diagnosis_id
     participant_id
-    phs_accession
-    diagnosis_classification
+    dbgap_accession
+    diagnosis
     diagnosis_classification_system
     diagnosis_verification_status
     diagnosis_basis
@@ -93,7 +93,7 @@ query diagnosisOverview($diagnosis_id: [String], $offset: Int = 0, $first: Int =
 `;
 
 export const customDiagnosisTabDownloadCSV = {
-  keysToInclude: ['participant_id', 'phs_accession', 'diagnosis_classification', 'anatomic_site', 'diagnosis_classification_system', 'diagnosis_verification_status', 'diagnosis_basis', 'diagnosis_comment', 'disease_phase', 'age_at_diagnosis', 'last_known_survival_status'],
+  keysToInclude: ['participant_id', 'dbgap_accession', 'diagnosis', 'anatomic_site', 'diagnosis_classification_system', 'diagnosis_verification_status', 'diagnosis_basis', 'diagnosis_comment', 'disease_phase', 'age_at_diagnosis', 'last_known_survival_status'],
   header: ['Participant ID', 'Study Accession', 'Diagnosis', 'Anatomic Site', 'Diagnosis Classification System', 'Diagnosis Verification Status', 'Diagnosis Basis', 'Diagnosis Comments', 'Disease Phase', 'Age at Diagnosis (days)', 'Last Known Survival Status'],
   query: GET_DIAGNOSIS_TAB,
   apiVariable: 'diagnosisOverview',
@@ -105,8 +105,8 @@ export const GET_STUDY_TAB = gql`
 query studyOverview($study_id: [String], $offset: Int = 0, $first: Int = 1000, $order_by:String =""){
   studyOverview(study_id: $participant_id, offset: $offset,first: $first, order_by: $order_by) {
     participant_id
-    phs_accession
-    diagnosis_classification
+    dbgap_accession
+    diagnosis
     disease_phase
     anatomic_site
     age_at_diagnosis
@@ -116,7 +116,7 @@ query studyOverview($study_id: [String], $offset: Int = 0, $first: Int = 1000, $
 `;
 
 export const customStudyTabDownloadCSV = {
-  keysToInclude: ['study_id', 'pubmed_id', 'grant_id', 'phs_accession', 'study_short_title', 'personnel_name', 'number_of_participants', 'diagnosis', 'number_of_samples', 'anatomic_site', 'number_of_files', 'file_type'],
+  keysToInclude: ['study_id', 'pubmed_id', 'grant_id', 'dbgap_accession', 'study_short_title', 'personnel_name', 'number_of_participants', 'diagnosis', 'number_of_samples', 'anatomic_site', 'number_of_files', 'file_type'],
   header: ['Study ID', 'PubMed ID', 'Grant ID', 'Study Accession', 'Study Short Title', 'Principle Investigator(s)', 'Number of Participants', 'Diagnosis', 'Number of Samples', 'Diagnosis Anatomic Site', 'Number of Files', 'File Type'],
   query: GET_STUDY_TAB,
   apiVariable: 'studyOverview',

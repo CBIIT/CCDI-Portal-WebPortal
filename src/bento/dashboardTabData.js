@@ -122,6 +122,8 @@ query search (
     $diagnosis_classification_system: [String] ,
     $diagnosis_verification_status: [String] ,
     $diagnosis_basis: [String] ,
+    $tumor_grade_source: [String],
+    $tumor_stage_source: [String],
     $last_known_survival_status: [String] ,
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
@@ -146,6 +148,8 @@ query search (
         diagnosis_classification_system: $diagnosis_classification_system,
         diagnosis_verification_status: $diagnosis_verification_status,
         diagnosis_basis: $diagnosis_basis,
+        tumor_grade_source: $tumor_grade_source,
+        tumor_stage_source: $tumor_stage_source,
         last_known_survival_status: $last_known_survival_status,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
@@ -224,8 +228,16 @@ query search (
         filterParticipantCountByDiagnosisBasis{
           group
           subjects
-      }
+        }
         filterParticipantCountByLibrarySelection{
+            group
+            subjects
+        }
+        filterParticipantCountByTumorGradeSource{
+            group
+            subjects
+        }
+        filterParticipantCountByTumorStageSource{
             group
             subjects
         }
@@ -361,6 +373,8 @@ query sampleOverview(
     $diagnosis_classification_system: [String] ,
     $diagnosis_verification_status: [String] ,
     $diagnosis_basis: [String] ,
+    $tumor_grade_source: [String],
+    $tumor_stage_source: [String],
     $last_known_survival_status: [String] ,
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
@@ -388,6 +402,8 @@ query sampleOverview(
         diagnosis_classification_system: $diagnosis_classification_system,
         diagnosis_verification_status: $diagnosis_verification_status,
         diagnosis_basis: $diagnosis_basis,
+        tumor_grade_source: $tumor_grade_source,
+        tumor_stage_source: $tumor_stage_source,
         diagnosis_comment: $diagnosis_comment,
         last_known_survival_status: $last_known_survival_status,
         sample_anatomic_site: $sample_anatomic_site,
@@ -432,6 +448,8 @@ query participantOverview(
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
     $diagnosis: [String] ,
+    $tumor_grade_source: [String],
+    $tumor_stage_source: [String],
     $last_known_survival_status: [String] ,
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
@@ -456,6 +474,8 @@ query participantOverview(
         diagnosis_anatomic_site: $diagnosis_anatomic_site,
         disease_phase: $disease_phase,
         diagnosis: $diagnosis,
+        tumor_grade_source: $tumor_grade_source,
+        tumor_stage_source: $tumor_stage_source,
         last_known_survival_status: $last_known_survival_status,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
@@ -497,6 +517,8 @@ query diagnosisOverview(
     $diagnosis_classification_system: [String] ,
     $diagnosis_verification_status: [String] ,
     $diagnosis_basis: [String] ,
+    $tumor_grade_source: [String] ,
+    $tumor_stage_source: [String] ,
     $last_known_survival_status: [String] ,
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
@@ -525,6 +547,8 @@ query diagnosisOverview(
         diagnosis_classification_system: $diagnosis_classification_system,
         diagnosis_verification_status: $diagnosis_verification_status,
         diagnosis_basis: $diagnosis_basis,
+        tumor_grade_source: $tumor_grade_source,
+        tumor_stage_source: $tumor_stage_source,
         last_known_survival_status: $last_known_survival_status,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
@@ -551,6 +575,8 @@ query diagnosisOverview(
         diagnosis_classification_system
         diagnosis_verification_status
         diagnosis_basis
+        tumor_grade_source
+        tumor_stage_source
         disease_phase
         anatomic_site
         age_at_diagnosis
@@ -569,6 +595,8 @@ query studyOverview(
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
     $diagnosis: [String] ,
+    $tumor_grade_source: [String],
+    $tumor_stage_source: [String],
     $last_known_survival_status: [String] ,
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
@@ -593,6 +621,8 @@ query studyOverview(
         diagnosis_anatomic_site: $diagnosis_anatomic_site,
         disease_phase: $disease_phase,
         diagnosis: $diagnosis,
+        tumor_grade_source: $tumor_grade_source,
+        tumor_stage_source: $tumor_stage_source,
         last_known_survival_status: $last_known_survival_status,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
@@ -685,6 +715,8 @@ query participantsAddAllToCart(
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
     $diagnosis: [String] ,
+    $tumor_grade_source: [String],
+    $tumor_stage_source: [String],
     $last_known_survival_status: [String] ,
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
@@ -710,6 +742,8 @@ query participantsAddAllToCart(
       diagnosis_anatomic_site: $diagnosis_anatomic_site,
       disease_phase: $disease_phase,
       diagnosis: $diagnosis,
+      tumor_grade_source: $tumor_grade_source,
+      tumor_stage_source: $tumor_stage_source,
       last_known_survival_status: $last_known_survival_status,
       sample_anatomic_site: $sample_anatomic_site,
       participant_age_at_collection: $participant_age_at_collection,
@@ -744,6 +778,8 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
       $diagnosis_classification_system: [String] ,
       $diagnosis_verification_status: [String] ,
       $diagnosis_basis: [String] ,
+      $tumor_grade_source: [String],
+      $tumor_stage_source: [String],
       $diagnosis_comment: [String] ,
       $last_known_survival_status: [String] ,
       $sample_anatomic_site: [String] ,
@@ -772,6 +808,8 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
           diagnosis_classification_system: $diagnosis_classification_system,
           diagnosis_verification_status: $diagnosis_verification_status,
           diagnosis_basis: $diagnosis_basis,
+          tumor_grade_source: $tumor_grade_source,
+          tumor_stage_source: $tumor_stage_source,
           diagnosis_comment: $diagnosis_comment,
           last_known_survival_status: $last_known_survival_status,
           sample_anatomic_site: $sample_anatomic_site,
@@ -804,6 +842,8 @@ query fileAddAllToCart(
   $diagnosis_anatomic_site: [String] ,
   $disease_phase: [String] ,
   $diagnosis: [String] ,
+  $tumor_grade_source: [String],
+  $tumor_stage_source: [String],
   $last_known_survival_status: [String] ,
   $sample_anatomic_site: [String] ,
   $participant_age_at_collection: [Int] ,
@@ -829,6 +869,8 @@ query fileAddAllToCart(
       diagnosis_anatomic_site: $diagnosis_anatomic_site,
       disease_phase: $disease_phase,
       diagnosis: $diagnosis,
+      tumor_grade_source: $tumor_grade_source,
+      tumor_stage_source: $tumor_stage_source,
       last_known_survival_status: $last_known_survival_status,
       sample_anatomic_site: $sample_anatomic_site,
       participant_age_at_collection: $participant_age_at_collection,
@@ -863,6 +905,8 @@ query diagnosisAddAllToCart(
   $diagnosis_classification_system: [String] ,
   $diagnosis_verification_status: [String] ,
   $diagnosis_basis: [String] ,
+  $tumor_grade_source: [String],
+  $tumor_stage_source: [String],
   $diagnosis_comment: [String],
   $last_known_survival_status: [String] ,
   $sample_anatomic_site: [String] ,
@@ -891,6 +935,8 @@ query diagnosisAddAllToCart(
       diagnosis_classification_system: $diagnosis_classification_system,
       diagnosis_verification_status: $diagnosis_verification_status,
       diagnosis_basis: $diagnosis_basis,
+      tumor_grade_source: $tumor_grade_source,
+      tumor_stage_source: $tumor_stage_source,
       diagnosis_comment: $diagnosis_comment,
       last_known_survival_status: $last_known_survival_status,
       sample_anatomic_site: $sample_anatomic_site,
@@ -923,6 +969,8 @@ query studyAddAllToCart(
   $diagnosis_anatomic_site: [String] ,
   $disease_phase: [String] ,
   $diagnosis: [String] ,
+  $tumor_grade_source: [String],
+  $tumor_stage_source: [String],
   $last_known_survival_status: [String] ,
   $sample_anatomic_site: [String] ,
   $participant_age_at_collection: [Int] ,
@@ -947,6 +995,8 @@ query studyAddAllToCart(
       diagnosis_anatomic_site: $diagnosis_anatomic_site,
       disease_phase: $disease_phase,
       diagnosis: $diagnosis,
+      tumor_grade_source: $tumor_grade_source,
+      tumor_stage_source: $tumor_stage_source,
       last_known_survival_status: $last_known_survival_status,
       sample_anatomic_site: $sample_anatomic_site,
       participant_age_at_collection: $participant_age_at_collection,
@@ -1148,6 +1198,20 @@ export const tabContainers = [
       {
         dataField: 'diagnosis_basis',
         header: 'Diagnosis Basis',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'tumor_grade_source',
+        header: 'Tumor Grade Source',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'tumor_stage_source',
+        header: 'Tumor Stage Source',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,

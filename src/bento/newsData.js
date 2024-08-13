@@ -13,6 +13,16 @@ import dataAccessPDF from "../assets/about/CCDI-CGC-Data-Access-Instructions-2.0
 
 export const newsList = [
     {
+        id: 'hub_08292024',
+        title: 'Updates and minor enhancements to the Hub made',
+        date: 'August 29, 2024',
+        slug: 'Release 2.3.2 includes a fix and some small updates',
+        highlight: `<p>The CCDI Hub 2.3.2 release features a query fix to the CCDI Hub Explore Dashboard. This fix will ensure the file counts are correct and match the number of files in the Hub’s database. Other updates include August Molecular Characterization Initiative (MCI) enrollment numbers and enhancements to the flow diagram on the MCI page, and corrections and updates to a few CCDI Hub News topics.</p>`,
+        fullText: '',
+        type: 'Site Updates',
+        img: updateImgDashboard,
+    },
+    {
         id: 'CCDC_08212024',
         title: 'Several updates included in August CCDC release',
         date: 'August 21, 2024',

@@ -13,6 +13,17 @@ import dataAccessPDF from "../assets/about/CCDI-CGC-Data-Access-Instructions-2.0
 
 export const newsList = [
     {
+        id: 'CCDC_08212024',
+        title: 'Several updates included in August CCDC release',
+        date: 'August 21, 2024',
+        slug: 'Changes to the CCDC include updates to existing resources and the addition of new data sets',
+        highlight: `<p>The August release of the Childhood Cancer Data Catalog (CCDC) includes two new data sets: CCDI’s Single-Cell Atlas of NF1 Nerve Sheath Tumors and The Cancer Imaging Archive’s MR Imaging of Pediatric Subjects with High-Grade Gliomas (DFCI-BCH-BWH-PEDs-HGG). Additionally, six resources now have updated counts as well as references and resource-level properties. Two of these resources have updated case disease diagnosis lists. Changes were made to other resources and a critical software update was performed for the entire catalog.</p>`,
+        fullText: '',
+        type: 'Application Updates',
+        img: updateImgCCDC,
+        latestUpdate: true,
+    },
+    {
         id: 'federation_08072024',
         title: 'Childhood Cancer Data Initiative (CCDI) Data Federation Resource',
         date: 'August 7, 2024',
@@ -53,7 +64,6 @@ export const newsList = [
         fullText: '',
         type: 'Application Updates',
         img: updateImgCCDC,
-        latestUpdate: true,
     },
     {
         id: 'ccdc_05172024',

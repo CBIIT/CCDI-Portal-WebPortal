@@ -120,7 +120,6 @@ query search (
     $disease_phase: [String] ,
     $diagnosis: [String] ,
     $diagnosis_classification_system: [String] ,
-    $diagnosis_verification_status: [String] ,
     $diagnosis_basis: [String] ,
     $tumor_grade_source: [String],
     $tumor_stage_source: [String],
@@ -146,7 +145,6 @@ query search (
         disease_phase: $disease_phase,
         diagnosis: $diagnosis,
         diagnosis_classification_system: $diagnosis_classification_system,
-        diagnosis_verification_status: $diagnosis_verification_status,
         diagnosis_basis: $diagnosis_basis,
         tumor_grade_source: $tumor_grade_source,
         tumor_stage_source: $tumor_stage_source,
@@ -371,7 +369,6 @@ query sampleOverview(
     $diagnosis: [String] ,
     $diagnosis_comment: [String],
     $diagnosis_classification_system: [String] ,
-    $diagnosis_verification_status: [String] ,
     $diagnosis_basis: [String] ,
     $tumor_grade_source: [String],
     $tumor_stage_source: [String],
@@ -400,7 +397,6 @@ query sampleOverview(
         disease_phase: $disease_phase,
         diagnosis: $diagnosis,
         diagnosis_classification_system: $diagnosis_classification_system,
-        diagnosis_verification_status: $diagnosis_verification_status,
         diagnosis_basis: $diagnosis_basis,
         tumor_grade_source: $tumor_grade_source,
         tumor_stage_source: $tumor_stage_source,
@@ -515,7 +511,6 @@ query diagnosisOverview(
     $diagnosis: [String] ,
     $diagnosis_comment: [String],
     $diagnosis_classification_system: [String] ,
-    $diagnosis_verification_status: [String] ,
     $diagnosis_basis: [String] ,
     $tumor_grade_source: [String] ,
     $tumor_stage_source: [String] ,
@@ -545,7 +540,6 @@ query diagnosisOverview(
         diagnosis: $diagnosis,
         diagnosis_comment: $diagnosis_comment,
         diagnosis_classification_system: $diagnosis_classification_system,
-        diagnosis_verification_status: $diagnosis_verification_status,
         diagnosis_basis: $diagnosis_basis,
         tumor_grade_source: $tumor_grade_source,
         tumor_stage_source: $tumor_stage_source,
@@ -573,7 +567,6 @@ query diagnosisOverview(
         diagnosis
         diagnosis_comment
         diagnosis_classification_system
-        diagnosis_verification_status
         diagnosis_basis
         tumor_grade_source
         tumor_stage_source
@@ -776,7 +769,6 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
       $disease_phase: [String] ,
       $diagnosis: [String] ,
       $diagnosis_classification_system: [String] ,
-      $diagnosis_verification_status: [String] ,
       $diagnosis_basis: [String] ,
       $tumor_grade_source: [String],
       $tumor_stage_source: [String],
@@ -806,7 +798,6 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
           disease_phase: $disease_phase,
           diagnosis: $diagnosis,
           diagnosis_classification_system: $diagnosis_classification_system,
-          diagnosis_verification_status: $diagnosis_verification_status,
           diagnosis_basis: $diagnosis_basis,
           tumor_grade_source: $tumor_grade_source,
           tumor_stage_source: $tumor_stage_source,
@@ -903,7 +894,6 @@ query diagnosisAddAllToCart(
   $disease_phase: [String] ,
   $diagnosis: [String] ,
   $diagnosis_classification_system: [String] ,
-  $diagnosis_verification_status: [String] ,
   $diagnosis_basis: [String] ,
   $tumor_grade_source: [String],
   $tumor_stage_source: [String],
@@ -933,7 +923,6 @@ query diagnosisAddAllToCart(
       disease_phase: $disease_phase,
       diagnosis: $diagnosis,
       diagnosis_classification_system: $diagnosis_classification_system,
-      diagnosis_verification_status: $diagnosis_verification_status,
       diagnosis_basis: $diagnosis_basis,
       tumor_grade_source: $tumor_grade_source,
       tumor_stage_source: $tumor_stage_source,
@@ -1184,13 +1173,6 @@ export const tabContainers = [
       {
         dataField: 'diagnosis_classification_system',
         header: 'Diagnosis Classification System',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'diagnosis_verification_status',
-        header: 'Diagnosis Verification Status',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,

@@ -116,8 +116,8 @@ query studyOverview($study_id: [String], $offset: Int = 0, $first: Int = 1000, $
 `;
 
 export const customStudyTabDownloadCSV = {
-  keysToInclude: ['study_id', 'pubmed_id', 'grant_id', 'dbgap_accession', 'study_short_title', 'personnel_name', 'number_of_participants', 'diagnosis', 'number_of_samples', 'anatomic_site', 'number_of_files', 'file_type'],
-  header: ['Study ID', 'PubMed ID', 'Grant ID', 'Study Accession', 'Study Short Title', 'Principle Investigator(s)', 'Number of Participants', 'Diagnosis', 'Number of Samples', 'Diagnosis Anatomic Site', 'Number of Files', 'File Type'],
+  keysToInclude: ['study_id', 'pubmed_id', 'grant_id', 'dbgap_accession', 'study_name', 'personnel_name', 'number_of_participants', 'diagnosis', 'number_of_samples', 'anatomic_site', 'number_of_files', 'file_type'],
+  header: ['Study ID', 'PubMed ID', 'Grant ID', 'Study Accession', 'Study Name', 'Principle Investigator(s)', 'Number of Participants', 'Diagnosis', 'Number of Samples', 'Diagnosis Anatomic Site', 'Number of Files', 'File Type'],
   query: GET_STUDY_TAB,
   apiVariable: 'studyOverview',
   fileName: 'tableDownload',

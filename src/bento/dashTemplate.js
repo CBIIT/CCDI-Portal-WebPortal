@@ -533,10 +533,10 @@ export const facetsConfig = [
   },
   {
     section: STUDY,
-    label: 'Study short title',
+    label: 'Study Name',
     apiPath: 'participantCountByStudyTitle',
     apiForFiltering: 'filterParticipantCountByStudyTitle',
-    datafield: 'study_short_title',
+    datafield: 'study_name',
     field: GROUP,
     type: InputTypes.CHECKBOX,
     sort_type: sortType.ALPHABET,

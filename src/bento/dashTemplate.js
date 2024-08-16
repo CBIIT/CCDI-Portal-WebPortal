@@ -259,17 +259,6 @@ export const facetsConfig = [
   },
   {
     section: DIAGNOSIS,
-    label: 'Diagnosis Verification Status',
-    apiPath: 'participantCountByDiagnosisVerificationStatus',
-    apiForFiltering: 'filterParticipantCountByDiagnosisVerificationStatus',
-    datafield: 'diagnosis_verification_status',
-    field: GROUP,
-    type: InputTypes.CHECKBOX,
-    sort_type: sortType.ALPHABET,
-    show: true,
-  },
-  {
-    section: DIAGNOSIS,
     label: 'Diagnosis Basis',
     apiPath: 'participantCountByDiagnosisBasis',
     apiForFiltering: 'filterParticipantCountByDiagnosisBasis',

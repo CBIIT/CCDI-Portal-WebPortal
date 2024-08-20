@@ -495,7 +495,7 @@ query participantOverview(
         study_id
         race
         sex_at_birth
-        alternate_participant_id
+        synonym_id
     }
 }
 `;
@@ -1100,8 +1100,8 @@ export const tabContainers = [
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'alternate_participant_id',
-        header: 'Alternate ID',
+        dataField: 'synonym_id',
+        header: 'Synonym Participant ID',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,

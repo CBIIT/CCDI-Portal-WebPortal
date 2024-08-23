@@ -27,7 +27,7 @@ export const newsList = [
         title: 'Several updates included in August CCDC release',
         date: 'August 21, 2024',
         slug: 'Changes to the CCDC include updates to existing resources and the addition of new data sets',
-        highlight: `<p>This Childhood Cancer Data Catalog (CCDC) release includes five new data sets: CCDI’s Single-Cell Atlas of NF1 Nerve Sheath Tumors, The Cancer Imaging Archive’s MR Imaging of Pediatric Subjects with High-Grade Gliomas (DFCI-BCH-BWH-PEDs-HGG), and three sets from the Single-cell Pediatric Cancer Atlas. Additionally, seven resources now have updated counts as well as references and resource-level properties. Changes were made to other resources and a critical software update was performed for the entire catalog.</p>`,
+        highlight: `<p>This Childhood Cancer Data Catalog (CCDC) release includes five new data sets: CCDI’s Single-Cell Atlas of NF1 Nerve Sheath Tumors, The Cancer Imaging Archive’s MR Imaging of Pediatric Subjects with High-Grade Gliomas (DFCI-BCH-BWH-PEDs-HGG), and three sets from the Single-cell Pediatric Cancer Atlas. Additionally, several resources now have updated counts as well as references and resource-level properties. Changes were made to other resources and a critical software update was performed for the entire catalog.</p>`,
         fullText: '',
         type: 'Application Updates',
         img: updateImgCCDC,

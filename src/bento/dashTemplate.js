@@ -829,4 +829,10 @@ export const widgetConfig = [
     dataName: 'participantCountByRace',
     sliceTitle: 'Participants',
   },
+  {
+    type: 'donut',
+    title: 'Assay Type',
+    dataName: 'participantCountByAssayMethod',
+    sliceTitle: 'Participants',
+  },
 ];

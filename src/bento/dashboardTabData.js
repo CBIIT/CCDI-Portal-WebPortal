@@ -193,6 +193,10 @@ query search (
             group
             subjects
         }
+        participantCountByAssayMethod{
+            group
+            subjects
+        }
         filterParticipantCountByAssayMethod{
             group
             subjects

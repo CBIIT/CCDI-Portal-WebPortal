@@ -175,7 +175,7 @@ export default () => ({
     width: '100%',
     // display: 'flex',
     justifyContent: 'space-between',
-    backgroundColor: '#10A075',
+    backgroundColor: '#4D889E',
     color: '#fff',
     border: '1px solid #0D8461',
     borderRadius: 10,
@@ -184,9 +184,8 @@ export default () => ({
     boxShadow: 'none',
     paddingLeft: 16,
     paddingRight: 12,
-    display: 'none',
     '&:hover': {
-      backgroundColor: '#10A075',
+      backgroundColor: '#4D889E',
     },
   },
   iconSpan: {

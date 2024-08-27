@@ -85,12 +85,26 @@ const { UploadModal } = UploadModalGenerator({
 
         // Combine the results and remove duplicates
         const unmatched = new Set(inputArray);
-        matched.forEach((obj) => unmatched.delete(obj.subject_id));
+        matched.forEach((obj) => unmatched.delete(obj.participant_id.toUpperCase()));
         return { matched, unmatched: [...unmatched] };
       } catch (e) {
         return { matched: [], unmatched: [] };
       }
     },
+  },
+  config: {
+    title: 'Upload Participants Set',
+    inputPlaceholder: 'e.g. PARTICIPANT-101025, PARTICIPANT-101026, PARTICIPANT-101027',
+    inputTooltip: 'Enter valid Participant IDs.',
+    uploadTooltip: 'Select a file from your computer.',
+    accept: '.csv,.txt',
+    maxSearchTerms: 1000,
+    matchedId: 'participant_id',
+    matchedLabel : 'Submitted Participant ID',
+    associateId: 'dbgap_accession',
+    associateLabel: '',
+    projectName: 'CCDI Hub',
+    caseIds: 'Participant IDs',
   },
 });
 
@@ -161,6 +175,10 @@ const BentoFacetFilter = ({
       setExpanded(!expanded);
     };
 
+    let searchConfig = {
+      title: 'Participants',
+    }
+
     return (
       <>
         <CustomExpansionPanelSummary onClick={collapseHandler} id={section}>
@@ -178,6 +196,7 @@ const BentoFacetFilter = ({
               SearchBox={SearchBox}
               UploadModal={UploadModal}
               hidden={!expanded || !showSearch}
+              config = {searchConfig}
             />
           )}
         </CustomExpansionPanelSummary>

@@ -13,9 +13,8 @@ export const GET_ALL_IDS = gql`{
 
 export const GET_PARTICIPANT_IDS = gql`
   query search ($participant_ids: [String]){
-    findParticipantIdsInList (participant_ids: $participant_ids) {
-        participant_ids
-        program_id
+    findParticipantIdsInList (participant_id: $participant_ids) {
+        participant_id
     }
 }
 `;

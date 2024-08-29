@@ -245,7 +245,11 @@ query search (
             group
             subjects
         }
-        filterParticipantCountByLibrarySource{
+        filterParticipantCountByLibrarySourceMaterial{
+            group
+            subjects
+        }
+        filterParticipantCountByLibrarySourceMolecule{
             group
             subjects
         }
@@ -375,10 +379,7 @@ query sampleOverview(
     $age_at_diagnosis: [Int] ,
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
-    $diagnosis: [String] ,
-    $diagnosis_comment: [String],
     $diagnosis_classification_system: [String] ,
-    $diagnosis_basis: [String] ,
     $tumor_grade_source: [String],
     $tumor_stage_source: [String],
     $last_known_survival_status: [String] ,
@@ -405,12 +406,9 @@ query sampleOverview(
         age_at_diagnosis: $age_at_diagnosis,
         diagnosis_anatomic_site: $diagnosis_anatomic_site,
         disease_phase: $disease_phase,
-        diagnosis: $diagnosis,
         diagnosis_classification_system: $diagnosis_classification_system,
-        diagnosis_basis: $diagnosis_basis,
         tumor_grade_source: $tumor_grade_source,
         tumor_stage_source: $tumor_stage_source,
-        diagnosis_comment: $diagnosis_comment,
         last_known_survival_status: $last_known_survival_status,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
@@ -435,11 +433,7 @@ query sampleOverview(
         study_id
         anatomic_site
         participant_age_at_collection
-        sample_diagnosis_classification
         sample_diagnosis_classification_system
-        sample_diagnosis_verification_status
-        sample_diagnosis_basis
-        sample_diagnosis_comment
         sample_tumor_status
         tumor_classification
     }
@@ -522,7 +516,6 @@ query diagnosisOverview(
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
     $diagnosis: [String] ,
-    $diagnosis_comment: [String],
     $diagnosis_classification_system: [String] ,
     $diagnosis_basis: [String] ,
     $tumor_grade_source: [String] ,
@@ -552,7 +545,6 @@ query diagnosisOverview(
         diagnosis_anatomic_site: $diagnosis_anatomic_site,
         disease_phase: $disease_phase,
         diagnosis: $diagnosis,
-        diagnosis_comment: $diagnosis_comment,
         diagnosis_classification_system: $diagnosis_classification_system,
         diagnosis_basis: $diagnosis_basis,
         tumor_grade_source: $tumor_grade_source,
@@ -578,9 +570,9 @@ query diagnosisOverview(
         id
         diagnosis_id
         participant_id
+        sample_id
         dbgap_accession
         diagnosis
-        diagnosis_comment
         diagnosis_classification_system
         diagnosis_basis
         tumor_grade_source
@@ -791,7 +783,6 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
       $diagnosis_basis: [String] ,
       $tumor_grade_source: [String],
       $tumor_stage_source: [String],
-      $diagnosis_comment: [String] ,
       $last_known_survival_status: [String] ,
       $sample_anatomic_site: [String] ,
       $participant_age_at_collection: [Int] ,
@@ -816,12 +807,9 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
           age_at_diagnosis: $age_at_diagnosis,
           diagnosis_anatomic_site: $diagnosis_anatomic_site,
           disease_phase: $disease_phase,
-          diagnosis: $diagnosis,
           diagnosis_classification_system: $diagnosis_classification_system,
-          diagnosis_basis: $diagnosis_basis,
           tumor_grade_source: $tumor_grade_source,
           tumor_stage_source: $tumor_stage_source,
-          diagnosis_comment: $diagnosis_comment,
           last_known_survival_status: $last_known_survival_status,
           sample_anatomic_site: $sample_anatomic_site,
           participant_age_at_collection: $participant_age_at_collection,
@@ -920,7 +908,6 @@ query diagnosisAddAllToCart(
   $diagnosis_basis: [String] ,
   $tumor_grade_source: [String],
   $tumor_stage_source: [String],
-  $diagnosis_comment: [String],
   $last_known_survival_status: [String] ,
   $sample_anatomic_site: [String] ,
   $participant_age_at_collection: [Int] ,
@@ -950,7 +937,6 @@ query diagnosisAddAllToCart(
       diagnosis_basis: $diagnosis_basis,
       tumor_grade_source: $tumor_grade_source,
       tumor_stage_source: $tumor_stage_source,
-      diagnosis_comment: $diagnosis_comment,
       last_known_survival_status: $last_known_survival_status,
       sample_anatomic_site: $sample_anatomic_site,
       participant_age_at_collection: $participant_age_at_collection,
@@ -1175,6 +1161,24 @@ export const tabContainers = [
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
+      },     
+      {
+        dataField: 'sample_id',
+        header: 'Sample ID',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+        cellType: cellTypes.CUSTOM_ELEM,
+        cellStyle: cellStyles.TRANSFORM,
+        dataFormatter: (dt) => {
+          if(dt instanceof Array){
+            return dt.join(',')
+          }
+          else if(dt === null)
+            return "";
+
+          return dt.toString();
+        },
       },
       {
         dataField: 'study_id',
@@ -1221,13 +1225,6 @@ export const tabContainers = [
       {
         dataField: 'tumor_stage_source',
         header: 'Tumor Stage Source',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'diagnosis_comment',
-        header: 'Diagnosis Comment',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
@@ -1495,36 +1492,8 @@ export const tabContainers = [
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'sample_diagnosis_classification',
-        header: 'Diagnosis',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
         dataField: 'sample_diagnosis_classification_system',
         header: 'Diagnosis Classification System',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'sample_diagnosis_verification_status',
-        header: 'Diagnosis Verification Status',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'sample_diagnosis_basis',
-        header: 'Diagnosis Basis',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'sample_diagnosis_comment',
-        header: 'Diagnosis Comment',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,

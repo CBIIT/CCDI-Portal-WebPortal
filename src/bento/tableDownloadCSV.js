@@ -79,11 +79,11 @@ query diagnosisOverview($diagnosis_id: [String], $offset: Int = 0, $first: Int =
   diagnosisOverview(diagnosis_id: $diagnosis_id, offset: $offset,first: $first, order_by: $order_by) {
     diagnosis_id
     participant_id
+    sample_id
     dbgap_accession
     diagnosis
     diagnosis_classification_system
     diagnosis_basis
-    diagnosis_comment
     disease_phase
     anatomic_site
     age_at_diagnosis
@@ -93,8 +93,8 @@ query diagnosisOverview($diagnosis_id: [String], $offset: Int = 0, $first: Int =
 `;
 
 export const customDiagnosisTabDownloadCSV = {
-  keysToInclude: ['participant_id', 'dbgap_accession', 'diagnosis', 'anatomic_site', 'diagnosis_classification_system', 'diagnosis_basis', 'diagnosis_comment', 'tumor_grade_source', 'tumor_stage_source', 'disease_phase', 'age_at_diagnosis', 'last_known_survival_status'],
-  header: ['Participant ID', 'Study Accession', 'Diagnosis', 'Anatomic Site', 'Diagnosis Classification System', 'Diagnosis Verification Status', 'Diagnosis Basis', 'Diagnosis Comments', 'Disease Phase', 'Age at Diagnosis (days)', 'Last Known Survival Status'],
+  keysToInclude: ['participant_id', 'sample_id', 'dbgap_accession', 'diagnosis', 'anatomic_site', 'diagnosis_classification_system', 'diagnosis_basis', 'tumor_grade_source', 'tumor_stage_source', 'disease_phase', 'age_at_diagnosis', 'last_known_survival_status'],
+  header: ['Participant ID', 'Sample ID', 'Study Accession', 'Diagnosis', 'Anatomic Site', 'Diagnosis Classification System', 'Diagnosis Verification Status', 'Diagnosis Basis', 'Diagnosis Comments', 'Disease Phase', 'Age at Diagnosis (days)', 'Last Known Survival Status'],
   query: GET_DIAGNOSIS_TAB,
   apiVariable: 'diagnosisOverview',
   fileName: 'tableDownload',

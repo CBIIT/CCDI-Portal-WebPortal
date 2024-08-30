@@ -251,7 +251,7 @@ const useOutsideAlerter = (ref) => {
 
 const NavBar = () => {
   const path = useLocation().pathname;
-  const isAbout = path === '/data-usage-policies' || path === '/about';
+  const isAbout = navbarSublists["About"].some((navItem)=>navItem.link === path);
   const [clickedTitle, setClickedTitle] = useState("");
   const dropdownSelection = useRef(null);
   const clickableObject = navMobileList.filter(item => item.className === 'navMobileItem clickable');

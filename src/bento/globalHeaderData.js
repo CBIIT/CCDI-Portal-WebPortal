@@ -136,6 +136,11 @@ Applications: [
       name: 'CCDI Data Usage Policies & Terms',
       link: '/data-usage-policies',
       className: 'navMobileSubItem',
+    },
+    {
+      name: 'CCDI-Supported Publications',
+      link: '/publications',
+      className: 'navMobileSubItem',
     }],
 };
 

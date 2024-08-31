@@ -44,11 +44,13 @@ export const CustomCellView = (props) => {
       <a href={`https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=${props[dataField]}`} target="_blank" rel="noreferrer">{props[dataField]}</a>
     )
   } else if (cellStyle === 'STUDY_DOWNLOAD') {
-    const study_download_url = studyDownloadLinks[props[dataField]]
+    const study_id = props[dataField];
+    const study_download_url = studyDownloadLinks[props[dataField]];
+    const fileName = study_id + "_CCDI_Study_Manifest.xlsx";
     return(
-      <Tooltip title="Download study">
+      <Tooltip title="Download study manifest">
         <span onClick={()=>{
-          openDoubleLink(study_download_url,(errorMessage) => {})
+          openDoubleLink(study_download_url, fileName)
         }} style={downloadStyle}>
           <CloudDownload />
         </span>

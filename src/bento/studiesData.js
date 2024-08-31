@@ -22,24 +22,16 @@ export {
   studyDownloadLinks
 };
 
-export async function openDoubleLink(url, setError) {
-  try {
+export async function openDoubleLink(url, fileName) {
     let urlContent = await fetch(url);
     if (urlContent.ok) {
-      let finalContent = await urlContent.json();
-      if (typeof finalContent == "object") {
-        if (finalContent.url) {
-          window.location.href = finalContent.url
-        } else {
-          setError("The server response does not contain a valid download link");
-        }
-      } else {
-        setError("Received an invalid response from the server. Please try again later")
-      }
-    } else {
-      setError("Network error. Please check your internet connection and try again");
+      let data = await urlContent.blob();
+      let a = document.createElement('a');
+      a.href = window.URL.createObjectURL(data);
+      a.download = fileName;
+      a.style.display = 'none';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
     }
-  } catch (e) {
-    setError("Failed to fetch the download URL. Please try again");
-  }
 }

@@ -74,6 +74,20 @@ const PublicationsContainer = styled.div`
     display: flex;
   }
 
+  .titleContainer {
+    display: flex;
+  }
+
+  .titleIdx {
+    font-family: Poppins;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0.02em;
+    margin-right: 12px;
+    color: #2E2E2E;
+  }
+
   .totalNumContainer {
     width: 1047px;
     margin: 0 auto;
@@ -347,7 +361,10 @@ const PublicationsView = ({classes}) => {
               <div id={publicationsItem.id} key={publicationskey} className='publicationsItem'>
                 <div className="UpperContainer">
                   <div className='publicationsItemTextContainer'>
-                    <a className='publicationsItemTitle' href={publicationsItem.link} target="_blank" rel="noopener noreferrer">{publicationsItem.title}</a>
+                    <div className='titleContainer'>
+                      <div className='titleIdx'>{idx+1}</div>
+                      <a className='publicationsItemTitle' href={publicationsItem.link} target="_blank" rel="noopener noreferrer">{publicationsItem.title}</a>
+                    </div>
                     <div className='publicationsItemDate'>{publicationsItem.date}</div>
                     <div className='publicationsItemContent'>{ReactHtmlParser(`${publicationsItem.summary.substring(0, 485)}...`)}</div>
                   </div>

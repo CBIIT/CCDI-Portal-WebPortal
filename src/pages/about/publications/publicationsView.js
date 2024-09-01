@@ -365,21 +365,22 @@ const PublicationsView = ({classes}) => {
   const [pageListVisible, setPageListVisible] = useState(0);
   const perPageSelection = useRef(null);
   const [inputValue, setInputValue] = useState('');
+  const [keyword, setKeyword] = useState('');
   const [deleteIconShow, setDeleteIconShow] = React.useState('none');
   useOutsideAlerter(perPageSelection);
 
   const [inputRef, setInputFocus] = useFocus();
 
   useEffect(() => {
-    let resultList;
+    let resultList=[];
     if (selectedTab === "All") {
-      resultList = publicationsList;
+      resultList = publicationsList.filter(item => (item.title.toUpperCase().includes(keyword.toUpperCase()) || item.date.toUpperCase().includes(keyword.toUpperCase()) || item.summary.toUpperCase().includes(keyword.toUpperCase())));
     } else {
-      resultList = publicationsList.filter(item => item.type === selectedTab);
+      resultList = publicationsList.filter(item => item.type === selectedTab && (item.title.toUpperCase().includes(keyword.toUpperCase()) || item.date.toUpperCase().includes(keyword.toUpperCase()) || item.summary.toUpperCase().includes(keyword.toUpperCase())));
     }
     setFilteredData(resultList);
     setPageTotal(resultList.length);
-  }, [selectedTab]);
+  }, [selectedTab, keyword]);
 
   useEffect(() => {
     const allids = [];
@@ -439,6 +440,11 @@ const PublicationsView = ({classes}) => {
     setInputFocus();
   };
 
+  const handleSearchButtonClick = () => {
+    setPage(1);
+    setKeyword(inputValue);
+  }
+
   return (
     <PublicationsContainer>
       <div className='pageHeader'><div className='pageHeaderText'>CCDI-Supported Publications</div></div>
@@ -447,7 +453,7 @@ const PublicationsView = ({classes}) => {
         <div className='deleteIcon' onClick={handleClear} >
             <img className="deleteIconImg" style={{display:deleteIconShow}} src='https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/globalSearchDelete.svg' alt='clear icon' />
         </div>
-        <div className='searchButton'>
+        <div className='searchButton' onClick={handleSearchButtonClick}>
           <div className='searchButtonText'>Search</div>
           <img className='searchButtonIcon' src={searchIcon} alt="searchIcon" />
         </div>

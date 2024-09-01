@@ -347,25 +347,6 @@ const useOutsideAlerter = (ref) => {
   }, [ref]);
 };
 
-const getResultList = (tabName) => {
-  if (tabName === "All") {
-    return publicationsList;
-  } else {
-    return publicationsList.filter(item => item.type === tabName);
-  }
-};
-
-const getPageResults = (selectedTab, pageInfo) => {
-  const resultList = getResultList(selectedTab);
-  const allids = [];
-  const indexStart = pageInfo.pageSize*(pageInfo.page-1);
-  const indexEnd = pageInfo.pageSize*pageInfo.page < pageInfo.pageTotal ? pageInfo.pageSize*pageInfo.page - 1 : pageInfo.pageTotal - 1;
-  for (let i = indexStart; i<= indexEnd; i++) {
-    allids.push(resultList[i]);
-  }
-  return allids;
-}
-
 const useFocus = () => {
   const htmlElRef = useRef(null)
   const setFocus = () => {htmlElRef.current &&  htmlElRef.current.focus()}
@@ -378,8 +359,9 @@ const PublicationsView = ({classes}) => {
   const sizelist = [10,20,50,100];
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(sizelist[0]);
-  const [pageTotal, setPageTotal] = useState(getResultList(selectedTab).length);
-  const [data, setdata] = useState(getPageResults(selectedTab, {page: page, pageTotal: pageTotal, pageSize: pageSize}));
+  const [filteredData, setFilteredData] = useState([]);
+  const [data, setdata] = useState([]);
+  const [pageTotal, setPageTotal] = useState(0);
   const [pageListVisible, setPageListVisible] = useState(0);
   const perPageSelection = useRef(null);
   const [inputValue, setInputValue] = useState('');
@@ -388,11 +370,31 @@ const PublicationsView = ({classes}) => {
 
   const [inputRef, setInputFocus] = useFocus();
 
+  useEffect(() => {
+    let resultList;
+    if (selectedTab === "All") {
+      resultList = publicationsList;
+    } else {
+      resultList = publicationsList.filter(item => item.type === selectedTab);
+    }
+    setFilteredData(resultList);
+    setPageTotal(resultList.length);
+  }, [selectedTab]);
+
+  useEffect(() => {
+    const allids = [];
+    const indexStart = pageSize*(page-1);
+    const indexEnd = pageSize*page < pageTotal ? pageSize*page - 1 : pageTotal - 1;
+    for (let i = indexStart; i<= indexEnd; i++) {
+      allids.push(filteredData[i]);
+    }
+    setdata(allids);
+  }, [page, pageSize, filteredData, pageTotal]);
+
   const onNext = () => {
     if (page < Math.ceil(pageTotal / pageSize)) {
       let tmp = page + 1;
       setPage(tmp);
-      setdata(getPageResults(selectedTab, {page: tmp, pageTotal: pageTotal, pageSize: pageSize}));
     }
   };
 
@@ -400,7 +402,6 @@ const PublicationsView = ({classes}) => {
     if (page > 1) {
       let tmp = page - 1;
       setPage(tmp);
-      setdata(getPageResults(selectedTab, {page: tmp, pageTotal: pageTotal, pageSize: pageSize}));
     }
   };
 
@@ -413,7 +414,6 @@ const PublicationsView = ({classes}) => {
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
-    setdata(getPageResults(selectedTab, {page: newPage, pageTotal: pageTotal, pageSize: pageSize}));
     scrollToTop();
   };
 
@@ -421,23 +421,12 @@ const PublicationsView = ({classes}) => {
     let newPageSize = Number(e.target.innerText);
     setPageSize(newPageSize);
     setPage(1);
-    setdata(getPageResults(selectedTab, {page: 1, pageTotal: pageTotal, pageSize: newPageSize}));
     setPageListVisible(!pageListVisible)
   };
 
   const onClickTab = (newsTabItem) => {
     setSelectedTab(newsTabItem);
-    const resultList = getResultList(newsTabItem);
-    const total = resultList.length;
-    const allids = [];
-    const indexStart = 0;
-    const indexEnd = pageSize < total ? pageSize - 1 : total - 1;
-    for (let i = indexStart; i<= indexEnd; i++) {
-      allids.push(resultList[i]);
-    }
-    setdata(allids);
     setPage(1);
-    setPageTotal(total);
   };
 
   const handleTextInputChange = (event) => {
@@ -474,7 +463,7 @@ const PublicationsView = ({classes}) => {
           })
         }
       </div>
-      <div className='totalNumContainer'><span className="totalNum">{data.length}</span> results</div>
+      <div className='totalNumContainer'><span className="totalNum">{filteredData.length}</span> results</div>
       <div className='publicationsList'>
         {
           data.length > 0 ? data.map((publicationsItem, idx) => {
@@ -484,7 +473,7 @@ const PublicationsView = ({classes}) => {
                 <div className="UpperContainer">
                   <div className='publicationsItemTextContainer'>
                     <div className='titleContainer'>
-                      <div className='titleIdx'>{idx+1}</div>
+                      <div className='titleIdx'>{(page-1)*pageSize+idx+1}</div>
                       <a className='publicationsItemTitle' href={publicationsItem.link} target="_blank" rel="noopener noreferrer">{publicationsItem.title}</a>
                     </div>
                     <div className='publicationsItemDate'>{publicationsItem.date}</div>

@@ -7,7 +7,8 @@ import Pagination from '@material-ui/lab/Pagination';
 import styled from 'styled-components';
 import exportIcon from '../../../assets/about/Export_Icon.svg';
 import publicationsHeaderImg from '../../../assets/about/Publications_Header.png';
-import { publicationsList } from '../../../bento/publicationsData'
+import { publicationsList } from '../../../bento/publicationsData';
+import searchIcon from '../../../assets/header/Search_Small_Icon.svg';
 
 const PublicationsContainer = styled.div`
   width: 100%;
@@ -28,6 +29,16 @@ const PublicationsContainer = styled.div`
     text-align: center;
     letter-spacing: 0.02em;
     color: #FFFFFF;
+  }
+
+  .searchBoxFooter {
+    width: 662px;
+    margin: 0 auto 40px auto;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 19px;
+    color: #05555C;
   }
 
   .tabList {
@@ -238,6 +249,86 @@ const PublicationsContainer = styled.div`
   }
 `;
 
+const SearchBar = styled.div`
+  display: flex;
+  margin: 40px auto 20px auto;
+  width: 662px;
+  height: 53px;
+  border: 2px solid #08838D;
+  // border-radius: 8px;
+  background: white;
+  border-radius: 4px;
+
+  .searchButton {
+    font-family: 'Open Sans';
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 16px;
+    padding: 16px 20px;
+    background: #05555C;
+    color: #FFFFFF;
+  }
+
+  .searchButton:hover {
+    cursor: pointer;
+  }
+
+  .deleteIcon {
+    height: 18px;
+    min-width: 15px;
+    padding-top: 19px;
+    margin-right: 13px;
+  }
+
+  .deleteIconImg:hover {
+    cursor: pointer;
+  }
+
+  .searchButtonIcon {
+    display: none;
+  }
+
+  @media (max-width: 1023px) {
+    margin: 0 auto;
+    maxWidth: 662px;
+  }
+
+  @media (max-width: 767px) {
+    .searchButtonText {
+      display: none;
+    }
+    .searchButtonIcon {
+      display: block;
+    }
+  }
+
+  @media (max-width: 732px) {
+    margin: 0 15px;
+    width: auto;
+  }
+`;
+
+const SearchInput = styled.input`
+  margin: 0 20px;
+  border: none;
+  font-family: 'Open Sans';
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 53px;
+  color: #000000;
+  width: 650px;
+  min-width: 0;
+  background: transparent;
+
+  ::placeholder {
+    color: #000000;
+  }
+
+  :focus {
+    outline: none;
+  }
+`;
+
 const useOutsideAlerter = (ref) => {
   useEffect(() => {
       function handleClickOutside(event) {
@@ -275,6 +366,12 @@ const getPageResults = (selectedTab, pageInfo) => {
   return allids;
 }
 
+const useFocus = () => {
+  const htmlElRef = useRef(null)
+  const setFocus = () => {htmlElRef.current &&  htmlElRef.current.focus()}
+  return [ htmlElRef, setFocus ] 
+};
+
 const PublicationsView = ({classes}) => {
   const [selectedTab, setSelectedTab] = useState("All");
   const newsTabList = ['All', 'Collaboration', 'Primary', 'Review', 'Book Chapter'];
@@ -285,7 +382,11 @@ const PublicationsView = ({classes}) => {
   const [data, setdata] = useState(getPageResults(selectedTab, {page: page, pageTotal: pageTotal, pageSize: pageSize}));
   const [pageListVisible, setPageListVisible] = useState(0);
   const perPageSelection = useRef(null);
+  const [inputValue, setInputValue] = useState('');
+  const [deleteIconShow, setDeleteIconShow] = React.useState('none');
   useOutsideAlerter(perPageSelection);
+
+  const [inputRef, setInputFocus] = useFocus();
 
   const onNext = () => {
     if (page < Math.ceil(pageTotal / pageSize)) {
@@ -339,9 +440,30 @@ const PublicationsView = ({classes}) => {
     setPageTotal(total);
   };
 
+  const handleTextInputChange = (event) => {
+    const text = event.target.value;
+    setInputValue(text);
+  };
+
+  const handleClear = () => {
+    setInputValue("");
+    setInputFocus();
+  };
+
   return (
     <PublicationsContainer>
       <div className='pageHeader'><div className='pageHeaderText'>CCDI-Supported Publications</div></div>
+      <SearchBar onMouseOver={() => setDeleteIconShow('block')} onMouseOut={() => setDeleteIconShow('none')}>
+        <SearchInput ref={inputRef} type="text" value={inputValue} onChange={handleTextInputChange} />
+        <div className='deleteIcon' onClick={handleClear} >
+            <img className="deleteIconImg" style={{display:deleteIconShow}} src='https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/globalSearchDelete.svg' alt='clear icon' />
+        </div>
+        <div className='searchButton'>
+          <div className='searchButtonText'>Search</div>
+          <img className='searchButtonIcon' src={searchIcon} alt="searchIcon" />
+        </div>
+      </SearchBar>
+      <div className='searchBoxFooter'>The following list contains manuscripts published by the Childhood Cancer Data Initiative (CCDI) support as of [UPDATE DATE]. The list will be updated as new studies are published.</div>
       <div className='tabList'>
         {
           newsTabList.map((newsTabItem, idx) => {

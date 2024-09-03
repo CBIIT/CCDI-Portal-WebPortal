@@ -13,9 +13,30 @@ import dataAccessPDF from "../assets/about/CCDI-CGC-Data-Access-Instructions-2.0
 
 export const newsList = [
     {
-        id: 'federation_08052024',
+        id: 'hub_08292024',
+        title: 'Updates and minor enhancements to the Hub made',
+        date: 'August 29, 2024',
+        slug: 'Release 2.3.2 includes a fix and some small updates',
+        highlight: `<p>The CCDI Hub 2.3.2 release features a query fix to the CCDI Hub Explore Dashboard. This fix will ensure the file counts are correct and match the number of files in the Hub’s database. Other updates include August Molecular Characterization Initiative (MCI) enrollment numbers and enhancements to the flow diagram on the MCI page, and corrections and updates to a few CCDI Hub News topics.</p>`,
+        fullText: '',
+        type: 'Site Updates',
+        img: updateImgDashboard,
+    },
+    {
+        id: 'CCDC_08212024',
+        title: 'Several updates included in August CCDC release',
+        date: 'August 21, 2024',
+        slug: 'Changes to the CCDC include updates to existing resources and the addition of new data sets',
+        highlight: `<p>This Childhood Cancer Data Catalog (CCDC) release includes five new data sets: CCDI’s Single-Cell Atlas of NF1 Nerve Sheath Tumors, The Cancer Imaging Archive’s MR Imaging of Pediatric Subjects with High-Grade Gliomas (DFCI-BCH-BWH-PEDs-HGG), and three sets from the Single-cell Pediatric Cancer Atlas. Additionally, several resources now have updated counts as well as references and resource-level properties. Changes were made to other resources and a critical software update was performed for the entire catalog.</p>`,
+        fullText: '',
+        type: 'Application Updates',
+        img: updateImgCCDC,
+        latestUpdate: true,
+    },
+    {
+        id: 'federation_08072024',
         title: 'Childhood Cancer Data Initiative (CCDI) Data Federation Resource',
-        date: 'August 5, 2024',
+        date: 'August 7, 2024',
         slug: 'API that facilitates data search from various resources eliminating the need for data consolidation into a single centralized repository.',
         highlight: `<p>The API provides an open-access subset of metadata including data set location. Data files are accessible according to the policies at each organization. Where possible, metadata have been harmonized to Common Data Elements provided by the Cancer Data Standards Registry and Repository (<a class="link" href="https://cadsr.cancer.gov" target="_blank" rel="noopener noreferrer">https://cadsr.cancer.gov</a>). Current data federation members are the Kids First Data Resource Center, Pediatric Cancer Data Commons, St. Jude Cloud, and Treehouse Childhood Cancer Data Initiative.</p>`,
         fullText: '',
@@ -24,9 +45,9 @@ export const newsList = [
         latestUpdate: true,
     },
     {
-        id: 'hub_08052024',
+        id: 'hub_08072024',
         title: 'A new resource page and enhanced user support text',
-        date: 'August 5, 2024',
+        date: 'August 7, 2024',
         slug: 'Release adds CCDI data federation resource page and enhanced user support text',
         highlight: `<p>In this release, the CCDI Hub added two key pages of interest: a CCDI data federation resource page and a description of data usage policies and terms. Clarifying text was also added to the “Stats at a Glance” summary, Explore Dashboard, and Molecular Characterization Initiative (MCI) enrollment page. Other improvements include hyperlinked dbGaP accessions and fixed column sorting in the Explore Dashboard grids and improved mobile responsiveness of the MCI resource page.</p>`,
         fullText: '',
@@ -53,7 +74,6 @@ export const newsList = [
         fullText: '',
         type: 'Application Updates',
         img: updateImgCCDC,
-        latestUpdate: true,
     },
     {
         id: 'ccdc_05172024',

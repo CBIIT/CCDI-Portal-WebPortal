@@ -99,6 +99,11 @@ Applications: [
     name:'Data Federation Resource',
     link: '/data-federation-resource',
     className: 'navMobileSubItem',
+  },
+  {
+    name:'CCDI Participant Index',
+    link: '/ccdi-participant-index',
+    className: 'navMobileSubItem',
   }],
 "Other Resources": [
   {

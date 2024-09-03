@@ -283,8 +283,13 @@ const HeroList = styled.div`
         visibility: visible;
     }
 
-    .carousel__item:last-child {
+    .carousel__item:nth-child(8) {
         transform: translateY(365%) scale(1);
+        opacity: 1;
+    }
+
+    .carousel__item:last-child {
+        transform: translateY(370%) scale(1);
         opacity: 0;
         visibility: hidden;
     }

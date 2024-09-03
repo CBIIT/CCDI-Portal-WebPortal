@@ -33,7 +33,7 @@ const PublicationsContainer = styled.div`
 
   .searchBoxFooter {
     width: 662px;
-    margin: 0 auto 40px auto;
+    margin: 0 auto 30px auto;
     font-family: Inter;
     font-size: 14px;
     font-weight: 400;
@@ -47,6 +47,8 @@ const PublicationsContainer = styled.div`
       grid-template-columns: auto auto auto auto auto;
       justify-content: center;
       margin: 20px auto 35px auto;
+      border-top: 1px solid #000000;
+      padding-top: 20px;
   }
 
   .tabListItem {
@@ -66,7 +68,7 @@ const PublicationsContainer = styled.div`
     color: #0A5E63;
     margin-left: 60px;
     padding-bottom: 5px;
-    border-bottom: 3px solid #0A5E63;
+    border-bottom: 4px solid #0A5E63;
   }
 
   .tabListItemActive:hover {
@@ -129,6 +131,10 @@ const PublicationsContainer = styled.div`
     padding: 23px 32px 0 38px;
     box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.25);
     text-decoration: none;
+  }
+
+  .publicationsItem:hover {
+    border: 1.5px solid #00BDCD;
   }
 
   .publicationsItemTitle {
@@ -489,7 +495,7 @@ const PublicationsView = ({classes}) => {
               </div>
             )
           }) :
-          <div className={classes.noticeText}>Currently no {selectedTab}</div>
+          <div className={classes.noResult} />
         }
       </div>
       { data.length > 0 &&
@@ -837,12 +843,8 @@ const styles = {
     //   marginLeft: '-68px',
     // }
   },
-  noticeText: {
-    fontFamily: 'Poppins',
-    color: '#13666A',
-    fontSize: '20px',
+  noResult: {
     marginBottom: '100px',
-    marginLeft: '205px',
   },
 };
 

@@ -379,7 +379,6 @@ query sampleOverview(
     $age_at_diagnosis: [Int] ,
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
-    $diagnosis_classification_system: [String] ,
     $tumor_grade_source: [String],
     $tumor_stage_source: [String],
     $last_known_survival_status: [String] ,
@@ -406,7 +405,6 @@ query sampleOverview(
         age_at_diagnosis: $age_at_diagnosis,
         diagnosis_anatomic_site: $diagnosis_anatomic_site,
         disease_phase: $disease_phase,
-        diagnosis_classification_system: $diagnosis_classification_system,
         tumor_grade_source: $tumor_grade_source,
         tumor_stage_source: $tumor_stage_source,
         last_known_survival_status: $last_known_survival_status,
@@ -433,7 +431,6 @@ query sampleOverview(
         study_id
         anatomic_site
         participant_age_at_collection
-        sample_diagnosis_classification_system
         sample_tumor_status
         tumor_classification
     }
@@ -779,7 +776,6 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
       $diagnosis_anatomic_site: [String] ,
       $disease_phase: [String] ,
       $diagnosis: [String] ,
-      $diagnosis_classification_system: [String] ,
       $diagnosis_basis: [String] ,
       $tumor_grade_source: [String],
       $tumor_stage_source: [String],
@@ -807,7 +803,6 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
           age_at_diagnosis: $age_at_diagnosis,
           diagnosis_anatomic_site: $diagnosis_anatomic_site,
           disease_phase: $disease_phase,
-          diagnosis_classification_system: $diagnosis_classification_system,
           tumor_grade_source: $tumor_grade_source,
           tumor_stage_source: $tumor_stage_source,
           last_known_survival_status: $last_known_survival_status,
@@ -1174,9 +1169,12 @@ export const tabContainers = [
           if(dt instanceof Array){
             return dt.join(',')
           }
-          else if(dt === null)
+          else if(dt === null){
             return "";
-
+          }
+          else if(dt.toString().charAt(0) === '[' && dt.toString().charAt(dt.toString().length - 1) === ']'){
+            return dt.toString().substring(1,dt.length-1)
+          }
           return dt.toString();
         },
       },
@@ -1489,13 +1487,6 @@ export const tabContainers = [
           }
           return dt.toString();
         },
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'sample_diagnosis_classification_system',
-        header: 'Diagnosis Classification System',
-        display: true,
-        tooltipText: 'sort',
         role: cellTypes.DISPLAY,
       },
       {

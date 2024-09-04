@@ -572,8 +572,6 @@ query diagnosisOverview(
         diagnosis
         diagnosis_classification_system
         diagnosis_basis
-        tumor_grade_source
-        tumor_stage_source
         disease_phase
         anatomic_site
         age_at_diagnosis
@@ -1213,7 +1211,7 @@ export const tabContainers = [
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
       },
-      {
+      /*{
         dataField: 'tumor_grade_source',
         header: 'Tumor Grade Source',
         display: true,
@@ -1226,7 +1224,7 @@ export const tabContainers = [
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
-      },
+      },*/
       {
         dataField: 'disease_phase',
         header: 'Disease Phase',
@@ -1255,6 +1253,16 @@ export const tabContainers = [
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
+        cellType: cellTypes.CUSTOM_ELEM,
+        cellStyle: cellStyles.TRANSFORM,
+        dataFormatter: (dt) => {
+          if(dt === '[]')
+            return ""
+          else if(dt.toString().charAt(0) === '[' && dt.toString().charAt(dt.toString().length - 1) === ']'){
+            return dt.toString().substring(1,dt.length-1)
+          }
+          return dt.toString();
+        },
       },
     ],
     id: 'diagnosis_tab',

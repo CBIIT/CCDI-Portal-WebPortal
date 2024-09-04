@@ -137,7 +137,7 @@ export const resourcesAppliationsListData = [
   {
     id: 'cpi',
     title: 'CCDI Participant Index',
-    content: 'CCDI’s Participant Index (CPI) API connects participant IDs across studies, empowering researchers to explore complex questions and advance childhood cancer research.',
+    content: 'CCDI’s Participant Index (CPI) API maps participant IDs across studies, empowering researchers to explore complex questions and advance pediatric cancer research.',
     link: '/ccdi-participant-index',
     img: cpiLogo,
     noLink: true

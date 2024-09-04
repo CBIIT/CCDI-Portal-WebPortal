@@ -11,7 +11,8 @@ import { publicationsList } from '../../../bento/publicationsData';
 import searchIcon from '../../../assets/header/Search_Small_Icon.svg';
 
 const PublicationsContainer = styled.div`
-  width: 100%;
+  width: 1420px;
+  // width: 100%;
   margin: 0 auto;
 
   .pageHeader {
@@ -123,7 +124,7 @@ const PublicationsContainer = styled.div`
 
   .publicationsItem {
     width: 1047px;
-    min-height: 248px;
+    min-height: 252px;
     border: 1.5px solid transparent;
     border-radius: 0px 20px;
     margin: 0 auto;
@@ -178,81 +179,81 @@ const PublicationsContainer = styled.div`
     width: 1420px;
   }
 
-  @media (max-width: 1186px) {
-    .pageHeader {
-      width: auto;
-      margin: 0 16px;
-    }
-  }
+  // @media (max-width: 1186px) {
+  //   .pageHeader {
+  //     width: auto;
+  //     margin: 0 16px;
+  //   }
+  // }
 
-  @media (max-width: 1090px) {
-    .publicationsList {
-      width: auto;
-      margin: 0 16px;
-    }
+  // @media (max-width: 1090px) {
+  //   .publicationsList {
+  //     width: auto;
+  //     margin: 0 16px;
+  //   }
 
-    .publicationsItem {
-      width: auto;
-    }
-  }
+  //   .publicationsItem {
+  //     width: auto;
+  //   }
+  // }
 
-  @media (max-width: 1023px) {
-    p {
-      margin-top: 5px;
-    }
+  // @media (max-width: 1023px) {
+  //   p {
+  //     margin-top: 5px;
+  //   }
 
-    .pageHeaderText {
-      line-height: 30px;
-      width: 250px;
-      padding-top: 70px;
-      margin: 0 auto;
-    }
+  //   .pageHeaderText {
+  //     line-height: 30px;
+  //     width: 250px;
+  //     padding-top: 70px;
+  //     margin: 0 auto;
+  //   }
 
-    .UpperContainer {
-      width: 100%;
-    }
-    .imgContainer {
-      margin-left: auto;
-    }
-    .publicationsItem {
-      padding: 18px 18px 0 18px;
-    }
-    .publicationsItemTitle {
-      min-height: 50px;
-    }
-    .tabListItem {
-      font-size: 12px;
-      margin-left: 0;
-    }
-    .tabListItemActive {
-      font-size: 12px;
-      margin-left: 0;
-    }
-    .tabList {
-      display: grid;
-      grid-column-gap: 4%;
-      grid-template-columns: auto auto auto auto auto;
-      justify-content: center;
-      margin: 20px auto 25px auto;
-    }
-  }
+  //   .UpperContainer {
+  //     width: 100%;
+  //   }
+  //   .imgContainer {
+  //     margin-left: auto;
+  //   }
+  //   .publicationsItem {
+  //     padding: 18px 18px 0 18px;
+  //   }
+  //   .publicationsItemTitle {
+  //     min-height: 50px;
+  //   }
+  //   .tabListItem {
+  //     font-size: 12px;
+  //     margin-left: 0;
+  //   }
+  //   .tabListItemActive {
+  //     font-size: 12px;
+  //     margin-left: 0;
+  //   }
+  //   .tabList {
+  //     display: grid;
+  //     grid-column-gap: 4%;
+  //     grid-template-columns: auto auto auto auto auto;
+  //     justify-content: center;
+  //     margin: 20px auto 25px auto;
+  //   }
+  // }
 
-  @media (max-width: 767px) {
-    .publicationsItemTitle {
-      font-size: 18px;
-    }
-  }
+  // @media (max-width: 767px) {
+  //   .publicationsItemTitle {
+  //     font-size: 18px;
+  //   }
+  // }
 
-  @media (max-width: 530px) {
-    .tabList {
-      display: grid;
-      grid-column-gap: 2%;
-      grid-template-columns: auto auto 50px 72px auto;
-      justify-content: center;
-      margin-left: 16px;
-      margin-right: 12px;
-    }
-  }
+  // @media (max-width: 530px) {
+  //   .tabList {
+  //     display: grid;
+  //     grid-column-gap: 2%;
+  //     grid-template-columns: auto auto 50px 72px auto;
+  //     justify-content: center;
+  //     margin-left: 16px;
+  //     margin-right: 12px;
+  //   }
+  // }
 `;
 
 const SearchBar = styled.div`
@@ -294,24 +295,24 @@ const SearchBar = styled.div`
     display: none;
   }
 
-  @media (max-width: 1023px) {
-    margin: 0 auto;
-    maxWidth: 662px;
-  }
+  // @media (max-width: 1023px) {
+  //   margin: 0 auto;
+  //   maxWidth: 662px;
+  // }
 
-  @media (max-width: 767px) {
-    .searchButtonText {
-      display: none;
-    }
-    .searchButtonIcon {
-      display: block;
-    }
-  }
+  // @media (max-width: 767px) {
+  //   .searchButtonText {
+  //     display: none;
+  //   }
+  //   .searchButtonIcon {
+  //     display: block;
+  //   }
+  // }
 
-  @media (max-width: 732px) {
-    margin: 0 15px;
-    width: auto;
-  }
+  // @media (max-width: 732px) {
+  //   margin: 0 15px;
+  //   width: auto;
+  // }
 `;
 
 const SearchInput = styled.input`
@@ -464,7 +465,7 @@ const PublicationsView = ({classes}) => {
           <img className='searchButtonIcon' src={searchIcon} alt="searchIcon" />
         </div>
       </SearchBar>
-      <div className='searchBoxFooter'>The following list contains manuscripts published by the Childhood Cancer Data Initiative (CCDI) support as of [UPDATE DATE]. The list will be updated as new studies are published.</div>
+      <div className='searchBoxFooter'>The following list contains manuscripts and posters published by the Childhood Cancer Data Initiative (CCDI) support as of July 7, 2024. The list will be updated as new studies are published.</div>
       <div className='tabList'>
         {
           newsTabList.map((newsTabItem, idx) => {
@@ -652,9 +653,9 @@ const styles = {
     '@media (min-width: 500px)': {
       display: 'flex',
     },
-    '@media (max-width: 767px)': {
-      display: 'none',
-    },
+    // '@media (max-width: 767px)': {
+    //   display: 'none',
+    // },
   },
   flexPageContainer: {
     display: 'flex',
@@ -838,10 +839,6 @@ const styles = {
     '&:hover': {
       cursor: 'pointer',
     },
-    // '@media (max-width: 499px)': {
-    //   marginTop: '56px',
-    //   marginLeft: '-68px',
-    // }
   },
   noResult: {
     marginBottom: '100px',

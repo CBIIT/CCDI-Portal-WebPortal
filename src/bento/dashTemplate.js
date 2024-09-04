@@ -268,7 +268,7 @@ export const facetsConfig = [
     sort_type: sortType.ALPHABET,
     show: true,
   },
-  {
+  /*{
     section: DIAGNOSIS,
     label: 'Tumor Grade Source',
     apiPath: 'participantCountByTumorGradeSource',
@@ -289,7 +289,7 @@ export const facetsConfig = [
     type: InputTypes.CHECKBOX,
     sort_type: sortType.ALPHABET,
     show: true,
-  },
+  },*/
   {
     section: DIAGNOSIS,
     label: 'Disease Phase',

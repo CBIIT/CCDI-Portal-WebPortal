@@ -74,6 +74,7 @@ const SearchbarContainer = styled.div`
 
 const SearchBar = styled.div`
   display: flex;
+  margin-top: 15px;
   margin-left: 69px;
   width: 662px;
   height: 53px;
@@ -236,9 +237,9 @@ function searchComponent({
     <SearchViewContainer>
       <img className='backgroundImg' src={searchImg} alt="" />
       <SearchbarContainer>
-        <div className='searchResultTitle'>Search Results</div>
+        <label htmlFor='global_search_bar' className='searchResultTitle'>Search Results</label>
         <SearchBar onMouseOver={() => setDeleteIconShow('block')} onMouseOut={() => setDeleteIconShow('none')}>
-          <SearchInput ref={inputRef} type="text" value={inputValue} onChange={handleTextInputChange} onKeyPress={handleKeyPress} />
+          <SearchInput id='global_search_bar' ref={inputRef} type="text" value={inputValue} onChange={handleTextInputChange} onKeyPress={handleKeyPress} />
           <div className='deleteIcon' onClick={handleClear} >
               <img className="deleteIconImg" style={{display:deleteIconShow}} src='https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/globalSearchDelete.svg' alt='clear icon' />
           </div>

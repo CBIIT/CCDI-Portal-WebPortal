@@ -14,7 +14,7 @@ import dataAccessPDF from "../assets/about/CCDI_CGC_Data_Access_Instructions_Sep
 export const newsList = [
     {
         id: 'hub_09302024',
-        title: 'Just released: CCDI Hub version 2.4.0 ',
+        title: 'Just released: CCDI Hub version 2.4.0',
         date: 'September 30, 2024',
         slug: 'Substantial data changes and new and enhanced features mark CCDI Hub release',
         highlight: `<p>The latest update to the CCDI Hub includes three new data sets and updates to 13 others. Several updates were also made to the Explore Dashboard to improve filtered search functionality, with further revisions made to the dashboard’s widgets, study table, and sample and diagnosis tables. Additionally, the site now has a new page about the CCDI Participant Index.</p>`,

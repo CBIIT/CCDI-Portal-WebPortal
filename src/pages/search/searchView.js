@@ -52,9 +52,9 @@ const SearchbarContainer = styled.div`
   .searchResultTitle {
     font-family: poppins;
     font-weight: 600;
-    font-size: 35px;
+    font-size: 50px;
     line-height: 45px;
-    letter-spacing: 0.02em;
+    letter-spacing: 1px;
     color: #FFFFFF;
     margin-bottom: 15px;
     margin-left: 69px;

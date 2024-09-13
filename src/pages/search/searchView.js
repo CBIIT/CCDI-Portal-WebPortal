@@ -66,6 +66,8 @@ const SearchbarContainer = styled.div`
     border-radius: 0 0 20px 20px;
 
     .searchResultTitle {
+      font-size: 35px;
+      line-height: 30px;
       text-align: center;
       margin-left: 0;
     }

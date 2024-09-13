@@ -62,7 +62,7 @@ const styles = (theme) => ({
     fontWeight: '300',
     fontSize: '16px',
     lineHeight: '24px',
-    margin: '5px 0',
+    margin: '10px 0',
   },
   linkText: {
     fontFamily: 'Inter',
@@ -79,13 +79,20 @@ const styles = (theme) => ({
     fontSize: '13px',
   },
   propertyContainer: {
-    margin: '0 0 30px 0px',
-    padding: '10px 15px',
+    margin: '0 0 25px 0px',
+    padding: '24px 25px',
     border: '1.5px solid #ffffff',
     borderRadius: '0 20px 0 20px',
     boxShadow: '0px 4px 20px 0px #00000040',
     '&:hover': {
       border: '1.5px solid #00BDCD',
+    },
+    '@media (max-width: 1024px)': {
+      margin: '0 0 17px 0px',
+      padding: '10px 15px',
+    },
+    '@media (max-width: 767px)': {
+      margin: '0 0 14px 0px',
     },
   },
   cardTitle: {

@@ -74,7 +74,6 @@ const SearchbarContainer = styled.div`
 
 const SearchBar = styled.div`
   display: flex;
-  margin-top: 15px;
   margin-left: 69px;
   width: 662px;
   height: 53px;
@@ -237,7 +236,8 @@ function searchComponent({
     <SearchViewContainer>
       <img className='backgroundImg' src={searchImg} alt="" />
       <SearchbarContainer>
-        <label htmlFor='global_search_bar' className='searchResultTitle'>Search Results</label>
+      <label htmlFor='global_search_bar'>
+        <div className='searchResultTitle'>Search Results</div>
         <SearchBar onMouseOver={() => setDeleteIconShow('block')} onMouseOut={() => setDeleteIconShow('none')}>
           <SearchInput id='global_search_bar' ref={inputRef} type="text" value={inputValue} onChange={handleTextInputChange} onKeyPress={handleKeyPress} />
           <div className='deleteIcon' onClick={handleClear} >
@@ -248,6 +248,7 @@ function searchComponent({
             <img className='searchButtonIcon' src={searchIcon} alt="searchIcon" />
           </div>
         </SearchBar>
+      </label>
       </SearchbarContainer>
       <div className={classes.bodyContainer}>
         <Box sx={{ width: '100%', typography: 'body1' }}>

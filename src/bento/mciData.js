@@ -182,7 +182,7 @@ export const MCIContent = [
                         +' (CDS Explorer). The CDS Explorer provides a user-friendly interface for exploring the data in the CDS. '
                         +'<a class="link" href="https://docs.cancergenomicscloud.org/docs/import-cds-data" target="_blank" rel="noopener noreferrer">Here is a tutorial</a>'
                         +' on how to import CDS data. To see a preview of MCI data prior to going through the data authorization process, '
-                        +'<a class="link" href="https://datacatalog.ccdi.cancer.gov/dataset/CCDI-MCI" target="_blank" rel="noopener noreferrer">visit MCI’s page</a>'
+                        +'<a class="link" href="https://datacatalog.ccdi.cancer.gov/dataset/CCDI-phs002790" target="_blank" rel="noopener noreferrer">visit MCI’s page</a>'
                         +' in the CCDI Childhood Cancer Data Catalog.</p>'
                         +'<p>For investigators planning to use data from different resources: If you intend to utilize data from institutions that enroll patients in the Molecular Characterization Initiative, please note that the data available on this site may be identical to the data collected from the submitting clinical sites.</p>',
             },

@@ -171,7 +171,7 @@ export const MCIContent = [
                         +', which is a data repository under the '
                         +'<a class="link" href="https://datascience.cancer.gov/data-commons" target="_blank" rel="noopener noreferrer">Cancer Research Data Commons</a>'
                         +' infrastructure. Please see the '
-                        +'<a class="link" href="https://datacatalog.ccdi.cancer.gov/CCDI_CGC_Data_Access_Instructions_1.0.pdf" target="_blank" rel="noopener noreferrer">instructions</a>'
+                        +'<a class="link" href="/static/media/CCDI_CGC_Data_Access_Instructions_September2024.9fb8f6b7.pdf" target="_blank" rel="noopener noreferrer">instructions</a>'
                         +' on how to access the data associated with this study, '
                         +'<a class="link" href="https://www.ncbi.nlm.nih.gov/gap/" target="_blank" rel="noopener noreferrer">phs002790</a>'
                         +'. For the CCDI studies, the database of Genotypes and Phenotypes (dbGaP) maintains a list of the subject IDs, sample IDs, and consents. Authorization through dbGaP is required to access controlled-access data and clinical/phenotypic files.</p>'

@@ -44,9 +44,9 @@ const HeroMobileSection = styled.div`
     color: #002A2E;
     font-family: poppins;
     font-weight: 600;
-    font-size: 35px;
-    line-height: 30px;
-    letter-spacing: 0.02em;
+    font-size: 40px;
+    line-height: 35px;
+    letter-spacing: -0.02em;
     margin: 0;
   }
 
@@ -210,7 +210,7 @@ const HeroMobile = () => {
                 <div className='carouselMobileListCoverColor' />
                 <h1 className='introTitle1'>
                     Discover<br/>
-                    CCDI<br/>
+                    CCDI {window.innerWidth < 872 ? <br/> : <></>}
                     Resources
                 </h1>
                 <div className='introTitle2'>Explore the CCDI Hub </div>

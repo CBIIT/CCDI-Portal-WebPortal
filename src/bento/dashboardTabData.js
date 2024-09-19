@@ -1319,7 +1319,7 @@ export const tabContainers = [
       },
       {
         dataField: 'study_id',
-        header: 'Study Manifest',
+        header: 'Access',
         display: true,
         sortable: false,
         tooltipText: 'sort',

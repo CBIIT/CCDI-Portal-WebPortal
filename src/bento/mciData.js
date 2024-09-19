@@ -1,3 +1,5 @@
+import dataAccessPDF from "../assets/about/CCDI_CGC_Data_Access_Instructions_September2024.pdf";
+
 export const introText = '<p>The CCDI Molecular Characterization Initiative (MCI) provides state-of-the-art molecular testing at no cost to newly diagnosed children, adolescents, and young adults (AYAs) with central nervous system (CNS) tumors, soft tissue sarcomas (STS), certain rare (RAR) childhood cancers, and certain neuroblastomas (NBL) being treated at a Children’s Oncology Group (COG)–affiliated hospital. The goal of this initiative is to enhance the understanding of the genetic factors involved in pediatric cancers and to provide timely, clinically relevant findings to doctors and families. This project uses Project:EveryChild (APEC14B1) to enroll participants, collect specimens, and annotate clinical data. The results of genetic testing will be shared with the treating physician and participants or their family, aiding in treatment decisions. This will also determine eligibility for certain planned COG clinical trials.</p>'
                          +'<p>For an overview of this initiative, <a class="link" href="https://www.cancer.gov/research/areas/childhood/childhood-cancer-data-initiative/data-ecosystem/molecular-characterization" target="_blank" rel="noopener noreferrer">access the MCI web page on cancer.gov</a>.</p>'
 
@@ -171,7 +173,7 @@ export const MCIContent = [
                         +', which is a data repository under the '
                         +'<a class="link" href="https://datascience.cancer.gov/data-commons" target="_blank" rel="noopener noreferrer">Cancer Research Data Commons</a>'
                         +' infrastructure. Please see the '
-                        +'<a class="link" href="https://datacatalog.ccdi.cancer.gov/CCDI_CGC_Data_Access_Instructions_1.0.pdf" target="_blank" rel="noopener noreferrer">instructions</a>'
+                        +`<a class="link" href=${dataAccessPDF} target="_blank" rel="noopener noreferrer">instructions</a>`
                         +' on how to access the data associated with this study, '
                         +'<a class="link" href="https://www.ncbi.nlm.nih.gov/gap/" target="_blank" rel="noopener noreferrer">phs002790</a>'
                         +'. For the CCDI studies, the database of Genotypes and Phenotypes (dbGaP) maintains a list of the subject IDs, sample IDs, and consents. Authorization through dbGaP is required to access controlled-access data and clinical/phenotypic files.</p>'
@@ -182,7 +184,7 @@ export const MCIContent = [
                         +' (CDS Explorer). The CDS Explorer provides a user-friendly interface for exploring the data in the CDS. '
                         +'<a class="link" href="https://docs.cancergenomicscloud.org/docs/import-cds-data" target="_blank" rel="noopener noreferrer">Here is a tutorial</a>'
                         +' on how to import CDS data. To see a preview of MCI data prior to going through the data authorization process, '
-                        +'<a class="link" href="https://datacatalog.ccdi.cancer.gov/dataset/CCDI-MCI" target="_blank" rel="noopener noreferrer">visit MCI’s page</a>'
+                        +'<a class="link" href="https://datacatalog.ccdi.cancer.gov/dataset/CCDI-phs002790" target="_blank" rel="noopener noreferrer">visit MCI’s page</a>'
                         +' in the CCDI Childhood Cancer Data Catalog.</p>'
                         +'<p>For investigators planning to use data from different resources: If you intend to utilize data from institutions that enroll patients in the Molecular Characterization Initiative, please note that the data available on this site may be identical to the data collected from the submitting clinical sites.</p>',
             },

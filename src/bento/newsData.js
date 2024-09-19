@@ -23,6 +23,17 @@ export const newsList = [
         img: updateImgHub,
         latestUpdate: true,
     },
+    { 
+        id: 'ccdc_09252024',
+        title: 'CCDC gets 5 new data sets and updates 8 resources',
+        date: 'September 25, 2024',
+        slug: 'Childhood Cancer Data Catalog (CCDC) continues to add data',
+        highlight: `<p>Five new data sets are now available in the CCDC. Among them are the CCDI National Childhood Cancer Registry Data Platform data set and Correlative Studies for Protocol #14-C-0059: T Cells Expressing an Anti-GD2 Chimeric Antigen Receptor in Patients with GD2+ Solid Tumors, a Collaboration with CIMAC-CIDC. Eight existing resources were updated with new counts, clinical trial lists, and changes to repository links, resource URLs, and reference links. No new features were added in this release.</p>`,
+        fullText: '',
+        type: 'Application Updates',
+        img: updateImgCCDC,
+        latestUpdate: true,
+    },
     {
         id: 'cpi_09252024',
         title: 'Childhood Cancer Data Initiative (CCDI) Participant Index',

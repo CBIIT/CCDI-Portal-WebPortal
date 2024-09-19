@@ -175,7 +175,7 @@ export const MCIContent = [
                         +' infrastructure. Please see the '
                         +`<a class="link" href=${dataAccessPDF} target="_blank" rel="noopener noreferrer">instructions</a>`
                         +' on how to access the data associated with this study, '
-                        +'<a class="link" href="https://www.ncbi.nlm.nih.gov/gap/" target="_blank" rel="noopener noreferrer">phs002790</a>'
+                        +'<a class="link" href="https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs002790" target="_blank" rel="noopener noreferrer">phs002790</a>'
                         +'. For the CCDI studies, the database of Genotypes and Phenotypes (dbGaP) maintains a list of the subject IDs, sample IDs, and consents. Authorization through dbGaP is required to access controlled-access data and clinical/phenotypic files.</p>'
                         +'<p>Users can analyze CCDI data on the '
                         +'<a class="link" href="https://www.cancergenomicscloud.org/" target="_blank" rel="noopener noreferrer">Cancer Genomics Cloud</a>'

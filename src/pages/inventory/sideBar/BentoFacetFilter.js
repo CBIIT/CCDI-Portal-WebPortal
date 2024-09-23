@@ -136,7 +136,7 @@ const BentoFacetFilter = ({
           classes={{ root: classes.clearAllButtonRoot }}
           onMouseEnter={() => setIsHover(true)}
           onMouseLeave={() => setIsHover(false)}
-          style= { disable ? { border: '1px solid #AEBDBE' } : {}}
+          style= { disable ? { border: '1px solid #627B7A' } : {}}
         >
           <img
             src={ disable ? resetIcon.src : ( isHover ? resetIcon.srcActiveHover : resetIcon.srcActive ) }

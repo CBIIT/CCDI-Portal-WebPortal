@@ -437,13 +437,13 @@ const StatsContainer = styled.div`
       }
 
       .statTitle {
-        color: #0095A2;
+        color: #05555C;
         font-size: 14px;
         line-height: 13px;
       }
 
       .statDetail {
-        color: #0095A2;
+        color: #05555C;
         font-size: 14px;
         line-height: 13px;
         letter-spacing: 0.28px;

@@ -16,7 +16,7 @@ export const cpiResourceData = [
         topic: 'Core Functions of the CPI',
         content: '<p>The CPI API functions as a reference service that allows software applications to communicate with each other, providing information on participants’ research IDs to authorized applications. Integration with the CPI is currently under development for applications like the CCDI Hub and Federation Data Resource.<p>'
                 +'<p>The CPI addresses key questions such as:</p>'
-                +'<ul><li><b>Which participants and domains are associated with mine?</b> Authorized applications can input participant ID(s) and retrieve all associated IDs along with their respective domains... This helps in mapping participants across different data sets and studies.</li>'
+                +'<ul><li><b>Which participants and domains are associated with mine?</b> Authorized applications can input participant ID(s) and retrieve all associated IDs along with their respective domains. This helps in mapping participants across different data sets and studies.</li>'
                 +'<li><b>What are the current domains in the CPI and their participant statistics?</b> Authorized users can access comprehensive information about each domain within the CPI database. This includes the domain name, description, category, and a URL linking to additional data, offering context about where a participant’s data is present. Also available are participant statistics for each domain, including the number of participants mapped to various domains, along with the total counts of participants.</li></ul>',
     },
     {

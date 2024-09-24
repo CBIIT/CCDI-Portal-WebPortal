@@ -22,6 +22,7 @@ export const newsList = [
         type: 'Application Updates',
         img: updateImgHub,
         latestUpdate: true,
+        altText: 'CCDI Hub Site & Data Release'
     },
     { 
         id: 'ccdc_09252024',
@@ -33,6 +34,7 @@ export const newsList = [
         type: 'Application Updates',
         img: updateImgCCDC,
         latestUpdate: true,
+        altText: 'CCDC'
     },
     {
         id: 'cpi_09252024',
@@ -44,6 +46,7 @@ export const newsList = [
         type: 'Announcements',
         img: updateImgCCDC2,
         latestUpdate: true,
+        altText: 'Data Federation/CPI'
     },
     {
         id: 'hub_08292024',

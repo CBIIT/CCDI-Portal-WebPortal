@@ -384,7 +384,7 @@ const LatestUpdate = () => {
                         const updatekey = `update_${updateidx}`;
                         return (
                         <div className='latestUpdatesListItem' key={updatekey} onMouseEnter={() => mouseIn(updatekey)} onMouseLeave={mouseOut}>
-                            <a href={`/news#${updateItem.id}`}><img className='latestUpdatesListItemPic' src={updateItem.img} alt={updateItem.id} aria-hidden='true' /><span style={{display:'none'}}>latestUpdates text</span></a>
+                            <a href={`/news#${updateItem.id}`}><img className='latestUpdatesListItemPic' src={updateItem.img} alt={updateItem.id} aria-label={updateItem.altText} /><span style={{display:'none'}}>latestUpdates text</span></a>
                             <a className='latestUpdatesListTitleContainer' href={`/news#${updateItem.id}`}><div className='latestUpdatesListTitle'>{updateItem.title}</div></a>
                             <div className='latestUpdatesListContent'>
                                 <span className='latestUpdatesTextContent'>{ReactHtmlParser(updateItem.slug)}</span>

@@ -42,7 +42,7 @@ export default () => ({
   resetTextDisabled: {
     marginTop: '0px',
     marginLeft: '8px',
-    color: '#AEBDBE',
+    color: '#627B7A',
     fontSize: 14,
   },
   cases: {

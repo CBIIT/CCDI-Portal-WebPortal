@@ -180,6 +180,8 @@ const LatestUpdatesContainer = styled.div`
           .latestUpdatesListTitle {
             padding: 6px 14px;
             font-size: 14px;
+            text-transform: uppercase;
+            font-weight: 600
           }
     
           .latestUpdatesListContent {
@@ -268,6 +270,8 @@ const TitleContainer = styled.div`
       font-size: 35px;
       text-transform: uppercase;
       margin: 0;
+      line-height: 38px;
+      letter-spacing: 0.02em;
     }
 
     @media (max-width: 1199px) {

@@ -145,7 +145,7 @@ const IntroTextContainer = styled.div`
       font-family: poppins;
       font-weight: 600;
       font-size: 50px;
-      letter-spacing: 0.02em;
+      letter-spacing: -0.02em;
       line-height: 45px;
       margin: 0;
     }
@@ -282,6 +282,7 @@ const StatsContainer = styled.div`
       font-size: 35px;
       color: #298085;
       line-height: 38px;
+      letter-spacing: 0.02em;
       background-color: white;
       margin: 0;
     }
@@ -408,9 +409,10 @@ const StatsContainer = styled.div`
       .statGlance {
         padding: 12px 0;
         text-align: left;
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 17px;
+        font-weight: 600;
+        font-size: 25px;
+        line-height: 20px;
+        letter-spacing: 0.02em;
         color: #255B5E;
         margin-left: calc(50vw - 405px);
       }
@@ -435,15 +437,16 @@ const StatsContainer = styled.div`
       }
 
       .statTitle {
-        color: #0095A2;
+        color: #05555C;
         font-size: 14px;
         line-height: 13px;
       }
 
       .statDetail {
-        color: #0095A2;
+        color: #05555C;
         font-size: 14px;
         line-height: 13px;
+        letter-spacing: 0.28px;
 
         ::after {
           content: "";
@@ -483,6 +486,11 @@ const StatsContainer = styled.div`
     @media (max-width: 872px) {
       .statGlance {
         margin-left: 30px;
+        font-weight: 600;
+        font-size: 25px;
+        line-height: 20px;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
       }
 
       .statList {
@@ -560,6 +568,8 @@ const ResourcesContainer = styled.div`
       font-family: Poppins;
       font-weight: 600;
       font-size: 35px;
+      line-height: 38px;
+      letter-spacing: 0.02em;
       color: #05555C;
     }
 
@@ -575,7 +585,9 @@ const ResourcesContainer = styled.div`
       margin: 10px 0 10px 135px;
       font-family: Poppins;
       font-weight: 600;
-      font-size: 17px;
+      font-size: 18px;
+      line-height: 22px;
+      letter-spacing: 0.02em;
     }
 
     .titleLine {
@@ -611,8 +623,8 @@ const ResourcesContainer = styled.div`
     }
 
     .resourceListItemLogo {
-      width: 169px;
-      height: 159px;
+      width: 133.37px;
+      height: 124px;
       border-radius: 20px;
       display: flex;
       color: #FFFFFF;
@@ -753,8 +765,9 @@ const ResourcesContainer = styled.div`
 
       .resourceSubtitleText {
         margin: 10px 0 10px calc(50vw - 405px);
-        font-size: 14px;
-        line-height: 17px;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 18px;
         letter-spacing: 0.02em;
       }
 
@@ -806,6 +819,10 @@ const ResourcesContainer = styled.div`
 
       .resourceSubtitleText {
         margin: 10px 0 10px 30px;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 18px;
+        letter-spacing: 0.02em;
       }
 
       .resourceTitle {

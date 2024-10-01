@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import {
+    useSearchParams,
+  } from "react-router-dom";
 import { useApolloClient } from '@apollo/client';
 import { getFilters } from '@bento-core/facet-filter';
 import store from '../../store';
@@ -10,10 +13,10 @@ import {
 import styles from './inventoryStyle';
 import { DASHBOARD_QUERY_NEW } from '../../bento/dashboardTabData';
 
-
 const InventoryCover = ({
   classes,
 }) => {
+    const [searchParams] = useSearchParams();
     const filterState = useSelector((state) => state.statusReducer.filterState);
     const localFindAutocomplete = useSelector((state) => state.localFind.autocomplete);
     const localFindUpload = useSelector((state) => state.localFind.upload);
@@ -31,6 +34,24 @@ const InventoryCover = ({
         return result;
     }
 
+    // useEffect(() => {
+    //     const filters = {
+    //         ...getFilters(filterState),
+    //         participant_ids: [
+    //             ...(localFindUpload || []).map((obj) => obj.participant_id),
+    //             ...(localFindAutocomplete || []).map((obj) => obj.title),
+    //         ],
+    //     };
+    //     store.dispatch(inDataloading(true));
+    //     getData(filters).then((result) => {
+    //         if (result.searchParticipants) {
+    //             store.dispatch(afterInitialLoading());
+    //             store.dispatch(inDataloading(false));
+    //             store.dispatch(syncUpDashboard(filters, result.searchParticipants));
+    //         }
+    //     });
+    // }, [filterState, localFindUpload, localFindAutocomplete]);
+
     useEffect(() => {
         const filters = {
             ...getFilters(filterState),
@@ -47,7 +68,8 @@ const InventoryCover = ({
                 store.dispatch(syncUpDashboard(filters, result.searchParticipants));
             }
         });
-    }, [filterState, localFindUpload, localFindAutocomplete]);
+    }, [searchParams]);
+
 
     return (
         <Backdrop className={classes.backdrop} open={!initialLoading && isDataloading}>

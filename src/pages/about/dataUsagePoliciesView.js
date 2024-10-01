@@ -154,6 +154,10 @@ const DataUsagePoliciesBody = styled.div`
         margin-bottom: 24px;
         margin-top: -12px;
     }
+    
+    li {
+         margin-bottom: 20px;
+    }
 
     .mciContentContainer {
         font-family: Inter;
@@ -204,7 +208,7 @@ const DataUsagePoliciesBody = styled.div`
 
     .calloutBox {
         color: #05555C;
-        margin: 20px 40px;
+        margin: 40px 40px;
         padding: 20px 30px;
         font-family: Poppins;
         font-size: 18px;

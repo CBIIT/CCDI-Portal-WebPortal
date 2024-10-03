@@ -13,9 +13,16 @@ const AboutContainer = styled.div`
     font-weight: 600;
     font-size: 35px;
     color: #206165;
-    margin: 48px 0;
+    margin: 48px 0 30px 0;
     text-align: center;
   }
+
+  hr {
+    max-width: 1265px;
+    margin: 0 auto 48px auto;
+    border: 0.5px solid #007A85;
+  }
+
   .aboutBody {
     font-family: Inter;
     font-weight: 400;
@@ -66,8 +73,17 @@ const AboutContainer = styled.div`
       height: 353px;
       margin-left: 37px;
     }
+    .aboutHeaderText {
+      font-size: 50px;
+      line-height: 45px;
+      letter-spacing: 1px;
+    }
     .secondParagraph {
       display: none;
+    }
+    hr {
+      margin: 0 50px 48px 50px;
+      border: 0.5px solid #007A85;
     }
   }
 
@@ -76,7 +92,7 @@ const AboutContainer = styled.div`
       position: relative;
       background-image: url(${aboutImg});
       height: 406px;
-      margin: 0 0 32px 0;
+      margin: 0 0 42px 0;
     }
     .aboutHeaderText {
       position: absolute;
@@ -87,12 +103,17 @@ const AboutContainer = styled.div`
       background: rgba(0, 95, 103, 0.85);
       height: 141px;
       line-height: 141px;
+      font-size: 50px;
+      letter-spacing: 1px;
     }
     .upperImg {
       display: none;
     }
     .aboutBody {
-      margin: 0 6.5% 150px 6.5%;
+      margin: 0 6.5% 0 6.5%;
+    }
+    hr {
+      display: none;
     }
   }
 
@@ -113,6 +134,7 @@ const AboutView = () => {
       <div className='aboutHeader'>
         <div className='aboutHeaderText'>About</div>
       </div>
+      <hr/>
       <div className='aboutBody'>
         <div className='upperContainer'>
           <div className='upperContentContainer'>

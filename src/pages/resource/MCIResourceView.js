@@ -201,7 +201,7 @@ const MCIResourceBody = styled.div`
     padding: 55px 32px 0 32px; 
     .navSection {
         width: 240px;
-        color: #4D889E;
+        color: #477C90;
         position: relative;
     }
 
@@ -230,7 +230,7 @@ const MCIResourceBody = styled.div`
 
     .navTopicItem {
         margin-bottom: 20px;
-        color: #4D889E;
+        color: #477C90;
         text-decoration: none;
         font-family: Inter;
         font-weight: 400;

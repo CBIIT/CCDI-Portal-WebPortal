@@ -87,6 +87,7 @@ const DonutChart = ({
                     startAngle={startAngle}
                     endAngle={endAngle}
                     fill={fill}
+                    aria-label={'active-cell'}
                   />
                   <Sector
                     cx={cx}
@@ -96,6 +97,7 @@ const DonutChart = ({
                     innerRadius={outerRadius + 6}
                     outerRadius={outerRadius + 8}
                     fill={fill}
+                    aria-label={'active-cell'}
                   />
               </g>
           );
@@ -124,7 +126,7 @@ const DonutChart = ({
                     data.map((entry, index) => {
                         const key = "cell-".concat(index);
                         const fill = data.length % 2 === 0 ? COLORS_EVEN[index % COLORS_EVEN.length] : COLORS_ODD[index % COLORS_ODD.length];
-                        return <Cell key={key} fill={fill} textColor={textColor} />;
+                        return <Cell key={key} fill={fill} textColor={textColor} aria-label={key} />;
                     })
                 }
             </Pie>

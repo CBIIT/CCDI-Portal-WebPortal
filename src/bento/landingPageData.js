@@ -9,6 +9,7 @@ import wheel5 from '../assets/landing/nccr_carousel.svg';
 import wheel6 from '../assets/landing/cgc_carousel.svg';
 import wheel7 from '../assets/landing/dbgap_carousel.svg';
 import wheel8 from '../assets/landing/federation_carousel.svg';
+import wheel9 from '../assets/landing/cpi_carousel.png';
 import c3dcLogo from '../assets/landing/c3dc_logo.svg';
 import ccdcMobile from '../assets/landing/ccdc_mobile.png';
 import civicMobile from '../assets/landing/civic_mobile.png';
@@ -18,6 +19,7 @@ import nccrMobile from '../assets/landing/nccr_mobile.png';
 import cgcMobile from '../assets/landing/cgc_mobile.png';
 import dbgapMobile from '../assets/landing/dbgap_mobile.png';
 import federationMobile from '../assets/landing/federation_mobile.svg';
+import cpiMobile from '../assets/landing/cpi_mobile.svg';
 import ccdcLogo from '../assets/landing/ccdc_logo.svg';
 import civicLogo from '../assets/landing/civic_logo.svg';
 import mciLogo from '../assets/landing/mci_logo.svg';
@@ -26,6 +28,7 @@ import nccrLogo from '../assets/landing/nccr_logo.svg';
 import cgcLogo from '../assets/landing/cgc_logo.svg';
 import dbgapLogo from '../assets/landing/dbgap_logo.svg';
 import federationLogo from '../assets/landing/federation_logo.svg';
+import cpiLogo from '../assets/landing/cpi_logo.svg';
 
 
 export const introData = {
@@ -131,6 +134,14 @@ export const resourcesAppliationsListData = [
     img: federationLogo,
     noLink: true
   },
+  {
+    id: 'cpi',
+    title: 'CCDI Participant Index',
+    content: 'CCDI’s Participant Index (CPI) API maps participant IDs across studies, empowering researchers to explore complex questions and advance pediatric cancer research.',
+    link: '/ccdi-participant-index',
+    img: cpiLogo,
+    noLink: true
+  },
 ];
 
 export const resourcesCloudListData = [
@@ -210,6 +221,12 @@ export const carouselList = [
     mobile: federationMobile,
     content: 'Data Federation Resource',
     link: '/data-federation-resource',
+  },
+  {
+    img: wheel9,
+    mobile: cpiMobile,
+    content: 'CCDI Participant Index',
+    link: '/ccdi-participant-index',
   },
 ];
 

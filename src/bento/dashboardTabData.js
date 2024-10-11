@@ -115,50 +115,52 @@ query search (
     $participant_ids: [String],
     $sex_at_birth: [String] ,
     $race: [String] ,
-    $ethnicity: [String] ,
     $age_at_diagnosis: [Int] ,
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
-    $diagnosis_classification: [String] ,
+    $diagnosis: [String] ,
     $diagnosis_classification_system: [String] ,
-    $diagnosis_verification_status: [String] ,
     $diagnosis_basis: [String] ,
-    $vital_status: [String] ,
+    $tumor_grade_source: [String],
+    $tumor_stage_source: [String],
+    $last_known_survival_status: [String] ,
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
     $sample_tumor_status: [String] ,
     $tumor_classification: [String] ,
     $assay_method: [String],
     $file_type: [String],
-    $phs_accession: [String],
-    $study_short_title: [String],
+    $dbgap_accession: [String],
+    $study_name: [String],
     $library_selection: [String],
-    $library_source: [String],
+    $library_source_material: [String],
+    $library_source_molecule: [String],
     $library_strategy: [String],
 ){
     searchParticipants (          
         participant_ids: $participant_ids,
         sex_at_birth: $sex_at_birth,
         race: $race,
-        ethnicity: $ethnicity,
         age_at_diagnosis: $age_at_diagnosis,
         diagnosis_anatomic_site: $diagnosis_anatomic_site,
         disease_phase: $disease_phase,
-        diagnosis_classification: $diagnosis_classification,
+        diagnosis: $diagnosis,
         diagnosis_classification_system: $diagnosis_classification_system,
-        diagnosis_verification_status: $diagnosis_verification_status,
         diagnosis_basis: $diagnosis_basis,
-        vital_status: $vital_status,
+        tumor_grade_source: $tumor_grade_source,
+        tumor_stage_source: $tumor_stage_source,
+        last_known_survival_status: $last_known_survival_status,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
         sample_tumor_status: $sample_tumor_status,
         tumor_classification: $tumor_classification,
         assay_method: $assay_method,
         file_type: $file_type,
-        phs_accession: $phs_accession,       
-        study_short_title: $study_short_title,
+        dbgap_accession: $dbgap_accession,       
+        study_name: $study_name,
         library_selection: $library_selection,
-        library_source: $library_source,
+        library_source_material: $library_source_material,
+        library_source_molecule: $library_source_molecule,
         library_strategy: $library_strategy,
     ) {
         numberOfDiagnosis
@@ -179,10 +181,6 @@ query search (
             group
             subjects
         }
-        participantCountByEthnicity {
-            group
-            subjects
-        }
         participantCountBySexAtBirth {
             group
             subjects
@@ -192,6 +190,10 @@ query search (
             subjects
         }
         participantCountByStudy {
+            group
+            subjects
+        }
+        participantCountByAssayMethod{
             group
             subjects
         }
@@ -207,10 +209,6 @@ query search (
             group
             subjects
         }
-        filterParticipantCountByEthnicity{
-            group
-            subjects
-        }
         filterParticipantCountByFileType{
             group
             subjects
@@ -219,7 +217,7 @@ query search (
             group
             subjects
         }
-        filterParticipantCountByDiagnosisClassification{
+        filterParticipantCountByDiagnosis{
             group
             subjects
         }
@@ -234,12 +232,24 @@ query search (
         filterParticipantCountByDiagnosisBasis{
           group
           subjects
-      }
+        }
         filterParticipantCountByLibrarySelection{
             group
             subjects
         }
-        filterParticipantCountByLibrarySource{
+        filterParticipantCountByTumorGradeSource{
+            group
+            subjects
+        }
+        filterParticipantCountByTumorStageSource{
+            group
+            subjects
+        }
+        filterParticipantCountByLibrarySourceMaterial{
+            group
+            subjects
+        }
+        filterParticipantCountByLibrarySourceMolecule{
             group
             subjects
         }
@@ -247,7 +257,7 @@ query search (
             group
             subjects
         }
-        filterParticipantCountByPHSAccession{
+        filterParticipantCountByDBGAPAccession{
             group
             subjects
         }
@@ -271,7 +281,7 @@ query search (
           group
           subjects
         }
-        filterParticipantCountByVitalStatus{
+        filterParticipantCountBySurvivalStatus{
           group
           subjects
         }
@@ -294,22 +304,22 @@ query fileOverview(
     $participant_ids: [String],
     $sex_at_birth: [String] ,
     $race: [String] ,
-    $ethnicity: [String] ,
     $age_at_diagnosis: [Int] ,
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
-    $diagnosis_classification: [String] ,
-    $vital_status: [String] ,
+    $diagnosis: [String] ,
+    $last_known_survival_status: [String] ,
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
     $sample_tumor_status: [String] ,
     $tumor_classification: [String] ,
     $assay_method: [String],
     $file_type: [String],
-    $phs_accession: [String],
-    $study_short_title: [String],
+    $dbgap_accession: [String],
+    $study_name: [String],
     $library_selection: [String],
-    $library_source: [String],
+    $library_source_material: [String],
+    $library_source_molecule: [String],
     $library_strategy: [String],
     $first: Int, 
     $offset: Int, 
@@ -319,22 +329,22 @@ query fileOverview(
         participant_ids: $participant_ids,
         sex_at_birth: $sex_at_birth,
         race: $race,
-        ethnicity: $ethnicity,
         age_at_diagnosis: $age_at_diagnosis,
         diagnosis_anatomic_site: $diagnosis_anatomic_site,
         disease_phase: $disease_phase,
-        diagnosis_classification: $diagnosis_classification,
-        vital_status: $vital_status,
+        diagnosis: $diagnosis,
+        last_known_survival_status: $last_known_survival_status,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
         sample_tumor_status: $sample_tumor_status,
         tumor_classification: $tumor_classification,
         assay_method: $assay_method,
         file_type: $file_type,
-        phs_accession: $phs_accession,       
-        study_short_title: $study_short_title,
+        dbgap_accession: $dbgap_accession,       
+        study_name: $study_name,
         library_selection: $library_selection,
-        library_source: $library_source,
+        library_source_material: $library_source_material,
+        library_source_molecule: $library_source_molecule,
         library_strategy: $library_strategy,
         first: $first, 
         offset: $offset, 
@@ -354,7 +364,8 @@ query fileOverview(
         guid
         md5sum
         library_selection
-        library_source
+        library_source_material
+        library_source_molecule
         library_strategy
     }
 }
@@ -365,26 +376,23 @@ query sampleOverview(
     $participant_ids: [String],
     $sex_at_birth: [String] ,
     $race: [String] ,
-    $ethnicity: [String] ,
     $age_at_diagnosis: [Int] ,
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
-    $diagnosis_classification: [String] ,
-    $diagnosis_comment: [String],
-    $diagnosis_classification_system: [String] ,
-    $diagnosis_verification_status: [String] ,
-    $diagnosis_basis: [String] ,
-    $vital_status: [String] ,
+    $tumor_grade_source: [String],
+    $tumor_stage_source: [String],
+    $last_known_survival_status: [String] ,
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
     $sample_tumor_status: [String] ,
     $tumor_classification: [String] ,
     $assay_method: [String],
     $file_type: [String],
-    $phs_accession: [String],
-    $study_short_title: [String],
+    $dbgap_accession: [String],
+    $study_name: [String],
     $library_selection: [String],
-    $library_source: [String],
+    $library_source_material: [String],
+    $library_source_molecule: [String],
     $library_strategy: [String],
     $first: Int, 
     $offset: Int, 
@@ -394,26 +402,23 @@ query sampleOverview(
         participant_ids: $participant_ids,
         sex_at_birth: $sex_at_birth,
         race: $race,
-        ethnicity: $ethnicity,
         age_at_diagnosis: $age_at_diagnosis,
         diagnosis_anatomic_site: $diagnosis_anatomic_site,
         disease_phase: $disease_phase,
-        diagnosis_classification: $diagnosis_classification,
-        diagnosis_classification_system: $diagnosis_classification_system,
-        diagnosis_verification_status: $diagnosis_verification_status,
-        diagnosis_basis: $diagnosis_basis,
-        diagnosis_comment: $diagnosis_comment,
-        vital_status: $vital_status,
+        tumor_grade_source: $tumor_grade_source,
+        tumor_stage_source: $tumor_stage_source,
+        last_known_survival_status: $last_known_survival_status,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
         sample_tumor_status: $sample_tumor_status,
         tumor_classification: $tumor_classification,
         assay_method: $assay_method,
         file_type: $file_type,
-        phs_accession: $phs_accession,       
-        study_short_title: $study_short_title,
+        dbgap_accession: $dbgap_accession,       
+        study_name: $study_name,
         library_selection: $library_selection,
-        library_source: $library_source,
+        library_source_material: $library_source_material,
+        library_source_molecule: $library_source_molecule,
         library_strategy: $library_strategy,
         first: $first, 
         offset: $offset, 
@@ -426,11 +431,6 @@ query sampleOverview(
         study_id
         anatomic_site
         participant_age_at_collection
-        sample_diagnosis_classification
-        sample_diagnosis_classification_system
-        sample_diagnosis_verification_status
-        sample_diagnosis_basis
-        sample_diagnosis_comment
         sample_tumor_status
         tumor_classification
     }
@@ -442,22 +442,24 @@ query participantOverview(
     $participant_ids: [String],
     $sex_at_birth: [String] ,
     $race: [String] ,
-    $ethnicity: [String] ,
     $age_at_diagnosis: [Int] ,
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
-    $diagnosis_classification: [String] ,
-    $vital_status: [String] ,
+    $diagnosis: [String] ,
+    $tumor_grade_source: [String],
+    $tumor_stage_source: [String],
+    $last_known_survival_status: [String] ,
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
     $sample_tumor_status: [String] ,
     $tumor_classification: [String] ,
     $assay_method: [String],
     $file_type: [String],
-    $phs_accession: [String],
-    $study_short_title: [String],
+    $dbgap_accession: [String],
+    $study_name: [String],
     $library_selection: [String],
-    $library_source: [String],
+    $library_source_material: [String],
+    $library_source_molecule: [String],
     $library_strategy: [String],
     $first: Int, 
     $offset: Int, 
@@ -467,22 +469,24 @@ query participantOverview(
         participant_ids: $participant_ids,
         sex_at_birth: $sex_at_birth,
         race: $race,
-        ethnicity: $ethnicity,
         age_at_diagnosis: $age_at_diagnosis,
         diagnosis_anatomic_site: $diagnosis_anatomic_site,
         disease_phase: $disease_phase,
-        diagnosis_classification: $diagnosis_classification,
-        vital_status: $vital_status,
+        diagnosis: $diagnosis,
+        tumor_grade_source: $tumor_grade_source,
+        tumor_stage_source: $tumor_stage_source,
+        last_known_survival_status: $last_known_survival_status,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
         sample_tumor_status: $sample_tumor_status,
         tumor_classification: $tumor_classification,
         assay_method: $assay_method,
         file_type: $file_type,
-        phs_accession: $phs_accession,       
-        study_short_title: $study_short_title,
+        dbgap_accession: $dbgap_accession,       
+        study_name: $study_name,
         library_selection: $library_selection,
-        library_source: $library_source,
+        library_source_material: $library_source_material,
+        library_source_molecule: $library_source_molecule,
         library_strategy: $library_strategy,
         first: $first, 
         offset: $offset, 
@@ -491,12 +495,11 @@ query participantOverview(
     ) {
         id
         participant_id
-        phs_accession
+        dbgap_accession
         study_id
         race
         sex_at_birth
-        ethnicity
-        alternate_participant_id
+        synonym_id
     }
 }
 `;
@@ -506,26 +509,26 @@ query diagnosisOverview(
     $participant_ids: [String],
     $sex_at_birth: [String] ,
     $race: [String] ,
-    $ethnicity: [String] ,
     $age_at_diagnosis: [Int] ,
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
-    $diagnosis_classification: [String] ,
-    $diagnosis_comment: [String],
+    $diagnosis: [String] ,
     $diagnosis_classification_system: [String] ,
-    $diagnosis_verification_status: [String] ,
     $diagnosis_basis: [String] ,
-    $vital_status: [String] ,
+    $tumor_grade_source: [String] ,
+    $tumor_stage_source: [String] ,
+    $last_known_survival_status: [String] ,
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
     $sample_tumor_status: [String] ,
     $tumor_classification: [String] ,
     $assay_method: [String],
     $file_type: [String],
-    $phs_accession: [String],
-    $study_short_title: [String],
+    $dbgap_accession: [String],
+    $study_name: [String],
     $library_selection: [String],
-    $library_source: [String],
+    $library_source_material: [String],
+    $library_source_molecule: [String],
     $library_strategy: [String],
     $first: Int, 
     $offset: Int, 
@@ -535,26 +538,26 @@ query diagnosisOverview(
         participant_ids: $participant_ids,
         sex_at_birth: $sex_at_birth,
         race: $race,
-        ethnicity: $ethnicity,
         age_at_diagnosis: $age_at_diagnosis,
         diagnosis_anatomic_site: $diagnosis_anatomic_site,
         disease_phase: $disease_phase,
-        diagnosis_classification: $diagnosis_classification,
-        diagnosis_comment: $diagnosis_comment,
+        diagnosis: $diagnosis,
         diagnosis_classification_system: $diagnosis_classification_system,
-        diagnosis_verification_status: $diagnosis_verification_status,
         diagnosis_basis: $diagnosis_basis,
-        vital_status: $vital_status,
+        tumor_grade_source: $tumor_grade_source,
+        tumor_stage_source: $tumor_stage_source,
+        last_known_survival_status: $last_known_survival_status,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
         sample_tumor_status: $sample_tumor_status,
         tumor_classification: $tumor_classification,
         assay_method: $assay_method,
         file_type: $file_type,
-        phs_accession: $phs_accession,       
-        study_short_title: $study_short_title,
+        dbgap_accession: $dbgap_accession,       
+        study_name: $study_name,
         library_selection: $library_selection,
-        library_source: $library_source,
+        library_source_material: $library_source_material,
+        library_source_molecule: $library_source_molecule,
         library_strategy: $library_strategy,
         first: $first, 
         offset: $offset, 
@@ -564,16 +567,15 @@ query diagnosisOverview(
         id
         diagnosis_id
         participant_id
-        phs_accession
-        diagnosis_classification
-        diagnosis_comment
+        sample_id
+        dbgap_accession
+        diagnosis
         diagnosis_classification_system
-        diagnosis_verification_status
         diagnosis_basis
         disease_phase
         anatomic_site
         age_at_diagnosis
-        vital_status
+        last_known_survival_status
         study_id
     }
 }
@@ -584,22 +586,24 @@ query studyOverview(
     $participant_ids: [String],
     $sex_at_birth: [String] ,
     $race: [String] ,
-    $ethnicity: [String] ,
     $age_at_diagnosis: [Int] ,
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
-    $diagnosis_classification: [String] ,
-    $vital_status: [String] ,
+    $diagnosis: [String] ,
+    $tumor_grade_source: [String],
+    $tumor_stage_source: [String],
+    $last_known_survival_status: [String] ,
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
     $sample_tumor_status: [String] ,
     $tumor_classification: [String] ,
     $assay_method: [String],
     $file_type: [String],
-    $phs_accession: [String],
-    $study_short_title: [String],
+    $dbgap_accession: [String],
+    $study_name: [String],
     $library_selection: [String],
-    $library_source: [String],
+    $library_source_material: [String],
+    $library_source_molecule: [String],
     $library_strategy: [String],
     $first: Int, 
     $offset: Int, 
@@ -609,22 +613,24 @@ query studyOverview(
         participant_ids: $participant_ids,
         sex_at_birth: $sex_at_birth,
         race: $race,
-        ethnicity: $ethnicity,
         age_at_diagnosis: $age_at_diagnosis,
         diagnosis_anatomic_site: $diagnosis_anatomic_site,
         disease_phase: $disease_phase,
-        diagnosis_classification: $diagnosis_classification,
-        vital_status: $vital_status,
+        diagnosis: $diagnosis,
+        tumor_grade_source: $tumor_grade_source,
+        tumor_stage_source: $tumor_stage_source,
+        last_known_survival_status: $last_known_survival_status,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
         sample_tumor_status: $sample_tumor_status,
         tumor_classification: $tumor_classification,
         assay_method: $assay_method,
         file_type: $file_type,
-        phs_accession: $phs_accession,       
-        study_short_title: $study_short_title,
+        dbgap_accession: $dbgap_accession,       
+        study_name: $study_name,
         library_selection: $library_selection,
-        library_source: $library_source,
+        library_source_material: $library_source_material,
+        library_source_molecule: $library_source_molecule,
         library_strategy: $library_strategy,
         first: $first, 
         offset: $offset, 
@@ -635,8 +641,8 @@ query studyOverview(
         study_id
         pubmed_id
         grant_id
-        phs_accession
-        study_short_title
+        dbgap_accession
+        study_name
         personnel_name
         diagnosis
         anatomic_site
@@ -702,22 +708,24 @@ query participantsAddAllToCart(
     $participant_ids: [String],
     $sex_at_birth: [String] ,
     $race: [String] ,
-    $ethnicity: [String] ,
     $age_at_diagnosis: [Int] ,
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
-    $diagnosis_classification: [String] ,
-    $vital_status: [String] ,
+    $diagnosis: [String] ,
+    $tumor_grade_source: [String],
+    $tumor_stage_source: [String],
+    $last_known_survival_status: [String] ,
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
     $sample_tumor_status: [String] ,
     $tumor_classification: [String] ,
     $assay_method: [String],
     $file_type: [String],
-    $phs_accession: [String],
-    $study_short_title: [String],
+    $dbgap_accession: [String],
+    $study_name: [String],
     $library_selection: [String],
-    $library_source: [String],
+    $library_source_material: [String],
+    $library_source_molecule: [String],
     $library_strategy: [String],
     $first: Int,
     $offset: Int= 0, 
@@ -728,22 +736,24 @@ query participantsAddAllToCart(
       participant_ids: $participant_ids,
       sex_at_birth: $sex_at_birth,
       race: $race,
-      ethnicity: $ethnicity,
       age_at_diagnosis: $age_at_diagnosis,
       diagnosis_anatomic_site: $diagnosis_anatomic_site,
       disease_phase: $disease_phase,
-      diagnosis_classification: $diagnosis_classification,
-      vital_status: $vital_status,
+      diagnosis: $diagnosis,
+      tumor_grade_source: $tumor_grade_source,
+      tumor_stage_source: $tumor_stage_source,
+      last_known_survival_status: $last_known_survival_status,
       sample_anatomic_site: $sample_anatomic_site,
       participant_age_at_collection: $participant_age_at_collection,
       sample_tumor_status: $sample_tumor_status,
       tumor_classification: $tumor_classification,
       assay_method: $assay_method,
       file_type: $file_type,
-      phs_accession: $phs_accession,       
-      study_short_title: $study_short_title,
+      dbgap_accession: $dbgap_accession,       
+      study_name: $study_name,
       library_selection: $library_selection,
-      library_source: $library_source,
+      library_source_material: $library_source_material,
+      library_source_molecule: $library_source_molecule,
       library_strategy: $library_strategy,
       first: $first,
       offset: $offset,
@@ -760,26 +770,25 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
       $participant_ids: [String],
       $sex_at_birth: [String] ,
       $race: [String] ,
-      $ethnicity: [String] ,
       $age_at_diagnosis: [Int] ,
       $diagnosis_anatomic_site: [String] ,
       $disease_phase: [String] ,
-      $diagnosis_classification: [String] ,
-      $diagnosis_classification_system: [String] ,
-      $diagnosis_verification_status: [String] ,
+      $diagnosis: [String] ,
       $diagnosis_basis: [String] ,
-      $diagnosis_comment: [String] ,
-      $vital_status: [String] ,
+      $tumor_grade_source: [String],
+      $tumor_stage_source: [String],
+      $last_known_survival_status: [String] ,
       $sample_anatomic_site: [String] ,
       $participant_age_at_collection: [Int] ,
       $sample_tumor_status: [String] ,
       $tumor_classification: [String] ,
       $assay_method: [String],
       $file_type: [String],
-      $phs_accession: [String],
-      $study_short_title: [String],
+      $dbgap_accession: [String],
+      $study_name: [String],
       $library_selection: [String],
-      $library_source: [String],
+      $library_source_material: [String],
+      $library_source_molecule: [String],
       $library_strategy: [String],
       $first: Int,
       $offset: Int= 0, 
@@ -789,26 +798,23 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
           participant_ids: $participant_ids,
           sex_at_birth: $sex_at_birth,
           race: $race,
-          ethnicity: $ethnicity,
           age_at_diagnosis: $age_at_diagnosis,
           diagnosis_anatomic_site: $diagnosis_anatomic_site,
           disease_phase: $disease_phase,
-          diagnosis_classification: $diagnosis_classification,
-          diagnosis_classification_system: $diagnosis_classification_system,
-          diagnosis_verification_status: $diagnosis_verification_status,
-          diagnosis_basis: $diagnosis_basis,
-          diagnosis_comment: $diagnosis_comment,
-          vital_status: $vital_status,
+          tumor_grade_source: $tumor_grade_source,
+          tumor_stage_source: $tumor_stage_source,
+          last_known_survival_status: $last_known_survival_status,
           sample_anatomic_site: $sample_anatomic_site,
           participant_age_at_collection: $participant_age_at_collection,
           sample_tumor_status: $sample_tumor_status,
           tumor_classification: $tumor_classification,
           assay_method: $assay_method,
           file_type: $file_type,
-          phs_accession: $phs_accession,       
-          study_short_title: $study_short_title,
+          dbgap_accession: $dbgap_accession,       
+          study_name: $study_name,
           library_selection: $library_selection,
-          library_source: $library_source,
+          library_source_material: $library_source_material,
+          library_source_molecule: $library_source_molecule,
           library_strategy: $library_strategy,
           first: $first,
           offset: $offset,
@@ -825,22 +831,24 @@ query fileAddAllToCart(
   $participant_ids: [String],
   $sex_at_birth: [String] ,
   $race: [String] ,
-  $ethnicity: [String] ,
   $age_at_diagnosis: [Int] ,
   $diagnosis_anatomic_site: [String] ,
   $disease_phase: [String] ,
-  $diagnosis_classification: [String] ,
-  $vital_status: [String] ,
+  $diagnosis: [String] ,
+  $tumor_grade_source: [String],
+  $tumor_stage_source: [String],
+  $last_known_survival_status: [String] ,
   $sample_anatomic_site: [String] ,
   $participant_age_at_collection: [Int] ,
   $sample_tumor_status: [String] ,
   $tumor_classification: [String] ,
   $assay_method: [String],
   $file_type: [String],
-  $phs_accession: [String],
-  $study_short_title: [String],
+  $dbgap_accession: [String],
+  $study_name: [String],
   $library_selection: [String],
-  $library_source: [String],
+  $library_source_material: [String],
+  $library_source_molecule: [String],
   $library_strategy: [String],
   $first: Int,
   $offset: Int= 0, 
@@ -851,22 +859,24 @@ query fileAddAllToCart(
       participant_ids: $participant_ids,
       sex_at_birth: $sex_at_birth,
       race: $race,
-      ethnicity: $ethnicity,
       age_at_diagnosis: $age_at_diagnosis,
       diagnosis_anatomic_site: $diagnosis_anatomic_site,
       disease_phase: $disease_phase,
-      diagnosis_classification: $diagnosis_classification,
-      vital_status: $vital_status,
+      diagnosis: $diagnosis,
+      tumor_grade_source: $tumor_grade_source,
+      tumor_stage_source: $tumor_stage_source,
+      last_known_survival_status: $last_known_survival_status,
       sample_anatomic_site: $sample_anatomic_site,
       participant_age_at_collection: $participant_age_at_collection,
       sample_tumor_status: $sample_tumor_status,
       tumor_classification: $tumor_classification,
       assay_method: $assay_method,
       file_type: $file_type,
-      phs_accession: $phs_accession,       
-      study_short_title: $study_short_title,
+      dbgap_accession: $dbgap_accession,       
+      study_name: $study_name,
       library_selection: $library_selection,
-      library_source: $library_source,
+      library_source_material: $library_source_material,
+      library_source_molecule: $library_source_molecule,
       library_strategy: $library_strategy,
       first: $first,
       offset: $offset,
@@ -883,26 +893,26 @@ query diagnosisAddAllToCart(
   $participant_ids: [String],
   $sex_at_birth: [String] ,
   $race: [String] ,
-  $ethnicity: [String] ,
   $age_at_diagnosis: [Int] ,
   $diagnosis_anatomic_site: [String] ,
   $disease_phase: [String] ,
-  $diagnosis_classification: [String] ,
+  $diagnosis: [String] ,
   $diagnosis_classification_system: [String] ,
-  $diagnosis_verification_status: [String] ,
   $diagnosis_basis: [String] ,
-  $diagnosis_comment: [String],
-  $vital_status: [String] ,
+  $tumor_grade_source: [String],
+  $tumor_stage_source: [String],
+  $last_known_survival_status: [String] ,
   $sample_anatomic_site: [String] ,
   $participant_age_at_collection: [Int] ,
   $sample_tumor_status: [String] ,
   $tumor_classification: [String] ,
   $assay_method: [String],
   $file_type: [String],
-  $phs_accession: [String],
-  $study_short_title: [String],
+  $dbgap_accession: [String],
+  $study_name: [String],
   $library_selection: [String],
-  $library_source: [String],
+  $library_source_material: [String],
+  $library_source_molecule: [String],
   $library_strategy: [String],
   $first: Int,
   $offset: Int= 0, 
@@ -912,26 +922,26 @@ query diagnosisAddAllToCart(
       participant_ids: $participant_ids,
       sex_at_birth: $sex_at_birth,
       race: $race,
-      ethnicity: $ethnicity,
       age_at_diagnosis: $age_at_diagnosis,
       diagnosis_anatomic_site: $diagnosis_anatomic_site,
       disease_phase: $disease_phase,
-      diagnosis_classification: $diagnosis_classification,
+      diagnosis: $diagnosis,
       diagnosis_classification_system: $diagnosis_classification_system,
-      diagnosis_verification_status: $diagnosis_verification_status,
       diagnosis_basis: $diagnosis_basis,
-      diagnosis_comment: $diagnosis_comment,
-      vital_status: $vital_status,
+      tumor_grade_source: $tumor_grade_source,
+      tumor_stage_source: $tumor_stage_source,
+      last_known_survival_status: $last_known_survival_status,
       sample_anatomic_site: $sample_anatomic_site,
       participant_age_at_collection: $participant_age_at_collection,
       sample_tumor_status: $sample_tumor_status,
       tumor_classification: $tumor_classification,
       assay_method: $assay_method,
       file_type: $file_type,
-      phs_accession: $phs_accession,       
-      study_short_title: $study_short_title,
+      dbgap_accession: $dbgap_accession,       
+      study_name: $study_name,
       library_selection: $library_selection,
-      library_source: $library_source,
+      library_source_material: $library_source_material,
+      library_source_molecule: $library_source_molecule,
       library_strategy: $library_strategy,
       first: $first,
       offset: $offset,
@@ -948,22 +958,24 @@ query studyAddAllToCart(
   $participant_ids: [String],
   $sex_at_birth: [String] ,
   $race: [String] ,
-  $ethnicity: [String] ,
   $age_at_diagnosis: [Int] ,
   $diagnosis_anatomic_site: [String] ,
   $disease_phase: [String] ,
-  $diagnosis_classification: [String] ,
-  $vital_status: [String] ,
+  $diagnosis: [String] ,
+  $tumor_grade_source: [String],
+  $tumor_stage_source: [String],
+  $last_known_survival_status: [String] ,
   $sample_anatomic_site: [String] ,
   $participant_age_at_collection: [Int] ,
   $sample_tumor_status: [String] ,
   $tumor_classification: [String] ,
   $assay_method: [String],
   $file_type: [String],
-  $phs_accession: [String],
-  $study_short_title: [String],
+  $dbgap_accession: [String],
+  $study_name: [String],
   $library_selection: [String],
-  $library_source: [String],
+  $library_source_material: [String],
+  $library_source_molecule: [String],
   $library_strategy: [String],
   $first: Int,
   $offset: Int= 0, 
@@ -973,22 +985,24 @@ query studyAddAllToCart(
       participant_ids: $participant_ids,
       sex_at_birth: $sex_at_birth,
       race: $race,
-      ethnicity: $ethnicity,
       age_at_diagnosis: $age_at_diagnosis,
       diagnosis_anatomic_site: $diagnosis_anatomic_site,
       disease_phase: $disease_phase,
-      diagnosis_classification: $diagnosis_classification,
-      vital_status: $vital_status,
+      diagnosis: $diagnosis,
+      tumor_grade_source: $tumor_grade_source,
+      tumor_stage_source: $tumor_stage_source,
+      last_known_survival_status: $last_known_survival_status,
       sample_anatomic_site: $sample_anatomic_site,
       participant_age_at_collection: $participant_age_at_collection,
       sample_tumor_status: $sample_tumor_status,
       tumor_classification: $tumor_classification,
       assay_method: $assay_method,
       file_type: $file_type,
-      phs_accession: $phs_accession,       
-      study_short_title: $study_short_title,
+      dbgap_accession: $dbgap_accession,       
+      study_name: $study_name,
       library_selection: $library_selection,
-      library_source: $library_source,
+      library_source_material: $library_source_material,
+      library_source_molecule: $library_source_molecule,
       library_strategy: $library_strategy,
       first: $first,
       offset: $offset,
@@ -1092,15 +1106,8 @@ export const tabContainers = [
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'ethnicity',
-        header: 'Ethnicity',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'alternate_participant_id',
-        header: 'Alternate ID',
+        dataField: 'synonym_id',
+        header: 'Synonym Participant ID',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
@@ -1147,6 +1154,27 @@ export const tabContainers = [
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
+      },     
+      {
+        dataField: 'sample_id',
+        header: 'Sample ID',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+        cellType: cellTypes.CUSTOM_ELEM,
+        cellStyle: cellStyles.TRANSFORM,
+        dataFormatter: (dt) => {
+          if(dt instanceof Array){
+            return dt.join(',')
+          }
+          else if(dt === null){
+            return "";
+          }
+          else if(dt.toString().charAt(0) === '[' && dt.toString().charAt(dt.toString().length - 1) === ']'){
+            return dt.toString().substring(1,dt.length-1)
+          }
+          return dt.toString();
+        },
       },
       {
         dataField: 'study_id',
@@ -1156,7 +1184,7 @@ export const tabContainers = [
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'diagnosis_classification',
+        dataField: 'diagnosis',
         header: 'Diagnosis',
         display: true,
         tooltipText: 'sort',
@@ -1177,26 +1205,26 @@ export const tabContainers = [
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'diagnosis_verification_status',
-        header: 'Diagnosis Verification Status',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
         dataField: 'diagnosis_basis',
         header: 'Diagnosis Basis',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
       },
-      {
-        dataField: 'diagnosis_comment',
-        header: 'Diagnosis Comment',
+      /*{
+        dataField: 'tumor_grade_source',
+        header: 'Tumor Grade Source',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
       },
+      {
+        dataField: 'tumor_stage_source',
+        header: 'Tumor Stage Source',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },*/
       {
         dataField: 'disease_phase',
         header: 'Disease Phase',
@@ -1220,11 +1248,21 @@ export const tabContainers = [
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'vital_status',
-        header: 'Vital Status',
+        dataField: 'last_known_survival_status',
+        header: 'Last Known Survival Status',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
+        cellType: cellTypes.CUSTOM_ELEM,
+        cellStyle: cellStyles.TRANSFORM,
+        dataFormatter: (dt) => {
+          if(!dt || dt === '[]')
+            return ""
+          else if(dt.toString().charAt(0) === '[' && dt.toString().charAt(dt.toString().length - 1) === ']'){
+            return dt.toString().substring(1,dt.length-1)
+          }
+          return dt.toString();
+        },
       },
     ],
     id: 'diagnosis_tab',
@@ -1247,7 +1285,7 @@ export const tabContainers = [
     dataField: 'dataStudy',
     api: GET_STUDY_OVERVIEW_QUERY,
     paginationAPIField: 'studyOverview',
-    defaultSortField: 'study_short_title',
+    defaultSortField: 'study_name',
     defaultSortDirection: 'asc',
     count: 'numberOfStudies',
     fileCount: 'studiesFileCount',
@@ -1264,8 +1302,8 @@ export const tabContainers = [
         role: cellTypes.CHECKBOX,
       },
       {
-        dataField: 'study_short_title',
-        header: 'Study Short Title',
+        dataField: 'study_name',
+        header: 'Study Name',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
@@ -1278,6 +1316,16 @@ export const tabContainers = [
         role: cellTypes.DISPLAY,
         cellType: cellTypes.CUSTOM_ELEM,
         cellStyle: cellStyles.DBGAP,
+      },
+      {
+        dataField: 'study_id',
+        header: 'Access',
+        display: true,
+        sortable: false,
+        tooltipText: 'sort',
+        cellType: cellTypes.CUSTOM_ELEM,
+        cellStyle: cellStyles.STUDY_DOWNLOAD,
+        role: cellTypes.DISPLAY,
       },
       {
         dataField: 'diagnosis',
@@ -1450,41 +1498,6 @@ export const tabContainers = [
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'sample_diagnosis_classification',
-        header: 'Diagnosis',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'sample_diagnosis_classification_system',
-        header: 'Diagnosis Classification System',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'sample_diagnosis_verification_status',
-        header: 'Diagnosis Verification Status',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'sample_diagnosis_basis',
-        header: 'Diagnosis Basis',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'sample_diagnosis_comment',
-        header: 'Diagnosis Comment',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
         dataField: 'sample_tumor_status',
         header: 'Sample Tumor Status',
         display: true,
@@ -1614,8 +1627,8 @@ export const tabContainers = [
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'library_source',
-        header: 'Library Source',
+        dataField: 'library_source_material',
+        header: 'Library Source Material',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
@@ -1623,6 +1636,13 @@ export const tabContainers = [
       {
         dataField: 'library_strategy',
         header: 'Library Strategy',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
+        dataField: 'library_source_molecule',
+        header: 'Library Source Molecule',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,

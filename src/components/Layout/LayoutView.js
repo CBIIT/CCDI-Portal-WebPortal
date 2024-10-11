@@ -6,6 +6,7 @@ import Header from '../ResponsiveHeader/';
 import Home from '../../pages/landing/landingController';
 import About from '../../pages/about/aboutView';
 import DataUsagePoliciesView from '../../pages/about/dataUsagePoliciesView';
+// import PublicationsView from '../../pages/about/publications/publicationsView';
 import News from '../../pages/news/newsView';
 import Error from '../../pages/error/Error';
 import Search from '../../pages/search/searchView';
@@ -14,6 +15,7 @@ import Cart from '../../pages/cart/cartController';
 import ScrollButton from '../ScrollButton/ScrollButtonView';
 import MCIResourceView from '../../pages/resource/MCIResourceView'
 import FederationResourceView from "../../pages/resource/FederationResourceView";
+import CPIResourceView from "../../pages/resource/CPIResourcePage/CPIResourceView";
 import OverlayWindow from '../OverlayWindow/OverlayWindow';
 // import NewsDetail from '../../pages/news/newsDetailView';
 
@@ -34,6 +36,8 @@ const Layout = () => {
           <Route path="/MCI" element={<MCIResourceView />} />
           <Route path="/data-federation-resource" element={<FederationResourceView/>} />
           <Route path="/data-usage-policies" element={<DataUsagePoliciesView />} />
+          <Route path="/ccdi-participant-index" element={<CPIResourceView />} />
+          {/* <Route path="/publications" element={<PublicationsView />} /> */}
           <Route path="*" element={<Error />} />
         </Routes>
         <Footer />

@@ -16,6 +16,7 @@ const InventoryCover = ({
 }) => {
     const filterState = useSelector((state) => state.statusReducer.filterState);
     const localFindAutocomplete = useSelector((state) => state.localFind.autocomplete);
+    const localFindUpload = useSelector((state) => state.localFind.upload);
     const isDataloading = useSelector((state) => state.inventoryReducer.isDataloading);
     const initialLoading = useSelector((state) => state.inventoryReducer.initialLoading);
     
@@ -34,6 +35,7 @@ const InventoryCover = ({
         const filters = {
             ...getFilters(filterState),
             participant_ids: [
+                ...(localFindUpload || []).map((obj) => obj.participant_id),
                 ...(localFindAutocomplete || []).map((obj) => obj.title),
             ],
         };
@@ -45,7 +47,7 @@ const InventoryCover = ({
                 store.dispatch(syncUpDashboard(filters, result.searchParticipants));
             }
         });
-    }, [filterState, localFindAutocomplete]);
+    }, [filterState, localFindUpload, localFindAutocomplete]);
 
     return (
         <Backdrop className={classes.backdrop} open={!initialLoading && isDataloading}>

@@ -1,90 +1,37 @@
-import gql from 'graphql-tag';
-
-// --------------- Icons configuration --------------
-// Ideal size for programListingIcon is 100x100 px
-// Ideal size for externalLinkIcon is 16x16 px
-const studyListingIcon = {
-  src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/programIcon.svg',
-  alt: 'Bento program logo',
+const studyDownloadLinks = {
+  "phs000720": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs000720_CCDI_Study_Manifest_v1.9.1.xlsx",
+  "phs001437": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs001437_CCDI_Study_Manifest_v1.9.1.xlsx",
+  "phs002371": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs002371_CCDI_Study_Manifest_v1.9.1.xlsx",
+  "phs002430": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs002430_CCDI_Study_Manifest_v1.9.1.xlsx",
+  "phs002431": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs002431_CCDI_Study_Manifest_v1.9.1.xlsx",
+  "phs002504": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs002504_CCDI_Study_Manifest_v1.9.1.xlsx",
+  "phs002517": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs002517_CCDI_Study_Manifest_v1.9.1.xlsx",
+  "phs002518": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs002518_CCDI_Study_Manifest_v1.9.1.xlsx",
+  "phs002529": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs002529_CCDI_Study_Manifest_v1.9.1.xlsx",
+  "phs002599": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs002599_CCDI_Study_Manifest_v1.9.1.xlsx",
+  "phs002620": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs002620_CCDI_Study_Manifest_v1.9.1.xlsx",
+  "phs002677": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs002677_CCDI_Study_Manifest_v1.9.1.xlsx",
+  "phs002790": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs002790_CCDI_Study_Manifest_v1.9.1.xlsx",
+  "phs003111": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs003111_CCDI_Study_Manifest_v1.9.1.xlsx",
+  "phs003164": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs003164_CCDI_Study_Manifest_v1.9.1.xlsx",
+  "phs003432": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs003432_CCDI_Study_Manifest_v1.9.1.xlsx",
+  "phs003519": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs003519_CCDI_Study_Manifest_v1.9.1.xlsx",
 };
-
-const externalLinkIcon = {
-  src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/externalLinkIcon.svg',
-  alt: 'External link icon',
-};
-
-// --------------- Table configuration --------------
-const table = {
-  // Set 'display' to false to hide the table entirely
-  display: true,
-  // Table title
-  title: 'Studies',
-  // Field name for table data, need to be updated only when using a different GraphQL query
-  dataField: 'studyInfo',
-  // Value must be one of the 'field' in columns
-  defaultSortField: 'study_acronym',
-  // 'asc' or 'desc'
-  defaultSortDirection: 'asc',
-  // Set 'selectableRows' to true to show the row selection
-  selectableRows: false,
-  // A maximum of 10 columns are allowed
-  columns: [
-    {
-      dataField: 'study_acronym',
-      header: 'Study Code',
-      link: '/study/{study_id}',
-      display: true
-    },
-    {
-      dataField: 'study_id',
-      header: 'Study ID',
-    },
-    {
-      dataField: 'study_name',
-      header: 'Study Name',
-    },
-    {
-      dataField: 'start_date',
-      header: 'Start Date',
-    },
-    {
-      dataField: 'end_date',
-      header: 'End Date',
-    },
-    {
-      dataField: 'pubmed_id',
-      header: 'PubMed ID',
-      link: 'https://pubmed.ncbi.nlm.nih.gov/{pubmed_id}',
-    },
-    {
-      dataField: 'num_studies',
-      header: 'Number of Arms',
-    },
-    {
-      dataField: 'num_subjects',
-      header: 'Associated Cases',
-    },
-  ],
-};
-
-// --------------- GraphQL query - Retrieve study info --------------
-const GET_STUDIES_DATA_QUERY = gql`{
-  studyInfo {
-    study_acronym
-    study_id
-    study_name
-    start_date
-    end_date
-    pubmed_id
-    num_studies
-    num_subjects
-    }
-  }
- `;
 
 export {
-  studyListingIcon,
-  externalLinkIcon,
-  table,
-  GET_STUDIES_DATA_QUERY,
+  studyDownloadLinks
 };
+
+export async function openDoubleLink(url, fileName) {
+    let urlContent = await fetch(url);
+    if (urlContent.ok) {
+      let data = await urlContent.blob();
+      let a = document.createElement('a');
+      a.href = window.URL.createObjectURL(data);
+      a.download = fileName;
+      a.style.display = 'none';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
+}

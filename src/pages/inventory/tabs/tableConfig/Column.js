@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { cellTypes, headerTypes } from '@bento-core/table';
 import ReactHtmlParser from "html-react-parser";
+import { studyDownloadLinks, openDoubleLink } from '../../../../bento/studiesData';
+import { CloudDownload } from '@material-ui/icons';
+import { Tooltip } from '@material-ui/core';
 
 export const CustomCellView = (props) => {
   const {
@@ -12,6 +15,12 @@ export const CustomCellView = (props) => {
     fontSize: "12px",
     cursor: 'pointer',
     textDecoration: 'underline',
+    height: '23px',
+  };
+  const downloadStyle = {
+    color: "#60797B",
+    fontSize: "12px",
+    cursor: 'pointer',
     height: '23px',
   };
   if (cellStyle === 'TRANSFORM') {
@@ -33,6 +42,19 @@ export const CustomCellView = (props) => {
   } else if (cellStyle === 'DBGAP') {
     return(
       <a href={`https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=${props[dataField]}`} target="_blank" rel="noreferrer">{props[dataField]}</a>
+    )
+  } else if (cellStyle === 'STUDY_DOWNLOAD') {
+    const study_id = props[dataField];
+    const study_download_url = studyDownloadLinks[props[dataField]];
+    const fileName = study_id + "_CCDI_Study_Manifest.xlsx";
+    return(
+      <Tooltip title="Download study manifest">
+        <span onClick={()=>{
+          openDoubleLink(study_download_url, fileName)
+        }} style={downloadStyle}>
+          <CloudDownload />
+        </span>
+      </Tooltip>
     )
   }
 };

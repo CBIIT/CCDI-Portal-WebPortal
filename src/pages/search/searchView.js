@@ -236,9 +236,10 @@ function searchComponent({
     <SearchViewContainer>
       <img className='backgroundImg' src={searchImg} alt="" />
       <SearchbarContainer>
+      <label htmlFor='global_search_bar'>
         <div className='searchResultTitle'>Search Results</div>
         <SearchBar onMouseOver={() => setDeleteIconShow('block')} onMouseOut={() => setDeleteIconShow('none')}>
-          <SearchInput ref={inputRef} type="text" value={inputValue} onChange={handleTextInputChange} onKeyPress={handleKeyPress} />
+          <SearchInput id='global_search_bar' ref={inputRef} type="text" value={inputValue} onChange={handleTextInputChange} onKeyPress={handleKeyPress} />
           <div className='deleteIcon' onClick={handleClear} >
               <img className="deleteIconImg" style={{display:deleteIconShow}} src='https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/globalSearchDelete.svg' alt='clear icon' />
           </div>
@@ -247,6 +248,7 @@ function searchComponent({
             <img className='searchButtonIcon' src={searchIcon} alt="searchIcon" />
           </div>
         </SearchBar>
+      </label>
       </SearchbarContainer>
       <div className={classes.bodyContainer}>
         <Box sx={{ width: '100%', typography: 'body1' }}>

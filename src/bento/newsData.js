@@ -9,9 +9,42 @@ import updateImgDashboard from '../assets/news/News_Dashboard.png';
 import updateImgEHR from '../assets/news/News_EHR.png';
 import updateImgC3DC from '../assets/news/News_C3DC.png';
 import updateImgHub from '../assets/news/News_Hub.png';
-import dataAccessPDF from "../assets/about/CCDI-CGC-Data-Access-Instructions-2.0.pdf";
+import dataAccessPDF from "../assets/about/CCDI_CGC_Data_Access_Instructions_September2024.pdf";
 
 export const newsList = [
+    {
+        id: 'hub_10102024',
+        title: 'Just released: CCDI Hub version 2.4.0',
+        date: 'October 10, 2024',
+        slug: 'Substantial data updates and new and enhanced features mark CCDI Hub release',
+        highlight: `<p>The latest update to the CCDI Hub includes three new data sets and updates to 13 others. Several updates were also made to the Explore Dashboard to improve filtered search functionality, with further revisions made to the dashboard’s widgets, study table, and sample and diagnosis tables. Additionally, the site now has a new page about the CCDI Participant Index.</p>`,
+        fullText: '',
+        type: 'Application Updates',
+        img: updateImgHub,
+        latestUpdate: true,
+    },
+    {
+        id: 'cpi_10102024',
+        title: 'Childhood Cancer Data Initiative (CCDI) Participant Index',
+        date: 'October 10, 2024',
+        slug: 'CPI API: Empowering Pediatric Cancer Research with Mapped Participant IDs',
+        highlight: `<p>The Childhood Cancer Data Initiative (CCDI) announces the release of Version 1.0 of the Participant Index (CPI) API. The CPI maps participant IDs from different studies/research institutions, enabling researchers to explore complex questions, gain deeper insights into diseases, develop innovative therapies, and enhance existing treatments. With 32 domains and over 418,000 participant IDs, the CPI API is a significant step forward in pediatric cancer research. More information can be found at <a class="link" href="https://ccdi-dev.cancer.gov/ccdi-participant-index" target="_blank" rel="noopener noreferrer">https://ccdi-dev.cancer.gov/ccdi-participant-index</a>.</p>`,
+        fullText: '',
+        type: 'Announcements',
+        img: updateImgCCDC2,
+        latestUpdate: true,
+    },
+    { 
+        id: 'ccdc_09252024',
+        title: 'CCDC gets 5 new data sets and updates 8 resources',
+        date: 'September 25, 2024',
+        slug: 'Childhood Cancer Data Catalog (CCDC) continues to add data',
+        highlight: `<p>Five new data sets are now available in the CCDC. Among them are the CCDI National Childhood Cancer Registry Data Platform data set and Correlative Studies for Protocol #14-C-0059: T Cells Expressing an Anti-GD2 Chimeric Antigen Receptor in Patients with GD2+ Solid Tumors, a Collaboration with CIMAC-CIDC. Eight existing resources were updated with new counts, clinical trial lists, and changes to repository links, resource URLs, and reference links. No new features were added in this release.</p>`,
+        fullText: '',
+        type: 'Application Updates',
+        img: updateImgCCDC,
+        latestUpdate: true,
+    },
     {
         id: 'hub_08292024',
         title: 'Updates and minor enhancements to the Hub made',
@@ -23,15 +56,15 @@ export const newsList = [
         img: updateImgDashboard,
     },
     {
-        id: 'CCDC_08212024',
+        id: 'ccdc_08212024',
         title: 'Several updates included in August CCDC release',
         date: 'August 21, 2024',
         slug: 'Changes to the CCDC include updates to existing resources and the addition of new data sets',
-        highlight: `<p>This Childhood Cancer Data Catalog (CCDC) release includes five new data sets: CCDI’s Single-Cell Atlas of NF1 Nerve Sheath Tumors, The Cancer Imaging Archive’s MR Imaging of Pediatric Subjects with High-Grade Gliomas (DFCI-BCH-BWH-PEDs-HGG), and three sets from the Single-cell Pediatric Cancer Atlas. Additionally, several resources now have updated counts as well as references and resource-level properties. Changes were made to other resources and a critical software update was performed for the entire catalog.</p>`,
+        highlight: `<p>This Childhood Cancer Data Catalog (CCDC) release includes six new data sets: CCDI’s Single-Cell Atlas of NF1 Nerve Sheath Tumors and Identification and Targeting of Treatment Resistant Progenitor Populations in T-cell Acute Lymphoblastic Leukemia, The Cancer Imaging Archive’s MR Imaging of Pediatric Subjects with High-Grade Gliomas (DFCI-BCH-BWH-PEDs-HGG), and three sets from the Single-cell Pediatric Cancer Atlas. Additionally, several resources now have updated counts as well as references and resource-level properties. Changes were made to other resources and a critical software update was performed for the entire catalog.</p>`
+                +'<p>Note: new data set count was originally reported incorrectly; count and labels of new data sets were updated on 10/10/24</p>',
         fullText: '',
         type: 'Application Updates',
         img: updateImgCCDC,
-        latestUpdate: true,
     },
     {
         id: 'federation_08072024',
@@ -63,7 +96,6 @@ export const newsList = [
         fullText: '',
         type: 'Site Updates',
         img: updateImgHub,
-        latestUpdate: true,
     },
     {
         id: 'ccdc_06122024',

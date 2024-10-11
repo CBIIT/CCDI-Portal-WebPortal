@@ -1256,7 +1256,7 @@ export const tabContainers = [
         cellType: cellTypes.CUSTOM_ELEM,
         cellStyle: cellStyles.TRANSFORM,
         dataFormatter: (dt) => {
-          if(dt === '[]')
+          if(!dt || dt === '[]')
             return ""
           else if(dt.toString().charAt(0) === '[' && dt.toString().charAt(dt.toString().length - 1) === ']'){
             return dt.toString().substring(1,dt.length-1)
@@ -1319,7 +1319,7 @@ export const tabContainers = [
       },
       {
         dataField: 'study_id',
-        header: 'Study Manifest',
+        header: 'Access',
         display: true,
         sortable: false,
         tooltipText: 'sort',

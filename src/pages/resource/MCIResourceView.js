@@ -663,8 +663,8 @@ const MCIResourceView = () => {
                                                             }
                                                             {mciItem.content && mciItem.content.includes('CCDI Data Ecosystem?') && 
                                                             <>
-                                                                <img className="ecosystemImg" src={ccdiDataEcosystemImg} alt="CCDI Data Ecosystem"/>
-                                                                <img className="ecosystemImgMobile" src={ccdiDataEcosystemMobileImg} alt="CCDI Data Ecosystem Mobile"/>
+                                                                <img className="ecosystemImg" src={ccdiDataEcosystemImg} alt="Infographic depicting the MCI assays and data types, and the data flow to patients, providers, and the CCDI Data Ecosystem"/>
+                                                                <img className="ecosystemImgMobile" src={ccdiDataEcosystemMobileImg} alt="Infographic depicting the MCI assays and data types, and the data flow to patients, providers, and the CCDI Data Ecosystem"/>
                                                                 <p style={{marginTop: '24px'}}>MCI assays and data types, and the data flow to patients, providers, and the CCDI Data Ecosystem.</p>
                                                             </>
                                                             }

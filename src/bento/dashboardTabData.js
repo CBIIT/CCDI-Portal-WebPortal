@@ -291,15 +291,15 @@ query search (
           group
           subjects
         }
-        filterParticipantAgeAtEventFreeSurvivalStatus{
+        filterParticipantCountByAgeAtEventFreeSurvivalStatus{
           group
           subjects
         }
-        filterParticipantEventFreeSurvivalStatus{
+        filterParticipantCountByEventFreeSurvivalStatus{
           group
           subjects
         }
-        filterParticipantFirstEvent{
+        filterParticipantCountByFirstEvent{
           group
           subjects
         }
@@ -617,7 +617,6 @@ query diagnosisOverview(
         disease_phase
         anatomic_site
         age_at_diagnosis
-        last_known_survival_status
         study_id
     }
 }
@@ -635,9 +634,6 @@ query studyOverview(
     $tumor_grade_source: [String],
     $tumor_stage_source: [String],
     $last_known_survival_status: [String] ,
-    age_at_event_free_survival_status: $age_at_event_free_survival_status,
-    event_free_survival_status: $event_free_survival_status,
-    first_event: $first_event,
     $age_at_event_free_survival_status: [String],
     $event_free_survival_status: [String],
     $first_event: [String],
@@ -1328,7 +1324,7 @@ export const tabContainers = [
         },
         role: cellTypes.DISPLAY,
       },
-      {
+      /*{
         dataField: 'last_known_survival_status',
         header: 'Last Known Survival Status',
         display: true,
@@ -1344,7 +1340,7 @@ export const tabContainers = [
           }
           return dt.toString();
         },
-      },
+      },*/
     ],
     id: 'diagnosis_tab',
     tableID: 'diagnosis_tab_table',

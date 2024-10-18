@@ -124,6 +124,9 @@ query search (
     $tumor_grade_source: [String],
     $tumor_stage_source: [String],
     $last_known_survival_status: [String] ,
+    $age_at_event_free_survival_status: [String],
+    $event_free_survival_status: [String],
+    $first_event: [String],
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
     $sample_tumor_status: [String] ,
@@ -150,6 +153,9 @@ query search (
         tumor_grade_source: $tumor_grade_source,
         tumor_stage_source: $tumor_stage_source,
         last_known_survival_status: $last_known_survival_status,
+        age_at_event_free_survival_status: $age_at_event_free_survival_status,
+        event_free_survival_status: $event_free_survival_status,
+        first_event: $first_event,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
         sample_tumor_status: $sample_tumor_status,
@@ -285,6 +291,18 @@ query search (
           group
           subjects
         }
+        filterParticipantCountByAgeAtEventFreeSurvivalStatus{
+          group
+          subjects
+        }
+        filterParticipantCountByEventFreeSurvivalStatus{
+          group
+          subjects
+        }
+        filterParticipantCountByFirstEvent{
+          group
+          subjects
+        }
         filterParticipantCountByDiagnosisAge{
             lowerBound
             upperBound
@@ -309,6 +327,9 @@ query fileOverview(
     $disease_phase: [String] ,
     $diagnosis: [String] ,
     $last_known_survival_status: [String] ,
+    $age_at_event_free_survival_status: [String],
+    $event_free_survival_status: [String],
+    $first_event: [String],
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
     $sample_tumor_status: [String] ,
@@ -334,6 +355,9 @@ query fileOverview(
         disease_phase: $disease_phase,
         diagnosis: $diagnosis,
         last_known_survival_status: $last_known_survival_status,
+        age_at_event_free_survival_status: $age_at_event_free_survival_status,
+        event_free_survival_status: $event_free_survival_status,
+        first_event: $first_event,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
         sample_tumor_status: $sample_tumor_status,
@@ -382,6 +406,9 @@ query sampleOverview(
     $tumor_grade_source: [String],
     $tumor_stage_source: [String],
     $last_known_survival_status: [String] ,
+    $age_at_event_free_survival_status: [String],
+    $event_free_survival_status: [String],
+    $first_event: [String],
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
     $sample_tumor_status: [String] ,
@@ -408,6 +435,9 @@ query sampleOverview(
         tumor_grade_source: $tumor_grade_source,
         tumor_stage_source: $tumor_stage_source,
         last_known_survival_status: $last_known_survival_status,
+        age_at_event_free_survival_status: $age_at_event_free_survival_status,
+        event_free_survival_status: $event_free_survival_status,
+        first_event: $first_event,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
         sample_tumor_status: $sample_tumor_status,
@@ -449,6 +479,9 @@ query participantOverview(
     $tumor_grade_source: [String],
     $tumor_stage_source: [String],
     $last_known_survival_status: [String] ,
+    $age_at_event_free_survival_status: [String],
+    $event_free_survival_status: [String],
+    $first_event: [String],
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
     $sample_tumor_status: [String] ,
@@ -476,6 +509,9 @@ query participantOverview(
         tumor_grade_source: $tumor_grade_source,
         tumor_stage_source: $tumor_stage_source,
         last_known_survival_status: $last_known_survival_status,
+        age_at_event_free_survival_status: $age_at_event_free_survival_status,
+        event_free_survival_status: $event_free_survival_status,
+        first_event: $first_event,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
         sample_tumor_status: $sample_tumor_status,
@@ -518,6 +554,9 @@ query diagnosisOverview(
     $tumor_grade_source: [String] ,
     $tumor_stage_source: [String] ,
     $last_known_survival_status: [String] ,
+    $age_at_event_free_survival_status: [String],
+    $event_free_survival_status: [String],
+    $first_event: [String],
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
     $sample_tumor_status: [String] ,
@@ -547,6 +586,9 @@ query diagnosisOverview(
         tumor_grade_source: $tumor_grade_source,
         tumor_stage_source: $tumor_stage_source,
         last_known_survival_status: $last_known_survival_status,
+        age_at_event_free_survival_status: $age_at_event_free_survival_status,
+        event_free_survival_status: $event_free_survival_status,
+        first_event: $first_event,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
         sample_tumor_status: $sample_tumor_status,
@@ -575,7 +617,6 @@ query diagnosisOverview(
         disease_phase
         anatomic_site
         age_at_diagnosis
-        last_known_survival_status
         study_id
     }
 }
@@ -593,6 +634,9 @@ query studyOverview(
     $tumor_grade_source: [String],
     $tumor_stage_source: [String],
     $last_known_survival_status: [String] ,
+    $age_at_event_free_survival_status: [String],
+    $event_free_survival_status: [String],
+    $first_event: [String],
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
     $sample_tumor_status: [String] ,
@@ -620,6 +664,9 @@ query studyOverview(
         tumor_grade_source: $tumor_grade_source,
         tumor_stage_source: $tumor_stage_source,
         last_known_survival_status: $last_known_survival_status,
+        age_at_event_free_survival_status: $age_at_event_free_survival_status,
+        event_free_survival_status: $event_free_survival_status,
+        first_event: $first_event,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
         sample_tumor_status: $sample_tumor_status,
@@ -715,6 +762,9 @@ query participantsAddAllToCart(
     $tumor_grade_source: [String],
     $tumor_stage_source: [String],
     $last_known_survival_status: [String] ,
+    $age_at_event_free_survival_status: [String],
+    $event_free_survival_status: [String],
+    $first_event: [String],
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
     $sample_tumor_status: [String] ,
@@ -743,6 +793,9 @@ query participantsAddAllToCart(
       tumor_grade_source: $tumor_grade_source,
       tumor_stage_source: $tumor_stage_source,
       last_known_survival_status: $last_known_survival_status,
+      age_at_event_free_survival_status: $age_at_event_free_survival_status,
+      event_free_survival_status: $event_free_survival_status,
+      first_event: $first_event,
       sample_anatomic_site: $sample_anatomic_site,
       participant_age_at_collection: $participant_age_at_collection,
       sample_tumor_status: $sample_tumor_status,
@@ -778,6 +831,9 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
       $tumor_grade_source: [String],
       $tumor_stage_source: [String],
       $last_known_survival_status: [String] ,
+      $age_at_event_free_survival_status: [String],
+      $event_free_survival_status: [String],
+      $first_event: [String],
       $sample_anatomic_site: [String] ,
       $participant_age_at_collection: [Int] ,
       $sample_tumor_status: [String] ,
@@ -804,6 +860,9 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
           tumor_grade_source: $tumor_grade_source,
           tumor_stage_source: $tumor_stage_source,
           last_known_survival_status: $last_known_survival_status,
+          age_at_event_free_survival_status: $age_at_event_free_survival_status,
+          event_free_survival_status: $event_free_survival_status,
+          first_event: $first_event,
           sample_anatomic_site: $sample_anatomic_site,
           participant_age_at_collection: $participant_age_at_collection,
           sample_tumor_status: $sample_tumor_status,
@@ -838,6 +897,9 @@ query fileAddAllToCart(
   $tumor_grade_source: [String],
   $tumor_stage_source: [String],
   $last_known_survival_status: [String] ,
+  $age_at_event_free_survival_status: [String],
+  $event_free_survival_status: [String],
+  $first_event: [String],
   $sample_anatomic_site: [String] ,
   $participant_age_at_collection: [Int] ,
   $sample_tumor_status: [String] ,
@@ -866,6 +928,9 @@ query fileAddAllToCart(
       tumor_grade_source: $tumor_grade_source,
       tumor_stage_source: $tumor_stage_source,
       last_known_survival_status: $last_known_survival_status,
+      age_at_event_free_survival_status: $age_at_event_free_survival_status,
+      event_free_survival_status: $event_free_survival_status,
+      first_event: $first_event,
       sample_anatomic_site: $sample_anatomic_site,
       participant_age_at_collection: $participant_age_at_collection,
       sample_tumor_status: $sample_tumor_status,
@@ -902,6 +967,9 @@ query diagnosisAddAllToCart(
   $tumor_grade_source: [String],
   $tumor_stage_source: [String],
   $last_known_survival_status: [String] ,
+  $age_at_event_free_survival_status: [String],
+  $event_free_survival_status: [String],
+  $first_event: [String],
   $sample_anatomic_site: [String] ,
   $participant_age_at_collection: [Int] ,
   $sample_tumor_status: [String] ,
@@ -931,6 +999,9 @@ query diagnosisAddAllToCart(
       tumor_grade_source: $tumor_grade_source,
       tumor_stage_source: $tumor_stage_source,
       last_known_survival_status: $last_known_survival_status,
+      age_at_event_free_survival_status: $age_at_event_free_survival_status,
+      event_free_survival_status: $event_free_survival_status,
+      first_event: $first_event,
       sample_anatomic_site: $sample_anatomic_site,
       participant_age_at_collection: $participant_age_at_collection,
       sample_tumor_status: $sample_tumor_status,
@@ -965,6 +1036,9 @@ query studyAddAllToCart(
   $tumor_grade_source: [String],
   $tumor_stage_source: [String],
   $last_known_survival_status: [String] ,
+  $age_at_event_free_survival_status: [String],
+  $event_free_survival_status: [String],
+  $first_event: [String],
   $sample_anatomic_site: [String] ,
   $participant_age_at_collection: [Int] ,
   $sample_tumor_status: [String] ,
@@ -992,6 +1066,9 @@ query studyAddAllToCart(
       tumor_grade_source: $tumor_grade_source,
       tumor_stage_source: $tumor_stage_source,
       last_known_survival_status: $last_known_survival_status,
+      age_at_event_free_survival_status: $age_at_event_free_survival_status,
+      event_free_survival_status: $event_free_survival_status,
+      first_event: $first_event,
       sample_anatomic_site: $sample_anatomic_site,
       participant_age_at_collection: $participant_age_at_collection,
       sample_tumor_status: $sample_tumor_status,
@@ -1247,7 +1324,7 @@ export const tabContainers = [
         },
         role: cellTypes.DISPLAY,
       },
-      {
+      /*{
         dataField: 'last_known_survival_status',
         header: 'Last Known Survival Status',
         display: true,
@@ -1263,7 +1340,7 @@ export const tabContainers = [
           }
           return dt.toString();
         },
-      },
+      },*/
     ],
     id: 'diagnosis_tab',
     tableID: 'diagnosis_tab_table',

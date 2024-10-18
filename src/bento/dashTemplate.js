@@ -4,6 +4,7 @@ import clearButtonActive from '../assets/icons/Clear_Icon_Active.svg';
 import clearButtonActiveHover from '../assets/icons/Clear_Icon_White.svg';
 
 const DEMOGRAPHICS = 'Demographics';
+const SURVIVAL = 'Survival';
 const DIAGNOSIS = 'Diagnosis';
 // const CASES = 'Cases';
 const SAMPLES = 'Samples';
@@ -41,6 +42,9 @@ export const facetSectionVariables = {
   //   isExpanded: true,
   //   hasSearch: true,
   // },
+  Survival: {
+    isExpanded: false,
+  },
   Samples: {
     isExpanded: false,
   },
@@ -76,6 +80,50 @@ export const facetsConfig = [
     apiPath: 'participantCountByRace',
     apiForFiltering: 'filterParticipantCountByRace',
     datafield: 'race',
+    field: GROUP,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: SURVIVAL,
+    label: 'Age at Event Free Survival Status',
+    apiPath: 'participantAgeAtEventFreeSurvivalStatus',
+    apiForFiltering: 'filterParticipantAgeAtEventFreeSurvivalStatus',
+    datafield: 'age_at_event_free_survival_status',
+    field: GROUP,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: SURVIVAL,
+    label: 'Event Free Survival Status',
+    apiPath: 'participantEventFreeSurvivalStatus',
+    apiForFiltering: 'filterParticipantEventFreeSurvivalStatus',
+    datafield: 'event_free_survival_status',
+    field: GROUP,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: SURVIVAL,
+    label: 'First Event',
+    apiPath: 'participantFirstEvent',
+    apiForFiltering: 'filterParticipantFirstEvent',
+    datafield: 'first_event',
+    field: GROUP,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: SURVIVAL,
+    label: 'Last Known Survival Status',
+    apiPath: 'participantCountBySurvivalStatus',
+    apiForFiltering: 'filterParticipantCountBySurvivalStatus',
+    datafield: 'last_known_survival_status',
     field: GROUP,
     type: InputTypes.CHECKBOX,
     sort_type: sortType.ALPHABET,
@@ -296,17 +344,6 @@ export const facetsConfig = [
     apiPath: 'participantCountByDiseasePhase',
     apiForFiltering: 'filterParticipantCountByDiseasePhase',
     datafield: 'disease_phase',
-    field: GROUP,
-    type: InputTypes.CHECKBOX,
-    sort_type: sortType.ALPHABET,
-    show: true,
-  },
-  {
-    section: DIAGNOSIS,
-    label: 'Last Known Survival Status',
-    apiPath: 'participantCountBySurvivalStatus',
-    apiForFiltering: 'filterParticipantCountBySurvivalStatus',
-    datafield: 'last_known_survival_status',
     field: GROUP,
     type: InputTypes.CHECKBOX,
     sort_type: sortType.ALPHABET,

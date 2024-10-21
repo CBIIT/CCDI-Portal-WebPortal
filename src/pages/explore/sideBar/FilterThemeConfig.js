@@ -161,15 +161,18 @@ const theme = {
           backgroundColor: '#974599',
         },
         '&.divider2': {
-          backgroundColor: '#E9B34A',
+          backgroundColor: '#4150A4',
         },
         '&.divider3': {
-          backgroundColor: '#CD5C4E',
+          backgroundColor: '#E9B34A',
         },
         '&.divider4': {
-          backgroundColor: '#1F6BBF',
+          backgroundColor: '#CD5C4E',
         },
         '&.divider5': {
+          backgroundColor: '#1F6BBF',
+        },
+        '&.divider6': {
           backgroundColor: '#60C4A1',
         },
       },

@@ -332,7 +332,7 @@ const NavBar = () => {
         <DropdownContainer>
             <div className="dropdownList">
               {
-                clickedTitle !== "" ? navbarSublists[clickedTitle].map((dropItem, idx) => {
+                clickedTitle !== "" ? navbarSublists[clickedTitle].sort((a, b) => a.name.localeCompare(b.name)).map((dropItem, idx) => {
                   const dropkey = `drop_${idx}`;
                   return (
                     <>

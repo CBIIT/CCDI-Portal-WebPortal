@@ -939,7 +939,7 @@ const LandingView = ({
             </div>
             <div className='resourceList'>
               {
-                resourcesAppliationsListData.map((appItem, appidx) => {
+                resourcesAppliationsListData.sort((a, b) => a.title.localeCompare(b.title)).map((appItem, appidx) => {
                   const appkey = `app_${appidx}`;
                   if (!appItem.link.includes('http')) {
                     return (

@@ -384,7 +384,7 @@ const Carousel = () => {
 
     useEffect(() => {
         if (rCarouselList.length === 0) {
-            setRCarouselList(getRandomList(carouselList));
+            setRCarouselList(getRandomList(carouselList.sort((a, b) => a.content.localeCompare(b.content))));
         }
         if (!isVisible) {
             clearInterval(timer);

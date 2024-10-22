@@ -119,6 +119,20 @@ const theme = {
           marginRight: '0px',
           fontWeight: '600',
         },
+        '&.survivalSubjects': {
+          color: '#E9B34A',
+          fontSize: '12px',
+          fontFamily: 'Nunito',
+          marginRight: '0px',
+          fontWeight: '600',
+        },
+        '&.treatmentSubjects': {
+          color: '#4150A4',
+          fontSize: '12px',
+          fontFamily: 'Nunito',
+          marginRight: '0px',
+          fontWeight: '600',
+        },
         '&.samplesSubjects': {
           color: '#897E67',
           fontSize: '12px',

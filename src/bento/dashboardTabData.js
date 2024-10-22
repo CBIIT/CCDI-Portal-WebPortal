@@ -127,6 +127,9 @@ query search (
     $age_at_last_known_survival_status: [Int],
     $event_free_survival_status: [String],
     $first_event: [String],
+    $treatment_type: [String],
+    $treatment_agent: [String],
+    $age_at_treatment_start: [Int] ,
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
     $sample_tumor_status: [String] ,
@@ -156,6 +159,9 @@ query search (
         age_at_last_known_survival_status: $age_at_last_known_survival_status,
         event_free_survival_status: $event_free_survival_status,
         first_event: $first_event,
+        treatment_type: $treatment_type,
+        treatment_agent: $treatment_agent,
+        age_at_treatment_start: $age_at_treatment_start,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
         sample_tumor_status: $sample_tumor_status,
@@ -299,6 +305,14 @@ query search (
           group
           subjects
         }
+        filterParticipantCountByTreatmentType{
+          group
+          subjects
+        }
+        filterParticipantCountByTreatmentAgent{
+          group
+          subjects
+        }
         filterParticipantCountByDiagnosisAge{
             lowerBound
             upperBound
@@ -310,6 +324,11 @@ query search (
           subjects
       }
       filterParticipantCountByAgeAtLastKnownSurvivalStatus{
+          lowerBound
+          upperBound
+          subjects
+      }
+      filterParticipantCountByAgeAtTreatmentStart {
           lowerBound
           upperBound
           subjects
@@ -331,6 +350,9 @@ query fileOverview(
     $age_at_last_known_survival_status: [Int],
     $event_free_survival_status: [String],
     $first_event: [String],
+    $treatment_type: [String],
+    $treatment_agent: [String],
+    $age_at_treatment_start: [Int] ,
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
     $sample_tumor_status: [String] ,
@@ -359,6 +381,9 @@ query fileOverview(
         age_at_last_known_survival_status: $age_at_last_known_survival_status,
         event_free_survival_status: $event_free_survival_status,
         first_event: $first_event,
+        treatment_type: $treatment_type,
+        treatment_agent: $treatment_agent,
+        age_at_treatment_start: $age_at_treatment_start,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
         sample_tumor_status: $sample_tumor_status,
@@ -410,6 +435,9 @@ query sampleOverview(
     $age_at_last_known_survival_status: [Int],
     $event_free_survival_status: [String],
     $first_event: [String],
+    $treatment_type: [String],
+    $treatment_agent: [String],
+    $age_at_treatment_start: [Int] ,
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
     $sample_tumor_status: [String] ,
@@ -439,6 +467,9 @@ query sampleOverview(
         age_at_last_known_survival_status: $age_at_last_known_survival_status,
         event_free_survival_status: $event_free_survival_status,
         first_event: $first_event,
+        treatment_type: $treatment_type,
+        treatment_agent: $treatment_agent,
+        age_at_treatment_start: $age_at_treatment_start,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
         sample_tumor_status: $sample_tumor_status,
@@ -483,6 +514,9 @@ query participantOverview(
     $age_at_last_known_survival_status: [Int],
     $event_free_survival_status: [String],
     $first_event: [String],
+    $treatment_type: [String],
+    $treatment_agent: [String],
+    $age_at_treatment_start: [Int] ,
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
     $sample_tumor_status: [String] ,
@@ -513,6 +547,9 @@ query participantOverview(
         age_at_last_known_survival_status: $age_at_last_known_survival_status,
         event_free_survival_status: $event_free_survival_status,
         first_event: $first_event,
+        treatment_type: $treatment_type,
+        treatment_agent: $treatment_agent,
+        age_at_treatment_start: $age_at_treatment_start,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
         sample_tumor_status: $sample_tumor_status,
@@ -558,6 +595,9 @@ query diagnosisOverview(
     $age_at_last_known_survival_status: [Int],
     $event_free_survival_status: [String],
     $first_event: [String],
+    $treatment_type: [String],
+    $treatment_agent: [String],
+    $age_at_treatment_start: [Int] ,
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
     $sample_tumor_status: [String] ,
@@ -590,6 +630,9 @@ query diagnosisOverview(
         age_at_last_known_survival_status: $age_at_last_known_survival_status,
         event_free_survival_status: $event_free_survival_status,
         first_event: $first_event,
+        treatment_type: $treatment_type,
+        treatment_agent: $treatment_agent,
+        age_at_treatment_start: $age_at_treatment_start,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
         sample_tumor_status: $sample_tumor_status,
@@ -638,6 +681,9 @@ query studyOverview(
     $age_at_last_known_survival_status: [Int],
     $event_free_survival_status: [String],
     $first_event: [String],
+    $treatment_type: [String],
+    $treatment_agent: [String],
+    $age_at_treatment_start: [Int] ,
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
     $sample_tumor_status: [String] ,
@@ -668,6 +714,9 @@ query studyOverview(
         age_at_last_known_survival_status: $age_at_last_known_survival_status,
         event_free_survival_status: $event_free_survival_status,
         first_event: $first_event,
+        treatment_type: $treatment_type,
+        treatment_agent: $treatment_agent,
+        age_at_treatment_start: $age_at_treatment_start,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
         sample_tumor_status: $sample_tumor_status,
@@ -766,6 +815,9 @@ query participantsAddAllToCart(
     $age_at_last_known_survival_status: [Int],
     $event_free_survival_status: [String],
     $first_event: [String],
+    $treatment_type: [String],
+    $treatment_agent: [String],
+    $age_at_treatment_start: [Int] ,
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
     $sample_tumor_status: [String] ,
@@ -797,6 +849,9 @@ query participantsAddAllToCart(
       age_at_last_known_survival_status: $age_at_last_known_survival_status,
       event_free_survival_status: $event_free_survival_status,
       first_event: $first_event,
+      treatment_type: $treatment_type,
+      treatment_agent: $treatment_agent,
+      age_at_treatment_start: $age_at_treatment_start,
       sample_anatomic_site: $sample_anatomic_site,
       participant_age_at_collection: $participant_age_at_collection,
       sample_tumor_status: $sample_tumor_status,
@@ -835,6 +890,9 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
       $age_at_last_known_survival_status: [Int],
       $event_free_survival_status: [String],
       $first_event: [String],
+      $treatment_type: [String],
+      $treatment_agent: [String],
+      $age_at_treatment_start: [Int] ,
       $sample_anatomic_site: [String] ,
       $participant_age_at_collection: [Int] ,
       $sample_tumor_status: [String] ,
@@ -864,6 +922,9 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
           age_at_last_known_survival_status: $age_at_last_known_survival_status,
           event_free_survival_status: $event_free_survival_status,
           first_event: $first_event,
+          treatment_type: $treatment_type,
+          treatment_agent: $treatment_agent,
+          age_at_treatment_start: $age_at_treatment_start,
           sample_anatomic_site: $sample_anatomic_site,
           participant_age_at_collection: $participant_age_at_collection,
           sample_tumor_status: $sample_tumor_status,
@@ -901,6 +962,9 @@ query fileAddAllToCart(
   $age_at_last_known_survival_status: [Int],
   $event_free_survival_status: [String],
   $first_event: [String],
+  $treatment_type: [String],
+  $treatment_agent: [String],
+  $age_at_treatment_start: [Int] ,
   $sample_anatomic_site: [String] ,
   $participant_age_at_collection: [Int] ,
   $sample_tumor_status: [String] ,
@@ -932,6 +996,9 @@ query fileAddAllToCart(
       age_at_last_known_survival_status: $age_at_last_known_survival_status,
       event_free_survival_status: $event_free_survival_status,
       first_event: $first_event,
+      treatment_type: $treatment_type,
+      treatment_agent: $treatment_agent,
+      age_at_treatment_start: $age_at_treatment_start,
       sample_anatomic_site: $sample_anatomic_site,
       participant_age_at_collection: $participant_age_at_collection,
       sample_tumor_status: $sample_tumor_status,
@@ -971,6 +1038,9 @@ query diagnosisAddAllToCart(
   $age_at_last_known_survival_status: [Int],
   $event_free_survival_status: [String],
   $first_event: [String],
+  $treatment_type: [String],
+  $treatment_agent: [String],
+  $age_at_treatment_start: [Int] ,
   $sample_anatomic_site: [String] ,
   $participant_age_at_collection: [Int] ,
   $sample_tumor_status: [String] ,
@@ -1003,6 +1073,9 @@ query diagnosisAddAllToCart(
       age_at_last_known_survival_status: $age_at_last_known_survival_status,
       event_free_survival_status: $event_free_survival_status,
       first_event: $first_event,
+      treatment_type: $treatment_type,
+      treatment_agent: $treatment_agent,
+      age_at_treatment_start: $age_at_treatment_start,
       sample_anatomic_site: $sample_anatomic_site,
       participant_age_at_collection: $participant_age_at_collection,
       sample_tumor_status: $sample_tumor_status,
@@ -1040,6 +1113,9 @@ query studyAddAllToCart(
   $age_at_last_known_survival_status: [Int],
   $event_free_survival_status: [String],
   $first_event: [String],
+  $treatment_type: [String],
+  $treatment_agent: [String],
+  $age_at_treatment_start: [Int] ,
   $sample_anatomic_site: [String] ,
   $participant_age_at_collection: [Int] ,
   $sample_tumor_status: [String] ,
@@ -1070,6 +1146,9 @@ query studyAddAllToCart(
       age_at_last_known_survival_status: $age_at_last_known_survival_status,
       event_free_survival_status: $event_free_survival_status,
       first_event: $first_event,
+      treatment_type: $treatment_type,
+      treatment_agent: $treatment_agent,
+      age_at_treatment_start: $age_at_treatment_start,
       sample_anatomic_site: $sample_anatomic_site,
       participant_age_at_collection: $participant_age_at_collection,
       sample_tumor_status: $sample_tumor_status,

@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, createRef } from 'react';
 import styled from 'styled-components';
 import ReactHtmlParser from 'html-react-parser';
 import headerImg from '../../../assets/resources/CPI_Header.png';
 import exportIcon from '../../../assets/resources/Explore_Icon.svg';
+import closeIcon from '../../../assets/icons/Close_Icon.svg';
+import arrowDownIcon from '../../../assets/icons/Arrow_Down.svg';
 import { cpiResourceData, introText } from '../../../bento/cpiResourceData';
 import exportIconBlue from '../../../assets/icons/Export_Icon.svg';
 import ccdiCPIImg from '../../../assets/resources/CPI_img.png';
@@ -242,6 +244,38 @@ const CPIResourceBody = styled.div`
         letter-spacing: -0.02em;
         margin-bottom: 20px;
         color: #05555C;
+
+        @media (max-width: 767px) {
+            display: none;
+        }
+    }
+
+    .mciTitleMobile {
+        width: 100%;
+        padding: 12px 10px;
+        margin-bottom: 20px;
+        font-family: Open Sans;
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 20px;
+        text-align: left;
+        color: #FFFFFF;
+        background: url(${closeIcon}) right 10px center no-repeat;
+        background-color: #187C85;
+        display: none;
+
+        @media (max-width: 767px) {
+            display: block;
+        }
+    }
+
+    .sectionCollapse {
+        background: url(${arrowDownIcon}) right 10px center no-repeat;
+        background-color: #187C85;
+    }
+
+    .mciTitleMobile:hover {
+        cursor: pointer;
     }
 
     .mciSubtitle {
@@ -341,12 +375,31 @@ const CPIResourceBody = styled.div`
         .contentList {
             width: 100%;
         }
+
+        .mciSection {
+            padding: 0 5px;
+        }
+
+        .mobileCollapse {
+            display: block;
+            @media (max-width: 767px) {
+                display: none;
+            }
+        }
+
+        .mciContentContainer {
+            margin-left: 0;
+        }
     }
 `;
 
 const CPIResourceView = () => {
     const [selectedNavTitle, setSelectedNavTitle] = useState('');
     const [stickyNavStyle, setStickyNavStyle] = useState('navList');
+    const sectionList = useRef([]);
+    sectionList.current = cpiResourceData.map((element, i) => {
+        return sectionList.current[i] || createRef()
+    });
     const handleScroll = () => {
         const bodyElement = document.getElementById('FederationBody');
         const footerList = document.getElementsByTagName('footer');
@@ -389,6 +442,18 @@ const CPIResourceView = () => {
         });
     }
 
+    const handleCollapseSection = e => {
+        const i = e.target.getAttribute("name");
+        const currentDisplay = sectionList.current[i].current.style.display;
+        if (currentDisplay === 'block') {
+            sectionList.current[i].current.style.display = 'none';
+            e.target.className = 'mciTitleMobile sectionCollapse';
+        } else {
+            sectionList.current[i].current.style.display = 'block';
+            e.target.className = 'mciTitleMobile';
+        }
+    }
+
     return (
         <CPIResourceContainer>
             <div className='resourceHeader'><div className='resourceHeaderBackground'><div className='resourceHeaderText'>CCDI Hub</div></div></div>
@@ -423,17 +488,19 @@ const CPIResourceView = () => {
                                 return (
                                     <div key={cpikey}>
                                         <div id={cpiItem.id} className='mciTitle'>{cpiItem.topic && cpiItem.topic}</div>
-                                        <div id={cpiItem.id} className='mciSubtitle'>{cpiItem.subtopic && cpiItem.subtopic}</div>
-                                        <div className='mciContentContainer'>
-                                            {cpiItem.content && ReactHtmlParser(cpiItem.content)}
-                                            
-                                            {cpiItem.id && cpiItem.id.includes('CPI_Components') && 
-                                            <div>
-                                                <img className='CPIImg' src={ccdiCPIImg} alt="CPI Img"/>
+                                        <div id={cpiItem.id} name={mciid} className='mciTitleMobile sectionCollapse' onClick={handleCollapseSection}>{cpiItem.topic && cpiItem.topic}</div>
+                                        <div className="mciSection mobileCollapse" ref={sectionList.current[mciid]}>
+                                            <div className='mciContentContainer'>
+                                                {cpiItem.content && ReactHtmlParser(cpiItem.content)}
+                                                
+                                                {cpiItem.id && cpiItem.id.includes('CPI_Components') && 
+                                                <div>
+                                                    <img className='CPIImg' src={ccdiCPIImg} alt="CPI Img"/>
+                                                </div>
+                                                }
                                             </div>
-                                            }
+                                            {cpiItem.content && <div style={{height: '40px'}} />}
                                         </div>
-                                        {cpiItem.content && <div style={{height: '40px'}} />}
                                     </div>
                                 )
                             })

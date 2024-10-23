@@ -6,6 +6,7 @@ import clearButtonActiveHover from '../assets/icons/Clear_Icon_White.svg';
 const DEMOGRAPHICS = 'Demographics';
 const SURVIVAL = 'Survival';
 const TREATMENT = 'Treatment';
+const TREATMENT_RESPONSE = 'Treatmentresponse';
 const DIAGNOSIS = 'Diagnosis';
 // const CASES = 'Cases';
 const SAMPLES = 'Samples';
@@ -28,6 +29,7 @@ export const resetIcon = {
 export const sectionLabel = {
   Datacategory: "Data Category",
   Sequencinglibrary: 'Sequencing Library',
+  Treatmentresponse: 'Treatment Response'
 };
 
 // --------------- Dashboard Sidebar Sections styling --------------
@@ -40,6 +42,9 @@ export const facetSectionVariables = {
     isExpanded: false,
   },
   Treatment: {
+    isExpanded: false,
+  },
+  Treatmentresponse: {
     isExpanded: false,
   },
   // Cases: {
@@ -468,6 +473,159 @@ export const facetsConfig = [
     apiPath: 'participantCountByTreatmentType',
     apiForFiltering: 'filterParticipantCountByTreatmentType',
     datafield: 'treatment_type',
+    field: GROUP,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: TREATMENT_RESPONSE,
+    label: 'Age at Treatment Start',
+    apiPath: 'participantCountByAgeAtResponse',
+    apiForFiltering: 'filterParticipantCountByAgeAtResponse',
+    datafield: 'age_at_response',
+    ApiLowerBoundName: 'lowerBound',
+    ApiUpperBoundName: 'upperBound',
+    show: true,
+    slider: true,
+    type: InputTypes.SLIDER,
+    sort_type: 'none',
+    minLowerBound: 0,
+    maxUpperBound: 100,
+    quantifier: 'Days',
+    style: {
+      colorPrimary: {
+        color: '#E9B34A',
+      },
+      sliderRoot: {
+        marginTop: '1px',
+        marginLeft: '20px',
+        marginRight: 'Auto',
+        paddingRight: '20px',
+      },
+      minValue: {
+        fontFamily: 'Nunito',
+        fontSize: '15px',
+        color: '#000000',
+        marginBottom: '0px',
+        float: 'left',
+        width: '75px',
+        display: 'flex',
+      },
+      maxValue: {
+        fontFamily: 'Nunito',
+        fontSize: '15px',
+        color: '#000000',
+        float: 'right',
+        marginBottom: '0px',
+        display: 'flex',
+      },
+      rail: {
+        borderRadius: 4,
+        height: 6,
+        background: '#142D64',
+      },
+      minInputLabel: {
+        float: 'left',
+        lineHeight: '34px',
+        marginRight: '5px',
+        fontFamily: 'Montserrat',
+        fontSize: '11px',
+        fontWeight: 500,
+      },
+      maxInputLabel: {
+        float: 'left',
+        lineHeight: '34px',
+        marginRight: '5px',
+        fontFamily: 'Montserrat',
+        fontSize: '11px',
+        fontWeight: 500,
+      },
+      thumb: {
+        height: 16,
+        width: 16,
+        background: '#E9B34A',
+      },
+      invalidThumb: {
+        height: 16,
+        width: 16,
+        background: '#F44336',
+      },
+      track: {
+        borderRadius: 4,
+        height: 6,
+        background: '#E9B34A',
+        '&~&': {
+          background: '#142D64',
+        },
+      },
+      invalidTrack: {
+        borderRadius: 4,
+        height: 6,
+        background: '#F44336',
+        '&~&': {
+          background: '#142D64',
+        },
+      },
+      upperBound: {
+        fontFamily: 'Nunito',
+        fontSize: '10px',
+        color: '#000000',
+        float: 'right',
+        marginLeft: 'Auto',
+        marginRight: 'Auto',
+        marginBottom: '15px',
+      },
+      lowerBound: {
+        fontFamily: 'Nunito',
+        fontSize: '10px',
+        color: '#000000',
+        float: 'left',
+        marginLeft: 'Auto',
+        marginRight: 'Auto',
+        marginBottom: '15px',
+      },
+      sliderText: {
+        color: '#897E67',
+        lineHeight: '120%',
+        fontFamily: 'Nunito',
+        fontSize: '14px',
+        padding: '5px 15px 5px 0px',
+        width: '100%',
+        textAlign: 'right',
+        background: '#D9C5A040',
+        marginTop: '10px',
+      },
+      invalidSliderText: {
+        color: '#D32F2F',
+        lineHeight: '120%',
+        fontFamily: 'Nunito',
+        fontSize: '14px',
+        padding: '5px 15px 5px 0px',
+        width: '100%',
+        textAlign: 'right',
+        background: '#E57373',
+        marginTop: '10px',
+      },
+      sliderListItem: {
+        height: '15px',
+      },
+      listItemGutters: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        padding: '2px 5px 2px 8px',
+      },
+      lowerUpperBound: {
+        height: '15px',
+      },
+    }
+  },
+  {
+    section: TREATMENT_RESPONSE,
+    label: 'Response Category',
+    apiPath: 'participantCountByResponseCategory',
+    apiForFiltering: 'filterParticipantCountByResponseCategory',
+    datafield: 'response_category',
     field: GROUP,
     type: InputTypes.CHECKBOX,
     sort_type: sortType.ALPHABET,

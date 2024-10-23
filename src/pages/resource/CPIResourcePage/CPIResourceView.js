@@ -12,7 +12,7 @@ const CPIResourceContainer = styled.div`
     width: 100%;
 
     .resourceBreadcrumbContainer {
-        width: 1420px;
+        // width: 1420px;
         margin: 0 auto;
     }
 
@@ -52,7 +52,7 @@ const CPIResourceContainer = styled.div`
     }
 
     .resourceHeaderText {
-        width: 1420px;
+        // width: 1420px;
         margin: 0 auto;
         padding: 150px 0 0 75px;
         color: #19676D;
@@ -94,15 +94,68 @@ const CPIResourceContainer = styled.div`
         letter-spacing: 0.02em;
         background: url(${exportIcon}) right center no-repeat;
     }
+
+    @media (min-width: 1420px) {
+        .resourceTitle {
+            width: 1420px;
+        }
+
+        .resourceHeaderText {
+            width: 1420px;
+        }
+
+        .resourceBreadcrumbContainer {
+            width: 1420px;
+        }
+    }
+
+    @media (max-width: 1140px) {
+        .resourceTitle {
+            padding-left: calc(50vw - 500px);
+        }
+
+        .resourceHeaderText {
+            padding-left: calc(50vw - 500px);
+        }
+    }
+
+    @media (max-width: 1023px) {
+
+        .resourceBreadcrumb {
+            margin-left: 16px;
+        }
+        .resourceTitle {
+            display: block;
+        }
+        
+        .resourceHeaderText {
+            padding-left: 16px;
+        }
+
+        .resourceTitle {
+            padding-left: 16px;
+        }
+
+        .goToSiteButton {
+            padding-left: 16px;
+        }
+
+        .goToSiteText {
+            padding: 15px 34px 15px 0;
+        }
+    }
 `;
 
 const CPIResourceBody = styled.div`
-    width: 1420px;
+    @media (min-width: 1420px) {
+        width: 1420px;
+    }
+
     margin: 0 auto;
     display: flex;
     padding: 55px 32px 0 32px; 
     .navSection {
-        width: 20%;
+        width: 240px;
         color: #4D889E;
         position: relative;
     }
@@ -130,12 +183,12 @@ const CPIResourceBody = styled.div`
     .navListSticky {
         position: fixed;
         top: 55px;
-        width: 272px;
+        width: 240px;
     }
     .navListAbsolute {
         position: absolute;
         bottom: 0;
-        width: 272px;
+        width: 240px;
     }
 
     .navTitle {
@@ -176,7 +229,7 @@ const CPIResourceBody = styled.div`
 
     .contentSection {
         display: flex;
-        width: 80%;
+        width: calc(100% - 240px);
         padding: 0 32px 0 50px;
         margin-bottom: 100px;
     }
@@ -248,6 +301,11 @@ const CPIResourceBody = styled.div`
         }
     }
 
+    .CPIImg {
+        width: 100%;
+        height: 100%;
+    }
+
     .donutContainer {
         display: flex;
     }
@@ -266,6 +324,23 @@ const CPIResourceBody = styled.div`
             margin: 120px 0 0 150px;
         }
 
+    }
+
+    @media (max-width: 767px) {
+        padding: 55px 0 0 0;
+
+        .navSection {
+            display: none;
+        }
+
+        .contentSection {
+            width: 100%;
+            padding: 0 16px;
+        }
+
+        .contentList {
+            width: 100%;
+        }
     }
 `;
 
@@ -353,8 +428,8 @@ const CPIResourceView = () => {
                                             {cpiItem.content && ReactHtmlParser(cpiItem.content)}
                                             
                                             {cpiItem.id && cpiItem.id.includes('CPI_Components') && 
-                                            <div style={{ justifyContent: 'center', display: 'flex', height: '600px'}}>
-                                                <img src={ccdiCPIImg} alt="CPI Img"/>
+                                            <div>
+                                                <img className='CPIImg' src={ccdiCPIImg} alt="CPI Img"/>
                                             </div>
                                             }
                                         </div>

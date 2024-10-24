@@ -68,16 +68,16 @@ const CPIResourceContainer = styled.div`
     }
 
     .resourceTitle {
-        width: 1420px;
+        // width: 1420px;
         margin: 0 auto;
         display: flex;
-        line-height: 64px;
+        line-height: 38px;
         background: #087D6F;
         font-family: Poppins;
         font-weight: 600;
         color: #ffffff;
         font-size: 35px;
-        padding-left: 75px;
+        padding: 13px 0 13px 75px;
     }
 
     .goToSiteButton {

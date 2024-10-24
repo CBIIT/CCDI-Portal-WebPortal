@@ -120,14 +120,14 @@ const theme = {
           fontWeight: '600',
         },
         '&.survivalSubjects': {
-          color: '#E9B34A',
+          color: '#CD5C4E',
           fontSize: '12px',
           fontFamily: 'Nunito',
           marginRight: '0px',
           fontWeight: '600',
         },
         '&.treatmentSubjects': {
-          color: '#4150A4',
+          color: '#1F6BBF',
           fontSize: '12px',
           fontFamily: 'Nunito',
           marginRight: '0px',
@@ -141,7 +141,7 @@ const theme = {
           fontWeight: '600',
         },
         '&.samplesSubjects': {
-          color: '#897E67',
+          color: '#4150A4',
           fontSize: '12px',
           fontFamily: 'Nunito',
           marginRight: '0px',
@@ -155,16 +155,18 @@ const theme = {
           fontWeight: '600',
         },
         '&.studySubjects': {
-          color: '#24568E',
+          color: '#357288',
           fontSize: '12px',
           fontFamily: 'Nunito',
           marginRight: '0px',
+          fontWeight: '600',
         },
         '&.sequencinglibrarySubjects': {
-          color: '#14835C',
+          color: '#974599',
           fontSize: '12px',
           fontFamily: 'Nunito',
           marginRight: '0px',
+          fontWeight: '600',
         },
       },
     },
@@ -182,19 +184,25 @@ const theme = {
           backgroundColor: '#974599',
         },
         '&.divider2': {
-          backgroundColor: '#4150A4',
+          backgroundColor: '#1F6BBF',
         },
         '&.divider3': {
           backgroundColor: '#E9B34A',
         },
         '&.divider4': {
-          backgroundColor: '#1F6BBF',
+          backgroundColor: '#CD5C4E',
         },
         '&.divider5': {
-          backgroundColor: '#60C4A1',
+          backgroundColor: '#4150A4',
         },
         '&.divider6': {
           backgroundColor: '#60C4A1',
+        },
+        '&.divider7': {
+          backgroundColor: '#357288',
+        },
+        '&.divider8': {
+          backgroundColor: '#974599',
         },
       },
     },

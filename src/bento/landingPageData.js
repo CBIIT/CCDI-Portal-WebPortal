@@ -128,7 +128,7 @@ export const resourcesAppliationsListData = [
   },
   {
     id: 'federation',
-    title: 'Data Federation Resource',
+    title: 'CCDI Data Federation Resource',
     content: 'The CCDI Data Federation Resource provides harmonized metadata accessible via an API that facilitates the search across multiple resources. ',
     link: '/data-federation-resource',
     img: federationLogo,
@@ -219,7 +219,7 @@ export const carouselList = [
   {
     img: wheel8,
     mobile: federationMobile,
-    content: 'Data Federation Resource',
+    content: 'CCDI Data Federation Resource',
     link: '/data-federation-resource',
   },
   {

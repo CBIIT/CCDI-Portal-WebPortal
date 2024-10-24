@@ -96,7 +96,7 @@ Applications: [
     className: 'navMobileSubItem',
   },
   {
-    name:'Data Federation Resource',
+    name:'CCDI Data Federation Resource',
     link: '/data-federation-resource',
     className: 'navMobileSubItem',
   },

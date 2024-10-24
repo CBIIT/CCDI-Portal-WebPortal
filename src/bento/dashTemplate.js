@@ -331,7 +331,7 @@ export const facetsConfig = [
     quantifier: 'Days',
     style: {
       colorPrimary: {
-        color: '#4555AB',
+        color: '#1F6BBF',
       },
       sliderRoot: {
         marginTop: '1px',
@@ -380,7 +380,7 @@ export const facetsConfig = [
       thumb: {
         height: 16,
         width: 16,
-        background: '#4555AB',
+        background: '#1F6BBF',
       },
       invalidThumb: {
         height: 16,
@@ -390,7 +390,7 @@ export const facetsConfig = [
       track: {
         borderRadius: 4,
         height: 6,
-        background: '#4555AB',
+        background: '#1F6BBF',
         '&~&': {
           background: '#142D64',
         },
@@ -648,7 +648,7 @@ export const facetsConfig = [
     quantifier: 'Days',
     style: {
       colorPrimary: {
-        color: '#E9B34A',
+        color: '#CD5C4E',
       },
       sliderRoot: {
         marginTop: '1px',
@@ -697,7 +697,7 @@ export const facetsConfig = [
       thumb: {
         height: 16,
         width: 16,
-        background: '#E9B34A',
+        background: '#CD5C4E',
       },
       invalidThumb: {
         height: 16,
@@ -707,7 +707,7 @@ export const facetsConfig = [
       track: {
         borderRadius: 4,
         height: 6,
-        background: '#E9B34A',
+        background: '#CD5C4E',
         '&~&': {
           background: '#142D64',
         },
@@ -823,7 +823,7 @@ export const facetsConfig = [
     quantifier: 'Days',
     style: {
       colorPrimary: {
-        color: '#E9B34A',
+        color: '#4150A4',
       },
       sliderRoot: {
         marginTop: '1px',
@@ -851,7 +851,7 @@ export const facetsConfig = [
       rail: {
         borderRadius: 4,
         height: 6,
-        background: '#142D64',
+        background: '#4150A4',
       },
       minInputLabel: {
         float: 'left',
@@ -872,7 +872,7 @@ export const facetsConfig = [
       thumb: {
         height: 16,
         width: 16,
-        background: '#E9B34A',
+        background: '#4150A4',
       },
       invalidThumb: {
         height: 16,
@@ -882,7 +882,7 @@ export const facetsConfig = [
       track: {
         borderRadius: 4,
         height: 6,
-        background: '#E9B34A',
+        background: '#4150A4',
         '&~&': {
           background: '#142D64',
         },

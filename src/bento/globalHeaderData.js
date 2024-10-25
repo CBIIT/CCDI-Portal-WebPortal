@@ -104,7 +104,12 @@ Applications: [
     name:'CCDI Participant Index',
     link: '/ccdi-participant-index',
     className: 'navMobileSubItem',
-  }],
+  },
+  {
+    name:'NCCR Data platform',
+    link: 'https://nccrdataplatform.ccdi.cancer.gov/home',
+    className: 'navMobileSubItem',
+  },],
 "Other Resources": [
   {
     name:'Other Resources',

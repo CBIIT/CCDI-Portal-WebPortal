@@ -10,6 +10,7 @@ import wheel6 from '../assets/landing/cgc_carousel.svg';
 import wheel7 from '../assets/landing/dbgap_carousel.svg';
 import wheel8 from '../assets/landing/federation_carousel.png';
 import wheel9 from '../assets/landing/cpi_carousel.png';
+import wheel10 from '../assets/landing/nccrdata_carousel.png';
 import c3dcLogo from '../assets/landing/c3dc_logo.svg';
 import ccdcMobile from '../assets/landing/ccdc_mobile.png';
 import civicMobile from '../assets/landing/civic_mobile.png';
@@ -20,6 +21,7 @@ import cgcMobile from '../assets/landing/cgc_mobile.png';
 import dbgapMobile from '../assets/landing/dbgap_mobile.png';
 import federationMobile from '../assets/landing/federation_mobile.png';
 import cpiMobile from '../assets/landing/cpi_mobile.png';
+import nccrdataMobile from '../assets/landing/nccrdata_mobile.png';
 import ccdcLogo from '../assets/landing/ccdc_logo.svg';
 import civicLogo from '../assets/landing/civic_logo.svg';
 import mciLogo from '../assets/landing/mci_logo.svg';
@@ -29,6 +31,7 @@ import cgcLogo from '../assets/landing/cgc_logo.svg';
 import dbgapLogo from '../assets/landing/dbgap_logo.svg';
 import federationLogo from '../assets/landing/federation_logo.svg';
 import cpiLogo from '../assets/landing/cpi_logo.svg';
+import nccrdataLogo from '../assets/landing/nccrdata_logo.svg';
 
 
 export const introData = {
@@ -137,10 +140,18 @@ export const resourcesAppliationsListData = [
   {
     id: 'cpi',
     title: 'CCDI Participant Index',
+    subtitle: 'CPI',
     content: 'CCDI’s Participant Index (CPI) API maps participant IDs across studies, empowering researchers to explore complex questions and advance pediatric cancer research.',
     link: '/ccdi-participant-index',
     img: cpiLogo,
     noLink: true
+  },
+  {
+    id: 'nccr',
+    title: 'National Childhood Cancer Registry (NCCR) Data Platform',
+    content: 'The NCCR Data Platform is a cloud-based repository offering comprehensive data on cancer patients aged 0-39.',
+    link: 'https://nccrdataplatform.ccdi.cancer.gov/home',
+    img: nccrdataLogo,
   },
 ];
 
@@ -227,6 +238,12 @@ export const carouselList = [
     mobile: cpiMobile,
     content: 'CCDI Participant Index',
     link: '/ccdi-participant-index',
+  },
+  {
+    img: wheel10,
+    mobile: nccrdataMobile,
+    content: 'NCCR Data Platform',
+    link: 'https://nccrdataplatform.ccdi.cancer.gov/home',
   },
 ];
 

@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, createRef } from 'react';
 import styled from 'styled-components';
 import ReactHtmlParser from 'html-react-parser';
 import headerImg from '../../assets/resources/Federation_Header.png';
 import exportIcon from '../../assets/resources/Explore_Icon.svg';
+import closeIcon from '../../assets/icons/Close_Icon.svg';
+import arrowDownIcon from '../../assets/icons/Arrow_Down.svg';
 import { federationContent, introText } from '../../bento/federationData';
 import exportIconBlue from '../../assets/icons/Export_Icon.svg';
 import ccdiDataAccessImg from '../../assets/resources/Federation_CCDI_Data_Access.png';
@@ -12,7 +14,7 @@ const FederationResourceContainer = styled.div`
     width: 100%;
 
     .resourceBreadcrumbContainer {
-        width: 1420px;
+        // width: 1420px;
         margin: 0 auto;
     }
 
@@ -52,7 +54,7 @@ const FederationResourceContainer = styled.div`
     }
 
     .resourceHeaderText {
-        width: 1420px;
+        // width: 1420px;
         margin: 0 auto;
         padding: 150px 0 0 75px;
         color: #19676D;
@@ -66,15 +68,19 @@ const FederationResourceContainer = styled.div`
     }
 
     .resourceTitle {
-        width: 1420px;
+        // width: 1420px;
         margin: 0 auto;
         display: flex;
-        line-height: 64px;
+        line-height: 38px;
         background: #087D6F;
         font-family: Poppins;
         font-weight: 600;
         color: #ffffff;
         font-size: 35px;
+    }
+
+    .resourceTitleText {
+        padding: 15px 0;
         padding-left: 75px;
     }
 
@@ -84,25 +90,79 @@ const FederationResourceContainer = styled.div`
         background: #035D63;
         font-weight: 400;
         font-size: 19px;
-        padding: 0 38px;
+        line-height: 21px;
+        padding: 0 25px;
     }
 
     .goToSiteText {
         color: #FFFFFF;
         text-decoration: none;
+        padding: 23px 0;
         padding-right: 34px;
         letter-spacing: 0.02em;
         background: url(${exportIcon}) right center no-repeat;
     }
+
+    @media (min-width: 1420px) {
+        .resourceTitle {
+            width: 1420px;
+        }
+
+        .resourceHeaderText {
+            width: 1420px;
+        }
+
+        .resourceBreadcrumbContainer {
+            width: 1420px;
+        }
+    }
+
+    @media (max-width: 1140px) {
+        .resourceTitleText {
+            padding-left: calc(50vw - 500px);
+        }
+
+        .resourceHeaderText {
+            padding-left: calc(50vw - 500px);
+        }
+    }
+
+    @media (max-width: 1023px) {
+        .resourceBreadcrumb {
+            margin-left: 16px;
+        }
+        .resourceTitle {
+            display: block;
+        }
+        
+        .resourceHeaderText {
+            padding-left: 16px;
+        }
+
+        .resourceTitleText {
+            padding-left: 16px;
+        }
+
+        .goToSiteButton {
+            padding-left: 16px;
+        }
+
+        .goToSiteText {
+            padding: 15px 34px 15px 0;
+        }
+    }
 `;
 
 const FederationResourceBody = styled.div`
-    width: 1420px;
+    @media (min-width: 1420px) {
+        width: 1420px;
+    }
+
     margin: 0 auto;
     display: flex;
     padding: 55px 32px 0 32px; 
     .navSection {
-        width: 20%;
+        width: 240px;
         color: #4D889E;
         position: relative;
     }
@@ -130,12 +190,12 @@ const FederationResourceBody = styled.div`
     .navListSticky {
         position: fixed;
         top: 55px;
-        width: 272px;
+        width: 240px;
     }
     .navListAbsolute {
         position: absolute;
         bottom: 0;
-        width: 272px;
+        width: 240px;
     }
 
     .navTitle {
@@ -176,7 +236,7 @@ const FederationResourceBody = styled.div`
 
     .contentSection {
         display: flex;
-        width: 80%;
+        width: calc(100% - 240px);
         padding: 0 32px 0 50px;
         margin-bottom: 100px;
     }
@@ -189,6 +249,38 @@ const FederationResourceBody = styled.div`
         letter-spacing: -0.02em;
         margin-bottom: 20px;
         color: #05555C;
+
+        @media (max-width: 767px) {
+            display: none;
+        }
+    }
+
+    .mciTitleMobile {
+        width: 100%;
+        padding: 12px 10px;
+        margin-bottom: 20px;
+        font-family: Open Sans;
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 20px;
+        text-align: left;
+        color: #FFFFFF;
+        background: url(${closeIcon}) right 10px center no-repeat;
+        background-color: #187C85;
+        display: none;
+
+        @media (max-width: 767px) {
+            display: block;
+        }
+    }
+
+    .sectionCollapse {
+        background: url(${arrowDownIcon}) right 10px center no-repeat;
+        background-color: #187C85;
+    }
+
+    .mciTitleMobile:hover {
+        cursor: pointer;
     }
 
     .mciSubtitle {
@@ -248,6 +340,11 @@ const FederationResourceBody = styled.div`
         }
     }
 
+    .federationImg {
+        width: 75%;
+        max-width: 467px;
+    }
+
     .donutContainer {
         display: flex;
     }
@@ -267,11 +364,47 @@ const FederationResourceBody = styled.div`
         }
 
     }
+
+    @media (max-width: 767px) {
+        padding: 55px 0 0 0;
+
+        .navSection {
+            display: none;
+        }
+
+        .contentSection {
+            width: 100%;
+            padding: 0 16px;
+        }
+
+        .contentList {
+            width: 100%;
+        }
+
+        .mciSection {
+            padding: 0 5px;
+        }
+
+        .mobileCollapse {
+            display: block;
+            @media (max-width: 767px) {
+                display: none;
+            }
+        }
+
+        .mciContentContainer {
+            margin-left: 0;
+        }
+    }
 `;
 
 const FederationResourceView = () => {
     const [selectedNavTitle, setSelectedNavTitle] = useState('');
     const [stickyNavStyle, setStickyNavStyle] = useState('navList');
+    const sectionList = useRef([]);
+    sectionList.current = federationContent.map((element, i) => {
+        return sectionList.current[i] || createRef()
+    });
     const handleScroll = () => {
         const bodyElement = document.getElementById('FederationBody');
         const footerList = document.getElementsByTagName('footer');
@@ -314,12 +447,24 @@ const FederationResourceView = () => {
         });
     }
 
+    const handleCollapseSection = e => {
+        const i = e.target.getAttribute("name");
+        const currentDisplay = sectionList.current[i].current.style.display;
+        if (currentDisplay === 'block') {
+            sectionList.current[i].current.style.display = 'none';
+            e.target.className = 'mciTitleMobile sectionCollapse';
+        } else {
+            sectionList.current[i].current.style.display = 'block';
+            e.target.className = 'mciTitleMobile';
+        }
+    }
+
     return (
         <FederationResourceContainer>
             <div className='resourceHeader'><div className='resourceHeaderBackground'><div className='resourceHeaderText'>CCDI Hub</div></div></div>
             <div className='resourceTitleContainer'>
                 <div className='resourceTitle'>
-                    CCDI Data Federation Resource 
+                    <div className='resourceTitleText'>CCDI Data Federation Resource</div>
                     <div className='goToSiteButton'>
                         <a className='goToSiteText' href="https://cbiit.github.io/ccdi-federation-api-aggregation/" target="_blank" rel="noopener noreferrer">API Access</a>
                     </div>
@@ -353,17 +498,19 @@ const FederationResourceView = () => {
                                 return (
                                     <div key={mcikey}>
                                         <div id={federationItem.id} className='mciTitle'>{federationItem.topic && federationItem.topic}</div>
-                                        <div id={federationItem.id} className='mciSubtitle'>{federationItem.subtopic && federationItem.subtopic}</div>
-                                        <div className='mciContentContainer'>
-                                            {federationItem.content && ReactHtmlParser(federationItem.content)}
-                                            
-                                            {federationItem.id && federationItem.id.includes('Data_Access') && 
-                                            <div style={{ justifyContent: 'center', display: 'flex', height: '600px'}}>
-                                                <img src={ccdiDataAccessImg} alt="Federation CCDI Data Access"/>
+                                        <div id={federationItem.id} name={mciid} className='mciTitleMobile sectionCollapse' onClick={handleCollapseSection}>{federationItem.topic && federationItem.topic}</div>
+                                        <div className="mciSection mobileCollapse" ref={sectionList.current[mciid]}>
+                                            <div className='mciContentContainer'>
+                                                {federationItem.content && ReactHtmlParser(federationItem.content)}
+                                                
+                                                {federationItem.id && federationItem.id.includes('Data_Access') && 
+                                                <div style={{ justifyContent: 'center', display: 'flex'}}>
+                                                    <img className="federationImg" src={ccdiDataAccessImg} alt="Federation CCDI Data Access"/>
+                                                </div>
+                                                }
                                             </div>
-                                            }
+                                            {federationItem.content && <div style={{height: '40px'}} />}
                                         </div>
-                                        {federationItem.content && <div style={{height: '40px'}} />}
                                     </div>
                                 )
                             })

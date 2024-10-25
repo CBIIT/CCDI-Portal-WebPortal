@@ -340,6 +340,11 @@ const FederationResourceBody = styled.div`
         }
     }
 
+    .federationImg {
+        width: 75%;
+        max-width: 467px;
+    }
+
     .donutContainer {
         display: flex;
     }
@@ -499,8 +504,8 @@ const FederationResourceView = () => {
                                                 {federationItem.content && ReactHtmlParser(federationItem.content)}
                                                 
                                                 {federationItem.id && federationItem.id.includes('Data_Access') && 
-                                                <div style={{ justifyContent: 'center', display: 'flex', height: '600px'}}>
-                                                    <img src={ccdiDataAccessImg} alt="Federation CCDI Data Access"/>
+                                                <div style={{ justifyContent: 'center', display: 'flex'}}>
+                                                    <img className="federationImg" src={ccdiDataAccessImg} alt="Federation CCDI Data Access"/>
                                                 </div>
                                                 }
                                             </div>

@@ -1004,6 +1004,17 @@ export const facetsConfig = [
     show: true,
   },
   {
+    section: DATACATEGORY,
+    label: 'File Mapping',
+    apiPath: 'participantCountByFileMappingLevel',
+    apiForFiltering: 'filterParticipantCountByFileMappingLevel',
+    datafield: 'file_mapping_level',
+    field: GROUP,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
     section: STUDY,
     label: 'dbGaP accession',
     apiPath: 'participantCountByDBGAPAccession',

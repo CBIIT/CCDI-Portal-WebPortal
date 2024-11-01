@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {aboutData} from '../../bento/aboutPageData';
 import aboutImg from '../../assets/about/About_Img_Large.png';
 import exportIcon from '../../assets/about/Export_Icon.svg';
+import exportBlackIcon from '../../assets/landing/Export_Icon_Black.svg';
 import ReactHtmlParser from 'html-react-parser';
 
 const AboutContainer = styled.div`
@@ -29,7 +30,7 @@ const AboutContainer = styled.div`
     font-size: 16px;
     color: #000000;
     margin: 0 50px;
-    margin-bottom: 150px;
+    margin-bottom: 30px;
     letter-spacing: 0.02em;
     line-height: 24px;
   }
@@ -47,6 +48,38 @@ const AboutContainer = styled.div`
 
   .textParagraph {
     margin: 25px 0 50px 0;
+  }
+
+  .aboutContactUs {
+    background: linear-gradient(180deg, rgba(17, 196, 212, 0.40) 0%, rgba(36, 203, 194, 0.40) 18.6%, rgba(55, 210, 176, 0.39) 37.67%, rgba(120, 233, 117, 0.38) 100%), linear-gradient(0deg, #56B0B8 0%, #56B0B8 100%), #2ADEC7;
+    opacity: 0.7;
+  }
+
+  .aboutContactUsContainer {
+    max-width: 1265px;
+    margin: 0 50px;
+    color: #000000;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: 0.32px;
+    padding: 36px 0 70px 0;
+  }
+
+  .aboutContactUsContent {
+    max-width: 792px;
+    font-family: Inter;
+    line-height: 24px;
+  }
+
+  .aboutContactUsHeader {
+    color: #000000;
+    font-family: Poppins;
+    font-size: 21px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 21px;
   }
 
   .upperImg {
@@ -67,6 +100,15 @@ const AboutContainer = styled.div`
     text-underline-offset: 4px;
   }
 
+  .aboutContactLink {
+    color: #000000;
+    font-family: Inter;
+    font-weight: 600;
+    padding-right: 20px;
+    background: url(${exportBlackIcon}) right center no-repeat;
+    text-underline-offset: 4px;
+  }
+
   @media (max-width: 1364px) {
     .upperImg {
       width: 300px;
@@ -84,6 +126,9 @@ const AboutContainer = styled.div`
     hr {
       margin: 0 50px 48px 50px;
       border: 0.5px solid #007A85;
+    }
+    .aboutContactUsContent {
+      max-width: 1364px;
     }
   }
 
@@ -112,6 +157,11 @@ const AboutContainer = styled.div`
     .aboutBody {
       margin: 0 6.5% 0 6.5%;
     }
+
+    .aboutContactUsContainer {
+      margin: 0 6.5%;
+    }
+
     hr {
       display: none;
     }
@@ -120,7 +170,11 @@ const AboutContainer = styled.div`
   @media (min-width: 1365px) {
     .aboutBody {
       width: 1265px;
-      margin: 0 auto 150px auto;
+      margin: 0 auto 30px auto;
+    }
+
+    .aboutContactUsContainer {
+      margin: 0 auto;
     }
     .lowerContainer {
       display: none;
@@ -150,6 +204,14 @@ const AboutView = () => {
         <div className='lowerContainer'>
           <div className='aboutSubtitle'>{aboutData.lowerTitle}</div>
           <div className='textParagraph'>{ReactHtmlParser(aboutData.lowerText)}</div>
+        </div>
+      </div>
+      <div className='aboutContactUs'>
+        <div className='aboutContactUsContainer'>
+          <div className='aboutContactUsContent'>
+            <div className='aboutContactUsHeader'>Contact Us</div>
+            <div>{ReactHtmlParser(aboutData.aboutText)}</div>
+          </div>
         </div>
       </div>
     </AboutContainer>

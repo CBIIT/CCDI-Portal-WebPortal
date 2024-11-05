@@ -24,6 +24,18 @@ export default () => ({
     borderBottom: 'thin solid #8A7F7C',
     overflow: 'auto',
     zIndex: '99',
+    '&::-webkit-scrollbar': {
+      width: '6px',
+      borderWidth: '0px 1px 1px 1px',
+      borderStyle: 'solid',
+      borderColor: '#B0B0B0',
+    },
+    '&::-webkit-scrollbar-track': {
+      backgroundColor: '#CECECE',
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: '#003F74',
+    },
   },
   rightContent: {
     width: 'calc(100% - 270px)',

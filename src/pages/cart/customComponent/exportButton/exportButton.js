@@ -8,21 +8,21 @@ import { MY_CART } from '../../../../bento/tableDownloadCSV'
 import { manifestData } from '../../../../bento/fileCentricCartWorkflowData'
 import arrowDownPng from './assets/arrowDown.png';
 import cgcIcon from './assets/cgc.svg';
+import manifestIcon from './assets/manifest.svg';
 import { getManifestData } from './util/TableService';
 import { exportStyles } from './exportStyles';
-
-
 
 const ExportButtonView = (props,) => {
     const { classes, filesId } = props;
     const LABEL = 'Available Export Options';
     const {
-        EXPORT_TO_CANCER_GENOMICS_CLOUD,
+        EXPORT_TO_CANCER_GENOMICS_CLOUD, DOWNLOAD_MANIFEST
       } = {
         EXPORT_TO_CANCER_GENOMICS_CLOUD: 'Export to Cancer Genomics Cloud',
+        DOWNLOAD_MANIFEST: 'Download Manifest',
       };
     const OPTIONS = [
-        EXPORT_TO_CANCER_GENOMICS_CLOUD,
+        EXPORT_TO_CANCER_GENOMICS_CLOUD, DOWNLOAD_MANIFEST
     ];     
 
 
@@ -93,22 +93,26 @@ const ExportButtonView = (props,) => {
     };
     
     const { data } = useQuery(STORE_MANIFEST_QUERY, {
-        variables: { manifestString: JSON.stringify(getManifestPayload()) },
-        context: { clientName: 'interopService' },
-        skip: !getManifestPayload(),
-        fetchPolicy: 'no-cache',
+      variables: { manifestString: JSON.stringify(getManifestPayload()) },
+      context: { clientName: 'interopService' },
+      skip: !getManifestPayload(),
+      fetchPolicy: 'no-cache',
     });
 
     useEffect(() => {
-        if (data && data.storeManifest) {
-          setSBGUrl(data.storeManifest);
-        }
-      }, [data]);      
+      if (data && data.storeManifest) {
+        console.log("!!!!", data);
+        setSBGUrl(data.storeManifest);
+      }
+    }, [data]);      
     
     const initiateDownload = (currLabel) => {
         switch (currLabel) {
-        case 'Export to Cancer Genomics Cloud': 
+          case 'Export to Cancer Genomics Cloud': 
             window.open(`https://cgc.sbgenomics.com/import-redirect/drs/csv?URL=${encodeURIComponent(sbgUrl)}`, '_blank');
+            break;
+          case 'Download Manifest':
+            // downloadCsvString(manifest, myFilesPageData.manifestFileName);
             break;
           default: noop(data);
             break;
@@ -123,6 +127,9 @@ const ExportButtonView = (props,) => {
         switch (type) {
           case EXPORT_TO_CANCER_GENOMICS_CLOUD:
             icon = cgcIcon;
+            break;
+          case DOWNLOAD_MANIFEST:
+            icon = manifestIcon;
             break;
           default:
             icon = undefined;

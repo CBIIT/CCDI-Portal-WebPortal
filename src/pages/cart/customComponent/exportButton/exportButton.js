@@ -5,12 +5,14 @@ import { Paper, Popper, Button, ClickAwayListener, Grow, MenuItem, MenuList, wit
 import { noop } from 'lodash';
 import { useQuery } from '@apollo/client';
 import { MY_CART } from '../../../../bento/tableDownloadCSV'
-import { manifestData } from '../../../../bento/fileCentricCartWorkflowData'
+import { manifestData, manifestFileName, myFilesPageData } from '../../../../bento/fileCentricCartWorkflowData'
+import client from '../../../../utils/graphqlClient';
 import arrowDownPng from './assets/arrowDown.png';
 import cgcIcon from './assets/cgc.svg';
 import manifestIcon from './assets/manifest.svg';
-import { getManifestData } from './util/TableService';
+// import { getManifestData } from './util/TableService';
 import { exportStyles } from './exportStyles';
+import { downloadJson } from './util/downloadJson';
 
 const ExportButtonView = (props,) => {
     const { classes, filesId } = props;
@@ -23,9 +25,9 @@ const ExportButtonView = (props,) => {
       };
     const OPTIONS = [
         EXPORT_TO_CANCER_GENOMICS_CLOUD, DOWNLOAD_MANIFEST
-    ];     
+    ];
 
-
+    const [manifest, setManifest] = useState('');
     const [sbgUrl, setSBGUrl] = useState('');
     const [open, setOpen] = useState(false);
     const [isLoading] = React.useState(false);
@@ -63,48 +65,73 @@ const ExportButtonView = (props,) => {
           storeManifest(manifest: $manifestString)
       }
     `;
-      
-    const getManifestPayload = () => {
-        const { data } = getManifestData(MY_CART, filesId);
-    
-        if (!data) {
-          return null;
-        }
-        const appendString = 'drs://nci-crdc.datacommons.io/'
-        const processedStoreManifestPayload = data.filesInList.map((el) => {
-          const obj = {}
-          for (let i = 0; i < manifestData.keysToInclude.length; i++) {
-            if (manifestData.keysToInclude[i] === 'file_id') {
-              obj[manifestData.header[i]] = el && el[manifestData.keysToInclude[i]] ? 
-                appendString + el[manifestData.keysToInclude[i]] 
-                : 
-                "";
-            }
-            else {
-              obj[manifestData.header[i]] = el && el[manifestData.keysToInclude[i]] ? 
-              el[manifestData.keysToInclude[i]] 
+
+    //transform data structure
+    const getManifestPayload = (manifestContent) => {
+      if (!manifestContent) {
+        return null;
+      }
+      const appendString = 'drs://nci-crdc.datacommons.io/'
+      const processedStoreManifestPayload = manifestContent.filesInList.map((el) => {
+        const obj = {}
+        for (let i = 0; i < manifestData.keysToInclude.length; i++) {
+          if (manifestData.keysToInclude[i] === 'file_id') {
+            obj[manifestData.header[i]] = el && el[manifestData.keysToInclude[i]] ? 
+              appendString + el[manifestData.keysToInclude[i]] 
               : 
               "";
-            }
           }
-          return obj;
-          });
-        return processedStoreManifestPayload;
-    };
-    
-    const { data } = useQuery(STORE_MANIFEST_QUERY, {
-      variables: { manifestString: JSON.stringify(getManifestPayload()) },
-      context: { clientName: 'interopService' },
-      skip: !getManifestPayload(),
-      fetchPolicy: 'no-cache',
-    });
+          else {
+            obj[manifestData.header[i]] = el && el[manifestData.keysToInclude[i]] ? 
+            el[manifestData.keysToInclude[i]] 
+            : 
+            "";
+          }
+        }
+        return obj;
+        });
+      return processedStoreManifestPayload;
+  };
 
-    useEffect(() => {
-      if (data && data.storeManifest) {
-        console.log("!!!!", data);
-        setSBGUrl(data.storeManifest);
+  useEffect(() => {
+    // getManifestData(MY_CART, filesId);
+    const fetchData = async () => {
+      const intialManifest = await client.query({
+        MY_CART,
+        variables: {
+          file_ids: filesId,
+        },
+      })
+        .then((response) => response.data);
+      const manifestPayload = getManifestPayload(intialManifest);
+      const { urlData } = useQuery(STORE_MANIFEST_QUERY, {
+        variables: { manifestString: JSON.stringify(manifestPayload) },
+        context: { clientName: 'interopService' },
+        skip: !manifestPayload,
+        fetchPolicy: 'no-cache',
+      });
+      if (urlData && urlData.storeManifest) {
+        console.log("!!!!", urlData);
+        setSBGUrl(urlData.storeManifest);
       }
-    }, [data]);      
+      setManifest(intialManifest);
+    }
+    fetchData().catch(console.error);
+  }, [filesId]);
+    
+    // const { data } = useQuery(STORE_MANIFEST_QUERY, {
+    //   variables: { manifestString: JSON.stringify(getManifestPayload()) },
+    //   context: { clientName: 'interopService' },
+    //   skip: !getManifestPayload(),
+    //   fetchPolicy: 'no-cache',
+    // });
+
+    // useEffect(() => {
+    //   if (data && data.storeManifest) {
+    //     console.log("!!!!", data);
+    //     setSBGUrl(data.storeManifest);
+    //   }
+    // }, [data]);      
     
     const initiateDownload = (currLabel) => {
         switch (currLabel) {
@@ -112,15 +139,13 @@ const ExportButtonView = (props,) => {
             window.open(`https://cgc.sbgenomics.com/import-redirect/drs/csv?URL=${encodeURIComponent(sbgUrl)}`, '_blank');
             break;
           case 'Download Manifest':
-            // downloadCsvString(manifest, myFilesPageData.manifestFileName);
+            downloadJson(manifest, '', myFilesPageData.manifestFileName, manifestData);
             break;
           default: noop(data);
             break;
         }
         noop();
     };
-
-    
 
     const getMenuItem = (type) => {
         let icon;

@@ -16,7 +16,6 @@ export function createFileName(fileName) {
   }
   
   export const downloadCsvString = (csvString, fileName) => {
-    console.log("???", csvString);
     const blob = new Blob([csvString], { type: "text/csv" });
     const url = URL.createObjectURL(blob);
   
@@ -66,6 +65,10 @@ export function createFileName(fileName) {
     manifestFileName,
     manifestData,
   }) {
+    console.log('!tableData: ', tableData);
+  console.log('!comment: ', comment);
+  console.log('!manifestFileName: ', manifestFileName);
+  console.log('!manifestData: ', manifestData);
     const jsonse = JSON.stringify(tableData);
     const csv = convertToCSV(jsonse, comment, manifestData.keysToInclude, manifestData.header);
     const exportData = new Blob([`${csv}`], { type: 'text/csv;charset=utf-8' });

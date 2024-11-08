@@ -93,45 +93,34 @@ const ExportButtonView = (props,) => {
       return processedStoreManifestPayload;
   };
 
+  async function fetchData() {
+    let result = await client.query({
+      query: MY_CART,
+      variables:{
+        file_ids: filesId,
+      },
+    })
+      .then((response) => response.data);
+    return result;
+  }
+
   useEffect(() => {
     // getManifestData(MY_CART, filesId);
-    const fetchData = async () => {
-      const intialManifest = await client.query({
-        MY_CART,
-        variables: {
-          file_ids: filesId,
-        },
-      })
-        .then((response) => response.data);
-      const manifestPayload = getManifestPayload(intialManifest);
-      const { urlData } = useQuery(STORE_MANIFEST_QUERY, {
-        variables: { manifestString: JSON.stringify(manifestPayload) },
-        context: { clientName: 'interopService' },
-        skip: !manifestPayload,
-        fetchPolicy: 'no-cache',
+      fetchData().then((intialManifest) => {
+        setManifest(intialManifest);
+        const manifestPayload = getManifestPayload(intialManifest);
+        console.log("@@@", manifestPayload);
+        const { urlData } = useQuery(STORE_MANIFEST_QUERY, {
+          variables: { manifestString: JSON.stringify(manifestPayload) },
+          context: { clientName: 'interopService' },
+          skip: !manifestPayload,
+          fetchPolicy: 'no-cache',
+        });
+        if (urlData && urlData.storeManifest) {
+          setSBGUrl(urlData.storeManifest);
+        }
       });
-      if (urlData && urlData.storeManifest) {
-        console.log("!!!!", urlData);
-        setSBGUrl(urlData.storeManifest);
-      }
-      setManifest(intialManifest);
-    }
-    fetchData().catch(console.error);
   }, [filesId]);
-    
-    // const { data } = useQuery(STORE_MANIFEST_QUERY, {
-    //   variables: { manifestString: JSON.stringify(getManifestPayload()) },
-    //   context: { clientName: 'interopService' },
-    //   skip: !getManifestPayload(),
-    //   fetchPolicy: 'no-cache',
-    // });
-
-    // useEffect(() => {
-    //   if (data && data.storeManifest) {
-    //     console.log("!!!!", data);
-    //     setSBGUrl(data.storeManifest);
-    //   }
-    // }, [data]);      
     
     const initiateDownload = (currLabel) => {
         switch (currLabel) {
@@ -141,7 +130,7 @@ const ExportButtonView = (props,) => {
           case 'Download Manifest':
             downloadJson(manifest, '', myFilesPageData.manifestFileName, manifestData);
             break;
-          default: noop(data);
+          default: noop(manifest);
             break;
         }
         noop();
@@ -155,9 +144,6 @@ const ExportButtonView = (props,) => {
             break;
           case DOWNLOAD_MANIFEST:
             icon = manifestIcon;
-            break;
-          default:
-            icon = undefined;
             break;
         }
         return (

@@ -125,23 +125,19 @@ export const customStudyTabDownloadCSV = {
 };
 
 export const MY_CART = gql`
-query filesInList($file_ids: [String], $offset: Int = 0, $first: Int = 1000, $order_by:String ="") {
-    filesInList(file_ids: $file_ids, offset: $offset,first: $first, order_by: $order_by) {
-        study_code
-        subject_id
-        file_name
-        file_type
-        association
-        file_description
-        file_format
-        file_size
+query filesInList($file_ids: [String], $offset: Int = 0, $first: Int = 6000, $order_by:String ="") {
+    filesInList(id: $file_ids, offset: $offset,first: $first, order_by: $order_by, sort_direction: $sort_direction) {
+        id
         file_id
+        file_name
+        study_name
+        dbgap_accession
+        participant_id
+        sample_id
+        file_type
+        file_size
         md5sum
-        library_selection
-        library_source_material
-        library_strategy
-        library_source_molecule
-        file_mapping_level
+        guid
     }
 }`;
 

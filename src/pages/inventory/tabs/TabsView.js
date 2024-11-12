@@ -1,13 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { connect, useDispatch } from 'react-redux';
+import {
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
+import { generateQueryStr } from '@bento-core/util';
+import {
+  changeTab,
+} from '../../../components/Inventory/InventoryState';
+import { queryParams } from '../../../bento/dashTemplate';
 import TabPanel from './TabPanel';
 import { tabContainers } from '../../../bento/dashboardTabData';
 import { Tabs as BentoTabs }  from '@bento-core/tab';
 import { customTheme } from './DefaultTabTheme';
 
 const Tabs = (props) => {
-  const [currentTab, setCurrentTab] = useState(0);
+   
+  const { currentTab } = props;
+  const dispatch = useDispatch();
+  const query = new URLSearchParams(useLocation().search);
+  const navigate = useNavigate();
+
   const handleTabChange = (event, value) => {
-    setCurrentTab(value);
+    let paramValue = {};
+    paramValue.tab = value;
+    const queryStr = generateQueryStr(query, queryParams, paramValue);
+    navigate(`/explore${queryStr}`, { replace: false });
+    dispatch(changeTab(value, 'not-facet'));
   };
 
   /**
@@ -48,4 +67,7 @@ const Tabs = (props) => {
   );
 };
 
-export default Tabs;
+const mapStateToProps = (state) => ({
+  currentTab: state.inventoryReducer.tab
+});
+export default connect(mapStateToProps, null)(Tabs);

@@ -9,11 +9,12 @@ export const exportStyles = (props) =>({
         borderBottomRightRadius: '0px',
         width: '190px',
         height: '41px',
-        padding: '2px 14px',
+        padding: '2px 24px 2px 14px',
+        marginRight: '25px',
         borderBottomLeftRadius: '0px',
         boxShadow: 'none',
         '&:hover': {
-          backgroundColor: '#2A6E93',
+          backgroundColor: '#104663',
           boxShadow: 'none',
         },
     
@@ -25,11 +26,16 @@ export const exportStyles = (props) =>({
         width: '190px',
         height: '41px',
         textWrap: 'nowrap',
-        padding: '2px 14px',
+        padding: '2px 24px 2px 14px',
+        marginRight: '25px',
         '&:hover': {
-          backgroundColor: '#2A6E93',
+          backgroundColor: '#104663',
           boxShadow: 'none',
         },
+        '&.Mui-disabled': {
+            backgroundColor: '#656F74',
+            opacity: 0.7,
+        }
     },
       availableDownloadDropdownBtnLabel: {
         color: '#FFFFFF',
@@ -71,8 +77,11 @@ export const exportStyles = (props) =>({
         borderBottom: '1px solid #0C534C',
         borderLeft: '1px solid #0C534C',
         '&:nth-child(even)': {
-            backgroundColor: '#CCD5E1',
             borderRadius: '0px 0px 5px 5px',
+        },
+        '&:hover': {
+            backgroundColor: '#CCD5E1',
+            boxShadow: 'none',
         },
     },
 })

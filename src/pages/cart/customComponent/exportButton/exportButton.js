@@ -7,7 +7,8 @@ import { useQuery } from '@apollo/client';
 import { MY_CART } from '../../../../bento/tableDownloadCSV'
 import { manifestData, myFilesPageData } from '../../../../bento/fileCentricCartWorkflowData'
 import client from '../../../../utils/graphqlClient';
-import arrowDownPng from './assets/arrowDown.svg';
+import arrowDownSvg from './assets/arrowDown.svg';
+import arrowUpSvg from './assets/arrowUp.svg';
 import cgcIcon from './assets/cgc.svg';
 import manifestIcon from './assets/manifest.svg';
 // import { getManifestData } from './util/TableService';
@@ -30,7 +31,7 @@ const ExportButtonView = (props,) => {
     const [manifest, setManifest] = useState('');
     const [sbgUrl, setSBGUrl] = useState('');
     const [open, setOpen] = useState(false);
-    const [isLoading] = React.useState(false);
+    const [isLoading] = useState(false);
     const [label] = useState(LABEL);
     const anchorRef = useRef(null);
     const STORE_MANIFEST_QUERY = gql`
@@ -180,7 +181,7 @@ const ExportButtonView = (props,) => {
                 contained: classes.availableDownloadBtnContained,
                 startIcon: classes.availableDownloadDropdownBtnStartIcon,
               }}
-              endIcon={<img style={{ marginLeft: '8px' }} src={arrowDownPng} alt="arrow down icon" />}
+              endIcon={<img style={{ marginLeft: '8px' }} src={open ? arrowUpSvg : arrowDownSvg } alt="arrow down icon" />}
               ref={anchorRef}
               aria-controls={open ? 'menu-list-grow' : undefined}
               aria-haspopup="true"

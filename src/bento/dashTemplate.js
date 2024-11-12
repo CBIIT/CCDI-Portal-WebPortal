@@ -952,7 +952,7 @@ export const facetsConfig = [
   },
   {
     section: SAMPLES,
-    label: 'Sample Anatomic site',
+    label: 'Sample Anatomic Site',
     apiPath: 'participantCountBySampleAnatomicSite',
     apiForFiltering: 'filterParticipantCountBySampleAnatomicSite',
     datafield: 'sample_anatomic_site',

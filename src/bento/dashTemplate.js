@@ -83,6 +83,7 @@ export const facetsConfig = [
     sort_type: sortType.ALPHABET,
     show: true,
     search: true,
+    expanded: true,
   },
   {
     section: DIAGNOSIS,

@@ -59,17 +59,14 @@ export function createFileName(fileName) {
     return str;
   }
   
-  export function downloadJson({
+  export function downloadJson(
     tableData,
     comment,
     manifestFileName,
     manifestData,
-  }) {
-    console.log('!tableData: ', tableData);
-  console.log('!comment: ', comment);
-  console.log('!manifestFileName: ', manifestFileName);
-  console.log('!manifestData: ', manifestData);
-    const jsonse = JSON.stringify(tableData);
+  ) {
+    const tableArr = tableData.filesInList;
+    const jsonse = JSON.stringify(tableArr);
     const csv = convertToCSV(jsonse, comment, manifestData.keysToInclude, manifestData.header);
     const exportData = new Blob([`${csv}`], { type: 'text/csv;charset=utf-8' });
     const JsonURL = window.URL.createObjectURL(exportData);

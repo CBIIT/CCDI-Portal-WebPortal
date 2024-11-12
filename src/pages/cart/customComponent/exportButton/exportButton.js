@@ -5,7 +5,7 @@ import { Paper, Popper, Button, ClickAwayListener, Grow, MenuItem, MenuList, wit
 import { noop } from 'lodash';
 import { useQuery } from '@apollo/client';
 import { MY_CART } from '../../../../bento/tableDownloadCSV'
-import { manifestData, manifestFileName, myFilesPageData } from '../../../../bento/fileCentricCartWorkflowData'
+import { manifestData, myFilesPageData } from '../../../../bento/fileCentricCartWorkflowData'
 import client from '../../../../utils/graphqlClient';
 import arrowDownPng from './assets/arrowDown.png';
 import cgcIcon from './assets/cgc.svg';
@@ -33,33 +33,6 @@ const ExportButtonView = (props,) => {
     const [isLoading] = React.useState(false);
     const [label] = useState(LABEL);
     const anchorRef = useRef(null);
-
-    const handleToggle = () => {
-        setOpen((prevOpen) => !prevOpen);
-    };
-
-    const handleClose = (event) => {
-        if (anchorRef.current && anchorRef.current.contains(event.target)) {
-            return;
-        }
-        setOpen(false);
-    };
-    function handleListKeyDown(event) {
-        if (event.key === 'Tab') {
-          event.preventDefault();
-          setOpen(false);
-        }
-    }
-
-    const StyledMenuItem = withStyles(() => ({
-        root: {
-          padding: '2px 26px',
-          color: '#fff',
-          overflow: 'auto',
-          whiteSpace: 'wrap',
-        },
-      }))(MenuItem);
-
     const STORE_MANIFEST_QUERY = gql`
       query storeManifest($manifestString: String!) {
           storeManifest(manifest: $manifestString)
@@ -68,7 +41,8 @@ const ExportButtonView = (props,) => {
 
     //transform data structure
     const getManifestPayload = (manifestContent) => {
-      if (!manifestContent) {
+      // console.log(manifestContent);
+      if (!manifestContent || (manifestContent.filesInList && manifestContent.filesInList.length === 0)) {
         return null;
       }
       const appendString = 'drs://nci-crdc.datacommons.io/'
@@ -93,34 +67,58 @@ const ExportButtonView = (props,) => {
       return processedStoreManifestPayload;
   };
 
+  const { urlData } = useQuery(STORE_MANIFEST_QUERY, {
+    variables: { manifestString: JSON.stringify(getManifestPayload(manifest)) },
+    context: { clientName: 'interopService' },
+    skip: !getManifestPayload(manifest),
+    fetchPolicy: 'no-cache',
+  });
+
+  const handleToggle = () => {
+      setOpen((prevOpen) => !prevOpen);
+  };
+
+  const handleClose = (event) => {
+      if (anchorRef.current && anchorRef.current.contains(event.target)) {
+          return;
+      }
+      setOpen(false);
+  };
+  function handleListKeyDown(event) {
+      if (event.key === 'Tab') {
+        event.preventDefault();
+        setOpen(false);
+      }
+  }
+
+  const StyledMenuItem = withStyles(() => ({
+      root: {
+        padding: '2px 26px',
+        color: '#fff',
+        overflow: 'auto',
+        whiteSpace: 'wrap',
+      },
+    }))(MenuItem);
+
   async function fetchData() {
     let result = await client.query({
       query: MY_CART,
       variables:{
         file_ids: filesId,
       },
-    })
-      .then((response) => response.data);
-    return result;
+    });
+    setManifest(result.data);
   }
 
   useEffect(() => {
-    // getManifestData(MY_CART, filesId);
-      fetchData().then((intialManifest) => {
-        setManifest(intialManifest);
-        const manifestPayload = getManifestPayload(intialManifest);
-        console.log("@@@", manifestPayload);
-        const { urlData } = useQuery(STORE_MANIFEST_QUERY, {
-          variables: { manifestString: JSON.stringify(manifestPayload) },
-          context: { clientName: 'interopService' },
-          skip: !manifestPayload,
-          fetchPolicy: 'no-cache',
-        });
-        if (urlData && urlData.storeManifest) {
-          setSBGUrl(urlData.storeManifest);
-        }
-      });
+    fetchData();
   }, [filesId]);
+
+  useEffect(() => {
+    if (urlData && urlData.storeManifest) {
+      setSBGUrl(urlData.storeManifest);
+    }
+  }, [urlData]);
     
     const initiateDownload = (currLabel) => {
         switch (currLabel) {
@@ -143,6 +141,9 @@ const ExportButtonView = (props,) => {
             icon = cgcIcon;
             break;
           case DOWNLOAD_MANIFEST:
+            icon = manifestIcon;
+            break;
+          default:
             icon = manifestIcon;
             break;
         }

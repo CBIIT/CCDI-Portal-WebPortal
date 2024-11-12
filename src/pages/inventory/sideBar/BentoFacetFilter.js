@@ -8,6 +8,10 @@
 /* eslint-disable arrow-body-style */
 import React, { useState } from 'react';
 import {
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
+import {
   AccordionSummary,
   Button,
   withStyles,
@@ -23,7 +27,8 @@ import {
 import store from '../../../store';
 import styles from './BentoFacetFilterStyle';
 import { FacetFilter, ClearAllFiltersBtn } from '@bento-core/facet-filter';
-import { facetsConfig, facetSectionVariables, resetIcon, sectionLabel } from '../../../bento/dashTemplate';
+import { generateQueryStr } from '@bento-core/util';
+import { facetsConfig, facetSectionVariables, resetIcon, sectionLabel, queryParams } from '../../../bento/dashTemplate';
 import FacetFilterThemeProvider from './FilterThemeConfig';
 import {
   getAllParticipantIds, getAllIds,
@@ -58,6 +63,14 @@ const { SearchBox } = SearchBoxGenerator({
     searchType: 'participantIds',
   },
   functions: {
+    updateBrowserUrl: (query, navigate, newUniqueValue) => {
+      console.log(newUniqueValue);
+      const paramValue = {
+        'p_id': newUniqueValue.map((data) => data.title).join('|')
+      };
+      const queryStr = generateQueryStr(query, queryParams, paramValue);
+      navigate(`/explore${queryStr}`);
+    },
     getSuggestions: async (searchType) => {
       try {
         const response = await getAllIds(searchType).catch(() => []);
@@ -74,6 +87,19 @@ const { SearchBox } = SearchBoxGenerator({
 // Generate UploadModal Component
 const { UploadModal } = UploadModalGenerator({
   functions: {
+    updateBrowserUrl: (query, navigate, filename, fileContent, matchIds, unmatchedIds) => {
+      const fc = fileContent
+          .split(/[,\n]/g)
+          .map((e) => e.trim().replace('\r', '').toUpperCase())
+          .filter((e) => e && e.length > 1);
+      const paramValue = {
+        'u': matchIds.map((data) => data.participant_id).join('|'),
+        'u_fc': fc.join('|'),
+        'u_um': unmatchedIds.join('|'),
+      };
+      const queryStr = generateQueryStr(query, queryParams, paramValue);
+      navigate(`/explore${queryStr}`);
+    },
     searchMatches: async (inputArray) => {
       try {
         // Split the search terms into chunks of 500
@@ -122,6 +148,8 @@ const BentoFacetFilter = ({
   */
   const CustomClearAllFiltersBtn = ({ onClearAllFilters, disable }) => {
     const [isHover, setIsHover] = useState(false);
+    const query = new URLSearchParams(useLocation().search);
+    const navigate = useNavigate();
     return (
       <div className={classes.floatRight}>
         <Button
@@ -129,6 +157,17 @@ const BentoFacetFilter = ({
           variant="outlined"
           disabled={disable}
           onClick={() => {
+            const paramValue = {
+              'p_id': '', 'u': '', 'u_fc': '', 'u_um': '', 'sex_at_birth': '', 'race': '',
+              'age_at_diagnosis': '', 'diagnosis': '', 'diagnosis_anatomic_site': '', 'diagnosis_classification_system': '', 'diagnosis_basis': '', 'disease_phase': '',
+              'treatment_type': '', 'treatment_agent': '', 'age_at_treatment_start': '', 'response_category': '', 'age_at_response': '', 
+              'age_at_event_free_survival_status': '', 'first_event': '', 'last_known_survival_status': '', 
+              'participant_age_at_collection': '', 'sample_anatomic_site': '', 'sample_tumor_status': '', 'tumor_classification': '', 
+              'assay_method': '', 'data_category': '', 'file_type': '', 'dbgap_accession': '', 'study_name': '', 
+              'library_selection': '', 'library_strategy': '', 'library_source_material': '', 'library_source_molecule': ''
+            };
+            const queryStr = generateQueryStr(query, queryParams, paramValue);
+            navigate(`/explore${queryStr}`);
             onClearAllFilters();
             store.dispatch(resetAllData());
           }}
@@ -197,6 +236,7 @@ const BentoFacetFilter = ({
               UploadModal={UploadModal}
               hidden={!expanded || !showSearch}
               config = {searchConfig}
+              queryParams={queryParams}
             />
           )}
         </CustomExpansionPanelSummary>
@@ -249,6 +289,7 @@ const BentoFacetFilter = ({
           facetsConfig={facetsConfig}
           CustomFacetSection={CustomFacetSection}
           CustomFacetView={CustomFacetView}
+          queryParams={queryParams}
         />
       </FacetFilterThemeProvider>
     </div>

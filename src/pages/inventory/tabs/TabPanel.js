@@ -10,6 +10,8 @@ import { themeConfig } from './tableConfig/Theme';
 import { configColumn } from './tableConfig/Column';
 import { configWrapper, wrapperConfig } from './wrapperConfig/Wrapper';
 import { customTheme } from './wrapperConfig/Theme';
+import { queryParams } from '../../../bento/dashTemplate';
+
 
 const TabView = (props) => {
   /**
@@ -85,6 +87,7 @@ const TabView = (props) => {
               queryVariables={activeFilters}
               totalRowCount={dashboardStats[config.count]}
               activeTab={activeTab}
+              queryParams={queryParams}
             />
           </Grid>
         </Grid>

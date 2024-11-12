@@ -34,12 +34,12 @@ export const sectionLabel = {
 
 // --------------- Dashboard Sidebar Sections styling --------------
 export const facetSectionVariables = {
-  Demographics: {
-    isExpanded: true,
-    hasSearch: true,
-  },
   Diagnosis: {
+    isExpanded: true,
+  },
+  Demographics: {
     isExpanded: false,
+    hasSearch: true,
   },
   Treatment: {
     isExpanded: false,
@@ -73,22 +73,23 @@ export const facetSectionVariables = {
 
 export const facetsConfig = [
   {
-    section: DEMOGRAPHICS,
-    label: 'Sex',
-    apiPath: 'participantCountBySexAtBirth',
-    apiForFiltering: 'filterParticipantCountBySexAtBirth',
-    datafield: 'sex_at_birth',
+    section: DIAGNOSIS,
+    label: 'Diagnosis',
+    apiPath: 'participantCountByDiagnosis',
+    apiForFiltering: 'filterParticipantCountByDiagnosis',
+    datafield: 'diagnosis',
     field: GROUP,
     type: InputTypes.CHECKBOX,
     sort_type: sortType.ALPHABET,
     show: true,
+    search: true,
   },
   {
-    section: DEMOGRAPHICS,
-    label: 'Race',
-    apiPath: 'participantCountByRace',
-    apiForFiltering: 'filterParticipantCountByRace',
-    datafield: 'race',
+    section: DIAGNOSIS,
+    label: 'Diagnosis Anatomic site',
+    apiPath: 'participantCountByAnatomicSite',
+    apiForFiltering: 'filterParticipantCountByDiagnosisAnatomicSite',
+    datafield: 'diagnosis_anatomic_site',
     field: GROUP,
     type: InputTypes.CHECKBOX,
     sort_type: sortType.ALPHABET,
@@ -111,7 +112,7 @@ export const facetsConfig = [
     quantifier: 'Days',
     style: {
       colorPrimary: {
-        color: '#AC6AAD',
+        color: '#4D889E',
       },
       sliderRoot: {
         marginTop: '1px',
@@ -161,7 +162,7 @@ export const facetsConfig = [
       thumb: {
         height: 16,
         width: 16,
-        background: '#AC6AAD',
+        background: '#4D889E',
       },
       invalidThumb: {
         height: 16,
@@ -171,7 +172,7 @@ export const facetsConfig = [
       track: {
         borderRadius: 4,
         height: 6,
-        background: '#AC6AAD',
+        background: '#4D889E',
         '&~&': {
           background: '#142D64',
         },
@@ -239,30 +240,6 @@ export const facetsConfig = [
   },
   {
     section: DIAGNOSIS,
-    label: 'Diagnosis',
-    apiPath: 'participantCountByDiagnosis',
-    apiForFiltering: 'filterParticipantCountByDiagnosis',
-    datafield: 'diagnosis',
-    field: GROUP,
-    type: InputTypes.CHECKBOX,
-    sort_type: sortType.ALPHABET,
-    show: true,
-    search: true,
-  },
-  {
-    section: DIAGNOSIS,
-    label: 'Diagnosis Anatomic Site',
-    apiPath: 'participantCountByAnatomicSite',
-    apiForFiltering: 'filterParticipantCountByDiagnosisAnatomicSite',
-    datafield: 'diagnosis_anatomic_site',
-    field: GROUP,
-    type: InputTypes.CHECKBOX,
-    sort_type: sortType.ALPHABET,
-    show: true,
-    search: true,
-  },
-  {
-    section: DIAGNOSIS,
     label: 'Diagnosis Classification System',
     apiPath: 'participantCountByDiagnosisClassificationSystem',
     apiForFiltering: 'filterParticipantCountByDiagnosisClassificationSystem',
@@ -311,6 +288,28 @@ export const facetsConfig = [
     apiPath: 'participantCountByDiseasePhase',
     apiForFiltering: 'filterParticipantCountByDiseasePhase',
     datafield: 'disease_phase',
+    field: GROUP,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: DEMOGRAPHICS,
+    label: 'Sex',
+    apiPath: 'participantCountBySexAtBirth',
+    apiForFiltering: 'filterParticipantCountBySexAtBirth',
+    datafield: 'sex_at_birth',
+    field: GROUP,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: DEMOGRAPHICS,
+    label: 'Race',
+    apiPath: 'participantCountByRace',
+    apiForFiltering: 'filterParticipantCountByRace',
+    datafield: 'race',
     field: GROUP,
     type: InputTypes.CHECKBOX,
     sort_type: sortType.ALPHABET,
@@ -1343,6 +1342,7 @@ export const widgetConfig = [
     sliceTitle: 'Participants',
   },
 ];
+
 
 // --------------- query url configuration --------------
 // Facets, tab, pagination paramters

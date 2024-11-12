@@ -1,7 +1,7 @@
 import React from "react";
 import gql from 'graphql-tag';
 import { cellTypes, dataFormatTypes } from '@bento-core/table';
-import { types, btnTypes } from '@bento-core/paginated-table';
+import { types } from '@bento-core/paginated-table';
 import { customMyFilesTabDownloadCSV } from './tableDownloadCSV';
 import cartLogo from '../assets/header/Cart_Logo.svg';
 import cartPageLogo from '../assets/cart/Cart_Page_Icon.svg';
@@ -70,14 +70,6 @@ export const myFilesPageData = {
       {
         type: types.CUSTOM_ELEM,
         customViewElem: (props) => <ExportButton {...props}/>
-      },
-      {
-        title: 'DOWNLOAD MANIFEST',
-        clsName: 'download_manifest',
-        type: types.BUTTON,
-        role: btnTypes.DOWNLOAD_MANIFEST,
-        btnType: btnTypes.DOWNLOAD_MANIFEST,
-        tooltipCofig: tooltipContent,
       }],
   },
   {

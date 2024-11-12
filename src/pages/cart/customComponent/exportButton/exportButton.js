@@ -116,6 +116,7 @@ const ExportButtonView = (props,) => {
 
   useEffect(() => {
     if (urlData && urlData.storeManifest) {
+      console.log(urlData.storeManifest);
       setSBGUrl(urlData.storeManifest);
     }
   }, [urlData]);

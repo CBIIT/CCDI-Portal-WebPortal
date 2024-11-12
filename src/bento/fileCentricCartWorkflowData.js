@@ -71,14 +71,15 @@ export const myFilesPageData = {
         type: types.CUSTOM_ELEM,
         customViewElem: (props) => <ExportButton {...props}/>
       },
-      {
-        title: 'DOWNLOAD MANIFEST',
-        clsName: 'download_manifest',
-        type: types.BUTTON,
-        role: btnTypes.DOWNLOAD_MANIFEST,
-        btnType: btnTypes.DOWNLOAD_MANIFEST,
-        tooltipCofig: tooltipContent,
-      }],
+      // {
+      //   title: 'DOWNLOAD MANIFEST',
+      //   clsName: 'download_manifest',
+      //   type: types.BUTTON,
+      //   role: btnTypes.DOWNLOAD_MANIFEST,
+      //   btnType: btnTypes.DOWNLOAD_MANIFEST,
+      //   tooltipCofig: tooltipContent,
+      // }
+    ],
   },
   {
     container: 'paginatedTable',

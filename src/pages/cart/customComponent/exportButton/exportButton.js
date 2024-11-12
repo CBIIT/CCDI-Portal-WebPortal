@@ -7,7 +7,7 @@ import { useQuery } from '@apollo/client';
 import { MY_CART } from '../../../../bento/tableDownloadCSV'
 import { manifestData, myFilesPageData } from '../../../../bento/fileCentricCartWorkflowData'
 import client from '../../../../utils/graphqlClient';
-import arrowDownPng from './assets/arrowDown.png';
+import arrowDownPng from './assets/arrowDown.svg';
 import cgcIcon from './assets/cgc.svg';
 import manifestIcon from './assets/manifest.svg';
 // import { getManifestData } from './util/TableService';
@@ -93,8 +93,7 @@ const ExportButtonView = (props,) => {
 
   const StyledMenuItem = withStyles(() => ({
       root: {
-        padding: '2px 26px',
-        color: '#fff',
+        padding: '2px 13px',
         overflow: 'auto',
         whiteSpace: 'wrap',
       },
@@ -155,14 +154,14 @@ const ExportButtonView = (props,) => {
           key={type}
           className={classes.styledMenuItem}
           >
+            <div>{type}</div>
             {
               icon && (
-              <span>
+              <span style={{paddingLeft: '10px'}}>
                 <img src={icon} alt="icon" />
               </span>
               )
             }
-            <div style={{ paddingLeft: icon ? '10px' : '0' }}>{type}</div>
           </StyledMenuItem>
         );
       };
@@ -181,7 +180,7 @@ const ExportButtonView = (props,) => {
                 contained: classes.availableDownloadBtnContained,
                 startIcon: classes.availableDownloadDropdownBtnStartIcon,
               }}
-              startIcon={<img style={{ marginRight: '8px' }} src={arrowDownPng} alt="arrow down icon" />}
+              endIcon={<img style={{ marginLeft: '8px' }} src={arrowDownPng} alt="arrow down icon" />}
               ref={anchorRef}
               aria-controls={open ? 'menu-list-grow' : undefined}
               aria-haspopup="true"

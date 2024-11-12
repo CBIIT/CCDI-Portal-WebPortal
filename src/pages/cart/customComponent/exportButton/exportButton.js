@@ -93,7 +93,7 @@ const ExportButtonView = (props,) => {
 
   const StyledMenuItem = withStyles(() => ({
       root: {
-        padding: '2px 13px',
+        padding: '2px 12px',
         overflow: 'auto',
         whiteSpace: 'wrap',
       },
@@ -157,7 +157,7 @@ const ExportButtonView = (props,) => {
             <div>{type}</div>
             {
               icon && (
-              <span style={{paddingLeft: '10px'}}>
+              <span style={{paddingLeft: '7px'}}>
                 <img src={icon} alt="icon" />
               </span>
               )

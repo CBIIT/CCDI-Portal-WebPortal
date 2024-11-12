@@ -4,10 +4,12 @@ export const exportStyles = (props) =>({
         borderTop: '1px solid #686868',
         borderRight: '1px solid #686868',
         borderLeft: '1px solid #686868',
-        borderTopRightRadius: '8px',
-        borderTopLeftRadius: '8px',
+        borderTopRightRadius: '5px',
+        borderTopLeftRadius: '5px',
         borderBottomRightRadius: '0px',
         width: '190px',
+        height: '41px',
+        padding: '2px 14px',
         borderBottomLeftRadius: '0px',
         boxShadow: 'none',
         '&:hover': {
@@ -18,11 +20,12 @@ export const exportStyles = (props) =>({
     },
     availableDownloadDropdownBtn: {
         backgroundColor: '#2A6E93',
-        borderRadius: '8px',
+        borderRadius: '5px',
         boxShadow: 'none',
         width: '190px',
         height: '41px',
         textWrap: 'nowrap',
+        padding: '2px 14px',
         '&:hover': {
           backgroundColor: '#2A6E93',
           boxShadow: 'none',
@@ -55,8 +58,6 @@ export const exportStyles = (props) =>({
     },
     dropdownPaper: {
         maxWidth: '190px',
-        borderBottomRightRadius: '5px',
-        borderBottomLeftRadius: '5px',
     },
     styledMenuItem: {
         fontFamily: 'Poppins',
@@ -66,9 +67,12 @@ export const exportStyles = (props) =>({
         textTransform: 'uppercase',
         height: '41px',
         padding: 0,
-        borderRadius: '0px 0px 5px 5px',
         borderRight: '1px solid #0C534C',
         borderBottom: '1px solid #0C534C',
         borderLeft: '1px solid #0C534C',
+        '&:nth-child(even)': {
+            backgroundColor: '#CCD5E1',
+            borderRadius: '0px 0px 5px 5px',
+        },
     },
 })

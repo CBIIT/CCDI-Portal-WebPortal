@@ -8,4 +8,5 @@ window.injectedEnv = {
   REACT_APP_APPLICATION_VERSION: 'YYYY_MM_DD/HH:MM',
   REACT_APP_ABOUT_CONTENT_URL: '../src/assets/aboutPagesContent.yaml',
   REACT_APP_FILE_SERVICE_API: 'https://bento-tools.org/v1/graphql/',
+  REACT_APP_INTEROP_SERVICE_API: 'https://ccdi-dev.cancer.gov/api/interoperation/',
 };

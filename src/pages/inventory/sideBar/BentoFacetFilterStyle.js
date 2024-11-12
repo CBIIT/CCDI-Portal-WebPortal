@@ -152,11 +152,11 @@ export default () => ({
   },
   findCaseButton: {
     // marginLeft: '105px',
-    backgroundColor: '#4D889E',
+    backgroundColor: '#974599',
     boxSizing: 'border-box',
     height: 30,
     width: 40,
-    border: '1.25px solid #4D889E',
+    border: '1.25px solid #974599',
     cursor: 'pointer',
     borderRadius: 11,
     display: 'flex',
@@ -175,7 +175,7 @@ export default () => ({
     width: '100%',
     // display: 'flex',
     justifyContent: 'space-between',
-    backgroundColor: '#4D889E',
+    backgroundColor: '#974599',
     color: '#fff',
     border: '1px solid #0D8461',
     borderRadius: 10,
@@ -185,7 +185,7 @@ export default () => ({
     paddingLeft: 16,
     paddingRight: 12,
     '&:hover': {
-      backgroundColor: '#4D889E',
+      backgroundColor: '#974599',
     },
   },
   iconSpan: {

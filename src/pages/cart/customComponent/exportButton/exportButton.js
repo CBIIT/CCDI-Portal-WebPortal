@@ -64,7 +64,17 @@ const ExportButtonView = (props,) => {
         }
         return obj;
         });
-      return processedStoreManifestPayload;
+      console.log(processedStoreManifestPayload);
+      const fakePayload = [];
+      const obj = {};
+      obj["drs_uri"] = "drs://nci-crdc.datacommons.io/dg.4DFC/e514032c-0229-4988-8d06-c459caf5e4de";
+      obj["name"] = "00007342-df52-4765-9315-f529860af6a5.multi.vqsr.filtered.denovo.vep_105.vcf.gz";
+      obj["Participant ID"] = "PT_J96HA0K2";
+      obj["Md5sum"] = "40d59440ab0add64a52860c0e17ae396";
+      fakePayload.push(obj);
+      console.log(fakePayload);
+      return fakePayload;
+      //return processedStoreManifestPayload;
   };
 
   const { data } = useQuery(STORE_MANIFEST_QUERY, {

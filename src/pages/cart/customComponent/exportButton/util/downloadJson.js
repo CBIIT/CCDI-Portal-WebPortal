@@ -14,20 +14,6 @@ export function createFileName(fileName) {
     if (seconds < 10) { seconds = `0${seconds}`; }
     return `${fileName} ${todaysDate} ${hours}-${minutes}-${seconds}${'.csv'}`;
   }
-  
-  export const downloadCsvString = (csvString, fileName) => {
-    const blob = new Blob([csvString], { type: "text/csv" });
-    const url = URL.createObjectURL(blob);
-  
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = `${fileName}.csv`;
-    document.body.appendChild(link);
-    link.click();
-  
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
-  };
 
   export function convertToCSV(jsonse, comments, keysToInclude, header) {
     const objArray = jsonse;

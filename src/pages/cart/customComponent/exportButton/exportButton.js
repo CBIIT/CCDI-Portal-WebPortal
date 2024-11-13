@@ -8,6 +8,7 @@ import { MY_CART } from '../../../../bento/tableDownloadCSV'
 import { manifestData, myFilesPageData } from '../../../../bento/fileCentricCartWorkflowData'
 import client from '../../../../utils/graphqlClient';
 import arrowDownSvg from './assets/arrowDown.svg';
+import arrowDownGraySvg from './assets/arrowDownGray.svg';
 import arrowUpSvg from './assets/arrowUp.svg';
 import cgcIcon from './assets/cgc.svg';
 import manifestIcon from './assets/manifest.svg';
@@ -181,7 +182,7 @@ const ExportButtonView = (props,) => {
                 contained: classes.availableDownloadBtnContained,
                 startIcon: classes.availableDownloadDropdownBtnStartIcon,
               }}
-              endIcon={<img style={{ marginLeft: '8px' }} src={open ? arrowUpSvg : arrowDownSvg } alt="arrow down icon" />}
+              endIcon={<img style={{ marginLeft: '8px' }} src={manifest.filesInList && manifest.filesInList.length === 0 ? arrowDownGraySvg : open ? arrowUpSvg : arrowDownSvg} alt="arrow icon" />}
               ref={anchorRef}
               aria-controls={open ? 'menu-list-grow' : undefined}
               aria-haspopup="true"

@@ -28,7 +28,7 @@ export const newsList = [
         title: 'Childhood Cancer Data Initiative (CCDI) Participant Index',
         date: 'October 10, 2024',
         slug: 'CPI API: Empowering Pediatric Cancer Research with Mapped Participant IDs',
-        highlight: `<p>The Childhood Cancer Data Initiative (CCDI) announces the release of Version 1.0 of the Participant Index (CPI) API. The CPI maps participant IDs from different studies/research institutions, enabling researchers to explore complex questions, gain deeper insights into diseases, develop innovative therapies, and enhance existing treatments. With 32 domains and over 418,000 participant IDs, the CPI API is a significant step forward in pediatric cancer research. More information can be found at <a class="link" href="https://ccdi-dev.cancer.gov/ccdi-participant-index" target="_blank" rel="noopener noreferrer">https://ccdi-dev.cancer.gov/ccdi-participant-index</a>.</p>`,
+        highlight: `<p>The Childhood Cancer Data Initiative (CCDI) announces the release of Version 1.0 of the Participant Index (CPI) API. The CPI maps participant IDs from different studies/research institutions, enabling researchers to explore complex questions, gain deeper insights into diseases, develop innovative therapies, and enhance existing treatments. With 32 domains and over 418,000 participant IDs, the CPI API is a significant step forward in pediatric cancer research. More information can be found at <a class="link" href="https://ccdi.cancer.gov/ccdi-participant-index" target="_blank" rel="noopener noreferrer">https://ccdi.cancer.gov/ccdi-participant-index</a>.</p>`,
         fullText: '',
         type: 'Announcements',
         img: updateImgCCDC2,

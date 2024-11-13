@@ -201,6 +201,7 @@ const ExportButtonView = (props,) => {
               role={undefined}
               transition
               disablePortal
+              style={{ zIndex: '9999' }}
             >
               {({ TransitionProps, placement }) => (
                 <Grow

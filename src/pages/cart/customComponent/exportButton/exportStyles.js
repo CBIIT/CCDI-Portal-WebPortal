@@ -1,9 +1,6 @@
 export const exportStyles = (props) =>({
     availableDownloadDropdownBtnIsOpen: {
         backgroundColor: '#2A6E93',
-        borderTop: '1px solid #686868',
-        borderRight: '1px solid #686868',
-        borderLeft: '1px solid #686868',
         borderTopRightRadius: '5px',
         borderTopLeftRadius: '5px',
         borderBottomRightRadius: '0px',

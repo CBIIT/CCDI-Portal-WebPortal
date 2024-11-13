@@ -67,7 +67,7 @@ const ExportButtonView = (props,) => {
       return processedStoreManifestPayload;
   };
 
-  const { urlData } = useQuery(STORE_MANIFEST_QUERY, {
+  const { data } = useQuery(STORE_MANIFEST_QUERY, {
     variables: { manifestString: JSON.stringify(getManifestPayload(manifest)) },
     context: { clientName: 'interopService' },
     skip: !getManifestPayload(manifest),
@@ -115,11 +115,12 @@ const ExportButtonView = (props,) => {
   }, [filesId]);
 
   useEffect(() => {
-    if (urlData && urlData.storeManifest) {
-      console.log(urlData.storeManifest);
-      setSBGUrl(urlData.storeManifest);
+    console.log(data);
+    if (data && data.storeManifest) {
+      console.log(data.storeManifest);
+      setSBGUrl(data.storeManifest);
     }
-  }, [urlData]);
+  }, [data]);
     
     const initiateDownload = (currLabel) => {
         switch (currLabel) {

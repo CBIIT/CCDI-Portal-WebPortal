@@ -505,7 +505,7 @@ const FederationResourceView = () => {
                                                 
                                                 {federationItem.id && federationItem.id.includes('Data_Access') && 
                                                 <div style={{ justifyContent: 'center', display: 'flex'}}>
-                                                    <img className="federationImg" src={ccdiDataAccessImg} alt="Federation CCDI Data Access"/>
+                                                    <img className="federationImg" src={ccdiDataAccessImg} alt="Infographic displaying the CCDI Federation Service ecosystem. Users can directly access individual source nodes (KidsFirst, PCDC, St. Jude Cloud, Treehouse) or utilize the aggregation capabilities of the Federation Service to query data across all nodes simultaneously."/>
                                                 </div>
                                                 }
                                             </div>

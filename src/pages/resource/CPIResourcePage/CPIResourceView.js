@@ -495,7 +495,7 @@ const CPIResourceView = () => {
                                                 
                                                 {cpiItem.id && cpiItem.id.includes('CPI_Components') && 
                                                 <div>
-                                                    <img className='CPIImg' src={ccdiCPIImg} alt="CPI Img"/>
+                                                    <img className='CPIImg' src={ccdiCPIImg} alt="Infographic displaying the flow of data and how it is organized from the submitters to the CPI authorized applications through the CCDI Participant index"/>
                                                 </div>
                                                 }
                                             </div>

@@ -334,7 +334,7 @@ export const facetsConfig = [
     quantifier: 'Days',
     style: {
       colorPrimary: {
-        color: '#1F6BBF',
+        color: '#4150A4',
       },
       sliderRoot: {
         marginTop: '1px',
@@ -383,7 +383,7 @@ export const facetsConfig = [
       thumb: {
         height: 16,
         width: 16,
-        background: '#1F6BBF',
+        background: '#4150A4',
       },
       invalidThumb: {
         height: 16,
@@ -393,7 +393,7 @@ export const facetsConfig = [
       track: {
         borderRadius: 4,
         height: 6,
-        background: '#1F6BBF',
+        background: '#4150A4',
         '&~&': {
           background: '#142D64',
         },
@@ -826,7 +826,7 @@ export const facetsConfig = [
     quantifier: 'Days',
     style: {
       colorPrimary: {
-        color: '#4150A4',
+        color: '#1F6BBF',
       },
       sliderRoot: {
         marginTop: '1px',
@@ -875,7 +875,7 @@ export const facetsConfig = [
       thumb: {
         height: 16,
         width: 16,
-        background: '#4150A4',
+        background: '#1F6BBF',
       },
       invalidThumb: {
         height: 16,
@@ -885,7 +885,7 @@ export const facetsConfig = [
       track: {
         borderRadius: 4,
         height: 6,
-        background: '#4150A4',
+        background: '#1F6BBF',
         '&~&': {
           background: '#142D64',
         },

@@ -1,6 +1,7 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import gql from 'graphql-tag';
+import ReactHtmlParser from 'html-react-parser';
 import { Paper, Popper, Button, ClickAwayListener, Grow, MenuItem, MenuList, withStyles } from '@material-ui/core';
 import { noop } from 'lodash';
 import { useQuery } from '@apollo/client';
@@ -15,6 +16,7 @@ import manifestIcon from './assets/manifest.svg';
 // import { getManifestData } from './util/TableService';
 import { exportStyles } from './exportStyles';
 import { downloadJson } from './util/downloadJson';
+import ToolTip from "@bento-core/tool-tip";
 
 const ExportButtonView = (props,) => {
     const { classes, filesId } = props;
@@ -137,34 +139,47 @@ const ExportButtonView = (props,) => {
 
     const getMenuItem = (type) => {
         let icon;
+        let tooltipText;
         switch (type) {
           case EXPORT_TO_CANCER_GENOMICS_CLOUD:
             icon = cgcIcon;
+            tooltipText = 'Click this link to export the file manifest into the <a class="link" href="https://www.cancergenomicscloud.org/" target="_blank" rel="noopener noreferrer">Cancer Genomic Cloud</a> to access and analyze selected data.';
             break;
           case DOWNLOAD_MANIFEST:
             icon = manifestIcon;
+            tooltipText = 'Save manifest file to your computer.';
             break;
           default:
             icon = manifestIcon;
             break;
         }
         return (
-          <StyledMenuItem onClick={() => {
-            initiateDownload(type);
-            setOpen(false);
-          }}
-          key={type}
-          className={classes.styledMenuItem}
+          <ToolTip
+            arrow
+            interactive
+            title={ReactHtmlParser(tooltipText)}
+            placement="left"
+            fontFamily="Poppins"
+            fontSize="13px"
+            fontWeight="400"
           >
-            <div>{type}</div>
-            {
-              icon && (
-              <span style={{paddingLeft: '7px'}}>
-                <img src={icon} alt="icon" />
-              </span>
-              )
-            }
-          </StyledMenuItem>
+            <StyledMenuItem onClick={() => {
+              initiateDownload(type);
+              setOpen(false);
+            }}
+            key={type}
+            className={classes.styledMenuItem}
+            >
+              <div>{type}</div>
+              {
+                icon && (
+                <span style={{paddingLeft: '7px'}}>
+                  <img src={icon} alt="icon" />
+                </span>
+                )
+              }
+            </StyledMenuItem>
+          </ToolTip>
         );
       };
     

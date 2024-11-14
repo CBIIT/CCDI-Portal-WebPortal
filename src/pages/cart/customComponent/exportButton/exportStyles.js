@@ -32,9 +32,14 @@ export const exportStyles = (props) =>({
         '&.Mui-disabled': {
             backgroundColor: '#656F74',
             opacity: 0.7,
+            pointerEvents: "auto",
             '& span': {
                 color: '#d3d3d3',
-            }
+            },
+            '&:hover': {
+                backgroundColor: '#656F74',
+                boxShadow: 'none',
+            },
         }
     },
     availableDownloadDropdownBtnLabel: {

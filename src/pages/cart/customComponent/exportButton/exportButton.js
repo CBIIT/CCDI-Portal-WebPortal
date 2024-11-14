@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useMemo } from 'react';
 import gql from 'graphql-tag';
 import ReactHtmlParser from 'html-react-parser';
 import { Paper, Popper, Button, ClickAwayListener, Grow, MenuItem, MenuList, withStyles } from '@material-ui/core';
@@ -95,6 +95,17 @@ const ExportButtonView = (props,) => {
       }
   }
 
+  const dropDownTooltipTitle = useMemo(() => {
+    switch (filesId.length > 0) {
+      case true:
+        return '';
+      case false:
+        return 'Add some files to the cart to get started.';
+      default:
+        return '';
+    }
+  }, [filesId]);
+
   const StyledMenuItem = withStyles(() => ({
       root: {
         padding: '2px 12px',
@@ -188,6 +199,12 @@ const ExportButtonView = (props,) => {
 
     return (
         <>
+          <ToolTip
+            arrow
+            maxWidth={200}
+            placement="left"
+            title={dropDownTooltipTitle}
+          >
             <Button
               classes={{
                 root: open
@@ -197,13 +214,13 @@ const ExportButtonView = (props,) => {
                 contained: classes.availableDownloadBtnContained,
                 startIcon: classes.availableDownloadDropdownBtnStartIcon,
               }}
-              endIcon={<img style={{ marginLeft: '8px' }} src={manifest.filesInList && manifest.filesInList.length === 0 ? arrowDownGraySvg : open ? arrowUpSvg : arrowDownSvg} alt="arrow icon" />}
+              endIcon={<img style={{ marginLeft: '8px' }} src={filesId.length === 0 ? arrowDownGraySvg : open ? arrowUpSvg : arrowDownSvg} alt="arrow icon" />}
               ref={anchorRef}
               aria-controls={open ? 'menu-list-grow' : undefined}
               aria-haspopup="true"
               onClick={handleToggle}
               disableRipple
-              disabled={manifest.filesInList ? manifest.filesInList.length === 0 : 0}
+              disabled={filesId ? filesId.length === 0 : 0}
             >
               {isLoading ? (<p>Loading...</p>) : (
                 <>
@@ -211,6 +228,7 @@ const ExportButtonView = (props,) => {
                 </>
               )}
             </Button>
+          </ToolTip>
             <Popper
               open={open}
               anchorEl={anchorRef.current}

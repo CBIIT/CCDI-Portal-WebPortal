@@ -52,11 +52,23 @@ const InventoryCover = ({
             }
             const paramValues = query.get(param);
             if (paramValues) {
-                filters[param] = paramValues.split('|');
-                newFilterState[param] = {};
-                paramValues.split('|').forEach((item) => {
-                    newFilterState[param][item] = true;
-                });
+                if (param === 'age_at_diagnosis' || param === 'age_at_treatment_start' || param === 'age_at_response' || param === 'age_at_last_known_survival_status' || param === 'participant_age_at_collection') {
+                    const rangeParams = paramValues.split(',');
+                    const lowerBound = parseInt(rangeParams[0]);
+                    const upperBound = parseInt(rangeParams[1]);
+                    if (rangeParams.length !== 2 || typeof lowerBound !==  'number' || Number.isNaN(lowerBound) || typeof upperBound !==  'number' || Number.isNaN(upperBound)) {
+                        return;
+                    } else {
+                        filters[param] = [lowerBound, upperBound];
+                        newFilterState[param] = [lowerBound, upperBound];
+                    }
+                } else {
+                    filters[param] = paramValues.split('|');
+                    newFilterState[param] = {};
+                    paramValues.split('|').forEach((item) => {
+                        newFilterState[param][item] = true;
+                    });
+                }
             }
         });
         return newFilterState;
@@ -87,7 +99,6 @@ const InventoryCover = ({
                         title: item,
                     };
                 });
-                console.log(data);
                 store.dispatch(updateAutocompleteData(data));
             } else {
                 store.dispatch(updateAutocompleteData([]));
@@ -127,7 +138,6 @@ const InventoryCover = ({
                 store.dispatch(changeTab(0, 'facet'));
             }
             if (action_type === "facet") {
-                console.log('loading...');
                 store.dispatch(inDataloading(true));
                 getData(filters).then((result) => {
                     if (result.searchParticipants) {

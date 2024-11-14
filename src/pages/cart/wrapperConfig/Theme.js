@@ -31,7 +31,7 @@ export const customTheme = {
       },
       '&.container_header': {
         maxWidth: '100%',
-        padding: '45px 0px',
+        padding: '45px 0 45px 0',
         marginRight: '-5px',
         position: 'relative',
         textAlign: 'right',

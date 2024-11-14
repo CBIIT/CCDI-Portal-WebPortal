@@ -9,7 +9,7 @@ import { manifestData, myFilesPageData } from '../../../../bento/fileCentricCart
 import client from '../../../../utils/graphqlClient';
 import arrowDownSvg from './assets/arrowDown.svg';
 import arrowDownGraySvg from './assets/arrowDownGray.svg';
-import linkIcon from './assets/linkIcon.svg';
+// import linkIcon from './assets/linkIcon.svg';
 import arrowUpSvg from './assets/arrowUp.svg';
 import cgcIcon from './assets/cgc.svg';
 import manifestIcon from './assets/manifest.svg';
@@ -100,7 +100,9 @@ const ExportButtonView = (props,) => {
       case true:
         return '';
       case false:
-        return 'Add some files to the cart to get started.';
+        return (
+          <div>Please visit the <a style={{color: '#165F83'}} href='/explore'>Explore page</a> and add some files to the cart to get started.</div>
+        );
       default:
         return '';
     }
@@ -109,20 +111,9 @@ const ExportButtonView = (props,) => {
   const dropDownListTooltipTitle = (type) => {
     switch (type) {
       case EXPORT_TO_CANCER_GENOMICS_CLOUD:
-        return (
-          <div>
-            Export selected data to&nbsp;
-            <a style={{color: '#165F83'}} href="https://www.cancergenomicscloud.org/" target="_blank" rel="noopener noreferrer">
-              Cancer Genomic Cloud
-              <span style={{marginLeft: '2px'}}><img src={linkIcon} alt="linkIcon" /></span>
-            </a>
-            &nbsp;for access and analysis.
-          </div>
-        );
+        return 'Export selected data to Cancer Genomics Cloud for access and analysis.';
       case DOWNLOAD_MANIFEST:
-        return (
-          <div>Save manifest file to your computer.</div>
-        );
+        return 'Save manifest file to your computer.';
       default:
         return '';
     }

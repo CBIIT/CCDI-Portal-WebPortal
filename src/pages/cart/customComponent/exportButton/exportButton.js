@@ -1,7 +1,6 @@
 
 import React, { useEffect, useState, useRef, useMemo } from 'react';
 import gql from 'graphql-tag';
-import ReactHtmlParser from 'html-react-parser';
 import { Paper, Popper, Button, ClickAwayListener, Grow, MenuItem, MenuList, withStyles } from '@material-ui/core';
 import { noop } from 'lodash';
 import { useQuery } from '@apollo/client';
@@ -10,6 +9,7 @@ import { manifestData, myFilesPageData } from '../../../../bento/fileCentricCart
 import client from '../../../../utils/graphqlClient';
 import arrowDownSvg from './assets/arrowDown.svg';
 import arrowDownGraySvg from './assets/arrowDownGray.svg';
+import linkIcon from './assets/linkIcon.svg';
 import arrowUpSvg from './assets/arrowUp.svg';
 import cgcIcon from './assets/cgc.svg';
 import manifestIcon from './assets/manifest.svg';
@@ -95,7 +95,7 @@ const ExportButtonView = (props,) => {
       }
   }
 
-  const dropDownTooltipTitle = useMemo(() => {
+  const dropDownButtonTooltipTitle = useMemo(() => {
     switch (filesId.length > 0) {
       case true:
         return '';
@@ -105,6 +105,28 @@ const ExportButtonView = (props,) => {
         return '';
     }
   }, [filesId]);
+
+  const dropDownListTooltipTitle = (type) => {
+    switch (type) {
+      case EXPORT_TO_CANCER_GENOMICS_CLOUD:
+        return (
+          <div>
+            Export selected data to&nbsp;
+            <a style={{color: '#165F83'}} href="https://www.cancergenomicscloud.org/" target="_blank" rel="noopener noreferrer">
+              Cancer Genomic Cloud
+              <span style={{marginLeft: '2px'}}><img src={linkIcon} alt="linkIcon" /></span>
+            </a>
+            &nbsp;for access and analysis.
+          </div>
+        );
+      case DOWNLOAD_MANIFEST:
+        return (
+          <div>Save manifest file to your computer.</div>
+        );
+      default:
+        return '';
+    }
+  } 
 
   const StyledMenuItem = withStyles(() => ({
       root: {
@@ -150,15 +172,12 @@ const ExportButtonView = (props,) => {
 
     const getMenuItem = (type) => {
         let icon;
-        let tooltipText;
         switch (type) {
           case EXPORT_TO_CANCER_GENOMICS_CLOUD:
             icon = cgcIcon;
-            tooltipText = 'Click this link to export the file manifest into the <a class="link" href="https://www.cancergenomicscloud.org/" target="_blank" rel="noopener noreferrer">Cancer Genomic Cloud</a> to access and analyze selected data.';
             break;
           case DOWNLOAD_MANIFEST:
             icon = manifestIcon;
-            tooltipText = 'Save manifest file to your computer.';
             break;
           default:
             icon = manifestIcon;
@@ -168,7 +187,7 @@ const ExportButtonView = (props,) => {
           <ToolTip
             arrow
             interactive
-            title={ReactHtmlParser(tooltipText)}
+            title={dropDownListTooltipTitle(type)}
             placement="left"
             fontFamily="Poppins"
             fontSize="13px"
@@ -203,7 +222,7 @@ const ExportButtonView = (props,) => {
             arrow
             maxWidth={200}
             placement="left"
-            title={dropDownTooltipTitle}
+            title={dropDownButtonTooltipTitle}
           >
             <Button
               classes={{

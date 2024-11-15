@@ -8,7 +8,7 @@ import Pagination from '@material-ui/lab/Pagination';
 import styled from 'styled-components';
 import exportIcon from '../../assets/about/Export_Icon.svg';
 import newsImg from '../../assets/news/News_Header.jpg';
-import { newsList } from '../../bento/newsData'
+import { altList, srcList, newsList } from '../../bento/newsData'
 
 const NewsContainer = styled.div`
   width: 100%;
@@ -371,7 +371,7 @@ const NewsView = ({classes}) => {
                     <div className='newsItemDate'>{newsItem.date}</div>
                     <div className='newsItemContent Upper'>{ReactHtmlParser(newsItem.highlight)}</div>
                   </div>
-                  {newsItem.img && <div className='imgContainer'><img className='newsItemImgContainer' src={newsItem.img} alt={newsItem.title}/></div>}
+                  {newsItem.img && <div className='imgContainer'><img className='newsItemImgContainer' src={srcList[newsItem.img]} alt={altList[newsItem.img]}/></div>}
                 </div>
                 <div className='newsItemContent Lower'>{ReactHtmlParser(newsItem.highlight)}</div>
               </div>

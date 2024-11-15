@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ReactHtmlParser from 'html-react-parser';
 import usePageVisibility from "./PageVisibility";
-import { newsList } from '../../../bento/newsData';
+import { altList, srcList, newsList } from '../../../bento/newsData';
 import { titleData } from '../../../bento/landingPageData';
 import exportIconText from '../../../assets/landing/Export_Icon_White.svg';
 
@@ -388,7 +388,7 @@ const LatestUpdate = () => {
                         const updatekey = `update_${updateidx}`;
                         return (
                         <div className='latestUpdatesListItem' key={updatekey} onMouseEnter={() => mouseIn(updatekey)} onMouseLeave={mouseOut}>
-                            <a href={`/news#${updateItem.id}`}><img className='latestUpdatesListItemPic' src={updateItem.img} alt={updateItem.id} aria-hidden='true' /><span style={{display:'none'}}>latestUpdates text</span></a>
+                            <a href={`/news#${updateItem.id}`}><img className='latestUpdatesListItemPic' src={srcList[updateItem.img]} alt={altList[updateItem.img]} aria-hidden='true' /><span style={{display:'none'}}>latestUpdates text</span></a>
                             <a className='latestUpdatesListTitleContainer' href={`/news#${updateItem.id}`}><div className='latestUpdatesListTitle'>{updateItem.title}</div></a>
                             <div className='latestUpdatesListContent'>
                                 <span className='latestUpdatesTextContent'>{ReactHtmlParser(updateItem.slug)}</span>

@@ -211,6 +211,7 @@ const ExportButtonView = (props,) => {
         <>
           <ToolTip
             arrow
+            interactive
             maxWidth={200}
             placement="left"
             title={dropDownButtonTooltipTitle}

@@ -136,7 +136,7 @@ query search (
     $participant_age_at_collection: [Int] ,
     $sample_tumor_status: [String] ,
     $tumor_classification: [String] ,
-    $assay_method: [String],
+    $data_category: [String],
     $file_type: [String],
     $dbgap_accession: [String],
     $study_name: [String],
@@ -171,7 +171,7 @@ query search (
         participant_age_at_collection: $participant_age_at_collection,
         sample_tumor_status: $sample_tumor_status,
         tumor_classification: $tumor_classification,
-        assay_method: $assay_method,
+        data_category: $data_category,
         file_type: $file_type,
         dbgap_accession: $dbgap_accession,       
         study_name: $study_name,
@@ -211,11 +211,11 @@ query search (
             group
             subjects
         }
-        participantCountByAssayMethod{
+        participantCountByDataCategory{
             group
             subjects
         }
-        filterParticipantCountByAssayMethod{
+        filterParticipantCountByDataCategory{
             group
             subjects
         }
@@ -378,7 +378,7 @@ query fileOverview(
     $participant_age_at_collection: [Int] ,
     $sample_tumor_status: [String] ,
     $tumor_classification: [String] ,
-    $assay_method: [String],
+    $data_category: [String],
     $file_type: [String],
     $dbgap_accession: [String],
     $study_name: [String],
@@ -412,7 +412,7 @@ query fileOverview(
         participant_age_at_collection: $participant_age_at_collection,
         sample_tumor_status: $sample_tumor_status,
         tumor_classification: $tumor_classification,
-        assay_method: $assay_method,
+        data_category: $data_category,
         file_type: $file_type,
         dbgap_accession: $dbgap_accession,       
         study_name: $study_name,
@@ -428,7 +428,7 @@ query fileOverview(
     ){
         id
         file_name
-        file_category
+        data_category
         file_description
         file_type
         file_size
@@ -470,7 +470,7 @@ query sampleOverview(
     $participant_age_at_collection: [Int] ,
     $sample_tumor_status: [String] ,
     $tumor_classification: [String] ,
-    $assay_method: [String],
+    $data_category: [String],
     $file_type: [String],
     $dbgap_accession: [String],
     $study_name: [String],
@@ -505,7 +505,7 @@ query sampleOverview(
         participant_age_at_collection: $participant_age_at_collection,
         sample_tumor_status: $sample_tumor_status,
         tumor_classification: $tumor_classification,
-        assay_method: $assay_method,
+        data_category: $data_category,
         file_type: $file_type,
         dbgap_accession: $dbgap_accession,       
         study_name: $study_name,
@@ -555,7 +555,7 @@ query participantOverview(
     $participant_age_at_collection: [Int] ,
     $sample_tumor_status: [String] ,
     $tumor_classification: [String] ,
-    $assay_method: [String],
+    $data_category: [String],
     $file_type: [String],
     $dbgap_accession: [String],
     $study_name: [String],
@@ -591,7 +591,7 @@ query participantOverview(
         participant_age_at_collection: $participant_age_at_collection,
         sample_tumor_status: $sample_tumor_status,
         tumor_classification: $tumor_classification,
-        assay_method: $assay_method,
+        data_category: $data_category,
         file_type: $file_type,
         dbgap_accession: $dbgap_accession,       
         study_name: $study_name,
@@ -642,7 +642,7 @@ query diagnosisOverview(
     $participant_age_at_collection: [Int] ,
     $sample_tumor_status: [String] ,
     $tumor_classification: [String] ,
-    $assay_method: [String],
+    $data_category: [String],
     $file_type: [String],
     $dbgap_accession: [String],
     $study_name: [String],
@@ -680,7 +680,7 @@ query diagnosisOverview(
         participant_age_at_collection: $participant_age_at_collection,
         sample_tumor_status: $sample_tumor_status,
         tumor_classification: $tumor_classification,
-        assay_method: $assay_method,
+        data_category: $data_category,
         file_type: $file_type,
         dbgap_accession: $dbgap_accession,       
         study_name: $study_name,
@@ -734,7 +734,7 @@ query studyOverview(
     $participant_age_at_collection: [Int] ,
     $sample_tumor_status: [String] ,
     $tumor_classification: [String] ,
-    $assay_method: [String],
+    $data_category: [String],
     $file_type: [String],
     $dbgap_accession: [String],
     $study_name: [String],
@@ -770,7 +770,7 @@ query studyOverview(
         participant_age_at_collection: $participant_age_at_collection,
         sample_tumor_status: $sample_tumor_status,
         tumor_classification: $tumor_classification,
-        assay_method: $assay_method,
+        data_category: $data_category,
         file_type: $file_type,
         dbgap_accession: $dbgap_accession,       
         study_name: $study_name,
@@ -874,7 +874,7 @@ query participantsAddAllToCart(
     $participant_age_at_collection: [Int] ,
     $sample_tumor_status: [String] ,
     $tumor_classification: [String] ,
-    $assay_method: [String],
+    $data_category: [String],
     $file_type: [String],
     $dbgap_accession: [String],
     $study_name: [String],
@@ -911,7 +911,7 @@ query participantsAddAllToCart(
       participant_age_at_collection: $participant_age_at_collection,
       sample_tumor_status: $sample_tumor_status,
       tumor_classification: $tumor_classification,
-      assay_method: $assay_method,
+      data_category: $data_category,
       file_type: $file_type,
       dbgap_accession: $dbgap_accession,       
       study_name: $study_name,
@@ -955,7 +955,7 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
       $participant_age_at_collection: [Int] ,
       $sample_tumor_status: [String] ,
       $tumor_classification: [String] ,
-      $assay_method: [String],
+      $data_category: [String],
       $file_type: [String],
       $dbgap_accession: [String],
       $study_name: [String],
@@ -990,7 +990,7 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
           participant_age_at_collection: $participant_age_at_collection,
           sample_tumor_status: $sample_tumor_status,
           tumor_classification: $tumor_classification,
-          assay_method: $assay_method,
+          data_category: $data_category,
           file_type: $file_type,
           dbgap_accession: $dbgap_accession,       
           study_name: $study_name,
@@ -1033,7 +1033,7 @@ query fileAddAllToCart(
   $participant_age_at_collection: [Int] ,
   $sample_tumor_status: [String] ,
   $tumor_classification: [String] ,
-  $assay_method: [String],
+  $data_category: [String],
   $file_type: [String],
   $dbgap_accession: [String],
   $study_name: [String],
@@ -1070,7 +1070,7 @@ query fileAddAllToCart(
       participant_age_at_collection: $participant_age_at_collection,
       sample_tumor_status: $sample_tumor_status,
       tumor_classification: $tumor_classification,
-      assay_method: $assay_method,
+      data_category: $data_category,
       file_type: $file_type,
       dbgap_accession: $dbgap_accession,       
       study_name: $study_name,
@@ -1115,7 +1115,7 @@ query diagnosisAddAllToCart(
   $participant_age_at_collection: [Int] ,
   $sample_tumor_status: [String] ,
   $tumor_classification: [String] ,
-  $assay_method: [String],
+  $data_category: [String],
   $file_type: [String],
   $dbgap_accession: [String],
   $study_name: [String],
@@ -1153,7 +1153,7 @@ query diagnosisAddAllToCart(
       participant_age_at_collection: $participant_age_at_collection,
       sample_tumor_status: $sample_tumor_status,
       tumor_classification: $tumor_classification,
-      assay_method: $assay_method,
+      data_category: $data_category,
       file_type: $file_type,
       dbgap_accession: $dbgap_accession,       
       study_name: $study_name,
@@ -1196,7 +1196,7 @@ query studyAddAllToCart(
   $participant_age_at_collection: [Int] ,
   $sample_tumor_status: [String] ,
   $tumor_classification: [String] ,
-  $assay_method: [String],
+  $data_category: [String],
   $file_type: [String],
   $dbgap_accession: [String],
   $study_name: [String],
@@ -1232,7 +1232,7 @@ query studyAddAllToCart(
       participant_age_at_collection: $participant_age_at_collection,
       sample_tumor_status: $sample_tumor_status,
       tumor_classification: $tumor_classification,
-      assay_method: $assay_method,
+      data_category: $data_category,
       file_type: $file_type,
       dbgap_accession: $dbgap_accession,       
       study_name: $study_name,
@@ -1792,11 +1792,25 @@ export const tabContainers = [
         role: cellTypes.DISPLAY,
       },
       {
-        dataField: 'file_category',
-        header: 'File Category',
+        dataField: 'data_category',
+        header: 'Data Category',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
+        cellType: cellTypes.CUSTOM_ELEM,
+        cellStyle: cellStyles.TRANSFORM,
+        dataFormatter: (dt) => {
+          if(dt instanceof Array){
+            return dt.join(',')
+          }
+          else if(dt === null){
+            return "";
+          }
+          else if(dt.toString().charAt(0) === '[' && dt.toString().charAt(dt.toString().length - 1) === ']'){
+            return dt.toString().substring(1,dt.length-1)
+          }
+          return dt.toString();
+        },
       },
       {
         dataField: 'file_description',

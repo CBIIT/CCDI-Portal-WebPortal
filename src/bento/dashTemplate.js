@@ -986,10 +986,10 @@ export const facetsConfig = [
   },
   {
     section: DATACATEGORY,
-    label: 'Assay Type',
-    apiPath: 'ParticipantCountByAssayMethod',
-    apiForFiltering: 'filterParticipantCountByAssayMethod',
-    datafield: 'assay_method',
+    label: 'Data Category',
+    apiPath: 'ParticipantCountByDataCategory',
+    apiForFiltering: 'filterParticipantCountByDataCategory',
+    datafield: 'data_category',
     field: GROUP,
     type: InputTypes.CHECKBOX,
     sort_type: sortType.ALPHABET,
@@ -1339,8 +1339,8 @@ export const widgetConfig = [
   },
   {
     type: 'donut',
-    title: 'Assay Type',
-    dataName: 'participantCountByAssayMethod',
+    title: 'Data Category',
+    dataName: 'participantCountByDataCategory',
     sliceTitle: 'Participants',
   },
 ];
@@ -1354,7 +1354,7 @@ export const queryParams = [
   'treatment_type', 'treatment_agent', 'age_at_treatment_start', 'response_category', 'age_at_response', 
   'age_at_last_known_survival_status', 'first_event', 'last_known_survival_status', 
   'participant_age_at_collection', 'sample_anatomic_site', 'sample_tumor_status', 'tumor_classification', 
-  'assay_method', 'data_category', 'file_type', 'file_mapping_level', 'dbgap_accession', 'study_name', 
+  'data_category', 'file_type', 'file_mapping_level', 'dbgap_accession', 'study_name', 
   'library_selection', 'library_strategy', 'library_source_material', 'library_source_molecule',
   'tab'
 ];

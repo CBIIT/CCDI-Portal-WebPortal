@@ -53,7 +53,7 @@ const ExportButtonView = (props,) => {
       const processedStoreManifestPayload = manifestContent.filesInList.map((el) => {
         const obj = {}
         for (let i = 0; i < manifestData.keysToInclude.length; i++) {
-          if (manifestData.keysToInclude[i] === 'file_id') {
+          if (manifestData.keysToInclude[i] === 'guid') {
             obj[manifestData.header[i]] = el && el[manifestData.keysToInclude[i]] ? 
               appendString + el[manifestData.keysToInclude[i]] 
               : 

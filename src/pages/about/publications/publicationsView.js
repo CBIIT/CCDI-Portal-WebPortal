@@ -9,6 +9,8 @@ import exportIcon from '../../../assets/about/Export_Icon.svg';
 import publicationsHeaderImg from '../../../assets/about/Publications_Header.png';
 import { publicationsList } from '../../../bento/publicationsData';
 import searchIcon from '../../../assets/header/Search_Small_Icon.svg';
+import arrowDownIcon from '../../../assets/about/arrowDownGreen.svg';
+import arrowUpIcon from '../../../assets/about/arrowUpGreen.svg';
 
 const PublicationsContainer = styled.div`
   // width: 1420px;
@@ -56,6 +58,46 @@ const PublicationsContainer = styled.div`
       margin: 20px auto 35px auto;
       border-top: 1px solid #CECECE;
       padding-top: 20px;
+  }
+
+  .tabDropdown {
+    display: none;
+  }
+
+  .tabDropdown {
+    position: absolute;
+    left: 15px;
+    padding: 0;
+    margin: 0 auto 52px auto;
+    width: calc(100vw - 45px);;
+    border: 2px solid #08838D;
+    background: white;
+    border-radius: 4px;
+  }
+
+  .tabDropdownItem {
+    color: #0A5E63;
+    height: 45px;
+    padding: 15.5px 10px;
+    list-style-type: none;
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 14px; /* 70% */
+    text-transform: capitalize;
+  }
+
+  .tabDropdownItem:hover {
+    cursor: pointer;
+  }
+
+  .tabDropdownItem:nth-child(even) {
+    background: #F4F5F5;
+  }
+
+  .tabDropIcon {
+    float: right;
   }
 
   .tabListItem {
@@ -273,11 +315,9 @@ const PublicationsContainer = styled.div`
       padding: 18px 18px 0 18px;
     }
     .tabListItem {
-      font-size: 12px;
       margin-left: 0;
     }
     .tabListItemActive {
-      font-size: 12px;
       margin-left: 0;
     }
     .tabList {
@@ -323,17 +363,19 @@ const PublicationsContainer = styled.div`
 
     .searchBoxFooter {
       text-align: left;
+      margin-bottom: 30px;
     }
-  }
 
-  @media (max-width: 530px) {
     .tabList {
-      display: grid;
-      grid-column-gap: 2%;
-      grid-template-columns: auto auto 50px 72px auto;
-      justify-content: center;
-      margin-left: 16px;
-      margin-right: 12px;
+      display: none;
+    }
+
+    .tabDropdown {
+      display: block;
+    }
+
+    .totalNumContainer {
+      margin-top: 85px;
     }
   }
 `;
@@ -389,8 +431,8 @@ const SearchBar = styled.div`
     }
   }
 
-  @media (max-width: 732px) {
-    margin: 0 15px 52px 15px;
+  @media (max-width: 767px) {
+    margin: 0 15px 15px 15px;
     width: auto;
   }
 `;
@@ -453,7 +495,8 @@ const PublicationsView = ({classes}) => {
   const perPageSelection = useRef(null);
   const [inputValue, setInputValue] = useState('');
   const [keyword, setKeyword] = useState('');
-  const [deleteIconShow, setDeleteIconShow] = React.useState('none');
+  const [deleteIconShow, setDeleteIconShow] = useState('none');
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   useOutsideAlerter(perPageSelection);
 
   const [inputRef, setInputFocus] = useFocus();
@@ -517,6 +560,12 @@ const PublicationsView = ({classes}) => {
     setPage(1);
   };
 
+  const onClickDropdownItem = (newsTabItem) => {
+    setSelectedTab(newsTabItem);
+    setDropdownOpen(false)
+    setPage(1);
+  };
+
   const handleTextInputChange = (event) => {
     const text = event.target.value;
     setInputValue(text);
@@ -556,6 +605,20 @@ const PublicationsView = ({classes}) => {
           })
         }
       </div>
+      <ul className='tabDropdown'>
+        <li className='tabDropdownItem' style={dropdownOpen? {fontSize: '16px'} : null} onClick={() => setDropdownOpen(!dropdownOpen)}>
+          {dropdownOpen ? "Select a category" : selectedTab}
+          <img className='tabDropIcon' src={dropdownOpen? arrowUpIcon : arrowDownIcon} alt='arrow img' />
+        </li>
+        {
+          dropdownOpen && newsTabList.map((newsTabItem, idx) => {
+            const tabkey = `tabkey_${idx}`;
+            return (
+              <li key={tabkey} className='tabDropdownItem' onClick={() => onClickDropdownItem(newsTabItem)}>{newsTabItem}</li>
+            )
+          })
+        }
+      </ul>
       <div className='totalNumContainer'><span className="totalNum">{filteredData.length}</span> results</div>
       <div className='publicationsList'>
         {

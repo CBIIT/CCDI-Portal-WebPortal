@@ -171,7 +171,7 @@ const PublicationsContainer = styled.div`
     font-size: 16px;
     line-height: 24px;
     color: #000000;
-    margin-bottom: 48px;
+    margin-bottom: 15px;
     a {
       color: #455299;
       font-family: 'Inter';
@@ -181,8 +181,15 @@ const PublicationsContainer = styled.div`
     }
   }
 
-  @media (min-width: 1420px) {
-    width: 1420px;
+  .publicationsItemTagContainer {
+    margin-bottom: 20px;
+  }
+
+  .publicationsItemTag {
+    border-radius: 20px;
+    border: 1.25px solid #78ACB1;
+    padding: 5px 10px;
+    display: inline;
   }
 
   @media (max-width: 1186px) {
@@ -378,7 +385,7 @@ const useFocus = () => {
 
 const PublicationsView = ({classes}) => {
   const [selectedTab, setSelectedTab] = useState("All");
-  const newsTabList = ['All', 'Collaboration', 'Primary', 'Review', 'Book Chapter'];
+  const newsTabList = ['All', 'Primary', 'Secondary', 'Abstract'];
   const sizelist = [10,20,50,100];
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(sizelist[0]);
@@ -502,11 +509,11 @@ const PublicationsView = ({classes}) => {
                 <div className="UpperContainer">
                   <div className='publicationsItemTextContainer'>
                     <div className='titleContainer'>
-                      <div className='titleIdx'>{(page-1)*pageSize+idx+1}</div>
                       <a className='publicationsItemTitle' href={publicationsItem.link} target="_blank" rel="noopener noreferrer">{publicationsItem.title}</a>
                     </div>
                     <div className='publicationsItemDate'>{publicationsItem.date}</div>
                     <div className='publicationsItemContent'>{ReactHtmlParser(`${publicationsItem.summary.substring(0, 485)}...`)}</div>
+                    <div className='publicationsItemTagContainer'><div className='publicationsItemTag'>{publicationsItem.tag}</div></div>
                   </div>
                 </div>
               </div>

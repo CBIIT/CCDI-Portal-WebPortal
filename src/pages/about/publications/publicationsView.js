@@ -150,7 +150,7 @@ const PublicationsContainer = styled.div`
     font-size: 20px;
     line-height: 22px;
     color: #00838F;
-    margin-bottom: 8px;
+    margin-bottom: 15px;
     text-decoration: none;
   }
 
@@ -161,29 +161,43 @@ const PublicationsContainer = styled.div`
     line-height: 24px;
     text-transform: uppercase;
     color: #000000;
-    margin-top: 12px;
     margin-bottom: 12px;
+    margin-right: 5px;
+  }
+
+  .dateConferenceContainer {
+    display: flex;
+  }
+
+  .publicationsText1 {
+    color: #0095A2;
+  }
+
+  .publicationsText2 {
+    display: none;
   }
 
   .publicationsItemConference {
-      color: #000;
-      font-family: Inter;
-      font-size: 13px;
-      font-style: normal;
-      font-weight: 300;
-      line-height: 22px;
-      letter-spacing: 0.26px;
-      text-transform: uppercase;
-      margin-bottom: 12px;
+    color: #000;
+    font-family: Inter;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 22px;
+    letter-spacing: 0.26px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
   }
 
   .publicationsItemConferenceLink {
-    color: #05555C;
+    color: #000;
     font-family: Inter;
-    font-size: 14px;
+    font-size: 13px;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 300;
     line-height: 22px;
+    letter-spacing: 0.26px;
+    text-transform: uppercase;
     text-decoration: none;
   }
 
@@ -215,6 +229,10 @@ const PublicationsContainer = styled.div`
     display: inline;
   }
 
+  p {
+    margin-top: 5px;
+  }
+
   @media (max-width: 1186px) {
     .pageHeader {
       width: auto;
@@ -239,10 +257,6 @@ const PublicationsContainer = styled.div`
   }
 
   @media (max-width: 1023px) {
-    p {
-      margin-top: 5px;
-    }
-
     .pageHeaderText {
       line-height: 35px;
       padding-top: 70px;
@@ -274,8 +288,27 @@ const PublicationsContainer = styled.div`
       margin: 20px auto 25px auto;
     }
 
+    .dateConferenceContainer {
+      display: block;
+    }
+
     .publicationsItemDate {
       margin-bottom: 0;
+    }
+
+    .publicationsText1 {
+      display: none;
+    }
+
+    .publicationsText2 {
+      display: inline-block;
+      margin-right: 5px;
+    }
+
+    .publicationsItemConferenceLink {
+      color: #05555C;
+      font-size: 14px;
+      font-weight: 400;
     }
   }
 
@@ -535,11 +568,14 @@ const PublicationsView = ({classes}) => {
                     <div className='titleContainer'>
                       <a className='publicationsItemTitle' href={publicationsItem.link} target="_blank" rel="noopener noreferrer">{publicationsItem.title}</a>
                     </div>
-                    <div className='publicationsItemDate'>{publicationsItem.date}</div>
-                    {publicationsItem.conference && <div className='publicationsItemConference'>
-                      Conference:&nbsp;
-                      <a className='publicationsItemConferenceLink' href={publicationsItem.conferenceLink} target="_blank" rel="noopener noreferrer">{publicationsItem.conference}</a>
-                    </div>}
+                    <div className='dateConferenceContainer'>
+                      <div className='publicationsItemDate'>{publicationsItem.date}</div>
+                      {publicationsItem.conference && <div className='publicationsItemConference'>
+                        <span className='publicationsText1'>| </span>
+                        <span className='publicationsText2'>Conference:</span>
+                        <a className='publicationsItemConferenceLink' href={publicationsItem.conferenceLink} target="_blank" rel="noopener noreferrer">{publicationsItem.conference}</a>
+                      </div>}
+                    </div>
                     <div className='publicationsItemContent'>{ReactHtmlParser(`${publicationsItem.summary.substring(0, 485)}...`)}</div>
                     <div className='publicationsItemTagContainer'><div className='publicationsItemTag'>{publicationsItem.tag}</div></div>
                   </div>

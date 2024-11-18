@@ -778,17 +778,6 @@ export const facetsConfig = [
   },
   {
     section: SURVIVAL,
-    label: 'Event Free Survival Status',
-    apiPath: 'participantEventFreeSurvivalStatus',
-    apiForFiltering: 'filterParticipantCountByEventFreeSurvivalStatus',
-    datafield: 'event_free_survival_status',
-    field: GROUP,
-    type: InputTypes.CHECKBOX,
-    sort_type: sortType.ALPHABET,
-    show: true,
-  },
-  {
-    section: SURVIVAL,
     label: 'First Event',
     apiPath: 'participantFirstEvent',
     apiForFiltering: 'filterParticipantCountByFirstEvent',

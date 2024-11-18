@@ -165,6 +165,28 @@ const PublicationsContainer = styled.div`
     margin-bottom: 12px;
   }
 
+  .publicationsItemConference {
+      color: #000;
+      font-family: Inter;
+      font-size: 13px;
+      font-style: normal;
+      font-weight: 300;
+      line-height: 22px;
+      letter-spacing: 0.26px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+  }
+
+  .publicationsItemConferenceLink {
+    color: #05555C;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
+    text-decoration: none;
+  }
+
   .publicationsItemContent {
     font-family: 'Inter';
     font-weight: 300;
@@ -186,6 +208,7 @@ const PublicationsContainer = styled.div`
   }
 
   .publicationsItemTag {
+    color: #05555C;
     border-radius: 20px;
     border: 1.25px solid #78ACB1;
     padding: 5px 10px;
@@ -235,9 +258,6 @@ const PublicationsContainer = styled.div`
     .publicationsItem {
       padding: 18px 18px 0 18px;
     }
-    .publicationsItemTitle {
-      min-height: 50px;
-    }
     .tabListItem {
       font-size: 12px;
       margin-left: 0;
@@ -252,6 +272,10 @@ const PublicationsContainer = styled.div`
       grid-template-columns: auto auto auto auto auto;
       justify-content: center;
       margin: 20px auto 25px auto;
+    }
+
+    .publicationsItemDate {
+      margin-bottom: 0;
     }
   }
 
@@ -512,6 +536,10 @@ const PublicationsView = ({classes}) => {
                       <a className='publicationsItemTitle' href={publicationsItem.link} target="_blank" rel="noopener noreferrer">{publicationsItem.title}</a>
                     </div>
                     <div className='publicationsItemDate'>{publicationsItem.date}</div>
+                    {publicationsItem.conference && <div className='publicationsItemConference'>
+                      Conference:&nbsp;
+                      <a className='publicationsItemConferenceLink' href={publicationsItem.conferenceLink} target="_blank" rel="noopener noreferrer">{publicationsItem.conference}</a>
+                    </div>}
                     <div className='publicationsItemContent'>{ReactHtmlParser(`${publicationsItem.summary.substring(0, 485)}...`)}</div>
                     <div className='publicationsItemTagContainer'><div className='publicationsItemTag'>{publicationsItem.tag}</div></div>
                   </div>
@@ -676,9 +704,9 @@ const styles = {
     '@media (min-width: 500px)': {
       display: 'flex',
     },
-    // '@media (max-width: 767px)': {
-    //   display: 'none',
-    // },
+    '@media (max-width: 1023px)': {
+      display: 'none',
+    },
   },
   flexPageContainer: {
     display: 'flex',

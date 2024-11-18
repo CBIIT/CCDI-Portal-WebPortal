@@ -6,7 +6,9 @@ export const publicationsList = [
         date: 'September 2024',
         summary: `<p>The National Childhood Cancer Registry (NCCR) is a central infrastructure that integrates childhood cancer data from central cancer registries and other sources to enhance access to and utilization of pediatric cancer data. The NCCR currently represents >70% of the United States pediatric population. Registries collect and publish cancer incidence and survival data for public health surveillance. Electronic health records (EHRs) are one data source. EHR data are currently obtained by manual collection at individual hospitals that then transfer data to population-based cancer registries. This study aimed to use automated data collection from hospital EHRs to broaden and standardize data reported to registries.</p>`,
         type: 'Abstract',
-        tag: 'NCCR'
+        tag: 'NCCR',
+        conference: 'AACR 2024 Special Conference in Cancer Research: Advances in Pediatric Cancer Research',
+        conferenceLink: 'https://www.aacr.org/meeting/aacr-special-conference-pediatric-cancer/',
     },
     {
         id: 'NCCR_052024',
@@ -15,7 +17,9 @@ export const publicationsList = [
         date: 'May 2024',
         summary: `<p>While cancer in children and adolescents is rare, it is the primary cause of death from disease for those over the age of 1. The ability to conduct high quality population-level research studies that leverages all available data is crucial in rare disease such as childhood cancer. However, data captured by research consortiums, NCI-supported Cancer Centers, hospitals, and other sources are typically stranded in institutional data silos and unavailable for secondary data analyses within and across institutions. These RWD are frequently encoded using source-specific data models that are not harmonized or interoperable with data from other sources. Most treating institutions report case information to central cancer registries in the North American Association of Central Cancer Registries (NAACCR) standard as part of legally-mandated cancer surveillance. However, cancer registries typically do not receive detailed diagnostic, treatment, or long-term follow-up information that are valuable for understanding a patient’s long-term health outcomes during and after a cancer diagnosis. Augmenting existing cancer registry data with harmonized data from other sources, such as electronic health records (EHRs), genomic data, and institutional datasets, would greatly enhance the value of cancer registries for surveillance and research.</p>`,
         type: 'Abstract',
-        tag: 'NCCR'
+        tag: 'NCCR',
+        conference: 'AMIA 2024 Clinical Informatics Conference',
+        conferenceLink: 'https://s4.goeshow.com/amia/cic/2024/schedule_at_a_glance.cfm?session_key=C8894AC7-D619-4A31-20ED-C4C33C040325&session_date=Wednesday,%20May%2022,%202024',
     },
     {
         id: 'MCICOG_112023',
@@ -24,7 +28,9 @@ export const publicationsList = [
         date: 'November 2023',
         summary: `<p>The Childhood Cancer Data Initiative (CCDI), is a 10-year, $50 million per year, US federal investment to advance pediatric cancer research through both new data generation and development of platforms for sharing data. The goal of the initiative is to learn from every child, adolescent, and young adult by bringing together the research, advocacy, and care communities in an ambitious effort to build a Data Ecosystem that enables rapid and systematic data collection, sharing, access, and analysis. A key component of the CCDI is the NCI’s Molecular Characterization Initiative (MCI). The MCI was initiated in 2022 and is run in collaboration with the Children’s Oncology Group (COG). The MCI offers at no cost to patients and institutions, clinically annotated, genomic characterization of tumors and germline samples to patients and their physician. These data are then deposited in an NCI repository for secondary use by the community. Here, we detail the MCI soft tissue sarcoma (STS) workflow and describe the first year of enrollment experience.</p>`,
         type: 'Abstract',
-        tag: 'MCI-COG'
+        tag: 'MCI-COG',
+        conference: 'Connective Tissue Oncology Society (CTOS) 2023 Annual meeting',
+        conferenceLink: 'https://www.ctos.org/Meeting/2023AnnualMeeting.aspx',
     },
     {
         id: 'MCICOG_062024',
@@ -33,7 +39,9 @@ export const publicationsList = [
         date: 'June 2024',
         summary: `<p>The Molecular Characterization Initiative (MCI) launched in 2022 under the NCI Childhood Cancer Data Initiative (CCDI) in partnership with the Children’s Oncology Group (COG). MCI represents a national strategy facilitating appropriate clinical and molecular characterization of childhood cancers while building an accessible data ecosystem. Since activation, 2400+ pediatric patients with CNS tumors have enrolled from 184 COG sites across the U.S. and globally. MCI provides free comprehensive genomic profiling for newly diagnosed CNS tumors, with results returned to physicians within 21 days. De-identified clinical and genomic data are deposited in the CCDI repository and may be accessed via the database of Genotypes and Phenotypes through a controlled data access request. Digital whole slide images corresponding to the extracted tissues are accessed through NCI Imaging Data Commons.</p>`,
         type: 'Abstract',
-        tag: 'MCI-COG'
+        tag: 'MCI-COG',
+        conference: '2024 AANP National Conference',
+        conferenceLink: 'https://www.aanp.org/events/2024-aanp-national-conference',
     },
     {
         id: 'NCCR_112024',
@@ -42,7 +50,9 @@ export const publicationsList = [
         date: 'November 2024',
         summary: `<p>Childhood cancers are rare diseases with approximately 16,000 cases diagnosed annually in the US.¹ Childhood cancer research data are typically captured through multicenter clinical trials and available only to consortium members, or investigator-initiated research at a single institution. Cancer treatment is also delivered outside of clinical trials—real-world data generated as a by-product of clinical care are typically siloed in distinct institutional information systems (Electronic Health Records, Radiation Oncology, Laboratory, and Imaging) and are not available for general research use. While central cancer registries collect information on all reported cancers in their jurisdiction, their data have not been linked across registries and with real world data at the national level before. Finally, as patients and their families travel across the US for treatment, a single registry or institution may not hold all data representing a patient’s cancer journey. Data from all these sources typically reside at different institutions with different governance frameworks and have been encoded in a variety of standard and non-standard formats, making them unavailable for research use.</p>`,
         type: 'Abstract',
-        tag: 'NCCR'
+        tag: 'NCCR',
+        conference: 'AMIA 2024 Annual Symposium',
+        conferenceLink: 'https://amia.secure-platform.com/symposium/gallery/rounds/82001/details/10740',
     },
     {
         id: 'Ecosystem_102023',

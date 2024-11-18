@@ -11,8 +11,8 @@ import { publicationsList } from '../../../bento/publicationsData';
 import searchIcon from '../../../assets/header/Search_Small_Icon.svg';
 
 const PublicationsContainer = styled.div`
-  width: 1420px;
-  // width: 100%;
+  // width: 1420px;
+  width: 100%;
   margin: 0 auto;
 
   .pageHeader {
@@ -33,13 +33,19 @@ const PublicationsContainer = styled.div`
   }
 
   .searchBoxFooter {
-    width: 662px;
-    margin: 0 auto 30px auto;
+    width: 1007px;
+    margin: 20px auto 45px auto;
     font-family: Inter;
     font-size: 14px;
     font-weight: 400;
     line-height: 19px;
     color: #05555C;
+    text-align: center;
+
+    @media (max-width: 732px) {
+      margin: 20px 15px 45px 15px;
+      width: auto;
+    }
   }
 
   .tabList {
@@ -48,7 +54,7 @@ const PublicationsContainer = styled.div`
       grid-template-columns: auto auto auto auto auto;
       justify-content: center;
       margin: 20px auto 35px auto;
-      border-top: 1px solid #000000;
+      border-top: 1px solid #CECECE;
       padding-top: 20px;
   }
 
@@ -179,86 +185,98 @@ const PublicationsContainer = styled.div`
     width: 1420px;
   }
 
-  // @media (max-width: 1186px) {
-  //   .pageHeader {
-  //     width: auto;
-  //     margin: 0 16px;
-  //   }
-  // }
+  @media (max-width: 1186px) {
+    .pageHeader {
+      width: auto;
+      margin: 0 16px;
+    }
 
-  // @media (max-width: 1090px) {
-  //   .publicationsList {
-  //     width: auto;
-  //     margin: 0 16px;
-  //   }
+    .searchBoxFooter {
+      width: auto;
+      margin: 20px 16px 45px 16px;
+    }
+  }
 
-  //   .publicationsItem {
-  //     width: auto;
-  //   }
-  // }
+  @media (max-width: 1090px) {
+    .publicationsList {
+      width: auto;
+      margin: 0 16px;
+    }
 
-  // @media (max-width: 1023px) {
-  //   p {
-  //     margin-top: 5px;
-  //   }
+    .publicationsItem {
+      width: auto;
+    }
+  }
 
-  //   .pageHeaderText {
-  //     line-height: 30px;
-  //     width: 250px;
-  //     padding-top: 70px;
-  //     margin: 0 auto;
-  //   }
+  @media (max-width: 1023px) {
+    p {
+      margin-top: 5px;
+    }
 
-  //   .UpperContainer {
-  //     width: 100%;
-  //   }
-  //   .imgContainer {
-  //     margin-left: auto;
-  //   }
-  //   .publicationsItem {
-  //     padding: 18px 18px 0 18px;
-  //   }
-  //   .publicationsItemTitle {
-  //     min-height: 50px;
-  //   }
-  //   .tabListItem {
-  //     font-size: 12px;
-  //     margin-left: 0;
-  //   }
-  //   .tabListItemActive {
-  //     font-size: 12px;
-  //     margin-left: 0;
-  //   }
-  //   .tabList {
-  //     display: grid;
-  //     grid-column-gap: 4%;
-  //     grid-template-columns: auto auto auto auto auto;
-  //     justify-content: center;
-  //     margin: 20px auto 25px auto;
-  //   }
-  // }
+    .pageHeaderText {
+      line-height: 35px;
+      padding-top: 70px;
+      margin: 0 auto;
+    }
 
-  // @media (max-width: 767px) {
-  //   .publicationsItemTitle {
-  //     font-size: 18px;
-  //   }
-  // }
+    .UpperContainer {
+      width: 100%;
+    }
+    .imgContainer {
+      margin-left: auto;
+    }
+    .publicationsItem {
+      padding: 18px 18px 0 18px;
+    }
+    .publicationsItemTitle {
+      min-height: 50px;
+    }
+    .tabListItem {
+      font-size: 12px;
+      margin-left: 0;
+    }
+    .tabListItemActive {
+      font-size: 12px;
+      margin-left: 0;
+    }
+    .tabList {
+      display: grid;
+      grid-column-gap: 4%;
+      grid-template-columns: auto auto auto auto auto;
+      justify-content: center;
+      margin: 20px auto 25px auto;
+    }
+  }
 
-  // @media (max-width: 530px) {
-  //   .tabList {
-  //     display: grid;
-  //     grid-column-gap: 2%;
-  //     grid-template-columns: auto auto 50px 72px auto;
-  //     justify-content: center;
-  //     margin-left: 16px;
-  //     margin-right: 12px;
-  //   }
-  // }
+  @media (max-width: 767px) {
+    .publicationsItemTitle {
+      font-size: 18px;
+    }
+
+    .pageHeaderText {
+      max-width: 308px;
+    }
+
+    .searchBoxFooter {
+      text-align: left;
+    }
+  }
+
+  @media (max-width: 530px) {
+    .tabList {
+      display: grid;
+      grid-column-gap: 2%;
+      grid-template-columns: auto auto 50px 72px auto;
+      justify-content: center;
+      margin-left: 16px;
+      margin-right: 12px;
+    }
+  }
 `;
 
 const SearchBar = styled.div`
   display: flex;
-  margin: 40px auto 20px auto;
+  margin: 0 auto 52px auto;
   width: 662px;
   height: 53px;
   border: 2px solid #08838D;
@@ -295,24 +313,22 @@ const SearchBar = styled.div`
     display: none;
   }
 
-  // @media (max-width: 1023px) {
-  //   margin: 0 auto;
-  //   maxWidth: 662px;
-  // }
+  @media (max-width: 1023px) {
+    margin: 0 auto 52px auto;;
+    maxWidth: 662px;
 
-  // @media (max-width: 767px) {
-  //   .searchButtonText {
-  //     display: none;
-  //   }
-  //   .searchButtonIcon {
-  //     display: block;
-  //   }
-  // }
+    .searchButtonText {
+      display: none;
+    }
+    .searchButtonIcon {
+      display: block;
+    }
+  }
 
-  // @media (max-width: 732px) {
-  //   margin: 0 15px;
-  //   width: auto;
-  // }
+  @media (max-width: 732px) {
+    margin: 0 15px 52px 15px;
+    width: auto;
+  }
 `;
 
 const SearchInput = styled.input`
@@ -455,6 +471,7 @@ const PublicationsView = ({classes}) => {
   return (
     <PublicationsContainer>
       <div className='pageHeader'><div className='pageHeaderText'>CCDI-Supported Publications</div></div>
+      <div className='searchBoxFooter'>The following list contains manuscripts and posters published by the Childhood Cancer Data Initiative (CCDI) support as of December 11, 2024. The list will be updated as new studies are published.</div>
       <SearchBar onMouseOver={() => setDeleteIconShow('block')} onMouseOut={() => setDeleteIconShow('none')}>
         <SearchInput ref={inputRef} type="text" value={inputValue} onChange={handleTextInputChange} />
         <div className='deleteIcon' onClick={handleClear} >
@@ -465,7 +482,6 @@ const PublicationsView = ({classes}) => {
           <img className='searchButtonIcon' src={searchIcon} alt="searchIcon" />
         </div>
       </SearchBar>
-      <div className='searchBoxFooter'>The following list contains manuscripts and posters published by the Childhood Cancer Data Initiative (CCDI) support as of July 7, 2024. The list will be updated as new studies are published.</div>
       <div className='tabList'>
         {
           newsTabList.map((newsTabItem, idx) => {

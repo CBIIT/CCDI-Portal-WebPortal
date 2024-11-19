@@ -1007,17 +1007,6 @@ export const facetsConfig = [
     show: true,
   },
   {
-    section: DATACATEGORY,
-    label: 'File Access',
-    apiPath: 'participantCountByFileAccess',
-    apiForFiltering: 'filterParticipantCountByFileAccess',
-    datafield: 'file_access',
-    field: GROUP,
-    type: InputTypes.CHECKBOX,
-    sort_type: sortType.ALPHABET,
-    show: true,
-  },
-  {
     section: STUDY,
     label: 'dbGaP accession',
     apiPath: 'participantCountByDBGAPAccession',

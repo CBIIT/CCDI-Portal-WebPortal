@@ -1,5 +1,16 @@
 export const publicationsList = [
     {
+        id: 'NCCR_112024',
+        title: 'NCI’s National Childhood Cancer Registry Data Platform: A New Data Sharing Resource to Analyze Cancer Surveillance and Real World Data',
+        link: 'https://nih.sharepoint.com/sites/NCI-CBIIT-FNLCCDI/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FNCI%2DCBIIT%2DFNLCCDI%2FShared%20Documents%2FCCDI%20Hub%20%28aka%20Data%20Inventory%20aka%20Portal%29%2F2%2DExecuting%2FCCDI%20Hub%20%2D%20Page%20Resources%20%28Text%20%26%20Images%29%2F2%2E5%2E0%20Publications%20Page%20Data%2FNCIsNationalChildhoodCancer%5FGoderre%2Epdf&parent=%2Fsites%2FNCI%2DCBIIT%2DFNLCCDI%2FShared%20Documents%2FCCDI%20Hub%20%28aka%20Data%20Inventory%20aka%20Portal%29%2F2%2DExecuting%2FCCDI%20Hub%20%2D%20Page%20Resources%20%28Text%20%26%20Images%29%2F2%2E5%2E0%20Publications%20Page%20Data',
+        date: 'November 2024',
+        summary: `<p>Childhood cancers are rare diseases with approximately 16,000 cases diagnosed annually in the US.¹ Childhood cancer research data are typically captured through multicenter clinical trials and available only to consortium members, or investigator-initiated research at a single institution. Cancer treatment is also delivered outside of clinical trials—real-world data generated as a by-product of clinical care are typically siloed in distinct institutional information systems (Electronic Health Records, Radiation Oncology, Laboratory, and Imaging) and are not available for general research use. While central cancer registries collect information on all reported cancers in their jurisdiction, their data have not been linked across registries and with real world data at the national level before. Finally, as patients and their families travel across the US for treatment, a single registry or institution may not hold all data representing a patient’s cancer journey. Data from all these sources typically reside at different institutions with different governance frameworks and have been encoded in a variety of standard and non-standard formats, making them unavailable for research use.</p>`,
+        type: 'Abstract',
+        tag: 'NCCR',
+        conference: 'AMIA 2024 Annual Symposium',
+        conferenceLink: 'https://amia.secure-platform.com/symposium/gallery/rounds/82001/details/10740',
+    },
+    {
         id: 'NCCR_092024',
         title: 'Automated Extraction and Provision of Electronic Health Record Data from Children with Cancer to National Childhood Cancer Center (NCCR) cancer registries',
         link: 'https://nih.sharepoint.com/:w:/r/sites/NCI-CBIIT-FNLCCDI/_layouts/15/Doc.aspx?sourcedoc=%7B3267F3B1-ED9A-40BB-BB9F-741044884D5F%7D&file=AACR_Abstract_SEERExtractEHR_06182024_FINAL.docx&action=default&mobileredirect=true',
@@ -9,6 +20,17 @@ export const publicationsList = [
         tag: 'NCCR',
         conference: 'AACR 2024 Special Conference in Cancer Research: Advances in Pediatric Cancer Research',
         conferenceLink: 'https://www.aacr.org/meeting/aacr-special-conference-pediatric-cancer/',
+    },
+    {
+        id: 'MCICOG_062024',
+        title: 'The Molecular Characterization Initiative: A clinical, pathologic and genomic resource for the international pediatric brain tumor community',
+        link: 'https://nih.sharepoint.com/:w:/r/sites/NCI-CBIIT-FNLCCDI/_layouts/15/Doc.aspx?sourcedoc=%7B5C1A12EE-D5A8-4DDE-869D-656B0AD7A8FE%7D&file=MCI%20AANP%20abstract%20FINAL.docx&action=default&mobileredirect=true',
+        date: 'June 2024',
+        summary: `<p>The Molecular Characterization Initiative (MCI) launched in 2022 under the NCI Childhood Cancer Data Initiative (CCDI) in partnership with the Children’s Oncology Group (COG). MCI represents a national strategy facilitating appropriate clinical and molecular characterization of childhood cancers while building an accessible data ecosystem. Since activation, 2400+ pediatric patients with CNS tumors have enrolled from 184 COG sites across the U.S. and globally. MCI provides free comprehensive genomic profiling for newly diagnosed CNS tumors, with results returned to physicians within 21 days. De-identified clinical and genomic data are deposited in the CCDI repository and may be accessed via the database of Genotypes and Phenotypes through a controlled data access request. Digital whole slide images corresponding to the extracted tissues are accessed through NCI Imaging Data Commons.</p>`,
+        type: 'Abstract',
+        tag: 'MCI-COG',
+        conference: '2024 AANP National Conference',
+        conferenceLink: 'https://www.aanp.org/events/2024-aanp-national-conference',
     },
     {
         id: 'NCCR_052024',
@@ -33,28 +55,6 @@ export const publicationsList = [
         conferenceLink: 'https://www.ctos.org/Meeting/2023AnnualMeeting.aspx',
     },
     {
-        id: 'MCICOG_062024',
-        title: 'The Molecular Characterization Initiative: A clinical, pathologic and genomic resource for the international pediatric brain tumor community',
-        link: 'https://nih.sharepoint.com/:w:/r/sites/NCI-CBIIT-FNLCCDI/_layouts/15/Doc.aspx?sourcedoc=%7B5C1A12EE-D5A8-4DDE-869D-656B0AD7A8FE%7D&file=MCI%20AANP%20abstract%20FINAL.docx&action=default&mobileredirect=true',
-        date: 'June 2024',
-        summary: `<p>The Molecular Characterization Initiative (MCI) launched in 2022 under the NCI Childhood Cancer Data Initiative (CCDI) in partnership with the Children’s Oncology Group (COG). MCI represents a national strategy facilitating appropriate clinical and molecular characterization of childhood cancers while building an accessible data ecosystem. Since activation, 2400+ pediatric patients with CNS tumors have enrolled from 184 COG sites across the U.S. and globally. MCI provides free comprehensive genomic profiling for newly diagnosed CNS tumors, with results returned to physicians within 21 days. De-identified clinical and genomic data are deposited in the CCDI repository and may be accessed via the database of Genotypes and Phenotypes through a controlled data access request. Digital whole slide images corresponding to the extracted tissues are accessed through NCI Imaging Data Commons.</p>`,
-        type: 'Abstract',
-        tag: 'MCI-COG',
-        conference: '2024 AANP National Conference',
-        conferenceLink: 'https://www.aanp.org/events/2024-aanp-national-conference',
-    },
-    {
-        id: 'NCCR_112024',
-        title: 'NCI’s National Childhood Cancer Registry Data Platform: A New Data Sharing Resource to Analyze Cancer Surveillance and Real World Data',
-        link: 'https://nih.sharepoint.com/sites/NCI-CBIIT-FNLCCDI/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FNCI%2DCBIIT%2DFNLCCDI%2FShared%20Documents%2FCCDI%20Hub%20%28aka%20Data%20Inventory%20aka%20Portal%29%2F2%2DExecuting%2FCCDI%20Hub%20%2D%20Page%20Resources%20%28Text%20%26%20Images%29%2F2%2E5%2E0%20Publications%20Page%20Data%2FNCIsNationalChildhoodCancer%5FGoderre%2Epdf&parent=%2Fsites%2FNCI%2DCBIIT%2DFNLCCDI%2FShared%20Documents%2FCCDI%20Hub%20%28aka%20Data%20Inventory%20aka%20Portal%29%2F2%2DExecuting%2FCCDI%20Hub%20%2D%20Page%20Resources%20%28Text%20%26%20Images%29%2F2%2E5%2E0%20Publications%20Page%20Data',
-        date: 'November 2024',
-        summary: `<p>Childhood cancers are rare diseases with approximately 16,000 cases diagnosed annually in the US.¹ Childhood cancer research data are typically captured through multicenter clinical trials and available only to consortium members, or investigator-initiated research at a single institution. Cancer treatment is also delivered outside of clinical trials—real-world data generated as a by-product of clinical care are typically siloed in distinct institutional information systems (Electronic Health Records, Radiation Oncology, Laboratory, and Imaging) and are not available for general research use. While central cancer registries collect information on all reported cancers in their jurisdiction, their data have not been linked across registries and with real world data at the national level before. Finally, as patients and their families travel across the US for treatment, a single registry or institution may not hold all data representing a patient’s cancer journey. Data from all these sources typically reside at different institutions with different governance frameworks and have been encoded in a variety of standard and non-standard formats, making them unavailable for research use.</p>`,
-        type: 'Abstract',
-        tag: 'NCCR',
-        conference: 'AMIA 2024 Annual Symposium',
-        conferenceLink: 'https://amia.secure-platform.com/symposium/gallery/rounds/82001/details/10740',
-    },
-    {
         id: 'Ecosystem_102023',
         title: 'Childhood cancer data initiative: Status report',
         link: 'https://onlinelibrary.wiley.com/doi/10.1002/pbc.30745',
@@ -64,12 +64,66 @@ export const publicationsList = [
         tag: 'CCDI Ecosystem'
     },
     {
-        id: 'Ecosystem_062023',
+        id: 'Ecosystem_multi_102023',
+        title: 'A multi-institutional pediatric dataset of clinical radiology MRIs by the Children’s Brain Tumor Network',
+        link: 'https://arxiv.org/abs/2310.01413',
+        date: 'October 2023',
+        summary: `<p>Pediatric brain and spinal cancers remain the leading cause of cancer-related death in children. Advancements in clinical decision-support in pediatric neuro-oncology utilizing the wealth of radiology imaging data collected through standard care, however, has significantly lagged other domains. Such data is ripe for use with predictive analytics such as artificial intelligence (AI) methods, which require large datasets. To address this unmet need, we provide a multi-institutional, large-scale pediatric dataset of 23,101 multi-parametric MRI exams acquired through routine care for 1,526 brain tumor patients, as part of the Children's Brain Tumor Network. This includes longitudinal MRIs across various cancer diagnoses, with associated patient-level clinical information, digital pathology slides, as well as tissue genotype and omics data. To facilitate downstream analysis, treatment-naïve images for 370 subjects were processed and released through the NCI Childhood Cancer Data Initiative via the Cancer Data Service. Through ongoing efforts to continuously build these imaging repositories, our aim is to accelerate discovery and translational AI models with real-world data, to ultimately empower precision medicine for children.</p>`,
+        type: 'Primary',
+        tag: 'CCDI Ecosystem'
+    },
+    {
+        id: 'Ecosystem_092023',
+        title: 'Radio-pathomic approaches in pediatric neuro-oncology: Opportunities and challenges',
+        link: 'https://academic.oup.com/noa/article/5/1/vdad119/7273003',
+        date: 'September 2023',
+        summary: `<p>With medical software platforms moving to cloud environments with scalable storage and computing, the translation of predictive artificial intelligence (AI) models to aid in clinical decision-making and facilitate personalized medicine for cancer patients is becoming a reality. Medical imaging, namely radiologic and histologic images, has immense analytical potential in neuro-oncology, and models utilizing integrated radiomic and pathomic data may yield a synergistic effect and provide a new modality for precision medicine. At the same time, the ability to harness multi-modal data is met with challenges in aggregating data across medical departments and institutions, as well as significant complexity in modeling the phenotypic and genotypic heterogeneity of pediatric brain tumors. In this paper, we review recent pathomic and integrated pathomic, radiomic, and genomic studies with clinical applications. We discuss current challenges limiting translational research on pediatric brain tumors and outline technical and analytical solutions. Overall, we propose that to empower the potential residing in radio-pathomics, systemic changes in cross-discipline data management and end-to-end software platforms to handle multi-modal data sets are needed, in addition to embracing modern AI-powered approaches. These changes can improve the performance of predictive models, and ultimately the ability to advance brain cancer treatments and patient outcomes through the development of such models.</p>`,
+        type: 'Primary',
+        tag: 'CCDI Ecosystem'
+    },
+    {
+        id: 'MCICOG_072023',
+        title: 'Children’s Oncology Group’s 2023 blueprint for research: Epidemiology',
+        link: 'https://onlinelibrary.wiley.com/doi/10.1002/pbc.30566',
+        date: 'July 2023',
+        summary: `<p>The Children's Oncology Group (COG) Epidemiology Committee has a primary focus on better understanding the etiologies of childhood cancers. Over the past 10 years, the committee has leveraged the Childhood Cancer Research Network, and now more recently Project:EveryChild (PEC), to conduct epidemiologic assessments of various childhood cancers, including osteosarcoma, neuroblastoma, germ cell tumors, Ewing sarcoma, rhabdomyosarcoma, and Langerhans cell histiocytosis. More recent studies have utilized questionnaire data collected as part of PEC to focus on specific characteristics and/or features, including the presence of congenital disorders and the availability of stored cord blood. Members of the COG Epidemiology Committee have also been involved in other large-scale National Institutes of Health efforts, including the Childhood Cancer Data Initiative and the Gabriella Miller Kids First Pediatric Research Program, which are improving our understanding of the factors associated with childhood cancer risk. Future plans will focus on addressing questions surrounding health disparities, utilizing novel biospecimens in COG epidemiology studies, exploring the role of environmental factors on the etiologies and outcomes of childhood cancer, collaborating with other COG committees to expand the role of epidemiology in childhood cancer research, and building new epidemiologic studies from the Molecular Characterization Initiative—all with the ultimate goal of developing novel prevention and intervention strategies for childhood cancer.</p>`,
+        type: 'Secondary',
+        tag: 'MCI-COG'
+    },
+    {
+        id: 'Ecosystem_062023_0101',
         title: 'The Childhood Cancer Data Initiative: Using the Power of Data to Learn From and Improve Outcomes for Every Child and Young Adult With Pediatric Cancer',
         link: 'https://ascopubs.org/doi/10.1200/JCO.22.02208',
         date: 'June 2023',
         summary: `<p>Data-driven basic, translational, and clinical research has resulted in improved outcomes for children, adolescents, and young adults (AYAs) with pediatric cancers. However, challenges in sharing data between institutions, particularly in research, prevent addressing substantial unmet needs in children and AYA patients diagnosed with certain pediatric cancers. Systematically collecting and sharing data from every child and AYA can enable greater understanding of pediatric cancers, improve survivorship, and accelerate development of new and more effective therapies. To accomplish this goal, the Childhood Cancer Data Initiative (CCDI) was launched in 2019 at the National Cancer Institute. CCDI is a collaborative community endeavor supported by a 10-year, $50-million (in US dollars) annual federal investment. CCDI aims to learn from every patient diagnosed with a pediatric cancer by designing and building a data ecosystem that facilitates data collection, sharing, and analysis for researchers, clinicians, and patients across the cancer community. For example, CCDI's Molecular Characterization Initiative provides comprehensive clinical molecular characterization for children and AYAs with newly diagnosed cancers. Through these efforts, the CCDI strives to provide clinical benefit to patients and improvements in diagnosis and care through data-focused research support and to build expandable, sustainable data resources and workflows to advance research well past the planned 10 years of the initiative. Importantly, if CCDI demonstrates the success of this model for pediatric cancers, similar approaches can be applied to adults, transforming both clinical research and treatment to improve outcomes for all patients with cancer.</p>`,
         type: 'Primary',
+        tag: 'CCDI Ecosystem'
+    },
+    {
+        id: 'Ecosystem_062023_0102',
+        title: 'Protocol for using single-cell sequencing to study the heterogeneity of NF1 nerve sheath tumors from clinical biospecimens',
+        link: 'https://www.sciencedirect.com/science/article/pii/S2666166723002642?via%3Dihub',
+        date: 'June 2023',
+        summary: `<p>Single-cell sequencing is a powerful technology to understand the heterogeneity of clinical biospecimens. Here, we present a protocol for obtaining single-cell suspension from neurofibromatosis type 1-associated nerve sheath tumors for transcriptomic profiling on the 10x platform. We describe steps for clinical sample collection, generation of single-cell suspension, and cell capture and sequencing. We then detail methods for integrative analysis, developmental Schwann cell trajectory building using bioinformatic tools, and comparative analysis. This protocol can be adapted for single-cell sequencing using mouse nerve tumors. For complete details on the use and execution of this protocol, please refer to Zhang et al. (2022).1.</p>`,
+        type: 'Secondary',
+        tag: 'CCDI Ecosystem'
+    },
+    {
+        id: 'Ecosystem_062023_0201',
+        title: 'Radiomics for characterization of the glioma immune microenvironment',
+        link: 'https://www.nature.com/articles/s41698-023-00413-9',
+        date: 'June 2023',
+        summary: `<p>Increasing evidence suggests that besides mutational and molecular alterations, the immune component of the tumor microenvironment also substantially impacts tumor behavior and complicates treatment response, particularly to immunotherapies. Although the standard method for characterizing tumor immune profile is through performing integrated genomic analysis on tissue biopsies, the dynamic change in the immune composition of the tumor microenvironment makes this approach not feasible, especially for brain tumors. Radiomics is a rapidly growing field that uses advanced imaging techniques and computational algorithms to extract numerous quantitative features from medical images. Recent advances in machine learning methods are facilitating biological validation of radiomic signatures and allowing them to "mine" for a variety of significant correlates, including genetic, immunologic, and histologic data. Radiomics has the potential to be used as a non-invasive approach to predict the presence and density of immune cells within the microenvironment, as well as to assess the expression of immune-related genes and pathways. This information can be essential for patient stratification, informing treatment decisions and predicting patients' response to immunotherapies. This is particularly important for tumors with difficult surgical access such as gliomas. In this review, we provide an overview of the glioma microenvironment, describe novel approaches for clustering patients based on their tumor immune profile, and discuss the latest progress on utilization of radiomics for immune profiling of glioma based on current literature.</p>`,
+        type: 'Primary',
+        tag: 'CCDI Ecosystem'
+    },
+    {
+        id: 'Ecosystem_062023_0202',
+        title: 'The children’s brain tumor network (CBTN) - Accelerating research in pediatric central nervous system tumors through collaboration and open science',
+        link: 'https://www.sciencedirect.com/science/article/pii/S1476558622000720?via%3Dihub',
+        date: 'June 2023',
+        summary: `<p>Pediatric brain tumors are the leading cause of cancer-related death in children in the United States and contribute a disproportionate number of potential years of life lost compared to adult cancers. Moreover, survivors frequently suffer long-term side effects, including secondary cancers. The Children's Brain Tumor Network (CBTN) is a multi-institutional international clinical research consortium created to advance therapeutic development through the collection and rapid distribution of biospecimens and data via open-science research platforms for real-time access and use by the global research community. The CBTN's 32 member institutions utilize a shared regulatory governance architecture at the Children's Hospital of Philadelphia to accelerate and maximize the use of biospecimens and data. As of August 2022, CBTN has enrolled over 4700 subjects, over 1500 parents, and collected over 65,000 biospecimen aliquots for research. Additionally, over 80 preclinical models have been developed from collected tumors. Multi-omic data for over 1000 tumors and germline material are currently available with data generation for > 5000 samples underway. To our knowledge, CBTN provides the largest open-access pediatric brain tumor multi-omic dataset annotated with longitudinal clinical and outcome data, imaging, associated biospecimens, child-parent genomic pedigrees, and in vivo and in vitro preclinical models. Empowered by NIH-supported platforms such as the Kids First Data Resource and the Childhood Cancer Data Initiative, the CBTN continues to expand the resources needed for scientists to accelerate translational impact for improved outcomes and quality of life for children with brain and spinal cord tumors.</p>`,
+        type: 'Secondary',
         tag: 'CCDI Ecosystem'
     },
     {
@@ -91,12 +145,12 @@ export const publicationsList = [
         tag: 'NCCR'
     },
     {
-        id: 'Ecosystem_062023',
-        title: 'Protocol for using single-cell sequencing to study the heterogeneity of NF1 nerve sheath tumors from clinical biospecimens',
-        link: 'https://www.sciencedirect.com/science/article/pii/S2666166723002642?via%3Dihub',
-        date: 'June 2023',
-        summary: `<p>Single-cell sequencing is a powerful technology to understand the heterogeneity of clinical biospecimens. Here, we present a protocol for obtaining single-cell suspension from neurofibromatosis type 1-associated nerve sheath tumors for transcriptomic profiling on the 10x platform. We describe steps for clinical sample collection, generation of single-cell suspension, and cell capture and sequencing. We then detail methods for integrative analysis, developmental Schwann cell trajectory building using bioinformatic tools, and comparative analysis. This protocol can be adapted for single-cell sequencing using mouse nerve tumors. For complete details on the use and execution of this protocol, please refer to Zhang et al. (2022).1.</p>`,
-        type: 'Secondary',
+        id: 'Ecosystem_112022',
+        title: 'CIViCdb 2022: evolution of an open-access cancer variant interpretation knowledgebase',
+        link: 'https://academic.oup.com/nar/article/51/D1/D1230/6827107',
+        date: 'November 2022',
+        summary: `<p>CIViC (Clinical Interpretation of Variants in Cancer; civicdb.org) is a crowd-sourced, public domain knowledgebase composed of literature-derived evidence characterizing the clinical utility of cancer variants. As clinical sequencing becomes more prevalent in cancer management, the need for cancer variant interpretation has grown beyond the capability of any single institution. CIViC contains peer-reviewed, published literature curated and expertly-moderated into structured data units (Evidence Items) that can be accessed globally and in real time, reducing barriers to clinical variant knowledge sharing. We have extended CIViC's functionality to support emergent variant interpretation guidelines, increase interoperability with other variant resources, and promote widespread dissemination of structured curated data. To support the full breadth of variant interpretation from basic to translational, including integration of somatic and germline variant knowledge and inference of drug response, we have enabled curation of three new Evidence Types (Predisposing, Oncogenic and Functional). The growing CIViC knowledgebase has over 300 contributors and distributes clinically-relevant cancer variant data currently representing >3200 variants in >470 genes from >3100 publications.</p>`,
+        type: 'Primary',
         tag: 'CCDI Ecosystem'
     },
     {
@@ -118,48 +172,12 @@ export const publicationsList = [
         tag: 'CCDI Ecosystem'
     },
     {
-        id: 'Ecosystem_112022',
-        title: 'CIViCdb 2022: evolution of an open-access cancer variant interpretation knowledgebase',
-        link: 'https://academic.oup.com/nar/article/51/D1/D1230/6827107',
-        date: 'November 2022',
-        summary: `<p>CIViC (Clinical Interpretation of Variants in Cancer; civicdb.org) is a crowd-sourced, public domain knowledgebase composed of literature-derived evidence characterizing the clinical utility of cancer variants. As clinical sequencing becomes more prevalent in cancer management, the need for cancer variant interpretation has grown beyond the capability of any single institution. CIViC contains peer-reviewed, published literature curated and expertly-moderated into structured data units (Evidence Items) that can be accessed globally and in real time, reducing barriers to clinical variant knowledge sharing. We have extended CIViC's functionality to support emergent variant interpretation guidelines, increase interoperability with other variant resources, and promote widespread dissemination of structured curated data. To support the full breadth of variant interpretation from basic to translational, including integration of somatic and germline variant knowledge and inference of drug response, we have enabled curation of three new Evidence Types (Predisposing, Oncogenic and Functional). The growing CIViC knowledgebase has over 300 contributors and distributes clinically-relevant cancer variant data currently representing >3200 variants in >470 genes from >3100 publications.</p>`,
+        id: 'Ecosystem_082021',
+        title: 'Cancer Informatics for Cancer Centers: Scientific Drivers for Informatics, Data Science, and Care in Pediatric, Adolescent, and Young Adult Cancer',
+        link: 'https://ascopubs.org/doi/10.1200/CCI.21.00040',
+        date: 'August 2021',
+        summary: `<p>Cancer Informatics for Cancer Centers (CI4CC) is a grassroots, nonprofit 501c3 organization intended to provide a focused national forum for engagement of senior cancer informatics leaders, primarily aimed at academic cancer centers anywhere in the world but with a special emphasis on the 70 National Cancer Institute–funded cancer centers. This consortium has regularly held topic-focused biannual face-to-face symposiums. These meetings are a place to review cancer informatics and data science priorities and initiatives, providing a forum for discussion of the strategic and pragmatic issues that we faced at our respective institutions and cancer centers. Here, we provide meeting highlights from the latest CI4CC Symposium, which was delayed from its original April 2020 schedule because of the COVID-19 pandemic and held virtually over three days (September 24, October 1, and October 8) in the fall of 2020. In addition to the content presented, we found that holding this event virtually once a week for 6 hours was a great way to keep the kind of deep engagement that a face-to-face meeting engenders. This is the second such publication of CI4CC Symposium highlights, the first covering the meeting that took place in Napa, California, from October 14-16, 2019. We conclude with some thoughts about using data science to learn from every child with cancer, focusing on emerging activities of the National Cancer Institute's Childhood Cancer Data Initiative.</p>`,
         type: 'Primary',
-        tag: 'CCDI Ecosystem'
-    },
-    {
-        id: 'Ecosystem_092023',
-        title: 'Radio-pathomic approaches in pediatric neuro-oncology: Opportunities and challenges',
-        link: 'https://academic.oup.com/noa/article/5/1/vdad119/7273003',
-        date: 'September 2023',
-        summary: `<p>With medical software platforms moving to cloud environments with scalable storage and computing, the translation of predictive artificial intelligence (AI) models to aid in clinical decision-making and facilitate personalized medicine for cancer patients is becoming a reality. Medical imaging, namely radiologic and histologic images, has immense analytical potential in neuro-oncology, and models utilizing integrated radiomic and pathomic data may yield a synergistic effect and provide a new modality for precision medicine. At the same time, the ability to harness multi-modal data is met with challenges in aggregating data across medical departments and institutions, as well as significant complexity in modeling the phenotypic and genotypic heterogeneity of pediatric brain tumors. In this paper, we review recent pathomic and integrated pathomic, radiomic, and genomic studies with clinical applications. We discuss current challenges limiting translational research on pediatric brain tumors and outline technical and analytical solutions. Overall, we propose that to empower the potential residing in radio-pathomics, systemic changes in cross-discipline data management and end-to-end software platforms to handle multi-modal data sets are needed, in addition to embracing modern AI-powered approaches. These changes can improve the performance of predictive models, and ultimately the ability to advance brain cancer treatments and patient outcomes through the development of such models.</p>`,
-        type: 'Primary',
-        tag: 'CCDI Ecosystem'
-    },
-    {
-        id: 'Ecosystem_102023',
-        title: 'A multi-institutional pediatric dataset of clinical radiology MRIs by the Children’s Brain Tumor Network',
-        link: 'https://arxiv.org/abs/2310.01413',
-        date: 'October 2023',
-        summary: `<p>Pediatric brain and spinal cancers remain the leading cause of cancer-related death in children. Advancements in clinical decision-support in pediatric neuro-oncology utilizing the wealth of radiology imaging data collected through standard care, however, has significantly lagged other domains. Such data is ripe for use with predictive analytics such as artificial intelligence (AI) methods, which require large datasets. To address this unmet need, we provide a multi-institutional, large-scale pediatric dataset of 23,101 multi-parametric MRI exams acquired through routine care for 1,526 brain tumor patients, as part of the Children's Brain Tumor Network. This includes longitudinal MRIs across various cancer diagnoses, with associated patient-level clinical information, digital pathology slides, as well as tissue genotype and omics data. To facilitate downstream analysis, treatment-naïve images for 370 subjects were processed and released through the NCI Childhood Cancer Data Initiative via the Cancer Data Service. Through ongoing efforts to continuously build these imaging repositories, our aim is to accelerate discovery and translational AI models with real-world data, to ultimately empower precision medicine for children.</p>`,
-        type: 'Primary',
-        tag: 'CCDI Ecosystem'
-    },
-    {
-        id: 'Ecosystem_062023_01',
-        title: 'Radiomics for characterization of the glioma immune microenvironment',
-        link: 'https://www.nature.com/articles/s41698-023-00413-9',
-        date: 'June 2023',
-        summary: `<p>Increasing evidence suggests that besides mutational and molecular alterations, the immune component of the tumor microenvironment also substantially impacts tumor behavior and complicates treatment response, particularly to immunotherapies. Although the standard method for characterizing tumor immune profile is through performing integrated genomic analysis on tissue biopsies, the dynamic change in the immune composition of the tumor microenvironment makes this approach not feasible, especially for brain tumors. Radiomics is a rapidly growing field that uses advanced imaging techniques and computational algorithms to extract numerous quantitative features from medical images. Recent advances in machine learning methods are facilitating biological validation of radiomic signatures and allowing them to "mine" for a variety of significant correlates, including genetic, immunologic, and histologic data. Radiomics has the potential to be used as a non-invasive approach to predict the presence and density of immune cells within the microenvironment, as well as to assess the expression of immune-related genes and pathways. This information can be essential for patient stratification, informing treatment decisions and predicting patients' response to immunotherapies. This is particularly important for tumors with difficult surgical access such as gliomas. In this review, we provide an overview of the glioma microenvironment, describe novel approaches for clustering patients based on their tumor immune profile, and discuss the latest progress on utilization of radiomics for immune profiling of glioma based on current literature.</p>`,
-        type: 'Primary',
-        tag: 'CCDI Ecosystem'
-    },
-    {
-        id: 'Ecosystem_062023_02',
-        title: 'The children’s brain tumor network (CBTN) - Accelerating research in pediatric central nervous system tumors through collaboration and open science',
-        link: 'https://www.sciencedirect.com/science/article/pii/S1476558622000720?via%3Dihub',
-        date: 'June 2023',
-        summary: `<p>Pediatric brain tumors are the leading cause of cancer-related death in children in the United States and contribute a disproportionate number of potential years of life lost compared to adult cancers. Moreover, survivors frequently suffer long-term side effects, including secondary cancers. The Children's Brain Tumor Network (CBTN) is a multi-institutional international clinical research consortium created to advance therapeutic development through the collection and rapid distribution of biospecimens and data via open-science research platforms for real-time access and use by the global research community. The CBTN's 32 member institutions utilize a shared regulatory governance architecture at the Children's Hospital of Philadelphia to accelerate and maximize the use of biospecimens and data. As of August 2022, CBTN has enrolled over 4700 subjects, over 1500 parents, and collected over 65,000 biospecimen aliquots for research. Additionally, over 80 preclinical models have been developed from collected tumors. Multi-omic data for over 1000 tumors and germline material are currently available with data generation for > 5000 samples underway. To our knowledge, CBTN provides the largest open-access pediatric brain tumor multi-omic dataset annotated with longitudinal clinical and outcome data, imaging, associated biospecimens, child-parent genomic pedigrees, and in vivo and in vitro preclinical models. Empowered by NIH-supported platforms such as the Kids First Data Resource and the Childhood Cancer Data Initiative, the CBTN continues to expand the resources needed for scientists to accelerate translational impact for improved outcomes and quality of life for children with brain and spinal cord tumors.</p>`,
-        type: 'Secondary',
         tag: 'CCDI Ecosystem'
     },
 ]

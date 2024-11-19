@@ -504,10 +504,11 @@ const PublicationsView = ({classes}) => {
 
   useEffect(() => {
     let resultList=[];
+    let keywordUpper = keyword.toUpperCase();
     if (selectedTab === "All") {
-      resultList = publicationsList.filter(item => (item.title.toUpperCase().includes(keyword.toUpperCase()) || item.date.toUpperCase().includes(keyword.toUpperCase()) || item.summary.toUpperCase().includes(keyword.toUpperCase())));
+      resultList = publicationsList.filter(item => (item.title.toUpperCase().includes(keywordUpper) || item.date.toUpperCase().includes(keywordUpper) || item.summary.toUpperCase().includes(keywordUpper) || item.tag.toUpperCase().includes(keywordUpper) || (item.conference && item.conference.toUpperCase().includes(keywordUpper))));
     } else {
-      resultList = publicationsList.filter(item => item.type === selectedTab && (item.title.toUpperCase().includes(keyword.toUpperCase()) || item.date.toUpperCase().includes(keyword.toUpperCase()) || item.summary.toUpperCase().includes(keyword.toUpperCase())));
+      resultList = publicationsList.filter(item => item.type === selectedTab && (item.title.toUpperCase().includes(keywordUpper) || item.date.toUpperCase().includes(keywordUpper) || item.summary.toUpperCase().includes(keywordUpper) || item.tag.toUpperCase().includes(keywordUpper) || (item.conference && item.conference.toUpperCase().includes(keywordUpper))));
     }
     setFilteredData(resultList);
     setPageTotal(resultList.length);

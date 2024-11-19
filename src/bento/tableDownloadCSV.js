@@ -60,6 +60,7 @@ query fileOverview($file_ids: [String], $offset: Int = 0, $first: Int = 10, $ord
     library_source_material
     library_source_molecule
     library_strategy
+    file_access
     file_mapping_level
   }
 }

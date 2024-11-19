@@ -273,10 +273,6 @@ query search (
             group
             subjects
         }
-        filterParticipantCountByFileAccess{
-            group
-            subjects
-        }
         filterParticipantCountByFileMappingLevel{
             group
             subjects

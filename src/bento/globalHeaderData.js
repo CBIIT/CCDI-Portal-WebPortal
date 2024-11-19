@@ -142,11 +142,11 @@ Applications: [
       link: '/data-usage-policies',
       className: 'navMobileSubItem',
     },
-    // {
-    //   name: 'CCDI-Supported Publications',
-    //   link: '/publications',
-    //   className: 'navMobileSubItem',
-    // },
+    {
+      name: 'CCDI-Supported Publications',
+      link: '/publications',
+      className: 'navMobileSubItem',
+    },
   ],
 };
 

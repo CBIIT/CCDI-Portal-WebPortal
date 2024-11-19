@@ -121,28 +121,40 @@ export default () => ({
     fontSize: '14px',
     marginRight: '0px',
   },
-  activeFacetDemographics: {
+  activeFacetDiagnosis: {
     color: '#357288',
     fontWeight: 600,
   },
-  activeFacetDiagnosis: {
+  activeFacetDemographics: {
     color: '#8C3F8D',
     fontWeight: 600,
   },
+  activeFacetTreatment: {
+    color: '#4555AB',
+    fontWeight: 600,
+  },
+  activeFacetTreatmentresponse: {
+    color: '#E9B34A',
+    fontWeight: 600,
+  },
+  activeFacetSurvival: {
+    color: '#CD5C4E',
+    fontWeight: 600,
+  },
   activeFacetSamples: {
-    color: '#907642',
-    fontWeight: 600,
-  },
-  activeFacetDatacategory: {
-    color: '#A85348',
-    fontWeight: 600,
-  },
-  activeFacetStudy: {
     color: '#1F6BBF',
     fontWeight: 600,
   },
+  activeFacetDatacategory: {
+    color: '#60C4A1',
+    fontWeight: 600,
+  },
+  activeFacetStudy: {
+    color: '#357288',
+    fontWeight: 600,
+  },
   activeFacetSequencinglibrary: {
-    color: '#14A773',
+    color: '#8C3F8D',
     fontWeight: 600,
   },
   searchContainer: {

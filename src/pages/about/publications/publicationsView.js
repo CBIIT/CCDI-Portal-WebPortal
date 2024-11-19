@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef }from 'react';
 import {
-  withStyles,
+  withStyles, ClickAwayListener
 } from '@material-ui/core';
 import ReactHtmlParser from 'html-react-parser';
 import Pagination from '@material-ui/lab/Pagination';
@@ -92,7 +92,7 @@ const PublicationsContainer = styled.div`
     cursor: pointer;
   }
 
-  .tabDropdownItem:nth-child(even) {
+  .tabDropdownItem:nth-child(odd) {
     background: #F4F5F5;
   }
 
@@ -493,6 +493,7 @@ const PublicationsView = ({classes}) => {
   const [pageTotal, setPageTotal] = useState(0);
   const [pageListVisible, setPageListVisible] = useState(0);
   const perPageSelection = useRef(null);
+  const anchorRef = useRef(null);
   const [inputValue, setInputValue] = useState('');
   const [keyword, setKeyword] = useState('');
   const [deleteIconShow, setDeleteIconShow] = useState('none');
@@ -581,6 +582,13 @@ const PublicationsView = ({classes}) => {
     setKeyword(inputValue);
   }
 
+  const handleClose = (event) => {
+    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+        return;
+    }
+    setDropdownOpen(false);
+  };
+
   return (
     <PublicationsContainer>
       <div className='pageHeader'><div className='pageHeaderText'>CCDI-Supported Publications</div></div>
@@ -606,18 +614,27 @@ const PublicationsView = ({classes}) => {
         }
       </div>
       <ul className='tabDropdown'>
-        <li className='tabDropdownItem' style={dropdownOpen? {fontSize: '16px'} : null} onClick={() => setDropdownOpen(!dropdownOpen)}>
+        <div
+          className='tabDropdownItem first'
+          ref={anchorRef}
+          style={dropdownOpen? {fontSize: '16px', background: '#FFFFFF'} : {background: '#FFFFFF'}}
+          onClick={() => setDropdownOpen(!dropdownOpen)}
+        >
           {dropdownOpen ? "Select a category" : selectedTab}
           <img className='tabDropIcon' src={dropdownOpen? arrowUpIcon : arrowDownIcon} alt='arrow img' />
-        </li>
-        {
-          dropdownOpen && newsTabList.map((newsTabItem, idx) => {
-            const tabkey = `tabkey_${idx}`;
-            return (
-              <li key={tabkey} className='tabDropdownItem' onClick={() => onClickDropdownItem(newsTabItem)}>{newsTabItem}</li>
-            )
-          })
-        }
+        </div>
+        <ClickAwayListener onClickAway={handleClose}>
+          <div>
+          {
+            dropdownOpen && newsTabList.map((newsTabItem, idx) => {
+              const tabkey = `tabkey_${idx}`;
+              return (
+                <li key={tabkey} className='tabDropdownItem' onClick={() => onClickDropdownItem(newsTabItem)}>{newsTabItem}</li>
+              )
+            })
+          }
+          </div>
+        </ClickAwayListener>
       </ul>
       <div className='totalNumContainer'><span className="totalNum">{filteredData.length}</span> results</div>
       <div className='publicationsList'>

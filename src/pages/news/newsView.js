@@ -150,6 +150,7 @@ const NewsContainer = styled.div`
 
   @media (max-width: 1186px) {
     .newsHeader {
+      height: 173px;
       width: auto;
       margin: 0 16px;
     }
@@ -169,6 +170,12 @@ const NewsContainer = styled.div`
   @media (max-width: 1023px) {
     p {
       margin-top: 5px;
+    }
+
+    .newsHeader {
+      height: 174px;
+      width: auto;
+      margin: 0 16px;
     }
 
     .newsHeaderText {
@@ -617,7 +624,7 @@ const styles = {
     '& .MuiPaginationItem-root': {
       color: '#045B80',
       fontFamily: 'Poppins',
-      fontSize: '14px',
+      fontSize: '18px',
       fontWeight: '300',
       minWidth: '18px',
       margin: '0',

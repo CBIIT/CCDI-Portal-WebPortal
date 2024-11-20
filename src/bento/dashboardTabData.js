@@ -143,7 +143,6 @@ query search (
     $library_source_material: [String],
     $library_source_molecule: [String],
     $library_strategy: [String],
-    $file_access: [String],
     $file_mapping_level: [String],
 ){
     searchParticipants (          
@@ -178,7 +177,6 @@ query search (
         library_source_material: $library_source_material,
         library_source_molecule: $library_source_molecule,
         library_strategy: $library_strategy,
-        file_access: $file_access,
         file_mapping_level: $file_mapping_level,
     ) {
         numberOfDiagnosis
@@ -272,10 +270,6 @@ query search (
             subjects
         }
         filterParticipantCountByLibraryStrategy{
-            group
-            subjects
-        }
-        filterParticipantCountByFileAccess{
             group
             subjects
         }
@@ -385,7 +379,6 @@ query fileOverview(
     $library_source_material: [String],
     $library_source_molecule: [String],
     $library_strategy: [String],
-    $file_access: [String],
     $file_mapping_level: [String],
     $first: Int, 
     $offset: Int, 
@@ -419,7 +412,6 @@ query fileOverview(
         library_source_material: $library_source_material,
         library_source_molecule: $library_source_molecule,
         library_strategy: $library_strategy,
-        file_access: $file_access,
         file_mapping_level: $file_mapping_level
         first: $first, 
         offset: $offset, 
@@ -478,7 +470,6 @@ query sampleOverview(
     $library_source_material: [String],
     $library_source_molecule: [String],
     $library_strategy: [String],
-    $file_access: [String],
     $file_mapping_level: [String],
     $first: Int, 
     $offset: Int, 
@@ -513,7 +504,6 @@ query sampleOverview(
         library_source_material: $library_source_material,
         library_source_molecule: $library_source_molecule,
         library_strategy: $library_strategy,
-        file_access: $file_access,
         file_mapping_level: $file_mapping_level
         first: $first, 
         offset: $offset, 
@@ -563,7 +553,6 @@ query participantOverview(
     $library_source_material: [String],
     $library_source_molecule: [String],
     $library_strategy: [String],
-    $file_access: [String],
     $file_mapping_level: [String],
     $first: Int, 
     $offset: Int, 
@@ -599,7 +588,6 @@ query participantOverview(
         library_source_material: $library_source_material,
         library_source_molecule: $library_source_molecule,
         library_strategy: $library_strategy,
-        file_access: $file_access,
         file_mapping_level: $file_mapping_level
         first: $first, 
         offset: $offset, 
@@ -650,7 +638,6 @@ query diagnosisOverview(
     $library_source_material: [String],
     $library_source_molecule: [String],
     $library_strategy: [String],
-    $file_access: [String],
     $file_mapping_level: [String],
     $first: Int, 
     $offset: Int, 
@@ -682,7 +669,6 @@ query diagnosisOverview(
         tumor_classification: $tumor_classification,
         data_category: $data_category,
         file_type: $file_type,
-        file_access: $file_access,
         dbgap_accession: $dbgap_accession,       
         study_name: $study_name,
         library_selection: $library_selection,
@@ -742,7 +728,6 @@ query studyOverview(
     $library_source_material: [String],
     $library_source_molecule: [String],
     $library_strategy: [String],
-    $file_access: [String],
     $file_mapping_level: [String],
     $first: Int, 
     $offset: Int, 
@@ -778,7 +763,6 @@ query studyOverview(
         library_source_material: $library_source_material,
         library_source_molecule: $library_source_molecule,
         library_strategy: $library_strategy,
-        file_access: $file_access,
         file_mapping_level: $file_mapping_level
         first: $first, 
         offset: $offset, 
@@ -882,7 +866,6 @@ query participantsAddAllToCart(
     $library_source_material: [String],
     $library_source_molecule: [String],
     $library_strategy: [String],
-    $file_access: [String],
     $file_mapping_level: [String],
     $first: Int,
     $offset: Int= 0, 
@@ -919,7 +902,6 @@ query participantsAddAllToCart(
       library_source_material: $library_source_material,
       library_source_molecule: $library_source_molecule,
       library_strategy: $library_strategy,
-      file_access: $file_access,
       file_mapping_level: $file_mapping_level
       first: $first,
       offset: $offset,
@@ -963,7 +945,6 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
       $library_source_material: [String],
       $library_source_molecule: [String],
       $library_strategy: [String],
-      $file_access: [String],
       $file_mapping_level: [String],
       $first: Int,
       $offset: Int= 0, 
@@ -998,7 +979,6 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
           library_source_material: $library_source_material,
           library_source_molecule: $library_source_molecule,
           library_strategy: $library_strategy,
-          file_access: $file_access,
           file_mapping_level: $file_mapping_level
           first: $first,
           offset: $offset,
@@ -1041,7 +1021,6 @@ query fileAddAllToCart(
   $library_source_material: [String],
   $library_source_molecule: [String],
   $library_strategy: [String],
-  $file_access: [String],
   $file_mapping_level: [String],
   $first: Int,
   $offset: Int= 0, 
@@ -1078,7 +1057,6 @@ query fileAddAllToCart(
       library_source_material: $library_source_material,
       library_source_molecule: $library_source_molecule,
       library_strategy: $library_strategy,
-      file_access: $file_access,
       file_mapping_level: $file_mapping_level
       first: $first,
       offset: $offset,
@@ -1123,7 +1101,6 @@ query diagnosisAddAllToCart(
   $library_source_material: [String],
   $library_source_molecule: [String],
   $library_strategy: [String],
-  $file_access: [String],
   $file_mapping_level: [String],
   $first: Int,
   $offset: Int= 0, 
@@ -1161,7 +1138,6 @@ query diagnosisAddAllToCart(
       library_source_material: $library_source_material,
       library_source_molecule: $library_source_molecule,
       library_strategy: $library_strategy,
-      file_access: $file_access,
       file_mapping_level: $file_mapping_level
       first: $first,
       offset: $offset,
@@ -1204,7 +1180,6 @@ query studyAddAllToCart(
   $library_source_material: [String],
   $library_source_molecule: [String],
   $library_strategy: [String],
-  $file_access: [String],
   $file_mapping_level: [String],
   $first: Int,
   $offset: Int= 0, 
@@ -1241,7 +1216,6 @@ query studyAddAllToCart(
       library_source_material: $library_source_material,
       library_source_molecule: $library_source_molecule,
       library_strategy: $library_strategy,
-      file_access: $file_access,
       file_mapping_level: $file_mapping_level
       first: $first,
       offset: $offset,

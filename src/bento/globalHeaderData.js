@@ -142,11 +142,16 @@ Applications: [
       link: '/data-usage-policies',
       className: 'navMobileSubItem',
     },
-    // {
-    //   name: 'CCDI-Supported Publications',
-    //   link: '/publications',
-    //   className: 'navMobileSubItem',
-    // },
+    {
+      name: 'CCDI-Supported Publications',
+      link: '/publications',
+      className: 'navMobileSubItem',
+    },
+    {
+      name: 'User Guide',
+      link: 'https://nih.sharepoint.com/:w:/r/sites/NCI-CBIIT-FNLCCDI/_layouts/15/Doc.aspx?sourcedoc=%7B5D16D4D0-5C0F-446A-9AA5-5E2AD325DA55%7D&file=CCDI_Usage_Instructions_October2024_restructured.docx&action=default&mobileredirect=true',
+      className: 'navMobileSubItem',
+    },
   ],
 };
 

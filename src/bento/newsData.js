@@ -41,6 +41,17 @@ export const srcList = {
 
 export const newsList = [
     {
+        id: 'hub_12062024',
+        title: 'Just released: CCDI Hub version 2.5.0',
+        date: 'December 6, 2024',
+        slug: 'New Data Sets, Enhanced Search, CGC Export, Publications Page, & MCI Update',
+        highlight: `<p>The latest update to the CCDI Hub includes six new data sets. Enhancements to the Explore Dashboard improve filtered search functionality, notably with a text search capability for the Diagnosis and Diagnosis Anatomic Site facets. A new Export button allows direct export from the Cart to the Velsera Cancer Genomics Cloud platform for further analysis. This release also introduces a new CCDI-Supported Publications page. Updates to existing pages include enhancements to the About Page, updated Hub User Guide, NCCR Data Platform links from the homepage, and the updated MCI enrollments report for November.</p>`,
+        fullText: '',
+        type: 'Application Updates',
+        img: 'updateImgHub',
+        latestUpdate: true,
+    },
+    {
         id: 'hub_10102024',
         title: 'Just released: CCDI Hub version 2.4.0',
         date: 'October 10, 2024',
@@ -71,7 +82,6 @@ export const newsList = [
         fullText: '',
         type: 'Application Updates',
         img: 'updateImgCCDC',
-        latestUpdate: true,
     },
     {
         id: 'hub_08292024',

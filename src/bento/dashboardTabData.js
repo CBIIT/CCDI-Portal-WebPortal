@@ -273,10 +273,6 @@ query search (
             group
             subjects
         }
-        filterParticipantCountByFileAccess{
-            group
-            subjects
-        }
         filterParticipantCountByFileMappingLevel{
             group
             subjects
@@ -1816,6 +1812,13 @@ export const tabContainers = [
         cellType: cellTypes.FORMAT_DATA,
       },
       {
+        dataField: 'file_access',
+        header: 'File Access',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+      },
+      {
         dataField: 'study_id',
         header: 'Study ID',
         display: true,
@@ -1874,13 +1877,6 @@ export const tabContainers = [
       {
         dataField: 'library_source_molecule',
         header: 'Library Source Molecule',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'file_access',
-        header: 'File Access',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,

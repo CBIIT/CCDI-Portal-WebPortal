@@ -51,6 +51,7 @@ query fileOverview($file_ids: [String], $offset: Int = 0, $first: Int = 10, $ord
     file_description
     file_type
     file_size
+    file_access
     study_id
     participant_id
     sample_id
@@ -60,7 +61,6 @@ query fileOverview($file_ids: [String], $offset: Int = 0, $first: Int = 10, $ord
     library_source_material
     library_source_molecule
     library_strategy
-    file_access
     file_mapping_level
   }
 }

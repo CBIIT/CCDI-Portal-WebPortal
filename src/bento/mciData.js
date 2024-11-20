@@ -27,68 +27,68 @@ export const MCIContent = [
                     ["University of Nebraska Medical Center", 25, 8, 79, ], ["University of New Mexico Cancer Center", 22, 9, 74, ], ["University of Oklahoma Health Sciences Center", 26, 10, 82, ], ["University of Rochester", 22, 4, 84, ], ["University of Texas Health Science Center at San Antonio", 23, 3, 39, ], ["University of Vermont and State Agricultural College", 20, 10, 80, ], ["University of Virginia Cancer Center", 29, 10, 80, ], ["University of Wisconsin Carbone Cancer Center", 29, 11, 28, ], ["University Pediatric Hospital", 29, 9, 1, ], ["USA Health Strada Patient Care Center", 20, 5, 70, ], ["UT Southwestern/Simmons Cancer Center-Dallas", 25, 3, 8, ], ["Valley Children's Hospital", 23, 11, 79, ], ["Vanderbilt University/Ingram Cancer Center", 26, 1, 20, ], ["Vannie Cook Children's Clinic", 28, 4, 93, ], ["Virginia Commonwealth University/Massey Cancer Center", 24, 8, 41, ], ["Wake Forest University Health Sciences", 23, 8, 19, ], ["Walter Reed National Military Medical Center", 22, 5, 22, ], ["Washington University School of Medicine", 22, 1, 88, ], ["Wesley Medical Center", 26, 0, 93, ], ["West Virginia University Charleston Division", 29, 7, 78, ], ["West Virginia University Healthcare", 28, 1, 32, ], ["Women's and Children's Hospital-Adelaide", 20, 7, 55, ], ["Yale University", 20, 9, 97, ], ],
                 },
                 diseaseTable: {
-                    title: 'Enrollments in MCI (APEC14B1-MCI) by Diagnosis Type as of August 7, 2024',
+                    title: 'Enrollments in MCI (APEC14B1-MCI) by Diagnosis Type as of November 12, 2024',
                     header: ['', 'Primary Diagnosis Disease Group', 'Number of Participants'],
-                    body: [['Central Nervous System', 3085], ['Soft Tissue Sarcoma', 930], ['Rare Tumors', 416], ['Neuroblastoma', 174], ['Ewing Sarcoma', 11], ['Osteosarcoma', 10], ['Germ Cell Tumor', 9], ['Myeloid Leukemia', 4], ['Renal', 4], ['Liver Tumor', 3], ['Non-Hodgkin Lymphoma', 3], ['Lymphoblastic Leukemia', 2], ['Lymphoproliferative Disease', 1]],
+                    body: [['Central Nervous System', 3503], ['Soft Tissue Sarcoma', 1061], ['Rare Tumors', 497], ['Neuroblastoma', 265], ['Ewing Sarcoma', 16], ['Osteosarcoma', 10], ['Germ Cell Tumor', 11], ['Myeloid Leukemia', 4], ['Renal', 8], ['Liver Tumor', 4], ['Non-Hodgkin Lymphoma', 3], ['Lymphoblastic Leukemia', 2], ['Langerhans Cell Histiocytosis', 1], ['Lymphoproliferative Disease', 1]],
                 },
                 diseaseDonut: {
                     title: 'Enrollment',
-                    data: [{ name: 'Central Nervous System', value: 3085}, {name: 'Soft Tissue Sarcoma', value: 930}, {name: 'Rare Tumors', value: 416}, {name: 'Neuroblastoma', value: 174}, {name: 'Ewing Sarcoma', value: 11}, {name: 'Osteosarcoma', value: 10}, {name: 'Germ Cell Tumor', value: 9}, {name: 'Myeloid Leukemia', value: 4}, {name: 'Renal', value: 4}, {name: 'Liver Tumor', value: 3}, {name: 'Non-Hodgkin Lymphoma', value: 3}, {name: 'Lymphoblastic Leukemia', value: 2}, {name: 'Lymphoproliferative Disease', value: 1}]
+                    data: [{ name: 'Central Nervous System', value: 3503}, {name: 'Soft Tissue Sarcoma', value: 1061}, {name: 'Rare Tumors', value: 497}, {name: 'Neuroblastoma', value: 265}, {name: 'Ewing Sarcoma', value: 16}, {name: 'Osteosarcoma', value: 10}, {name: 'Germ Cell Tumor', value: 11}, {name: 'Myeloid Leukemia', value: 4}, {name: 'Renal', value: 8}, {name: 'Liver Tumor', value: 4}, {name: 'Non-Hodgkin Lymphoma', value: 3}, {name: 'Lymphoblastic Leukemia', value: 2}, {name: 'Langerhans Cell Histiocytosis', value: 1}, {name: 'Lymphoproliferative Disease', value: 1}]
                 },
                 donut: {
-                    title: 'Enrollments in MCI (APEC14B1-MCI) by Diagnosis Type as of August 7, 2024',
+                    title: 'Enrollments in MCI (APEC14B1-MCI) by Diagnosis Type as of November 12, 2024',
                     data: [{name: 'Central Nervous System', value: 2704}, {name: 'Rare Tumors', value: 355}, {name: 'Soft Tissue Sarcoma', value: 815}, {name: 'Neuroblastoma', value: 98}],
                 },
                 map: {
                     data: [ 
                         [110, 540, "ALASKA", 2], //AK
-                        [638, 420, "ALABAMA", 91], //AL
-                        [550, 390, "ARKANSAS", 12], //AR
-                        [240, 430, "ARIZONA", 68], //AZ
-                        [100, 280, "CALIFORNIA", 341], //CA
-                        [320, 290, "COLORADO", 17], //CO
-                        [834, 228, "CONNECTICUT", 45], //CT
-                        [790, 305, "DISTRICT OF COLUMBIA", 30], //DC
-                        [810, 290, "DELEWARE", 45], //DE
-                        [735, 500, "FLORIDA", 241], //FL
-                        [720, 450, "GEORGIA", 141], //GA
-                        [340, 630, "HAWAII", 10], //HI
-                        [505, 250, "IOWA", 67], //IA
-                        [240, 220, "IDAHO", 34], //ID
-                        [600, 320, "ILLINOIS", 78], //IL
-                        [638, 285, "INDIANA", 84], //IN
+                        [638, 420, "ALABAMA", 107], //AL
+                        [550, 390, "ARKANSAS", 15], //AR
+                        [240, 430, "ARIZONA", 75], //AZ
+                        [100, 280, "CALIFORNIA", 415], //CA
+                        [320, 290, "COLORADO", 22], //CO
+                        [834, 228, "CONNECTICUT", 52], //CT
+                        [790, 305, "DISTRICT OF COLUMBIA", 48], //DC
+                        [810, 290, "DELEWARE", 52], //DE
+                        [735, 500, "FLORIDA", 277], //FL
+                        [720, 450, "GEORGIA", 159], //GA
+                        [340, 630, "HAWAII", 15], //HI
+                        [505, 250, "IOWA", 71], //IA
+                        [240, 220, "IDAHO", 35], //ID
+                        [600, 320, "ILLINOIS", 90], //IL
+                        [638, 285, "INDIANA", 91], //IN
                         [490, 330, "KANSAS", 0], //KS
-                        [670, 330, "KENTUCKY", 44], //KY
-                        [550, 460, "LOUISIANA", 37], //LA
-                        [840, 208, "MASSACHUSETTS", 36], //MA
-                        [785, 288, "MARYLAND", 67], //MD
-                        [860, 120, "MAINE", 18], //ME
-                        [645, 210, "MICHIGAN", 105], //MI
-                        [515, 150, "MINNESOTA", 129], //MN
-                        [530, 310, "MISSOURI", 95], //MO
-                        [600, 420, "MISSISSIPPI", 40], //MS
-                        [785, 355, "NORTH CAROLINA", 128], //NC
-                        [440, 135, "NORTH DAKOTA", 17], //ND
-                        [460, 285, "NEBRASKA", 46], //NE
-                        [843, 185, "NEW HAMPSHIRE", 7], //NH
-                        [815, 265, "NEW JERSEY", 56], //NJ
-                        [330, 430, "NEW MEXICO", 33], //NM
+                        [670, 330, "KENTUCKY", 57], //KY
+                        [550, 460, "LOUISIANA", 39], //LA
+                        [840, 208, "MASSACHUSETTS", 46], //MA
+                        [785, 288, "MARYLAND", 79], //MD
+                        [860, 120, "MAINE", 19], //ME
+                        [645, 210, "MICHIGAN", 117], //MI
+                        [515, 150, "MINNESOTA", 143], //MN
+                        [530, 310, "MISSOURI", 116], //MO
+                        [600, 420, "MISSISSIPPI", 49], //MS
+                        [785, 355, "NORTH CAROLINA", 144], //NC
+                        [440, 135, "NORTH DAKOTA", 20], //ND
+                        [460, 285, "NEBRASKA", 54], //NE
+                        [843, 185, "NEW HAMPSHIRE", 11], //NH
+                        [815, 265, "NEW JERSEY", 63], //NJ
+                        [330, 430, "NEW MEXICO", 34], //NM
                         [160, 260, "NEVADA", 3], //NV
-                        [795, 190, "NEW YORK", 261], //NY
-                        [690, 300, "OHIO", 234], //OH
-                        [490, 410, "OKLAHOMA", 67], //OK
-                        [150, 200, "OREGON", 33], //OR
-                        [780, 245, "PENNSYLVANIA", 163], //PA
-                        [853, 222, "RHODE ISLAND", 32], //RI
-                        [720, 395, "SOUTH CAROLINA", 58], //SC
-                        [410, 195, "SOUTH DAKOTA", 10], //SD
-                        [675, 370, "TENNESSEE", 90], //TN
-                        [480, 490, "TEXAS", 463], //TX
-                        [240, 275, "UTAH", 74], //UT
-                        [765, 310, "VIRGINIA", 82], //VA
-                        [825, 170, "VERMONT", 19], //VT
-                        [150, 100, "WASHINGTON", 218], //WA
-                        [570, 190, "WISCONSIN", 138], //WI
+                        [795, 190, "NEW YORK", 296], //NY
+                        [690, 300, "OHIO", 273], //OH
+                        [490, 410, "OKLAHOMA", 73], //OK
+                        [150, 200, "OREGON", 40], //OR
+                        [780, 245, "PENNSYLVANIA", 184], //PA
+                        [853, 222, "RHODE ISLAND", 37], //RI
+                        [720, 395, "SOUTH CAROLINA", 70], //SC
+                        [410, 195, "SOUTH DAKOTA", 11], //SD
+                        [675, 370, "TENNESSEE", 97], //TN
+                        [480, 490, "TEXAS", 520], //TX
+                        [240, 275, "UTAH", 94], //UT
+                        [765, 310, "VIRGINIA", 91], //VA
+                        [825, 170, "VERMONT", 20], //VT
+                        [150, 100, "WASHINGTON", 266], //WA
+                        [570, 190, "WISCONSIN", 163], //WI
                         [720, 330, "WEST VIRGINIA", 7], //WV
                       ],
                 }

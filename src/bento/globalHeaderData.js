@@ -4,6 +4,7 @@ import searchbarIcon from '../assets/header/Search_Icon.svg';
 import cartLogo from '../assets/header/Cart_Logo.svg';
 import usFlagSmall from "../assets/header/us_flag_small.png";
 import dataAccessPDF from "../assets/about/CCDI_CGC_Data_Access_Instructions_September2024.pdf";
+import userGuidePDF from '../assets/about/CCDI_Usage_Instructions_Nov2024_v2.5.0.pdf';
 
 // globalHeaderLogo image 468x100
 // globalHeaderImage: image 2200x100
@@ -149,7 +150,7 @@ Applications: [
     },
     {
       name: 'User Guide',
-      link: 'https://nih.sharepoint.com/:w:/r/sites/NCI-CBIIT-FNLCCDI/_layouts/15/Doc.aspx?sourcedoc=%7B5D16D4D0-5C0F-446A-9AA5-5E2AD325DA55%7D&file=CCDI_Usage_Instructions_October2024_restructured.docx&action=default&mobileredirect=true',
+      link: userGuidePDF,
       className: 'navMobileSubItem',
     },
   ],

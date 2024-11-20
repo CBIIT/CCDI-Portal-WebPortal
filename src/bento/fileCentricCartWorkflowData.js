@@ -8,6 +8,7 @@ import cartLogo from '../assets/header/Cart_Logo.svg';
 import cartPageLogo from '../assets/cart/Cart_Page_Icon.svg';
 import cartQuestionIcon from '../assets/cart/Question_Icon.svg';
 import ExportButton from "../pages/cart/customComponent/exportButton/exportButtonController";
+import LinkButton from "../pages/cart/customComponent/userGuideButton/linkButton";
 
 export const navBarCartData = {
   cartLabel: 'Cart',
@@ -68,6 +69,10 @@ export const myFilesPageData = {
     size: 'xl',
     clsName: 'container_header',
     items: [
+      {
+        type: types.CUSTOM_ELEM,
+        customViewElem: (props) => <LinkButton {...props}/>
+      },
       {
         type: types.CUSTOM_ELEM,
         customViewElem: (props) => <ExportButton {...props}/>

@@ -3,7 +3,7 @@ import LogoSmall from '../assets/header/Portal_Logo_Small.svg';
 import searchbarIcon from '../assets/header/Search_Icon.svg';
 import cartLogo from '../assets/header/Cart_Logo.svg';
 import usFlagSmall from "../assets/header/us_flag_small.png";
-import dataAccessPDF from "../assets/about/CCDI_CGC_Data_Access_Instructions_September2024.pdf";
+import userGuidePDF from '../assets/about/CCDI_Usage_Instructions_Nov2024_v2.5.0.pdf';
 
 // globalHeaderLogo image 468x100
 // globalHeaderImage: image 2200x100
@@ -134,7 +134,7 @@ Applications: [
     },
     {
       name: 'Accessing CCDI Data (PDF)',
-      link: dataAccessPDF,
+      link: userGuidePDF,
       className: 'navMobileSubItem',
     },
     {
@@ -142,11 +142,16 @@ Applications: [
       link: '/data-usage-policies',
       className: 'navMobileSubItem',
     },
-    // {
-    //   name: 'CCDI-Supported Publications',
-    //   link: '/publications',
-    //   className: 'navMobileSubItem',
-    // },
+    {
+      name: 'CCDI-Supported Publications',
+      link: '/publications',
+      className: 'navMobileSubItem',
+    },
+    {
+      name: 'User Guide',
+      link: userGuidePDF,
+      className: 'navMobileSubItem',
+    },
   ],
 };
 

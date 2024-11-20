@@ -6,7 +6,7 @@ import Header from '../ResponsiveHeader/';
 import Home from '../../pages/landing/landingController';
 import About from '../../pages/about/aboutView';
 import DataUsagePoliciesView from '../../pages/about/dataUsagePoliciesView';
-// import PublicationsView from '../../pages/about/publications/publicationsView';
+import PublicationsView from '../../pages/about/publications/publicationsView';
 import News from '../../pages/news/newsView';
 import Error from '../../pages/error/Error';
 import Search from '../../pages/search/searchView';
@@ -37,7 +37,7 @@ const Layout = () => {
           <Route path="/data-federation-resource" element={<FederationResourceView/>} />
           <Route path="/data-usage-policies" element={<DataUsagePoliciesView />} />
           <Route path="/ccdi-participant-index" element={<CPIResourceView />} />
-          {/* <Route path="/publications" element={<PublicationsView />} /> */}
+          <Route path="/publications" element={<PublicationsView />} />
           <Route path="*" element={<Error />} />
         </Routes>
         <Footer />

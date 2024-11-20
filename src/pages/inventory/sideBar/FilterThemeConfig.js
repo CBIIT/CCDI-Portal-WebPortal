@@ -43,41 +43,59 @@ const theme = {
     },
     MuiListItem: {
       root: {
-        '&.demographicsCheckedEven': {
-          backgroundColor: '#CBDFE0',
-        },
-        '&.demographicsCheckedOdd': {
-          backgroundColor: '#E4ECE9',
-        },
         '&.diagnosisCheckedEven': {
-          backgroundColor: '#C8A4C840',
+          backgroundColor: '#BBCFC840',
         },
         '&.diagnosisCheckedOdd': {
+          backgroundColor: '#E4ECE940',
+        },
+        '&.demographicsCheckedEven': {
+          backgroundColor: '#C8A4C840',
+        },
+        '&.demographicsCheckedOdd': {
           backgroundColor: '#E1C9E140',
         },
-        '&.samplesCheckedEven': {
+        '&.treatmentCheckedEven': {
+          backgroundColor: '#D9DFFF40',
+        },
+        '&.treatmentCheckedOdd': {
+          backgroundColor: '#DCDEED40',
+        },
+        '&.treatmentresponseCheckedEven': {
           backgroundColor: '#D9C5A040',
         },
-        '&.samplesCheckedOdd': {
+        '&.treatmentresponseCheckedOdd': {
           backgroundColor: '#F0DFBD40',
         },
-        '&.datacategoryCheckedEven': {
+        '&.survivalCheckedEven': {
           backgroundColor: '#E1B4AD40',
         },
-        '&.datacategoryCheckedOdd': {
+        '&.survivalCheckedOdd': {
           backgroundColor: '#F8D7D240',
         },
-        '&.studyCheckedEven': {
+        '&.samplesCheckedEven': {
           backgroundColor: '#9FBCDD40',
         },
-        '&.studyCheckedOdd': {
+        '&.samplesCheckedOdd': {
           backgroundColor: '#CEDEF040',
         },
-        '&.sequencinglibraryCheckedEven': {
+        '&.datacategoryCheckedEven': {
           backgroundColor: '#95C6B340',
         },
-        '&.sequencinglibraryCheckedOdd': {
+        '&.datacategoryCheckedOdd': {
           backgroundColor: '#DDEAE540',
+        },
+        '&.studyCheckedEven': {
+          backgroundColor: '#BBCFC840',
+        },
+        '&.studyCheckedOdd': {
+          backgroundColor: '#E4ECE940',
+        },
+        '&.sequencinglibraryCheckedEven': {
+          backgroundColor: '#C8A4C840',
+        },
+        '&.sequencinglibraryCheckedOdd': {
+          backgroundColor: '#E1C9E140',
         },
       },
     },
@@ -105,22 +123,15 @@ const theme = {
     },
     MuiTypography: {
       root: {
-        '&.demographicsSubjects': {
+        '&.diagnosisSubjects': {
           color: '#357288',
           fontSize: '12px',
           fontFamily: 'Nunito',
           marginRight: '0px',
           fontWeight: '600',
         },
-        '&.diagnosisSubjects': {
+        '&.demographicsSubjects': {
           color: '#7D267E',
-          fontSize: '12px',
-          fontFamily: 'Nunito',
-          marginRight: '0px',
-          fontWeight: '600',
-        },
-        '&.survivalSubjects': {
-          color: '#CD5C4E',
           fontSize: '12px',
           fontFamily: 'Nunito',
           marginRight: '0px',
@@ -140,15 +151,22 @@ const theme = {
           marginRight: '0px',
           fontWeight: '600',
         },
+        '&.survivalSubjects': {
+          color: '#CD5C4E',
+          fontSize: '12px',
+          fontFamily: 'Nunito',
+          marginRight: '0px',
+          fontWeight: '600',
+        },
         '&.samplesSubjects': {
-          color: '#4150A4',
+          color: '#1F6BBF',
           fontSize: '12px',
           fontFamily: 'Nunito',
           marginRight: '0px',
           fontWeight: '600',
         },
         '&.datacategorySubjects': {
-          color: '#A85348',
+          color: '#60C4A1',
           fontSize: '12px',
           fontFamily: 'Nunito',
           marginRight: '0px',
@@ -162,7 +180,7 @@ const theme = {
           fontWeight: '600',
         },
         '&.sequencinglibrarySubjects': {
-          color: '#974599',
+          color: '#7D267E',
           fontSize: '12px',
           fontFamily: 'Nunito',
           marginRight: '0px',

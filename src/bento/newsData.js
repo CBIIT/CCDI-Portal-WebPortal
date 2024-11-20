@@ -9,7 +9,7 @@ import updateImgDashboard from '../assets/news/News_Dashboard.png';
 import updateImgEHR from '../assets/news/News_EHR.png';
 import updateImgC3DC from '../assets/news/News_C3DC.png';
 import updateImgHub from '../assets/news/News_Hub.png';
-import dataAccessPDF from "../assets/about/CCDI_CGC_Data_Access_Instructions_September2024.pdf";
+import userGuidePDF from '../assets/about/CCDI_Usage_Instructions_Nov2024_v2.5.0.pdf';
 
 export const altList = {
     updateImgCCDC: 'Young boy on a swing outdoors, symbolizing childhood health, linking to the CCDC site',
@@ -41,6 +41,17 @@ export const srcList = {
 
 export const newsList = [
     {
+        id: 'hub_12062024',
+        title: 'Just released: CCDI Hub version 2.5.0',
+        date: 'December 6, 2024',
+        slug: 'New Data Sets, Enhanced Search, CGC Export, Publications Page, & MCI Update',
+        highlight: `<p>The latest update to the CCDI Hub includes six new data sets. Enhancements to the Explore Dashboard improve filtered search functionality, notably with a text search capability for the Diagnosis and Diagnosis Anatomic Site facets. A new Export button allows direct export from the Cart to the Velsera Cancer Genomics Cloud platform for further analysis. This release also introduces a new CCDI-Supported Publications page. Updates to existing pages include enhancements to the About Page, updated Hub User Guide, NCCR Data Platform links from the homepage, and the updated MCI enrollments report for November.</p>`,
+        fullText: '',
+        type: 'Application Updates',
+        img: 'updateImgHub',
+        latestUpdate: true,
+    },
+    {
         id: 'hub_10102024',
         title: 'Just released: CCDI Hub version 2.4.0',
         date: 'October 10, 2024',
@@ -71,7 +82,6 @@ export const newsList = [
         fullText: '',
         type: 'Application Updates',
         img: 'updateImgCCDC',
-        latestUpdate: true,
     },
     {
         id: 'hub_08292024',
@@ -119,7 +129,7 @@ export const newsList = [
         title: 'Latest Hub release includes new studies and enhanced functionality',
         date: 'June 27, 2024',
         slug: 'CCDI Hub adds two new studies, updated data sets, and enhanced features in June release',
-        highlight: `<p>The CCDI Hub updated seven data sets and added two new: Pediatric AYA Cancer Touchstone (<a class="link" href="https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs002431.v1.p1" target="_blank" rel="noopener noreferrer">phs002431.v1</a>) and Pediatric Tumor Profiling (<a class="link" href="https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs002677.v1.p1" target="_blank" rel="noopener noreferrer">phs002677.v1</a>) data sets. These encompass 1,600 participants and 2,700 samples, totaling 20,760 new files. The <a href="/MCI" target="_blank">MCI page</a> now features updated visualizations and a streamlined navigation pane. The Files tab on the <a href="/Explore" target="_blank">Explore Dashboard</a> now includes Library Selection, Source, and Strategy. <a href=${dataAccessPDF} target="_blank"}>User Documentation</a> is available, providing instructions for accessing controlled data and navigating the Explore Dashboard.</p>`,
+        highlight: `<p>The CCDI Hub updated seven data sets and added two new: Pediatric AYA Cancer Touchstone (<a class="link" href="https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs002431.v1.p1" target="_blank" rel="noopener noreferrer">phs002431.v1</a>) and Pediatric Tumor Profiling (<a class="link" href="https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs002677.v1.p1" target="_blank" rel="noopener noreferrer">phs002677.v1</a>) data sets. These encompass 1,600 participants and 2,700 samples, totaling 20,760 new files. The <a href="/MCI" target="_blank">MCI page</a> now features updated visualizations and a streamlined navigation pane. The Files tab on the <a href="/Explore" target="_blank">Explore Dashboard</a> now includes Library Selection, Source, and Strategy. <a href=${userGuidePDF} target="_blank"}>User Documentation</a> is available, providing instructions for accessing controlled data and navigating the Explore Dashboard.</p>`,
         fullText: '',
         type: 'Site Updates',
         img: 'updateImgHub',

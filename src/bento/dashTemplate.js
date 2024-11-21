@@ -483,7 +483,7 @@ export const facetsConfig = [
   },
   {
     section: TREATMENT_RESPONSE,
-    label: 'Age at Treatment Start',
+    label: 'Age at Response',
     apiPath: 'participantCountByAgeAtResponse',
     apiForFiltering: 'filterParticipantCountByAgeAtResponse',
     datafield: 'age_at_response',

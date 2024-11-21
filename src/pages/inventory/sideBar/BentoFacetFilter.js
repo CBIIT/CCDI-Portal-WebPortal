@@ -64,7 +64,6 @@ const { SearchBox } = SearchBoxGenerator({
   },
   functions: {
     updateBrowserUrl: (query, navigate, newUniqueValue) => {
-      console.log(newUniqueValue);
       const paramValue = {
         'p_id': newUniqueValue.map((data) => data.title).join('|')
       };
@@ -198,20 +197,15 @@ const BentoFacetFilter = ({
   * 1. Config local search input for Case
   * 2. Facet Section Name
   */
-  const CustomFacetSection = ({ section }) => {
-    const { name, expandSection } = section;
+  const CustomFacetSection = ({ section, expanded }) => {
+    const { name } = section;
     const { hasSearch = false } = facetSectionVariables[name];
 
-    const [expanded, setExpanded] = useState(expandSection);
     const [showSearch, setShowSearch] = useState(true);
 
     const toggleSearch = (e) => {
       e.stopPropagation();
       setShowSearch(!showSearch);
-    };
-
-    const collapseHandler = () => {
-      setExpanded(!expanded);
     };
 
     let searchConfig = {
@@ -220,7 +214,7 @@ const BentoFacetFilter = ({
 
     return (
       <>
-        <CustomExpansionPanelSummary onClick={collapseHandler} id={section}>
+        <CustomExpansionPanelSummary id={section}>
           <div className={classes.sectionSummaryTextContainer}>
             {sectionLabel[name] !== undefined ? sectionLabel[name] : name}
             {hasSearch && (

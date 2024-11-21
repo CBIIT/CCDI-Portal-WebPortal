@@ -189,7 +189,7 @@ export default () => ({
     justifyContent: 'space-between',
     backgroundColor: '#974599',
     color: '#fff',
-    border: '1px solid #0D8461',
+    // border: '1px solid #0D8461',
     borderRadius: 10,
     fontFamily: 'Lato',
     fontSize: 11,

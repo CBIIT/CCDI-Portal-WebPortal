@@ -32,7 +32,7 @@ export const navMobileList = [
     className: 'navMobileItem',
   },
   {
-      name: 'Applications',
+      name: 'Resources',
       link: '',
       className: 'navMobileItem clickable',
   },
@@ -54,12 +54,7 @@ export const navMobileList = [
 ];
 
 export const navbarSublists = {
-Applications: [
-  {
-    name:'Applications',
-    link: '',
-    className: 'navMobileSubTitle',
-  },
+  Resources: [
   {
     name: 'Childhood Cancer Clinical Data Commons',
     link: 'https://clinicalcommons.ccdi.cancer.gov/',

@@ -220,7 +220,7 @@ const Header = () => {
   
   const clickNavItem = (e) => {
     const clickTitle = e.target.innerText;
-    setNavbarMobileList(navbarSublists[clickTitle]);
+    setNavbarMobileList(navbarSublists[clickTitle].sort((a, b) => a.name.localeCompare(b.name)));
   }
 
   return (

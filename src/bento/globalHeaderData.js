@@ -37,11 +37,6 @@ export const navMobileList = [
       className: 'navMobileItem clickable',
   },
   {
-      name: 'Other Resources',
-      link: '',
-      className: 'navMobileItem clickable',
-  },
-  {
       name: 'News',
       link: '/news',
       className: 'navMobileItem',
@@ -109,12 +104,6 @@ Applications: [
     name:'NCCR Data platform',
     link: 'https://nccrdataplatform.ccdi.cancer.gov/home',
     className: 'navMobileSubItem',
-  },],
-"Other Resources": [
-  {
-    name:'Other Resources',
-    link: '',
-    className: 'navMobileSubTitle',
   },
   {
     name:'Cancer Genomics Cloud',

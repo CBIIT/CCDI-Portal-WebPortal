@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef, createRef } from 'react';
 import styled from 'styled-components';
 import ReactHtmlParser from 'html-react-parser';
-import headerImg from '../../assets/resources/Federation_Header.png';
-import exportIcon from '../../assets/resources/Explore_Icon.svg';
-import closeIcon from '../../assets/icons/Close_Icon.svg';
-import arrowDownIcon from '../../assets/icons/Arrow_Down.svg';
-import { federationContent, introText } from '../../bento/federationData';
-import exportIconBlue from '../../assets/icons/Export_Icon.svg';
-import ccdiDataAccessImg from '../../assets/resources/Federation_CCDI_Data_Access.png';
+import headerImg from '../../../assets/resources/Federation_Header.png';
+import exportIcon from '../../../assets/resources/Explore_Icon.svg';
+import closeIcon from '../../../assets/icons/Close_Icon.svg';
+import arrowDownIcon from '../../../assets/icons/Arrow_Down.svg';
+import { federationContent, introText } from '../../../bento/federationData';
+import exportIconBlue from '../../../assets/icons/Export_Icon.svg';
+import ccdiDataAccessImg from '../../../assets/resources/Federation_CCDI_Data_Access.png';
 
 
 const FederationResourceContainer = styled.div`

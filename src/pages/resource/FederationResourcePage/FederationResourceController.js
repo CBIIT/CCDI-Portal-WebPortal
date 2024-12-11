@@ -14,7 +14,17 @@ const FederationResourceController = ({ match }) => {
       let resultData = [];
       let result = [];
       try {
-        result = await axios.get(FEDERATION_URL);
+        result = await axios.get(
+            FEDERATION_URL,
+            {
+                // query URL without using browser cache
+                headers: {
+                  'Cache-Control': 'no-cache',
+                  'Pragma': 'no-cache',
+                  'Expires': '0',
+                },
+            }
+        );
         resultData = yaml.safeLoad(result.data);
       } catch (_error) {
         // result = await axios.get(YAMLData);

@@ -14,16 +14,9 @@ const FederationResourceController = ({ match }) => {
       let resultData = [];
       let result = [];
       try {
+        const fileUrl = `${FEDERATION_URL}?ts=${new Date().getTime()}`;
         result = await axios.get(
-            FEDERATION_URL,
-            {
-                // query URL without using browser cache
-                headers: {
-                  'Cache-Control': 'no-cache',
-                  'Pragma': 'no-cache',
-                  'Expires': '0',
-                },
-            }
+          fileUrl
         );
         resultData = yaml.safeLoad(result.data);
       } catch (_error) {

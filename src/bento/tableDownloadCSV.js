@@ -126,7 +126,7 @@ export const customStudyTabDownloadCSV = {
 };
 
 export const MY_CART = gql`
-query filesInList($file_ids: [String], $offset: Int = 0, $first: Int = 6000, $order_by:String ="file_name", $sort_direction:String="asc") {
+query filesInList($file_ids: [String], $offset: Int = 0, $first: Int = 200000, $order_by:String ="file_name", $sort_direction:String="asc") {
     filesInList(id: $file_ids, offset: $offset,first: $first, order_by: $order_by, sort_direction: $sort_direction) {
         id
         file_id

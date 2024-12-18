@@ -107,7 +107,7 @@ export const myFilesPageData = {
 
 
 export const manifestData = {
-  keysToInclude: ['guid', 'file_id', 'participant_id', 'md5sum'],
+  keysToInclude: ['guid', 'file_name', 'participant_id', 'md5sum'],
   header: ['drs_uri', 'name', 'Participant ID', 'Md5sum'],
 };
 

@@ -45,7 +45,6 @@ const ExportButtonView = (props,) => {
 
     //transform data structure
     const getManifestPayload = (manifestContent) => {
-      console.log(manifestContent);
       if (!manifestContent || (manifestContent.filesManifestInList && manifestContent.filesManifestInList.length === 0)) {
         return null;
       }

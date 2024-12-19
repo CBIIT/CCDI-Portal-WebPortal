@@ -4,7 +4,7 @@ import axios from "axios";
 import FederationResourceView from "./FederationResourceView";
 
 // const ABOUT_CONTENT_URL = env.REACT_APP_ABOUT_CONTENT_URL;
-const FEDERATION_URL = 'https://raw.githubusercontent.com/CBIIT/CCDI_Hub_Static_Contents/local/federationData.yaml';
+const FEDERATION_URL = 'https://raw.githubusercontent.com/CBIIT/CCDI_Hub_Static_Contents/dev/federationData.yaml';
 
 const FederationResourceController = ({ match }) => {
   const [data, setData] = useState([]);

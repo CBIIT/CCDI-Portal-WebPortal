@@ -96,7 +96,7 @@ export const navbarSublists = {
     className: 'navMobileSubItem',
   },
   {
-    name:'NCCR Data platform',
+    name:'NCCR Data Platform',
     link: 'https://nccrdataplatform.ccdi.cancer.gov/home',
     className: 'navMobileSubItem',
   },

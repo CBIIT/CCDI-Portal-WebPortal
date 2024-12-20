@@ -41,6 +41,26 @@ export const srcList = {
 
 export const newsList = [
     {
+        id: 'hub_02122025',
+        title: 'Childhood Cancer Data Initiative (CCDI) Data Federation Resource releases API V1.1',
+        date: 'February 12, 2025',
+        slug: 'We are excited to announce the release of API V1.1 which enhances search capabilities across various participating resources.',
+        highlight: `<p>CCDI API V1.1 introduces new metadata fields — Anatomic Site, Specimen Molecular Analyte, Library Source Material, Library Selection Method — to enhance data search capabilities. These new metadata fields are harmonized to CDEs registered in the Cancer Data Standards Registry and Repository whenever possible. Current members include the Kids First Data Resource Center, Pediatric Cancer Data Commons, St. Jude Cloud, and Treehouse Childhood Cancer Data Initiative. Data access processes follow the policies of each contributing resource.</p>`,
+        type: 'Announcements',
+        img: 'updateImgHub',
+        latestUpdate: true,
+    },
+    {
+        id: 'ccdc_12112024',
+        title: 'Explore two new resources in the December CCDC release',
+        date: 'December 11, 2024',
+        slug: 'The Childhood Cancer Data Catalog (CCDC) has two new resources and eight new data sets, plus other features',
+        highlight: `<p>The Specimen Resource Locator and Pediatric Malignancies: Inventory of DCEG Research resources were added to the CCDC, along with eight new data sets for existing resources. Some descriptions, titles, and counts were updated across the catalog and there are two new features—users can now download all data set digests from the menu, in addition to being able to link to available TARGET data sets in dbGaP.</p>`,
+        type: 'Application Updates',
+        img: 'updateImgCCDC',
+        latestUpdate: true,
+    },
+    {
         id: 'hub_12062024',
         title: 'Just released: CCDI Hub version 2.5.0',
         date: 'December 6, 2024',
@@ -60,7 +80,6 @@ export const newsList = [
         fullText: '',
         type: 'Application Updates',
         img: 'updateImgHub',
-        latestUpdate: true,
     },
     {
         id: 'cpi_10102024',
@@ -71,7 +90,6 @@ export const newsList = [
         fullText: '',
         type: 'Announcements',
         img: 'updateImgCCDC2',
-        latestUpdate: true,
     },
     { 
         id: 'ccdc_09252024',

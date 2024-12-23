@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, createRef } from 'react';
 import styled from 'styled-components';
 import ReactHtmlParser from 'html-react-parser';
 import { NavLink } from 'react-router-dom';
-import { MCIContent, introText } from '../../../bento/mciData';
+// import { MCIContent, introText } from '../../../bento/mciData';
 import headerImg from '../../../assets/resources/MCI_header_white.png';
 import headerMobileImg from '../../../assets/resources/MCI_header_white_mobile.png';
 import exportIcon from '../../../assets/resources/Explore_Icon.svg';
@@ -508,13 +508,16 @@ const MCIResourceBody = styled.div`
     }
 `;
 
-const MCIResourceView = () => {
+const MCIResourceView = ({data}) => {
     const [selectedNavTitle, setSelectedNavTitle] = useState('');
     const [stickyNavStyle, setStickyNavStyle] = useState('navList');
     const sectionList = useRef([]);
-    sectionList.current = MCIContent.map((element, i) => {
-        return sectionList.current[i] || createRef()
-    });
+    const MCIContent = data.mciContent;
+    if (MCIContent) {
+        sectionList.current = MCIContent.map((element, i) => {
+            return sectionList.current[i] || createRef()
+        });
+    }
     const handleScroll = () => {
         const bodyElement = document.getElementById('MCIBody');
         const footerList = document.getElementsByTagName('footer');
@@ -597,7 +600,7 @@ const MCIResourceView = () => {
                     <div className={stickyNavStyle} id='leftNav'>
                         <div className='navTitle'>TOPICS</div>
                         {
-                            MCIContent.map((mci, topicid) => {
+                            MCIContent && MCIContent.map((mci, topicid) => {
                                 const topickey = `topic_${topicid}`;
                                 return (
                                     <>
@@ -620,9 +623,9 @@ const MCIResourceView = () => {
                 </div>
                 <div className='contentSection'>
                     <div className='contentList'>
-                        <div className='introContainer'>{ReactHtmlParser(introText)}</div>
+                        {data.introText && <div className='introContainer'>{ReactHtmlParser(data.introText)}</div>}
                         {
-                            MCIContent.map((mci, mciidx) => {
+                            MCIContent && MCIContent.map((mci, mciidx) => {
                                 const mcikey = `mci_${mciidx}`;
                                 return (
                                     <div key={mcikey}>

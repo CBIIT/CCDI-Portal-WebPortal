@@ -13,7 +13,7 @@ import Search from '../../pages/search/searchView';
 import Inventory from '../../pages/inventory/inventoryController';
 import Cart from '../../pages/cart/cartController';
 import ScrollButton from '../ScrollButton/ScrollButtonView';
-import MCIResourceView from '../../pages/resource/MCIResourceView'
+import MCIResourceView from '../../pages/resource/MCIResourcePage/MCIResourceView'
 import FederationResourceView from "../../pages/resource/FederationResourceView";
 import CPIResourceView from "../../pages/resource/CPIResourcePage/CPIResourceView";
 import OverlayWindow from '../OverlayWindow/OverlayWindow';

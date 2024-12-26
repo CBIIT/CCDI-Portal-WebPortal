@@ -29,7 +29,7 @@ export const MCIContent = [
                 diseaseTable: {
                     title: 'Enrollments in MCI (APEC14B1-MCI) by Diagnosis Type as of November 12, 2024',
                     header: ['', 'Primary Diagnosis Disease Group', 'Number of Participants'],
-                    body: [['Central Nervous System', 3503], ['Soft Tissue Sarcoma', 1061], ['Rare Tumors', 497], ['Neuroblastoma', 265], ['Ewing Sarcoma', 16], ['Osteosarcoma', 10], ['Germ Cell Tumor', 11], ['Myeloid Leukemia', 4], ['Renal', 8], ['Liver Tumor', 4], ['Non-Hodgkin Lymphoma', 3], ['Lymphoblastic Leukemia', 2], ['Langerhans Cell Histiocytosis', 1], ['Lymphoproliferative Disease', 1]],
+                    body: [{ name: 'Central Nervous System', value: 3503}, {name: 'Soft Tissue Sarcoma', value: 1061}, {name: 'Rare Tumors', value: 497}, {name: 'Neuroblastoma', value: 265}, {name: 'Ewing Sarcoma', value: 16}, {name: 'Osteosarcoma', value: 10}, {name: 'Germ Cell Tumor', value: 11}, {name: 'Myeloid Leukemia', value: 4}, {name: 'Renal', value: 8}, {name: 'Liver Tumor', value: 4}, {name: 'Non-Hodgkin Lymphoma', value: 3}, {name: 'Lymphoblastic Leukemia', value: 2}, {name: 'Langerhans Cell Histiocytosis', value: 1}, {name: 'Lymphoproliferative Disease', value: 1}],
                 },
                 diseaseDonut: {
                     title: 'Enrollment',

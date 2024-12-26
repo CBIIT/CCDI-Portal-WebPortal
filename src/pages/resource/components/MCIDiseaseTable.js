@@ -119,7 +119,7 @@ height: 900;
 }
 `;
 
-const MCIDiseaseTable = ({ table, donut }) => {
+const MCIDiseaseTable = ({ table }) => {
     return (
         <MCITableContainer>
             <div className='mciTableTitle'>{table.title}</div>
@@ -136,10 +136,10 @@ const MCIDiseaseTable = ({ table, donut }) => {
             <div className='mciTableBody'>
                 <div className='mciTableDonut'>
                     <DonutChart
-                        data={donut.data}
+                        data={table.body}
                         innerRadiusP='50%'
                         outerRadiusP='85%'
-                        paddingSpace={donut.length === 1 ? 0 : 0.5}
+                        paddingSpace={table.body.length === 1 ? 0 : 0.5}
                         textColor="black"
                     />
                 </div>
@@ -152,8 +152,8 @@ const MCIDiseaseTable = ({ table, donut }) => {
                             return (
                                 <>
 
-                                    <div className='mciTableBodyListItem' key={key1}>{bodyItem[0]}</div>
-                                    <div className='mciTableBodyListItem' key={key2}>{bodyItem[1]}</div>
+                                    <div className='mciTableBodyListItem' key={key1}>{bodyItem.name}</div>
+                                    <div className='mciTableBodyListItem' key={key2}>{bodyItem.value}</div>
                                 </>
                             )
                         })

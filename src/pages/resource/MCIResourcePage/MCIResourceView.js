@@ -651,9 +651,9 @@ const MCIResourceView = ({data}) => {
                                                                 />
                                                             </div>
                                                             } */}
-                                                            {mciItem.diseaseTable && mciItem.diseaseDonut && 
+                                                            {mciItem.diseaseTable && 
                                                             <>
-                                                                <div className='MCIDiseaseTableContainer'><MCIDiseaseTable table={mciItem.diseaseTable} donut={mciItem.diseaseDonut}/></div>
+                                                                <div className='MCIDiseaseTableContainer'><MCIDiseaseTable table={mciItem.diseaseTable}/></div>
                                                                 <div className='MCIDiseaseTableMobileContainer'><MCIDiseaseTableMobile table={mciItem.diseaseTable}/></div>
                                                                 <div>{mciItem.diseaseTable.footer}</div>
                                                             </>

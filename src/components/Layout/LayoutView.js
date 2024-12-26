@@ -7,7 +7,7 @@ import Home from '../../pages/landing/landingController';
 import About from '../../pages/about/aboutView';
 import DataUsagePoliciesView from '../../pages/about/dataUsagePoliciesView';
 import PublicationsView from '../../pages/about/publications/publicationsView';
-import News from '../../pages/news/newsView';
+import News from '../../pages/news/newsController';
 import Error from '../../pages/error/Error';
 import Search from '../../pages/search/searchView';
 import Inventory from '../../pages/inventory/inventoryController';

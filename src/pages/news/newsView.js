@@ -8,7 +8,8 @@ import Pagination from '@material-ui/lab/Pagination';
 import styled from 'styled-components';
 import exportIcon from '../../assets/about/Export_Icon.svg';
 import newsImg from '../../assets/news/News_Header.jpg';
-import { altList, srcList, newsList } from '../../bento/newsData'
+// import { altList, srcList, newsList } from '../../bento/newsData'
+import { altList, srcList } from '../../bento/newsData'
 
 const NewsContainer = styled.div`
   width: 100%;
@@ -262,27 +263,26 @@ const useOutsideAlerter = (ref) => {
   }, [ref]);
 };
 
-const getResultList = (tabName) => {
-  if (tabName === "All") {
-    return newsList;
-  } else {
-    return newsList.filter(item => item.type === tabName);
-  }
-};
+const NewsView = ({classes, newsList}) => {
+  const getResultList = (tabName) => {
+    if (tabName === "All") {
+      return newsList;
+    } else {
+      return newsList.filter(item => item.type === tabName);
+    }
+  };
 
-const getPageResults = (selectedTab, pageInfo) => {
-  const resultList = getResultList(selectedTab);
-  const allids = [];
-  const indexStart = pageInfo.pageSize*(pageInfo.page-1);
-  const indexEnd = pageInfo.pageSize*pageInfo.page < pageInfo.pageTotal ? pageInfo.pageSize*pageInfo.page - 1 : pageInfo.pageTotal - 1;
-  for (let i = indexStart; i<= indexEnd; i++) {
-    allids.push(resultList[i]);
+  const getPageResults = (selectedTab, pageInfo) => {
+    const resultList = getResultList(selectedTab);
+    const allids = [];
+    const indexStart = pageInfo.pageSize*(pageInfo.page-1);
+    const indexEnd = pageInfo.pageSize*pageInfo.page < pageInfo.pageTotal ? pageInfo.pageSize*pageInfo.page - 1 : pageInfo.pageTotal - 1;
+    for (let i = indexStart; i<= indexEnd; i++) {
+      allids.push(resultList[i]);
+    }
+    return allids;
   }
-  return allids;
-}
 
-const NewsView = ({classes}) => {
-  // const navigate = useNavigate();
   const [selectedTab, setSelectedTab] = useState("All");
   const newsTabList = ['All', 'Announcements', 'News & Other', 'Application Updates', 'Site Updates'];
   const sizelist = [10,20,50,100];

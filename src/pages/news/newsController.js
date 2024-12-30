@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
+import env from '../../utils/env'
 import yaml from "js-yaml";
 import axios from "axios";
 import NewsView from "./newsView";
 
-// const ABOUT_CONTENT_URL = env.REACT_APP_ABOUT_CONTENT_URL;
-const NEWS_URL = 'https://raw.githubusercontent.com/CBIIT/CCDI_Hub_Static_Contents/dev/newsData.yaml';
+const NEWS_URL = env.NEWS_URL;
 
 const NewsController = () => {
   const [data, setData] = useState([]);

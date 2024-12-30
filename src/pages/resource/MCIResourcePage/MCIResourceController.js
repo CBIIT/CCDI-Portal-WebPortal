@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
+import env from '../../../utils/env';
 import yaml from "js-yaml";
 import axios from "axios";
 import MCIResourceView from "./MCIResourceView";
 
-// const ABOUT_CONTENT_URL = env.REACT_APP_ABOUT_CONTENT_URL;
-const MCI_URL = 'https://raw.githubusercontent.com/CBIIT/CCDI_Hub_Static_Contents/dev/mciData.yaml';
+const MCI_URL = env.MCI_URL;
 
 const MCIResourceController = ({ match }) => {
   const [data, setData] = useState([]);

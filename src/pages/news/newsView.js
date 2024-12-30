@@ -9,7 +9,7 @@ import styled from 'styled-components';
 import exportIcon from '../../assets/about/Export_Icon.svg';
 import newsImg from '../../assets/news/News_Header.jpg';
 // import { altList, srcList, newsList } from '../../bento/newsData'
-import { altList, srcList } from '../../bento/newsData'
+import { srcList } from '../../bento/newsData'
 
 const NewsContainer = styled.div`
   width: 100%;
@@ -263,7 +263,7 @@ const useOutsideAlerter = (ref) => {
   }, [ref]);
 };
 
-const NewsView = ({classes, newsList}) => {
+const NewsView = ({classes, newsList, altList}) => {
   const getResultList = (tabName) => {
     if (tabName === "All") {
       return newsList;

@@ -5,8 +5,11 @@ import { CircularProgress } from '@material-ui/core';
 import { statsData } from '../../bento/landingPageData';
 import LandingView from './landingView';
 import { LANDING_DATA_QUERY } from '../../bento/landingPageData';
+import env from '../../utils/env';
 
 const CCDCurl ='https://datacatalog.ccdi.cancer.gov/service/datasets/count';
+
+const STATIC_CONTENT_URL = `${env.REACT_APP_STATIC_CONTENT_URL}newsData.yaml`;
 
 const getDashData = () => {
   const client = useApolloClient();
@@ -28,6 +31,7 @@ const getDashData = () => {
   const [statsDataNew, setStatsDataNew] = useState(statsData);
 
   useEffect(() => {
+    console.log("print out static content url: " + STATIC_CONTENT_URL);
     const controller = new AbortController();
     getCCDC().then((result) => {
       let newStatList = statsDataNew;

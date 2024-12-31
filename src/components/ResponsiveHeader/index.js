@@ -1,9 +1,5 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
 import styled from 'styled-components';
-import {
-  initCart,
-} from '@bento-core/cart';
 import HeaderDesktop from './HeaderDesktop';
 import HeaderTablet from './HeaderTablet';
 import HeaderMobile from './HeaderMobile';
@@ -59,10 +55,6 @@ const HeaderContainer = styled.div`
 `;
 
 const Header = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(initCart());
-  }, []);
   return (
     <HeaderContainer>
       <div className="desktop">

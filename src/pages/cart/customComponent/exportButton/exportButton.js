@@ -45,11 +45,12 @@ const ExportButtonView = (props,) => {
 
     //transform data structure
     const getManifestPayload = (manifestContent) => {
-      if (!manifestContent || (manifestContent.filesManifestInList && manifestContent.filesManifestInList.length === 0)) {
+      // console.log(manifestContent);
+      if (!manifestContent || (manifestContent.filesInList && manifestContent.filesInList.length === 0)) {
         return null;
       }
       const appendString = 'drs://nci-crdc.datacommons.io/'
-      const processedStoreManifestPayload = manifestContent.filesManifestInList.map((el) => {
+      const processedStoreManifestPayload = manifestContent.filesInList.map((el) => {
         const obj = {}
         for (let i = 0; i < manifestData.keysToInclude.length; i++) {
           if (manifestData.keysToInclude[i] === 'guid') {

@@ -19,7 +19,7 @@ export const federationContent = [
                 +'<a class="link" href="https://cbiit.github.io/ccdi-federation-api-aggregation/swagger-aggr.yml" target="_blank" rel="noopener noreferrer">OpenAPI Specification</a>, '
                 +'<a class="link" href="https://github.com/CBIIT/ccdi-federation-api-spec/wiki" target="_blank" rel="noopener noreferrer">Data Federation Resource Wiki</a>, '
                 +'and '
-                +'<a class="link" href="https://github.com/CBIIT/ccdi-federation-api-spec" target="_blank" rel="noopener noreferrer">GitHub Repository</a>'
+                +'<a class="link" href="https://github.com/CBIIT/ccdi-federation-api" target="_blank" rel="noopener noreferrer">GitHub Repository</a>'
                 +' to support participating node development. You may also get assistance or report an '
                 +'<a class="link" href="https://github.com/CBIIT/ccdi-federation-api-spec/issues/new/choose" target="_blank" rel="noopener noreferrer">issue</a>. Read more about CCDI Federation API in the '
                 +'<a class="link" href="https://cbiit.github.io/ccdi-federation-api/blog/09-25-2024-introducing-the-federation-api.html" target="_blank" rel="noopener noreferrer">blog</a>.</p>'

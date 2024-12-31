@@ -32,12 +32,7 @@ export const navMobileList = [
     className: 'navMobileItem',
   },
   {
-      name: 'Applications',
-      link: '',
-      className: 'navMobileItem clickable',
-  },
-  {
-      name: 'Other Resources',
+      name: 'Resources',
       link: '',
       className: 'navMobileItem clickable',
   },
@@ -59,12 +54,7 @@ export const navMobileList = [
 ];
 
 export const navbarSublists = {
-Applications: [
-  {
-    name:'Applications',
-    link: '',
-    className: 'navMobileSubTitle',
-  },
+  Resources: [
   {
     name: 'Childhood Cancer Clinical Data Commons',
     link: 'https://clinicalcommons.ccdi.cancer.gov/',
@@ -106,15 +96,9 @@ Applications: [
     className: 'navMobileSubItem',
   },
   {
-    name:'NCCR Data platform',
+    name:'NCCR Data Platform',
     link: 'https://nccrdataplatform.ccdi.cancer.gov/home',
     className: 'navMobileSubItem',
-  },],
-"Other Resources": [
-  {
-    name:'Other Resources',
-    link: '',
-    className: 'navMobileSubTitle',
   },
   {
     name:'Cancer Genomics Cloud',

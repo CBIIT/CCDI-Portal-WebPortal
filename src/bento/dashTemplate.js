@@ -950,7 +950,6 @@ export const facetsConfig = [
     type: InputTypes.CHECKBOX,
     sort_type: sortType.ALPHABET,
     show: true,
-    search: true,
   },
   {
     section: SAMPLES,

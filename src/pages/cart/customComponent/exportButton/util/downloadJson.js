@@ -51,7 +51,7 @@ export function createFileName(fileName) {
     manifestFileName,
     manifestData,
   ) {
-    const tableArr = tableData.filesManifestInList;
+    const tableArr = tableData.filesInList;
     const jsonse = JSON.stringify(tableArr);
     const csv = convertToCSV(jsonse, comment, manifestData.keysToInclude, manifestData.header);
     const exportData = new Blob([`${csv}`], { type: 'text/csv;charset=utf-8' });

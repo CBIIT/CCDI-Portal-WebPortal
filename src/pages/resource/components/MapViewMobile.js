@@ -102,7 +102,7 @@ const MapViewMobileContainer = styled.div`
 const MapMobileView = ( {mapData} ) => {
     return (
         <MapViewMobileContainer>
-            <div className='mciTableTitle'>Enrollment Counts by State as of August 7, 2024</div>
+            <div className='mciTableTitle'>Enrollment Counts by State as of November 12, 2024</div>
             <div className='mciTableHeader'>
                 <div className='mciTableHeaderList'>
                     <div className='mciTableHeaderListItem' key="mapMobileHeader_1"><p className='headerText'>State</p></div>

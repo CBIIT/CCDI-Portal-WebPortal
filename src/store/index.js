@@ -32,6 +32,7 @@ if (process.env.NODE_ENV === 'development') {
 } else {
   store = createStore(
     combineReducers(reducers),
+    applyMiddleware(ReduxThunk)
   );
 }
 

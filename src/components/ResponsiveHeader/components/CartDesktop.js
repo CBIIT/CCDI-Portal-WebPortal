@@ -70,7 +70,7 @@ const CartContainer = styled.div`
 
   .cartCounter2Wrapper {
     margin-top: 6px;
-    margin-left: 3px;
+    margin-left: 10px;
   }
 
   .cartCounter2 {
@@ -124,7 +124,7 @@ const Cart = (props) => {
                     {navBarCartData.cartLabelType === "labelUnderCount" ? (
                       <div className="cartCounter2Wrapper">
                         <div className="cartCounter2">
-                          {numberOfCases}
+                          {numberOfCases.toLocaleString()}
                         </div>
                         <div className="cartLabel">
                           Files
@@ -133,7 +133,7 @@ const Cart = (props) => {
                     ) : (
                       <span className="badge">
                         <span className="cartCounter">
-                          {numberOfCases}
+                          {numberOfCases.toLocaleString()}
                         </span>
                       </span>
                     )}

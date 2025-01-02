@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import Logo from '../ResponsiveHeader/components/LogoTablet';
@@ -214,17 +214,26 @@ const USGovBanner = styled.div`
 
 const Header = () => {
   const path = useLocation().pathname;
+  const [clickTitle, setClickTitle] = useState('');
   const [navMobileDisplay, setNavMobileDisplay] = useState('none');
   const [navbarMobileList, setNavbarMobileList] = useState(navMobileList);
   
   const clickNavItem = (e) => {
-    const clickTitle = e.target.innerText;
-    setNavbarMobileList(navbarSublists[clickTitle]);
+    const ctitle = e.target.innerText;
+    setClickTitle(ctitle);
   }
-  
+
+  useEffect(() => {
+    if (clickTitle) {
+      setNavbarMobileList(navbarSublists[clickTitle].sort((a, b) => a.name.localeCompare(b.name)));
+    } else {
+      setNavbarMobileList(navMobileList);
+    }
+  }, [clickTitle]);
+
   return (
     <>
-       <USGovBanner>
+      <USGovBanner>
         <div className ='USGovBannerInner'>
           <div className='bannerLeft'>
             <img src={USGovBannerData.logo} alt={"US Flag logo"}></img>
@@ -251,8 +260,9 @@ const Header = () => {
         <MenuArea>
             <div className='menuContainer'>
                 <div className='closeIcon' onClick={() => setNavMobileDisplay('none')}><img className='closeIconImg' src={menuClearIcon} alt="menuClearButton" /></div>
-                { navbarMobileList !== navMobileList && <div className='backButton' onClick={() => setNavbarMobileList(navMobileList)}>Main Menu</div>}
+                { navbarMobileList !== navMobileList && <div className='backButton' onClick={() => setClickTitle('')}>Main Menu</div>}
                 <div className='navMobileContainer'>
+                { navbarMobileList !== navMobileList && <div className='navMobileItem'>{clickTitle}</div>}
                     {
                         navbarMobileList.map((navMobileItem, idx) => {
                             const mobilekey = `mobile_${idx}`;
@@ -261,7 +271,6 @@ const Header = () => {
                                     {navMobileItem.className === 'navMobileItem' && <NavLink to={navMobileItem.link} key={mobilekey} onClick={() => setNavMobileDisplay('none')}><div className='navMobileItem'>{navMobileItem.name}</div></NavLink>}
                                     {navMobileItem.className === 'navMobileItem clickable' && <div key={mobilekey} className='navMobileItem clickable' onClick={clickNavItem}>{navMobileItem.name}</div>}
                                     {navMobileItem.className === 'navMobileSubItem' && <a href={navMobileItem.link} target={navMobileItem.link.includes("http") || navMobileItem.link.includes("pdf") ? "_blank" : ""} rel="noopener noreferrer" key={mobilekey}><div className='navMobileItem SubItem' onClick={() => setNavMobileDisplay('none')}>{navMobileItem.name}</div></a>}
-                                    {navMobileItem.className === 'navMobileSubTitle' && <div key={mobilekey} className='navMobileItem'>{navMobileItem.name}</div>}
                                     {navMobileItem.className === 'cart' && <NavLink to={navBarCartData.cartLink} key='cart_key' onClick={() => setNavMobileDisplay('none')}><div className='navMobileItem' style={{fontWeight: '600'}}>MY FILES</div></NavLink>}
                                 </>
                             )

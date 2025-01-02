@@ -182,7 +182,7 @@ export const MCIContent = [
                         +' through the '
                         +'<a class="link" href="https://gcc02.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcgc.sbgenomics.com%2Fdatasets%2Ffile-repository&data=05%7C01%7Ccarol.bastiani%40nih.gov%7C7708699b96a144ce602208db6d0ace70%7C14b77578977342d58507251ca2dc2b06%7C0%7C0%7C638223665394038536%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=SyqbQFpBXs7Iqo6Ji2bSpdE3wQBcfAql9Gkacq7%2FBoI%3D&reserved=0" target="_blank" rel="noopener noreferrer">Cancer Data Service Explorer</a>'
                         +' (CDS Explorer). The CDS Explorer provides a user-friendly interface for exploring the data in the CDS. '
-                        +'<a class="link" href="https://docs.cancergenomicscloud.org/docs/import-cds-data" target="_blank" rel="noopener noreferrer">Here is a tutorial</a>'
+                        +'<a class="link" href="https://docs.cancergenomicscloud.org/docs/import-data-from-the-cds" target="_blank" rel="noopener noreferrer">Here is a tutorial</a>'
                         +' on how to import CDS data. To see a preview of MCI data prior to going through the data authorization process, '
                         +'<a class="link" href="https://datacatalog.ccdi.cancer.gov/dataset/CCDI-phs002790" target="_blank" rel="noopener noreferrer">visit MCI’s page</a>'
                         +' in the CCDI Childhood Cancer Data Catalog.</p>'

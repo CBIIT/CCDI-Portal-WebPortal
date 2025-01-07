@@ -4,7 +4,7 @@ import yaml from "js-yaml";
 import axios from "axios";
 import NewsView from "./newsView";
 
-const NEWS_URL = `${env.REACT_APP_STATIC_CONTENT_URL}newsData.yaml`;
+const NEWS_URL = `${env.REACT_APP_STATIC_CONTENT_URL}/newsData.yaml`;
 
 const NewsController = () => {
   const [data, setData] = useState([]);

@@ -4,7 +4,7 @@ import yaml from "js-yaml";
 import axios from "axios";
 import MCIResourceView from "./MCIResourceView";
 
-const MCI_URL = env.REACT_APP_STATIC_CONTENT_URL + 'mciData.yaml';
+const MCI_URL = env.REACT_APP_STATIC_CONTENT_URL + '/mciData.yaml';
 
 const MCIResourceController = ({ match }) => {
   const [data, setData] = useState([]);

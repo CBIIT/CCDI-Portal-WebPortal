@@ -70,7 +70,7 @@ const CartContainer = styled.div`
 
   .cartCounter2Wrapper {
     margin-top: 6px;
-    margin-left: 10px;
+    margin-left: 12px;
   }
 
   .cartCounter2 {

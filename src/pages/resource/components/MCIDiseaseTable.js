@@ -84,9 +84,12 @@ height: 900;
     font-weight: 400;
     line-height: 17px;
     letter-spacing: 0em;
-    text-align: center;
     background: #F4F5F5;
     border-left: 1px solid #42779A;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
 
 .donutContainer {

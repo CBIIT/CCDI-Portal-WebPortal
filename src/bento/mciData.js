@@ -168,25 +168,15 @@ export const MCIContent = [
                 id: 'How_to_Access_MCI_Data',
                 subtopic: 'How to Access MCI Data',
                 content: '<h3>How can MCI data be accessed through the CCDI Data Ecosystem?</h3>'
-                        +'<p>Separately, molecular characterization data and deidentified clinical reports are submitted to the CCDI Data Ecosystem, along with additional data encompassing demographics, diagnosis, treatment, and follow-up directly from COG. Data are hosted in the '
-                        +'<a class="link" href="https://datacommons.cancer.gov/repository/cancer-data-service" target="_blank" rel="noopener noreferrer">Cancer Data Service (CDS)</a>'
-                        +', which is a data repository under the '
-                        +'<a class="link" href="https://datascience.cancer.gov/data-commons" target="_blank" rel="noopener noreferrer">Cancer Research Data Commons</a>'
-                        +' infrastructure. Please see the '
-                        +`<a class="link" href=${userGuidePDF} target="_blank" rel="noopener noreferrer">instructions</a>`
-                        +' on how to access the data associated with this study, '
-                        +'<a class="link" href="https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs002790" target="_blank" rel="noopener noreferrer">phs002790</a>'
-                        +'. For the CCDI studies, the database of Genotypes and Phenotypes (dbGaP) maintains a list of the subject IDs, sample IDs, and consents. Authorization through dbGaP is required to access controlled-access data and clinical/phenotypic files.</p>'
-                        +'<p>Users can analyze CCDI data on the '
-                        +'<a class="link" href="https://www.cancergenomicscloud.org/" target="_blank" rel="noopener noreferrer">Cancer Genomics Cloud</a>'
-                        +' through the '
-                        +'<a class="link" href="https://gcc02.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcgc.sbgenomics.com%2Fdatasets%2Ffile-repository&data=05%7C01%7Ccarol.bastiani%40nih.gov%7C7708699b96a144ce602208db6d0ace70%7C14b77578977342d58507251ca2dc2b06%7C0%7C0%7C638223665394038536%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=SyqbQFpBXs7Iqo6Ji2bSpdE3wQBcfAql9Gkacq7%2FBoI%3D&reserved=0" target="_blank" rel="noopener noreferrer">Cancer Data Service Explorer</a>'
-                        +' (CDS Explorer). The CDS Explorer provides a user-friendly interface for exploring the data in the CDS. '
-                        +'<a class="link" href="https://docs.cancergenomicscloud.org/docs/import-data-from-the-cds" target="_blank" rel="noopener noreferrer">Here is a tutorial</a>'
-                        +' on how to import CDS data. To see a preview of MCI data prior to going through the data authorization process, '
-                        +'<a class="link" href="https://datacatalog.ccdi.cancer.gov/dataset/CCDI-phs002790" target="_blank" rel="noopener noreferrer">visit MCI’s page</a>'
-                        +' in the CCDI Childhood Cancer Data Catalog.</p>'
-                        +'<p>For investigators planning to use data from different resources: If you intend to utilize data from institutions that enroll patients in the Molecular Characterization Initiative, please note that the data available on this site may be identical to the data collected from the submitting clinical sites.</p>',
+                        +'<p>MCI data can be accessed through the CCDI Data Ecosystem, which includes molecular characterization data, deidentified clinical reports, and whole slide images of hematoxylin and eosin (H&E) stained tissue, along with additional data on demographics, diagnosis, treatment, and follow-up.</p>'
+                        +'<p>CCDI studies are summarized and indexed in the '
+                        +'<a href="/explore">CCDI Hub Explore Dashboard</a>'
+                        +', where you can export row-level metadata for participants, samples, or files. To download study metadata, open the Studies filter set from the left-hand menu, expand the Study Name category, and scroll to find the Molecular Characterization Initiative. Alternatively in the Studies filter set, you can expand the dbGaP Accession category and scroll to find accession phs002790. Select the checkbox next to either Molecular Characterization Initiative or phs002790, then locate the Metadata column under Studies and click to download the study’s metadata. Then, select the cohorts of your interest.</p>'
+                        +'<p>Alternatively, the shopping cart feature on the dashboard allows users to select and manage files of interest. You can download a comma-separated values (CSV) file manifest or export the manifest directly to the Cancer Genomics Cloud (CGC) for further analysis. This '
+                        +`<a class="link" href=${userGuidePDF} target="_blank" rel="noopener noreferrer">user guide</a>`
+                        +' provides information on how to find, request, access, download, and analyze controlled-access data. For questions, contact '
+                        +'<a href="mailto:ncichildhoodcancerdatainitiative@mail.nih.gov">ncichildhoodcancerdatainitiative@mail.nih.gov</a>.</p>'
+                        +'<p>Note: For investigators planning to use data from different resources: If you intend to utilize data from institutions that enroll patients in the Molecular Characterization Initiative, please note that the data available on this site may be identical to the data collected from the submitting clinical sites.</p>'
             },
             {
                 id: 'Germline_Findings',

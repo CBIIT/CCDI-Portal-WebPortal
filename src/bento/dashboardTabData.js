@@ -1539,7 +1539,7 @@ export const tabContainers = [
         cellStyle: cellStyles.DBGAP,
       },
       {
-        dataField: 'study_id',
+        dataField: 'dbgap_accession',
         header: 'Access',
         display: true,
         sortable: false,
@@ -1792,7 +1792,6 @@ export const tabContainers = [
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
-        hideable: true,
       },
       {
         dataField: 'data_category',

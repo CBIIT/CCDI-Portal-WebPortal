@@ -71,8 +71,8 @@ export const configColumn = (columns) => {
   * display columns as configuration
   * set custom cell render for column
   */
-  const displayColumns = columns.filter((col) => col.display);
-  const displayCustomView = [...displayColumns].map((column) => {
+
+  const displayCustomView = columns.map((column) => {
     if (column.cellType === cellTypes.CUSTOM_ELEM) {
       return {
         ...column,

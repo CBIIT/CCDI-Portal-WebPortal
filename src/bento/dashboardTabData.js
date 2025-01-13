@@ -1264,7 +1264,9 @@ export const tabContainers = [
     tableID: 'participant_tab_table',
     extendedViewConfig: {
       pagination: true,
-      manageViewColumns: false,
+      manageViewColumns: {
+        title: 'View Columns',
+      },
     },
     columns: [
       {
@@ -1303,6 +1305,7 @@ export const tabContainers = [
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
+        hideable: true,
       },
       {
         dataField: 'race',
@@ -1310,6 +1313,7 @@ export const tabContainers = [
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
+        hideable: true,
       },
       {
         dataField: 'synonym_id',
@@ -1317,6 +1321,7 @@ export const tabContainers = [
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
+        hideable: true,
       },
     ],
     id: 'participant_tab',
@@ -1346,7 +1351,9 @@ export const tabContainers = [
     tableID: 'diagnosis_tab_table',
     extendedViewConfig: {
       pagination: true,
-      manageViewColumns: false,
+      manageViewColumns: {
+        title: 'View Columns',
+      },
     },
     columns: [
       {
@@ -1395,6 +1402,7 @@ export const tabContainers = [
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
+        hideable: true,
       },
       {
         dataField: 'anatomic_site',
@@ -1402,20 +1410,22 @@ export const tabContainers = [
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
+        hideable: true,
       },
       {
         dataField: 'diagnosis_classification_system',
         header: 'Diagnosis Classification System',
-        display: true,
+        display: false,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
       },
       {
         dataField: 'diagnosis_basis',
         header: 'Diagnosis Basis',
-        display: true,
+        display: false,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
+        hideable: true,
       },
       /*{
         dataField: 'tumor_grade_source',
@@ -1434,9 +1444,10 @@ export const tabContainers = [
       {
         dataField: 'disease_phase',
         header: 'Disease Phase',
-        display: true,
+        display: false,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
+        hideable: true,
       },
       {
         dataField: 'age_at_diagnosis',
@@ -1452,6 +1463,7 @@ export const tabContainers = [
           return dt.toString();
         },
         role: cellTypes.DISPLAY,
+        hideable: true,
       },
       /*{
         dataField: 'last_known_survival_status',
@@ -1499,7 +1511,9 @@ export const tabContainers = [
     tableID: 'study_tab_table',
     extendedViewConfig: {
       pagination: true,
-      manageViewColumns: false,
+      manageViewColumns: {
+        title: 'View Columns',
+      },
     },
     columns: [
       {
@@ -1513,6 +1527,7 @@ export const tabContainers = [
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
+        hideable: true,
       },
       {
         dataField: 'study_id',
@@ -1524,7 +1539,7 @@ export const tabContainers = [
         cellStyle: cellStyles.DBGAP,
       },
       {
-        dataField: 'study_id',
+        dataField: 'dbgap_accession',
         header: 'Access',
         display: true,
         sortable: false,
@@ -1532,6 +1547,7 @@ export const tabContainers = [
         cellType: cellTypes.CUSTOM_ELEM,
         cellStyle: cellStyles.STUDY_DOWNLOAD,
         role: cellTypes.DISPLAY,
+        hideable: true,
       },
       {
         dataField: 'diagnosis',
@@ -1543,6 +1559,7 @@ export const tabContainers = [
         cellType: cellTypes.CUSTOM_ELEM,
         cellStyle: cellStyles.EXPAND,
         role: cellTypes.DISPLAY,
+        hideable: true,
       },
       {
         dataField: 'anatomic_site',
@@ -1553,6 +1570,7 @@ export const tabContainers = [
         cellType: cellTypes.CUSTOM_ELEM,
         cellStyle: cellStyles.EXPAND,
         role: cellTypes.DISPLAY,
+        hideable: true,
       },
       {
         dataField: 'num_of_participants',
@@ -1560,6 +1578,7 @@ export const tabContainers = [
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
+        hideable: true,
       },
       {
         dataField: 'num_of_samples',
@@ -1567,6 +1586,7 @@ export const tabContainers = [
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
+        hideable: true,
       },
       {
         dataField: 'num_of_files',
@@ -1574,6 +1594,7 @@ export const tabContainers = [
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
+        hideable: true,
       },
       {
         dataField: 'file_type',
@@ -1584,6 +1605,7 @@ export const tabContainers = [
         cellType: cellTypes.CUSTOM_ELEM,
         cellStyle: cellStyles.EXPAND,
         role: cellTypes.DISPLAY,
+        hideable: true,
       },
       {
         dataField: 'pubmed_id',
@@ -1591,6 +1613,7 @@ export const tabContainers = [
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
+        hideable: true,
       },
       {
         dataField: 'personnel_name',
@@ -1598,6 +1621,7 @@ export const tabContainers = [
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
+        hideable: true,
       },
       {
         dataField: 'grant_id',
@@ -1605,6 +1629,7 @@ export const tabContainers = [
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
+        hideable: true,
       },
     ],
     id: 'study_tab',
@@ -1635,7 +1660,9 @@ export const tabContainers = [
     tableID: 'sample_tab_table',
     extendedViewConfig: {
       pagination: true,
-      manageViewColumns: false,
+      manageViewColumns: {
+        title: 'View Columns',
+      },
     },
     saveButtonDefaultStyle: {
       color: '#fff',
@@ -1687,6 +1714,7 @@ export const tabContainers = [
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
+        hideable: true,
       },
       {
         dataField: 'participant_age_at_collection',
@@ -1702,6 +1730,7 @@ export const tabContainers = [
           return dt.toString();
         },
         role: cellTypes.DISPLAY,
+        hideable: true,
       },
       {
         dataField: 'sample_tumor_status',
@@ -1709,6 +1738,7 @@ export const tabContainers = [
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
+        hideable: true,
       },
       {
         dataField: 'tumor_classification',
@@ -1716,6 +1746,7 @@ export const tabContainers = [
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
+        hideable: true,
       },
     ],
     id: 'sample_tab',
@@ -1745,7 +1776,9 @@ export const tabContainers = [
     tableID: 'file_tab_table',
     extendedViewConfig: {
       pagination: true,
-      manageViewColumns: false,
+      manageViewColumns: {
+        title: 'View Columns',
+      },
     },
     columns: [
       {
@@ -1780,6 +1813,7 @@ export const tabContainers = [
           }
           return dt.toString();
         },
+        hideable: true,
       },
       {
         dataField: 'file_description',
@@ -1787,6 +1821,7 @@ export const tabContainers = [
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
+        hideable: true,
       },
       {
         dataField: 'file_type',
@@ -1794,6 +1829,7 @@ export const tabContainers = [
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
+        hideable: true,
       },
       {
         dataField: 'file_size',
@@ -1803,6 +1839,7 @@ export const tabContainers = [
         role: cellTypes.DISPLAY,
         dataFormatType: dataFormatTypes.FORMAT_BYTES,
         cellType: cellTypes.FORMAT_DATA,
+        hideable: true,
       },
       {
         dataField: 'file_access',
@@ -1810,6 +1847,7 @@ export const tabContainers = [
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
+        hideable: true,
       },
       {
         dataField: 'study_id',
@@ -1835,51 +1873,58 @@ export const tabContainers = [
       {
         dataField: 'guid',
         header: 'GUID',
-        display: true,
+        display: false,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
+        hideable: true,
       },
       {
         dataField: 'md5sum',
         header: 'MD5sum',
-        display: true,
+        display: false,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
+        hideable: true,
       },
       {
         dataField: 'library_selection',
         header: 'Library Selection',
-        display: true,
+        display: false,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
+        hideable: true,
       },
       {
         dataField: 'library_source_material',
         header: 'Library Source Material',
-        display: true,
+        display: false,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
+        hideable: true,
       },
       {
         dataField: 'library_strategy',
         header: 'Library Strategy',
-        display: true,
+        display: false,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
+        hideable: true,
       },
       {
         dataField: 'library_source_molecule',
         header: 'Library Source Molecule',
-        display: true,
+        display: false,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
+        hideable: true,
       },
       {
         dataField: 'file_mapping_level',
         header: 'File Mapping',
-        display: true,
+        display: false,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
+        hideable: true,
       },
     ],
     id: 'file_tab',

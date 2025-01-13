@@ -1532,7 +1532,7 @@ export const tabContainers = [
       },
       {
         dataField: 'study_id',
-        header: 'Access',
+        header: 'Manifest',
         display: true,
         sortable: false,
         tooltipText: 'sort',

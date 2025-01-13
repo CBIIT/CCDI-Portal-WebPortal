@@ -176,7 +176,7 @@ export const MCIContent = [
                         +`<a class="link" href=${userGuidePDF} target="_blank" rel="noopener noreferrer">user guide</a>`
                         +' provides information on how to find, request, access, download, and analyze controlled-access data. For questions, contact '
                         +'<a href="mailto:ncichildhoodcancerdatainitiative@mail.nih.gov">ncichildhoodcancerdatainitiative@mail.nih.gov</a>.</p>'
-                        +'<p>Note: For investigators planning to use data from different resources: If you intend to utilize data from institutions that enroll patients in the Molecular Characterization Initiative, please note that the data available on this site may be identical to the data collected from the submitting clinical sites.</p>'
+                        +'<p>Note For investigators planning to use data from different resources: If you intend to utilize data from institutions that enroll patients in the Molecular Characterization Initiative, please note that the data available on this site may be identical to the data collected from the submitting clinical sites.</p>'
             },
             {
                 id: 'Germline_Findings',

@@ -140,6 +140,9 @@ export const table = {
   defaultSortDirection: 'asc',
   paginationAPIField: 'filesInList',
   tableDownloadCSV: customMyFilesTabDownloadCSV,
+  extendedViewConfig: {
+    manageViewColumns: false
+  },
   columns: [
     {
       dataField: 'file_name',

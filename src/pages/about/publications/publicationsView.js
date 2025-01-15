@@ -204,7 +204,6 @@ const PublicationsContainer = styled.div`
     text-transform: uppercase;
     color: #000000;
     margin-bottom: 12px;
-    margin-right: 5px;
   }
 
   .dateConferenceContainer {
@@ -213,10 +212,17 @@ const PublicationsContainer = styled.div`
 
   .publicationsText1 {
     color: #0095A2;
+    padding: 0 10px;
   }
 
   .publicationsText2 {
-    display: none;
+    color: #00838F;
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: 0.05em;
+    padding-right: 7px;
   }
 
   .publicationsItemConference {
@@ -228,26 +234,22 @@ const PublicationsContainer = styled.div`
     line-height: 22px;
     letter-spacing: 0.26px;
     text-transform: uppercase;
-    margin-bottom: 12px;
   }
 
   .publicationsItemConferenceLink {
     color: #000;
     font-family: Inter;
     font-size: 13px;
-    font-style: normal;
     font-weight: 300;
     line-height: 22px;
-    letter-spacing: 0.26px;
-    text-transform: uppercase;
-    text-decoration: none;
+    letter-spacing: 0.02em;
   }
 
   .publicationsItemContent {
     font-family: 'Inter';
-    font-weight: 300;
+    font-weight: 500;
     font-size: 16px;
-    line-height: 24px;
+    line-height: 22px;
     color: #000000;
     margin-bottom: 15px;
     a {
@@ -264,11 +266,15 @@ const PublicationsContainer = styled.div`
   }
 
   .publicationsItemTag {
-    color: #05555C;
+    color: #FFFFFF;
     border-radius: 20px;
-    border: 1.25px solid #78ACB1;
+    background: #2B8186;
     padding: 5px 10px;
     display: inline;
+    font-family: Poppins;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 19.31px;
   }
 
   p {
@@ -340,15 +346,8 @@ const PublicationsContainer = styled.div`
       display: none;
     }
 
-    .publicationsText2 {
-      display: inline-block;
-      margin-right: 5px;
-    }
-
-    .publicationsItemConferenceLink {
-      color: #05555C;
-      font-size: 14px;
-      font-weight: 400;
+    .publicationsItemContent {
+      margin-top: 10px;
     }
   }
 
@@ -647,14 +646,28 @@ const PublicationsView = ({classes}) => {
                 <div className="UpperContainer">
                   <div className='publicationsItemTextContainer'>
                     <div className='titleContainer'>
-                      <a className='publicationsItemTitle' href={publicationsItem.link} target="_blank" rel="noopener noreferrer">{publicationsItem.title}</a>
+                      <div className='publicationsItemTitle'>{publicationsItem.title}</div>
                     </div>
                     <div className='dateConferenceContainer'>
                       <div className='publicationsItemDate'>{publicationsItem.date}</div>
                       {publicationsItem.conference && <div className='publicationsItemConference'>
-                        <span className='publicationsText1'>| </span>
-                        <span className='publicationsText2'>Conference:</span>
-                        <a className='publicationsItemConferenceLink' href={publicationsItem.conferenceLink} target="_blank" rel="noopener noreferrer">{publicationsItem.conference}</a>
+                        <span className='publicationsText1'>|</span>
+                        <span className='publicationsText2'>Conference</span>
+                        <span className='publicationsItemConferenceLink'>{publicationsItem.conference}</span>
+                      </div>}
+                      {publicationsItem.journal && <div className='publicationsItemConference'>
+                        <span className='publicationsText1'>|</span>
+                        <span className='publicationsText2'>Journal</span>
+                        <span className='publicationsItemConferenceLink'>{publicationsItem.journal}</span>
+                      </div>}
+                      {publicationsItem.pmid && <div className='publicationsItemConference'>
+                        <span className='publicationsText1'>|</span>
+                        <span className='publicationsText2'>PMID</span>
+                        <span className='publicationsItemConferenceLink'>{publicationsItem.pmid}</span>
+                      </div>}
+                      {publicationsItem.preprint && <div className='publicationsItemConference'>
+                        <span className='publicationsText1'>|</span>
+                        <span className='publicationsText2'>PREPRINT</span>
                       </div>}
                     </div>
                     <div className='publicationsItemContent'>{ReactHtmlParser(`${publicationsItem.summary.substring(0, 485)}...`)}</div>

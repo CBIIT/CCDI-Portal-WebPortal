@@ -277,6 +277,10 @@ const PublicationsContainer = styled.div`
     line-height: 19.31px;
   }
 
+  .publicationsItemTag:hover {
+    background: #0E595E;
+  }
+
   p {
     margin-top: 5px;
   }
@@ -345,10 +349,6 @@ const PublicationsContainer = styled.div`
     .publicationsText1 {
       display: none;
     }
-
-    .publicationsItemContent {
-      margin-top: 10px;
-    }
   }
 
   @media (max-width: 767px) {
@@ -375,6 +375,10 @@ const PublicationsContainer = styled.div`
 
     .totalNumContainer {
       margin-top: 85px;
+    }
+
+    .publicationsItemContent {
+      margin-top: 10px;
     }
   }
 `;
@@ -439,21 +443,25 @@ const SearchBar = styled.div`
 const SearchInput = styled.input`
   margin: 0 20px;
   border: none;
-  font-family: 'Open Sans';
-  font-weight: 400;
-  font-size: 25px;
-  line-height: 53px;
-  color: #000000;
+  font-family: Poppins;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 16px;
+  color: #0A5E63;
   width: 650px;
   min-width: 0;
   background: transparent;
 
   ::placeholder {
-    color: #000000;
+    color: #0A5E63;
   }
 
   :focus {
     outline: none;
+  }
+
+  @media (max-width: 767px) {
+    margin: 0 10px;
   }
 `;
 
@@ -594,7 +602,7 @@ const PublicationsView = ({classes}) => {
       <div className='pageHeader'><div className='pageHeaderText'>CCDI-Supported Publications</div></div>
       <div className='searchBoxFooter'>The following list contains manuscripts and posters published by the Childhood Cancer Data Initiative (CCDI) support as of December 11, 2024. The list will be updated as new studies are published.</div>
       <SearchBar onMouseOver={() => setDeleteIconShow('block')} onMouseOut={() => setDeleteIconShow('none')}>
-        <SearchInput ref={inputRef} type="text" value={inputValue} onChange={handleTextInputChange} />
+        <SearchInput ref={inputRef} type="text" value={inputValue} placeholder="Search Publications" onChange={handleTextInputChange} />
         <div className='deleteIcon' onClick={handleClear} >
             <img className="deleteIconImg" style={{display:deleteIconShow}} src='https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/globalSearchDelete.svg' alt='clear icon' />
         </div>

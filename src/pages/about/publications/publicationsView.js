@@ -296,10 +296,8 @@ const PublicationsContainer = styled.div`
     border-radius: 5px;
     border: 1.25px solid #455299;
     width: 167px;
-    padding: 11px 0;
-    text-align: center;
+    padding: 11px 0 11px 38px;
     color: #455299;
-    text-align: center;
     font-family: Poppins;
     font-size: 12px;
     font-style: normal;
@@ -307,6 +305,10 @@ const PublicationsContainer = styled.div`
     line-height: 16px; /* 133.333% */
     letter-spacing: 0.24px;
     text-transform: uppercase;
+  }
+
+  .readMoreText {
+    background: url(${exportIcon}) 79px center no-repeat;
   }
 
   .readMoreButton:hover {
@@ -332,6 +334,14 @@ const PublicationsContainer = styled.div`
 
     .publicationsItem {
       width: auto;
+    }
+
+    .dateConferenceContainer {
+      display: block;
+    }
+
+    .publicationsText1 {
+      display: none;
     }
   }
 
@@ -363,16 +373,8 @@ const PublicationsContainer = styled.div`
       margin: 20px auto 25px auto;
     }
 
-    .dateConferenceContainer {
-      display: block;
-    }
-
     .publicationsItemDate {
       margin-bottom: 0;
-    }
-
-    .publicationsText1 {
-      display: none;
     }
   }
 
@@ -727,7 +729,7 @@ const PublicationsView = ({classes}) => {
                     <div className='publicationsItemContent'>{ReactHtmlParser(`${publicationsItem.summary.substring(0, 485)}...`)}</div>
                     <div className='footerContainer'>
                       <div className='publicationsItemTagContainer'><div className='publicationsItemTag'>{publicationsItem.tag}</div></div>
-                      <a className='readMoreButtonContainer' href={publicationsItem.link} target='_blank' rel='noopener noreferrer'><div className='readMoreButton'>Read More</div></a>
+                      <a className='readMoreButtonContainer' href={publicationsItem.link} target='_blank' rel='noopener noreferrer'><div className='readMoreButton'><div className='readMoreText'>Read More</div></div></a>
                     </div>
                   </div>
                 </div>

@@ -19,35 +19,34 @@ const PublicationsContainer = styled.div`
 
   .pageHeader {
     width: 1142px;
-    height: 203px;
+    height: 140px;
     margin: 0 auto;
     background-image: url(${publicationsHeaderImg});
     background-repeat: no-repeat;
     background-color: #87D7DCCC; 
     border-radius: 0px 0px 20px 20px;
+  }
+
+  .pageHeaderText {
     font-family: 'Poppins';
     font-weight: 600;
     font-size: 35px;
-    line-height: 214px;
     text-align: center;
     letter-spacing: 0.02em;
     color: #FFFFFF;
+    padding: 40px 0 12px 0;
   }
 
-  .searchBoxFooter {
-    width: 1007px;
-    margin: 20px auto 45px auto;
-    font-family: Inter;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 19px;
-    color: #05555C;
+  .pageHeaderSubtext {
+    color: #AEECF0;
     text-align: center;
-
-    @media (max-width: 732px) {
-      margin: 20px 15px 45px 15px;
-      width: auto;
-    }
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 160% */
+    text-align: left;
+    margin-left: 50px;
   }
 
   .tabList {
@@ -290,11 +289,6 @@ const PublicationsContainer = styled.div`
       width: auto;
       margin: 0 16px;
     }
-
-    .searchBoxFooter {
-      width: auto;
-      margin: 20px 16px 45px 16px;
-    }
   }
 
   @media (max-width: 1090px) {
@@ -309,12 +303,10 @@ const PublicationsContainer = styled.div`
   }
 
   @media (max-width: 1023px) {
-    .pageHeaderText {
-      line-height: 35px;
-      padding-top: 70px;
-      margin: 0 auto;
+    .pageHeaderSubtext {
+      margin-left: 30px;
     }
-
+  
     .UpperContainer {
       width: 100%;
     }
@@ -356,13 +348,20 @@ const PublicationsContainer = styled.div`
       font-size: 18px;
     }
 
-    .pageHeaderText {
-      max-width: 308px;
+    .pageHeader {
+      height: 165px;
     }
 
-    .searchBoxFooter {
-      text-align: left;
-      margin-bottom: 30px;
+    .pageHeaderText {
+      max-width: 308px;
+      line-height: 35px;
+      padding-top: 40px;
+      margin: 0 auto;
+    }
+
+    .pageHeaderSubtext {
+      margin-left: 0;
+      text-align: center;
     }
 
     .tabList {
@@ -385,7 +384,7 @@ const PublicationsContainer = styled.div`
 
 const SearchBar = styled.div`
   display: flex;
-  margin: 0 auto 52px auto;
+  margin: 25px auto;
   width: 662px;
   height: 53px;
   border: 2px solid #08838D;
@@ -423,7 +422,6 @@ const SearchBar = styled.div`
   }
 
   @media (max-width: 1023px) {
-    margin: 0 auto 52px auto;;
     maxWidth: 662px;
 
     .searchButtonText {
@@ -435,7 +433,7 @@ const SearchBar = styled.div`
   }
 
   @media (max-width: 767px) {
-    margin: 0 15px 15px 15px;
+    margin: 20px 15px 15px 15px;
     width: auto;
   }
 `;
@@ -599,8 +597,10 @@ const PublicationsView = ({classes}) => {
 
   return (
     <PublicationsContainer>
-      <div className='pageHeader'><div className='pageHeaderText'>CCDI-Supported Publications</div></div>
-      <div className='searchBoxFooter'>The following list contains manuscripts and posters published by the Childhood Cancer Data Initiative (CCDI) support as of December 11, 2024. The list will be updated as new studies are published.</div>
+      <div className='pageHeader'>
+        <div className='pageHeaderText'>CCDI-Supported Publications</div>
+        <div className='pageHeaderSubtext'>Publication list updated as of 2/12/25.</div>
+      </div>
       <SearchBar onMouseOver={() => setDeleteIconShow('block')} onMouseOut={() => setDeleteIconShow('none')}>
         <SearchInput ref={inputRef} type="text" value={inputValue} placeholder="Search Publications" onChange={handleTextInputChange} />
         <div className='deleteIcon' onClick={handleClear} >

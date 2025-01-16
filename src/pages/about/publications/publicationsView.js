@@ -19,35 +19,34 @@ const PublicationsContainer = styled.div`
 
   .pageHeader {
     width: 1142px;
-    height: 203px;
+    height: 140px;
     margin: 0 auto;
     background-image: url(${publicationsHeaderImg});
     background-repeat: no-repeat;
     background-color: #87D7DCCC; 
     border-radius: 0px 0px 20px 20px;
+  }
+
+  .pageHeaderText {
     font-family: 'Poppins';
     font-weight: 600;
     font-size: 35px;
-    line-height: 214px;
     text-align: center;
     letter-spacing: 0.02em;
     color: #FFFFFF;
+    padding: 40px 0 12px 0;
   }
 
-  .searchBoxFooter {
-    width: 1007px;
-    margin: 20px auto 45px auto;
-    font-family: Inter;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 19px;
-    color: #05555C;
+  .pageHeaderSubtext {
+    color: #AEECF0;
     text-align: center;
-
-    @media (max-width: 732px) {
-      margin: 20px 15px 45px 15px;
-      width: auto;
-    }
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 160% */
+    text-align: left;
+    margin-left: 50px;
   }
 
   .tabList {
@@ -204,7 +203,6 @@ const PublicationsContainer = styled.div`
     text-transform: uppercase;
     color: #000000;
     margin-bottom: 12px;
-    margin-right: 5px;
   }
 
   .dateConferenceContainer {
@@ -213,10 +211,17 @@ const PublicationsContainer = styled.div`
 
   .publicationsText1 {
     color: #0095A2;
+    padding: 0 10px;
   }
 
   .publicationsText2 {
-    display: none;
+    color: #00838F;
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: 0.05em;
+    padding-right: 7px;
   }
 
   .publicationsItemConference {
@@ -228,26 +233,22 @@ const PublicationsContainer = styled.div`
     line-height: 22px;
     letter-spacing: 0.26px;
     text-transform: uppercase;
-    margin-bottom: 12px;
   }
 
   .publicationsItemConferenceLink {
     color: #000;
     font-family: Inter;
     font-size: 13px;
-    font-style: normal;
     font-weight: 300;
     line-height: 22px;
-    letter-spacing: 0.26px;
-    text-transform: uppercase;
-    text-decoration: none;
+    letter-spacing: 0.02em;
   }
 
   .publicationsItemContent {
     font-family: 'Inter';
-    font-weight: 300;
+    font-weight: 500;
     font-size: 16px;
-    line-height: 24px;
+    line-height: 22px;
     color: #000000;
     margin-bottom: 15px;
     a {
@@ -259,16 +260,59 @@ const PublicationsContainer = styled.div`
     }
   }
 
-  .publicationsItemTagContainer {
+  .footerContainer {
+    display: flex;
     margin-bottom: 20px;
   }
 
+  .publicationsItemTagContainer {
+    margin-top: 7px;
+  }
+
   .publicationsItemTag {
-    color: #05555C;
+    color: #FFFFFF;
     border-radius: 20px;
-    border: 1.25px solid #78ACB1;
+    background: #2B8186;
     padding: 5px 10px;
-    display: inline;
+    display: inline-block;
+    font-family: Poppins;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 19.31px;
+  }
+
+  .publicationsItemTag:hover {
+    background: #0E595E;
+  }
+
+  .readMoreButtonContainer {
+    text-decoration: none;
+    width: 167px;
+    display: block;
+    margin-left: auto;
+  }
+
+  .readMoreButton {
+    border-radius: 5px;
+    border: 1.25px solid #455299;
+    width: 167px;
+    padding: 11px 0 11px 38px;
+    color: #455299;
+    font-family: Poppins;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 16px; /* 133.333% */
+    letter-spacing: 0.24px;
+    text-transform: uppercase;
+  }
+
+  .readMoreText {
+    background: url(${exportIcon}) 79px center no-repeat;
+  }
+
+  .readMoreButton:hover {
+    background-color: #E6F3F7;
   }
 
   p {
@@ -279,11 +323,6 @@ const PublicationsContainer = styled.div`
     .pageHeader {
       width: auto;
       margin: 0 16px;
-    }
-
-    .searchBoxFooter {
-      width: auto;
-      margin: 20px 16px 45px 16px;
     }
   }
 
@@ -296,15 +335,21 @@ const PublicationsContainer = styled.div`
     .publicationsItem {
       width: auto;
     }
+
+    .dateConferenceContainer {
+      display: block;
+    }
+
+    .publicationsText1 {
+      display: none;
+    }
   }
 
   @media (max-width: 1023px) {
-    .pageHeaderText {
-      line-height: 35px;
-      padding-top: 70px;
-      margin: 0 auto;
+    .pageHeaderSubtext {
+      margin-left: 30px;
     }
-
+  
     .UpperContainer {
       width: 100%;
     }
@@ -328,27 +373,8 @@ const PublicationsContainer = styled.div`
       margin: 20px auto 25px auto;
     }
 
-    .dateConferenceContainer {
-      display: block;
-    }
-
     .publicationsItemDate {
       margin-bottom: 0;
-    }
-
-    .publicationsText1 {
-      display: none;
-    }
-
-    .publicationsText2 {
-      display: inline-block;
-      margin-right: 5px;
-    }
-
-    .publicationsItemConferenceLink {
-      color: #05555C;
-      font-size: 14px;
-      font-weight: 400;
     }
   }
 
@@ -357,13 +383,24 @@ const PublicationsContainer = styled.div`
       font-size: 18px;
     }
 
-    .pageHeaderText {
-      max-width: 308px;
+    .publicationsItemTagContainer {
+      margin-bottom: 15px;
     }
 
-    .searchBoxFooter {
-      text-align: left;
-      margin-bottom: 30px;
+    .pageHeader {
+      height: 165px;
+    }
+
+    .pageHeaderText {
+      max-width: 308px;
+      line-height: 35px;
+      padding-top: 40px;
+      margin: 0 auto;
+    }
+
+    .pageHeaderSubtext {
+      margin-left: 0;
+      text-align: center;
     }
 
     .tabList {
@@ -377,12 +414,25 @@ const PublicationsContainer = styled.div`
     .totalNumContainer {
       margin-top: 85px;
     }
+
+    .publicationsItemContent {
+      margin-top: 10px;
+    }
+
+    .footerContainer {
+      display: block;
+      margin-bottom: 25px;
+    }
+
+    .readMoreButtonContainer {
+      margin-left: 0;
+    }
   }
 `;
 
 const SearchBar = styled.div`
   display: flex;
-  margin: 0 auto 52px auto;
+  margin: 25px auto;
   width: 662px;
   height: 53px;
   border: 2px solid #08838D;
@@ -420,7 +470,6 @@ const SearchBar = styled.div`
   }
 
   @media (max-width: 1023px) {
-    margin: 0 auto 52px auto;;
     maxWidth: 662px;
 
     .searchButtonText {
@@ -432,7 +481,7 @@ const SearchBar = styled.div`
   }
 
   @media (max-width: 767px) {
-    margin: 0 15px 15px 15px;
+    margin: 20px 15px 15px 15px;
     width: auto;
   }
 `;
@@ -440,21 +489,25 @@ const SearchBar = styled.div`
 const SearchInput = styled.input`
   margin: 0 20px;
   border: none;
-  font-family: 'Open Sans';
-  font-weight: 400;
-  font-size: 25px;
-  line-height: 53px;
-  color: #000000;
+  font-family: Poppins;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 16px;
+  color: #0A5E63;
   width: 650px;
   min-width: 0;
   background: transparent;
 
   ::placeholder {
-    color: #000000;
+    color: #0A5E63;
   }
 
   :focus {
     outline: none;
+  }
+
+  @media (max-width: 767px) {
+    margin: 0 10px;
   }
 `;
 
@@ -592,10 +645,12 @@ const PublicationsView = ({classes}) => {
 
   return (
     <PublicationsContainer>
-      <div className='pageHeader'><div className='pageHeaderText'>CCDI-Supported Publications</div></div>
-      <div className='searchBoxFooter'>The following list contains manuscripts and posters published by the Childhood Cancer Data Initiative (CCDI) support as of December 11, 2024. The list will be updated as new studies are published.</div>
+      <div className='pageHeader'>
+        <div className='pageHeaderText'>CCDI-Supported Publications</div>
+        <div className='pageHeaderSubtext'>Publication list updated as of 2/12/25.</div>
+      </div>
       <SearchBar onMouseOver={() => setDeleteIconShow('block')} onMouseOut={() => setDeleteIconShow('none')}>
-        <SearchInput ref={inputRef} type="text" value={inputValue} onChange={handleTextInputChange} />
+        <SearchInput ref={inputRef} type="text" value={inputValue} placeholder="Search Publications" onChange={handleTextInputChange} />
         <div className='deleteIcon' onClick={handleClear} >
             <img className="deleteIconImg" style={{display:deleteIconShow}} src='https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/globalSearchDelete.svg' alt='clear icon' />
         </div>
@@ -647,18 +702,35 @@ const PublicationsView = ({classes}) => {
                 <div className="UpperContainer">
                   <div className='publicationsItemTextContainer'>
                     <div className='titleContainer'>
-                      <a className='publicationsItemTitle' href={publicationsItem.link} target="_blank" rel="noopener noreferrer">{publicationsItem.title}</a>
+                      <div className='publicationsItemTitle'>{publicationsItem.title}</div>
                     </div>
                     <div className='dateConferenceContainer'>
                       <div className='publicationsItemDate'>{publicationsItem.date}</div>
                       {publicationsItem.conference && <div className='publicationsItemConference'>
-                        <span className='publicationsText1'>| </span>
-                        <span className='publicationsText2'>Conference:</span>
-                        <a className='publicationsItemConferenceLink' href={publicationsItem.conferenceLink} target="_blank" rel="noopener noreferrer">{publicationsItem.conference}</a>
+                        <span className='publicationsText1'>|</span>
+                        <span className='publicationsText2'>Conference</span>
+                        <span className='publicationsItemConferenceLink'>{publicationsItem.conference}</span>
+                      </div>}
+                      {publicationsItem.journal && <div className='publicationsItemConference'>
+                        <span className='publicationsText1'>|</span>
+                        <span className='publicationsText2'>Journal</span>
+                        <span className='publicationsItemConferenceLink'>{publicationsItem.journal}</span>
+                      </div>}
+                      {publicationsItem.pmid && <div className='publicationsItemConference'>
+                        <span className='publicationsText1'>|</span>
+                        <span className='publicationsText2'>PMID</span>
+                        <span className='publicationsItemConferenceLink'>{publicationsItem.pmid}</span>
+                      </div>}
+                      {publicationsItem.preprint && <div className='publicationsItemConference'>
+                        <span className='publicationsText1'>|</span>
+                        <span className='publicationsText2'>PREPRINT</span>
                       </div>}
                     </div>
                     <div className='publicationsItemContent'>{ReactHtmlParser(`${publicationsItem.summary.substring(0, 485)}...`)}</div>
-                    <div className='publicationsItemTagContainer'><div className='publicationsItemTag'>{publicationsItem.tag}</div></div>
+                    <div className='footerContainer'>
+                      <div className='publicationsItemTagContainer'><div className='publicationsItemTag'>{publicationsItem.tag}</div></div>
+                      <a className='readMoreButtonContainer' href={publicationsItem.link} target='_blank' rel='noopener noreferrer'><div className='readMoreButton'><div className='readMoreText'>Read More</div></div></a>
+                    </div>
                   </div>
                 </div>
               </div>

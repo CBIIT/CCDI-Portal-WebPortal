@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext }  from 'react';
 import { connect, useDispatch } from 'react-redux';
 import {
   useLocation,
@@ -13,10 +13,13 @@ import TabPanel from './TabPanel';
 import { tabContainers } from '../../../bento/dashboardTabData';
 import { Tabs as BentoTabs }  from '@bento-core/tab';
 import { customTheme } from './DefaultTabTheme';
+import CohortModalGenerator from '../cohortModal/cohortModalGenerator';
+import { CohortModalContext } from '../cohortModal/CohortModalContext';
 
 const Tabs = (props) => {
    
   const { currentTab } = props;
+  const { showCohortModal, setShowCohortModal} = useContext(CohortModalContext);
   const dispatch = useDispatch();
   const query = new URLSearchParams(useLocation().search);
   const navigate = useNavigate();
@@ -28,6 +31,9 @@ const Tabs = (props) => {
     navigate(`/explore${queryStr}`, { replace: false });
     dispatch(changeTab(value, 'not-facet'));
   };
+
+  const { CohortModal } = CohortModalGenerator();
+
 
   /**
   * 1. change <name> to <display> as array item
@@ -43,6 +49,10 @@ const Tabs = (props) => {
 
   return (
     <>
+      <CohortModal
+        open={showCohortModal}
+        onCloseModal={() => setShowCohortModal(false)}
+      />
       <BentoTabs
         tabItems={getTabs(tabContainers)}
         currentTab={currentTab}

@@ -260,8 +260,13 @@ const PublicationsContainer = styled.div`
     }
   }
 
-  .publicationsItemTagContainer {
+  .footerContainer {
+    display: flex;
     margin-bottom: 20px;
+  }
+
+  .publicationsItemTagContainer {
+    margin-top: 7px;
   }
 
   .publicationsItemTag {
@@ -269,7 +274,7 @@ const PublicationsContainer = styled.div`
     border-radius: 20px;
     background: #2B8186;
     padding: 5px 10px;
-    display: inline;
+    display: inline-block;
     font-family: Poppins;
     font-size: 13px;
     font-weight: 600;
@@ -278,6 +283,34 @@ const PublicationsContainer = styled.div`
 
   .publicationsItemTag:hover {
     background: #0E595E;
+  }
+
+  .readMoreButtonContainer {
+    text-decoration: none;
+    width: 167px;
+    display: block;
+    margin-left: auto;
+  }
+
+  .readMoreButton {
+    border-radius: 5px;
+    border: 1.25px solid #455299;
+    width: 167px;
+    padding: 11px 0;
+    text-align: center;
+    color: #455299;
+    text-align: center;
+    font-family: Poppins;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 16px; /* 133.333% */
+    letter-spacing: 0.24px;
+    text-transform: uppercase;
+  }
+
+  .readMoreButton:hover {
+    background-color: #E6F3F7;
   }
 
   p {
@@ -348,6 +381,10 @@ const PublicationsContainer = styled.div`
       font-size: 18px;
     }
 
+    .publicationsItemTagContainer {
+      margin-bottom: 15px;
+    }
+
     .pageHeader {
       height: 165px;
     }
@@ -378,6 +415,15 @@ const PublicationsContainer = styled.div`
 
     .publicationsItemContent {
       margin-top: 10px;
+    }
+
+    .footerContainer {
+      display: block;
+      margin-bottom: 25px;
+    }
+
+    .readMoreButtonContainer {
+      margin-left: 0;
     }
   }
 `;
@@ -679,7 +725,10 @@ const PublicationsView = ({classes}) => {
                       </div>}
                     </div>
                     <div className='publicationsItemContent'>{ReactHtmlParser(`${publicationsItem.summary.substring(0, 485)}...`)}</div>
-                    <div className='publicationsItemTagContainer'><div className='publicationsItemTag'>{publicationsItem.tag}</div></div>
+                    <div className='footerContainer'>
+                      <div className='publicationsItemTagContainer'><div className='publicationsItemTag'>{publicationsItem.tag}</div></div>
+                      <a className='readMoreButtonContainer' href={publicationsItem.link} target='_blank' rel='noopener noreferrer'><div className='readMoreButton'>Read More</div></a>
+                    </div>
                   </div>
                 </div>
               </div>

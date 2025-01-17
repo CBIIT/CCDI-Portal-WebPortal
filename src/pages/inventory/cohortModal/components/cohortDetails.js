@@ -327,7 +327,7 @@ const CohortDetails = (props) => {
                         <Button variant="contained" className={classes.saveButton} onClick={() => handleSaveCohort(localCohort)}>
                             Save Changes
                         </Button>
-                        <div className={classes.dropdownSection} ref={dropdownRef}>
+                        {/*<div className={classes.dropdownSection} ref={dropdownRef}>
                             <Button
                                 variant="contained"
                                 className={showDownloadDropdown ? classes.downloadButtonOpened : classes.downloadButton}
@@ -359,7 +359,7 @@ const CohortDetails = (props) => {
                                     </div>
                                 </div>
                             )}
-                        </div>
+                        </div>*/}
 
                     </div>
                     <span className={classes.cohortLastUpdated}>
@@ -682,11 +682,10 @@ const styles = () => ({
     },
     cohortButtonSection: {
         display: 'flex',
-        justifyContent: 'space-between',
+        //justifyContent: 'space-between',
         padding: '40px 20px 10px 20px',
         width: '100%',
         gap: '8px',
-
         '& button': {
             height: '41px',
             fontFamily: 'Poppins',

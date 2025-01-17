@@ -561,7 +561,7 @@ const PublicationsView = ({classes}) => {
     if (selectedTab === "All") {
       resultList = publicationsList.filter(item => (item.title.toUpperCase().includes(keywordUpper) || item.date.toUpperCase().includes(keywordUpper) || item.summary.toUpperCase().includes(keywordUpper) || item.tag.toUpperCase().includes(keywordUpper) || (item.conference && item.conference.toUpperCase().includes(keywordUpper))));
     } else {
-      resultList = publicationsList.filter(item => item.type === selectedTab && (item.title.toUpperCase().includes(keywordUpper) || item.date.toUpperCase().includes(keywordUpper) || item.summary.toUpperCase().includes(keywordUpper) || item.tag.toUpperCase().includes(keywordUpper) || (item.conference && item.conference.toUpperCase().includes(keywordUpper))));
+      resultList = publicationsList.filter(item => item.category === selectedTab && (item.title.toUpperCase().includes(keywordUpper) || item.date.toUpperCase().includes(keywordUpper) || item.summary.toUpperCase().includes(keywordUpper) || item.tag.toUpperCase().includes(keywordUpper) || (item.conference && item.conference.toUpperCase().includes(keywordUpper))));
     }
     setFilteredData(resultList);
     setPageTotal(resultList.length);
@@ -721,9 +721,9 @@ const PublicationsView = ({classes}) => {
                         <span className='publicationsText2'>PMID</span>
                         <span className='publicationsItemConferenceLink'>{publicationsItem.pmid}</span>
                       </div>}
-                      {publicationsItem.preprint && <div className='publicationsItemConference'>
+                      {publicationsItem.type && <div className='publicationsItemConference'>
                         <span className='publicationsText1'>|</span>
-                        <span className='publicationsText2'>PREPRINT</span>
+                        <span className='publicationsText2'>{publicationsItem.type}</span>
                       </div>}
                     </div>
                     <div className='publicationsItemContent'>{ReactHtmlParser(`${publicationsItem.summary.substring(0, 485)}...`)}</div>

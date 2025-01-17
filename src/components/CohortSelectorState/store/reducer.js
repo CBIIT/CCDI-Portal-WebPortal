@@ -4,9 +4,9 @@ export const initialState = {
 };
 
 const participantObjectTemplate = {
+  id: '',
   participant_id: '',
-  dbgap_accession: '',
-  participant_pk: '',
+  study_id: '',
 };
 
 const cohortObjectTemplate = {
@@ -25,6 +25,7 @@ const isValidParticipant = (participant) => {
 };
 
 const isValidCohort = (cohort) => {
+  console.log(cohort);
   if (!Object.keys(cohortObjectTemplate).every(key => key in cohort)) {
     return false;
   }
@@ -38,14 +39,13 @@ const isValidCohort = (cohort) => {
   ) {
     return false;
   }
-
+  
   // eslint-disable-next-line no-unused-vars
   for (const participant of cohort.participants) {
     if (!isValidParticipant(participant)) {
       return false;
     }
   }
-
   return true;
 };
 
@@ -97,16 +97,15 @@ const createNewCohort = (state, payload) => {
 
 const addParticipantsToCohort = (state, payload, ) => {
   const { cohortId, participants } = payload;
-
   if (!state[cohortId]) {
     throw new Error(`Cohort with ID ${cohortId} does not exist`);
   }
 
   // Get existing participant PKs
-  const existingParticipantPks = new Set(state[cohortId].participants.map(p => p.participant_pk));
+  const existingParticipantIDs = new Set(state[cohortId].participants.map(p => p.id));
 
   // Filter out participants with duplicate PKs
-  const newParticipants = participants.filter(p => !existingParticipantPks.has(p.participant_pk));
+  const newParticipants = participants.filter(p => !existingParticipantIDs.has(p.id));
 
   const updatedParticipants = [
     ...state[cohortId].participants,

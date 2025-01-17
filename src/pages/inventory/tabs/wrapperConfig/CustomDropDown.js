@@ -153,6 +153,7 @@ export const CustomDropDown = ({ options, label, isHidden, backgroundColor, bord
       } = context;
       setIsOpen(false);
       clearSelection();
+      console.log(hiddenSelectedRows);
       dispatch(onAddParticipantsToCohort(
         value,
         hiddenSelectedRows,

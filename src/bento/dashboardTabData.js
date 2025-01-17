@@ -1300,6 +1300,7 @@ export const tabContainers = [
     count: 'numberOfParticipants',
     fileCount: 'participantsFileCount',
     dataKey: 'id',
+    hiddenDataKeys: ['id', 'participant_id', 'study_id'],
     defaultSortField: 'participant_id',
     defaultSortDirection: 'asc',
     buttonText: 'Add Selected Files',

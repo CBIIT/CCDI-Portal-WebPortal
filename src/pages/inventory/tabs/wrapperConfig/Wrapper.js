@@ -131,7 +131,8 @@ export const wrapperConfig = [{
       tooltipCofig: tooltipContent,
       conditional: true,
       alertMessage,
-    }],
+    },
+  ],
 },
 {
   container: 'buttons',

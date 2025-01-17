@@ -127,10 +127,10 @@ const CohortDetails = (props) => {
         }
     };
 
-    const handleDeleteParticipant = (participant_pk) => {
+    const handleDeleteParticipant = (id) => {
         setLocalCohort({
             ...localCohort,
-            participants: localCohort.participants.filter(participant => participant.participant_pk !== participant_pk),
+            participants: localCohort.participants.filter(participant => participant.id !== id),
         });
     };
 
@@ -153,10 +153,10 @@ const CohortDetails = (props) => {
 
         if (primaryComparison !== 0) return primaryComparison;
 
-        const secondaryComparison = a.dbgap_accession.localeCompare(b.dbgap_accession);
+        const secondaryComparison = a.study_id.localeCompare(b.study_id);
         if (secondaryComparison !== 0) return secondaryComparison;
 
-        return a.participant_pk.localeCompare(b.participant_pk);
+        return a.id.localeCompare(b.id);
     });
 
     const filteredParticipants = searchText !== '' ? localCohort.participants.filter(participant =>
@@ -272,14 +272,14 @@ const CohortDetails = (props) => {
                                 />
                             </div>
                             <div
-                                onClick={() => handleSort('dbgap_accession')}
+                                onClick={() => handleSort('study_id')}
                                 className={classes.headerColumn}
                             >
-                                <span >dbGaP Accession</span>
+                                <span >Study ID</span>
                                 <img
                                     src={SortingIcon}
                                     alt="sort by participant id icon"
-                                    className={classes.sortingIcon + ' ' + (selectedColumn[0] === 'dbgap_accession' ? classes.selectedColumn : '') + ' ' + (selectedColumn[1] === 'descending' ? classes.descendingColumn : '')}
+                                    className={classes.sortingIcon + ' ' + (selectedColumn[0] === 'study_id' ? classes.selectedColumn : '') + ' ' + (selectedColumn[1] === 'descending' ? classes.descendingColumn : '')}
                                 />
                             </div>
                             <div className={classes.removeHeader} onClick={() => {
@@ -301,15 +301,15 @@ const CohortDetails = (props) => {
                             ref={scrollContainerRef}
                         >
                             {filteredParticipants.length > 0 ? filteredParticipants.map((participant) => (
-                                <div key={participant.participant_pk} className={classes.tableRow}>
+                                <div key={participant.id} className={classes.tableRow}>
                                     <div>{participant.participant_id}</div>
-                                    <div>{participant.dbgap_accession}</div>
+                                    <div>{participant.study_id}</div>
                                     <div className={classes.removeParticipant}>
                                         <img
                                             src={TrashCanIconBlue}
                                             alt="delete participant icon"
                                             className={classes.blueTrashCan}
-                                            onClick={() => handleDeleteParticipant(participant.participant_pk)}
+                                            onClick={() => handleDeleteParticipant(participant.id)}
                                         />
                                     </div>
                                 </div>

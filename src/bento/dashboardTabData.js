@@ -33,6 +33,48 @@ export const tooltipContent = {
     border: '#03A383 1px solid',
   }
 };
+export const tooltipContentAddToNewCohort = {
+  icon: questionIcon,
+  alt: 'tooltipIcon',
+  Participants: 'Create a new cohort using the selected Participant IDs',
+  Diagnosis: 'Create a new cohort using the selected Participant IDs',
+  Studies: 'Create a new cohort using the selected Participant IDs',
+  Treatment: 'Create a new cohort using the selected Participant IDs',
+  Survival: 'Create a new cohort using the selected Participant IDs ',
+  "Treatment Response": 'Create a new cohort using the selected Participant IDs',
+  arrow: true,
+  styles: {
+    border: '1px red solid'
+  }
+}
+
+export const tooltipContentAddToExistingCohort = {
+  icon: questionIcon,
+  alt: 'tooltipIcon',
+  Participants: 'Add selected Participant IDs to an existing cohort',
+  Diagnosis: 'Add selected Participant IDs to an existing cohort',
+  Studies: 'Add selected Participant IDs to an existing cohort',
+  Survival: 'Add selected Participant IDs to an existing cohort',
+  Treatment: 'Add selected Participant IDs to an existing cohort',
+  "Treatment Response": 'Add selected Participant IDs to an existing cohort',
+  arrow: true,
+  styles: {
+  }
+}
+
+export const tooltipContentListAll = {
+  icon: questionIcon,
+  alt: 'tooltipIcon',
+  Participants: 'Click to view the complete list of all cohorts',
+  Diagnosis: 'Click to view the complete list of all cohorts',
+  Studies: 'Click to view the complete list of all cohorts',
+  Treatment: 'Click to view the complete list of all cohorts',
+  Survival: 'Click to view the complete list of all cohorts',
+  "Treatment Response": 'Click to view the complete list of all cohorts',
+  arrow: true,
+  styles: {
+  }
+}
 
 // --------------- Dahboard Table external link configuration --------------
 // Ideal size for externalLinkIcon is 16x16 px
@@ -1258,6 +1300,7 @@ export const tabContainers = [
     count: 'numberOfParticipants',
     fileCount: 'participantsFileCount',
     dataKey: 'id',
+    hiddenDataKeys: ['id', 'participant_id', 'study_id'],
     defaultSortField: 'participant_id',
     defaultSortDirection: 'asc',
     buttonText: 'Add Selected Files',

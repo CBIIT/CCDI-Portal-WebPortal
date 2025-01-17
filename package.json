@@ -10,7 +10,7 @@
     "@bento-core/data-table": "^1.0.0",
     "@bento-core/facet-filter": "1.0.1-ccdihub.33",
     "@bento-core/local-find": "1.0.1-ccdihub.10",
-    "@bento-core/paginated-table": "1.0.1-ccdihub.106",
+    "@bento-core/paginated-table": "1.0.1-ccdihub.108",
     "@bento-core/query-bar": "1.0.1-ccdihub.12",
     "@bento-core/stats-bar": "1.0.1-ccdihub.4",
     "@bento-core/tab": "^1.0.0",
@@ -180,6 +180,7 @@
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-react": "^7.20.5",
-    "eslint-plugin-react-hooks": "^1.7.0"
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "use-reducer-logger": "^1.0.2"
   }
 }

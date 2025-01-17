@@ -59,6 +59,8 @@ const TabView = (props) => {
     columns: configColumn(config.columns),
     count: dashboardStats[config.count],
     selectedRows: [],
+    hiddenSelectedRows: [],
+    hiddenDataKeys: ['id','participant_id', 'study_id'],
     enableRowSelection: config.enableRowSelection,
     tableMsg: config.tableMsg,
     sortBy: config.defaultSortField,

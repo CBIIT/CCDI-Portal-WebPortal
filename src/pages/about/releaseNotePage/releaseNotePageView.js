@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Collapse } from '@material-ui/core';
-import html2pdf from "html2pdf.js";
 import ReactHtmlParser from "html-react-parser";
 import { siteUpdateList } from '../../../bento/newsData';
-import NCILogoExport from '../../../assets/about/NCI_Logo.png'
+import { handleExport } from './handleExportPDF'
 
 const SiteUpdateResultContainer = styled.div`
     width: 1420px;
@@ -161,7 +160,7 @@ const SiteUpdateCard = styled.div`
     border: 1.5px solid #00BDCD;
     box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.25);
     padding: 33px 38px;
-    width: 918px;
+    width: 850px;
     max-height: 1138px;
     overflow-y: auto;
     position: relative;
@@ -291,85 +290,37 @@ const ReleaseNotesPageView = () => {
         return newDateFormat;
     };
 
-    const handleExport = (idx) => {
-        console.log("???", idx);
-        const img = document.createElement("img");
-        img.src = NCILogoExport;
-        img.width = '1';
-        const element = document.getElementById(`${idx}_desc`);
-        const elementClone = element.cloneNode(true);
-        const titleDiv = document.getElementById(`${idx}_title`);
-        const dateDiv = document.getElementById(`${idx}_date`);
-        const newDiv = document.createElement("div");
-        const newDivTitle = document.createElement("div");
-        newDivTitle.style = "display: flex;margin-bottom: 15px;";
-        const titleSpan = document.createElement('span');
-        titleSpan.style = "color: #004187;font-family: Inter;font-size: 28px;font-weight:600;";
-        titleSpan.appendChild(document.createTextNode("Site Update Release Notes"));
-        newDivTitle.appendChild(titleSpan);
-        const newDivUpdate = document.createElement("div");
-        newDivUpdate.style = "display: flex;";
-        const updateSpan = document.createElement('span');
-        updateSpan.style = "color: #567aac;font-family: Inter;font-size: 14px;line-height: 25px;";
-        updateSpan.appendChild(document.createTextNode("UPDATE TITLE:"));
-        const updateSpanValue = document.createElement('span');
-        updateSpanValue.style = "margin-left: 45px;color: #004187;font-family: Inter;font-size: 16px;font-weight:600;line-height: 25px;";
-        updateSpanValue.appendChild(document.createTextNode(titleDiv.innerText));
-        newDivUpdate.appendChild(updateSpan);
-        newDivUpdate.appendChild(updateSpanValue);
-        const newDivDate = document.createElement("div");
-        newDivDate.style = "display: flex;";
-        const dateSpan = document.createElement('span');
-        dateSpan.style = "color: #567aac;font-family: Inter;font-size: 14px;line-height: 25px;";
-        dateSpan.appendChild(document.createTextNode("DATE OF RELEASE:"));
-        const dateSpanValue = document.createElement('span');
-        dateSpanValue.style = "margin-left: 20px;color: #004187;font-family: Inter;font-size: 16px;font-weight:600;line-height: 25px;";
-        dateSpanValue.appendChild(document.createTextNode(dateDiv.innerText));
-        newDivDate.appendChild(dateSpan);
-        newDivDate.appendChild(dateSpanValue);
-        const breakline = document.createElement("HR");
-        breakline.style = "height: 1px; background-color: #3b6697; margin-bottom: 40px;";
-        newDiv.appendChild(newDivTitle);
-        newDiv.appendChild(newDivUpdate);
-        newDiv.appendChild(newDivDate);
-        newDiv.appendChild(breakline);
-        newDiv.appendChild(elementClone);
-        const opt = {
-          margin: [35, 15, 20, 15],
-          filename: "siteupdate_export.pdf",
-          image: {type: 'jpeg', quality: 1},
-          html2canvas: {dpi: 72, scale: 4, letterRendering: true},
-          jsPDF: {unit: 'mm', format: 'a4', orientation: 'portrait'}
-        };
-  
-        console.log("!!!", newDiv);
-        html2pdf().from(newDiv).set(opt).toContainer()
-        .toCanvas()
-        .toPdf()
-        .get('pdf')
-        .then((pdf) => {
-            console.log("&&&", pdf);
-          const totalPages = pdf.internal.getNumberOfPages();
-          for (let i = 1; i <= totalPages; i += 1) {
-              pdf.setPage(i);
-              pdf.addImage(img, 'PNG', 13, 7, 120, 15);
-              pdf.setDrawColor("#606061");
-              pdf.setLineWidth(1.0);
-              pdf.line(15, 27, 195, 27);
-              pdf.setDrawColor("#3b6697");
-              pdf.setLineWidth(0.2);
-              pdf.line(15, 280, 195, 280);
-              pdf.setFontSize(8);
-              pdf.setFont(pdf.getFont().fontName, "normal");
-              pdf.setTextColor("#000000");
-              pdf.text('U.S. Department of Health and Human Services | National Institutes of Health | National Cancer Institute', 35,
-                  pdf.internal.pageSize.getHeight() / 1.04);
-              pdf.setFont(pdf.getFont().fontName, "bold");
-              pdf.text(`Page ${i} of ${totalPages}`, 180, pdf.internal.pageSize.getHeight() / 1.04);
+    const createNav = () => {
+        const NavList = [];
+        let SubObj = null;
+        let SubList = [];
+        let prevYear = 0;
+        for (let i = 0; i < siteUpdateList.length; i += 1) {
+          const currYear = siteUpdateList[i].date.split("-")[0];
+          const yearObj = {};
+          const date = siteUpdateList[i].date;
+          const newDateFormat = formatDate(date);
+          if (prevYear !== currYear) {
+            if (SubObj) {
+              SubObj.list = SubList;
+              NavList.push(SubObj);
+            }
+            SubList = [];
+            SubObj = {};
+            SubObj.year = currYear;
+            prevYear = currYear;
           }
-          })
-          .save();
-      };
+          yearObj.date = newDateFormat;
+          yearObj.index = i;
+          SubList.push(yearObj);
+          if (i === siteUpdateList.length - 1) {
+            SubObj.list = SubList;
+            NavList.push(SubObj);
+          }
+        }
+        return NavList;
+    };
+
     return (
         <SiteUpdateResultContainer>
             <div className='titleContainer'>Release Notes</div>

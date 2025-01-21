@@ -22,6 +22,7 @@ const SiteUpdateResultContainer = styled.div`
         line-height: 35px; /* 100% */
         letter-spacing: 0.7px;
         border-bottom: 1px solid #007A85;
+        margin-bottom: 60px;
     }
 `;
 
@@ -155,28 +156,42 @@ const SiteUpdateItem = styled.div`
 `;
 
 const SiteUpdateCard = styled.div`
-  display: grid;
-  border: 1px solid #b6dffd;
-  box-shadow: 3px 3px 10px lightgray;
-  // margin-top: 20px;
-  // margin: -44px 30px 0px 370px;
-  padding: 2px 29px 15px 29px;
-  width: 918px;
-  max-height: 1138px;
-  overflow-y: auto;
-  position: relative;
-`;
+    display: grid;
+    border-radius: 0px 20px;
+    border: 1.5px solid #00BDCD;
+    box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.25);
+    padding: 33px 38px;
+    width: 918px;
+    max-height: 1138px;
+    overflow-y: auto;
+    position: relative;
 
-const SiteUpdateCardTitle = styled.div`
-    color: #00A272;
-    font-family: Inter;
-    font-size: 33px;
-    font-weight: 300;
-    line-height: 39.6px;
-    letter-spacing: -0.165px;
-    border-bottom: 2px solid #004187;
-    margin: 5px 0px 5px 0px;
-    padding-bottom: 10px;
+    .cardHeaderContainer {
+        display: flex;
+        border-bottom: 0.5px solid #00838F;
+        padding-bottom: 15px;
+    }
+
+    .cardTitleContainer {
+        color: #00838F;
+        font-family: Poppins;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 20px; /* 100% */
+        letter-spacing: 0.4px;
+        margin-bottom: 5px;
+    }
+
+    .cardDateContainer {
+        color: #000000;
+        font-family: Inter;
+        font-size: 13px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: 24px; /* 184.615% */
+        text-transform: uppercase;
+    }
 `;
 
 const DataContentType = styled.div`
@@ -206,22 +221,14 @@ const DataContentType = styled.div`
 `;
 
 const SiteUpdateExport = styled.div`
-    position: absolute;
-    right: 29px;
-    top: 10px;
-    z-index: 9;
     width: 167px;
     height: 41px;
     background: #05555C;
     border-radius: 5px;
 
     .spanText {
-        display: flex;
-        padding: 12px 0;
-        justify-content: center;
-        gap: 12px;
+        padding: 12px 10px;
         color: #FFFFFF;
-        text-align: center;
         font-family: Poppins;
         font-size: 12px;
         font-style: normal;
@@ -242,16 +249,6 @@ const SiteUpdateCardDescription = styled.div`
     font-size: 14px;
     line-height: 17px;
     padding: 0px 0px 20px 0px;
-
-    .dateContainer {
-      color: #707F8D;
-      font-family: Lato;
-      font-size: 16px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 150%; /* 24px */
-      margin-bottom: 10px;
-    }
 
     a {
         // color: #00a272;
@@ -379,16 +376,18 @@ const ReleaseNotesPageView = () => {
             <SiteUpdateResultContext>
                 <SiteUpdateItem id={`post${siteUpdateList[selectedIdx].id}`}>
                     <SiteUpdateCard>
-                        <SiteUpdateCardTitle id={`${siteUpdateList[selectedIdx].id}_title`} title={siteUpdateList[selectedIdx].title}>
-                            {siteUpdateList[selectedIdx].title}
-                        </SiteUpdateCardTitle>
-                        <SiteUpdateExport>
-                            <div className="spanText" onClick={() => handleExport(siteUpdateList[selectedIdx].id)}>
-                                DOWNLOAD PDF
+                        <div className='cardHeaderContainer'>
+                            <div>
+                                <div className="cardTitleContainer" id={`${siteUpdateList[selectedIdx].id}_title`} title={siteUpdateList[selectedIdx].title}>{siteUpdateList[selectedIdx].title}</div>
+                                <div className="cardDateContainer" id={`${siteUpdateList[selectedIdx].id}_date`}>{formatDate(siteUpdateList[selectedIdx].date)}</div>
                             </div>
-                        </SiteUpdateExport>
+                            <SiteUpdateExport>
+                                <div className="spanText" onClick={() => handleExport(siteUpdateList[selectedIdx].id)}>
+                                    DOWNLOAD PDF
+                                </div>
+                            </SiteUpdateExport>
+                        </div>
                         <SiteUpdateCardDescription id={`${siteUpdateList[selectedIdx].id}_desc`}>
-                            <div className="dateContainer" id={`${siteUpdateList[selectedIdx].id}_date`}>{formatDate(siteUpdateList[selectedIdx].date)}</div>
                             {ReactHtmlParser(siteUpdateList[selectedIdx].fullText)}
                         </SiteUpdateCardDescription>
                     </SiteUpdateCard>

@@ -3,10 +3,30 @@ import styled from 'styled-components';
 import { Collapse } from '@material-ui/core';
 import html2pdf from "html2pdf.js";
 import ReactHtmlParser from "html-react-parser";
-import { siteUpdateList } from '../../../bento/newsData'
+import { siteUpdateList } from '../../../bento/newsData';
+import NCILogoExport from '../../../assets/about/NCI_Logo.png'
 
 const SiteUpdateResultContainer = styled.div`
-  width: 100%;
+    width: 1420px;
+    margin: 0 auto;
+
+    .titleContainer {
+        width: 1338px;
+        padding: 48px 0;
+        color: var(--Utility-Colors-Dark-Teal-Hover, #1A5255);
+        text-align: center;
+        font-family: Poppins;
+        font-size: 35px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 35px; /* 100% */
+        letter-spacing: 0.7px;
+        border-bottom: 1px solid #007A85;
+    }
+`;
+
+const SiteUpdateResultContext = styled.div`
+  width: 1420px;
   display: flex;
   padding: 0 20px 50px 0;
 `;
@@ -190,45 +210,30 @@ const SiteUpdateExport = styled.div`
     right: 29px;
     top: 10px;
     z-index: 9;
+    width: 167px;
+    height: 41px;
+    background: #05555C;
+    border-radius: 5px;
 
     .spanText {
-      padding-right: 30px;
-      display: flex;
+        display: flex;
+        padding: 12px 0;
+        justify-content: center;
+        gap: 12px;
+        color: #FFFFFF;
+        text-align: center;
+        font-family: Poppins;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 16px; /* 133.333% */
+        letter-spacing: 0.24px;
+        text-transform: uppercase;
     }
-    
-    .buttonStyle {
-      width: 100px;
-      position: relative;
-      font-size: 14px;
-      font-weight: bold;
-      text-align: right;
-      color: white;
-      padding: 10px 0px 10px 200px;
-      margin-top: -3px;
-      text-transform: uppercase;
-      display: flex;
-      -webkit-box-pack: center;
-      justify-content: right;
-      -webkit-box-align: center;
-      align-items: center;
-      float: right;
-      text-decoration: none;
+
+    .spanText:hover {
+        cursor: pointer;
     }
-    
-    .buttonStyle:hover {
-      color: lightgray;
-      text-decoration: none;
-    }
-    
-    .buttonStyle::after {
-      position: absolute;
-      z-index: -1;
-      content: "";
-      border-bottom: 35px solid #004187;
-      border-left: 35px solid transparent;
-      height: 0;
-      width: 159px;
-    }    
 `;
 
 const SiteUpdateCardDescription = styled.div`
@@ -292,7 +297,7 @@ const ReleaseNotesPageView = () => {
     const handleExport = (idx) => {
         console.log("???", idx);
         const img = document.createElement("img");
-        // img.src = NCILogoExport;
+        img.src = NCILogoExport;
         img.width = '1';
         const element = document.getElementById(`${idx}_desc`);
         const elementClone = element.cloneNode(true);
@@ -369,31 +374,27 @@ const ReleaseNotesPageView = () => {
           .save();
       };
     return (
-        <>
         <SiteUpdateResultContainer>
-            <SiteUpdateItem id={`post${siteUpdateList[selectedIdx].id}`}>
-                <SiteUpdateCard>
-                    <SiteUpdateCardTitle id={`${siteUpdateList[selectedIdx].id}_title`} title={siteUpdateList[selectedIdx].title}>
-                        {siteUpdateList[selectedIdx].title}
-                    </SiteUpdateCardTitle>
-                    <SiteUpdateExport>
-                        <a href="#" role="button" className="buttonStyle" onClick={() => handleExport(siteUpdateList[selectedIdx].id)}>
-                        <span className="spanText">
-                            <svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" className="svg-inline--fa fa-arrow-from-bottom fa-w-12 fa-lg">
-                            <path fill="currentColor" d="M360 480H24c-13.3 0-24-10.7-24-24v-24c0-13.3 10.7-24 24-24h336c13.3 0 24 10.7 24 24v24c0 13.3-10.7 24-24 24zM90.4 216.5l65.6-65.6V360c0 13.3 10.7 24 24 24h24c13.3 0 24-10.7 24-24V150.9l65.6 65.6c9.4 9.4 24.6 9.4 33.9 0l17-17c9.4-9.4 9.4-24.6 0-33.9L209 30.1c-9.4-9.4-24.6-9.4-33.9 0L39.5 165.6c-9.4 9.4-9.4 24.6 0 33.9l17 17c9.4 9.4 24.6 9.4 33.9 0z" className="" />
-                            </svg>
-                            &nbsp;&nbsp;export
-                        </span>
-                        </a>
-                    </SiteUpdateExport>
-                    <SiteUpdateCardDescription id={`${siteUpdateList[selectedIdx].id}_desc`}>
-                        <div className="dateContainer" id={`${siteUpdateList[selectedIdx].id}_date`}>{formatDate(siteUpdateList[selectedIdx].date)}</div>
-                        {ReactHtmlParser(siteUpdateList[selectedIdx].fullText)}
-                    </SiteUpdateCardDescription>
-                </SiteUpdateCard>
-            </SiteUpdateItem>
+            <div className='titleContainer'>Release Notes</div>
+            <SiteUpdateResultContext>
+                <SiteUpdateItem id={`post${siteUpdateList[selectedIdx].id}`}>
+                    <SiteUpdateCard>
+                        <SiteUpdateCardTitle id={`${siteUpdateList[selectedIdx].id}_title`} title={siteUpdateList[selectedIdx].title}>
+                            {siteUpdateList[selectedIdx].title}
+                        </SiteUpdateCardTitle>
+                        <SiteUpdateExport>
+                            <div className="spanText" onClick={() => handleExport(siteUpdateList[selectedIdx].id)}>
+                                DOWNLOAD PDF
+                            </div>
+                        </SiteUpdateExport>
+                        <SiteUpdateCardDescription id={`${siteUpdateList[selectedIdx].id}_desc`}>
+                            <div className="dateContainer" id={`${siteUpdateList[selectedIdx].id}_date`}>{formatDate(siteUpdateList[selectedIdx].date)}</div>
+                            {ReactHtmlParser(siteUpdateList[selectedIdx].fullText)}
+                        </SiteUpdateCardDescription>
+                    </SiteUpdateCard>
+                </SiteUpdateItem>
+            </SiteUpdateResultContext>
         </SiteUpdateResultContainer>
-        </>
     );
 };
 

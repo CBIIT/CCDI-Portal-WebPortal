@@ -176,6 +176,7 @@ export const MCIContent = [
                         +`<a class="link" href=${userGuidePDF} target="_blank" rel="noopener noreferrer">user guide</a>`
                         +' provides information on how to find, request, access, download, and analyze controlled-access data. For questions, contact '
                         +'<a href="mailto:ncichildhoodcancerdatainitiative@mail.nih.gov">ncichildhoodcancerdatainitiative@mail.nih.gov</a>.</p>'
+                        +'<p>MCI H&E-stained images in Digital Imaging and Communications in Medicine (DICOM) format are accessible as open-access through the Imaging Data Commons (IDC). Researchers can explore and visualize these images and their accompanying manifests using the <a class="link" href="https://portal.imaging.datacommons.cancer.gov/explore/" target="_blank" rel="noopener noreferrer">IDC Portal</a>. To learn more about the images, supporting metadata, and attribution requirements, please visit <a class="link" href="https://zenodo.org/records/14009669" target="_blank" rel="noopener noreferrer">Zenodo Collection</a>.</p>'
                         +'<p>Note for investigators planning to use data from different resources: If you intend to utilize data from institutions that enroll patients in the Molecular Characterization Initiative, please note that the data available on this site may be identical to the data collected from the submitting clinical sites.</p>'
             },
             {

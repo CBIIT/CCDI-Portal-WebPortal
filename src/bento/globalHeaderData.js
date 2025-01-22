@@ -3,7 +3,7 @@ import LogoSmall from '../assets/header/Portal_Logo_Small.svg';
 import searchbarIcon from '../assets/header/Search_Icon.svg';
 import cartLogo from '../assets/header/Cart_Logo.svg';
 import usFlagSmall from "../assets/header/us_flag_small.png";
-import userGuidePDF from '../assets/about/CCDI_Usage_Instructions_Nov2024_v2.5.0.pdf';
+import userGuidePDF from '../assets/about/CCDI_Usage_Instructions_Jan2025_2.5.1_Final.pdf';
 
 // globalHeaderLogo image 468x100
 // globalHeaderImage: image 2200x100

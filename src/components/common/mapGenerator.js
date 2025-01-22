@@ -28,7 +28,7 @@ const MapView = ({mapData}) => {
           roam: false
         },
         title: {
-          text: "Enrollment Counts by State as of November 12, 2024",
+          text: "Enrollment Counts by State as of January 14, 2025",
           left: "center",
           top: "15%",
         },

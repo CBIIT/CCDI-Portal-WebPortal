@@ -27,68 +27,68 @@ export const MCIContent = [
                     ["University of Nebraska Medical Center", 25, 8, 79, ], ["University of New Mexico Cancer Center", 22, 9, 74, ], ["University of Oklahoma Health Sciences Center", 26, 10, 82, ], ["University of Rochester", 22, 4, 84, ], ["University of Texas Health Science Center at San Antonio", 23, 3, 39, ], ["University of Vermont and State Agricultural College", 20, 10, 80, ], ["University of Virginia Cancer Center", 29, 10, 80, ], ["University of Wisconsin Carbone Cancer Center", 29, 11, 28, ], ["University Pediatric Hospital", 29, 9, 1, ], ["USA Health Strada Patient Care Center", 20, 5, 70, ], ["UT Southwestern/Simmons Cancer Center-Dallas", 25, 3, 8, ], ["Valley Children's Hospital", 23, 11, 79, ], ["Vanderbilt University/Ingram Cancer Center", 26, 1, 20, ], ["Vannie Cook Children's Clinic", 28, 4, 93, ], ["Virginia Commonwealth University/Massey Cancer Center", 24, 8, 41, ], ["Wake Forest University Health Sciences", 23, 8, 19, ], ["Walter Reed National Military Medical Center", 22, 5, 22, ], ["Washington University School of Medicine", 22, 1, 88, ], ["Wesley Medical Center", 26, 0, 93, ], ["West Virginia University Charleston Division", 29, 7, 78, ], ["West Virginia University Healthcare", 28, 1, 32, ], ["Women's and Children's Hospital-Adelaide", 20, 7, 55, ], ["Yale University", 20, 9, 97, ], ],
                 },
                 diseaseTable: {
-                    title: 'Enrollments in MCI (APEC14B1-MCI) by Diagnosis Type as of November 12, 2024',
+                    title: 'Enrollments in MCI (APEC14B1-MCI) by Diagnosis Type as of January 14, 2025',
                     header: ['', 'Primary Diagnosis Disease Group', 'Number of Participants'],
-                    body: [['Central Nervous System', 3503], ['Soft Tissue Sarcoma', 1061], ['Rare Tumors', 497], ['Neuroblastoma', 265]],
+                    body: [['Central Nervous System', 3756], ['Soft Tissue Sarcoma', 1167], ['Rare Tumors', 554], ['Neuroblastoma', 331]],
                 },
                 diseaseDonut: {
                     title: 'Enrollment',
-                    data: [{ name: 'Central Nervous System', value: 3503}, {name: 'Soft Tissue Sarcoma', value: 1061}, {name: 'Rare Tumors', value: 497}, {name: 'Neuroblastoma', value: 265}]
+                    data: [{ name: 'Central Nervous System', value: 3756}, {name: 'Soft Tissue Sarcoma', value: 1167}, {name: 'Rare Tumors', value: 554}, {name: 'Neuroblastoma', value: 331}]
                 },
                 donut: {
-                    title: 'Enrollments in MCI (APEC14B1-MCI) by Diagnosis Type as of November 12, 2024',
-                    data: [{name: 'Central Nervous System', value: 2704}, {name: 'Rare Tumors', value: 355}, {name: 'Soft Tissue Sarcoma', value: 815}, {name: 'Neuroblastoma', value: 98}],
+                    title: 'Enrollments in MCI (APEC14B1-MCI) by Diagnosis Type as of January 14, 2025',
+                    data: [{name: 'Central Nervous System', value: 3756}, {name: 'Soft Tissue Sarcoma', value: 1167}, {name: 'Rare Tumors', value: 554}, {name: 'Neuroblastoma', value: 331}],
                 },
                 map: {
                     data: [ 
                         [110, 540, "ALASKA", 2], //AK
-                        [638, 420, "ALABAMA", 107], //AL
-                        [550, 390, "ARKANSAS", 15], //AR
-                        [240, 430, "ARIZONA", 75], //AZ
-                        [100, 280, "CALIFORNIA", 415], //CA
-                        [320, 290, "COLORADO", 22], //CO
-                        [834, 228, "CONNECTICUT", 52], //CT
-                        [790, 305, "DISTRICT OF COLUMBIA", 48], //DC
-                        [810, 290, "DELEWARE", 52], //DE
-                        [735, 500, "FLORIDA", 277], //FL
-                        [720, 450, "GEORGIA", 159], //GA
-                        [340, 630, "HAWAII", 15], //HI
-                        [505, 250, "IOWA", 71], //IA
-                        [240, 220, "IDAHO", 35], //ID
-                        [600, 320, "ILLINOIS", 90], //IL
-                        [638, 285, "INDIANA", 91], //IN
+                        [638, 420, "ALABAMA", 118], //AL
+                        [550, 390, "ARKANSAS", 16], //AR
+                        [240, 430, "ARIZONA", 77], //AZ
+                        [100, 280, "CALIFORNIA", 449], //CA
+                        [320, 290, "COLORADO", 25], //CO
+                        [834, 228, "CONNECTICUT", 55], //CT
+                        [790, 305, "DISTRICT OF COLUMBIA", 51], //DC
+                        [810, 290, "DELEWARE", 60], //DE
+                        [735, 500, "FLORIDA", 307], //FL
+                        [720, 450, "GEORGIA", 175], //GA
+                        [340, 630, "HAWAII", 17], //HI
+                        [505, 250, "IOWA", 74], //IA
+                        [240, 220, "IDAHO", 39], //ID
+                        [600, 320, "ILLINOIS", 105], //IL
+                        [638, 285, "INDIANA", 95], //IN
                         [490, 330, "KANSAS", 0], //KS
-                        [670, 330, "KENTUCKY", 57], //KY
-                        [550, 460, "LOUISIANA", 39], //LA
-                        [840, 208, "MASSACHUSETTS", 46], //MA
-                        [785, 288, "MARYLAND", 79], //MD
-                        [860, 120, "MAINE", 19], //ME
-                        [645, 210, "MICHIGAN", 117], //MI
-                        [515, 150, "MINNESOTA", 143], //MN
-                        [530, 310, "MISSOURI", 116], //MO
-                        [600, 420, "MISSISSIPPI", 49], //MS
-                        [785, 355, "NORTH CAROLINA", 144], //NC
+                        [670, 330, "KENTUCKY", 60], //KY
+                        [550, 460, "LOUISIANA", 46], //LA
+                        [840, 208, "MASSACHUSETTS", 43], //MA
+                        [785, 288, "MARYLAND", 88], //MD
+                        [860, 120, "MAINE", 21], //ME
+                        [645, 210, "MICHIGAN", 124], //MI
+                        [515, 150, "MINNESOTA", 158], //MN
+                        [530, 310, "MISSOURI", 124], //MO
+                        [600, 420, "MISSISSIPPI", 53], //MS
+                        [785, 355, "NORTH CAROLINA", 155], //NC
                         [440, 135, "NORTH DAKOTA", 20], //ND
-                        [460, 285, "NEBRASKA", 54], //NE
-                        [843, 185, "NEW HAMPSHIRE", 11], //NH
-                        [815, 265, "NEW JERSEY", 63], //NJ
+                        [460, 285, "NEBRASKA", 59], //NE
+                        [843, 185, "NEW HAMPSHIRE", 13], //NH
+                        [815, 265, "NEW JERSEY", 70], //NJ
                         [330, 430, "NEW MEXICO", 34], //NM
                         [160, 260, "NEVADA", 3], //NV
-                        [795, 190, "NEW YORK", 296], //NY
-                        [690, 300, "OHIO", 273], //OH
-                        [490, 410, "OKLAHOMA", 73], //OK
-                        [150, 200, "OREGON", 40], //OR
-                        [780, 245, "PENNSYLVANIA", 184], //PA
-                        [853, 222, "RHODE ISLAND", 37], //RI
-                        [720, 395, "SOUTH CAROLINA", 70], //SC
+                        [795, 190, "NEW YORK", 327], //NY
+                        [690, 300, "OHIO", 312], //OH
+                        [490, 410, "OKLAHOMA", 79], //OK
+                        [150, 200, "OREGON", 50], //OR
+                        [780, 245, "PENNSYLVANIA", 205], //PA
+                        [853, 222, "RHODE ISLAND", 39], //RI
+                        [720, 395, "SOUTH CAROLINA", 77], //SC
                         [410, 195, "SOUTH DAKOTA", 11], //SD
-                        [675, 370, "TENNESSEE", 97], //TN
-                        [480, 490, "TEXAS", 520], //TX
-                        [240, 275, "UTAH", 94], //UT
-                        [765, 310, "VIRGINIA", 91], //VA
-                        [825, 170, "VERMONT", 20], //VT
-                        [150, 100, "WASHINGTON", 266], //WA
-                        [570, 190, "WISCONSIN", 163], //WI
+                        [675, 370, "TENNESSEE", 104], //TN
+                        [480, 490, "TEXAS", 575], //TX
+                        [240, 275, "UTAH", 104], //UT
+                        [765, 310, "VIRGINIA", 89], //VA
+                        [825, 170, "VERMONT", 21], //VT
+                        [150, 100, "WASHINGTON", 293], //WA
+                        [570, 190, "WISCONSIN", 173], //WI
                         [720, 330, "WEST VIRGINIA", 7], //WV
                       ],
                 }

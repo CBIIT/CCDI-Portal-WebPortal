@@ -9,7 +9,7 @@ import updateImgDashboard from '../assets/news/News_Dashboard.png';
 import updateImgEHR from '../assets/news/News_EHR.png';
 import updateImgC3DC from '../assets/news/News_C3DC.png';
 import updateImgHub from '../assets/news/News_Hub.png';
-import userGuidePDF from '../assets/about/CCDI_Usage_Instructions_Nov2024_v2.5.0.pdf';
+import userGuidePDF from '../assets/about/CCDI_Usage_Instructions_Jan2025_2.5.1_Final.pdf';
 
 export const altList = {
     updateImgCCDC: 'Young boy on a swing outdoors, symbolizing childhood health, linking to the CCDC site',

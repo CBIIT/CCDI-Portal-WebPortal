@@ -24,6 +24,10 @@ const SiteUpdateResultContainer = styled.div`
         border-bottom: 1px solid #007A85;
         margin-bottom: 60px;
     }
+
+    .siteUpdateContext {
+      display: flex;
+    }
 `;
 
 const SiteUpdateResultContext = styled.div`
@@ -35,7 +39,6 @@ const SiteUpdateResultContext = styled.div`
 const NavContainer = styled.div`
   display: flex;
   padding: 0 0 50px 0;
-  border-right: 1px solid #E0E4E7;
   border-top: 3px solid #C3D5E0;
 
   .navListContainer {
@@ -144,11 +147,6 @@ const NavContainer = styled.div`
       text-decoration: underline;
     }
   }
-`;
-
-const ResultInfo = styled.div`
-  margin-left: 20px;
-  font-weight: bold;
 `;
 
 const SiteUpdateItem = styled.div`
@@ -282,6 +280,9 @@ const SiteUpdateCardDescription = styled.div`
 
 const ReleaseNotesPageView = () => {
     const [selectedIdx, setSelectedIdx] = useState(0);
+    const [siteUpdateNav, setSiteUpdateNav] = useState([]);
+    const [open, setOpen] = useState([]);
+
     const formatDate = (date) => {
         const dateData = `${date.substring(5, 7)}/${date.substring(8, 10)}/${date.substring(0, 4)}`;
         const newDate = new Date(dateData);
@@ -321,6 +322,28 @@ const ReleaseNotesPageView = () => {
         }
         return NavList;
     };
+
+    useEffect(() => {
+      // if (siteUpdateList.length > 0) {
+      //   if (hash !== '') {
+      //     const id = hash.replace('#', '');
+      //     const element = document.getElementById(id);
+      //     if (element) element.scrollIntoView({ behavior: 'smooth'});
+      //   }
+      // }
+      setSiteUpdateNav(createNav());
+      const openArr = [];
+      openArr[0] = true;
+      for (let i = 1; i < siteUpdateNav.length; i += 1) {
+        openArr[i] = false;
+      }
+      setOpen(openArr);
+      const currentUrl = window.location.href;
+      const urlArr = currentUrl.split("#post");
+      if (urlArr.length > 1) {
+        setSelectedIdx(urlArr[1] - 1);
+      }
+    }, [siteUpdateList]);
 
     const handleExport = (idx) => {
         const img = document.createElement("img");
@@ -399,29 +422,70 @@ const ReleaseNotesPageView = () => {
           .save();
     };
 
+    const handleClick = (idx) => {
+      const newOpen = Object.assign([], open);
+      newOpen[idx] = !newOpen[idx];
+      setOpen(newOpen);
+    };
+
     return (
         <SiteUpdateResultContainer>
             <div className='titleContainer'>Release Notes</div>
-            <SiteUpdateResultContext>
-                <SiteUpdateItem id={`post${siteUpdateList[selectedIdx].id}`}>
-                    <SiteUpdateCard>
-                        <div className='cardHeaderContainer'>
-                            <div>
-                                <div className="cardTitleContainer" id={`${siteUpdateList[selectedIdx].id}_title`} title={siteUpdateList[selectedIdx].title}>{siteUpdateList[selectedIdx].title}</div>
-                                <div className="cardDateContainer" id={`${siteUpdateList[selectedIdx].id}_date`}>{formatDate(siteUpdateList[selectedIdx].date)}</div>
-                            </div>
-                            <SiteUpdateExport>
-                                <div className="spanText" onClick={() => handleExport(siteUpdateList[selectedIdx].id)}>
-                                    DOWNLOAD PDF
-                                </div>
-                            </SiteUpdateExport>
+            <div className='siteUpdateContext'>
+              <NavContainer>
+                <ul className="navListContainer">
+                  <div className="navTitle">Release Note</div>
+                {
+                  siteUpdateNav.map((subObj, objidx) => {
+                    const objkey = `obj_${objidx}`;
+                    return (
+                      <li key={objkey} className="dateSubListContainer">
+                        <div className="yearTitleContainer">
+                          <button type="button" className={`yearTitle ${open[objidx] ? "" : "collapsed"}`} onClick={() => handleClick(objidx)}>{subObj.year}</button>
                         </div>
-                        <SiteUpdateCardDescription id={`${siteUpdateList[selectedIdx].id}_desc`}>
-                            {ReactHtmlParser(siteUpdateList[selectedIdx].fullText)}
-                        </SiteUpdateCardDescription>
-                    </SiteUpdateCard>
-                </SiteUpdateItem>
-            </SiteUpdateResultContext>
+                        <Collapse in={open[objidx]}>
+                          <ul className="dateSubList">
+                          {
+                            subObj.list.map((navItem, yearidx) => {
+                              const yearkey = `obj_${yearidx}`;
+                              return (
+                                <li key={yearkey} className="dateListItem" style={selectedIdx === navItem.index ? {border: '3px solid #676767', padding: '2px 7px'} : null}>
+                                  <a href="#" role="button" onClick={() => setSelectedIdx(navItem.index)}>
+                                    <div className="dateListItemText">{navItem.date}</div>
+                                  </a>
+                                </li>
+                              );
+                            })
+                          }
+                          </ul>
+                        </Collapse>
+                      </li>
+                    );
+                  })
+                }
+                </ul>
+              </NavContainer>
+              <SiteUpdateResultContext>
+                  <SiteUpdateItem id={`post${siteUpdateList[selectedIdx].id}`}>
+                      <SiteUpdateCard>
+                          <div className='cardHeaderContainer'>
+                              <div>
+                                  <div className="cardTitleContainer" id={`${siteUpdateList[selectedIdx].id}_title`} title={siteUpdateList[selectedIdx].title}>{siteUpdateList[selectedIdx].title}</div>
+                                  <div className="cardDateContainer" id={`${siteUpdateList[selectedIdx].id}_date`}>{formatDate(siteUpdateList[selectedIdx].date)}</div>
+                              </div>
+                              <SiteUpdateExport>
+                                  <div className="spanText" onClick={() => handleExport(siteUpdateList[selectedIdx].id)}>
+                                      DOWNLOAD PDF
+                                  </div>
+                              </SiteUpdateExport>
+                          </div>
+                          <SiteUpdateCardDescription id={`${siteUpdateList[selectedIdx].id}_desc`}>
+                              {ReactHtmlParser(siteUpdateList[selectedIdx].fullText)}
+                          </SiteUpdateCardDescription>
+                      </SiteUpdateCard>
+                  </SiteUpdateItem>
+              </SiteUpdateResultContext>
+            </div>
         </SiteUpdateResultContainer>
     );
 };

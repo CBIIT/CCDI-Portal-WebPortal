@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Collapse, Tooltip } from '@material-ui/core';
+import { withStyles, Collapse, Tooltip } from '@material-ui/core';
 import html2pdf from "html2pdf.js";
 import ReactHtmlParser from "html-react-parser";
 import { siteUpdateList } from '../../../bento/newsData';
@@ -438,6 +438,25 @@ const ReleaseNotesPageView = () => {
       setOpen(newOpen);
     };
 
+    const LightTooltip = withStyles(() => ({
+      arrow: {
+        color: 'white',
+        "&:before": {
+          border: "1px solid #676767"
+        },
+      },
+      tooltip: {
+        backgroundColor: 'white',
+        border: '1px solid #676767',
+        color: '#000000',
+        fontFamily: 'Poppins',
+        fontSize: 13,
+        fontWeight: 400,
+        letterSpacing: '-0.13px',
+      },
+    }))(Tooltip);
+    
+
     return (
         <SiteUpdateResultContainer>
             <div className='titleContainer'>Release Notes</div>
@@ -501,13 +520,14 @@ const ReleaseNotesPageView = () => {
                                   const typekey = `update_${typeidx}`;
                                   const newType = type.trim();
                                   return (
-                                    <Tooltip
+                                    <LightTooltip
                                       key={typekey}
                                       title={newType}
                                       arrow
+                                      PopperProps={{ style: { marginTop: -12 } }}
                                     >
                                       <img src={iconSrc[newType]} className= "typeIcon" alt={`${newType} icon`} />
-                                    </Tooltip>
+                                    </LightTooltip>
                                   );
                                 })
                               }

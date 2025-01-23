@@ -5,7 +5,8 @@ import html2pdf from "html2pdf.js";
 import ReactHtmlParser from "html-react-parser";
 import { siteUpdateList } from '../../../bento/newsData';
 import NCILogoExport from '../../../assets/about/NCI_Logo.png';
-import ArrorDownIcon from '../../../assets/about/Arrow_Down_Black_Icon.svg';
+import ArrowDownIcon from '../../../assets/about/Arrow_Down_Black_Icon.svg';
+import UploadIcon from '../../../assets/about/Upload-Icon.svg';
 
 const SiteUpdateResultContainer = styled.div`
     width: 1420px;
@@ -71,6 +72,7 @@ const NavContainer = styled.div`
   }
 
   .yearTitle {
+    display: flex;
     border-top: 0.5px solid #969696;
     color: #000000;
     font-family: Poppins;
@@ -82,6 +84,10 @@ const NavContainer = styled.div`
     text-transform: lowercase;
     background: #FFFFFF;
     padding: 10px 20px;
+
+    :hover {
+      cursor: pointer;
+    }
   }
 
   .arrowIcon {
@@ -199,7 +205,8 @@ const SiteUpdateExport = styled.div`
     margin-left: auto;
 
     .spanText {
-        padding: 12px 10px;
+        display: flex;
+        padding: 10px 18px;
         color: #FFFFFF;
         font-family: Poppins;
         font-size: 12px;
@@ -211,7 +218,15 @@ const SiteUpdateExport = styled.div`
     }
 
     .spanText:hover {
-        cursor: pointer;
+      cursor: pointer;
+    }
+
+    .downloadPDFText {
+      margin-right: 12px;
+      padding-top: 3px;
+    }
+    .downloadPDFImg {
+      // margin-top: 10px;
     }
 `;
 
@@ -415,7 +430,7 @@ const ReleaseNotesPageView = () => {
                     return (
                       <li key={objkey} className="dateSubListContainer">
                         <div className="yearTitle" onClick={() => handleClick(objidx)}>
-                          <img className='arrowIcon' src={ArrorDownIcon} alt="arrow down icon"/>
+                          <img className='arrowIcon' src={ArrowDownIcon} alt="arrow down icon"/>
                           <span>{subObj.year}</span>
                         </div>
                         <Collapse in={open[objidx]}>
@@ -446,12 +461,13 @@ const ReleaseNotesPageView = () => {
                       <SiteUpdateCard>
                           <div className='cardHeaderContainer'>
                               <div>
-                                  <div className="cardTitleContainer" id={`${siteUpdateList[selectedIdx].id}_title`} title={siteUpdateList[selectedIdx].title}>{siteUpdateList[selectedIdx].title}</div>
+                                  <div className="cardTitleContainer" id={`${siteUpdateList[selectedIdx].id}_title`} title={siteUpdateList[selectedIdx].version}>Release {siteUpdateList[selectedIdx].version}</div>
                                   <div className="cardDateContainer" id={`${siteUpdateList[selectedIdx].id}_date`}>{formatDate(siteUpdateList[selectedIdx].date)}</div>
                               </div>
                               <SiteUpdateExport>
                                   <div className="spanText" onClick={() => handleExport(siteUpdateList[selectedIdx].id)}>
-                                      DOWNLOAD PDF
+                                      <div className='downloadPDFText'>DOWNLOAD PDF</div>
+                                      <div className='downloadPDFImg'><img src={UploadIcon} alt="download pdf icon" /></div>
                                   </div>
                               </SiteUpdateExport>
                           </div>

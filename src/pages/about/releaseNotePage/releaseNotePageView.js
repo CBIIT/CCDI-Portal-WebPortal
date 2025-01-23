@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Collapse } from '@material-ui/core';
+import { Collapse, Tooltip } from '@material-ui/core';
 import html2pdf from "html2pdf.js";
 import ReactHtmlParser from "html-react-parser";
 import { siteUpdateList } from '../../../bento/newsData';
 import NCILogoExport from '../../../assets/about/NCI_Logo.png';
 import ArrowDownIcon from '../../../assets/about/Arrow_Down_Black_Icon.svg';
 import UploadIcon from '../../../assets/about/Upload-Icon.svg';
+import ClinicalTrialsIcon from '../../../assets/about/Release_Clinical_Icon.svg';
+import GenomicsIcon from '../../../assets/about/Release_Genomics_Icon.svg';
+import ImagingIcon from '../../../assets/about/Release_Imaging_Icon.svg';
+import XenograftIcon from '../../../assets/about/Release_Xenograft_Icon.svg';
+import EpidemiologicIcon from '../../../assets/about/Release_Epidemiologic_Icon.svg';
+import CellLinesIcon from '../../../assets/about/Release_CellLines_Icon.svg';
 
 const SiteUpdateResultContainer = styled.div`
     width: 1420px;
@@ -100,12 +106,16 @@ const NavContainer = styled.div`
 
   .dateListItem {
     list-style-type: none;
-    padding: 5px 10px 5px 41px;
+    padding: 5px 10px 5px 42px;
     background: #F4F4F4;
     margin-bottom: 4px;
 
     :last-child {
       margin-bottom: 0;
+    }
+
+    :hover {
+      cursor: pointer;
     }
   }
 
@@ -184,7 +194,7 @@ const SiteUpdateCard = styled.div`
 const DataContentType = styled.div`
   font-size: 3rem;
   line-height: 23px;
-  border-bottom: 2px solid lightgray;
+  border-bottom: 0.5px solid #00838F;
   margin: 0px 0px 10px 0px;
   padding-bottom: 6px;
 
@@ -282,6 +292,14 @@ const ReleaseNotesPageView = () => {
     const [siteUpdateNav, setSiteUpdateNav] = useState([]);
     const [open, setOpen] = useState([]);
 
+    const iconSrc = {
+      Clinical: ClinicalTrialsIcon,
+      'Genomics/Omics': GenomicsIcon,
+      Imaging: ImagingIcon,
+      Xenograft: XenograftIcon,
+      Epidemiologic: EpidemiologicIcon,
+      'Cell Lines': CellLinesIcon,
+    };
     // const formatDate = (date) => {
     //     const dateData = `${date.substring(5, 7)}/${date.substring(8, 10)}/${date.substring(0, 4)}`;
     //     const newDate = new Date(dateData);
@@ -485,6 +503,22 @@ const ReleaseNotesPageView = () => {
                                   </div>
                               </SiteUpdateExport>
                           </div>
+                          { siteUpdateList[selectedIdx].contentType
+                          && (
+                            <DataContentType>
+                              {
+                                siteUpdateList[selectedIdx].contentType.split(",").map((type, typeidx) => {
+                                  const typekey = `update_${typeidx}`;
+                                  const newType = type.trim();
+                                  return (
+                                    <Tooltip key={typekey} title={newType} arrow>
+                                      <img src={iconSrc[newType]} className={newType === "Clinical" ? "clinicalIcon" : "typeIcon"} alt={`${newType} icon`} />
+                                    </Tooltip>
+                                  );
+                                })
+                              }
+                            </DataContentType>
+                          )}
                           <SiteUpdateCardDescription id={`${siteUpdateList[selectedIdx].id}_desc`}>
                               {ReactHtmlParser(siteUpdateList[selectedIdx].fullText)}
                           </SiteUpdateCardDescription>

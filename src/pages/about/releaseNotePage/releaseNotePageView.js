@@ -4,7 +4,8 @@ import { Collapse } from '@material-ui/core';
 import html2pdf from "html2pdf.js";
 import ReactHtmlParser from "html-react-parser";
 import { siteUpdateList } from '../../../bento/newsData';
-import NCILogoExport from '../../../assets/about/NCI_Logo.png'
+import NCILogoExport from '../../../assets/about/NCI_Logo.png';
+import ArrorDownIcon from '../../../assets/about/Arrow_Down_Black_Icon.svg';
 
 const SiteUpdateResultContainer = styled.div`
     width: 1420px;
@@ -27,6 +28,7 @@ const SiteUpdateResultContainer = styled.div`
 
     .siteUpdateContext {
       display: flex;
+      margin: 0 100px;
     }
 `;
 
@@ -37,76 +39,53 @@ const SiteUpdateResultContext = styled.div`
 `;
 
 const NavContainer = styled.div`
-  display: flex;
   padding: 0 0 50px 0;
-  border-top: 3px solid #C3D5E0;
+  margin-right: 30px;
+  border-top: 7.6px solid #1F939D;
 
   .navListContainer {
-    width: 230px;
-    margin: 5px;
+    width: 262px;
+    margin: 0;
     padding-left: 0;
   }
 
   .navTitle {
-    color: #004187;
-    font-family: Lato;
-    font-size: 21px;
+    color: #000000;
+    font-family: Poppins;
+    font-size: 18.5px;
     font-style: normal;
-    font-weight: 900;
-    line-height: 150%; /* 31.5px */
-    letter-spacing: 0.105px;
-    padding: 7px 0 6px 10px;
-    background: #F7F8FA;
+    font-weight: 500;
+    line-height: 106.523%; /* 19.707px */
+    letter-spacing: -0.37px;
+    text-transform: uppercase;
+    background: #F4F4F4;
+    padding: 15px 0 15px 20px;
+    border-left: 0.5px solid #969696;
+    border-right: 0.5px solid #969696;
   }
 
   .dateSubListContainer {
     list-style-type: none;
-    margin-bottom: 2px;
-  }
-
-  .yearTitleContainer {
-    background: #F7F8FA;  
-    padding: 0 10px;
+    border-left: 0.5px solid #969696;
+    border-right: 0.5px solid #969696;
   }
 
   .yearTitle {
-    width: 100%;
-    padding: 7px 0;
-    // margin-top: 2px;
-    border: none;
-    color: #8A9296;
-    font-family: Lato;
-    font-size: 12.8px;
+    border-top: 0.5px solid #969696;
+    color: #000000;
+    font-family: Poppins;
+    font-size: 16px;
     font-style: normal;
     font-weight: 600;
-    line-height: 15.36px; /* 120% */
-    text-align: left;
-    border-top: 1px solid #4BA4E3;
-    background: #F7F8FA;
+    line-height: normal;
+    letter-spacing: -0.32px;
+    text-transform: lowercase;
+    background: #FFFFFF;
+    padding: 10px 20px;
   }
 
-  .yearTitle:not(.collapsed)::after {
-    background-image: none;
-    transform: rotate(-180deg);
-  }
-
-  .yearTitle::after {
-    flex-shrink: 0;
-    width: 1rem;
-    height: 0;
-    display: inline-block;
-    vertical-align: .5em;
-    content: "";
-    border-top: .6em solid;
-    border-right: .5em solid transparent;
-    border-bottom: 0;
-    border-left: .5em solid transparent;
-    font-size: 1rem;
-    background-image: none;
-    transition: transform .2s ease-in-out;
-    color: #4ba4e3;
-    text-align: right;
-    float:right;
+  .arrowIcon {
+    margin-right: 10px;
   }
 
   .dateSubList {
@@ -116,36 +95,30 @@ const NavContainer = styled.div`
   .dateListItem {
     list-style-type: none;
     padding: 5px 10px;
+    background: #F4F4F4;
+    margin-bottom: 4px;
 
     a {
       text-decoration: none;
-      color: #004187;
-      font-family: Lato;
-      font-size: 17px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: 150%; /* 25.5px */
     }
 
-    :nth-child(6n+1) {
-    background-color: #e9e9e9;
-  }
-
-    :nth-child(6n+3) {
-      background-color: #d6e6f3;
-    }
-
-    :nth-child(6n+5) {
-      background-color: #e9e2bc;
+    :last-child {
+      margin-bottom: 0;
     }
   }
 
   .dateListItemText {
-    width: 100%;
+    color: #000000;
+    text-align: right;
+    font-family: Nunito;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 17px; 
+  }
 
-    &:hover {
-      text-decoration: underline;
-    }
+  .bottomLine {
+    border-top: 0.5px solid #969696;
   }
 `;
 
@@ -223,6 +196,7 @@ const SiteUpdateExport = styled.div`
     height: 41px;
     background: #05555C;
     border-radius: 5px;
+    margin-left: auto;
 
     .spanText {
         padding: 12px 10px;
@@ -440,8 +414,9 @@ const ReleaseNotesPageView = () => {
                     const objkey = `obj_${objidx}`;
                     return (
                       <li key={objkey} className="dateSubListContainer">
-                        <div className="yearTitleContainer">
-                          <button type="button" className={`yearTitle ${open[objidx] ? "" : "collapsed"}`} onClick={() => handleClick(objidx)}>{subObj.year}</button>
+                        <div className="yearTitle" onClick={() => handleClick(objidx)}>
+                          <img className='arrowIcon' src={ArrorDownIcon} alt="arrow down icon"/>
+                          <span>{subObj.year}</span>
                         </div>
                         <Collapse in={open[objidx]}>
                           <ul className="dateSubList">
@@ -449,7 +424,7 @@ const ReleaseNotesPageView = () => {
                             subObj.list.map((navItem, yearidx) => {
                               const yearkey = `obj_${yearidx}`;
                               return (
-                                <li key={yearkey} className="dateListItem" style={selectedIdx === navItem.index ? {border: '3px solid #676767', padding: '2px 7px'} : null}>
+                                <li key={yearkey} className="dateListItem" style={selectedIdx === navItem.index ? {background: '#E7F1F5'} : null}>
                                   <a href="#" role="button" onClick={() => setSelectedIdx(navItem.index)}>
                                     <div className="dateListItemText">{navItem.date}</div>
                                   </a>
@@ -463,6 +438,7 @@ const ReleaseNotesPageView = () => {
                     );
                   })
                 }
+                  <div className='bottomLine' />
                 </ul>
               </NavContainer>
               <SiteUpdateResultContext>

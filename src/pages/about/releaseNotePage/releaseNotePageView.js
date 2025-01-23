@@ -123,6 +123,7 @@ const NavContainer = styled.div`
   }
   .dateListItemText {
     margin-left: auto;
+    margin-top: 4px;
     color: #000000;
     text-align: right;
     font-family: Nunito;
@@ -281,14 +282,14 @@ const ReleaseNotesPageView = () => {
     const [siteUpdateNav, setSiteUpdateNav] = useState([]);
     const [open, setOpen] = useState([]);
 
-    const formatDate = (date) => {
-        const dateData = `${date.substring(5, 7)}/${date.substring(8, 10)}/${date.substring(0, 4)}`;
-        const newDate = new Date(dateData);
-        const newDateArr = newDate.toDateString().split(' ');
-        const month = newDate.toLocaleString('default', { month: 'long' });
-        const newDateFormat = month.concat(' ', newDateArr[2], ', ', newDateArr[3]);
-        return newDateFormat;
-    };
+    // const formatDate = (date) => {
+    //     const dateData = `${date.substring(5, 7)}/${date.substring(8, 10)}/${date.substring(0, 4)}`;
+    //     const newDate = new Date(dateData);
+    //     const newDateArr = newDate.toDateString().split(' ');
+    //     const month = newDate.toLocaleString('default', { month: 'long' });
+    //     const newDateFormat = month.concat(' ', newDateArr[2], ', ', newDateArr[3]);
+    //     return newDateFormat;
+    // };
 
     const createNav = () => {
         const NavList = [];
@@ -296,10 +297,12 @@ const ReleaseNotesPageView = () => {
         let SubList = [];
         let prevYear = 0;
         for (let i = 0; i < siteUpdateList.length; i += 1) {
-          const currYear = siteUpdateList[i].date.split("-")[0];
+          const currYear = siteUpdateList[i].date.split(", ")[1];
           const yearObj = {};
-          const date = siteUpdateList[i].date;
-          const newDateFormat = formatDate(date);
+          const fullMonth = siteUpdateList[i].date.split(" ")[0];
+          const restDate = siteUpdateList[i].date.split(fullMonth)[1];
+          const newDate = fullMonth.substring(0,3) + restDate;
+          // const newDateFormat = formatDate(date);
           if (prevYear !== currYear) {
             if (SubObj) {
               SubObj.list = SubList;
@@ -310,7 +313,8 @@ const ReleaseNotesPageView = () => {
             SubObj.year = currYear;
             prevYear = currYear;
           }
-          yearObj.date = newDateFormat;
+          yearObj.version = siteUpdateList[i].version;
+          yearObj.date = newDate;
           yearObj.index = i;
           SubList.push(yearObj);
           if (i === siteUpdateList.length - 1) {
@@ -450,7 +454,7 @@ const ReleaseNotesPageView = () => {
                               return (
                                 <li key={yearkey} className="dateListItem" style={selectedIdx === navItem.index ? {background: '#E7F1F5'} : null}>
                                   <div className='dateListItemContainer' onClick={() => setSelectedIdx(navItem.index)}>
-                                    <div className="dateListVersionText">Version: {siteUpdateList[yearidx].version}</div>
+                                    <div className="dateListVersionText">Version: {navItem.version}</div>
                                     <div className="dateListItemText">{navItem.date}</div>
                                   </div>
                                 </li>
@@ -472,7 +476,7 @@ const ReleaseNotesPageView = () => {
                           <div className='cardHeaderContainer'>
                               <div>
                                   <div className="cardTitleContainer" id={`${siteUpdateList[selectedIdx].id}_title`} title={siteUpdateList[selectedIdx].version}>Release {siteUpdateList[selectedIdx].version}</div>
-                                  <div className="cardDateContainer" id={`${siteUpdateList[selectedIdx].id}_date`}>{formatDate(siteUpdateList[selectedIdx].date)}</div>
+                                  <div className="cardDateContainer" id={`${siteUpdateList[selectedIdx].id}_date`}>{siteUpdateList[selectedIdx].date}</div>
                               </div>
                               <SiteUpdateExport>
                                   <div className="spanText" onClick={() => handleExport(siteUpdateList[selectedIdx].id)}>

@@ -106,7 +106,7 @@ const NavContainer = styled.div`
 
   .dateListItem {
     list-style-type: none;
-    padding: 5px 10px 5px 42px;
+    padding: 4px 10px 4px 42px;
     background: #F4F4F4;
     margin-bottom: 4px;
 
@@ -196,23 +196,13 @@ const DataContentType = styled.div`
   line-height: 23px;
   border-bottom: 0.5px solid #00838F;
   margin: 0px 0px 10px 0px;
-  padding-bottom: 6px;
+  padding: 12px 0 6px 0;
 
   .typeIcon {
-    height: 30px;
-    margin: 0px 8px 0px 8px;
+    margin-right: 17px;
   }
 
   .typeIcon:hover {
-    cursor: pointer;
-  }
-
-  .clinicalIcon {
-    height: 35px;
-    margin: 0px 8px 0px 8px;
-  }
-
-  .clinicalIcon:hover {
     cursor: pointer;
   }
 `;
@@ -511,8 +501,12 @@ const ReleaseNotesPageView = () => {
                                   const typekey = `update_${typeidx}`;
                                   const newType = type.trim();
                                   return (
-                                    <Tooltip key={typekey} title={newType} arrow>
-                                      <img src={iconSrc[newType]} className={newType === "Clinical" ? "clinicalIcon" : "typeIcon"} alt={`${newType} icon`} />
+                                    <Tooltip
+                                      key={typekey}
+                                      title={newType}
+                                      arrow
+                                    >
+                                      <img src={iconSrc[newType]} className= "typeIcon" alt={`${newType} icon`} />
                                     </Tooltip>
                                   );
                                 })

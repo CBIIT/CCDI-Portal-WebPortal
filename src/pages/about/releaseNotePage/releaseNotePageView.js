@@ -100,20 +100,29 @@ const NavContainer = styled.div`
 
   .dateListItem {
     list-style-type: none;
-    padding: 5px 10px;
+    padding: 5px 10px 5px 41px;
     background: #F4F4F4;
     margin-bottom: 4px;
-
-    a {
-      text-decoration: none;
-    }
 
     :last-child {
       margin-bottom: 0;
     }
   }
 
+  .dateListItemContainer {
+    display: flex;
+  }
+  .dateListVersionText {
+    color: #000000;
+    font-family: Nunito;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    
+  }
   .dateListItemText {
+    margin-left: auto;
     color: #000000;
     text-align: right;
     font-family: Nunito;
@@ -139,7 +148,7 @@ const SiteUpdateCard = styled.div`
     box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.25);
     padding: 33px 38px;
     width: 850px;
-    max-height: 1138px;
+    // max-height: 1138px;
     overflow-y: auto;
     position: relative;
 
@@ -440,9 +449,10 @@ const ReleaseNotesPageView = () => {
                               const yearkey = `obj_${yearidx}`;
                               return (
                                 <li key={yearkey} className="dateListItem" style={selectedIdx === navItem.index ? {background: '#E7F1F5'} : null}>
-                                  <a href="#" role="button" onClick={() => setSelectedIdx(navItem.index)}>
+                                  <div className='dateListItemContainer' onClick={() => setSelectedIdx(navItem.index)}>
+                                    <div className="dateListVersionText">Version: {siteUpdateList[yearidx].version}</div>
                                     <div className="dateListItemText">{navItem.date}</div>
-                                  </a>
+                                  </div>
                                 </li>
                               );
                             })

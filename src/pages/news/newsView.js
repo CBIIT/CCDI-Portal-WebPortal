@@ -5,6 +5,7 @@ import {
 // import { useNavigate } from 'react-router-dom';
 import ReactHtmlParser from 'html-react-parser';
 import Pagination from '@material-ui/lab/Pagination';
+import { Button } from '@material-ui/core';
 import styled from 'styled-components';
 import exportIcon from '../../assets/about/Export_Icon.svg';
 import newsImg from '../../assets/news/News_Header.jpg';
@@ -33,7 +34,8 @@ const NewsContainer = styled.div`
 
   .tabList {
     display: flex;
-    margin: 20px 0 35px calc(45% - 490px);;
+    justify-content: center;
+    margin: 20px 0 35px 0;
   }
 
   .tabListItem {
@@ -79,7 +81,7 @@ const NewsContainer = styled.div`
 
   .newsItem {
     width: 1047px;
-    min-height: 248px;
+    height: 230px;
     border: 1.5px solid transparent;
     border-radius: 0px 20px;
     margin: 0 auto;
@@ -89,12 +91,64 @@ const NewsContainer = styled.div`
     text-decoration: none;
   }
 
+  .releaseNewsItem {
+    width: 1047px;
+    height: 350px;
+    border: 1.5px solid transparent;
+    border-radius: 0px 20px;
+    margin: 0 auto;
+    margin-bottom: 29px;
+    padding: 23px 32px 0 38px;
+    box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.25);
+    text-decoration: none;
+  }
+
+  .downloadPDF {
+    width: 167px;
+    height: 41px;
+    border-radius: 5px;
+    border: 1.25px #05555C solid;
+    background-color: #05555C;
+    font-family: 'Poppins';
+    font-weight: 600;
+    font-size: 12px;
+    color: white;
+    left: 48px;
+    margin-top: 12.5px;
+  }
+  .downloadPDF:hover {
+    background-color: #05555C;
+  }
+
+  .readMore {
+    width: 167px;
+    height: 41px;
+    border-radius: 5px;
+    border: 1.25px #455299 solid;
+    font-family: 'Poppins';
+    font-weight: 600;
+    font-size: 12px;
+    color: #455299;
+    left: 48px;
+    margin-top: 12.5px;
+
+    .MuiButton-label {
+      width: 80%;
+      margin-right: 8px;
+      background: url(${exportIcon}) right center no-repeat;
+    }
+  }
+
   // .newsItem:hover {
   //   border: 1.5px solid #00BDCD;
   // }
 
   .newsItemTextContainer {
-    width: 76%;
+
+  }
+
+  .newsSubtitle {
+    display: flex;
   }
 
   .newsItemTitle {
@@ -116,13 +170,47 @@ const NewsContainer = styled.div`
     margin-bottom: 8px;
   }
 
+  .newsCategory {
+    font-family: 'Poppins';
+    font-weight: 400;
+    font-size: 12px;
+    height: 24px;
+    line-height: 20px;
+    color: #05555C
+    margin-left: 20px;
+    border: 1.25px #78AC81 solid;
+    border-radius: 20px;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
   .newsItemContent {
     font-family: 'Inter';
+    max-height: 110px;
+    overflow-y: scroll;
     font-weight: 300;
     font-size: 16px;
     line-height: 24px;
     color: #000000;
-    margin-bottom: 48px;
+    margin-bottom: 24px;
+    a {
+      color: #455299;
+      font-family: 'Inter';
+      font-weight: 600;
+      padding-right: 20px;
+      background: url(${exportIcon}) right center no-repeat;
+    }
+  }
+
+  .releaseNewsItemContent {
+    font-family: 'Inter';
+    max-height: 220px;
+    overflow-y: scroll;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 24px;
+    color: #000000;
+    margin-bottom: 24px;
     a {
       color: #455299;
       font-family: 'Inter';
@@ -284,7 +372,7 @@ const getPageResults = (selectedTab, pageInfo) => {
 const NewsView = ({classes}) => {
   // const navigate = useNavigate();
   const [selectedTab, setSelectedTab] = useState("All");
-  const newsTabList = ['All', 'Announcements', 'News & Other', 'Application Updates', 'Site Updates'];
+  const newsTabList = ['All', 'News', 'CCDI Application Updates', 'Release Notes'];
   const sizelist = [10,20,50,100];
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(sizelist[0]);
@@ -366,23 +454,45 @@ const NewsView = ({classes}) => {
           })
         }
       </div>
+      <div>{getResultList(selectedTab).length} results</div>
       <div className='newsList'>
         {
           data.length > 0 ? data.map((newsItem, idx) => {
             const newskey = `news_${idx}`;
-            return (
-              <div id={newsItem.id} key={newskey} className='newsItem'>
+             return (
+              newsItem.type !== 'Release Notes' ? <div id={newsItem.id} key={newskey} className='newsItem'>
                 <div className="UpperContainer">
                   <div className='newsItemTextContainer'>
                     <div className='newsItemTitle'>{newsItem.title}</div>
-                    <div className='newsItemDate'>{newsItem.date}</div>
+                    <div className='newsSubtitle'>
+                      <div className='newsItemDate'>{newsItem.date}</div>
+                      <div className='newsCategory'>{newsItem.type}</div>
+                    </div>
                     <div className='newsItemContent Upper'>{ReactHtmlParser(newsItem.highlight)}</div>
                   </div>
                   {newsItem.img && <div className='imgContainer'><img className='newsItemImgContainer' src={srcList[newsItem.img]} alt={altList[newsItem.img]}/></div>}
                 </div>
                 <div className='newsItemContent Lower'>{ReactHtmlParser(newsItem.highlight)}</div>
+              </div> :
+              <div id={newsItem.id} key={newskey} className='releaseNewsItem'>
+              <div className="UpperContainer">
+                <div className='newsItemTextContainer'>
+                  <div className='newsItemTitle'>{newsItem.title}</div>
+                  <div className='newsSubtitle'>
+                    <div className='newsItemDate'>{newsItem.date}</div>
+                    <div className='newsCategory'>{newsItem.type}</div>
+                  </div>
+                  <div className='releaseNewsItemContent Upper'>{ReactHtmlParser(newsItem.highlight)}</div>
+                </div>
+                {newsItem.img && <div className='imgContainer'>
+                  <img className='newsItemImgContainer' src={srcList[newsItem.img]} alt={altList[newsItem.img]}/>
+                  <Button className='downloadPDF'>Download PDF</Button>
+                  <Button className='readMore'>Read More</Button>
+                </div>}
               </div>
-            )
+              <div className='newsItemContent Lower'>{ReactHtmlParser(newsItem.highlight)}</div>
+            </div>
+              ) 
           }) :
           <div className={classes.noticeText}>Currently no {selectedTab}</div>
         }

@@ -33,6 +33,10 @@ export default {
           text: 'Contact Us',
           link: 'mailto:NCIChildhoodCancerDataInitiative@mail.nih.gov',
         },
+        {
+          text: 'Release Notes',
+          link: '/release-notes',
+        }
       ],
     },
     {

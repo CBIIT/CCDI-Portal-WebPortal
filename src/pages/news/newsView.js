@@ -72,6 +72,7 @@ const NewsContainer = styled.div`
 
   .UpperContainer {
     display: flex;
+    position: relative;
   }
 
   .newsList {
@@ -87,6 +88,7 @@ const NewsContainer = styled.div`
     margin: 0 auto;
     margin-bottom: 29px;
     padding: 23px 32px 0 38px;
+    padding-right: 0px;
     box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.25);
     text-decoration: none;
   }
@@ -99,6 +101,7 @@ const NewsContainer = styled.div`
     margin: 0 auto;
     margin-bottom: 29px;
     padding: 23px 32px 0 38px;
+    padding-right: 0px;
     box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.25);
     text-decoration: none;
   }
@@ -144,7 +147,9 @@ const NewsContainer = styled.div`
   // }
 
   .newsItemTextContainer {
-
+    position: absolute;
+    width: 75%;
+    background-color: white;
   }
 
   .newsSubtitle {
@@ -158,6 +163,10 @@ const NewsContainer = styled.div`
     line-height: 22px;
     color: #00838F;
     margin-bottom: 8px;
+  }
+
+  .newsItemTitleInner{
+    margin-bottom: 30px;
   }
 
   .newsItemDate {
@@ -186,8 +195,40 @@ const NewsContainer = styled.div`
 
   .newsItemContent {
     font-family: 'Inter';
-    max-height: 110px;
-    overflow-y: scroll;
+    padding-right: 25%;
+    margin-top: 13px;
+    height: 175px;
+    overflow-y: auto;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 24px;
+    color: #000000;
+    a {
+      color: #455299;
+      font-family: 'Inter';
+      font-weight: 600;
+      padding-right: 20px;
+      background: url(${exportIcon}) right center no-repeat;
+    }
+    &::-webkit-scrollbar {
+      width: 7px;
+      background-color: #E2E2E2;
+      border-left: 0.5px solid #1E1E1E;
+    }
+    &::-webkit-scrollbar-track {
+      background-color: #F1F1F1;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: #82BBE8;
+    }
+  }
+
+  .releaseNewsItemContent {
+    font-family: 'Inter';
+    padding-right: 25%;
+    margin-top: 13px;
+    height: 300px;
+    overflow-y: auto;
     font-weight: 300;
     font-size: 16px;
     line-height: 24px;
@@ -202,22 +243,20 @@ const NewsContainer = styled.div`
     }
   }
 
-  .releaseNewsItemContent {
-    font-family: 'Inter';
-    max-height: 220px;
-    overflow-y: scroll;
-    font-weight: 300;
-    font-size: 16px;
-    line-height: 24px;
-    color: #000000;
-    margin-bottom: 24px;
-    a {
-      color: #455299;
-      font-family: 'Inter';
-      font-weight: 600;
-      padding-right: 20px;
-      background: url(${exportIcon}) right center no-repeat;
-    }
+  .newsItemBottom {
+    position: absolute;
+    top: 190px;
+    height: 15px;
+    background-color: white;
+    display: block;
+    width: 75%;
+  }
+
+  .imgContainer {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    width: 25%;
   }
 
   .newsItemImgContainer {
@@ -468,7 +507,10 @@ const NewsView = ({classes}) => {
                       <div className='newsItemDate'>{newsItem.date}</div>
                       <div className='newsCategory'>{newsItem.type}</div>
                     </div>
-                    <div className='newsItemContent Upper'>{ReactHtmlParser(newsItem.highlight)}</div>
+                  </div>
+                  <div className='newsItemContent Upper'>
+                    <div className='newsItemTitle newsItemTitleInner'>{newsItem.title}</div>
+                    {ReactHtmlParser(newsItem.highlight)}
                   </div>
                   {newsItem.img && <div className='imgContainer'><img className='newsItemImgContainer' src={srcList[newsItem.img]} alt={altList[newsItem.img]}/></div>}
                 </div>
@@ -482,7 +524,10 @@ const NewsView = ({classes}) => {
                     <div className='newsItemDate'>{newsItem.date}</div>
                     <div className='newsCategory'>{newsItem.type}</div>
                   </div>
-                  <div className='releaseNewsItemContent Upper'>{ReactHtmlParser(newsItem.highlight)}</div>
+                </div>
+                <div className='releaseNewsItemContent Upper'>
+                  <div className='newsItemTitle newsItemTitleInner'>{newsItem.title}</div>
+                  {ReactHtmlParser(newsItem.highlight)}
                 </div>
                 {newsItem.img && <div className='imgContainer'>
                   <img className='newsItemImgContainer' src={srcList[newsItem.img]} alt={altList[newsItem.img]}/>

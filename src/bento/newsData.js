@@ -46,7 +46,7 @@ export const newsList = [
         date: 'February 12, 2025',
         slug: 'We are excited to announce the release of API V1.1 which enhances search capabilities across various participating resources.',
         highlight: `<p>CCDI API V1.1 introduces new metadata fields — Anatomic Site, Specimen Molecular Analyte, Library Source Material, Library Selection Method — to enhance data search capabilities. These new metadata fields are harmonized to CDEs registered in the Cancer Data Standards Registry and Repository whenever possible. Current members include the Kids First Data Resource Center, Pediatric Cancer Data Commons, St. Jude Cloud, and Treehouse Childhood Cancer Data Initiative. Data access processes follow the policies of each contributing resource.</p>`,
-        type: 'Release Notes',
+        type: 'CCDI Application Updates',
         img: 'updateImgHub',
         latestUpdate: true,
     },

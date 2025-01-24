@@ -159,7 +159,7 @@ const SiteUpdateCard = styled.div`
     box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.25);
     padding: 33px 38px;
     width: 850px;
-    // max-height: 1138px;
+    max-height: 1138px;
     overflow-y: auto;
     position: relative;
 
@@ -342,18 +342,30 @@ const ReleaseNotesPageView = () => {
       //   }
       // }
       setSiteUpdateNav(createNav());
-      const openArr = [];
-      openArr[0] = true;
-      for (let i = 1; i < siteUpdateNav.length; i += 1) {
-        openArr[i] = false;
-      }
-      setOpen(openArr);
-      const currentUrl = window.location.href;
-      const urlArr = currentUrl.split("#post");
-      if (urlArr.length > 1) {
-        setSelectedIdx(urlArr[1] - 1);
-      }
     }, [releaseNotesList]);
+
+    useEffect(() => {
+      if (siteUpdateNav.length > 0) {
+        let openArr = [];
+        const currentUrl = window.location.href;
+        const urlArr = currentUrl.split("#");
+        let openYear = siteUpdateNav[0].year;
+        if (urlArr.length > 1) {
+          openYear = urlArr[1].slice(-4);
+          const ids = releaseNotesList.map( (item) => item.id);
+          const urlIdx = ids.indexOf(urlArr[1]);
+          setSelectedIdx(urlIdx);
+        }
+        for (let i = 0; i < siteUpdateNav.length; i += 1) {
+          if (openYear === siteUpdateNav[i].year) {
+            openArr[i] = true;
+          } else {
+            openArr[i] = false;
+          }
+        }
+        setOpen(openArr);
+      }
+    }, [siteUpdateNav]);
 
     const handleExport = (idx) => {
         const img = document.createElement("img");

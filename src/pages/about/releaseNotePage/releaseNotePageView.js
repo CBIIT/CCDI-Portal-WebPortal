@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { withStyles, Collapse, Tooltip } from '@material-ui/core';
 import html2pdf from "html2pdf.js";
 import ReactHtmlParser from "html-react-parser";
-import { siteUpdateList } from '../../../bento/newsData';
+import { releaseNotesList } from '../../../bento/newsData';
 import NCILogoExport from '../../../assets/about/NCI_Logo.png';
 import ArrowDownIcon from '../../../assets/about/Arrow_Down_Black_Icon.svg';
 import UploadIcon from '../../../assets/about/Upload-Icon.svg';
@@ -304,11 +304,11 @@ const ReleaseNotesPageView = () => {
         let SubObj = null;
         let SubList = [];
         let prevYear = 0;
-        for (let i = 0; i < siteUpdateList.length; i += 1) {
-          const currYear = siteUpdateList[i].date.split(", ")[1];
+        for (let i = 0; i < releaseNotesList.length; i += 1) {
+          const currYear = releaseNotesList[i].date.split(", ")[1];
           const yearObj = {};
-          const fullMonth = siteUpdateList[i].date.split(" ")[0];
-          const restDate = siteUpdateList[i].date.split(fullMonth)[1];
+          const fullMonth = releaseNotesList[i].date.split(" ")[0];
+          const restDate = releaseNotesList[i].date.split(fullMonth)[1];
           const newDate = fullMonth.substring(0,3) + restDate;
           // const newDateFormat = formatDate(date);
           if (prevYear !== currYear) {
@@ -321,11 +321,11 @@ const ReleaseNotesPageView = () => {
             SubObj.year = currYear;
             prevYear = currYear;
           }
-          yearObj.version = siteUpdateList[i].version;
+          yearObj.version = releaseNotesList[i].version;
           yearObj.date = newDate;
           yearObj.index = i;
           SubList.push(yearObj);
-          if (i === siteUpdateList.length - 1) {
+          if (i === releaseNotesList.length - 1) {
             SubObj.list = SubList;
             NavList.push(SubObj);
           }
@@ -334,7 +334,7 @@ const ReleaseNotesPageView = () => {
     };
 
     useEffect(() => {
-      // if (siteUpdateList.length > 0) {
+      // if (releaseNotesList.length > 0) {
       //   if (hash !== '') {
       //     const id = hash.replace('#', '');
       //     const element = document.getElementById(id);
@@ -353,7 +353,7 @@ const ReleaseNotesPageView = () => {
       if (urlArr.length > 1) {
         setSelectedIdx(urlArr[1] - 1);
       }
-    }, [siteUpdateList]);
+    }, [releaseNotesList]);
 
     const handleExport = (idx) => {
         const img = document.createElement("img");
@@ -498,25 +498,25 @@ const ReleaseNotesPageView = () => {
                 </ul>
               </NavContainer>
               <SiteUpdateResultContext>
-                  <SiteUpdateItem id={`post${siteUpdateList[selectedIdx].id}`}>
+                  <SiteUpdateItem id={`post${releaseNotesList[selectedIdx].id}`}>
                       <SiteUpdateCard>
                           <div className='cardHeaderContainer'>
                               <div>
-                                  <div className="cardTitleContainer" id={`${siteUpdateList[selectedIdx].id}_title`} title={siteUpdateList[selectedIdx].version}>Release {siteUpdateList[selectedIdx].version}</div>
-                                  <div className="cardDateContainer" id={`${siteUpdateList[selectedIdx].id}_date`}>{siteUpdateList[selectedIdx].date}</div>
+                                  <div className="cardTitleContainer" id={`${releaseNotesList[selectedIdx].id}_title`} title={releaseNotesList[selectedIdx].version}>Release {releaseNotesList[selectedIdx].version}</div>
+                                  <div className="cardDateContainer" id={`${releaseNotesList[selectedIdx].id}_date`}>{releaseNotesList[selectedIdx].date}</div>
                               </div>
                               <SiteUpdateExport>
-                                  <div className="spanText" onClick={() => handleExport(siteUpdateList[selectedIdx].id)}>
+                                  <div className="spanText" onClick={() => handleExport(releaseNotesList[selectedIdx].id)}>
                                       <div className='downloadPDFText'>DOWNLOAD PDF</div>
                                       <div className='downloadPDFImg'><img src={UploadIcon} alt="download pdf icon" /></div>
                                   </div>
                               </SiteUpdateExport>
                           </div>
-                          { siteUpdateList[selectedIdx].contentType
+                          { releaseNotesList[selectedIdx].contentType
                           && (
                             <DataContentType>
                               {
-                                siteUpdateList[selectedIdx].contentType.split(",").map((type, typeidx) => {
+                                releaseNotesList[selectedIdx].contentType.split(",").map((type, typeidx) => {
                                   const typekey = `update_${typeidx}`;
                                   const newType = type.trim();
                                   return (
@@ -533,8 +533,8 @@ const ReleaseNotesPageView = () => {
                               }
                             </DataContentType>
                           )}
-                          <SiteUpdateCardDescription id={`${siteUpdateList[selectedIdx].id}_desc`}>
-                              {ReactHtmlParser(siteUpdateList[selectedIdx].fullText)}
+                          <SiteUpdateCardDescription id={`${releaseNotesList[selectedIdx].id}_desc`}>
+                              {ReactHtmlParser(releaseNotesList[selectedIdx].fullText)}
                           </SiteUpdateCardDescription>
                       </SiteUpdateCard>
                   </SiteUpdateItem>

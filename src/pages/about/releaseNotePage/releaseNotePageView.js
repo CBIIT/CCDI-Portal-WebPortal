@@ -150,18 +150,30 @@ const NavContainer = styled.div`
 
 const SiteUpdateItem = styled.div`
   scroll-margin: 200px;
+  border-radius: 0px 20px;
+  border: 1.5px solid #00BDCD;
+  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
 `;
 
 const SiteUpdateCard = styled.div`
     display: grid;
-    border-radius: 0px 20px;
-    border: 1.5px solid #00BDCD;
-    box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.25);
     padding: 33px 38px;
     width: 850px;
     max-height: 1138px;
     overflow-y: auto;
     position: relative;
+    &::-webkit-scrollbar {
+      width: 7px;
+      background-color: #E2E2E2;
+      border-left: 0.5px solid #1E1E1E;
+    }
+    &::-webkit-scrollbar-track {
+      background-color: #F1F1F1;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: #82BBE8;
+    }
 
     .cardHeaderContainer {
         display: flex;

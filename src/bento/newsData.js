@@ -453,3 +453,100 @@ export const newsList = [
         img: 'updateImgSymposium',
     },
 ]
+
+export const releaseNotesList = [
+    {
+        id: 'hub_release_12122024',
+        title: 'Childhood Cancer Data Initiative (CCDI) Data Federation Resource releases API V1.1',
+        version: 'v2.5.0',
+        date: 'December 12, 2024',
+        fullText: '<p>The Childhood Cancer Data Initiative (CCDI) Hub is excited to announce the Explore Dashboard has been updated to use <a href="https://github.com/CBIIT/ccdi-model/releases/tag/1.7.2" target="_blank">CCDI Data Model version 1.7.2</a>. This new data model facilitated numerous updates to the Dashboard, notability greater precision for participant diagnoses. This update also introduces two new visualizations to the CCDI Molecular Characterization Initiative (MCI) page, a Donut chart of enrollment by diagnosis type and a USA map Bubble chart of enrollment counts by state.</p>'
+                +'<p>The CCDI Hub also excited to announce the addition of 4 new datasets and updates to 2 existing datasets, the CCDI Molecular Characterization Initiative and Pediatric Brain Tumor Atlas. These 6 datasets include the addition of over 1,600 new participants; 3,100 new samples; and almost 30,000 new files.</p>'
+                +'<p>There are many other improvements that enhance the site and Explore Dashboard usability which are detailed below:</p>'
+                +'<h1 style="font-weight: normal; margin: 30pt 0in 0in;"><span style="color: #2f5496; font-size: 16pt;">CCDI Hub Data Updates</span></h1>'
+                +'<h2 style="font-weight: normal; margin: 2pt 0in 0in;"><span style="color: #2f5496; font-size: 13pt;">New Dataset</span></h2>'
+                +'<ul style="margin:0in 0in 8pt;"><li>Genomic Sequencing of Pediatric Rhabdomyosarcoma (PHS000720)</li><li>Pediatric Preclinical Testing Consortium (PPTC) (PHS001437) </li><li>Human Tumor Atlas Network (HTAN) (PHS002371)</li><li>Childhood Cancer Data Initiative (CCDI): Genomic Analysis in Pediatric Malignancies (PHS002430)</li></ul>'
+                +'<h2 style="font-weight: normal; margin: 2pt 0in 0in;"><span style="color: #2f5496; font-size: 13pt;">Updated Datasets</span></h2>'
+                +'<ul style="margin:0in 0in 8pt;"><li>CCDI Molecular Characterization Initiative (PHS002790)</li><li>Pediatric Brain Tumor Atlas (PHS002517)</li></ul>'
+                +'<h1 style="font-weight: normal; margin: 30pt 0in 0in;"><span style="color: #2f5496; font-size: 16pt;">CCDI Hub Site Updates</span></h1>'
+                +'<h2 style="font-weight: normal; margin: 2pt 0in 0in;"><span style="color: #2f5496; font-size: 13pt;">General Site</span></h2>'
+                +'<ul style="margin:0in 0in 8pt;"><li>Updated Carousel and Menu bar links to navigate directly to the site or resource. </li><li>Update the "CCDI Stats at a Glance" section so that the dataset counts for Childhood Cancer Data Catalog (CCDC) updates automatically when the CCDC site updates. </li><li>Updated the About page text.</li><li>Updated the design of the "Page not found" page. </li><li>Improved visual response for tablet and mobile browsing of the Global Search and "Page not found" pages. </li></ul>'
+                +'<h2 style="font-weight: normal; margin: 2pt 0in 0in;"><span style="color: #2f5496; font-size: 13pt;">Molecular Characterization Initiative (MCI) page</span></h2>'
+                +'<ul style="margin:0in 0in 8pt;"><li>Two new Enrollment visualizations have been added to the MCI Page <ul><li>A Donut chart of Enrollment in MCI (APEC14B1-MCI) by Diagnosis Type </li><li>A USA map Bubble chart of Enrollment Counts by State  </li></ul></li><li>The "Go to Site" link renamed to "Request Access (dbGaP)." No change in linked location. </li><li>Updated the text of the "How can MCI data be accessed through the CCDI Data Ecosystem?" section. </li></ul>'
+                +'<h1 style="font-weight: normal; margin: 30pt 0in 0in;"><span style="color: #2f5496; font-size: 16pt;">CCDI Hub Explore Dashboard</span></h1> <h2 style="font-weight: normal; margin: 2pt 0in 0in;"><span style="color: #2f5496; font-size: 13pt;">Faceted Search & Breadcrumb</span></h2>'
+                +'<ul style="margin:0in 0in 8pt;"><li>The Faceted search and breadcrumb are now visually linked by category color. </li><li>Illogical faceted search queries, i.e. selecting Sex=male and searching for a female PID, will now properly display.  </li><li>‘Sex’ replaced ‘Gender’ within the Demographics category. </li><li>‘Diagnosis Classification,’ ‘Diagnosis Classification System,’ ‘Diagnosis Verification Status,’ and ‘Diagnosis Basis’ have replaced ‘Diagnosis (ICD-O)’ in both the Diagnosis and Samples categories. </li><li>‘Disease Phase’ now appears after at the diagnosis data elements in the Diagnosis category. </li><li>‘Age at collection (days)’ now appears as the first item in the Samples category. </li><li>The ‘Library’ category was renamed to ‘Sequencing Library.’ </li></ul> <h2 style="font-weight: normal; margin: 2pt 0in 0in;"><span style="color: #2f5496; font-size: 13pt;">Visualization Dashboard</span></h2>'
+                +'<ul style="margin:0in 0in 8pt;"><li>The ‘Diagnosis’ donut chart label was updated from ‘Diagnosis (ICD-O)’ and displayed responses are now derived from CCDI data model element diagnosis_classification and not the retired element diagnosis_icd_o. </li><li>The Age at Diagnosis (years) Histogram label was updated to be Participant from Subject. </li><li>The ‘Sex’ donut chart label was updated from ‘Gender’ and displayed responses are now derived from CCDI data model element sex_at_birth and not the retired element gender. </li></ul>'
+                +'<h2 style="font-weight: normal; margin: 2pt 0in 0in;"><span style="color: #2f5496; font-size: 13pt;">Results Table</span></h2> <ul style="margin:0in 0in 8pt;"><li>‘Sex’ replaced ‘Gender’ on the Participants tab. </li><li>"Diagnosis Classification", "Diagnosis Classification System", "Diagnosis Verification Status","Diagnosis Basis" and "Diagnosis Comment" have replaced "Diagnosis (ICD-O)" in both the Diagnosis and Samples tabs. </li><li>A disclaimer was added to the bottom of the results table to note that participants may have participated in one or more studies and may not be unique.</li></ul>',
+        type: 'Release Notes',
+        img: 'updateImgHub',
+        contentType: 'Clinical, Genomics/Omics',
+    },
+    {
+        id: 'hub_release_08102024',
+        title: 'Test 2',
+        version: 'v2.4.0',
+        date: 'August 10, 2024',
+        fullText: '<p>The Childhood Cancer Data Initiative (CCDI) Hub is excited to announce the Explore Dashboard has been updated to use <a href="https://github.com/CBIIT/ccdi-model/releases/tag/1.7.2" target="_blank">CCDI Data Model version 1.7.2</a>. This new data model facilitated numerous updates to the Dashboard, notability greater precision for participant diagnoses. This update also introduces two new visualizations to the CCDI Molecular Characterization Initiative (MCI) page, a Donut chart of enrollment by diagnosis type and a USA map Bubble chart of enrollment counts by state.</p>'
+                +'<p>The CCDI Hub also excited to announce the addition of 4 new datasets and updates to 2 existing datasets, the CCDI Molecular Characterization Initiative and Pediatric Brain Tumor Atlas. These 6 datasets include the addition of over 1,600 new participants; 3,100 new samples; and almost 30,000 new files.</p>'
+                +'<p>There are many other improvements that enhance the site and Explore Dashboard usability which are detailed below:</p>'
+                +'<h1 style="font-weight: normal; margin: 30pt 0in 0in;"><span style="color: #2f5496; font-size: 16pt;">CCDI Hub Data Updates</span></h1>'
+                +'<h2 style="font-weight: normal; margin: 2pt 0in 0in;"><span style="color: #2f5496; font-size: 13pt;">New Dataset</span></h2>'
+                +'<ul style="margin:0in 0in 8pt;"><li>Genomic Sequencing of Pediatric Rhabdomyosarcoma (PHS000720)</li><li>Pediatric Preclinical Testing Consortium (PPTC) (PHS001437) </li><li>Human Tumor Atlas Network (HTAN) (PHS002371)</li><li>Childhood Cancer Data Initiative (CCDI): Genomic Analysis in Pediatric Malignancies (PHS002430)</li></ul>'
+                +'<h2 style="font-weight: normal; margin: 2pt 0in 0in;"><span style="color: #2f5496; font-size: 13pt;">Updated Datasets</span></h2>'
+                +'<ul style="margin:0in 0in 8pt;"><li>CCDI Molecular Characterization Initiative (PHS002790)</li><li>Pediatric Brain Tumor Atlas (PHS002517)</li></ul>'
+                +'<h1 style="font-weight: normal; margin: 30pt 0in 0in;"><span style="color: #2f5496; font-size: 16pt;">CCDI Hub Site Updates</span></h1>'
+                +'<h2 style="font-weight: normal; margin: 2pt 0in 0in;"><span style="color: #2f5496; font-size: 13pt;">General Site</span></h2>'
+                +'<ul style="margin:0in 0in 8pt;"><li>Updated Carousel and Menu bar links to navigate directly to the site or resource. </li><li>Update the "CCDI Stats at a Glance" section so that the dataset counts for Childhood Cancer Data Catalog (CCDC) updates automatically when the CCDC site updates. </li><li>Updated the About page text.</li><li>Updated the design of the "Page not found" page. </li><li>Improved visual response for tablet and mobile browsing of the Global Search and "Page not found" pages. </li></ul>'
+                +'<h2 style="font-weight: normal; margin: 2pt 0in 0in;"><span style="color: #2f5496; font-size: 13pt;">Molecular Characterization Initiative (MCI) page</span></h2>'
+                +'<ul style="margin:0in 0in 8pt;"><li>Two new Enrollment visualizations have been added to the MCI Page <ul><li>A Donut chart of Enrollment in MCI (APEC14B1-MCI) by Diagnosis Type </li><li>A USA map Bubble chart of Enrollment Counts by State  </li></ul></li><li>The "Go to Site" link renamed to "Request Access (dbGaP)." No change in linked location. </li><li>Updated the text of the "How can MCI data be accessed through the CCDI Data Ecosystem?" section. </li></ul>'
+                +'<h1 style="font-weight: normal; margin: 30pt 0in 0in;"><span style="color: #2f5496; font-size: 16pt;">CCDI Hub Explore Dashboard</span></h1> <h2 style="font-weight: normal; margin: 2pt 0in 0in;"><span style="color: #2f5496; font-size: 13pt;">Faceted Search & Breadcrumb</span></h2>',
+        type: 'Release Notes',
+        img: 'updateImgHub',
+        contentType: 'Clinical, Genomics/Omics',
+    },
+    {
+        id: 'hub_release_08102024',
+        title: 'Test 3',
+        version: 'v2.3.0',
+        date: 'April 10, 2024',
+        fullText: '<p>The Childhood Cancer Data Initiative (CCDI) Hub is excited to announce the Explore Dashboard has been updated to use <a href="https://github.com/CBIIT/ccdi-model/releases/tag/1.7.2" target="_blank">CCDI Data Model version 1.7.2</a>. This new data model facilitated numerous updates to the Dashboard, notability greater precision for participant diagnoses. This update also introduces two new visualizations to the CCDI Molecular Characterization Initiative (MCI) page, a Donut chart of enrollment by diagnosis type and a USA map Bubble chart of enrollment counts by state.</p>'
+                +'<p>The CCDI Hub also excited to announce the addition of 4 new datasets and updates to 2 existing datasets, the CCDI Molecular Characterization Initiative and Pediatric Brain Tumor Atlas. These 6 datasets include the addition of over 1,600 new participants; 3,100 new samples; and almost 30,000 new files.</p>'
+                +'<p>There are many other improvements that enhance the site and Explore Dashboard usability which are detailed below:</p>'
+                +'<h1 style="font-weight: normal; margin: 30pt 0in 0in;"><span style="color: #2f5496; font-size: 16pt;">CCDI Hub Data Updates</span></h1>'
+                +'<h2 style="font-weight: normal; margin: 2pt 0in 0in;"><span style="color: #2f5496; font-size: 13pt;">New Dataset</span></h2>'
+                +'<ul style="margin:0in 0in 8pt;"><li>Genomic Sequencing of Pediatric Rhabdomyosarcoma (PHS000720)</li><li>Pediatric Preclinical Testing Consortium (PPTC) (PHS001437) </li><li>Human Tumor Atlas Network (HTAN) (PHS002371)</li><li>Childhood Cancer Data Initiative (CCDI): Genomic Analysis in Pediatric Malignancies (PHS002430)</li></ul>'
+                +'<h2 style="font-weight: normal; margin: 2pt 0in 0in;"><span style="color: #2f5496; font-size: 13pt;">Updated Datasets</span></h2>'
+                +'<ul style="margin:0in 0in 8pt;"><li>CCDI Molecular Characterization Initiative (PHS002790)</li><li>Pediatric Brain Tumor Atlas (PHS002517)</li></ul>'
+                +'<h1 style="font-weight: normal; margin: 30pt 0in 0in;"><span style="color: #2f5496; font-size: 16pt;">CCDI Hub Site Updates</span></h1>'
+                +'<h1 style="font-weight: normal; margin: 30pt 0in 0in;"><span style="color: #2f5496; font-size: 16pt;">CCDI Hub Explore Dashboard</span></h1> <h2 style="font-weight: normal; margin: 2pt 0in 0in;"><span style="color: #2f5496; font-size: 13pt;">Faceted Search & Breadcrumb</span></h2>',
+        type: 'Release Notes',
+        img: 'updateImgHub',
+        contentType: 'Genomics/Omics, Epidemiologic, Cell Lines, Imaging, Xenograft',
+    },
+    {
+        id: 'hub_release_10312023',
+        title: 'Childhood Cancer Data Initiative (CCDI) Data Federation Resource releases API V1.1',
+        version: 'v2.0.0',
+        date: 'October 31, 2023',
+        fullText: '<p>The Childhood Cancer Data Initiative (CCDI) Hub is excited to announce the Explore Dashboard has been updated to use <a href="https://github.com/CBIIT/ccdi-model/releases/tag/1.7.2" target="_blank">CCDI Data Model version 1.7.2</a>. This new data model facilitated numerous updates to the Dashboard, notability greater precision for participant diagnoses. This update also introduces two new visualizations to the CCDI Molecular Characterization Initiative (MCI) page, a Donut chart of enrollment by diagnosis type and a USA map Bubble chart of enrollment counts by state.</p>'
+                +'<p>The CCDI Hub also excited to announce the addition of 4 new datasets and updates to 2 existing datasets, the CCDI Molecular Characterization Initiative and Pediatric Brain Tumor Atlas. These 6 datasets include the addition of over 1,600 new participants; 3,100 new samples; and almost 30,000 new files.</p>'
+                +'<p>There are many other improvements that enhance the site and Explore Dashboard usability which are detailed below:</p>'
+                +'<h1 style="font-weight: normal; margin: 30pt 0in 0in;"><span style="color: #2f5496; font-size: 16pt;">CCDI Hub Data Updates</span></h1>'
+                +'<h2 style="font-weight: normal; margin: 2pt 0in 0in;"><span style="color: #2f5496; font-size: 13pt;">New Dataset</span></h2>'
+                +'<ul style="margin:0in 0in 8pt;"><li>Genomic Sequencing of Pediatric Rhabdomyosarcoma (PHS000720)</li><li>Pediatric Preclinical Testing Consortium (PPTC) (PHS001437) </li><li>Human Tumor Atlas Network (HTAN) (PHS002371)</li><li>Childhood Cancer Data Initiative (CCDI): Genomic Analysis in Pediatric Malignancies (PHS002430)</li></ul>'
+                +'<h2 style="font-weight: normal; margin: 2pt 0in 0in;"><span style="color: #2f5496; font-size: 13pt;">Updated Datasets</span></h2>'
+                +'<ul style="margin:0in 0in 8pt;"><li>CCDI Molecular Characterization Initiative (PHS002790)</li><li>Pediatric Brain Tumor Atlas (PHS002517)</li></ul>'
+                +'<h1 style="font-weight: normal; margin: 30pt 0in 0in;"><span style="color: #2f5496; font-size: 16pt;">CCDI Hub Site Updates</span></h1>'
+                +'<h2 style="font-weight: normal; margin: 2pt 0in 0in;"><span style="color: #2f5496; font-size: 13pt;">General Site</span></h2>'
+                +'<ul style="margin:0in 0in 8pt;"><li>Updated Carousel and Menu bar links to navigate directly to the site or resource. </li><li>Update the "CCDI Stats at a Glance" section so that the dataset counts for Childhood Cancer Data Catalog (CCDC) updates automatically when the CCDC site updates. </li><li>Updated the About page text.</li><li>Updated the design of the "Page not found" page. </li><li>Improved visual response for tablet and mobile browsing of the Global Search and "Page not found" pages. </li></ul>'
+                +'<h2 style="font-weight: normal; margin: 2pt 0in 0in;"><span style="color: #2f5496; font-size: 13pt;">Molecular Characterization Initiative (MCI) page</span></h2>'
+                +'<ul style="margin:0in 0in 8pt;"><li>Two new Enrollment visualizations have been added to the MCI Page <ul><li>A Donut chart of Enrollment in MCI (APEC14B1-MCI) by Diagnosis Type </li><li>A USA map Bubble chart of Enrollment Counts by State  </li></ul></li><li>The "Go to Site" link renamed to "Request Access (dbGaP)." No change in linked location. </li><li>Updated the text of the "How can MCI data be accessed through the CCDI Data Ecosystem?" section. </li></ul>'
+                +'<h1 style="font-weight: normal; margin: 30pt 0in 0in;"><span style="color: #2f5496; font-size: 16pt;">CCDI Hub Explore Dashboard</span></h1> <h2 style="font-weight: normal; margin: 2pt 0in 0in;"><span style="color: #2f5496; font-size: 13pt;">Faceted Search & Breadcrumb</span></h2>'
+                +'<ul style="margin:0in 0in 8pt;"><li>The Faceted search and breadcrumb are now visually linked by category color. </li><li>Illogical faceted search queries, i.e. selecting Sex=male and searching for a female PID, will now properly display.  </li><li>‘Sex’ replaced ‘Gender’ within the Demographics category. </li><li>‘Diagnosis Classification,’ ‘Diagnosis Classification System,’ ‘Diagnosis Verification Status,’ and ‘Diagnosis Basis’ have replaced ‘Diagnosis (ICD-O)’ in both the Diagnosis and Samples categories. </li><li>‘Disease Phase’ now appears after at the diagnosis data elements in the Diagnosis category. </li><li>‘Age at collection (days)’ now appears as the first item in the Samples category. </li><li>The ‘Library’ category was renamed to ‘Sequencing Library.’ </li></ul> <h2 style="font-weight: normal; margin: 2pt 0in 0in;"><span style="color: #2f5496; font-size: 13pt;">Visualization Dashboard</span></h2>'
+                +'<ul style="margin:0in 0in 8pt;"><li>The ‘Diagnosis’ donut chart label was updated from ‘Diagnosis (ICD-O)’ and displayed responses are now derived from CCDI data model element diagnosis_classification and not the retired element diagnosis_icd_o. </li><li>The Age at Diagnosis (years) Histogram label was updated to be Participant from Subject. </li><li>The ‘Sex’ donut chart label was updated from ‘Gender’ and displayed responses are now derived from CCDI data model element sex_at_birth and not the retired element gender. </li></ul>'
+                +'<h2 style="font-weight: normal; margin: 2pt 0in 0in;"><span style="color: #2f5496; font-size: 13pt;">Results Table</span></h2> <ul style="margin:0in 0in 8pt;"><li>‘Sex’ replaced ‘Gender’ on the Participants tab. </li><li>"Diagnosis Classification", "Diagnosis Classification System", "Diagnosis Verification Status","Diagnosis Basis" and "Diagnosis Comment" have replaced "Diagnosis (ICD-O)" in both the Diagnosis and Samples tabs. </li><li>A disclaimer was added to the bottom of the results table to note that participants may have participated in one or more studies and may not be unique.</li></ul>',
+        type: 'Release Notes',
+        img: 'updateImgHub',
+        contentType: '',
+    }
+]

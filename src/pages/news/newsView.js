@@ -13,7 +13,9 @@ import NCILogoExport from '../../assets/about/NCI_Logo.png';
 import newsImg from '../../assets/news/News_Header.jpg';
 import { altList, srcList, newsList, releaseNotesList } from '../../bento/newsData'
 
-const fullList = newsList.concat(releaseNotesList);
+const fullList = (newsList.concat(releaseNotesList)).sort((a,b) => {
+  return new Date(a.date).getTime() - new Date(b.date).getTime();
+}).reverse();
 
 const NewsContainer = styled.div`
   width: 100%;

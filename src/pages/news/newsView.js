@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef }from 'react';
 import {
-  withStyles,
+  withStyles, ClickAwayListener
 } from '@material-ui/core';
 // import { useNavigate } from 'react-router-dom';
 import html2pdf from "html2pdf.js";
@@ -11,6 +11,9 @@ import styled from 'styled-components';
 import exportIcon from '../../assets/about/Export_Icon.svg';
 import NCILogoExport from '../../assets/about/NCI_Logo.png';
 import newsImg from '../../assets/news/News_Header.jpg';
+import arrowDownIcon from '../../assets/about/arrowDownGreen.svg';
+import arrowUpIcon from '../../assets/about/arrowUpGreen.svg';
+import UploadIcon from '../../assets/about/Upload-Icon.svg';
 import { altList, srcList, newsList, releaseNotesList } from '../../bento/newsData'
 
 const fullList = (newsList.concat(releaseNotesList)).sort((a,b) => {
@@ -22,8 +25,9 @@ const NewsContainer = styled.div`
   margin: 0 auto;
 
   .numResults {
-    margin-left: 200px;
-    margin-bottom: 10px;
+    margin: 0 auto 10px auto;
+    padding-left: 50px;
+    width: 1047px;
     color: #13666A;
     font-family: 'Poppins';
     font-weight: 500;
@@ -32,7 +36,7 @@ const NewsContainer = styled.div`
 
   .newsHeader {
     width: 1142px;
-    height: 214px;
+    height: 140px;
     margin: 0 auto;
     background-image: url(${newsImg});
     background-repeat: no-repeat;
@@ -41,7 +45,7 @@ const NewsContainer = styled.div`
     font-family: 'Poppins';
     font-weight: 600;
     font-size: 35px;
-    line-height: 214px;
+    line-height: 140px;
     text-align: center;
     letter-spacing: 0.02em;
     color: #FFFFFF;
@@ -59,7 +63,8 @@ const NewsContainer = styled.div`
     font-size: 16px;
     line-height: 16px;
     color: #298085;
-    margin-left: 60px;
+    margin-left: 30px;
+    margin-right: 30px;
   }
 
   .tabListItemActive {
@@ -68,7 +73,8 @@ const NewsContainer = styled.div`
     font-size: 16px;
     line-height: 16px;
     color: #0A5E63;
-    margin-left: 60px;
+    margin-left: 30px;
+    margin-right: 30px;
     padding-bottom: 5px;
     border-bottom: 3px solid #0A5E63;
   }
@@ -83,6 +89,44 @@ const NewsContainer = styled.div`
 
   .tabListItem:hover {
     cursor: pointer;
+  }
+
+  .tabDropdown {
+    display: none;
+  }
+
+  .tabDropdown {
+    padding: 0;
+    margin: 25px auto 25px auto;
+    width: calc(100vw - 45px);;
+    border: 2px solid #08838D;
+    background: white;
+    border-radius: 4px;
+  }
+
+  .tabDropdownItem {
+    color: #0A5E63;
+    height: 45px;
+    padding: 15.5px 10px;
+    list-style-type: none;
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 14px; /* 70% */
+    text-transform: capitalize;
+  }
+
+  .tabDropdownItem:hover {
+    cursor: pointer;
+  }
+
+  .tabDropdownItem:nth-child(odd) {
+    background: #F4F5F5;
+  }
+
+  .tabDropIcon {
+    float: right;
   }
 
   .UpperContainer {
@@ -131,14 +175,22 @@ const NewsContainer = styled.div`
     font-weight: 600;
     font-size: 12px;
     color: white;
-    left: 48px;
+    margin-left: 48px;
     margin-top: 12.5px;
+    text-align: left;
+    padding-left: 20px;
+
+    img {
+      position: absolute;
+      margin-left: 10px;
+    }
   }
   .downloadPDF:hover {
     background-color: #05555C;
   }
 
   .readMore {
+    display: block;
     width: 167px;
     height: 41px;
     border-radius: 5px;
@@ -147,19 +199,29 @@ const NewsContainer = styled.div`
     font-weight: 600;
     font-size: 12px;
     color: #455299;
-    left: 48px;
+    margin-left: 48px;
     margin-top: 12.5px;
+    text-align: left;
+    padding-left: 40px;
 
-    .MuiButton-label {
-      width: 80%;
-      margin-right: 8px;
-      background: url(${exportIcon}) right center no-repeat;
+    img {
+      position: absolute;
+      margin-left: 10px;
+      margin-top: 3px;
     }
   }
-
-  // .newsItem:hover {
-  //   border: 1.5px solid #00BDCD;
-  // }
+  .Desktop {
+    display: block;
+  }
+  .Tablet {
+    display: none;
+  }
+  .notMobile {
+    display: block;
+  }
+  .Mobile {
+    display: none;
+  }
 
   .newsItemTextContainer {
     position: absolute;
@@ -181,7 +243,7 @@ const NewsContainer = styled.div`
   }
 
   .newsItemTitleInner{
-    margin-bottom: 30px;
+    margin-bottom: 40px;
   }
 
   .newsItemDate {
@@ -256,6 +318,17 @@ const NewsContainer = styled.div`
       padding-right: 20px;
       background: url(${exportIcon}) right center no-repeat;
     }
+    &::-webkit-scrollbar {
+      width: 7px;
+      background-color: #E2E2E2;
+      border-left: 0.5px solid #1E1E1E;
+    }
+    &::-webkit-scrollbar-track {
+      background-color: #F1F1F1;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: #82BBE8;
+    }
   }
 
   .newsItemBottom {
@@ -268,10 +341,11 @@ const NewsContainer = styled.div`
   }
 
   .imgContainer {
+    display: grid;
     position: absolute;
     top: 0;
-    right: 10px;
-    width: 25%;
+    right: 25px;
+    // width: calc(25% - 30px);
   }
 
   .newsItemImgContainer {
@@ -282,17 +356,13 @@ const NewsContainer = styled.div`
     height: 172px;
   }
 
-  .Lower {
-    display: none;
-  }
-
   @media (min-width: 1420px) {
     width: 1420px;
   }
 
   @media (max-width: 1186px) {
     .newsHeader {
-      height: 173px;
+      height: 140px;
       width: auto;
       margin: 0 16px;
     }
@@ -307,15 +377,20 @@ const NewsContainer = styled.div`
     .newsItem {
       width: auto;
     }
+    .releaseNewsItem {
+      width: auto;
+    }
   }
 
   @media (max-width: 1023px) {
-    p {
-      margin-top: 5px;
+    .Desktop {
+      display: none;
     }
-
+    .Tablet {
+      display: block;
+    }
     .newsHeader {
-      height: 174px;
+      height: 140px;
       width: auto;
       margin: 0 16px;
     }
@@ -323,7 +398,7 @@ const NewsContainer = styled.div`
     .newsHeaderText {
       line-height: 30px;
       width: 250px;
-      padding-top: 70px;
+      padding-top: 40px;
       margin: 0 auto;
     }
 
@@ -334,54 +409,93 @@ const NewsContainer = styled.div`
       margin-left: auto;
     }
     .newsItemImgContainer {
-      width: 99px;
-      height: 86px;
-      margin-top: 0;
+      width: 115px;
+      height: 100px;
+      margin-top: 5px;
     }
-    .Upper {
-      display: none;
+    .downloadPDF {
+      width: 115px;
+      margin-left: 33px;
+      padding-left: 35px;
     }
-    .Lower {
-      display: block;
-      margin-bottom: 25px;
-    }
-    .newsItem {
-      padding: 18px 18px 0 18px;
-    }
-    .newsItemTitle {
-      min-height: 50px;
-    }
-    .tabListItem {
-      font-size: 12px;
-      margin-left: 0;
-    }
-    .tabListItemActive {
-      font-size: 12px;
-      margin-left: 0;
-    }
-    .tabList {
-      display: grid;
-      grid-column-gap: 4%;
-      grid-template-columns: auto auto auto auto auto;
-      justify-content: center;
-      margin: 20px auto 25px auto;
+    .readMore {
+      width: 115px;
+      margin-left: 33px;
+      padding-left: 10px;
     }
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: 649px) {
+    .newsItemTextContainer {
+      width: 100%;
+      position: relative;
+      .titleImgContainer {
+        display: flex;
+      }
+      .newsSubtitle {
+        margin-top: 8px;
+      }
+      .newsItemDate {
+        margin-bottom: 0;
+      }
+      .imgContainer {
+        position: relative;
+      }
+      .newsItemImgContainer {
+        width: 100px;
+        height: 85px;
+        margin-top: 0px;
+      }
+    }
     .newsItemTitle {
       font-size: 18px;
+      min-height: 50px;
     }
-  }
-
-  @media (max-width: 530px) {
     .tabList {
-      display: grid;
-      grid-column-gap: 2%;
-      grid-template-columns: auto auto 50px 72px auto;
-      justify-content: center;
-      margin-left: 16px;
-      margin-right: 12px;
+      display: none;
+    }
+
+    .tabDropdown {
+      display: block;
+    }
+    .notMobile {
+      display: none;
+    }
+    .Mobile {
+      display: block;
+    }
+    .newsItem {
+      width: auto;
+      height: 300px;
+      overflow: hidden;
+    }
+    .releaseNewsItem {
+      width: auto;
+      height: 550px;
+      overflow: hidden;
+    }
+    .newsItemContent {
+      padding-right: 20px;
+      margin-top: 0;
+      height: 130px;
+    }
+    .releaseNewsItemContent {
+      padding-right: 20px;
+      margin-top: 0;
+      height: 280px;
+      margin-bottom: 10px;
+    }
+    .downloadPDF {
+      display: block;
+      width: 167px;
+      margin-left: 0px;
+      padding-left: 20px;
+    }
+    .readMore {
+      display: block;
+      width: 167px;
+      margin-left: 0px;
+      padding-left: 35px;
     }
   }
 `;
@@ -513,6 +627,8 @@ const NewsView = ({classes}) => {
   const [data, setdata] = useState(getPageResults(selectedTab, {page: page, pageTotal: pageTotal, pageSize: pageSize}));
   const [pageListVisible, setPageListVisible] = useState(0);
   const perPageSelection = useRef(null);
+  const anchorRef = useRef(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   // const announcementsArray = newsList.filter(item => item.type === 'Announcements');
   useOutsideAlerter(perPageSelection);
 
@@ -568,11 +684,34 @@ const NewsView = ({classes}) => {
     setPageTotal(total);
   };
 
+  const onClickDropdownItem = (newsTabItem) => {
+    setSelectedTab(newsTabItem);
+    setDropdownOpen(false)
+    const resultList = getResultList(newsTabItem);
+    const total = resultList.length;
+    const allids = [];
+    const indexStart = 0;
+    const indexEnd = pageSize < total ? pageSize - 1 : total - 1;
+    for (let i = indexStart; i<= indexEnd; i++) {
+      allids.push(resultList[i]);
+    }
+    setdata(allids);
+    setPage(1);
+    setPageTotal(total);
+  };
+
   // const gotoNewsDetail = (e, newsID) => {
   //   if (e.target.tagName !== 'A') {
   //     navigate(`/newsdetail/${newsID.trim()}`);
   //   }
   // };
+
+  const handleClose = (event) => {
+    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+        return;
+    }
+    setDropdownOpen(false);
+  };
 
   return (
     <NewsContainer>
@@ -587,6 +726,29 @@ const NewsView = ({classes}) => {
           })
         }
       </div>
+      <ul className='tabDropdown'>
+        <div
+          className='tabDropdownItem first'
+          ref={anchorRef}
+          style={dropdownOpen? {fontSize: '16px', background: '#FFFFFF'} : {background: '#FFFFFF'}}
+          onClick={() => setDropdownOpen(!dropdownOpen)}
+        >
+          {dropdownOpen ? "Select a category" : selectedTab}
+          <img className='tabDropIcon' src={dropdownOpen? arrowUpIcon : arrowDownIcon} alt='arrow img' />
+        </div>
+        <ClickAwayListener onClickAway={handleClose}>
+          <div>
+          {
+            dropdownOpen && newsTabList.map((newsTabItem, idx) => {
+              const tabkey = `tabkey_${idx}`;
+              return (
+                <li key={tabkey} className='tabDropdownItem' onClick={() => onClickDropdownItem(newsTabItem)}>{newsTabItem}</li>
+              )
+            })
+          }
+          </div>
+        </ClickAwayListener>
+      </ul>
       <div className='numResults'><b>{getResultList(selectedTab).length}</b> results</div>
       <div className='newsList'>
         {
@@ -594,7 +756,7 @@ const NewsView = ({classes}) => {
             const newskey = `news_${idx}`;
              return (
               newsItem.type !== 'Release Notes' ? <div id={newsItem.id} key={newskey} className='newsItem'>
-                <div className="UpperContainer">
+                <div className="UpperContainer notMobile">
                   <div className='newsItemTextContainer'>
                     <div className='newsItemTitle'>{newsItem.title}</div>
                     <div className='newsSubtitle'>
@@ -602,16 +764,30 @@ const NewsView = ({classes}) => {
                       <div className='newsCategory'>{newsItem.type}</div>
                     </div>
                   </div>
-                  <div className='newsItemContent Upper'>
+                  <div className='newsItemContent'>
                     <div className='newsItemTitle newsItemTitleInner'>{newsItem.title}</div>
                     {ReactHtmlParser(newsItem.highlight)}
                   </div>
                   {newsItem.img && <div className='imgContainer'><img className='newsItemImgContainer' src={srcList[newsItem.img]} alt={altList[newsItem.img]}/></div>}
                 </div>
-                <div className='newsItemContent Lower'>{ReactHtmlParser(newsItem.highlight)}</div>
+                <div className="UpperContainer Mobile">
+                  <div className='newsItemTextContainer'>
+                    <div className="titleImgContainer">
+                      <div className='newsItemTitle'>{newsItem.title}</div>
+                      {newsItem.img && <div className='imgContainer'><img className='newsItemImgContainer' src={srcList[newsItem.img]} alt={altList[newsItem.img]}/></div>}
+                    </div>
+                    <div className='newsSubtitle'>
+                      <div className='newsItemDate'>{newsItem.date}</div>
+                      <div className='newsCategory'>{newsItem.type}</div>
+                    </div>
+                  </div>
+                  <div className='newsItemContent'>
+                    {ReactHtmlParser(newsItem.highlight)}
+                  </div>
+                </div>
               </div> :
               <div id={`post${releaseNotesList.id}`} key={newskey} className='releaseNewsItem'>
-              <div className="UpperContainer">
+              <div className="UpperContainer notMobile">
                 <div className='newsItemTextContainer'>
                   <div className='newsItemTitle'>{newsItem.title}</div>
                   <div className='newsSubtitle'>
@@ -619,17 +795,37 @@ const NewsView = ({classes}) => {
                     <div className='newsCategory'>{newsItem.type}</div>
                   </div>
                 </div>
-                <div className='releaseNewsItemContent Upper'>
+                <div className='releaseNewsItemContent'>
                   <div className='newsItemTitle newsItemTitleInner'>{newsItem.title}</div>
                   {ReactHtmlParser(newsItem.fullText)}
                 </div>
                 {newsItem.img && <div className='imgContainer'>
                   <img className='newsItemImgContainer' src={srcList[newsItem.img]} alt={altList[newsItem.img]}/>
-                  <Button className='downloadPDF' onClick={() => handleExport(releaseNotesList.id)}>Download PDF</Button>
-                  <Button className='readMore'>Read More</Button>
+                  <Button className='downloadPDF Desktop' onClick={() => handleExport(releaseNotesList.id)}>Download PDF<img src={UploadIcon} alt="download pdf icon" /></Button>
+                  <Button className='downloadPDF Tablet' onClick={() => handleExport(releaseNotesList.id)}>PDF<img src={UploadIcon} alt="download pdf icon" /></Button>
+                  <Button className='readMore Desktop'>Read More<img src={exportIcon} alt="outlink icon" /></Button>
+                  <Button className='readMore Tablet'>Read More<img src={exportIcon} alt="outlink icon" /></Button>
                 </div>}
               </div>
-              <div className='newsItemContent Lower'>{ReactHtmlParser(newsItem.fullText)}</div>
+              <div className="UpperContainer Mobile">
+                <div className='newsItemTextContainer'>
+                  <div className="titleImgContainer">
+                    <div className='newsItemTitle'>{newsItem.title}</div>
+                    {newsItem.img && <div className='imgContainer'>
+                      <img className='newsItemImgContainer' src={srcList[newsItem.img]} alt={altList[newsItem.img]}/>
+                      </div>}
+                  </div>
+                  <div className='newsSubtitle'>
+                    <div className='newsItemDate'>{newsItem.date}</div>
+                    <div className='newsCategory'>{newsItem.type}</div>
+                  </div>
+                </div>
+                <div className='releaseNewsItemContent'>
+                  {ReactHtmlParser(newsItem.fullText)}
+                </div>
+                <Button className='downloadPDF' onClick={() => handleExport(releaseNotesList.id)}>Download PDF<img src={UploadIcon} alt="download pdf icon" /></Button>
+                <Button className='readMore'>Read More<img src={exportIcon} alt="outlink icon" /></Button>
+              </div>
             </div>
               ) 
           }) :

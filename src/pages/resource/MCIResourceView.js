@@ -665,7 +665,8 @@ const MCIResourceView = () => {
                                                             <>
                                                                 <img className="ecosystemImg" src={ccdiDataEcosystemImg} alt="Infographic depicting the MCI assays and data types, and the data flow to patients, providers, and the CCDI Data Ecosystem"/>
                                                                 <img className="ecosystemImgMobile" src={ccdiDataEcosystemMobileImg} alt="Infographic depicting the MCI assays and data types, and the data flow to patients, providers, and the CCDI Data Ecosystem"/>
-                                                                <p style={{marginTop: '24px'}}>MCI assays and data types, and the data flow to patients, providers, and the CCDI Data Ecosystem.</p>
+                                                                <h3 style={{ marginTop: '24px' }}>Community Tools and Scripts</h3>
+                                                                <div>Convert COG-formatted JSON files to TSV format with CCDI’s MCI_JSON2TSV tool <a href="https://github.com/CBIIT/ChildhoodCancerDataInitiative-MCI_JSON2TSV" target='blank' rel="noopener noreferrer">here</a>.</div>
                                                             </>
                                                             }
                                                             {mciItem.table &&

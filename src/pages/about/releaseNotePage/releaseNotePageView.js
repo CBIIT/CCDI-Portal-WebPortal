@@ -526,7 +526,7 @@ const ReleaseNotesPageView = () => {
                       <SiteUpdateCard>
                           <div className='cardHeaderContainer'>
                               <div>
-                                  <div className="cardTitleContainer" id={`${releaseNotesList[selectedIdx].id}_title`} title={releaseNotesList[selectedIdx].version}>Release {releaseNotesList[selectedIdx].version}</div>
+                                  <div className="cardTitleContainer" id={`${releaseNotesList[selectedIdx].id}_title`} title={releaseNotesList[selectedIdx].version}>{releaseNotesList[selectedIdx].title}</div>
                                   <div className="cardDateContainer" id={`${releaseNotesList[selectedIdx].id}_date`}>{releaseNotesList[selectedIdx].date}</div>
                               </div>
                               <SiteUpdateExport>

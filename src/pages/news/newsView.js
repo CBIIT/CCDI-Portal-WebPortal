@@ -713,6 +713,11 @@ const NewsView = ({classes}) => {
     setDropdownOpen(false);
   };
 
+  const handleReadMore = (id) => { 
+    const newWindow = window.open(`/release-notes#${id}`, '_self')
+    if (newWindow) newWindow.opener = null
+  }
+
   return (
     <NewsContainer>
       <div className='newsHeader'><div className='newsHeaderText'>Hub News and Updates</div></div>
@@ -786,25 +791,25 @@ const NewsView = ({classes}) => {
                   </div>
                 </div>
               </div> :
-              <div id={`post${releaseNotesList.id}`} key={newskey} className='releaseNewsItem'>
+              <div id={`post${newsItem.id}`} key={newskey} className='releaseNewsItem'>
               <div className="UpperContainer notMobile">
                 <div className='newsItemTextContainer'>
-                  <div className='newsItemTitle'>{newsItem.title}</div>
+                  <div id={`${newsItem.id}_title`} className='newsItemTitle'>{newsItem.title}</div>
                   <div className='newsSubtitle'>
-                    <div className='newsItemDate'>{newsItem.date}</div>
+                    <div id={`${newsItem.id}_date`} className='newsItemDate'>{newsItem.date}</div>
                     <div className='newsCategory'>{newsItem.type}</div>
                   </div>
                 </div>
-                <div className='releaseNewsItemContent'>
+                <div id={`${newsItem.id}_desc`} className='releaseNewsItemContent'>
                   <div className='newsItemTitle newsItemTitleInner'>{newsItem.title}</div>
                   {ReactHtmlParser(newsItem.fullText)}
                 </div>
                 {newsItem.img && <div className='imgContainer'>
                   <img className='newsItemImgContainer' src={srcList[newsItem.img]} alt={altList[newsItem.img]}/>
-                  <Button className='downloadPDF Desktop' onClick={() => handleExport(releaseNotesList.id)}>Download PDF<img src={UploadIcon} alt="download pdf icon" /></Button>
-                  <Button className='downloadPDF Tablet' onClick={() => handleExport(releaseNotesList.id)}>PDF<img src={UploadIcon} alt="download pdf icon" /></Button>
-                  <Button className='readMore Desktop'>Read More<img src={exportIcon} alt="outlink icon" /></Button>
-                  <Button className='readMore Tablet'>Read More<img src={exportIcon} alt="outlink icon" /></Button>
+                  <Button className='downloadPDF Desktop' onClick={() => handleExport(newsItem.id)}>Download PDF<img src={UploadIcon} alt="download pdf icon" /></Button>
+                  <Button className='downloadPDF Tablet' onClick={() => handleExport(newsItem.id)}>PDF<img src={UploadIcon} alt="download pdf icon" /></Button>
+                  <Button className='readMore Desktop' onClick={() => handleReadMore(newsItem.id)}>Read More<img src={exportIcon} alt="outlink icon" /></Button>
+                  <Button className='readMore Tablet' onClick={() => handleReadMore(newsItem.id)}>Read More<img src={exportIcon} alt="outlink icon" /></Button>
                 </div>}
               </div>
               <div className="UpperContainer Mobile">

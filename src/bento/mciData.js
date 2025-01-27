@@ -161,8 +161,8 @@ export const MCIContent = [
         ]
     },
     {
-        id: 'Accessing_MCI_Data',
-        topic: 'Accessing MCI Data',
+        id: 'Accessing_MCI_Data_And_Tools',
+        topic: 'Accessing MCI Data and Tools',
         list: [
             {
                 id: 'How_to_Access_MCI_Data',

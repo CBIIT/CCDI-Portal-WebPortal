@@ -132,6 +132,11 @@ export const navbarSublists = {
       className: 'navMobileSubItem',
     },
     {
+      name: 'Release Notes',
+      link: '/release-notes',
+      className: 'navMobileSubItem',
+    },
+    {
       name: 'User Guide',
       link: userGuidePDF,
       className: 'navMobileSubItem',

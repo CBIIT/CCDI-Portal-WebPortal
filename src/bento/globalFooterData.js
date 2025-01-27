@@ -30,9 +30,13 @@ export default {
           link: 'https://www.cancer.gov/research/areas/childhood/childhood-cancer-data-initiative',
         },
         {
-          text: 'Contact CCDI Hub',
+          text: 'Contact Us',
           link: 'mailto:NCIChildhoodCancerDataInitiative@mail.nih.gov',
         },
+        {
+          text: 'Release Notes',
+          link: '/release-notes',
+        }
       ],
     },
     {

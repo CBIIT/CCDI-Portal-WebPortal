@@ -1583,7 +1583,7 @@ export const tabContainers = [
       },
       {
         dataField: 'dbgap_accession',
-        header: 'Access',
+        header: 'Manifest',
         display: true,
         sortable: false,
         tooltipText: 'sort',

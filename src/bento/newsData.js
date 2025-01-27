@@ -9,7 +9,7 @@ import updateImgDashboard from '../assets/news/News_Dashboard.png';
 import updateImgEHR from '../assets/news/News_EHR.png';
 import updateImgC3DC from '../assets/news/News_C3DC.png';
 import updateImgHub from '../assets/news/News_Hub.png';
-import userGuidePDF from '../assets/about/CCDI_Usage_Instructions_Nov2024_v2.5.0.pdf';
+import userGuidePDF from '../assets/about/CCDI_Usage_Instructions_Jan2025_2.5.1_Final.pdf';
 
 export const altList = {
     updateImgCCDC: 'Young boy on a swing outdoors, symbolizing childhood health, linking to the CCDC site',
@@ -42,6 +42,16 @@ export const srcList = {
 export const newsList = [
     {
         id: 'hub_02122025',
+        title: 'CCDI Hub Update: Version 2.5.1 Released',
+        date: 'February 12, 2025',
+        slug: 'Improved layout, MCI Data Update, and Multiple Bug Fixes',
+        highlight: `<p>Version 2.5.1 includes updates to the navigation menu in the Explore Dashboard to enhance user interaction. File access to two studies, 'Feasibility and Clinical Utility of Whole Genome Profiling in Pediatric and Young Adult Cancers' (PHS002620) and 'Clonal Evolution During Metastatic Spread in High-Risk Neuroblastoma' (PHS003111), has been temporarily removed and will be updated soon. Updates to news, publications, the MCI page and data, and the user guide ensure the most current information is available. Additionally, several bugs have been resolved to improve the overall user experience.</p>`,
+        type: 'Application Updates',
+        img: 'updateImgHub',
+        latestUpdate: true,
+    },
+    {
+        id: 'hub_federation_02122025',
         title: 'Childhood Cancer Data Initiative (CCDI) Data Federation Resource releases API V1.1',
         date: 'February 12, 2025',
         slug: 'We are excited to announce the release of API V1.1 which enhances search capabilities across various participating resources.',
@@ -69,7 +79,6 @@ export const newsList = [
         fullText: '',
         type: 'News',
         img: 'updateImgHub',
-        latestUpdate: true,
     },
     {
         id: 'hub_10102024',

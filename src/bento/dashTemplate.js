@@ -297,7 +297,7 @@ export const facetsConfig = [
   },
   {
     section: DEMOGRAPHICS,
-    label: 'Sex',
+    label: 'Sex at Birth',
     apiPath: 'participantCountBySexAtBirth',
     apiForFiltering: 'filterParticipantCountBySexAtBirth',
     datafield: 'sex_at_birth',
@@ -1317,7 +1317,7 @@ export const widgetConfig = [
   },
   {
     type: 'donut',
-    title: 'Sex',
+    title: 'Sex at Birth',
     dataName: 'participantCountBySexAtBirth',
     sliceTitle: 'Participants',
   },

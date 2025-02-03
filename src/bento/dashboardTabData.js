@@ -1344,7 +1344,7 @@ export const tabContainers = [
       },
       {
         dataField: 'sex_at_birth',
-        header: 'Sex',
+        header: 'Sex at Birth',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,

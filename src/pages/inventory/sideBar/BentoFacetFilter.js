@@ -123,7 +123,7 @@ const { UploadModal } = UploadModalGenerator({
     inputTooltip: 'Enter valid Participant IDs.',
     uploadTooltip: 'Select a file from your computer.',
     accept: '.csv,.txt',
-    maxSearchTerms: 1000,
+    maxSearchTerms: 5000,
     matchedId: 'participant_id',
     matchedLabel : 'Submitted Participant ID',
     associateId: 'dbgap_accession',

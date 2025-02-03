@@ -84,7 +84,7 @@ const WidgetView = ({
               <Grid key={index} item lg={4} md={6} sm={12} xs={12}>
                 <Widget
                   header={(
-                    <Typography size="md" weight="normal" family="Nunito" color="lochmara">
+                    <Typography size="md" weight="normal" family="Nunito" style={{color: '#4A5C5E'}}>
                       {widget.title}
                     </Typography>
                   )}

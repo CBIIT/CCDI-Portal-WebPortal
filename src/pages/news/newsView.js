@@ -518,6 +518,17 @@ const useOutsideAlerter = (ref) => {
   }, [ref]);
 };
 
+const NewsView = ({classes, newsList, altList}) => {
+  // const getPageResults = (selectedTab, pageInfo) => {
+  //   const resultList = getResultList(selectedTab);
+  //   const allids = [];
+  //   const indexStart = pageInfo.pageSize*(pageInfo.page-1);
+  //   const indexEnd = pageInfo.pageSize*pageInfo.page < pageInfo.pageTotal ? pageInfo.pageSize*pageInfo.page - 1 : pageInfo.pageTotal - 1;
+  //   for (let i = indexStart; i<= indexEnd; i++) {
+  //     allids.push(resultList[i]);
+  //   }
+  //   return allids;
+  // }
 const getResultList = (tabName) => {
   if (tabName === "All") {
     return fullList;
@@ -616,8 +627,6 @@ const getPageResults = (selectedTab, pageInfo) => {
   return allids;
 }
 
-const NewsView = ({classes}) => {
-  // const navigate = useNavigate();
   const [selectedTab, setSelectedTab] = useState("All");
   const newsTabList = ['All', 'News', 'CCDI Application Updates', 'Release Notes'];
   const sizelist = [10,20,50,100];

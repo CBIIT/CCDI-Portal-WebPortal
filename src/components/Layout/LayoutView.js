@@ -7,13 +7,13 @@ import Home from '../../pages/landing/landingController';
 import About from '../../pages/about/aboutView';
 import DataUsagePoliciesView from '../../pages/about/dataUsagePoliciesView';
 import PublicationsView from '../../pages/about/publications/publicationsView';
-import News from '../../pages/news/newsView';
+import News from '../../pages/news/newsController';
 import Error from '../../pages/error/Error';
 import Search from '../../pages/search/searchView';
 import Inventory from '../../pages/inventory/inventoryController';
 import Cart from '../../pages/cart/cartController';
 import ScrollButton from '../ScrollButton/ScrollButtonView';
-import MCIResourceView from '../../pages/resource/MCIResourceView'
+import MCIResourceView from '../../pages/resource/MCIResourcePage/MCIResourceController'
 import FederationResourceView from "../../pages/resource/FederationResourceView";
 import CPIResourceView from "../../pages/resource/CPIResourcePage/CPIResourceView";
 import ReleaseNotesPageView from '../../pages/about/releaseNotePage/releaseNotePageView';

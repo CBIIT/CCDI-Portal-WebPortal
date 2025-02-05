@@ -3,7 +3,7 @@ import LogoSmall from '../assets/header/Portal_Logo_Small.svg';
 import searchbarIcon from '../assets/header/Search_Icon.svg';
 import cartLogo from '../assets/header/Cart_Logo.svg';
 import usFlagSmall from "../assets/header/us_flag_small.png";
-import userGuidePDF from '../assets/about/CCDI_Usage_Instructions_Nov2024_v2.5.0.pdf';
+import userGuidePDF from '../assets/about/CCDI_Usage_Instructions_Jan2025_2.5.1_Final.pdf';
 
 // globalHeaderLogo image 468x100
 // globalHeaderImage: image 2200x100
@@ -32,12 +32,7 @@ export const navMobileList = [
     className: 'navMobileItem',
   },
   {
-      name: 'Applications',
-      link: '',
-      className: 'navMobileItem clickable',
-  },
-  {
-      name: 'Other Resources',
+      name: 'Resources',
       link: '',
       className: 'navMobileItem clickable',
   },
@@ -59,12 +54,7 @@ export const navMobileList = [
 ];
 
 export const navbarSublists = {
-Applications: [
-  {
-    name:'Applications',
-    link: '',
-    className: 'navMobileSubTitle',
-  },
+  Resources: [
   {
     name: 'Childhood Cancer Clinical Data Commons',
     link: 'https://clinicalcommons.ccdi.cancer.gov/',
@@ -106,15 +96,9 @@ Applications: [
     className: 'navMobileSubItem',
   },
   {
-    name:'NCCR Data platform',
+    name:'NCCR Data Platform',
     link: 'https://nccrdataplatform.ccdi.cancer.gov/home',
     className: 'navMobileSubItem',
-  },],
-"Other Resources": [
-  {
-    name:'Other Resources',
-    link: '',
-    className: 'navMobileSubTitle',
   },
   {
     name:'Cancer Genomics Cloud',
@@ -145,6 +129,11 @@ Applications: [
     {
       name: 'CCDI-Supported Publications',
       link: '/publications',
+      className: 'navMobileSubItem',
+    },
+    {
+      name: 'Release Notes',
+      link: '/release-notes',
       className: 'navMobileSubItem',
     },
     {

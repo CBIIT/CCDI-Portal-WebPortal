@@ -1,11 +1,24 @@
+import React, { useContext } from 'react';
 import {
   btnTypes,
   types,
 } from '@bento-core/paginated-table';
 import {
-  tooltipContentAddAll, tooltipContent,
+  tooltipContentAddAll, 
+  tooltipContent,
+  tooltipContentAddToNewCohort,
+  tooltipContentAddToExistingCohort,
+  tooltipContentListAll,
 } from '../../../../bento/dashboardTabData';
 import { alertMessage } from '../../../../bento/fileCentricCartWorkflowData';
+import { CustomDropDown } from './CustomDropDown';
+import { CustomButton } from './customButton';
+import { CohortStateContext } from '../../../../components/CohortSelectorState/CohortStateContext';
+
+const GetOptions = () => {
+  const { state } = useContext(CohortStateContext);
+  return Object.keys(state);
+}
 
 export const layoutConfig = [{
   container: 'buttons',
@@ -43,6 +56,49 @@ export const wrapperConfig = [{
       tooltipCofig: tooltipContent,
       conditional: true,
       alertMessage,
+    },
+    {
+      title: 'Create Cohort',
+      clsName: 'add_selected_button',
+      type: types.COHORT_ELEM,
+      role: btnTypes.CUSTOM_ELEM,
+      btnType: btnTypes.CUSTOM_ELEM,
+      tooltipCofig: tooltipContentAddToNewCohort,
+      conditional: false,
+      CohortViewElem: () => <CustomButton borderColor={"#73C7BE"} label={"CREATE COHORT"} backgroundColor={"#375C67"} type={"CREATE"} hoverColor={"#375C67"} />,
+      alertMessage,
+    },
+    {
+      title: 'Add Participants to Existing Cohort',
+      clsName: 'add_selected_button',
+      type: types.COHORT_ELEM,
+      role: btnTypes.CUSTOM_ELEM,
+      btnType: btnTypes.CUSTOM_ELEM,
+      section: 'addToExisting',
+      tooltipCofig: tooltipContentAddToExistingCohort,
+      conditional: true,
+      CohortViewElem: () => {
+        let options = GetOptions();
+        return (
+          <CustomDropDown label={"ADD PARTICIPANTS TO EXISTING COHORT"} backgroundColor={"#0B4E75"} borderColor={"#73A9C7"} options={options} />
+        )
+      }
+    },
+    {
+      title: 'View All Cohorts',
+      clsName: 'add_selected_button',
+      type: types.COHORT_ELEM,
+      role: btnTypes.CUSTOM_ELEM,
+      btnType: btnTypes.CUSTOM_ELEM,
+      tooltipCofig: tooltipContentListAll,
+      conditional: true,
+      CohortViewElem: () => {
+        let options = GetOptions();
+        return (
+          <CustomButton borderColor={"#C79673"} label={"VIEW ALL COHORTS(" + options.length + ")"} cohortsAvailable={options.length > 0} backgroundColor={"#935824"} hoverColor={"#704015"} type={"VIEW"} />
+        )
+      },
+      alertMessage,
     }],
 },
 {
@@ -75,7 +131,8 @@ export const wrapperConfig = [{
       tooltipCofig: tooltipContent,
       conditional: true,
       alertMessage,
-    }],
+    },
+  ],
 },
 {
   container: 'buttons',

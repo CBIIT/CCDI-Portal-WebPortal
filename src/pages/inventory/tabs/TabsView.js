@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext }  from 'react';
 import { connect, useDispatch } from 'react-redux';
 import {
   useLocation,
@@ -13,10 +13,13 @@ import TabPanel from './TabPanel';
 import { tabContainers } from '../../../bento/dashboardTabData';
 import { Tabs as BentoTabs }  from '@bento-core/tab';
 import { customTheme } from './DefaultTabTheme';
+import CohortModalGenerator from '../cohortModal/cohortModalGenerator';
+import { CohortModalContext } from '../cohortModal/CohortModalContext';
 
 const Tabs = (props) => {
    
   const { currentTab } = props;
+  const { showCohortModal, setShowCohortModal} = useContext(CohortModalContext);
   const dispatch = useDispatch();
   const query = new URLSearchParams(useLocation().search);
   const navigate = useNavigate();
@@ -29,6 +32,9 @@ const Tabs = (props) => {
     dispatch(changeTab(value, 'not-facet'));
   };
 
+  const { CohortModal } = CohortModalGenerator();
+
+
   /**
   * 1. change <name> to <display> as array item
   * 2. <display> -> [tab.name, props.dashboardStats[tab.count]]
@@ -36,13 +42,17 @@ const Tabs = (props) => {
   const getTabs = (tabs) => tabs.map((tab) => ({
     ...tab,
     name: tab.name,
-    count: `(${props.dashboardStats[tab.count]})`,
+    count: `(${props.dashboardStats[tab.count].toLocaleString()})`,
     display: [tab.name, props.dashboardStats[tab.count]],
     clsName: `${tab.name}`.toLowerCase().replace(' ', '_'),
   }));
 
   return (
     <>
+      <CohortModal
+        open={showCohortModal}
+        onCloseModal={() => setShowCohortModal(false)}
+      />
       <BentoTabs
         tabItems={getTabs(tabContainers)}
         currentTab={currentTab}

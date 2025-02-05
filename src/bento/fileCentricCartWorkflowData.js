@@ -18,7 +18,7 @@ export const navBarCartData = {
 };
 
 // --------------- Files limit configuration --------------
-export const alertMessage = 'The cart is limited to 200000 files. Please narrow the search criteria or remove some files from the cart to add more.';
+export const alertMessage = 'The cart is limited to 200,000 files. Please narrow the search criteria or remove some files from the cart to add more.';
 export const maximumNumberOfFilesAllowedInTheCart = 200000;
 
 // --------------- Tooltip configuration --------------
@@ -140,6 +140,9 @@ export const table = {
   defaultSortDirection: 'asc',
   paginationAPIField: 'filesInList',
   tableDownloadCSV: customMyFilesTabDownloadCSV,
+  extendedViewConfig: {
+    manageViewColumns: false
+  },
   columns: [
     {
       dataField: 'file_name',

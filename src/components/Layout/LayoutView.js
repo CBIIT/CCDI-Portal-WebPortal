@@ -16,6 +16,7 @@ import ScrollButton from '../ScrollButton/ScrollButtonView';
 import MCIResourceView from '../../pages/resource/MCIResourcePage/MCIResourceController'
 import FederationResourceView from "../../pages/resource/FederationResourceView";
 import CPIResourceView from "../../pages/resource/CPIResourcePage/CPIResourceView";
+import ReleaseNotesPageView from '../../pages/about/releaseNotePage/releaseNotePageView';
 import OverlayWindow from '../OverlayWindow/OverlayWindow';
 // import NewsDetail from '../../pages/news/newsDetailView';
 
@@ -38,6 +39,7 @@ const Layout = () => {
           <Route path="/data-usage-policies" element={<DataUsagePoliciesView />} />
           <Route path="/ccdi-participant-index" element={<CPIResourceView />} />
           <Route path="/publications" element={<PublicationsView />} />
+          <Route path="/release-notes" element={<ReleaseNotesPageView />} />
           <Route path="*" element={<Error />} />
         </Routes>
         <Footer />

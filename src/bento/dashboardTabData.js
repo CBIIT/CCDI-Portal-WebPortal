@@ -482,6 +482,115 @@ query fileOverview(
 }
 `;
 
+export const GET_COHORT_METADATA_QUERY = gql`
+query cohortMetadata(
+    $id: [String],
+    $first: Int,
+    $offset: Int,
+    $order_by: String,
+    $sort_direction: String
+) {
+
+cohortMetadata(
+    id: $id,
+    first: $first,
+    offset: $offset,
+    order_by: $order_by,
+    sort_direction: $sort_direction
+) {
+    dbgap_accession
+
+    participants {
+        participant_id
+        dbgap_accession  
+        race
+        sex_at_birth
+        diagnosis
+        diagnoses {
+            diagnosis_id
+            diagnosis
+            diagnosis_classification_system
+            diagnosis_basis
+            disease_phase
+            anatomic_site
+            age_at_diagnosis
+        }
+        survivals {
+            survival_id
+            age_at_event_free_survival_status
+            age_at_last_known_survival_status
+            cause_of_death
+            event_free_survival_status
+            first_event
+            last_known_survival_status
+        }
+        treatments {
+            treatment_id
+            age_at_treatment_end
+            age_at_treatment_start
+            treatment_agent
+            treatment_type
+        }
+        treatment_responses {    
+            treatment_response_id
+            age_at_response
+            response
+            response_category
+            response_system
+        }
+        samples {
+            sample_id
+            anatomic_site
+            participant_age_at_collection
+            sample_tumor_status
+            tumor_classification
+        }
+        files {
+            file_name
+            data_category
+            file_description
+            file_type
+            file_size
+            study_id
+            participant_id
+            sample_id
+            file_id
+            guid
+            md5sum
+            library_selection
+            library_source_material
+            library_source_molecule
+            library_strategy
+            file_access
+            file_mapping_level
+        }
+    }
+}}
+`;
+
+export const GET_COHORT_MANIFEST_QUERY = gql`
+  query cohortManifest(
+    $id: [String],
+    $first: Int,
+    $offset: Int,
+    $order_by: String,
+    $sort_direction: String) {
+      cohortManifest(
+        id: $id,
+        first: $first,
+        offset: $offset,
+        order_by: $order_by,
+        sort_direction: $sort_direction
+      ) {
+        participant_id
+        dbgap_accession  
+        race
+        sex_at_birth
+        diagnosis
+      }
+    }
+`
+
 export const GET_SAMPLES_OVERVIEW_QUERY = gql`
 query sampleOverview(
     $participant_ids: [String],

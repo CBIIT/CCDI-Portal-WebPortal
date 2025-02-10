@@ -72,6 +72,12 @@ const tblBody = {
           lineBreak: 'anywhere',
         },
       },
+      '&.sex_at_birth': {
+        minWidth: '150px',
+        '& p': {
+          lineBreak: 'anywhere',
+        },
+      },
       '&.file_name': {
         minWidth: '300px',
         '& p': {

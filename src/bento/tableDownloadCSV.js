@@ -7,13 +7,22 @@ query participantOverViewPaged($participant_ids: [String], $offset: Int = 0, $fi
     dbgap_accession
     race
     sex_at_birth
+    diagnosis
+    anatomic_site
+    age_at_diagnosis
+    treatment_agent
+    treatment_type
+    age_at_treatment_start
+    first_event
+    last_known_survival_status
+    age_at_last_known_survival_status
   }
 }
 `;
 
 export const customParticipantsTabDownloadCSV = {
-  keysToInclude: ['participant_id', 'dbgap_accession', 'race', 'sex_at_birth'],
-  header: ['Participant ID', 'Study Accession', 'Race', 'Sex'],
+  keysToInclude: ['participant_id', 'dbgap_accession', 'race', 'sex_at_birth', 'diagnosis', 'anatomic_site', 'age_at_diagnosis', 'treatment_agent', 'age_at_treatment_start', 'first_event', 'last_known_survival_status', 'age_at_last_known_survival_status'],
+  header: ['Participant ID', 'Study Accession', 'Race', 'Sex', 'Diagnosis', 'Diagnosis Anatomic Site', 'Age at Diagnosis (days)', 'Treatment Agent', 'Treatment Type', 'Age at Treatment Start (days)', 'First Event', 'Last Known Survival Status', 'Age at Last Known Survival Status (days)'],
   query: GET_PARTICIPANTS_TAB,
   apiVariable: 'participantOverView',
   fileName: 'tableDownload',

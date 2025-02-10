@@ -41,9 +41,9 @@ export const srcList = {
 
 export const newsList = [
     {
-        id: 'hub_02122025',
+        id: 'hub_02142025',
         title: 'CCDI Hub Update: Version 2.5.1 Released',
-        date: 'February 12, 2025',
+        date: 'February 14, 2025',
         slug: 'Improved layout, MCI Data Update, and Multiple Bug Fixes',
         highlight: `<p>Version 2.5.1 includes updates to the navigation menu in the Explore Dashboard to enhance user interaction. File access to two studies, 'Feasibility and Clinical Utility of Whole Genome Profiling in Pediatric and Young Adult Cancers' (PHS002620) and 'Clonal Evolution During Metastatic Spread in High-Risk Neuroblastoma' (PHS003111), has been temporarily removed and will be updated soon. Updates to news, publications, the MCI page and data, and the user guide ensure the most current information is available. Additionally, several bugs have been resolved to improve the overall user experience.</p>`,
         type: 'Application Updates',
@@ -51,9 +51,9 @@ export const newsList = [
         latestUpdate: true,
     },
     {
-        id: 'hub_federation_02122025',
+        id: 'hub_federation_02142025',
         title: 'Childhood Cancer Data Initiative (CCDI) Data Federation Resource releases API V1.1',
-        date: 'February 12, 2025',
+        date: 'February 14, 2025',
         slug: 'We are excited to announce the release of API V1.1 which enhances search capabilities across various participating resources.',
         highlight: `<p>CCDI API V1.1 introduces new metadata fields — Anatomic Site, Specimen Molecular Analyte, Library Source Material, Library Selection Method — to enhance data search capabilities. These new metadata fields are harmonized to CDEs registered in the Cancer Data Standards Registry and Repository whenever possible. Current members include the Kids First Data Resource Center, Pediatric Cancer Data Commons, St. Jude Cloud, and Treehouse Childhood Cancer Data Initiative. Data access processes follow the policies of each contributing resource.</p>`,
         type: 'Announcements',
@@ -61,9 +61,9 @@ export const newsList = [
         latestUpdate: true,
     },
     {
-        id: 'ccdc_12112024',
+        id: 'ccdc_02142025',
         title: 'Explore two new resources in the December CCDC release',
-        date: 'December 11, 2024',
+        date: 'February 14, 2025',
         slug: 'The Childhood Cancer Data Catalog (CCDC) has two new resources and eight new data sets, plus other features',
         highlight: `<p>The Specimen Resource Locator and Pediatric Malignancies: Inventory of DCEG Research resources were added to the CCDC, along with eight new data sets for existing resources. Some descriptions, titles, and counts were updated across the catalog and there are two new features—users can now download all data set digests from the menu, in addition to being able to link to available TARGET data sets in dbGaP.</p>`,
         type: 'Application Updates',

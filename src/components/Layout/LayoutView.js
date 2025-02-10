@@ -15,7 +15,7 @@ import Cart from '../../pages/cart/cartController';
 import ScrollButton from '../ScrollButton/ScrollButtonView';
 import MCIResourceView from '../../pages/resource/MCIResourcePage/MCIResourceController'
 import FederationResourceView from "../../pages/resource/FederationResourcePage/FederationResourceController";
-import CPIResourceView from "../../pages/resource/CPIResourcePage/CPIResourceView";
+import CPIResourceView from "../../pages/resource/CPIResourcePage/CPIResourceController";
 import ReleaseNotesPageView from '../../pages/about/releaseNotePage/releaseNotePageView';
 import OverlayWindow from '../OverlayWindow/OverlayWindow';
 // import NewsDetail from '../../pages/news/newsDetailView';

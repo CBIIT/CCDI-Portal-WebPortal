@@ -754,6 +754,15 @@ query participantOverview(
         race
         sex_at_birth
         synonym_id
+        diagnosis
+        anatomic_site
+        age_at_diagnosis
+        treatment_agent
+        treatment_type
+        age_at_treatment_start
+        first_event
+        last_known_survival_status
+        age_at_last_known_survival_status
     }
 }
 `;
@@ -1471,6 +1480,78 @@ export const tabContainers = [
         dataField: 'synonym_id',
         header: 'Synonym Participant ID',
         display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+        hideable: true,
+      },
+      {
+        dataField: 'diagnosis',
+        header: 'Diagnosis',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+        hideable: true,
+      },
+      {
+        dataField: 'anatomic_site',
+        header: 'Diagnosis Anatomic Site',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+        hideable: true,
+      },
+      {
+        dataField: 'age_at_diagnosis',
+        header: 'Age at Diagnosis (days)',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+        hideable: true,
+      },
+      {
+        dataField: 'treatment_agent',
+        header: 'Treatment Agent',
+        display: false,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+        hideable: true,
+      },
+      {
+        dataField: 'treatment_type',
+        header: 'Treatment Type',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+        hideable: true,
+      },
+      {
+        dataField: 'age_at_treatment_start',
+        header: 'Age at Treatment Start (days)',
+        display: false,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+        hideable: true,
+      },
+      {
+        dataField: 'first_event',
+        header: 'First Event',
+        display: false,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+        hideable: true,
+      },
+      {
+        dataField: 'last_known_survival_status',
+        header: 'Last Known Survival Status',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+        hideable: true,
+      },
+      {
+        dataField: 'age_at_last_known_survival_status',
+        header: 'Age at Last Known Survival Status (days)',
+        display: false,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
         hideable: true,

@@ -4,7 +4,7 @@ import yaml from "js-yaml";
 import axios from "axios";
 import FederationResourceView from "./FederationResourceView";
 
-const FEDERATION_URL = env.REACT_APP_STATIC_CONTENT_URL + '/federationData.yaml';
+const RESOURCE_URL = env.REACT_APP_STATIC_CONTENT_URL + '/resourceData.yaml';
 
 const FederationResourceController = ({ match }) => {
   const [data, setData] = useState([]);
@@ -14,7 +14,7 @@ const FederationResourceController = ({ match }) => {
       let resultData = [];
       let result = [];
       try {
-        const fileUrl = `${FEDERATION_URL}?ts=${new Date().getTime()}`;
+        const fileUrl = `${RESOURCE_URL}?ts=${new Date().getTime()}`;
         result = await axios.get(
           fileUrl
         );

@@ -494,7 +494,7 @@ const FederationResourceView = ({data}) => {
                 </div>
                 <div className='contentSection'>
                     <div className='contentList'>
-                        {data.introText && <div className='introContainer'>{ReactHtmlParser(data.introText)}</div>}
+                        {data.federationIntroText && <div className='introContainer'>{ReactHtmlParser(data.federationIntroText)}</div>}
                         {
                             federationContent && federationContent.map((federationItem, mciid) => {
                                 const mcikey = `federation_${mciid}`;

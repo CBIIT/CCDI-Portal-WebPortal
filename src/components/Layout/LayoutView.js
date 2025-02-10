@@ -5,7 +5,7 @@ import Footer from '../ResponsiveFooter/';
 import Header from '../ResponsiveHeader/';
 import Home from '../../pages/landing/landingController';
 import About from '../../pages/about/aboutView';
-import DataUsagePoliciesView from '../../pages/about/dataUsagePoliciesView';
+import DataUsagePoliciesView from '../../pages/about/DataUsagePoliciesPage/DataUsagePoliciesController';
 import PublicationsView from '../../pages/about/publications/publicationsView';
 import News from '../../pages/news/newsController';
 import Error from '../../pages/error/Error';

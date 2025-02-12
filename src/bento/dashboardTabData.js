@@ -671,6 +671,7 @@ query sampleOverview(
         participant_age_at_collection
         sample_tumor_status
         tumor_classification
+        diagnosis
     }
 }
 `;
@@ -1976,6 +1977,14 @@ export const tabContainers = [
       {
         dataField: 'tumor_classification',
         header: 'Sample Tumor Classification',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+        hideable: true,
+      },
+      {
+        dataField: 'diagnosis',
+        header: 'Sample Diagnosis',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,

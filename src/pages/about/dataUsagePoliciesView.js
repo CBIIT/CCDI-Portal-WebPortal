@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ReactHtmlParser from 'html-react-parser';
-import headerImg from '../../assets/about/Data_Usage_Policies_Header.jpg';
+import headerImg from '../../assets/about/Data_Usage_Policies_Header.png';
 import { dataUsagePoliciesContent, introText } from '../../bento/dataUsagePoliciesData';
 import exportIconBlue from '../../assets/icons/Export_Icon.svg';
 
@@ -10,7 +10,7 @@ const DataUsagePoliciesContainer = styled.div`
 
     .policiesHeaderContainer {
         width: 1142px;
-        height: 203px;
+        height: 140px;
         margin: 0 134px;
         background-image: url(${headerImg});
         background-repeat: no-repeat;
@@ -23,7 +23,7 @@ const DataUsagePoliciesContainer = styled.div`
         text-align: center;
         letter-spacing: 0.02em;
         color: #FFFFFF;
-        padding: 70px 400px;
+        padding: 34px 400px;
 
         @media (min-width: 1420px) {
             margin: 0 auto;

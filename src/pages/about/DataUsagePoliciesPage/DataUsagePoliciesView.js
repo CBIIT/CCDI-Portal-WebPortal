@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ReactHtmlParser from 'html-react-parser';
-import headerImg from '../../assets/about/Data_Usage_Policies_Header.jpg';
-import { dataUsagePoliciesContent, introText } from '../../bento/dataUsagePoliciesData';
-import exportIconBlue from '../../assets/icons/Export_Icon.svg';
+import headerImg from '../../../assets/about/Data_Usage_Policies_Header.jpg';
+// import { dataUsagePoliciesContent, introText } from '../../../bento/dataUsagePoliciesData';
+import exportIconBlue from '../../../assets/icons/Export_Icon.svg';
 
 const DataUsagePoliciesContainer = styled.div`
     width: 100%;
@@ -232,9 +232,10 @@ const DataUsagePoliciesBody = styled.div`
     }
 `;
 
-const DataUsagePoliciesView = () => {
+const DataUsagePoliciesView = ({data}) => {
     const [selectedNavTitle, setSelectedNavTitle] = useState('');
     const [stickyNavStyle, setStickyNavStyle] = useState('navList');
+    const dataUsagePoliciesContent = data.dataUsagePoliciesContent;
     const handleScroll = () => {
         const bodyElement = document.getElementById('DataUsagePoliciesBody');
         const footerList = document.getElementsByTagName('footer');
@@ -285,7 +286,7 @@ const DataUsagePoliciesView = () => {
                     <div className={stickyNavStyle} id='leftNav'>
                         <div className='navTitle'>TOPICS</div>
                         {
-                            dataUsagePoliciesContent.map((policiesItem, topicid) => {
+                            dataUsagePoliciesContent && dataUsagePoliciesContent.map((policiesItem, topicid) => {
                                 const topickey = `topic_${topicid}`;
                                 if (policiesItem.topic) {
                                     return (
@@ -301,9 +302,9 @@ const DataUsagePoliciesView = () => {
                 </div>
                 <div className='contentSection'>
                     <div className='contentList'>
-                        <div className='introContainer'>{ReactHtmlParser(introText)}</div>
+                    {data.dataUsagePoliciesIntroText && <div className='introContainer'>{ReactHtmlParser(data.dataUsagePoliciesIntroText)}</div>}
                         {
-                            dataUsagePoliciesContent.map((policiesItem, mciid) => {
+                            dataUsagePoliciesContent && dataUsagePoliciesContent.map((policiesItem, mciid) => {
                                 const mcikey = `federation_${mciid}`;
                                 return (
                                     <div key={mcikey}>

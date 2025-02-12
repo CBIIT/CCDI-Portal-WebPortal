@@ -425,6 +425,16 @@ const NewsContainer = styled.div`
     }
   }
 
+  @media (max-width: 767px) {
+    .newsHeader {
+      height: 165px;
+    }
+
+    .newsHeaderText {
+      padding-top: 50px;
+    }
+  }
+
   @media (max-width: 649px) {
     .newsItemTextContainer {
       width: 100%;

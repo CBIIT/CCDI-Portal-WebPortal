@@ -85,33 +85,6 @@ export const customFilesTabDownloadCSV = {
   defaultFullTableDownload: false,
 };
 
-export const GET_DIAGNOSIS_TAB = gql`
-query diagnosisOverview($diagnosis_id: [String], $offset: Int = 0, $first: Int = 1000, $order_by:String =""){
-  diagnosisOverview(diagnosis_id: $diagnosis_id, offset: $offset,first: $first, order_by: $order_by) {
-    diagnosis_id
-    participant_id
-    sample_id
-    dbgap_accession
-    diagnosis
-    diagnosis_classification_system
-    diagnosis_basis
-    disease_phase
-    anatomic_site
-    age_at_diagnosis
-    last_known_survival_status
-  }
-}
-`;
-
-export const customDiagnosisTabDownloadCSV = {
-  keysToInclude: ['participant_id', 'sample_id', 'dbgap_accession', 'diagnosis', 'anatomic_site', 'diagnosis_classification_system', 'diagnosis_basis', /*'tumor_grade_source', 'tumor_stage_source',*/ 'disease_phase', 'age_at_diagnosis', 'last_known_survival_status'],
-  header: ['Participant ID', 'Sample ID', 'Study Accession', 'Diagnosis', 'Anatomic Site', 'Diagnosis Classification System', 'Diagnosis Verification Status', 'Diagnosis Basis', 'Diagnosis Comments', 'Disease Phase', 'Age at Diagnosis (days)', 'Last Known Survival Status'],
-  query: GET_DIAGNOSIS_TAB,
-  apiVariable: 'diagnosisOverview',
-  fileName: 'tableDownload',
-  defaultFullTableDownload: false,
-};
-
 export const GET_STUDY_TAB = gql`
 query studyOverview($study_id: [String], $offset: Int = 0, $first: Int = 1000, $order_by:String =""){
   studyOverview(study_id: $participant_id, offset: $offset,first: $first, order_by: $order_by) {

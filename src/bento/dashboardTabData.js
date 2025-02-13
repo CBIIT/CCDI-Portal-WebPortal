@@ -1,7 +1,7 @@
 /* eslint-disable */
 import gql from 'graphql-tag';
 import { cellTypes, cellStyles } from '@bento-core/table';
-import { customParticipantsTabDownloadCSV, customFilesTabDownloadCSV, customSamplesTabDownloadCSV, customDiagnosisTabDownloadCSV, customStudyTabDownloadCSV } from './tableDownloadCSV';
+import { customParticipantsTabDownloadCSV, customFilesTabDownloadCSV, customSamplesTabDownloadCSV, customStudyTabDownloadCSV } from './tableDownloadCSV';
 import { dataFormatTypes } from '@bento-core/table';
 import questionIcon from '../assets/icons/Question_Icon.svg';
 
@@ -10,7 +10,6 @@ export const tooltipContentAddAll = {
   icon: questionIcon,
   alt: 'tooltipIcon',
   Participants: 'Click button to add all files associated with the filtered row(s).',
-  Diagnosis: 'Click button to add all files associated with the filtered row(s).',
   Studies: 'Click button to add all files associated with the filtered row(s).',
   Samples: 'Click button to add all files associated with the filtered row(s).',
   Files: 'Click button to add all files associated with the filtered row(s).',
@@ -24,7 +23,6 @@ export const tooltipContent = {
   icon: questionIcon,
   alt: 'tooltipIcon',
   Participants: 'Click button to add files associated with the selected row(s).',
-  Diagnosis: 'Click button to add files associated with the selected row(s).',
   Studies: 'Click button to add files associated with the selected row(s).',
   Samples: 'Click button to add files associated with the selected row(s).',
   Files: 'Click button to add files associated with the selected row(s).',
@@ -37,7 +35,6 @@ export const tooltipContentAddToNewCohort = {
   icon: questionIcon,
   alt: 'tooltipIcon',
   Participants: 'Create a new cohort using the selected Participant IDs',
-  Diagnosis: 'Create a new cohort using the selected Participant IDs',
   Studies: 'Create a new cohort using the selected Participant IDs',
   Treatment: 'Create a new cohort using the selected Participant IDs',
   Survival: 'Create a new cohort using the selected Participant IDs ',
@@ -52,7 +49,6 @@ export const tooltipContentAddToExistingCohort = {
   icon: questionIcon,
   alt: 'tooltipIcon',
   Participants: 'Add selected Participant IDs to an existing cohort',
-  Diagnosis: 'Add selected Participant IDs to an existing cohort',
   Studies: 'Add selected Participant IDs to an existing cohort',
   Survival: 'Add selected Participant IDs to an existing cohort',
   Treatment: 'Add selected Participant IDs to an existing cohort',
@@ -66,7 +62,6 @@ export const tooltipContentListAll = {
   icon: questionIcon,
   alt: 'tooltipIcon',
   Participants: 'Click to view the complete list of all cohorts',
-  Diagnosis: 'Click to view the complete list of all cohorts',
   Studies: 'Click to view the complete list of all cohorts',
   Treatment: 'Click to view the complete list of all cohorts',
   Survival: 'Click to view the complete list of all cohorts',
@@ -91,12 +86,6 @@ export const tabs = [
     title: 'Participants',
     dataField: 'dataParticipant',
     count: 'numberOfParticipants',
-  },
-  {
-    id: 'diagnosis_tab',
-    title: 'Diagnosis',
-    dataField: 'dataDiagnosis',
-    count: 'numberOfDiagnosis',
   },
   {
     id: 'study_tab',
@@ -134,12 +123,6 @@ export const tabIndex = [
   },
   {
     title: 'Files',
-    primaryColor: '#F7D7F7',
-    secondaryColor: '#86D6F0',
-    selectedColor: '#C92EC7',
-  },
-  {
-    title: 'Diagnosis',
     primaryColor: '#F7D7F7',
     secondaryColor: '#86D6F0',
     selectedColor: '#C92EC7',
@@ -764,94 +747,6 @@ query participantOverview(
         first_event
         last_known_survival_status
         age_at_last_known_survival_status
-    }
-}
-`;
-
-export const GET_DIAGNOSIS_OVERVIEW_QUERY = gql`
-query diagnosisOverview(
-    $participant_ids: [String],
-    $sex_at_birth: [String] ,
-    $race: [String] ,
-    $age_at_diagnosis: [Int] ,
-    $diagnosis_anatomic_site: [String] ,
-    $disease_phase: [String] ,
-    $diagnosis: [String] ,
-    $diagnosis_classification_system: [String] ,
-    $diagnosis_basis: [String] ,
-    $last_known_survival_status: [String] ,
-    $age_at_last_known_survival_status: [Int],
-    $first_event: [String],
-    $treatment_type: [String],
-    $treatment_agent: [String],
-    $age_at_treatment_start: [Int] ,
-    $response_category: [String] ,
-    $age_at_response: [Int] ,
-    $sample_anatomic_site: [String] ,
-    $participant_age_at_collection: [Int] ,
-    $sample_tumor_status: [String] ,
-    $tumor_classification: [String] ,
-    $data_category: [String],
-    $file_type: [String],
-    $dbgap_accession: [String],
-    $study_name: [String],
-    $library_selection: [String],
-    $library_source_material: [String],
-    $library_source_molecule: [String],
-    $library_strategy: [String],
-    $file_mapping_level: [String],
-    $first: Int, 
-    $offset: Int, 
-    $order_by: String,
-    $sort_direction: String ){
-      diagnosisOverview(
-        participant_ids: $participant_ids,
-        sex_at_birth: $sex_at_birth,
-        race: $race,
-        age_at_diagnosis: $age_at_diagnosis,
-        diagnosis_anatomic_site: $diagnosis_anatomic_site,
-        disease_phase: $disease_phase,
-        diagnosis: $diagnosis,
-        diagnosis_classification_system: $diagnosis_classification_system,
-        diagnosis_basis: $diagnosis_basis,
-        last_known_survival_status: $last_known_survival_status,
-        age_at_last_known_survival_status: $age_at_last_known_survival_status,
-        first_event: $first_event,
-        treatment_type: $treatment_type,
-        treatment_agent: $treatment_agent,
-        age_at_treatment_start: $age_at_treatment_start,
-        response_category: $response_category,
-        age_at_response: $age_at_response,
-        sample_anatomic_site: $sample_anatomic_site,
-        participant_age_at_collection: $participant_age_at_collection,
-        sample_tumor_status: $sample_tumor_status,
-        tumor_classification: $tumor_classification,
-        data_category: $data_category,
-        file_type: $file_type,
-        dbgap_accession: $dbgap_accession,       
-        study_name: $study_name,
-        library_selection: $library_selection,
-        library_source_material: $library_source_material,
-        library_source_molecule: $library_source_molecule,
-        library_strategy: $library_strategy,
-        file_mapping_level: $file_mapping_level
-        first: $first, 
-        offset: $offset, 
-        order_by: $order_by,
-        sort_direction: $sort_direction
-    ) {
-        id
-        diagnosis_id
-        participant_id
-        sample_id
-        dbgap_accession
-        diagnosis
-        diagnosis_classification_system
-        diagnosis_basis
-        disease_phase
-        anatomic_site
-        age_at_diagnosis
-        study_id
     }
 }
 `;
@@ -1571,166 +1466,6 @@ export const tabContainers = [
     addAllFilesResponseKeys: ['participantOverview', 'files'],
     addAllFileQuery: GET_ALL_FILEIDS_FROM_PARTICIPANTSTAB_FOR_ADD_ALL_CART,
     addSelectedFilesQuery: GET_ALL_FILEIDS_PARTICIPANTSTAB_FOR_SELECT_ALL,
-  },
-  {
-    name: 'Diagnosis',
-    dataField: 'dataDiagnosis',
-    api: GET_DIAGNOSIS_OVERVIEW_QUERY,
-    paginationAPIField: 'diagnosisOverview',
-    defaultSortField: 'participant_id',
-    defaultSortDirection: 'asc',
-    count: 'numberOfDiagnosis',
-    fileCount: 'diagnosisFileCount',
-    dataKey: 'id',
-    tableID: 'diagnosis_tab_table',
-    extendedViewConfig: {
-      pagination: true,
-      manageViewColumns: {
-        title: 'View Columns',
-      },
-    },
-    columns: [
-      {
-        cellType: cellTypes.CHECKBOX,
-        display: true,
-        role: cellTypes.CHECKBOX,
-      },
-      {
-        dataField: 'participant_id',
-        header: 'Participant ID',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },     
-      {
-        dataField: 'sample_id',
-        header: 'Sample ID',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-        cellType: cellTypes.CUSTOM_ELEM,
-        cellStyle: cellStyles.TRANSFORM,
-        dataFormatter: (dt) => {
-          if(dt instanceof Array){
-            return dt.join(',')
-          }
-          else if(dt === null){
-            return "";
-          }
-          else if(dt.toString().charAt(0) === '[' && dt.toString().charAt(dt.toString().length - 1) === ']'){
-            return dt.toString().substring(1,dt.length-1)
-          }
-          return dt.toString();
-        },
-      },
-      {
-        dataField: 'study_id',
-        header: 'Study ID',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'diagnosis',
-        header: 'Diagnosis',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-        hideable: true,
-      },
-      {
-        dataField: 'anatomic_site',
-        header: 'Diagnosis Anatomic Site',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-        hideable: true,
-      },
-      {
-        dataField: 'diagnosis_classification_system',
-        header: 'Diagnosis Classification System',
-        display: false,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'diagnosis_basis',
-        header: 'Diagnosis Basis',
-        display: false,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-        hideable: true,
-      },
-      /*{
-        dataField: 'tumor_grade_source',
-        header: 'Tumor Grade Source',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },
-      {
-        dataField: 'tumor_stage_source',
-        header: 'Tumor Stage Source',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-      },*/
-      {
-        dataField: 'disease_phase',
-        header: 'Disease Phase',
-        display: false,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-        hideable: true,
-      },
-      {
-        dataField: 'age_at_diagnosis',
-        header: 'Age at Diagnosis (days)',
-        display: true,
-        tooltipText: 'sort',
-        cellType: cellTypes.CUSTOM_ELEM,
-        cellStyle: cellStyles.TRANSFORM,
-        dataFormatter: (dt) => {
-          if (dt === -999) {
-            return 'Not Reported';
-          }
-          return dt.toString();
-        },
-        role: cellTypes.DISPLAY,
-        hideable: true,
-      },
-      /*{
-        dataField: 'last_known_survival_status',
-        header: 'Last Known Survival Status',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-        cellType: cellTypes.CUSTOM_ELEM,
-        cellStyle: cellStyles.TRANSFORM,
-        dataFormatter: (dt) => {
-          if(!dt || dt === '[]')
-            return ""
-          else if(dt.toString().charAt(0) === '[' && dt.toString().charAt(dt.toString().length - 1) === ']'){
-            return dt.toString().substring(1,dt.length-1)
-          }
-          return dt.toString();
-        },
-      },*/
-    ],
-    id: 'diagnosis_tab',
-    tableID: 'diagnosis_tab_table',
-    tabIndex: '3',
-    selectableRows: true,
-    tableDownloadCSV: customDiagnosisTabDownloadCSV,
-    downloadFileName: 'CCDI Hub Diagnosis Download',
-    tableMsg: {
-      noMatch: 'No Matching Records Found',
-    },
-    addFilesRequestVariableKey: 'diagnosis_ids',
-    addFilesResponseKeys: ['fileIDsFromList'],
-    addAllFilesResponseKeys: ['diagnosisOverview', 'files'],
-    addAllFileQuery: GET_ALL_FILEIDS_FROM_DIAGNOSISTAB_FOR_ADD_ALL_CART,
-    addSelectedFilesQuery: GET_ALL_FILEIDS_DIAGNOSISTAB_FOR_SELECT_ALL,
   },
   {
     name: 'Studies',

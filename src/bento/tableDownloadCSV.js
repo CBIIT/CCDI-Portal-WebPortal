@@ -39,13 +39,14 @@ query sampleOverview($sample_ids: [String], $offset: Int = 0, $first: Int = 1000
     participant_age_at_collection
     sample_tumor_status
     tumor_classification
+    diagnosis
   }
 }
 `;
 
 export const customSamplesTabDownloadCSV = {
-  keysToInclude: ['sample_id', 'participant_id', 'study_id', 'anatomic_site', 'participant_age_at_collection', 'sample_tumor_status', 'tumor_classification'],
-  header: ['Sample ID', 'Participant ID', 'Study ID', 'Sample Anatomic Site', 'Age at Sample Collection (days)', 'Diagnosis', 'Sample Tumor Status', 'Sample Tumor Classification'],
+  keysToInclude: ['sample_id', 'participant_id', 'study_id', 'anatomic_site', 'participant_age_at_collection', 'sample_tumor_status', 'tumor_classification', 'diagnosis'],
+  header: ['Sample ID', 'Participant ID', 'Study ID', 'Sample Anatomic Site', 'Age at Sample Collection (days)', 'Diagnosis', 'Sample Tumor Status', 'Sample Tumor Classification', 'Diagnosis'],
   query: GET_SAMPLES_TAB,
   apiVariable: 'sampleOverview',
   fileName: 'tableDownload',
@@ -80,33 +81,6 @@ export const customFilesTabDownloadCSV = {
   header: ['File Name', 'File Category', 'File Description', 'File Type', 'File Size', 'Study ID', 'Participant ID', 'Sample ID', 'GUID', 'MD5sum', 'Library Selection', 'Library Source', 'Library Strategy', 'File Mapping'],
   query: GET_FILES_TAB,
   apiVariable: 'fileOverview',
-  fileName: 'tableDownload',
-  defaultFullTableDownload: false,
-};
-
-export const GET_DIAGNOSIS_TAB = gql`
-query diagnosisOverview($diagnosis_id: [String], $offset: Int = 0, $first: Int = 1000, $order_by:String =""){
-  diagnosisOverview(diagnosis_id: $diagnosis_id, offset: $offset,first: $first, order_by: $order_by) {
-    diagnosis_id
-    participant_id
-    sample_id
-    dbgap_accession
-    diagnosis
-    diagnosis_classification_system
-    diagnosis_basis
-    disease_phase
-    anatomic_site
-    age_at_diagnosis
-    last_known_survival_status
-  }
-}
-`;
-
-export const customDiagnosisTabDownloadCSV = {
-  keysToInclude: ['participant_id', 'sample_id', 'dbgap_accession', 'diagnosis', 'anatomic_site', 'diagnosis_classification_system', 'diagnosis_basis', /*'tumor_grade_source', 'tumor_stage_source',*/ 'disease_phase', 'age_at_diagnosis', 'last_known_survival_status'],
-  header: ['Participant ID', 'Sample ID', 'Study Accession', 'Diagnosis', 'Anatomic Site', 'Diagnosis Classification System', 'Diagnosis Verification Status', 'Diagnosis Basis', 'Diagnosis Comments', 'Disease Phase', 'Age at Diagnosis (days)', 'Last Known Survival Status'],
-  query: GET_DIAGNOSIS_TAB,
-  apiVariable: 'diagnosisOverview',
   fileName: 'tableDownload',
   defaultFullTableDownload: false,
 };

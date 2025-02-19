@@ -488,7 +488,6 @@ cohortMetadata(
         dbgap_accession  
         race
         sex_at_birth
-        diagnosis
         diagnoses {
             diagnosis_id
             diagnosis

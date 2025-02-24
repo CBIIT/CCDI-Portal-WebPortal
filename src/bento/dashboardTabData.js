@@ -162,6 +162,7 @@ query search (
     $file_type: [String],
     $dbgap_accession: [String],
     $study_name: [String],
+    $study_status: [String],
     $library_selection: [String],
     $library_source_material: [String],
     $library_source_molecule: [String],
@@ -194,6 +195,7 @@ query search (
         file_type: $file_type,
         dbgap_accession: $dbgap_accession,       
         study_name: $study_name,
+        study_status: $study_status,
         library_selection: $library_selection,
         library_source_material: $library_source_material,
         library_source_molecule: $library_source_molecule,
@@ -314,6 +316,10 @@ query search (
           group
           subjects
         }
+        filterParticipantCountByStudyStatus{
+          group
+          subjects
+        }
         filterParticipantCountByTumorClassification{
           group
           subjects
@@ -398,6 +404,7 @@ query fileOverview(
     $file_type: [String],
     $dbgap_accession: [String],
     $study_name: [String],
+    $study_status: [String],
     $library_selection: [String],
     $library_source_material: [String],
     $library_source_molecule: [String],
@@ -433,6 +440,7 @@ query fileOverview(
         file_type: $file_type,
         dbgap_accession: $dbgap_accession,       
         study_name: $study_name,
+        study_status: $study_status,
         library_selection: $library_selection,
         library_source_material: $library_source_material,
         library_source_molecule: $library_source_molecule,
@@ -600,6 +608,7 @@ query sampleOverview(
     $file_type: [String],
     $dbgap_accession: [String],
     $study_name: [String],
+    $study_status: [String],
     $library_selection: [String],
     $library_source_material: [String],
     $library_source_molecule: [String],
@@ -635,6 +644,7 @@ query sampleOverview(
         file_type: $file_type,
         dbgap_accession: $dbgap_accession,       
         study_name: $study_name,
+        study_status: $study_status,
         library_selection: $library_selection,
         library_source_material: $library_source_material,
         library_source_molecule: $library_source_molecule,
@@ -685,6 +695,7 @@ query participantOverview(
     $file_type: [String],
     $dbgap_accession: [String],
     $study_name: [String],
+    $study_status: [String],
     $library_selection: [String],
     $library_source_material: [String],
     $library_source_molecule: [String],
@@ -720,6 +731,7 @@ query participantOverview(
         file_type: $file_type,
         dbgap_accession: $dbgap_accession,       
         study_name: $study_name,
+        study_status: $study_status,
         library_selection: $library_selection,
         library_source_material: $library_source_material,
         library_source_molecule: $library_source_molecule,
@@ -778,6 +790,7 @@ query studyOverview(
     $file_mapping_level: [String],
     $dbgap_accession: [String],
     $study_name: [String],
+    $study_status: [String],
     $library_selection: [String],
     $library_source_material: [String],
     $library_source_molecule: [String],
@@ -813,6 +826,7 @@ query studyOverview(
         file_mapping_level: $file_mapping_level,
         dbgap_accession: $dbgap_accession,       
         study_name: $study_name,
+        study_status: $study_status,
         library_selection: $library_selection,
         library_source_material: $library_source_material,
         library_source_molecule: $library_source_molecule,
@@ -828,6 +842,7 @@ query studyOverview(
         grant_id
         dbgap_accession
         study_name
+        study_status
         personnel_name
         diagnosis
         anatomic_site
@@ -915,6 +930,7 @@ query participantsAddAllToCart(
     $file_type: [String],
     $dbgap_accession: [String],
     $study_name: [String],
+    $study_status: [String],
     $library_selection: [String],
     $library_source_material: [String],
     $library_source_molecule: [String],
@@ -951,6 +967,7 @@ query participantsAddAllToCart(
       file_type: $file_type,
       dbgap_accession: $dbgap_accession,       
       study_name: $study_name,
+      study_status: $study_status,
       library_selection: $library_selection,
       library_source_material: $library_source_material,
       library_source_molecule: $library_source_molecule,
@@ -994,6 +1011,7 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
       $file_mapping_level: [String],
       $dbgap_accession: [String],
       $study_name: [String],
+      $study_status: [String],
       $library_selection: [String],
       $library_source_material: [String],
       $library_source_molecule: [String],
@@ -1029,6 +1047,7 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
           file_mapping_level: $file_mapping_level,
           dbgap_accession: $dbgap_accession,       
           study_name: $study_name,
+          study_status: $study_status,
           library_selection: $library_selection,
           library_source_material: $library_source_material,
           library_source_molecule: $library_source_molecule,
@@ -1070,6 +1089,7 @@ query fileAddAllToCart(
   $file_type: [String],
   $dbgap_accession: [String],
   $study_name: [String],
+  $study_status: [String],
   $library_selection: [String],
   $library_source_material: [String],
   $library_source_molecule: [String],
@@ -1106,6 +1126,7 @@ query fileAddAllToCart(
       file_type: $file_type,
       dbgap_accession: $dbgap_accession,       
       study_name: $study_name,
+      study_status: $study_status,
       library_selection: $library_selection,
       library_source_material: $library_source_material,
       library_source_molecule: $library_source_molecule,
@@ -1148,6 +1169,7 @@ query diagnosisAddAllToCart(
   $file_type: [String],
   $dbgap_accession: [String],
   $study_name: [String],
+  $study_status: [String],
   $library_selection: [String],
   $library_source_material: [String],
   $library_source_molecule: [String],
@@ -1183,6 +1205,7 @@ query diagnosisAddAllToCart(
       file_type: $file_type,
       dbgap_accession: $dbgap_accession,       
       study_name: $study_name,
+      study_status: $study_status,
       library_selection: $library_selection,
       library_source_material: $library_source_material,
       library_source_molecule: $library_source_molecule,
@@ -1225,6 +1248,7 @@ query studyAddAllToCart(
   $file_type: [String],
   $dbgap_accession: [String],
   $study_name: [String],
+  $study_status: [String],
   $library_selection: [String],
   $library_source_material: [String],
   $library_source_molecule: [String],
@@ -1260,6 +1284,7 @@ query studyAddAllToCart(
       file_type: $file_type,
       dbgap_accession: $dbgap_accession,       
       study_name: $study_name,
+      study_status: $study_status,
       library_selection: $library_selection,
       library_source_material: $library_source_material,
       library_source_molecule: $library_source_molecule,
@@ -1505,6 +1530,14 @@ export const tabContainers = [
         role: cellTypes.DISPLAY,
         cellType: cellTypes.CUSTOM_ELEM,
         cellStyle: cellStyles.DBGAP,
+      },
+      {
+        dataField: 'study_status',
+        header: 'Study Status',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+        hideable: true,
       },
       {
         dataField: 'dbgap_accession',

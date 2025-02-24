@@ -11,6 +11,7 @@ import wheel7 from '../assets/landing/dbgap_carousel.svg';
 import wheel8 from '../assets/landing/federation_carousel.png';
 import wheel9 from '../assets/landing/cpi_carousel.png';
 import wheel10 from '../assets/landing/nccrdata_carousel.png';
+import wheel11 from '../assets/landing/c3dc_carousel.png';
 import c3dcLogo from '../assets/landing/c3dc_logo.svg';
 import ccdcMobile from '../assets/landing/ccdc_mobile.png';
 import civicMobile from '../assets/landing/civic_mobile.png';
@@ -22,6 +23,7 @@ import dbgapMobile from '../assets/landing/dbgap_mobile.png';
 import federationMobile from '../assets/landing/federation_mobile.png';
 import cpiMobile from '../assets/landing/cpi_mobile.png';
 import nccrdataMobile from '../assets/landing/nccrdata_mobile.png';
+import c3dcMobile from '../assets/landing/c3dc_mobile.png';
 import ccdcLogo from '../assets/landing/ccdc_logo.svg';
 import civicLogo from '../assets/landing/civic_logo.svg';
 import mciLogo from '../assets/landing/mci_logo.svg';
@@ -244,6 +246,12 @@ export const carouselList = [
     mobile: nccrdataMobile,
     content: 'NCCR Data Platform',
     link: 'https://nccrdataplatform.ccdi.cancer.gov/home',
+  },
+  {
+    img: wheel11,
+    mobile: c3dcMobile,
+    content: 'Childhood Cancer Clinical Data Commons',
+    link: 'https://clinicalcommons.ccdi.cancer.gov',
   },
 ];
 

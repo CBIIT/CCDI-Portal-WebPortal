@@ -149,6 +149,11 @@ const HeroMobileSection = styled.div`
     visibility: hidden;
   }
 
+  .carouselMobileItem:nth-child(11) {
+    transform: translateX(815%);
+    visibility: hidden;
+  }
+
 
   @media (min-width: 1200px) {
     display: none;

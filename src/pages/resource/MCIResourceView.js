@@ -272,7 +272,7 @@ const MCIResourceBody = styled.div`
 
         a {
             color: #455299;
-            font-weight: 600;
+            font-weight: 700;
             text-decoration: underline;
             text-underline-position: under;
             line-break: anywhere;
@@ -335,8 +335,13 @@ const MCIResourceBody = styled.div`
     }
 
     p {
+        font-weight: 500;
         margin-top: 0;
         min-width: 0;
+    }
+
+    li {
+        font-weight: 500;
     }
 
     h3 {
@@ -360,7 +365,7 @@ const MCIResourceBody = styled.div`
 
         a {
             color: #455299;
-            font-weight: 600;
+            font-weight: 700;
             text-decoration: underline;
             text-underline-position: under;
             line-break: anywhere;
@@ -652,7 +657,7 @@ const MCIResourceView = () => {
                                                             <>
                                                                 <div className='MCIDiseaseTableContainer'><MCIDiseaseTable table={mciItem.diseaseTable} donut={mciItem.diseaseDonut}/></div>
                                                                 <div className='MCIDiseaseTableMobileContainer'><MCIDiseaseTableMobile table={mciItem.diseaseTable}/></div>
-                                                                <div>{mciItem.diseaseTable.footer}</div>
+                                                                <p>{mciItem.diseaseTable.footer}</p>
                                                             </>
                                                             }
                                                             {mciItem.map &&
@@ -666,14 +671,14 @@ const MCIResourceView = () => {
                                                                 <img className="ecosystemImg" src={ccdiDataEcosystemImg} alt="Infographic depicting the MCI assays and data types, and the data flow to patients, providers, and the CCDI Data Ecosystem"/>
                                                                 <img className="ecosystemImgMobile" src={ccdiDataEcosystemMobileImg} alt="Infographic depicting the MCI assays and data types, and the data flow to patients, providers, and the CCDI Data Ecosystem"/>
                                                                 <h3 style={{ marginTop: '24px' }}>Community Tools and Scripts</h3>
-                                                                <div>Convert COG-formatted JSON files to TSV format with CCDI’s MCI_JSON2TSV tool <a href="https://github.com/CBIIT/ChildhoodCancerDataInitiative-MCI_JSON2TSV" target='blank' rel="noopener noreferrer">here</a>.</div>
+                                                                <p>Convert COG-formatted JSON files to TSV format with CCDI’s MCI_JSON2TSV tool <a href="https://github.com/CBIIT/ChildhoodCancerDataInitiative-MCI_JSON2TSV" target='blank' rel="noopener noreferrer">here</a>.</p>
                                                             </>
                                                             }
                                                             {mciItem.table &&
                                                             <>
                                                                 <div className='MCITableContainer'><MCITable table={mciItem.table} /></div>
                                                                 <div className='MCITableMobileContainer'><MCITableMobile table={mciItem.table} /></div>
-                                                                <div>{mciItem.table.footer}</div>
+                                                                <p>{mciItem.table.footer}</p>
                                                             </>
                                                             }
                                                             {mciItem.annotation && 

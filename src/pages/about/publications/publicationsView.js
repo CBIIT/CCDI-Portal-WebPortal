@@ -647,7 +647,7 @@ const PublicationsView = ({classes}) => {
     <PublicationsContainer>
       <div className='pageHeader'>
         <div className='pageHeaderText'>CCDI-Supported Publications</div>
-        <div className='pageHeaderSubtext'>Publication list updated as of 2/12/25.</div>
+        <div className='pageHeaderSubtext'>Publication list updated as of 3/31/25.</div>
       </div>
       <SearchBar onMouseOver={() => setDeleteIconShow('block')} onMouseOut={() => setDeleteIconShow('none')}>
         <SearchInput ref={inputRef} type="text" value={inputValue} placeholder="Search Publications" onChange={handleTextInputChange} />

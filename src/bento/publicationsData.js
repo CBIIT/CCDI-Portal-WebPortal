@@ -1,12 +1,23 @@
 export const publicationsList = [
     {
+        id: 'NCCR_01122025',
+        title: 'Making the case for an International Childhood Cancer Data Partnership',
+        link: "https://pubmed.ncbi.nlm.nih.gov/39799506",
+        date: 'January 2025',
+        summary: `<p>Childhood cancers are a heterogeneous group of rare diseases, accounting for less than 2% of all cancers diagnosed worldwide. Most countries, therefore, do not have enough cases to provide robust information on epidemiology, treatment, and late effects, especially for rarer types of cancer. Thus, only through a concerted effort to share data internationally will we be able to answer research questions that could not otherwise be answered. With this goal in mind, the U.S. National Cancer Institute and the French National Cancer Institute co-sponsored the Paris Conference for an International Childhood Cancer Data Partnership in November 2023. This meeting convened more than 200 participants from 17 countries to address complex challenges in pediatric cancer research and data sharing. This Commentary delves into some key topics discussed during the Paris Conference and describes pilots that will help move this international effort forward. Main topics presented include: 1) the wide variation in interpreting the European Union's General Data Protection Regulation among Member States; 2) obstacles with transferring personal health data outside of the European Union; 3) standardization and harmonization, including common data models; and 4) novel approaches to data sharing such as federated querying and federated learning. We finally provide a brief description of three ongoing pilot projects. The International Childhood Cancer Data Partnership is the first step in developing a process to better support pediatric cancer research internationally through combining data from multiple countries.</p>`,
+        category: 'Secondary',
+        tag: 'CCDI-NCCR',
+        journal: 'JNCI: Journal of the National Cancer Institute',
+        pmid: '39799506',
+    },
+    {
         id: 'NCCR_112024',
         title: 'NCI’s National Childhood Cancer Registry Data Platform: A New Data Sharing Resource to Analyze Cancer Surveillance and Real World Data',
         link: "https://d2xnga7irezzit.cloudfront.net/ccdi_hub_files/publications/NCI's+National+Childhood+Cancer+Registry+Data+Platform+-++A+New+Data+Sharing+Resource+to+Analyze+Cancer+Surveillance+and+Real+World+Data_AMIA+2024+Symposium+abstract.pdf",
         date: 'November 2024',
         summary: `<p>Childhood cancers are rare diseases with approximately 16,000 cases diagnosed annually in the US.¹ Childhood cancer research data are typically captured through multicenter clinical trials and available only to consortium members, or investigator-initiated research at a single institution. Cancer treatment is also delivered outside of clinical trials—real-world data generated as a by-product of clinical care are typically siloed in distinct institutional information systems (Electronic Health Records, Radiation Oncology, Laboratory, and Imaging) and are not available for general research use. While central cancer registries collect information on all reported cancers in their jurisdiction, their data have not been linked across registries and with real world data at the national level before. Finally, as patients and their families travel across the US for treatment, a single registry or institution may not hold all data representing a patient’s cancer journey. Data from all these sources typically reside at different institutions with different governance frameworks and have been encoded in a variety of standard and non-standard formats, making them unavailable for research use.</p>`,
         category: 'Abstract',
-        tag: 'NCCR',
+        tag: 'CCDI-NCCR',
         conference: 'AMIA 2024 Annual Symposium',
     },
     {
@@ -16,8 +27,19 @@ export const publicationsList = [
         date: 'September 2024',
         summary: `<p>The National Childhood Cancer Registry (NCCR) is a central infrastructure that integrates childhood cancer data from central cancer registries and other sources to enhance access to and utilization of pediatric cancer data. The NCCR currently represents >70% of the United States pediatric population. Registries collect and publish cancer incidence and survival data for public health surveillance. Electronic health records (EHRs) are one data source. EHR data are currently obtained by manual collection at individual hospitals that then transfer data to population-based cancer registries. This study aimed to use automated data collection from hospital EHRs to broaden and standardize data reported to registries.</p>`,
         category: 'Abstract',
-        tag: 'NCCR',
+        tag: 'CCDI-NCCR',
         conference: 'AACR 2024 Special Conference in Cancer Research: Advances in Pediatric Cancer Research',
+    },
+    {
+        id: 'Ecosystem_09012024',
+        title: 'Multicenter Histology Image Integration and Multiscale Deep Learning for Pediatric Sarcoma Subtype Classification',
+        link: "https://aacrjournals.org/cancerres/article/84/17_Supplement/B023/747183/Abstract-B023-Multicenter-histology-image",
+        date: 'September 2024',
+        summary: "<p>Pediatric sarcomas are rare and diverse, with few highly specialized centers reviewing sufficient volume to hone histopathological expertise, resulting in frequent misclassification. Digitization of histology slides enables automated imaging analysis and training of artificial neural networks (ANNs) for sarcoma subtype classification. Such tools are reproducible, mitigate against inter-observer bias, and can be implemented at a distance, allowing for global access to more precise diagnostics. A limitation is insufficient high-quality data to train models and avoid overfitting. Here, we amass a digitized sarcoma histology dataset from multiple centers. We designed a computational pipeline to (1) harmonize images to remove center-specific artifacts, (2) mirror a traditional pathologist’s process by extracting imaging features at varying sizes and magnifications, and (3) implement the latest in deep learning backbones to perform automated classification of rhabdomyosarcoma (RMS) v. non-rhabdomyosarcoma (NRSTS) and further subtyping. We provide powerful proof of concept for the ability of these techniques to expand access to highly specialized care to the global pediatric sarcoma population. Methods: Hematoxylin & Eosin-stained images and limited clinical data were collected with representation from numerous centers. We optimized a pipeline for focus checking, resolution standardization, stain normalization, and image format conversion to generate a harmonized dataset of over 500 images. We tested varying tile sizes and overlaps, magnification powers, "
+                +"and single- vs. multi-scale concatenated-feature sets to optimize classification accuracy. Deep learning feature extraction was performed with two backbones (InceptionV3 and CTranspath). Using our previously developed SAMPLER method, we create statistical representations of each feature to train and test ANN classifiers for RMS vs NRSTS and further subtype predictions. Results: Optimal parameters were 224 pixel tile size and 112 micron spacing on center, yielding non-overlapping tiles when viewed at 20X, 0.5 microns per pixel (mpp). Single scale feature extraction at 0.5 and 1.0 outperformed 0.75 mpp. Multi-scale feature concatenation from the combination of 0.5 and 1.0 mpp provided the best overall classification performance. In matched analyses of all tested parameter combinations, CTranspath outperformed InceptionV3 with consistently higher area under curve. Conclusions: Our multi-institutional pediatric sarcoma histology dataset represents the broadest harmonized resource of this type to our knowledge. Using a multiscale approach and optimized tiling parameters, we demonstrate the superiority of vision transformer- over strict convolutional ANNs to provide gross distinction between sarcoma subtypes. Our harmonization procedures open the door for expansion of the dataset through ongoing multi-institutional collaboration, bringing promise for a future in which automated image review may accurately and remotely identify sarcoma histology, improving subtype-specific delivery of care.</p>",
+        category: 'Abstract',
+        tag: 'CCDI Ecosystem',
+        conference: 'AACR Special Conference in Cancer Research: Advances in Pediatric Cancer Research',
     },
     {
         id: 'Ecosystem_062024',
@@ -56,7 +78,7 @@ export const publicationsList = [
         date: 'May 2024',
         summary: `<p>While cancer in children and adolescents is rare, it is the primary cause of death from disease for those over the age of 1. The ability to conduct high quality population-level research studies that leverages all available data is crucial in rare disease such as childhood cancer. However, data captured by research consortiums, NCI-supported Cancer Centers, hospitals, and other sources are typically stranded in institutional data silos and unavailable for secondary data analyses within and across institutions. These RWD are frequently encoded using source-specific data models that are not harmonized or interoperable with data from other sources. Most treating institutions report case information to central cancer registries in the North American Association of Central Cancer Registries (NAACCR) standard as part of legally-mandated cancer surveillance. However, cancer registries typically do not receive detailed diagnostic, treatment, or long-term follow-up information that are valuable for understanding a patient’s long-term health outcomes during and after a cancer diagnosis. Augmenting existing cancer registry data with harmonized data from other sources, such as electronic health records (EHRs), genomic data, and institutional datasets, would greatly enhance the value of cancer registries for surveillance and research.</p>`,
         category: 'Abstract',
-        tag: 'NCCR',
+        tag: 'CCDI-NCCR',
         conference: 'AMIA 2024 Clinical Informatics Conference',
     },
     {
@@ -175,7 +197,7 @@ export const publicationsList = [
         date: 'May 2023',
         summary: `<p>The physical properties of protons lower doses to surrounding normal tissues compared with photons, potentially reducing acute and long-term adverse effects, including subsequent cancers. The magnitude of benefit is uncertain, however, and currently based largely on modeling studies. Despite the paucity of directly comparative data, the number of proton centers and patients are expanding exponentially. Direct studies of the potential risks and benefits are needed in children, who have the highest risk of radiation-related subsequent cancers. The Pediatric Proton and Photon Therapy Comparison Cohort aims to meet this need.</p>`,
         category: 'Primary',
-        tag: 'NCCR',
+        tag: 'CCDI-NCCR',
         journal: 'Advances in Radiation Oncology',
         pmid: '38047226',
     },

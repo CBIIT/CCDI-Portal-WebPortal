@@ -1397,14 +1397,6 @@ export const tabContainers = [
         hideable: true,
       },
       {
-        dataField: 'synonym_id',
-        header: 'Synonym Participant ID',
-        display: true,
-        tooltipText: 'sort',
-        role: cellTypes.DISPLAY,
-        hideable: true,
-      },
-      {
         dataField: 'diagnosis',
         header: 'Diagnosis',
         display: true,

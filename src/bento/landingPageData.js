@@ -12,6 +12,7 @@ import wheel8 from '../assets/landing/federation_carousel.png';
 import wheel9 from '../assets/landing/cpi_carousel.png';
 import wheel10 from '../assets/landing/nccrdata_carousel.png';
 import wheel11 from '../assets/landing/c3dc_carousel.png';
+import wheel12 from '../assets/landing/ecDNA_carousel.png';
 import c3dcLogo from '../assets/landing/c3dc_logo.svg';
 import ccdcMobile from '../assets/landing/ccdc_mobile.png';
 import civicMobile from '../assets/landing/civic_mobile.png';
@@ -24,6 +25,7 @@ import federationMobile from '../assets/landing/federation_mobile.png';
 import cpiMobile from '../assets/landing/cpi_mobile.png';
 import nccrdataMobile from '../assets/landing/nccrdata_mobile.png';
 import c3dcMobile from '../assets/landing/c3dc_mobile.png';
+import ecDNAMobile from '../assets/landing/ecDNA_mobile.png';
 import ccdcLogo from '../assets/landing/ccdc_logo.svg';
 import civicLogo from '../assets/landing/civic_logo.svg';
 import mciLogo from '../assets/landing/mci_logo.svg';
@@ -34,7 +36,7 @@ import dbgapLogo from '../assets/landing/dbgap_logo.svg';
 import federationLogo from '../assets/landing/federation_logo.svg';
 import cpiLogo from '../assets/landing/cpi_logo.svg';
 import nccrdataLogo from '../assets/landing/nccrdata_logo.svg';
-
+import ecDNALogo from '../assets/landing/ecDNA_logo.svg';
 
 export const introData = {
   landingIntroPic: landingImg,
@@ -124,7 +126,7 @@ export const resourcesAppliationsListData = [
     img: mtpLogo,
   },
   {
-    id: 'nccr',
+    id: 'nccrexplorer',
     title: 'National Childhood Cancer Registry Explorer',
     subtitle: 'NCCR Explorer',
     content: 'A tool to browse demographic, incidence, and survival statistics for cancers in children, adolescent, and young adults.',
@@ -154,6 +156,14 @@ export const resourcesAppliationsListData = [
     content: 'The NCCR Data Platform is a cloud-based repository offering comprehensive data on cancer patients aged 0-39.',
     link: 'https://nccrdataplatform.ccdi.cancer.gov/home',
     img: nccrdataLogo,
+  },
+  {
+    id: 'ecDNA',
+    title: 'CCDI Extrachromosomal DNA',
+    subtitle: 'ecDNA',
+    content: 'A catalog of circular extrachromosomal DNA (ecDNA) associated with childhood cancers, facilitating research and clinical insights.',
+    link: 'https://ccdi-ecdna.org',
+    img: ecDNALogo,
   },
 ];
 
@@ -252,6 +262,12 @@ export const carouselList = [
     mobile: c3dcMobile,
     content: 'Childhood Cancer Clinical Data Commons',
     link: 'https://clinicalcommons.ccdi.cancer.gov',
+  },
+  {
+    img: wheel12,
+    mobile: ecDNAMobile,
+    content: 'CCDI Extrachromosomal DNA (ecDNA)',
+    link: 'https://ccdi-ecdna.org',
   },
 ];
 

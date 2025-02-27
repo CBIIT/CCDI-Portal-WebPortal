@@ -109,6 +109,11 @@ export const navbarSublists = {
     name:'Database of Genotypes and Phenotypes',
     link: 'https://www.ncbi.nlm.nih.gov/gap',
     className: 'navMobileSubItem',
+  },
+  {
+    name:'CCDI Extrachromosomal DNA (ecDNA)',
+    link: 'https://ccdi-ecdna.org',
+    className: 'navMobileSubItem',
   }],
   "About": [
     {

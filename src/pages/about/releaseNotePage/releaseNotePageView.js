@@ -208,10 +208,10 @@ const DataContentType = styled.div`
   line-height: 23px;
   border-bottom: 0.5px solid #00838F;
   margin: 0px 0px 10px 0px;
-  padding: 12px 0 6px 0;
+  padding: 10px 0;
 
   .typeIcon {
-    margin-right: 17px;
+    margin-right: 18px;
   }
 
   .typeIcon:hover {
@@ -301,6 +301,15 @@ const ReleaseNotesPageView = () => {
       Xenograft: XenograftIcon,
       Epidemiologic: EpidemiologicIcon,
       'Cell Lines': CellLinesIcon,
+    };
+
+    const iconAlt = {
+      Clinical: 'Icon of a folder with plus sign',
+      'Genomics/Omics': 'DNA helix icon',
+      Imaging: 'Outline icon of a person going through an MRI scan',
+      Xenograft: 'Outline icon of a lab mouse with a syringe injecting into its back, representing medical or scientific research.',
+      Epidemiologic: 'Globe icon with a plus sign, representing global data types',
+      'Cell Lines': 'Outline icon of petri dish with bacteria',
     };
     // const formatDate = (date) => {
     //     const dateData = `${date.substring(5, 7)}/${date.substring(8, 10)}/${date.substring(0, 4)}`;
@@ -548,9 +557,9 @@ const ReleaseNotesPageView = () => {
                                       key={typekey}
                                       title={newType}
                                       arrow
-                                      PopperProps={{ style: { marginTop: -12 } }}
+                                      PopperProps={{ style: { marginTop: -8 } }}
                                     >
-                                      <img src={iconSrc[newType]} className= "typeIcon" alt={`${newType} icon`} />
+                                      <img src={iconSrc[newType]} className= "typeIcon" alt={iconAlt[newType]} />
                                     </LightTooltip>
                                   );
                                 })

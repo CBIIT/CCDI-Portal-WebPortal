@@ -2,11 +2,15 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ReactHtmlParser from 'html-react-parser';
 import usePageVisibility from "./PageVisibility";
-import { altList, srcList, newsList } from '../../../bento/newsData';
+import { altList, srcList, newsList, releaseNotesList } from '../../../bento/newsData';
 import { titleData } from '../../../bento/landingPageData';
 import exportIconText from '../../../assets/landing/Export_Icon_White.svg';
 
 let timer = null;
+
+const fullList = (newsList.concat(releaseNotesList)).sort((a,b) => {
+  return new Date(a.date).getTime() - new Date(b.date).getTime();
+}).reverse();
 
 const LatestUpdatesSection = styled.div`
   position: relative;
@@ -300,7 +304,7 @@ const LatestUpdate = () => {
     const isVisible = usePageVisibility();
 
     const getFirstList = () => {
-      const latestUpdateList = newsList.filter((item) => item.latestUpdate);
+      const latestUpdateList = fullList.filter((item) => item.latestUpdate);
       let newItemList = [latestUpdateList[2]]
       newItemList = newItemList.concat(latestUpdateList.slice(0,3));
       newItemList = newItemList.concat(latestUpdateList.slice(0,2));

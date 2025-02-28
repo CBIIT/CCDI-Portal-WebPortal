@@ -208,10 +208,10 @@ const DataContentType = styled.div`
   line-height: 23px;
   border-bottom: 0.5px solid #00838F;
   margin: 0px 0px 10px 0px;
-  padding: 12px 0 6px 0;
+  padding: 10px 0;
 
   .typeIcon {
-    margin-right: 17px;
+    margin-right: 18px;
   }
 
   .typeIcon:hover {
@@ -548,7 +548,7 @@ const ReleaseNotesPageView = () => {
                                       key={typekey}
                                       title={newType}
                                       arrow
-                                      PopperProps={{ style: { marginTop: -12 } }}
+                                      PopperProps={{ style: { marginTop: -8 } }}
                                     >
                                       <img src={iconSrc[newType]} className= "typeIcon" alt={`${newType} icon`} />
                                     </LightTooltip>

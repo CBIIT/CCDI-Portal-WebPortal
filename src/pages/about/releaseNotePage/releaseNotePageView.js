@@ -302,6 +302,15 @@ const ReleaseNotesPageView = () => {
       Epidemiologic: EpidemiologicIcon,
       'Cell Lines': CellLinesIcon,
     };
+
+    const iconAlt = {
+      Clinical: 'Icon of a folder with plus sign',
+      'Genomics/Omics': 'DNA helix icon',
+      Imaging: 'Outline icon of a person going through an MRI scan',
+      Xenograft: 'Outline icon of a lab mouse with a syringe injecting into its back, representing medical or scientific research.',
+      Epidemiologic: 'Globe icon with a plus sign, representing global data types',
+      'Cell Lines': 'Outline icon of petri dish with bacteria',
+    };
     // const formatDate = (date) => {
     //     const dateData = `${date.substring(5, 7)}/${date.substring(8, 10)}/${date.substring(0, 4)}`;
     //     const newDate = new Date(dateData);
@@ -550,7 +559,7 @@ const ReleaseNotesPageView = () => {
                                       arrow
                                       PopperProps={{ style: { marginTop: -8 } }}
                                     >
-                                      <img src={iconSrc[newType]} className= "typeIcon" alt={`${newType} icon`} />
+                                      <img src={iconSrc[newType]} className= "typeIcon" alt={iconAlt[newType]} />
                                     </LightTooltip>
                                   );
                                 })

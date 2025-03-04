@@ -758,6 +758,14 @@ query participantOverview(
         first_event
         last_known_survival_status
         age_at_last_known_survival_status
+        cpi_data {
+          associated_id
+          repository_of_synonym_id
+          domain_description
+          domain_category
+          data_location
+          data_type
+        }
     }
 }
 `;
@@ -1372,6 +1380,7 @@ export const tabContainers = [
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
+        cellType: cellTypes.CPI,
       },
       {
         dataField: 'study_id',

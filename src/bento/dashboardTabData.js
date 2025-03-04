@@ -748,7 +748,6 @@ query participantOverview(
         study_id
         race
         sex_at_birth
-        synonym_id
         diagnosis
         anatomic_site
         age_at_diagnosis

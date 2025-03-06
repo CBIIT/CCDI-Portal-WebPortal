@@ -29,16 +29,16 @@ export const MCIContent = [
                 diseaseTable: {
                     title: 'Enrollments in MCI (APEC14B1-MCI) by Diagnosis Type as of February 10, 2025',
                     header: ['', 'Primary Diagnosis Disease Group', 'Number of Participants'],
-                    body: [['Central Nervous System', 3883], ['Soft Tissue Sarcoma', 1198], ['Rare Tumors', 572], ['Neuroblastoma', 361]],
+                    body: [{name: 'Central Nervous System', value: 3883}, {name: 'Soft Tissue Sarcoma', value: 1198}, {name: 'Rare Tumors', value: 572}, {name: 'Neuroblastoma', value: 361}],
                 },
-                diseaseDonut: {
-                    title: 'Enrollment',
-                    data: [{ name: 'Central Nervous System', value: 3756}, {name: 'Soft Tissue Sarcoma', value: 1167}, {name: 'Rare Tumors', value: 554}, {name: 'Neuroblastoma', value: 331}]
-                },
-                donut: {
-                    title: 'Enrollments in MCI (APEC14B1-MCI) by Diagnosis Type as of February 10, 2025',
-                    data: [{name: 'Central Nervous System', value: 3756}, {name: 'Soft Tissue Sarcoma', value: 1167}, {name: 'Rare Tumors', value: 554}, {name: 'Neuroblastoma', value: 331}],
-                },
+                // diseaseDonut: {
+                //     title: 'Enrollment',
+                //     data: [{ name: 'Central Nervous System', value: 3756}, {name: 'Soft Tissue Sarcoma', value: 1167}, {name: 'Rare Tumors', value: 554}, {name: 'Neuroblastoma', value: 331}]
+                // },
+                // donut: {
+                //     title: 'Enrollments in MCI (APEC14B1-MCI) by Diagnosis Type as of February 10, 2025',
+                //     data: [{name: 'Central Nervous System', value: 3756}, {name: 'Soft Tissue Sarcoma', value: 1167}, {name: 'Rare Tumors', value: 554}, {name: 'Neuroblastoma', value: 331}],
+                // },
                 map: {
                     data: [ 
                         [110, 540, "ALASKA", 2], //AK

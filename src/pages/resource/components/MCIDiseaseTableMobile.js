@@ -119,8 +119,8 @@ const MCIDiseaseTableMobile = ({ table }) => {
                             return (
                                 <>
 
-                                    <div className='mciTableBodyListItem' key={key1}>{bodyItem[0]}</div>
-                                    <div className='mciTableBodyListItem' key={key2}>{bodyItem[1]}</div>
+                                    <div className='mciTableBodyListItem' key={key1}>{bodyItem.name}</div>
+                                    <div className='mciTableBodyListItem' key={key2}>{bodyItem.value}</div>
                                 </>
                             )
                         })

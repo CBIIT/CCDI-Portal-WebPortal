@@ -348,6 +348,7 @@ const ReleaseNotesPageView = () => {
     const [selectedIdx, setSelectedIdx] = useState(0);
     const [siteUpdateNav, setSiteUpdateNav] = useState([]);
     const [open, setOpen] = useState([]);
+    const [mobile, setMobile] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
     const iconSrc = {
@@ -412,9 +413,9 @@ const ReleaseNotesPageView = () => {
 
     const resizeHandler = () => {
       if (window.innerWidth > 767) {
-        setDropdownOpen(true);
+        setMobile(false);
       } else {
-        setDropdownOpen(false);
+        setMobile(true);
       }
   };
 
@@ -541,6 +542,11 @@ const ReleaseNotesPageView = () => {
       setOpen(newOpen);
     };
 
+    const onClickDropdownItem = (idx) => {
+      setSelectedIdx(idx);
+      setDropdownOpen(false);
+    }
+
     const LightTooltip = withStyles(() => ({
       arrow: {
         color: 'white',
@@ -569,9 +575,11 @@ const ReleaseNotesPageView = () => {
                 <ul className="navListContainer">
                   <div className="navTitle">Release Note</div>
                 {
-                  dropdownOpen && siteUpdateNav.map((subObj, objidx) => {
+                  siteUpdateNav.map((subObj, objidx) => {
                     const objkey = `obj_${objidx}`;
-                    console.log("???", window.screen.width);
+                    if (mobile && !dropdownOpen) {
+                      return null;
+                    }
                     return (
                       <li key={objkey} className="dateSubListContainer">
                         <div className="yearTitle" onClick={() => handleClick(objidx)}>
@@ -585,7 +593,7 @@ const ReleaseNotesPageView = () => {
                               const yearkey = `obj_${yearidx}`;
                               return (
                                 <li key={yearkey} className="dateListItem" style={selectedIdx === navItem.index ? {background: '#E7F1F5'} : null}>
-                                  <div className='dateListItemContainer' onClick={() => setSelectedIdx(navItem.index)}>
+                                  <div className='dateListItemContainer' onClick={() => onClickDropdownItem(navItem.index)}>
                                     <div className="dateListVersionText">Version: {navItem.version}</div>
                                     <div className="dateListItemText">{navItem.date}</div>
                                   </div>

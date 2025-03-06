@@ -58,6 +58,10 @@ height: 900;
     min-width: 180px;
 }
 
+.mciTableDonut .recharts-pie-sector{
+    outline: none;
+}
+
 .mciTableBodyList {
     width: 66.66%
     overflow-x: hidden;

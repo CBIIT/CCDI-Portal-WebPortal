@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { withStyles, Collapse, Tooltip, ClickAwayListener } from '@material-ui/core';
 import html2pdf from "html2pdf.js";
@@ -350,6 +350,7 @@ const ReleaseNotesPageView = () => {
     const [open, setOpen] = useState([]);
     const [mobile, setMobile] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const anchorRef = useRef(null);
 
     const iconSrc = {
       Clinical: ClinicalTrialsIcon,
@@ -547,6 +548,13 @@ const ReleaseNotesPageView = () => {
       setDropdownOpen(false);
     }
 
+    const handleClose = (event) => {
+      if (anchorRef.current && anchorRef.current.contains(event.target)) {
+          return;
+      }
+      setDropdownOpen(false);
+    };
+
     const LightTooltip = withStyles(() => ({
       arrow: {
         color: 'white',
@@ -571,44 +579,52 @@ const ReleaseNotesPageView = () => {
             <div className='titleContainer'>Release Notes</div>
             <div className='siteUpdateContext'>
               <NavContainer>
-                <div className="mobileBtn" onClick={() => setDropdownOpen(!dropdownOpen)}>Release Version</div>
-                <ul className="navListContainer">
-                  <div className="navTitle">Release Note</div>
-                {
-                  siteUpdateNav.map((subObj, objidx) => {
-                    const objkey = `obj_${objidx}`;
-                    if (mobile && !dropdownOpen) {
-                      return null;
-                    }
-                    return (
-                      <li key={objkey} className="dateSubListContainer">
-                        <div className="yearTitle" onClick={() => handleClick(objidx)}>
-                          <img className='arrowIcon' src={ArrowDownIcon} alt="arrow down icon"/>
-                          <span>{subObj.year}</span>
-                        </div>
-                        <Collapse in={open[objidx]}>
-                          <ul className="dateSubList">
-                          {
-                            subObj.list.map((navItem, yearidx) => {
-                              const yearkey = `obj_${yearidx}`;
-                              return (
-                                <li key={yearkey} className="dateListItem" style={selectedIdx === navItem.index ? {background: '#E7F1F5'} : null}>
-                                  <div className='dateListItemContainer' onClick={() => onClickDropdownItem(navItem.index)}>
-                                    <div className="dateListVersionText">Version: {navItem.version}</div>
-                                    <div className="dateListItemText">{navItem.date}</div>
-                                  </div>
-                                </li>
-                              );
-                            })
-                          }
-                          </ul>
-                        </Collapse>
-                      </li>
-                    );
-                  })
-                }
-                  <div className='bottomLine' />
-                </ul>
+                <div
+                  className="mobileBtn"
+                  ref={anchorRef}
+                  onClick={() => setDropdownOpen(!dropdownOpen)}
+                >
+                  Release Version
+                </div>
+                <ClickAwayListener onClickAway={handleClose}>
+                  <ul className="navListContainer">
+                    <div className="navTitle">Release Note</div>
+                  {
+                    siteUpdateNav.map((subObj, objidx) => {
+                      const objkey = `obj_${objidx}`;
+                      if (mobile && !dropdownOpen) {
+                        return null;
+                      }
+                      return (
+                        <li key={objkey} className="dateSubListContainer">
+                          <div className="yearTitle" onClick={() => handleClick(objidx)}>
+                            <img className='arrowIcon' src={ArrowDownIcon} alt="arrow down icon"/>
+                            <span>{subObj.year}</span>
+                          </div>
+                          <Collapse in={open[objidx]}>
+                            <ul className="dateSubList">
+                            {
+                              subObj.list.map((navItem, yearidx) => {
+                                const yearkey = `obj_${yearidx}`;
+                                return (
+                                  <li key={yearkey} className="dateListItem" style={selectedIdx === navItem.index ? {background: '#E7F1F5'} : null}>
+                                    <div className='dateListItemContainer' onClick={() => onClickDropdownItem(navItem.index)}>
+                                      <div className="dateListVersionText">Version: {navItem.version}</div>
+                                      <div className="dateListItemText">{navItem.date}</div>
+                                    </div>
+                                  </li>
+                                );
+                              })
+                            }
+                            </ul>
+                          </Collapse>
+                        </li>
+                      );
+                    })
+                  }
+                    <div className='bottomLine' />
+                  </ul>
+                </ClickAwayListener>
               </NavContainer>
               <SiteUpdateResultContext>
                   <SiteUpdateItem id={`post${releaseNotesList[selectedIdx].id}`}>

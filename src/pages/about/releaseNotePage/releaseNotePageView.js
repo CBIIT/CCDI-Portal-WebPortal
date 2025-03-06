@@ -6,6 +6,8 @@ import ReactHtmlParser from "html-react-parser";
 import { releaseNotesList } from '../../../bento/newsData';
 import NCILogoExport from '../../../assets/about/NCI_Logo.png';
 import ArrowDownIcon from '../../../assets/about/Arrow_Down_Black_Icon.svg';
+import arrowDownGreenIcon from '../../../assets/about/arrowDownGreen.svg';
+import arrowUpGreenIcon from '../../../assets/about/arrowUpGreen.svg';
 import UploadIcon from '../../../assets/about/Upload-Icon.svg';
 import ClinicalTrialsIcon from '../../../assets/about/Release_Clinical_Icon.svg';
 import GenomicsIcon from '../../../assets/about/Release_Genomics_Icon.svg';
@@ -19,17 +21,20 @@ const SiteUpdateResultContainer = styled.div`
 
     .titleContainer {
         width: 100%;
-        padding: 48px 0;
-        color: var(--Utility-Colors-Dark-Teal-Hover, #1A5255);
-        text-align: center;
-        font-family: Poppins;
-        font-size: 35px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 35px; /* 100% */
-        letter-spacing: 0.7px;
         border-bottom: 1px solid #007A85;
         margin-bottom: 60px;
+    }
+
+    .titleText {
+      padding: 48px 0;
+      color: var(--Utility-Colors-Dark-Teal-Hover, #1A5255);
+      text-align: center;
+      font-family: Poppins;
+      font-size: 35px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 35px; /* 100% */
+      letter-spacing: 0.7px;
     }
 
     .siteUpdateContext {
@@ -45,14 +50,24 @@ const SiteUpdateResultContainer = styled.div`
     @media (max-width: 767px) {
       .siteUpdateContext {
         display: block;
-        margin: 0 10px;
+        margin: 0;
+      }
+
+      .titleContainer {
+        margin-bottom: 22px;
+      }
+
+      .titleText {
+        width: 150px;
+        margin: 0 auto;
+        padding: 30px 0;
       }
     }
 `;
 
 const SiteUpdateResultContext = styled.div`
   display: flex;
-  padding: 0 20px 50px 0;
+  padding: 0 0 50px 0;
 
   @media (min-width: 1420px) {
     width: 1420px;
@@ -71,7 +86,22 @@ const NavContainer = styled.div`
   }
 
   .mobileBtn {
+    width: calc(100vw - 70px);
+    color: #0A5E63;
+    height: 45px;
+    padding: 15.5px 10px;
+    list-style-type: none;
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 14px; /* 70% */
+    text-transform: capitalize;
     display: none;
+
+    :hover {
+      cursor: pointer;
+    }
   }
 
   .navTitle {
@@ -178,8 +208,18 @@ const NavContainer = styled.div`
   }
 
   @media (max-width: 767px) {
+    border-top: none;
     position: absolute;
+    left: 25px;
     z-index: 999;
+
+    .dateListItem {
+      margin: 2px 0;
+
+      :last-child {
+        margin-bottom: 2px;
+      }
+    }
 
     .dateListItemText {
       display: block;
@@ -189,12 +229,24 @@ const NavContainer = styled.div`
       display: block;
     }
 
+    .tabDropIcon {
+      float: right;
+    }
+
     .navTitle {
       display: none;
     }
 
     .navListContainer {
       width: 100%;
+      border: 2px solid #08838D;
+      border-radius: 4px;
+      background: white;
+    }
+
+    .yearTitle {
+      border-top: 1px solid #969696;
+      // border-bottom: 1px solid #969696;
     }
   }
 `;
@@ -207,7 +259,7 @@ const SiteUpdateItem = styled.div`
   overflow: hidden;
 
   @media (max-width: 767px) {
-    margin-top: 100px;
+    margin-top: 85px;
   }
 `;
 
@@ -304,6 +356,18 @@ const SiteUpdateExport = styled.div`
     }
     .downloadPDFImg {
       // margin-top: 10px;
+    }
+
+    @media (max-width: 767px) {
+      width: 45px;
+
+      .spanText {
+        padding: 10px 15px;
+      }
+
+      .downloadPDFText {
+        display: none;
+      }
     }
 `;
 
@@ -576,18 +640,20 @@ const ReleaseNotesPageView = () => {
 
     return (
         <SiteUpdateResultContainer>
-            <div className='titleContainer'>Release Notes</div>
+            <div className='titleContainer'><div className='titleText'>Release Notes</div></div>
             <div className='siteUpdateContext'>
               <NavContainer>
-                <div
-                  className="mobileBtn"
-                  ref={anchorRef}
-                  onClick={() => setDropdownOpen(!dropdownOpen)}
-                >
-                  Release Version
-                </div>
                 <ClickAwayListener onClickAway={handleClose}>
                   <ul className="navListContainer">
+                    <div
+                      className="mobileBtn"
+                      ref={anchorRef}
+                      onClick={() => setDropdownOpen(!dropdownOpen)}
+                      style={dropdownOpen? {fontSize: '16px'} : null}
+                    >
+                      {dropdownOpen ? "Select a release version" : "Release Version"}
+                      <img className='tabDropIcon' src={dropdownOpen? arrowUpGreenIcon : arrowDownGreenIcon} alt='arrow img' />
+                    </div>
                     <div className="navTitle">Release Note</div>
                   {
                     siteUpdateNav.map((subObj, objidx) => {
@@ -597,7 +663,11 @@ const ReleaseNotesPageView = () => {
                       }
                       return (
                         <li key={objkey} className="dateSubListContainer">
-                          <div className="yearTitle" onClick={() => handleClick(objidx)}>
+                          <div
+                            className="yearTitle"
+                            onClick={() => handleClick(objidx)}
+                            style={open[objidx] && mobile ? {borderBottom: '1px solid #969696'} : null}
+                          >
                             <img className='arrowIcon' src={ArrowDownIcon} alt="arrow down icon"/>
                             <span>{subObj.year}</span>
                           </div>

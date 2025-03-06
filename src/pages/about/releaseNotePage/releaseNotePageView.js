@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { withStyles, Collapse, Tooltip } from '@material-ui/core';
+import { withStyles, Collapse, Tooltip, ClickAwayListener } from '@material-ui/core';
 import html2pdf from "html2pdf.js";
 import ReactHtmlParser from "html-react-parser";
 import { releaseNotesList } from '../../../bento/newsData';
@@ -15,11 +15,10 @@ import EpidemiologicIcon from '../../../assets/about/Release_Epidemiologic_Icon.
 import CellLinesIcon from '../../../assets/about/Release_CellLines_Icon.svg';
 
 const SiteUpdateResultContainer = styled.div`
-    width: 1420px;
-    margin: 0 auto;
+    margin: 0 16px;
 
     .titleContainer {
-        width: 1338px;
+        width: 100%;
         padding: 48px 0;
         color: var(--Utility-Colors-Dark-Teal-Hover, #1A5255);
         text-align: center;
@@ -37,12 +36,27 @@ const SiteUpdateResultContainer = styled.div`
       display: flex;
       margin: 0 100px;
     }
+
+    @media (min-width: 1420px) {
+      width: 1380px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 767px) {
+      .siteUpdateContext {
+        display: block;
+        margin: 0 10px;
+      }
+    }
 `;
 
 const SiteUpdateResultContext = styled.div`
-  width: 1420px;
   display: flex;
   padding: 0 20px 50px 0;
+
+  @media (min-width: 1420px) {
+    width: 1420px;
+  }
 `;
 
 const NavContainer = styled.div`
@@ -54,6 +68,10 @@ const NavContainer = styled.div`
     width: 262px;
     margin: 0;
     padding-left: 0;
+  }
+
+  .mobileBtn {
+    display: none;
   }
 
   .navTitle {
@@ -146,6 +164,39 @@ const NavContainer = styled.div`
   .bottomLine {
     border-top: 0.5px solid #969696;
   }
+
+  @media (max-width: 1023px) {
+    .dateListItemText {
+      display: none;
+    }
+
+    .navListContainer {
+      width: 182px;
+      margin: 0;
+      padding-left: 0;
+    }
+  }
+
+  @media (max-width: 767px) {
+    position: absolute;
+    z-index: 999;
+
+    .dateListItemText {
+      display: block;
+    }
+
+    .mobileBtn {
+      display: block;
+    }
+
+    .navTitle {
+      display: none;
+    }
+
+    .navListContainer {
+      width: 100%;
+    }
+  }
 `;
 
 const SiteUpdateItem = styled.div`
@@ -154,15 +205,19 @@ const SiteUpdateItem = styled.div`
   border: 1.5px solid #00BDCD;
   box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.25);
   overflow: hidden;
+
+  @media (max-width: 767px) {
+    margin-top: 100px;
+  }
 `;
 
 const SiteUpdateCard = styled.div`
     display: grid;
     padding: 33px 38px;
-    width: 850px;
+    // width: 850px;
     max-height: 1138px;
     overflow-y: auto;
-    position: relative;
+    // position: relative;
     &::-webkit-scrollbar {
       width: 7px;
       background-color: #E2E2E2;
@@ -293,6 +348,7 @@ const ReleaseNotesPageView = () => {
     const [selectedIdx, setSelectedIdx] = useState(0);
     const [siteUpdateNav, setSiteUpdateNav] = useState([]);
     const [open, setOpen] = useState([]);
+    const [dropdownOpen, setDropdownOpen] = useState(false);
 
     const iconSrc = {
       Clinical: ClinicalTrialsIcon,
@@ -353,6 +409,20 @@ const ReleaseNotesPageView = () => {
         }
         return NavList;
     };
+
+    const resizeHandler = () => {
+      if (window.innerWidth > 767) {
+        setDropdownOpen(true);
+      } else {
+        setDropdownOpen(false);
+      }
+  };
+
+    useEffect(() => {
+            window.addEventListener('resize', resizeHandler);
+            resizeHandler();
+            return () => window.addEventListener('resize', resizeHandler);
+        }, []);
 
     useEffect(() => {
       // if (releaseNotesList.length > 0) {
@@ -495,11 +565,13 @@ const ReleaseNotesPageView = () => {
             <div className='titleContainer'>Release Notes</div>
             <div className='siteUpdateContext'>
               <NavContainer>
+                <div className="mobileBtn" onClick={() => setDropdownOpen(!dropdownOpen)}>Release Version</div>
                 <ul className="navListContainer">
                   <div className="navTitle">Release Note</div>
                 {
-                  siteUpdateNav.map((subObj, objidx) => {
+                  dropdownOpen && siteUpdateNav.map((subObj, objidx) => {
                     const objkey = `obj_${objidx}`;
+                    console.log("???", window.screen.width);
                     return (
                       <li key={objkey} className="dateSubListContainer">
                         <div className="yearTitle" onClick={() => handleClick(objidx)}>

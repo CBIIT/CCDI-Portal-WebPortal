@@ -39,15 +39,28 @@ const SiteUpdateResultContainer = styled.div`
 
     .siteUpdateContext {
       display: flex;
-      margin: 0 100px;
+      margin: 0 calc(50% - 590px);
     }
 
     @media (min-width: 1420px) {
       width: 1380px;
       margin: 0 auto;
+
+      .siteUpdateContext {
+        display: flex;
+        margin: 0 100px;
+      }
+    }
+
+    @media (max-width: 1230px) {
+      .siteUpdateContext {
+        margin: 0;
+      }
     }
 
     @media (max-width: 767px) {
+      margin: 0 10px;
+
       .siteUpdateContext {
         display: block;
         margin: 0;
@@ -86,7 +99,7 @@ const NavContainer = styled.div`
   }
 
   .mobileBtn {
-    width: calc(100vw - 70px);
+    width: calc(100vw - 62px);
     color: #0A5E63;
     height: 45px;
     padding: 15.5px 10px;
@@ -210,7 +223,7 @@ const NavContainer = styled.div`
   @media (max-width: 767px) {
     border-top: none;
     position: absolute;
-    left: 25px;
+    left: 22px;
     z-index: 999;
 
     .dateListItem {
@@ -656,7 +669,7 @@ const ReleaseNotesPageView = () => {
                       onClick={() => setDropdownOpen(!dropdownOpen)}
                       style={dropdownOpen? {fontSize: '16px'} : null}
                     >
-                      {dropdownOpen ? "Select a release version" : "Release Version"}
+                      {dropdownOpen ? "Select a release version" : "Version: " + releaseNotesList[selectedIdx].version}
                       <img className='tabDropIcon' src={dropdownOpen? arrowUpGreenIcon : arrowDownGreenIcon} alt='arrow img' />
                     </div>
                     <div className="navTitle">Release Note</div>

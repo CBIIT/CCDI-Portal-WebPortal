@@ -311,6 +311,7 @@ const SiteUpdateCard = styled.div`
         line-height: 20px; /* 100% */
         letter-spacing: 0.4px;
         margin-bottom: 5px;
+        padding-right: 15px;
     }
 
     .cardDateContainer {
@@ -345,7 +346,6 @@ const DataContentType = styled.div`
 `;
 
 const SiteUpdateExport = styled.div`
-    width: 167px;
     height: 41px;
     background: #05555C;
     border-radius: 5px;
@@ -353,6 +353,7 @@ const SiteUpdateExport = styled.div`
 
     .spanText {
         display: flex;
+        width: 167px;
         padding: 10px 18px;
         color: #FFFFFF;
         font-family: Poppins;

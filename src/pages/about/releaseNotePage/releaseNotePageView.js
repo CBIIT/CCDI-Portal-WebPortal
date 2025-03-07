@@ -223,6 +223,7 @@ const NavContainer = styled.div`
 
     .dateListItemText {
       display: block;
+      margin-right: 30px;
     }
 
     .mobileBtn {
@@ -307,6 +308,10 @@ const SiteUpdateCard = styled.div`
         font-weight: 300;
         line-height: 24px; /* 184.615% */
         text-transform: uppercase;
+    }
+
+    @media (max-width: 767px) {
+      padding: 20px;
     }
 `;
 

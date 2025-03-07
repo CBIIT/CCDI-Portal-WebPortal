@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
-import { withStyles, Collapse, Tooltip } from '@material-ui/core';
+import { withStyles, Collapse, Tooltip, ClickAwayListener } from '@material-ui/core';
 import html2pdf from "html2pdf.js";
 import ReactHtmlParser from "html-react-parser";
 import { releaseNotesList } from '../../../bento/newsData';
 import NCILogoExport from '../../../assets/about/NCI_Logo.png';
 import ArrowDownIcon from '../../../assets/about/Arrow_Down_Black_Icon.svg';
+import arrowDownGreenIcon from '../../../assets/about/arrowDownGreen.svg';
+import arrowUpGreenIcon from '../../../assets/about/arrowUpGreen.svg';
 import UploadIcon from '../../../assets/about/Upload-Icon.svg';
 import ClinicalTrialsIcon from '../../../assets/about/Release_Clinical_Icon.svg';
 import GenomicsIcon from '../../../assets/about/Release_Genomics_Icon.svg';
@@ -15,34 +17,74 @@ import EpidemiologicIcon from '../../../assets/about/Release_Epidemiologic_Icon.
 import CellLinesIcon from '../../../assets/about/Release_CellLines_Icon.svg';
 
 const SiteUpdateResultContainer = styled.div`
-    width: 1420px;
-    margin: 0 auto;
+    margin: 0 16px;
 
     .titleContainer {
-        width: 1338px;
-        padding: 48px 0;
-        color: var(--Utility-Colors-Dark-Teal-Hover, #1A5255);
-        text-align: center;
-        font-family: Poppins;
-        font-size: 35px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 35px; /* 100% */
-        letter-spacing: 0.7px;
+        width: 100%;
         border-bottom: 1px solid #007A85;
         margin-bottom: 60px;
     }
 
+    .titleText {
+      padding: 48px 0;
+      color: var(--Utility-Colors-Dark-Teal-Hover, #1A5255);
+      text-align: center;
+      font-family: Poppins;
+      font-size: 35px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 35px; /* 100% */
+      letter-spacing: 0.7px;
+    }
+
     .siteUpdateContext {
       display: flex;
-      margin: 0 100px;
+      margin: 0 calc(50% - 590px);
+    }
+
+    @media (min-width: 1420px) {
+      width: 1380px;
+      margin: 0 auto;
+
+      .siteUpdateContext {
+        display: flex;
+        margin: 0 100px;
+      }
+    }
+
+    @media (max-width: 1230px) {
+      .siteUpdateContext {
+        margin: 0;
+      }
+    }
+
+    @media (max-width: 767px) {
+      margin: 0 10px;
+
+      .siteUpdateContext {
+        display: block;
+        margin: 0;
+      }
+
+      .titleContainer {
+        margin-bottom: 22px;
+      }
+
+      .titleText {
+        width: 150px;
+        margin: 0 auto;
+        padding: 30px 0;
+      }
     }
 `;
 
 const SiteUpdateResultContext = styled.div`
-  width: 1420px;
   display: flex;
-  padding: 0 20px 50px 0;
+  padding: 0 0 50px 0;
+
+  @media (min-width: 1420px) {
+    width: 1420px;
+  }
 `;
 
 const NavContainer = styled.div`
@@ -54,6 +96,25 @@ const NavContainer = styled.div`
     width: 262px;
     margin: 0;
     padding-left: 0;
+  }
+
+  .mobileBtn {
+    width: calc(100vw - 62px);
+    color: #0A5E63;
+    height: 45px;
+    padding: 15.5px 10px;
+    list-style-type: none;
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 14px; /* 70% */
+    text-transform: capitalize;
+    display: none;
+
+    :hover {
+      cursor: pointer;
+    }
   }
 
   .navTitle {
@@ -146,6 +207,62 @@ const NavContainer = styled.div`
   .bottomLine {
     border-top: 0.5px solid #969696;
   }
+
+  @media (max-width: 1023px) {
+    .dateListItemText {
+      display: none;
+    }
+
+    .navListContainer {
+      width: 182px;
+      margin: 0;
+      padding-left: 0;
+    }
+  }
+
+  @media (max-width: 767px) {
+    border-top: none;
+    position: absolute;
+    left: 22px;
+    z-index: 999;
+
+    .dateListItem {
+      margin: 2px 0;
+
+      :last-child {
+        margin-bottom: 2px;
+      }
+    }
+
+    .dateListItemText {
+      display: block;
+      margin-right: 30px;
+    }
+
+    .mobileBtn {
+      display: block;
+    }
+
+    .tabDropIcon {
+      float: right;
+    }
+
+    .navTitle {
+      display: none;
+    }
+
+    .navListContainer {
+      width: 100%;
+      border: 2px solid #08838D;
+      border-radius: 4px;
+      background: white;
+    }
+
+    .yearTitle {
+      border-top: 1px solid #969696;
+      // border-bottom: 1px solid #969696;
+    }
+  }
 `;
 
 const SiteUpdateItem = styled.div`
@@ -154,15 +271,19 @@ const SiteUpdateItem = styled.div`
   border: 1.5px solid #00BDCD;
   box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.25);
   overflow: hidden;
+
+  @media (max-width: 767px) {
+    margin-top: 85px;
+  }
 `;
 
 const SiteUpdateCard = styled.div`
     display: grid;
     padding: 33px 38px;
-    width: 850px;
+    // width: 850px;
     max-height: 1138px;
     overflow-y: auto;
-    position: relative;
+    // position: relative;
     &::-webkit-scrollbar {
       width: 7px;
       background-color: #E2E2E2;
@@ -190,6 +311,7 @@ const SiteUpdateCard = styled.div`
         line-height: 20px; /* 100% */
         letter-spacing: 0.4px;
         margin-bottom: 5px;
+        padding-right: 15px;
     }
 
     .cardDateContainer {
@@ -200,6 +322,10 @@ const SiteUpdateCard = styled.div`
         font-weight: 300;
         line-height: 24px; /* 184.615% */
         text-transform: uppercase;
+    }
+
+    @media (max-width: 767px) {
+      padding: 20px;
     }
 `;
 
@@ -220,7 +346,6 @@ const DataContentType = styled.div`
 `;
 
 const SiteUpdateExport = styled.div`
-    width: 167px;
     height: 41px;
     background: #05555C;
     border-radius: 5px;
@@ -228,6 +353,7 @@ const SiteUpdateExport = styled.div`
 
     .spanText {
         display: flex;
+        width: 167px;
         padding: 10px 18px;
         color: #FFFFFF;
         font-family: Poppins;
@@ -249,6 +375,18 @@ const SiteUpdateExport = styled.div`
     }
     .downloadPDFImg {
       // margin-top: 10px;
+    }
+
+    @media (max-width: 767px) {
+      width: 45px;
+
+      .spanText {
+        padding: 10px 15px;
+      }
+
+      .downloadPDFText {
+        display: none;
+      }
     }
 `;
 
@@ -293,6 +431,9 @@ const ReleaseNotesPageView = () => {
     const [selectedIdx, setSelectedIdx] = useState(0);
     const [siteUpdateNav, setSiteUpdateNav] = useState([]);
     const [open, setOpen] = useState([]);
+    const [mobile, setMobile] = useState(false);
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const anchorRef = useRef(null);
 
     const iconSrc = {
       Clinical: ClinicalTrialsIcon,
@@ -353,6 +494,20 @@ const ReleaseNotesPageView = () => {
         }
         return NavList;
     };
+
+    const resizeHandler = () => {
+      if (window.innerWidth > 767) {
+        setMobile(false);
+      } else {
+        setMobile(true);
+      }
+  };
+
+    useEffect(() => {
+            window.addEventListener('resize', resizeHandler);
+            resizeHandler();
+            return () => window.addEventListener('resize', resizeHandler);
+        }, []);
 
     useEffect(() => {
       // if (releaseNotesList.length > 0) {
@@ -471,6 +626,18 @@ const ReleaseNotesPageView = () => {
       setOpen(newOpen);
     };
 
+    const onClickDropdownItem = (idx) => {
+      setSelectedIdx(idx);
+      setDropdownOpen(false);
+    }
+
+    const handleClose = (event) => {
+      if (anchorRef.current && anchorRef.current.contains(event.target)) {
+          return;
+      }
+      setDropdownOpen(false);
+    };
+
     const LightTooltip = withStyles(() => ({
       arrow: {
         color: 'white',
@@ -492,43 +659,61 @@ const ReleaseNotesPageView = () => {
 
     return (
         <SiteUpdateResultContainer>
-            <div className='titleContainer'>Release Notes</div>
+            <div className='titleContainer'><div className='titleText'>Release Notes</div></div>
             <div className='siteUpdateContext'>
               <NavContainer>
-                <ul className="navListContainer">
-                  <div className="navTitle">Release Note</div>
-                {
-                  siteUpdateNav.map((subObj, objidx) => {
-                    const objkey = `obj_${objidx}`;
-                    return (
-                      <li key={objkey} className="dateSubListContainer">
-                        <div className="yearTitle" onClick={() => handleClick(objidx)}>
-                          <img className='arrowIcon' src={ArrowDownIcon} alt="arrow down icon"/>
-                          <span>{subObj.year}</span>
-                        </div>
-                        <Collapse in={open[objidx]}>
-                          <ul className="dateSubList">
-                          {
-                            subObj.list.map((navItem, yearidx) => {
-                              const yearkey = `obj_${yearidx}`;
-                              return (
-                                <li key={yearkey} className="dateListItem" style={selectedIdx === navItem.index ? {background: '#E7F1F5'} : null}>
-                                  <div className='dateListItemContainer' onClick={() => setSelectedIdx(navItem.index)}>
-                                    <div className="dateListVersionText">Version: {navItem.version}</div>
-                                    <div className="dateListItemText">{navItem.date}</div>
-                                  </div>
-                                </li>
-                              );
-                            })
-                          }
-                          </ul>
-                        </Collapse>
-                      </li>
-                    );
-                  })
-                }
-                  <div className='bottomLine' />
-                </ul>
+                <ClickAwayListener onClickAway={handleClose}>
+                  <ul className="navListContainer">
+                    <div
+                      className="mobileBtn"
+                      ref={anchorRef}
+                      onClick={() => setDropdownOpen(!dropdownOpen)}
+                      style={dropdownOpen? {fontSize: '16px'} : null}
+                    >
+                      {dropdownOpen ? "Select a release version" : "Version: " + releaseNotesList[selectedIdx].version}
+                      <img className='tabDropIcon' src={dropdownOpen? arrowUpGreenIcon : arrowDownGreenIcon} alt='arrow img' />
+                    </div>
+                    <div className="navTitle">Release Note</div>
+                  {
+                    siteUpdateNav.map((subObj, objidx) => {
+                      const objkey = `obj_${objidx}`;
+                      if (mobile && !dropdownOpen) {
+                        return null;
+                      }
+                      return (
+                        <li key={objkey} className="dateSubListContainer">
+                          <div
+                            className="yearTitle"
+                            onClick={() => handleClick(objidx)}
+                            style={open[objidx] && mobile ? {borderBottom: '1px solid #969696'} : null}
+                          >
+                            <img className='arrowIcon' src={ArrowDownIcon} alt="arrow down icon"/>
+                            <span>{subObj.year}</span>
+                          </div>
+                          <Collapse in={open[objidx]}>
+                            <ul className="dateSubList">
+                            {
+                              subObj.list.map((navItem, yearidx) => {
+                                const yearkey = `obj_${yearidx}`;
+                                return (
+                                  <li key={yearkey} className="dateListItem" style={selectedIdx === navItem.index ? {background: '#E7F1F5'} : null}>
+                                    <div className='dateListItemContainer' onClick={() => onClickDropdownItem(navItem.index)}>
+                                      <div className="dateListVersionText">Version: {navItem.version}</div>
+                                      <div className="dateListItemText">{navItem.date}</div>
+                                    </div>
+                                  </li>
+                                );
+                              })
+                            }
+                            </ul>
+                          </Collapse>
+                        </li>
+                      );
+                    })
+                  }
+                    <div className='bottomLine' />
+                  </ul>
+                </ClickAwayListener>
               </NavContainer>
               <SiteUpdateResultContext>
                   <SiteUpdateItem id={`post${releaseNotesList[selectedIdx].id}`}>

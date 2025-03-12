@@ -551,6 +551,7 @@ const ReleaseNotesPageView = () => {
         const elementClone = element.cloneNode(true);
         const titleDiv = document.getElementById(`${idx}_title`);
         const dateDiv = document.getElementById(`${idx}_date`);
+        const version = document.getElementById(`${idx}_version`).innerText;
         const newDiv = document.createElement("div");
         const newDivTitle = document.createElement("div");
         newDivTitle.style = "display: flex;margin-bottom: 15px;";
@@ -587,7 +588,7 @@ const ReleaseNotesPageView = () => {
         newDiv.appendChild(elementClone);
         const opt = {
           margin: [35, 15, 20, 15],
-          filename: "siteupdate_export.pdf",
+          filename: 'CCDI_Hub_'+version+"_Release_Notes.pdf",
           image: {type: 'jpeg', quality: 1},
           html2canvas: {dpi: 72, scale: 4, letterRendering: true},
           jsPDF: {unit: 'mm', format: 'a4', orientation: 'portrait'}
@@ -722,6 +723,7 @@ const ReleaseNotesPageView = () => {
                               <div>
                                   <div className="cardTitleContainer" id={`${releaseNotesList[selectedIdx].id}_title`} title={releaseNotesList[selectedIdx].version}>{releaseNotesList[selectedIdx].title}</div>
                                   <div className="cardDateContainer" id={`${releaseNotesList[selectedIdx].id}_date`}>{releaseNotesList[selectedIdx].date}</div>
+                                  <div id={`${releaseNotesList[selectedIdx].id}_version`} style={{display: 'none'}}>{releaseNotesList[selectedIdx].version}</div>
                               </div>
                               <SiteUpdateExport>
                                   <div className="spanText" onClick={() => handleExport(releaseNotesList[selectedIdx].id)}>

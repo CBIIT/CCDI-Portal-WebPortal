@@ -546,6 +546,7 @@ const handleExport = (idx) => {
         const elementClone = element.cloneNode(true);
         const titleDiv = document.getElementById(`${idx}_title`);
         const dateDiv = document.getElementById(`${idx}_date`);
+        const version = document.getElementById(`${idx}_version`).innerText;
         const newDiv = document.createElement("div");
         const newDivTitle = document.createElement("div");
         newDivTitle.style = "display: flex;margin-bottom: 15px;";
@@ -582,7 +583,7 @@ const handleExport = (idx) => {
         newDiv.appendChild(elementClone);
         const opt = {
           margin: [35, 15, 20, 15],
-          filename: "siteupdate_export.pdf",
+          filename: 'CCDI_Hub_'+version+"_Release_Notes.pdf",
           image: {type: 'jpeg', quality: 1},
           html2canvas: {dpi: 72, scale: 4, letterRendering: true},
           jsPDF: {unit: 'mm', format: 'a4', orientation: 'portrait'}
@@ -805,6 +806,7 @@ const NewsView = ({classes}) => {
               <div className="UpperContainer notMobile">
                 <div className='newsItemTextContainer'>
                   <div id={`${newsItem.id}_title`} className='newsItemTitle'>{newsItem.title}</div>
+                  <div id={`${newsItem.id}_version`} style={{display: 'none'}}>{newsItem.version}</div>
                   <div className='newsSubtitle'>
                     <div id={`${newsItem.id}_date`} className='newsItemDate'>{newsItem.date}</div>
                     <div className='newsCategory'>{newsItem.type}</div>

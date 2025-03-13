@@ -3,7 +3,6 @@ import LogoSmall from '../assets/header/Portal_Logo_Small.svg';
 import searchbarIcon from '../assets/header/Search_Icon.svg';
 import cartLogo from '../assets/header/Cart_Logo.svg';
 import usFlagSmall from "../assets/header/us_flag_small.png";
-import userGuidePDF from '../assets/about/CCDI_Usage_Instructions_Feb2025_2.5.1_Final.pdf';
 
 // globalHeaderLogo image 468x100
 // globalHeaderImage: image 2200x100
@@ -123,7 +122,7 @@ export const navbarSublists = {
     },
     {
       name: 'Accessing CCDI Data (PDF)',
-      link: userGuidePDF,
+      link: '/user-guide.pdf',
       className: 'navMobileSubItem',
     },
     {
@@ -143,7 +142,7 @@ export const navbarSublists = {
     },
     {
       name: 'User Guide',
-      link: userGuidePDF,
+      link: '/user-guide.pdf',
       className: 'navMobileSubItem',
     },
   ],

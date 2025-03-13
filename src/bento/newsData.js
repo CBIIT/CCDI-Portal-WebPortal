@@ -9,6 +9,7 @@ import updateImgDashboard from '../assets/news/News_Dashboard.png';
 import updateImgEHR from '../assets/news/News_EHR.png';
 import updateImgC3DC from '../assets/news/News_C3DC.png';
 import updateImgHub from '../assets/news/News_Hub.png';
+import updateImgecDNA from '../assets/news/News_ecDNA.png';
 
 export const altList = {
     updateImgCCDC: 'Young boy on a swing outdoors, symbolizing childhood health, linking to the CCDC site',
@@ -22,6 +23,7 @@ export const altList = {
     updateImgEHR: 'updateImgEHR',
     updateImgC3DC: 'A person using a laptop at a desk with the C3DC website displayed, focusing on access and visualization of data sets within the C3DC community.',
     updateImgHub: 'A hand holding digital human icons with abstract graphs and network data, symbolizing the CCDI Hub Site & Data Release, representing human resources and data analysis.',
+    updateImgecDNA: 'Abstract visualization of a glowing digital network with interconnected blue and yellow nodes on a dark background.',
 }
 
 export const srcList = {
@@ -36,6 +38,7 @@ export const srcList = {
     updateImgEHR: updateImgEHR,
     updateImgC3DC: updateImgC3DC,
     updateImgHub: updateImgHub,
+    updateImgecDNA: updateImgecDNA,
 }
 
 export const newsList = [
@@ -47,6 +50,16 @@ export const newsList = [
         highlight: `<p>The first CCDC release of 2025 introduces a new resource and accompanying data set from NCI National Clinical Trials Network (NCTN) Biobanks. Explore the NCTN Biobanks data set along with a new dbGaP data set: Genomic Profiling of Pediatric B-Cell Acute Lymphoblastic Leukemia. Additionally, this release includes updated counts to data sets in six resources across the catalog. The user guide has also undergone extensive updates, with improved content and images to more accurately describe the application and its resources.</p>`,
         type: 'CCDI Application Updates',
         img: 'updateImgCCDC',
+        latestUpdate: true,
+    },
+    {
+        id: 'ecDNA_03312025',
+        title: 'Childhood Cancer Catalog of Circular ecDNA implements CCDI Data Federation API',
+        date: 'March 31, 2025',
+        slug: 'Web interface and Federation compliant API to support data-driven discoveries, advancing research in pediatric cancer.',
+        highlight: `<p>The Childhood Cancer Catalog of Circular Extrachromosomal DNA (ecDNA), developed by the Sanford Burnham Prebys Medical Discovery Institute, is a pediatric cancer genomics platform focused on circular ecDNA (<a class="link" href="https://ccdi-ecdna.org" target="_blank" rel="noopener noreferrer">https://ccdi-ecdna.org</a>). The platform incudes an API that aligns with the CCDI Data Federation Specification. eCDNA includes curated amplicon data from over 3,200 patients and 3,800 biosamples, derived from whole-genome sequencing datasets from major pediatric cancer databases.</p>`,
+        type: 'News',
+        img: 'updateImgecDNA',
         latestUpdate: true,
     },
     {
@@ -508,7 +521,6 @@ export const releaseNotesList = [
         type: 'Release Notes',
         img: 'updateImgHub',
         contentType: '',
-        latestUpdate: true,
     },
     {
         id: 'hub_release_12182024',

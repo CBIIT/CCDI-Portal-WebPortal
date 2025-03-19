@@ -161,6 +161,15 @@ const FederationResourceBody = styled.div`
     margin: 0 auto;
     display: flex;
     padding: 55px 32px 0 32px; 
+
+    p {
+        font-weight: 500;
+    }
+
+    li {
+        font-weight: 500;
+    }
+
     .navSection {
         width: 240px;
         color: #477C90;
@@ -176,7 +185,7 @@ const FederationResourceBody = styled.div`
 
         a {
             color: #455299;
-            font-weight: 600;
+            font-weight: 700;
             text-decoration: underline;
             text-underline-position: under;
             line-break: anywhere;
@@ -321,7 +330,7 @@ const FederationResourceBody = styled.div`
 
         a {
             color: #455299;
-            font-weight: 600;
+            font-weight: 700;
             text-decoration: underline;
             text-underline-position: under;
         }

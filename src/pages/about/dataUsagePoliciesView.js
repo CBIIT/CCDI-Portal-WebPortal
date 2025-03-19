@@ -36,6 +36,15 @@ const DataUsagePoliciesBody = styled.div`
     margin: 0 auto;
     display: flex;
     padding: 55px 135px 0 135px; 
+
+    p {
+        font-weight: 500;
+    }
+
+    li {
+        font-weight: 500;
+    }
+
     .navSection {
         width: 25%;
         color: #4D889E;
@@ -51,7 +60,7 @@ const DataUsagePoliciesBody = styled.div`
 
         a {
             color: #455299;
-            font-weight: 600;
+            font-weight: 700;
             text-decoration: underline;
             text-underline-position: under;
             line-break: anywhere;
@@ -167,7 +176,7 @@ const DataUsagePoliciesBody = styled.div`
 
         a {
             color: #455299;
-            font-weight: 600;
+            font-weight: 700;
             text-decoration: underline;
             text-underline-position: under;
         }
@@ -228,6 +237,7 @@ const DataUsagePoliciesBody = styled.div`
 
         a {
             color: #05555C;
+            font-weight: 500;
         }
     }
 `;

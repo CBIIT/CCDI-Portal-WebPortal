@@ -201,13 +201,6 @@ const BentoFacetFilter = ({
     const { name } = section;
     const { hasSearch = false } = facetSectionVariables[name];
 
-    const [showSearch, setShowSearch] = useState(true);
-
-    const toggleSearch = (e) => {
-      e.stopPropagation();
-      setShowSearch(!showSearch);
-    };
-
     let searchConfig = {
       title: 'Participants',
     }
@@ -217,18 +210,13 @@ const BentoFacetFilter = ({
         <CustomExpansionPanelSummary id={section}>
           <div className={classes.sectionSummaryTextContainer}>
             {sectionLabel[name] !== undefined ? sectionLabel[name] : name}
-            {hasSearch && (
-              <div className={classes.findCaseButton} onClick={toggleSearch}>
-                <img src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/FacetLocalFindSearchIcon.svg" className={classes.findCaseIcon} alt="search" />
-              </div>
-            )}
           </div>
           {hasSearch && (
             <SearchView
               classes={classes}
               SearchBox={SearchBox}
               UploadModal={UploadModal}
-              hidden={!expanded || !showSearch}
+              hidden={!expanded}
               config = {searchConfig}
               queryParams={queryParams}
             />

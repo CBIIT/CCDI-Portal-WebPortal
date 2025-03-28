@@ -39,7 +39,18 @@ const UseGuideButton = ({classes}) => {
         'Creating and managing cohorts',
         'Downloading Metadata from the Studies tab',
         'Creating an Exportable File Manifest from the Cart',
-    ]
+    ];
+
+    const handleClickEvent = (event) => {
+        const id = event.target.getAttribute('name');
+        // setSelectedNavTitle(id);
+        const contentElement = document.getElementById('UserGuideContentSection');
+        const element = document.getElementById(id);
+        contentElement.scrollTo({ 
+            top: element.offsetTop - 15,
+            behavior: "smooth" 
+        });
+    }
 
     const modalBody = {
         position: 'relative',
@@ -79,12 +90,12 @@ const UseGuideButton = ({classes}) => {
                                     titleList.map((titleItem, topicid) => {
                                         const topickey = `topic_${topicid}`;
                                         return (
-                                            <div name={titleItem} className={classes.navTopicItem} key={topickey}>{titleItem}</div>
+                                            <div name={titleItem} className={classes.navTopicItem} key={topickey} onClick={handleClickEvent}>{titleItem}</div>
                                         )
                                     })
                                 }
                             </div>
-                        <div className={classes.contentSection}>
+                        <div id='UserGuideContentSection' className={classes.contentSection}>
                             <div className={classes.contentList}>
                                 <div className={classes.contentTitle}>CCDI Hub Explore Dashboard and Cart</div>
                                 <div className={classes.mciContentContainer}>

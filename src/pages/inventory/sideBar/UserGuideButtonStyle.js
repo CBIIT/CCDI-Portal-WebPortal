@@ -32,12 +32,40 @@ export default () => ({
         fontSize: '16px',
         letterSpacing: '0.01em',
         lineHeight: '19px',
+        '&:hover': {
+            cursor: 'pointer',
+        },
+    },
+    navTopicItemSelected: {
+        marginBottom: '20px',
+        color: '#477C90',
+        textDecoration: 'none',
+        fontFamily: 'Inter',
+        fontWeight: 600,
+        fontSize: '16px',
+        letterSpacing: '0.01em',
+        lineHeight: '19px',
+        '&:hover': {
+            cursor: 'pointer',
+        },
     },
     contentSection: {
         display: 'flex',
-        padding: '0 32px 0 50px',
+        padding: '0 50px',
         height: '635px',
         overflow: 'auto',
+        '&::-webkit-scrollbar': {
+            width: '7px',
+            borderWidth: '0px 1px 1px 1px',
+            borderStyle: 'solid',
+            borderColor: '#B0B0B0',
+        },
+        '&::-webkit-scrollbar-track': {
+            backgroundColor: '#CECECE',
+        },
+        '&::-webkit-scrollbar-thumb': {
+            backgroundColor: '#2D83B1',
+        },
     },
     contentTitle: {
         fontFamily: 'Poppins',

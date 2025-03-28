@@ -25,6 +25,7 @@ const UseGuideButtonContainer = styled.div`
 
 const UseGuideButton = ({classes}) => {
     const [open, setOpen] = useState(false);
+    const [selectedNavTitle, setSelectedNavTitle] = useState('');
     
     const handleClickOpen = () => {
         setOpen(true);
@@ -43,7 +44,7 @@ const UseGuideButton = ({classes}) => {
 
     const handleClickEvent = (event) => {
         const id = event.target.getAttribute('name');
-        // setSelectedNavTitle(id);
+        setSelectedNavTitle(id);
         const contentElement = document.getElementById('UserGuideContentSection');
         const element = document.getElementById(id);
         contentElement.scrollTo({ 
@@ -90,7 +91,7 @@ const UseGuideButton = ({classes}) => {
                                     titleList.map((titleItem, topicid) => {
                                         const topickey = `topic_${topicid}`;
                                         return (
-                                            <div name={titleItem} className={classes.navTopicItem} key={topickey} onClick={handleClickEvent}>{titleItem}</div>
+                                            <div name={titleItem} className={selectedNavTitle === titleItem ? classes.navTopicItemSelected : classes.navTopicItem} key={topickey} onClick={handleClickEvent}>{titleItem}</div>
                                         )
                                     })
                                 }

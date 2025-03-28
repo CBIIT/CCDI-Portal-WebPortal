@@ -34,6 +34,13 @@ const UseGuideButton = ({classes}) => {
         setOpen(false);
     };
 
+    const titleList = [
+        'Finding Participants, Studies, Samples, and Files',
+        'Creating and managing cohorts',
+        'Downloading Metadata from the Studies tab',
+        'Creating an Exportable File Manifest from the Cart',
+    ]
+
     const modalBody = {
         position: 'relative',
         margin: '0 auto',
@@ -66,12 +73,20 @@ const UseGuideButton = ({classes}) => {
                         <CloseIcon fontSize="small" />
                     </IconButton>
                     <div className={classes.paperArea}>
-                        <div className={classes.navSection}>CCDI Hub Explore Dashboard and Cart</div>
+                        <div className={classes.navSection}>
+                            <div className={classes.navTitle}>USER GUIDE TOPICS</div>
+                                {
+                                    titleList.map((titleItem, topicid) => {
+                                        const topickey = `topic_${topicid}`;
+                                        return (
+                                            <div name={titleItem} className={classes.navTopicItem} key={topickey}>{titleItem}</div>
+                                        )
+                                    })
+                                }
+                            </div>
                         <div className={classes.contentSection}>
                             <div className={classes.contentList}>
-                                <div className={classes.contentTitle}>
-                                    CCDI Hub Explore Dashboard and Cart
-                                </div>
+                                <div className={classes.contentTitle}>CCDI Hub Explore Dashboard and Cart</div>
                                 <div className={classes.mciContentContainer}>
                                     <p>The CCDI Hub Explore Dashboard is a tool that allows for the exploration of participant-level, diagnoses, studies, samples, and files information for CCDI-managed data sets. The Explore Dashboard enables researchers to find CCDI data within a single study or across multiple studies and create synthetic cohorts based on filtered search (i.e., demographics, diagnosis, samples, etc.). Upon interaction with these filters (Figure 1A), users can review the open-access information through visual summaries (Figure 1B) and browse the row level data in tabs organized by participants, diagnosis, studies, samples, and files (Figure 1C) to determine which data sets are applicable to their research questions. Users can then add desired files to the cart (Figure 1D), from which they can download a manifest for the selected data or take the manifest directly into the CGC. To access the controlled data, users must request them at the controlled-access login page on dbGaP.</p>
                                     <p>Step-by-step instructions for finding and exporting data are included below.</p>

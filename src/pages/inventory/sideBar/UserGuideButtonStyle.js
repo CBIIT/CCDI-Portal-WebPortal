@@ -14,6 +14,23 @@ export default () => ({
         color: '#477C90',
         position: 'relative',
     },
+    navTitle: {
+        fontFamily: 'Poppins',
+        fontWeight: 600,
+        fontSize: '17px',
+        letterSpacing: '0.02em',
+        marginBottom: '29px',
+    },
+    navTopicItem: {
+        marginBottom: '20px',
+        color: '#477C90',
+        textDecoration: 'none',
+        fontFamily: 'Inter',
+        fontWeight: 400,
+        fontSize: '16px',
+        letterSpacing: '0.01em',
+        lineHeight: '19px',
+    },
     contentSection: {
         display: 'flex',
         padding: '0 32px 0 50px',

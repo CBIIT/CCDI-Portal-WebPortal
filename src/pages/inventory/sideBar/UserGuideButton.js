@@ -63,7 +63,7 @@ const UseGuideButton = ({classes}) => {
         background: '#FFFFFF',
         border: '1px solid #505050',
         borderRadius: '40px',
-        // overflow: 'hidden',
+        overflow: 'hidden',
     };
 
     return (

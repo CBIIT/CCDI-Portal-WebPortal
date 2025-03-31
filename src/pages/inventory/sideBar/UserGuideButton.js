@@ -208,9 +208,9 @@ const UseGuideButton = ({classes}) => {
                                     <div className={classes.mciContentContainer}>
                                         <p>To download a study-specific research data distribution file with the DCF Services Portal interface, a researcher must execute the following steps:</p>
                                         <ul>
-                                            <li>Please navigate to nci-crdc.datacommons.io and click the “RAS Login” button. Login to the NCI DCF Services portal at nci-crdc.datacommons.io/login (Figure B1).</li>
+                                            <li>Please navigate to <a className={classes.link} href="https://nci-crdc.datacommons.io" target="_blank" rel="noopener noreferrer">nci-crdc.datacommons.io</a> and click the “RAS Login” button. Login to the <a className={classes.link} href="https://nci-crdc.datacommons.io/login" target="_blank" rel="noopener noreferrer">NCI DCF Services</a> portal at <a className={classes.link} href="https://nci-crdc.datacommons.io/login" target="_blank" rel="noopener noreferrer">nci-crdc.datacommons.io/login</a> (Figure B1).</li>
                                             <li>Once logged in, click the “Profile” section in the top right corner and review your project access to confirm study access (Figure B2).</li>
-                                            <li>Add the file GUID after the final backslash in this URL: https://nci-crdc.datacommons.io/user/data/download/. Paste the URL you created in a browser address field and press Enter or Return.</li>
+                                            <li>Add the file GUID after the final backslash in this URL: <a className={classes.link} href="https://nci-crdc.datacommons.io/user/data/download" target="_blank" rel="noopener noreferrer">https://nci-crdc.datacommons.io/user/data/download/</a>. Paste the URL you created in a browser address field and press Enter or Return.</li>
                                             <li>The NCI DCF Services Portal will respond by providing a JSON document with a new (signed) URL for the requested data file. Copy the signed URL.</li>
                                             <li>Paste this new signed URL into the browser address field and press Enter or Return (Figure B3).
                                                 <ul><li>Note: Once issued, the signed URL provided is valid for a relatively short period of time.</li></ul>
@@ -227,15 +227,27 @@ const UseGuideButton = ({classes}) => {
                                     <div className={classes.mciContentContainer}>
                                         <p>To download a study-specific research data distribution file with a CLI client, a researcher must execute the following steps:</p>
                                         <ul>
-                                            <li>Obtain the Gen3-client command-line tool from GitHub.</li>
-                                            <li>Install and configure the client based on the Gen3 instructions.
+                                            <li>Obtain the <a className={classes.link} href="https://github.com/uc-cdis/cdis-data-client" target="_blank" rel="noopener noreferrer">Gen3-client command-line tool</a> from GitHub.</li>
+                                            <li>Install and configure the client based on the <a className={classes.link} href="https://gen3.org/resources/user/gen3-client/#1-installation-instructions" target="_blank" rel="noopener noreferrer">Gen3 instructions</a>.
                                                 <ul>
                                                     <li>These instructions include signing into the DCF web client and obtaining a downloaded JSON API key from the Profile page, and then configuring the client.</li>
                                                     <li>The API endpoint that will be used for DCF configuration is ‘https://nci-crdc.datacommons.io’.</li>
                                                 </ul>
                                             </li>
-                                            <li>Obtain either a GUID or manifest of GUIDs for the data files of interest from the CCDI Explore page or the Explore Dashboard exportable manifest.</li>
-                                            <li>Create a Gen3 structured manifest:<br />[<br />]<br /></li>
+                                            <li>Obtain either a GUID or manifest of GUIDs for the data files of interest from the <a href="/explore">CCDI Explore page</a> or the Explore Dashboard exportable manifest.</li>
+                                            <li>Create a Gen3 structured manifest:<br />
+                                                [<br />
+                                                &nbsp;&nbsp;&#123;<br />
+                                                &nbsp;&nbsp;&nbsp;&nbsp;“object_id”: “dg.4DFC/&#123;guid_1&#125;”<br />
+                                                &nbsp;&nbsp;&#125;,<br />
+                                                &nbsp;&nbsp;&#123;<br />
+                                                &nbsp;&nbsp;&nbsp;&nbsp;“object_id”: “dg.4DFC/&#123;guid_2&#125;”<br />
+                                                &nbsp;&nbsp;&#125;,<br />
+                                                &nbsp;&nbsp;...<br />
+                                                &nbsp;&nbsp;&#123;<br />
+                                                &nbsp;&nbsp;&nbsp;&nbsp;“object_id”: “dg.4DFC/&#123;guid_n&#125;”<br />
+                                                &nbsp;&nbsp;&#125;<br />
+                                                ]<br /></li>
                                             <li>Download the file(s) using the Gen3 client (either the <a href="https://gen3.org/resources/user/gen3-client/#4-download-a-single-data-file-using-a-guid" className={classes.link} target="_blank" rel="noopener noreferrer">single</a> or <a href="https://gen3.org/resources/user/gen3-client/#5-multiple-file-download-with-manifest" className={classes.link} target="_blank" rel="noopener noreferrer">multiple</a> download option).</li>
                                         </ul>
                                         <p>For more information on this process, please visit the <a href="https://gen3.org/resources/user/gen3-client" className={classes.link} target="_blank" rel="noopener noreferrer">Gen3 documentation page</a>.</p>

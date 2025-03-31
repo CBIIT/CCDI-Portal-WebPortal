@@ -107,6 +107,14 @@ export default () => ({
             textUnderlinePosition: 'under',
         }
     },
+    figureContainer: {
+        textAlign: 'center',
+    },
+    figureText: {
+        fontFamily: 'Poppins',
+        fontSize: '14px',
+        textAlign: 'center',
+    },
     customButton: {
         borderRadius: '9px',
         maxWidth: '30px',

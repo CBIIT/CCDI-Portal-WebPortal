@@ -7,6 +7,8 @@ import styles from './UserGuideButtonStyle';
 import userguideIcon from '../../../assets/icons/Explore_User_Guide_Icon.svg';
 import userguideIconWhite from '../../../assets/icons/Explore_User_Guide_Icon_White.svg';
 import CloseIcon from '@material-ui/icons/Close';
+import figure1 from '../../../assets/explore/Figure1.png';
+import figure2 from '../../../assets/explore/Figure2.png';
 
 const UseGuideButtonContainer = styled.div`
     .buttonContainer {
@@ -116,6 +118,8 @@ const UseGuideButton = ({classes}) => {
                                 <div className={classes.contentTitle}>CCDI Hub Explore Dashboard and Cart</div>
                                 <div className={classes.mciContentContainer}>
                                     <p>The <a href="/explore">CCDI Hub Explore Dashboard</a> is a tool that allows for the exploration of participant-level, diagnoses, studies, samples, and files information for CCDI-managed data sets. The Explore Dashboard enables researchers to find CCDI data within a single study or across multiple studies and create synthetic cohorts based on filtered search (i.e., demographics, diagnosis, samples, etc.). Upon interaction with these filters (Figure 1A), users can review the open-access information through visual summaries (Figure 1B) and browse the row level data in tabs organized by participants, diagnosis, studies, samples, and files (Figure 1C) to determine which data sets are applicable to their research questions. Users can then add desired files to the cart (Figure 1D), from which they can download a manifest for the selected data or take the manifest directly into the CGC. To access the controlled data, users must request them at the <a className={classes.link} href="https://dbgap.ncbi.nlm.nih.gov/aa/wga.cgi?page=login" target="_blank" rel="noopener noreferrer">controlled-access login page on dbGaP</a>.</p>
+                                    <div className={classes.figureContainer}><img src={figure1} alt='Figure1'/></div>
+                                    <div className={classes.figureText}>Figure 1: CCDI Hub Explore Dashboard and Cart features</div>
                                     <p>Step-by-step instructions for finding and exporting data are included below.</p>
                                 </div>
                                 <div>
@@ -125,7 +129,11 @@ const UseGuideButton = ({classes}) => {
                                     <div className={classes.mciContentContainer}>
                                         <p>The CCDI Hub Explore Dashboard provides row-level metadata for CCDI study participants and their data objects for review with a filtered search, select visualizations, and an exportable table of results. Here’s how to find and filter information on the Explore Dashboard:</p>
                                         <ul>
-                                            <li>The CCDI Hub is located at <a href="/">ccdi.cancer.gov</a>. From the CCDI Hub Home page, navigate to the Explore Dashboard by clicking “Explore” (Figure 2).</li>
+                                            <li>
+                                                The CCDI Hub is located at <a href="/">ccdi.cancer.gov</a>. From the CCDI Hub Home page, navigate to the Explore Dashboard by clicking “Explore” (Figure 2).
+                                                <div className={classes.figureContainer}><img src={figure2} style={{width: '400px'}} alt='Figure2'/></div>
+                                                <div className={classes.figureText}>Figure 2: CCDI homepage with red box highlighting the “Explore” menu bar link</div> 
+                                            </li>
                                             <li>On the Explore Dashboard, you can filter row-level data and view them as visualizations (Figure 3). The Explore Dashboard is participant-centric, meaning that filtering criteria and results return de-identified information about a participant and their related studies, collected samples, or created files.</li>
                                             <li>Search criteria are displayed in the right panel (Figure 4A). Faceted filtering may be done by uploading a list of participant IDs (in “DEMOGRAPHICS” Figure 4B), text searches (“DIAGNOSIS,” “DIAGNOSIS ATOMIC SITE,” and “SAMPLE ANATOMIC SITE” Figure 4C), numerical sliders (“AGE AT DIAGNOSIS” and “AGE AT COLLECTION” Figure 4D), or checkbox selections for the remaining properties. You can apply multiple filtering criteria at the same time in a search. You can view and clear your current selection(s) in the query summary at the top of the widgets (Figure 4E).</li>
                                             <li>Filtering your search will update the Explore Dashboard’s visualizations and the results tables (Figure 5). Each results table will be updated with information on the participants, samples, studies, or files that meet the filtered criteria. Information displayed by default on each table is described below:

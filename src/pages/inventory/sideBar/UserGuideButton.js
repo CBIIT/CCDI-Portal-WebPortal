@@ -42,6 +42,9 @@ const UseGuideButton = ({classes}) => {
         'Creating and managing cohorts',
         'Downloading Metadata from the Studies tab',
         'Creating an Exportable File Manifest from the Cart',
+        'NCI Data Commons Framework Services (DCFS): Controlled Data Access Instructions',
+        'Full User Guide',
+        'Contact Us',
     ];
 
     const handleClickEvent = (event) => {
@@ -58,10 +61,10 @@ const UseGuideButton = ({classes}) => {
     const modalBody = {
         position: 'relative',
         margin: '0 auto',
-        marginTop: '50px',
+        marginTop: '10%',
         width: '90%',
         maxWidth: '1279px',
-        height: '635px',
+        height: '723px',
         background: '#FFFFFF',
         border: '1px solid #505050',
         borderRadius: '40px',
@@ -185,6 +188,72 @@ const UseGuideButton = ({classes}) => {
                                             <li>The shopping cart feature enables you to select and manage files. It’s a simple way to keep track of data and files during your session. Selecting the “DOWNLOAD MANIFEST” button from the “AVAILABLE EXPORT OPTIONS” dropdown menu (Figure 14) will produce a comma-separated values (CSV) file manifest of the items within the cart.</li>
                                             <li>You can then download this manifest file locally or upload it in the CGC (Appendix C). Similarly, you can instead select the “EXPORT TO CANCER GENOMICS CLOUD” button from the “AVAILABLE EXPORT OPTIONS” dropdown menu to load the resulting manifest directly into your CGC account.</li>
                                         </ul>
+                                        <p>Note that the Cart has a maximum capacity of 200,000 files, which may limit the ability to create very large manifests for use in the CGC. Should you need to create a manifest containing more than 100,000 files, you can either create manifests from the cart in batches (containing up to 100,000 files in each batch) or use the comprehensive metadata downloads from the Explore page “Studies” tab to create a manifest that can take all data for a given study into the CGC. Longer term solutions are being researched.</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div id='NCI Data Commons Framework Services (DCFS): Controlled Data Access Instructions' className={classes.sectionTitle}>
+                                        <p>NCI Data Commons Framework Services (DCFS): Controlled Data Access Instructions</p>
+                                    </div>
+                                    <div className={classes.mciContentContainer}>
+                                        <p>NCI Data Commons Framework Services (DCFS), powered by Gen3, facilitates data authorization in a secure and scalable manner. DCFS’s Indexd service provides permanent digital IDs for data objects. These IDs can be used to retrieve the data or query the metadata associated with the object.</p>
+                                        <p>CCDI data is available for download using the DCFS. To gain access to controlled data, researchers must first have an NIH eRA Commons account for authentication, after which they will need to obtain authorization (via an active DCFS login account) to access the data in dbGaP.</p>
+                                        <p>Below are instructions for using the Data Commons Framework (DCF) user interface or the DCF Gen3-client to access CCDI data.</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div className={classes.sectionSubTitle}>
+                                        <p>File Download Procedure via User Interface</p>
+                                    </div>
+                                    <div className={classes.mciContentContainer}>
+                                        <p>To download a study-specific research data distribution file with the DCF Services Portal interface, a researcher must execute the following steps:</p>
+                                        <ul>
+                                            <li>Please navigate to nci-crdc.datacommons.io and click the “RAS Login” button. Login to the NCI DCF Services portal at nci-crdc.datacommons.io/login (Figure B1).</li>
+                                            <li>Once logged in, click the “Profile” section in the top right corner and review your project access to confirm study access (Figure B2).</li>
+                                            <li>Add the file GUID after the final backslash in this URL: https://nci-crdc.datacommons.io/user/data/download/. Paste the URL you created in a browser address field and press Enter or Return.</li>
+                                            <li>The NCI DCF Services Portal will respond by providing a JSON document with a new (signed) URL for the requested data file. Copy the signed URL.</li>
+                                            <li>Paste this new signed URL into the browser address field and press Enter or Return (Figure B3).
+                                                <ul><li>Note: Once issued, the signed URL provided is valid for a relatively short period of time.</li></ul>
+                                            </li>
+                                            <li>The NCI DCF Services Portal will respond by displaying a URL. Click the URL to download the file (Figure B3).</li>
+                                        </ul>
+                                        <p>Note: If errors or problems are experienced during the file downloading process above, please contact the CCDI mailbox for assistance.</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div className={classes.sectionSubTitle}>
+                                        <p>File Download Procedure via Command Line Interface (CLI) client</p>
+                                    </div>
+                                    <div className={classes.mciContentContainer}>
+                                        <p>To download a study-specific research data distribution file with a CLI client, a researcher must execute the following steps:</p>
+                                        <ul>
+                                            <li>Obtain the Gen3-client command-line tool from GitHub.</li>
+                                            <li>Install and configure the client based on the Gen3 instructions.
+                                                <ul>
+                                                    <li>These instructions include signing into the DCF web client and obtaining a downloaded JSON API key from the Profile page, and then configuring the client.</li>
+                                                    <li>The API endpoint that will be used for DCF configuration is ‘https://nci-crdc.datacommons.io’.</li>
+                                                </ul>
+                                            </li>
+                                            <li>Obtain either a GUID or manifest of GUIDs for the data files of interest from the CCDI Explore page or the Explore Dashboard exportable manifest.</li>
+                                            <li>Create a Gen3 structured manifest:</li>
+                                            <li>Download the file(s) using the Gen3 client (either the single or multiple download option).</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div id='Full User Guide' className={classes.sectionTitle}>
+                                        <p>Full User Guide</p>
+                                    </div>
+                                    <div className={classes.mciContentContainer}>
+                                        <p>To learn more about CCDI Hub, Explore Dashboard, and accessing data, see the complete User Guide.</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div id='Contact Us' className={classes.sectionTitle}>
+                                        <p>Contact Us</p>
+                                    </div>
+                                    <div className={classes.mciContentContainer}>
+                                        <p>Please direct any questions or requests for further information to the CCDI mailbox.</p>
                                     </div>
                                 </div>
                             </div>

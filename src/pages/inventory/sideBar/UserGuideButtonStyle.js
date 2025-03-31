@@ -52,7 +52,7 @@ export default () => ({
     contentSection: {
         display: 'flex',
         padding: '0 50px',
-        height: '635px',
+        height: '683px',
         overflow: 'auto',
         '&::-webkit-scrollbar': {
             width: '7px',
@@ -80,6 +80,15 @@ export default () => ({
         fontFamily: 'Poppins',
         fontWeight: '600',
         fontSize: '25px',
+        lineHeight: '26px',
+        letterSpacing: '-0.02em',
+        marginBottom: '20px',
+        color: '#007A85',
+    },
+    sectionSubTitle: {
+        fontFamily: 'Poppins',
+        fontWeight: '600',
+        fontSize: '22px',
         lineHeight: '26px',
         letterSpacing: '-0.02em',
         marginBottom: '20px',

@@ -35,6 +35,7 @@ const Inventory = ({
               <QueryBarView data={dashData} />
               <WidgetView
                 data={dashData}
+                activeFilters={activeFilters}
               />
               <TabsView
                 dashboardStats={dashData}

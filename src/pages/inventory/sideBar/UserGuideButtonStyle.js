@@ -105,14 +105,26 @@ export default () => ({
             fontWeight: 700,
             textDecoration: 'underline',
             textUnderlinePosition: 'under',
+        },
+
+        '& li': {
+            marginBottom: '10px',
         }
+    },
+    alphaList: {
+        listStyleType: 'lower-alpha',
     },
     figureContainer: {
         textAlign: 'center',
+        marginTop: '10px',
     },
     figureText: {
-        fontFamily: 'Poppins',
+        fontFamily: 'Inter',
         fontSize: '14px',
+        fontStyle: 'italic',
+        fontWeight: 500,
+        lineHeight: '22px',
+        letterSpacing: '-0.28px',
         textAlign: 'center',
     },
     customButton: {

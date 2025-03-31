@@ -99,6 +99,13 @@ export default () => ({
         fontWeight: 400,
         fontSize: '16px',
         lineHeight: '22px',
+
+        '& a': {
+            color: '#455299',
+            fontWeight: 700,
+            textDecoration: 'underline',
+            textUnderlinePosition: 'under',
+        }
     },
     customButton: {
         borderRadius: '9px',

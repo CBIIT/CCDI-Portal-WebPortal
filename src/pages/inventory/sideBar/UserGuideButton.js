@@ -115,7 +115,7 @@ const UseGuideButton = ({classes}) => {
                             <div className={classes.contentList}>
                                 <div className={classes.contentTitle}>CCDI Hub Explore Dashboard and Cart</div>
                                 <div className={classes.mciContentContainer}>
-                                    <p>The CCDI Hub Explore Dashboard is a tool that allows for the exploration of participant-level, diagnoses, studies, samples, and files information for CCDI-managed data sets. The Explore Dashboard enables researchers to find CCDI data within a single study or across multiple studies and create synthetic cohorts based on filtered search (i.e., demographics, diagnosis, samples, etc.). Upon interaction with these filters (Figure 1A), users can review the open-access information through visual summaries (Figure 1B) and browse the row level data in tabs organized by participants, diagnosis, studies, samples, and files (Figure 1C) to determine which data sets are applicable to their research questions. Users can then add desired files to the cart (Figure 1D), from which they can download a manifest for the selected data or take the manifest directly into the CGC. To access the controlled data, users must request them at the controlled-access login page on dbGaP.</p>
+                                    <p>The <a href="/explore">CCDI Hub Explore Dashboard</a> is a tool that allows for the exploration of participant-level, diagnoses, studies, samples, and files information for CCDI-managed data sets. The Explore Dashboard enables researchers to find CCDI data within a single study or across multiple studies and create synthetic cohorts based on filtered search (i.e., demographics, diagnosis, samples, etc.). Upon interaction with these filters (Figure 1A), users can review the open-access information through visual summaries (Figure 1B) and browse the row level data in tabs organized by participants, diagnosis, studies, samples, and files (Figure 1C) to determine which data sets are applicable to their research questions. Users can then add desired files to the cart (Figure 1D), from which they can download a manifest for the selected data or take the manifest directly into the CGC. To access the controlled data, users must request them at the <a className={classes.link} href="https://dbgap.ncbi.nlm.nih.gov/aa/wga.cgi?page=login" target="_blank" rel="noopener noreferrer">controlled-access login page on dbGaP</a>.</p>
                                     <p>Step-by-step instructions for finding and exporting data are included below.</p>
                                 </div>
                                 <div>
@@ -125,15 +125,15 @@ const UseGuideButton = ({classes}) => {
                                     <div className={classes.mciContentContainer}>
                                         <p>The CCDI Hub Explore Dashboard provides row-level metadata for CCDI study participants and their data objects for review with a filtered search, select visualizations, and an exportable table of results. Here’s how to find and filter information on the Explore Dashboard:</p>
                                         <ul>
-                                            <li>The CCDI Hub is located at ccdi.cancer.gov. From the CCDI Hub Home page, navigate to the Explore Dashboard by clicking “Explore” (Figure 2).</li>
+                                            <li>The CCDI Hub is located at <a href="/">ccdi.cancer.gov</a>. From the CCDI Hub Home page, navigate to the Explore Dashboard by clicking “Explore” (Figure 2).</li>
                                             <li>On the Explore Dashboard, you can filter row-level data and view them as visualizations (Figure 3). The Explore Dashboard is participant-centric, meaning that filtering criteria and results return de-identified information about a participant and their related studies, collected samples, or created files.</li>
                                             <li>Search criteria are displayed in the right panel (Figure 4A). Faceted filtering may be done by uploading a list of participant IDs (in “DEMOGRAPHICS” Figure 4B), text searches (“DIAGNOSIS,” “DIAGNOSIS ATOMIC SITE,” and “SAMPLE ANATOMIC SITE” Figure 4C), numerical sliders (“AGE AT DIAGNOSIS” and “AGE AT COLLECTION” Figure 4D), or checkbox selections for the remaining properties. You can apply multiple filtering criteria at the same time in a search. You can view and clear your current selection(s) in the query summary at the top of the widgets (Figure 4E).</li>
                                             <li>Filtering your search will update the Explore Dashboard’s visualizations and the results tables (Figure 5). Each results table will be updated with information on the participants, samples, studies, or files that meet the filtered criteria. Information displayed by default on each table is described below:
                                                 <ul>
-                                                    <li>“Participants”: Characteristics of a participant in the Explore Dashboard. Participants belong to a study, and they may have one or more samples, diagnoses, or files associated with them. Participants with mappings through the CCDI Participant Index (CPI) have a summary of these mappings available from this view.</li>
+                                                    <li>“Participants”: Characteristics of a participant in the Explore Dashboard. Participants belong to a study, and they may have one or more samples, diagnoses, or files associated with them. Participants with mappings through the <a href='/ccdi-participant-index'>CCDI Participant Index (CPI)</a> have a summary of these mappings available from this view.</li>
                                                     <li>“Studies”: Studies that are a part of the Explore Dashboard. Participants, diagnosis, samples, and files all belong to a CCDI study.</li>
                                                     <li>“Samples”: Samples available from participants within the Explore Dashboard. Samples belong to a participant and can be associated with one or more files.</li>
-                                                    <li>“Files”: Files available from studies, participants, and samples within the Explore Dashboard. Files may belong to a study and may be associated with one or more participants or samples. Files may also be of many types, including sequencing, proteomics, imaging files, etc. DICOM imaging files are currently available for the Genomic Sequencing of Pediatric Rhabdomyosarcoma (phs000720) and Molecular Characterization Initiative (phs002790) studies and can be accessed directly from the Imaging Data Commons (IDC) Data Portal and file paths to images are provided in the downloadable study manifest within Hub, described in the following section.</li>
+                                                    <li>“Files”: Files available from studies, participants, and samples within the Explore Dashboard. Files may belong to a study and may be associated with one or more participants or samples. Files may also be of many types, including sequencing, proteomics, imaging files, etc. DICOM imaging files are currently available for the Genomic Sequencing of Pediatric Rhabdomyosarcoma (phs000720) and Molecular Characterization Initiative (phs002790) studies and can be accessed directly from the <a className={classes.link} href="https://portal.imaging.datacommons.cancer.gov" target="_blank" rel="noopener noreferrer">Imaging Data Commons (IDC) Data Portal</a> and file paths to images are provided in the downloadable study manifest within Hub, described in the following section.</li>
                                                 </ul>
                                             </li>
                                             <li>Visible columns in each table can be customized by clicking the “View columns” button in the upper righthand corner of the table and selecting or deselecting available columns (Figure 6). Note that Participant ID, Sample ID, and Study ID cannot be removed from any table, and File Name cannot be removed from the Files table.</li>
@@ -196,8 +196,8 @@ const UseGuideButton = ({classes}) => {
                                         <p>NCI Data Commons Framework Services (DCFS): Controlled Data Access Instructions</p>
                                     </div>
                                     <div className={classes.mciContentContainer}>
-                                        <p>NCI Data Commons Framework Services (DCFS), powered by Gen3, facilitates data authorization in a secure and scalable manner. DCFS’s Indexd service provides permanent digital IDs for data objects. These IDs can be used to retrieve the data or query the metadata associated with the object.</p>
-                                        <p>CCDI data is available for download using the DCFS. To gain access to controlled data, researchers must first have an NIH eRA Commons account for authentication, after which they will need to obtain authorization (via an active DCFS login account) to access the data in dbGaP.</p>
+                                        <p>NCI Data Commons Framework Services (DCFS), powered by <a className={classes.link} href="https://gen3.org" target="_blank" rel="noopener noreferrer">Gen3</a>, facilitates data authorization in a secure and scalable manner. DCFS’s Indexd service provides permanent digital IDs for data objects. These IDs can be used to retrieve the data or query the metadata associated with the object.</p>
+                                        <p>CCDI data is available for download using the DCFS. To gain access to controlled data, researchers must first have an <a className={classes.link} href="https://public.era.nih.gov/commonsplus/public/login.era?TARGET=https%3A%2F%2Fpublic.era.nih.gov%3A443%2Fcommons" target="_blank" rel="noopener noreferrer">NIH eRA Commons account</a> for authentication, after which they will need to obtain authorization (via an active DCFS <a className={classes.link} href="https://nci-crdc.datacommons.io/login" target="_blank" rel="noopener noreferrer">login account</a>) to access the data in <a className={classes.link} href="https://dbgap.ncbi.nlm.nih.gov/aa/wga.cgi?page=login" target="_blank" rel="noopener noreferrer">dbGaP</a>.</p>
                                         <p>Below are instructions for using the Data Commons Framework (DCF) user interface or the DCF Gen3-client to access CCDI data.</p>
                                     </div>
                                 </div>
@@ -217,7 +217,7 @@ const UseGuideButton = ({classes}) => {
                                             </li>
                                             <li>The NCI DCF Services Portal will respond by displaying a URL. Click the URL to download the file (Figure B3).</li>
                                         </ul>
-                                        <p>Note: If errors or problems are experienced during the file downloading process above, please contact the CCDI mailbox for assistance.</p>
+                                        <p>Note: If errors or problems are experienced during the file downloading process above, please contact the <a href="mailto:NCIChildhoodCancerDataInitiative@mail.nih.gov" target="_blank" rel="noopener noreferrer">CCDI mailbox</a> for assistance.</p>
                                     </div>
                                 </div>
                                 <div>
@@ -235,9 +235,10 @@ const UseGuideButton = ({classes}) => {
                                                 </ul>
                                             </li>
                                             <li>Obtain either a GUID or manifest of GUIDs for the data files of interest from the CCDI Explore page or the Explore Dashboard exportable manifest.</li>
-                                            <li>Create a Gen3 structured manifest:</li>
-                                            <li>Download the file(s) using the Gen3 client (either the single or multiple download option).</li>
+                                            <li>Create a Gen3 structured manifest:<br />[<br />]<br /></li>
+                                            <li>Download the file(s) using the Gen3 client (either the <a href="https://gen3.org/resources/user/gen3-client/#4-download-a-single-data-file-using-a-guid" className={classes.link} target="_blank" rel="noopener noreferrer">single</a> or <a href="https://gen3.org/resources/user/gen3-client/#5-multiple-file-download-with-manifest" className={classes.link} target="_blank" rel="noopener noreferrer">multiple</a> download option).</li>
                                         </ul>
+                                        <p>For more information on this process, please visit the <a href="https://gen3.org/resources/user/gen3-client" className={classes.link} target="_blank" rel="noopener noreferrer">Gen3 documentation page</a>.</p>
                                     </div>
                                 </div>
                                 <div>
@@ -245,7 +246,7 @@ const UseGuideButton = ({classes}) => {
                                         <p>Full User Guide</p>
                                     </div>
                                     <div className={classes.mciContentContainer}>
-                                        <p>To learn more about CCDI Hub, Explore Dashboard, and accessing data, see the complete User Guide.</p>
+                                        <p>To learn more about CCDI Hub, Explore Dashboard, and accessing data, see the complete <a href="/user-guide.pdf" className={classes.link} target="_blank" rel="noopener noreferrer">User Guide</a>.</p>
                                     </div>
                                 </div>
                                 <div>
@@ -253,7 +254,7 @@ const UseGuideButton = ({classes}) => {
                                         <p>Contact Us</p>
                                     </div>
                                     <div className={classes.mciContentContainer}>
-                                        <p>Please direct any questions or requests for further information to the CCDI mailbox.</p>
+                                        <p>Please direct any questions or requests for further information to the <a href="mailto:NCIChildhoodCancerDataInitiative@mail.nih.gov" target="_blank" rel="noopener noreferrer">CCDI mailbox</a>.</p>
                                     </div>
                                 </div>
                             </div>

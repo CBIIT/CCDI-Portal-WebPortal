@@ -143,5 +143,14 @@ export default () => ({
           backgroundColor: '#60797B',
           color: 'white',
         },
-      },
+    },
+    linkButtonStyle: {
+        color: '#455299',
+        fontWeight: 700,
+        textDecoration: 'underline',
+        textUnderlinePosition: 'under',
+        '&:hover': {
+            cursor: 'pointer',
+        },
+    },
 });

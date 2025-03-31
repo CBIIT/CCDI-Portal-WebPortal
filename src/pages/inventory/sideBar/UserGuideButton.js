@@ -75,6 +75,15 @@ const UseGuideButton = ({classes}) => {
         });
     }
 
+    const handleOnClickManifest = () => {
+        const contentElement = document.getElementById('UserGuideContentSection');
+        const element = document.getElementById('Downloading Metadata from the Studies tab');
+        contentElement.scrollTo({ 
+            top: element.offsetTop - 40,
+            behavior: "smooth" 
+        });
+    }
+
     const modalBody = {
         position: 'relative',
         margin: '0 auto',
@@ -315,7 +324,7 @@ const UseGuideButton = ({classes}) => {
                                                     <li>The API endpoint that will be used for DCF configuration is ‘https://nci-crdc.datacommons.io’.</li>
                                                 </ol>
                                             </li>
-                                            <li>Obtain either a GUID or manifest of GUIDs for the data files of interest from the <a href="/explore">CCDI Explore page</a> or the Explore Dashboard exportable manifest.</li>
+                                            <li>Obtain either a GUID or manifest of GUIDs for the data files of interest from the <a href="/explore">CCDI Explore page</a> or the <span className={classes.linkButtonStyle} onClick={handleOnClickManifest}>Explore Dashboard exportable manifest</span>.</li>
                                             <li>Create a Gen3 structured manifest:<br />
                                                 [<br />
                                                 &nbsp;&nbsp;&#123;<br />

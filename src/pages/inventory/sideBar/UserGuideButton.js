@@ -48,7 +48,7 @@ const UseGuideButton = ({classes}) => {
         const contentElement = document.getElementById('UserGuideContentSection');
         const element = document.getElementById(id);
         contentElement.scrollTo({ 
-            top: element.offsetTop - 15,
+            top: element.offsetTop - 40,
             behavior: "smooth" 
         });
     }

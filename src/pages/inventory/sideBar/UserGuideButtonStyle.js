@@ -8,10 +8,10 @@ export default () => ({
     paperArea: {
         display: 'flex',
         paddingLeft: '20px',
+        paddingTop: '40px',
     },
     navSection: {
         minWidth: '267px',
-        marginTop: '40px',
         marginLeft: '40px',
         color: '#477C90',
         position: 'relative',
@@ -73,7 +73,6 @@ export default () => ({
         fontSize: '30px',
         lineHeight: '26px',
         letterSpacing: '-0.02em',
-        marginTop: '40px',
         marginBottom: '20px',
         color: '#05555C',
     },

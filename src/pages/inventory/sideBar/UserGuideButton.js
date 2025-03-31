@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import {
-    Modal, Box, IconButton, withStyles
+    Modal, Box, Button, IconButton, withStyles
 } from '@material-ui/core';
 import styles from './UserGuideButtonStyle';
 import userguideIcon from '../../../assets/icons/Explore_User_Guide_Icon.svg';
+import userguideIconWhite from '../../../assets/icons/Explore_User_Guide_Icon_White.svg';
 import CloseIcon from '@material-ui/icons/Close';
 
 const UseGuideButtonContainer = styled.div`
@@ -25,6 +26,7 @@ const UseGuideButtonContainer = styled.div`
 
 const UseGuideButton = ({classes}) => {
     const [open, setOpen] = useState(false);
+    const [isHover, setIsHover] = useState(false);
     const [selectedNavTitle, setSelectedNavTitle] = useState('');
     
     const handleClickOpen = () => {
@@ -70,7 +72,16 @@ const UseGuideButton = ({classes}) => {
     return (
         <UseGuideButtonContainer>
             <div className='buttonContainer'>
-                <img src={userguideIcon} alt="user guide icon" onClick={handleClickOpen}/>
+            <Button
+                variant="outlined"
+                onClick={handleClickOpen}
+                className={classes.customButton}
+                classes={{ root: classes.clearAllButtonRoot }}
+                onMouseEnter={() => setIsHover(true)}
+                onMouseLeave={() => setIsHover(false)}
+            >
+                <img src={isHover?userguideIconWhite: userguideIcon} alt="user guide icon" />
+                </Button>
                 <div className='buttonText'>Explore the CCDI User Guide</div>
             </div>
             <Modal

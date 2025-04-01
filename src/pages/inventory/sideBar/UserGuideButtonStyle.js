@@ -1,3 +1,5 @@
+import exportIconBlue from '../../../assets/icons/Export_Icon.svg';
+
 export default () => ({
     closeButton: {
         position: 'absolute',
@@ -153,4 +155,8 @@ export default () => ({
             cursor: 'pointer',
         },
     },
+    link: {
+        paddingRight: '20px',
+        background: `url(${exportIconBlue}) right center no-repeat`,
+    }
 });

@@ -1,15 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import usePageVisibility from "./PageVisibility";
 import { carouselList } from '../../../bento/landingPageData';
 import exportIconText from '../../../assets/landing/Export_Icon_White.svg';
+import startIcon from '../../../assets/icons/Start_Icon.svg';
 
 let timer = null;
 
 const HeroMobileSection = styled.div`
   position: relative;
   z-index: 5;
-  height: 650px;
+  height: 680px;
 
   .backgroundContainer {
     padding: 46px calc(50vw - 405px);
@@ -59,6 +60,76 @@ const HeroMobileSection = styled.div`
     font-size: 14px;
     line-height: 17px;
     text-transform: uppercase;
+  }
+
+  .buttonContainer {
+    position: absolute;
+    top: 620px;
+    right: 16px;
+    display: flex;
+  }
+
+  .pauseButtonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center
+    padding-left: 5px;
+    background: #FFFFFF;
+    height: 39px;
+    width: 39px;
+    border-radius: 50%;
+    border: 0.6px solid #4BBFC6;
+    box-shadow: 0px 2.49px 9.32px 0px #00000073;
+    margin: 0 10px;
+  }
+
+  .pauseButtonContainer:hover {
+    cursor: pointer;
+    border: 1px solid #4BBFC6;
+  }
+
+  .pauseButtonIcon {
+    height: 22px;
+    width: 22px;
+  }
+
+  .arrowButtonContainer {
+    background: #FFFFFF;
+    height: 39px;
+    width: 39px;
+    border-radius: 50%;
+    border: 0.6px solid #4BBFC6;
+  }
+
+  .arrowButtonContainer:hover {
+    cursor: pointer;
+    border: 1px solid #4BBFC6;
+      .arrowUp {
+        border-bottom: 11px solid #3D4551;
+      }
+      .arrowDown {
+        border-top: 11px solid #3D4551;
+      }
+  }
+
+  .arrowUp {
+    margin: 14px 0 0 9px;
+    width: 0; 
+    height: 0; 
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 11px solid #B8BBBE;
+    transform: rotate(-90deg);
+    }
+
+  .arrowDown {
+      margin: 13px 0 0 13px;
+      width: 0; 
+      height: 0; 
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-top: 11px solid #B8BBBE;
+      transform: rotate(-90deg);
   }
 
   .carouselMobileList {
@@ -180,13 +251,18 @@ const HeroMobileSection = styled.div`
 
 const HeroMobile = () => {
     const isVisible = usePageVisibility();
+    const [pause, setPause] = useState(false);
 
     const mouseIn = (key) => {
+      if (!pause) {
         clearInterval(timer);
+      }
     }
 
     const mouseOut = () => {
+      if (!pause) {
         resetTimer();
+      }
     }
 
     const resetTimer = () => {
@@ -200,6 +276,36 @@ const HeroMobile = () => {
         list.removeChild(firstitem);
         list.appendChild(firstitem);
     };
+
+    const nextSlide = () => {
+      if (!pause) {
+          resetTimer();
+      }
+      nextItem();
+  };
+
+    const prevItem = () => {
+      const list = document.getElementById("mcarouselList");
+      const lastitem = list.lastChild;
+      list.removeChild(lastitem);
+      list.insertBefore(lastitem, list.firstChild);
+    };
+
+    const prevSlide = () => {
+        if (!pause) {
+            resetTimer();
+        }
+        prevItem();
+    };
+
+    const clickPause = () => {
+      if (pause) {
+          resetTimer();
+      } else {
+          clearInterval(timer);
+      }
+      setPause(!pause);
+    }
 
     const startTimer = () => {
         timer = setInterval(() => {
@@ -245,6 +351,17 @@ const HeroMobile = () => {
                         })
                     }
                 </div>
+            </div>
+            <div className='buttonContainer'>
+              <div className='arrowButtonContainer' onClick={prevSlide}>
+                  <div className="arrowUp"></div>
+              </div>
+              <div className='pauseButtonContainer' onClick={clickPause}>
+                  <img className='pauseButtonIcon' src={startIcon} alt="pause button"/>
+              </div>
+              <div className='arrowButtonContainer' onClick={nextSlide}>
+                <div className="arrowDown"></div>
+              </div>
             </div>
         </HeroMobileSection>
     );

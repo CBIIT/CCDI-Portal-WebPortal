@@ -19,8 +19,27 @@ const WidgetView = ({
   classes,
   data,
   theme,
+  activeFilters,
 }) => {
-  const displayWidgets = formatWidgetData(data, widgetConfig);
+
+  let config = widgetConfig;
+  let displayWidgets = formatWidgetData(data, widgetConfig);
+  const totalDiagnosis = displayWidgets.participantCountByDiagnosis.length;
+
+  if(Object.keys(activeFilters).length === 1 && activeFilters.participant_ids.length === 0){
+    displayWidgets = {
+      ...displayWidgets,
+      participantCountByDiagnosis: displayWidgets.participantCountByDiagnosis.slice(0, 20),
+    }
+    
+    const index = config.findIndex((e) => e.dataName === 'participantCountByDiagnosis');
+    config[index].title = `Showing top 20 out of ${totalDiagnosis} total diagnoses`
+  }
+  else{
+    const index = config.findIndex((e) => e.dataName === 'participantCountByDiagnosis');
+    config[index].title = 'Showing all matching diagnoses'
+  }
+
   const [collapse, setCollapse] = React.useState(true);
   // const themeChanger = useTheme();
   const handleChange = () => setCollapse((prev) => !prev);
@@ -72,7 +91,7 @@ const WidgetView = ({
       </div>
       <Collapse in={collapse} className={classes.backgroundWidgets}>
         <Grid container>
-          {widgetConfig.slice(0, 6).map((widget, index) => {
+          {config.slice(0, 6).map((widget, index) => {
             const dataset = displayWidgets[widget.dataName];
             if (!dataset || dataset.length === 0) {
               return <></>;

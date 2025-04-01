@@ -144,7 +144,7 @@ const UseGuideButton = ({classes}) => {
                                 <div id='Overview' className={classes.sectionTitle}>
                                     <p>Overview</p>
                                 </div>
-                                <div className={classes.mciContentContainer}>
+                                <div className={classes.contentContainer}>
                                     <p>The <a href="/explore">CCDI Hub Explore Dashboard</a> is a tool that allows for the exploration of participant-level, diagnoses, studies, samples, and files information for CCDI-managed data sets. The Explore Dashboard enables researchers to find CCDI data within a single study or across multiple studies and create synthetic cohorts based on filtered search (i.e., demographics, diagnosis, samples, etc.). Upon interaction with these filters (Figure 1A), users can review the open-access information through visual summaries (Figure 1B) and browse the row level data in tabs organized by participants, diagnosis, studies, samples, and files (Figure 1C) to determine which data sets are applicable to their research questions. Users can then add desired files to the cart (Figure 1D), from which they can download a manifest for the selected data or take the manifest directly into the CGC. To access the controlled data, users must request them at the <a className={classes.link} href="https://dbgap.ncbi.nlm.nih.gov/aa/wga.cgi?page=login" target="_blank" rel="noopener noreferrer">controlled-access login page on dbGaP</a>.</p>
                                     <div className={classes.figureContainer}><img src={figure1} style={{width: '40%'}} alt='Figure1'/></div>
                                     <div className={classes.figureText}>Figure 1: CCDI Hub Explore Dashboard and Cart features</div>
@@ -154,7 +154,7 @@ const UseGuideButton = ({classes}) => {
                                     <div id='Finding Participants, Studies, Samples, and Files' className={classes.sectionTitle}>
                                         <p>Finding Participants, Studies, Samples, and Files</p>
                                     </div>
-                                    <div className={classes.mciContentContainer}>
+                                    <div className={classes.contentContainer}>
                                         <p>The CCDI Hub Explore Dashboard provides row-level metadata for CCDI study participants and their data objects for review with a filtered search, select visualizations, and an exportable table of results. Here’s how to find and filter information on the Explore Dashboard:</p>
                                         <ol>
                                             <li>
@@ -196,7 +196,7 @@ const UseGuideButton = ({classes}) => {
                                     <div id='Creating and managing cohorts' className={classes.sectionTitle}>
                                         <p>Creating and managing cohorts</p>
                                     </div>
-                                    <div className={classes.mciContentContainer}>
+                                    <div className={classes.contentContainer}>
                                         <p>From the CCDI Hub Explore Dashboard Participant table, or you can group participants into cohorts to find files of interest, or you can add files directly to the cart (read more in next section). To create a cohort:</p>
                                         <ol>
                                             <li>Using the process described above, apply any filters of interest from the lefthand facet menu.</li>
@@ -225,7 +225,7 @@ const UseGuideButton = ({classes}) => {
                                     <div id='Downloading Metadata from the Studies tab' className={classes.sectionTitle}>
                                         <p>Downloading Metadata from the Studies tab</p>
                                     </div>
-                                    <div className={classes.mciContentContainer}>
+                                    <div className={classes.contentContainer}>
                                         <p>From the CCDI Hub Explore Dashboard, you can download all open metadata for each study from the “Studies” tab to further filter data and build cohorts. For instance, additional filtering by diagnosis of interest can generate a set of participants and the resulting manifest can be uploaded into the CGC. As an example, the following steps guide you on how to download the metadata for the CCDI Molecular Characterization Initiative:</p>
                                         <ol>
                                             <li>Using the process described above, open the “STUDY” set of filters from the lefthand menu, expand the “STUDY NAME” category, and scroll down to find “Molecular Characterization Initiative.”</li>
@@ -249,7 +249,7 @@ const UseGuideButton = ({classes}) => {
                                     <div id='Creating an Exportable File Manifest from the Cart' className={classes.sectionTitle}>
                                         <p>Creating an Exportable File Manifest from the Cart</p>
                                     </div>
-                                    <div className={classes.mciContentContainer}>
+                                    <div className={classes.contentContainer}>
                                         <p>In addition to the study-specific downloads, you can also export each row-level metadata element for CCDI participants, diagnoses, samples, or files based on your selections within the Explore Dashboard. Here’s how to create a manifest file of filtered information on the Explore Dashboard:</p>
                                         <ol>
                                             <li>On the results tables of the Explore Dashboard, you can select a row of metadata using the checkbox at the start of the row. Multiple rows can be selected within a table, even across pages of the table. Use the checkbox at the top of the checkbox column to select or deselect all rows.</li>
@@ -277,7 +277,7 @@ const UseGuideButton = ({classes}) => {
                                     <div id='NCI Data Commons Framework Services (DCFS): Controlled Data Access Instructions' className={classes.sectionTitle}>
                                         <p>NCI Data Commons Framework Services (DCFS): Controlled Data Access Instructions</p>
                                     </div>
-                                    <div className={classes.mciContentContainer}>
+                                    <div className={classes.contentContainer}>
                                         <p>NCI Data Commons Framework Services (DCFS), powered by <a className={classes.link} href="https://gen3.org" target="_blank" rel="noopener noreferrer">Gen3</a>, facilitates data authorization in a secure and scalable manner. DCFS’s Indexd service provides permanent digital IDs for data objects. These IDs can be used to retrieve the data or query the metadata associated with the object.</p>
                                         <p>CCDI data is available for download using the DCFS. To gain access to controlled data, researchers must first have an <a className={classes.link} href="https://public.era.nih.gov/commonsplus/public/login.era?TARGET=https%3A%2F%2Fpublic.era.nih.gov%3A443%2Fcommons" target="_blank" rel="noopener noreferrer">NIH eRA Commons account</a> for authentication, after which they will need to obtain authorization (via an active DCFS <a className={classes.link} href="https://nci-crdc.datacommons.io/login" target="_blank" rel="noopener noreferrer">login account</a>) to access the data in <a className={classes.link} href="https://dbgap.ncbi.nlm.nih.gov/aa/wga.cgi?page=login" target="_blank" rel="noopener noreferrer">dbGaP</a>.</p>
                                         <p>Below are instructions for using the Data Commons Framework (DCF) user interface or the DCF Gen3-client to access CCDI data.</p>
@@ -287,7 +287,7 @@ const UseGuideButton = ({classes}) => {
                                     <div className={classes.sectionSubTitle}>
                                         <p>File Download Procedure via User Interface</p>
                                     </div>
-                                    <div className={classes.mciContentContainer}>
+                                    <div className={classes.contentContainer}>
                                         <p>To download a study-specific research data distribution file with the DCF Services Portal interface, a researcher must execute the following steps:</p>
                                         <ol>
                                             <li>
@@ -318,7 +318,7 @@ const UseGuideButton = ({classes}) => {
                                     <div className={classes.sectionSubTitle}>
                                         <p>File Download Procedure via Command Line Interface (CLI) client</p>
                                     </div>
-                                    <div className={classes.mciContentContainer}>
+                                    <div className={classes.contentContainer}>
                                         <p>To download a study-specific research data distribution file with a CLI client, a researcher must execute the following steps:</p>
                                         <ol>
                                             <li>Obtain the <a className={classes.link} href="https://github.com/uc-cdis/cdis-data-client" target="_blank" rel="noopener noreferrer">Gen3-client command-line tool</a> from GitHub.</li>
@@ -351,7 +351,7 @@ const UseGuideButton = ({classes}) => {
                                     <div id='Full User Guide' className={classes.sectionTitle}>
                                         <p>Full User Guide</p>
                                     </div>
-                                    <div className={classes.mciContentContainer}>
+                                    <div className={classes.contentContainer}>
                                         <p>To learn more about CCDI Hub, Explore Dashboard, and accessing data, see the complete <a href="/user-guide.pdf" className={classes.link} target="_blank" rel="noopener noreferrer">User Guide</a>.</p>
                                     </div>
                                 </div>
@@ -359,7 +359,7 @@ const UseGuideButton = ({classes}) => {
                                     <div id='Contact Us' className={classes.sectionTitle}>
                                         <p>Contact Us</p>
                                     </div>
-                                    <div className={classes.mciContentContainer}>
+                                    <div className={classes.contentContainer}>
                                         <p style={{paddingBottom: '100px'}}>Please direct any questions or requests for further information to the <a href="mailto:NCIChildhoodCancerDataInitiative@mail.nih.gov" target="_blank" rel="noopener noreferrer">CCDI mailbox</a>.</p>
                                     </div>
                                 </div>

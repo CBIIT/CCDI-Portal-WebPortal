@@ -22,6 +22,7 @@ export default () => ({
         fontFamily: 'Poppins',
         fontWeight: 600,
         fontSize: '17px',
+        lineHeight: '20px',
         letterSpacing: '0.02em',
         marginBottom: '29px',
     },
@@ -72,9 +73,8 @@ export default () => ({
     contentTitle: {
         fontFamily: 'Poppins',
         fontWeight: '600',
-        fontSize: '30px',
-        lineHeight: '26px',
-        letterSpacing: '-0.02em',
+        fontSize: '35px',
+        lineHeight: '38px',
         marginBottom: '20px',
         color: '#05555C',
     },
@@ -82,7 +82,7 @@ export default () => ({
         fontFamily: 'Poppins',
         fontWeight: '600',
         fontSize: '25px',
-        lineHeight: '26px',
+        lineHeight: '27px',
         letterSpacing: '-0.02em',
         marginBottom: '20px',
         color: '#007A85',
@@ -96,7 +96,7 @@ export default () => ({
         marginBottom: '20px',
         color: '#007A85',
     },
-    mciContentContainer: {
+    contentContainer: {
         fontFamily: 'Inter',
         fontWeight: 400,
         fontSize: '16px',
@@ -125,8 +125,8 @@ export default () => ({
         fontSize: '14px',
         fontStyle: 'italic',
         fontWeight: 500,
-        lineHeight: '22px',
-        letterSpacing: '-0.28px',
+        lineHeight: '18px',
+        letterSpacing: '-0.02em',
         textAlign: 'center',
     },
     customButton: {

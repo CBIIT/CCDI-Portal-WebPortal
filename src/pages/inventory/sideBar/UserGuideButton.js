@@ -55,6 +55,7 @@ const UseGuideButton = ({classes}) => {
     };
 
     const titleList = [
+        'Overview',
         'Finding Participants, Studies, Samples, and Files',
         'Creating and managing cohorts',
         'Downloading Metadata from the Studies tab',
@@ -87,7 +88,7 @@ const UseGuideButton = ({classes}) => {
     const modalBody = {
         position: 'relative',
         margin: '0 auto',
-        marginTop: '10%',
+        marginTop: '6%',
         width: '90%',
         maxWidth: '1279px',
         height: '723px',
@@ -140,6 +141,9 @@ const UseGuideButton = ({classes}) => {
                         <div id='UserGuideContentSection' className={classes.contentSection}>
                             <div className={classes.contentList}>
                                 <div className={classes.contentTitle}>CCDI Hub Explore Dashboard and Cart</div>
+                                <div id='Overview' className={classes.sectionTitle}>
+                                    <p>Overview</p>
+                                </div>
                                 <div className={classes.mciContentContainer}>
                                     <p>The <a href="/explore">CCDI Hub Explore Dashboard</a> is a tool that allows for the exploration of participant-level, diagnoses, studies, samples, and files information for CCDI-managed data sets. The Explore Dashboard enables researchers to find CCDI data within a single study or across multiple studies and create synthetic cohorts based on filtered search (i.e., demographics, diagnosis, samples, etc.). Upon interaction with these filters (Figure 1A), users can review the open-access information through visual summaries (Figure 1B) and browse the row level data in tabs organized by participants, diagnosis, studies, samples, and files (Figure 1C) to determine which data sets are applicable to their research questions. Users can then add desired files to the cart (Figure 1D), from which they can download a manifest for the selected data or take the manifest directly into the CGC. To access the controlled data, users must request them at the <a className={classes.link} href="https://dbgap.ncbi.nlm.nih.gov/aa/wga.cgi?page=login" target="_blank" rel="noopener noreferrer">controlled-access login page on dbGaP</a>.</p>
                                     <div className={classes.figureContainer}><img src={figure1} style={{width: '40%'}} alt='Figure1'/></div>
@@ -296,7 +300,7 @@ const UseGuideButton = ({classes}) => {
                                                 <div className={classes.figureContainer}><img src={figureB2} style={{width: '80%'}} alt='FigureB2'/></div>
                                                 <div className={classes.figureText}>Figure B2: DCF Profile page highlighting "Profile" and the accessible projects.</div> 
                                             </li>
-                                            <li>Add the file GUID after the final backslash in this URL: <a className={classes.link} href="https://nci-crdc.datacommons.io/user/data/download" target="_blank" rel="noopener noreferrer">https://nci-crdc.datacommons.io/user/data/download/</a>. Paste the URL you created in a browser address field and press Enter or Return.</li>
+                                            <li>Add the file GUID after the final backslash in this URL: <span className={classes.linkButtonStyle}>https://nci-crdc.datacommons.io/user/data/download/</span>. Paste the URL you created in a browser address field and press Enter or Return.</li>
                                             <li>The NCI DCF Services Portal will respond by providing a JSON document with a new (signed) URL for the requested data file. Copy the signed URL.</li>
                                             <li>Paste this new signed URL into the browser address field and press Enter or Return (Figure B3).
                                                 <ol className={classes.alphaList}><li>Note: Once issued, the signed URL provided is valid for a relatively short period of time.</li></ol>

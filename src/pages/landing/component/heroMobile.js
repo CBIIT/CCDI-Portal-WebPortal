@@ -357,7 +357,7 @@ const HeroMobile = () => {
                   <div className="arrowUp"></div>
               </div>
               <div className='pauseButtonContainer' onClick={clickPause} style={pause ? {paddingLeft:'5px'} : null}>
-                  <img className='pauseButtonIcon' src={pause ? startIcon : pauseIcon} alt="pause button"/>
+                  <img className='pauseButtonIcon' src={pause ? startIcon : pauseIcon} alt="pause button" style={pause ? null : {height:'18px', width:'18px'}}/>
               </div>
               <div className='arrowButtonContainer' onClick={nextSlide}>
                 <div className="arrowDown"></div>

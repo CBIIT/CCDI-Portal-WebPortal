@@ -89,12 +89,13 @@ export default () => ({
     },
     sectionSubTitle: {
         fontFamily: 'Poppins',
-        fontWeight: '600',
+        fontWeight: '400',
         fontSize: '22px',
         lineHeight: '26px',
         letterSpacing: '-0.02em',
         marginBottom: '20px',
-        color: '#007A85',
+        color: '#05555C',
+        textTransform: 'uppercase',
     },
     contentContainer: {
         fontFamily: 'Inter',

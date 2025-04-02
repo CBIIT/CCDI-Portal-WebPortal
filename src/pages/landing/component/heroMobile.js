@@ -4,6 +4,7 @@ import usePageVisibility from "./PageVisibility";
 import { carouselList } from '../../../bento/landingPageData';
 import exportIconText from '../../../assets/landing/Export_Icon_White.svg';
 import startIcon from '../../../assets/icons/Start_Icon.svg';
+import pauseIcon from '../../../assets/icons/Pause_Icon.svg';
 
 let timer = null;
 
@@ -73,7 +74,6 @@ const HeroMobileSection = styled.div`
     display: flex;
     justify-content: center;
     align-items: center
-    padding-left: 5px;
     background: #FFFFFF;
     height: 39px;
     width: 39px;
@@ -356,8 +356,8 @@ const HeroMobile = () => {
               <div className='arrowButtonContainer' onClick={prevSlide}>
                   <div className="arrowUp"></div>
               </div>
-              <div className='pauseButtonContainer' onClick={clickPause}>
-                  <img className='pauseButtonIcon' src={startIcon} alt="pause button"/>
+              <div className='pauseButtonContainer' onClick={clickPause} style={pause ? {paddingLeft:'5px'} : null}>
+                  <img className='pauseButtonIcon' src={pause ? startIcon : pauseIcon} alt="pause button"/>
               </div>
               <div className='arrowButtonContainer' onClick={nextSlide}>
                 <div className="arrowDown"></div>

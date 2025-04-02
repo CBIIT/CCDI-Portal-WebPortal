@@ -80,7 +80,7 @@ const HeroMobileSection = styled.div`
     border-radius: 50%;
     border: 0.6px solid #4BBFC6;
     box-shadow: 0px 2.49px 9.32px 0px #00000073;
-    margin: 0 10px;
+    margin: 0 15px;
   }
 
   .pauseButtonContainer:hover {
@@ -104,31 +104,31 @@ const HeroMobileSection = styled.div`
   .arrowButtonContainer:hover {
     cursor: pointer;
     border: 1px solid #4BBFC6;
-      .arrowUp {
-        border-bottom: 11px solid #3D4551;
+      .arrowLeft {
+        border-bottom: 11px solid #8D9096;
       }
-      .arrowDown {
-        border-top: 11px solid #3D4551;
+      .arrowRight {
+        border-top: 11px solid #8D9096;
       }
   }
 
-  .arrowUp {
+  .arrowLeft {
     margin: 14px 0 0 9px;
     width: 0; 
     height: 0; 
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
-    border-bottom: 11px solid #B8BBBE;
+    border-bottom: 11px solid #C9C9C9;
     transform: rotate(-90deg);
     }
 
-  .arrowDown {
+  .arrowRight {
       margin: 13px 0 0 13px;
       width: 0; 
       height: 0; 
       border-left: 8px solid transparent;
       border-right: 8px solid transparent;
-      border-top: 11px solid #B8BBBE;
+      border-top: 11px solid #C9C9C9;
       transform: rotate(-90deg);
   }
 
@@ -354,13 +354,13 @@ const HeroMobile = () => {
             </div>
             <div className='buttonContainer'>
               <div className='arrowButtonContainer' onClick={prevSlide}>
-                  <div className="arrowUp"></div>
+                  <div className="arrowLeft"></div>
               </div>
               <div className='pauseButtonContainer' onClick={clickPause} style={pause ? {paddingLeft:'5px'} : null}>
                   <img className='pauseButtonIcon' src={pause ? startIcon : pauseIcon} alt="pause button" style={pause ? null : {height:'18px', width:'18px'}}/>
               </div>
               <div className='arrowButtonContainer' onClick={nextSlide}>
-                <div className="arrowDown"></div>
+                <div className="arrowRight"></div>
               </div>
             </div>
         </HeroMobileSection>

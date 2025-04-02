@@ -1315,7 +1315,7 @@ export const widgetConfig = [
   },
   {
     type: 'donut',
-    title: 'Showing all matching diagnoses',
+    title: 'Diagnosis',
     dataName: 'participantCountByDiagnosis',
     sliceTitle: 'Participants',
   },

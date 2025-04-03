@@ -5,6 +5,7 @@ import {
   TableView,
   Wrapper,
 } from '@bento-core/paginated-table';
+import { useNavigate } from 'react-router-dom';
 import styles from './TabStyle';
 import { themeConfig } from './tableConfig/Theme';
 import { configColumn } from './tableConfig/Column';
@@ -71,6 +72,12 @@ const TabView = (props) => {
     downloadFileName: tab.downloadFileName,
   });
 
+  const navigate = useNavigate();
+  
+  const handleNavigate = (url) => {
+    navigate(url);
+  };
+
   return (
     <TableContextProvider>
       <Wrapper
@@ -90,6 +97,7 @@ const TabView = (props) => {
               totalRowCount={dashboardStats[config.count]}
               activeTab={activeTab}
               queryParams={queryParams}
+              navigation={handleNavigate}
             />
           </Grid>
         </Grid>

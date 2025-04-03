@@ -764,6 +764,7 @@ query participantOverview(
           domain_category
           data_location
           data_type
+          p_id
         }
     }
 }

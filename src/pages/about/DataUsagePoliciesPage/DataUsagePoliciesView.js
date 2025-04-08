@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ReactHtmlParser from 'html-react-parser';
-import headerImg from '../../../assets/about/Data_Usage_Policies_Header.jpg';
+import headerImg from '../../../assets/about/Data_Usage_Policies_Header.png';
 // import { dataUsagePoliciesContent, introText } from '../../../bento/dataUsagePoliciesData';
 import exportIconBlue from '../../../assets/icons/Export_Icon.svg';
 

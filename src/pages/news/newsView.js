@@ -14,11 +14,8 @@ import newsImg from '../../assets/news/News_Header.jpg';
 import arrowDownIcon from '../../assets/about/arrowDownGreen.svg';
 import arrowUpIcon from '../../assets/about/arrowUpGreen.svg';
 import UploadIcon from '../../assets/about/Upload-Icon.svg';
-import { altList, srcList, newsList, releaseNotesList } from '../../bento/newsData'
-
-const fullList = (newsList.concat(releaseNotesList)).sort((a,b) => {
-  return new Date(a.date).getTime() - new Date(b.date).getTime();
-}).reverse();
+import { srcList } from '../../bento/newsData';
+// import { altList, srcList, newsList, releaseNotesList } from '../../bento/newsData'
 
 const NewsContainer = styled.div`
   width: 100%;
@@ -528,7 +525,7 @@ const useOutsideAlerter = (ref) => {
   }, [ref]);
 };
 
-const NewsView = ({classes, newsList, altList}) => {
+const NewsView = ({classes, newsList, altList, releaseNotesList}) => {
   // const getPageResults = (selectedTab, pageInfo) => {
   //   const resultList = getResultList(selectedTab);
   //   const allids = [];
@@ -539,6 +536,11 @@ const NewsView = ({classes, newsList, altList}) => {
   //   }
   //   return allids;
   // }
+
+  const fullList = (newsList.concat(releaseNotesList)).sort((a,b) => {
+    return new Date(a.date).getTime() - new Date(b.date).getTime();
+  }).reverse();
+
 const getResultList = (tabName) => {
   if (tabName === "All") {
     return fullList;

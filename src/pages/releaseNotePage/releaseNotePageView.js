@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { withStyles, Collapse, Tooltip, ClickAwayListener } from '@material-ui/core';
 import html2pdf from "html2pdf.js";
 import ReactHtmlParser from "html-react-parser";
-import { releaseNotesList } from '../../bento/newsData';
+// import { releaseNotesList } from '../../bento/newsData';
 import NCILogoExport from '../../assets/about/NCI_Logo.png';
 import ArrowDownIcon from '../../assets/about/Arrow_Down_Black_Icon.svg';
 import arrowDownGreenIcon from '../../assets/about/arrowDownGreen.svg';
@@ -427,7 +427,7 @@ const SiteUpdateCardDescription = styled.div`
     }
 `;
 
-const ReleaseNotesPageView = () => {
+const ReleaseNotesPageView = ( {releaseNotesList} ) => {
     const [selectedIdx, setSelectedIdx] = useState(0);
     const [siteUpdateNav, setSiteUpdateNav] = useState([]);
     const [open, setOpen] = useState([]);

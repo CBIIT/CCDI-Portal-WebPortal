@@ -8,10 +8,6 @@ import exportIconText from '../../../assets/landing/Export_Icon_White.svg';
 
 let timer = null;
 
-const fullList = (newsList.concat(releaseNotesList)).sort((a,b) => {
-  return new Date(a.date).getTime() - new Date(b.date).getTime();
-}).reverse();
-
 const LatestUpdatesSection = styled.div`
   position: relative;
   z-index: 5;
@@ -297,11 +293,15 @@ const TitleContainer = styled.div`
     }
 `;
 
-const LatestUpdate = () => {
+const LatestUpdate = ({altList}) => {
     const [hoverItem, setHoverItem] = useState("");
     const [pause, setPause] = useState(true);
     const [rLatestlList, setRLatestlList] = useState([]);
     const isVisible = usePageVisibility();
+
+    const fullList = (newsList.concat(releaseNotesList)).sort((a,b) => {
+      return new Date(a.date).getTime() - new Date(b.date).getTime();
+    }).reverse();
 
     const getFirstList = () => {
       const latestUpdateList = fullList.filter((item) => item.latestUpdate);
@@ -392,7 +392,7 @@ const LatestUpdate = () => {
                         const updatekey = `update_${updateidx}`;
                         return (
                         <div className='latestUpdatesListItem' key={updatekey} onMouseEnter={() => mouseIn(updatekey)} onMouseLeave={mouseOut}>
-                            <a href={`/news#${updateItem.id}`}><img className='latestUpdatesListItemPic' src={srcList[updateItem.img]} alt={altList[updateItem.img]} aria-hidden='true' /><span style={{display:'none'}}>latestUpdates text</span></a>
+                            <a href={`/news#${updateItem.id}`}><img className='latestUpdatesListItemPic' src={srcList[updateItem.img]} alt={altList ? altList[updateItem.img] : 'alt text'} aria-hidden='true' /><span style={{display:'none'}}>latestUpdates text</span></a>
                             <a className='latestUpdatesListTitleContainer' href={`/news#${updateItem.id}`}><div className='latestUpdatesListTitle'>{updateItem.title}</div></a>
                             <div className='latestUpdatesListContent'>
                                 <span className='latestUpdatesTextContent'>{ReactHtmlParser(updateItem.slug)}</span>

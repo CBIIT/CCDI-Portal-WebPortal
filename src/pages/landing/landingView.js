@@ -853,8 +853,6 @@ const LandingView = ({
   newsData
 }) => {
 
-  console.log("@@@@",newsData)
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [])

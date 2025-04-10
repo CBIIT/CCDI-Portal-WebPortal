@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ReactHtmlParser from 'html-react-parser';
 import usePageVisibility from "./PageVisibility";
-import { altList, srcList, newsList, releaseNotesList } from '../../../bento/newsData';
+// import { altList, srcList, newsList, releaseNotesList } from '../../../bento/newsData';
+import { srcList } from '../../../bento/newsData';
 import { titleData } from '../../../bento/landingPageData';
 import exportIconText from '../../../assets/landing/Export_Icon_White.svg';
 
@@ -293,17 +294,16 @@ const TitleContainer = styled.div`
     }
 `;
 
-const LatestUpdate = ({altList}) => {
+const LatestUpdate = ({newsList, releaseNotesList, altList}) => {
     const [hoverItem, setHoverItem] = useState("");
     const [pause, setPause] = useState(true);
     const [rLatestlList, setRLatestlList] = useState([]);
     const isVisible = usePageVisibility();
 
-    const fullList = (newsList.concat(releaseNotesList)).sort((a,b) => {
-      return new Date(a.date).getTime() - new Date(b.date).getTime();
-    }).reverse();
-
     const getFirstList = () => {
+      const fullList = (newsList.concat(releaseNotesList)).sort((a,b) => {
+        return new Date(a.date).getTime() - new Date(b.date).getTime();
+      }).reverse();
       const latestUpdateList = fullList.filter((item) => item.latestUpdate);
       let newItemList = [latestUpdateList[2]]
       newItemList = newItemList.concat(latestUpdateList.slice(0,3));
@@ -358,11 +358,16 @@ const LatestUpdate = ({altList}) => {
             resetTimer();
             setPause(false);
         }
-        if (rLatestlList.length === 0) {
-            setRLatestlList(getFirstList());
-        }
         return () => clearInterval(timer);
     }, []);
+
+    useEffect(() => {
+      if (rLatestlList.length === 0 && newsList) {
+        if (newsList.length > 0) {
+          setRLatestlList(getFirstList());
+        }
+      }
+    }, [newsList]);
 
     useEffect(() => {
         if (!isVisible || pause) {

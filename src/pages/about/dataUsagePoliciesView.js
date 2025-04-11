@@ -13,7 +13,7 @@ const DataUsagePoliciesContainer = styled.div`
     .policiesHeaderContainer {
         width: 1142px;
         height: 140px;
-        margin: 0 134px;
+        margin: 0 auto;
         background-image: url(${headerImg});
         background-repeat: no-repeat;
         background-color: #87D7DCCC; 
@@ -25,10 +25,27 @@ const DataUsagePoliciesContainer = styled.div`
         text-align: center;
         letter-spacing: 0.02em;
         color: #FFFFFF;
-        padding: 34px 400px;
 
         @media (min-width: 1420px) {
             margin: 0 auto;
+        }
+
+        @media (max-width: 1186px) {
+            height: 140px;
+            width: auto;
+            margin: 0 16px;
+        }
+    }
+
+    .policiesHeaderText {
+        line-height: 38px;
+        width: 320px;
+        padding-top: 33px;
+        margin: 0 auto;
+
+        @media (max-width: 767px) {
+            padding-top: 15px;
+            width: 270px;
         }
     }
 `;
@@ -374,7 +391,7 @@ const DataUsagePoliciesView = () => {
 
     return (
         <DataUsagePoliciesContainer>
-             <div className='policiesHeaderContainer'>CCDI Data Usage Policies & Terms</div>
+             <div className='policiesHeaderContainer'><div className='policiesHeaderText'>CCDI Data Usage Policies & Terms</div></div>
             <DataUsagePoliciesBody id='DataUsagePoliciesBody'>
                 <div className='navSection'>
                     <div className={stickyNavStyle} id='leftNav'>

@@ -121,36 +121,48 @@ const WidgetView = ({
               return <></>;
             }
             return (
-              <Grid key={index} item lg={4} md={6} sm={12} xs={12}>
-                <Widget
-                  header={(
-                    <>
-                      <Typography size="md" weight="normal" family="Nunito" style={{ color: '#4A5C5E' }}>
-                        {widget.title}
-                      </Typography>
-                      {widget.title === 'Diagnosis' &&
-                        <LightTooltip
-                          title={diagnosisTooltip}
-                          placement='top-end'
-                          arrow
-                        >
-                          <img src={questionIcon} alt='diagnosis tooltip' style={{marginLeft: '0.5px', marginBottom: '10px', scale: '0.8'}}/>
-                        </LightTooltip>}
-                    </>
-                  )}
-                  bodyClass={classes.fullHeightBody}
-                  className={classes.card}
-                  bottomDivider
-                  customBackGround
-                  data={dataset}
-                  chartType={widget.type}
-                  sliceTitle={widget.sliceTitle}
-                  chartTitleLocation="bottom"
-                  chartTitleAlignment="center"
-                  width={widget.width}
-                  height={widget.height}
-                  noJustifyTitle
-                />
+              <Grid key={index} item lg={4} md={6} sm={12} xs={12}
+                style={{
+                  paddingLeft: '30px',
+                  paddingRight: '20px',
+                  paddingTop: '40px',
+                  borderRadius: '30px',
+                }}
+              >
+                <div
+                  className={classes.widgetBox}
+                >
+                  <Widget
+                    header={(
+                      <>
+                        <Typography size="md" weight="normal" family="Nunito" style={{ color: '#4A5C5E' }}>
+                          {widget.title}
+                        </Typography>
+                        {widget.title === 'Diagnosis' &&
+                          <LightTooltip
+                            title={diagnosisTooltip}
+                            placement='top-end'
+                            arrow
+                          >
+                            <img src={questionIcon} alt='diagnosis tooltip' style={{ marginLeft: '0.5px', marginBottom: '10px', scale: '0.8' }} />
+                          </LightTooltip>}
+                      </>
+                    )}
+                    title={widget.title}
+                    bodyClass={classes.fullHeightBody}
+                    className={classes.card}
+                    bottomDivider
+                    customBackGround
+                    data={dataset}
+                    chartType={widget.type}
+                    sliceTitle={widget.sliceTitle}
+                    chartTitleLocation="bottom"
+                    chartTitleAlignment="center"
+                    width={widget.width}
+                    height={widget.height}
+                    noJustifyTitle
+                  />
+                </div>
               </Grid>
             );
           })}

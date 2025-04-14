@@ -37,6 +37,15 @@ export default () => ({
       backgroundColor: '#003F74',
     },
   },
+  sideBarMenuSider: {
+
+  },
+  siderContent: {
+    listStyle: 'none',
+  },
+  facetCategory: {
+
+  },
   rightContent: {
     width: 'calc(100% - 270px)',
     position: 'relative',

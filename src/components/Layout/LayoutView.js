@@ -6,7 +6,7 @@ import Header from '../ResponsiveHeader/';
 import Home from '../../pages/landing/landingController';
 import About from '../../pages/about/AboutPage/AboutController';
 import DataUsagePoliciesView from '../../pages/about/DataUsagePoliciesPage/DataUsagePoliciesController';
-import PublicationsView from '../../pages/about/publications/publicationsView';
+import PublicationsView from '../../pages/about/publications/publicationsController';
 import News from '../../pages/news/newsController';
 import Error from '../../pages/error/Error';
 import Search from '../../pages/search/searchView';

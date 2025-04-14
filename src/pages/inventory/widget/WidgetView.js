@@ -124,7 +124,6 @@ const WidgetView = ({
               <Grid key={index} item lg={4} md={6} sm={12} xs={12}
                 style={{
                   paddingLeft: '30px',
-                  paddingRight: '20px',
                   paddingTop: '40px',
                   borderRadius: '30px',
                 }}

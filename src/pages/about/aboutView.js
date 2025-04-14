@@ -9,6 +9,14 @@ import ReactHtmlParser from 'html-react-parser';
 const AboutContainer = styled.div`
   margin: 0 auto;
 
+  p {
+      font-weight: 500;
+  }
+
+  li {
+      font-weight: 500;
+  }
+
   .aboutHeader {
     font-family: poppins;
     font-weight: 600;
@@ -48,6 +56,7 @@ const AboutContainer = styled.div`
 
   .textParagraph {
     margin: 25px 0 50px 0;
+    font-weight: 500;
   }
 
   .aboutContactUs {
@@ -94,7 +103,7 @@ const AboutContainer = styled.div`
   .aboutLink {
     color: #455299;
     font-family: poppins;
-    font-weight: 600;
+    font-weight: 700;
     padding-right: 20px;
     background: url(${exportIcon}) right center no-repeat;
     text-underline-offset: 4px;
@@ -103,7 +112,7 @@ const AboutContainer = styled.div`
   .aboutContactLink {
     color: #000000;
     font-family: Inter;
-    font-weight: 600;
+    font-weight: 700;
     padding-right: 20px;
     background: url(${exportBlackIcon}) right center no-repeat;
     text-underline-offset: 4px;

@@ -4,19 +4,19 @@ import { Route, Routes, } from 'react-router-dom';
 import Footer from '../ResponsiveFooter/';
 import Header from '../ResponsiveHeader/';
 import Home from '../../pages/landing/landingController';
-import About from '../../pages/about/aboutView';
-import DataUsagePoliciesView from '../../pages/about/dataUsagePoliciesView';
+import About from '../../pages/about/AboutPage/AboutController';
+import DataUsagePoliciesView from '../../pages/about/DataUsagePoliciesPage/DataUsagePoliciesController';
 import PublicationsView from '../../pages/about/publications/publicationsView';
-import News from '../../pages/news/newsView';
+import News from '../../pages/news/newsController';
 import Error from '../../pages/error/Error';
 import Search from '../../pages/search/searchView';
 import Inventory from '../../pages/inventory/inventoryController';
 import Cart from '../../pages/cart/cartController';
 import ScrollButton from '../ScrollButton/ScrollButtonView';
-import MCIResourceView from '../../pages/resource/MCIResourceView'
-import FederationResourceView from "../../pages/resource/FederationResourceView";
-import CPIResourceView from "../../pages/resource/CPIResourcePage/CPIResourceView";
-import ReleaseNotesPageView from '../../pages/about/releaseNotePage/releaseNotePageView';
+import MCIResourceView from '../../pages/resource/MCIResourcePage/MCIResourceController'
+import FederationResourceView from "../../pages/resource/FederationResourcePage/FederationResourceController";
+import CPIResourceView from "../../pages/resource/CPIResourcePage/CPIResourceController";
+import ReleaseNotesPageView from '../../pages/releaseNotePage/releaseNotePageController';
 import OverlayWindow from '../OverlayWindow/OverlayWindow';
 // import NewsDetail from '../../pages/news/newsDetailView';
 

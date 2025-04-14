@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef, createRef } from 'react';
 import styled from 'styled-components';
 import ReactHtmlParser from 'html-react-parser';
-import headerImg from '../../assets/resources/Federation_Header.png';
-import exportIcon from '../../assets/resources/Explore_Icon.svg';
-import closeIcon from '../../assets/icons/Close_Icon.svg';
-import arrowDownIcon from '../../assets/icons/Arrow_Down.svg';
-import { federationContent, introText } from '../../bento/federationData';
-import exportIconBlue from '../../assets/icons/Export_Icon.svg';
-import ccdiDataAccessImg from '../../assets/resources/Federation_CCDI_Data_Access.png';
+import headerImg from '../../../assets/resources/Federation_Header.png';
+import exportIcon from '../../../assets/resources/Explore_Icon.svg';
+import closeIcon from '../../../assets/icons/Close_Icon.svg';
+import arrowDownIcon from '../../../assets/icons/Arrow_Down.svg';
+// import { federationContent, introText } from '../../../bento/federationData';
+import exportIconBlue from '../../../assets/icons/Export_Icon.svg';
+import ccdiDataAccessImg from '../../../assets/resources/Federation_CCDI_Data_Access.png';
 
 
 const FederationResourceContainer = styled.div`
@@ -398,13 +398,16 @@ const FederationResourceBody = styled.div`
     }
 `;
 
-const FederationResourceView = () => {
+const FederationResourceView = ({data}) => {
     const [selectedNavTitle, setSelectedNavTitle] = useState('');
     const [stickyNavStyle, setStickyNavStyle] = useState('navList');
     const sectionList = useRef([]);
-    sectionList.current = federationContent.map((element, i) => {
-        return sectionList.current[i] || createRef()
-    });
+    const federationContent = data.federationContent;
+    if (federationContent) {
+        sectionList.current = federationContent.map((element, i) => {
+            return sectionList.current[i] || createRef()
+        });
+    }
     const handleScroll = () => {
         const bodyElement = document.getElementById('FederationBody');
         const footerList = document.getElementsByTagName('footer');
@@ -475,7 +478,7 @@ const FederationResourceView = () => {
                     <div className={stickyNavStyle} id='leftNav'>
                         <div className='navTitle'>TOPICS</div>
                         {
-                            federationContent.map((federationItem, topicid) => {
+                            federationContent && federationContent.map((federationItem, topicid) => {
                                 const topickey = `topic_${topicid}`;
                                 if (federationItem.topic) {
                                     return (
@@ -491,9 +494,9 @@ const FederationResourceView = () => {
                 </div>
                 <div className='contentSection'>
                     <div className='contentList'>
-                        <div className='introContainer'>{ReactHtmlParser(introText)}</div>
+                        {data.federationIntroText && <div className='introContainer'>{ReactHtmlParser(data.federationIntroText)}</div>}
                         {
-                            federationContent.map((federationItem, mciid) => {
+                            federationContent && federationContent.map((federationItem, mciid) => {
                                 const mcikey = `federation_${mciid}`;
                                 return (
                                     <div key={mcikey}>
@@ -523,3 +526,4 @@ const FederationResourceView = () => {
 }
 
 export default FederationResourceView;
+

@@ -404,19 +404,19 @@ const SiteUpdateCardDescription = styled.div`
         font-weight: 500;
     }
 
-    a[target="_blank"]::after {
-      content: " ";
-      font-weight: bold;
-      color: #004187;
-      font-size: 14px;
-      background-repeat: no-repeat;
-      background-size: 100%;
-      background-position-y: 4px;
-      background-position-x: -2px;
-      width: 17px;
-      height: 17px;
-      display: inline-table;
-    }
+    // a[target="_blank"]::after {
+    //   content: " ";
+    //   font-weight: bold;
+    //   color: #004187;
+    //   font-size: 14px;
+    //   background-repeat: no-repeat;
+    //   background-size: 100%;
+    //   background-position-y: 4px;
+    //   background-position-x: -2px;
+    //   width: 17px;
+    //   height: 17px;
+    //   display: inline-table;
+    // }
 
     p {
       font-family: Lato;

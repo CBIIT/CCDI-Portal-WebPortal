@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useApolloClient } from '@apollo/client';
 import { connect } from 'react-redux';
+import env from '../../utils/env'
+import yaml from "js-yaml";
+import axios from "axios";
 import { CircularProgress } from '@material-ui/core';
 import { statsData } from '../../bento/landingPageData';
 import LandingView from './landingView';
 import { LANDING_DATA_QUERY } from '../../bento/landingPageData';
 
 const CCDCurl ='https://datacatalog.ccdi.cancer.gov/service/datasets/count';
+const NEWS_URL = `${env.REACT_APP_STATIC_CONTENT_URL}/newsData.yaml`;
 
 const getDashData = () => {
   const client = useApolloClient();
@@ -25,7 +29,22 @@ const getDashData = () => {
     return result;
   }
 
+  async function getNewsData() {
+    let resultData = [];
+    let result = [];
+    try {
+      const fileUrl = `${NEWS_URL}?ts=${new Date().getTime()}`;
+      result = await axios.get(
+        fileUrl
+      );
+      resultData = yaml.safeLoad(result.data);
+    } catch (_error) {
+    }
+    return resultData
+  }
+
   const [statsDataNew, setStatsDataNew] = useState(statsData);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -40,13 +59,16 @@ const getDashData = () => {
       newStatList[1].num = MCICount;
       setStatsDataNew([...newStatList]);
     });
+    getNewsData().then((resultData) => {
+      setData(resultData);
+    });
     return () => controller.abort();
   },[]);
-  return { statsDataNew };
+  return { statsDataNew, data };
 };
 
 const LandingController = (() => {
-  const { statsDataNew } = getDashData();
+  const { statsDataNew, data } = getDashData();
 
   if (!statsDataNew) {
     return (<div style={{"height": "1200px","paddingTop": "10px"}}><div style={{"margin": "auto","display": "flex","maxWidth": "1800px"}}><CircularProgress /></div></div>);
@@ -55,6 +77,7 @@ const LandingController = (() => {
   return (
     <LandingView
       statsData={statsDataNew}
+      newsData={data}
     />
   );
 });

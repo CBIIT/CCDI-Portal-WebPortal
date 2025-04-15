@@ -117,6 +117,10 @@ const ResourcesSection = styled.div`
     margin-top: 380px;
     margin-bottom: 20px;
   }
+
+  @media (max-width: 700px) {
+    margin-top: 400px;
+  }
 `;
 
 const FirstContainer = styled.div`

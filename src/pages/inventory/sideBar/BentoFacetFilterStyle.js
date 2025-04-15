@@ -158,9 +158,11 @@ export default () => ({
     fontWeight: 600,
   },
   searchContainer: {
-    paddingTop: '15px',
     margin: '0 2px',
-    marginRight: 6,
+    marginBottom: '20px',
+    marginLeft:'20px',
+    marginRight: '20px',
+    marginTop: '-15px',
   },
   findCaseButton: {
     // marginLeft: '105px',

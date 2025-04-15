@@ -12,7 +12,7 @@ const CartContainer = styled.div`
   position: absolute;
   top: 12px;
   right: calc(50% - 710px);
-  z-index: 9999;
+  z-index: 1200;
 
   @media (max-width: 1430px) {
     right: 0;

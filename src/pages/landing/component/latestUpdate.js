@@ -6,6 +6,8 @@ import usePageVisibility from "./PageVisibility";
 import { srcList } from '../../../bento/newsData';
 import { titleData } from '../../../bento/landingPageData';
 import exportIconText from '../../../assets/landing/Export_Icon_White.svg';
+import startIcon from '../../../assets/icons/Start_Icon.svg';
+import pauseIcon from '../../../assets/icons/Pause_Icon.svg';
 
 let timer = null;
 
@@ -110,6 +112,10 @@ const LatestUpdatesContainer = styled.div`
     }
 
     .hoverTextContentContainer {
+      display: none;
+    }
+
+    .buttonContainer {
       display: none;
     }
 
@@ -219,6 +225,75 @@ const LatestUpdatesContainer = styled.div`
     @media (max-width: 700px) {
       .latestUpdatesListItem {
         transition: 650ms;
+      }
+
+      .buttonContainer {
+        position: absolute;
+        top: 380px;
+        right: 16px;
+        display: flex;
+      }
+
+      .pauseButtonContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center
+        background: #FFFFFF;
+        height: 39px;
+        width: 39px;
+        border-radius: 50%;
+        border: 0.6px solid #4BBFC6;
+        box-shadow: 0px 2.49px 9.32px 0px #00000073;
+        margin: 0 15px;
+      }
+
+      .pauseButtonContainer:hover {
+        cursor: pointer;
+        border: 1px solid #4BBFC6;
+      }
+
+      .pauseButtonIcon {
+        height: 22px;
+        width: 22px;
+      }
+
+      .arrowButtonContainer {
+        background: #FFFFFF;
+        height: 39px;
+        width: 39px;
+        border-radius: 50%;
+        border: 0.6px solid #4BBFC6;
+      }
+
+      .arrowButtonContainer:hover {
+        cursor: pointer;
+        border: 1px solid #4BBFC6;
+          .arrowLeft {
+            border-bottom: 11px solid #8D9096;
+          }
+          .arrowRight {
+            border-top: 11px solid #8D9096;
+          }
+      }
+
+      .arrowLeft {
+        margin: 14px 0 0 9px;
+        width: 0; 
+        height: 0; 
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-bottom: 11px solid #C9C9C9;
+        transform: rotate(-90deg);
+        }
+
+      .arrowRight {
+          margin: 13px 0 0 13px;
+          width: 0; 
+          height: 0; 
+          border-left: 8px solid transparent;
+          border-right: 8px solid transparent;
+          border-top: 11px solid #C9C9C9;
+          transform: rotate(-90deg);
       }
     }
 
@@ -335,6 +410,36 @@ const LatestUpdate = ({newsList, releaseNotesList, altList}) => {
         list.appendChild(firstitem);
     };
 
+    const nextSlide = () => {
+      if (!pause) {
+          resetTimer();
+      }
+      nextItem();
+    };
+
+    const prevItem = () => {
+      const list = document.getElementById("latestList");
+      const lastitem = list.lastChild;
+      list.removeChild(lastitem);
+      list.insertBefore(lastitem, list.firstChild);
+    };
+
+    const prevSlide = () => {
+        if (!pause) {
+            resetTimer();
+        }
+        prevItem();
+    };
+
+    const clickPause = () => {
+      if (pause) {
+          resetTimer();
+      } else {
+          clearInterval(timer);
+      }
+      setPause(!pause);
+    }
+
     const startTimer = () => {
         timer = setInterval(() => {
             nextItem();
@@ -415,6 +520,17 @@ const LatestUpdate = ({newsList, releaseNotesList, altList}) => {
                         )
                     })
                 }
+            </div>
+            <div className='buttonContainer'>
+              <div className='arrowButtonContainer' onClick={prevSlide}>
+                  <div className="arrowLeft"></div>
+              </div>
+              <div className='pauseButtonContainer' onClick={clickPause} style={pause ? {paddingLeft:'5px'} : null}>
+                  <img className='pauseButtonIcon' src={pause ? startIcon : pauseIcon} alt="pause button" style={pause ? null : {height:'18px', width:'18px'}}/>
+              </div>
+              <div className='arrowButtonContainer' onClick={nextSlide}>
+                <div className="arrowRight"></div>
+              </div>
             </div>
             </LatestUpdatesContainer>
         </LatestUpdatesSection>

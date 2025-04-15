@@ -295,6 +295,14 @@ const DataUsagePoliciesBody = styled.div`
         }
     }
 
+     @media (max-width: 1400px) {
+        padding: 55px calc(50% - 550px) 0 calc(50% - 550px); 
+    }
+
+    @media (max-width: 1186px) {
+        padding: 55px 32px 0 32px; 
+    }
+
     @media (max-width: 767px) {
         padding: 55px 0 0 0;
 

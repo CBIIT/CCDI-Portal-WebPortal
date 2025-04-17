@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, createRef } from 'react';
 import styled from 'styled-components';
 import ReactHtmlParser from 'html-react-parser';
 import headerImg from '../../assets/about/Data_Usage_Policies_Header.png';
 import { dataUsagePoliciesContent, introText } from '../../bento/dataUsagePoliciesData';
 import exportIconBlue from '../../assets/icons/Export_Icon.svg';
+import closeIcon from '../../assets/icons/Close_Icon.svg';
+import arrowDownIcon from '../../assets/icons/Arrow_Down.svg';
 
 const DataUsagePoliciesContainer = styled.div`
     width: 100%;
@@ -11,7 +13,7 @@ const DataUsagePoliciesContainer = styled.div`
     .policiesHeaderContainer {
         width: 1142px;
         height: 140px;
-        margin: 0 134px;
+        margin: 0 auto;
         background-image: url(${headerImg});
         background-repeat: no-repeat;
         background-color: #87D7DCCC; 
@@ -23,16 +25,36 @@ const DataUsagePoliciesContainer = styled.div`
         text-align: center;
         letter-spacing: 0.02em;
         color: #FFFFFF;
-        padding: 34px 400px;
 
         @media (min-width: 1420px) {
             margin: 0 auto;
+        }
+
+        @media (max-width: 1186px) {
+            height: 140px;
+            width: auto;
+            margin: 0 16px;
+        }
+    }
+
+    .policiesHeaderText {
+        line-height: 38px;
+        width: 320px;
+        padding-top: 33px;
+        margin: 0 auto;
+
+        @media (max-width: 767px) {
+            padding-top: 15px;
+            width: 270px;
         }
     }
 `;
 
 const DataUsagePoliciesBody = styled.div`
-    width: 1420px;
+    @media (min-width: 1420px) {
+        width: 1420px;
+    }
+
     margin: 0 auto;
     display: flex;
     padding: 55px 135px 0 135px; 
@@ -133,6 +155,38 @@ const DataUsagePoliciesBody = styled.div`
         letter-spacing: -0.02em;
         margin-bottom: 20px;
         color: #007A85;
+
+        @media (max-width: 767px) {
+            display: none;
+        }
+    }
+
+    .mciTitleMobile {
+        width: 100%;
+        padding: 12px 10px;
+        margin-bottom: 20px;
+        font-family: Open Sans;
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 20px;
+        text-align: left;
+        color: #FFFFFF;
+        background: url(${closeIcon}) right 10px center no-repeat;
+        background-color: #187C85;
+        display: none;
+
+        @media (max-width: 767px) {
+            display: block;
+        }
+    }
+
+    .sectionCollapse {
+        background: url(${arrowDownIcon}) right 10px center no-repeat;
+        background-color: #187C85;
+    }
+
+    .mciTitleMobile:hover {
+        cursor: pointer;
     }
 
     .mciSubtitle {
@@ -240,11 +294,55 @@ const DataUsagePoliciesBody = styled.div`
             font-weight: 500;
         }
     }
+
+     @media (max-width: 1400px) {
+        padding: 55px calc(50% - 550px) 0 calc(50% - 550px); 
+    }
+
+    @media (max-width: 1186px) {
+        padding: 55px 32px 0 32px; 
+    }
+
+    @media (max-width: 767px) {
+        padding: 55px 0 0 0;
+
+        .navSection {
+            display: none;
+        }
+
+        .contentSection {
+            width: 100%;
+            padding: 0 16px;
+        }
+
+        .contentList {
+            width: 100%;
+        }
+
+        .mciSection {
+            padding: 0 5px;
+        }
+
+        .mobileCollapse {
+            display: block;
+            @media (max-width: 767px) {
+                display: none;
+            }
+        }
+
+        .mciContentContainer {
+            margin-left: 0;
+        }
+    }
 `;
 
 const DataUsagePoliciesView = () => {
     const [selectedNavTitle, setSelectedNavTitle] = useState('');
     const [stickyNavStyle, setStickyNavStyle] = useState('navList');
+    const sectionList = useRef([]);
+    sectionList.current = dataUsagePoliciesContent.map((element, i) => {
+        return sectionList.current[i] || createRef()
+    });
     const handleScroll = () => {
         const bodyElement = document.getElementById('DataUsagePoliciesBody');
         const footerList = document.getElementsByTagName('footer');
@@ -287,9 +385,21 @@ const DataUsagePoliciesView = () => {
         });
     }
 
+    const handleCollapseSection = e => {
+        const i = e.target.getAttribute("name");
+        const currentDisplay = sectionList.current[i].current.style.display;
+        if (currentDisplay === 'block') {
+            sectionList.current[i].current.style.display = 'none';
+            e.target.className = 'mciTitleMobile sectionCollapse';
+        } else {
+            sectionList.current[i].current.style.display = 'block';
+            e.target.className = 'mciTitleMobile';
+        }
+    }
+
     return (
         <DataUsagePoliciesContainer>
-             <div className='policiesHeaderContainer'>CCDI Data Usage Policies & Terms</div>
+             <div className='policiesHeaderContainer'><div className='policiesHeaderText'>CCDI Data Usage Policies & Terms</div></div>
             <DataUsagePoliciesBody id='DataUsagePoliciesBody'>
                 <div className='navSection'>
                     <div className={stickyNavStyle} id='leftNav'>
@@ -318,11 +428,14 @@ const DataUsagePoliciesView = () => {
                                 return (
                                     <div key={mcikey}>
                                         <div id={policiesItem.id} className='mciTitle'>{policiesItem.topic && policiesItem.topic}</div>
-                                        <div id={policiesItem.id} className='mciSubtitle'>{policiesItem.subtopic && policiesItem.subtopic}</div>
-                                        <div className='mciContentContainer'>
-                                            {policiesItem.content && ReactHtmlParser(policiesItem.content)}
+                                        {/* <div id={policiesItem.id} className='mciSubtitle'>{policiesItem.subtopic && policiesItem.subtopic}</div> */}
+                                        <div id={policiesItem.id} name={mciid} className='mciTitleMobile sectionCollapse' onClick={handleCollapseSection}>{policiesItem.topic && policiesItem.topic}</div>
+                                        <div className="mciSection mobileCollapse" ref={sectionList.current[mciid]}>
+                                            <div className='mciContentContainer'>
+                                                {policiesItem.content && ReactHtmlParser(policiesItem.content)}
+                                            </div>
+                                            {policiesItem.content && <div style={{height: '40px'}} />}
                                         </div>
-                                        {policiesItem.content && <div style={{height: '40px'}} />}
                                     </div>
                                 )
                             })

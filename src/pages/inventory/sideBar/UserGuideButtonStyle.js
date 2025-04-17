@@ -73,7 +73,7 @@ export default () => ({
     contentTitle: {
         fontFamily: 'Poppins',
         fontWeight: '600',
-        fontSize: '35px',
+        fontSize: '30px',
         lineHeight: '38px',
         marginBottom: '20px',
         color: '#05555C',

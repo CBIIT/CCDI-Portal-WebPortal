@@ -849,7 +849,8 @@ const ResourcesContainer = styled.div`
 `;
 
 const LandingView = ({
-  statsData
+  statsData,
+  newsData
 }) => {
 
   useEffect(() => {
@@ -922,7 +923,8 @@ const LandingView = ({
           </StatsBox>
         </StatsContainer>
       </StatsSection>
-      <LatestUpdate />
+      <LatestUpdate newsList={newsData.newsList} releaseNotesList={newsData.releaseNotesList} altList={newsData.altList} />
+      {/* <LatestUpdate /> */}
       <ResourcesSection>
         <ResourcesOverlayRight />
         <ResourcesOverlay />

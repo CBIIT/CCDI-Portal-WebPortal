@@ -7,7 +7,7 @@ import Pagination from '@material-ui/lab/Pagination';
 import styled from 'styled-components';
 import exportIcon from '../../../assets/about/Export_Icon.svg';
 import publicationsHeaderImg from '../../../assets/about/Publications_Header.png';
-import { publicationsList } from '../../../bento/publicationsData';
+// import { publicationsList } from '../../../bento/publicationsData';
 import searchIcon from '../../../assets/header/Search_Small_Icon.svg';
 import arrowDownIcon from '../../../assets/about/arrowDownGreen.svg';
 import arrowUpIcon from '../../../assets/about/arrowUpGreen.svg';
@@ -535,7 +535,7 @@ const useFocus = () => {
   return [ htmlElRef, setFocus ] 
 };
 
-const PublicationsView = ({classes}) => {
+const PublicationsView = ({classes, publicationsList}) => {
   const [selectedTab, setSelectedTab] = useState("All");
   const newsTabList = ['All', 'Primary', 'Secondary', 'Abstract'];
   const sizelist = [10,20,50,100];

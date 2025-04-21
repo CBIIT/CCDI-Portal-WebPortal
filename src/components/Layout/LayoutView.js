@@ -17,6 +17,8 @@ import MCIResourceView from '../../pages/resource/MCIResourceView'
 import FederationResourceView from "../../pages/resource/FederationResourceView";
 import CPIResourceView from "../../pages/resource/CPIResourcePage/CPIResourceView";
 import ReleaseNotesPageView from '../../pages/about/releaseNotePage/releaseNotePageView';
+import StudiesView from '../../pages/studies/studiesView';
+import StudiesDetail from "../../pages/studies/studiesDetail";
 import OverlayWindow from '../OverlayWindow/OverlayWindow';
 // import NewsDetail from '../../pages/news/newsDetailView';
 
@@ -40,6 +42,10 @@ const Layout = () => {
           <Route path="/ccdi-participant-index" element={<CPIResourceView />} />
           <Route path="/publications" element={<PublicationsView />} />
           <Route path="/release-notes" element={<ReleaseNotesPageView />} />
+          <Route path="/studies" >
+            <Route index={true} element={<StudiesView />}></Route>
+            <Route path=":studyId" element={<StudiesDetail />} />
+          </Route>
           <Route path="*" element={<Error />} />
         </Routes>
         <Footer />

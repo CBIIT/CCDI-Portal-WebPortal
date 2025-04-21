@@ -26,17 +26,18 @@ import figureB2 from '../../../assets/explore/FigureB2.png';
 import figureB3 from '../../../assets/explore/FigureB3.png';
 
 const UseGuideButtonContainer = styled.div`
+    background-color: #ffffff;
     .buttonContainer {
         display: flex;
         margin-left: 6px;
-        margin-top: 7px;
+        padding-top: 7px;
     }
 
     .buttonText {
         color: #627B7A;
         font-weight: 400;
         font-size: 14px;
-        line-height: 30px;
+        line-height: 15px;
         margin-left: 8px;
     }
 `;

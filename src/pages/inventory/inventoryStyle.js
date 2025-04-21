@@ -1,4 +1,43 @@
 export default () => ({
+  clearAllButtonRoot: {
+    margin: 'auto',
+  },
+  customButton: {
+    borderRadius: '9px',
+    maxWidth: '30px',
+    maxHeight: '30px',
+    minWidth: '30px',
+    minHeight: '30px',
+    marginTop: '0px',
+    fontSize: 9,
+    textTransform: 'none',
+    color: '#3d4241',
+    marginLeft: '0px',
+    border: '1px solid #60797B',
+    '&:hover': {
+      backgroundColor: '#60797B',
+      color: 'white',
+    },
+  },
+  floatRight: {
+    display: 'flex',
+    backgroundColor: '#ffffff',
+    padding: '7px 0px 7px 6px',
+  },
+  resetText: {
+    marginTop: '0px',
+    marginLeft: '8px',
+    color: '#60797B',
+    fontSize: 14,
+    lineHeight: '15px',
+  },
+  resetTextDisabled: {
+    marginTop: '0px',
+    marginLeft: '8px',
+    color: '#627B7A',
+    fontSize: 14,
+    lineHeight: '15px',
+  },
   backdrop: {
     width: '100%',
     zIndex: 99999,
@@ -36,7 +75,7 @@ export default () => ({
     '& li': {
       height: '50px',
       lineHeight: '50px',
-      padding: '0 13px',
+      padding: '0 5px 0 13px',
     }
   },
   facetCategory: {
@@ -55,7 +94,7 @@ export default () => ({
     verticalAlign: '-5px',
   },
   categoryTitle: {
-    paddingLeft: '15px',
+    paddingLeft: '12px',
   },
   sidebarMenuContentPanel: {
     width: '270px',

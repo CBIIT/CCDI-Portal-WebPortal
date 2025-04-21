@@ -26,10 +26,10 @@ import {
 } from '@bento-core/local-find';
 import store from '../../../store';
 import styles from './BentoFacetFilterStyle';
-import { FacetFilter, ClearAllFiltersBtn } from '@bento-core/facet-filter';
+import { NewFacetFilter } from '@bento-core/facet-filter';
 import { generateQueryStr } from '@bento-core/util';
 import { facetsConfig, facetSectionVariables, resetIcon, sectionLabel, queryParams } from '../../../bento/dashTemplate';
-import FacetFilterThemeProvider from './FilterThemeConfig';
+import FacetFilterThemeProvider from './NewFilterThemeConfig';
 import {
   getAllParticipantIds, getAllIds,
 } from './BentoFilterUtils';
@@ -137,61 +137,8 @@ const NewBentoFacetFilter = ({
   classes,
   searchData,
   activeFilters,
+  selectedSection,
 }) => {
-  /**
-  * Clear All Filter Button
-  * Custom button component
-  * bento core params
-  * 1. onClearAllFilters - dispatch clear all filters
-  * 2. disable - true/ false
-  */
-  const CustomClearAllFiltersBtn = ({ onClearAllFilters, disable }) => {
-    const [isHover, setIsHover] = useState(false);
-    const query = new URLSearchParams(useLocation().search);
-    const navigate = useNavigate();
-    return (
-      <div className={classes.floatRight}>
-        <Button
-          id="button_sidebar_clear_all_filters"
-          variant="outlined"
-          disabled={disable}
-          onClick={() => {
-            const paramValue = {
-              'p_id': '', 'u': '', 'u_fc': '', 'u_um': '', 'sex_at_birth': '', 'race': '',
-              'age_at_diagnosis': '', 'diagnosis': '', 'diagnosis_anatomic_site': '', 'diagnosis_classification_system': '', 'diagnosis_basis': '', 'disease_phase': '',
-              'treatment_type': '', 'treatment_agent': '', 'age_at_treatment_start': '', 'response_category': '', 'age_at_response': '',
-              'age_at_last_known_survival_status': '', 'first_event': '', 'last_known_survival_status': '',
-              'participant_age_at_collection': '', 'sample_anatomic_site': '', 'sample_tumor_status': '', 'tumor_classification': '',
-              'data_category': '', 'file_type': '', 'dbgap_accession': '', 'study_name': '', 'study_status': '',
-              'library_selection': '', 'library_strategy': '', 'library_source_material': '', 'library_source_molecule': ''
-            };
-            const queryStr = generateQueryStr(query, queryParams, paramValue);
-            navigate(`/explore${queryStr}`);
-            onClearAllFilters();
-            store.dispatch(resetAllData());
-          }}
-          className={classes.customButton}
-          classes={{ root: classes.clearAllButtonRoot }}
-          onMouseEnter={() => setIsHover(true)}
-          onMouseLeave={() => setIsHover(false)}
-          style={disable ? { border: '1px solid #627B7A' } : {}}
-        >
-          <img
-            src={disable ? resetIcon.src : (isHover ? resetIcon.srcActiveHover : resetIcon.srcActive)}
-            height={resetIcon.size}
-            width={resetIcon.size}
-            alt={resetIcon.alt}
-          />
-        </Button>
-        <span className={disable
-          ? classes.resetTextDisabled : classes.resetText}
-        >
-          Clear all filtered selections
-        </span>
-      </div>
-    );
-  };
-
   /** Note:
   * Generate Custom facet Section Component
   * 1. Config local search input for Case
@@ -207,11 +154,6 @@ const NewBentoFacetFilter = ({
 
     return (
       <>
-        <CustomExpansionPanelSummary id={section}>
-          <div className={classes.sectionSummaryTextContainer}>
-            {sectionLabel[name] !== undefined ? sectionLabel[name] : name}
-          </div>
-        </CustomExpansionPanelSummary>
         {hasSearch && (
           <SearchView
             classes={classes}
@@ -259,21 +201,22 @@ const NewBentoFacetFilter = ({
 
   return (
     <div>
-      <FacetFilterThemeProvider>
-        <ClearAllFiltersBtn
-          Component={CustomClearAllFiltersBtn}
-          activeFilters={activeFilters}
-        />
-        <FacetFilter
-          data={searchData}
-          activeFilters={activeFilters}
-          facetSectionConfig={facetSectionVariables}
-          facetsConfig={facetsConfig}
-          CustomFacetSection={CustomFacetSection}
-          CustomFacetView={CustomFacetView}
-          queryParams={queryParams}
-        />
-      </FacetFilterThemeProvider>
+      {
+        selectedSection !== -1 && (
+          <FacetFilterThemeProvider>
+            <NewFacetFilter
+              data={searchData}
+              activeFilters={activeFilters}
+              facetSectionConfig={facetSectionVariables}
+              facetsConfig={facetsConfig}
+              selectedSection={selectedSection}
+              CustomFacetSection={CustomFacetSection}
+              CustomFacetView={CustomFacetView}
+              queryParams={queryParams}
+            />
+          </FacetFilterThemeProvider>
+        )
+      }
     </div>
   );
 };

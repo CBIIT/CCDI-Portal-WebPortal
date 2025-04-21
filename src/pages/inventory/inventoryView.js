@@ -40,9 +40,19 @@ const ULSection = styled.ul`
 `;
 
 const SideBarContentPanel = styled.div`
-  width: 270px;
+  width: ${(props) => (props.selected === -1 ? '180px' : '270px')};
+  margin-left: ${(props) => (props.selected === -1 ? '-180px' : '0px')};
   padding: 16px 16px 0 16px;
   background-color: #f0f1f8;
+  transition: all .5s;
+`;
+
+const RightContentPanel = styled.div`
+  width: ${(props) => (props.selected === -1 ? 'calc(100% - 180px)' : 'calc(100% - 450px)')};
+  position: relative;
+  border-right: thin solid #8A7F7C;
+  border-left: thin solid #8A7F7C;
+  transition: all .5s;
 `;
 
 const Inventory = ({
@@ -114,7 +124,10 @@ const Inventory = ({
     } else {
       setSelectedSection(categoryID);
     }
-    
+  };
+
+  const handleCloseContentPanelClick = () => {
+    setSelectedSection(-1);
   };
 
   if (!dashData) {
@@ -135,6 +148,7 @@ const Inventory = ({
             />
           </div> */}
           <div className={classes.sideBar}>
+            <div className={classes.sideBarCover} />
             <label for="local_find_input" style={{ display: 'none' }}>Participant ID Text Search box</label>
             <div className={classes.sideBarMenuSider}>
               <UseGuideButton />
@@ -165,27 +179,25 @@ const Inventory = ({
             </div>
           </div>
           {
-            selectedSection !== -1 && (
-              <SideBarContentPanel>
-                <div className={classes.contentPanelHeader}>
-                  <a>
-                    <svg fill="currentColor" height="24" viewBox="0 0 16 16" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M8.80901 8L12.9106 3.11094C12.9793 3.02969 12.9215 2.90625 12.8153 2.90625H11.5684C11.4949 2.90625 11.4246 2.93906 11.3762 2.99531L7.99339 7.02813L4.61057 2.99531C4.5637 2.93906 4.49339 2.90625 4.41839 2.90625H3.17151C3.06526 2.90625 3.00745 3.02969 3.0762 3.11094L7.17776 8L3.0762 12.8891C3.0608 12.9072 3.05092 12.9293 3.04773 12.9529C3.04454 12.9764 3.04818 13.0004 3.05822 13.022C3.06826 13.0435 3.08426 13.0617 3.10435 13.0745C3.12443 13.0872 3.14774 13.0939 3.17151 13.0938H4.41839C4.49182 13.0938 4.56214 13.0609 4.61057 13.0047L7.99339 8.97188L11.3762 13.0047C11.4231 13.0609 11.4934 13.0938 11.5684 13.0938H12.8153C12.9215 13.0938 12.9793 12.9703 12.9106 12.8891L8.80901 8Z"></path>
-                    </svg>
-                  </a>
+            <SideBarContentPanel selected={selectedSection}>
+              <div className={classes.contentPanelHeader}>
+                <a onClick={() => handleCloseContentPanelClick()}>
+                  <svg fill="currentColor" height="24" viewBox="0 0 16 16" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M8.80901 8L12.9106 3.11094C12.9793 3.02969 12.9215 2.90625 12.8153 2.90625H11.5684C11.4949 2.90625 11.4246 2.93906 11.3762 2.99531L7.99339 7.02813L4.61057 2.99531C4.5637 2.93906 4.49339 2.90625 4.41839 2.90625H3.17151C3.06526 2.90625 3.00745 3.02969 3.0762 3.11094L7.17776 8L3.0762 12.8891C3.0608 12.9072 3.05092 12.9293 3.04773 12.9529C3.04454 12.9764 3.04818 13.0004 3.05822 13.022C3.06826 13.0435 3.08426 13.0617 3.10435 13.0745C3.12443 13.0872 3.14774 13.0939 3.17151 13.0938H4.41839C4.49182 13.0938 4.56214 13.0609 4.61057 13.0047L7.99339 8.97188L11.3762 13.0047C11.4231 13.0609 11.4934 13.0938 11.5684 13.0938H12.8153C12.9215 13.0938 12.9793 12.9703 12.9106 12.8891L8.80901 8Z"></path>
+                  </svg>
+                </a>
+              </div>
+              <div className={classes.contentPanelBody}>
+                <div className={classes.facetsWrapper}>
+                  <NewBentoFacetFilter
+                    searchData={dashData}
+                    activeFilters={activeFilters}
+                    selectedSection={selectedSection}
+                  />
                 </div>
-                <div className={classes.contentPanelBody}>
-                  <div className={classes.facetsWrapper}>
-                    <NewBentoFacetFilter
-                      searchData={dashData}
-                      activeFilters={activeFilters}
-                      selectedSection={selectedSection}
-                    />
-                  </div>
-                </div>
-              </SideBarContentPanel>
-            )
+              </div>
+            </SideBarContentPanel>
           }
-          <div className={classes.rightContent}>
+          <RightContentPanel selected={selectedSection}>
             <div className={classes.widgetsContainer}>
               <QueryBarView data={dashData} />
               <WidgetView
@@ -198,7 +210,7 @@ const Inventory = ({
               />
               <div className={classes.goToCartLink}><NavLink to='/fileCentricCart'>Go to cart &#62;</NavLink></div>
             </div>
-          </div>
+          </RightContentPanel>
         </div>
       </div>
     </div>

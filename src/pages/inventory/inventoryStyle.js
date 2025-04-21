@@ -55,6 +55,12 @@ export default () => ({
     margin: 'auto',
     borderLeft: 'thin solid #8A7F7C',
   },
+  sideBarCover: {
+    marginLeft: '-100px',
+    width: '100px',
+    backgroundColor: 'red',
+    position: 'absolute',
+  },
   sideBar: {
     width: '180px',
     maxHeight: '1361px',
@@ -64,6 +70,7 @@ export default () => ({
     overflow: 'auto',
     zIndex: '99',
     color: '#ffffff',
+    position: 'relative',
   },
   sideBarMenuSider: {
     width: '180px',
@@ -114,7 +121,9 @@ export default () => ({
       }
     }
   },
-  contentPanelBody: {},
+  contentPanelBody: {
+    paddingTop: '35px',
+  },
   rightContent: {
     width: 'calc(100% - 450px)',
     position: 'relative',

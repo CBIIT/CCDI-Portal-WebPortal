@@ -159,10 +159,9 @@ export default () => ({
   },
   searchContainer: {
     margin: '0 2px',
-    marginBottom: '20px',
-    marginLeft:'20px',
-    marginRight: '20px',
     marginTop: '-15px',
+    paddingTop: '15px',
+    marginRight: '6px',
   },
   findCaseButton: {
     // marginLeft: '105px',

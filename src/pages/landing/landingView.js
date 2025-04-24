@@ -333,11 +333,14 @@ const StatsContainer = styled.div`
     }
 
     .statDetail {
-      color: #05555C;
+      color: #00838F;
       font-family: Poppins;
       font-weight: 600;
       font-size: 19px;
-      line-height: 21px;
+      line-height: 23px;
+      font-family: Poppins;
+      letter-spacing: 2%;
+      text-transform: uppercase;
       text-align: left;
       text-decoration: none;
 
@@ -363,8 +366,8 @@ const StatsContainer = styled.div`
         display: inline-block;
         width: 8px;
         height: 8px;
-        border-bottom: 2px solid #05555C;
-        border-left: 2px solid #05555C;
+        border-bottom: 2px solid #00838F;
+        border-left: 2px solid #00838F;
         margin: 0 0 2px 3px;
         transform: rotate(-135deg);
         -webkit-transform: rotate(-135deg);
@@ -417,7 +420,7 @@ const StatsContainer = styled.div`
         font-size: 25px;
         line-height: 20px;
         letter-spacing: 0.02em;
-        color: #255B5E;
+        color: #298085;
         margin-left: calc(50vw - 405px);
       }
 
@@ -441,16 +444,18 @@ const StatsContainer = styled.div`
       }
 
       .statTitle {
-        color: #05555C;
+        color: #00838F;
         font-size: 14px;
         line-height: 13px;
       }
 
       .statDetail {
-        color: #05555C;
+        color: #00838F;
+        font-family: Poppins;
+        font-weight: 600;
         font-size: 14px;
         line-height: 13px;
-        letter-spacing: 0.28px;
+        letter-spacing: 2%;
 
         ::after {
           content: "";
@@ -491,8 +496,8 @@ const StatsContainer = styled.div`
       .statGlance {
         margin-left: 30px;
         font-weight: 600;
-        font-size: 25px;
-        line-height: 20px;
+        font-size: 14px;
+        line-height: 17px;
         letter-spacing: 0.02em;
         text-transform: uppercase;
       }
@@ -510,6 +515,17 @@ const StatsContainer = styled.div`
 
       .statsNoteContainer {
         margin-left: 30px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .statGlance {
+        font-family: Poppins;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 17px;
+        letter-spacing: 2%;
+        text-transform: uppercase;
       }
     }
 
@@ -666,7 +682,7 @@ const ResourcesContainer = styled.div`
     .resourceListItemContext {
       color: #000000;
       font-family: Poppins;
-      font-weight: 400;
+      font-weight: 500;
       font-size: 16px;
       letter-spacing: 0.02em;
     }

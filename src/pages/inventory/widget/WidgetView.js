@@ -125,7 +125,7 @@ const WidgetView = ({
                 <Widget
                   header={(
                     <>
-                      <Typography size="md" weight="normal" family="Nunito" style={{ color: '#4A5C5E' }}>
+                      <Typography size="md" weight="normal" family="Nunito" style={{ fontFamily:"Poppins", letterSpacing:"-0.02em", fontSize: "18.5px", color: '#4A5C5E' }}>
                         {widget.title}
                       </Typography>
                       {widget.title === 'Diagnosis' &&

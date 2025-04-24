@@ -55,7 +55,7 @@ const GET_STUDIES_DATA_QUERY = gql`
         order_by: $order_by,
         sort_direction: $sort_direction
       ) {
-        dbgap_accession
+        study_id
         study_name
         num_of_participants
         num_of_samples
@@ -64,27 +64,32 @@ const GET_STUDIES_DATA_QUERY = gql`
     }
 `;
 
+const GET_NUMBER_OF_STUDIES = gql`{
+    numberOfStudies
+}`
+
 const table = {
   name: 'Studies',
-  dataField: 'dbgap_accession',
+  dataField: 'study_id',
   paginationAPIField: 'studiesListing',
   api: GET_STUDIES_DATA_QUERY,
-  dataKey: 'dbgap_accession',
-  defaultSortField: 'dbgap_accession',
+  dataKey: 'study_id',
+  defaultSortField: 'study_id',
   defaultSortDirection: 'asc',
   tableID: 'studies_table',
   extendedViewConfig: {
     pagination: true,
+    hasExport: false,
   },
   columns: [
     {
-      dataField: 'dbgap_accession',
-      header: 'dbGaP Accession',
-      tooltipText: 'Sort by dbGaP Accession',
+      dataField: 'study_id',
+      header: 'Study ID',
+      tooltipText: 'Sort by Study ID',
       //cellType: cellTypes.LINK,
       linkAttr: {
         rootPath: '/studies',
-        pathParams: ['dbgap_accession']
+        pathParams: ['study_id']
       },
       display: true,
     },
@@ -119,5 +124,6 @@ const table = {
 export {
   table,
   GET_STUDIES_DATA_QUERY,
+  GET_NUMBER_OF_STUDIES,
   studyDownloadLinks
 };

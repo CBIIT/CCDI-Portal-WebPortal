@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import headerImg from '../../assets/resources/Studies_Header.png';
 import { table } from '../../bento/studiesData';
@@ -7,6 +7,8 @@ import { themeConfig } from './tableConfig/Theme';
 import { configColumn } from './tableConfig/Column.js';
 import studyIcon from '../../assets/icons/Study_Icon.svg';
 import breadcrumbIcon from '../../assets/icons/Breadcrumb_Icon.svg';
+import { useApolloClient } from '@apollo/client';
+import { GET_NUMBER_OF_STUDIES } from '../../bento/studiesData';
 
 const StudiesContainer = styled.div`
   .breadcrumb {
@@ -74,7 +76,9 @@ const StudiesContainer = styled.div`
 
 const StudiesView = () => {
 
-  //const [data, setData] = useState([])
+  const client = useApolloClient();
+
+  const [studies, setNumStudies] = useState(0);
   const initTblState = (initialState) => ({
     ...initialState,
     title: 'Studies Table',
@@ -89,6 +93,26 @@ const StudiesView = () => {
     rowsPerPage: 10,
     page: 0,
   });
+
+  async function numStudies() {
+    let result;
+    await client.query({
+      query: GET_NUMBER_OF_STUDIES,
+      variables: {},
+    })
+    .then((response) => 
+      result = response.data.numberOfStudies
+    );
+    return result;
+  }
+
+  useEffect(() => {
+    numStudies().then((result) => {
+      console.log(result)
+      setNumStudies(result);
+    })
+  }, [])
+
   return (
     <StudiesContainer>
       <div className='breadcrumb'><a href='/'>Home</a>
@@ -108,6 +132,7 @@ const StudiesView = () => {
           initState={initTblState}
           themeConfig={themeConfig}
           queryVariables={{}}
+          totalRowCount={studies}
         />
       </div>
     </StudiesContainer>

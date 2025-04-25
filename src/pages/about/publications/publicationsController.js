@@ -29,7 +29,7 @@ const PublicationsController = () => {
     fetchData();
   }, []);
   if (data.publicationsList) {
-    return <PublicationsView publicationsList={data.publicationsList} />;
+    return <PublicationsView bannerText={data.bannerText} publicationsList={data.publicationsList} />;
   } else {
     return <div />
   }

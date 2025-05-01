@@ -1,4 +1,3 @@
-import { cellTypes } from '@bento-core/table';
 import gql from 'graphql-tag';
 
 const studyDownloadLinks = {

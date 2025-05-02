@@ -36,6 +36,11 @@ export const navMobileList = [
     className: 'navMobileItem',
   },
   {
+    name: 'Data Model',
+    link: '/data-model',
+    className: 'navMobileItem',
+  },
+  {
       name: 'Resources',
       link: '',
       className: 'navMobileItem clickable',

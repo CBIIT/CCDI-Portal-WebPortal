@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import {aboutData} from '../../bento/aboutPageData';
-import aboutImg from '../../assets/about/About_Img_Large.png';
-import exportIcon from '../../assets/about/Export_Icon.svg';
-import exportBlackIcon from '../../assets/landing/Export_Icon_Black.svg';
+// import {aboutData} from '../../../bento/aboutPageData';
+import aboutImg from '../../../assets/about/About_Img_Large.png';
+import exportIcon from '../../../assets/about/Export_Icon.svg';
+import exportBlackIcon from '../../../assets/landing/Export_Icon_Black.svg';
 import ReactHtmlParser from 'html-react-parser';
 
 const AboutContainer = styled.div`
@@ -191,7 +191,8 @@ const AboutContainer = styled.div`
   }
 `;
 
-const AboutView = () => {
+const AboutView = ({data}) => {
+  const aboutData = data.aboutData;
   return (
     <AboutContainer>
       <div className='aboutHeader'>
@@ -201,25 +202,25 @@ const AboutView = () => {
       <div className='aboutBody'>
         <div className='upperContainer'>
           <div className='upperContentContainer'>
-            <div className='aboutSubtitle'>{aboutData.upperTitle}</div>
-            <div className='textParagraph'>{ReactHtmlParser(aboutData.upperText)}</div>
+            {aboutData && <div className='aboutSubtitle'>{aboutData.upperTitle}</div>}
+            {aboutData && <div className='textParagraph'>{ReactHtmlParser(aboutData.upperText)}</div>}
             <div className='secondParagraph'>
-              <div className='aboutSubtitle'>{aboutData.lowerTitle}</div>
-              <div className='textParagraph'>{ReactHtmlParser(aboutData.lowerText)}</div>
+              {aboutData && <div className='aboutSubtitle'>{aboutData.lowerTitle}</div>}
+              {aboutData && <div className='textParagraph'>{ReactHtmlParser(aboutData.lowerText)}</div>}
             </div>
           </div>
           <img className='upperImg' src={aboutImg} alt="about_img" />
         </div>
         <div className='lowerContainer'>
-          <div className='aboutSubtitle'>{aboutData.lowerTitle}</div>
-          <div className='textParagraph'>{ReactHtmlParser(aboutData.lowerText)}</div>
+          {aboutData && <div className='aboutSubtitle'>{aboutData.lowerTitle}</div>}
+          {aboutData && <div className='textParagraph'>{ReactHtmlParser(aboutData.lowerText)}</div>}
         </div>
       </div>
       <div className='aboutContactUs'>
         <div className='aboutContactUsContainer'>
           <div className='aboutContactUsContent'>
             <div className='aboutContactUsHeader'>Contact Us</div>
-            <div>{ReactHtmlParser(aboutData.aboutText)}</div>
+            {aboutData && <div>{ReactHtmlParser(aboutData.aboutText)}</div>}
           </div>
         </div>
       </div>

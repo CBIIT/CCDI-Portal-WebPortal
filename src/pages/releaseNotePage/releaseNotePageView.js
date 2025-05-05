@@ -3,18 +3,18 @@ import styled from 'styled-components';
 import { withStyles, Collapse, Tooltip, ClickAwayListener } from '@material-ui/core';
 import html2pdf from "html2pdf.js";
 import ReactHtmlParser from "html-react-parser";
-import { releaseNotesList } from '../../../bento/newsData';
-import NCILogoExport from '../../../assets/about/NCI_Logo.png';
-import ArrowDownIcon from '../../../assets/about/Arrow_Down_Black_Icon.svg';
-import arrowDownGreenIcon from '../../../assets/about/arrowDownGreen.svg';
-import arrowUpGreenIcon from '../../../assets/about/arrowUpGreen.svg';
-import UploadIcon from '../../../assets/about/Upload-Icon.svg';
-import ClinicalTrialsIcon from '../../../assets/about/Release_Clinical_Icon.svg';
-import GenomicsIcon from '../../../assets/about/Release_Genomics_Icon.svg';
-import ImagingIcon from '../../../assets/about/Release_Imaging_Icon.svg';
-import XenograftIcon from '../../../assets/about/Release_Xenograft_Icon.svg';
-import EpidemiologicIcon from '../../../assets/about/Release_Epidemiologic_Icon.svg';
-import CellLinesIcon from '../../../assets/about/Release_CellLines_Icon.svg';
+// import { releaseNotesList } from '../../bento/newsData';
+import NCILogoExport from '../../assets/about/NCI_Logo.png';
+import ArrowDownIcon from '../../assets/about/Arrow_Down_Black_Icon.svg';
+import arrowDownGreenIcon from '../../assets/about/arrowDownGreen.svg';
+import arrowUpGreenIcon from '../../assets/about/arrowUpGreen.svg';
+import UploadIcon from '../../assets/about/Upload-Icon.svg';
+import ClinicalTrialsIcon from '../../assets/about/Release_Clinical_Icon.svg';
+import GenomicsIcon from '../../assets/about/Release_Genomics_Icon.svg';
+import ImagingIcon from '../../assets/about/Release_Imaging_Icon.svg';
+import XenograftIcon from '../../assets/about/Release_Xenograft_Icon.svg';
+import EpidemiologicIcon from '../../assets/about/Release_Epidemiologic_Icon.svg';
+import CellLinesIcon from '../../assets/about/Release_CellLines_Icon.svg';
 
 const SiteUpdateResultContainer = styled.div`
     margin: 0 16px;
@@ -404,19 +404,19 @@ const SiteUpdateCardDescription = styled.div`
         font-weight: 700;
     }
 
-    a[target="_blank"]::after {
-      content: " ";
-      font-weight: bold;
-      color: #004187;
-      font-size: 14px;
-      background-repeat: no-repeat;
-      background-size: 100%;
-      background-position-y: 4px;
-      background-position-x: -2px;
-      width: 17px;
-      height: 17px;
-      display: inline-table;
-    }
+    // a[target="_blank"]::after {
+    //   content: " ";
+    //   font-weight: bold;
+    //   color: #004187;
+    //   font-size: 14px;
+    //   background-repeat: no-repeat;
+    //   background-size: 100%;
+    //   background-position-y: 4px;
+    //   background-position-x: -2px;
+    //   width: 17px;
+    //   height: 17px;
+    //   display: inline-table;
+    // }
 
     p {
       font-family: Inter;
@@ -432,7 +432,7 @@ const SiteUpdateCardDescription = styled.div`
     }
 `;
 
-const ReleaseNotesPageView = () => {
+const ReleaseNotesPageView = ( {releaseNotesList} ) => {
     const [selectedIdx, setSelectedIdx] = useState(0);
     const [siteUpdateNav, setSiteUpdateNav] = useState([]);
     const [open, setOpen] = useState([]);

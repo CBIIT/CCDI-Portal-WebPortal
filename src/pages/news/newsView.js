@@ -14,11 +14,8 @@ import newsImg from '../../assets/news/News_Header.jpg';
 import arrowDownIcon from '../../assets/about/arrowDownGreen.svg';
 import arrowUpIcon from '../../assets/about/arrowUpGreen.svg';
 import UploadIcon from '../../assets/about/Upload-Icon.svg';
-import { altList, srcList, newsList, releaseNotesList } from '../../bento/newsData'
-
-const fullList = (newsList.concat(releaseNotesList)).sort((a,b) => {
-  return new Date(a.date).getTime() - new Date(b.date).getTime();
-}).reverse();
+import { srcList } from '../../bento/newsData';
+// import { altList, srcList, newsList, releaseNotesList } from '../../bento/newsData'
 
 const NewsContainer = styled.div`
   width: 100%;
@@ -528,6 +525,22 @@ const useOutsideAlerter = (ref) => {
   }, [ref]);
 };
 
+const NewsView = ({classes, newsList, altList, releaseNotesList}) => {
+  // const getPageResults = (selectedTab, pageInfo) => {
+  //   const resultList = getResultList(selectedTab);
+  //   const allids = [];
+  //   const indexStart = pageInfo.pageSize*(pageInfo.page-1);
+  //   const indexEnd = pageInfo.pageSize*pageInfo.page < pageInfo.pageTotal ? pageInfo.pageSize*pageInfo.page - 1 : pageInfo.pageTotal - 1;
+  //   for (let i = indexStart; i<= indexEnd; i++) {
+  //     allids.push(resultList[i]);
+  //   }
+  //   return allids;
+  // }
+
+  const fullList = (newsList.concat(releaseNotesList)).sort((a,b) => {
+    return new Date(a.date).getTime() - new Date(b.date).getTime();
+  }).reverse();
+
 const getResultList = (tabName) => {
   if (tabName === "All") {
     return fullList;
@@ -627,8 +640,6 @@ const getPageResults = (selectedTab, pageInfo) => {
   return allids;
 }
 
-const NewsView = ({classes}) => {
-  // const navigate = useNavigate();
   const [selectedTab, setSelectedTab] = useState("All");
   const newsTabList = ['All', 'News', 'CCDI Application Updates', 'Release Notes'];
   const sizelist = [10,20,50,100];

@@ -36,11 +36,6 @@ export const navMobileList = [
     className: 'navMobileItem',
   },
   {
-    name: 'Data Model',
-    link: '/data-model',
-    className: 'navMobileItem',
-  },
-  {
       name: 'Resources',
       link: '',
       className: 'navMobileItem clickable',
@@ -133,6 +128,11 @@ export const navbarSublists = {
     {
       name: 'Accessing CCDI Data (PDF)',
       link: '/user-guide.pdf',
+      className: 'navMobileSubItem',
+    },
+    {
+      name: 'CCDI Data Model',
+      link: '/data-model',
       className: 'navMobileSubItem',
     },
     {

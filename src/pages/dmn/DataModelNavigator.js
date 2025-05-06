@@ -1,9 +1,9 @@
 
 import React from 'react';
-// import env from '../../utils/env';
+import env from '../../utils/env';
 
 const DataModelNavigator = () => {
-  const dmnUrl = "https://cbiit.github.io/crdc-data-model-navigator/";
+  const dmnUrl = env.REACT_APP_DMN_URL  || "https://cbiit.github.io/crdc-data-model-navigator/";
   return (
     <div style={{ width: '100%', height: '1000px' }}>
       <iframe

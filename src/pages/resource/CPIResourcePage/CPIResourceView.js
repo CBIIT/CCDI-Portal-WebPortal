@@ -5,7 +5,7 @@ import headerImg from '../../../assets/resources/CPI_Header.png';
 import exportIcon from '../../../assets/resources/Explore_Icon.svg';
 import closeIcon from '../../../assets/icons/Close_Icon.svg';
 import arrowDownIcon from '../../../assets/icons/Arrow_Down.svg';
-import { cpiResourceData, introText } from '../../../bento/cpiResourceData';
+// import { cpiResourceData, introText } from '../../../bento/cpiResourceData';
 import exportIconBlue from '../../../assets/icons/Export_Icon.svg';
 import ccdiCPIImg from '../../../assets/resources/CPI_img.png';
 
@@ -402,13 +402,19 @@ const CPIResourceBody = styled.div`
     }
 `;
 
-const CPIResourceView = () => {
+const CPIResourceView = ({data}) => {
     const [selectedNavTitle, setSelectedNavTitle] = useState('');
     const [stickyNavStyle, setStickyNavStyle] = useState('navList');
     const sectionList = useRef([]);
-    sectionList.current = cpiResourceData.map((element, i) => {
-        return sectionList.current[i] || createRef()
-    });
+    // sectionList.current = cpiResourceData.map((element, i) => {
+    //     return sectionList.current[i] || createRef()
+    // });
+    const cpiContent = data.cpiContent;
+    if (cpiContent) {
+        sectionList.current = cpiContent.map((element, i) => {
+            return sectionList.current[i] || createRef()
+        });
+    }
     const handleScroll = () => {
         const bodyElement = document.getElementById('FederationBody');
         const footerList = document.getElementsByTagName('footer');
@@ -474,7 +480,7 @@ const CPIResourceView = () => {
                     <div className={stickyNavStyle} id='leftNav'>
                         <div className='navTitle'>TOPICS</div>
                         {
-                            cpiResourceData.map((cpiItem, topicid) => {
+                            cpiContent && cpiContent.map((cpiItem, topicid) => {
                                 const topickey = `topic_${topicid}`;
                                 if (cpiItem.topic) {
                                     return (
@@ -490,9 +496,9 @@ const CPIResourceView = () => {
                 </div>
                 <div className='contentSection'>
                     <div className='contentList'>
-                        <div className='introContainer'>{ReactHtmlParser(introText)}</div>
+                        {data.cpiIntroText && <div className='introContainer'>{ReactHtmlParser(data.cpiIntroText)}</div>}
                         {
-                            cpiResourceData.map((cpiItem, mciid) => {
+                            cpiContent && cpiContent.map((cpiItem, mciid) => {
                                 const cpikey = `cpi_${mciid}`;
                                 return (
                                     <div key={cpikey}>

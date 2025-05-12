@@ -164,7 +164,7 @@ function searchView(props) {
    * @param {number} currentPage the current page offset
    */
   const getTabData = async (field, pageSize, currentPage) => {
-    const isPublic = !authCheck();
+    const isPublic = true;
 
     // Handle the 'All' tab search separately
     if (field === 'all') {

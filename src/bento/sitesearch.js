@@ -59,11 +59,6 @@ export const SEARCH_PUBLIC = gql`
         publicGlobalSearch(input: $input) {
             model_count
             about_count
-            program_count
-            study_count
-            subject_count
-            sample_count
-            file_count
             about_page{
                 page
                 title

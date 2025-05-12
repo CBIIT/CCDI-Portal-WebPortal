@@ -127,7 +127,50 @@ const StudiesDetailContainer = styled.div`
     }
 `;
 
-const StudiesDetail = ({studyId}) => {
+const StudiesDetailBodyContainer = styled.div`
+    // width: 1420px;
+    // margin: 0 auto;
+    display: grid;
+    grid-template-columns: 50% 50%;
+
+    .leftContainer {
+        border-right: 1px solid #939393;
+        padding: 34px 40px 20px 70px;
+    }
+
+    .rightContainer {
+        padding: 34px 70px 20px 40px;
+    }
+
+    .studyItem {
+        margin-bottom: 33px;
+    }
+
+    .studyItemTitle {
+        color: #0095A2;
+        font-family: Poppins;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 24px;
+        letter-spacing: 0.32px;
+        text-transform: uppercase;
+    }
+
+    .studyItemContent {
+        color: #000000;
+        font-family: Inter;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 22px;
+    }
+
+     @media (min-width: 1420px) {
+        width: 1420px;
+        margin: 0 auto;
+    }
+`;
+
+const StudiesDetail = ({data}) => {
     return(
         <StudiesDetailContainer>
             <div className='breadcrumb'>
@@ -135,15 +178,45 @@ const StudiesDetail = ({studyId}) => {
                 <img src={breadcrumbIcon} className='breadcrumbIcon' alt="breadcrumb icon" />
                 <a href='/studies'>Studies</a>
                 <img src={breadcrumbIcon} className='breadcrumbIcon' alt="breadcrumb icon" />
-                <span>Study Code {studyId}</span>
+                <span>Study Code {data.study_id}</span>
             </div>
             <div className='resourceHeader'><div className='resourceHeaderBackground'><div className='resourceHeaderText'>CCDI Hub Studies</div></div></div>
             <div className='resourceTitleContainer'>
                 <div className='resourceTitle'>
-                    <div>Study Code:<span className='studyIdText'>{studyId}</span><img src={bookIcon} alt="bookIcon" /></div>
-                    <div className='goToSiteButton'>Subjects in this Study: <span className='subjectNumber'>300</span></div>
+                    <div>Study Code:<span className='studyIdText'>{data.study_id}</span><img src={bookIcon} alt="bookIcon" /></div>
+                    <div className='goToSiteButton'>Subjects in this Study: <span className='subjectNumber'>{data.num_of_participants.toLocaleString('en-US')}</span></div>
                 </div>
             </div>
+            <StudiesDetailBodyContainer>
+                <div className='leftContainer'>
+                    <div className='studyItem'>
+                        <div className='studyItemTitle'>STUDY ID</div>
+                        <div className="studyItemContent">{data.study_id}</div>
+                    </div>
+                    <div className='studyItem'>
+                        <div className='studyItemTitle'>STUDY NAME</div>
+                        <div className="studyItemContent">{data.study_name}</div>
+                    </div>
+                    <div className='studyItem'>
+                        <div className='studyItemTitle'>Study Description</div>
+                        <div className="studyItemContent">{data.study_description}</div>
+                    </div>
+                </div>
+                <div className='rightContainer'>
+                    <div className='studyItem'>
+                        <div className='studyItemTitle'>Participants Count</div>
+                        <div className="studyItemContent">{data.num_of_participants.toLocaleString('en-US')}</div>
+                    </div>
+                    <div className='studyItem'>
+                        <div className='studyItemTitle'>Samples Count</div>
+                        <div className="studyItemContent">{data.num_of_samples.toLocaleString('en-US')}</div>
+                    </div>
+                    <div className='studyItem'>
+                        <div className='studyItemTitle'>Files Count</div>
+                        <div className="studyItemContent">{data.num_of_files.toLocaleString('en-US')}</div>
+                    </div>
+                </div>
+            </StudiesDetailBodyContainer>
         </StudiesDetailContainer>
     )
 }

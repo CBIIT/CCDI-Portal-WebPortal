@@ -9,7 +9,7 @@ import DataUsagePoliciesView from '../../pages/about/DataUsagePoliciesPage/DataU
 import PublicationsView from '../../pages/about/publications/publicationsController';
 import News from '../../pages/news/newsController';
 import Error from '../../pages/error/Error';
-import Search from '../../pages/search/searchView';
+import Search from '../../pages/globalSearch/searchView';
 import Inventory from '../../pages/inventory/inventoryController';
 import Cart from '../../pages/cart/cartController';
 import ScrollButton from '../ScrollButton/ScrollButtonView';

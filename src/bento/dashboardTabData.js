@@ -1354,7 +1354,7 @@ export const tabContainers = [
     extendedViewConfig: {
       pagination: true,
       manageViewColumns: {
-        title: 'View Columns',
+        title: 'Displayed Columns',
       },
     },
     columns: [
@@ -1506,7 +1506,7 @@ export const tabContainers = [
     extendedViewConfig: {
       pagination: true,
       manageViewColumns: {
-        title: 'View Columns',
+        title: 'Displayed Columns',
       },
     },
     columns: [
@@ -1663,7 +1663,7 @@ export const tabContainers = [
     extendedViewConfig: {
       pagination: true,
       manageViewColumns: {
-        title: 'View Columns',
+        title: 'Displayed Columns',
       },
     },
     saveButtonDefaultStyle: {
@@ -1787,7 +1787,7 @@ export const tabContainers = [
     extendedViewConfig: {
       pagination: true,
       manageViewColumns: {
-        title: 'View Columns',
+        title: 'Displayed Columns',
       },
     },
     columns: [

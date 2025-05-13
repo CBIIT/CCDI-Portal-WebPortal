@@ -7,7 +7,7 @@ import Pagination from '@material-ui/lab/Pagination';
 import styled from 'styled-components';
 import exportIcon from '../../../assets/about/Export_Icon.svg';
 import publicationsHeaderImg from '../../../assets/about/Publications_Header.png';
-import { publicationsList } from '../../../bento/publicationsData';
+// import { publicationsList } from '../../../bento/publicationsData';
 import searchIcon from '../../../assets/header/Search_Small_Icon.svg';
 import arrowDownIcon from '../../../assets/about/arrowDownGreen.svg';
 import arrowUpIcon from '../../../assets/about/arrowUpGreen.svg';
@@ -132,7 +132,7 @@ const PublicationsContainer = styled.div`
   }
 
   .UpperContainer {
-    display: flex;
+    // display: flex;
   }
 
   .titleContainer {
@@ -535,7 +535,7 @@ const useFocus = () => {
   return [ htmlElRef, setFocus ] 
 };
 
-const PublicationsView = ({classes}) => {
+const PublicationsView = ({classes, bannerText, publicationsList}) => {
   const [selectedTab, setSelectedTab] = useState("All");
   const newsTabList = ['All', 'Primary', 'Secondary', 'Abstract'];
   const sizelist = [10,20,50,100];
@@ -647,7 +647,7 @@ const PublicationsView = ({classes}) => {
     <PublicationsContainer>
       <div className='pageHeader'>
         <div className='pageHeaderText'>CCDI-Supported Publications</div>
-        <div className='pageHeaderSubtext'>Publication list updated as of 3/31/25.</div>
+        <div className='pageHeaderSubtext'>{bannerText}</div>
       </div>
       <SearchBar onMouseOver={() => setDeleteIconShow('block')} onMouseOut={() => setDeleteIconShow('none')}>
         <SearchInput ref={inputRef} type="text" value={inputValue} placeholder="Search Publications" onChange={handleTextInputChange} />
@@ -726,7 +726,7 @@ const PublicationsView = ({classes}) => {
                         <span className='publicationsText2'>{publicationsItem.type}</span>
                       </div>}
                     </div>
-                    <div className='publicationsItemContent'>{ReactHtmlParser(`${publicationsItem.summary.substring(0, 485)}...`)}</div>
+                    <div className='publicationsItemContent'>{ReactHtmlParser(publicationsItem.summary.length > 485 ? `${publicationsItem.summary.substring(0, 485)}...` : publicationsItem.summary)}</div>
                     <div className='footerContainer'>
                       <div className='publicationsItemTagContainer'><div className='publicationsItemTag'>{publicationsItem.tag}</div></div>
                       <a className='readMoreButtonContainer' href={publicationsItem.link} target='_blank' rel='noopener noreferrer'><div className='readMoreButton'><div className='readMoreText'>Read More</div></div></a>

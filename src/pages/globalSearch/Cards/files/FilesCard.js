@@ -9,17 +9,16 @@ import { cn } from 'bento-components';
   return text.replace(/\[|\]/g, '');
 };*/
 
-const ParticipantCard = ({ data = {}, index })=> {
+const FilesCard = ({ data = {}, index })=> {
   const {
+    file_name,
+    data_category,
     participant_id,
-    diagnosis_str,
+    file_description,
     study_id,
-    age_at_diagnosis_str,
-    treatment_type_str,
-    sex_at_birth,
-    treatment_agent_str,
-    race_str,
-    last_known_survival_status_str
+    file_type,
+    sample_id,
+    file_size,
   } = data;
   const classes = useStyles();
 
@@ -42,25 +41,23 @@ const ParticipantCard = ({ data = {}, index })=> {
 
       <Grid item xs={true}>
         <div className={cn(classes.keyAndValueRow, classes.titleRow)}>
-          <span className={classes.titleKey}>PARTICIPANT</span>
+          <span className={classes.titleKey}>FILES</span>
           <Typography variant="h3" className={classes.titleValue}>
-            {participant_id}
+            {file_name}
           </Typography>
         </div>
         <div className={classes.row}>
           <div className={classes.column}>
-            {renderInfo('Diagnosis:', diagnosis_str)}
-            {renderInfo('Age at Diagnosis:', age_at_diagnosis_str)}
-            {renderInfo('Sex at Birth:', sex_at_birth)}
-            {renderInfo('Race:', race_str)}
+            {renderInfo('Data Category:', data_category)}
+            {renderInfo('File Description:', file_description)}
+            {renderInfo('File Type:', file_type)}
+            {renderInfo('File Size:', file_size)}
           </div>
 
           <div className={cn(classes.column, classes.leftColumn)}>
+            {renderInfo('Participant:', participant_id)}
             {renderInfo('Study ID:', study_id)}
-            {renderInfo('Treatement Type:', treatment_type_str)}
-            {renderInfo('Treatment Agent:', treatment_agent_str)}
-            {renderInfo('Last Known Survival Status:', last_known_survival_status_str)}
-
+            {renderInfo('Sample:', sample_id)}
           </div>
         </div>
       </Grid>
@@ -72,4 +69,4 @@ const ParticipantCard = ({ data = {}, index })=> {
   );
 };
 
-export default ParticipantCard;
+export default FilesCard;

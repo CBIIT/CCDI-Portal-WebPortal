@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import headerImg from '../../assets/studies/studyDetailBackground.png';
 import breadcrumbIcon from '../../assets/icons/Breadcrumb_Icon.svg';
 import bookIcon from '../../assets/studies/bookIcon.svg';
+import { studyDownloadLinks } from '../../bento/studiesData';
 
 const StudiesDetailContainer = styled.div`
     .breadcrumb {
@@ -76,12 +77,12 @@ const StudiesDetailContainer = styled.div`
         font-weight: 600;
         line-height: 38px;
         letter-spacing: 0.7px;
-        // text-decoration-line: underline;
-        // text-decoration-style: solid;
-        // text-decoration-thickness: 2px;
+        text-decoration-line: underline;
+        text-decoration-style: solid;
+        text-decoration-thickness: 2px;
     }
 
-    .goToSiteButton {
+    .participantContaniner {
         display: flex;
         margin-left: auto;
         padding: 0 25px;
@@ -103,9 +104,9 @@ const StudiesDetailContainer = styled.div`
         font-weight: 600;
         line-height: 21px; /* 110.526% */
         letter-spacing: 0.38px;
-        // text-decoration-line: underline;
-        // text-decoration-style: solid;
-        // text-decoration-thickness: 1px;
+        text-decoration-line: underline;
+        text-decoration-style: solid;
+        text-decoration-thickness: 1px;
     }
 
     @media (min-width: 1420px) {
@@ -162,6 +163,15 @@ const StudiesDetailBodyContainer = styled.div`
         font-size: 16px;
         font-weight: 500;
         line-height: 22px;
+
+        a {
+            color: #455299;
+            font-family: Inter;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 22px;
+        }
     }
 
      @media (min-width: 1420px) {
@@ -183,15 +193,15 @@ const StudiesDetail = ({data}) => {
             <div className='resourceHeader'><div className='resourceHeaderBackground'><div className='resourceHeaderText'>CCDI Hub Studies</div></div></div>
             <div className='resourceTitleContainer'>
                 <div className='resourceTitle'>
-                    <div>Study Code:<span className='studyIdText'>{data.study_id}</span><img src={bookIcon} alt="bookIcon" /></div>
-                    <div className='goToSiteButton'>Subjects in this Study: <span className='subjectNumber'>{data.num_of_participants.toLocaleString('en-US')}</span></div>
+                    <div>Study Code:<a href={`https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=${data.study_id}`} className='studyIdText' target="_blank" rel="noopener noreferrer">{data.study_id}</a><img src={bookIcon} alt="bookIcon" /></div>
+                    <div className='participantContaniner'>Participants in this Study: <a href={`/explore?dbgap_accession=${data.study_id}`} className='subjectNumber'>{data.num_of_participants.toLocaleString('en-US')}</a></div>
                 </div>
             </div>
             <StudiesDetailBodyContainer>
                 <div className='leftContainer'>
                     <div className='studyItem'>
                         <div className='studyItemTitle'>STUDY ID</div>
-                        <div className="studyItemContent">{data.study_id}</div>
+                        <div className="studyItemContent"><a href={`https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=${data.study_id}`} target="_blank" rel="noopener noreferrer">{data.study_id}</a></div>
                     </div>
                     <div className='studyItem'>
                         <div className='studyItemTitle'>STUDY NAME</div>
@@ -200,6 +210,10 @@ const StudiesDetail = ({data}) => {
                     <div className='studyItem'>
                         <div className='studyItemTitle'>Study Description</div>
                         <div className="studyItemContent">{data.study_description}</div>
+                    </div>
+                    <div className='studyItem'>
+                        <div className='studyItemTitle'>Download</div>
+                        <div className="studyItemContent"><a href={studyDownloadLinks[data.study_id]}>Study Manifest</a></div>
                     </div>
                 </div>
                 <div className='rightContainer'>
@@ -210,10 +224,6 @@ const StudiesDetail = ({data}) => {
                     <div className='studyItem'>
                         <div className='studyItemTitle'>Samples Count</div>
                         <div className="studyItemContent">{data.num_of_samples.toLocaleString('en-US')}</div>
-                    </div>
-                    <div className='studyItem'>
-                        <div className='studyItemTitle'>Files Count</div>
-                        <div className="studyItemContent">{data.num_of_files.toLocaleString('en-US')}</div>
                     </div>
                 </div>
             </StudiesDetailBodyContainer>

@@ -9,9 +9,10 @@ import { useParams } from 'react-router-dom';
 // import env from '../../utils/env';
 
 const data = {
-  study_id: 'phs1234567',
+  study_id: 'phs000463',
   study_name: 'Molecular Characterization Initiative',
   dbgap_accession: '',
+  publications: ['123', '234', '345'],
   study_description: 'The National Cancer Institute (NCI) Childhood Cancer Data Initiative (CCDI) focuses on the critical need to collect, analyze, and share data to address the burden of cancer in children, adolescents, and young adults (AYAs). The Molecular Characterization Initiative (MCI) will further the CCDIs goals by providing access to better diagnostic tests for pediatric and AYA patients. The molecular characterizations of solid tumors, soft tissue sarcomas, and rare diseases are performed in a CLIA-certified setting as results may be used to screen for and/or confirm clinical trial eligibility, direct treatment, or otherwise contribute to the conduct of the trial. ',
   num_of_participants: 11111,
   num_of_samples: 22222,
@@ -23,24 +24,6 @@ const studyDetailContainer = () => {
   // const { loading, error, data } = useQuery(GET_STUDY_DETAIL_DATA_QUERY, {
   //   variables: { "study_id": studyId },
   // });
-
-  // const [manifestData, setManifestData] = useState({});
-
-  // useEffect(() => {
-  //   const fetchManifestData = async () => {
-  //     try {
-  //       const URL = env.REACT_APP_CCDI_MANIFEST_FILES_URL || "https://raw.githubusercontent.com/CBIIT/C3DC-Data-Releases/refs/heads/dev/ccdiManifestURL.json";
-  //       const response = await fetch(URL);
-  //       const jsonData = await response.json();
-  //       setManifestData(jsonData);
-  //     } catch (error) {
-  //       setManifestData({networkError: "Error fetching manifest data."});
-  //       console.error('Error fetching manifest data:', error);
-  //     }
-  //   };
-
-  //   fetchManifestData();
-  // }, []);
  
   // if (loading) return <CircularProgress />;
   // if (error || !data || !data.studyDetails ) {
@@ -52,7 +35,7 @@ const studyDetailContainer = () => {
   // }
 
   return (
-    <StudyDetailView data={data} studyId={studyId} />
+    <StudyDetailView data={data} />
   );
 };
 

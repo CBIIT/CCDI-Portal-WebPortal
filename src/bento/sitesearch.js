@@ -56,8 +56,7 @@ export const SEARCH_PAGE_DATAFIELDS = {
 /** Public search queries */
 export const SEARCH_PUBLIC = gql`
     query publicGlobalSearchQuery($input: String) {
-        publicGlobalSearch(input: $input) {
-            model_count
+        globalSearch(input: $input) {
             about_count
             about_page{
                 page

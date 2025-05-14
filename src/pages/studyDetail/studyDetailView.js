@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import headerImg from '../../assets/studies/studyDetailBackground.png';
 import breadcrumbIcon from '../../assets/icons/Breadcrumb_Icon.svg';
 import bookIcon from '../../assets/studies/bookIcon.svg';
+import exportIcon from '../../assets/studies/exportIcon.svg';
+import manifestIcon from '../../assets/studies/manifestIcon.svg';
 import { studyDownloadLinks } from '../../bento/studiesData';
 
 const StudiesDetailContainer = styled.div`
@@ -174,6 +176,14 @@ const StudiesDetailBodyContainer = styled.div`
         }
     }
 
+    .exportIcon {
+        margin-left: 8px;
+    }
+
+    .studyManifestIcon {
+        margin-left: 10px;
+    }
+
      @media (min-width: 1420px) {
         width: 1420px;
         margin: 0 auto;
@@ -201,7 +211,7 @@ const StudiesDetail = ({data}) => {
                 <div className='leftContainer'>
                     <div className='studyItem'>
                         <div className='studyItemTitle'>STUDY ID</div>
-                        <div className="studyItemContent"><a href={`https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=${data.study_id}`} target="_blank" rel="noopener noreferrer">{data.study_id}</a></div>
+                        <div className="studyItemContent"><a href={`https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=${data.study_id}`} target="_blank" rel="noopener noreferrer">{data.study_id}<img className='exportIcon' src={exportIcon} alt="exportIcon" /></a></div>
                     </div>
                     <div className='studyItem'>
                         <div className='studyItemTitle'>STUDY NAME</div>
@@ -213,7 +223,20 @@ const StudiesDetail = ({data}) => {
                     </div>
                     <div className='studyItem'>
                         <div className='studyItemTitle'>Download</div>
-                        <div className="studyItemContent"><a href={studyDownloadLinks[data.study_id]}>Study Manifest</a></div>
+                        <div className="studyItemContent">
+                        {
+                            data.publications.map((publicationItem, idx) => {
+                                const key = `publication_${idx}`;
+                                return (
+                                    <div><a key={key} href={`https://pubmed.ncbi.nlm.nih.gov/${publicationItem}`} target="_blank" rel="noopener noreferrer">PMID:{publicationItem}<img className='exportIcon' src={exportIcon} alt="exportIcon" /></a></div>
+                                )
+                            })
+                        }
+                        </div>
+                    </div>
+                    <div className='studyItem'>
+                        <div className='studyItemTitle'>Download</div>
+                        <div className="studyItemContent"><a href={studyDownloadLinks[data.study_id]}>Study Manifest<img className='studyManifestIcon' src={manifestIcon} alt="manifestIcon" /></a></div>
                     </div>
                 </div>
                 <div className='rightContainer'>

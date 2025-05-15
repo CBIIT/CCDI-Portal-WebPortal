@@ -222,16 +222,18 @@ const StudiesDetail = ({data}) => {
                         <div className="studyItemContent">{data.study_description}</div>
                     </div>
                     <div className='studyItem'>
-                        <div className='studyItemTitle'>Download</div>
+                        <div className='studyItemTitle'>Publications</div>
                         <div className="studyItemContent">
-                        {
-                            data.publications.map((publicationItem, idx) => {
-                                const key = `publication_${idx}`;
-                                return (
-                                    <div><a key={key} href={`https://pubmed.ncbi.nlm.nih.gov/${publicationItem}`} target="_blank" rel="noopener noreferrer">PMID:{publicationItem}<img className='exportIcon' src={exportIcon} alt="exportIcon" /></a></div>
-                                )
-                            })
-                        }
+                            {
+                                data.pubmed_ids !== '' ?
+                                data.pubmed_ids.split(";").map((publicationItem, idx) => {
+                                    const key = `publication_${idx}`;
+                                    return (
+                                        <div><a key={key} href={`https://pubmed.ncbi.nlm.nih.gov/${publicationItem}`} target="_blank" rel="noopener noreferrer">PMID:{publicationItem}<img className='exportIcon' src={exportIcon} alt="exportIcon" /></a></div>
+                                    )
+                                })
+                                : <div>N/A</div>
+                            }
                         </div>
                     </div>
                     <div className='studyItem'>

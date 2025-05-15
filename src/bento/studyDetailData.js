@@ -6,6 +6,7 @@ query studyDetails($study_id: String) {
         study_id
         study_name
         dbgap_accession
+        pubmed_ids
         study_description
         num_of_participants
         num_of_samples

@@ -1,4 +1,5 @@
 import gql from 'graphql-tag';
+import { cellTypes } from '@bento-core/table';
 
 const studyDownloadLinks = {
   "phs000463": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs000463_CCDI_Study_Manifest_v2.1.0.xlsx",
@@ -85,7 +86,7 @@ const table = {
       dataField: 'study_id',
       header: 'Study ID',
       tooltipText: 'Sort by Study ID',
-      //cellType: cellTypes.LINK,
+      cellType: cellTypes.LINK,
       linkAttr: {
         rootPath: '/studies',
         pathParams: ['study_id']

@@ -18,7 +18,7 @@ import FederationResourceView from "../../pages/resource/FederationResourcePage/
 import CPIResourceView from "../../pages/resource/CPIResourcePage/CPIResourceController";
 import ReleaseNotesPageView from '../../pages/releaseNotePage/releaseNotePageController';
 import StudiesView from '../../pages/studies/studiesView';
-import StudiesDetail from "../../pages/studies/studiesDetail";
+import StudiesDetail from "../../pages/studyDetail/studyDetailController";
 import OverlayWindow from '../OverlayWindow/OverlayWindow';
 // import NewsDetail from '../../pages/news/newsDetailView';
 

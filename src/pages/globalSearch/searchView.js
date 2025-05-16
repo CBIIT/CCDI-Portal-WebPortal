@@ -9,7 +9,9 @@ import {
   SEARCH_PAGE_DATAFIELDS, SEARCH_PAGE_KEYS,
   queryCountAPI, queryResultAPI, queryAutocompleteAPI,
 } from '../../bento/sitesearch';
-import { ParticipantCard, AboutCard, ValueCard } from './Cards';
+import { ParticipantCard, AboutCard, StudiesCard, SamplesCard, FilesCard, ModelsCard } from './Cards';
+import { useLocation } from 'react-router-dom';
+import searchBackground from './assets/globalSearchBackground.png';
 
 /**
  * Determine the correct datafield and offset for the All tab based
@@ -22,11 +24,15 @@ import { ParticipantCard, AboutCard, ValueCard } from './Cards';
  */
 async function getAllQueryField(searchText, calcOffset, pageSize, isPublic) {
   const searchResp = await queryCountAPI(searchText, isPublic);
-  const custodianConfigForTabData = isPublic ? [{ countField: 'about_count', nameField: 'about_page' }]
-    : [{ countField: 'participant_count', nameField: 'participants' },
-      { countField: 'biospecimen_count', nameField: 'biospecimens' },
-      { countField: 'model_count', nameField: 'model' },
-      { countField: 'about_count', nameField: 'about_page' }];
+
+  const custodianConfigForTabData = [
+    { countField: 'participant_count', nameField: 'participants' },
+    { countField: 'study_count', nameField: 'studies' },
+    { countField: 'sample_count', nameField: 'samples' },
+    { countField: 'file_count', nameField: 'files' },
+    { countField: 'model_count', nameField: 'model' },
+    { countField: 'about_count', nameField: 'about_page' }
+  ];
 
   let acc = 0;
   const mapCountAndName = custodianConfigForTabData.map((obj) => {
@@ -48,7 +54,7 @@ async function getAllQueryField(searchText, calcOffset, pageSize, isPublic) {
     };
   }
 
-  return { datafieldValue: isPublic ? 'about_page' : 'participants', offsetValue: 0 };
+  return { datafieldValue: 'participants', offsetValue: 0 };
 }
 
 /**
@@ -69,19 +75,31 @@ async function queryAllAPI(search, offset, pageSize, isPublic) {
     first: pageSize,
     offset: offsetValue,
   };
+  let results = await queryResultAPI(datafieldValue, input, isPublic)
+  results = results.map((e) => {
+    return {...e, type: datafieldValue }
+  })
 
-  return queryResultAPI(datafieldValue, input, isPublic);
+  return results;
 }
+
+const useQuery = () => {
+  return new URLSearchParams(useLocation().search);
+};
 
 function searchView(props) {
   const {
-    classes, searchparam = '',
+    classes,
     isSignedIn, isAuthorized, publicAccessEnabled,
   } = props;
 
+  const query = useQuery();
+  const searchparam = query.get("keyword") ? query.get("keyword").trim() : "";
+  console.log(searchparam);
   //const history = useHistory();
   const [searchText, setSearchText] = useState(searchparam);
   const [searchCounts, setSearchCounts] = useState([]);
+
 
   const authCheck = () => isAuthorized || publicAccessEnabled;
 
@@ -116,7 +134,7 @@ function searchView(props) {
     if (value === searchText) { return; }
     if (value.trim() === '') { return; }
 
-    queryCountAPI(value, !authCheck()).then((d) => {
+    queryCountAPI(value).then((d) => {
       setSearchText(value);
       setSearchCounts(d);
      // history.push(`/search/${value}`);
@@ -165,11 +183,12 @@ function searchView(props) {
    */
   const getTabData = async (field, pageSize, currentPage) => {
     const isPublic = true;
-
+  
     // Handle the 'All' tab search separately
     if (field === 'all') {
-      const count = isPublic ? searchCounts.about_count : countValues(searchCounts);
+      const count = countValues(searchCounts);
       let data = await queryAllAPI(searchText, (currentPage - 1) * pageSize, pageSize, isPublic);
+      console.log(data)
 
       // If the current set of data is less than the page size,
       // we need to query the next datafield for it's data
@@ -186,10 +205,9 @@ function searchView(props) {
           apiQueries += 1;
         }
       }
-
+      
       return (data || []).slice(0, pageSize);
     }
-
     // Handle all of the other tabs
     const input = {
       input: searchText,
@@ -197,6 +215,7 @@ function searchView(props) {
       offset: (currentPage - 1) * pageSize,
     };
     const data = await queryResultAPI(field, input, isPublic);
+    console.log(data);
     return (data || []).slice(0, pageSize);
   };
 
@@ -219,10 +238,11 @@ function searchView(props) {
     config: {
       resultCardMap: {
         participants: ParticipantCard,
-        property: ValueCard,
-        node: ValueCard,
-        value: ValueCard,
-        about: AboutCard,
+        studies: StudiesCard,
+        samples: SamplesCard,
+        files: FilesCard,
+        model: ModelsCard,
+        about_page: AboutCard,
       },
       showFilterBy: true,
     },
@@ -244,7 +264,7 @@ function searchView(props) {
           paginationContainer: classes.paginationContainer,
           noData: classes.noData,
         },
-        count: (!authCheck() ? searchCounts.about_count : countValues(searchCounts)) || 0,
+        count: countValues(searchCounts) || 0,
         value: '1',
       },
       {
@@ -261,13 +281,13 @@ function searchView(props) {
           noData: classes.noData,
         },
         count: searchCounts.participant_count || 0,
-        value: `${!authCheck() ? 'inactive-' : ''}2`,
+        value: `2`,
       },
       {
-        name: 'Biospecimens',
-        field: 'biospecimens',
+        name: 'Studies',
+        field: 'studies',
         classes: {
-          root: classes.biospecimenButton,
+          root: classes.studiesButton,
           wrapper: classes.tabColor,
           totalResults: classes.totalResults,
           totalCount: classes.totalCount,
@@ -276,12 +296,44 @@ function searchView(props) {
           paginationContainer: classes.paginationContainer,
           noData: classes.noData,
         },
-        count: searchCounts.biospecimen_count || 0,
-        value: `${!authCheck() ? 'inactive-' : ''}3`,
+        count: searchCounts.study_count || 0,
+        value: `3`,
       },
       {
-        name: 'General',
-        field: 'about_page',
+        name: 'Samples',
+        field: 'samples',
+        classes: {
+          root: classes.samplesButton,
+          wrapper: classes.tabColor,
+          totalResults: classes.totalResults,
+          totalCount: classes.totalCount,
+          subsection: classes.subsection,
+          subsectionBody: classes.subsectionBody,
+          paginationContainer: classes.paginationContainer,
+          noData: classes.noData,
+        },
+        count: searchCounts.sample_count || 0,
+        value: '4',
+      },
+      {
+        name: 'Files',
+        field: 'files',
+        classes: {
+          root: classes.filesButton,
+          wrapper: classes.tabColor,
+          totalResults: classes.totalResults,
+          totalCount: classes.totalCount,
+          subsection: classes.subsection,
+          subsectionBody: classes.subsectionBody,
+          paginationContainer: classes.paginationContainer,
+          noData: classes.noData,
+        },
+        count: searchCounts.file_count || 0,
+        value: '5',
+      },
+      {
+        name: 'Data Model',
+        field: 'model',
         classes: {
           root: classes.aboutButton,
           wrapper: classes.tabColor,
@@ -292,12 +344,12 @@ function searchView(props) {
           paginationContainer: classes.paginationContainer,
           noData: classes.noData,
         },
-        count: searchCounts.about_count || 0,
-        value: '4',
+        count: searchCounts.model_count || 0,
+        value: `6`,
       },
       {
-        name: 'Model',
-        field: 'model',
+        name: 'About',
+        field: 'about_page',
         classes: {
           root: classes.modelButton,
           wrapper: classes.tabColor,
@@ -308,32 +360,31 @@ function searchView(props) {
           paginationContainer: classes.paginationContainer,
           noData: classes.noData,
         },
-        count: searchCounts.model_count || 0,
-        value: `${!authCheck() ? 'inactive-' : ''}5`,
+        count: searchCounts.about_count || 0,
+        value: `7`,
       },
     ],
   });
 
   useEffect(() => {
-    if (searchparam.trim() === '') {
-      return;
-    }
-
     queryCountAPI(searchparam, !authCheck()).then((d) => {
       setSearchCounts(d);
     });
+    
   }, []);
 
   return (
     <>
+      <img src={searchBackground} alt="searchBackground" style={{ position: 'absolute', right: '0px', top: '120px' }} />
       <Grid container direction="column" alignItems="center" justifyContent="center" className={classes.heroArea}>
         <Grid item>
-          <h2 className={classes.searchTitle}>Search Clinical and Translational Data Commons</h2>
+          <h2 className={classes.searchTitle}>Search Results</h2>
         </Grid>
         <Grid item>
           <SearchBar value={searchText} clearable={!false}/>
         </Grid>
       </Grid>
+     
 
       <div className={classes.bodyContainer}>
         <Box sx={{ width: '100%', typography: 'body1' }}>

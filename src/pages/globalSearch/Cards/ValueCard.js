@@ -88,6 +88,7 @@ const styles = (theme) => {
       textAlign: 'left',
       color: '#747474',
       width: '25px',
+      marginRight: '20px',
       [mdBreakpoint]: {
         width: '49px',
       }

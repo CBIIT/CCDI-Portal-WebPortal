@@ -12,8 +12,7 @@ import { cn } from 'bento-components';
 const ModelsCard = ({ data = {}, index })=> {
   const {
     property,
-    value_kw,
-    property_type,
+    value,
     property_description,
     node,
   } = data;
@@ -38,22 +37,18 @@ const ModelsCard = ({ data = {}, index })=> {
 
       <Grid item xs={true}>
         <div className={cn(classes.keyAndValueRow, classes.titleRow)}>
-          <span className={classes.titleKey}>MODEL</span>
+          <span className={classes.titleKey}>DATA MODEL</span>
           <Typography variant="h3" className={classes.titleValue}>
-            {property}
+            {value}
           </Typography>
         </div>
         <div className={classes.row}>
           <div className={classes.column}>
             {renderInfo('Data Model Node:', node)}
-            {renderInfo('Age at Diagnosis:', value_kw)}
+            {renderInfo('Property Name:', property)}
             {renderInfo('Property Description:', property_description)}
           </div>
         </div>
-      </Grid>
-
-      <Grid item xs={12} className={classes.hrContainer}>
-        <hr className={classes.hr}/>
       </Grid>
     </Grid>
   );

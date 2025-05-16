@@ -5,22 +5,25 @@ import client from '../utils/graphqlClient';
  * Maps a datafield to the correct search query
  *
  * @param {string} field datatable field name
- * @param {boolean} isPublic whether the search is public or not
  */
-export function getResultQueryByField(field, isPublic) {
+export function getResultQueryByField(field) {
     switch (field) {
       case 'all':
-        return isPublic ? SEARCH_PUBLIC : SEARCH_PAGE_RESULT_PARTICIPANTS;
+        return SEARCH_PAGE_RESULT_PARTICIPANTS;
       case 'participants':
         return SEARCH_PAGE_RESULT_PARTICIPANTS;
       case 'studies':
         return SEARCH_PAGE_RESULT_STUDIES;
+      case 'samples':
+        return SEARCH_PAGE_RESULT_SAMPLES;
+      case 'files':
+        return SEARCH_PAGE_RESULT_FILES;
       case 'model':
         return SEARCH_PAGE_RESULT_MODEL;
       case 'about_page':
-        return isPublic ? SEARCH_PAGE_RESULT_ABOUT_PUBLIC : SEARCH_PAGE_RESULT_ABOUT;
+        return SEARCH_PAGE_RESULT_ABOUT;
       default:
-        return SEARCH_PAGE_RESULT_PARTICIPANTS;
+        return SEARCH_PAGE_RESULT_ABOUT;
     }
   }
 
@@ -57,13 +60,7 @@ export const SEARCH_PAGE_DATAFIELDS = {
 export const SEARCH_PUBLIC = gql`
     query publicGlobalSearchQuery($input: String) {
         globalSearch(input: $input) {
-            about_count
-            about_page{
-                page
-                title
-                type
-                text
-            }
+            participant_count
         }
     }
 `;
@@ -75,14 +72,20 @@ export const SEARCH = gql`
       participants {
         participant_id
       }
-      biospecimens {
-        parent_specimen_id
+      studies {
+        study_id
       }
-      gs_list {
-        autocomplete_list
+      samples {
+        sample_id
       }
-      model_search {
+      files {
+        file_name
+      }
+      model {
         node
+      }
+      about_page {
+        title
       }
     }
   }
@@ -90,14 +93,13 @@ export const SEARCH = gql`
 
 
 export const SEARCH_PAGE_RESULT_ABOUT_PUBLIC = gql`
-    query publicGlobalSearch($input: String, $first: Int, $offset: Int){
+    query globalSearch($input: String, $first: Int, $offset: Int){
         globalSearch(
             input: $input
             first: $first
             offset: $offset
         ) {
             about_page {
-                type
                 text
                 page
                 title
@@ -106,13 +108,18 @@ export const SEARCH_PAGE_RESULT_ABOUT_PUBLIC = gql`
     }`;
 
 export const SEARCH_PAGE_RESULTS_PUBLIC = gql`
-    query publicGlobalSearch($input: String, $first: Int, $offset: Int){
+    query globalSearch($input: String, $first: Int, $offset: Int){
         globalSearch(
             input: $input
             first: $first
             offset: $offset
         ) {
+            participant_count
+            study_count
+            sample_count
             about_count
+            file_count
+            model_count
         }
     }
 `;
@@ -127,6 +134,7 @@ export const SEARCH_PAGE_RESULT_PARTICIPANTS = gql`
       participants {
         participant_id
         study_id
+        diagnosis_str
         age_at_diagnosis_str
         treatment_type_str
         sex_at_birth
@@ -146,11 +154,11 @@ export const SEARCH_PAGE_RESULT_STUDIES = gql`
       offset: $offset
     ) {
       studies {
-        type
         study_id
         study_name
         study_status
         num_of_participants
+        num_of_samples
         num_of_files
       }
     }
@@ -165,7 +173,6 @@ export const SEARCH_PAGE_RESULT_SAMPLES = gql`
       offset: $offset
     ) {
       samples {
-        type
         sample_id
         participant_id
         study_id
@@ -185,8 +192,7 @@ export const SEARCH_PAGE_RESULT_FILES = gql`
       first: $first
       offset: $offset
     ) {
-      samples {
-        type
+      files {
         file_name
         data_category
         participant_id
@@ -208,7 +214,6 @@ export const SEARCH_PAGE_RESULT_MODEL = gql`
             offset: $offset
         ) {
             model {
-                type
                 node
                 property
                 property_description
@@ -228,12 +233,11 @@ export const SEARCH_PAGE_RESULT_ABOUT = gql`
       first: $first
       offset: $offset
     ) {
-        about_page {
-          type
-          text
-          page
-          title
-        }
+      about_page {
+        text
+        page
+        title
+      }
     }
   }
 `;
@@ -255,17 +259,17 @@ export const SEARCH_PAGE_RESULTS = gql`
   }
 `;
 
-export async function queryAutocompleteAPI(inputValue, isPublic) {
+export async function queryAutocompleteAPI(inputValue) {
     const data = await client.query({
-      query: isPublic ? SEARCH_PUBLIC : SEARCH,
+      query:  SEARCH,
       variables: {
         input: inputValue,
       },
       context: {
-        clientName: isPublic ? 'publicService' : '',
+        clientName:  '',
       },
     })
-      .then((result) => (isPublic ? result.data.publicGlobalSearch : result.data.globalSearch))
+      .then((result) => (result.data.globalSearch))
       .catch(() => []);
   
     return data;
@@ -276,41 +280,40 @@ export async function queryAutocompleteAPI(inputValue, isPublic) {
  * Query the backend API for the search result counts by search string
  *
  * @param {string} inputValue search text
- * @param {boolean} isPublic whether to use the public service or not
  */
-export async function queryCountAPI(inputValue, isPublic) {
+export async function queryCountAPI(inputValue) {
     const data = await client.query({
-      query: isPublic ? SEARCH_PAGE_RESULTS_PUBLIC : SEARCH_PAGE_RESULTS,
+      query: SEARCH_PAGE_RESULTS,
       variables: {
         input: inputValue,
       },
       context: {
-        clientName: isPublic ? 'publicService' : '',
+        clientName: '',
       },
     })
-      .then((result) => (isPublic ? result.data.publicGlobalSearch : result.data.globalSearch))
+      .then((result) => result.data.globalSearch)
       .catch(() => {});
   
     return data;
   }
   
-  /**
+  /**ƒ
    * Query the backend API for the search results by datafield
    *
    * @param {string} datafield
    * @param {object} input search query variable input
-   * @param {boolean} isPublic is the search public or private
    */
-  export async function queryResultAPI(datafield, input, isPublic) {
+  export async function queryResultAPI(datafield, input) {
+    
     const data = await client.query({
-      query: getResultQueryByField(datafield, isPublic),
+      query: getResultQueryByField(datafield),
       variables: input,
       context: {
-        clientName: isPublic ? 'publicService' : '',
+        clientName: '',
       },
     })
-      .then((result) => (isPublic ? result.data.publicGlobalSearch : result.data.globalSearch))
+      .then((result) => (result.data.globalSearch))
       .catch(() => []);
-  
+    console.log(data)
     return data[datafield] || [];
   }

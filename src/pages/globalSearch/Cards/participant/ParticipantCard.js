@@ -50,23 +50,19 @@ const ParticipantCard = ({ data = {}, index })=> {
         <div className={classes.row}>
           <div className={classes.column}>
             {renderInfo('Diagnosis:', diagnosis_str)}
-            {renderInfo('Age at Diagnosis:', age_at_diagnosis_str)}
+            {renderInfo('Age at Diagnosis:', age_at_diagnosis_str + ' days')}
             {renderInfo('Sex at Birth:', sex_at_birth)}
             {renderInfo('Race:', race_str)}
+            {renderInfo('Study ID:', study_id)}
           </div>
 
           <div className={cn(classes.column, classes.leftColumn)}>
-            {renderInfo('Study ID:', study_id)}
             {renderInfo('Treatement Type:', treatment_type_str)}
             {renderInfo('Treatment Agent:', treatment_agent_str)}
             {renderInfo('Last Known Survival Status:', last_known_survival_status_str)}
 
           </div>
         </div>
-      </Grid>
-
-      <Grid item xs={12} className={classes.hrContainer}>
-        <hr className={classes.hr}/>
       </Grid>
     </Grid>
   );

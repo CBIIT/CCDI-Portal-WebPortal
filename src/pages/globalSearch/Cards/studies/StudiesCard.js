@@ -37,23 +37,17 @@ const StudiesCard = ({ data = {}, index }) => {
         <div className={cn(classes.keyAndValueRow, classes.titleRow)}>
           <span className={classes.titleKey}>STUDIES</span>
           <Typography variant="h3" className={classes.titleValue}>
-            {study_id}
+            <a href={`https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=${study_id}`} rel='noreferrer' target='_blank'>{study_id}</a>
           </Typography>
         </div>
         <div className={classes.row}>
           <div className={classes.column}>
             {renderInfo('Study Name:', study_name)}
             {renderInfo('Number of Participants:', num_of_participants)}
-          </div>
-
-          <div className={cn(classes.column, classes.leftColumn)}>
             {renderInfo('Study Status:', study_status)}
             {renderInfo('Number of Files:', num_of_files)}
           </div>
         </div>
-      </Grid>
-      <Grid item xs={12} className={classes.hrContainer}>
-        <hr className={classes.hr}/>
       </Grid>
     </Grid>
   );

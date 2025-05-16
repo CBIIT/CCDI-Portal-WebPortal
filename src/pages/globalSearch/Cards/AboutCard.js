@@ -36,9 +36,9 @@ const AboutCard = ({
     return (
       <span>
         {' '}
-        { parts.map((part, i) => (
-          <span id={i} className={part.toLowerCase() === highlight.toLowerCase() ? classes.highlightText : {} }>
-            { part }
+        {parts.map((part, i) => (
+          <span id={i} className={part.toLowerCase() === highlight.toLowerCase() ? classes.highlightText : {}}>
+            {part}
           </span>
         ))}
         {' '}
@@ -49,11 +49,11 @@ const AboutCard = ({
   return (
     <Grid item container className={classes.card} id={`global_search_card_${index}`}>
       <Grid item className={classes.indexContainer}>
-        {index + 1 }
+        {index + 1}
       </Grid>
       <Grid item xs={true} className={classes.propertyContainer}>
         <div className={classes.titleRow}>
-          <span className={classes.detailContainerHeader}>GENERAL</span>
+          <span className={classes.detailContainerHeader}>ABOUT</span>
           <Typography variant="h3" className={classes.cardTitle}>
             {data.title}
           </Typography>
@@ -61,12 +61,9 @@ const AboutCard = ({
         <div className={classes.cardBody}>
           <div className={classes.text}>{getHighlightedText(results, searchText, classes)}</div>
           <div className={classes.linkText}>
-            <Anchor link={data.page} text={`${window.location.origin}${data.page}`} classes={classes}/>
+            <Anchor link={data.page} text={`${window.location.origin}${data.page}`} classes={classes} />
           </div>
         </div>
-      </Grid>
-      <Grid item xs={12} className={classes.hrContainer}>
-        <hr className={classes.hr}/>
       </Grid>
     </Grid>
   );
@@ -82,107 +79,110 @@ const styles = (theme) => {
         display: 'none',
       },
       [lgBreakpoint]: {
-        minWidth: '959px',
-        width: '959px',
+        minWidth: '1047px',
+        width: '1047px',
       },
       maxWidth: '800px',
-      padding: '0px',
-    },
-    linkText: {
-      marginTop: '4px',
-    },
-    link: {
-      fontFamily: 'Roboto',
-      fontSize: '15px',
-      fontWeight: 500,
-      lineHeight: '23px',
-      letterSpacing: '0em',
-      textAlign: 'left',
-      color: '#990099',
-      textDecoration: 'none',
-      '&:hover': {
-        textDecoration: 'underline',
-      },
+      padding: '24px 32px 24px 20px',
+      border: '0.25px solid #78AEB3',
+      borderTopRightRadius: '20px',
+      borderBottomLeftRadius: '20px',
+      boxShadow: '0px 4px 20px 0px #00000040',
+      marginBottom: '20px',
     },
     indexContainer: {
-      fontFamily: 'Roboto',
-      fontSize: '16px',
-      fontWeight: 400,
-      lineHeight: '16px',
-      letterSpacing: '0px',
+      marginTop: '6px',
+      fontFamily: 'Poppins',
+      fontSize: '20px',
+      fontWeight: '500',
+      lineHeight: '22px',
+      letterSpacing: '2%',
       textAlign: 'left',
-      color: '#747474',
+      color: '#2E2E2E',
       width: '25px',
+      marginRight: '20px',
       [mdBreakpoint]: {
         width: '49px',
       }
     },
-    titleRow: {
+    infoContainer: {
+      display: 'flex',
+      flexDirection: 'column',
+      margin: '0px',
+      padding: '0px',
+    },
+    keyAndValueRow: {
       display: 'flex',
       margin: '0px',
       padding: '0px',
-      marginBottom: '5px',
     },
-    cardTitle: {
-      textDecoration: 'none',
-      fontFamily: 'Inter',
-      fontWeight: 500,
-      fontSize: '18px',
-      lineHeight: '22px',
-      color: '#004D73',
-      paddingLeft: '10px',
-      verticalAlign: 'middle',
+    row: {
+      display: 'flex',
+      flexDirection: 'column', // For smaller screens, stack items vertically
+      margin: '0px',
+      padding: '0px',
+      [lgBreakpoint]: {  // For larger screens, change to row layout
+        flexDirection: 'row',
+      },
+    },
+    column: {
+      flex: 1,
+      margin: '0px',
+      padding: '0px',
+      [lgBreakpoint]: {  // For larger screens, allow for two columns
+        flexBasis: '50%',
+      },
+    },
+    leftColumn: {
+      [lgBreakpoint]: {
+        marginLeft: '20px',
+      },
+    },
+    titleRow: {
+      marginBottom: '5px',
+      display: 'flex',
     },
     detailContainerHeader: {
-      textTransform: 'uppercase',
-      padding: '6px 5px',
-      backgroundColor: '#EEDEF1',
-      color: '#092630',
-      fontFamily: 'Roboto',
-      fontSize: '12px',
-      fontWeight: '400',
-      lineHeight: '12px',
-      verticalAlign: 'middle',
-      borderRadius: '2px',
+      margin: '0px',
+      padding: '5px 15px 5px 15px',
+      gap: '10px',
+      fontFamily: 'Poppins',
+      fontSize: '14px',
+      fontWeight: '600',
+      lineHeight: '19.31px',
+      letterSpacing: '0px',
+      color: 'white',
+      height: '30px',
+      display: 'flex',
+      borderRadius: '20px',
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#BC8924',
+    },
+    cardTitle: {
+      margin: '0px',
+      padding: '0px',
+      marginTop: '2px',
+      marginLeft: '10px',
+      fontFamily: 'Inter',
+      fontSize: '18px',
+      fontWeight: 500,
+      lineHeight: '22px',
+      letterSpacing: '0px',
       textAlign: 'left',
+      color: '#00838F',
     },
     cardBody: {
-      marginLeft: '3px',
-    },
-    text: {
-      color: '#000000',
-      fontFamily: 'Roboto',
+      fontFamily: 'Inter',
       fontSize: '16px',
-      fontWeight: 400,
-      lineHeight: '24px',
-      letterSpacing: '0em',
+      fontWeight: '400',
+      lineHeight: '22px',
+      letterSpacing: '2%',
       textAlign: 'left',
+      margin: '0px',
+      marginTop: '-2px',
     },
-    highlightText: {
-      color: '#004D73',
-      fontWeight: 600,
-    },
-    hrContainer: {
-      paddingTop: '10px',
-      paddingBottom: '10px',
-      maxWidth: '800px',
-      marginLeft: '18px',
-      [mdBreakpoint]: {
-        marginLeft: '36px',
-      },
-      [lgBreakpoint]: {
-        marginLeft: '36px',
-        width: '925px',
-        minWidth: '925px',
-      },
-    },
-    hr: {
-      width: '100%', 
-      border: '1px solid #E7EEF5',
-      margin: '10px 0px',
-      padding: '0px',
-    }
-  }
+  };
 };
 
 export default withStyles(styles, { withTheme: true })(AboutCard);

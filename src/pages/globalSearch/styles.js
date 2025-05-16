@@ -1,13 +1,16 @@
+
+
 const buttonRoot = {
   height: '56px',
+  minWidth: '100px',
   fontSize: '16px',
   marginRight: '20px',
   textTransform: 'none',
   '@media (min-width: 800px)': {
-    marginRight: '33px',
+    marginRight: '15px',
   },
-  '@media (min-width: 1000px)': {
-    marginRight: '68px',
+  '@media (min-width: 1300px)': {
+    marginRight: '30px',
   }
 };
 
@@ -27,7 +30,8 @@ const styles = () => ({
   },
   tabContainter: {
     display: 'flex',
-    maxWidth: '840px',
+    maxWidth: '1200px',
+    marginLeft: '320px',
     height: '56px',
     margin: '0 auto',
     '& .MuiTab-root': {
@@ -37,22 +41,26 @@ const styles = () => ({
   tabColor: { color: '#142D64' },
   allButton: {
     ...buttonRoot,
-    width: '64px',
-    minWidth: 'fit-content',
   },
   participantButton: {
     ...buttonRoot,
-    width: '126px',
-    minWidth: '126px',
+    whiteSpace: 'nowrap',
   },
-  biospecimenButton: {
+  samplesButton: {
     ...buttonRoot,
-    minWidth: '140px',
+    whiteSpace: 'nowrap',
+  },
+  studiesButton: {
+    ...buttonRoot,
+    whiteSpace: 'nowrap',
+  },
+  filesButton: {
+    ...buttonRoot,
+    whiteSpace: 'nowrap',
   },
   aboutButton: {
     ...buttonRoot,
-    width: '95px',
-    minWidth: '95px',
+    whiteSpace: 'nowrap',
   },
   modelButton: {
     height: '56px',
@@ -69,15 +77,25 @@ const styles = () => ({
     fontSize: '25px',
   },
   heroArea: {
-    width: '100%',
-    height: '185px',
-    background: '#285A6C',
+    display: 'flex',
+    position: 'relative',
+    left: '149px',
+    width: '889px',
+    height: '179px',
+    background: '#08838D',
+    marginTop: '60px',
+    marginBottom: '60px',
+    borderTopRightRadius: '20px',
+    borderBottomLeftRadius: '20px',
+    alignItems: 'start',
+    paddingLeft: '60px',
+    zIndex: '1',
   },
   searchTitle: {
-    color: '#B4E2F5',
-    fontFamily: 'Inter',
-    fontWeight: '400',
-    fontSize: '24px',
+    color: '#FFFFFF',
+    fontFamily: 'Poppins',
+    fontWeight: '600',
+    fontSize: '50px',
     lineHeight: '31.47px',
     margin: '0px 0px 15px 0px',
     textAlign: 'center',
@@ -226,24 +244,29 @@ const styles = () => ({
     }
   },
   totalResults: {
-    color: '#225987',
-    fontFamily: 'Roboto',
-    fontSize: '20px',
-    fontWeight: 400,
+    color: '#13666A',
+    fontFamily: 'Poppins',
+    fontSize: '18px',
+    fontWeight: '500',
     lineHeight: '31px',
     letterSpacing: '0.02em',
     textAlign: 'left',
-    paddingLeft: '16px',
+    paddingLeft: '35px',
     maxWidth: '959px',
-    margin: '11px auto 2px auto'
+    margin: '40px auto 2px auto',
+    textTransform: 'lowercase',
   },
   totalCount: {
-    fontFamily: 'Roboto',
+    fontFamily: 'Poppins',
+    fontWeight: '700',
+    fontSize: '18px',
+    lineHeight: '0%',
+    color: '#13666A',
   },
   subsection: {
     borderBottom: '1px solid #8A8A8A',
     paddingBottom: '22px',
-    paddingTop: '22px',
+    paddingTop: '5px',
   },
   subsectionBody: {
     padding: '0px 16px',

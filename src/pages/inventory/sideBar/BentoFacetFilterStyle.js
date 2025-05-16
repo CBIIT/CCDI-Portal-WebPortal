@@ -30,8 +30,10 @@ export default () => ({
       color: 'white',
     },
   },
-  floatRight: {
+  buttonContainer: {
     margin: '7px 0px 7px 6px',
+    position: 'absolute',
+    top: '-45px',
   },
   resetText: {
     marginTop: '0px',

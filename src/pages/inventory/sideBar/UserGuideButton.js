@@ -27,6 +27,8 @@ import figureB3 from '../../../assets/explore/FigureB3.png';
 
 const UseGuideButtonContainer = styled.div`
     .buttonContainer {
+        position: absolute;
+        top: -80px;
         display: flex;
         margin-left: 6px;
         margin-top: 7px;
@@ -102,15 +104,15 @@ const UseGuideButton = ({classes}) => {
     return (
         <UseGuideButtonContainer>
             <div className='buttonContainer'>
-            <Button
-                variant="outlined"
-                onClick={handleClickOpen}
-                className={classes.customButton}
-                classes={{ root: classes.clearAllButtonRoot }}
-                onMouseEnter={() => setIsHover(true)}
-                onMouseLeave={() => setIsHover(false)}
-            >
-                <img src={isHover?userguideIconWhite: userguideIcon} alt="user guide icon" />
+                <Button
+                    variant="outlined"
+                    onClick={handleClickOpen}
+                    className={classes.customButton}
+                    classes={{ root: classes.clearAllButtonRoot }}
+                    onMouseEnter={() => setIsHover(true)}
+                    onMouseLeave={() => setIsHover(false)}
+                >
+                    <img src={isHover?userguideIconWhite: userguideIcon} alt="user guide icon" />
                 </Button>
                 <div className='buttonText'>Explore the CCDI User Guide</div>
             </div>

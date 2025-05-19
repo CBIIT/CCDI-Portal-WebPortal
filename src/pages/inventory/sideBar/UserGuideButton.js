@@ -28,10 +28,10 @@ import figureB3 from '../../../assets/explore/FigureB3.png';
 const UseGuideButtonContainer = styled.div`
     .buttonContainer {
         position: absolute;
-        top: -80px;
+        top: -82px;
         display: flex;
-        margin-left: 6px;
-        margin-top: 7px;
+        width: 100%;
+        padding: 7px 6px 7px 6px;
     }
 
     .buttonText {

@@ -18,10 +18,11 @@ export default () => ({
   },
   sideBarContainer: {
     position: 'relative',
-    marginTop: '80px',
-  },
+    marginTop: '82px',
+  },  
   sideBar: {
     width: '270px',
+    paddingBottom: '1px',
     maxHeight: '1361px',
     overflowX: 'hidden',
     backgroundColor: 'transparent',

@@ -8,6 +8,7 @@ import About from '../../pages/about/AboutPage/AboutController';
 import DataUsagePoliciesView from '../../pages/about/DataUsagePoliciesPage/DataUsagePoliciesController';
 import PublicationsView from '../../pages/about/publications/publicationsController';
 import News from '../../pages/news/newsController';
+import DataModelNavigator from '../../pages/dmn/DataModelNavigator';
 import Error from '../../pages/error/Error';
 import Search from '../../pages/search/searchView';
 import Inventory from '../../pages/inventory/inventoryController';
@@ -33,6 +34,7 @@ const Layout = () => {
           <Route path="/home" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/news" element={<News />} />
+          <Route path="/data-model" element={<DataModelNavigator />} />
           <Route path="/sitesearch" element={<Search />} />
           <Route path="/explore" element={<Inventory />} />
           <Route path="/fileCentricCart" element={<Cart />} />

@@ -131,6 +131,11 @@ export const navbarSublists = {
       className: 'navMobileSubItem',
     },
     {
+      name: 'CCDI Data Model',
+      link: '/data-model',
+      className: 'navMobileSubItem',
+    },
+    {
       name: 'CCDI Data Usage Policies & Terms',
       link: '/data-usage-policies',
       className: 'navMobileSubItem',

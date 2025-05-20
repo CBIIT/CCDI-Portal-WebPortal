@@ -5,9 +5,9 @@ import {
 import useStyles from './style';
 import { cn } from 'bento-components';
 
-/* const removeSquareBracketsFromString = (text) => {
+const removeSquareBracketsFromString = (text) => {
   return text.replace(/\[|\]/g, '');
-};*/
+}
 
 const FilesCard = ({ data = {}, index })=> {
   const {
@@ -48,7 +48,7 @@ const FilesCard = ({ data = {}, index })=> {
         </div>
         <div className={classes.row}>
           <div className={classes.column}>
-            {renderInfo('Data Category:', data_category)}
+            {renderInfo('Data Category:', removeSquareBracketsFromString(data_category))}
             {renderInfo('File Description:', file_description)}
             {renderInfo('File Type:', file_type)}
             {renderInfo('File Size:', file_size)}

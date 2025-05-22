@@ -8,6 +8,11 @@ import Components from './component';
 import client from '../../../utils/graphqlClient';
 import {
   SEARCH_PAGE_RESULT_ABOUT_PUBLIC,
+  SEARCH_PAGE_RESULT_PARTICIPANTS,
+  SEARCH_PAGE_RESULT_STUDIES,
+  SEARCH_PAGE_RESULT_SAMPLES,
+  SEARCH_PAGE_RESULT_FILES,
+  SEARCH_PAGE_RESULT_MODEL
 } from '../../../bento/sitesearch';
 
 const useOutsideAlerter = (ref) => {
@@ -42,10 +47,20 @@ function SearchPagination({
 
   function getPublicQuery(field) {
     switch (field) {
+      case 'all':
+        return SEARCH_PAGE_RESULT_PARTICIPANTS;
+      case 'studies':
+        return SEARCH_PAGE_RESULT_STUDIES
+      case 'samples':
+        return SEARCH_PAGE_RESULT_SAMPLES;
+      case 'files':
+        return SEARCH_PAGE_RESULT_FILES;
+      case 'model':
+        return SEARCH_PAGE_RESULT_MODEL;
       case 'about_page':
-        return { QUERY: SEARCH_PAGE_RESULT_ABOUT_PUBLIC, field: 'about_page' };
+        return SEARCH_PAGE_RESULT_ABOUT_PUBLIC;
       default:
-        return { QUERY: SEARCH_PAGE_RESULT_ABOUT_PUBLIC, field: 'about_page' };
+        return SEARCH_PAGE_RESULT_PARTICIPANTS;
     }
   }
 

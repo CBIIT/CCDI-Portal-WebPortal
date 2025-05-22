@@ -77,6 +77,7 @@ const styles = (theme) => ({
     color: '#747474',
     fontFamily: 'Inter',
     fontSize: '13px',
+    marginRight: '10px',
   },
   propertyContainer: {
     margin: '0 0 25px 0px',

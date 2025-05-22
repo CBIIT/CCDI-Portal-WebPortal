@@ -537,7 +537,7 @@ const useFocus = () => {
 
 const PublicationsView = ({classes, bannerText, publicationsList}) => {
   const [selectedTab, setSelectedTab] = useState("All");
-  const newsTabList = ['All', 'Primary', 'Secondary', 'Abstract'];
+  const newsTabList = ['All', 'Primary', 'Secondary', 'Abstracts'];
   const sizelist = [10,20,50,100];
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(sizelist[0]);

@@ -275,3 +275,12 @@ export const LANDING_DATA_QUERY = gql`{
     numberOfMCICount
   }
 `;
+
+export const GLOBAL_STATS_BAR_QUERY = gql`{
+  numberOfDiseases,
+  numberOfParticipants,
+  numberOfReferenceFiles,
+  numberOfStudies,
+  numberOfSurvivals
+  }
+  `;

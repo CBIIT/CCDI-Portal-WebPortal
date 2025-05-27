@@ -21,6 +21,7 @@ import ReleaseNotesPageView from '../../pages/releaseNotePage/releaseNotePageCon
 import StudiesView from '../../pages/studies/studiesView';
 import StudiesDetail from "../../pages/studyDetail/studyDetailController";
 import OverlayWindow from '../OverlayWindow/OverlayWindow';
+import CohortAnalyzerController  from "../../pages/CohortAnalyzer/CohortAnalyzerController";
 // import NewsDetail from '../../pages/news/newsDetailView';
 
 const Layout = () => {
@@ -44,6 +45,7 @@ const Layout = () => {
           <Route path="/ccdi-participant-index" element={<CPIResourceView />} />
           <Route path="/publications" element={<PublicationsView />} />
           <Route path="/release-notes" element={<ReleaseNotesPageView />} />
+          <Route path="/cohortAnalyzer" element={<CohortAnalyzerController />} />
           <Route path="/studies" >
             <Route index={true} element={<StudiesView />}></Route>
             <Route path=":studyId" element={<StudiesDetail />} />

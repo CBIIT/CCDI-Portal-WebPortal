@@ -59,6 +59,7 @@ const GET_STUDIES_DATA_QUERY = gql`
         study_name
         num_of_participants
         num_of_samples
+        num_of_diagnoses
         num_of_files
       }
     }
@@ -106,9 +107,15 @@ const table = {
       display: true,
     },
     {
+      dataField: 'num_of_diagnoses',
+      header: 'Diagnosis Count',
+      tooltipText: 'Sort by Diagnosis Count',
+      display: true,
+    },
+    {
       dataField: 'num_of_samples',
       header: 'Samples Count',
-      tooltipText: 'Sort by Diagnosis Count',
+      tooltipText: 'Sort by Sample Count',
       display: true,
     },
     {

@@ -25,32 +25,35 @@ const Tabs = ({ data, classes, isModalView = false }) => {
   // State to track the currently selected tab
   const [currentTab, setCurrentTab] = useState(0);
 
-  // Helper to create a tab object, limiting to top 20 if needed
-  const createTab = (name, data) => {
-    // Remove items with group === 0
-    let filteredData = Array.isArray(data)
-      ? data.filter(item => item.subjects !== 0)
-      : data;
-
-    if (Array.isArray(filteredData) && filteredData.length > 20) {
-      return { name: `Top 20 ${name}`, data: filteredData.slice(0, 20) };
+  // Helper to filter out items with group or subjects === 0
+  const filterValidItems = (arr) => {
+    if (Array.isArray(arr)) {
+      return arr.filter((item) => item.group !== 0 && item.subjects !== 0);
     }
-
-    return { name, data: filteredData };
+    return arr;
   };
 
-  // Prepare tab data for each category
-  const dataCategoriesTab = createTab('Data Categories', data_categories);
-  const diagnosesTab = createTab('Diagnoses', diagnoses);
-  const anatomicSitesTab = createTab('Anatomic Sites', anatomic_sites);
+  // Helper to create a tab object, limiting to top 20 if needed
+  const createTab = (name, data) => {
+    if (Array.isArray(data) && data.length > 20) {
+      return { name: `Top 20 ${name}`, data: data.slice(0, 20) };
+    }
+    return { name, data };
+  };
 
-  // // Array of tab containers for rendering
-  // const tabContainers = [dataCategoriesTab, diagnosesTab, anatomicSitesTab];
+  // Prepare Tabs filtering data arrays
+  const DataCategories = filterValidItems(data_categories);
+  const Diagnoses = filterValidItems(diagnoses);
+  const AnatomicSites = filterValidItems(anatomic_sites);
 
-    // Array of tab containers for rendering, filter out tabs with empty data arrays
-  const tabContainers = [dataCategoriesTab, diagnosesTab, anatomicSitesTab].filter(
-    tab => Array.isArray(tab.data) && tab.data.length > 0
-  );
+  // Build tab containers, only including non-empty arrays
+  const tabContainers = [
+    createTab('Data Categories', DataCategories),
+    createTab('Diagnoses', Diagnoses),
+    createTab('Anatomic Sites', AnatomicSites),
+  ].filter((tab) => {
+    return Array.isArray(tab.data) && tab.data.length > 0
+  });
 
   // Handle tab change event
   const handleTabChange = (event, value) => {
@@ -67,7 +70,7 @@ const Tabs = ({ data, classes, isModalView = false }) => {
           handleTabChange={handleTabChange}
           customTheme={customTheme}
         />
-        
+
         {/* Show the 'Subjects in this Study' section when the view is in Modal mode.  */}
         {isModalView && (
           <h4 className={classes.modalTitle}>

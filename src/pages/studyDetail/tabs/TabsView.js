@@ -27,10 +27,16 @@ const Tabs = ({ data, classes, isModalView = false }) => {
 
   // Helper to create a tab object, limiting to top 20 if needed
   const createTab = (name, data) => {
-    if (Array.isArray(data) && data.length > 20) {
-      return { name: `Top 20 ${name}`, data: data.slice(0, 20) };
+    // Remove items with group === 0
+    let filteredData = Array.isArray(data)
+      ? data.filter(item => item.subjects !== 0)
+      : data;
+
+    if (Array.isArray(filteredData) && filteredData.length > 20) {
+      return { name: `Top 20 ${name}`, data: filteredData.slice(0, 20) };
     }
-    return { name, data };
+
+    return { name, data: filteredData };
   };
 
   // Prepare tab data for each category
@@ -38,8 +44,13 @@ const Tabs = ({ data, classes, isModalView = false }) => {
   const diagnosesTab = createTab('Diagnoses', diagnoses);
   const anatomicSitesTab = createTab('Anatomic Sites', anatomic_sites);
 
-  // Array of tab containers for rendering
-  const tabContainers = [dataCategoriesTab, diagnosesTab, anatomicSitesTab];
+  // // Array of tab containers for rendering
+  // const tabContainers = [dataCategoriesTab, diagnosesTab, anatomicSitesTab];
+
+    // Array of tab containers for rendering, filter out tabs with empty data arrays
+  const tabContainers = [dataCategoriesTab, diagnosesTab, anatomicSitesTab].filter(
+    tab => Array.isArray(tab.data) && tab.data.length > 0
+  );
 
   // Handle tab change event
   const handleTabChange = (event, value) => {

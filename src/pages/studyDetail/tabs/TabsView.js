@@ -1,18 +1,31 @@
-import React, { useState } from "react";
-import { Tabs as BentoTabs } from "@bento-core/tab";
-import TabPanel from "./TabPanel";
-import customTheme from "./DefaultTabTheme";
-// import LargeViewButton from "../LargeViewButton/LargeViewButton";
+import React, { useState } from 'react';
+import { Tabs as BentoTabs } from '@bento-core/tab';
+import { withStyles } from '@material-ui/core';
+import TabPanel from './TabPanel';
+import customTheme from './DefaultTabTheme';
+import styles from './TabsStyle';
+import ChartView from '../chart/ChartView';
 
-// import WidgetView from "../widget/WidgetView";
-
-import ChartView from "../chart/ChartView";
-
-const Tabs = ({ data, isModalView = false }) => {
+/**
+ * Tabs component displays tabbed chart views for study details
+ * Renders a set of tabs displaying different data categories (Data Categories, Diagnoses, Anatomic Sites)
+ * with optional modal view styling and participant count.
+ *
+ * @component
+ * @param {Object} props - Component props.
+ * @param {Object} props.data - Data object containing arrays for anatomic_sites, data_categories, diagnoses, and num_of_participants.
+ * @param {Object} props.classes - CSS classes for styling the component.
+ * @param {boolean} [props.isModalView=false] - Whether the component is rendered in a modal view.
+ * @returns {JSX.Element} The rendered Tabs component.
+ */
+const Tabs = ({ data, classes, isModalView = false }) => {
+  // Destructure relevant data arrays from the input data
   const { anatomic_sites, data_categories, diagnoses } = data || {};
 
+  // State to track the currently selected tab
   const [currentTab, setCurrentTab] = useState(0);
 
+  // Helper to create a tab object, limiting to top 20 if needed
   const createTab = (name, data) => {
     if (Array.isArray(data) && data.length > 20) {
       return { name: `Top 20 ${name}`, data: data.slice(0, 20) };
@@ -20,74 +33,53 @@ const Tabs = ({ data, isModalView = false }) => {
     return { name, data };
   };
 
-  const dataCategoriesTab = createTab("Data Categories", data_categories);
-  const diagnosesTab = createTab("Diagnoses", diagnoses);
-  const anatomicSitesTab = createTab("Anatomic Sites", anatomic_sites);
+  // Prepare tab data for each category
+  const dataCategoriesTab = createTab('Data Categories', data_categories);
+  const diagnosesTab = createTab('Diagnoses', diagnoses);
+  const anatomicSitesTab = createTab('Anatomic Sites', anatomic_sites);
 
-  const tabContainers = [
-    dataCategoriesTab,
-    diagnosesTab,
-    anatomicSitesTab,
-  ];
+  // Array of tab containers for rendering
+  const tabContainers = [dataCategoriesTab, diagnosesTab, anatomicSitesTab];
 
+  // Handle tab change event
   const handleTabChange = (event, value) => {
     setCurrentTab(value);
   };
 
   return (
     <>
-      <div
-        style={
-          isModalView
-            ? {
-                display: "flex",
-                justifyContent: "space-between",
-                borderBottom: "2px solid #71767A",
-                padding: "0 8px",
-                alignItems: "center",
-              }
-            : {
-                borderBottom: "2px solid #71767A",
-              }
-        }
-      >
+      {/* Tab header with optional modal view title */}
+      <div className={isModalView ? classes.modalHeader : classes.header}>
         <BentoTabs
           tabItems={tabContainers}
           currentTab={currentTab}
           handleTabChange={handleTabChange}
           customTheme={customTheme}
         />
-
+        
+        {/* Show the 'Subjects in this Study' section when the view is in Modal mode.  */}
         {isModalView && (
-          <h4
-            style={{
-              fontFamily: "Poppins",
-              fontSize: 15,
-              fontWeight: 400,
-              margin: "15px 0",
-              color: "#377E99"
-            }}
-          >
-            Subjects in this Study:{" "}
-            <span
-              style={{
-                fontWeight: "700",
-              }}
-            >
+          <h4 className={classes.modalTitle}>
+            Subjects in this Study:{' '}
+            <span className={classes.modalTitleSpan}>
               {data.num_of_participants}
             </span>
           </h4>
         )}
       </div>
 
+      {/* Render tab panels with corresponding chart views */}
       {tabContainers.map((tab, index) => (
         <TabPanel value={currentTab} index={index} key={index}>
-          {/* <WidgetView dataSet={tabContainers[currentTab]}/> */}
-          <ChartView data={tabContainers[currentTab].data} isModalView={isModalView} />
+          <ChartView
+            data={tabContainers[currentTab].data}
+            isModalView={isModalView}
+          />
         </TabPanel>
       ))}
     </>
   );
 };
 
-export default Tabs;
+// Export Tabs component
+export default withStyles(styles)(Tabs);

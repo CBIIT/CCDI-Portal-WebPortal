@@ -1,98 +1,57 @@
-import React, { useState } from "react";
-import { Modal, Button } from "@material-ui/core";
-import CloseIcon from "@material-ui/icons/Close";
-import SearchIcon from "@material-ui/icons/Search";
-import TabsView from "../tabs/TabsView";
+import React, { useState } from 'react';
+import { Modal, Button } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
+import ZoomInIcon from '@material-ui/icons/ZoomIn';
+import { withStyles } from '@material-ui/core';
+import styles from './ModalStyle';
+import TabsView from '../tabs/TabsView';
 
-const ModalView = ({ data }) => {
+/**
+ * ModalView component displays a modal with detailed study profile information.
+ * Renders a button to open a modal dialog showing study details in a tabbed view.
+ *
+ * @component
+ * @param {Object} props - Component props.
+ * @param {Object} props.data - Data object containing study details, including study_id and other relevant information.
+ * @param {Object} props.classes - CSS classes for styling the component.
+ * @returns {JSX.Element} The rendered ModalView component.
+ */
+const ModalView = ({ data, classes }) => {
+  // State to control modal open/close
   const [open, setOpen] = useState(false);
 
+  // Open modal handler
   const handleOpen = () => setOpen(true);
+  // Close modal handler
   const handleClose = () => setOpen(false);
 
   return (
-    <div
-      style={{
-        textAlign: "center",
-      }}
-    >
+    // Root container for modal trigger and modal itself
+    <div className={classes.root}>
+      {/* Button to open the modal */}
       <Button
         variant="text"
         onClick={handleOpen}
-        endIcon={<SearchIcon fontSize="small" />}
-        style={{
-          textTransform: "none",
-          color: "#455299",
-          fontFamily: "Inter",
-          fontSize: "16px",
-          fontStyle: "normal",
-          fontWeight: "700",
-          lineHeight: "22px",
-          textDecoration: "underline",
-          background: "none",
-          padding: 0,
-          minWidth: "auto",
-          paddingLeft: "3rem",
-        }}
+        endIcon={<ZoomInIcon fontSize="large" className={classes.openButtonIcon} />}
+        className={classes.openButton}
       >
         See Enlarged View
       </Button>
+      {/* Modal dialog */}
       <Modal open={open} onClose={handleClose}>
-        <div
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            background: "#fff",
-            // padding: 24,
-            outline: "none",
-            borderRadius: 8,
-            boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
-            minWidth: 900,
-            minWeight: 550,
-          }}
-        >
-          {/* Header */}
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              borderBottom: "1px solid #eee",
-              padding: 16,
-              paddingBottom: 8,
-              marginBottom: 16,
-            }}
-          >
-            <h2
-              style={{
-                margin: 0,
-                fontSize: "19px",
-                fontFamily: "Poppins",
-                fontWeight: "400",
-              }}
-            >
-              Study Profile:{" "}
-              <span
-                style={{
-                  fontWeight: "700",
-                }}
-              >
-                {data.study_id}
-              </span>
+        <div className={classes.modalContainer}>
+          {/* Modal header with title and close button */}
+          <div className={classes.modalHeader}>
+            <h2 className={classes.modalTitle}>
+              Study Profile:{' '}
+              <span className={classes.titleSpan}>{data.study_id}</span>
             </h2>
-            <Button onClick={handleClose} style={{ minWidth: 0, padding: 4 }}>
+            <Button onClick={handleClose} className={classes.closeButton}>
               <CloseIcon />
             </Button>
           </div>
-          {/* Body */}
-          <div
-            style={{
-              padding: 16,
-              paddingTop: 0,
-            }}
-          >
+          {/* Modal body with tabbed study details */}
+          <div className={classes.modalBody}>
             <TabsView data={data} isModalView={true} />
           </div>
         </div>
@@ -101,4 +60,5 @@ const ModalView = ({ data }) => {
   );
 };
 
-export default ModalView;
+// Export ModalView component
+export default withStyles(styles)(ModalView);

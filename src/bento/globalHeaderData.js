@@ -36,6 +36,11 @@ export const navMobileList = [
     className: 'navMobileItem',
   },
   {
+    name: 'Cohort Analyzer',
+    link: '/cohortAnalyzer',
+    className: 'navMobileItem',
+  },
+  {
       name: 'Resources',
       link: '',
       className: 'navMobileItem clickable',

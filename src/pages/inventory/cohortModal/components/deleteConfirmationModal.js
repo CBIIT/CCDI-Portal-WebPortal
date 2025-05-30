@@ -15,7 +15,6 @@ const DeleteConfirmationModal = (props) => {
         handleDelete,
         deletionType
     } = props;
-
     return (
         <Modal
             open={open}

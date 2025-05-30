@@ -25,6 +25,7 @@ export const tableConfig = {
       title: 'DOWNLOAD DATA',
       cloudIcon: true,
     },
+    hasExport: false,
   },
   columns: [
     {
@@ -36,7 +37,7 @@ export const tableConfig = {
     },
 
     {
-      dataField: 'dbgap_accession',
+      dataField: 'study_id',
       header: 'dbGaP Accession',
       display: true,
       tooltipText: 'sort',
@@ -82,9 +83,7 @@ export const tableConfig = {
 };
 
 const participant_query = gql`query participantOverview(
-    # Demographics
     $id: [String],
-
     # Table config
     $first: Int,
     $offset: Int,
@@ -105,7 +104,7 @@ participantOverview(
     participant_id
     race
     sex_at_birth
-    dbgap_accession
+    study_id
     __typename
 }}`;
 

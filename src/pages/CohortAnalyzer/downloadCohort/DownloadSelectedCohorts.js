@@ -25,7 +25,7 @@ export default function DownloadSelectedCohort({ queryVariable, isSelected }) {
             query: GET_COHORT_MANIFEST_QUERY,
             variables: queryVariable,
         });
-        arrayToCSVDownload(data['diagnosisOverview'], "analyzed");
+        arrayToCSVDownload(data['cohortManifest'], "analyzed");
     };
 
     const downloadCohortMetadata = async () => {

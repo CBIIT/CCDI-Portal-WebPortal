@@ -183,6 +183,7 @@ export const useStyle = makeStyles((theme) => ({
         width: '100%',
         display: 'flex',
         justifyContent: 'space-between',
+        marginTop: '20px',
         marginLeft: 10,
         marginRight: 25,
         '& p': {

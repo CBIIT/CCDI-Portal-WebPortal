@@ -6,6 +6,8 @@ import bookIcon from '../../assets/studies/bookIcon.svg';
 import exportIcon from '../../assets/studies/exportIcon.svg';
 import manifestIcon from '../../assets/studies/manifestIcon.svg';
 import { studyDownloadLinks } from '../../bento/studiesData';
+import TabsView from './tabs/TabsView';
+import ModalView from "./modal/ModalView";
 
 const StudiesDetailContainer = styled.div`
     .breadcrumb {
@@ -229,7 +231,7 @@ const StudiesDetail = ({data}) => {
                                 data.pubmed_ids.split(";").map((publicationItem, idx) => {
                                     const key = `publication_${idx}`;
                                     return (
-                                        <div><a key={key} href={`https://pubmed.ncbi.nlm.nih.gov/${publicationItem}`} target="_blank" rel="noopener noreferrer">PMID:{publicationItem}<img className='exportIcon' src={exportIcon} alt="exportIcon" /></a></div>
+                                        <div key={key}><a href={`https://pubmed.ncbi.nlm.nih.gov/${publicationItem}`} target="_blank" rel="noopener noreferrer">PMID:{publicationItem}<img className='exportIcon' src={exportIcon} alt="exportIcon" /></a></div>
                                     )
                                 })
                                 : <div>N/A</div>
@@ -249,6 +251,13 @@ const StudiesDetail = ({data}) => {
                     <div className='studyItem'>
                         <div className='studyItemTitle'>Samples Count</div>
                         <div className="studyItemContent">{data.num_of_samples.toLocaleString('en-US')}</div>
+                    </div>
+                    <div className='studyItem'>
+                        <div className='studyItemTitle'>Study Profile</div>
+                        <div className="studyItemContent">
+                            <TabsView data={data}/>
+                            <ModalView data={data}/>
+                        </div>
                     </div>
                 </div>
             </StudiesDetailBodyContainer>

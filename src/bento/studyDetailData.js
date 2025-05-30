@@ -6,12 +6,23 @@ query studyDetails($study_id: String) {
         study_id
         study_name
         dbgap_accession
-        pubmed_ids
         study_description
+        pubmed_ids
         num_of_participants
         num_of_samples
         num_of_files
-   
+        data_categories {
+          group
+          subjects
+        }
+        diagnoses {
+          group
+          subjects
+        }
+        anatomic_sites {
+          group
+          subjects
+        }
         __typename
     }
   }`;

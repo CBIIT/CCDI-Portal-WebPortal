@@ -52,7 +52,7 @@ const Tabs = ({ data, classes, isModalView = false }) => {
     createTab('Diagnoses', Diagnoses),
     createTab('Anatomic Sites', AnatomicSites),
   ].filter((tab) => {
-    return Array.isArray(tab.data) && tab.data.length > 0
+    return Array.isArray(tab.data) && tab.data.length > 0;
   });
 
   // Handle tab change event

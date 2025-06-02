@@ -65,6 +65,8 @@ const useStyles = makeStyles((theme) => {
       },
     },
     leftColumn: {
+      width: '50%',
+      wordBreak: 'break-all',
       [lgBreakpoint]: { 
         marginLeft: '20px',
       },

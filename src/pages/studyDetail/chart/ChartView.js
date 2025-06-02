@@ -75,7 +75,7 @@ const ChartView = ({ data, classes, isModalView = true }) => {
                     DEFAULT_COLORS[index % DEFAULT_COLORS.length],
                 }}
               />
-              <span>{entry.group}</span>
+              <span className={classes.legendItemLabel}>{entry.group}</span>
             </li>
           );
         })}
@@ -156,6 +156,8 @@ const ChartView = ({ data, classes, isModalView = true }) => {
                 lineHeight: '24px',
                 fontSize: '14px',
                 color: '#555',
+                maxHeight: '505px',
+                overflow: 'hidden overlay',
               }}
               content={<CustomizedLegend hoveredGroup={hoveredGroup} />}
             />

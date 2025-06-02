@@ -41,6 +41,9 @@ const styles = {
     marginRight: '8px',
     display: 'inline-block',
   },
+  legendItemLabel: {
+    maxWidth: '300px',
+  },
   tooltip: {
     background: '#fff',
     border: '1px solid #CCCCCC',

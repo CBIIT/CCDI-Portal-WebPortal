@@ -143,6 +143,16 @@ const useStyles = makeStyles((theme) => {
       border: '1px solid #E7EEF5',
       margin: '10px 0px',
       padding: '0px',
+    },
+    button: {
+      width: '167px',
+      height: '41px',
+      alignSelf: 'end',
+      color: '#07679C',
+      borderColor: '#07679C',
+      fontFamily: 'Poppins',
+      fontWeight: '600',
+      fontSize: '12px',
     }
   }
 });

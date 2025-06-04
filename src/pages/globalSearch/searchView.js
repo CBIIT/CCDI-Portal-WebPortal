@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { withStyles, Box, Grid } from '@material-ui/core';
-//import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   SearchBarGenerator, SearchResultsGenerator, countValues,
 } from '@bento-core/global-search';
@@ -95,8 +95,7 @@ function searchView(props) {
 
   const query = useQuery();
   const searchparam = query.get("keyword") ? query.get("keyword").trim() : "";
-  console.log(searchparam);
-  //const history = useHistory();
+  const navigate = useNavigate();
   const [searchText, setSearchText] = useState(searchparam);
   const [searchCounts, setSearchCounts] = useState([]);
 
@@ -137,7 +136,7 @@ function searchView(props) {
     queryCountAPI(value).then((d) => {
       setSearchText(value);
       setSearchCounts(d);
-     // history.push(`/search/${value}`);
+      navigate(`/sitesearch?keyword=${value}`)
     });
   };
 

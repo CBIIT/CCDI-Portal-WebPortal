@@ -104,21 +104,27 @@ export const navbarSublists = {
     link: 'https://nccrdataplatform.ccdi.cancer.gov/home',
     className: 'navMobileSubItem',
   },
-  {
-    name:'Cancer Genomics Cloud',
-    link: 'https://www.cancergenomicscloud.org',
-    className: 'navMobileSubItem',
-  }, 
-  {
-    name:'Database of Genotypes and Phenotypes',
-    link: 'https://www.ncbi.nlm.nih.gov/gap',
-    className: 'navMobileSubItem',
-  },
+  // {
+  //   name:'Cancer Genomics Cloud',
+  //   link: 'https://www.cancergenomicscloud.org',
+  //   className: 'navMobileSubItem',
+  // }, 
+  // {
+  //   name:'Database of Genotypes and Phenotypes',
+  //   link: 'https://www.ncbi.nlm.nih.gov/gap',
+  //   className: 'navMobileSubItem',
+  // },
   {
     name:'CCDI Extrachromosomal DNA (ecDNA)',
     link: 'https://ccdi-ecdna.org',
     className: 'navMobileSubItem',
-  }],
+  },
+  {
+    name:'Tools',
+    link: '/tools',
+    className: 'navMobileSubItem',
+  },
+  ],
   "About": [
     {
       name: 'About CCDI Hub',

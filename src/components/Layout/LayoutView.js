@@ -17,6 +17,7 @@ import ScrollButton from '../ScrollButton/ScrollButtonView';
 import MCIResourceView from '../../pages/resource/MCIResourcePage/MCIResourceController'
 import FederationResourceView from "../../pages/resource/FederationResourcePage/FederationResourceController";
 import CPIResourceView from "../../pages/resource/CPIResourcePage/CPIResourceController";
+import ToolsResourceView from "../../pages/resource/ToolsResourcePage/ToolsResourceController";
 import ReleaseNotesPageView from '../../pages/releaseNotePage/releaseNotePageController';
 import StudiesView from '../../pages/studies/studiesView';
 import StudiesDetail from "../../pages/studyDetail/studyDetailController";
@@ -43,6 +44,7 @@ const Layout = () => {
           <Route path="/data-usage-policies" element={<DataUsagePoliciesView />} />
           <Route path="/ccdi-participant-index" element={<CPIResourceView />} />
           <Route path="/publications" element={<PublicationsView />} />
+          <Route path="/tools" element={<ToolsResourceView />} />
           <Route path="/release-notes" element={<ReleaseNotesPageView />} />
           <Route path="/studies" >
             <Route index={true} element={<StudiesView />}></Route>

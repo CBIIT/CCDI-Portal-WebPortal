@@ -9,7 +9,7 @@ import arrowDownIcon from '../../../assets/icons/Arrow_Down.svg';
 const ToolsContainer = styled.div`
     width: 100%;
 
-    .policiesHeaderContainer {
+    .headerContainer {
         width: 1142px;
         height: 140px;
         margin: 0 auto;
@@ -24,6 +24,9 @@ const ToolsContainer = styled.div`
         text-align: center;
         letter-spacing: 0.02em;
         color: #FFFFFF;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
         @media (min-width: 1420px) {
             margin: 0 auto;
@@ -36,14 +39,15 @@ const ToolsContainer = styled.div`
         }
     }
 
-    .policiesHeaderText {
+    .headerText {
         line-height: 38px;
         width: 320px;
-        padding-top: 33px;
-        margin: 0 auto;
-
+        /* Remove padding-top and margin to allow flex centering */
+        padding-top: 0;
+        margin: 0;
+        
         @media (max-width: 767px) {
-            padding-top: 15px;
+            padding-top: 0;
             width: 270px;
         }
     }
@@ -399,7 +403,7 @@ const ToolsResourceView = ({data}) => {
 
     return (
         <ToolsContainer>
-             <div className='policiesHeaderContainer'><div className='policiesHeaderText'>Tools</div></div>
+             <div className='headerContainer'><div className='headerText'>Tools</div></div>
             <ToolsBody id='ToolsBody'>
                 <div className='navSection'>
                     <div className={stickyNavStyle} id='leftNav'>

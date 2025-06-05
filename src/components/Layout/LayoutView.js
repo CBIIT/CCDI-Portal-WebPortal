@@ -17,6 +17,7 @@ import ScrollButton from '../ScrollButton/ScrollButtonView';
 import MCIResourceView from '../../pages/resource/MCIResourcePage/MCIResourceController'
 import FederationResourceView from "../../pages/resource/FederationResourcePage/FederationResourceController";
 import CPIResourceView from "../../pages/resource/CPIResourcePage/CPIResourceController";
+import CBioPortalResourceView from "../../pages/resource/cBioPortalResourcePage/cBioPortalResourceController";
 import ReleaseNotesPageView from '../../pages/releaseNotePage/releaseNotePageController';
 import StudiesView from '../../pages/studies/studiesView';
 import StudiesDetail from "../../pages/studyDetail/studyDetailController";
@@ -43,6 +44,7 @@ const Layout = () => {
           <Route path="/data-federation-resource" element={<FederationResourceView/>} />
           <Route path="/data-usage-policies" element={<DataUsagePoliciesView />} />
           <Route path="/ccdi-participant-index" element={<CPIResourceView />} />
+          <Route path="/cbioportal" element={<CBioPortalResourceView />} />
           <Route path="/publications" element={<PublicationsView />} />
           <Route path="/release-notes" element={<ReleaseNotesPageView />} />
           <Route path="/cohortAnalyzer" element={<CohortAnalyzerController />} />

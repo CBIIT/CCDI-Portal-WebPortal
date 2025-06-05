@@ -27,9 +27,11 @@ import figureB3 from '../../../assets/explore/FigureB3.png';
 
 const UseGuideButtonContainer = styled.div`
     .buttonContainer {
+        position: absolute;
+        top: -82px;
         display: flex;
-        margin-left: 6px;
-        margin-top: 7px;
+        width: 100%;
+        padding: 7px 6px 7px 6px;
     }
 
     .buttonText {
@@ -102,15 +104,15 @@ const UseGuideButton = ({classes}) => {
     return (
         <UseGuideButtonContainer>
             <div className='buttonContainer'>
-            <Button
-                variant="outlined"
-                onClick={handleClickOpen}
-                className={classes.customButton}
-                classes={{ root: classes.clearAllButtonRoot }}
-                onMouseEnter={() => setIsHover(true)}
-                onMouseLeave={() => setIsHover(false)}
-            >
-                <img src={isHover?userguideIconWhite: userguideIcon} alt="user guide icon" />
+                <Button
+                    variant="outlined"
+                    onClick={handleClickOpen}
+                    className={classes.customButton}
+                    classes={{ root: classes.clearAllButtonRoot }}
+                    onMouseEnter={() => setIsHover(true)}
+                    onMouseLeave={() => setIsHover(false)}
+                >
+                    <img src={isHover?userguideIconWhite: userguideIcon} alt="user guide icon" />
                 </Button>
                 <div className='buttonText'>Explore the CCDI User Guide</div>
             </div>
@@ -168,7 +170,7 @@ const UseGuideButton = ({classes}) => {
                                                 <div className={classes.figureText}>Figure 3: Explore Dashboard page with red boxes highlighting the search filters and results</div> 
                                             </li>
                                             <li>
-                                                Search criteria are displayed in the right panel (Figure 4A). Faceted filtering may be done by uploading a list of participant IDs (in “DEMOGRAPHICS” Figure 4B), text searches (“DIAGNOSIS,” “DIAGNOSIS ATOMIC SITE,” and “SAMPLE ANATOMIC SITE” Figure 4C), numerical sliders (“AGE AT DIAGNOSIS” and “AGE AT COLLECTION” Figure 4D), or checkbox selections for the remaining properties. You can apply multiple filtering criteria at the same time in a search. You can view and clear your current selection(s) in the query summary at the top of the widgets (Figure 4E).
+                                                Search criteria are displayed in the right panel (Figure 4A). Faceted filtering may be done by uploading a list of participant IDs (in “DEMOGRAPHICS” Figure 4B), text searches (“DIAGNOSIS,” “DIAGNOSIS ANATOMIC SITE,” and “SAMPLE ANATOMIC SITE” Figure 4C), numerical sliders (“AGE AT DIAGNOSIS” and “AGE AT COLLECTION” Figure 4D), or checkbox selections for the remaining properties. You can apply multiple filtering criteria at the same time in a search. You can view and clear your current selection(s) in the query summary at the top of the widgets (Figure 4E).
                                                 <div className={classes.figureContainer}><img src={figure4} style={{width: '90%'}} alt='Figure4'/></div>
                                                 <div className={classes.figureText}>Figure 4: Full facet list in Explore Dashboard with highlights of various facet types and query display/clear function</div> 
                                             </li>

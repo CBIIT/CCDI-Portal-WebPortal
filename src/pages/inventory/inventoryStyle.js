@@ -16,8 +16,13 @@ export default () => ({
     margin: 'auto',
     borderLeft: 'thin solid #8A7F7C',
   },
+  sideBarContainer: {
+    position: 'relative',
+    marginTop: '82px',
+  },  
   sideBar: {
     width: '270px',
+    paddingBottom: '1px',
     maxHeight: '1361px',
     overflowX: 'hidden',
     backgroundColor: 'transparent',

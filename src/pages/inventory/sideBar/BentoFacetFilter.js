@@ -150,7 +150,7 @@ const BentoFacetFilter = ({
     const query = new URLSearchParams(useLocation().search);
     const navigate = useNavigate();
     return (
-      <div className={classes.floatRight}>
+      <div className={classes.buttonContainer}>
         <Button
           id="button_sidebar_clear_all_filters"
           variant="outlined"

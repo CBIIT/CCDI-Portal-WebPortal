@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { onAddParticipantsToCohort } from '../../../../components/CohortSelectorState/store/action';
 import { CohortStateContext } from '../../../../components/CohortSelectorState/CohortStateContext';
 import { useGlobal } from '../../../../components/Global/GlobalProvider';
+import DeleteConfirmationModal from '../../cohortModal/components/deleteConfirmationModal';
 
 const DropdownContainer = styled.div`
   position: relative;
@@ -113,6 +114,7 @@ export const CustomDropDown = ({ options, label, isHidden, backgroundColor, bord
   const [isOpen, setIsOpen] = useState(false);
   const tableContext = useContext(TableContext);
   const [isActive, setIsActive] = useState(false);
+  const [showPopupMessage,setShowPopupMessage] = useState("");
 
   useEffect(() => {
     const { context } = tableContext;
@@ -121,6 +123,7 @@ export const CustomDropDown = ({ options, label, isHidden, backgroundColor, bord
     } = context;
     setIsActive(hiddenSelectedRows.length > 0 && options.length > 0);
   }, [tableContext])
+
   const toggleDropdown = () => isActive && setIsOpen(!isOpen);
 
   const clearSelection = () => {
@@ -133,6 +136,7 @@ export const CustomDropDown = ({ options, label, isHidden, backgroundColor, bord
     dispatch(onRowSelectHidden([]));
 
   }
+
   const { Notification } = useGlobal();
 
   const triggerNotification = (count) => {
@@ -143,25 +147,59 @@ export const CustomDropDown = ({ options, label, isHidden, backgroundColor, bord
     }
 
   };
-  const { dispatch } = useContext(CohortStateContext);
+  
+  const { state, dispatch } = useContext(CohortStateContext);
 
-  const handleSelect = (value) => {
-    if (isActive) {
-      const { context } = tableContext;
-      const {
-        hiddenSelectedRows = [],
-      } = context;
-      setIsOpen(false);
-      clearSelection();
-      console.log(hiddenSelectedRows);
-      dispatch(onAddParticipantsToCohort(
-        value,
-        hiddenSelectedRows,
-        (count) => triggerNotification(count) // Pass as a callback
-      ));
+  // Checks if adding the selected participants to the cohort would exceed the 4000 participant limit
+  const exceedLimitSelectedParticipant = (selectedCohort, hiddenSelectedRows) => {
+    let existingParticipantCount = 0;
+    let numberSelectedRows = 0;
 
+    // Get the cohort object from state
+    const cohort = state[selectedCohort];
+    // Count existing participants in the cohort
+    if (cohort && cohort.participants && Array.isArray(cohort.participants)) {
+      existingParticipantCount = cohort.participants.length;
     }
+
+    // Count the number of newly selected participants
+    if (hiddenSelectedRows && Array.isArray(hiddenSelectedRows)) {
+      numberSelectedRows = hiddenSelectedRows.length;
+    }
+
+    // Return true if the total would exceed 4000, otherwise false
+    if ((existingParticipantCount + numberSelectedRows) > 4000) {
+      return true;
+    }
+
+    return false;
+  }
+
+  // Handles the selection of a cohort from the dropdown
+  const handleSelect = (selectedCohort) => {
+   if (isActive) { // Only proceed if the dropdown is active (i.e., there are selected rows)
+    const { context } = tableContext;
+    const { hiddenSelectedRows = [] } = context;
+
+    // Check if adding the selected participants would exceed the cohort limit
+    if (!exceedLimitSelectedParticipant(selectedCohort, hiddenSelectedRows)) {
+      setIsOpen(false); // Close the dropdown
+      clearSelection(); // Clear the current selection in the table
+
+      // Dispatch action to add participants to the selected cohort
+      // Pass a callback to trigger a notification after adding
+      dispatch(onAddParticipantsToCohort(
+       selectedCohort,
+       hiddenSelectedRows,
+       (count) => triggerNotification(count) // Pass as a callback
+      ));
+    } else {
+      // Show Popup notification if the participant limit would be exceeded
+      setShowPopupMessage("You are not allowed to add more than 4000 participants in a single cohort");
+    }
+   }
   };
+
   const dropDownListRef = useRef(null);
 
   function useClickOutside(ref, onClickOutside) {
@@ -199,6 +237,14 @@ export const CustomDropDown = ({ options, label, isHidden, backgroundColor, bord
           })}
         </DropdownList>
       )}
+      <DeleteConfirmationModal
+        classes={""}
+        open={showPopupMessage}
+        setOpen={() => { setShowPopupMessage("")  }}
+        handleDelete={() => { setShowPopupMessage("") }}
+        deletionType={false}
+        message={showPopupMessage}
+      />
     </DropdownContainer>
   );
 };

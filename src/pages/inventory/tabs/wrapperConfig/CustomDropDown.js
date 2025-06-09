@@ -153,7 +153,7 @@ export const CustomDropDown = ({ options, label, isHidden, backgroundColor, bord
   // Checks if adding the selected participants to the cohort would exceed the 4000 participant limit
   const exceedLimitSelectedParticipant = (selectedCohort, hiddenSelectedRows) => {
     let existingParticipantCount = 0;
-    let numberSelectedRows = 0;
+    let selectedRowsCount = 0;
 
     // Get the cohort object from state
     const cohort = state[selectedCohort];
@@ -164,11 +164,11 @@ export const CustomDropDown = ({ options, label, isHidden, backgroundColor, bord
 
     // Count the number of newly selected participants
     if (hiddenSelectedRows && Array.isArray(hiddenSelectedRows)) {
-      numberSelectedRows = hiddenSelectedRows.length;
+      selectedRowsCount = hiddenSelectedRows.length;
     }
 
     // Return true if the total would exceed 4000, otherwise false
-    if ((existingParticipantCount + numberSelectedRows) > 4000) {
+    if ((existingParticipantCount + selectedRowsCount) > 4000) {
       return true;
     }
 
@@ -182,21 +182,22 @@ export const CustomDropDown = ({ options, label, isHidden, backgroundColor, bord
     const { hiddenSelectedRows = [] } = context;
 
     // Check if adding the selected participants would exceed the cohort limit
-    if (!exceedLimitSelectedParticipant(selectedCohort, hiddenSelectedRows)) {
-      setIsOpen(false); // Close the dropdown
-      clearSelection(); // Clear the current selection in the table
-
-      // Dispatch action to add participants to the selected cohort
-      // Pass a callback to trigger a notification after adding
-      dispatch(onAddParticipantsToCohort(
-       selectedCohort,
-       hiddenSelectedRows,
-       (count) => triggerNotification(count) // Pass as a callback
-      ));
-    } else {
+    if (exceedLimitSelectedParticipant(selectedCohort, hiddenSelectedRows)) {
       // Show Popup notification if the participant limit would be exceeded
       setShowPopupMessage("You are not allowed to add more than 4000 participants in a single cohort");
+      return;
     }
+
+    // If the limit is not exceeded, proceed with adding participants
+    setIsOpen(false); // Close the dropdown
+    clearSelection(); // Clear the current selection in the table
+
+    // Dispatch action to add participants to the selected cohort
+    dispatch(onAddParticipantsToCohort(
+      selectedCohort,
+      hiddenSelectedRows,
+      (count) => triggerNotification(count) // Pass as a callback
+    ));
    }
   };
 

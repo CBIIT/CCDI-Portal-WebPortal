@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => {
     leftColumn: {
       width: '50%',
       wordBreak: 'break-word',
-      [lgBreakpoint]: { 
+      [lgBreakpoint]: {
         marginLeft: '20px',
       },
     },
@@ -103,6 +103,25 @@ const useStyles = makeStyles((theme) => {
       letterSpacing: '0px',
       textAlign: 'left',
       color: '#00838F',
+    },
+    titleLink: {
+      fontFamily: 'Inter',
+      fontSize: '14.25px',
+      fontWeight: '600',
+      lineHeight: '22px',
+      letterSpacing: '2.25%',
+      textAlign: 'left',
+      margin: '0px 0px 0px 3px',
+      padding: '0px',
+      textTransform: 'uppercase',
+      color: 'blue',
+      whiteSpace: 'nowrap',
+      textDecoration: 'underline',
+      backgroundColor: 'transparent',
+      '&:hover': {
+        textDecoration: 'underline',
+        backgroundColor: 'transparent',
+      }
     },
     key: {
       fontFamily: 'Inter',
@@ -142,7 +161,7 @@ const useStyles = makeStyles((theme) => {
       },
     },
     hr: {
-      width: '100%', 
+      width: '100%',
       border: '1px solid #E7EEF5',
       margin: '10px 0px',
       padding: '0px',

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import {
-  Grid, Typography, Button,
+  Grid, Typography, Button
 } from '@material-ui/core';
 import useStyles from './style';
 import { cn } from 'bento-components';
 import CPIModal from './CPIModal';
 import cpiIcon from '../../../../assets/icons/Global_Cpi_Icon.svg';
+import { Link } from 'react-router-dom';
 
 /* const removeSquareBracketsFromString = (text) => {
   return text.replace(/\[|\]/g, '');
@@ -42,9 +43,13 @@ const ParticipantCard = ({ data = {}, index }) => {
       <Typography variant="h6" className={classes.key}>
         {label}
       </Typography>
-      <Typography variant="body1" className={classes.value}>
-        {value}
-      </Typography>
+      {label !== 'Study ID:' ?
+        <Typography variant="body1" className={classes.value}>
+          {value}
+        </Typography> :
+        <Button component={Link} to={`/studies?p_id=${study_id}`} className={classes.titleLink}>
+          {study_id}
+        </Button>}
     </div>
   );
 

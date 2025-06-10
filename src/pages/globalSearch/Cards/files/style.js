@@ -63,6 +63,7 @@ const useStyles = makeStyles((theme) => {
       [lgBreakpoint]: {  // For larger screens, allow for two columns
         flexBasis: '50%',
       },
+      wordBreak: 'break-all',
     },
     leftColumn: {
       [lgBreakpoint]: {

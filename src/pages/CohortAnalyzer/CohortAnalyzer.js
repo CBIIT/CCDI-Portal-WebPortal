@@ -32,6 +32,7 @@ import {
     sortByReturn,
     getAllIds,
     getIdsFromCohort,
+    filterAllParticipantWithDiagnosisName,
 } from "./CohortAnalyzerUtil";
 import styled from "styled-components";
 
@@ -108,8 +109,38 @@ export const CohortAnalyzer = () => {
         setCohortData(newState);
     }
 
+    function updatedCohortContentAllowDuplication(newParticipantsData) {
+        const newState = { ...state };
+        selectedCohorts.forEach(cohortId => {
+            const existingParticipants = newState[cohortId].participants || [];
+
+
+            let finalResponse = [];
+            newParticipantsData.forEach((participant) => {
+                const matchingExistingParticipants = existingParticipants.find(
+                    existingParticipant => existingParticipant.id === participant.id
+                );
+
+                if (matchingExistingParticipants) {
+                    finalResponse.push({
+                        ...matchingExistingParticipants, ...participant
+                    })
+                }
+
+            })
+
+            newState[cohortId] = {
+                ...newState[cohortId],
+                participants: finalResponse,
+            };
+
+        });
+        setCohortData(newState);
+    }
+
     async function getJoinedCohort(isReset = false) {
         let queryVariables = generateQueryVariable(selectedCohorts, state);
+
         if (Object.keys(generalInfo).length > 0) {
             queryVariables = { "id": isReset ? getIdsFromCohort(state, selectedCohorts) : getAllIds(generalInfo), first: 10000 };
         }
@@ -132,6 +163,47 @@ export const CohortAnalyzer = () => {
         }
     }
 
+    async function getJoinedCohortByD(selectedCohortSection = null) {
+        let queryVariables = generateQueryVariable(selectedCohorts, state);
+        if (Object.keys(generalInfo).length > 0) {
+            queryVariables = { "id": getIdsFromCohort(state, selectedCohorts), first: 10000 };
+        }
+        setQueryVariable(queryVariables);
+
+        const { data } = await client.query({
+            query: analyzer_query[nodeIndex],
+            variables: queryVariables,
+        });
+        console.log(data);
+        if (queryVariables.id.length > 0) {
+            if (searchValue !== "") {
+
+                let filteredRowData = data[responseKeys[nodeIndex]].filter((a, b) => a.participant_id.includes(searchValue))
+
+                if (JSON.stringify(selectedCohortSection) !== "{}") {
+                    filteredRowData = filterAllParticipantWithDiagnosisName(generalInfo, filteredRowData)
+                }
+                setRowData(addCohortColumn(filteredRowData, state, selectedCohorts));
+                updatedCohortContentAllowDuplication(filteredRowData)
+            } else {
+
+
+                if (JSON.stringify(selectedCohortSection) !== "{}") {
+
+                    let filterRowData = filterAllParticipantWithDiagnosisName(generalInfo, data[responseKeys[nodeIndex]])
+                    console.log(filterRowData);
+                    setRowData(addCohortColumn(filterRowData, state, selectedCohorts));
+                } else {
+                    setRowData(addCohortColumn(data[responseKeys[nodeIndex]], state, selectedCohorts));
+                    updatedCohortContent(data[responseKeys[nodeIndex]])
+                }
+
+            }
+        } else {
+            setRowData([]);
+        }
+    }
+
     function shortenText(text, maxSize = 17) {
         return text.length > maxSize ? text.slice(0, maxSize) + "..." : text;
     }
@@ -146,7 +218,11 @@ export const CohortAnalyzer = () => {
 
     useEffect(() => {
         if (selectedChart.length >= 0) {
-            getJoinedCohort();
+            if (nodeIndex === 0) {
+                getJoinedCohort();
+            } else if (nodeIndex === 1) {
+                getJoinedCohortByD(generalInfo);
+            }
         }
 
         if (nodeIndex === 0 || nodeIndex === 1 || nodeIndex === 2) {
@@ -190,26 +266,35 @@ export const CohortAnalyzer = () => {
 
 
     useEffect(() => {
-
-        getJoinedCohort();
+        if (nodeIndex === 0) {
+            getJoinedCohort();
+        } else if (nodeIndex === 1) {
+            getJoinedCohortByD(generalInfo);
+        }
     }, [searchValue])
 
     useEffect(() => {
 
-        getJoinedCohort();
+        if (nodeIndex === 0) {
+            getJoinedCohort();
+        } else if (nodeIndex === 1) {
+            getJoinedCohortByD(generalInfo);
+        }
 
     }, [generalInfo])
 
     useEffect(() => {
-
         setSelectedCohortSections([]);
         setGeneralInfo({})
         setSearchValue("");
         if (searchRef.current) {
             searchRef.current.value = "";
         }
-
-        getJoinedCohort(true);
+        if (nodeIndex === 0) {
+            getJoinedCohort(true);
+        } else if (nodeIndex === 1) {
+            getJoinedCohortByD({});
+        }
 
     }, [nodeIndex])
 
@@ -498,8 +583,16 @@ export const CohortAnalyzer = () => {
                                         Participant ID
                                     </p>
                                 </ToolTip>
-                            </div>
+                                <ToolTip backgroundColor={'white'} zIndex={3000} title={"All Venn diagram selected areas will be cleared when changing buttons"} arrow placement="top">
 
+                                    <p>
+                                        <input disabled={selectedCohorts.length === 0} type="radio" onClick={() => {
+                                            setNodeIndex(1);
+                                        }} radioGroup="node_type" name="node_type" />
+                                        Diagnosis
+                                    </p>
+                                </ToolTip>
+                            </div>
                         </div>
 
                         {refershTableContent && selectedCohorts.length > 0 &&

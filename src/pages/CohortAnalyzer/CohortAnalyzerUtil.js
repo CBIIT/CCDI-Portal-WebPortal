@@ -14,7 +14,7 @@ export const triggerNotification = (count, Notification) => {
 
 export const filterAllParticipantWithDiagnosisName=(generalInfo,allParticipants)=>{
     let finalIds = [];
-    
+    console.log(generalInfo);
     Object.keys(generalInfo).forEach((section) => {
         allParticipants.forEach((part) => {
             if(generalInfo[section].includes(part.diagnosis)){

@@ -19,7 +19,7 @@ const StudiesCard = ({ data = {}, index }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('/studies');
+    navigate(`/studies/${study_id}`);
   };
 
   const renderInfo = (label, value = '') => (

@@ -82,7 +82,7 @@ const ParticipantCard = ({ data = {}, index }) => {
             </div>
 
             <div className={cn(classes.column, classes.leftColumn)}>
-              {renderInfo('Treatement Type:', treatment_type_str)}
+              {renderInfo('Treatment Type:', treatment_type_str)}
               {renderInfo('Treatment Agent:', treatment_agent_str)}
               {renderInfo('Last Known Survival Status:', last_known_survival_status_str)}
 

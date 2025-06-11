@@ -152,6 +152,11 @@ export const navbarSublists = {
       className: 'navMobileSubItem',
     },
     {
+      name: 'Hub Explore Dashboard Tutorial Video',
+      link: 'https://www.youtube.com/watch?v=Eu8y1GDTszU',
+      className: 'navMobileSubItem',
+    },
+    {
       name: 'Release Notes',
       link: '/release-notes',
       className: 'navMobileSubItem',

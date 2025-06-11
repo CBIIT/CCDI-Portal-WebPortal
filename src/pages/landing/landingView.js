@@ -17,7 +17,7 @@ const LandingViewContainer = styled.div`
     background: white;
     
     @media (min-width: 1200px) {
-      height: 3180px;
+      // height: 3180px;
     }
 `;
 

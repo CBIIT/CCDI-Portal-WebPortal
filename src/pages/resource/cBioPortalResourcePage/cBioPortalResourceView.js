@@ -181,6 +181,9 @@ const CBioPortalResourceBody = styled.div`
         font-size: 16px;
         line-height: 22px;
         margin-bottom: 50px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
 
         a {
             color: #455299;
@@ -189,6 +192,27 @@ const CBioPortalResourceBody = styled.div`
             text-underline-position: under;
             line-break: anywhere;
         }
+    }
+
+    .cBioPortalButton {
+        height: 41px;
+        width: 239px;
+        border-radius: 5px;
+        background: #05555C;
+        color: #FFFFFF;
+        text-align: center;
+        font-family: Poppins;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 16px; /* 133.333% */
+        letter-spacing: 0.24px;
+        text-transform: uppercase;
+        text-decoration: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 16px 0 0 0;
     }
 
     .navList {
@@ -497,7 +521,17 @@ const CBioPortalResourceView = ({data}) => {
                 </div>
                 <div className='contentSection'>
                     <div className='contentList'>
-                        {data.cpiIntroText && <div className='introContainer'>{ReactHtmlParser(data.cbioportalIntroText)}</div>}
+                        {data.cpiIntroText
+                        && <div className='introContainer'>
+                                {ReactHtmlParser(data.cbioportalIntroText)}
+                                <a href="https://cbioportal.ccdi.cancer.gov" target="_blank" rel="noopener noreferrer" style={{textDecoration: 'none'}}>
+                                    <div class="cBioPortalButton">
+                                        GO TO CCDI CBIOPORTAL &nbsp;
+                                        <img src={exportIcon} alt='export icon' />
+                                    </div>
+                                </a>
+                            </div>
+                        }
                         {
                             cbioportalContent && cbioportalContent.map((cbioportalItem, mciid) => {
                                 const cpikey = `cpi_${mciid}`;

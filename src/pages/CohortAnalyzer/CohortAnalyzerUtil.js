@@ -101,7 +101,7 @@ export const resetSelection = (setSelectedCohorts,setNodeIndex) => {
 }
 
 export const sortBy = (type, cohortList, setCohortList, state) => {
-    let listOfCohortsLocal = cohortList;
+    let listOfCohortsLocal = [...cohortList]; // clone to avoid mutation
     if (type === "alphabet") {
         listOfCohortsLocal.sort((a, b) =>
             a.localeCompare(b))
@@ -116,7 +116,7 @@ export const sortBy = (type, cohortList, setCohortList, state) => {
 }
 
 export const sortByReturn = (type, cohortList, state, selected) => {
-    let listOfCohortsLocal = cohortList;
+    let listOfCohortsLocal = [...cohortList]; // clone to avoid mutation
     if (type === "alphabet") {
         listOfCohortsLocal.sort((a, b) =>
             a.localeCompare(b))

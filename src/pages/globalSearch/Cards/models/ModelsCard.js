@@ -16,6 +16,7 @@ const ModelsCard = ({ data = {}, index }) => {
     value,
     property_description,
     node,
+    category_type,
   } = data;
   const classes = useStyles();
   const navigate = useNavigate();
@@ -52,8 +53,8 @@ const ModelsCard = ({ data = {}, index }) => {
           <div className={classes.row}>
             <div className={classes.column}>
               {renderInfo('Data Model Node:', node)}
-              {renderInfo('Property Name:', property)}
-              {renderInfo('Property Description:', property_description)}
+              {category_type !== 'node' && renderInfo('Property Name:', property)}
+              {category_type !== 'node' && renderInfo('Property Description:', property_description)}
             </div>
           </div>
         </Grid>

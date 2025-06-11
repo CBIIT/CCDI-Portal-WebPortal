@@ -69,7 +69,6 @@ async function queryAllAPI(search, offset, pageSize, isPublic) {
   const {
     datafieldValue, offsetValue,
   } = await getAllQueryField(search, offset, pageSize, isPublic);
-
   const input = {
     input: search,
     first: pageSize,
@@ -187,7 +186,6 @@ function searchView(props) {
     if (field === 'all') {
       const count = countValues(searchCounts);
       let data = await queryAllAPI(searchText, (currentPage - 1) * pageSize, pageSize, isPublic);
-      console.log(data)
 
       // If the current set of data is less than the page size,
       // we need to query the next datafield for it's data
@@ -214,7 +212,6 @@ function searchView(props) {
       offset: (currentPage - 1) * pageSize,
     };
     const data = await queryResultAPI(field, input, isPublic);
-    console.log(data);
     return (data || []).slice(0, pageSize);
   };
 

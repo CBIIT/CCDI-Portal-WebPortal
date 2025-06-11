@@ -231,6 +231,7 @@ export const SEARCH_PAGE_RESULT_MODEL = gql`
                 property_type
                 value
                 highlight
+                category_type
             }
         }
     }

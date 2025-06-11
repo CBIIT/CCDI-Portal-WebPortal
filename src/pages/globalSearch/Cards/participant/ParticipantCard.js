@@ -47,7 +47,7 @@ const ParticipantCard = ({ data = {}, index }) => {
         <Typography variant="body1" className={classes.value}>
           {value}
         </Typography> :
-        <Button component={Link} to={`/studies?p_id=${study_id}`} className={classes.titleLink}>
+        <Button component={Link} to={`/studies/${study_id}`} className={classes.titleLink}>
           {study_id}
         </Button>}
     </div>

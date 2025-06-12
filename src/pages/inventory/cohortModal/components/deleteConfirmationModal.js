@@ -13,7 +13,8 @@ const DeleteConfirmationModal = (props) => {
         open,
         setOpen,
         handleDelete,
-        deletionType
+        deletionType,
+        message,
     } = props;
     return (
         <Modal
@@ -21,7 +22,7 @@ const DeleteConfirmationModal = (props) => {
             onClose={() => setOpen(false)}
         >
             <div className={classes.modal}>
-                <div className={classes.modalContent}>
+                {!message ? <div className={classes.modalContent}>
                     <div className={classes.modalHeading}>
                         <span>Are you sure you want to delete {deletionType}? {deletionType !== deletionTypes.DELETE_ALL_PARTICIPANTS && 'This action cannot be undone.'}</span>
                         <span>Press Confirm or Cancel.</span>
@@ -43,7 +44,23 @@ const DeleteConfirmationModal = (props) => {
                             Confirm
                         </button>
                     </div>
-                </div>
+                </div> :
+                    <div className={classes.modalContent}>
+                        <div className={classes.modalHeading}>
+                            <span>{message}</span>
+                        </div>
+                        <div className={classes.modalButtons}>
+                            <button
+                                className={classes.confirmButton}
+                                onClick={() => {
+                                    setOpen(false);
+                                }}
+                            >
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                }
             </div>
         </Modal>
     );
@@ -66,7 +83,7 @@ const styles = () => ({
         justifyContent: 'center',
         flexDirection: 'column',
     },
-    modalHeading: { 
+    modalHeading: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

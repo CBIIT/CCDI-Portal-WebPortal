@@ -81,6 +81,22 @@ export const CohortAnalyzer = () => {
 
     }
 
+    const exceedLimitSelectedParticipant = (hiddenSelectedRows) => {
+        let selectedRowsCount = 0;
+
+        // Count the number of selected participants
+        if (hiddenSelectedRows && Array.isArray(hiddenSelectedRows)) {
+            selectedRowsCount = hiddenSelectedRows.length;
+        }
+
+        // Return true if the total would exceed 4000, otherwise false
+        if (selectedRowsCount > 4000) {
+            return true;
+        }
+
+        return false;
+    }
+
     function updatedCohortContent(newParticipantsData) {
         const newState = { ...state };
         selectedCohorts.forEach(cohortId => {
@@ -373,6 +389,10 @@ export const CohortAnalyzer = () => {
     }
 
     const handleClick = () => {
+        if (exceedLimitSelectedParticipant(rowData)) {
+          setWarningMessage("You are not allowed to create a new cohort with more than 4000 participants");
+          return;
+        }
         if (selectedCohortSection.length > 0 && rowData.length > 0) {
             setCurrentCohortChanges(null);
             dispatch(onCreateNewCohort(

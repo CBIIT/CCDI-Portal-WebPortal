@@ -269,11 +269,22 @@ export const CohortAnalyzer = () => {
       };
     }
     setQueryVariable(queryVariables);
-    const { data } = await client.query({
+
+   let data;
+    try {
+      const response = await client.query({
       query: analyzer_query[nodeIndex],
       variables: queryVariables,
-    });
+      });
+      data = response.data;
+    } catch (error) {
+      console.error('Error fetching cohort data:', error);
+      setRowData([]);
+      return;
+    }
+
     if (queryVariables.id.length > 0) {
+
       if (searchValue !== '') {
         let filteredRowData = data[responseKeys[nodeIndex]].filter((a, b) =>
           a.participant_id.includes(searchValue)
@@ -292,7 +303,6 @@ export const CohortAnalyzer = () => {
     selectedCohorts,
     state,
     generalInfo,
-    setQueryVariable,
     client,
     nodeIndex,
     analyzer_query,
@@ -300,7 +310,6 @@ export const CohortAnalyzer = () => {
     searchValue,
     addCohortColumn,
     updatedCohortContent,
-    setRowData,
     getIdsFromCohort,
     getAllIds,
     generateQueryVariable,
@@ -316,12 +325,21 @@ export const CohortAnalyzer = () => {
     }
     setQueryVariable(queryVariables);
 
-    const { data } = await client.query({
+    let data;
+    try {
+      const response = await client.query({
       query: analyzer_query[nodeIndex],
       variables: queryVariables,
-    });
-    console.log(data);
+      });
+      data = response.data;
+    } catch (error) {
+      console.error('Error fetching cohort data:', error);
+      setRowData([]);
+      return;
+    }
+
     if (queryVariables.id.length > 0) {
+
       if (searchValue !== '') {
         let filteredRowData = data[responseKeys[nodeIndex]].filter((a, b) =>
           a.participant_id.includes(searchValue)
@@ -361,7 +379,6 @@ export const CohortAnalyzer = () => {
     selectedCohorts,
     state,
     generalInfo,
-    setQueryVariable,
     client,
     nodeIndex,
     analyzer_query,
@@ -370,7 +387,6 @@ export const CohortAnalyzer = () => {
     addCohortColumn,
     updatedCohortContent,
     updatedCohortContentAllowDuplication,
-    setRowData,
     getIdsFromCohort,
     filterAllParticipantWithDiagnosisName,
     generateQueryVariable,

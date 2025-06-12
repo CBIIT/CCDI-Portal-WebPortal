@@ -142,7 +142,7 @@ export const CohortAnalyzer = () => {
         let queryVariables = generateQueryVariable(selectedCohorts, state);
 
         if (Object.keys(generalInfo).length > 0) {
-            queryVariables = { "id": isReset ? getIdsFromCohort(state, selectedCohorts) : getAllIds(generalInfo), first: 10000 };
+            queryVariables = { "id": isReset ? getIdsFromCohort(state, selectedCohorts) : getAllIds(generalInfo), first: 12000 };
         }
         setQueryVariable(queryVariables);
         const { data } = await client.query({
@@ -166,7 +166,7 @@ export const CohortAnalyzer = () => {
     async function getJoinedCohortByD(selectedCohortSection = null) {
         let queryVariables = generateQueryVariable(selectedCohorts, state);
         if (Object.keys(generalInfo).length > 0) {
-            queryVariables = { "id": getIdsFromCohort(state, selectedCohorts), first: 10000 };
+            queryVariables = { "id": getIdsFromCohort(state, selectedCohorts), first: 12000 };
         }
         setQueryVariable(queryVariables);
 

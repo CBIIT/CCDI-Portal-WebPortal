@@ -174,7 +174,7 @@ export const CohortAnalyzer = () => {
             query: analyzer_query[nodeIndex],
             variables: queryVariables,
         });
-        console.log(data);
+
         if (queryVariables.id.length > 0) {
             if (searchValue !== "") {
 
@@ -191,7 +191,6 @@ export const CohortAnalyzer = () => {
                 if (JSON.stringify(selectedCohortSection) !== "{}") {
 
                     let filterRowData = filterAllParticipantWithDiagnosisName(generalInfo, data[responseKeys[nodeIndex]])
-                    console.log(filterRowData);
                     setRowData(addCohortColumn(filterRowData, state, selectedCohorts));
                 } else {
                     setRowData(addCohortColumn(data[responseKeys[nodeIndex]], state, selectedCohorts));
@@ -376,7 +375,6 @@ export const CohortAnalyzer = () => {
     const handleClick = () => {
         if (selectedCohortSection.length > 0 && rowData.length > 0) {
             setCurrentCohortChanges(null);
-            console.log(rowData);
             dispatch(onCreateNewCohort(
                 "",
                 "",

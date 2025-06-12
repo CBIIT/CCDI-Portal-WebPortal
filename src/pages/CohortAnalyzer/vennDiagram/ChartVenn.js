@@ -30,7 +30,7 @@ const ChartVenn = ({ intersection, cohortData, setSelectedChart, setSelectedCoho
   const chartRef = useRef(null);
 
   const baseColorArray = ["#F9E28B", "#86E2B9", "#5198C8D9", ].map(color => hexToRgba(color));;
-  const nodes = ["id","diagnosis","treatment_type"];
+  const nodes = ["id","id","treatment_type"];
 
   const [baseSets, setBaseSets] = useState([]);
   const [data, setData] = useState(null);

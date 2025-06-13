@@ -1,5 +1,3 @@
-import dataAccessPDF from "../assets/about/CCDI_CGC_Data_Access_Instructions_September2024.pdf";
-
 export const introText = '<p>The CCDI Molecular Characterization Initiative (MCI) provides state-of-the-art molecular testing at no cost to newly diagnosed children, adolescents, and young adults (AYAs) with central nervous system (CNS) tumors, soft tissue sarcomas (STS), certain rare (RAR) childhood cancers, and certain neuroblastomas (NBL) being treated at a Children’s Oncology Group (COG)–affiliated hospital. The goal of this initiative is to enhance the understanding of the genetic factors involved in pediatric cancers and to provide timely, clinically relevant findings to doctors and families. This project uses Project:EveryChild (APEC14B1) to enroll participants, collect specimens, and annotate clinical data. The results of genetic testing will be shared with the treating physician and participants or their family, aiding in treatment decisions. This will also determine eligibility for certain planned COG clinical trials.</p>'
                          +'<p>For an overview of this initiative, <a class="link" href="https://www.cancer.gov/research/areas/childhood/childhood-cancer-data-initiative/data-ecosystem/molecular-characterization" target="_blank" rel="noopener noreferrer">access the MCI web page on cancer.gov</a>.</p>'
 
@@ -13,7 +11,7 @@ export const MCIContent = [
                 subtopic: 'APEC14B1-MCI Enrollment Metrics',
                 content: '<p>The MCI enrollment metrics are based on counts of patients enrolled with MCI through Project:EveryChild (APEC14B1) and are based on monthly COG reporting.</p>',
                 numberTable: {
-                    title: 'List of Institutions for Enrollments in MCI (APEC14B1-MCI) by Diagnosis Type as of August 7, 2024',
+                    title: 'List of Institutions for Enrollments in MCI (APEC14B1-MCI) by Diagnosis Type as of February 10, 2025',
                     header: ['Institution Name', 'CNS Diagnosis', 'Rare Tumor Diagnosis', 'STS Diagnosis'],
                     footer: 'Abbreviations: CNS, Central Nervous System; STS, Soft-tissue Sarcoma',
                     body: [["AdventHealth Orlando", 22, 4, 10, ], ["Advocate Children's Hospital-Oak Lawn", 30, 13, 81, ], ["Advocate Children's Hospital-Park Ridge", 26, 6, 96, ], ["Albany Medical Center", 27, 11, 91, ], ["Alberta Children's Hospital", 28, 5, 1, ], ["Alfred I duPont Hospital for Children", 24, 0, 11, ], ["Alliance for Childhood Diseases/Cure 4 the Kids Foundation", 18, 6, 70, ], ["Ann and Robert H Lurie Children's Hospital of Chicago", 22, 6, 21, ], ["Arkansas Children's Hospital", 26, 0, 30, ], ["Arnold Palmer Hospital for Children", 30, 3, 98, ], ["Ascension Saint Vincent Indianapolis Hospital", 25, 5, 29, ], ["Atrium Health Navicent", 29, 12, 28, ], ["Augusta University Medical Center", 18, 3, 40, ], ["Banner Children's at Desert", 18, 7, 26, ], ["Banner University Medical Center - Tucson", 30, 10, 1, ], ["Baylor College of Medicine/Dan L Duncan Comprehensive Cancer Center", 22, 8, 34, ], ["Baystate Medical Center", 23, 11, 20, ], ["Beaumont Children's Hospital-Royal Oak", 26, 2, 86, ], ["BI-LO Charities Children's Cancer Center", 24, 6, 68, ], ["Blank Children's Hospital", 26, 0, 83, ], ["British Columbia Children's Hospital", 20, 10, 2, ], ["Bronson Methodist Hospital", 28, 2, 42, ], ["Broward Health Medical Center", 27, 9, 58, ], ["C S Mott Children's Hospital", 29, 5, 28, ], ["CancerCare Manitoba", 19, 3, 89, ], ["Cardinal Glennon Children's Medical Center", 23, 3, 89, ], ["Carilion Children's", 25, 10, 0, ],
@@ -27,68 +25,68 @@ export const MCIContent = [
                     ["University of Nebraska Medical Center", 25, 8, 79, ], ["University of New Mexico Cancer Center", 22, 9, 74, ], ["University of Oklahoma Health Sciences Center", 26, 10, 82, ], ["University of Rochester", 22, 4, 84, ], ["University of Texas Health Science Center at San Antonio", 23, 3, 39, ], ["University of Vermont and State Agricultural College", 20, 10, 80, ], ["University of Virginia Cancer Center", 29, 10, 80, ], ["University of Wisconsin Carbone Cancer Center", 29, 11, 28, ], ["University Pediatric Hospital", 29, 9, 1, ], ["USA Health Strada Patient Care Center", 20, 5, 70, ], ["UT Southwestern/Simmons Cancer Center-Dallas", 25, 3, 8, ], ["Valley Children's Hospital", 23, 11, 79, ], ["Vanderbilt University/Ingram Cancer Center", 26, 1, 20, ], ["Vannie Cook Children's Clinic", 28, 4, 93, ], ["Virginia Commonwealth University/Massey Cancer Center", 24, 8, 41, ], ["Wake Forest University Health Sciences", 23, 8, 19, ], ["Walter Reed National Military Medical Center", 22, 5, 22, ], ["Washington University School of Medicine", 22, 1, 88, ], ["Wesley Medical Center", 26, 0, 93, ], ["West Virginia University Charleston Division", 29, 7, 78, ], ["West Virginia University Healthcare", 28, 1, 32, ], ["Women's and Children's Hospital-Adelaide", 20, 7, 55, ], ["Yale University", 20, 9, 97, ], ],
                 },
                 diseaseTable: {
-                    title: 'Enrollments in MCI (APEC14B1-MCI) by Diagnosis Type as of August 7, 2024',
+                    title: 'Enrollments in MCI (APEC14B1-MCI) by Diagnosis Type as of February 10, 2025',
                     header: ['', 'Primary Diagnosis Disease Group', 'Number of Participants'],
-                    body: [['Central Nervous System', 3085], ['Soft Tissue Sarcoma', 930], ['Rare Tumors', 416], ['Neuroblastoma', 174], ['Ewing Sarcoma', 11], ['Osteosarcoma', 10], ['Germ Cell Tumor', 9], ['Myeloid Leukemia', 4], ['Renal', 4], ['Liver Tumor', 3], ['Non-Hodgkin Lymphoma', 3], ['Lymphoblastic Leukemia', 2], ['Lymphoproliferative Disease', 1]],
+                    body: [{name: 'Central Nervous System', value: 3883}, {name: 'Soft Tissue Sarcoma', value: 1198}, {name: 'Rare Tumors', value: 572}, {name: 'Neuroblastoma', value: 361}],
                 },
-                diseaseDonut: {
-                    title: 'Enrollment',
-                    data: [{ name: 'Central Nervous System', value: 3085}, {name: 'Soft Tissue Sarcoma', value: 930}, {name: 'Rare Tumors', value: 416}, {name: 'Neuroblastoma', value: 174}, {name: 'Ewing Sarcoma', value: 11}, {name: 'Osteosarcoma', value: 10}, {name: 'Germ Cell Tumor', value: 9}, {name: 'Myeloid Leukemia', value: 4}, {name: 'Renal', value: 4}, {name: 'Liver Tumor', value: 3}, {name: 'Non-Hodgkin Lymphoma', value: 3}, {name: 'Lymphoblastic Leukemia', value: 2}, {name: 'Lymphoproliferative Disease', value: 1}]
-                },
-                donut: {
-                    title: 'Enrollments in MCI (APEC14B1-MCI) by Diagnosis Type as of August 7, 2024',
-                    data: [{name: 'Central Nervous System', value: 2704}, {name: 'Rare Tumors', value: 355}, {name: 'Soft Tissue Sarcoma', value: 815}, {name: 'Neuroblastoma', value: 98}],
-                },
+                // diseaseDonut: {
+                //     title: 'Enrollment',
+                //     data: [{ name: 'Central Nervous System', value: 3756}, {name: 'Soft Tissue Sarcoma', value: 1167}, {name: 'Rare Tumors', value: 554}, {name: 'Neuroblastoma', value: 331}]
+                // },
+                // donut: {
+                //     title: 'Enrollments in MCI (APEC14B1-MCI) by Diagnosis Type as of February 10, 2025',
+                //     data: [{name: 'Central Nervous System', value: 3756}, {name: 'Soft Tissue Sarcoma', value: 1167}, {name: 'Rare Tumors', value: 554}, {name: 'Neuroblastoma', value: 331}],
+                // },
                 map: {
                     data: [ 
                         [110, 540, "ALASKA", 2], //AK
-                        [638, 420, "ALABAMA", 91], //AL
-                        [550, 390, "ARKANSAS", 12], //AR
-                        [240, 430, "ARIZONA", 68], //AZ
-                        [100, 280, "CALIFORNIA", 341], //CA
-                        [320, 290, "COLORADO", 17], //CO
-                        [834, 228, "CONNECTICUT", 45], //CT
-                        [790, 305, "DISTRICT OF COLUMBIA", 30], //DC
-                        [810, 290, "DELEWARE", 45], //DE
-                        [735, 500, "FLORIDA", 241], //FL
-                        [720, 450, "GEORGIA", 141], //GA
-                        [340, 630, "HAWAII", 10], //HI
-                        [505, 250, "IOWA", 67], //IA
-                        [240, 220, "IDAHO", 34], //ID
-                        [600, 320, "ILLINOIS", 78], //IL
-                        [638, 285, "INDIANA", 84], //IN
+                        [638, 420, "ALABAMA", 122], //AL
+                        [550, 390, "ARKANSAS", 16], //AR
+                        [240, 430, "ARIZONA", 79], //AZ
+                        [100, 280, "CALIFORNIA", 466], //CA
+                        [320, 290, "COLORADO", 27], //CO
+                        [834, 228, "CONNECTICUT", 56], //CT
+                        [790, 305, "DISTRICT OF COLUMBIA", 54], //DC
+                        [810, 290, "DELEWARE", 60], //DE
+                        [735, 500, "FLORIDA", 313], //FL
+                        [720, 450, "GEORGIA", 177], //GA
+                        [340, 630, "HAWAII", 18], //HI
+                        [505, 250, "IOWA", 76], //IA
+                        [240, 220, "IDAHO", 40], //ID
+                        [600, 320, "ILLINOIS", 108], //IL
+                        [638, 285, "INDIANA", 99], //IN
                         [490, 330, "KANSAS", 0], //KS
-                        [670, 330, "KENTUCKY", 44], //KY
-                        [550, 460, "LOUISIANA", 37], //LA
-                        [840, 208, "MASSACHUSETTS", 36], //MA
-                        [785, 288, "MARYLAND", 67], //MD
-                        [860, 120, "MAINE", 18], //ME
-                        [645, 210, "MICHIGAN", 105], //MI
-                        [515, 150, "MINNESOTA", 129], //MN
-                        [530, 310, "MISSOURI", 95], //MO
-                        [600, 420, "MISSISSIPPI", 40], //MS
-                        [785, 355, "NORTH CAROLINA", 128], //NC
-                        [440, 135, "NORTH DAKOTA", 17], //ND
-                        [460, 285, "NEBRASKA", 46], //NE
-                        [843, 185, "NEW HAMPSHIRE", 7], //NH
-                        [815, 265, "NEW JERSEY", 56], //NJ
-                        [330, 430, "NEW MEXICO", 33], //NM
+                        [670, 330, "KENTUCKY", 63], //KY
+                        [550, 460, "LOUISIANA", 47], //LA
+                        [840, 208, "MASSACHUSETTS", 43], //MA
+                        [785, 288, "MARYLAND", 91], //MD
+                        [860, 120, "MAINE", 23], //ME
+                        [645, 210, "MICHIGAN", 129], //MI
+                        [515, 150, "MINNESOTA", 164], //MN
+                        [530, 310, "MISSOURI", 131], //MO
+                        [600, 420, "MISSISSIPPI", 59], //MS
+                        [785, 355, "NORTH CAROLINA", 165], //NC
+                        [440, 135, "NORTH DAKOTA", 21], //ND
+                        [460, 285, "NEBRASKA", 59], //NE
+                        [843, 185, "NEW HAMPSHIRE", 13], //NH
+                        [815, 265, "NEW JERSEY", 73], //NJ
+                        [330, 430, "NEW MEXICO", 34], //NM
                         [160, 260, "NEVADA", 3], //NV
-                        [795, 190, "NEW YORK", 261], //NY
-                        [690, 300, "OHIO", 234], //OH
-                        [490, 410, "OKLAHOMA", 67], //OK
-                        [150, 200, "OREGON", 33], //OR
-                        [780, 245, "PENNSYLVANIA", 163], //PA
-                        [853, 222, "RHODE ISLAND", 32], //RI
-                        [720, 395, "SOUTH CAROLINA", 58], //SC
-                        [410, 195, "SOUTH DAKOTA", 10], //SD
-                        [675, 370, "TENNESSEE", 90], //TN
-                        [480, 490, "TEXAS", 463], //TX
-                        [240, 275, "UTAH", 74], //UT
-                        [765, 310, "VIRGINIA", 82], //VA
-                        [825, 170, "VERMONT", 19], //VT
-                        [150, 100, "WASHINGTON", 218], //WA
-                        [570, 190, "WISCONSIN", 138], //WI
+                        [795, 190, "NEW YORK", 335], //NY
+                        [690, 300, "OHIO", 322], //OH
+                        [490, 410, "OKLAHOMA", 80], //OK
+                        [150, 200, "OREGON", 52], //OR
+                        [780, 245, "PENNSYLVANIA", 218], //PA
+                        [853, 222, "RHODE ISLAND", 39], //RI
+                        [720, 395, "SOUTH CAROLINA", 77], //SC
+                        [410, 195, "SOUTH DAKOTA", 11], //SD
+                        [675, 370, "TENNESSEE", 112], //TN
+                        [480, 490, "TEXAS", 594], //TX
+                        [240, 275, "UTAH", 105], //UT
+                        [765, 310, "VIRGINIA", 91], //VA
+                        [825, 170, "VERMONT", 22], //VT
+                        [150, 100, "WASHINGTON", 303], //WA
+                        [570, 190, "WISCONSIN", 185], //WI
                         [720, 330, "WEST VIRGINIA", 7], //WV
                       ],
                 }
@@ -161,32 +159,23 @@ export const MCIContent = [
         ]
     },
     {
-        id: 'Accessing_MCI_Data',
-        topic: 'Accessing MCI Data',
+        id: 'Accessing_MCI_Data_And_Tools',
+        topic: 'Accessing MCI Data and Tools',
         list: [
             {
                 id: 'How_to_Access_MCI_Data',
                 subtopic: 'How to Access MCI Data',
                 content: '<h3>How can MCI data be accessed through the CCDI Data Ecosystem?</h3>'
-                        +'<p>Separately, molecular characterization data and deidentified clinical reports are submitted to the CCDI Data Ecosystem, along with additional data encompassing demographics, diagnosis, treatment, and follow-up directly from COG. Data are hosted in the '
-                        +'<a class="link" href="https://datacommons.cancer.gov/repository/cancer-data-service" target="_blank" rel="noopener noreferrer">Cancer Data Service (CDS)</a>'
-                        +', which is a data repository under the '
-                        +'<a class="link" href="https://datascience.cancer.gov/data-commons" target="_blank" rel="noopener noreferrer">Cancer Research Data Commons</a>'
-                        +' infrastructure. Please see the '
-                        +`<a class="link" href=${dataAccessPDF} target="_blank" rel="noopener noreferrer">instructions</a>`
-                        +' on how to access the data associated with this study, '
-                        +'<a class="link" href="https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs002790" target="_blank" rel="noopener noreferrer">phs002790</a>'
-                        +'. For the CCDI studies, the database of Genotypes and Phenotypes (dbGaP) maintains a list of the subject IDs, sample IDs, and consents. Authorization through dbGaP is required to access controlled-access data and clinical/phenotypic files.</p>'
-                        +'<p>Users can analyze CCDI data on the '
-                        +'<a class="link" href="https://www.cancergenomicscloud.org/" target="_blank" rel="noopener noreferrer">Cancer Genomics Cloud</a>'
-                        +' through the '
-                        +'<a class="link" href="https://gcc02.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcgc.sbgenomics.com%2Fdatasets%2Ffile-repository&data=05%7C01%7Ccarol.bastiani%40nih.gov%7C7708699b96a144ce602208db6d0ace70%7C14b77578977342d58507251ca2dc2b06%7C0%7C0%7C638223665394038536%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=SyqbQFpBXs7Iqo6Ji2bSpdE3wQBcfAql9Gkacq7%2FBoI%3D&reserved=0" target="_blank" rel="noopener noreferrer">Cancer Data Service Explorer</a>'
-                        +' (CDS Explorer). The CDS Explorer provides a user-friendly interface for exploring the data in the CDS. '
-                        +'<a class="link" href="https://docs.cancergenomicscloud.org/docs/import-cds-data" target="_blank" rel="noopener noreferrer">Here is a tutorial</a>'
-                        +' on how to import CDS data. To see a preview of MCI data prior to going through the data authorization process, '
-                        +'<a class="link" href="https://datacatalog.ccdi.cancer.gov/dataset/CCDI-phs002790" target="_blank" rel="noopener noreferrer">visit MCI’s page</a>'
-                        +' in the CCDI Childhood Cancer Data Catalog.</p>'
-                        +'<p>For investigators planning to use data from different resources: If you intend to utilize data from institutions that enroll patients in the Molecular Characterization Initiative, please note that the data available on this site may be identical to the data collected from the submitting clinical sites.</p>',
+                        +'<p>MCI data can be accessed through the CCDI Data Ecosystem, which includes molecular characterization data, deidentified clinical reports, and whole slide images of hematoxylin and eosin (H&E) stained tissue, along with additional data on demographics, diagnosis, treatment, and follow-up.</p>'
+                        +'<p>CCDI studies are summarized and indexed in the '
+                        +'<a href="/explore">CCDI Hub Explore Dashboard</a>'
+                        +', where you can export row-level metadata for participants, samples, or files. To download study metadata, open the Studies filter set from the left-hand menu, expand the Study Name category, and scroll to find the Molecular Characterization Initiative. Alternatively in the Studies filter set, you can expand the dbGaP Accession category and scroll to find accession phs002790. Select the checkbox next to either Molecular Characterization Initiative or phs002790, then locate the Metadata column under Studies and click to download the study’s metadata. Then, select the cohorts of your interest.</p>'
+                        +'<p>Alternatively, the shopping cart feature on the dashboard allows users to select and manage files of interest. You can download a comma-separated values (CSV) file manifest or export the manifest directly to the Cancer Genomics Cloud (CGC) for further analysis. This '
+                        +`<a class="link" href="/user-guide.pdf" target="_blank" rel="noopener noreferrer">user guide</a>`
+                        +' provides information on how to find, request, access, download, and analyze controlled-access data. For questions, contact '
+                        +'<a href="mailto:ncichildhoodcancerdatainitiative@mail.nih.gov">ncichildhoodcancerdatainitiative@mail.nih.gov</a>.</p>'
+                        +'<p>MCI H&E-stained images in Digital Imaging and Communications in Medicine (DICOM) format are accessible as open-access through the Imaging Data Commons (IDC). Researchers can explore and visualize these images and their accompanying manifests using the <a class="link" href="https://portal.imaging.datacommons.cancer.gov/explore/" target="_blank" rel="noopener noreferrer">IDC Portal</a>. To learn more about the images, supporting metadata, and attribution requirements, please visit <a class="link" href="https://zenodo.org/records/14009669" target="_blank" rel="noopener noreferrer">Zenodo Collection</a>.</p>'
+                        +'<p>Note for investigators planning to use data from different resources: If you intend to utilize data from institutions that enroll patients in the Molecular Characterization Initiative, please note that the data available on this site may be identical to the data collected from the submitting clinical sites.</p>'
             },
             {
                 id: 'Germline_Findings',

@@ -195,13 +195,13 @@ const HeroList = styled.div`
         color: rgba(0, 0, 0, 0.7);
         font-family: poppins;
         font-weight: 600;
-        font-size: 18px;
-        line-height: 25px;
+        font-size: 28px;
+        line-height: 30px;
         width: 300px;
         text-decoration: none;
         display: flex;
         align-items: center;
-        letter-spacing: -0.01em;
+        letter-spacing: -0.056px;
         margin-left: 41px;
         transition: 650ms;
     }
@@ -288,8 +288,23 @@ const HeroList = styled.div`
         opacity: 1;
     }
 
-    .carousel__item:last-child {
+    .carousel__item:nth-child(9) {
         transform: translateY(370%) scale(1);
+        opacity: 1;
+    }
+
+    .carousel__item:nth-child(10) {
+        transform: translateY(375%) scale(1);
+        opacity: 1;
+    }
+
+    .carousel__item:nth-child(11) {
+        transform: translateY(380%) scale(1);
+        opacity: 1;
+    }
+
+    .carousel__item:last-child {
+        transform: translateY(385%) scale(1);
         opacity: 0;
         visibility: hidden;
     }
@@ -384,7 +399,7 @@ const Carousel = () => {
 
     useEffect(() => {
         if (rCarouselList.length === 0) {
-            setRCarouselList(getRandomList(carouselList));
+            setRCarouselList(getRandomList(carouselList.sort((a, b) => a.content.localeCompare(b.content))));
         }
         if (!isVisible) {
             clearInterval(timer);

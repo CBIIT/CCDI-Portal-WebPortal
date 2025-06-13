@@ -271,7 +271,7 @@ const FooterTablet = () => {
   }
 
   const handleSubmit = (e) => {
-    console.log("Handle click")
+    // console.log("Handle click")
     if (!validateEmail(emailContent)) {
       setErrorClass("errorEmail");
       e.preventDefault();

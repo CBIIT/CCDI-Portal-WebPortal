@@ -41,7 +41,7 @@ const MCISearchTableContainer = styled.div`
         font-weight: 700;
         line-height: 30px;
         letter-spacing: -0.02em;
-        color: #4D889E;
+        color: #477C90;
     }
 
     .searchboxContainer {
@@ -181,7 +181,7 @@ const MCISearchTable = ( {table} ) => {
                 </div>
                 <div className={inputValue !== '' ? 'clearIconContainer active' : 'clearIconContainer'} onClick={() => setInputValue("")} />
             </div>
-            <div className='mciTableBodyList'>
+            <div className='mciTableBodyList' tabIndex="0">
                 {
                     tableList.map((bodyItem, idx) => {
                         const key =  `mcitable_${idx}`;

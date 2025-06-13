@@ -1,45 +1,52 @@
 import React, { useState, useEffect, useRef }from 'react';
 import {
-  withStyles,
+  withStyles, ClickAwayListener
 } from '@material-ui/core';
 import ReactHtmlParser from 'html-react-parser';
 import Pagination from '@material-ui/lab/Pagination';
 import styled from 'styled-components';
 import exportIcon from '../../../assets/about/Export_Icon.svg';
 import publicationsHeaderImg from '../../../assets/about/Publications_Header.png';
-import { publicationsList } from '../../../bento/publicationsData';
+// import { publicationsList } from '../../../bento/publicationsData';
 import searchIcon from '../../../assets/header/Search_Small_Icon.svg';
+import arrowDownIcon from '../../../assets/about/arrowDownGreen.svg';
+import arrowUpIcon from '../../../assets/about/arrowUpGreen.svg';
 
 const PublicationsContainer = styled.div`
-  width: 1420px;
-  // width: 100%;
+  // width: 1420px;
+  width: 100%;
   margin: 0 auto;
 
   .pageHeader {
     width: 1142px;
-    height: 203px;
+    height: 140px;
     margin: 0 auto;
     background-image: url(${publicationsHeaderImg});
     background-repeat: no-repeat;
     background-color: #87D7DCCC; 
     border-radius: 0px 0px 20px 20px;
+  }
+
+  .pageHeaderText {
     font-family: 'Poppins';
     font-weight: 600;
     font-size: 35px;
-    line-height: 214px;
     text-align: center;
     letter-spacing: 0.02em;
     color: #FFFFFF;
+    padding: 40px 0 12px 0;
   }
 
-  .searchBoxFooter {
-    width: 662px;
-    margin: 0 auto 30px auto;
+  .pageHeaderSubtext {
+    color: #AEECF0;
+    text-align: center;
     font-family: Inter;
-    font-size: 14px;
+    font-size: 15px;
+    font-style: normal;
     font-weight: 400;
-    line-height: 19px;
-    color: #05555C;
+    line-height: 24px; /* 160% */
+    text-align: left;
+    margin-left: 50px;
   }
 
   .tabList {
@@ -48,8 +55,48 @@ const PublicationsContainer = styled.div`
       grid-template-columns: auto auto auto auto auto;
       justify-content: center;
       margin: 20px auto 35px auto;
-      border-top: 1px solid #000000;
+      border-top: 1px solid #CECECE;
       padding-top: 20px;
+  }
+
+  .tabDropdown {
+    display: none;
+  }
+
+  .tabDropdown {
+    position: absolute;
+    left: 15px;
+    padding: 0;
+    margin: 0 auto 52px auto;
+    width: calc(100vw - 45px);;
+    border: 2px solid #08838D;
+    background: white;
+    border-radius: 4px;
+  }
+
+  .tabDropdownItem {
+    color: #0A5E63;
+    height: 45px;
+    padding: 15.5px 10px;
+    list-style-type: none;
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 14px; /* 70% */
+    text-transform: capitalize;
+  }
+
+  .tabDropdownItem:hover {
+    cursor: pointer;
+  }
+
+  .tabDropdownItem:nth-child(odd) {
+    background: #F4F5F5;
+  }
+
+  .tabDropIcon {
+    float: right;
   }
 
   .tabListItem {
@@ -85,7 +132,7 @@ const PublicationsContainer = styled.div`
   }
 
   .UpperContainer {
-    display: flex;
+    // display: flex;
   }
 
   .titleContainer {
@@ -144,7 +191,7 @@ const PublicationsContainer = styled.div`
     font-size: 20px;
     line-height: 22px;
     color: #00838F;
-    margin-bottom: 8px;
+    margin-bottom: 15px;
     text-decoration: none;
   }
 
@@ -155,17 +202,55 @@ const PublicationsContainer = styled.div`
     line-height: 24px;
     text-transform: uppercase;
     color: #000000;
-    margin-top: 12px;
     margin-bottom: 12px;
+  }
+
+  .dateConferenceContainer {
+    display: flex;
+  }
+
+  .publicationsText1 {
+    color: #0095A2;
+    padding: 0 10px;
+  }
+
+  .publicationsText2 {
+    color: #00838F;
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: 0.05em;
+    padding-right: 7px;
+  }
+
+  .publicationsItemConference {
+    color: #000;
+    font-family: Inter;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 22px;
+    letter-spacing: 0.26px;
+    text-transform: uppercase;
+  }
+
+  .publicationsItemConferenceLink {
+    color: #000;
+    font-family: Inter;
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 22px;
+    letter-spacing: 0.02em;
   }
 
   .publicationsItemContent {
     font-family: 'Inter';
-    font-weight: 300;
+    font-weight: 500;
     font-size: 16px;
-    line-height: 24px;
+    line-height: 22px;
     color: #000000;
-    margin-bottom: 48px;
+    margin-bottom: 15px;
     a {
       color: #455299;
       font-family: 'Inter';
@@ -175,90 +260,179 @@ const PublicationsContainer = styled.div`
     }
   }
 
-  @media (min-width: 1420px) {
-    width: 1420px;
+  .footerContainer {
+    display: flex;
+    margin-bottom: 20px;
   }
 
-  // @media (max-width: 1186px) {
-  //   .pageHeader {
-  //     width: auto;
-  //     margin: 0 16px;
-  //   }
-  // }
+  .publicationsItemTagContainer {
+    margin-top: 7px;
+  }
 
-  // @media (max-width: 1090px) {
-  //   .publicationsList {
-  //     width: auto;
-  //     margin: 0 16px;
-  //   }
+  .publicationsItemTag {
+    color: #FFFFFF;
+    border-radius: 20px;
+    background: #2B8186;
+    padding: 5px 10px;
+    display: inline-block;
+    font-family: Poppins;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 19.31px;
+  }
 
-  //   .publicationsItem {
-  //     width: auto;
-  //   }
-  // }
+  .publicationsItemTag:hover {
+    background: #0E595E;
+  }
 
-  // @media (max-width: 1023px) {
-  //   p {
-  //     margin-top: 5px;
-  //   }
+  .readMoreButtonContainer {
+    text-decoration: none;
+    width: 167px;
+    display: block;
+    margin-left: auto;
+  }
 
-  //   .pageHeaderText {
-  //     line-height: 30px;
-  //     width: 250px;
-  //     padding-top: 70px;
-  //     margin: 0 auto;
-  //   }
+  .readMoreButton {
+    border-radius: 5px;
+    border: 1.25px solid #455299;
+    width: 167px;
+    padding: 11px 0 11px 38px;
+    color: #455299;
+    font-family: Poppins;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 16px; /* 133.333% */
+    letter-spacing: 0.24px;
+    text-transform: uppercase;
+  }
 
-  //   .UpperContainer {
-  //     width: 100%;
-  //   }
-  //   .imgContainer {
-  //     margin-left: auto;
-  //   }
-  //   .publicationsItem {
-  //     padding: 18px 18px 0 18px;
-  //   }
-  //   .publicationsItemTitle {
-  //     min-height: 50px;
-  //   }
-  //   .tabListItem {
-  //     font-size: 12px;
-  //     margin-left: 0;
-  //   }
-  //   .tabListItemActive {
-  //     font-size: 12px;
-  //     margin-left: 0;
-  //   }
-  //   .tabList {
-  //     display: grid;
-  //     grid-column-gap: 4%;
-  //     grid-template-columns: auto auto auto auto auto;
-  //     justify-content: center;
-  //     margin: 20px auto 25px auto;
-  //   }
-  // }
+  .readMoreText {
+    background: url(${exportIcon}) 79px center no-repeat;
+  }
 
-  // @media (max-width: 767px) {
-  //   .publicationsItemTitle {
-  //     font-size: 18px;
-  //   }
-  // }
+  .readMoreButton:hover {
+    background-color: #E6F3F7;
+  }
 
-  // @media (max-width: 530px) {
-  //   .tabList {
-  //     display: grid;
-  //     grid-column-gap: 2%;
-  //     grid-template-columns: auto auto 50px 72px auto;
-  //     justify-content: center;
-  //     margin-left: 16px;
-  //     margin-right: 12px;
-  //   }
-  // }
+  p {
+    margin-top: 5px;
+  }
+
+  @media (max-width: 1186px) {
+    .pageHeader {
+      width: auto;
+      margin: 0 16px;
+    }
+  }
+
+  @media (max-width: 1090px) {
+    .publicationsList {
+      width: auto;
+      margin: 0 16px;
+    }
+
+    .publicationsItem {
+      width: auto;
+    }
+
+    .dateConferenceContainer {
+      display: block;
+    }
+
+    .publicationsText1 {
+      display: none;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .pageHeaderSubtext {
+      margin-left: 30px;
+    }
+  
+    .UpperContainer {
+      width: 100%;
+    }
+    .imgContainer {
+      margin-left: auto;
+    }
+    .publicationsItem {
+      padding: 18px 18px 0 18px;
+    }
+    .tabListItem {
+      margin-left: 0;
+    }
+    .tabListItemActive {
+      margin-left: 0;
+    }
+    .tabList {
+      display: grid;
+      grid-column-gap: 4%;
+      grid-template-columns: auto auto auto auto auto;
+      justify-content: center;
+      margin: 20px auto 25px auto;
+    }
+
+    .publicationsItemDate {
+      margin-bottom: 0;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .publicationsItemTitle {
+      font-size: 18px;
+    }
+
+    .publicationsItemTagContainer {
+      margin-bottom: 15px;
+    }
+
+    .pageHeader {
+      height: 165px;
+    }
+
+    .pageHeaderText {
+      max-width: 308px;
+      line-height: 35px;
+      padding-top: 40px;
+      margin: 0 auto;
+    }
+
+    .pageHeaderSubtext {
+      margin-left: 0;
+      text-align: center;
+    }
+
+    .tabList {
+      display: none;
+    }
+
+    .tabDropdown {
+      display: block;
+    }
+
+    .totalNumContainer {
+      margin-top: 85px;
+    }
+
+    .publicationsItemContent {
+      margin-top: 10px;
+    }
+
+    .footerContainer {
+      display: block;
+      margin-bottom: 25px;
+    }
+
+    .readMoreButtonContainer {
+      margin-left: 0;
+    }
+  }
 `;
 
 const SearchBar = styled.div`
   display: flex;
-  margin: 40px auto 20px auto;
+  margin: 25px auto;
   width: 662px;
   height: 53px;
   border: 2px solid #08838D;
@@ -295,44 +469,45 @@ const SearchBar = styled.div`
     display: none;
   }
 
-  // @media (max-width: 1023px) {
-  //   margin: 0 auto;
-  //   maxWidth: 662px;
-  // }
+  @media (max-width: 1023px) {
+    maxWidth: 662px;
 
-  // @media (max-width: 767px) {
-  //   .searchButtonText {
-  //     display: none;
-  //   }
-  //   .searchButtonIcon {
-  //     display: block;
-  //   }
-  // }
+    .searchButtonText {
+      display: none;
+    }
+    .searchButtonIcon {
+      display: block;
+    }
+  }
 
-  // @media (max-width: 732px) {
-  //   margin: 0 15px;
-  //   width: auto;
-  // }
+  @media (max-width: 767px) {
+    margin: 20px 15px 15px 15px;
+    width: auto;
+  }
 `;
 
 const SearchInput = styled.input`
   margin: 0 20px;
   border: none;
-  font-family: 'Open Sans';
-  font-weight: 400;
-  font-size: 25px;
-  line-height: 53px;
-  color: #000000;
+  font-family: Poppins;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 16px;
+  color: #0A5E63;
   width: 650px;
   min-width: 0;
   background: transparent;
 
   ::placeholder {
-    color: #000000;
+    color: #0A5E63;
   }
 
   :focus {
     outline: none;
+  }
+
+  @media (max-width: 767px) {
+    margin: 0 10px;
   }
 `;
 
@@ -360,9 +535,9 @@ const useFocus = () => {
   return [ htmlElRef, setFocus ] 
 };
 
-const PublicationsView = ({classes}) => {
+const PublicationsView = ({classes, bannerText, publicationsList}) => {
   const [selectedTab, setSelectedTab] = useState("All");
-  const newsTabList = ['All', 'Collaboration', 'Primary', 'Review', 'Book Chapter'];
+  const newsTabList = ['All', 'Primary', 'Secondary', 'Abstract'];
   const sizelist = [10,20,50,100];
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(sizelist[0]);
@@ -371,19 +546,22 @@ const PublicationsView = ({classes}) => {
   const [pageTotal, setPageTotal] = useState(0);
   const [pageListVisible, setPageListVisible] = useState(0);
   const perPageSelection = useRef(null);
+  const anchorRef = useRef(null);
   const [inputValue, setInputValue] = useState('');
   const [keyword, setKeyword] = useState('');
-  const [deleteIconShow, setDeleteIconShow] = React.useState('none');
+  const [deleteIconShow, setDeleteIconShow] = useState('none');
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   useOutsideAlerter(perPageSelection);
 
   const [inputRef, setInputFocus] = useFocus();
 
   useEffect(() => {
     let resultList=[];
+    let keywordUpper = keyword.toUpperCase();
     if (selectedTab === "All") {
-      resultList = publicationsList.filter(item => (item.title.toUpperCase().includes(keyword.toUpperCase()) || item.date.toUpperCase().includes(keyword.toUpperCase()) || item.summary.toUpperCase().includes(keyword.toUpperCase())));
+      resultList = publicationsList.filter(item => (item.title.toUpperCase().includes(keywordUpper) || item.date.toUpperCase().includes(keywordUpper) || item.summary.toUpperCase().includes(keywordUpper) || item.tag.toUpperCase().includes(keywordUpper) || (item.conference && item.conference.toUpperCase().includes(keywordUpper))));
     } else {
-      resultList = publicationsList.filter(item => item.type === selectedTab && (item.title.toUpperCase().includes(keyword.toUpperCase()) || item.date.toUpperCase().includes(keyword.toUpperCase()) || item.summary.toUpperCase().includes(keyword.toUpperCase())));
+      resultList = publicationsList.filter(item => item.category === selectedTab && (item.title.toUpperCase().includes(keywordUpper) || item.date.toUpperCase().includes(keywordUpper) || item.summary.toUpperCase().includes(keywordUpper) || item.tag.toUpperCase().includes(keywordUpper) || (item.conference && item.conference.toUpperCase().includes(keywordUpper))));
     }
     setFilteredData(resultList);
     setPageTotal(resultList.length);
@@ -437,6 +615,12 @@ const PublicationsView = ({classes}) => {
     setPage(1);
   };
 
+  const onClickDropdownItem = (newsTabItem) => {
+    setSelectedTab(newsTabItem);
+    setDropdownOpen(false)
+    setPage(1);
+  };
+
   const handleTextInputChange = (event) => {
     const text = event.target.value;
     setInputValue(text);
@@ -452,11 +636,21 @@ const PublicationsView = ({classes}) => {
     setKeyword(inputValue);
   }
 
+  const handleClose = (event) => {
+    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+        return;
+    }
+    setDropdownOpen(false);
+  };
+
   return (
     <PublicationsContainer>
-      <div className='pageHeader'><div className='pageHeaderText'>CCDI-Supported Publications</div></div>
+      <div className='pageHeader'>
+        <div className='pageHeaderText'>CCDI-Supported Publications</div>
+        <div className='pageHeaderSubtext'>{bannerText}</div>
+      </div>
       <SearchBar onMouseOver={() => setDeleteIconShow('block')} onMouseOut={() => setDeleteIconShow('none')}>
-        <SearchInput ref={inputRef} type="text" value={inputValue} onChange={handleTextInputChange} />
+        <SearchInput ref={inputRef} type="text" value={inputValue} placeholder="Search Publications" onChange={handleTextInputChange} />
         <div className='deleteIcon' onClick={handleClear} >
             <img className="deleteIconImg" style={{display:deleteIconShow}} src='https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/globalSearchDelete.svg' alt='clear icon' />
         </div>
@@ -465,7 +659,6 @@ const PublicationsView = ({classes}) => {
           <img className='searchButtonIcon' src={searchIcon} alt="searchIcon" />
         </div>
       </SearchBar>
-      <div className='searchBoxFooter'>The following list contains manuscripts and posters published by the Childhood Cancer Data Initiative (CCDI) support as of July 7, 2024. The list will be updated as new studies are published.</div>
       <div className='tabList'>
         {
           newsTabList.map((newsTabItem, idx) => {
@@ -476,6 +669,29 @@ const PublicationsView = ({classes}) => {
           })
         }
       </div>
+      <ul className='tabDropdown'>
+        <div
+          className='tabDropdownItem first'
+          ref={anchorRef}
+          style={dropdownOpen? {fontSize: '16px', background: '#FFFFFF'} : {background: '#FFFFFF'}}
+          onClick={() => setDropdownOpen(!dropdownOpen)}
+        >
+          {dropdownOpen ? "Select a category" : selectedTab}
+          <img className='tabDropIcon' src={dropdownOpen? arrowUpIcon : arrowDownIcon} alt='arrow img' />
+        </div>
+        <ClickAwayListener onClickAway={handleClose}>
+          <div>
+          {
+            dropdownOpen && newsTabList.map((newsTabItem, idx) => {
+              const tabkey = `tabkey_${idx}`;
+              return (
+                <li key={tabkey} className='tabDropdownItem' onClick={() => onClickDropdownItem(newsTabItem)}>{newsTabItem}</li>
+              )
+            })
+          }
+          </div>
+        </ClickAwayListener>
+      </ul>
       <div className='totalNumContainer'><span className="totalNum">{filteredData.length}</span> results</div>
       <div className='publicationsList'>
         {
@@ -486,11 +702,35 @@ const PublicationsView = ({classes}) => {
                 <div className="UpperContainer">
                   <div className='publicationsItemTextContainer'>
                     <div className='titleContainer'>
-                      <div className='titleIdx'>{(page-1)*pageSize+idx+1}</div>
-                      <a className='publicationsItemTitle' href={publicationsItem.link} target="_blank" rel="noopener noreferrer">{publicationsItem.title}</a>
+                      <div className='publicationsItemTitle'>{publicationsItem.title}</div>
                     </div>
-                    <div className='publicationsItemDate'>{publicationsItem.date}</div>
-                    <div className='publicationsItemContent'>{ReactHtmlParser(`${publicationsItem.summary.substring(0, 485)}...`)}</div>
+                    <div className='dateConferenceContainer'>
+                      <div className='publicationsItemDate'>{publicationsItem.date}</div>
+                      {publicationsItem.conference && <div className='publicationsItemConference'>
+                        <span className='publicationsText1'>|</span>
+                        <span className='publicationsText2'>Conference</span>
+                        <span className='publicationsItemConferenceLink'>{publicationsItem.conference}</span>
+                      </div>}
+                      {publicationsItem.journal && <div className='publicationsItemConference'>
+                        <span className='publicationsText1'>|</span>
+                        <span className='publicationsText2'>Journal</span>
+                        <span className='publicationsItemConferenceLink'>{publicationsItem.journal}</span>
+                      </div>}
+                      {publicationsItem.pmid && <div className='publicationsItemConference'>
+                        <span className='publicationsText1'>|</span>
+                        <span className='publicationsText2'>PMID</span>
+                        <span className='publicationsItemConferenceLink'>{publicationsItem.pmid}</span>
+                      </div>}
+                      {publicationsItem.type && <div className='publicationsItemConference'>
+                        <span className='publicationsText1'>|</span>
+                        <span className='publicationsText2'>{publicationsItem.type}</span>
+                      </div>}
+                    </div>
+                    <div className='publicationsItemContent'>{ReactHtmlParser(publicationsItem.summary.length > 485 ? `${publicationsItem.summary.substring(0, 485)}...` : publicationsItem.summary)}</div>
+                    <div className='footerContainer'>
+                      <div className='publicationsItemTagContainer'><div className='publicationsItemTag'>{publicationsItem.tag}</div></div>
+                      <a className='readMoreButtonContainer' href={publicationsItem.link} target='_blank' rel='noopener noreferrer'><div className='readMoreButton'><div className='readMoreText'>Read More</div></div></a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -653,9 +893,9 @@ const styles = {
     '@media (min-width: 500px)': {
       display: 'flex',
     },
-    // '@media (max-width: 767px)': {
-    //   display: 'none',
-    // },
+    '@media (max-width: 1023px)': {
+      display: 'none',
+    },
   },
   flexPageContainer: {
     display: 'flex',

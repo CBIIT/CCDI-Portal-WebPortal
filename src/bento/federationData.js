@@ -9,7 +9,7 @@ export const federationContent = [
                 +'<p>To access the CCDI Data Federation Resource API, please click '
                 +'<a class="link" href="https://cbiit.github.io/ccdi-federation-api-aggregation/" target="_blank" rel="noopener noreferrer">here</a>.</p>'
                 +'<p>To access participating nodes API, please click '
-                +'<a class="link" href="https://cbiit.github.io/ccdi-federation-api/" target="_blank" rel="noopener noreferrer">here</a>.</p>'
+                +'<a class="link" href="https://cbiit.github.io/ccdi-federation-api-spec" target="_blank" rel="noopener noreferrer">here</a>.</p>'
                 +'<p>The API does not deliver files. Rather, it provides an open-access subset of the metadata (e.g., demographics) that match a user’s search criteria and provides the location of the complete data set. The data are accessible according to the policies at each contributing resource.</p>'
     },
     {
@@ -18,16 +18,17 @@ export const federationContent = [
         content: '<p>The CCDI Data Federation Resource offers a suite of resources including the '
                 +'<a class="link" href="https://cbiit.github.io/ccdi-federation-api-aggregation/swagger-aggr.yml" target="_blank" rel="noopener noreferrer">OpenAPI Specification</a>, '
                 +'<a class="link" href="https://github.com/CBIIT/ccdi-federation-api-spec/wiki" target="_blank" rel="noopener noreferrer">Data Federation Resource Wiki</a>, '
-                +'and comprehensive documentation on the '
-                +'<a class="link" href="https://github.com/CBIIT/ccdi-federation-api-spec" target="_blank" rel="noopener noreferrer">CCDI Data Federation Resource GitHub Repository</a>. '
-                +'You may also get assistance or report an '
-                +'<a class="link" href="https://github.com/CBIIT/ccdi-federation-api-spec/issues/new/choose" target="_blank" rel="noopener noreferrer">issue</a>.</p>'
+                +'and '
+                +'<a class="link" href="https://github.com/CBIIT/ccdi-federation-api" target="_blank" rel="noopener noreferrer">GitHub Repository</a>'
+                +' to support participating node development. You may also get assistance or report an '
+                +'<a class="link" href="https://github.com/CBIIT/ccdi-federation-api-spec/issues/new/choose" target="_blank" rel="noopener noreferrer">issue</a>. Read more about CCDI Federation API in the '
+                +'<a class="link" href="https://cbiit.github.io/ccdi-federation-api/blog/09-25-2024-introducing-the-federation-api.html" target="_blank" rel="noopener noreferrer">blog</a>.</p>'
     },
     {
         id: 'Contribute_Federation',
         topic: 'Contribute to CCDI Data Federation Resource',
         content: '<p>We invite the community to join us in empowering research through CCDI data federation. Organizations that implement CCDI’s data federation API harmonize data according to CCDI standards to ensure data are searchable.</p>'
-                +'<p>Details can be found on the <a class="link" href="https://github.com/CBIIT/ccdi-federation-api-spec/wiki" target="_blank" rel="noopener noreferrer">CCDI Data Federation Resource Wiki page</a>.</p>',
+                +'<p>If interested in becoming a member of the CCDI Data Federation Resource, please send an email to <a href="mailto:ncichildhoodcancerdatainitiative@mail.nih.gov" target="_blank" rel="noopener noreferrer">ncichildhoodcancerdatainitiative@mail.nih.gov</a>.</p>',
 
     },
     {

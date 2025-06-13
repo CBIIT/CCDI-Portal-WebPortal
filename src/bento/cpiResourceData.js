@@ -1,4 +1,4 @@
-export const introText =  '<p>The CCDI Participant Index (CPI) application programming interface (API) is part of the CCDI Data Ecosystem and serves as a backend reference service that can be leveraged by other software applications. The goal of the CPI is to manage, map, and share mapped research participant IDs (Identifiers) representing the same individual. This is achieved by collecting various IDs associated with a participant from different studies and research institutions, collectively referred to as “Domains”. These mappings will empower researchers to explore complex questions, gain deeper insights into diseases, develop innovative therapies, and enhance existing treatments.</p>'
+export const introText =  '<p>The Childhood Cancer Data Initiative (CCDI) Participant Index (CPI) maps research participant identifiers across multiple studies and institutions, collectively referred to as “Domains”. By mappings these identifiers, CPI enables researchers to connect data associated with the same individual across different datasets stored in sources such as the CCDI Hub and National Childhood Cancer Registry (NCCR). This mapping capability enhances the discovery of multimodal data, facilitating the exploration of complex research questions, and ultimately supporting the development of innovative therapies for pediatric cancers.</p>'
 
 export const cpiResourceData = [
     {
@@ -6,7 +6,7 @@ export const cpiResourceData = [
         topic: 'Components',
         content: '<p>“Identifiers” and “Domains” make up the structure of the CPI. These elements are essential for organizing and mapping participant data across various studies and organizations. The key components include:</p>'
                 +'<ul><li><b>Identifier</b>: A public identifier (Participant ID) appearing in a research dataset accessible to researchers (e.g., Kids First ID, GENIE ID).</li>'
-                +'<li><b>Domain</b>: Groups of unique participant IDs categorized as follows:<ul><li><b>Organizational Identifier</b>: A project/network of unique participant identifiers (e.g. AACR GENIE, Pediatric Cancer Data Commons).</li>'
+                +'<li><b>Domain</b>: Groups of unique participant IDs categorized as follows:<ul><li><b>Organizational Identifier</b>: A project/network of unique participant identifiers (e.g. Children\'s Oncology Group, AACR GENIE, Pediatric Cancer Data Commons).</li>'
                 +'<li><b>Data Set</b>: A single dataset for a particular study where data files for the participants can be found (e.g., dbGaP accession numbers).</li>'
                 +'<li><b>Study</b>: Programmatic references to research initiatives (e.g., TARGET, Gabriella Miller Kids First).</li></ul></li></ul>'
                 +'<p>Further information on CPI components and functions can be found at <a href="https://participantindex-docs.ccdi.cancer.gov" target="_blank" rel="noopener noreferrer">participantindex-docs.ccdi.cancer.gov</a>.</p>',

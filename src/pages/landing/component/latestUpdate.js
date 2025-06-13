@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ReactHtmlParser from 'html-react-parser';
 import usePageVisibility from "./PageVisibility";
-import { newsList } from '../../../bento/newsData';
+// import { altList, srcList, newsList, releaseNotesList } from '../../../bento/newsData';
+import { srcList } from '../../../bento/newsData';
 import { titleData } from '../../../bento/landingPageData';
 import exportIconText from '../../../assets/landing/Export_Icon_White.svg';
 
@@ -180,6 +181,8 @@ const LatestUpdatesContainer = styled.div`
           .latestUpdatesListTitle {
             padding: 6px 14px;
             font-size: 14px;
+            text-transform: uppercase;
+            font-weight: 600
           }
     
           .latestUpdatesListContent {
@@ -268,6 +271,8 @@ const TitleContainer = styled.div`
       font-size: 35px;
       text-transform: uppercase;
       margin: 0;
+      line-height: 38px;
+      letter-spacing: 0.02em;
     }
 
     @media (max-width: 1199px) {
@@ -289,14 +294,17 @@ const TitleContainer = styled.div`
     }
 `;
 
-const LatestUpdate = () => {
+const LatestUpdate = ({newsList, releaseNotesList, altList}) => {
     const [hoverItem, setHoverItem] = useState("");
     const [pause, setPause] = useState(true);
     const [rLatestlList, setRLatestlList] = useState([]);
     const isVisible = usePageVisibility();
 
     const getFirstList = () => {
-      const latestUpdateList = newsList.filter((item) => item.latestUpdate);
+      const fullList = (newsList.concat(releaseNotesList)).sort((a,b) => {
+        return new Date(a.date).getTime() - new Date(b.date).getTime();
+      }).reverse();
+      const latestUpdateList = fullList.filter((item) => item.latestUpdate);
       let newItemList = [latestUpdateList[2]]
       newItemList = newItemList.concat(latestUpdateList.slice(0,3));
       newItemList = newItemList.concat(latestUpdateList.slice(0,2));
@@ -350,11 +358,16 @@ const LatestUpdate = () => {
             resetTimer();
             setPause(false);
         }
-        if (rLatestlList.length === 0) {
-            setRLatestlList(getFirstList());
-        }
         return () => clearInterval(timer);
     }, []);
+
+    useEffect(() => {
+      if (rLatestlList.length === 0 && newsList) {
+        if (newsList.length > 0) {
+          setRLatestlList(getFirstList());
+        }
+      }
+    }, [newsList]);
 
     useEffect(() => {
         if (!isVisible || pause) {
@@ -384,7 +397,7 @@ const LatestUpdate = () => {
                         const updatekey = `update_${updateidx}`;
                         return (
                         <div className='latestUpdatesListItem' key={updatekey} onMouseEnter={() => mouseIn(updatekey)} onMouseLeave={mouseOut}>
-                            <a href={`/news#${updateItem.id}`}><img className='latestUpdatesListItemPic' src={updateItem.img} alt={updateItem.id} aria-hidden='true' /><span style={{display:'none'}}>latestUpdates text</span></a>
+                            <a href={`/news#${updateItem.id}`}><img className='latestUpdatesListItemPic' src={srcList[updateItem.img]} alt={altList ? altList[updateItem.img] : 'alt text'} aria-hidden='true' /><span style={{display:'none'}}>latestUpdates text</span></a>
                             <a className='latestUpdatesListTitleContainer' href={`/news#${updateItem.id}`}><div className='latestUpdatesListTitle'>{updateItem.title}</div></a>
                             <div className='latestUpdatesListContent'>
                                 <span className='latestUpdatesTextContent'>{ReactHtmlParser(updateItem.slug)}</span>

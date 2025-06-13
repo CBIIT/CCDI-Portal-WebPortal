@@ -1,10 +1,14 @@
+import React from "react";
 import gql from 'graphql-tag';
 import { cellTypes, dataFormatTypes } from '@bento-core/table';
-import { types, btnTypes } from '@bento-core/paginated-table';
+// import { types, btnTypes } from '@bento-core/paginated-table';
+import { types } from '@bento-core/paginated-table';
 import { customMyFilesTabDownloadCSV } from './tableDownloadCSV';
 import cartLogo from '../assets/header/Cart_Logo.svg';
 import cartPageLogo from '../assets/cart/Cart_Page_Icon.svg';
 import cartQuestionIcon from '../assets/cart/Question_Icon.svg';
+import ExportButton from "../pages/cart/customComponent/exportButton/exportButtonController";
+import LinkButton from "../pages/cart/customComponent/userGuideButton/linkButton";
 
 export const navBarCartData = {
   cartLabel: 'Cart',
@@ -14,8 +18,8 @@ export const navBarCartData = {
 };
 
 // --------------- Files limit configuration --------------
-export const alertMessage = 'The cart is limited to 6000 files. Please narrow the search criteria or remove some files from the cart to add more.';
-export const maximumNumberOfFilesAllowedInTheCart = 6000;
+export const alertMessage = 'The cart is limited to 200,000 files. Please narrow the search criteria or remove some files from the cart to add more.';
+export const maximumNumberOfFilesAllowedInTheCart = 200000;
 
 // --------------- Tooltip configuration --------------
 export const tooltipContent = {
@@ -66,13 +70,22 @@ export const myFilesPageData = {
     clsName: 'container_header',
     items: [
       {
-        title: 'DOWNLOAD MANIFEST',
-        clsName: 'download_manifest',
-        type: types.BUTTON,
-        role: btnTypes.DOWNLOAD_MANIFEST,
-        btnType: btnTypes.DOWNLOAD_MANIFEST,
-        tooltipCofig: tooltipContent,
-      }],
+        type: types.CUSTOM_ELEM,
+        customViewElem: (props) => <LinkButton {...props}/>
+      },
+      {
+        type: types.CUSTOM_ELEM,
+        customViewElem: (props) => <ExportButton {...props}/>
+      },
+      // {
+      //   title: 'DOWNLOAD MANIFEST',
+      //   clsName: 'download_manifest',
+      //   type: types.BUTTON,
+      //   role: btnTypes.DOWNLOAD_MANIFEST,
+      //   btnType: btnTypes.DOWNLOAD_MANIFEST,
+      //   tooltipCofig: tooltipContent,
+      // }
+    ],
   },
   {
     container: 'paginatedTable',
@@ -127,6 +140,9 @@ export const table = {
   defaultSortDirection: 'asc',
   paginationAPIField: 'filesInList',
   tableDownloadCSV: customMyFilesTabDownloadCSV,
+  extendedViewConfig: {
+    manageViewColumns: false
+  },
   columns: [
     {
       dataField: 'file_name',

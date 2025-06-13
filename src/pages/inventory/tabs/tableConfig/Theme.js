@@ -38,7 +38,7 @@ const tblBody = {
   MuiTableCell: {
     root: {
       minHeight: '45px',
-      padding: '0px 5px 0px 20px',
+      padding: '5px 5px 5px 20px',
       color: '#004C73',
       borderBottom: 'none',
     },
@@ -67,6 +67,12 @@ const tblBody = {
         },
       },
       '&.study_id': {
+        minWidth: '150px',
+        '& p': {
+          lineBreak: 'anywhere',
+        },
+      },
+      '&.sex_at_birth': {
         minWidth: '150px',
         '& p': {
           lineBreak: 'anywhere',

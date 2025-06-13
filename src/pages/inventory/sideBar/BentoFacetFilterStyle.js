@@ -42,7 +42,7 @@ export default () => ({
   resetTextDisabled: {
     marginTop: '0px',
     marginLeft: '8px',
-    color: '#AEBDBE',
+    color: '#627B7A',
     fontSize: 14,
   },
   cases: {
@@ -121,28 +121,40 @@ export default () => ({
     fontSize: '14px',
     marginRight: '0px',
   },
-  activeFacetDemographics: {
+  activeFacetDiagnosis: {
     color: '#357288',
     fontWeight: 600,
   },
-  activeFacetDiagnosis: {
+  activeFacetDemographics: {
     color: '#8C3F8D',
     fontWeight: 600,
   },
+  activeFacetTreatment: {
+    color: '#4555AB',
+    fontWeight: 600,
+  },
+  activeFacetTreatmentresponse: {
+    color: '#E9B34A',
+    fontWeight: 600,
+  },
+  activeFacetSurvival: {
+    color: '#CD5C4E',
+    fontWeight: 600,
+  },
   activeFacetSamples: {
-    color: '#907642',
-    fontWeight: 600,
-  },
-  activeFacetDatacategory: {
-    color: '#A85348',
-    fontWeight: 600,
-  },
-  activeFacetStudy: {
     color: '#1F6BBF',
     fontWeight: 600,
   },
+  activeFacetDatacategory: {
+    color: '#60C4A1',
+    fontWeight: 600,
+  },
+  activeFacetStudy: {
+    color: '#357288',
+    fontWeight: 600,
+  },
   activeFacetSequencinglibrary: {
-    color: '#14A773',
+    color: '#8C3F8D',
     fontWeight: 600,
   },
   searchContainer: {
@@ -152,11 +164,11 @@ export default () => ({
   },
   findCaseButton: {
     // marginLeft: '105px',
-    backgroundColor: '#4D889E',
+    backgroundColor: '#974599',
     boxSizing: 'border-box',
     height: 30,
     width: 40,
-    border: '1.25px solid #4D889E',
+    border: '1.25px solid #974599',
     cursor: 'pointer',
     borderRadius: 11,
     display: 'flex',
@@ -175,9 +187,9 @@ export default () => ({
     width: '100%',
     // display: 'flex',
     justifyContent: 'space-between',
-    backgroundColor: '#4D889E',
+    backgroundColor: '#974599',
     color: '#fff',
-    border: '1px solid #0D8461',
+    // border: '1px solid #0D8461',
     borderRadius: 10,
     fontFamily: 'Lato',
     fontSize: 11,
@@ -185,7 +197,7 @@ export default () => ({
     paddingLeft: 16,
     paddingRight: 12,
     '&:hover': {
-      backgroundColor: '#4D889E',
+      backgroundColor: '#974599',
     },
   },
   iconSpan: {

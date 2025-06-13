@@ -3,7 +3,6 @@ import LogoSmall from '../assets/header/Portal_Logo_Small.svg';
 import searchbarIcon from '../assets/header/Search_Icon.svg';
 import cartLogo from '../assets/header/Cart_Logo.svg';
 import usFlagSmall from "../assets/header/us_flag_small.png";
-import dataAccessPDF from "../assets/about/CCDI_CGC_Data_Access_Instructions_September2024.pdf";
 
 // globalHeaderLogo image 468x100
 // globalHeaderImage: image 2200x100
@@ -32,12 +31,7 @@ export const navMobileList = [
     className: 'navMobileItem',
   },
   {
-      name: 'Applications',
-      link: '',
-      className: 'navMobileItem clickable',
-  },
-  {
-      name: 'Other Resources',
+      name: 'Resources',
       link: '',
       className: 'navMobileItem clickable',
   },
@@ -59,12 +53,7 @@ export const navMobileList = [
 ];
 
 export const navbarSublists = {
-Applications: [
-  {
-    name:'Applications',
-    link: '',
-    className: 'navMobileSubTitle',
-  },
+  Resources: [
   {
     name: 'Childhood Cancer Clinical Data Commons',
     link: 'https://clinicalcommons.ccdi.cancer.gov/',
@@ -96,7 +85,7 @@ Applications: [
     className: 'navMobileSubItem',
   },
   {
-    name:'Data Federation Resource',
+    name:'CCDI Data Federation Resource',
     link: '/data-federation-resource',
     className: 'navMobileSubItem',
   },
@@ -104,12 +93,11 @@ Applications: [
     name:'CCDI Participant Index',
     link: '/ccdi-participant-index',
     className: 'navMobileSubItem',
-  }],
-"Other Resources": [
+  },
   {
-    name:'Other Resources',
-    link: '',
-    className: 'navMobileSubTitle',
+    name:'NCCR Data Platform',
+    link: 'https://nccrdataplatform.ccdi.cancer.gov/home',
+    className: 'navMobileSubItem',
   },
   {
     name:'Cancer Genomics Cloud',
@@ -120,6 +108,11 @@ Applications: [
     name:'Database of Genotypes and Phenotypes',
     link: 'https://www.ncbi.nlm.nih.gov/gap',
     className: 'navMobileSubItem',
+  },
+  {
+    name:'CCDI Extrachromosomal DNA (ecDNA)',
+    link: 'https://ccdi-ecdna.org',
+    className: 'navMobileSubItem',
   }],
   "About": [
     {
@@ -129,7 +122,7 @@ Applications: [
     },
     {
       name: 'Accessing CCDI Data (PDF)',
-      link: dataAccessPDF,
+      link: '/user-guide.pdf',
       className: 'navMobileSubItem',
     },
     {
@@ -137,11 +130,21 @@ Applications: [
       link: '/data-usage-policies',
       className: 'navMobileSubItem',
     },
-    // {
-    //   name: 'CCDI-Supported Publications',
-    //   link: '/publications',
-    //   className: 'navMobileSubItem',
-    // },
+    {
+      name: 'CCDI-Supported Publications',
+      link: '/publications',
+      className: 'navMobileSubItem',
+    },
+    {
+      name: 'Release Notes',
+      link: '/release-notes',
+      className: 'navMobileSubItem',
+    },
+    {
+      name: 'User Guide',
+      link: '/user-guide.pdf',
+      className: 'navMobileSubItem',
+    },
   ],
 };
 

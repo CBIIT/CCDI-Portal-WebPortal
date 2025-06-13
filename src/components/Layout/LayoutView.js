@@ -44,7 +44,7 @@ const Layout = () => {
           <Route path="/data-federation-resource" element={<FederationResourceView/>} />
           <Route path="/data-usage-policies" element={<DataUsagePoliciesView />} />
           <Route path="/ccdi-participant-index" element={<CPIResourceView />} />
-          <Route path="/cbioportal" element={<CBioPortalResourceView />} />
+          {/* <Route path="/cbioportal" element={<CBioPortalResourceView />} /> */}
           <Route path="/publications" element={<PublicationsView />} />
           <Route path="/tools" element={<ToolsResourceView />} />
           <Route path="/release-notes" element={<ReleaseNotesPageView />} />

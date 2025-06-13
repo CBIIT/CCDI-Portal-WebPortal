@@ -24,9 +24,6 @@ import figure14 from '../../../assets/explore/Figure14.png';
 import figure15 from '../../../assets/explore/Figure15.png';
 import figure16 from '../../../assets/explore/Figure16.png';
 import figure17 from '../../../assets/explore/Figure17.png';
-import figureB1 from '../../../assets/explore/FigureB1.png';
-import figureB2 from '../../../assets/explore/FigureB2.png';
-import figureB3 from '../../../assets/explore/FigureB3.png';
 
 const UseGuideButtonContainer = styled.div`
     .buttonContainer {
@@ -62,13 +59,13 @@ const UseGuideButton = ({classes}) => {
     const titleList = [
         'Overview',
         'Finding Participants, Studies, Samples, and Files',
-        'Creating and managing cohorts',
+        'Creating and Managing Cohorts',
         'Downloading Metadata from the Studies tab',
         'Creating an Exportable File Manifest from the Cart',
+        "Accessing Help Documentation",
         'Additional Search Features',
-        'NCI Data Commons Framework Services (DCFS): Controlled Data Access Instructions',
+        'Contact Information',
         'Full User Guide',
-        'Contact Us',
     ];
 
     const handleClickEvent = (event) => {
@@ -76,15 +73,6 @@ const UseGuideButton = ({classes}) => {
         setSelectedNavTitle(id);
         const contentElement = document.getElementById('UserGuideContentSection');
         const element = document.getElementById(id);
-        contentElement.scrollTo({ 
-            top: element.offsetTop - 40,
-            behavior: "smooth" 
-        });
-    }
-
-    const handleOnClickManifest = () => {
-        const contentElement = document.getElementById('UserGuideContentSection');
-        const element = document.getElementById('Downloading Metadata from the Studies tab');
         contentElement.scrollTo({ 
             top: element.offsetTop - 40,
             behavior: "smooth" 
@@ -204,7 +192,7 @@ const UseGuideButton = ({classes}) => {
                                     </div>
                                 </div>
                                 <div>
-                                    <div id='Creating and managing cohorts' className={classes.sectionTitle}>
+                                    <div id='Creating and Managing Cohorts' className={classes.sectionTitle}>
                                         <p>Creating and managing cohorts</p>
                                     </div>
                                     <div className={classes.contentContainer}>
@@ -285,7 +273,7 @@ const UseGuideButton = ({classes}) => {
                                     </div>
                                 </div>
                                 <div>
-                                    <div className={classes.sectionTitle}>
+                                    <div id="Accessing Help Documentation" className={classes.sectionTitle}>
                                         <p>Accessing Help Documentation</p>
                                     </div>
                                     <div className={classes.contentContainer}>
@@ -306,77 +294,11 @@ const UseGuideButton = ({classes}) => {
                                     </div>
                                 </div>
                                 <div>
-                                    <div id='NCI Data Commons Framework Services (DCFS): Controlled Data Access Instructions' className={classes.sectionTitle}>
-                                        <p>NCI Data Commons Framework Services (DCFS): Controlled Data Access Instructions</p>
+                                    <div id='Contact Information' className={classes.sectionTitle}>
+                                        <p>Contact Information</p>
                                     </div>
                                     <div className={classes.contentContainer}>
-                                        <p>NCI Data Commons Framework Services (DCFS), powered by <a className={classes.link} href="https://gen3.org" target="_blank" rel="noopener noreferrer">Gen3</a>, facilitates data authorization in a secure and scalable manner. DCFS’s Indexd service provides permanent digital IDs for data objects. These IDs can be used to retrieve the data or query the metadata associated with the object.</p>
-                                        <p>CCDI data is available for download using the DCFS. To gain access to controlled data, researchers must first have an <a className={classes.link} href="https://public.era.nih.gov/commonsplus/public/login.era?TARGET=https%3A%2F%2Fpublic.era.nih.gov%3A443%2Fcommons" target="_blank" rel="noopener noreferrer">NIH eRA Commons account</a> for authentication, after which they will need to obtain authorization (via an active DCFS <a className={classes.link} href="https://nci-crdc.datacommons.io/login" target="_blank" rel="noopener noreferrer">login account</a>) to access the data in <a className={classes.link} href="https://dbgap.ncbi.nlm.nih.gov/aa/wga.cgi?page=login" target="_blank" rel="noopener noreferrer">dbGaP</a>.</p>
-                                        <p>Below are instructions for using the Data Commons Framework (DCF) user interface or the DCF Gen3-client to access CCDI data.</p>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div className={classes.sectionSubTitle}>
-                                        <p>File Download Procedure via User Interface</p>
-                                    </div>
-                                    <div className={classes.contentContainer}>
-                                        <p>To download a study-specific research data distribution file with the DCF Services Portal interface, a researcher must execute the following steps:</p>
-                                        <ol>
-                                            <li>
-                                                Please navigate to <a className={classes.link} href="https://nci-crdc.datacommons.io" target="_blank" rel="noopener noreferrer">nci-crdc.datacommons.io</a> and click the “RAS Login” button. Login to the <a className={classes.link} href="https://nci-crdc.datacommons.io/login" target="_blank" rel="noopener noreferrer">NCI DCF Services</a> portal at <a className={classes.link} href="https://nci-crdc.datacommons.io/login" target="_blank" rel="noopener noreferrer">nci-crdc.datacommons.io/login</a> (Figure B1).
-                                                <div className={classes.figureContainer}><img src={figureB1} style={{width: '80%'}} alt='FigureB1'/></div>
-                                                <div className={classes.figureText}>Figure B1: NIH DCF homepage with the NIH Researcher Auth Service (RAS) login highlighted</div> 
-                                            </li>
-                                            <li>
-                                                Once logged in, click the “Profile” section in the top right corner and review your project access to confirm study access (Figure B2).
-                                                <div className={classes.figureContainer}><img src={figureB2} style={{width: '80%'}} alt='FigureB2'/></div>
-                                                <div className={classes.figureText}>Figure B2: DCF Profile page highlighting "Profile" and the accessible projects.</div> 
-                                            </li>
-                                            <li>Add the file GUID after the final backslash in this URL: <span className={classes.linkButtonStyle}>https://nci-crdc.datacommons.io/user/data/download/</span>. Paste the URL you created in a browser address field and press Enter or Return.</li>
-                                            <li>The NCI DCF Services Portal will respond by providing a JSON document with a new (signed) URL for the requested data file. Copy the signed URL.</li>
-                                            <li>Paste this new signed URL into the browser address field and press Enter or Return (Figure B3).
-                                                <ol className={classes.alphaList}><li>Note: Once issued, the signed URL provided is valid for a relatively short period of time.</li></ol>
-                                            </li>
-                                            <li>
-                                                The NCI DCF Services Portal will respond by displaying a URL. Click the URL to download the file (Figure B3).
-                                                <div className={classes.figureContainer}><img src={figureB3} style={{width: '100%'}} alt='FigureB3'/></div>
-                                                <div className={classes.figureText}>Figure B3: DCF Service Portal displaying the signed access URL and the file download URL</div> 
-                                            </li>
-                                        </ol>
-                                        <p>Note: If errors or problems are experienced during the file downloading process above, please contact the <a href="mailto:NCIChildhoodCancerDataInitiative@mail.nih.gov" target="_blank" rel="noopener noreferrer">CCDI mailbox</a> for assistance.</p>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div className={classes.sectionSubTitle}>
-                                        <p>File Download Procedure via Command Line Interface (CLI) client</p>
-                                    </div>
-                                    <div className={classes.contentContainer}>
-                                        <p>To download a study-specific research data distribution file with a CLI client, a researcher must execute the following steps:</p>
-                                        <ol>
-                                            <li>Obtain the <a className={classes.link} href="https://github.com/uc-cdis/cdis-data-client" target="_blank" rel="noopener noreferrer">Gen3-client command-line tool</a> from GitHub.</li>
-                                            <li>Install and configure the client based on the <a className={classes.link} href="https://gen3.org/resources/user/gen3-client/#1-installation-instructions" target="_blank" rel="noopener noreferrer">Gen3 instructions</a>.
-                                                <ol className={classes.alphaList}>
-                                                    <li>These instructions include signing into the DCF web client and obtaining a downloaded JSON API key from the Profile page, and then configuring the client.</li>
-                                                    <li>The API endpoint that will be used for DCF configuration is ‘https://nci-crdc.datacommons.io’.</li>
-                                                </ol>
-                                            </li>
-                                            <li>Obtain either a GUID or manifest of GUIDs for the data files of interest from the <a href="/explore">CCDI Explore page</a> or the <span className={classes.linkButtonStyle} onClick={handleOnClickManifest}>Explore Dashboard exportable manifest</span>.</li>
-                                            <li>Create a Gen3 structured manifest:<br />
-                                                [<br />
-                                                &nbsp;&nbsp;&#123;<br />
-                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“object_id”: “dg.4DFC/&#123;guid_1&#125;”<br />
-                                                &nbsp;&nbsp;&#125;,<br />
-                                                &nbsp;&nbsp;&#123;<br />
-                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“object_id”: “dg.4DFC/&#123;guid_2&#125;”<br />
-                                                &nbsp;&nbsp;&#125;,<br />
-                                                &nbsp;&nbsp;...<br />
-                                                &nbsp;&nbsp;&#123;<br />
-                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“object_id”: “dg.4DFC/&#123;guid_n&#125;”<br />
-                                                &nbsp;&nbsp;&#125;<br />
-                                                ]<br /></li>
-                                            <li>Download the file(s) using the Gen3 client (either the <a href="https://gen3.org/resources/user/gen3-client/#4-download-a-single-data-file-using-a-guid" className={classes.link} target="_blank" rel="noopener noreferrer">single</a> or <a href="https://gen3.org/resources/user/gen3-client/#5-multiple-file-download-with-manifest" className={classes.link} target="_blank" rel="noopener noreferrer">multiple</a> download option).</li>
-                                        </ol>
-                                        <p>For more information on this process, please visit the <a href="https://gen3.org/resources/user/gen3-client" className={classes.link} target="_blank" rel="noopener noreferrer">Gen3 documentation page</a>.</p>
+                                        <p>Please direct any questions or requests for further information to the <a href="mailto:NCIChildhoodCancerDataInitiative@mail.nih.gov" target="_blank" rel="noopener noreferrer">CCDI mailbox</a>.</p>
                                     </div>
                                 </div>
                                 <div>
@@ -384,15 +306,7 @@ const UseGuideButton = ({classes}) => {
                                         <p>Full User Guide</p>
                                     </div>
                                     <div className={classes.contentContainer}>
-                                        <p>To learn more about CCDI Hub, Explore Dashboard, and accessing data, see the complete <a href="/user-guide.pdf" className={classes.link} target="_blank" rel="noopener noreferrer">User Guide</a>.</p>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div id='Contact Us' className={classes.sectionTitle}>
-                                        <p>Contact Us</p>
-                                    </div>
-                                    <div className={classes.contentContainer}>
-                                        <p style={{paddingBottom: '100px'}}>Please direct any questions or requests for further information to the <a href="mailto:NCIChildhoodCancerDataInitiative@mail.nih.gov" target="_blank" rel="noopener noreferrer">CCDI mailbox</a>.</p>
+                                        <p style={{paddingBottom: '100px'}}>To learn more about CCDI Hub, Explore Dashboard, and accessing data, see the complete <a href="/user-guide.pdf" className={classes.link} target="_blank" rel="noopener noreferrer">User Guide</a>.</p>
                                     </div>
                                 </div>
                             </div>

@@ -122,6 +122,7 @@ export const CohortAnalyzer = () => {
             };
 
         });
+        console.log("newState", newState);
         setCohortData(newState);
     }
 
@@ -151,6 +152,7 @@ export const CohortAnalyzer = () => {
             };
 
         });
+        console.log("newState allow Duplication", newState);
         setCohortData(newState);
     }
 
@@ -370,6 +372,7 @@ export const CohortAnalyzer = () => {
 
 
     const handleCheckbox = (cohort, self) => {
+        console.log("cohort", cohort, "selectedCohorts", selectedCohorts);
         if (selectedCohorts.includes(cohort)) {
             let finalCohortList = [];
             selectedCohorts.forEach((cohortItem) => {
@@ -394,11 +397,30 @@ export const CohortAnalyzer = () => {
           return;
         }
         if (selectedCohortSection.length > 0 && rowData.length > 0) {
+            const participantData = [];
+            rowData.forEach((row) => {
+                participantData.push({
+                    id: row.id ? row.id : row.pid,
+                    participant_id: row.participant_id,
+                    study_id: row.study_id,
+                });
+            });
+
+            // Remove duplicates by id
+            const uniqueParticipantData = [];
+            const seenIds = new Set();
+            for (const p of participantData) {
+                if (!seenIds.has(p.id)) {
+                    uniqueParticipantData.push(p);
+                    seenIds.add(p.id);
+                }
+            }
+
             setCurrentCohortChanges(null);
             dispatch(onCreateNewCohort(
                 "",
                 "",
-                rowData,
+                uniqueParticipantData,
                 (count) => {
                     triggerNotification(count, Notification);
                     setShowCohortModal(true);
@@ -616,7 +638,7 @@ export const CohortAnalyzer = () => {
                         {refershTableContent && selectedCohorts.length > 0 &&
                             <ChartVenn
                                 intersection={nodeIndex}
-                                cohortData={cohortData ? (selectedCohorts.map(cohortId => cohortData[cohortId])) : (selectedCohorts.map(cohortId => state[cohortId]))}
+                                cohortData={(selectedCohorts.map(cohortId => state[cohortId]))}
                                 setSelectedChart={(data) => { setSelectedChart(data); setRefershSelectedChart(!refershSelectedChart) }}
                                 setSelectedCohortSections={(data) => {
                                     setSelectedCohortSections(data);

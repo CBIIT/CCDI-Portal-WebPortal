@@ -16,7 +16,7 @@ export const filterAllParticipantWithDiagnosisName=(generalInfo,allParticipants)
     let finalIds = [];
     Object.keys(generalInfo).forEach((section) => {
         allParticipants.forEach((part) => {
-            if(generalInfo[section].includes(part.id)){
+            if(generalInfo[section].includes(part.pid)){
                 finalIds = [...finalIds,part]
             }
         })
@@ -68,7 +68,7 @@ export const getAllIds = (generalInfo) => {
 export const addCohortColumn = (rowD, state, selectedCohorts) => {
     let finalRowData = rowD.map((row) => {
         // Get the cohort name for the current participants
-        let cohortName = getCohortName(row.id, state, selectedCohorts);
+        let cohortName = getCohortName(row.id ? row.id : row.pid, state, selectedCohorts);
         // Return a new object with the added cohort property
         return {
             ...row,

@@ -203,7 +203,7 @@ diagnosisOverview(
 ) {
     # Demographics
     participant_id
-    id
+    pid
     # Diagnosis
     d_id
     diagnosis_id

@@ -1,9 +1,10 @@
 import React from 'react';
 import {
-  Grid, Typography,
+  Grid, Typography, Button
 } from '@material-ui/core';
 import { cn } from 'bento-components';
 import useStyles from './style';
+import { useNavigate } from 'react-router-dom';
 
 const StudiesCard = ({ data = {}, index }) => {
   const {
@@ -15,6 +16,11 @@ const StudiesCard = ({ data = {}, index }) => {
   } = data;
 
   const classes = useStyles();
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/studies/${study_id}`);
+  };
 
   const renderInfo = (label, value = '') => (
     <div className={classes.keyAndValueRow}>
@@ -49,6 +55,7 @@ const StudiesCard = ({ data = {}, index }) => {
           </div>
         </div>
       </Grid>
+      <Button className={classes.button} variant="outlined" onClick={() => handleClick()}>GO TO STUDY</Button>
     </Grid>
   );
 };

@@ -141,6 +141,15 @@ export const SEARCH_PAGE_RESULT_PARTICIPANTS = gql`
         treatment_agent_str
         race_str
         last_known_survival_status_str
+        cpi_data {
+          associated_id
+          repository_of_synonym_id
+          domain_description
+          domain_category
+          data_location
+          data_type
+          p_id
+        }
       }
     }
   }
@@ -193,6 +202,7 @@ export const SEARCH_PAGE_RESULT_FILES = gql`
       offset: $offset
     ) {
       files {
+        id
         file_name
         data_category
         participant_id
@@ -221,6 +231,7 @@ export const SEARCH_PAGE_RESULT_MODEL = gql`
                 property_type
                 value
                 highlight
+                category_type
             }
         }
     }
@@ -314,6 +325,5 @@ export async function queryCountAPI(inputValue) {
     })
       .then((result) => (result.data.globalSearch))
       .catch(() => []);
-    console.log(data)
     return data[datafield] || [];
   }

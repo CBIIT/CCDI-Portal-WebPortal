@@ -28,7 +28,6 @@ export const CohortModalGenerator = (uiConfig = DEFAULT_CONFIG) => {
     const {
         config, functions,
     } = uiConfig;
-
     const { state, dispatch } = useContext(CohortStateContext);
     const [selectedCohort, setSelectedCohort] = useState(null); // Default to the first entry
     const [alert, setAlert] = useState({ type: '', message: '' });

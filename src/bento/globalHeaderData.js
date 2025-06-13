@@ -36,6 +36,11 @@ export const navMobileList = [
     className: 'navMobileItem',
   },
   {
+    name: 'Cohort Analyzer',
+    link: '/cohortAnalyzer',
+    className: 'navMobileItem',
+  },
+  {
       name: 'Resources',
       link: '',
       className: 'navMobileItem clickable',
@@ -97,6 +102,11 @@ export const navbarSublists = {
   {
     name:'CCDI Participant Index',
     link: '/ccdi-participant-index',
+    className: 'navMobileSubItem',
+  },
+  {
+    name: 'CCDI cBioPortal',
+    link: '/cbioportal',
     className: 'navMobileSubItem',
   },
   {

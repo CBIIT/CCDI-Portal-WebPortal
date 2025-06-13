@@ -16,14 +16,13 @@ const DeleteConfirmationModal = (props) => {
         deletionType,
         message
     } = props;
-
     return (
         <Modal
             open={open}
             onClose={() => setOpen(false)}
         >
             <div className={classes.modal}>
-                <div className={classes.modalContent}>
+                {!message ? <div className={classes.modalContent}>
                     <div className={classes.modalHeading}>
                         {message ?
                             <span>{message}</span>
@@ -62,7 +61,23 @@ const DeleteConfirmationModal = (props) => {
                         </>
                         }
                     </div>
-                </div>
+                </div> :
+                    <div className={classes.modalContent}>
+                        <div className={classes.modalHeading}>
+                            <span>{message}</span>
+                        </div>
+                        <div className={classes.modalButtons}>
+                            <button
+                                className={classes.confirmButton}
+                                onClick={() => {
+                                    setOpen(false);
+                                }}
+                            >
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                }
             </div>
         </Modal>
     );
@@ -85,7 +100,7 @@ const styles = () => ({
         justifyContent: 'center',
         flexDirection: 'column',
     },
-    modalHeading: { 
+    modalHeading: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

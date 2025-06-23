@@ -8,7 +8,7 @@
     "@babel/core": "7.2.2",
     "@bento-core/cart": "1.0.1-ccdihub.9",
     "@bento-core/data-table": "^1.0.0",
-    "@bento-core/facet-filter": "1.0.1-ccdihub.33",
+    "@bento-core/facet-filter": "1.0.1-ccdihub.34",
     "@bento-core/global-search": "1.0.1-ccdihub.4",
     "@bento-core/local-find": "1.0.1-ccdihub.11",
     "@bento-core/paginated-table": "1.0.1-ccdihub.129",

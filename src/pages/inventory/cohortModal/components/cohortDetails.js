@@ -231,7 +231,7 @@ const CohortDetails = (props) => {
                                 type="text"
                                 name="cohortName"
                                 value={localCohort['cohortName']}
-                                onBlur={handleSaveName}
+                                onBlur={(e) => handleSaveName(e)}
                                 onChange={(e) => handleTextChange(e)}
                                 maxLength={20}
                                 autoFocus
@@ -256,7 +256,7 @@ const CohortDetails = (props) => {
                         <textarea
                         className={classes.editingCohortDescription}
                         value={localCohort['cohortDescription']}
-                        onBlur={handleSaveDescription}
+                        onBlur={(e) => {handleSaveDescription(e)}}
                         name="cohortDescription"
                         onChange={(e) => handleTextChange(e)}
                         rows={2}

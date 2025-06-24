@@ -12,10 +12,13 @@ import DEFAULT_STYLES from './styles';
 import DEFAULT_CONFIG from './config';
 import CohortList from './components/cohortList';
 import CohortDetails from './components/cohortDetails';
+import DeleteConfirmationModal from './components/deleteConfirmationModal';
+import { deletionTypes } from './components/deleteConfirmationModal';
 import Alert from '@material-ui/lab/Alert';
 import { GET_COHORT_MANIFEST_QUERY, GET_COHORT_METADATA_QUERY } from '../../../bento/dashboardTabData.js';
 import client from '../../../utils/graphqlClient.js'
-import { arrayToCSVDownload, objectToJsonDownload } from './utils.js';
+import { arrayToCSVDownload, objectToJsonDownload, hasUnsavedChanges} from './utils.js';
+import { CohortModalContext } from './CohortModalContext.js'
 
 /**
  * Generator function to create cohortModal component with custom configuration
@@ -29,9 +32,21 @@ export const CohortModalGenerator = (uiConfig = DEFAULT_CONFIG) => {
         config, functions,
     } = uiConfig;
 
+
+     const { currentCohortChanges, setCurrentCohortChanges } = useContext(CohortModalContext);
+
     const { state, dispatch } = useContext(CohortStateContext);
     const [selectedCohort, setSelectedCohort] = useState(null); // Default to the first entry
     const [alert, setAlert] = useState({ type: '', message: '' });
+
+    const unSavedChanges = currentCohortChanges ? hasUnsavedChanges(currentCohortChanges, state[selectedCohort]) : false;
+    const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+    const [deleteModalProps, setDeleteModalProps] = useState({
+        handleDelete: () => { },
+        deletionType: "",
+    });
+
+
     useEffect(() => {
         if (alert.message) {
             const timer = setTimeout(() => {
@@ -80,6 +95,23 @@ export const CohortModalGenerator = (uiConfig = DEFAULT_CONFIG) => {
     const handleDeleteAllCohorts = () => {
         dispatch(onDeleteAllCohort());
     };
+
+    // Handle saving updates to cohort
+    const handleSetCurrentCohortChanges = (localCohort) => {
+        if (!localCohort.cohortId) return;
+        setCurrentCohortChanges({
+            cohortId: localCohort.cohortId,
+            cohortName: localCohort.cohortName,
+            cohortDescription: localCohort.cohortDescription,
+            participants: localCohort.participants,
+            searchText: localCohort.searchText,
+        })
+    };
+
+    const handleClearCurrentCohortChanges = () => {
+        setCurrentCohortChanges(null);
+    };
+
     // Handle saving updates to cohort
     const handleSaveCohort = (localCohort) => {
         if (!localCohort.cohortId) return;
@@ -90,7 +122,10 @@ export const CohortModalGenerator = (uiConfig = DEFAULT_CONFIG) => {
                 cohortDescription: localCohort.cohortDescription,
                 participants: localCohort.participants
             },
-            () => setAlert({ type: 'success', message: 'Cohort updated successfully!' }),
+            () => {
+                setAlert({ type: 'success', message: 'Cohort updated successfully!' })
+                handleClearCurrentCohortChanges();
+            },
             (error) => setAlert({ type: 'error', message: `Failed to update cohort: ${error.message}` })
         ));
     };
@@ -115,17 +150,31 @@ export const CohortModalGenerator = (uiConfig = DEFAULT_CONFIG) => {
                 setSelectedCohort(null);
             };
 
+            const unSavedChangesCheck = () => {
+                if (unSavedChanges) {
+                    setDeleteModalProps({
+                        handleDelete: () => closeModalWrapper(),
+                        deletionType: deletionTypes.CLEAR_UNSAVED_CHANGES,
+                    });
+                    setShowDeleteConfirmation(true)
+                }
+                else {
+                    closeModalWrapper()
+                }
+            }
+
             return (
+                <>
                 <Modal
                     {...props}
                     open={open}
                     className={classes.modal}
-                    onClose={closeModalWrapper}
+                    onClose={unSavedChangesCheck}
                 >
                     <div className={classes.paper}>
                         <h1 className={classes.modalTitle}>
                             <span>{modalTitle}</span>
-                            <span className={classes.closeIcon} onClick={closeModalWrapper}>
+                            <span className={classes.closeIcon} onClick={unSavedChangesCheck}>
                                 <img
                                     src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/LocalFindCaseDeleteIcon.svg"
                                     alt="close icon"
@@ -140,13 +189,18 @@ export const CohortModalGenerator = (uiConfig = DEFAULT_CONFIG) => {
                         </h1>
                         <div className={classes.modalContainer}>
                             <CohortList
+                
                                 classes={cohortListClasses}
                                 config={config.cohortList}
                                 selectedCohort={selectedCohort}
                                 setSelectedCohort={setSelectedCohort}
-                                closeParentModal={closeModalWrapper}
+                                unSavedChanges={unSavedChanges}
+                                setChangingConfirmation={setDeleteModalProps}
+                                setShowChangingConfirmation={setShowDeleteConfirmation}
+                                closeParentModal={unSavedChangesCheck}
                                 handleDeleteCohort={handleDeleteCohort}
                                 handleDeleteAllCohorts={handleDeleteAllCohorts}
+                                handleClearCurrentCohortChanges={handleClearCurrentCohortChanges}
                                 deleteConfirmationClasses={deleteConfirmationClasses}
                                 state={state}
                             />
@@ -154,8 +208,10 @@ export const CohortModalGenerator = (uiConfig = DEFAULT_CONFIG) => {
                                 classes={cohortDetailsClasses}
                                 config={config.cohortDetails}
                                 activeCohort={state[selectedCohort]}
-                                closeModal={closeModalWrapper}
+                                temporaryCohort={currentCohortChanges}
+                                closeModal={unSavedChangesCheck}
                                 handleSaveCohort={handleSaveCohort}
+                                handleSetCurrentCohortChanges={handleSetCurrentCohortChanges}
                                 downloadCohortManifest={downloadCohortManifest}
                                 downloadCohortMetadata={downloadCohortMetadata}
                                 deleteConfirmationClasses={deleteConfirmationClasses}
@@ -163,6 +219,16 @@ export const CohortModalGenerator = (uiConfig = DEFAULT_CONFIG) => {
                         </div>
                     </div>
                 </Modal>
+                
+                <DeleteConfirmationModal
+                    classes={deleteConfirmationClasses}
+                    open={showDeleteConfirmation}
+                    setOpen={setShowDeleteConfirmation}
+                    handleDelete={deleteModalProps.handleDelete}
+                    deletionType={deleteModalProps.deletionType}
+                />
+
+                </>
             )
         }),
     };

@@ -172,7 +172,7 @@ export const resourcesAppliationsListData = [
     id: 'cBioPortal',
     title: 'cBioPortal Cancer Data Explorer',
     content: 'CCDI’s customized cBioPortal instance allows users to explore and visualize complex genomic and clinical data without the need to download large datasets.',
-    link: '/cbioportal',
+    link: 'https://www.cbioportal.org',
     img: cBioPortalLogo,
   },
 ];
@@ -283,7 +283,7 @@ export const carouselList = [
     img: wheel13,
     mobile: cBioPortalMobile,
     content: 'CCDI cBioPortal',
-    link: '/cbioportal',
+    link: 'https://www.cbioportal.org',
   },
 ];
 

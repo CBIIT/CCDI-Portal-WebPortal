@@ -101,7 +101,7 @@ export const navbarSublists = {
   },
   {
     name: 'CCDI cBioPortal',
-    link: 'https://www.cbioportal.org',
+    link: '/cbioportal',
     className: 'navMobileSubItem',
   },
   {

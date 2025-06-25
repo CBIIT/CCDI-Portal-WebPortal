@@ -74,7 +74,8 @@ export const useStyle = makeStyles((theme) => ({
         textDecoration: 'none'
     },
     leftSideAnalyzer: {
-        width: 268,
+        maxWidth: 268,
+        minWidth:268,
         height: 588,
         marginTop: 70,
         overflowY: 'hidden',

@@ -221,9 +221,6 @@ export const CohortAnalyzer = () => {
         }
     }
 
-    function shortenText(text, maxSize = 17) {
-        return text.length > maxSize ? text.slice(0, maxSize) + "..." : text;
-    }
 
     useEffect(() => {
         setSearchValue("");
@@ -582,7 +579,7 @@ export const CohortAnalyzer = () => {
                                                         selectedCohorts={selectedCohorts}
                                                         cohort={cohort}
                                                         handleCheckbox={handleCheckbox} />
-                                                    <span className={classes.cardContent} style={{ opacity: selectedCohorts.length === 3 && !selectedCohorts.includes(cohort) ? 0.3 : 1 }} > {shortenText(cohortName)} </span>
+                                                    <span className={classes.cardContent} style={{ opacity: selectedCohorts.length === 3 && !selectedCohorts.includes(cohort) ? 0.3 : 1 }} > {cohortName} </span>
                                                 </div>
                                                 <img alt={"Trashcan"} style={{ cursor: 'pointer', zIndex: 3 }} onClick={() => { handlePopup(cohort, state, setDeleteInfo, deleteInfo) }} src={trashCan} width={15} height={16} />
                                             </div>

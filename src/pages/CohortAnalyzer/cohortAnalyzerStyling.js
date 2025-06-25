@@ -77,10 +77,10 @@ export const useStyle = makeStyles((theme) => ({
         width: 268,
         height: 588,
         marginTop: 70,
-        overflowY: 'hidden',
+        overflow: 'hidden',
         borderRadius: ' 0px 35px 35px 0px',
         border: '4px solid #4E8191',
-
+        borderLeft: 'none',
     },
     leftSideAnalyzerChild: {
         height: '90%',
@@ -180,12 +180,11 @@ export const useStyle = makeStyles((theme) => ({
     },
     sortSection: {
         height: 31,
-        width: '100%',
+        width: 'calc(100% - 10px)',
         display: 'flex',
         justifyContent: 'space-between',
-        marginTop: '20px',
-        marginLeft: 10,
-        marginRight: 25,
+        marginTop: '10px',
+        marginLeft: '10px',
         '& p': {
             fontSize: 9
         }

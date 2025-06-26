@@ -496,7 +496,7 @@ const CBioPortalResourceView = ({data}) => {
                 <div className='resourceTitle'>
                     <div className='resourceTitleText'>CCDI cBioPortal</div>
                     <div className='goToSiteButton'>
-                        <a className='goToSiteText' href="https://www.cbioportal.org" target="_blank" rel="noopener noreferrer">Go to cBioPortal</a>
+                        <a className='goToSiteText' href="https://cbioportal.ccdi.cancer.gov" target="_blank" rel="noopener noreferrer">Go to cBioPortal</a>
                     </div>
                 </div>
             </div>

@@ -7,7 +7,7 @@ import { Tooltip } from '@material-ui/core';
 
 export const CustomCellView = (props) => {
   const {
-    dataField, dataFormatter, cellStyle,
+    dataField, dataFormatter, cellStyle, label
   } = props;
   const [top5, setTop5] = useState(true);
   const newStyle = {
@@ -40,21 +40,57 @@ export const CustomCellView = (props) => {
       );
     }
   } else if (cellStyle === 'DBGAP') {
-    return(
+    return (
       <a href={`https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=${props[dataField]}`} target="_blank" rel="noreferrer">{props[dataField]}</a>
     )
   } else if (cellStyle === 'STUDY_DOWNLOAD') {
     const study_id = props[dataField];
     const study_download_url = studyDownloadLinks[props[dataField]];
     const fileName = study_id + "_CCDI_Study_Manifest.xlsx";
-    return(
+    return (
       <Tooltip title="Download study manifest">
-        <span onClick={()=>{
+        <span onClick={() => {
           openDoubleLink(study_download_url, fileName)
         }} style={downloadStyle}>
           <CloudDownload />
         </span>
       </Tooltip>
+    )
+  } else if (dataField === 'cohort') {
+    return (
+      <div style={{ display: 'flex', gap: 10, justifyContent: 'center', width: 67 }}>
+        {
+          label.map((cohort, index) => (
+            <Tooltip title={<div>
+
+              {label.map((coh, innerIndex) => (
+                <div style={{ display: 'flex', gap: 10, marginBottom: 5 }}>
+                  <div style={{
+                    backgroundColor: coh["color"],
+                    width: 17,
+                    height: 17,
+                    border: '1px solid #686868',
+                    borderRadius: 4
+                  }}>
+                  </div>
+                  {coh["cohort"]}
+                </div>
+              ))
+              }
+
+            </div>} arrow placement="top">
+              <div style={{
+                backgroundColor: cohort["color"],
+                width: 17,
+                height: 17,
+                border: '1px solid #686868',
+                borderRadius: 4
+              }}>
+              </div>
+            </Tooltip>
+          ))
+        }
+      </div>
     )
   }
 };

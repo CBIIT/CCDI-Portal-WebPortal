@@ -267,6 +267,7 @@ const PublicationsContainer = styled.div`
 
   .publicationsItemTagContainer {
     margin-top: 7px;
+    display: flex;
   }
 
   .publicationsItemTag {
@@ -279,6 +280,7 @@ const PublicationsContainer = styled.div`
     font-size: 13px;
     font-weight: 600;
     line-height: 19.31px;
+    margin-right: 10px;
   }
 
   .publicationsItemTag:hover {
@@ -728,7 +730,16 @@ const PublicationsView = ({classes, bannerText, publicationsList}) => {
                     </div>
                     <div className='publicationsItemContent'>{ReactHtmlParser(publicationsItem.summary.length > 485 ? `${publicationsItem.summary.substring(0, 485)}...` : publicationsItem.summary)}</div>
                     <div className='footerContainer'>
-                      <div className='publicationsItemTagContainer'><div className='publicationsItemTag'>{publicationsItem.tag}</div></div>
+                      <div className='publicationsItemTagContainer'>
+                        {
+                          publicationsItem.tag.split(',').map((tagItem, tagIdx) => {
+                            const tagKey = `tag_${tagIdx}`;
+                            return (
+                              <span key={tagKey} className='publicationsItemTag'>{tagItem.trim()}</span>
+                            )
+                          })
+                        }
+                      </div>
                       <a className='readMoreButtonContainer' href={publicationsItem.link} target='_blank' rel='noopener noreferrer'><div className='readMoreButton'><div className='readMoreText'>Read More</div></div></a>
                     </div>
                   </div>

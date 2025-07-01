@@ -1,3 +1,6 @@
+import gql from 'graphql-tag';
+import { cellTypes } from '@bento-core/table';
+
 const studyDownloadLinks = {
   "phs000463": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs000463_CCDI_Study_Manifest_v2.1.0.xlsx",
   "phs000464": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs000464_CCDI_Study_Manifest_v2.1.0.xlsx",
@@ -26,20 +29,108 @@ const studyDownloadLinks = {
   "phs000471": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs000471_CCDI_Study_Manifest_v2.1.0.xlsx",
 };
 
-export {
-  studyDownloadLinks
+export async function openDoubleLink(url, fileName) {
+  let urlContent = await fetch(url);
+  if (urlContent.ok) {
+    let data = await urlContent.blob();
+    let a = document.createElement('a');
+    a.href = window.URL.createObjectURL(data);
+    a.download = fileName;
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
+}
+
+const GET_STUDIES_DATA_QUERY = gql`
+  query studiesListing (
+    $first: Int,
+    $offset: Int,
+    $order_by: String,
+    $sort_direction: String) {
+      studiesListing(
+        first: $first,
+        offset: $offset,
+        order_by: $order_by,
+        sort_direction: $sort_direction
+      ) {
+        study_id
+        study_name
+        num_of_participants
+        num_of_samples
+        num_of_diagnoses
+        num_of_files
+      }
+    }
+`;
+
+const GET_NUMBER_OF_STUDIES = gql`{
+    numberOfStudies
+}`
+
+const table = {
+  name: 'Studies',
+  dataField: 'study_id',
+  paginationAPIField: 'studiesListing',
+  api: GET_STUDIES_DATA_QUERY,
+  dataKey: 'study_id',
+  defaultSortField: 'study_id',
+  defaultSortDirection: 'asc',
+  tableID: 'studies_table',
+  extendedViewConfig: {
+    pagination: true,
+    hasExport: false,
+  },
+  columns: [
+    {
+      dataField: 'study_id',
+      header: 'Study ID',
+      tooltipText: 'Sort by Study ID',
+      cellType: cellTypes.LINK,
+      linkAttr: {
+        rootPath: '/studies',
+        pathParams: ['study_id']
+      },
+      display: true,
+    },
+    {
+      dataField: 'study_name',
+      header: 'Study Name',
+      tooltipText: 'Sort by Study Name',
+      display: true,
+    },
+    {
+      dataField: 'num_of_participants',
+      header: 'Participants Count',
+      tooltipText: 'Sort by Participants Count',
+      display: true,
+    },
+    {
+      dataField: 'num_of_diagnoses',
+      header: 'Diagnosis Count',
+      tooltipText: 'Sort by Diagnosis Count',
+      display: true,
+    },
+    {
+      dataField: 'num_of_samples',
+      header: 'Samples Count',
+      tooltipText: 'Sort by Sample Count',
+      display: true,
+    },
+    {
+      dataField: 'num_of_files',
+      header: 'Files Count',
+      tooltipText: 'Sort by File Count',
+      display: true,
+    },
+  ],
 };
 
-export async function openDoubleLink(url, fileName) {
-    let urlContent = await fetch(url);
-    if (urlContent.ok) {
-      let data = await urlContent.blob();
-      let a = document.createElement('a');
-      a.href = window.URL.createObjectURL(data);
-      a.download = fileName;
-      a.style.display = 'none';
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-    }
-}
+
+export {
+  table,
+  GET_STUDIES_DATA_QUERY,
+  GET_NUMBER_OF_STUDIES,
+  studyDownloadLinks
+};

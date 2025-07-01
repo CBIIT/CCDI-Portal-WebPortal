@@ -7,6 +7,7 @@ import WidgetView from './widget/WidgetView';
 import StatsView from '../../components/Stats/StatsView';
 import TabsView from './tabs/TabsView';
 import QueryBarView from './filterQueryBar/QueryBarView';
+import UseGuideButton from './sideBar/UserGuideButton.js';
 import { CircularProgress } from '@material-ui/core';
 
 const Inventory = ({
@@ -23,12 +24,15 @@ const Inventory = ({
       <StatsView data={dashData} />
       <div className={classes.contentBox}>
         <div className={classes.content}>
-          <div className={classes.sideBar}>
-            <label for="local_find_input" style={{ display: 'none' }}>Participant ID Text Search box</label>
-            <BentoFacetFilter
-              searchData={dashData}
-              activeFilters={activeFilters}
-            />
+          <div className={classes.sideBarContainer}>
+            <div className={classes.sideBar}>
+              <UseGuideButton />
+              <label for="local_find_input" style={{ display: 'none' }}>Participant ID Text Search box</label>
+              <BentoFacetFilter
+                searchData={dashData}
+                activeFilters={activeFilters}
+              />
+            </div>
           </div>
           <div className={classes.rightContent}>
             <div className={classes.widgetsContainer}>

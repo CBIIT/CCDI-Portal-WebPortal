@@ -31,6 +31,16 @@ export const navMobileList = [
     className: 'navMobileItem',
   },
   {
+    name: 'Studies',
+    link: '/studies',
+    className: 'navMobileItem',
+  },
+  {
+    name: 'Cohort Analyzer',
+    link: '/cohortAnalyzer',
+    className: 'navMobileItem',
+  },
+  {
       name: 'Resources',
       link: '',
       className: 'navMobileItem clickable',
@@ -99,21 +109,27 @@ export const navbarSublists = {
     link: 'https://nccrdataplatform.ccdi.cancer.gov/home',
     className: 'navMobileSubItem',
   },
-  {
-    name:'Cancer Genomics Cloud',
-    link: 'https://www.cancergenomicscloud.org',
-    className: 'navMobileSubItem',
-  }, 
-  {
-    name:'Database of Genotypes and Phenotypes',
-    link: 'https://www.ncbi.nlm.nih.gov/gap',
-    className: 'navMobileSubItem',
-  },
+  // {
+  //   name:'Cancer Genomics Cloud',
+  //   link: 'https://www.cancergenomicscloud.org',
+  //   className: 'navMobileSubItem',
+  // }, 
+  // {
+  //   name:'Database of Genotypes and Phenotypes',
+  //   link: 'https://www.ncbi.nlm.nih.gov/gap',
+  //   className: 'navMobileSubItem',
+  // },
   {
     name:'CCDI Extrachromosomal DNA (ecDNA)',
     link: 'https://ccdi-ecdna.org',
     className: 'navMobileSubItem',
-  }],
+  },
+  {
+    name:'Tools',
+    link: '/tools',
+    className: 'navMobileSubItem',
+  },
+  ],
   "About": [
     {
       name: 'About CCDI Hub',
@@ -121,8 +137,13 @@ export const navbarSublists = {
       className: 'navMobileSubItem',
     },
     {
-      name: 'Accessing CCDI Data (PDF)',
-      link: '/user-guide.pdf',
+      name: 'CCDI Data Submission Guide (PDF)',
+      link: '/Submission_Guide.pdf',
+      className: 'navMobileSubItem',
+    },
+    {
+      name: 'CCDI Data Model',
+      link: '/data-model',
       className: 'navMobileSubItem',
     },
     {
@@ -133,6 +154,11 @@ export const navbarSublists = {
     {
       name: 'CCDI-Supported Publications',
       link: '/publications',
+      className: 'navMobileSubItem',
+    },
+    {
+      name: 'Hub Explore Dashboard Tutorial Video',
+      link: 'https://www.youtube.com/watch?v=Eu8y1GDTszU',
       className: 'navMobileSubItem',
     },
     {

@@ -273,14 +273,14 @@ const NewsContainer = styled.div`
     margin-top: 13px;
     height: 175px;
     overflow-y: auto;
-    font-weight: 300;
+    font-weight: 500;
     font-size: 16px;
     line-height: 24px;
     color: #000000;
     a {
       color: #455299;
       font-family: 'Inter';
-      font-weight: 600;
+      font-weight: 700;
       padding-right: 20px;
       background: url(${exportIcon}) right center no-repeat;
     }
@@ -303,7 +303,7 @@ const NewsContainer = styled.div`
     margin-top: 13px;
     height: 300px;
     overflow-y: auto;
-    font-weight: 300;
+    font-weight: 500;
     font-size: 16px;
     line-height: 24px;
     color: #000000;
@@ -311,7 +311,7 @@ const NewsContainer = styled.div`
     a {
       color: #455299;
       font-family: 'Inter';
-      font-weight: 600;
+      font-weight: 700;
       padding-right: 20px;
       background: url(${exportIcon}) right center no-repeat;
     }

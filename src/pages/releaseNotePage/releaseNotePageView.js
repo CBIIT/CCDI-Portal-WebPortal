@@ -401,7 +401,7 @@ const SiteUpdateCardDescription = styled.div`
         // color: #00a272;
         // text-decoration: none;
         text-decoration-color: #0563C1;
-        font-weight: 500;
+        font-weight: 700;
     }
 
     // a[target="_blank"]::after {
@@ -419,11 +419,16 @@ const SiteUpdateCardDescription = styled.div`
     // }
 
     p {
-      font-family: Lato;
+      font-family: Inter;
       font-size: 16px;
       font-style: normal;
-      font-weight: 400;
+      font-weight: 500;
       line-height: 150%;
+    }
+
+    li {
+      font-family: Inter;
+      font-weight: 500;
     }
 `;
 

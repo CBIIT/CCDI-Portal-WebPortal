@@ -28,6 +28,10 @@ const DataUsagePoliciesController = ({ match }) => {
     };
     fetchData();
   }, []);
-  return <DataUsagePoliciesView data={data} />;
+  if (data.dataUsagePoliciesContent) {
+    return <DataUsagePoliciesView data={data} />;
+  } else {
+    return <div />
+  }
 };
 export default DataUsagePoliciesController;

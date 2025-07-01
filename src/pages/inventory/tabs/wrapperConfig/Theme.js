@@ -10,7 +10,7 @@ export const customTheme = {
         textAlign: 'right',
       },
       '&.container_footer': {
-        paddingTop: '10px',
+        paddingTop: '3px',
         textAlign: 'right',
         display:  'flex',
         '& p': {
@@ -19,9 +19,50 @@ export const customTheme = {
           paddingRight: '24px',
           margin: '0',
           textAlign: 'left',
+          fontWeight: '400',
+            fontFamily: 'Roboto',
+            fontSize: '14px',
+            lineHeight: '20px',
+            letterSpacing: '0.005em',
+
           '& span': {
-            fontWeight: '600',
-          }
+            fontWeight: '700',
+            fontFamily: 'Roboto',
+            fontSize: '14px',
+            lineHeight: '20px',
+            letterSpacing: '0.005em',
+          },
+        },
+        '& img': {
+          position:'relative',
+          top: '8px',
+          width: '13px',
+          height: '13px',
+        },
+      },
+      '&.container_footer_last': {
+        paddingTop: '15px',
+        textAlign: 'right',
+        display:  'flex',
+        '& p': {
+          minWidth: '300px',
+          maxWidth: '700px',
+          paddingRight: '24px',
+          margin: '0',
+          textAlign: 'left',
+          fontWeight: '400',
+            fontFamily: 'Roboto',
+            fontSize: '14px',
+            lineHeight: '20px',
+            letterSpacing: '0.005em',
+
+          '& span': {
+            fontWeight: '700',
+            fontFamily: 'Roboto',
+            fontSize: '14px',
+            lineHeight: '20px',
+            letterSpacing: '0.005em',
+          },
         },
         '& img': {
           position:'relative',

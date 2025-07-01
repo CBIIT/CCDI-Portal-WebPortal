@@ -30,8 +30,10 @@ export default () => ({
       color: 'white',
     },
   },
-  floatRight: {
-    margin: '7px 0px 7px 6px',
+  buttonContainer: {
+    padding: '7px 6px 7px 6px',
+    position: 'absolute',
+    top: '-45px',
   },
   resetText: {
     marginTop: '0px',
@@ -158,9 +160,11 @@ export default () => ({
     fontWeight: 600,
   },
   searchContainer: {
-    paddingTop: '15px',
     margin: '0 2px',
-    marginRight: 6,
+    marginBottom: '20px',
+    marginLeft:'20px',
+    marginRight: '20px',
+    marginTop: '-15px',
   },
   findCaseButton: {
     // marginLeft: '105px',

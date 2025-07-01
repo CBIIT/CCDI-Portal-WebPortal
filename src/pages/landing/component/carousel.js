@@ -194,9 +194,10 @@ const HeroList = styled.div`
     .listItemContent {
         color: rgba(0, 0, 0, 0.7);
         font-family: poppins;
-        font-weight: 600;
-        font-size: 28px;
-        line-height: 30px;
+        font-weight: 400;
+        font-size: 22px;
+        line-height: 25px;
+        letter-spacing: -1%;
         width: 300px;
         text-decoration: none;
         display: flex;
@@ -252,6 +253,10 @@ const HeroList = styled.div`
 
         .listItemContent {
             color: #01828C;
+            font-weight: 600;
+            font-size: 28px;
+            line-height: 30px;
+            letter-spacing: -0.2%;
             transform: translateX(10px) scale(1.05, 0.82);
         }
 

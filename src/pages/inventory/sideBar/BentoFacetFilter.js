@@ -88,9 +88,9 @@ const { UploadModal } = UploadModalGenerator({
   functions: {
     updateBrowserUrl: (query, navigate, filename, fileContent, matchIds, unmatchedIds) => {
       const fc = fileContent
-          .split(/[,\n]/g)
-          .map((e) => e.trim().replace('\r', '').toUpperCase())
-          .filter((e) => e && e.length > 1);
+        .split(/[,\n]/g)
+        .map((e) => e.trim().replace('\r', '').toUpperCase())
+        .filter((e) => e && e.length > 1);
       const paramValue = {
         'u': matchIds.map((data) => data.participant_id).join('|'),
         'u_fc': fc.join('|'),
@@ -125,7 +125,7 @@ const { UploadModal } = UploadModalGenerator({
     accept: '.csv,.txt',
     maxSearchTerms: 5000,
     matchedId: 'participant_id',
-    matchedLabel : 'Submitted Participant ID',
+    matchedLabel: 'Submitted Participant ID',
     associateId: 'dbgap_accession',
     associateLabel: '',
     projectName: 'CCDI Hub',
@@ -150,7 +150,7 @@ const BentoFacetFilter = ({
     const query = new URLSearchParams(useLocation().search);
     const navigate = useNavigate();
     return (
-      <div className={classes.floatRight}>
+      <div className={classes.buttonContainer}>
         <Button
           id="button_sidebar_clear_all_filters"
           variant="outlined"
@@ -174,10 +174,10 @@ const BentoFacetFilter = ({
           classes={{ root: classes.clearAllButtonRoot }}
           onMouseEnter={() => setIsHover(true)}
           onMouseLeave={() => setIsHover(false)}
-          style= { disable ? { border: '1px solid #627B7A' } : {}}
+          style={disable ? { border: '1px solid #627B7A' } : {}}
         >
           <img
-            src={ disable ? resetIcon.src : ( isHover ? resetIcon.srcActiveHover : resetIcon.srcActive ) }
+            src={disable ? resetIcon.src : (isHover ? resetIcon.srcActiveHover : resetIcon.srcActive)}
             height={resetIcon.size}
             width={resetIcon.size}
             alt={resetIcon.alt}
@@ -201,13 +201,6 @@ const BentoFacetFilter = ({
     const { name } = section;
     const { hasSearch = false } = facetSectionVariables[name];
 
-    const [showSearch, setShowSearch] = useState(true);
-
-    const toggleSearch = (e) => {
-      e.stopPropagation();
-      setShowSearch(!showSearch);
-    };
-
     let searchConfig = {
       title: 'Participants',
     }
@@ -217,23 +210,18 @@ const BentoFacetFilter = ({
         <CustomExpansionPanelSummary id={section}>
           <div className={classes.sectionSummaryTextContainer}>
             {sectionLabel[name] !== undefined ? sectionLabel[name] : name}
-            {hasSearch && (
-              <div className={classes.findCaseButton} onClick={toggleSearch}>
-                <img src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/FacetLocalFindSearchIcon.svg" className={classes.findCaseIcon} alt="search" />
-              </div>
-            )}
           </div>
-          {hasSearch && (
-            <SearchView
-              classes={classes}
-              SearchBox={SearchBox}
-              UploadModal={UploadModal}
-              hidden={!expanded || !showSearch}
-              config = {searchConfig}
-              queryParams={queryParams}
-            />
-          )}
         </CustomExpansionPanelSummary>
+        {hasSearch && (
+          <SearchView
+            classes={classes}
+            SearchBox={SearchBox}
+            UploadModal={UploadModal}
+            hidden={!expanded}
+            config={searchConfig}
+            queryParams={queryParams}
+          />
+        )}
       </>
     );
   };

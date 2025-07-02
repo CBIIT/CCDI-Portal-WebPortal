@@ -484,7 +484,7 @@ function searchView(props) {
 
   return (
     <>
-      <img src={searchBackground} alt="searchBackground" style={{ position: 'absolute', right: '0px', top: '120px' }} />
+      <img src={searchBackground} alt="searchBackground" style={{ position: 'absolute', right: '0px', top: '23%', zIndex: -1 }} />
       <Grid container direction="column" alignItems="center" justifyContent="center" className={classes.heroArea}>
         <Grid item>
           <h2 className={classes.searchTitle}>Search Results</h2>

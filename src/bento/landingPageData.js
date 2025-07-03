@@ -172,7 +172,7 @@ export const resourcesAppliationsListData = [
     id: 'cBioPortal',
     title: 'cBioPortal Cancer Data Explorer',
     content: 'CCDI’s customized cBioPortal instance allows users to explore and visualize complex genomic and clinical data without the need to download large datasets.',
-    link: 'https://www.cbioportal.org',
+    link: 'https://cbioportal.ccdi.cancer.gov',
     img: cBioPortalLogo,
   },
 ];
@@ -283,7 +283,7 @@ export const carouselList = [
     img: wheel13,
     mobile: cBioPortalMobile,
     content: 'CCDI cBioPortal',
-    link: 'https://www.cbioportal.org',
+    link: 'https://cbioportal.ccdi.cancer.gov',
   },
 ];
 
@@ -291,3 +291,8 @@ export const LANDING_DATA_QUERY = gql`{
     numberOfMCICount
   }
 `;
+
+export const GLOBAL_STATS_BAR_QUERY = gql`{
+  numberOfParticipants,
+  }
+  `;

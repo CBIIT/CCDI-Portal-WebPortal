@@ -136,7 +136,8 @@ export const tabIndex = [
 ];
 
 export const DASHBOARD_QUERY_NEW = gql`
-query search (          
+query search (
+    $import_data: [String],    
     $participant_ids: [String],
     $sex_at_birth: [String] ,
     $race: [String] ,
@@ -169,7 +170,8 @@ query search (
     $library_strategy: [String],
     $file_mapping_level: [String],
 ){
-    searchParticipants (          
+    searchParticipants (
+        import_data: $import_data,          
         participant_ids: $participant_ids,
         sex_at_birth: $sex_at_birth,
         race: $race,
@@ -379,6 +381,7 @@ query search (
 
 export const GET_FILES_OVERVIEW_QUERY = gql`
 query fileOverview(
+    $import_data: [String],
     $participant_ids: [String],
     $sex_at_birth: [String] ,
     $race: [String] ,
@@ -415,6 +418,7 @@ query fileOverview(
     $order_by: String,
     $sort_direction: String ){
     fileOverview(
+        import_data: $import_data,
         participant_ids: $participant_ids,
         sex_at_birth: $sex_at_birth,
         race: $race,
@@ -583,6 +587,7 @@ export const GET_COHORT_MANIFEST_QUERY = gql`
 
 export const GET_SAMPLES_OVERVIEW_QUERY = gql`
 query sampleOverview(
+    $import_data: [String],
     $participant_ids: [String],
     $sex_at_birth: [String] ,
     $race: [String] ,
@@ -619,6 +624,7 @@ query sampleOverview(
     $order_by: String,
     $sort_direction: String ){
     sampleOverview(
+        import_data: $import_data,
         participant_ids: $participant_ids,
         sex_at_birth: $sex_at_birth,
         race: $race,
@@ -670,6 +676,7 @@ query sampleOverview(
 
 export const GET_PARTICIPANTS_OVERVIEW_QUERY = gql`
 query participantOverview(
+    $import_data: [String],
     $participant_ids: [String],
     $sex_at_birth: [String] ,
     $race: [String] ,
@@ -706,6 +713,7 @@ query participantOverview(
     $order_by: String,
     $sort_direction: String ){
     participantOverview(
+        import_data: $import_data,
         participant_ids: $participant_ids,
         sex_at_birth: $sex_at_birth,
         race: $race,
@@ -772,6 +780,7 @@ query participantOverview(
 
 export const GET_STUDY_OVERVIEW_QUERY = gql`
 query studyOverview(
+    $import_data: [String],
     $participant_ids: [String],
     $sex_at_birth: [String] ,
     $race: [String] ,
@@ -808,6 +817,7 @@ query studyOverview(
     $order_by: String,
     $sort_direction: String ){
     studyOverview(
+        import_data: $import_data,
         participant_ids: $participant_ids,
         sex_at_birth: $sex_at_birth,
         race: $race,
@@ -913,6 +923,7 @@ query search (
 
 export const GET_ALL_FILEIDS_FROM_PARTICIPANTSTAB_FOR_ADD_ALL_CART = gql`
 query participantsAddAllToCart(
+    $import_data: [String],
     $participant_ids: [String],
     $sex_at_birth: [String] ,
     $race: [String] ,
@@ -950,6 +961,7 @@ query participantsAddAllToCart(
     $sort_direction: String = "asc" 
   ){
     participantOverview(
+      import_data: $import_data,
       participant_ids: $participant_ids,
       sex_at_birth: $sex_at_birth,
       race: $race,
@@ -993,6 +1005,7 @@ query participantsAddAllToCart(
 
 export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
     query samplesAddAllToCart(
+      $import_data: [String],
       $participant_ids: [String],
       $sex_at_birth: [String] ,
       $race: [String] ,
@@ -1029,6 +1042,7 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
       $order_by: String = "file_id",
       $sort_direction: String = "asc" ){
       sampleOverview(
+          import_data: $import_data,
           participant_ids: $participant_ids,
           sex_at_birth: $sex_at_birth,
           race: $race,
@@ -1072,6 +1086,7 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
 
 export const GET_ALL_FILEIDS_FROM_FILESTAB_FOR_ADD_ALL_CART = gql`
 query fileAddAllToCart(
+  $import_data: [String],
   $participant_ids: [String],
   $sex_at_birth: [String] ,
   $race: [String] ,
@@ -1109,6 +1124,7 @@ query fileAddAllToCart(
   $sort_direction: String = "asc"
  ){
   fileOverview(
+      import_data: $import_data,
       participant_ids: $participant_ids,
       sex_at_birth: $sex_at_birth,
       race: $race,
@@ -1152,6 +1168,7 @@ query fileAddAllToCart(
 
 export const GET_ALL_FILEIDS_FROM_DIAGNOSISTAB_FOR_ADD_ALL_CART = gql`
 query diagnosisAddAllToCart(
+  $import_data: [String],
   $participant_ids: [String],
   $sex_at_birth: [String] ,
   $race: [String] ,
@@ -1188,6 +1205,7 @@ query diagnosisAddAllToCart(
   $order_by: String = "file_id",
   $sort_direction: String = "asc" ){
   diagnosisOverview(
+      import_data: $import_data,
       participant_ids: $participant_ids,
       sex_at_birth: $sex_at_birth,
       race: $race,
@@ -1231,6 +1249,7 @@ query diagnosisAddAllToCart(
 
 export const GET_ALL_FILEIDS_FROM_STUDYTAB_FOR_ADD_ALL_CART = gql`
 query studyAddAllToCart(
+  $import_data: [String],
   $participant_ids: [String],
   $sex_at_birth: [String] ,
   $race: [String] ,
@@ -1267,6 +1286,7 @@ query studyAddAllToCart(
   $order_by: String = "file_id",
   $sort_direction: String = "asc" ){
   studyOverview(
+      import_data: $import_data,
       participant_ids: $participant_ids,
       sex_at_birth: $sex_at_birth,
       race: $race,

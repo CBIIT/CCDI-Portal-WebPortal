@@ -1,6 +1,8 @@
 export const initialState = {
     initialLoading: true,
     isDataloading: false,
+    importFromURL: null,
+    importFromData: [],
     activeFilters: null,
     dashData: null,
     return_2_page: false,
@@ -11,6 +13,7 @@ export const initialState = {
   
   export const AFTER_INITIAL_LOADING = 'Inventory/AFTER_INITIAL_LOADING';
   export const DATA_LOADING = 'Inventory/DATA_LOADING';
+  export const UPDATE_IMPORTFROM = 'Inventory/UPDATE_IMPORTFROM';
   export const FACET_VALUE_CHANGED = 'Inventory/FACET_VALUE_CHANGED';
   export const DASHBOARD_DATA_CHANGED = 'Inventory/DASHBOARD_DATA_CHANGED';
   export const RETURN_2_PAGE = 'return_2_page';
@@ -29,6 +32,14 @@ export const initialState = {
     type: DATA_LOADING,
     payload: {
         isDataloading,
+    },
+  });
+
+  export const updateImportfrom = (importFromURL, importFromData) => ({
+    type: UPDATE_IMPORTFROM,
+    payload: {
+        importFromURL,
+        importFromData,
     },
   });
 
@@ -87,6 +98,13 @@ export const initialState = {
             return {
                 ...state,
                 isDataloading: payload.isDataloading,
+            };
+        // Update importFromData with the fetched data
+        case UPDATE_IMPORTFROM:
+            return {
+                ...state,
+                importFromURL: payload.importFromURL,
+                importFromData: payload.importFromData,
             };
         case FACET_VALUE_CHANGED:
             return {

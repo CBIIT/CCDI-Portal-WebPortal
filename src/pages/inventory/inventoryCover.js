@@ -11,7 +11,7 @@ import { updateUploadData, updateAutocompleteData, updateUploadMetadata, resetUp
 import store from '../../store';
 import { withStyles, CircularProgress, Backdrop } from '@material-ui/core';
 import {
-    inDataloading, syncUpDashboard, afterInitialLoading, return2Page, returnQueryUrl, changeTab, restoreActionType,
+    inDataloading, updateImportfrom, syncUpDashboard, afterInitialLoading, return2Page, returnQueryUrl, changeTab, restoreActionType,
 } from '../../components/Inventory/InventoryState';
 import styles from './inventoryStyle';
 import { DASHBOARD_QUERY_NEW } from '../../bento/dashboardTabData';
@@ -47,7 +47,7 @@ const InventoryCover = ({
     const generateFacetFilters = (filters, query, queryParams) => {
         let newFilterState = {};
         queryParams.forEach((param) => {
-            if (param === 'p_id' || param === 'u' || param === 'u_fc' || param === 'u_um' || param === 'tab') {
+            if (param === 'import_from' || param === 'p_id' || param === 'u' || param === 'u_fc' || param === 'u_um' || param === 'tab') {
                     return;
             }
             const paramValues = query.get(param);
@@ -77,12 +77,20 @@ const InventoryCover = ({
     useEffect(() => {
         if (query.size === 0 && return_2_page) {
             navigate(`/explore${return_query_url}`);
-        } else {
-            let filters = {};
-            const participant_id = query.get('p_id');
-            const upload = query.get('u');
-            const upload_filecontent = query.get('u_fc');
-            const upload_unmatched = query.get('u_um');
+            return;
+        }
+        
+        // Parse all query params
+        let filters = {};
+        const import_from = query.get('import_from');
+        const participant_id = query.get('p_id');
+        const upload = query.get('u');
+        const upload_filecontent = query.get('u_fc');
+        const upload_unmatched = query.get('u_um');
+        const tab = query.get('tab');
+        
+        // Helper to finish the rest of the logic after import_from is handled
+        const continueWithFilters = (extraParticipantIds = []) => {
             filters.participant_ids = [];
             if (participant_id) {
                 filters.participant_ids = [...filters.participant_ids, ...participant_id.split('|')];
@@ -90,25 +98,27 @@ const InventoryCover = ({
             if (upload) {
                 filters.participant_ids = [...filters.participant_ids, ...upload.split('|')];
             }
+            if (extraParticipantIds.length > 0) {
+                filters.import_data = extraParticipantIds;
+            }
             const newFilterState = generateFacetFilters(filters, query, queryParams);
-            // need to update local find component and query bar component for initial loading
+
+            // Update autocomplete data
             if (participant_id) {
-                const data = participant_id.split('|').map((item) => {
-                    return {
-                        type: 'participantIds',
-                        title: item,
-                    };
-                });
+                const data = participant_id.split('|').map((item) => ({
+                    type: 'participantIds',
+                    title: item,
+                }));
                 store.dispatch(updateAutocompleteData(data));
             } else {
                 store.dispatch(updateAutocompleteData([]));
             }
+
+            // Update upload data and metadata
             if (upload) {
-                const data = upload.split('|').map((item) => {
-                    return {
-                        participant_id: item,
-                    };
-                });
+                const data = upload.split('|').map((item) => ({
+                    participant_id: item,
+                }));
                 let fc = '';
                 let um = [];
                 if (upload_filecontent && upload_unmatched) {
@@ -122,21 +132,25 @@ const InventoryCover = ({
                     filename: "",
                     fileContent: fc,
                     matched: data,
-                    unmatched: um
-                }
+                    unmatched: um,
+                };
                 store.dispatch(updateUploadData(data));
                 store.dispatch(updateUploadMetadata(metadata));
             } else {
                 store.dispatch(resetUploadData());
             }
+
             store.dispatch(updateFilterState(newFilterState));
-            const tab = query.get('tab');
+
+            // Handle tab
             if (tab) {
                 const tab_number = parseInt(tab, 10);
-                !isNaN(tab_number) && store.dispatch(changeTab(parseInt(tab, 10), 'facet'));
+                !isNaN(tab_number) && store.dispatch(changeTab(tab_number, 'facet'));
             } else {
                 store.dispatch(changeTab(0, 'facet'));
             }
+
+            // Data loading logic
             if (action_type === "facet") {
                 store.dispatch(inDataloading(true));
                 getData(filters).then((result) => {
@@ -153,6 +167,25 @@ const InventoryCover = ({
                 store.dispatch(returnQueryUrl(window.location.search));
                 store.dispatch(restoreActionType());
             }
+        };
+
+        // Handle import_from if present
+        if (import_from) {
+            fetch(import_from)
+                .then(response => response.json())
+                .then(jsonData => {
+                    store.dispatch(updateImportfrom(import_from, jsonData));
+                    // If jsonData is an array of participant IDs, pass them to continueWithFilters
+                    continueWithFilters(Array.isArray(jsonData) ? jsonData.map(obj => JSON.stringify(obj)) : []);
+                })
+                .catch(error => {
+                    console.error("Failed to fetch import_from JSON:", error);
+                    store.dispatch(updateImportfrom(null, []));
+                    continueWithFilters();
+                });
+        } else {
+            store.dispatch(updateImportfrom(null, []));
+            continueWithFilters();
         }
     }, [searchParams]);
 

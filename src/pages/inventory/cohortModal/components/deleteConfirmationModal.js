@@ -13,38 +13,71 @@ const DeleteConfirmationModal = (props) => {
         open,
         setOpen,
         handleDelete,
-        deletionType
+        deletionType,
+        message
     } = props;
-
     return (
         <Modal
             open={open}
             onClose={() => setOpen(false)}
         >
             <div className={classes.modal}>
-                <div className={classes.modalContent}>
+                {!message ? <div className={classes.modalContent}>
                     <div className={classes.modalHeading}>
-                        <span>Are you sure you want to delete {deletionType}? {deletionType !== deletionTypes.DELETE_ALL_PARTICIPANTS && 'This action cannot be undone.'}</span>
-                        <span>Press Confirm or Cancel.</span>
+                        {message ?
+                            <span>{message}</span>
+                            :
+                            <>
+                                <span>Are you sure you want to delete {deletionType}? {deletionType !== deletionTypes.DELETE_ALL_PARTICIPANTS && 'This action cannot be undone.'}</span>
+                                <span>Press Confirm or Cancel.</span>
+                            </>
+                        }
                     </div>
                     <div className={classes.modalButtons}>
-                        <button
-                            className={classes.cancelButton}
-                            onClick={() => setOpen(false)}
-                        >
-                            Cancel
-                        </button>
-                        <button
-                            className={classes.confirmButton}
-                            onClick={() => {
-                                handleDelete();
-                                setOpen(false);
-                            }}
-                        >
-                            Confirm
-                        </button>
+                        {message ?
+                            <button className={classes.confirmButton}
+                                onClick={() => {
+                                    setOpen(false);
+
+                                }}
+                            >Ok</button>
+                            :
+                        <>
+                            <button
+                                className={classes.cancelButton}
+                                onClick={() => setOpen(false)}
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                className={classes.confirmButton}
+                                onClick={() => {
+                                    handleDelete();
+                                    setOpen(false);
+                                }}
+                            >
+                                Confirm
+                            </button>
+                        </>
+                        }
                     </div>
-                </div>
+                </div> :
+                    <div className={classes.modalContent}>
+                        <div className={classes.modalHeading}>
+                            <span>{message}</span>
+                        </div>
+                        <div className={classes.modalButtons}>
+                            <button
+                                className={classes.confirmButton}
+                                onClick={() => {
+                                    setOpen(false);
+                                }}
+                            >
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                }
             </div>
         </Modal>
     );
@@ -67,7 +100,7 @@ const styles = () => ({
         justifyContent: 'center',
         flexDirection: 'column',
     },
-    modalHeading: { 
+    modalHeading: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

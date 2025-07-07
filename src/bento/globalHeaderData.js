@@ -106,7 +106,7 @@ export const navbarSublists = {
   },
   {
     name: 'CCDI cBioPortal',
-    link: '/cbioportal',
+    link: 'https://cbioportal.ccdi.cancer.gov',
     className: 'navMobileSubItem',
   },
   {
@@ -142,8 +142,8 @@ export const navbarSublists = {
       className: 'navMobileSubItem',
     },
     {
-      name: 'Accessing CCDI Data (PDF)',
-      link: '/user-guide.pdf',
+      name: 'CCDI Data Submission Guide (PDF)',
+      link: '/Submission_Guide.pdf',
       className: 'navMobileSubItem',
     },
     {

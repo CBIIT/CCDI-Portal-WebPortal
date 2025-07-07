@@ -108,6 +108,7 @@ export const CohortAnalyzer = () => {
 
         // Return true if the total would exceed 4000, otherwise false
         if (selectedRowsCount >= 4000) {
+        if (selectedRowsCount > 4000) {
             return true;
         }
 

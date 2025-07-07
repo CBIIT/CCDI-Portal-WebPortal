@@ -17,12 +17,13 @@ import ScrollButton from '../ScrollButton/ScrollButtonView';
 import MCIResourceView from '../../pages/resource/MCIResourcePage/MCIResourceController'
 import FederationResourceView from "../../pages/resource/FederationResourcePage/FederationResourceController";
 import CPIResourceView from "../../pages/resource/CPIResourcePage/CPIResourceController";
-import ToolsResourceView from "../../pages/resource/ToolsResourcePage/ToolsResourceController";
+// import CBioPortalResourceView from "../../pages/resource/cBioPortalResourcePage/cBioPortalResourceController";
 import ReleaseNotesPageView from '../../pages/releaseNotePage/releaseNotePageController';
 import StudiesView from '../../pages/studies/studiesView';
 import StudiesDetail from "../../pages/studyDetail/studyDetailController";
 import OverlayWindow from '../OverlayWindow/OverlayWindow';
 import CohortAnalyzerController  from "../../pages/CohortAnalyzer/CohortAnalyzerController";
+import ToolsResourceView from "../../pages/resource/ToolsResourcePage/ToolsResourceView";
 // import NewsDetail from '../../pages/news/newsDetailView';
 
 const Layout = () => {

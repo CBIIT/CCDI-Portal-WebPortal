@@ -221,7 +221,6 @@ export const CohortAnalyzer = () => {
         }
     }
 
-
     useEffect(() => {
         setSearchValue("");
         if (searchRef.current) {

@@ -25,7 +25,6 @@ const isValidParticipant = (participant) => {
 };
 
 const isValidCohort = (cohort) => {
-  console.log(cohort);
   if (!Object.keys(cohortObjectTemplate).every(key => key in cohort)) {
     return false;
   }

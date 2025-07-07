@@ -92,3 +92,7 @@ export const GET_GLOBAL_STATS_DATA_QUERY = gql`{
   numberOfStudies
   }
   `;
+
+export const GET_PARTICIPANTS_STATS_QUERY = gql`{
+  numberOfParticipants
+}`

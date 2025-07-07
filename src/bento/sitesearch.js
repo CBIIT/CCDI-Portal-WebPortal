@@ -132,6 +132,7 @@ export const SEARCH_PAGE_RESULT_PARTICIPANTS = gql`
       offset: $offset
     ) {
       participants {
+        id
         participant_id
         study_id
         diagnosis_str

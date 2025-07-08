@@ -81,6 +81,23 @@ export const CohortAnalyzer = () => {
 
     }
 
+    const exceedLimitCreatedCohost = (hiddenCohortState) => {
+
+        let cohortStateCount = 0;
+
+        // Count the number of cohost
+        if (hiddenCohortState && typeof hiddenCohortState === 'object') {
+            cohortStateCount = Object.keys(hiddenCohortState).length;
+        }
+
+        // Return true if the cohort total would exceed 20, otherwise false
+        if (cohortStateCount >= 20) {
+            return true;
+        }
+
+        return false;
+    }
+
     const exceedLimitSelectedParticipant = (hiddenSelectedRows) => {
         let selectedRowsCount = 0;
 
@@ -90,7 +107,7 @@ export const CohortAnalyzer = () => {
         }
 
         // Return true if the total would exceed 4000, otherwise false
-        if (selectedRowsCount > 4000) {
+        if (selectedRowsCount >= 4000) {
             return true;
         }
 
@@ -388,6 +405,10 @@ export const CohortAnalyzer = () => {
     }
 
     const handleClick = () => {
+        if (exceedLimitCreatedCohost(state)){
+            setWarningMessage("You are not allowed to create more that 20 cohorts");
+            return
+        }
         if (exceedLimitSelectedParticipant(rowData)) {
           setWarningMessage("You are not allowed to create a new cohort with more than 4000 participants");
           return;

@@ -53,7 +53,7 @@ const ButtonStyled = styled.button`
 export const CustomButton = ({ label, backgroundColor, type, hoverColor, cohortsAvailable, borderColor }) => {
 
   const tableContext = useContext(TableContext);
-  const { dispatch } = useContext(CohortStateContext);
+  const { state, dispatch } = useContext(CohortStateContext);
   const { setShowCohortModal} = useContext(CohortModalContext);
   const { Notification } = useGlobal();
   const [isActive, setIsActive] = useState(false);
@@ -91,6 +91,23 @@ export const CustomButton = ({ label, backgroundColor, type, hoverColor, cohorts
     dispatch(onRowSelectHidden([]));
   }
 
+  // Checks if the created cohorts exceed the 20 cohort limit
+  const exceedLimitCreatedCohost = (hiddenCohortState) => {
+    let cohortStateCount = 0;
+
+    // Count the number of cohost
+    if (hiddenCohortState && typeof hiddenCohortState === 'object') {
+        cohortStateCount = Object.keys(hiddenCohortState).length;
+    }
+
+    // Return true if the cohort total would exceed 4, otherwise false
+    if (cohortStateCount >=  20) {
+        return true;
+    }
+
+    return false;
+  }
+
   // Checks if the selected participants for the new cohort exceed the 4000 participant limit
   const exceedLimitSelectedParticipant = (hiddenSelectedRows) => {
     let selectedRowsCount = 0;
@@ -117,6 +134,13 @@ export const CustomButton = ({ label, backgroundColor, type, hoverColor, cohorts
         const {
           hiddenSelectedRows = []
         } = context;
+
+        // Check if the created cohorts exceed the 20 cohort limit
+        if (exceedLimitCreatedCohost(state)) {
+          // Show Popup notification if the cohort limit would be exceeded
+          setShowPopupMessage("You are not allowed to create more that 20 cohorts");
+          return;
+        }
 
         // Check if the selected participants exceed the cohort limit
         if (exceedLimitSelectedParticipant(hiddenSelectedRows)) {

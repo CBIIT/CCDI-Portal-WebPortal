@@ -5,6 +5,7 @@ export const deletionTypes = {
     DELETE_ALL_COHORTS: 'ALL cohorts',
     DELETE_SINGLE_COHORT: 'this cohort',
     DELETE_ALL_PARTICIPANTS: 'ALL participants',
+    CLEAR_UNSAVED_CHANGES: 'leave?'
 };
 
 const DeleteConfirmationModal = (props) => {
@@ -28,8 +29,9 @@ const DeleteConfirmationModal = (props) => {
                             <span>{message}</span>
                             :
                             <>
-                                <span>Are you sure you want to delete {deletionType}? {deletionType !== deletionTypes.DELETE_ALL_PARTICIPANTS && 'This action cannot be undone.'}</span>
-                                <span>Press Confirm or Cancel.</span>
+                                <span> Are you sure you want to {deletionType} </span>
+                                {deletionType !== deletionTypes.DELETE_ALL_PARTICIPANTS && <span>{deletionType === deletionTypes.CLEAR_UNSAVED_CHANGES && 'You will lose all unsaved changes. ' }This action cannot be undone.</span>}
+                                {deletionType !== deletionTypes.DELETE_ALL_PARTICIPANTS && <span>Press Confirm or Cancel. </span>}
                             </>
                         }
                     </div>
@@ -42,23 +44,23 @@ const DeleteConfirmationModal = (props) => {
                                 }}
                             >Ok</button>
                             :
-                        <>
-                            <button
-                                className={classes.cancelButton}
-                                onClick={() => setOpen(false)}
-                            >
-                                Cancel
-                            </button>
-                            <button
-                                className={classes.confirmButton}
-                                onClick={() => {
-                                    handleDelete();
-                                    setOpen(false);
-                                }}
-                            >
-                                Confirm
-                            </button>
-                        </>
+                            <>
+                                <button
+                                    className={classes.cancelButton}
+                                    onClick={() => setOpen(false)}
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    className={classes.confirmButton}
+                                    onClick={() => {
+                                        handleDelete();
+                                        setOpen(false);
+                                    }}
+                                >
+                                    Confirm
+                                </button>
+                            </>
                         }
                     </div>
                 </div> :

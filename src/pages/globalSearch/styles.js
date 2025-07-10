@@ -82,14 +82,17 @@ const styles = () => ({
     left: '149px',
     width: '889px',
     height: '179px',
-    background: '#08838D',
     marginTop: '60px',
     marginBottom: '60px',
+    background: '#08838D',
     borderTopRightRadius: '20px',
     borderBottomLeftRadius: '20px',
     alignItems: 'start',
     paddingLeft: '60px',
     zIndex: '1',
+  },
+  searchArea: {
+    display: 'flex',
   },
   searchTitle: {
     color: '#FFFFFF',

@@ -151,6 +151,12 @@ const FederationResourceContainer = styled.div`
             padding: 15px 34px 15px 0;
         }
     }
+
+    @media (max-width: 900px) {
+        .resourceHeaderBackground {
+            width: 900px;
+        }
+    }
 `;
 
 const FederationResourceBody = styled.div`

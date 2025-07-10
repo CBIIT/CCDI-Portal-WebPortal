@@ -81,6 +81,23 @@ export const CohortAnalyzer = () => {
 
     }
 
+    const exceedLimitCreatedCohost = (hiddenCohortState) => {
+
+        let cohortStateCount = 0;
+
+        // Count the number of cohost
+        if (hiddenCohortState && typeof hiddenCohortState === 'object') {
+            cohortStateCount = Object.keys(hiddenCohortState).length;
+        }
+
+        // Return true if the cohort total would exceed 20, otherwise false
+        if (cohortStateCount >= 20) {
+            return true;
+        }
+
+        return false;
+    }
+
     const exceedLimitSelectedParticipant = (hiddenSelectedRows) => {
         let selectedRowsCount = 0;
 
@@ -90,7 +107,7 @@ export const CohortAnalyzer = () => {
         }
 
         // Return true if the total would exceed 4000, otherwise false
-        if (selectedRowsCount > 4000) {
+        if (selectedRowsCount >= 4000) {
             return true;
         }
 
@@ -219,10 +236,6 @@ export const CohortAnalyzer = () => {
         } else {
             setRowData([]);
         }
-    }
-
-    function shortenText(text, maxSize = 17) {
-        return text.length > maxSize ? text.slice(0, maxSize) + "..." : text;
     }
 
     useEffect(() => {
@@ -392,6 +405,10 @@ export const CohortAnalyzer = () => {
     }
 
     const handleClick = () => {
+        if (exceedLimitCreatedCohost(state)){
+            setWarningMessage("You are not allowed to create more that 20 cohorts");
+            return
+        }
         if (exceedLimitSelectedParticipant(rowData)) {
           setWarningMessage("You are not allowed to create a new cohort with more than 4000 participants");
           return;
@@ -582,7 +599,7 @@ export const CohortAnalyzer = () => {
                                                         selectedCohorts={selectedCohorts}
                                                         cohort={cohort}
                                                         handleCheckbox={handleCheckbox} />
-                                                    <span className={classes.cardContent} style={{ opacity: selectedCohorts.length === 3 && !selectedCohorts.includes(cohort) ? 0.3 : 1 }} > {shortenText(cohortName)} </span>
+                                                    <span className={classes.cardContent} style={{ opacity: selectedCohorts.length === 3 && !selectedCohorts.includes(cohort) ? 0.3 : 1 }} > {cohortName} </span>
                                                 </div>
                                                 <img alt={"Trashcan"} style={{ cursor: 'pointer', zIndex: 3 }} onClick={() => { handlePopup(cohort, state, setDeleteInfo, deleteInfo) }} src={trashCan} width={15} height={16} />
                                             </div>

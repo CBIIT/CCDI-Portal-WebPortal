@@ -76,7 +76,7 @@ async function queryAllAPI(search, offset, pageSize, isPublic) {
   };
   let results = await queryResultAPI(datafieldValue, input, isPublic)
   results = results.map((e) => {
-    return {...e, type: datafieldValue }
+    return { ...e, type: datafieldValue }
   })
 
   return results;
@@ -181,7 +181,7 @@ function searchView(props) {
    */
   const getTabData = async (field, pageSize, currentPage) => {
     const isPublic = true;
-  
+
     // Handle the 'All' tab search separately
     if (field === 'all') {
       const count = countValues(searchCounts);
@@ -202,7 +202,7 @@ function searchView(props) {
           apiQueries += 1;
         }
       }
-      
+
       return (data || []).slice(0, pageSize);
     }
     // Handle all of the other tabs
@@ -479,21 +479,23 @@ function searchView(props) {
     queryCountAPI(searchparam, !authCheck()).then((d) => {
       setSearchCounts(d);
     });
-    
+
   }, []);
 
   return (
     <>
-      <img src={searchBackground} alt="searchBackground" style={{ position: 'absolute', right: '0px', top: '23%', zIndex: -1 }} />
-      <Grid container direction="column" alignItems="center" justifyContent="center" className={classes.heroArea}>
-        <Grid item>
-          <h2 className={classes.searchTitle}>Search Results</h2>
+      <div className={classes.searchArea}>
+        <img src={searchBackground} alt="searchBackground" style={{ position: 'absolute', right: '0px', zIndex: -1 }} />
+        <Grid container direction="column" alignItems="center" justifyContent="center" className={classes.heroArea}>
+          <Grid item>
+            <h2 className={classes.searchTitle}>Search Results</h2>
+          </Grid>
+          <Grid item>
+            <SearchBar value={searchText} clearable={!false} />
+          </Grid>
         </Grid>
-        <Grid item>
-          <SearchBar value={searchText} clearable={!false}/>
-        </Grid>
-      </Grid>
-     
+      </div>
+
 
       <div className={classes.bodyContainer}>
         <Box sx={{ width: '100%', typography: 'body1' }}>

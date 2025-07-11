@@ -4,6 +4,7 @@ import {
   useLocation,
   useNavigate,
 } from "react-router-dom";
+import { updateImportfrom } from '../../../components/Inventory/InventoryState';
 import { clearAllFilters, clearFacetSection, clearSliderSection, toggleCheckBox } from '@bento-core/facet-filter';
 import { resetAllData, resetUploadData, updateAutocompleteData } from '@bento-core/local-find';
 import { generateQueryStr } from '@bento-core/util';
@@ -19,7 +20,7 @@ import { facetsConfig, queryParams } from '../../../bento/dashTemplate';
  * @param {object} props.localFind Local Find State
  * @returns {JSX.Element}
  */
-const QueryBarView = ({ data, statusReducer, localFind }) => {
+const QueryBarView = ({ data, hasImportFrom, statusReducer, localFind }) => {
   const dispatch = useDispatch();
   const query = new URLSearchParams(useLocation().search);
   const navigate = useNavigate();
@@ -27,7 +28,6 @@ const QueryBarView = ({ data, statusReducer, localFind }) => {
   const sectionOrder = facetsConfig.map((v) => v.datafield);
   const mappedFilterState = Object.keys(statusReducer || {}).map((facet) => {
     const config = facetsConfig.find((config) => config.datafield === facet);
-
     return {
       ...config,
       items: statusReducer[facet],
@@ -40,7 +40,7 @@ const QueryBarView = ({ data, statusReducer, localFind }) => {
     functions: {
       clearAll: () => {
         const paramValue = {
-          'p_id': '', 'u': '', 'u_fc': '', 'u_um': '', 'sex_at_birth': '', 'race': '',
+          'import_from': '', 'p_id': '', 'u': '', 'u_fc': '', 'u_um': '', 'sex_at_birth': '', 'race': '',
           'age_at_diagnosis': '', 'diagnosis': '', 'diagnosis_anatomic_site': '', 'diagnosis_classification_system': '', 'diagnosis_basis': '', 'disease_phase': '',
           'treatment_type': '', 'treatment_agent': '', 'age_at_treatment_start': '', 'response_category': '', 'age_at_response': '', 
           'age_at_last_known_survival_status': '', 'first_event': '', 'last_known_survival_status': '', 
@@ -52,6 +52,14 @@ const QueryBarView = ({ data, statusReducer, localFind }) => {
         navigate(`/explore${queryStr}`, { replace: true });
         dispatch(resetAllData());
         dispatch(clearAllFilters());
+      },
+      clearImportFrom: () => {
+        const paramValue = {
+          'import_from': '',
+        };
+        const queryStr = generateQueryStr(query, queryParams, paramValue);
+        navigate(`/explore${queryStr}`, { replace: true });
+        dispatch(updateImportfrom(null, []));
       },
       clearUpload: () => {
         const paramValue = {
@@ -124,6 +132,7 @@ const QueryBarView = ({ data, statusReducer, localFind }) => {
 
   return (
     <QueryBar
+      hasImportFrom={hasImportFrom}
       statusReducer={mappedFilterState}
       localFind={localFind}
     />
@@ -131,6 +140,7 @@ const QueryBarView = ({ data, statusReducer, localFind }) => {
 };
 
 const mapStateToProps = (state) => ({
+  hasImportFrom: state.inventoryReducer.importFromData.length > 0,
   statusReducer: state.statusReducer.filterState,
   localFind: state.localFind,
 });

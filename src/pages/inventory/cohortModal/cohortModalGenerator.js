@@ -144,6 +144,7 @@ export const CohortModalGenerator = (uiConfig = DEFAULT_CONFIG) => {
                 modalClosed();
                 if (props.onCloseModal) {
                     props.onCloseModal();
+                    handleClearCurrentCohortChanges();
                 }
                 setSelectedCohort(null);
             };

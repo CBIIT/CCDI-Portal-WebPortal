@@ -51,6 +51,7 @@ const CohortDetails = (props) => {
 
     const scrollContainerRef = useRef(null);
     const dropdownRef = useRef(null);
+    const saveButtonRef = useRef(null);
 
 
     useEffect(() => {
@@ -100,12 +101,23 @@ const CohortDetails = (props) => {
     };
 
     const handleSaveName = (e) => {
-        setIsEditingName(false);
-        handleSetCurrentCohortChanges({
-            ...temporaryCohort,
-            ...localCohort,
-            [e.target.name]: e.target.value,
-        });
+        // If the input loses focus because the user clicked the Save Changes button,
+        if (
+            e.nativeEvent.relatedTarget &&
+            saveButtonRef.current &&
+            e.nativeEvent.relatedTarget === saveButtonRef.current
+        ) {
+            // If the Save Changes button was clicked, save the cohort
+            handleSaveCohort(localCohort)
+
+        } else {
+            setIsEditingName(false);
+            handleSetCurrentCohortChanges({
+                ...temporaryCohort,
+                ...localCohort,
+                [e.target.name]: e.target.value,
+            });
+        }
     };
 
     const handleSaveDescription = (e) => {
@@ -358,7 +370,12 @@ const CohortDetails = (props) => {
                         <Button variant="contained" className={classes.cancelButton} onClick={closeModal}>
                             Cancel
                         </Button>
-                        <Button variant="contained" className={classes.saveButton} onClick={() => handleSaveCohort(localCohort)}>
+                        <Button
+                            variant="contained"
+                            className={classes.saveButton}
+                            ref={saveButtonRef}
+                            onClick={() => handleSaveCohort(localCohort)}
+                        >
                             Save Changes
                         </Button>
                         <div className={classes.dropdownSection} ref={dropdownRef}>

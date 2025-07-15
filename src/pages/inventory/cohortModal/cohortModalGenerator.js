@@ -140,12 +140,16 @@ export const CohortModalGenerator = (uiConfig = DEFAULT_CONFIG) => {
                 DeleteConfirmation: deleteConfirmationClasses,
             } = classes;
 
+            // Wrapper function to handle closing the modal and cleanup
             const closeModalWrapper = () => {
                 modalClosed();
+                // Call the onCloseModal prop if provided
                 if (props.onCloseModal) {
                     props.onCloseModal();
-                    handleClearCurrentCohortChanges();
                 }
+                // Clear current cohort changes
+                handleClearCurrentCohortChanges();
+                // Reset the selected cohort state
                 setSelectedCohort(null);
             };
 

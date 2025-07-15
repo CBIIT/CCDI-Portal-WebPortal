@@ -71,8 +71,8 @@ const CPIModal = ({
   onClose,
   row,
 }) => {
-  const [sortBy, setSortBy] = useState('associated_id');
-  const [sortOrder, setSortOrder] = useState('asc');
+  // const [sortBy, setSortBy] = useState('associated_id');
+  // const [sortOrder, setSortOrder] = useState('asc');
   const [data, setData] = useState(row.cpi_data);
   const themeConfig = createTheme(defaultTheme);
   const [selectedIds, setIds] = useState([]);
@@ -110,22 +110,22 @@ const CPIModal = ({
     }
   };
 
-  const sortingData = (column, newOrder) => {
+  /* const sortingData = (column, newOrder) => {
     const sortedData = data.sort((a, b) => a[column].localeCompare(b[column]));
 
     if (newOrder === 'desc') {
       return sortedData.reverse();
     }
     return sortedData;
-  };
+  }; */
 
-  const handleSortByColumn = (column, order) => {
+  /* const handleSortByColumn = (column, order) => {
     const newOrder = (order === 'asc' && sortBy === column) ? 'desc' : 'asc';
     const newData = sortingData(column, newOrder);
     setData(newData);
     setSortBy(column);
     setSortOrder(newOrder);
-  };
+  }; */
 
     const wrapperConfig = {
     container: 'buttons',
@@ -363,9 +363,9 @@ const CPIModal = ({
                   displayColumns.map((column) => (
                     <HeaderCell
                       column={column}
-                      sortBy={sortBy}
-                      sortOrder={sortOrder}
-                      toggleSort={() => handleSortByColumn(column.dataField, sortOrder)}
+                      // sortBy={sortBy}
+                      // sortOrder={sortOrder}
+                      // toggleSort={() => handleSortByColumn(column.dataField, sortOrder)}
                       style={{ paddingLeft: '3px', paddingRight: '3px', fontWeight: '700' }}
                     />
                   ))

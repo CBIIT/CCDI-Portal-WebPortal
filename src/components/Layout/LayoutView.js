@@ -23,7 +23,7 @@ import StudiesView from '../../pages/studies/studiesView';
 import StudiesDetail from "../../pages/studyDetail/studyDetailController";
 import OverlayWindow from '../OverlayWindow/OverlayWindow';
 import CohortAnalyzerController  from "../../pages/CohortAnalyzer/CohortAnalyzerController";
-import ToolsResourceView from "../../pages/resource/ToolsResourcePage/ToolsResourceView";
+import ToolsResourceView from "../../pages/resource/ToolsResourcePage/ToolsResourceController";
 // import NewsDetail from '../../pages/news/newsDetailView';
 
 const Layout = () => {

@@ -75,11 +75,6 @@ export const navbarSublists = {
     className: 'navMobileSubItem',
   },
   {
-    name:'Clinical Interpretation of Variants in Cancer',
-    link: 'https://civicdb.org',
-    className: 'navMobileSubItem',
-  },
-  {
     name: 'Molecular Characterization Initiative',
     link: '/MCI',
     className: 'navMobileSubItem',
@@ -124,11 +119,6 @@ export const navbarSublists = {
   //   link: 'https://www.ncbi.nlm.nih.gov/gap',
   //   className: 'navMobileSubItem',
   // },
-  {
-    name:'CCDI Extrachromosomal DNA (ecDNA)',
-    link: 'https://ccdi-ecdna.org',
-    className: 'navMobileSubItem',
-  },
   {
     name:'Tools',
     link: '/tools',

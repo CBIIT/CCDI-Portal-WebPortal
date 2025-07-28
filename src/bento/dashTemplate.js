@@ -262,6 +262,17 @@ export const facetsConfig = [
     sort_type: sortType.ALPHABET,
     show: true,
   },
+  {
+    section: DIAGNOSIS,
+    label: 'Diagnosis Category',
+    apiPath: 'participantCountByDiagnosisCategory',
+    apiForFiltering: 'filterParticipantCountByDiagnosisCategory',
+    datafield: 'diagnosis_category',
+    field: GROUP,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
   /*{
     section: DIAGNOSIS,
     label: 'Tumor Grade Source',

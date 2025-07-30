@@ -39,7 +39,7 @@ const ExportButtonView = (props,) => {
     const anchorRef = useRef(null);
     const STORE_MANIFEST_QUERY = gql`
       query storeManifest($manifestString: String!) {
-          storeManifest(manifest: $manifestString)
+          storeManifest(manifest: $manifestString, type: "json")
       }
     `;
 

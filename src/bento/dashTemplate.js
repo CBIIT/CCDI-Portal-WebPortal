@@ -1,7 +1,7 @@
 import { sortType, InputTypes } from '@bento-core/facet-filter';
 import clearButton from '../assets/icons/Clear_Icon.svg';
-import clearButtonActive from '../assets/icons/Clear_Icon_Active.svg';
-import clearButtonActiveHover from '../assets/icons/Clear_Icon_White.svg';
+import clearButtonActive from '../assets/icons/Clear_Icon_White.svg';
+import clearButtonActiveHover from '../assets/icons/Clear_Icon_Active.svg';
 
 const DEMOGRAPHICS = 'Demographics';
 const SURVIVAL = 'Survival';

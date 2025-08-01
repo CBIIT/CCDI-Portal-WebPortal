@@ -78,8 +78,9 @@ const InventoryCover = ({
 
         // If there are no query parameters and the user is not returning to a page,
         if(query.size === 0 && return_2_page === false && return_query_url !== '/explore'){
-            navigate(`/explore${return_query_url}`);
-            return;
+            // navigate(`/explore${return_query_url}`);
+            // return;
+            // console.log("do something when left!");
         }
 
         // If there are no query parameters and the user is returning to a page,

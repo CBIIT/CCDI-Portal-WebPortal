@@ -25,24 +25,6 @@ import figure15 from '../../../assets/explore/Figure15.png';
 import figure16 from '../../../assets/explore/Figure16.png';
 import figure17 from '../../../assets/explore/Figure17.png';
 
-// const UseGuideButtonContainer = styled.div`
-//     .buttonContainer {
-//         position: absolute;
-//         top: -82px;
-//         display: flex;
-//         width: 100%;
-//         padding: 7px 6px 7px 6px;
-//     }
-
-//     .buttonText {
-//         color: #627B7A;
-//         font-weight: 400;
-//         font-size: 14px;
-//         line-height: 30px;
-//         margin-left: 8px;
-//     }
-// `;
-
 const UseGuideButtonContainer = styled.div`
     background-color: #337478;
     .buttonContainer {

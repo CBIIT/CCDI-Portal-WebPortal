@@ -89,7 +89,7 @@ const { UploadModal } = UploadModalGenerator({
     updateBrowserUrl: (query, navigate, filename, fileContent, matchIds, unmatchedIds) => {
       const fc = fileContent
         .split(/[,\n]/g)
-        .map((e) => e.trim().replace('\r', '').toUpperCase())
+        .map((e) => e.trim().replace(/\r/g, '').toUpperCase())
         .filter((e) => e && e.length > 1);
       const paramValue = {
         'u': matchIds.map((data) => data.participant_id).join('|'),

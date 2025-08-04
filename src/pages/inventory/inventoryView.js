@@ -154,7 +154,6 @@ const Inventory = ({
               <ULSection className={classes.siderContent}>
                 {
                   sectionList.map((category, idx) => {
-                    console.log(category);
                     return (
                       <>
                       <Divider className={`${classes.divider} divider${idx}`}/>

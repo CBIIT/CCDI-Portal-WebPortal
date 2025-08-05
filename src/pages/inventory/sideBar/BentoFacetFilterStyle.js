@@ -161,10 +161,11 @@ export default () => ({
   },
   searchContainer: {
     margin: '0 2px',
-    marginBottom: '20px',
-    marginLeft:'20px',
-    marginRight: '20px',
     marginTop: '-15px',
+    paddingTop: '15px',
+    marginRight: '6px',
+    marginLeft: '10px',
+    paddingBottom: '15px',
   },
   findCaseButton: {
     // marginLeft: '105px',
@@ -227,5 +228,5 @@ export default () => ({
     fontSize: 11,
     fontWeight: '400',
     fontStyle: 'normal',
-  }
+  },
 });

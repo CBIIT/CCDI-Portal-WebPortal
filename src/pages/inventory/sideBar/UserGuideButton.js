@@ -26,16 +26,15 @@ import figure16 from '../../../assets/explore/Figure16.png';
 import figure17 from '../../../assets/explore/Figure17.png';
 
 const UseGuideButtonContainer = styled.div`
+    background-color: #337478;
     .buttonContainer {
-        position: absolute;
-        top: -82px;
         display: flex;
-        width: 100%;
-        padding: 7px 6px 7px 6px;
+        margin-left: 6px;
+        padding-top: 10px;
     }
 
     .buttonText {
-        color: #627B7A;
+        color: #ffffff;
         font-weight: 400;
         font-size: 14px;
         line-height: 30px;
@@ -104,7 +103,7 @@ const UseGuideButton = ({classes}) => {
                     onMouseEnter={() => setIsHover(true)}
                     onMouseLeave={() => setIsHover(false)}
                 >
-                    <img src={isHover?userguideIconWhite: userguideIcon} alt="user guide icon" />
+                    <img src={isHover? userguideIcon : userguideIconWhite} alt="user guide icon" />
                 </Button>
                 <div className='buttonText'>Explore the CCDI User Guide</div>
             </div>

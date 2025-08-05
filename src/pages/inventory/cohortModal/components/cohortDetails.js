@@ -121,12 +121,23 @@ const CohortDetails = (props) => {
     };
 
     const handleSaveDescription = (e) => {
-        setIsEditingDescription(false);
-        handleSetCurrentCohortChanges({
-            ...temporaryCohort,
-            ...localCohort,
-            [e.target.name]: e.target.value,
-        });
+        // If the input loses focus because the user clicked the Save Changes button,
+        if (
+            e.nativeEvent.relatedTarget &&
+            saveButtonRef.current &&
+            e.nativeEvent.relatedTarget === saveButtonRef.current
+        ) {
+            // If the Save Changes button was clicked, save the cohort
+            handleSaveCohort(localCohort)
+
+        } else {
+            setIsEditingDescription(false);
+            handleSetCurrentCohortChanges({
+                ...temporaryCohort,
+                ...localCohort,
+                [e.target.name]: e.target.value,
+            });
+        }
     };
 
     const handleSetSearch = (e) => {

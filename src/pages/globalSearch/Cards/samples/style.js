@@ -113,6 +113,7 @@ const useStyles = makeStyles((theme) => {
       padding: '0px',
       textTransform: 'uppercase',
       color: '#0F757E',
+      whiteSpace: 'nowrap',
     },
     value: {
       fontFamily: 'Inter',

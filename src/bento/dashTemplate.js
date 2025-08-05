@@ -272,6 +272,7 @@ export const facetsConfig = [
     type: InputTypes.CHECKBOX,
     sort_type: sortType.ALPHABET,
     show: true,
+    search: true,
   },
   /*{
     section: DIAGNOSIS,
@@ -1362,7 +1363,7 @@ export const widgetConfig = [
 // Facets, tab, pagination paramters
 export const queryParams = [
   'import_from', 'p_id', 'u', 'u_fc', 'u_um', 'sex_at_birth', 'race',
-  'age_at_diagnosis', 'diagnosis', 'diagnosis_anatomic_site', 'diagnosis_classification_system', 'diagnosis_basis', 'disease_phase',
+  'age_at_diagnosis', 'diagnosis', 'diagnosis_anatomic_site', 'diagnosis_classification_system', 'diagnosis_basis', 'diagnosis_category', 'disease_phase',
   'treatment_type', 'treatment_agent', 'age_at_treatment_start', 'response_category', 'age_at_response', 
   'age_at_last_known_survival_status', 'first_event', 'last_known_survival_status', 
   'participant_age_at_collection', 'sample_anatomic_site', 'sample_tumor_status', 'tumor_classification', 

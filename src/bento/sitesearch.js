@@ -142,6 +142,7 @@ export const SEARCH_PAGE_RESULT_PARTICIPANTS = gql`
         treatment_agent_str
         race_str
         last_known_survival_status_str
+        diagnosis_category_str
         cpi_data {
           associated_id
           repository_of_synonym_id
@@ -190,6 +191,7 @@ export const SEARCH_PAGE_RESULT_SAMPLES = gql`
         sample_tumor_status
         diagnosis_str
         tumor_classification
+        diagnosis_category_str
       }
     }
   }

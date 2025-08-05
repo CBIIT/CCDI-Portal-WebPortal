@@ -276,6 +276,10 @@ query search (
           group
           subjects
         }
+        filterParticipantCountByDiagnosisCategory{
+          group
+          subjects
+        }
         filterParticipantCountByLibrarySelection{
             group
             subjects
@@ -677,6 +681,7 @@ query sampleOverview(
         sample_tumor_status
         tumor_classification
         diagnosis
+        diagnosis_category
     }
 }
 `;
@@ -766,6 +771,7 @@ query participantOverview(
         race
         sex_at_birth
         diagnosis
+        diagnosis_category
         anatomic_site
         age_at_diagnosis
         treatment_agent
@@ -1463,6 +1469,14 @@ export const tabContainers = [
         hideable: true,
       },
       {
+        dataField: 'diagnosis_category',
+        header: 'Diagnosis Category',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+        hideable: true,
+      },
+      {
         dataField: 'age_at_diagnosis',
         header: 'Age at Diagnosis (days)',
         display: true,
@@ -1799,6 +1813,14 @@ export const tabContainers = [
         role: cellTypes.DISPLAY,
         hideable: true,
       },
+      {
+        dataField: 'diagnosis_category',
+        header: 'Diagnosis Category',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+        hideable: true,
+      },
     ],
     id: 'sample_tab',
     tableID: 'sample_tab_table',
@@ -1853,14 +1875,14 @@ export const tabContainers = [
         cellType: cellTypes.CUSTOM_ELEM,
         cellStyle: cellStyles.TRANSFORM,
         dataFormatter: (dt) => {
-          if(dt instanceof Array){
+          if (dt instanceof Array) {
             return dt.join(',')
           }
-          else if(dt === null){
+          else if (dt === null) {
             return "";
           }
-          else if(dt.toString().charAt(0) === '[' && dt.toString().charAt(dt.toString().length - 1) === ']'){
-            return dt.toString().substring(1,dt.length-1)
+          else if (dt.toString().charAt(0) === '[' && dt.toString().charAt(dt.toString().length - 1) === ']') {
+            return dt.toString().substring(1, dt.length - 1)
           }
           return dt.toString();
         },
@@ -1995,4 +2017,3 @@ export const tabContainers = [
   },
 ];
 
-  

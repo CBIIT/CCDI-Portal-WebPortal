@@ -19,6 +19,7 @@ const SamplesCard = ({ data = {}, index }) => {
     sample_tumor_status,
     diagnosis_str,
     tumor_classification,
+    diagnosis_category_str,
   } = data;
   const classes = useStyles();
   const navigate = useNavigate();
@@ -57,6 +58,7 @@ const SamplesCard = ({ data = {}, index }) => {
               {renderInfo('Participant ID:', participant_id)}
               {renderInfo('Sample Anatomic Site:', sample_anatomic_site_str)}
               {renderInfo('Sample Diagnosis:', diagnosis_str)}
+              {renderInfo('Diagnosis Category:', diagnosis_category_str)}
             </div>
 
             <div className={cn(classes.column, classes.leftColumn)}>

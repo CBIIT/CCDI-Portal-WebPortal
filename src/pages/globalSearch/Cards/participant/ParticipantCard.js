@@ -18,6 +18,7 @@ const ParticipantCard = ({ data = {}, index }) => {
     diagnosis_str,
     study_id,
     age_at_diagnosis_str,
+    diagnosis_category_str,
     treatment_type_str,
     sex_at_birth,
     treatment_agent_str,
@@ -75,6 +76,7 @@ const ParticipantCard = ({ data = {}, index }) => {
           <div className={classes.row}>
             <div className={classes.column}>
               {renderInfo('Diagnosis:', diagnosis_str)}
+              {renderInfo('Diagnosis Category:', diagnosis_category_str)}
               {renderInfo('Age at Diagnosis:', age_at_diagnosis_str + ' days')}
               {renderInfo('Sex at Birth:', sex_at_birth)}
               {renderInfo('Race:', race_str)}

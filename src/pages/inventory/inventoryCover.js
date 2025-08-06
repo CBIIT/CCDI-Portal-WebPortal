@@ -33,6 +33,11 @@ const InventoryCover = ({
     const client = useApolloClient();
 
     const query = new URLSearchParams(useLocation().search);
+
+    const location = useLocation();
+
+    const navigationType = location.state && location.state.navigationType;
+
     const navigate = useNavigate();
 
     async function getData(filters) {
@@ -76,14 +81,14 @@ const InventoryCover = ({
 
     useEffect(() => {
 
-        // If there are no query parameters and the user is not returning to a page,
-        // if(query.size === 0 && return_2_page === false && return_query_url !== '/explore'){
-            // navigate(`/explore${return_query_url}`);
-            // return;
-        // }
-
         // If there are no query parameters and the user is returning to a page,
         if (query.size === 0 && return_2_page === true) {
+            navigate(`/explore${return_query_url}`);
+            return;
+        }
+
+        //Check if the user is returning to the same page from the main menu
+        if (query.size === 0 && return_2_page === false && return_query_url !== '' && navigationType === 'main_menu') {
             navigate(`/explore${return_query_url}`);
             return;
         }
@@ -96,7 +101,6 @@ const InventoryCover = ({
         const upload_filecontent = query.get('u_fc');
         const upload_unmatched = query.get('u_um');
         const tab = query.get('tab');
-        
         // Helper to finish the rest of the logic after import_from is handled
         const continueWithFilters = (extraParticipantIds = []) => {
             filters.participant_ids = [];
@@ -195,7 +199,7 @@ const InventoryCover = ({
             store.dispatch(updateImportfrom(null, []));
             continueWithFilters();
         }
-    }, [searchParams]);
+    }, [searchParams, navigationType]);
 
     useEffect(() => {
         return () => {

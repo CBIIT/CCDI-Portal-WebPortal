@@ -291,7 +291,7 @@ const NavBar = () => {
                   &&
                   <LiSection key={navkey}>
                     <div className='navTitle directLink'>
-                      <NavLink to={navMobileItem.link}>
+                      <NavLink to={navMobileItem.link} state={{ navigationType: 'main_menu' }}>
                         <div
                           className='navText directLink'
                           onKeyDown={onKeyPressHandler}

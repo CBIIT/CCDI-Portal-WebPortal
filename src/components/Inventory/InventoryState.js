@@ -6,7 +6,7 @@ export const initialState = {
     activeFilters: null,
     dashData: null,
     return_2_page: false,
-    return_query_url: '/explore',
+    return_query_url: '',
     tab: 0,
     action_type: 'facet',
   };

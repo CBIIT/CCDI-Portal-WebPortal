@@ -235,7 +235,7 @@ const HeroMobileSection = styled.div`
     visibility: hidden;
   }
 
-  .carouselMobileItem:nth-child(13) {
+  .carouselMobileItem:nth-child(14) {
     transform: translateX(830%);
     visibility: hidden;
   }

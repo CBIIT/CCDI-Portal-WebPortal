@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useMemo } from 'react';
 import {
   NavLink,
   useLocation,
@@ -66,8 +66,41 @@ const Inventory = ({
 }) => {
   const [selectedSection, setSelectedSection] = useState(-1);
 
-  const sectionList = [...new Set(facetsConfig.map((item) => item.section))];
+  // Calculate filter-related counts and lists using memoization for performance
+  const {
+    activeFiltersCount, // Total number of active filters across all sections
+    sectionList,        // List of unique section names from facet config
+    sectionCount        // Count of active filters per section
+  } = useMemo(() => {
+    // Return empty values if facet config is missing
+    if (!facetsConfig || !facetsConfig.length) {
+      return { activeFiltersCount: 0, sectionList: [], sectionCount: {} };
+    }
   
+    // Create list of sections with their active filter counts
+    const facetsConfigList = facetsConfig.map(item => ({
+      section: item.section,
+      datafield: item.datafield,
+      // Count number of active filters for this facet's datafield
+      count: (activeFilters && activeFilters[item.datafield] ? activeFilters[item.datafield].length : 0)
+    }));
+  
+    // Get unique list of section names
+    const sectionList = [...new Set(facetsConfig.map(item => item.section))];
+    
+    // Calculate total number of active filters across all sections
+    const activeFiltersCount = Object.values(activeFilters || {})
+      .reduce((sum, array) => sum + array.length, 0);
+  
+    // Calculate total active filters per section
+    const sectionCount = facetsConfigList.reduce((acc, item) => {
+      acc[item.section] = (acc[item.section] || 0) + item.count;
+      return acc;
+    }, {});
+  
+    return { activeFiltersCount, sectionList, sectionCount };
+  }, [facetsConfig, activeFilters]); // Only recalculate when these dependencies change
+
   /**
     * Clear All Filter Button
     * Custom button component
@@ -152,6 +185,9 @@ const Inventory = ({
                 activeFilters={activeFilters}
               />
               <ULSection className={classes.siderContent}>
+                <span>
+                  {activeFiltersCount}
+                </span>
                 {
                   sectionList.map((category, idx) => {
                     return (
@@ -160,6 +196,7 @@ const Inventory = ({
                       <li onClick={() => handleCategoryClick(idx)}>
                         <div className={classes.categoryContainer}>
                           <span className={classes.categoryTitle}>{category}</span>
+                          <span className={classes.categoryCount}>{sectionCount[category] !== 0 ? '*': ''}</span>
                           {selectedSection === idx && <img src={vectorIcon} alt="vector" className={classes.categoryIcon} />}
                         </div>
                       </li>

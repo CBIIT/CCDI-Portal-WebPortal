@@ -102,6 +102,15 @@ export default () => ({
       padding: '0 4px',
     }
   },
+  activeFilterLegend: {
+    color: '#9CE1E5',
+    margin: '0 16px',
+    padding: '16px 0',
+    fontStyle: 'italic',
+    '& svg': {
+      marginRight: '8px',
+    }
+  },
   sideBarCover: {
     marginLeft: '-100px',
     width: '100px',

@@ -206,7 +206,6 @@ const Inventory = ({
                 </span>
               </div>
               <ULSection className={classes.siderContent}>
-    
                 {
                   sectionList.map((category, idx) => {
                     return (
@@ -232,6 +231,12 @@ const Inventory = ({
                   })
                 }
               </ULSection>
+              <div className={classes.activeFilterLegend}>
+                <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="4.5" cy="4.5" r="4.5" fill="#9CE1E5" />
+                </svg>
+                <span>denotes facet(s) selected</span>
+              </div>
             </div>
           </div>
           {

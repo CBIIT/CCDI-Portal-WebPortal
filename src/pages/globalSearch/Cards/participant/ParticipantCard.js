@@ -56,11 +56,11 @@ const ParticipantCard = ({ data = {}, index }) => {
 
   return (
     <div className={classes.card}>
-      <CPIModal
+      {data.cpi_data && data.cpi_data.length ? <CPIModal
         row={data}
         open={modalOpen}
         onClose={handleModalClose}
-      />
+      /> : <></>}
       <Grid item container>
         <Grid item className={classes.indexContainer}>
           {index + 1}
@@ -92,7 +92,7 @@ const ParticipantCard = ({ data = {}, index }) => {
           </div>
         </Grid>
       </Grid>
-      {cpi_data.length ? <Grid container justifyContent="flex-end">
+      {cpi_data && cpi_data.length ? <Grid container justifyContent="flex-end">
         <Grid item offset={{ xs: 'auto' }}>
           {<Button className={classes.button} variant="outlined" onClick={() => handleModalOpen()}>
             <span>Available CPI MAPPING</span>

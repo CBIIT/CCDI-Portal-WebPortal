@@ -56,11 +56,11 @@ const ParticipantCard = ({ data = {}, index }) => {
 
   return (
     <div className={classes.card}>
-      <CPIModal
+      {data.cpi_data && data.cpi_data.length ? <CPIModal
         row={data}
         open={modalOpen}
         onClose={handleModalClose}
-      />
+      /> : <></>}
       <Grid item container>
         <Grid item className={classes.indexContainer}>
           {index + 1}

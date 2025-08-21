@@ -111,7 +111,7 @@ const WidgetView = ({
         </div>
       </div>
       <Collapse in={collapse} className={classes.backgroundWidgets}>
-        <Grid container>
+        <Grid container style={{ minWidth: '990px' }}>
           {config.slice(0, 6).map((widget, index) => {
             const dataset = displayWidgets[widget.dataName];
             if (!dataset || dataset.length === 0) {

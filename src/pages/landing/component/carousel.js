@@ -313,10 +313,10 @@ const HeroList = styled.div`
         opacity: 1;
     }
 
-    .carousel__item:nth-child(13) {
-        transform: translateY(390%) scale(1);
-        opacity: 1;
-    }
+    // .carousel__item:nth-child(13) {
+    //     transform: translateY(390%) scale(1);
+    //     opacity: 1;
+    // }
 
     .carousel__item:last-child {
         transform: translateY(395%) scale(1);

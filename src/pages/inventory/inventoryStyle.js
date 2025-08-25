@@ -86,6 +86,31 @@ export default () => ({
     margin: 'auto',
     borderLeft: 'thin solid #8A7F7C',
   },
+  activeFiltersCount: {
+    color: '#ffffff',
+    textAlign: 'center',
+    display: 'flex',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    padding: '8px 0',
+    margin: '0 8px',
+    borderTop: '#ADADAD 0.5px solid',
+    '& span': {
+      color: '#ffffff',
+      fontSize: '11px',
+      border: '0.5px solid #ffffff',
+      padding: '0 4px',
+    }
+  },
+  activeFilterLegend: {
+    color: '#9CE1E5',
+    margin: '0 16px',
+    padding: '16px 0',
+    fontStyle: 'italic',
+    '& svg': {
+      marginRight: '8px',
+    }
+  },
   sideBarCover: {
     marginLeft: '-100px',
     width: '100px',
@@ -142,13 +167,11 @@ export default () => ({
   },
   categoryTitle: {
     color: '#000000',
-    display: 'flex',
-    zIndex: 2,
     fontSize: '18.5px',
-    alignItems: 'center',
     fontFamily: 'Poppins',
     fontWeight: 500,
     marginLeft: '3px',
+    marginRight: '6px',
     letterSpacing: '-0.02em',
     justifyContent: 'space-between',
     textTransform: 'uppercase',

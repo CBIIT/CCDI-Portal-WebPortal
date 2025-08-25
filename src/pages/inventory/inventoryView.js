@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useMemo } from 'react';
 import {
   NavLink,
   useLocation,
@@ -16,7 +16,7 @@ import {
 } from '@bento-core/local-find';
 import store from '../../store';
 import { generateQueryStr } from '@bento-core/util';
-import { resetIcon, queryParams, facetsConfig } from '../../bento/dashTemplate';
+import { resetIcon, queryParams, facetsConfig, sectionLabel } from '../../bento/dashTemplate';
 import styles from './inventoryStyle';
 import NewBentoFacetFilter from './sideBar/NewBentoFacetFilter';
 import WidgetView from './widget/WidgetView';
@@ -59,6 +59,21 @@ const RightContentPanel = styled.div`
   transition: all .5s;
 `;
 
+const getDividerColor = (index) => {
+  const colors = [
+    '#4D889E', // divider0
+    '#974599', // divider1
+    '#4150A4', // divider2
+    '#E9B34A', // divider3
+    '#CD5C4E', // divider4
+    '#1F6BBF', // divider5
+    '#60C4A1', // divider6
+    '#357288', // divider7
+    '#974599', // divider8
+  ];
+  return colors[index % colors.length]; // Use modulo to cycle through colors if needed
+};
+
 const Inventory = ({
   classes,
   dashData,
@@ -66,8 +81,41 @@ const Inventory = ({
 }) => {
   const [selectedSection, setSelectedSection] = useState(-1);
 
-  const sectionList = [...new Set(facetsConfig.map((item) => item.section))];
+  // Calculate filter-related counts and lists using memoization for performance
+  const {
+    activeFiltersCount, // Total number of active filters across all sections
+    sectionList,        // List of unique section names from facet config
+    sectionCount        // Count of active filters per section
+  } = useMemo(() => {
+    // Return empty values if facet config is missing
+    if (!facetsConfig || !facetsConfig.length) {
+      return { activeFiltersCount: 0, sectionList: [], sectionCount: {} };
+    }
   
+    // Create list of sections with their active filter counts
+    const facetsConfigList = facetsConfig.map(item => ({
+      section: item.section,
+      datafield: item.datafield,
+      // Count number of active filters for this facet's datafield
+      count: (activeFilters && activeFilters[item.datafield] ? activeFilters[item.datafield].length : 0)
+    }));
+  
+    // Get unique list of section names
+    const sectionList = [...new Set(facetsConfig.map(item => item.section))];
+    
+    // Calculate total number of active filters across all sections
+    const activeFiltersCount = Object.values(activeFilters || {})
+      .reduce((sum, array) => sum + array.length, 0);
+  
+    // Calculate total active filters per section
+    const sectionCount = facetsConfigList.reduce((acc, item) => {
+      acc[item.section] = (acc[item.section] || 0) + item.count;
+      return acc;
+    }, {});
+  
+    return { activeFiltersCount, sectionList, sectionCount };
+  }, [facetsConfig, activeFilters]); // Only recalculate when these dependencies change
+
   /**
     * Clear All Filter Button
     * Custom button component
@@ -151,6 +199,12 @@ const Inventory = ({
                 Component={CustomClearAllFiltersBtn}
                 activeFilters={activeFilters}
               />
+              <div className={classes.activeFiltersCount}>
+                Total Filters Selected:
+                <span>
+                  {activeFiltersCount}
+                </span>
+              </div>
               <ULSection className={classes.siderContent}>
                 {
                   sectionList.map((category, idx) => {
@@ -159,7 +213,16 @@ const Inventory = ({
                       <Divider className={`${classes.divider} divider${idx}`}/>
                       <li onClick={() => handleCategoryClick(idx)}>
                         <div className={classes.categoryContainer}>
-                          <span className={classes.categoryTitle}>{category}</span>
+                          <div>
+                            <span className={classes.categoryTitle}>{sectionLabel[category] !== undefined ? sectionLabel[category] : category}</span>
+                            <span className={classes.categoryCount}>
+                              {sectionCount[category] !== 0 ? (
+                                <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <circle cx="4.5" cy="4.5" r="4.5" fill={getDividerColor(idx)} />
+                                </svg>
+                              ) : ''}
+                            </span>
+                          </div>
                           {selectedSection === idx && <img src={vectorIcon} alt="vector" className={classes.categoryIcon} />}
                         </div>
                       </li>
@@ -168,6 +231,12 @@ const Inventory = ({
                   })
                 }
               </ULSection>
+              <div className={classes.activeFilterLegend}>
+                <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="4.5" cy="4.5" r="4.5" fill="#9CE1E5" />
+                </svg>
+                <span>denotes facet(s) selected</span>
+              </div>
             </div>
           </div>
           {

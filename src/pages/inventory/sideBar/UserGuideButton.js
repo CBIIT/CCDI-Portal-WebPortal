@@ -7,23 +7,30 @@ import styles from './UserGuideButtonStyle';
 import userguideIcon from '../../../assets/icons/Explore_User_Guide_Icon.svg';
 import userguideIconWhite from '../../../assets/icons/Explore_User_Guide_Icon_White.svg';
 import CloseIcon from '@material-ui/icons/Close';
-import figure1 from '../../../assets/explore/Figure1.png';
+import figure1 from '../../../assets/explore/Figure1.jpg';
 import figure2 from '../../../assets/explore/Figure2.png';
-import figure3 from '../../../assets/explore/Figure3.png';
-import figure4 from '../../../assets/explore/Figure4.png';
+import figure3 from '../../../assets/explore/Figure3.jpg';
+import figure4 from '../../../assets/explore/Figure4.jpg';
 import figure5 from '../../../assets/explore/Figure5.png';
-import figure6 from '../../../assets/explore/Figure6.png';
+import figure6 from '../../../assets/explore/Figure6.jpg';
 import figure7 from '../../../assets/explore/Figure7.png';
 import figure8 from '../../../assets/explore/Figure8.png';
 import figure9 from '../../../assets/explore/Figure9.png';
 import figure10 from '../../../assets/explore/Figure10.png';
 import figure11 from '../../../assets/explore/Figure11.png';
 import figure12 from '../../../assets/explore/Figure12.png';
-import figure13 from '../../../assets/explore/Figure13.png';
+import figure13 from '../../../assets/explore/Figure13.jpg';
 import figure14 from '../../../assets/explore/Figure14.png';
 import figure15 from '../../../assets/explore/Figure15.png';
 import figure16 from '../../../assets/explore/Figure16.png';
 import figure17 from '../../../assets/explore/Figure17.png';
+import figure18 from '../../../assets/explore/Figure18.png';
+import figure19 from '../../../assets/explore/Figure19.jpg';
+import figure20 from '../../../assets/explore/Figure20.jpg';
+import figure21 from '../../../assets/explore/Figure21.jpg';
+import figure22 from '../../../assets/explore/Figure22.jpg';
+import figure23 from '../../../assets/explore/Figure23.jpg';
+import figure24 from '../../../assets/explore/Figure24.jpg';
 
 const UseGuideButtonContainer = styled.div`
     background-color: #337478;
@@ -240,7 +247,10 @@ const UseGuideButton = ({classes}) => {
                                                 <div className={classes.figureText}>Figure 12: Study metadata export file browsable on local machine</div> 
                                             </li>
                                         </ol>
+                                        <p>Note the full study manifest can also be downloaded from the associated study details page accessible from the Studies list in the application menu. </p>
                                         <p>Appendix A details the process for generating a DRS manifest from the downloaded study metadata tables to be compatible with the CGC.</p>
+                                        <div className={classes.figureContainer}><img src={figure13} style={{width: '80%'}} alt='Figure13'/></div>
+                                        <div className={classes.figureText}>Figure 13: Studies listing and Study Details page</div>
                                     </div>
                                 </div>
                                 <div>
@@ -252,19 +262,19 @@ const UseGuideButton = ({classes}) => {
                                         <ol>
                                             <li>On the results tables of the Explore Dashboard, you can select a row of metadata using the checkbox at the start of the row. Multiple rows can be selected within a table, even across pages of the table. Use the checkbox at the top of the checkbox column to select or deselect all rows.</li>
                                             <li>
-                                                After selecting desired rows, add files for that element to the My Files shopping cart (Figure 13) by clicking either the “ADD ALL FILTERED FILES” or “ADD SELECTED FILES” button. Note that selection of items in each tab depends on the specific content of that tab. For example, selecting an item in the “Participants” tab means every file associated with a participant will be added to the My Files shopping cart, whereas selecting an item in the “Files” tab will add that single selected file to the cart.
-                                                <div className={classes.figureContainer}><img src={figure13} style={{width: '80%'}} alt='Figure13'/></div>
-                                                <div className={classes.figureText}>Figure 13: Selection checkboxes and buttons to add files to the cart for the “Participants” table</div> 
-                                            </li>
-                                            <li>
-                                                To navigate to the shopping cart, select “MY FILES” or the shopping cart icon on the menu bar (Figure 14).
+                                                After selecting desired rows, add files for that element to the My Files shopping cart (Figure 14) by clicking either the “ADD ALL FILTERED FILES” or “ADD SELECTED FILES” button. Note that selection of items in each tab depends on the specific content of that tab. For example, selecting an item in the “Participants” tab means every file associated with a participant will be added to the My Files shopping cart, whereas selecting an item in the “Files” tab will add that single selected file to the cart.
                                                 <div className={classes.figureContainer}><img src={figure14} style={{width: '80%'}} alt='Figure14'/></div>
-                                                <div className={classes.figureText}>Figure 14: CCDI Hub menu bar with red box highlighting the My Files shopping cart</div> 
+                                                <div className={classes.figureText}>Figure 14: Selection checkboxes and buttons to add files to the cart for the “Participants” table</div> 
                                             </li>
                                             <li>
-                                                The shopping cart feature enables you to select and manage files. It’s a simple way to keep track of data and files during your session. Selecting the “DOWNLOAD MANIFEST” button from the “AVAILABLE EXPORT OPTIONS” dropdown menu (Figure 15) will produce a comma-separated values (CSV) file manifest of the items within the cart.
-                                                <div className={classes.figureContainer}><img src={figure15} style={{width: '90%'}} alt='Figure15'/></div>
-                                                <div className={classes.figureText}>Figure 15: The Explore Dashboard Cart page with red box highlighting the “Available Export Options” button</div> 
+                                                To navigate to the shopping cart, select “MY FILES” or the shopping cart icon on the menu bar (Figure 15).
+                                                <div className={classes.figureContainer}><img src={figure15} style={{width: '80%'}} alt='Figure15'/></div>
+                                                <div className={classes.figureText}>Figure 15: CCDI Hub menu bar with red box highlighting the My Files shopping cart</div> 
+                                            </li>
+                                            <li>
+                                                The shopping cart feature enables you to select and manage files. It’s a simple way to keep track of data and files during your session. Selecting the “DOWNLOAD MANIFEST” button from the “AVAILABLE EXPORT OPTIONS” dropdown menu (Figure 16) will produce a comma-separated values (CSV) file manifest of the items within the cart.
+                                                <div className={classes.figureContainer}><img src={figure16} style={{width: '90%'}} alt='Figure16'/></div>
+                                                <div className={classes.figureText}>Figure 16: The Explore Dashboard Cart page with red box highlighting the “Available Export Options” button</div> 
                                             </li>
                                             <li>You can then download this manifest file locally or upload it in the CGC (Appendix C). Similarly, you can instead select the “EXPORT TO CANCER GENOMICS CLOUD” button from the “AVAILABLE EXPORT OPTIONS” dropdown menu to load the resulting manifest directly into your CGC account.</li>
                                         </ol>
@@ -276,9 +286,9 @@ const UseGuideButton = ({classes}) => {
                                         <p>Accessing Help Documentation</p>
                                     </div>
                                     <div className={classes.contentContainer}>
-                                        <p>The contents of this document are also available from a Help Browser, accessible from the top of the Explore Dashboard (Figure 16). From this browser, you can scroll or click through the available topics and readily navigate back to the main UI as needed.</p>
-                                        <div className={classes.figureContainer}><img src={figure16} style={{width: '80%'}} alt='Figure16'/></div>
-                                        <div className={classes.figureText}>Figure 16: In-page help text browser</div> 
+                                        <p>The contents of this document are also available from a Help Browser, accessible from the top of the Explore Dashboard (Figure 17). From this browser, you can scroll or click through the available topics and readily navigate back to the main UI as needed.</p>
+                                        <div className={classes.figureContainer}><img src={figure17} style={{width: '80%'}} alt='Figure17'/></div>
+                                        <div className={classes.figureText}>Figure 17: In-page help text browser</div> 
                                     </div>
                                 </div>
                                 <div>
@@ -286,10 +296,59 @@ const UseGuideButton = ({classes}) => {
                                         <p>Additional search features</p>
                                     </div>
                                     <div className={classes.contentContainer}>
-                                        <p>For users who prefer text searching, the global search bar at the top of each page allows you enter a query and report all findings in metadata and page text throughout the CCDI Hub. Search results are categorized as Participant, Studies, Samples, Files, Data Model, or About (Figure 17). Where applicable, you can link from these findings back to the Explore Dashboard or other pages with information relevant to your search.</p>
-                                        <div className={classes.figureContainer}><img src={figure17} style={{width: '80%'}} alt='Figure17'/></div>
-                                        <div className={classes.figureText}>Figure 17: Global Search results</div>
+                                        <p>For users who prefer text searching, the global search bar at the top of each page allows you enter a query and report all findings in metadata and page text throughout the CCDI Hub. Search results are categorized as Participant, Studies, Samples, Files, Data Model, or About (Figure 18). Where applicable, you can link from these findings back to the Explore Dashboard or other pages with information relevant to your search.</p>
+                                        <div className={classes.figureContainer}><img src={figure18} style={{width: '80%'}} alt='Figure18'/></div>
+                                        <div className={classes.figureText}>Figure 18: Global Search results</div>
                                         <p>For users interested in the data model, you can browse the model nodes and properties by selecting “CCDI Data Model” from the About dropdown menu.</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div id='CCDI Hub Explore Cohort Analyzer' className={classes.sectionTitle}>
+                                        <p>CCDI Hub Explore Cohort Analyzer</p>
+                                    </div>
+                                    <div className={classes.contentContainer}>
+                                        <p>The Cohort Analyzer offers a powerful method to explore how various clinical attributes overlap and differ across multiple groups (Figure 19). The Cohort Analyzer is designed to compare up to three cohorts and visualize their intersections through an interactive Venn diagram and a corresponding data table. This feature leverages cohorts created in the Explore Dashboard, enabling users to analyze key relationships and distinctions based between datasets effectively.</p>
+                                        <div className={classes.figureContainer}><img src={figure19} style={{width: '80%'}} alt='Figure19'/></div>
+                                        <div className={classes.figureText}>Figure 19: Cohort Analyzer page</div>
+                                        <p>By visualizing the shared and unique data points using a Venn diagram, you can identify common patterns or variations in key clinical variables such as diagnosis, treatment, and participant characteristics. This analysis helps reveal underlying trends in the clinical data that may be crucial for research, such as identifying which treatment protocols are common across cohorts or exploring the presence of specific diagnoses.</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div id='Customizable Properties' className={classes.sectionTitle}>
+                                        <p>Customizable Properties</p>
+                                    </div>
+                                    <div className={classes.contentContainer}>
+                                        <p>The radio buttons allow users to select more than one property for comparison. Currently available properties include Participant ID and Diagnosis.</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div id='Enhanced Analytical Capabilities' className={classes.sectionTitle}>
+                                        <p>Enhanced Analytical Capabilities</p>
+                                    </div>
+                                    <div className={classes.contentContainer}>
+                                        <p>Users will be able to visualize overlaps and unique attributes within each cohort. In addition, users can:</p>
+                                        <ul>
+                                            <li>Investigate specific sections of the Venn diagram to view participant-level details from the corresponding table view</li>
+                                            <li>Export results, including the data table and Venn diagram, for further analysis or integration into other platforms</li>
+                                            <li>Use advanced filters to refine cohort comparisons, such as narrowing by specific diagnosis</li>
+                                            <li>Download results as CSV or JSON files</li>
+                                            <li>Export your analysis into a pre-filtered view within the Explore Dashboard for streamlined review and exploration</li>
+                                        </ul>
+                                        <p>To start using the Cohort Analyzer, you will first need to select the cohorts you want to analyze. As you add cohorts, the system will automatically keep track of your cohorts on the left side Cohort Selector. This tool's functionality adapts based on the number of selected cohorts, ensuring a customized analysis. Select your first cohort by clicking the check box in the Cohort Selector sidebar. The Venn diagram and table will update to display the cohort information based on the participant ID or diagnosis based on the radio button selection. In this example, we are using the participant ID, thus the table will contain properties specific to the participant, as well as show to what cohorts the participant belongs (Figure 20).</p>
+                                        <div className={classes.figureContainer}><img src={figure20} style={{width: '80%'}} alt='Figure20'/></div>
+                                        <div className={classes.figureText}>Figure 20: One Cohort Selected: You have created and selected one cohort</div>
+                                        <p>Select another cohort in the Cohort Selector to see the Venn diagram and table update again. This time, if there are common participants between both cohorts, the diagram will show the shared participants in the intersection between the two. In the table, with none of the Venn diagrams selected, it will display all participants and their respective cohort.</p>
+                                        <div className={classes.figureContainer}><img src={figure21} style={{width: '80%'}} alt='Figure21'/></div>
+                                        <div className={classes.figureText}>Figure 21: Two Cohorts Selected: You have selected two cohorts. Visualize shared and unique data points between these cohorts</div>
+                                        <p>Select a third and final cohort. The Venn diagram and table will update once more with all the participant level data (Figure 22).</p>
+                                        <div className={classes.figureContainer}><img src={figure22} style={{width: '80%'}} alt='Figure22'/></div>
+                                        <div className={classes.figureText}>Figure 22: Three Cohorts Selected: You have selected three cohorts. Explore their intersections and unique attributes using the Venn diagram.</div>
+                                        <p>Please note that the number in parentheses by the cohort's name in the Venn diagram represents the count of unique records for that radio button selection. The number inside the Venn diagram sections are the count of unique values for that radio button selection. Finally, the count next to your cohort in the Cohort Selection side bar indicates the total participants in your cohort. At this point, you can select one of these pieces on the Venn diagram to update the table to show only those participants and their respective data. In the example below, the center intersection was selected. The table updates, showing only participants that are found in all three cohorts. With this section selected, a user can also create an entirely new cohort with these filtered participants.</p>
+                                        <div className={classes.figureContainer}><img src={figure23} style={{width: '80%'}} alt='Figure23'/></div>
+                                        <div className={classes.figureText}>Figure 23: View the center intersection between all Cohort selected (see dark green highlighted region)</div>
+                                        <p>The user will see the intersections of all three cohorts. Additionally, the user will also see intersections between two cohorts. Clicking on the desired intersection will result in the table being updated accordingly with metadata for those selected participants.</p>
+                                        <div className={classes.figureContainer}><img src={figure24} style={{width: '80%'}} alt='Figure24'/></div>
+                                        <div className={classes.figureText}>Figure 24: View the specific intersections between selected Cohorts</div>
                                     </div>
                                 </div>
                                 <div>

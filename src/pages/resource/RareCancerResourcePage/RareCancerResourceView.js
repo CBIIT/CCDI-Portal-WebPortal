@@ -84,6 +84,7 @@ const ResourceContainer = styled.div`
     .resourceTitleText {
         padding: 15px 0;
         padding-left: 75px;
+        max-width: 640px;
     }
 
     .goToSiteButton {
@@ -99,8 +100,7 @@ const ResourceContainer = styled.div`
     .goToSiteText {
         color: #FFFFFF;
         text-decoration: none;
-        padding: 23px 0;
-        padding-right: 34px;
+        padding: 42px 34px 23px 0;
         letter-spacing: 0.02em;
         background: url(${exportIcon}) right center no-repeat;
     }
@@ -144,6 +144,7 @@ const ResourceContainer = styled.div`
 
         .resourceTitleText {
             padding-left: 16px;
+            max-width: 600px;
         }
 
         .goToSiteButton {

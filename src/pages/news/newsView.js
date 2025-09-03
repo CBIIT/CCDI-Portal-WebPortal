@@ -736,7 +736,7 @@ const getPageResults = (selectedTab, pageInfo) => {
   };
 
   const handleReadMore = (id) => { 
-    const newWindow = window.open(`/release-notes#${id}`, '_self')
+    const newWindow = window.open(`/release-notes#${id}`, '_blank')
     if (newWindow) newWindow.opener = null
   }
 
@@ -852,7 +852,7 @@ const getPageResults = (selectedTab, pageInfo) => {
                   {ReactHtmlParser(newsItem.fullText)}
                 </div>
                 <Button className='downloadPDF' onClick={() => handleExport(releaseNotesList.id)}>Download PDF<img src={UploadIcon} alt="download pdf icon" /></Button>
-                <Button className='readMore'>Read More<img src={exportIcon} alt="outlink icon" /></Button>
+                <Button className='readMore' onClick={() => handleReadMore(newsItem.id)}>Read More<img src={exportIcon} alt="outlink icon" /></Button>
               </div>
             </div>
               ) 

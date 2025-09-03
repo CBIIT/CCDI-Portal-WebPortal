@@ -69,7 +69,7 @@ const StudiesDetailContainer = styled.div`
         font-weight: 300;
         line-height: 38px;
         letter-spacing: 0.7px;
-        padding: 15px 0 15px 36px;
+        padding: 13px 0 13px 36px;
     }
 
     .studyIdText {

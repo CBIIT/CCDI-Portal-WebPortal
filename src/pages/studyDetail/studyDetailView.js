@@ -152,7 +152,7 @@ const StudiesDetailBodyContainer = styled.div`
     }
 
     .studyItemTitle {
-        color: #0095A2;
+        color: #00818D;
         font-family: Poppins;
         font-size: 16px;
         font-weight: 500;

@@ -69,6 +69,7 @@ const StudiesContainer = styled.div`
   .resourceBody {
     margin-left: 45px;
     margin-right: 45px;
+    padding-bottom: 30px;
   }
 
   .studyIcon{

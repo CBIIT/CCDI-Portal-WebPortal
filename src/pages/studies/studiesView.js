@@ -65,9 +65,10 @@ const StudiesContainer = styled.div`
     font-size: 35px;
     padding: 15px 0 15px 88px;
   }
+
   .resourceBody {
-    margin-left: 50px;
-    margin-right: 50px;
+    margin-left: 45px;
+    margin-right: 45px;
   }
 
   .studyIcon{

@@ -63,7 +63,7 @@ const StudiesContainer = styled.div`
     font-weight: 600;
     color: #ffffff;
     font-size: 35px;
-    padding: 15px 0 15px 88px;
+    padding: 13px 0 13px 88px;
   }
 
   .resourceBody {

@@ -42,7 +42,7 @@ const StudiesContainer = styled.div`
   .resourceHeaderText {
     // width: 1420px;
     margin: 0 auto;
-    padding: 150px 0 0 75px;
+    padding: 150px 0 0 88px;
     color: #19676D;
     font-family: Poppins;
     font-size: 40px;
@@ -63,7 +63,7 @@ const StudiesContainer = styled.div`
     font-weight: 600;
     color: #ffffff;
     font-size: 35px;
-    padding: 15px 0 15px 75px;
+    padding: 15px 0 15px 88px;
   }
   .resourceBody {
     margin-left: 50px;

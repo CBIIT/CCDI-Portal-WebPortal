@@ -82,7 +82,7 @@ const table = {
   defaultSortDirection: 'asc',
   tableID: 'studies_table',
   extendedViewConfig: {
-    pagination: true,
+    pagination: false,
     hasExport: false,
   },
   columns: [

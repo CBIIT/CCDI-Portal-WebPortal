@@ -1,5 +1,8 @@
 export const tblHeader = {
   MuiTableCell: {
+    root: {
+      padding: '5px 16px',
+    },
     head: {
       color: '#0F253A',
       position: 'relative',

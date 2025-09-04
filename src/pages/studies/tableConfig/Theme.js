@@ -230,11 +230,11 @@ export const toolbar = {
 export const tblPgn = {
   MuiTablePagination: {
     root: {
-      paddingRight: '50px',
+      paddingRight: '48px',
       marginLeft: 'auto',
       // borderBottom: '1px solid #8A7F7C',
       '&:last-child': {
-        paddingRight: '50px',
+        paddingRight: '48px',
       }
     },
     toolbar: {

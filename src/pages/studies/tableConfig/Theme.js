@@ -20,7 +20,8 @@ export const tblHeader = {
       fontSize: '15px',
       fontFamily: 'Open Sans',
       fontWeight: '700',
-      letterSpacing: '0.06em',
+      letterSpacing: '-0.019em',
+      lineHeight: '1rem',
       textDecoration: 'none',
       '&:hover': {
         color: '#13344A',

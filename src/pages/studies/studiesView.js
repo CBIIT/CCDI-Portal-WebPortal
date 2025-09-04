@@ -16,7 +16,8 @@ const StudiesContainer = styled.div`
     font-weight: 400;
     font-size: 16px;
     line-height: 162%;
-    margin-left: 50px;
+    padding-left: 30px;
+    // margin-left: 50px;
     padding-top: 8px;
     padding-bottom: 8px;
   }
@@ -71,6 +72,13 @@ const StudiesContainer = styled.div`
 
   .studyIcon{
     margin-left: 30px;
+  }
+
+  @media (min-width: 1420px) {
+    .breadcrumb {
+        width: 1420px;
+        margin: 0 auto;
+    }
   }
 `;
 

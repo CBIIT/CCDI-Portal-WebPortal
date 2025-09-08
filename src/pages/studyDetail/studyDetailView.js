@@ -15,7 +15,7 @@ const StudiesDetailContainer = styled.div`
         font-weight: 400;
         font-size: 16px;
         line-height: 162%;
-        margin-left: 32px;
+        padding-left: 30px;
         padding-top: 8px;
         padding-bottom: 8px;
 
@@ -115,7 +115,7 @@ const StudiesDetailContainer = styled.div`
 
     @media (min-width: 1420px) {
         .breadcrumb {
-            width: 1350px;
+            width: 1420px;
             margin: 0 auto;
         }
         .resourceTitle {

@@ -15,7 +15,7 @@ const StudiesDetailContainer = styled.div`
         font-weight: 400;
         font-size: 16px;
         line-height: 162%;
-        margin-left: 32px;
+        padding-left: 30px;
         padding-top: 8px;
         padding-bottom: 8px;
 
@@ -69,7 +69,7 @@ const StudiesDetailContainer = styled.div`
         font-weight: 300;
         line-height: 38px;
         letter-spacing: 0.7px;
-        padding: 15px 0 15px 36px;
+        padding: 13px 0 13px 36px;
     }
 
     .studyIdText {
@@ -115,7 +115,7 @@ const StudiesDetailContainer = styled.div`
 
     @media (min-width: 1420px) {
         .breadcrumb {
-            width: 1350px;
+            width: 1420px;
             margin: 0 auto;
         }
         .resourceTitle {
@@ -152,7 +152,7 @@ const StudiesDetailBodyContainer = styled.div`
     }
 
     .studyItemTitle {
-        color: #0095A2;
+        color: #00818D;
         font-family: Poppins;
         font-size: 16px;
         font-weight: 500;

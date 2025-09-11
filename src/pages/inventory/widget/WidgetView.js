@@ -86,8 +86,7 @@ const WidgetView = ({
   return (
     <>
       <div className={classes.widgetsCollapse}>
-        <div className={classes.floatLeft} />
-        <div className={classes.floatRight}>
+        <div className={classes.buttonCollapseContainer}>
           <FormControlLabel
             control={(
               <Button className={classes.customButton} onClick={handleChange}>
@@ -126,6 +125,8 @@ const WidgetView = ({
                   paddingLeft: '30px',
                   paddingTop: '40px',
                   borderRadius: '30px',
+                  minWidth: '330px',
+                  maxWidth: '450px',
                 }}
               >
                 <div

@@ -239,8 +239,13 @@ const StudiesDetail = ({data}) => {
                         </div>
                     </div>
                     <div className='studyItem'>
-                        <div className='studyItemTitle'>Download</div>
-                        <div className="studyItemContent"><a href={studyDownloadLinks[data.study_id]}>Study Manifest<img className='studyManifestIcon' src={manifestIcon} alt="manifestIcon" /></a></div>
+                        <div className='studyItemTitle'>Access Data</div>
+                        <div className="studyItemContent">
+                            <a href={studyDownloadLinks[data.study_id]}>Download Study Manifest<img className='studyManifestIcon' src={manifestIcon} alt="manifestIcon" /></a>
+                            {data.study_id === 'phs002790' && <>
+                                <br/><a href="https://cbioportal.ccdi.cancer.gov/" target="_blank" rel="noopener noreferrer">View in CCDI cBioPortal Data Explorer<img className='exportIcon' src={exportIcon} alt="exportIcon" /></a>
+                            </>}
+                        </div>
                     </div>
                 </div>
                 <div className='rightContainer'>

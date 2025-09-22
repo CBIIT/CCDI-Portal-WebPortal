@@ -145,7 +145,7 @@ const useStyles = makeStyles((theme) => {
       padding: '0px',
     },
     button: {
-      width: '167px',
+      width: '189px',
       height: '41px',
       alignSelf: 'end',
       color: '#07679C',
@@ -153,6 +153,94 @@ const useStyles = makeStyles((theme) => {
       fontFamily: 'Poppins',
       fontWeight: '600',
       fontSize: '12px',
+      marginTop: '20px',
+      lineHeight: '13px',
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      padding: '0 12px',
+      borderRadius: '8px',
+      transition: 'border-radius 0.2s ease-in-out',
+      '&:hover': {
+        backgroundColor: '#DEE4EC',
+      },
+      '& .MuiButton-label': {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        width: '100%',
+      },
+    },
+    buttonOpen: {
+      borderBottomLeftRadius: '0',
+      borderBottomRightRadius: '0',
+    },
+    dropdownContainer: {
+      position: 'relative',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'flex-end',
+    },
+    dropdown: {
+      position: 'absolute',
+      top: '100%',
+      right: 0,
+      zIndex: 1000,
+      marginTop: '-1px',
+      backgroundColor: 'white',
+      border: '1px solid #07679C',
+      borderTop: 'none',
+      borderRadius: '0 0 8px 8px',
+      boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.15)',
+      minWidth: '189px',
+      width: '189px',
+      transformOrigin: 'top',
+      animation: '$slideDown 0.2s ease-out',
+    },
+    '@keyframes slideDown': {
+      '0%': {
+        opacity: 0,
+        transform: 'translateY(-10px)',
+      },
+      '100%': {
+        opacity: 1,
+        transform: 'translateY(0)',
+      },
+    },
+    dropdownList: {
+      padding: 0,
+      margin: 0,
+    },
+    dropdownItem: {
+      borderBottom: '1px solid #07679C',
+      padding: '12px 12px',
+      height: '41px',
+      minHeight: '41px',
+      '&:first-child': {
+        borderTop: '1px solid #07679C',
+      },
+      '&:last-child': {
+        borderBottom: 'none',
+      },
+      '&:hover': {
+        backgroundColor: '#DEE4EC',
+      },
+      '&:active': {
+        backgroundColor: '#e9ecef',
+      },
+      '&:not(:last-child)': {
+        borderBottom: '1px solid #07679C',
+      },
+    },
+    dropdownItemText: {
+      '& .MuiListItemText-primary': {
+        fontFamily: 'Poppins',
+        fontWeight: '600',
+        fontSize: '12px',
+        color: '#07679C',
+        textTransform: 'uppercase',
+        letterSpacing: '0.5px',
+      },
     }
   }
 });

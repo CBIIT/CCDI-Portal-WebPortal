@@ -156,6 +156,9 @@ const useStyles = makeStyles((theme) => {
       fontSize: '12px',
       marginTop: '20px',
       lineHeight: '13px',
+      '&:hover': {
+        backgroundColor: '#DEE4EC',
+      },
     }
   }
 });

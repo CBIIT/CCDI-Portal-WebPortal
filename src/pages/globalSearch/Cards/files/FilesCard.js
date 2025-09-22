@@ -12,29 +12,17 @@ const removeSquareBracketsFromString = (text) => {
 }
 
 function formatBytes(bytes, decimals = 2) {
-    if (!+bytes) return '0 Bytes'
+  if (!+bytes) return '0 Bytes'
 
-    const k = 1000
-    const dm = decimals < 0 ? 0 : decimals
-    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB']
+  const k = 1000
+  const dm = decimals < 0 ? 0 : decimals
+  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB']
 
-    const i = Math.floor(Math.log(bytes) / Math.log(k))
+  const i = Math.floor(Math.log(bytes) / Math.log(k))
 
-    return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`
+  return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`
 }
 
-const buttonStyle = {
-  width: '167px',
-  height: '41px',
-  alignSelf: 'end',
-  color: '#07679C',
-  borderColor: '#07679C',
-  fontFamily: 'Poppins',
-  fontWeight: '600',
-  fontSize: '12px',
-  marginTop: '20px',
-  lineHeight: '13px',
-}
 
 const FilesCard = ({ data = {}, index }) => {
   const {
@@ -95,7 +83,25 @@ const FilesCard = ({ data = {}, index }) => {
       </Grid>
       <Grid container justifyContent="flex-end">
         <Grid item offset={{ xs: 'auto' }}>
-          <AddToCart fileId={id} buttonStyle={buttonStyle} />
+          <AddToCart
+            fileId={id}
+            buttonStyle={{
+              width: '167px',
+              height: '41px',
+              alignSelf: 'end',
+              color: '#07679C',
+              borderColor: '#07679C',
+              fontFamily: 'Poppins',
+              fontWeight: '600',
+              fontSize: '12px',
+              marginTop: '20px',
+              lineHeight: '13px',
+              '&:hover': {
+                backgroundColor: '#DEE4EC !important',
+              },
+            }}
+            className={classes.addToCartButton}
+          />
         </Grid>
       </Grid>
     </div>

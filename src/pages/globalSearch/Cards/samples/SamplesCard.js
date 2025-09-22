@@ -25,7 +25,7 @@ const SamplesCard = ({ data = {}, index }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/explore?p_id=${participant_id}`);
+    navigate(`/explore?p_id=${participant_id}&tab=2`);
   };
 
   const renderInfo = (label, value = '') => (

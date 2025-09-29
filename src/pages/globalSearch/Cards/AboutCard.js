@@ -1,5 +1,5 @@
-import React from 'react';
-import { Grid, Typography, withStyles } from '@material-ui/core';
+import React, { useState, useRef, useEffect } from 'react';
+import { Grid, Typography, withStyles, Tooltip } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
 const Anchor = ({ link, text, classes }) => {
@@ -14,9 +14,66 @@ const Anchor = ({ link, text, classes }) => {
   );
 };
 
+// Utility function to truncate title with start...end format
+const truncateTitle = (title, containerWidth) => {
+  if (!title || !containerWidth) return { truncated: title, needsTruncation: false };
+  
+  const maxTitleWidth = containerWidth * 0.5;
+  
+  const tempElement = document.createElement('span');
+  tempElement.style.position = 'absolute';
+  tempElement.style.visibility = 'hidden';
+  tempElement.style.fontSize = '18px';
+  tempElement.style.fontFamily = 'Inter';
+  tempElement.style.fontWeight = '500';
+  tempElement.textContent = title;
+  
+  document.body.appendChild(tempElement);
+  const titleWidth = tempElement.offsetWidth;
+  document.body.removeChild(tempElement);
+  
+  if (titleWidth <= maxTitleWidth) {
+    return { truncated: title, needsTruncation: false };
+  }
+  
+  const ellipsisWidth = 20;
+  const availableWidth = maxTitleWidth - ellipsisWidth;
+  const charWidth = titleWidth / title.length;
+  const availableChars = Math.floor(availableWidth / charWidth);
+  
+  if (availableChars <= 6) {
+    return { truncated: title.substring(0, Math.max(3, availableChars)) + '...', needsTruncation: true };
+  }
+  
+  const startChars = Math.ceil(availableChars * 0.6);
+  const endChars = Math.floor(availableChars * 0.4);
+  
+  const startText = title.substring(0, startChars);
+  const endText = title.substring(title.length - endChars);
+  
+  return { 
+    truncated: `${startText}...${endText}`, 
+    needsTruncation: true 
+  };
+};
+
 const AboutCard = ({
   searchText, data, classes, index,
 }) => {
+  const [containerWidth, setContainerWidth] = useState(0);
+  const cardRef = useRef(null);
+  
+  useEffect(() => {
+    const measureWidth = () => {
+      if (cardRef.current) {
+        setContainerWidth(cardRef.current.offsetWidth);
+      }
+    };
+    measureWidth();
+    window.addEventListener('resize', measureWidth);
+    return () => window.removeEventListener('resize', measureWidth);
+  }, []);
+  
   const results = data.text.map((result) => result.replaceAll('$', ''));
 
   function getHighlightedText(text, highlight, classes) {
@@ -46,17 +103,24 @@ const AboutCard = ({
     );
   }
 
+  const { truncated, needsTruncation } = truncateTitle(data.title, containerWidth);
+  
   return (
-    <Grid item container className={classes.card} id={`global_search_card_${index}`}>
-      <Grid item className={classes.indexContainer}>
-        {index + 1}
-      </Grid>
+    <Grid item container className={classes.card} id={`global_search_card_${index}`} ref={cardRef}>
       <Grid item xs={true} className={classes.propertyContainer}>
         <div className={classes.titleRow}>
           <span className={classes.detailContainerHeader}>ABOUT</span>
-          <Typography variant="h3" className={classes.cardTitle}>
-            {data.title}
-          </Typography>
+          {needsTruncation ? (
+            <Tooltip title={data.title} placement="top">
+              <Typography variant="h3" className={classes.cardTitle}>
+                {truncated}
+              </Typography>
+            </Tooltip>
+          ) : (
+            <Typography variant="h3" className={classes.cardTitle}>
+              {data.title}
+            </Typography>
+          )}
         </div>
         <div className={classes.cardBody}>
           <div className={classes.text}>{getHighlightedText(results, searchText, classes)}</div>
@@ -83,7 +147,7 @@ const styles = (theme) => {
         width: '1047px',
       },
       maxWidth: '800px',
-      padding: '24px 32px 24px 20px',
+      padding: '24px 16px 24px 20px',
       border: '0.25px solid #78AEB3',
       borderTopRightRadius: '20px',
       borderBottomLeftRadius: '20px',

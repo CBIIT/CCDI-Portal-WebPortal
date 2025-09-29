@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => {
         width: '1047px',
       },
       maxWidth: '800px',
-      padding: '24px 32px 24px 20px',
+      padding: '24px 16px 24px 20px',
       border: '0.25px solid #78AEB3',
       borderTopRightRadius: '20px',
       borderBottomLeftRadius: '20px',
@@ -46,6 +46,16 @@ const useStyles = makeStyles((theme) => {
       display: 'flex',
       margin: '0px',
       padding: '0px',
+      alignItems: 'flex-start',
+      '& $key': {
+        whiteSpace: 'nowrap',
+        flexShrink: 0,
+      },
+      '& $value': {
+        wordBreak: 'break-word',
+        minWidth: 0,
+        flex: 1,
+      },
     },
     row: {
       display: 'flex',
@@ -75,7 +85,7 @@ const useStyles = makeStyles((theme) => {
     },
     titleKey: {
       margin: '0px',
-      padding: '5px 15px 5px 15px',
+      padding: '2px 15px 2px 15px',
       gap: '10px',
       fontFamily: 'Poppins',
       fontSize: '14px',
@@ -160,10 +170,86 @@ const useStyles = makeStyles((theme) => {
       },
     },
     hr: {
-      width: '100%',
+      width: '100%', 
       border: '1px solid #E7EEF5',
       margin: '10px 0px',
       padding: '0px',
+    },
+    cardHeader: {
+      marginBottom: '4px',
+    },
+    titleContainer: {
+      flex: 1,
+      width: '100%',
+    },
+    buttonAlignWithTitle: {
+      marginTop: '-8px', // Move button up to align with title baseline
+    },
+    contentArea: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '4px',
+      marginTop: '0px',
+    },
+    propertyLine: {
+      display: 'flex',
+      flexDirection: 'column',
+      margin: '0px',
+      padding: '0px',
+      [mdBreakpoint]: {
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+      },
+    },
+    groupedProperties: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '4px',
+      [mdBreakpoint]: {
+        flexDirection: 'row',
+        gap: '6px',
+        alignItems: 'flex-start',
+      },
+    },
+    propertyGroup: {
+      display: 'flex',
+      flexDirection: 'column',
+      flex: '1',
+      minWidth: '0',
+      [mdBreakpoint]: {
+        minWidth: '180px',
+      },
+      '& $keyAndValueRow': {
+        '& $key': {
+          whiteSpace: 'nowrap',
+          flexShrink: 0,
+        },
+        '& $value': {
+          whiteSpace: 'nowrap',
+          minWidth: 0,
+          flex: 1,
+        },
+      },
+    },
+    customTooltip: {
+      backgroundColor: '#ffffff',
+      color: '#000000',
+      border: '1px solid #000000',
+      fontSize: '14px',
+      fontFamily: 'Inter',
+      padding: '12px 16px',
+      borderRadius: '4px',
+      maxWidth: '400px',
+      wordWrap: 'break-word',
+      lineHeight: '1.4',
+      boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.15)',
+    },
+    customTooltipArrow: {
+      color: '#000000',
+      '&:before': {
+        backgroundColor: '#ffffff',
+        border: '1px solid #000000',
+      },
     },
   }
 });

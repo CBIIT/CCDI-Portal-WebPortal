@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => {
         width: '1047px',
       },
       maxWidth: '800px',
-      padding: '24px 32px 24px 20px',
+      padding: '24px 16px 24px 20px',
       border: '0.25px solid #78AEB3',
       borderTopRightRadius: '20px',
       borderBottomLeftRadius: '20px',
@@ -46,6 +46,16 @@ const useStyles = makeStyles((theme) => {
       display: 'flex',
       margin: '0px',
       padding: '0px',
+      alignItems: 'flex-start',
+      '& $key': {
+        whiteSpace: 'nowrap',
+        flexShrink: 0,
+      },
+      '& $value': {
+        wordBreak: 'break-word',
+        minWidth: 0,
+        flex: 1,
+      },
     },
     row: {
       display: 'flex',
@@ -74,7 +84,7 @@ const useStyles = makeStyles((theme) => {
     },
     titleKey: {
       margin: '0px',
-      padding: '5px 15px 5px 15px',
+      padding: '2px 15px 2px 15px',
       gap: '10px',
       fontFamily: 'Poppins',
       fontSize: '14px',
@@ -241,7 +251,63 @@ const useStyles = makeStyles((theme) => {
         textTransform: 'uppercase',
         letterSpacing: '0.5px',
       },
-    }
+    },
+    cardHeader: {
+      marginBottom: '8px',
+    },
+    titleContainer: {
+      flex: 1,
+      width: '100%',
+    },
+    buttonAlignWithTitle: {
+      marginTop: '-20px', // Move button up to align with title baseline
+    },
+    contentArea: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '2px',
+      marginTop: '0px',
+    },
+    propertyLine: {
+      display: 'flex',
+      flexDirection: 'column',
+      margin: '0px',
+      padding: '0px',
+      [mdBreakpoint]: {
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+      },
+    },
+    groupedProperties: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '6px',
+      [mdBreakpoint]: {
+        flexDirection: 'row',
+        gap: '20px',
+        alignItems: 'flex-start',
+      },
+    },
+    propertyGroup: {
+      display: 'flex',
+      flexDirection: 'column',
+      flex: '1',
+      minWidth: '0',
+      [mdBreakpoint]: {
+        minWidth: '200px',
+      },
+      '& $keyAndValueRow': {
+        '& $key': {
+          whiteSpace: 'nowrap',
+          flexShrink: 0,
+        },
+        '& $value': {
+          whiteSpace: 'nowrap',
+          minWidth: 0,
+          flex: 1,
+        },
+      },
+    },
   }
 });
 

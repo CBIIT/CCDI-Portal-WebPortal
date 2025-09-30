@@ -49,6 +49,7 @@ const useStyles = makeStyles((theme) => {
       flexDirection: 'column',
       margin: '0px',
       padding: '0px',
+      position: 'relative',
       [mdBreakpoint]: {
         flexDirection: 'row',
         alignItems: 'flex-start',
@@ -251,28 +252,30 @@ const useStyles = makeStyles((theme) => {
     },
     treatmentTypeContainer: {
       paddingLeft: '15px',
-      display: 'flex',
-      alignItems: 'flex-start',
+      width: '100%',
+      paddingRight: '30px', // Make space for the arrow
       [mdBreakpoint]: {
         paddingLeft: '15px',
+        paddingRight: '35px',
       },
       '@media (max-width: 600px)': {
         paddingLeft: '8px',
+        paddingRight: '28px',
       },
     },
     expandToggle: {
       cursor: 'pointer',
-      marginLeft: '6px',
+      position: 'absolute',
+      top: '3px',
+      right: '0px',
       display: 'flex',
       alignItems: 'flex-start',
-      alignSelf: 'flex-start',
-      marginTop: '1px',
       '&:hover': {
         opacity: '0.7',
       },
       '@media (max-width: 600px)': {
-        marginLeft: '4px',
-        marginTop: '0px',
+        top: '18px', // Position to align with value text on mobile
+        right: '0px',
       },
     },
     expandIcon: {
@@ -284,6 +287,10 @@ const useStyles = makeStyles((theme) => {
       '@media (max-width: 600px)': {
         fontSize: '16px',
       },
+    },
+    treatmentTextContainer: {
+      width: '100%',
+      minWidth: 0,
     },
     clickableText: {
       cursor: 'pointer',

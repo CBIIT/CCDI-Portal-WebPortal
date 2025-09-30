@@ -20,8 +20,18 @@ const useStyles = makeStyles((theme) => {
       borderBottomLeftRadius: '20px',
       boxShadow: '0px 4px 20px 0px #00000040',
       marginBottom: '20px',
-    },
-    indexContainer: {
+     },
+     cardHeader: {
+       marginBottom: '8px',
+     },
+     titleContainer: {
+       flex: 1,
+       width: '100%',
+     },
+     buttonAlignWithTitle: {
+       marginTop: '-8px', // Move button up to align with title baseline
+     },
+     indexContainer: {
       marginTop: '6px',
       fontFamily: 'Poppins',
       fontSize: '20px',
@@ -166,18 +176,39 @@ const useStyles = makeStyles((theme) => {
       margin: '10px 0px',
       padding: '0px',
     },
-    button: {
-      width: '167px',
-      height: '41px',
-      alignSelf: 'end',
-      color: '#07679C',
-      borderColor: '#07679C',
-      fontFamily: 'Poppins',
-      fontWeight: '600',
-      fontSize: '12px',
-      marginTop: '20px',
-      lineHeight: '13px',
-    }
+     button: {
+       width: '167px',
+       height: '41px',
+       alignSelf: 'end',
+       color: '#07679C',
+       borderColor: '#07679C',
+       fontFamily: 'Poppins',
+       fontWeight: '600',
+       fontSize: '12px',
+       marginTop: '20px',
+       lineHeight: '13px',
+       display: 'flex',
+       justifyContent: 'space-between',
+       alignItems: 'center',
+       padding: '0 12px',
+       borderRadius: '8px',
+       '&:hover': {
+         backgroundColor: '#DEE4EC',
+       },
+       '& .MuiButton-label': {
+         display: 'flex',
+         justifyContent: 'space-between',
+         alignItems: 'center',
+         width: '100%',
+       },
+     },
+     topRightButton: {
+       marginTop: '0px !important',
+       width: '160px',
+       [mdBreakpoint]: {
+         width: '189px',
+       },
+     }
   }
 });
 

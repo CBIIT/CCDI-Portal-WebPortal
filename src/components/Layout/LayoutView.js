@@ -16,6 +16,7 @@ import Cart from '../../pages/cart/cartController';
 import ScrollButton from '../ScrollButton/ScrollButtonView';
 import MCIResourceView from '../../pages/resource/MCIResourcePage/MCIResourceController'
 import FederationResourceView from "../../pages/resource/FederationResourcePage/FederationResourceController";
+import FederationDataModelNavigator from "../../pages/resource/FederationDMN/FederationDMN";
 import CPIResourceView from "../../pages/resource/CPIResourcePage/CPIResourceController";
 // import CBioPortalResourceView from "../../pages/resource/cBioPortalResourcePage/cBioPortalResourceController";
 import ReleaseNotesPageView from '../../pages/releaseNotePage/releaseNotePageController';
@@ -44,6 +45,7 @@ const Layout = () => {
           <Route path="/fileCentricCart" element={<Cart />} />
           <Route path="/MCI" element={<MCIResourceView />} />
           <Route path="/data-federation-resource" element={<FederationResourceView/>} />
+          <Route path="/federation-data-model" element={<FederationDataModelNavigator />} />
           <Route path="/data-usage-policies" element={<DataUsagePoliciesView />} />
           <Route path="/ccdi-participant-index" element={<CPIResourceView />} />
           <Route path="/publications" element={<PublicationsView />} />

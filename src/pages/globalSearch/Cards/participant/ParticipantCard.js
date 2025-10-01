@@ -9,6 +9,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import gql from 'graphql-tag';
+import { ReactComponent as DownArrowIcon } from '../../assets/Down_Arrow.svg';
+import { ReactComponent as UpArrowIcon } from '../../assets/Up_Arrow.svg';
 import { getFilesID } from './WrapperService';
 import { CohortStateContext } from '../../../../components/CohortSelectorState/CohortStateContext';
 import { onAddParticipantsToCohort } from '../../../../components/CohortSelectorState/store/action';
@@ -301,32 +303,103 @@ const ParticipantCard = ({ data = {}, index, addFiles, setAlterDisplay, setOpenS
       setTreatmentTypeExpanded(!treatmentTypeExpanded);
     };
 
-    return (
-      <div className={classes.keyAndValueRow}>
-        <Typography variant="h6" className={classes.key}>
-          {label}
-        </Typography>
-        <div className={classes.treatmentTypeContainer}>
-          <Typography 
-            variant="body1" 
-            className={`${classes.value} ${shouldTruncate ? classes.clickableText : ''}`}
-            style={{ display: 'inline' }}
-            onClick={shouldTruncate ? handleToggleExpand : undefined}
-          >
-            {displayValue}
-            {shouldTruncate && !treatmentTypeExpanded && '...'}
+    return {
+      content: (
+        <div className={classes.keyAndValueRow}>
+          <Typography variant="h6" className={classes.key}>
+            {label}
           </Typography>
-          {shouldTruncate && (
-            <span 
-              className={classes.expandToggle}
-              onClick={handleToggleExpand}
-            >
-              {treatmentTypeExpanded ? <ExpandLessIcon className={classes.expandIcon} /> : <ExpandMoreIcon className={classes.expandIcon} />}
-            </span>
-          )}
+          <div className={classes.treatmentTypeContainer}>
+            <div className={classes.treatmentTextContainer}>
+              <Typography 
+                variant="body1" 
+                className={`${classes.value} ${shouldTruncate ? classes.clickableText : ''}`}
+                style={{ display: 'inline', paddingLeft: 0 }}
+                onClick={shouldTruncate ? handleToggleExpand : undefined}
+              >
+                {displayValue}
+                {shouldTruncate && !treatmentTypeExpanded && '...'}
+              </Typography>
+            </div>
+          </div>
         </div>
-      </div>
-    );
+      ),
+      arrow: shouldTruncate ? (
+        <span 
+          className={classes.expandToggle}
+          onClick={handleToggleExpand}
+        >
+          {treatmentTypeExpanded ? <UpArrowIcon className={classes.expandIcon} /> : <DownArrowIcon className={classes.expandIcon} />}
+        </span>
+      ) : null
+    };
+  };
+
+  const renderTreatmentAgent = (label, value = '') => {
+    // Simple, reliable character limits based on screen size
+    const getMaxLength = () => {
+      if (window.innerWidth <= 600) {
+        return 35; // Mobile
+      } else if (window.innerWidth <= 900) {
+        return 55; // Tablet  
+      } else if (window.innerWidth <= 1200) {
+        return 75; // Small desktop
+      } else {
+        return 95; // Large desktop
+      }
+    };
+
+    const [maxLength, setMaxLength] = React.useState(getMaxLength());
+
+    // Update character limit on window resize
+    React.useEffect(() => {
+      const handleResize = () => {
+        setMaxLength(getMaxLength());
+      };
+
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    const shouldTruncate = value && value.length > maxLength;
+    const displayValue = shouldTruncate && !treatmentAgentExpanded 
+      ? value.substring(0, maxLength) 
+      : value;
+
+    const handleToggleExpand = () => {
+      setTreatmentAgentExpanded(!treatmentAgentExpanded);
+    };
+
+    return {
+      content: (
+        <div className={classes.keyAndValueRow}>
+          <Typography variant="h6" className={classes.key}>
+            {label}
+          </Typography>
+          <div className={classes.treatmentTypeContainer}>
+            <div className={classes.treatmentTextContainer}>
+              <Typography 
+                variant="body1" 
+                className={`${classes.value} ${shouldTruncate ? classes.clickableText : ''}`}
+                style={{ display: 'inline', paddingLeft: 0 }}
+                onClick={shouldTruncate ? handleToggleExpand : undefined}
+              >
+                {displayValue}
+                {shouldTruncate && !treatmentAgentExpanded && '...'}
+              </Typography>
+            </div>
+          </div>
+        </div>
+      ),
+      arrow: shouldTruncate ? (
+        <span 
+          className={classes.expandToggle}
+          onClick={handleToggleExpand}
+        >
+          {treatmentAgentExpanded ? <UpArrowIcon className={classes.expandIcon} /> : <DownArrowIcon className={classes.expandIcon} />}
+        </span>
+      ) : null
+    };
   };
 
   const renderTreatmentAgent = (label, value = '') => {
@@ -559,12 +632,28 @@ const ParticipantCard = ({ data = {}, index, addFiles, setAlterDisplay, setOpenS
         
         {/* Treatment Type - with expand/collapse */}
         <div className={classes.propertyLine}>
-          {renderTreatmentType('Treatment Type:', treatment_type_str)}
+          {(() => {
+            const treatmentType = renderTreatmentType('Treatment Type:', treatment_type_str);
+            return (
+              <>
+                {treatmentType.content}
+                {treatmentType.arrow}
+              </>
+            );
+          })()}
         </div>
         
         {/* Treatment Agent - with expand/collapse */}
         <div className={classes.propertyLine}>
-          {renderTreatmentAgent('Treatment Agent:', treatment_agent_str)}
+          {(() => {
+            const treatmentAgent = renderTreatmentAgent('Treatment Agent:', treatment_agent_str);
+            return (
+              <>
+                {treatmentAgent.content}
+                {treatmentAgent.arrow}
+              </>
+            );
+          })()}
         </div>
         
         {/* Last Known Survival Status - single line */}

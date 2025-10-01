@@ -254,6 +254,7 @@ const useStyles = makeStyles((theme) => {
       paddingLeft: '15px',
       width: '100%',
       paddingRight: '30px', // Make space for the arrow
+      lineHeight: '16px',
       [mdBreakpoint]: {
         paddingLeft: '15px',
         paddingRight: '35px',
@@ -266,8 +267,8 @@ const useStyles = makeStyles((theme) => {
     expandToggle: {
       cursor: 'pointer',
       position: 'absolute',
-      top: '3px',
-      right: '0px',
+      top: '5px',
+      right: '20px',
       display: 'flex',
       alignItems: 'flex-start',
       '&:hover': {

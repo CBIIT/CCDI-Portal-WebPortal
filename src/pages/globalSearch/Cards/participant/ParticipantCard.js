@@ -402,6 +402,69 @@ const ParticipantCard = ({ data = {}, index, addFiles, setAlterDisplay, setOpenS
     };
   };
 
+  const renderTreatmentAgent = (label, value = '') => {
+    // Simple, reliable character limits based on screen size
+    const getMaxLength = () => {
+      if (window.innerWidth <= 600) {
+        return 35; // Mobile
+      } else if (window.innerWidth <= 900) {
+        return 55; // Tablet  
+      } else if (window.innerWidth <= 1200) {
+        return 75; // Small desktop
+      } else {
+        return 95; // Large desktop
+      }
+    };
+
+    const [maxLength, setMaxLength] = React.useState(getMaxLength());
+
+    // Update character limit on window resize
+    React.useEffect(() => {
+      const handleResize = () => {
+        setMaxLength(getMaxLength());
+      };
+
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    const shouldTruncate = value && value.length > maxLength;
+    const displayValue = shouldTruncate && !treatmentAgentExpanded 
+      ? value.substring(0, maxLength) 
+      : value;
+
+    const handleToggleExpand = () => {
+      setTreatmentAgentExpanded(!treatmentAgentExpanded);
+    };
+
+    return (
+      <div className={classes.keyAndValueRow}>
+        <Typography variant="h6" className={classes.key}>
+          {label}
+        </Typography>
+        <div className={classes.treatmentTypeContainer}>
+          <Typography 
+            variant="body1" 
+            className={`${classes.value} ${shouldTruncate ? classes.clickableText : ''}`}
+            style={{ display: 'inline' }}
+            onClick={shouldTruncate ? handleToggleExpand : undefined}
+          >
+            {displayValue}
+            {shouldTruncate && !treatmentAgentExpanded && '...'}
+          </Typography>
+          {shouldTruncate && (
+            <span 
+              className={classes.expandToggle}
+              onClick={handleToggleExpand}
+            >
+              {treatmentAgentExpanded ? <ExpandLessIcon className={classes.expandIcon} /> : <ExpandMoreIcon className={classes.expandIcon} />}
+            </span>
+          )}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className={classes.card} ref={cardRef}>
       {data.cpi_data && data.cpi_data.length ? <CPIModal

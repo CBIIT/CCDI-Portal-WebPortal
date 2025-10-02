@@ -1,5 +1,5 @@
-import { Grid, withStyles } from '@material-ui/core';
-import React from 'react';
+import { Grid, withStyles, Tooltip, Typography } from '@material-ui/core';
+import React, { useState, useRef, useEffect } from 'react';
 import { prepareLinks } from '@bento-core/util';
 import PropertyItem from './PropertyItem';
 
@@ -37,16 +37,79 @@ const CARD_PROPERTIES = [
   },
 ];
 
+// Utility function to truncate title with start...end format
+const truncateTitle = (title, containerWidth) => {
+  if (!title || !containerWidth) return { truncated: title, needsTruncation: false };
+  
+  const maxTitleWidth = containerWidth * 0.5; // 50% of container width
+  
+  // Create temporary element to measure text width
+  const tempElement = document.createElement('span');
+  tempElement.style.position = 'absolute';
+  tempElement.style.visibility = 'hidden';
+  tempElement.style.fontSize = '18px';
+  tempElement.style.fontFamily = 'Inter';
+  tempElement.style.fontWeight = '500';
+  tempElement.textContent = title;
+  
+  document.body.appendChild(tempElement);
+  const titleWidth = tempElement.offsetWidth;
+  document.body.removeChild(tempElement);
+  
+  if (titleWidth <= maxTitleWidth) {
+    return { truncated: title, needsTruncation: false };
+  }
+  
+  const ellipsisWidth = 20;
+  const availableWidth = maxTitleWidth - ellipsisWidth;
+  const charWidth = titleWidth / title.length;
+  const availableChars = Math.floor(availableWidth / charWidth);
+  
+  if (availableChars <= 6) {
+    return { truncated: title.substring(0, Math.max(3, availableChars)) + '...', needsTruncation: true };
+  }
+  
+  const startChars = Math.ceil(availableChars * 0.6);
+  const endChars = Math.floor(availableChars * 0.4);
+  
+  const startText = title.substring(0, startChars);
+  const endText = title.substring(title.length - endChars);
+  
+  return { 
+    truncated: `${startText}...${endText}`, 
+    needsTruncation: true 
+  };
+};
+
 const ValueCard = ({ data, classes, index }) => {
+  const [containerWidth, setContainerWidth] = useState(0);
+  const cardRef = useRef(null);
+  
+  useEffect(() => {
+    const measureWidth = () => {
+      if (cardRef.current) {
+        setContainerWidth(cardRef.current.offsetWidth);
+      }
+    };
+    measureWidth();
+    window.addEventListener('resize', measureWidth);
+    return () => window.removeEventListener('resize', measureWidth);
+  }, []);
+  
   const propertiesWithLinks = prepareLinks(CARD_PROPERTIES, data);
+  const { truncated, needsTruncation } = truncateTitle(data.value, containerWidth);
+  
   return (
-    <Grid item container className={classes.card} id={`global_search_card_${index}`}>
-      <Grid item className={classes.indexContainer}>
-        {index + 1 }
-      </Grid>
+    <Grid item container className={classes.card} id={`global_search_card_${index}`} ref={cardRef}>
       <Grid item xs={true} className={classes.propertyContainer}>
         <div className={classes.titleRow}>
-          <span className={classes.detailContainerHeader}>MODEL</span>
+          {needsTruncation ? (
+            <Tooltip title={data.value} placement="top">
+              <span className={classes.detailContainerHeader}>MODEL: {truncated}</span>
+            </Tooltip>
+          ) : (
+            <span className={classes.detailContainerHeader}>MODEL: {data.value}</span>
+          )}
         </div>
         {propertiesWithLinks.map((prop, idx) => (
           <PropertyItem
@@ -77,7 +140,7 @@ const styles = (theme) => {
         width: '959px',
       },
       maxWidth: '800px',
-      padding: '0px',
+      padding: '24px 16px 24px 20px',
     },
     indexContainer: {
       fontFamily: 'Roboto',

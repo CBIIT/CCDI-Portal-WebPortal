@@ -10,7 +10,7 @@ import PublicationsView from '../../pages/about/publications/publicationsControl
 import News from '../../pages/news/newsController';
 import DataModelNavigator from '../../pages/dmn/DataModelNavigator';
 import Error from '../../pages/error/Error';
-import Search from '../../pages/globalSearch/searchView';
+import Search from '../../pages/globalSearch/searchController';
 import Inventory from '../../pages/inventory/inventoryController';
 import Cart from '../../pages/cart/cartController';
 import ScrollButton from '../ScrollButton/ScrollButtonView';

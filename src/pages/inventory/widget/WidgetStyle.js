@@ -4,7 +4,6 @@ const styles = (theme) => ({
   },
   dashboardDivider: {
     height: 16,
-    marginTop: '32px',
     backgroundColor: '#E2E7EC',
   },
   dashboardDividerTop: {
@@ -77,6 +76,8 @@ const styles = (theme) => ({
   },
   backgroundWidgets: {
     background: theme.palette.widgetBackground.main,
+    paddingLeft: '30px',
+    paddingRight: '60px',
   },
   sideBar: {
     width: '250px',

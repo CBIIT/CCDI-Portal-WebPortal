@@ -67,7 +67,8 @@ const TabView = (props) => {
     sortBy: config.defaultSortField,
     sortOrder: config.defaultSortDirection,
     extendedViewConfig: config.extendedViewConfig,
-    rowsPerPage: 10,
+    rowsPerPageOptions: [50, 100],
+    rowsPerPage: 50,
     page: 0,
     downloadFileName: tab.downloadFileName,
   });

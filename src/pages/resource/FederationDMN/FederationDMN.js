@@ -8,33 +8,30 @@ import env from '../../../utils/env';
  * with environment-specific configuration URLs.
  */
 const FederationDataModelNavigator = () => {
+  // Configuration constants
+  const DEFAULT_DMN_URL = "https://cbiit.github.io/crdc-data-model-navigator/?config=https://raw.githubusercontent.com/CBIIT/ccdi-model/refs/heads/dmn-dev/model-desc/";
+  const FED_DMN_BASE_URL = "https://raw.githubusercontent.com/CBIIT/ccdi-federation-dmn/refs/heads/";
+  
   // Get the base DMN URL from environment variables or use default
-  const BASE_URL = env.REACT_APP_DMN_URL || "https://cbiit.github.io/crdc-data-model-navigator/?config=https://raw.githubusercontent.com/CBIIT/ccdi-model/refs/heads/dmn-dev/model-desc/";
+  const baseUrl = env.REACT_APP_DMN_URL || DEFAULT_DMN_URL;
+  
+  // Extract environment from URL (e.g., "dev" from "dmn-dev")
+  const match = baseUrl.match(/refs\/heads\/dmn-([^\/]+)/);
+  const baseEnv = match && match[1] || 'dev';
   
   // Remove any existing config parameter to get clean base URL
-  const CLEAN_BASE_URL = BASE_URL.split('?config=')[0];
+  const cleanBaseUrl = baseUrl.split('?config=')[0];
 
   /**
    * Constructs the Federation DMN URL with environment-specific configuration
    * @returns {string} Complete URL with config parameter pointing to the appropriate branch
    */
   const getFedDmnUrl = () => {
-    // Map environment names to their corresponding GitHub branch names
-    const envFedBranches = {
-      development: 'fed-dev',
-      qa: 'fed-qa',
-      staging: 'fed-stage',
-      production: 'fed-prod'
-    };
-
-    // Get the branch name for the current environment, default to development
-    const branch = envFedBranches[env.NODE_ENV] || envFedBranches.development;
-    
-    // Construct the full GitHub raw content URL for the federation DMN config
-    const configUrl = `https://raw.githubusercontent.com/CBIIT/ccdi-federation-dmn/refs/heads/${branch}/`;
+    // Construct the federation DMN config URL for the current environment
+    const fedConfigUrl = `${FED_DMN_BASE_URL}fed-${baseEnv}/`;
     
     // Return the complete DMN URL with the config parameter
-    return `${CLEAN_BASE_URL}?config=${configUrl}`;
+    return `${cleanBaseUrl}?config=${fedConfigUrl}`;
   };
 
   // Get the complete DMN URL with the config parameter

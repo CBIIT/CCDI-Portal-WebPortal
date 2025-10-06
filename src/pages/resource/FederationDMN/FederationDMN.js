@@ -31,7 +31,7 @@ const FederationDataModelNavigator = () => {
     const fedConfigUrl = `${FED_DMN_BASE_URL}fed-${baseEnv}/`;
     
     // Return the complete DMN URL with the config parameter
-    return `${cleanBaseUrl}?config=${fedConfigUrl}`;
+    return `${cleanBaseUrl}?config=${encodeURIComponent(fedConfigUrl)}`;
   };
 
   // Get the complete DMN URL with the config parameter

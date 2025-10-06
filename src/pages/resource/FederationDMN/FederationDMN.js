@@ -37,6 +37,7 @@ const FederationDataModelNavigator = () => {
     return `${CLEAN_BASE_URL}?config=${configUrl}`;
   };
 
+  // Get the complete DMN URL with the config parameter
   const fedDmnUrl = getFedDmnUrl();
 
   return (

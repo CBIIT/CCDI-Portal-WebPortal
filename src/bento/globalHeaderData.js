@@ -109,11 +109,6 @@ export const navbarSublists = {
     link: 'https://nccrdataplatform.ccdi.cancer.gov/home',
     className: 'navMobileSubItem',
   },
-  {
-    name:'Federation Data Model',
-    link: '/federation-data-model',
-    className: 'navMobileSubItem',
-  },  
   // {
   //   name:'Cancer Genomics Cloud',
   //   link: 'https://www.cancergenomicscloud.org',

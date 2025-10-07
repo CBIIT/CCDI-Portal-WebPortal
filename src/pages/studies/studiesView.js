@@ -101,7 +101,8 @@ const StudiesView = () => {
     sortOrder: table.defaultSortDirection,
     extendedViewConfig: table.extendedViewConfig,
     selectedRows: [],
-    rowsPerPage: 10,
+    rowsPerPageOptions: [50, 100],
+    rowsPerPage: 50,
     page: 0,
   });
 

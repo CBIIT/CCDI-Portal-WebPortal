@@ -45,7 +45,7 @@ const Layout = () => {
           <Route path="/fileCentricCart" element={<Cart />} />
           <Route path="/MCI" element={<MCIResourceView />} />
           <Route path="/data-federation-resource" element={<FederationResourceView/>} />
-          <Route path="/federation-data-model" element={<FederationDataModelNavigator />} />
+          <Route path="/data-federation-data-model" element={<FederationDataModelNavigator />} />
           <Route path="/data-usage-policies" element={<DataUsagePoliciesView />} />
           <Route path="/ccdi-participant-index" element={<CPIResourceView />} />
           <Route path="/publications" element={<PublicationsView />} />

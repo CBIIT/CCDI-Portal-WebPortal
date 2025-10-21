@@ -11,10 +11,10 @@ import {
 } from '@material-ui/core';
 import styled from 'styled-components';
 import { ClearAllFiltersBtn } from '@bento-core/facet-filter';
+import store from '../../store';
 import {
   resetAllData,
 } from '@bento-core/local-find';
-import store from '../../store';
 import { generateQueryStr } from '@bento-core/util';
 import { resetIcon, queryParams, facetsConfig, sectionLabel } from '../../bento/dashTemplate';
 import styles from './inventoryStyle';
@@ -78,6 +78,7 @@ const Inventory = ({
   classes,
   dashData,
   activeFilters,
+  unknownAgesState,
 }) => {
   const [selectedSection, setSelectedSection] = useState(-1);
 
@@ -92,20 +93,82 @@ const Inventory = ({
       return { activeFiltersCount: 0, sectionList: [], sectionCount: {} };
     }
   
+    // Get current URL parameters
+    const query = new URLSearchParams(useLocation().search);
+    
     // Create list of sections with their active filter counts
-    const facetsConfigList = facetsConfig.map(item => ({
-      section: item.section,
-      datafield: item.datafield,
-      // Count number of active filters for this facet's datafield
-      count: (activeFilters && activeFilters[item.datafield] ? activeFilters[item.datafield].length : 0)
-    }));
+    const facetsConfigList = facetsConfig.map(item => {
+      let count = (activeFilters && activeFilters[item.datafield] ? activeFilters[item.datafield].length : 0);
+      
+      // For slider-type facets, check both Redux state and URL parameters for unknownAges
+      if (item.type === 'slider') {
+        let unknownAges = 'include'; // default value
+        
+        // First check Redux state
+        if (unknownAgesState && unknownAgesState[item.datafield]) {
+          unknownAges = unknownAgesState[item.datafield];
+        }
+        // If not in Redux state, check URL parameters
+        else {
+          const unknownAgesParam = `${item.datafield}_unknownAges`;
+          const urlUnknownAges = query.get(unknownAgesParam);
+          if (urlUnknownAges) {
+            unknownAges = urlUnknownAges;
+          }
+        }
+        
+        if (unknownAges !== 'include') {
+          count += 1; // Count unknownAges selection as an active filter
+        }
+      }
+      
+      return {
+        section: item.section,
+        datafield: item.datafield,
+        count: count
+      };
+    });
   
     // Get unique list of section names
     const sectionList = [...new Set(facetsConfig.map(item => item.section))];
     
     // Calculate total number of active filters across all sections
-    const activeFiltersCount = Object.values(activeFilters || {})
-      .reduce((sum, array) => sum + array.length, 0);
+    let activeFiltersCount = 0;
+    const ageRelatedParams = ['age_at_diagnosis', 'age_at_treatment_start', 'age_at_response', 'age_at_last_known_survival_status', 'participant_age_at_collection'];
+    
+    // Count filters, but handle age-related facets specially to avoid double counting
+    Object.keys(activeFilters || {}).forEach(key => {
+      if (ageRelatedParams.includes(key)) {
+        // For age-related facets, only count once regardless of slider or unknownAges
+        const hasSliderFilter = activeFilters[key] && activeFilters[key].length > 0;
+        
+        let hasUnknownAgesFilter = false;
+        let unknownAges = 'include';
+        
+        // Check Redux state first
+        if (unknownAgesState && unknownAgesState[key]) {
+          unknownAges = unknownAgesState[key];
+        }
+        // If not in Redux state, check URL parameters
+        else {
+          const unknownAgesParam = `${key}_unknownAges`;
+          const urlUnknownAges = query.get(unknownAgesParam);
+          if (urlUnknownAges) {
+            unknownAges = urlUnknownAges;
+          }
+        }
+        
+        hasUnknownAgesFilter = unknownAges !== 'include';
+        
+        // Count as one filter if either slider or unknownAges is active
+        if (hasSliderFilter || hasUnknownAgesFilter) {
+          activeFiltersCount += 1;
+        }
+      } else {
+        // For non-age-related facets, count normally
+        activeFiltersCount += activeFilters[key].length;
+      }
+    });
   
     // Calculate total active filters per section
     const sectionCount = facetsConfigList.reduce((acc, item) => {
@@ -114,7 +177,7 @@ const Inventory = ({
     }, {});
   
     return { activeFiltersCount, sectionList, sectionCount };
-  }, [facetsConfig, activeFilters]); // Only recalculate when these dependencies change
+  }, [facetsConfig, activeFilters, unknownAgesState, useLocation().search]); // Only recalculate when these dependencies change
 
   /**
     * Clear All Filter Button
@@ -136,10 +199,10 @@ const Inventory = ({
           onClick={() => {
             const paramValue = {
               'p_id': '', 'u': '', 'u_fc': '', 'u_um': '', 'sex_at_birth': '', 'race': '',
-              'age_at_diagnosis': '', 'diagnosis': '', 'diagnosis_anatomic_site': '', 'diagnosis_classification_system': '', 'diagnosis_basis': '', 'disease_phase': '',
-              'treatment_type': '', 'treatment_agent': '', 'age_at_treatment_start': '', 'response_category': '', 'age_at_response': '',
-              'age_at_last_known_survival_status': '', 'first_event': '', 'last_known_survival_status': '',
-              'participant_age_at_collection': '', 'sample_anatomic_site': '', 'sample_tumor_status': '', 'tumor_classification': '',
+              'age_at_diagnosis': '', 'age_at_diagnosis_unknownAges': '', 'diagnosis': '', 'diagnosis_anatomic_site': '', 'diagnosis_classification_system': '', 'diagnosis_basis': '', 'disease_phase': '',
+              'treatment_type': '', 'treatment_agent': '', 'age_at_treatment_start': '', 'age_at_treatment_start_unknownAges': '', 'response_category': '', 'age_at_response': '', 'age_at_response_unknownAges': '',
+              'age_at_last_known_survival_status': '', 'age_at_last_known_survival_status_unknownAges': '', 'first_event': '', 'last_known_survival_status': '',
+              'participant_age_at_collection': '', 'participant_age_at_collection_unknownAges': '', 'sample_anatomic_site': '', 'sample_tumor_status': '', 'tumor_classification': '',
               'data_category': '', 'file_type': '', 'dbgap_accession': '', 'study_name': '', 'study_status': '',
               'library_selection': '', 'library_strategy': '', 'library_source_material': '', 'library_source_molecule': ''
             };
@@ -147,6 +210,18 @@ const Inventory = ({
             navigate(`/explore${queryStr}`);
             onClearAllFilters();
             store.dispatch(resetAllData());
+            
+            // Reset unknownAges state to default values
+            const ageRelatedParams = ['age_at_diagnosis', 'age_at_treatment_start', 'age_at_response', 'age_at_last_known_survival_status', 'participant_age_at_collection'];
+            ageRelatedParams.forEach(param => {
+              store.dispatch({
+                type: 'UNKNOWN_AGES_CHANGED',
+                payload: {
+                  datafield: param,
+                  unknownAges: 'include',
+                },
+              });
+            });
           }}
           className={classes.customButton}
           onMouseEnter={() => setIsHover(true)}
@@ -252,6 +327,7 @@ const Inventory = ({
                     searchData={dashData}
                     activeFilters={activeFilters}
                     selectedSection={selectedSection}
+                    unknownAgesState={unknownAgesState}
                   />
                 </div>
               </div>
@@ -259,7 +335,7 @@ const Inventory = ({
           }
           <RightContentPanel selected={selectedSection}>
             <div className={classes.widgetsContainer}>
-              <QueryBarView data={dashData} />
+              <QueryBarView data={dashData} unknownAgesState={unknownAgesState} />
               <WidgetView
                 data={dashData}
                 activeFilters={activeFilters}

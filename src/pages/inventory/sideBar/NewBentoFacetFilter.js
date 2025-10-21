@@ -138,6 +138,7 @@ const NewBentoFacetFilter = ({
   searchData,
   activeFilters,
   selectedSection,
+  unknownAgesState,
 }) => {
   /** Note:
   * Generate Custom facet Section Component
@@ -213,6 +214,7 @@ const NewBentoFacetFilter = ({
               CustomFacetSection={CustomFacetSection}
               CustomFacetView={CustomFacetView}
               queryParams={queryParams}
+              unknownAgesState={unknownAgesState}
             />
           </FacetFilterThemeProvider>
         )

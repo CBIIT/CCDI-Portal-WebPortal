@@ -172,27 +172,48 @@ const QueryBarView = ({ data, hasImportFrom, statusReducer, localFind, unknownAg
       resetFacetSlider: (section) => {
         const field = section.datafield;
         let paramValue = {};
-        paramValue[field] = '';
         
-        // Also clear the corresponding unknownAges parameter if it exists
-        const unknownAgesField = `${field}_unknownAges`;
-        if (queryParams.includes(unknownAgesField)) {
+        // Check if this is an unknownAges entry
+        if (section.isUnknownAges) {
+          // For unknownAges entries, clear the unknownAges parameter
+          const unknownAgesField = `${section.parentDatafield}_unknownAges`;
           paramValue[unknownAgesField] = '';
-        }
-        
-        const queryStr = generateQueryStr(query, queryParams, paramValue);
-        navigate(`/explore${queryStr}`, { replace: true });
-        dispatch(clearSliderSection(section));
-        
-        // Reset the corresponding unknownAges parameter in Redux state
-        if (queryParams.includes(unknownAgesField)) {
+          
+          const queryStr = generateQueryStr(query, queryParams, paramValue);
+          navigate(`/explore${queryStr}`, { replace: true });
+          
+          // Reset the unknownAges parameter in Redux state
           store.dispatch({
             type: 'UNKNOWN_AGES_CHANGED',
             payload: {
-              datafield: field,
+              datafield: section.parentDatafield,
               unknownAges: 'include',
             },
           });
+        } else {
+          // For regular slider entries, clear the slider range
+          paramValue[field] = '';
+          
+          // Also clear the corresponding unknownAges parameter if it exists
+          const unknownAgesField = `${field}_unknownAges`;
+          if (queryParams.includes(unknownAgesField)) {
+            paramValue[unknownAgesField] = '';
+          }
+          
+          const queryStr = generateQueryStr(query, queryParams, paramValue);
+          navigate(`/explore${queryStr}`, { replace: true });
+          dispatch(clearSliderSection(section));
+          
+          // Reset the corresponding unknownAges parameter in Redux state
+          if (queryParams.includes(unknownAgesField)) {
+            store.dispatch({
+              type: 'UNKNOWN_AGES_CHANGED',
+              payload: {
+                datafield: field,
+                unknownAges: 'include',
+              },
+            });
+          }
         }
       },
       resetUnknownAges: (section) => {

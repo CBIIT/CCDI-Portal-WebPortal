@@ -1,13 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import headerImg from '../../assets/studies/studyDetailBackground.png';
 import breadcrumbIcon from '../../assets/icons/Breadcrumb_Icon.svg';
 import bookIcon from '../../assets/studies/bookIcon.svg';
-import exportIcon from '../../assets/studies/exportIcon.svg';
-import manifestIcon from '../../assets/studies/manifestIcon.svg';
-import { studyDownloadLinks } from '../../bento/studiesData';
-import TabsView from './tabs/TabsView';
-import ModalView from "./modal/ModalView";
+import OverviewView from './overview/overviewView';
+import SupportingDataView from './supportingData/supportingDataView';
+// import TabsView from './tabs/TabsView';
 
 const StudiesDetailContainer = styled.div`
     .breadcrumb {
@@ -132,59 +130,60 @@ const StudiesDetailContainer = styled.div`
     }
 `;
 
+const TabsContainer = styled.div`
+    width: 100%;
+    border-bottom: 1px solid #939393;
+    
+    @media (min-width: 1420px) {
+        .tabsWrapper {
+            width: 1420px;
+            margin: 0 auto;
+        }
+    }
+`;
+
+const TabsList = styled.div`
+    display: flex;
+    padding: 0 40px;
+    gap: 40px;
+    padding-bottom: 1px;
+`;
+
+const Tab = styled.button`
+    background: none;
+    border: none;
+    padding: 16px 0;
+    font-family: Poppins;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.36px;
+    cursor: pointer;
+    position: relative;
+    color: ${props => props.active ? '#0E546E' : '#757575'};
+    transition: color 0.3s ease;
+
+    &:hover {
+        color: #0E546E;
+    }
+
+    ${props => props.active && `
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background-color: #0E546E;
+        }
+    `}
+`;
+
 const StudiesDetailBodyContainer = styled.div`
     // width: 1420px;
     // margin: 0 auto;
     display: grid;
     grid-template-columns: 50% 50%;
-
-    .leftContainer {
-        border-right: 1px solid #939393;
-        padding: 34px 40px 20px 70px;
-    }
-
-    .rightContainer {
-        padding: 34px 70px 20px 40px;
-    }
-
-    .studyItem {
-        margin-bottom: 33px;
-    }
-
-    .studyItemTitle {
-        color: #00818D;
-        font-family: Poppins;
-        font-size: 16px;
-        font-weight: 500;
-        line-height: 24px;
-        letter-spacing: 0.32px;
-        text-transform: uppercase;
-    }
-
-    .studyItemContent {
-        color: #000000;
-        font-family: Inter;
-        font-size: 16px;
-        font-weight: 500;
-        line-height: 22px;
-
-        a {
-            color: #455299;
-            font-family: Inter;
-            font-size: 16px;
-            font-style: normal;
-            font-weight: 700;
-            line-height: 22px;
-        }
-    }
-
-    .exportIcon {
-        margin-left: 8px;
-    }
-
-    .studyManifestIcon {
-        margin-left: 10px;
-    }
 
      @media (min-width: 1420px) {
         width: 1420px;
@@ -192,7 +191,18 @@ const StudiesDetailBodyContainer = styled.div`
     }
 `;
 
+
+const TAB_LABELS = {
+    OVERVIEW: 'Overview',
+    SUPPORTING_DATA: 'Supporting Data',
+}
+
 const StudiesDetail = ({data}) => {
+    const [activeTab, setActiveTab] = useState(TAB_LABELS.OVERVIEW);
+
+    // Check if supporting_data exists and has items
+    const hasSupportingData = data.supporting_data && Array.isArray(data.supporting_data) && data.supporting_data.length > 0;
+
     return(
         <StudiesDetailContainer>
             <div className='breadcrumb'>
@@ -209,63 +219,45 @@ const StudiesDetail = ({data}) => {
                     <div className='participantContaniner'>Participants in this Study: <a href={`/explore?dbgap_accession=${data.study_id}`} className='subjectNumber'>{data.num_of_participants.toLocaleString('en-US')}</a></div>
                 </div>
             </div>
+        
+            {/* Conditionally render tabs only if supporting data exists */}
+            {hasSupportingData && (
+                <TabsContainer>
+                    <div className='tabsWrapper'>
+                        <TabsList>
+                            {/* OVERVIEW Tab */}
+                            <Tab 
+                                active={activeTab === TAB_LABELS.OVERVIEW}
+                                onClick={() => setActiveTab(TAB_LABELS.OVERVIEW)}
+                            >
+                                {TAB_LABELS.OVERVIEW}
+                            </Tab>
+                            {/* SUPPORTING DATA Tab */}
+                            <Tab 
+                                active={activeTab === TAB_LABELS.SUPPORTING_DATA}
+                                onClick={() => setActiveTab(TAB_LABELS.SUPPORTING_DATA)}
+                            >
+                                {TAB_LABELS.SUPPORTING_DATA}
+                            </Tab>
+                        </TabsList>
+                    </div>
+                </TabsContainer>
+            )}
+
+            {/* Studies Detail Body Container */}
             <StudiesDetailBodyContainer>
-                <div className='leftContainer'>
-                    <div className='studyItem'>
-                        <div className='studyItemTitle'>STUDY ID</div>
-                        <div className="studyItemContent"><a href={`https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=${data.study_id}`} target="_blank" rel="noopener noreferrer">{data.study_id}<img className='exportIcon' src={exportIcon} alt="exportIcon" /></a></div>
-                    </div>
-                    <div className='studyItem'>
-                        <div className='studyItemTitle'>STUDY NAME</div>
-                        <div className="studyItemContent">{data.study_name}</div>
-                    </div>
-                    <div className='studyItem'>
-                        <div className='studyItemTitle'>Study Description</div>
-                        <div className="studyItemContent">{data.study_description}</div>
-                    </div>
-                    <div className='studyItem'>
-                        <div className='studyItemTitle'>Publications</div>
-                        <div className="studyItemContent">
-                            {
-                                data.pubmed_ids !== '' ?
-                                data.pubmed_ids.split(";").map((publicationItem, idx) => {
-                                    const key = `publication_${idx}`;
-                                    return (
-                                        <div key={key}><a href={`https://pubmed.ncbi.nlm.nih.gov/${publicationItem}`} target="_blank" rel="noopener noreferrer">PMID:{publicationItem}<img className='exportIcon' src={exportIcon} alt="exportIcon" /></a></div>
-                                    )
-                                })
-                                : <div>N/A</div>
-                            }
-                        </div>
-                    </div>
-                    <div className='studyItem'>
-                        <div className='studyItemTitle'>Access Data</div>
-                        <div className="studyItemContent">
-                            <a href={studyDownloadLinks[data.study_id]}>Download Study Manifest<img className='studyManifestIcon' src={manifestIcon} alt="manifestIcon" /></a>
-                            {data.study_id === 'phs002790' && <>
-                                <br/><a href="https://cbioportal.ccdi.cancer.gov/" target="_blank" rel="noopener noreferrer">View in CCDI cBioPortal Data Explorer<img className='exportIcon' src={exportIcon} alt="exportIcon" /></a>
-                            </>}
-                        </div>
-                    </div>
-                </div>
-                <div className='rightContainer'>
-                    <div className='studyItem'>
-                        <div className='studyItemTitle'>Participants Count</div>
-                        <div className="studyItemContent">{data.num_of_participants.toLocaleString('en-US')}</div>
-                    </div>
-                    <div className='studyItem'>
-                        <div className='studyItemTitle'>Samples Count</div>
-                        <div className="studyItemContent">{data.num_of_samples.toLocaleString('en-US')}</div>
-                    </div>
-                    <div className='studyItem'>
-                        <div className='studyItemTitle'>Study Profile</div>
-                        <div className="studyItemContent">
-                            <TabsView data={data}/>
-                            <ModalView data={data}/>
-                        </div>
-                    </div>
-                </div>
+
+                {/* show tab content based on active tab default */}
+                {activeTab === TAB_LABELS.OVERVIEW && (
+                    <OverviewView data={data} />
+                )}
+
+                {/* If supporting data exists, show tab content based on active tab */}
+                {hasSupportingData && activeTab === TAB_LABELS.SUPPORTING_DATA && (
+                    <SupportingDataView data={data} />
+                )}
             </StudiesDetailBodyContainer>
+        
         </StudiesDetailContainer>
     )
 }

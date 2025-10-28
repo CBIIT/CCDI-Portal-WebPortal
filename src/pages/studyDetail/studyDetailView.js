@@ -218,7 +218,6 @@ const StudiesDetail = ({data}) => {
                 </div>
             </div>
         
-            {/* Conditionally render tabs only if supporting data exists */}
             <TabsContainer>
                 <div className='tabsWrapper'>
                     <TabsList>
@@ -229,7 +228,7 @@ const StudiesDetail = ({data}) => {
                         >
                             {TAB_LABELS.OVERVIEW}
                         </Tab>
-                        {/* SUPPORTING DATA Tab */}
+                        {/* SUPPORTING DATA Tab render only if supporting data exists */}
                         {hasSupportingData && (
                         <Tab 
                             active={activeTab === TAB_LABELS.SUPPORTING_DATA}

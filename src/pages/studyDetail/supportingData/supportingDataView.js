@@ -66,9 +66,9 @@ const SupportingDataView = ({ data, classes }) => {
                             <div className={classes.repositoryTitle}>
                                 <span className={classes.repositoryLabel}>REPOSITORY:</span>
                                 <span>{repository.data_name}</span>
-                                {repository.url && (
+                                {repository.data_url && (
                                     <a 
-                                        href={repository.url} 
+                                        href={repository.data_url} 
                                         target="_blank" 
                                         rel="noopener noreferrer"
                                         onClick={(e) => e.stopPropagation()}

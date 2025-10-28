@@ -193,7 +193,7 @@ const StudiesDetailBodyContainer = styled.div`
 const TAB_LABELS = {
     OVERVIEW: 'Overview',
     SUPPORTING_DATA: 'Supporting Data',
-}
+};
 
 const StudiesDetail = ({data}) => {
     const [activeTab, setActiveTab] = useState(TAB_LABELS.OVERVIEW);

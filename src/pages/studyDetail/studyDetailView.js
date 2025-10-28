@@ -171,7 +171,7 @@ const Tab = styled.button`
             bottom: -2px;
             left: 0;
             right: 0;
-            height: 3px;
+            height: 4px;
             background-color: #0E546E;
         }
     `}
@@ -219,28 +219,28 @@ const StudiesDetail = ({data}) => {
             </div>
         
             {/* Conditionally render tabs only if supporting data exists */}
-            {hasSupportingData && (
-                <TabsContainer>
-                    <div className='tabsWrapper'>
-                        <TabsList>
-                            {/* OVERVIEW Tab */}
-                            <Tab 
-                                active={activeTab === TAB_LABELS.OVERVIEW}
-                                onClick={() => setActiveTab(TAB_LABELS.OVERVIEW)}
-                            >
-                                {TAB_LABELS.OVERVIEW}
-                            </Tab>
-                            {/* SUPPORTING DATA Tab */}
-                            <Tab 
-                                active={activeTab === TAB_LABELS.SUPPORTING_DATA}
-                                onClick={() => setActiveTab(TAB_LABELS.SUPPORTING_DATA)}
-                            >
-                                {TAB_LABELS.SUPPORTING_DATA}
-                            </Tab>
-                        </TabsList>
-                    </div>
-                </TabsContainer>
-            )}
+            <TabsContainer>
+                <div className='tabsWrapper'>
+                    <TabsList>
+                        {/* OVERVIEW Tab */}
+                        <Tab 
+                            active={activeTab === TAB_LABELS.OVERVIEW}
+                            onClick={() => setActiveTab(TAB_LABELS.OVERVIEW)}
+                        >
+                            {TAB_LABELS.OVERVIEW}
+                        </Tab>
+                        {/* SUPPORTING DATA Tab */}
+                        {hasSupportingData && (
+                        <Tab 
+                            active={activeTab === TAB_LABELS.SUPPORTING_DATA}
+                            onClick={() => setActiveTab(TAB_LABELS.SUPPORTING_DATA)}
+                        >
+                            {TAB_LABELS.SUPPORTING_DATA}
+                        </Tab>
+                        )}
+                    </TabsList>
+                </div>
+            </TabsContainer>
 
             {/* Studies Detail Body Container */}
             <StudiesDetailBodyContainer>

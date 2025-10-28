@@ -94,7 +94,7 @@ const SupportingDataView = ({ data, classes }) => {
                                             {Object.entries(repository.data_object).map(([key, value], rowIndex) => (
                                                 <TableRow key={rowIndex}>
                                                     <TableCell>{key.replace(/_/g, ' ')}</TableCell>
-                                                    <TableCell>{value}</TableCell>
+                                                    <TableCell dangerouslySetInnerHTML={{ __html: value }}></TableCell>
                                                 </TableRow>
                                             ))}
                                         </TableBody>

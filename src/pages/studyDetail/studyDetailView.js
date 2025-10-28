@@ -5,8 +5,6 @@ import breadcrumbIcon from '../../assets/icons/Breadcrumb_Icon.svg';
 import bookIcon from '../../assets/studies/bookIcon.svg';
 import OverviewView from './overview/overviewView';
 import SupportingDataView from './supportingData/supportingDataView';
-// import TabsView from './tabs/TabsView';
-
 const StudiesDetailContainer = styled.div`
     .breadcrumb {
         font-family: Public Sans;

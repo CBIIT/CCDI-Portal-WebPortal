@@ -74,6 +74,7 @@ const ToastNotification = ({
         minWidth: '200px',
         maxWidth: '400px',
         animation: 'slideIn 0.3s ease-out',
+        pointerEvents: 'auto',
       }}
     >
       {getIcon()}

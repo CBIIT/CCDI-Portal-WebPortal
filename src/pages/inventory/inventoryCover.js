@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import {
     useLocation,
@@ -51,6 +51,8 @@ const InventoryCover = ({
 
     const generateFacetFilters = (filters, query, queryParams) => {
         let newFilterState = {};
+        let unknownAgesState = {};
+        
         queryParams.forEach((param) => {
             if (param === 'import_from' || param === 'p_id' || param === 'u' || param === 'u_fc' || param === 'u_um' || param === 'tab') {
                     return;
@@ -66,6 +68,16 @@ const InventoryCover = ({
                     } else {
                         filters[param] = [lowerBound, upperBound];
                         newFilterState[param] = [lowerBound, upperBound];
+                        
+                        // Handle unknownAges parameter for age-related filters
+                        const unknownAgesParam = `${param}_unknownAges`;
+                        const unknownAgesValue = query.get(unknownAgesParam);
+                        if (unknownAgesValue) {
+                            unknownAgesState[param] = unknownAgesValue;
+                        } else {
+                            // Default to "include" if not specified
+                            unknownAgesState[param] = 'include';
+                        }
                     }
                 } else {
                     filters[param] = paramValues.split('|');
@@ -76,7 +88,17 @@ const InventoryCover = ({
                 }
             }
         });
-        return newFilterState;
+        
+        // Set default unknownAges values for age-related parameters that don't have values
+        const ageRelatedParams = ['age_at_diagnosis', 'age_at_treatment_start', 'age_at_response', 'age_at_last_known_survival_status', 'participant_age_at_collection'];
+        ageRelatedParams.forEach(param => {
+            if (!unknownAgesState[param]) {
+                unknownAgesState[param] = 'include';
+            }
+        });
+        
+        // Add unknownAgesState to the return object
+        return { newFilterState, unknownAgesState };
     }
 
     useEffect(() => {
@@ -113,7 +135,19 @@ const InventoryCover = ({
             if (extraParticipantIds.length > 0) {
                 filters.import_data = extraParticipantIds;
             }
-            const newFilterState = generateFacetFilters(filters, query, queryParams);
+            const { newFilterState, unknownAgesState } = generateFacetFilters(filters, query, queryParams);
+
+            // Add unknownAges parameters to filters for GraphQL query
+            // Only include unknownAges parameters if they are not "include" (default)
+            Object.keys(unknownAgesState).forEach(key => {
+                const unknownAgesValue = unknownAgesState[key];
+                // Handle both string and array values
+                const value = Array.isArray(unknownAgesValue) ? unknownAgesValue[0] : unknownAgesValue;
+                if (value && value !== 'include') {
+                    const unknownAgesParam = `${key}_unknownAges`;
+                    filters[unknownAgesParam] = [value];
+                }
+            });
 
             // Update autocomplete data
             if (participant_id) {
@@ -200,6 +234,40 @@ const InventoryCover = ({
             continueWithFilters();
         }
     }, [searchParams, navigationType]);
+
+    // Listen for unknownAgesState changes and update URL
+    const unknownAgesState = useSelector((state) => state.statusReducer.unknownAgesState);
+    const [previousUnknownAgesState, setPreviousUnknownAgesState] = useState(null);
+    
+    useEffect(() => {
+        if (unknownAgesState && previousUnknownAgesState !== unknownAgesState) {
+            const query = new URLSearchParams(window.location.search);
+            let hasChanges = false;
+            
+            // Update URL with unknownAges parameters
+            Object.keys(unknownAgesState).forEach(key => {
+                const unknownAgesParam = `${key}_unknownAges`;
+                const value = unknownAgesState[key];
+                // Only update URL if value is not "include" (default)
+                if (value && value !== 'include') {
+                    query.set(unknownAgesParam, value);
+                    hasChanges = true;
+                } else if (value === 'include') {
+                    // Remove parameter if it's the default value
+                    query.delete(unknownAgesParam);
+                    hasChanges = true;
+                }
+            });
+            
+            // Update URL if there are changes
+            if (hasChanges) {
+                const newUrl = `/explore${query.toString() ? '?' + query.toString() : ''}`;
+                navigate(newUrl, { replace: true });
+            }
+            
+            setPreviousUnknownAgesState(unknownAgesState);
+        }
+    }, [unknownAgesState, navigate, previousUnknownAgesState]);
 
     useEffect(() => {
         return () => {

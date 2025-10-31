@@ -12,13 +12,15 @@ const styles = {
   },
   modalTitle: {
     fontFamily: 'Poppins',
-    fontSize: '15px',
+    fontSize: '19px',
     fontWeight: '400',
     margin: '15px 0',
     color: '#377E99',
   },
   modalTitleSpan: {
-    fontWeight: '700',
+    fontWeight: '600',
+    letterSpacing: '0.38px',
+    textDecorationLine: 'underline',
   },
 };
 

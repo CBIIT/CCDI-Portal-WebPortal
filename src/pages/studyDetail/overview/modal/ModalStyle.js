@@ -39,9 +39,8 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    borderBottom: '1px solid #eee',
-    padding: '16px',
-    paddingBottom: '8px',
+    borderBottom: '1px solid #BDBFC2',
+    padding: '16px 30px 8px 50px',
     marginBottom: '16px',
   },
   modalTitle: {
@@ -58,7 +57,7 @@ const styles = {
     padding: '4px',
   },
   modalBody: {
-    padding: '16px',
+    padding: '16px 50px',
     paddingTop: '0px',
   },
 };

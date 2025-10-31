@@ -31,14 +31,22 @@ import closeIcon from '../../assets/icons/Window_Close_Icon.svg';
 const ULSection = styled.ul`
   li {
     cursor: pointer;
-  }
-
-  li:hover {
-    opacity: 0.8;
+    
+    .categoryIcon {
+      display: none;
+    }
+    
+    &:hover {    
+      .categoryIcon {
+        display: block;
+      }
+    }
   }
 
   .categoryItemSelected {
-    background-color: #DDEDEE;
+    .categoryIcon {
+      display: block;
+    }
   }
 `;
 
@@ -252,7 +260,8 @@ const Inventory = ({
     }
   };
 
-  const handleCloseContentPanelClick = () => {
+  const handleCloseContentPanelClick = (event) => {
+    event.preventDefault();
     setSelectedSection(-1);
   };
 
@@ -267,7 +276,7 @@ const Inventory = ({
         <div className={classes.content}>
           <div className={classes.sideBar}>
             <div className={classes.sideBarCover} />
-            <label for="local_find_input" style={{ display: 'none' }}>Participant ID Text Search box</label>
+            <label htmlFor="local_find_input" style={{ display: 'none' }}>Participant ID Text Search box</label>
             <div className={classes.sideBarMenuSider}>
               <UseGuideButton />
               <ClearAllFiltersBtn
@@ -284,24 +293,27 @@ const Inventory = ({
                 {
                   sectionList.map((category, idx) => {
                     return (
-                      <>
-                      <Divider className={`${classes.divider} divider${idx}`}/>
-                      <li onClick={() => handleCategoryClick(idx)}>
-                        <div className={classes.categoryContainer}>
-                          <div>
-                            <span className={classes.categoryTitle}>{sectionLabel[category] !== undefined ? sectionLabel[category] : category}</span>
-                            <span className={classes.categoryCount}>
-                              {sectionCount[category] !== 0 ? (
-                                <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <circle cx="4.5" cy="4.5" r="4.5" fill={getDividerColor(idx)} />
-                                </svg>
-                              ) : ''}
-                            </span>
+                      <React.Fragment key={category}>
+                        <Divider className={`${classes.divider} divider${idx}`}/>
+                        <li 
+                          onClick={() => handleCategoryClick(idx)}
+                          className={selectedSection === idx ? 'categoryItemSelected' : ''}
+                        >
+                          <div className={classes.categoryContainer}>
+                            <div>
+                              <span className={classes.categoryTitle}>{sectionLabel[category] !== undefined ? sectionLabel[category] : category}</span>
+                              <span className={classes.categoryCount}>
+                                {sectionCount[category] !== 0 ? (
+                                  <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="4.5" cy="4.5" r="4.5" fill={getDividerColor(idx)} />
+                                  </svg>
+                                ) : ''}
+                              </span>
+                            </div>
+                            <img src={vectorIcon} alt="vector" className="categoryIcon" />
                           </div>
-                          {selectedSection === idx && <img src={vectorIcon} alt="vector" className={classes.categoryIcon} />}
-                        </div>
-                      </li>
-                      </>
+                        </li>
+                      </React.Fragment>
                     );
                   })
                 }
@@ -317,7 +329,7 @@ const Inventory = ({
           {
             <SideBarContentPanel selected={selectedSection}>
               <div className={classes.contentPanelHeader}>
-                <a onClick={() => handleCloseContentPanelClick()}>
+                <a href='/#' onClick={(event) => handleCloseContentPanelClick(event)}>
                   <img src={closeIcon} alt="close" className={classes.closeIcon} />
                 </a>
               </div>

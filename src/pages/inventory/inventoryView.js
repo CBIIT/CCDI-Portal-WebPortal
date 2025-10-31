@@ -27,6 +27,7 @@ import UseGuideButton from './sideBar/UserGuideButton.js';
 import { CircularProgress } from '@material-ui/core';
 import vectorIcon from '../../assets/icons/Vector_icon.svg';
 import closeIcon from '../../assets/icons/Window_Close_Icon.svg';
+import UserNotesButton from './sideBar/UserNotesButton.js';
 
 const ULSection = styled.ul`
   li {
@@ -270,6 +271,7 @@ const Inventory = ({
             <label for="local_find_input" style={{ display: 'none' }}>Participant ID Text Search box</label>
             <div className={classes.sideBarMenuSider}>
               <UseGuideButton />
+              <UserNotesButton />
               <ClearAllFiltersBtn
                 Component={CustomClearAllFiltersBtn}
                 activeFilters={activeFilters}

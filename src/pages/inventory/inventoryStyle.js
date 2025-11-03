@@ -150,6 +150,10 @@ export default () => ({
     justifyContent: 'space-between',
     height: '100%',
   },
+  categoryTitleContainer: {
+    display: 'flex',
+    alignItems: 'center',
+  },
   facetCategory: {
     cursor: 'pointer',
     '&:hover': {

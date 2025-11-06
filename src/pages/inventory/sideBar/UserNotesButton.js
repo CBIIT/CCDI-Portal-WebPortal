@@ -28,7 +28,6 @@ const UserNotesButtonContainer = styled.div`
 const UserNotesButton = ({classes}) => {
     const [open, setOpen] = useState(false);
     const [isHover, setIsHover] = useState(false);
-    // const [selectedNavTitle, setSelectedNavTitle] = useState('');
     
     const handleClickOpen = () => {
         setOpen(true);

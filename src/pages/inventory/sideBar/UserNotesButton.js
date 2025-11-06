@@ -59,7 +59,7 @@ const UserNotesButton = ({classes}) => {
                     <div>   
                         {/* Modal header with title and close button */}
                         <div className={classes.modalHeader}>
-                            <h2 className={classes.modalTitle}>Study Profile</h2>
+                            <h2 className={classes.modalTitle}>Notes to User</h2>
                             <IconButton
                                     aria-label="close"
                                     onClick={handleClose}

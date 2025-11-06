@@ -201,6 +201,7 @@ export default () => ({
   },
   contentPanelBody: {
     paddingTop: '20px',
+    backgroundColor: '#ffffff',
   },
   rightContent: {
     width: 'calc(100% - 540px)',

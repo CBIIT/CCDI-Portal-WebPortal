@@ -134,7 +134,7 @@ const theme = {
         },
         '&.demographicsSubjects': {
           color: '#7D267E',
-          backgroundColor: '#D8D8D8',
+          backgroundColor: '#F3DFF3',
           padding: '1px 2px',
           fontSize: '11px',
           fontFamily: 'Nunito',
@@ -145,7 +145,7 @@ const theme = {
         },
         '&.treatmentSubjects': {
           color: '#1F6BBF',
-          backgroundColor: '#D8D8D8',
+          backgroundColor: '#D9DFFF',
           padding: '1px 2px',
           fontSize: '11px',
           fontFamily: 'Nunito',
@@ -155,8 +155,8 @@ const theme = {
           textAlign: 'center',
         },
         '&.treatmentresponseSubjects': {
-          color: '#E9B34A',
-          backgroundColor: '#D8D8D8',
+          color: '#BD9038',
+          backgroundColor: '#F0DFBD',
           padding: '1px 2px',
           fontSize: '11px',
           fontFamily: 'Nunito',
@@ -167,7 +167,7 @@ const theme = {
         },
         '&.survivalSubjects': {
           color: '#CD5C4E',
-          backgroundColor: '#D8D8D8',
+          backgroundColor: '#F8D7D2',
           padding: '1px 2px',
           fontSize: '11px',
           fontFamily: 'Nunito',
@@ -178,7 +178,7 @@ const theme = {
         },
         '&.samplesSubjects': {
           color: '#1F6BBF',
-          backgroundColor: '#D8D8D8',
+          backgroundColor: '#D9DFFF',
           padding: '1px 2px',
           fontSize: '11px',
           fontFamily: 'Nunito',
@@ -188,8 +188,8 @@ const theme = {
           textAlign: 'center',
         },
         '&.datacategorySubjects': {
-          color: '#60C4A1',
-          backgroundColor: '#D8D8D8',
+          color: '#377861',
+          backgroundColor: '#D1E8E4',
           padding: '1px 2px',
           fontSize: '11px',
           fontFamily: 'Nunito',
@@ -200,7 +200,7 @@ const theme = {
         },
         '&.studySubjects': {
           color: '#357288',
-          backgroundColor: '#D8D8D8',
+          backgroundColor: '#C8E4F4',
           padding: '1px 2px',
           fontSize: '11px',
           fontFamily: 'Nunito',
@@ -211,7 +211,7 @@ const theme = {
         },
         '&.sequencinglibrarySubjects': {
           color: '#7D267E',
-          backgroundColor: '#D8D8D8',
+          backgroundColor: '#EDD1ED',
           padding: '1px 2px',
           fontSize: '11px',
           fontFamily: 'Nunito',

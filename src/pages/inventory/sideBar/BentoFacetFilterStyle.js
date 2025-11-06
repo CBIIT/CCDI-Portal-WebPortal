@@ -72,7 +72,7 @@ export default () => ({
     fontWeight: 400,
     lineHeight: '18px',
     marginLeft: '5px',
-    textTransform: 'uppercase',
+    textTransform: 'capitalize',
     letterSpacing: '-0.02em',
   },
   dropDownIconSubSection: {

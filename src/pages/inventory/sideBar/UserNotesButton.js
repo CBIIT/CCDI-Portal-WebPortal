@@ -47,7 +47,7 @@ const UserNotesButton = ({classes}) => {
                     onMouseEnter={() => setIsHover(true)}
                     onMouseLeave={() => setIsHover(false)}
                 >
-                    <img src={isHover? userguideIcon : userguideIconWhite} alt="user guide icon" />
+                    <img src={isHover ? userguideIcon : userguideIconWhite} alt="user guide icon" />
                 </Button>
                 <div className='buttonText'>Notes to User</div>
             </div>

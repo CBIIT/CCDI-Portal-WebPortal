@@ -200,7 +200,7 @@ export default () => ({
     }
   },
   contentPanelBody: {
-    paddingTop: '20px',
+    marginTop: '20px',
     backgroundColor: '#ffffff',
   },
   rightContent: {

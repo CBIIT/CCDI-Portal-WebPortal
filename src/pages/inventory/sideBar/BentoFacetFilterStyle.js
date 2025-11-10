@@ -1,10 +1,19 @@
 export default () => ({
   inputRoot: {
-    height: '26px',
+    height: '30px',
     borderRadius: '8px',
     color: '#646464',
     fontFamily: 'Nunito',
-    fontSize: 9,
+    fontSize: '14px',
+    '& input': {
+      height: '7px',
+      fontSize: '14px',
+      paddingLeft: '12px !important',
+    },
+    '& input::placeholder': {
+      color: '#757575',
+      opacity: 1,
+    },
     '& fieldset': {
       borderWidth: '1px !important',
       borderColor: '#003F74 !important',

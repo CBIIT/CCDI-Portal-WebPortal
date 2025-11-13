@@ -1,6 +1,5 @@
 import React from 'react';
 import { ThemeProvider, createTheme } from '@material-ui/core/styles';
-
 const theme = {
   overrides: {
     Mui: {
@@ -41,58 +40,58 @@ const theme = {
     MuiListItem: {
       root: {
         '&.diagnosisCheckedEven': {
-          backgroundColor: '#BBCFC840',
+          backgroundColor: '#E4F6F5',
         },
         '&.diagnosisCheckedOdd': {
-          backgroundColor: '#E4ECE940',
+          backgroundColor: '#EAFFFE',
         },
         '&.demographicsCheckedEven': {
-          backgroundColor: '#C8A4C840',
+          backgroundColor: '#E4F6F5',
         },
         '&.demographicsCheckedOdd': {
-          backgroundColor: '#E1C9E140',
+          backgroundColor: '#EAFFFE',
         },
         '&.treatmentCheckedEven': {
-          backgroundColor: '#D9DFFF40',
+          backgroundColor: '#E4F6F5',
         },
         '&.treatmentCheckedOdd': {
-          backgroundColor: '#DCDEED40',
+          backgroundColor: '#EAFFFE',
         },
         '&.treatmentresponseCheckedEven': {
-          backgroundColor: '#D9C5A040',
+          backgroundColor: '#E4F6F5',
         },
         '&.treatmentresponseCheckedOdd': {
-          backgroundColor: '#F0DFBD40',
+          backgroundColor: '#EAFFFE',
         },
         '&.survivalCheckedEven': {
-          backgroundColor: '#E1B4AD40',
+          backgroundColor: '#E4F6F5',
         },
         '&.survivalCheckedOdd': {
-          backgroundColor: '#F8D7D240',
+          backgroundColor: '#EAFFFE',
         },
         '&.samplesCheckedEven': {
-          backgroundColor: '#9FBCDD40',
+          backgroundColor: '#E4F6F5',
         },
         '&.samplesCheckedOdd': {
-          backgroundColor: '#CEDEF040',
+          backgroundColor: '#EAFFFE',
         },
         '&.datacategoryCheckedEven': {
-          backgroundColor: '#95C6B340',
+          backgroundColor: '#E4F6F5',
         },
         '&.datacategoryCheckedOdd': {
-          backgroundColor: '#DDEAE540',
+          backgroundColor: '#EAFFFE',
         },
         '&.studyCheckedEven': {
-          backgroundColor: '#BBCFC840',
+          backgroundColor: '#E4F6F5',
         },
         '&.studyCheckedOdd': {
-          backgroundColor: '#E4ECE940',
+          backgroundColor: '#EAFFFE',
         },
         '&.sequencinglibraryCheckedEven': {
-          backgroundColor: '#C8A4C840',
+          backgroundColor: '#E4F6F5',
         },
         '&.sequencinglibraryCheckedOdd': {
-          backgroundColor: '#E1C9E140',
+          backgroundColor: '#EAFFFE',
         },
       },
     },
@@ -121,64 +120,85 @@ const theme = {
     MuiTypography: {
       root: {
         '&.diagnosisSubjects': {
-          color: '#357288',
-          fontSize: '12px',
+          color: '#325A67',
+          backgroundColor: '#CEECEB',
+          padding: '1px 2px',
+          fontSize: '11px',
           fontFamily: 'Nunito',
           marginRight: '0px',
           fontWeight: '600',
+
         },
         '&.demographicsSubjects': {
-          color: '#7D267E',
-          fontSize: '12px',
+          color: '#325A67',
+          backgroundColor: '#CEECEB',
+          padding: '1px 2px',
+          fontSize: '11px',
           fontFamily: 'Nunito',
           marginRight: '0px',
           fontWeight: '600',
+
         },
         '&.treatmentSubjects': {
-          color: '#1F6BBF',
-          fontSize: '12px',
+          color: '#325A67',
+          backgroundColor: '#CEECEB',
+          padding: '1px 2px',
+          fontSize: '11px',
           fontFamily: 'Nunito',
           marginRight: '0px',
           fontWeight: '600',
+
         },
         '&.treatmentresponseSubjects': {
-          color: '#E9B34A',
-          fontSize: '12px',
+          color: '#325A67',
+          backgroundColor: '#CEECEB',
+          padding: '1px 2px',
+          fontSize: '11px',
           fontFamily: 'Nunito',
           marginRight: '0px',
           fontWeight: '600',
         },
         '&.survivalSubjects': {
-          color: '#CD5C4E',
-          fontSize: '12px',
+          color: '#325A67',
+          backgroundColor: '#CEECEB',
+          padding: '1px 2px',
+          fontSize: '11px',
           fontFamily: 'Nunito',
           marginRight: '0px',
           fontWeight: '600',
         },
         '&.samplesSubjects': {
-          color: '#1F6BBF',
-          fontSize: '12px',
+          color: '#325A67',
+          backgroundColor: '#CEECEB',
+          padding: '1px 2px',
+          fontSize: '11px',
           fontFamily: 'Nunito',
           marginRight: '0px',
           fontWeight: '600',
         },
         '&.datacategorySubjects': {
-          color: '#60C4A1',
-          fontSize: '12px',
+          color: '#325A67',
+          backgroundColor: '#CEECEB',
+          padding: '1px 2px',
+          fontSize: '11px',
           fontFamily: 'Nunito',
           marginRight: '0px',
           fontWeight: '600',
         },
         '&.studySubjects': {
-          color: '#357288',
-          fontSize: '12px',
+          color: '#325A67',
+          backgroundColor: '#CEECEB',
+          padding: '1px 2px',
+          fontSize: '11px',
           fontFamily: 'Nunito',
           marginRight: '0px',
           fontWeight: '600',
         },
         '&.sequencinglibrarySubjects': {
-          color: '#7D267E',
-          fontSize: '12px',
+          color: '#325A67',
+          backgroundColor: '#CEECEB',
+          padding: '1px 2px',
+          fontSize: '11px',
           fontFamily: 'Nunito',
           marginRight: '0px',
           fontWeight: '600',

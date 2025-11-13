@@ -1,7 +1,5 @@
 import React from 'react';
 import { ThemeProvider, createTheme } from '@material-ui/core/styles';
-import { pad } from 'lodash';
-
 const theme = {
   overrides: {
     Mui: {

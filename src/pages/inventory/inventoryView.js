@@ -27,18 +27,27 @@ import UseGuideButton from './sideBar/UserGuideButton.js';
 import { CircularProgress } from '@material-ui/core';
 import vectorIcon from '../../assets/icons/Vector_icon.svg';
 import closeIcon from '../../assets/icons/Window_Close_Icon.svg';
+import UserNotesButton from './sideBar/UserNotesButton.js';
 
 const ULSection = styled.ul`
   li {
     cursor: pointer;
-  }
-
-  li:hover {
-    opacity: 0.8;
+    
+    .categoryIcon {
+      display: none;
+    }
+    
+    &:hover {    
+      .categoryIcon {
+        display: block;
+      }
+    }
   }
 
   .categoryItemSelected {
-    background-color: #DDEDEE;
+    .categoryIcon {
+      display: block;
+    }
   }
 `;
 
@@ -252,7 +261,8 @@ const Inventory = ({
     }
   };
 
-  const handleCloseContentPanelClick = () => {
+  const handleCloseContentPanelClick = (event) => {
+    event.preventDefault();
     setSelectedSection(-1);
   };
 
@@ -267,9 +277,10 @@ const Inventory = ({
         <div className={classes.content}>
           <div className={classes.sideBar}>
             <div className={classes.sideBarCover} />
-            <label for="local_find_input" style={{ display: 'none' }}>Participant ID Text Search box</label>
+            <label htmlFor="local_find_input" style={{ display: 'none' }}>Participant ID Text Search box</label>
             <div className={classes.sideBarMenuSider}>
               <UseGuideButton />
+              <UserNotesButton />
               <ClearAllFiltersBtn
                 Component={CustomClearAllFiltersBtn}
                 activeFilters={activeFilters}
@@ -317,7 +328,7 @@ const Inventory = ({
           {
             <SideBarContentPanel selected={selectedSection}>
               <div className={classes.contentPanelHeader}>
-                <a onClick={() => handleCloseContentPanelClick()}>
+                <a href='/#' onClick={(event) => handleCloseContentPanelClick(event)}>
                   <img src={closeIcon} alt="close" className={classes.closeIcon} />
                 </a>
               </div>

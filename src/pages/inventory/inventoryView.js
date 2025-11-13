@@ -284,24 +284,24 @@ const Inventory = ({
                 {
                   sectionList.map((category, idx) => {
                     return (
-                      <>
-                      <Divider className={`${classes.divider} divider${idx}`}/>
-                      <li onClick={() => handleCategoryClick(idx)}>
-                        <div className={classes.categoryContainer}>
-                          <div className={classes.categoryTitleContainer}>
-                            <span className={classes.categoryTitle}>{sectionLabel[category] !== undefined ? sectionLabel[category] : category}</span>
-                            <span className={classes.categoryCount}>
-                              {sectionCount[category] !== 0 ? (
-                                <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <circle cx="4.5" cy="4.5" r="4.5" fill={getDividerColor(idx)} />
-                                </svg>
-                              ) : ''}
-                            </span>
+                      <React.Fragment key={category}>
+                        <Divider className={`${classes.divider} divider${idx}`}/>
+                        <li onClick={() => handleCategoryClick(idx)}>
+                          <div className={classes.categoryContainer}>
+                            <div className={classes.categoryTitleContainer}>
+                              <span className={classes.categoryTitle}>{sectionLabel[category] !== undefined ? sectionLabel[category] : category}</span>
+                              <span className={classes.categoryCount}>
+                                {sectionCount[category] !== 0 ? (
+                                  <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="4.5" cy="4.5" r="4.5" fill={getDividerColor(idx)} />
+                                  </svg>
+                                ) : ''}
+                              </span>
+                            </div>
+                            {selectedSection === idx && <img src={vectorIcon} alt="vector" className={classes.categoryIcon} />}
                           </div>
-                          {selectedSection === idx && <img src={vectorIcon} alt="vector" className={classes.categoryIcon} />}
-                        </div>
-                      </li>
-                      </>
+                        </li>
+                      </React.Fragment>
                     );
                   })
                 }

@@ -129,7 +129,6 @@ const theme = {
           fontFamily: 'Nunito',
           marginRight: '0px',
           fontWeight: '600',
-
         },
         '&.demographicsSubjects': {
           color: '#325A67',
@@ -139,7 +138,6 @@ const theme = {
           fontFamily: 'Nunito',
           marginRight: '0px',
           fontWeight: '600',
-
         },
         '&.treatmentSubjects': {
           color: '#325A67',
@@ -149,7 +147,6 @@ const theme = {
           fontFamily: 'Nunito',
           marginRight: '0px',
           fontWeight: '600',
-
         },
         '&.treatmentresponseSubjects': {
           color: '#325A67',

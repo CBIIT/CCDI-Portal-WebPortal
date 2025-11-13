@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { Grid, withStyles } from '@material-ui/core';
 import { 
   TableContextProvider,
@@ -12,6 +12,7 @@ import { configColumn } from './tableConfig/Column';
 import { configWrapper, wrapperConfig } from './wrapperConfig/Wrapper';
 import { customTheme } from './wrapperConfig/Theme';
 import { queryParams } from '../../../bento/dashTemplate';
+import { GET_FILENAMES_QUERY } from '../../../bento/dashboardTabData';
 
 
 const TabView = (props) => {
@@ -28,6 +29,12 @@ const TabView = (props) => {
     activeTab,
     tab,
   } = props;
+
+  // State for file search functionality
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResultCount, setSearchResultCount] = useState(null);
+  const [columnState, setColumnState] = useState(null);
+  const isFilesTab = config.paginationAPIField === 'fileOverview';
   /*
   * useReducer table state
   * paginated table update data when state change
@@ -51,13 +58,60 @@ const TabView = (props) => {
   * 11. selectedRows: (Optional) provides ids of the selected row (id defined by dataKey)
   * 12. themeConfig - (optional) configure table style
   */
+  // Handler for file search
+  const handleFileSearch = useCallback((term) => {
+    setSearchTerm(term);
+    // Reset count when search term changes
+    if (!term) {
+      setSearchResultCount(null);
+    }
+  }, []);
+
+  // Handler for search result count update
+  const handleSearchResultCount = useCallback((count) => {
+    setSearchResultCount(count);
+  }, []);
+
+  // Handler for column state change
+  const handleColumnStateChange = useCallback((columns) => {
+    setColumnState(columns);
+  }, []);
+
+  // Determine which query to use based on search state
+  const getQuery = () => {
+    if (isFilesTab && searchTerm) {
+      return GET_FILENAMES_QUERY;
+    }
+    return config.api;
+  };
+
+  // Determine pagination API field based on search state
+  const getPaginationAPIField = () => {
+    if (isFilesTab && searchTerm) {
+      return 'getFilenames';
+    }
+    return config.paginationAPIField;
+  };
+
+  // Determine query variables based on search state
+  const getQueryVariables = () => {
+    if (isFilesTab && searchTerm) {
+      // Merge activeFilters with the filename search parameter
+      return { 
+        ...activeFilters,
+        filename: searchTerm 
+      };
+    }
+    return activeFilters;
+  };
+
   const initTblState = (initailState) => ({
     ...initailState,
     title: config.name,
-    query: config.api,
-    paginationAPIField: config.paginationAPIField,
+    query: getQuery(),
+    paginationAPIField: getPaginationAPIField(),
     dataKey: config.dataKey,
-    columns: configColumn(config.columns),
+    columns: columnState || configColumn(config.columns),
     count: dashboardStats[config.count],
     selectedRows: [],
     hiddenSelectedRows: [],
@@ -92,13 +146,18 @@ const TabView = (props) => {
         <Grid container>
           <Grid item xs={12} id={config.tableID}>
             <TableView
+              key={`${config.tableID}-${searchTerm}`}
               initState={initTblState}
               themeConfig={themeConfig}
-              queryVariables={activeFilters}
-              totalRowCount={dashboardStats[config.count]}
+              queryVariables={getQueryVariables()}
+              totalRowCount={searchResultCount !== null ? searchResultCount : dashboardStats[config.count]}
               activeTab={activeTab}
               queryParams={queryParams}
               navigation={handleNavigate}
+              onSearch={isFilesTab ? handleFileSearch : undefined}
+              searchValue={searchTerm}
+              onSearchResultCount={isFilesTab ? handleSearchResultCount : undefined}
+              onColumnStateChange={isFilesTab ? handleColumnStateChange : undefined}
             />
           </Grid>
         </Grid>

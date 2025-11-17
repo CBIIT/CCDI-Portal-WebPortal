@@ -2114,6 +2114,8 @@ export const tabContainers = [
         header: 'Participant ID',
         display: true,
         tooltipText: 'sort',
+        cellType: cellTypes.CUSTOM_ELEM,
+        cellStyle: cellStyles.MODAL,
         role: cellTypes.DISPLAY,
       },
       {
@@ -2121,6 +2123,8 @@ export const tabContainers = [
         header: 'Sample ID',
         display: true,
         tooltipText: 'sort',
+        cellType: cellTypes.CUSTOM_ELEM,
+        cellStyle: cellStyles.MODAL,
         role: cellTypes.DISPLAY,
       },
       {

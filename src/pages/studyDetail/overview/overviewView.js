@@ -2,12 +2,13 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import exportIcon from '../../../assets/studies/exportIcon.svg';
 import manifestIcon from '../../../assets/studies/manifestIcon.svg';
-import { studyDownloadLinks } from '../../../bento/studiesData';
+import { studyDownloadLinks, studycBioPortalLinks } from '../../../bento/studiesData';
 import TabsView from './tabs/TabsView';
 import ModalView from './modal/ModalView';
 import { styles } from './overviewStyle';
 
 const OverviewView = ({ data, classes }) => {
+    console.log(data);
     return (
         <div className={classes.container}>
             {/* Left Container for Study Details */}
@@ -56,9 +57,9 @@ const OverviewView = ({ data, classes }) => {
                             Download Study Manifest
                             <img className={classes.studyManifestIcon} src={manifestIcon} alt="manifestIcon" />
                         </a>
-                        {data.study_id === 'phs002790' && <>
+                        {studycBioPortalLinks[data.study_id] && <>
                             <br/>
-                            <a href="https://cbioportal.ccdi.cancer.gov/" target="_blank" rel="noopener noreferrer">
+                            <a href={studycBioPortalLinks[data.study_id]} target="_blank" rel="noopener noreferrer">
                                 View in CCDI cBioPortal Data Explorer
                                 <img className={classes.exportIcon} src={exportIcon} alt="exportIcon" />
                             </a>

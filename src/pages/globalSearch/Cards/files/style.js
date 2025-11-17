@@ -196,6 +196,7 @@ const useStyles = makeStyles((theme) => {
       flexDirection: 'column',
       margin: '0px',
       padding: '0px',
+      position: 'relative', // For absolute positioning of arrow
       [mdBreakpoint]: {
         flexDirection: 'row',
         alignItems: 'flex-start',
@@ -216,8 +217,14 @@ const useStyles = makeStyles((theme) => {
       flexDirection: 'column',
       flex: '1',
       minWidth: '0',
+      position: 'relative', // For absolute positioning of arrow
+      '@media (max-width: 749px)': {
+        width: '100%', // Full width on mobile
+        maxWidth: '100%',
+      },
       [mdBreakpoint]: {
         minWidth: '180px',
+        maxWidth: 'none',
       },
       '& $keyAndValueRow': {
         '& $key': {
@@ -225,7 +232,6 @@ const useStyles = makeStyles((theme) => {
           flexShrink: 0,
         },
         '& $value': {
-          whiteSpace: 'nowrap',
           minWidth: 0,
           flex: 1,
         },
@@ -250,6 +256,79 @@ const useStyles = makeStyles((theme) => {
         backgroundColor: '#ffffff',
         border: '1px solid #000000',
       },
+    },
+    participantContainer: {
+      paddingLeft: '15px',
+      width: '100%',
+      paddingRight: '40px', // Make space for the arrow
+      lineHeight: '22px',
+      [mdBreakpoint]: {
+        paddingLeft: '15px',
+        paddingRight: '45px',
+      },
+      '@media (max-width: 749px)': {
+        paddingLeft: '8px',
+        paddingRight: '35px',
+        maxWidth: 'none', // Allow full width on mobile
+      },
+    },
+    expandToggle: {
+      cursor: 'pointer',
+      position: 'absolute',
+      top: '5px',
+      right: '20px',
+      display: 'flex',
+      alignItems: 'flex-start',
+      '&:hover': {
+        opacity: '0.7',
+      },
+      '@media (max-width: 600px)': {
+        top: '18px', // Position to align with value text on mobile
+        right: '0px',
+      },
+    },
+    expandIcon: {
+      fontSize: '18px',
+      color: '#000000',
+      [mdBreakpoint]: {
+        fontSize: '18px',
+      },
+      '@media (max-width: 600px)': {
+        fontSize: '16px',
+      },
+    },
+    participantTextContainer: {
+      width: '100%',
+      minWidth: 0,
+      maxWidth: '100%',
+      overflow: 'hidden',
+    },
+    clickableText: {
+      cursor: 'pointer',
+      '&:hover': {
+        opacity: '0.7',
+      },
+    },
+    sampleContainer: {
+      paddingLeft: '15px',
+      width: '100%',
+      paddingRight: '40px', // Make space for the arrow
+      lineHeight: '22px',
+      [mdBreakpoint]: {
+        paddingLeft: '15px',
+        paddingRight: '45px',
+      },
+      '@media (max-width: 749px)': {
+        paddingLeft: '8px',
+        paddingRight: '35px',
+        maxWidth: 'none', // Allow full width on mobile
+      },
+    },
+    sampleTextContainer: {
+      width: '100%',
+      minWidth: 0,
+      maxWidth: '100%',
+      overflow: 'hidden',
     },
   }
 });

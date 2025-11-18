@@ -143,8 +143,12 @@ const ParticipantCard = ({ data = {}, index, addFiles, setAlterDisplay, setOpenS
     cohortDispatch(onAddParticipantsToCohort(
       cohortId,
       [participantData],
-      () => {
-        showNotification(`Participant added to ${cohortName}`, 'success');
+      (count) => {
+        if (count === 0) {
+          showNotification(`Participant is already in ${cohortName}`, 'info');
+        } else {
+          showNotification(`Participant added to ${cohortName}`, 'success');
+        }
       },
       (error) => {
         showNotification(`Failed to add participant to ${cohortName}`, 'error');
@@ -180,8 +184,19 @@ const ParticipantCard = ({ data = {}, index, addFiles, setAlterDisplay, setOpenS
         const fileCount = ids.length;
         if (fileCount <= upperLimit && cartCount < upperLimit) {
                   if (cartCount + ids.length <= upperLimit) {
-                    // Directly add files to cart without confirmation dialog
-                    addFiles(ids);
+                    // Check for duplicates first
+                    const cartFilesDict = {};
+                    cartFiles.forEach((file) => { cartFilesDict[file] = true; });
+                    const newIds = checkDuplicate(cartFilesDict, ids);
+                    
+                    if (newIds.length === 0) {
+                      // All files are already in cart
+                      showNotification('Files already in cart', 'info');
+                    } else {
+                      // Add new files to cart
+                      addFiles(newIds);
+                      showNotification(`${newIds.length} File(s) successfully added to your cart`, 'success');
+                    }
 
                     if (setOpenSnackbar) {
                       setOpenSnackbar(true);
@@ -191,8 +206,14 @@ const ParticipantCard = ({ data = {}, index, addFiles, setAlterDisplay, setOpenS
                     cartFiles.forEach((file) => { cartFilesDict[file] = true; });
                     const newIds = checkDuplicate(cartFilesDict, ids);
                     if (cartCount + newIds.length <= upperLimit) {
-                      // Directly add files to cart without confirmation dialog
-                      addFiles(newIds);
+                      if (newIds.length === 0) {
+                        // All files are already in cart
+                        showNotification('Files already in cart', 'info');
+                      } else {
+                        // Add new files to cart
+                        addFiles(newIds);
+                        showNotification(`${newIds.length} File(s) successfully added to your cart`, 'success');
+                      }
                       if (setOpenSnackbar) {
                         setOpenSnackbar(true);
                       }

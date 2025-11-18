@@ -40,6 +40,8 @@ const ToastNotification = ({
         return <CheckCircleIcon style={{ color: 'white', fontSize: '20px' }} />;
       case 'error':
         return <ErrorIcon style={{ color: 'white', fontSize: '20px' }} />;
+      case 'info':
+        return <CheckCircleIcon style={{ color: 'white', fontSize: '20px' }} />;
       default:
         return <CheckCircleIcon style={{ color: 'white', fontSize: '20px' }} />;
     }
@@ -51,6 +53,8 @@ const ToastNotification = ({
         return '#4CAF50';
       case 'error':
         return '#F44336';
+      case 'info':
+        return '#757575';
       default:
         return '#4CAF50';
     }

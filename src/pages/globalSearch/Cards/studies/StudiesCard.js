@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
+import { studyDownloadLinks, openDoubleLink } from '../../../../bento/studiesData';
 
 // Utility function to truncate title with start...end format
 const truncateTitle = (title, containerWidth) => {
@@ -101,6 +102,16 @@ const StudiesCard = ({ data = {}, index }) => {
     window.open('https://cbioportal.ccdi.cancer.gov/', '_blank');
   };
 
+  const handleDownloadManifest = () => {
+    const downloadUrl = studyDownloadLinks[study_id];
+    if (downloadUrl) {
+      const fileName = `${study_id}_CCDI_Study_Manifest.xlsx`;
+      openDoubleLink(downloadUrl, fileName);
+    } else {
+      console.warn(`No download link found for study: ${study_id}`);
+    }
+  };
+
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -179,6 +190,17 @@ const StudiesCard = ({ data = {}, index }) => {
                     >
                       <ListItemText 
                         primary="VIEW STUDY" 
+                        className={classes.dropdownItemText}
+                      />
+                    </ListItem>
+                    
+                    <ListItem 
+                      button 
+                      className={classes.dropdownItem}
+                      onClick={handleDownloadManifest}
+                    >
+                      <ListItemText 
+                        primary="DOWNLOAD MANIFEST" 
                         className={classes.dropdownItemText}
                       />
                     </ListItem>

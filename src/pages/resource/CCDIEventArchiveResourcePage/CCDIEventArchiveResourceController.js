@@ -28,7 +28,7 @@ const CCDIEventArchiveResourceController = ({ match }) => {
     };
     fetchData();
   }, []);
-  if (data.toolsContent) {
+  if (data.ccdiEventAnnouncementsContent) {
     return <CCDIEventArchiveResourceView data={data} />;
   } else {
     return <div />

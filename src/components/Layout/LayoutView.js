@@ -51,7 +51,7 @@ const Layout = () => {
           <Route path="/ccdi-participant-index" element={<CPIResourceView />} />
           <Route path="/publications" element={<PublicationsView />} />
           <Route path="/tools" element={<ToolsResourceView />} />
-          <Route path="/CCDI-events-archive" element={<CCDIEventArchiveResourceView />} />
+          <Route path="/ccdi-events-announcements" element={<CCDIEventArchiveResourceView />} />
           {/* <Route path="/pediatric-adolescent-and-young-adult-rare-cancer-study" element={<RareCancerResourceView/>} /> */}
           <Route path="/release-notes" element={<ReleaseNotesPageView />} />
           <Route path="/cohortAnalyzer" element={<CohortAnalyzerController />} />

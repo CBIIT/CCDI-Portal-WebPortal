@@ -120,11 +120,6 @@ export const navbarSublists = {
   //   className: 'navMobileSubItem',
   // },
   {
-    name:'CCDI Events Archive',
-    link: '/CCDI-events-archive',
-    className: 'navMobileSubItem',
-  },
-  {
     name:'Tools',
     link: '/tools',
     className: 'navMobileSubItem',
@@ -174,6 +169,11 @@ export const navbarSublists = {
     {
       name: 'User Guide',
       link: '/user-guide.pdf',
+      className: 'navMobileSubItem',
+    },
+    {
+      name:'CCDI Events Announcements',
+      link: '/ccdi-events-announcements',
       className: 'navMobileSubItem',
     },
   ],

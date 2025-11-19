@@ -6,7 +6,7 @@ import exportIconBlue from '../../../assets/icons/Export_Icon.svg';
 import closeIcon from '../../../assets/icons/Close_Icon.svg';
 import arrowDownIcon from '../../../assets/icons/Arrow_Down.svg';
 
-const CCDIEventArchiveContainer = styled.div`
+const CCDIContainer = styled.div`
     width: 100%;
 
     .headerContainer {
@@ -41,7 +41,6 @@ const CCDIEventArchiveContainer = styled.div`
 
     .headerText {
         line-height: 38px;
-        width: 320px;
         /* Remove padding-top and margin to allow flex centering */
         padding-top: 0;
         margin: 0;
@@ -53,7 +52,7 @@ const CCDIEventArchiveContainer = styled.div`
     }
 `;
 
-const CCDIEventArchiveBody = styled.div`
+const CCDIBody = styled.div`
     @media (min-width: 1420px) {
         width: 1420px;
     }
@@ -342,9 +341,9 @@ const CCDIEventArchiveBody = styled.div`
 const CCDIEventArchiveResourceView = ({data}) => {
     const [selectedNavTitle, setSelectedNavTitle] = useState('');
     const [stickyNavStyle, setStickyNavStyle] = useState('navList');
-    const ccdiEventArchiveContent = data.ccdiEventArchiveContent;
+    const ccdiContent = data.ccdiEventAnnouncementsContent;
     const sectionList = useRef([]);
-    sectionList.current = ccdiEventArchiveContent.map((element, i) => {
+    sectionList.current = ccdiContent.map((element, i) => {
         return sectionList.current[i] || createRef()
     });
     const handleScroll = () => {
@@ -402,22 +401,22 @@ const CCDIEventArchiveResourceView = ({data}) => {
     }
 
     return (
-        <CCDIEventArchiveContainer>
-             <div className='headerContainer'><div className='headerText'>Tools</div></div>
-            <CCDIEventArchiveBody id='CCDIEventArchiveBody'>
+        <CCDIContainer>
+             <div className='headerContainer'><div className='headerText'>CCDI Events Announcements</div></div>
+            <CCDIBody id='CCDIEventArchiveBody'>
                 <div className='navSection'>
                     <div className={stickyNavStyle} id='leftNav'>
                         <div className='navTitle'>TOPICS</div>
                         {
-                            ccdiEventArchiveContent && ccdiEventArchiveContent.map((toolsItem, topicid) => {
+                            ccdiContent && ccdiContent.map((ccdiContentItem, topicid) => {
                                 const topickey = `topic_${topicid}`;
-                                if (toolsItem.topic) {
+                                if (ccdiContentItem.topic) {
                                     return (
-                                        <div name={toolsItem.id} className={selectedNavTitle === toolsItem.id ? 'navTopicItem selected' : 'navTopicItem'} key={topickey} onClick={handleClickEvent}>{toolsItem.topic}</div>
+                                        <div name={ccdiContentItem.id} className={selectedNavTitle === ccdiContentItem.id ? 'navTopicItem selected' : 'navTopicItem'} key={topickey} onClick={handleClickEvent}>{ccdiContentItem.topic}</div>
                                     )
                                 }
                                 return (
-                                    <div name={toolsItem.id} className={selectedNavTitle === toolsItem.id ? 'navTopicItem selected subtitle' : 'navTopicItem subtitle'} key={topickey} onClick={handleClickEvent}>{toolsItem.subtopic}</div>
+                                    <div name={ccdiContentItem.id} className={selectedNavTitle === ccdiContentItem.id ? 'navTopicItem selected subtitle' : 'navTopicItem subtitle'} key={topickey} onClick={handleClickEvent}>{ccdiContentItem.subtopic}</div>
                                 )
                             })
                         }
@@ -425,20 +424,20 @@ const CCDIEventArchiveResourceView = ({data}) => {
                 </div>
                 <div className='contentSection'>
                     <div className='contentList'>
-                    {data.ccdiEventArchiveIntroText && <div className='introContainer'>{ReactHtmlParser(data.ccdiEventArchiveIntroText)}</div>}
+                    {data.ccdiEventAnnouncementsIntroText && <div className='introContainer'>{ReactHtmlParser(data.ccdiEventAnnouncementsIntroText)}</div>}
                         {
-                            ccdiEventArchiveContent && ccdiEventArchiveContent.map((toolsItem, toolid) => {
-                                const toolkey = `federation_${toolid}`;
+                            ccdiContent && ccdiContent.map((ccdiItem, ccdiId) => {
+                                const toolkey = `federation_${ccdiId}`;
                                 return (
                                     <div key={toolkey}>
-                                        <div id={toolsItem.id} className='mciTitle'>{toolsItem.topic && toolsItem.topic}</div>
-                                        {/* <div id={toolsItem.id} className='mciSubtitle'>{toolsItem.subtopic && toolsItem.subtopic}</div> */}
-                                        <div id={toolsItem.id} name={toolid} className='mciTitleMobile sectionCollapse' onClick={handleCollapseSection}>{toolsItem.topic && toolsItem.topic}</div>
-                                        <div className="mciSection mobileCollapse" ref={sectionList.current[toolid]}>
+                                        <div id={ccdiItem.id} className='mciTitle'>{ccdiItem.topic && ccdiItem.topic}</div>
+                                        {/* <div id={ccdiItem.id} className='mciSubtitle'>{ccdiItem.subtopic && ccdiItem.subtopic}</div> */}
+                                        <div id={ccdiItem.id} name={ccdiId} className='mciTitleMobile sectionCollapse' onClick={handleCollapseSection}>{ccdiItem.topic && ccdiItem.topic}</div>
+                                        <div className="mciSection mobileCollapse" ref={sectionList.current[ccdiId]}>
                                             <div className='mciContentContainer'>
-                                                {toolsItem.content && ReactHtmlParser(toolsItem.content)}
+                                                {ccdiItem.content && ReactHtmlParser(ccdiItem.content)}
                                             </div>
-                                            {toolsItem.content && <div style={{height: '40px'}} />}
+                                            {ccdiItem.content && <div style={{height: '40px'}} />}
                                         </div>
                                     </div>
                                 )
@@ -446,8 +445,8 @@ const CCDIEventArchiveResourceView = ({data}) => {
                         }
                     </div>
                 </div>
-            </CCDIEventArchiveBody>
-        </CCDIEventArchiveContainer>
+            </CCDIBody>
+        </CCDIContainer>
     )
 }
 

@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import env from '../../../utils/env';
 import yaml from "js-yaml";
 import axios from "axios";
-import CCDIEventArchiveResourceView from "./CCDIEventArchiveResourceView";
+import CCDIEventAnnouncementsResourceView from "./CCDIEventAnnouncementsResourceView";
 
 const RESOURCE_URL = env.REACT_APP_STATIC_CONTENT_URL + '/resourceData.yaml';
 
-const CCDIEventArchiveResourceController = ({ match }) => {
+const CCDIEventAnnouncementsResourceController = ({ match }) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -29,9 +29,9 @@ const CCDIEventArchiveResourceController = ({ match }) => {
     fetchData();
   }, []);
   if (data.ccdiEventAnnouncementsContent) {
-    return <CCDIEventArchiveResourceView data={data} />;
+    return <CCDIEventAnnouncementsResourceView data={data} />;
   } else {
     return <div />
   }
 };
-export default CCDIEventArchiveResourceController;
+export default CCDIEventAnnouncementsResourceController;

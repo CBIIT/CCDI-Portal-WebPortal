@@ -338,7 +338,7 @@ const CCDIBody = styled.div`
     }
 `;
 
-const CCDIEventArchiveResourceView = ({data}) => {
+const CCDIEventAnnouncementsResourceView = ({data}) => {
     const [selectedNavTitle, setSelectedNavTitle] = useState('');
     const [stickyNavStyle, setStickyNavStyle] = useState('navList');
     const ccdiContent = data.ccdiEventAnnouncementsContent;
@@ -450,4 +450,4 @@ const CCDIEventArchiveResourceView = ({data}) => {
     )
 }
 
-export default CCDIEventArchiveResourceView;
+export default CCDIEventAnnouncementsResourceView;

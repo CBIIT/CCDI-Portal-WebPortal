@@ -172,7 +172,7 @@ export const navbarSublists = {
       className: 'navMobileSubItem',
     },
     {
-      name:'CCDI Events Announcements',
+      name: 'CCDI Events Announcements',
       link: '/ccdi-events-announcements',
       className: 'navMobileSubItem',
     },

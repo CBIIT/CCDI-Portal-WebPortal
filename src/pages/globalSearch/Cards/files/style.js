@@ -260,15 +260,16 @@ const useStyles = makeStyles((theme) => {
     participantContainer: {
       paddingLeft: '15px',
       width: '100%',
-      paddingRight: '40px', // Make space for the arrow
+      paddingRight: '45px', // Make space for the arrow
       lineHeight: '22px',
+      boxSizing: 'border-box',
       [mdBreakpoint]: {
         paddingLeft: '15px',
         paddingRight: '45px',
       },
       '@media (max-width: 749px)': {
         paddingLeft: '8px',
-        paddingRight: '35px',
+        paddingRight: '40px',
         maxWidth: 'none', // Allow full width on mobile
       },
     },
@@ -302,6 +303,11 @@ const useStyles = makeStyles((theme) => {
       minWidth: 0,
       maxWidth: '100%',
       overflow: 'hidden',
+      boxSizing: 'border-box',
+      '& .MuiTypography-root': {
+        maxWidth: '100%',
+        boxSizing: 'border-box',
+      },
     },
     clickableText: {
       cursor: 'pointer',
@@ -312,15 +318,16 @@ const useStyles = makeStyles((theme) => {
     sampleContainer: {
       paddingLeft: '15px',
       width: '100%',
-      paddingRight: '40px', // Make space for the arrow
+      paddingRight: '45px', // Make space for the arrow
       lineHeight: '22px',
+      boxSizing: 'border-box',
       [mdBreakpoint]: {
         paddingLeft: '15px',
         paddingRight: '45px',
       },
       '@media (max-width: 749px)': {
         paddingLeft: '8px',
-        paddingRight: '35px',
+        paddingRight: '40px',
         maxWidth: 'none', // Allow full width on mobile
       },
     },
@@ -329,6 +336,11 @@ const useStyles = makeStyles((theme) => {
       minWidth: 0,
       maxWidth: '100%',
       overflow: 'hidden',
+      boxSizing: 'border-box',
+      '& .MuiTypography-root': {
+        maxWidth: '100%',
+        boxSizing: 'border-box',
+      },
     },
   }
 });

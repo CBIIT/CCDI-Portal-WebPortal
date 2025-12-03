@@ -13,6 +13,12 @@ const removeSquareBracketsFromString = (text) => {
   return text.replace(/\[|\]/g, '');
 }
 
+const formatListWithSemicolons = (text) => {
+  if (!text) return text;
+  // Remove square brackets and replace commas with semicolons
+  return text.replace(/\[|\]/g, '').replace(/,/g, ';');
+}
+
 function formatBytes(bytes, decimals = 2) {
   if (!+bytes) return '0 Bytes'
 
@@ -115,15 +121,16 @@ const FilesCard = ({ data = {}, index }) => {
 
   const renderParticipant = (label, value = '') => {
     // Simple, reliable character limits based on screen size
+    // Reduced to account for the '...' we add manually
     const getMaxLength = () => {
       if (window.innerWidth <= 749) {
-        return 90; // Mobile - use full card width like sample
+        return 85; // Mobile
       } else if (window.innerWidth <= 900) {
-        return 50; // Tablet  
+        return 47; // Tablet  
       } else if (window.innerWidth <= 1200) {
-        return 70; // Small desktop
+        return 67; // Small desktop
       } else {
-        return 95; // Large desktop
+        return 90; // Large desktop - conservative to prevent overflow
       }
     };
 
@@ -155,23 +162,20 @@ const FilesCard = ({ data = {}, index }) => {
             {label}
           </Typography>
           <div className={classes.participantContainer}>
-            <div className={classes.participantTextContainer}>
-              <Typography 
-                variant="body1" 
-                className={`${classes.value} ${shouldTruncate ? classes.clickableText : ''}`}
-                style={{ 
-                  display: 'inline', 
-                  paddingLeft: 0,
-                  wordBreak: participantExpanded ? 'break-word' : 'normal',
-                  whiteSpace: participantExpanded ? 'normal' : 'nowrap',
-                  overflowWrap: 'break-word'
-                }}
-                onClick={shouldTruncate ? handleToggleExpand : undefined}
-              >
-                {displayValue}
-                {shouldTruncate && !participantExpanded && '...'}
-              </Typography>
-            </div>
+            <Typography 
+              variant="body1" 
+              className={`${classes.value} ${shouldTruncate ? classes.clickableText : ''}`}
+              style={{ 
+                paddingLeft: 0,
+                wordBreak: participantExpanded ? 'break-word' : 'normal',
+                whiteSpace: participantExpanded ? 'normal' : 'nowrap',
+                overflowWrap: 'break-word',
+              }}
+              onClick={shouldTruncate ? handleToggleExpand : undefined}
+            >
+              {displayValue}
+              {shouldTruncate && !participantExpanded && '...'}
+            </Typography>
           </div>
         </div>
       ),
@@ -188,15 +192,16 @@ const FilesCard = ({ data = {}, index }) => {
 
   const renderSample = (label, value = '') => {
     // Simple, reliable character limits based on screen size
+    // Reduced to account for the '...' we add manually
     const getMaxLength = () => {
       if (window.innerWidth <= 749) {
-        return 90; // Mobile - samples can be longer, use even more width
+        return 85; // Mobile
       } else if (window.innerWidth <= 900) {
-        return 50; // Tablet  
+        return 47; // Tablet  
       } else if (window.innerWidth <= 1200) {
-        return 70; // Small desktop
+        return 67; // Small desktop
       } else {
-        return 95; // Large desktop
+        return 90; // Large desktop - conservative to prevent overflow
       }
     };
 
@@ -228,23 +233,20 @@ const FilesCard = ({ data = {}, index }) => {
             {label}
           </Typography>
           <div className={classes.sampleContainer}>
-            <div className={classes.sampleTextContainer}>
-              <Typography 
-                variant="body1" 
-                className={`${classes.value} ${shouldTruncate ? classes.clickableText : ''}`}
-                style={{ 
-                  display: 'inline', 
-                  paddingLeft: 0,
-                  wordBreak: sampleExpanded ? 'break-word' : 'normal',
-                  whiteSpace: sampleExpanded ? 'normal' : 'nowrap',
-                  overflowWrap: 'break-word'
-                }}
-                onClick={shouldTruncate ? handleToggleExpand : undefined}
-              >
-                {displayValue}
-                {shouldTruncate && !sampleExpanded && '...'}
-              </Typography>
-            </div>
+            <Typography 
+              variant="body1" 
+              className={`${classes.value} ${shouldTruncate ? classes.clickableText : ''}`}
+              style={{ 
+                paddingLeft: 0,
+                wordBreak: sampleExpanded ? 'break-word' : 'normal',
+                whiteSpace: sampleExpanded ? 'normal' : 'nowrap',
+                overflowWrap: 'break-word',
+              }}
+              onClick={shouldTruncate ? handleToggleExpand : undefined}
+            >
+              {displayValue}
+              {shouldTruncate && !sampleExpanded && '...'}
+            </Typography>
           </div>
         </div>
       ),
@@ -372,7 +374,7 @@ const FilesCard = ({ data = {}, index }) => {
         {/* Participant - Line 4 */}
         <div className={classes.propertyLine} style={{ position: 'relative' }}>
           {(() => {
-            const participant = renderParticipant('Participant:', removeSquareBracketsFromString(participant_id));
+            const participant = renderParticipant('Participant:', formatListWithSemicolons(participant_id));
             return (
               <>
                 {participant.content}
@@ -390,7 +392,7 @@ const FilesCard = ({ data = {}, index }) => {
         {/* Sample - Line 6 */}
         <div className={classes.propertyLine} style={{ position: 'relative' }}>
           {(() => {
-            const sample = renderSample('Sample:', removeSquareBracketsFromString(sample_id));
+            const sample = renderSample('Sample:', formatListWithSemicolons(sample_id));
             return (
               <>
                 {sample.content}

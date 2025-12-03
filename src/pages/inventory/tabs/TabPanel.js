@@ -25,10 +25,38 @@ const TabView = (props) => {
     config,
     dashboardStats,
     activeFilters,
+    unknownAgesState,
     classes,
     activeTab,
     tab,
   } = props;
+
+  // Helper function to merge unknownAges parameters into activeFilters
+  const getFiltersWithUnknownAges = useCallback(() => {
+    if (!activeFilters) return {};
+    
+    const mergedFilters = { ...activeFilters };
+    
+    // Add unknownAges parameters from unknownAgesState
+    if (unknownAgesState) {
+      const ageParams = [
+        'age_at_diagnosis',
+        'age_at_treatment_start',
+        'age_at_response',
+        'age_at_last_known_survival_status',
+        'participant_age_at_collection'
+      ];
+      
+      ageParams.forEach(param => {
+        const unknownAgesKey = `${param}_unknownAges`;
+        if (unknownAgesState[param] && unknownAgesState[param] !== 'include') {
+          mergedFilters[unknownAgesKey] = [unknownAgesState[param]];
+        }
+      });
+    }
+    
+    return mergedFilters;
+  }, [activeFilters, unknownAgesState]);
 
   // State for file search functionality
   const [searchTerm, setSearchTerm] = useState('');
@@ -95,14 +123,16 @@ const TabView = (props) => {
 
   // Determine query variables based on search state
   const getQueryVariables = () => {
+    const filtersWithUnknownAges = getFiltersWithUnknownAges();
+    
     if (isFilesTab && searchTerm) {
       // Merge activeFilters with the filename search parameter
       return { 
-        ...activeFilters,
+        ...filtersWithUnknownAges,
         filename: searchTerm 
       };
     }
-    return activeFilters;
+    return filtersWithUnknownAges;
   };
 
   const initTblState = (initailState) => ({
@@ -140,7 +170,7 @@ const TabView = (props) => {
         customTheme={customTheme}
         classes={classes}
         section={config.name}
-        activeFilters={activeFilters}
+        activeFilters={getFiltersWithUnknownAges()}
         fileCount={dashboardStats['numberOfFiles']}
       >
         <Grid container>

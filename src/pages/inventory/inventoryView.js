@@ -354,6 +354,7 @@ const Inventory = ({
               <TabsView
                 dashboardStats={dashData}
                 activeFilters={activeFilters}
+                unknownAgesState={unknownAgesState}
               />
               <div className={classes.goToCartLink}><NavLink to='/fileCentricCart'>Go to cart &#62;</NavLink></div>
             </div>

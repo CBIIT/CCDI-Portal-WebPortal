@@ -387,6 +387,9 @@ export const CustomCellView = (props) => {
       </div>
     )
   }
+  
+  // Default case: render the field value directly
+  return <>{props[dataField]}</>;
 };
 
 export const CustomHeaderCellView = () => (<></>);

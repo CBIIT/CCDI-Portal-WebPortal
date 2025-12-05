@@ -167,12 +167,14 @@ export const table = {
       header: 'Participant ID',
       display: true,
       tooltipText: 'sort',
+      cellType: cellTypes.CUSTOM_ELEM,
     },
     {
       dataField: 'sample_id',
       header: 'Sample ID',
       display: true,
       tooltipText: 'sort',
+      cellType: cellTypes.CUSTOM_ELEM,
     },
     {
       dataField: 'file_type',

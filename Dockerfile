@@ -1,9 +1,11 @@
 FROM node:16.20.1-alpine AS build
+RUN apk update && apk upgrade --no-cache openssl busybox
 
 
 WORKDIR /usr/src/app
 
 COPY . .
+RUN npm cache clean --force
 
 RUN NODE_OPTIONS="--max-old-space-size=4096" npm set progress=false
 RUN NODE_OPTIONS="--max-old-space-size=4096" npm ci --legacy-peer-deps
@@ -12,7 +14,7 @@ RUN NODE_OPTIONS="--max-old-space-size=4096" npm run build --silent
 # FROM nginx:1.23.3-alpine
 #FROM nginx:1.25.5
 FROM nginx:1.26.3-alpine-slim AS fnl_base_image
-#RUN apt-get update && apt-get -y upgrade
+RUN apk update && apk upgrade --no-cache openssl busybox
 
 COPY --from=build /usr/src/app/dist /usr/share/nginx/html
 COPY --from=build /usr/src/app/config/inject.template.js /usr/share/nginx/html/inject.template.js

@@ -45,20 +45,20 @@ const studyDownloadLinks = {
 };
 
 const studycBioPortalLinks = {
-  'phs000463': 'https://cbioportal.ccdi.cancer.gov/?studyId=phs000463',
-  'phs000464': 'https://cbioportal.ccdi.cancer.gov/?studyId=phs000464',
-  'phs000465': 'https://cbioportal.ccdi.cancer.gov/?studyId=phs000465',
-  'phs000466': 'https://cbioportal.ccdi.cancer.gov/?studyId=phs000466',
-  'phs000467': 'https://cbioportal.ccdi.cancer.gov/?studyId=phs000467',
-  'phs000468': 'https://cbioportal.ccdi.cancer.gov/?studyId=phs000468',
-  'phs000470': 'https://cbioportal.ccdi.cancer.gov/?studyId=phs000470',
-  'phs000471': 'https://cbioportal.ccdi.cancer.gov/?studyId=phs000471',
-  'phs001437': 'https://cbioportal.ccdi.cancer.gov/?studyId=phs001437',
-  'phs002276': 'https://cbioportal.ccdi.cancer.gov/?studyId=phs002276',
-  'phs002517': 'https://cbioportal.ccdi.cancer.gov/?studyId=phs002517',
-  'phs002790': 'https://cbioportal.ccdi.cancer.gov/?studyId=phs002790',
-  'phs002883': 'https://cbioportal.ccdi.cancer.gov/?studyId=phs002883',
-  'phs003432': 'https://cbioportal.ccdi.cancer.gov/?studyId=phs003432'
+  'phs000463': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs000463',
+  'phs000464': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs000464',
+  'phs000465': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs000465',
+  'phs000466': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs000466',
+  'phs000467': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs000467',
+  'phs000468': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs000468',
+  'phs000470': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs000470',
+  'phs000471': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs000471',
+  'phs001437': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs001437',
+  'phs002276': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs002276',
+  'phs002517': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs002517',
+  'phs002790': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs002790',
+  'phs002883': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs002883',
+  'phs003432': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs003432'
 };
 
 

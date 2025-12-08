@@ -36,6 +36,23 @@ const studyDownloadLinks = {
   "phs003519": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs003519_CCDI_Study_Manifest_v3.1.0.xlsx",
 };
 
+const studycBioPortalLinks = {
+  'phs000463': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs000463',
+  'phs000464': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs000464',
+  'phs000465': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs000465',
+  'phs000466': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs000466',
+  'phs000467': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs000467',
+  'phs000468': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs000468',
+  'phs000470': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs000470',
+  'phs000471': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs000471',
+  'phs001437': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs001437',
+  'phs002276': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs002276',
+  'phs002517': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs002517',
+  'phs002790': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs002790',
+  'phs002883': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs002883',
+  'phs003432': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs003432'
+};
+
 export async function openDoubleLink(url, fileName) {
   let urlContent = await fetch(url);
   if (urlContent.ok) {
@@ -139,5 +156,6 @@ export {
   table,
   GET_STUDIES_DATA_QUERY,
   GET_NUMBER_OF_STUDIES,
-  studyDownloadLinks
+  studyDownloadLinks,
+  studycBioPortalLinks
 };

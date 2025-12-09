@@ -1643,7 +1643,15 @@ export const tabContainers = [
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
-        cellType: cellTypes.CPI,
+      },
+      {
+        dataField: 'cpi_data',
+        header: 'Available CPI Mapping',
+        display: true,
+        sortable: false,
+        role: cellTypes.DISPLAY,
+        cellType: cellTypes.CPI_MAPPING,
+        cellStyle: cellStyles.EXCLUDE_FROM_DOWNLOAD,
       },
       {
         dataField: 'study_id',

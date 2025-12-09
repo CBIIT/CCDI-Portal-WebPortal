@@ -84,7 +84,7 @@ height: 900;
 .mciTableBodyListItem {
     height: 77px;
     font-family: Open Sans;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
     line-height: 17px;
     letter-spacing: 0em;

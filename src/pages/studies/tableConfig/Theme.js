@@ -17,11 +17,11 @@ export const tblHeader = {
     root: {
       color: '#0F253A',
       position: 'relative',
-      fontSize: '15px',
+      fontSize: '17px',
       fontFamily: 'Open Sans',
       fontWeight: '700',
       letterSpacing: '-0.019em',
-      lineHeight: '1rem',
+      lineHeight: '18px',
       textDecoration: 'none',
       '&:hover': {
         color: '#13344A',
@@ -52,11 +52,13 @@ const tblBody = {
     },
     body: {
       fontFamily: 'Open Sans',
-      fontSize: '14px',
+      fontSize: '16px',
+      lineHeight: '19.2px',
       color: '#24415C',
       '& p': {
         fontFamily: 'Open Sans',
-        fontSize: '14px',
+        fontSize: '16px',
+        lineHeight: '19.2px',
       },
       '&.pubmed_id': {
         minWidth: '150px',

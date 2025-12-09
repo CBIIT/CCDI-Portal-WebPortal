@@ -12,9 +12,16 @@ const studyDownloadLinks = {
   "phs000470": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs000470_CCDI_Study_Manifest_v3.1.0.xlsx",
   "phs000471": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs000471_CCDI_Study_Manifest_v3.1.0.xlsx",
   "phs000720": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs000720_CCDI_Study_Manifest_v3.1.0.xlsx",
+  "phs001228": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs001228_CCDI_Study_Manifest_v3.1.0.xlsx",
   "phs001327": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs001327_CCDI_Study_Manifest_v3.1.0.xlsx",
   "phs001437": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs001437_CCDI_Study_Manifest_v3.1.0.xlsx",
+  "phs001714": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs001714_CCDI_Study_Manifest_v3.1.0.xlsx",
+  "phs001738": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs001738_CCDI_Study_Manifest_v3.1.0.xlsx",
+  "phs001846": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs001846_CCDI_Study_Manifest_v3.1.0.xlsx",
+  "phs001878": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs001878_CCDI_Study_Manifest_v3.1.0.xlsx",
+  "phs002187": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs002187_CCDI_Study_Manifest_v3.1.0.xlsx",
   "phs002276": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs002276_CCDI_Study_Manifest_v3.1.0.xlsx",
+  "phs002322": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs002322_CCDI_Study_Manifest_v3.1.0.xlsx",
   "phs002371": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs002371_CCDI_Study_Manifest_v3.1.0.xlsx",
   "phs002430": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs002430_CCDI_Study_Manifest_v3.1.0.xlsx",
   "phs002431": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs002431_CCDI_Study_Manifest_v3.1.0.xlsx",
@@ -32,8 +39,26 @@ const studyDownloadLinks = {
   "phs003161": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs003161_CCDI_Study_Manifest_v3.1.0.xlsx",
   "phs003163": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs003163_CCDI_Study_Manifest_v3.1.0.xlsx",
   "phs003164": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs003164_CCDI_Study_Manifest_v3.1.0.xlsx",
+  "phs003215": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs003215_CCDI_Study_Manifest_v3.1.0.xlsx",
   "phs003432": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs003432_CCDI_Study_Manifest_v3.1.0.xlsx",
   "phs003519": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs003519_CCDI_Study_Manifest_v3.1.0.xlsx",
+};
+
+const studycBioPortalLinks = {
+  'phs000463': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs000463',
+  'phs000464': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs000464',
+  'phs000465': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs000465',
+  'phs000466': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs000466',
+  'phs000467': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs000467',
+  'phs000468': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs000468',
+  'phs000470': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs000470',
+  'phs000471': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs000471',
+  'phs001437': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs001437',
+  'phs002276': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs002276',
+  'phs002517': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs002517',
+  'phs002790': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs002790',
+  'phs002883': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs002883',
+  'phs003432': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs003432'
 };
 
 export async function openDoubleLink(url, fileName) {
@@ -139,5 +164,6 @@ export {
   table,
   GET_STUDIES_DATA_QUERY,
   GET_NUMBER_OF_STUDIES,
-  studyDownloadLinks
+  studyDownloadLinks,
+  studycBioPortalLinks
 };

@@ -6,9 +6,17 @@ import useStyles from './style';
 import { cn } from 'bento-components';
 import { AddToCart } from '@bento-core/table';
 import { Link } from 'react-router-dom';
+import { ReactComponent as DownArrowIcon } from '../../assets/Down_Arrow.svg';
+import { ReactComponent as UpArrowIcon } from '../../assets/Up_Arrow.svg';
 
 const removeSquareBracketsFromString = (text) => {
   return text.replace(/\[|\]/g, '');
+}
+
+const formatListWithSemicolons = (text) => {
+  if (!text) return text;
+  // Remove square brackets and replace commas with semicolons
+  return text.replace(/\[|\]/g, '').replace(/,/g, ';');
 }
 
 function formatBytes(bytes, decimals = 2) {
@@ -26,9 +34,9 @@ function formatBytes(bytes, decimals = 2) {
 // Utility function to truncate title with start...end format
 const truncateTitle = (title, containerWidth) => {
   if (!title || !containerWidth) return { truncated: title, needsTruncation: false };
-  
+
   const maxTitleWidth = containerWidth * 0.5; // 50% of container width
-  
+
   // Create temporary element to measure text width
   const tempElement = document.createElement('span');
   tempElement.style.position = 'absolute';
@@ -37,35 +45,35 @@ const truncateTitle = (title, containerWidth) => {
   tempElement.style.fontFamily = 'Inter';
   tempElement.style.fontWeight = '500';
   tempElement.textContent = title;
-  
+
   document.body.appendChild(tempElement);
   const titleWidth = tempElement.offsetWidth;
   document.body.removeChild(tempElement);
-  
+
   if (titleWidth <= maxTitleWidth) {
     return { truncated: title, needsTruncation: false };
   }
-  
+
   // Calculate how many characters to show at start and end
   const ellipsisWidth = 20; // Approximate width of "..."
   const availableWidth = maxTitleWidth - ellipsisWidth;
   const charWidth = titleWidth / title.length;
   const availableChars = Math.floor(availableWidth / charWidth);
-  
+
   if (availableChars <= 6) {
     // Too short, just truncate normally
     return { truncated: title.substring(0, Math.max(3, availableChars)) + '...', needsTruncation: true };
   }
-  
+
   const startChars = Math.ceil(availableChars * 0.6); // 60% at start
   const endChars = Math.floor(availableChars * 0.4); // 40% at end
-  
+
   const startText = title.substring(0, startChars);
   const endText = title.substring(title.length - endChars);
-  
-  return { 
-    truncated: `${startText}...${endText}`, 
-    needsTruncation: true 
+
+  return {
+    truncated: `${startText}...${endText}`,
+    needsTruncation: true
   };
 };
 
@@ -83,6 +91,8 @@ const FilesCard = ({ data = {}, index }) => {
   } = data;
   const classes = useStyles();
   const [containerWidth, setContainerWidth] = useState(0);
+  const [participantExpanded, setParticipantExpanded] = useState(false);
+  const [sampleExpanded, setSampleExpanded] = useState(false);
   const cardRef = useRef(null);
 
   // Measure container width for title truncation
@@ -109,6 +119,148 @@ const FilesCard = ({ data = {}, index }) => {
     </div>
   );
 
+  const renderParticipant = (label, value = '') => {
+    // Simple, reliable character limits based on screen size
+    // Reduced to account for the '...' we add manually
+    const getMaxLength = () => {
+      if (window.innerWidth <= 749) {
+        return 85; // Mobile
+      } else if (window.innerWidth <= 900) {
+        return 47; // Tablet  
+      } else if (window.innerWidth <= 1200) {
+        return 67; // Small desktop
+      } else {
+        return 90; // Large desktop - conservative to prevent overflow
+      }
+    };
+
+    const [maxLength, setMaxLength] = React.useState(getMaxLength());
+
+    // Update character limit on window resize
+    React.useEffect(() => {
+      const handleResize = () => {
+        setMaxLength(getMaxLength());
+      };
+
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    const shouldTruncate = value && value.length > maxLength;
+    const displayValue = shouldTruncate && !participantExpanded 
+      ? value.substring(0, maxLength) 
+      : value;
+
+    const handleToggleExpand = () => {
+      setParticipantExpanded(!participantExpanded);
+    };
+
+    return {
+      content: (
+        <div className={classes.keyAndValueRow}>
+          <Typography variant="h6" className={classes.key}>
+            {label}
+          </Typography>
+          <div className={classes.participantContainer}>
+            <Typography 
+              variant="body1" 
+              className={`${classes.value} ${shouldTruncate ? classes.clickableText : ''}`}
+              style={{ 
+                paddingLeft: 0,
+                wordBreak: participantExpanded ? 'break-word' : 'normal',
+                whiteSpace: participantExpanded ? 'normal' : 'nowrap',
+                overflowWrap: 'break-word',
+              }}
+              onClick={shouldTruncate ? handleToggleExpand : undefined}
+            >
+              {displayValue}
+              {shouldTruncate && !participantExpanded && '...'}
+            </Typography>
+          </div>
+        </div>
+      ),
+      arrow: shouldTruncate ? (
+        <span 
+          className={classes.expandToggle}
+          onClick={handleToggleExpand}
+        >
+          {participantExpanded ? <UpArrowIcon className={classes.expandIcon} /> : <DownArrowIcon className={classes.expandIcon} />}
+        </span>
+      ) : null
+    };
+  };
+
+  const renderSample = (label, value = '') => {
+    // Simple, reliable character limits based on screen size
+    // Reduced to account for the '...' we add manually
+    const getMaxLength = () => {
+      if (window.innerWidth <= 749) {
+        return 85; // Mobile
+      } else if (window.innerWidth <= 900) {
+        return 47; // Tablet  
+      } else if (window.innerWidth <= 1200) {
+        return 67; // Small desktop
+      } else {
+        return 90; // Large desktop - conservative to prevent overflow
+      }
+    };
+
+    const [maxLength, setMaxLength] = React.useState(getMaxLength());
+
+    // Update character limit on window resize
+    React.useEffect(() => {
+      const handleResize = () => {
+        setMaxLength(getMaxLength());
+      };
+
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    const shouldTruncate = value && value.length > maxLength;
+    const displayValue = shouldTruncate && !sampleExpanded 
+      ? value.substring(0, maxLength) 
+      : value;
+
+    const handleToggleExpand = () => {
+      setSampleExpanded(!sampleExpanded);
+    };
+
+    return {
+      content: (
+        <div className={classes.keyAndValueRow}>
+          <Typography variant="h6" className={classes.key}>
+            {label}
+          </Typography>
+          <div className={classes.sampleContainer}>
+            <Typography 
+              variant="body1" 
+              className={`${classes.value} ${shouldTruncate ? classes.clickableText : ''}`}
+              style={{ 
+                paddingLeft: 0,
+                wordBreak: sampleExpanded ? 'break-word' : 'normal',
+                whiteSpace: sampleExpanded ? 'normal' : 'nowrap',
+                overflowWrap: 'break-word',
+              }}
+              onClick={shouldTruncate ? handleToggleExpand : undefined}
+            >
+              {displayValue}
+              {shouldTruncate && !sampleExpanded && '...'}
+            </Typography>
+          </div>
+        </div>
+      ),
+      arrow: shouldTruncate ? (
+        <span 
+          className={classes.expandToggle}
+          onClick={handleToggleExpand}
+        >
+          {sampleExpanded ? <UpArrowIcon className={classes.expandIcon} /> : <DownArrowIcon className={classes.expandIcon} />}
+        </span>
+      ) : null
+    };
+  };
+
   return (
     <div className={classes.card} ref={cardRef}>
       {/* Header with file title and add to cart button */}
@@ -120,8 +272,8 @@ const FilesCard = ({ data = {}, index }) => {
               {!participant_id ? (() => {
                 const { truncated, needsTruncation } = truncateTitle(file_name, containerWidth);
                 return needsTruncation ? (
-                  <Tooltip 
-                    title={file_name} 
+                  <Tooltip
+                    title={file_name}
                     placement="top"
                     classes={{
                       tooltip: classes.customTooltip,
@@ -141,8 +293,8 @@ const FilesCard = ({ data = {}, index }) => {
               })() : (() => {
                 const { truncated, needsTruncation } = truncateTitle(file_name, containerWidth);
                 return needsTruncation ? (
-                  <Tooltip 
-                    title={file_name} 
+                  <Tooltip
+                    title={file_name}
                     placement="top"
                     classes={{
                       tooltip: classes.customTooltip,
@@ -162,7 +314,7 @@ const FilesCard = ({ data = {}, index }) => {
               })()}
             </div>
           </Grid>
-          
+
           {/* Add to Cart button moved to top right */}
           <Grid item className={classes.buttonAlignWithTitle}>
             <AddToCart
@@ -193,19 +345,19 @@ const FilesCard = ({ data = {}, index }) => {
           </Grid>
         </Grid>
       </div>
-      
+
       {/* Content area */}
       <div className={classes.contentArea}>
         {/* Data Category - Line 1 */}
         <div className={classes.propertyLine}>
           {renderInfo('Data Category:', removeSquareBracketsFromString(data_category))}
         </div>
-        
+
         {/* File Description - Line 2 */}
         <div className={classes.propertyLine}>
           {renderInfo('File Description:', file_description)}
         </div>
-        
+
         {/* File Type, File Size - Line 3 */}
         <div className={classes.groupedProperties}>
           <div className={classes.propertyGroup}>
@@ -218,18 +370,36 @@ const FilesCard = ({ data = {}, index }) => {
             {/* Empty space to align with Sample column */}
           </div>
         </div>
-        
-        {/* Participant, Study ID, Sample - Line 4 */}
-        <div className={classes.groupedProperties}>
-          <div className={classes.propertyGroup}>
-            {renderInfo('Participant:', participant_id)}
-          </div>
-          <div className={classes.propertyGroup}>
-            {renderInfo('Study ID:', study_id)}
-          </div>
-          <div className={classes.propertyGroup}>
-            {renderInfo('Sample:', sample_id)}
-          </div>
+
+        {/* Participant - Line 4 */}
+        <div className={classes.propertyLine} style={{ position: 'relative' }}>
+          {(() => {
+            const participant = renderParticipant('Participant:', formatListWithSemicolons(participant_id));
+            return (
+              <>
+                {participant.content}
+                {participant.arrow}
+              </>
+            );
+          })()}
+        </div>
+
+        {/* Study ID - Line 5 */}
+        <div className={classes.propertyLine}>
+          {renderInfo('Study ID:', study_id)}
+        </div>
+
+        {/* Sample - Line 6 */}
+        <div className={classes.propertyLine} style={{ position: 'relative' }}>
+          {(() => {
+            const sample = renderSample('Sample:', formatListWithSemicolons(sample_id));
+            return (
+              <>
+                {sample.content}
+                {sample.arrow}
+              </>
+            );
+          })()}
         </div>
       </div>
     </div>

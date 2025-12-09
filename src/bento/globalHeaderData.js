@@ -171,6 +171,11 @@ export const navbarSublists = {
       link: '/user-guide.pdf',
       className: 'navMobileSubItem',
     },
+    {
+      name: 'CCDI Events Announcements',
+      link: '/ccdi-events-announcements',
+      className: 'navMobileSubItem',
+    },
   ],
 };
 

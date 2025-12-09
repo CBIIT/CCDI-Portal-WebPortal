@@ -8,6 +8,7 @@ import ModalView from './modal/ModalView';
 import { styles } from './overviewStyle';
 
 const OverviewView = ({ data, classes }) => {
+    console.log(data);
     return (
         <div className={classes.container}>
             {/* Left Container for Study Details */}

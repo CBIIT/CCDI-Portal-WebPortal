@@ -1,7 +1,17 @@
 import React from 'react';
 import { cellTypes, headerTypes } from '@bento-core/table';
 
-export const CustomCellView = () => (<></>);
+const removeSquareBrackets = (text) => {
+  if (!text) return text;
+  return String(text).replace(/\[|\]/g, '');
+};
+
+export const CustomCellView = ({ dataField, label }) => {
+  if (dataField === 'participant_id' || dataField === 'sample_id') {
+    return <>{removeSquareBrackets(label)}</>;
+  }
+  return <>{label}</>;
+};
 
 export const CustomHeaderCellView = () => (<></>);
 

@@ -297,12 +297,9 @@ const Inventory = ({
                     return (
                       <React.Fragment key={category}>
                         <Divider className={`${classes.divider} divider${idx}`}/>
-                        <li 
-                          onClick={() => handleCategoryClick(idx)}
-                          className={selectedSection === idx ? 'categoryItemSelected' : ''}
-                        >
+                        <li onClick={() => handleCategoryClick(idx)}>
                           <div className={classes.categoryContainer}>
-                            <div>
+                            <div className={classes.categoryTitleContainer}>
                               <span className={classes.categoryTitle}>{sectionLabel[category] !== undefined ? sectionLabel[category] : category}</span>
                               <span className={classes.categoryCount}>
                                 {sectionCount[category] !== 0 ? (
@@ -312,7 +309,7 @@ const Inventory = ({
                                 ) : ''}
                               </span>
                             </div>
-                            <img src={vectorIcon} alt="vector" className="categoryIcon" />
+                            {selectedSection === idx && <img src={vectorIcon} alt="vector" className={classes.categoryIcon} />}
                           </div>
                         </li>
                       </React.Fragment>
@@ -357,6 +354,7 @@ const Inventory = ({
               <TabsView
                 dashboardStats={dashData}
                 activeFilters={activeFilters}
+                unknownAgesState={unknownAgesState}
               />
               <div className={classes.goToCartLink}><NavLink to='/fileCentricCart'>Go to cart &#62;</NavLink></div>
             </div>

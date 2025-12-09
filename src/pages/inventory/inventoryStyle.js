@@ -150,6 +150,10 @@ export default () => ({
     justifyContent: 'space-between',
     height: '100%',
   },
+  categoryTitleContainer: {
+    display: 'flex',
+    alignItems: 'center',
+  },
   facetCategory: {
     cursor: 'pointer',
     '&:hover': {
@@ -196,7 +200,8 @@ export default () => ({
     }
   },
   contentPanelBody: {
-    paddingTop: '20px',
+    marginTop: '20px',
+    backgroundColor: '#ffffff',
   },
   rightContent: {
     width: 'calc(100% - 540px)',

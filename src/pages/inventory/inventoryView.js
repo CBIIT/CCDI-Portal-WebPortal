@@ -208,7 +208,7 @@ const Inventory = ({
           onClick={() => {
             const paramValue = {
               'p_id': '', 'u': '', 'u_fc': '', 'u_um': '', 'sex_at_birth': '', 'race': '',
-              'age_at_diagnosis': '', 'age_at_diagnosis_unknownAges': '', 'diagnosis': '', 'diagnosis_anatomic_site': '', 'diagnosis_classification_system': '', 'diagnosis_basis': '', 'disease_phase': '',
+              'age_at_diagnosis': '', 'age_at_diagnosis_unknownAges': '', 'diagnosis': '', 'diagnosis_anatomic_site': '', 'diagnosis_classification_system': '', 'diagnosis_basis': '', 'diagnosis_category': '', 'disease_phase': '',
               'treatment_type': '', 'treatment_agent': '', 'age_at_treatment_start': '', 'age_at_treatment_start_unknownAges': '', 'response_category': '', 'age_at_response': '', 'age_at_response_unknownAges': '',
               'age_at_last_known_survival_status': '', 'age_at_last_known_survival_status_unknownAges': '', 'first_event': '', 'last_known_survival_status': '',
               'participant_age_at_collection': '', 'participant_age_at_collection_unknownAges': '', 'sample_anatomic_site': '', 'sample_tumor_status': '', 'tumor_classification': '',

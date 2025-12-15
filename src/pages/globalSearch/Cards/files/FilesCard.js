@@ -4,10 +4,10 @@ import {
 } from '@material-ui/core';
 import useStyles from './style';
 import { cn } from 'bento-components';
-import { AddToCart } from '@bento-core/table';
 import { Link } from 'react-router-dom';
 import { ReactComponent as DownArrowIcon } from '../../assets/Down_Arrow.svg';
 import { ReactComponent as UpArrowIcon } from '../../assets/Up_Arrow.svg';
+import ToastNotification from '../participant/ToastNotification';
 
 const removeSquareBracketsFromString = (text) => {
   return text.replace(/\[|\]/g, '');
@@ -77,7 +77,7 @@ const truncateTitle = (title, containerWidth) => {
   };
 };
 
-const FilesCard = ({ data = {}, index }) => {
+const FilesCard = ({ data = {}, index, addFiles, cartFiles = [] }) => {
   const {
     id,
     file_name,
@@ -93,6 +93,7 @@ const FilesCard = ({ data = {}, index }) => {
   const [containerWidth, setContainerWidth] = useState(0);
   const [participantExpanded, setParticipantExpanded] = useState(false);
   const [sampleExpanded, setSampleExpanded] = useState(false);
+  const [notification, setNotification] = useState({ open: false, message: '', type: 'success' });
   const cardRef = useRef(null);
 
   // Measure container width for title truncation
@@ -107,6 +108,42 @@ const FilesCard = ({ data = {}, index }) => {
     window.addEventListener('resize', measureWidth);
     return () => window.removeEventListener('resize', measureWidth);
   }, []);
+
+  const showNotification = (message, type = 'success') => {
+    setNotification({ open: true, message, type });
+  };
+
+  const handleNotificationClose = () => {
+    setNotification({ open: false, message: '', type: 'success' });
+  };
+
+  const handleAddToCart = () => {
+    if (!addFiles) {
+      console.warn('Cart functionality not available: missing addFiles prop');
+      return;
+    }
+
+    const upperLimit = 200000;
+    const cartCount = cartFiles.length;
+
+    if (cartCount >= upperLimit) {
+      showNotification('Cart limit reached. Please remove some files first.', 'error');
+      return;
+    }
+
+    // Check if file is already in cart
+    if (cartFiles.includes(id)) {
+      showNotification('File already in cart', 'error');
+      return;
+    }
+
+    if (cartCount + 1 <= upperLimit) {
+      addFiles([id]);
+      showNotification('1 File successfully added to your cart', 'success');
+    } else {
+      showNotification('Cart limit reached. Please remove some files first.', 'error');
+    }
+  };
 
   const renderInfo = (label, value = '') => (
     <div className={classes.keyAndValueRow}>
@@ -317,9 +354,10 @@ const FilesCard = ({ data = {}, index }) => {
 
           {/* Add to Cart button moved to top right */}
           <Grid item className={classes.buttonAlignWithTitle}>
-            <AddToCart
-              fileId={id}
-              buttonStyle={{
+            <Button
+              variant="outlined"
+              onClick={handleAddToCart}
+              style={{
                 width: '189px',
                 height: '41px',
                 alignSelf: 'end',
@@ -335,13 +373,12 @@ const FilesCard = ({ data = {}, index }) => {
                 alignItems: 'center',
                 padding: '0 12px',
                 borderRadius: '8px',
-                transition: 'border-radius 0.2s ease-in-out',
-                '&:hover': {
-                  backgroundColor: '#DEE4EC !important',
-                },
+                textTransform: 'uppercase',
               }}
               className={classes.addToCartButton}
-            />
+            >
+              Add to Cart
+            </Button>
           </Grid>
         </Grid>
       </div>
@@ -402,6 +439,13 @@ const FilesCard = ({ data = {}, index }) => {
           })()}
         </div>
       </div>
+      
+      <ToastNotification
+        open={notification.open}
+        message={notification.message}
+        type={notification.type}
+        onClose={handleNotificationClose}
+      />
     </div>
   );
 };

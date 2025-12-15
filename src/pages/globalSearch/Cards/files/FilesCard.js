@@ -19,6 +19,22 @@ const formatListWithSemicolons = (text) => {
   return text.replace(/\[|\]/g, '').replace(/,/g, ';');
 }
 
+const formatParticipantIdForUrl = (participantId) => {
+  if (!participantId) return '';
+  
+  // If it's already a string, remove brackets and spaces, then replace commas with |
+  if (typeof participantId === 'string') {
+    return participantId.replace(/\[|\]|\s/g, '').replace(/,/g, '|');
+  }
+  
+  // If it's an array, join with |
+  if (Array.isArray(participantId)) {
+    return participantId.join('|');
+  }
+  
+  return participantId;
+}
+
 function formatBytes(bytes, decimals = 2) {
   if (!+bytes) return '0 Bytes'
 
@@ -329,6 +345,7 @@ const FilesCard = ({ data = {}, index, addFiles, cartFiles = [] }) => {
                 );
               })() : (() => {
                 const { truncated, needsTruncation } = truncateTitle(file_name, containerWidth);
+                const formattedParticipantId = formatParticipantIdForUrl(participant_id);
                 return needsTruncation ? (
                   <Tooltip
                     title={file_name}
@@ -339,12 +356,12 @@ const FilesCard = ({ data = {}, index, addFiles, cartFiles = [] }) => {
                     }}
                     arrow
                   >
-                    <Button component={Link} to={`/explore?p_id=${participant_id}`} className={classes.titleLink}>
+                    <Button component={Link} to={`/explore?p_id=${formattedParticipantId}`} className={classes.titleLink}>
                       {truncated}
                     </Button>
                   </Tooltip>
                 ) : (
-                  <Button component={Link} to={`/explore?p_id=${participant_id}`} className={classes.titleLink}>
+                  <Button component={Link} to={`/explore?p_id=${formattedParticipantId}`} className={classes.titleLink}>
                     {file_name}
                   </Button>
                 );

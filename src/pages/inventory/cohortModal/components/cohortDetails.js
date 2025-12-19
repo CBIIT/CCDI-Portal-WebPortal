@@ -240,6 +240,8 @@ const CohortDetails = (props) => {
                 handleDelete={deleteModalProps.handleDelete}
                 deletionType={deleteModalProps.deletionType}
             />
+            
+            <div style={{display: 'flex', flexDirection: 'column', gap: '20px'}}> {/* This is the div that contains the cohort details section and the button */}
             <div className={classes.cohortDetailsSection}>
                 <div className={classes.cohortHeading}>
                     <span className={classes.cohortHeader}>
@@ -389,45 +391,48 @@ const CohortDetails = (props) => {
                         >
                             Save Changes
                         </Button>
-                        <div className={classes.dropdownSection} ref={dropdownRef}>
-                            <Button
-                                variant="contained"
-                                className={showDownloadDropdown ? classes.downloadButtonOpened : classes.downloadButton}
-                                onClick={handleDownloadDropdown}
-                            >
-                                <div className={classes.downloadButtonText}>
-                                    <span>Download</span>
-                                    <span>Selected Cohorts</span>
-                                </div>
-                                <img
-                                    src={ExpandMoreIcon}
-                                    alt="expand download icon"
-                                    className={`${classes.expandMoreIcon} ${showDownloadDropdown ? classes.rotatedIcon : ''}`}
-                                />
-                            </Button>
-                            {showDownloadDropdown && (
-                                <div className={classes.dropdownMenu}>
-                                    <div
-                                        className={classes.dropdownItem + ' ' + classes.firstDropdownItem}
-                                        onClick={() => {handleDownloadFile(downloadCohortManifest)}}
-                                    >
-                                        Manifest CSV
-                                    </div>
-                                    <div
-                                        className={classes.dropdownItem}
-                                        onClick={() => {handleDownloadFile(downloadCohortMetadata)}}
-                                    >
-                                        Metadata JSON
-                                    </div>
-                                </div>
-                            )}
-                        </div>
-
                     </div>
                     <span className={classes.cohortLastUpdated}>
                         {datePrefix} {(new Date(activeCohort.lastUpdated)).toLocaleDateString('en-US')}
                     </span>
                 </div>
+            </div>
+            <div className={classes.cohortActionButtonSection}>
+                <div className={classes.dropdownSection} ref={dropdownRef}>
+                    <Button
+                        variant="contained"
+                        className={showDownloadDropdown ? classes.downloadButtonOpened : classes.downloadButton}
+                        onClick={handleDownloadDropdown}
+                    >
+                        <div className={classes.downloadButtonText}>
+                            <span>Download</span>
+                            <span>Selected Cohorts</span>
+                        </div>
+                        <img
+                            src={ExpandMoreIcon}
+                            alt="expand download icon"
+                            className={`${classes.expandMoreIcon} ${showDownloadDropdown ? classes.rotatedIcon : ''}`}
+                        />
+                    </Button>
+                    {showDownloadDropdown && (
+                        <div className={classes.dropdownMenu}>
+                            <div
+                                className={classes.dropdownItem + ' ' + classes.firstDropdownItem}
+                                onClick={() => {handleDownloadFile(downloadCohortManifest)}}
+                            >
+                                Manifest CSV
+                            </div>
+                            <div
+                                className={classes.dropdownItem}
+                                onClick={() => {handleDownloadFile(downloadCohortMetadata)}}
+                            >
+                                Metadata JSON
+                            </div>
+                        </div>
+                    )}
+                </div>
+                <Button variant="contained" className={classes.viewCohortDetailsButton} onClick={() => console.log("currentCohortChanges")}>View Cohort Details</Button>
+            </div>
             </div>
         </>
     );
@@ -744,10 +749,26 @@ const styles = () => ({
     },
     cohortButtonSection: {
         display: 'flex',
-        //justifyContent: 'space-between',
+        justifyContent: 'center',
         padding: '40px 20px 10px 20px',
         width: '100%',
         gap: '8px',
+        '& button': {
+            height: '41px',
+            fontFamily: 'Poppins',
+            fontSize: '12px',
+            fontWeight: '600',
+            lineHeight: '16px',
+            color: '#FFFFFF',
+        },
+    },
+    cohortActionButtonSection: {
+        display: 'flex',
+        justifyContent: 'flex-end',
+        flexDirection: 'row',
+        width: '100%',
+        gap: '10px',
+        minWidth: '500px',
         '& button': {
             height: '41px',
             fontFamily: 'Poppins',
@@ -782,6 +803,17 @@ const styles = () => ({
             boxShadow: 'none',
         },
 
+    },
+    viewCohortDetailsButton: {
+        backgroundColor: '#003F74',
+        border: '1.25px solid #73A9C7',
+        width: '137px',
+        borderRadius: '5px',
+        boxShadow: 'none',
+        '&:hover': {
+            backgroundColor: '#073F60',
+            boxShadow: 'none',
+        },
     },
     downloadButton: {
         backgroundColor: '#0C534C',

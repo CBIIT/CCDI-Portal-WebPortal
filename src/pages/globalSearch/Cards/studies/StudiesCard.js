@@ -86,10 +86,6 @@ const StudiesCard = ({ data = {}, index }) => {
     return () => window.removeEventListener('resize', measureWidth);
   }, []);
 
-  const handleClick = () => {
-    navigate(`/studies/${study_id}`);
-  };
-
   const handleDropdownToggle = () => {
     setDropdownOpen(!dropdownOpen);
   };

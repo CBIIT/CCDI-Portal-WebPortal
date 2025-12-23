@@ -41,14 +41,14 @@ export const filterAllParticipantWithTreatmentType=(generalInfo,allParticipants)
 export const getIdsFromCohort = (data,selectedCohorts) => {
     const allParticipantPKs = [];
 
-    for (const cohortKey in data) {
+    Object.keys(data).forEach(cohortKey => {
         if(selectedCohorts.includes(cohortKey)){
-        if (data[cohortKey].participants) {
-            const participantPKs = data[cohortKey].participants.map(participant => participant.id);
-            allParticipantPKs.push(...participantPKs);
+            if (data[cohortKey] && data[cohortKey].participants) {
+                const participantPKs = data[cohortKey].participants.map(participant => participant.id);
+                allParticipantPKs.push(...participantPKs);
+            }
         }
-    }
-    }
+    });
 
     return allParticipantPKs;
 }

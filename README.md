@@ -1,4 +1,7 @@
-CCDI Portal frontend code base.
+# CCDI Portal Frontend Codebase
+
+[![Test](https://github.com/CBIIT/CCDI-Portal-WebPortal/actions/workflows/test.yml/badge.svg)](https://github.com/CBIIT/CCDI-Portal-WebPortal/actions/workflows/test.yml)
+[![ESLint](https://github.com/CBIIT/CCDI-Portal-WebPortal/actions/workflows/lint.yml/badge.svg)](https://github.com/CBIIT/CCDI-Portal-WebPortal/actions/workflows/lint.yml)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -22,6 +25,18 @@ You will also see any lint errors in the console.
 
 Launches the test runner in the interactive watch mode.<br>
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+### `npm run test:ci`
+
+Runs tests in CI mode with coverage reporting. This command is used by GitHub Actions for automated testing.
+
+### `npm run lint`
+
+Runs ESLint to check code quality and style. Fails if there are any warnings or errors.
+
+### `npm run lint:fix`
+
+Automatically fixes ESLint issues where possible.
 
 ### `npm run build`
 

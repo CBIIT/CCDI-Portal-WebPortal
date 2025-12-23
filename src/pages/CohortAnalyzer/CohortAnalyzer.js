@@ -426,12 +426,12 @@ export const CohortAnalyzer = () => {
             // Remove duplicates by id
             const uniqueParticipantData = [];
             const seenIds = new Set();
-            for (const p of participantData) {
-                if (!seenIds.has(p.id)) {
-                    uniqueParticipantData.push(p);
-                    seenIds.add(p.id);
+            participantData.forEach((participant) => {
+                if (!seenIds.has(participant.id)) {
+                    uniqueParticipantData.push(participant);
+                    seenIds.add(participant.id);
                 }
-            }
+            });
 
             setCurrentCohortChanges(null);
             dispatch(onCreateNewCohort(

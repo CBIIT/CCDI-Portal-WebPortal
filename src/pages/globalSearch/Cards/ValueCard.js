@@ -1,4 +1,4 @@
-import { Grid, withStyles, Tooltip, Typography } from '@material-ui/core';
+import { Grid, withStyles, Tooltip } from '@material-ui/core';
 import React, { useState, useRef, useEffect } from 'react';
 import { prepareLinks } from '@bento-core/util';
 import PropertyItem from './PropertyItem';

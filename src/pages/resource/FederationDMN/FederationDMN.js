@@ -16,8 +16,8 @@ const FederationDataModelNavigator = () => {
   const baseUrl = env.REACT_APP_DMN_URL || DEFAULT_DMN_URL;
   
   // Extract environment from URL (e.g., "dev" from "dmn-dev")
-  const match = baseUrl.match(/refs\/heads\/dmn-([^\/]+)/);
-  const baseEnv = match && match[1] || 'dev';
+  const match = baseUrl.match(/refs\/heads\/dmn-([^/]+)/);
+  const baseEnv = (match && match[1]) || 'dev';
   
   // Remove any existing config parameter to get clean base URL
   const cleanBaseUrl = baseUrl.split('?config=')[0];

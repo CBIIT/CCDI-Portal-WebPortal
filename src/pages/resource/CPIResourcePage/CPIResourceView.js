@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useRef, createRef } from 'react';
 import styled from 'styled-components';
 import ReactHtmlParser from 'html-react-parser';
-import headerImg from '../../../assets/resources/CPI_Header.png';
 import exportIcon from '../../../assets/resources/Explore_Icon.svg';
 import closeIcon from '../../../assets/icons/Close_Icon.svg';
 import arrowDownIcon from '../../../assets/icons/Arrow_Down.svg';
 // import { cpiResourceData, introText } from '../../../bento/cpiResourceData';
 import exportIconBlue from '../../../assets/icons/Export_Icon.svg';
-import ccdiCPIImg from '../../../assets/resources/CPI_img.png';
 
 
 const CPIResourceContainer = styled.div`
@@ -43,14 +41,6 @@ const CPIResourceContainer = styled.div`
         width: 100%;
         height: 214px;
         background: #e6ebee;
-    }
-
-    .resourceHeaderBackground {
-        width: 100%;
-        height: 214px;
-        background-image: url(${headerImg});
-        background-repeat:no-repeat;
-        background-position:center; 
     }
 
     .resourceHeaderText {
@@ -146,6 +136,14 @@ const CPIResourceContainer = styled.div`
             padding: 15px 34px 15px 0;
         }
     }
+`;
+
+const ResourceHeaderBackground = styled.div`
+    width: 100%;
+    height: 214px;
+    background-image: url(${props => props.headerImg || ''});
+    background-repeat: no-repeat;
+    background-position: center;
 `;
 
 const CPIResourceBody = styled.div`
@@ -402,7 +400,195 @@ const CPIResourceBody = styled.div`
     }
 `;
 
-const CPIResourceView = ({data}) => {
+const CPIStatsContainer = styled.div`
+    width: 100%;
+    background: white;
+    border: 2px solid white;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    padding: 35px 34px 40px 34px;
+    margin-bottom: 50px;
+
+    .statsHeader {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        align-items: center;
+    }
+
+    .statsTitle {
+        font-family: Poppins;
+        font-weight: 600;
+        font-size: 19px;
+        line-height: 21px;
+        text-align: center;
+        color: #000000;
+        letter-spacing: 0.38px;
+    }
+
+    .statsSubtitle {
+        font-family: 'Open Sans';
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 1.2;
+        color: #0f253a;
+    }
+
+    .statsContent {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        align-items: flex-start;
+        padding: 0 20px;
+        width: 100%;
+        max-width: 710px;
+    }
+
+    .statRow {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .statItem {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        width: 100%;
+    }
+
+    .statIcon {
+        flex-shrink: 0;
+    }
+
+    .statInfo {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .statLabel {
+        font-family: Poppins;
+        font-weight: 500;
+        font-size: 13px;
+        line-height: 22px;
+        color: #919191;
+        text-transform: uppercase;
+        letter-spacing: 0.26px;
+        margin-bottom: 0;
+    }
+
+    .statValue {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        color: #00838f;
+    }
+
+    .statNumber {
+        font-family: Poppins;
+        font-weight: 700;
+        font-size: 20px;
+        letter-spacing: 0.4px;
+        line-height: 40px;
+    }
+
+    .statUnit {
+        font-family: Poppins;
+        font-weight: 400;
+        font-size: 18px;
+        letter-spacing: 0.36px;
+        line-height: 21px;
+    }
+
+    .statDescription {
+        font-family: Inter;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
+        color: #0f253a;
+        margin-left: 15px;
+    }
+
+    .statDivider {
+        width: 49px;
+        height: 0;
+        border-left: 1px solid #ccc;
+        transform: rotate(90deg);
+        margin: 0 15px;
+    }
+
+    .linkageItem {
+        display: flex;
+        gap: 5px;
+        align-items: flex-start;
+        font-size: 16px;
+        line-height: 16px;
+    }
+
+    .linkageNumber {
+        font-family: Inter;
+        font-weight: 600;
+        color: #4555ab;
+        text-decoration: underline;
+    }
+
+    .linkageText {
+        font-family: Inter;
+        font-weight: 500;
+        color: #0f253a;
+    }
+
+    .domainNumber {
+        font-family: Inter;
+        font-weight: 600;
+        color: #455299;
+        text-decoration: underline;
+    }
+
+    .domainText {
+        font-family: Inter;
+        font-weight: 500;
+        color: #0f253a;
+    }
+
+    .linkagesList {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        align-items: flex-start;
+    }
+
+    .domainsList {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        align-items: flex-start;
+    }
+
+    @media (max-width: 767px) {
+        padding: 20px 16px;
+        
+        .statsContent {
+            padding: 0;
+        }
+
+        .statItem {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .statDescription {
+            margin-left: 0;
+            margin-top: 10px;
+        }
+    }
+`;
+
+const CPIResourceView = ({data, cpiStats}) => {
+    console.log("cpiStats", cpiStats);
     const [selectedNavTitle, setSelectedNavTitle] = useState('');
     const [stickyNavStyle, setStickyNavStyle] = useState('navList');
     const sectionList = useRef([]);
@@ -471,7 +657,7 @@ const CPIResourceView = ({data}) => {
 
     return (
         <CPIResourceContainer>
-            <div className='resourceHeader'><div className='resourceHeaderBackground'><div className='resourceHeaderText'>CCDI Hub</div></div></div>
+            <div className='resourceHeader'><ResourceHeaderBackground headerImg={data && data.CPI_Header_URL}><div className='resourceHeaderText'>CCDI Hub</div></ResourceHeaderBackground></div>
             <div className='resourceTitleContainer'>
                 <div className='resourceTitle'>CCDI Participant Index</div>
             </div>
@@ -497,6 +683,98 @@ const CPIResourceView = ({data}) => {
                 <div className='contentSection'>
                     <div className='contentList'>
                         {data.cpiIntroText && <div className='introContainer'>{ReactHtmlParser(data.cpiIntroText)}</div>}
+                        {cpiStats && (
+                            <CPIStatsContainer>
+                                <div className='statsHeader'>
+                                    <div className='statsTitle'>CPI Stats at a Glance</div>
+                                    <div className='statsSubtitle'>Summary of CPI v1.5</div>
+                                </div>
+                                <div className='statsContent'>
+                                    <div className='statRow'>
+                                        <div className='statItem'>
+                                            <div className='statIcon'>
+                                                <img src={data.CPI_Unique_Participants_Icon_URL} alt="CPI_Unique_Participants_Icon" style={{width: '37px', height: '36px'}} />
+                                            </div>
+                                            <div className='statInfo'>
+                                                <div className='statLabel'>Total unique participants</div>
+                                                <div className='statValue'>
+                                                    <div className='statNumber'>{cpiStats.participant_statistics.unique_participant_count.toLocaleString()}</div>
+                                                    <div className='statUnit'>Individuals</div>
+                                                </div>
+                                            </div>
+                                            <div className='statDivider'></div>
+                                            <div className='statDescription'>Deduplicated count of unique individuals across all domains</div>
+                                        </div>
+                                    </div>
+                                    <div className='statRow'>
+                                        <div className='statItem'>
+                                            <div className='statIcon'>
+                                                <img src={data.CPI_Total_Mapped_Participants_Ids_Icon_URL} alt="CPI_Total_Mapped_Participants_Ids_Icon" style={{width: '35px', height: '38px'}} />
+                                            </div>
+                                            <div className='statInfo'>
+                                                <div className='statLabel'>Total mapped participants IDs</div>
+                                                <div className='statValue'>
+                                                    <div className='statNumber'>{cpiStats.participant_statistics.mapped_participant_count.toLocaleString()}</div>
+                                                    <div className='statUnit'>Mappings</div>
+                                                </div>
+                                            </div>
+                                            <div className='statDivider'></div>
+                                            <div className='statDescription'>Participant IDs may occur in multiple datasets and/or other domains</div>
+                                        </div>
+                                    </div>
+                                    <div className='statRow'>
+                                        <div className='statItem'>
+                                            <div className='statIcon'>
+                                                <img src={data.CPI_Cross_Dataset_Linkages_Icon_URL} alt="CPI_Cross_Dataset_Linkages_Icon" style={{width: '54px', height: '37px'}} />
+                                            </div>
+                                            <div className='statInfo'>
+                                                <div className='statLabel'>Cross-dataset linkages</div>
+                                            </div>
+                                            <div className='statDivider'></div>
+                                            <div className='linkagesList'>
+                                                <div className='linkageItem'>
+                                                    <span className='linkageNumber'>{cpiStats.participant_statistics.unique_participants_by_dataset[0].participant_count.toLocaleString()}</span>
+                                                    <span className='linkageText'>Participants mapped across {cpiStats.participant_statistics.unique_participants_by_dataset[0].dataset_count.toLocaleString()} datasets</span>
+                                                </div>
+                                                <div className='linkageItem'>
+                                                    <span className='linkageNumber'>{cpiStats.participant_statistics.unique_participants_by_dataset[1].participant_count.toLocaleString()}</span>
+                                                    <span className='linkageText'>Participants mapped across {cpiStats.participant_statistics.unique_participants_by_dataset[1].dataset_count.toLocaleString()} datasets</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className='statRow'>
+                                        <div className='statItem'>
+                                            <div className='statIcon'>
+                                                <img src={data.CPI_Domain_Coverage_Icon_URL} alt="CPI_Domain_Coverage_Icon" style={{width: '40px', height: '45px'}} />
+                                            </div>
+                                            <div className='statInfo'>
+                                                <div className='statLabel'>Domain Coverage</div>
+                                                <div className='statValue'>
+                                                    <div className='statNumber'>{cpiStats.counts_by_domain.length}</div>
+                                                    <div className='statUnit'>Total domains</div>
+                                                </div>
+                                            </div>
+                                            <div className='statDivider'></div>
+                                            <div className='domainsList'>
+                                                <div className='linkageItem'>
+                                                    <span className='domainNumber'>{cpiStats.counts_by_domain.filter(item => item.domain_category === "organizational_identifier").length.toLocaleString()}</span>
+                                                    <span className='domainText'>Organizational Identifiers</span>
+                                                </div>
+                                                <div className='linkageItem'>
+                                                    <span className='domainNumber'>{cpiStats.counts_by_domain.filter(item => item.domain_category === "dataset").length.toLocaleString()}</span>
+                                                    <span className='domainText'>Datasets</span>
+                                                </div>
+                                                <div className='linkageItem'>
+                                                    <span className='domainNumber'>{cpiStats.counts_by_domain.filter(item => item.domain_category === "study").length.toLocaleString()}</span>
+                                                    <span className='domainText'>Studies</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </CPIStatsContainer>
+                        )}
                         {
                             cpiContent && cpiContent.map((cpiItem, mciid) => {
                                 const cpikey = `cpi_${mciid}`;
@@ -510,7 +788,7 @@ const CPIResourceView = ({data}) => {
                                                 
                                                 {cpiItem.id && cpiItem.id.includes('CPI_Components') && 
                                                 <div>
-                                                    <img className='CPIImg' src={ccdiCPIImg} alt="Flow of data from submitters through CCDI Participant Index to CPI authorized applications."/>
+                                                    <img className='CPIImg' src={data.CPI_Img_URL} alt="Flow of data from submitters through CCDI Participant Index to CPI authorized applications."/>
                                                 </div>
                                                 }
                                             </div>

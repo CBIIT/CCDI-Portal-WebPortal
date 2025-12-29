@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { withStyles } from '@material-ui/core';
 import TrashCanIconGray from '../../../../assets/icons/Trash_Can_Icon_Gray.svg';
 import TrashCanIconWhite from '../../../../assets/icons/Trash_Can_Icon_White.svg';
+import DuplicateIconWhite from '../../../../assets/icons/Duplicate_Icon_White.svg';
 import DEFAULT_CONFIG from '../config';
 import DeleteConfirmationModal from './deleteConfirmationModal';
 import { deletionTypes } from './deleteConfirmationModal';
@@ -23,6 +24,7 @@ const CohortList = (props) => {
         closeParentModal,
         handleDeleteCohort,
         handleDeleteAllCohorts,
+        handleDuplicateCohort,
         handleClearCurrentCohortChanges,
         state,
     } = props;
@@ -138,7 +140,16 @@ const CohortList = (props) => {
                                 <span className={classes.cohortListItemText}>
                                     {state[cohort].cohortId}
                                 </span>
-                                <span>
+                                <span className={classes.cohortListItemActions}>
+                                    <img
+                                        src={DuplicateIconWhite}
+                                        alt="duplicate cohort icon"
+                                        className={classes.whiteDuplicateIcon}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            handleDuplicateCohort(state[cohort].cohortId);
+                                        }}
+                                    />
                                     <img
                                         src={TrashCanIconWhite}
                                         alt="delete cohort icon"
@@ -258,6 +269,18 @@ const styles = () => ({
         '&:hover': {
             cursor: 'pointer',
         },
+    },
+    whiteDuplicateIcon: {
+        width: 14,
+        color: 'white',
+        '&:hover': {
+            cursor: 'pointer',
+        },
+    },
+    cohortListItemActions: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '10px',
     },
 });
 

@@ -81,6 +81,8 @@ export const CohortAnalyzer = () => {
                 if (!selectedCohorts.includes(viewCohort.cohortId)) {
                     setSelectedCohorts([viewCohort.cohortId]);
                 }
+                // Scroll to top of page
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }
     }, [location]);

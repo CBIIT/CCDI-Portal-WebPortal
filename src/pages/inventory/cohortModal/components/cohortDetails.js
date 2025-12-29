@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { withStyles, Button } from '@material-ui/core';
 import DEFAULT_CONFIG from '../config';
 import EditIcon from '../../../../assets/icons/Edit_Icon.svg';
@@ -26,7 +27,10 @@ const CohortDetails = (props) => {
         downloadCohortManifest,
         downloadCohortMetadata,
         deleteConfirmationClasses,
+        setAlert,
     } = props;
+
+    const navigate = useNavigate();
 
     if (!activeCohort) {
         return null;
@@ -201,6 +205,15 @@ const CohortDetails = (props) => {
         download();
         setShowDownloadDropdown(false);
     };
+
+    const handleViewCohortDetailsClick = useCallback(() => {
+        try {
+            navigate(`/cohortAnalyzer`, { state: { cohort: localCohort } });
+        } catch (error) {
+            console.error('Error navigating to cohort details:', error);
+            setAlert({ type: 'error', message: 'Failed to navigate to Cohort Analyzer. Please try again.' });
+        }
+    }, [navigate, localCohort, setAlert]);
 
     localCohort.participants.sort((a, b) => {
         const primaryComparison = selectedColumn[1] === 'ascending'
@@ -431,7 +444,7 @@ const CohortDetails = (props) => {
                         </div>
                     )}
                 </div>
-                <Button variant="contained" className={classes.viewCohortDetailsButton} onClick={() => console.log("currentCohortChanges")}>View Cohort Details</Button>
+                <Button variant="contained" className={classes.viewCohortDetailsButton} onClick={handleViewCohortDetailsClick}>View Cohort Details</Button>
             </div>
             </div>
         </>

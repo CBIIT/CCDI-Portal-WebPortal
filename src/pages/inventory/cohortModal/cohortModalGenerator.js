@@ -281,6 +281,7 @@ export const CohortModalGenerator = (uiConfig = DEFAULT_CONFIG) => {
                                 downloadCohortManifest={downloadCohortManifest}
                                 downloadCohortMetadata={downloadCohortMetadata}
                                 deleteConfirmationClasses={deleteConfirmationClasses}
+                                setAlert={setAlert}
                             />
                         </div>
                     </div>

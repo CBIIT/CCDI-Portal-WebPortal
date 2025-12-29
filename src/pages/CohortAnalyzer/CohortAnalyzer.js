@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { CohortStateContext } from "../../components/CohortSelectorState/CohortStateContext";
 import { configColumn } from "../inventory/tabs/tableConfig/Column";
 import { TableView } from "@bento-core/paginated-table";
@@ -39,6 +40,7 @@ import styled from "styled-components";
 export const CohortAnalyzer = () => {
     const classes = useStyle();
     const { state, dispatch } = useContext(CohortStateContext);
+    const location = useLocation();
     const [selectedCohorts, setSelectedCohorts] = useState([]);
     const [queryVariable, setQueryVariable] = useState({});
     const [rowData, setRowData] = useState([]);
@@ -70,6 +72,19 @@ export const CohortAnalyzer = () => {
     const handleMouseLeave = () => {
         setHoveredCohort("");
     }
+
+    useEffect(() => {
+        if (location && location.state) {
+            const viewCohort = location.state.cohort;
+            if (viewCohort && viewCohort.cohortId && state[viewCohort.cohortId]) {
+                // Auto-select the cohort if it exists in the state
+                if (!selectedCohorts.includes(viewCohort.cohortId)) {
+                    setSelectedCohorts([viewCohort.cohortId]);
+                }
+            }
+        }
+    }, [location]);
+
     const searchRef = useRef();
 
 

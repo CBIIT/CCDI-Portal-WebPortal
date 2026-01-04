@@ -524,40 +524,20 @@ const CPIStatsContainer = styled.div`
         line-height: 16px;
     }
 
-    .linkageNumber {
+    .statListItemNumber {
         font-family: Inter;
-        font-weight: 600;
-        color: #4555ab;
-        text-decoration: underline;
+        font-weight: 500;
+        color: #0f253a;
+        // text-decoration: underline;
     }
 
-    .linkageText {
+    .statListItemText {
         font-family: Inter;
         font-weight: 500;
         color: #0f253a;
     }
 
-    .domainNumber {
-        font-family: Inter;
-        font-weight: 600;
-        color: #455299;
-        text-decoration: underline;
-    }
-
-    .domainText {
-        font-family: Inter;
-        font-weight: 500;
-        color: #0f253a;
-    }
-
-    .linkagesList {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-        align-items: flex-start;
-    }
-
-    .domainsList {
+    .statList {
         display: flex;
         flex-direction: column;
         gap: 6px;
@@ -724,14 +704,14 @@ const CPIResourceView = ({data, cpiStats}) => {
                                             <div className='statInfo'>
                                                 <div className='statLabel'>Cross-dataset linkages</div>
                                             </div>
-                                            <div className='linkagesList'>
+                                            <div className='statList'>
                                                 <div className='linkageItem'>
-                                                    <span className='linkageNumber'>{cpiStats.participant_statistics.unique_participants_by_dataset[0].participant_count.toLocaleString()}</span>
-                                                    <span className='linkageText'>Participants mapped across {cpiStats.participant_statistics.unique_participants_by_dataset[0].dataset_count.toLocaleString()} datasets</span>
+                                                    <span className='statListItemNumber'>{cpiStats.participant_statistics.unique_participants_by_dataset[0].participant_count.toLocaleString()}</span>
+                                                    <span className='statListItemText'>Participants mapped across {cpiStats.participant_statistics.unique_participants_by_dataset[0].dataset_count.toLocaleString()} datasets</span>
                                                 </div>
                                                 <div className='linkageItem'>
-                                                    <span className='linkageNumber'>{cpiStats.participant_statistics.unique_participants_by_dataset[1].participant_count.toLocaleString()}</span>
-                                                    <span className='linkageText'>Participants mapped across {cpiStats.participant_statistics.unique_participants_by_dataset[1].dataset_count.toLocaleString()} datasets</span>
+                                                    <span className='statListItemNumber'>{cpiStats.participant_statistics.unique_participants_by_dataset[1].participant_count.toLocaleString()}</span>
+                                                    <span className='statListItemText'>Participants mapped across {cpiStats.participant_statistics.unique_participants_by_dataset[1].dataset_count.toLocaleString()} datasets</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -748,18 +728,18 @@ const CPIResourceView = ({data, cpiStats}) => {
                                                     <div className='statUnit'>Total domains</div>
                                                 </div>
                                             </div>
-                                            <div className='domainsList'>
+                                            <div className='statList'>
                                                 <div className='linkageItem'>
-                                                    <span className='domainNumber'>{cpiStats.counts_by_domain.filter(item => item.domain_category === "organizational_identifier").length.toLocaleString()}</span>
-                                                    <span className='domainText'>Organizational Identifiers</span>
+                                                    <span className='statListItemNumber'>{cpiStats.counts_by_domain.filter(item => item.domain_category === "organizational_identifier").length.toLocaleString()}</span>
+                                                    <span className='statListItemText'>Organizational Identifiers</span>
                                                 </div>
                                                 <div className='linkageItem'>
-                                                    <span className='domainNumber'>{cpiStats.counts_by_domain.filter(item => item.domain_category === "dataset").length.toLocaleString()}</span>
-                                                    <span className='domainText'>Datasets</span>
+                                                    <span className='statListItemNumber'>{cpiStats.counts_by_domain.filter(item => item.domain_category === "dataset").length.toLocaleString()}</span>
+                                                    <span className='statListItemText'>Datasets</span>
                                                 </div>
                                                 <div className='linkageItem'>
-                                                    <span className='domainNumber'>{cpiStats.counts_by_domain.filter(item => item.domain_category === "study").length.toLocaleString()}</span>
-                                                    <span className='domainText'>Studies</span>
+                                                    <span className='statListItemNumber'>{cpiStats.counts_by_domain.filter(item => item.domain_category === "study").length.toLocaleString()}</span>
+                                                    <span className='statListItemText'>Studies</span>
                                                 </div>
                                             </div>
                                         </div>

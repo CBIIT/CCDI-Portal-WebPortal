@@ -408,7 +408,6 @@ const CPIStatsContainer = styled.div`
     flex-direction: column;
     gap: 20px;
     align-items: center;
-    padding: 35px 34px 40px 34px;
     margin-bottom: 50px;
 
     .statsHeader {
@@ -441,7 +440,6 @@ const CPIStatsContainer = styled.div`
         flex-direction: column;
         gap: 30px;
         align-items: flex-start;
-        padding: 0 20px;
         width: 100%;
         max-width: 710px;
     }
@@ -455,18 +453,23 @@ const CPIStatsContainer = styled.div`
     .statItem {
         display: flex;
         gap: 15px;
-        align-items: center;
+        align-items: stretch;
         width: 100%;
     }
 
     .statIcon {
         flex-shrink: 0;
+        width: 50px;
+        display: flex;
+        align-items: center;
     }
 
     .statInfo {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        justify-content: center;
+        width: 235px;
+        border-right: 0.75px solid #919191;
     }
 
     .statLabel {
@@ -478,6 +481,7 @@ const CPIStatsContainer = styled.div`
         text-transform: uppercase;
         letter-spacing: 0.26px;
         margin-bottom: 0;
+        width: 235px;
     }
 
     .statValue {
@@ -492,7 +496,7 @@ const CPIStatsContainer = styled.div`
         font-weight: 700;
         font-size: 20px;
         letter-spacing: 0.4px;
-        line-height: 40px;
+        line-height: 25px;
     }
 
     .statUnit {
@@ -509,15 +513,7 @@ const CPIStatsContainer = styled.div`
         font-size: 16px;
         line-height: 20px;
         color: #0f253a;
-        margin-left: 15px;
-    }
-
-    .statDivider {
-        width: 49px;
-        height: 0;
-        border-left: 1px solid #ccc;
-        transform: rotate(90deg);
-        margin: 0 15px;
+        width: 370px;
     }
 
     .linkageItem {
@@ -693,7 +689,7 @@ const CPIResourceView = ({data, cpiStats}) => {
                                     <div className='statRow'>
                                         <div className='statItem'>
                                             <div className='statIcon'>
-                                                <img src={data.CPI_Unique_Participants_Icon_URL} alt="CPI_Unique_Participants_Icon" style={{width: '37px', height: '36px'}} />
+                                                <img src={data.CPI_Unique_Participants_Icon_URL} alt="CPI_Unique_Participants_Icon" />
                                             </div>
                                             <div className='statInfo'>
                                                 <div className='statLabel'>Total unique participants</div>
@@ -702,14 +698,13 @@ const CPIResourceView = ({data, cpiStats}) => {
                                                     <div className='statUnit'>Individuals</div>
                                                 </div>
                                             </div>
-                                            <div className='statDivider'></div>
                                             <div className='statDescription'>Deduplicated count of unique individuals across all domains</div>
                                         </div>
                                     </div>
                                     <div className='statRow'>
                                         <div className='statItem'>
                                             <div className='statIcon'>
-                                                <img src={data.CPI_Total_Mapped_Participants_Ids_Icon_URL} alt="CPI_Total_Mapped_Participants_Ids_Icon" style={{width: '35px', height: '38px'}} />
+                                                <img src={data.CPI_Total_Mapped_Participants_Ids_Icon_URL} alt="CPI_Total_Mapped_Participants_Ids_Icon" />
                                             </div>
                                             <div className='statInfo'>
                                                 <div className='statLabel'>Total mapped participants IDs</div>
@@ -718,19 +713,17 @@ const CPIResourceView = ({data, cpiStats}) => {
                                                     <div className='statUnit'>Mappings</div>
                                                 </div>
                                             </div>
-                                            <div className='statDivider'></div>
                                             <div className='statDescription'>Participant IDs may occur in multiple datasets and/or other domains</div>
                                         </div>
                                     </div>
                                     <div className='statRow'>
                                         <div className='statItem'>
                                             <div className='statIcon'>
-                                                <img src={data.CPI_Cross_Dataset_Linkages_Icon_URL} alt="CPI_Cross_Dataset_Linkages_Icon" style={{width: '54px', height: '37px'}} />
+                                                <img src={data.CPI_Cross_Dataset_Linkages_Icon_URL} alt="CPI_Cross_Dataset_Linkages_Icon" />
                                             </div>
                                             <div className='statInfo'>
                                                 <div className='statLabel'>Cross-dataset linkages</div>
                                             </div>
-                                            <div className='statDivider'></div>
                                             <div className='linkagesList'>
                                                 <div className='linkageItem'>
                                                     <span className='linkageNumber'>{cpiStats.participant_statistics.unique_participants_by_dataset[0].participant_count.toLocaleString()}</span>
@@ -746,7 +739,7 @@ const CPIResourceView = ({data, cpiStats}) => {
                                     <div className='statRow'>
                                         <div className='statItem'>
                                             <div className='statIcon'>
-                                                <img src={data.CPI_Domain_Coverage_Icon_URL} alt="CPI_Domain_Coverage_Icon" style={{width: '40px', height: '45px'}} />
+                                                <img src={data.CPI_Domain_Coverage_Icon_URL} alt="CPI_Domain_Coverage_Icon" />
                                             </div>
                                             <div className='statInfo'>
                                                 <div className='statLabel'>Domain Coverage</div>
@@ -755,7 +748,6 @@ const CPIResourceView = ({data, cpiStats}) => {
                                                     <div className='statUnit'>Total domains</div>
                                                 </div>
                                             </div>
-                                            <div className='statDivider'></div>
                                             <div className='domainsList'>
                                                 <div className='linkageItem'>
                                                     <span className='domainNumber'>{cpiStats.counts_by_domain.filter(item => item.domain_category === "organizational_identifier").length.toLocaleString()}</span>

@@ -467,7 +467,6 @@ const CPIStatsContainer = styled.div`
     .statInfo {
         display: flex;
         flex-direction: column;
-        justify-content: center;
         width: 235px;
         border-right: 0.75px solid #919191;
     }
@@ -544,7 +543,7 @@ const CPIStatsContainer = styled.div`
         align-items: flex-start;
     }
 
-    @media (max-width: 767px) {
+    @media (max-width: 1023px) {
         padding: 20px 16px;
         
         .statsContent {
@@ -552,13 +551,62 @@ const CPIStatsContainer = styled.div`
         }
 
         .statItem {
-            flex-direction: column;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .statInfo {
+            border-right: none;
             align-items: flex-start;
         }
 
+        .statLabel {
+            text-align: left;
+        }
+
+        .statValue {
+            justify-content: flex-start;
+        }
+
         .statDescription {
+            width: 375px;
             margin-left: 0;
             margin-top: 10px;
+            border-top: 0.75px solid #919191;
+            padding-top: 8px;
+        }
+
+        .statList {
+            width: 375px;
+            margin-top: 10px;
+            border-top: 0.75px solid #919191;
+            padding-top: 8px;
+            border-collapse: separate;
+            border-spacing: 0 6px;
+        }
+
+        .statListContainer {
+            display: table;
+            margin: 0 auto;
+        }
+
+        .linkageItem {
+            display: table-row;
+        }
+
+        .statListItemNumber {
+            display: table-cell;
+            padding-right: 8px;
+            vertical-align: top;
+            text-align: right;
+        }
+
+        .statListItemText {
+            display: table-cell;
+            vertical-align: top;
         }
     }
 `;
@@ -705,13 +753,15 @@ const CPIResourceView = ({data, cpiStats}) => {
                                                 <div className='statLabel'>Cross-dataset linkages</div>
                                             </div>
                                             <div className='statList'>
-                                                <div className='linkageItem'>
-                                                    <span className='statListItemNumber'>{cpiStats.participant_statistics.unique_participants_by_dataset[0].participant_count.toLocaleString()}</span>
-                                                    <span className='statListItemText'>Participants mapped across {cpiStats.participant_statistics.unique_participants_by_dataset[0].dataset_count.toLocaleString()} datasets</span>
-                                                </div>
-                                                <div className='linkageItem'>
-                                                    <span className='statListItemNumber'>{cpiStats.participant_statistics.unique_participants_by_dataset[1].participant_count.toLocaleString()}</span>
-                                                    <span className='statListItemText'>Participants mapped across {cpiStats.participant_statistics.unique_participants_by_dataset[1].dataset_count.toLocaleString()} datasets</span>
+                                                <div className='statListContainer'>
+                                                    <div className='linkageItem'>
+                                                        <span className='statListItemNumber'>{cpiStats.participant_statistics.unique_participants_by_dataset[0].participant_count.toLocaleString()}</span>
+                                                        <span className='statListItemText'>Participants mapped across {cpiStats.participant_statistics.unique_participants_by_dataset[0].dataset_count.toLocaleString()} datasets</span>
+                                                    </div>
+                                                    <div className='linkageItem'>
+                                                        <span className='statListItemNumber'>{cpiStats.participant_statistics.unique_participants_by_dataset[1].participant_count.toLocaleString()}</span>
+                                                        <span className='statListItemText'>Participants mapped across {cpiStats.participant_statistics.unique_participants_by_dataset[1].dataset_count.toLocaleString()} datasets</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -729,17 +779,19 @@ const CPIResourceView = ({data, cpiStats}) => {
                                                 </div>
                                             </div>
                                             <div className='statList'>
-                                                <div className='linkageItem'>
-                                                    <span className='statListItemNumber'>{cpiStats.counts_by_domain.filter(item => item.domain_category === "organizational_identifier").length.toLocaleString()}</span>
-                                                    <span className='statListItemText'>Organizational Identifiers</span>
-                                                </div>
-                                                <div className='linkageItem'>
-                                                    <span className='statListItemNumber'>{cpiStats.counts_by_domain.filter(item => item.domain_category === "dataset").length.toLocaleString()}</span>
-                                                    <span className='statListItemText'>Datasets</span>
-                                                </div>
-                                                <div className='linkageItem'>
-                                                    <span className='statListItemNumber'>{cpiStats.counts_by_domain.filter(item => item.domain_category === "study").length.toLocaleString()}</span>
-                                                    <span className='statListItemText'>Studies</span>
+                                                <div className='statListContainer'>
+                                                    <div className='linkageItem'>
+                                                        <span className='statListItemNumber'>{cpiStats.counts_by_domain.filter(item => item.domain_category === "organizational_identifier").length.toLocaleString()}</span>
+                                                        <span className='statListItemText'>Organizational Identifiers</span>
+                                                    </div>
+                                                    <div className='linkageItem'>
+                                                        <span className='statListItemNumber'>{cpiStats.counts_by_domain.filter(item => item.domain_category === "dataset").length.toLocaleString()}</span>
+                                                        <span className='statListItemText'>Datasets</span>
+                                                    </div>
+                                                    <div className='linkageItem'>
+                                                        <span className='statListItemNumber'>{cpiStats.counts_by_domain.filter(item => item.domain_category === "study").length.toLocaleString()}</span>
+                                                        <span className='statListItemText'>Studies</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

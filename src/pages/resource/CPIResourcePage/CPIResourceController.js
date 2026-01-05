@@ -53,7 +53,7 @@ const getCPIData = () => {
 
 const CPIResourceController = ({ match }) => {
   const { data, cpiStats } = getCPIData();
-  if (cpiStats && data) {
+  if (data) {
     return <CPIResourceView data={data} cpiStats={cpiStats} />;
   } else {
     return <div>Loading...</div>;

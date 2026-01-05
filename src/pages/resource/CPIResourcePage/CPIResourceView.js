@@ -765,7 +765,7 @@ const CPIResourceView = ({data, cpiStats}) => {
                 <div className='contentSection'>
                     <div className='contentList'>
                         {data.cpiIntroText && <div className='introContainer'>{ReactHtmlParser(data.cpiIntroText)}</div>}
-                        {cpiStats && (
+                        {cpiStats ? (
                             <CPIStatsContainer>
                                 <img className='blurBorder' src={isMobile ? blurBorderMobile : blurBorder} alt="blurBorder" />
                                 <div className='statsHeader'>
@@ -866,6 +866,8 @@ const CPIResourceView = ({data, cpiStats}) => {
                                 </div>
                                 <img className='blurBorder' src={isMobile ? blurBorderMobile : blurBorder} alt="blurBorder" />
                             </CPIStatsContainer>
+                        ) : (
+                            <div>Statistic Temporarily Unavailable</div>
                         )}
                         {
                             cpiContent && cpiContent.map((cpiItem, mciid) => {

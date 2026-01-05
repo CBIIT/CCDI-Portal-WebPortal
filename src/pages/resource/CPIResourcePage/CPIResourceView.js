@@ -7,6 +7,7 @@ import arrowDownIcon from '../../../assets/icons/Arrow_Down.svg';
 // import { cpiResourceData, introText } from '../../../bento/cpiResourceData';
 import exportIconBlue from '../../../assets/icons/Export_Icon.svg';
 import blurBorder from '../../../assets/resources/blur_border.svg';
+import blurBorderMobile from '../../../assets/resources/blur_border_mobile.svg';
 
 const CPIResourceContainer = styled.div`
     width: 100%;
@@ -239,8 +240,13 @@ const CPIResourceBody = styled.div`
     .contentSection {
         display: flex;
         width: calc(100% - 240px);
-        padding: 0 32px 0 50px;
+        padding: 0 32px 0 20px;
         margin-bottom: 100px;
+
+        @media (max-width: 1023px) {
+            width: calc(100% - 197px);
+            padding-left: 0;
+        }
     }
 
     .mciTitle {
@@ -365,6 +371,20 @@ const CPIResourceBody = styled.div`
             margin: 120px 0 0 150px;
         }
 
+    }
+
+    @media (max-width: 1023px) {
+        padding: 43px 16px 0 16px; 
+        .navSection {
+            width: 197px;
+        }
+
+        .navListSticky {
+            width: 197px;
+        }
+        .navListAbsolute {
+            width: 197px;
+        }
     }
 
     @media (max-width: 767px) {
@@ -644,6 +664,7 @@ const CPIResourceView = ({data, cpiStats}) => {
     console.log("cpiStats", cpiStats);
     const [selectedNavTitle, setSelectedNavTitle] = useState('');
     const [stickyNavStyle, setStickyNavStyle] = useState('navList');
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 767);
     const sectionList = useRef([]);
     // sectionList.current = cpiResourceData.map((element, i) => {
     //     return sectionList.current[i] || createRef()
@@ -681,8 +702,16 @@ const CPIResourceView = ({data, cpiStats}) => {
     useEffect(() => {
         window.scrollTo(0, 0);
         document.addEventListener("scroll", handleScroll);
+        
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 767);
+        };
+        
+        window.addEventListener("resize", handleResize);
+        
         return () => {
             document.removeEventListener("scroll", handleScroll);
+            window.removeEventListener("resize", handleResize);
         };
     }, [])
 
@@ -738,7 +767,7 @@ const CPIResourceView = ({data, cpiStats}) => {
                         {data.cpiIntroText && <div className='introContainer'>{ReactHtmlParser(data.cpiIntroText)}</div>}
                         {cpiStats && (
                             <CPIStatsContainer>
-                                <img className='blurBorder' src={blurBorder} alt="blurBorder" />
+                                <img className='blurBorder' src={isMobile ? blurBorderMobile : blurBorder} alt="blurBorder" />
                                 <div className='statsHeader'>
                                     <div className='statsTitle'>CPI Stats at a Glance</div>
                                     <div className='statsSubtitle'>Summary of CPI v1.5</div>
@@ -835,7 +864,7 @@ const CPIResourceView = ({data, cpiStats}) => {
                                         </div>
                                     </div>
                                 </div>
-                                <img className='blurBorder' src={blurBorder} alt="blurBorder" />
+                                <img className='blurBorder' src={isMobile ? blurBorderMobile : blurBorder} alt="blurBorder" />
                             </CPIStatsContainer>
                         )}
                         {

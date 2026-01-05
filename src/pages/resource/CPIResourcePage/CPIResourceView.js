@@ -6,7 +6,7 @@ import closeIcon from '../../../assets/icons/Close_Icon.svg';
 import arrowDownIcon from '../../../assets/icons/Arrow_Down.svg';
 // import { cpiResourceData, introText } from '../../../bento/cpiResourceData';
 import exportIconBlue from '../../../assets/icons/Export_Icon.svg';
-
+import blurBorder from '../../../assets/resources/blur_border.svg';
 
 const CPIResourceContainer = styled.div`
     width: 100%;
@@ -406,7 +406,7 @@ const CPIStatsContainer = styled.div`
     border: 2px solid white;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 35px;
     align-items: center;
     margin-bottom: 50px;
 
@@ -548,7 +548,6 @@ const CPIStatsContainer = styled.div`
     }
 
     @media (max-width: 1023px) {
-        padding: 20px 16px;
         
         .statsContent {
             padding: 0;
@@ -739,6 +738,7 @@ const CPIResourceView = ({data, cpiStats}) => {
                         {data.cpiIntroText && <div className='introContainer'>{ReactHtmlParser(data.cpiIntroText)}</div>}
                         {cpiStats && (
                             <CPIStatsContainer>
+                                <img className='blurBorder' src={blurBorder} alt="blurBorder" />
                                 <div className='statsHeader'>
                                     <div className='statsTitle'>CPI Stats at a Glance</div>
                                     <div className='statsSubtitle'>Summary of CPI v1.5</div>
@@ -835,6 +835,7 @@ const CPIResourceView = ({data, cpiStats}) => {
                                         </div>
                                     </div>
                                 </div>
+                                <img className='blurBorder' src={blurBorder} alt="blurBorder" />
                             </CPIStatsContainer>
                         )}
                         {

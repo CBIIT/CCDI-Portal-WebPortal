@@ -5,7 +5,7 @@ import axios from "axios";
 import CPIResourceView from "./CPIResourceView";
 
 const RESOURCE_URL = env.REACT_APP_STATIC_CONTENT_URL + '/resourceData.yaml';
-const CPI_URL = 'https://participantindex-qa.ccdi.cancer.gov/v1/statistic';
+const CPI_URL = 'https://participantindex.ccdi.cancer.gov/v1/statistic';
 
 const getCPIData = () => {
   async function getResourceData() {

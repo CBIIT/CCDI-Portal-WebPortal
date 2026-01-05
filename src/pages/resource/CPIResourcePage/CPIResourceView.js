@@ -467,7 +467,6 @@ const CPIStatsContainer = styled.div`
     .statInfo {
         display: flex;
         flex-direction: column;
-        width: 235px;
         border-right: 0.75px solid #919191;
     }
 
@@ -480,7 +479,6 @@ const CPIStatsContainer = styled.div`
         text-transform: uppercase;
         letter-spacing: 0.26px;
         margin-bottom: 0;
-        width: 235px;
     }
 
     .statValue {
@@ -543,11 +541,18 @@ const CPIStatsContainer = styled.div`
         align-items: flex-start;
     }
 
+    @media (min-width: 1024px) {
+        .statLabel {
+            width: 235px;
+        }
+    }
+
     @media (max-width: 1023px) {
         padding: 20px 16px;
         
         .statsContent {
             padding: 0;
+            max-width: 539px;
         }
 
         .statItem {
@@ -607,6 +612,31 @@ const CPIStatsContainer = styled.div`
         .statListItemText {
             display: table-cell;
             vertical-align: top;
+        }
+    }
+
+    @media (max-width: 767px) {
+
+        .statsContent {
+            max-width: 343px;
+        }
+
+        .statDescription {
+            width: 270px;
+        }
+
+        .statDescriptionContainer {
+            margin: 0 auto;
+            width: 220px;
+        }
+
+        .statList {
+            width: 270px;
+        }
+
+        .statListContainer {
+            max-width: 226px;
+            margin: 0 auto;
         }
     }
 `;
@@ -726,7 +756,11 @@ const CPIResourceView = ({data, cpiStats}) => {
                                                     <div className='statUnit'>Individuals</div>
                                                 </div>
                                             </div>
-                                            <div className='statDescription'>Deduplicated count of unique individuals across all domains</div>
+                                            <div className='statDescription'>
+                                                <div className='statDescriptionContainer'>
+                                                    Deduplicated count of unique individuals across all domains
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div className='statRow'>
@@ -741,7 +775,11 @@ const CPIResourceView = ({data, cpiStats}) => {
                                                     <div className='statUnit'>Mappings</div>
                                                 </div>
                                             </div>
-                                            <div className='statDescription'>Participant IDs may occur in multiple datasets and/or other domains</div>
+                                            <div className='statDescription'>
+                                                <div className='statDescriptionContainer'>
+                                                    Participant IDs may occur in multiple datasets and/or other domains
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div className='statRow'>

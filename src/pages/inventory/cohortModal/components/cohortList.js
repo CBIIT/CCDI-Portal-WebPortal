@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { withStyles } from '@material-ui/core';
+import { withStyles, Button, Tooltip } from '@material-ui/core';
 import TrashCanIconGray from '../../../../assets/icons/Trash_Can_Icon_Gray.svg';
 import TrashCanIconWhite from '../../../../assets/icons/Trash_Can_Icon_White.svg';
 import DuplicateIconWhite from '../../../../assets/icons/Duplicate_Icon_White.svg';
@@ -141,28 +141,40 @@ const CohortList = (props) => {
                                     {state[cohort].cohortId}
                                 </span>
                                 <span className={classes.cohortListItemActions}>
-                                    <img
-                                        src={DuplicateIconWhite}
-                                        alt="duplicate cohort icon"
-                                        className={classes.whiteDuplicateIcon}
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                            handleDuplicateCohort(state[cohort].cohortId);
-                                        }}
-                                    />
-                                    <img
-                                        src={TrashCanIconWhite}
-                                        alt="delete cohort icon"
-                                        className={classes.whiteTrashCan}
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                            setDeleteModalProps({
-                                                handleDelete: () => handleDeleteCohort(state[cohort].cohortId),
-                                                deletionType: deletionTypes.DELETE_SINGLE_COHORT,
-                                            });
-                                            setShowDeleteConfirmation(true);
-                                        }}
-                                    />
+                                    <Tooltip title="Duplicate cohort" arrow>
+                                        <Button
+                                            className={classes.actionButton}
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                handleDuplicateCohort(state[cohort].cohortId);
+                                            }}
+                                        >
+                                            <img
+                                                src={DuplicateIconWhite}
+                                                alt="duplicate cohort icon"
+                                                className={classes.whiteDuplicateIcon}
+                                            />
+                                        </Button>
+                                    </Tooltip>
+                                    <Tooltip title="Delete cohort" arrow>
+                                        <Button
+                                            className={classes.actionButton}
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                setDeleteModalProps({
+                                                    handleDelete: () => handleDeleteCohort(state[cohort].cohortId),
+                                                    deletionType: deletionTypes.DELETE_SINGLE_COHORT,
+                                                });
+                                                setShowDeleteConfirmation(true);
+                                            }}
+                                        >
+                                            <img
+                                                src={TrashCanIconWhite}
+                                                alt="delete cohort icon"
+                                                className={classes.whiteTrashCan}
+                                            />
+                                        </Button>
+                                    </Tooltip>
                                 </span>
                             </div>
                         );
@@ -281,6 +293,13 @@ const styles = () => ({
         display: 'flex',
         alignItems: 'center',
         gap: '10px',
+    },
+    actionButton: {
+        minWidth: 'auto',
+        padding: '4px',
+        '&:hover': {
+            backgroundColor: 'rgba(255, 255, 255, 0.1)',
+        },
     },
 });
 

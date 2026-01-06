@@ -27,37 +27,75 @@ const getCPIData = () => {
   async function getCpiStats() {
     try {
       const response = await fetch(CPI_URL);
+      if (response.status !== 200) {
+        console.error('Error fetching CPI statistics: Status', response.status);
+        throw new Error(`API returned status ${response.status}`);
+      }
       const result = await response.json();
-      return result;
+      return { success: true, data: result };
     } catch (error) {
       console.error('Error fetching CPI statistics:', error);
-      return null;
+      return { success: false, error: error.message };
     }
   }
 
   const [data, setData] = useState([]);
   const [cpiStats, setCpiStats] = useState(null);
+  const [loadingData, setLoadingData] = useState(true);
+  const [loadingCpiStats, setLoadingCpiStats] = useState(true);
+  const [cpiStatsError, setCpiStatsError] = useState(false);
 
   useEffect(() => {
     const controller = new AbortController();
+    
+    setLoadingData(true);
     getResourceData().then((resultData) => {
       setData(resultData);
+      setLoadingData(false);
     });
+    
+    setLoadingCpiStats(true);
+    setCpiStatsError(false);
     getCpiStats().then((result) => {
-      setCpiStats(result);
+      if (result.success) {
+        setCpiStats(result.data);
+        setCpiStatsError(false);
+      } else {
+        setCpiStats(null);
+        setCpiStatsError(true);
+      }
+      setLoadingCpiStats(false);
     });
+    
     return () => controller.abort();
   }, []);
-  return { data, cpiStats };
+  
+  return { data, cpiStats, loadingData, loadingCpiStats, cpiStatsError };
 };
 
 const CPIResourceController = ({ match }) => {
-  const { data, cpiStats } = getCPIData();
-  if (data) {
-    return <CPIResourceView data={data} cpiStats={cpiStats} />;
-  } else {
+  const { data, cpiStats, loadingData, loadingCpiStats, cpiStatsError } = getCPIData();
+  
+  // Show loading while resource data is being fetched
+  if (loadingData) {
     return <div>Loading...</div>;
   }
+  
+  // If resource data is loaded, show the view
+  // The view will handle loading/error states for cpiStats
+  if (data) {
+    return (
+      <CPIResourceView 
+        data={data} 
+        cpiStats={cpiStats} 
+        loadingCpiStats={loadingCpiStats}
+        cpiStatsError={cpiStatsError}
+      />
+    );
+  }
+  
+  // Fallback (shouldn't normally reach here)
+  return <div>Loading...</div>;
 };
 
 export default CPIResourceController;

@@ -186,7 +186,7 @@ const CPIResourceBody = styled.div`
         }
     }
 
-    .errorContainer {
+    .infoContainer {
         text-align: center;
         width: 100%;
         font-family: Poppins;
@@ -672,8 +672,7 @@ const CPIStatsContainer = styled.div`
     }
 `;
 
-const CPIResourceView = ({data, cpiStats}) => {
-    console.log("cpiStats", cpiStats);
+const CPIResourceView = ({data, cpiStats, loadingCpiStats, cpiStatsError}) => {
     const [selectedNavTitle, setSelectedNavTitle] = useState('');
     const [stickyNavStyle, setStickyNavStyle] = useState('navList');
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 767);
@@ -783,7 +782,11 @@ const CPIResourceView = ({data, cpiStats}) => {
                                 <div className='statsTitle'>CPI Stats at a Glance</div>
                                 <div className='statsSubtitle'>Summary of CPI v1.5</div>
                             </div>
-                            {cpiStats ? (
+                            {loadingCpiStats ? (
+                                <div className='infoContainer'>Loading Statistics...</div>
+                            ) : cpiStatsError || !cpiStats ? (
+                                <div className='infoContainer'>Statistic Temporarily Unavailable</div>
+                            ) : (
                                 <div className='statsContent'>
                                     <div className='statRow'>
                                         <div className='statItem'>
@@ -876,8 +879,6 @@ const CPIResourceView = ({data, cpiStats}) => {
                                         </div>
                                     </div>
                                 </div>
-                            ) : (
-                                <div className='errorContainer'>Statistic Temporarily Unavailable</div>
                             )}
                             <img className='blurBorder' src={isMobile ? blurBorderMobile : blurBorder} alt="blurBorder" />
                         </CPIStatsContainer>

@@ -186,6 +186,16 @@ const CPIResourceBody = styled.div`
         }
     }
 
+    .errorContainer {
+        text-align: center;
+        width: 100%;
+        font-family: Inter;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 22px;
+        margin-bottom: 20px;
+    }
+
     .navList {
         position: static;
     }
@@ -867,7 +877,7 @@ const CPIResourceView = ({data, cpiStats}) => {
                                 <img className='blurBorder' src={isMobile ? blurBorderMobile : blurBorder} alt="blurBorder" />
                             </CPIStatsContainer>
                         ) : (
-                            <div>Statistic Temporarily Unavailable</div>
+                            <div className='errorContainer'>Statistic Temporarily Unavailable</div>
                         )}
                         {
                             cpiContent && cpiContent.map((cpiItem, mciid) => {

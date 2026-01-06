@@ -189,11 +189,13 @@ const CPIResourceBody = styled.div`
     .errorContainer {
         text-align: center;
         width: 100%;
-        font-family: Inter;
+        font-family: Poppins;
+        color: #919191;
         font-weight: 500;
-        font-size: 16px;
+        font-size: 13px;
         line-height: 22px;
-        margin-bottom: 20px;
+        letter-spacing: 0.26px;
+        text-transform: uppercase;
     }
 
     .navList {
@@ -775,13 +777,13 @@ const CPIResourceView = ({data, cpiStats}) => {
                 <div className='contentSection'>
                     <div className='contentList'>
                         {data.cpiIntroText && <div className='introContainer'>{ReactHtmlParser(data.cpiIntroText)}</div>}
-                        {cpiStats ? (
-                            <CPIStatsContainer>
-                                <img className='blurBorder' src={isMobile ? blurBorderMobile : blurBorder} alt="blurBorder" />
-                                <div className='statsHeader'>
-                                    <div className='statsTitle'>CPI Stats at a Glance</div>
-                                    <div className='statsSubtitle'>Summary of CPI v1.5</div>
-                                </div>
+                        <CPIStatsContainer>
+                            <img className='blurBorder' src={isMobile ? blurBorderMobile : blurBorder} alt="blurBorder" />
+                            <div className='statsHeader'>
+                                <div className='statsTitle'>CPI Stats at a Glance</div>
+                                <div className='statsSubtitle'>Summary of CPI v1.5</div>
+                            </div>
+                            {cpiStats ? (
                                 <div className='statsContent'>
                                     <div className='statRow'>
                                         <div className='statItem'>
@@ -874,11 +876,11 @@ const CPIResourceView = ({data, cpiStats}) => {
                                         </div>
                                     </div>
                                 </div>
-                                <img className='blurBorder' src={isMobile ? blurBorderMobile : blurBorder} alt="blurBorder" />
-                            </CPIStatsContainer>
-                        ) : (
-                            <div className='errorContainer'>Statistic Temporarily Unavailable</div>
-                        )}
+                            ) : (
+                                <div className='errorContainer'>Statistic Temporarily Unavailable</div>
+                            )}
+                            <img className='blurBorder' src={isMobile ? blurBorderMobile : blurBorder} alt="blurBorder" />
+                        </CPIStatsContainer>
                         {
                             cpiContent && cpiContent.map((cpiItem, mciid) => {
                                 const cpikey = `cpi_${mciid}`;

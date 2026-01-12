@@ -137,6 +137,11 @@ export const navbarSublists = {
       className: 'navMobileSubItem',
     },
     {
+      name: 'CCDI Data Ecosystem and AI Readiness (PDF)',
+      link: '/Ecosystem_AI_Readiness.pdf',
+      className: 'navMobileSubItem',
+    },
+    {
       name: 'CCDI Data Submission Guide (PDF)',
       link: '/Submission_Guide.pdf',
       className: 'navMobileSubItem',

@@ -13,7 +13,7 @@ const ToolsContainer = styled.div`
         width: 1142px;
         height: 140px;
         margin: 0 auto;
-        background-image: url(${headerImg});
+        background-image: url(${props => props.headerImg || headerImg});
         background-repeat: no-repeat;
         background-color: #87D7DCCC; 
         border-radius: 0px 0px 20px 20px;
@@ -402,7 +402,7 @@ const ToolsResourceView = ({data}) => {
     }
 
     return (
-        <ToolsContainer>
+        <ToolsContainer headerImg={data.Tools_Header}>
              <div className='headerContainer'><div className='headerText'>Tools</div></div>
             <ToolsBody id='ToolsBody'>
                 <div className='navSection'>

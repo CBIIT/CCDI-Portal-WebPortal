@@ -144,7 +144,7 @@ const AboutContainer = styled.div`
   @media (max-width: 767px) {
     .aboutHeader {
       position: relative;
-      background-image: url(${aboutImg});
+      background-image: url(${props => props.aboutImg || aboutImg});
       height: 406px;
       margin: 0 0 42px 0;
     }
@@ -194,7 +194,7 @@ const AboutContainer = styled.div`
 const AboutView = ({data}) => {
   const aboutData = data.aboutData;
   return (
-    <AboutContainer>
+    <AboutContainer aboutImg={data.About_Img}>
       <div className='aboutHeader'>
         <div className='aboutHeaderText'>About</div>
       </div>
@@ -209,7 +209,7 @@ const AboutView = ({data}) => {
               {aboutData && <div className='textParagraph'>{ReactHtmlParser(aboutData.lowerText)}</div>}
             </div>
           </div>
-          <img className='upperImg' src={aboutImg} alt="about_img" />
+          <img className='upperImg' src={data.About_Img || aboutImg} alt="about_img" />
         </div>
         <div className='lowerContainer'>
           {aboutData && <div className='aboutSubtitle'>{aboutData.lowerTitle}</div>}

@@ -46,7 +46,7 @@ const CBioPortalResourceContainer = styled.div`
     .resourceHeaderBackground {
         width: 100%;
         height: 214px;
-        background-image: url(${headerImg});
+        background-image: url(${props => props.headerImg || headerImg});
         background-repeat:no-repeat;
         background-position:center; 
     }
@@ -490,7 +490,7 @@ const CBioPortalResourceView = ({data}) => {
     }
 
     return (
-        <CBioPortalResourceContainer>
+        <CBioPortalResourceContainer headerImg={data.CBioPortal_Header}>
             <div className='resourceHeader'><div className='resourceHeaderBackground'><div className='resourceHeaderText'>CCDI Hub</div></div></div>
             <div className='resourceTitleContainer'>
                 <div className='resourceTitle'>

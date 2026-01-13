@@ -12,7 +12,6 @@ import newsImg from '../../assets/news/News_Header.jpg';
 import arrowDownIcon from '../../assets/about/arrowDownGreen.svg';
 import arrowUpIcon from '../../assets/about/arrowUpGreen.svg';
 import UploadIcon from '../../assets/about/Upload-Icon.svg';
-import { srcList } from '../../bento/newsData';
 // import { altList, srcList, newsList, releaseNotesList } from '../../bento/newsData'
 
 const NewsContainer = styled.div`
@@ -523,7 +522,7 @@ const useOutsideAlerter = (ref) => {
   }, [ref]);
 };
 
-const NewsView = ({classes, newsList, altList, releaseNotesList}) => {
+const NewsView = ({classes, srcList,newsList, altList, releaseNotesList}) => {
   // const getPageResults = (selectedTab, pageInfo) => {
   //   const resultList = getResultList(selectedTab);
   //   const allids = [];

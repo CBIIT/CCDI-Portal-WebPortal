@@ -29,7 +29,7 @@ const NewsController = () => {
     fetchData();
   }, []);
   if (data.newsList) {
-    return <NewsView newsList={data.newsList} altList={data.altList} releaseNotesList={data.releaseNotesList} />;
+    return <NewsView newsList={data.newsList} srcList={data.newsImgUrlList} altList={data.altList} releaseNotesList={data.releaseNotesList} />;
   } else {
     return <div />
   }

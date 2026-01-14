@@ -13,7 +13,7 @@ const CCDIContainer = styled.div`
         width: 1142px;
         height: 140px;
         margin: 0 auto;
-        background-image: url(${headerImg});
+        background-image: url(${props => props.headerImg || headerImg});
         background-repeat: no-repeat;
         background-color: #87D7DCCC; 
         border-radius: 0px 0px 20px 20px;
@@ -401,7 +401,7 @@ const CCDIEventAnnouncementsResourceView = ({data}) => {
     }
 
     return (
-        <CCDIContainer>
+        <CCDIContainer headerImg={data.CCDI_Event_Announcements_Header}>
              <div className='headerContainer'><div className='headerText'>CCDI Events Announcements</div></div>
             <CCDIBody id='CCDIEventArchiveBody'>
                 <div className='navSection'>

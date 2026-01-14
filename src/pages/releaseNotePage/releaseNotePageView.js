@@ -430,7 +430,7 @@ const SiteUpdateCardDescription = styled.div`
     }
 `;
 
-const ReleaseNotesPageView = ( {releaseNotesList} ) => {
+const ReleaseNotesPageView = ( {contentTypeUrlList, releaseNotesList} ) => {
     const [selectedIdx, setSelectedIdx] = useState(0);
     const [siteUpdateNav, setSiteUpdateNav] = useState([]);
     const [open, setOpen] = useState([]);
@@ -675,7 +675,7 @@ const ReleaseNotesPageView = ( {releaseNotesList} ) => {
                                       arrow
                                       PopperProps={{ style: { marginTop: -8 } }}
                                     >
-                                      <img src={iconSrc[newType]} className= "typeIcon" alt={iconAlt[newType]} />
+                                      <img src={contentTypeUrlList ? contentTypeUrlList[newType] : iconSrc[newType]} className= "typeIcon" alt={iconAlt[newType]} />
                                     </LightTooltip>
                                   );
                                 })

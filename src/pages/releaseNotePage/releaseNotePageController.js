@@ -29,7 +29,7 @@ const ReleaseNotePageController = () => {
     fetchData();
   }, []);
   if (data.releaseNotesList) {
-    return <ReleaseNotesPageView releaseNotesList={data.releaseNotesList} />;
+    return <ReleaseNotesPageView contentTypeUrlList={data.contentTypeUrlList} releaseNotesList={data.releaseNotesList} />;
   } else {
     return <div />
   }

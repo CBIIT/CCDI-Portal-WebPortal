@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { withStyles, Button, Tooltip } from '@material-ui/core';
+import { withStyles, Button } from '@material-ui/core';
+import ToolTip from '@bento-core/tool-tip';
 import TrashCanIconGray from '../../../../assets/icons/Trash_Can_Icon_Gray.svg';
 import TrashCanIconWhite from '../../../../assets/icons/Trash_Can_Icon_White.svg';
 import DuplicateIconWhite from '../../../../assets/icons/Duplicate_Icon_White.svg';
@@ -141,7 +142,7 @@ const CohortList = (props) => {
                                     {state[cohort].cohortId}
                                 </span>
                                 <span className={classes.cohortListItemActions}>
-                                    <Tooltip title="Duplicate cohort" arrow>
+                                    <ToolTip title="Duplicate cohort" placement="top" arrow>
                                         <Button
                                             className={classes.actionButton}
                                             onClick={(e) => {
@@ -155,8 +156,8 @@ const CohortList = (props) => {
                                                 className={classes.whiteDuplicateIcon}
                                             />
                                         </Button>
-                                    </Tooltip>
-                                    <Tooltip title="Delete cohort" arrow>
+                                    </ToolTip>
+                                    <ToolTip title="Delete cohort" placement="top-end" arrow>
                                         <Button
                                             className={classes.actionButton}
                                             onClick={(e) => {
@@ -174,7 +175,7 @@ const CohortList = (props) => {
                                                 className={classes.whiteTrashCan}
                                             />
                                         </Button>
-                                    </Tooltip>
+                                    </ToolTip>
                                 </span>
                             </div>
                         );

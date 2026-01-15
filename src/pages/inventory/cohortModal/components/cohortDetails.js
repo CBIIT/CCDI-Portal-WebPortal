@@ -444,7 +444,7 @@ const CohortDetails = (props) => {
                         </div>
                     )}
                 </div>
-                <Button variant="contained" className={classes.viewCohortDetailsButton} onClick={handleViewCohortDetailsClick}>View Cohort Details</Button>
+                <Button variant="contained" className={classes.viewCohortDetailsButton} onClick={handleViewCohortDetailsClick}>View in Cohort Analyzer</Button>
             </div>
             </div>
         </>
@@ -820,7 +820,7 @@ const styles = () => ({
     viewCohortDetailsButton: {
         backgroundColor: '#003F74',
         border: '1.25px solid #73A9C7',
-        width: '137px',
+        width: '157px',
         borderRadius: '5px',
         boxShadow: 'none',
         '&:hover': {

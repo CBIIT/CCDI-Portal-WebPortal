@@ -299,8 +299,8 @@ const StatsContainer = styled.div`
     }
 
     .statItem {
-      max-width: 280px;
-      padding: 0 40px 0 45px;
+      width: 278px;
+      padding: 0 45px 0 45px;
     }
 
     .statNum {
@@ -434,6 +434,7 @@ const StatsContainer = styled.div`
 
       .statItem {
         padding: 0;
+        width: 140px;
       }
 
       .statNum {
@@ -510,7 +511,7 @@ const StatsContainer = styled.div`
       }
 
       .statItem {
-        width: 144px;
+        width: 140px;
       }
 
       .statsNoteContainer {
@@ -608,29 +609,31 @@ const ResourcesContainer = styled.div`
       font-size: 18px;
       line-height: 22px;
       letter-spacing: 0.02em;
-    }
+      position: relative;
+      display: inline-block;
+      max-width: calc(75% - 145px);
 
-    .titleLine {
-      margin-left: 10px;
-      display: flex;
-      height: 34px;
-      padding-bottom: 5px;
-    }
-    
-    .titleLineLong {
-      content:'';
-      display:inline-block;
-      width: 120px; 
-      border-bottom: 3px solid;
-      margin-right: 2px;
-    }
-
-    .titleLineShort {
-      content:'';
-      display:inline-block;
-      width: 8px; 
-      border-bottom: 3px solid;
-      margin-left: 3px;
+      ::after {
+        content: '';
+        position: absolute;
+        left: calc(100% + 10px);
+        bottom: 5px;
+        height: 3px;
+        width: 144px;
+        background: linear-gradient(
+          to right,
+          currentColor 0px,
+          currentColor 120px,
+          transparent 120px,
+          transparent 122px,
+          currentColor 122px,
+          currentColor 130px,
+          transparent 130px,
+          transparent 133px,
+          currentColor 133px,
+          currentColor 141px
+        );
+      }
     }
 
     .resourceListItem {
@@ -793,8 +796,8 @@ const ResourcesContainer = styled.div`
 
       .resourceTitle {
         margin-left: calc(50vw - 405px);
-        font-size: 14px;
-        line-height: 17px;
+        font-size: 25px;
+        line-height: 20px;
         letter-spacing: 0.02em;
       }
 
@@ -822,10 +825,6 @@ const ResourcesContainer = styled.div`
       .lower {
         display: none;
       }
-
-      .titleLine {
-        height: 27px;
-      }
     }
 
     @media (max-width: 872px) {
@@ -840,13 +839,16 @@ const ResourcesContainer = styled.div`
       .resourceSubtitleText {
         margin: 10px 0 10px 30px;
         font-weight: 500;
-        font-size: 16px;
-        line-height: 18px;
+        font-size: 14px;
+        line-height: 17px;
         letter-spacing: 0.02em;
       }
 
       .resourceTitle {
         margin-left: 30px;
+        font-size: 14px;
+        line-height: 17px;
+        text-transform: uppercase;
       }
     }
 
@@ -953,11 +955,6 @@ const LandingView = ({
           <div className='resourceItem'>
             <div className='resourceSubtitle' style={{color: '#00838F'}}>
               <h3 className='resourceSubtitleText'>{titleData.applicationsTitle}</h3>
-              <div className='titleLine'>
-                <div className='titleLineLong' />
-                <div className='titleLineShort' />
-                <div className='titleLineShort' />
-              </div>
             </div>
             <div className='resourceList'>
               {
@@ -1008,11 +1005,6 @@ const LandingView = ({
           <div className='resourceItem'>
             <div className='resourceSubtitle' style={{color: '#5666BD'}}>
               <h3 className='resourceSubtitleText'>{titleData.cloudResourcesTitle}</h3>
-              <div className='titleLine'>
-                <div className='titleLineLong' />
-                <div className='titleLineShort' />
-                <div className='titleLineShort' />
-              </div>
             </div>
             <div className='resourceList'>
               {

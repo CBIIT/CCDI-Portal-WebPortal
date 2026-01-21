@@ -54,7 +54,7 @@ export const introData = {
 
 export const titleData = {
   latestUpdatesTitle: 'Latest Updates',
-  resourceTitle: 'RESOURCES',
+  resourceTitle: 'Resources',
   applicationsTitle: 'CCDI-SUPPORTED RESOURCES',
   cloudResourcesTitle: 'OTHER RESOURCES',
   aboutTitle: 'About the CCDI Community',

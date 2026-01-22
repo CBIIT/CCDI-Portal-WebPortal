@@ -197,14 +197,12 @@ const DropdownContainer = styled.div`
     .dropdownList {
       background: #1F4671;
       display: grid;
-      grid-column-gap: 2%;
-      grid-template-columns: 32% 32% 32%;
-      padding: 32px 140px 0 140px;
+      grid-template-columns: 25% 25% 25% 25%;
+      padding: 32px 33px 0 33px;
     }
 
     .dropdownItem {
-      // border: 1px solid rgba(0, 0, 0, 0.8);
-      padding: 0 10px 32px 10px;
+      padding: 0 16px 32px 16px;
       font-size: 30px;
       text-align: left;
       font-family: poppins;

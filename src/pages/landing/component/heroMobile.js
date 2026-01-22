@@ -65,7 +65,7 @@ const HeroMobileSection = styled.div`
 
   .buttonContainer {
     position: absolute;
-    top: 620px;
+    top: 597px;
     right: 16px;
     display: flex;
   }
@@ -351,7 +351,7 @@ const HeroMobile = () => {
                             const mcarouselkey = `mcarousel_${idx}`;
                             return (
                                 <div key={mcarouselkey} className='carouselMobileItem' onMouseEnter={mouseIn} onMouseLeave={mouseOut}>
-                                    <img className='itemImgContainer' src={mcarouselItem.mobile} alt="carousel_img"/>
+                                    <img className='itemImgContainer' src={mcarouselItem.mobile} alt={mcarouselItem.content}/>
                                     <div className="itemTitleContainer"><a href={mcarouselItem.link} target="_blank" rel="noopener noreferrer">{mcarouselItem.content}</a></div>
                                     <a className="exportIconContainer" href={mcarouselItem.link} target="_blank" rel="noopener noreferrer">
                                       <img className='exportIconMobile' src={exportIconText} alt="export_icon"/>

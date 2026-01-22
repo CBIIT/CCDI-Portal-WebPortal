@@ -148,7 +148,7 @@ const LatestUpdatesContainer = styled.div`
         }
 
         .latestUpdatesListItem:nth-child(1) {
-            transform: translateX(-115%);
+            transform: translateX(-132%);
             display: block;
             visibility: hidden;
           }
@@ -158,21 +158,21 @@ const LatestUpdatesContainer = styled.div`
           }
     
           .latestUpdatesListItem:nth-child(3) {
-            transform: translateX(115%);
+            transform: translateX(133%);
           }
     
           .latestUpdatesListItem:nth-child(4) {
-            transform: translateX(230%);
+            transform: translateX(266%);
           }
 
           .latestUpdatesListItem:nth-child(5) {
-            transform: translateX(345%);
+            transform: translateX(399%);
             display: block;
             visibility: hidden;
           }
 
           .latestUpdatesListItem:nth-child(6) {
-            transform: translateX(345%);
+            transform: translateX(399%);
             display: block;
             visibility: hidden;
           }
@@ -294,6 +294,25 @@ const LatestUpdatesContainer = styled.div`
           border-top: 11px solid #C9C9C9;
           transform: rotate(-90deg);
       }
+      
+      .latestUpdatesListItem:nth-child(1) {
+        transform: translateX(-115%);
+      }
+      .latestUpdatesListItem:nth-child(2) {
+        transform: translateX(0);
+      }
+      .latestUpdatesListItem:nth-child(3) {
+        transform: translateX(115%);
+      }
+      .latestUpdatesListItem:nth-child(4) {
+        transform: translateX(230%);
+      }
+      .latestUpdatesListItem:nth-child(5) {
+        transform: translateX(345%);
+      }
+      .latestUpdatesListItem:nth-child(6) {
+        transform: translateX(345%);
+      }
     }
 
     @media (max-width: 872px) {
@@ -343,7 +362,7 @@ const TitleContainer = styled.div`
       font-family: Poppins;
       font-weight: 600;
       font-size: 35px;
-      text-transform: uppercase;
+      text-transform: capitalize;
       margin: 0;
       line-height: 38px;
       letter-spacing: 0.02em;
@@ -358,13 +377,19 @@ const TitleContainer = styled.div`
       }
 
       .titleText {
-        font-size: 14px;
-        font-line: 17px;
+        font-size: 25px;
+        line-height: 20px;
       }
     }
 
     @media (max-width: 872px) {
       margin: 0 0 20px 30px;
+
+      .titleText {
+        font-size: 14px;
+        line-height: 17px;
+        text-transform: uppercase;
+      }
     }
 `;
 

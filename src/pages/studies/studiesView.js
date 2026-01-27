@@ -90,6 +90,9 @@ const StudiesView = () => {
   const client = useApolloClient();
 
   const [studies, setNumStudies] = useState(0);
+  const [studiesData, setStudiesData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  
   const initTblState = (initialState) => ({
     ...initialState,
     title: 'Studies Table',
@@ -106,23 +109,36 @@ const StudiesView = () => {
     page: 0,
   });
 
-  async function numStudies() {
-    let result;
-    await client.query({
-      query: GET_NUMBER_OF_STUDIES,
-      variables: {},
-    })
-    .then((response) => 
-      result = response.data.numberOfStudies
-    );
-    return result;
+  async function fetchAllStudies() {
+    try {
+      setLoading(true);
+      const [studiesResult, countResult] = await Promise.all([
+        client.query({
+          query: table.api,
+          variables: {
+            first: 10000, // Fetch all studies
+            offset: 0,
+            order_by: table.defaultSortField,
+            sort_direction: table.defaultSortDirection,
+          },
+        }),
+        client.query({
+          query: GET_NUMBER_OF_STUDIES,
+          variables: {},
+        })
+      ]);
+      
+      setStudiesData(studiesResult.data[table.paginationAPIField] || []);
+      setNumStudies(countResult.data.numberOfStudies);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching studies:', error);
+      setLoading(false);
+    }
   }
 
   useEffect(() => {
-    numStudies().then((result) => {
-      console.log(result)
-      setNumStudies(result);
-    })
+    fetchAllStudies();
   }, [])
 
   return (
@@ -140,12 +156,17 @@ const StudiesView = () => {
         <div className='resourceTitle'>Studies<img src={studyIcon} alt="study icon" className='studyIcon'/></div>
       </div>
       <div className='resourceBody'>
-        <TableView
-          initState={initTblState}
-          themeConfig={themeConfig}
-          queryVariables={{}}
-          totalRowCount={studies}
-        />
+        {loading ? (
+          <div style={{ textAlign: 'center', padding: '50px' }}>Loading studies...</div>
+        ) : (
+          <TableView
+            initState={initTblState}
+            themeConfig={themeConfig}
+            server={false}
+            tblRows={studiesData}
+            totalRowCount={studies}
+          />
+        )}
       </div>
     </StudiesContainer>
   );

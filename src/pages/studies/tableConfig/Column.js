@@ -86,12 +86,12 @@ export const configColumn = (columns) => {
   * custom header view configuration
   */
   const displayCustomHeader = [...displayCustomView].map((column) => {
-    if (column.headerType === headerTypes.CUSTOM_ELEM) {
+    if (column.headerType === headerTypes.CUSTOM_ELEM && !column.customColHeaderRender) {
       return {
         ...column,
         customColHeaderRender: (props) => <CustomHeaderCellView {...props} />,
       };
-    }
+    } 
     return column;
   });
   return displayCustomHeader;

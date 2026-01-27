@@ -1,5 +1,7 @@
+import React from 'react';
 import gql from 'graphql-tag';
-import { cellTypes } from '@bento-core/table';
+import { cellTypes, headerTypes } from '@bento-core/table';
+import DataAvailabilityHeader from '../pages/studies/tableConfig/DataAvailabilityHeader';
 
 const studyDownloadLinks = {
   "phs000463": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs000463_CCDI_Study_Manifest_v3.1.0.xlsx",
@@ -93,6 +95,10 @@ const GET_STUDIES_DATA_QUERY = gql`
         num_of_samples
         num_of_diagnoses
         num_of_files
+        num_of_study_files
+        num_of_participant_files
+        num_of_sample_files
+        num_of_publications
       }
     }
 `;
@@ -131,6 +137,25 @@ const table = {
       header: 'Study Name',
       tooltipText: 'Sort by Study Name',
       display: true,
+    },
+    {
+      dataField: 'data_availability',
+      header: 'Data Availability',
+      headerType: headerTypes.CUSTOM_ELEM,
+      customColHeaderRender: () => <DataAvailabilityHeader />,
+      tooltipText: 'Data Availability',
+      cellType: cellTypes.STUDIES,
+      sortable: false,
+      display: true,
+      customCellData: {
+        width: '400px',
+        fields: [
+          'num_of_study_files',
+          'num_of_participant_files',
+          'num_of_sample_files',
+          'num_of_publications'
+        ]
+      }
     },
     {
       dataField: 'num_of_participants',

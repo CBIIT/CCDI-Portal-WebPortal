@@ -51,7 +51,6 @@ const studycBioPortalLinks = {
   'phs000466': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=openpedcan_v15',
   'phs000467': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=openpedcan_v15',
   'phs000468': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=openpedcan_v15',
-  'phs000469': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=openpedcan_v15',
   'phs000470': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=openpedcan_v15',
   'phs000471': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=openpedcan_v15',
   'phs001437': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=openpedcan_v15',
@@ -60,9 +59,7 @@ const studycBioPortalLinks = {
   'phs002790': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs002790',
   'phs002883': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=openpedcan_v15',
   'phs003432': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=openpedcan_v15',
-  'phs003519': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=openpedcan_v15',
 };
-
 
 export async function openDoubleLink(url, fileName) {
   let urlContent = await fetch(url);

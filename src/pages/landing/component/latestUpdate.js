@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import ReactHtmlParser from 'html-react-parser';
 import usePageVisibility from "./PageVisibility";
 // import { altList, srcList, newsList, releaseNotesList } from '../../../bento/newsData';
-import { srcList } from '../../../bento/newsData';
 import { titleData } from '../../../bento/landingPageData';
 import exportIconText from '../../../assets/landing/Export_Icon_White.svg';
 import startIcon from '../../../assets/icons/Start_Icon.svg';
@@ -369,7 +368,7 @@ const TitleContainer = styled.div`
     }
 `;
 
-const LatestUpdate = ({newsList, releaseNotesList, altList}) => {
+const LatestUpdate = ({newsList, srcList, releaseNotesList, altList}) => {
     const [hoverItem, setHoverItem] = useState("");
     const [pause, setPause] = useState(true);
     const [rLatestlList, setRLatestlList] = useState([]);

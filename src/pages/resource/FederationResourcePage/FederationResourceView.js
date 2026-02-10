@@ -7,7 +7,7 @@ import closeIcon from '../../../assets/icons/Close_Icon.svg';
 import arrowDownIcon from '../../../assets/icons/Arrow_Down.svg';
 // import { federationContent, introText } from '../../../bento/federationData';
 import exportIconBlue from '../../../assets/icons/Export_Icon.svg';
-import ccdiDataAccessImg from '../../../assets/resources/Federation_CCDI_Data_Access.png';
+// import ccdiDataAccessImg from '../../../assets/resources/Federation_CCDI_Data_Access.png';
 
 
 const FederationResourceContainer = styled.div`
@@ -48,7 +48,7 @@ const FederationResourceContainer = styled.div`
     .resourceHeaderBackground {
         width: 100%;
         height: 214px;
-        background-image: url(${headerImg});
+        background-image: url(${props => props.headerImg || headerImg});
         background-repeat:no-repeat;
         background-position:center; 
     }
@@ -478,7 +478,7 @@ const FederationResourceView = ({data}) => {
     }
 
     return (
-        <FederationResourceContainer>
+        <FederationResourceContainer headerImg={data.Federation_Header}>
             <div className='resourceHeader'><div className='resourceHeaderBackground'><div className='resourceHeaderText'>CCDI Hub</div></div></div>
             <div className='resourceTitleContainer'>
                 <div className='resourceTitle'>
@@ -523,7 +523,7 @@ const FederationResourceView = ({data}) => {
                                                 
                                                 {federationItem.id && federationItem.id.includes('Data_Access') && 
                                                 <div style={{ justifyContent: 'center', display: 'flex'}}>
-                                                    <img className="federationImg" src={ccdiDataAccessImg} alt="Infographic displaying the CCDI Federation Service ecosystem. Users can directly access individual source nodes (KidsFirst, PCDC, St. Jude Cloud, Treehouse) or utilize the aggregation capabilities of the Federation Service to query data across all nodes simultaneously."/>
+                                                    <img className="federationImg" src={data.CCDI_Federation_Data_Access} alt="Infographic displaying the CCDI Federation Service ecosystem. Users can directly access individual source nodes (KidsFirst, PCDC, St. Jude Cloud, Treehouse) or utilize the aggregation capabilities of the Federation Service to query data across all nodes simultaneously."/>
                                                 </div>
                                                 }
                                             </div>

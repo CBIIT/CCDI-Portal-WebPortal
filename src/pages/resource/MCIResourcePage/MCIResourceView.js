@@ -77,7 +77,7 @@ const MCIResourceContainer = styled.div`
     .resourceHeaderBackground {
         width: 100%;
         height: 214px;
-        background-image: url(${headerImg});
+        background-image: url(${props => props.headerImg || headerImg});
         background-repeat:no-repeat;
         background-position:center;
     }
@@ -85,7 +85,7 @@ const MCIResourceContainer = styled.div`
     .resourceHeaderBackgroundMobile {
         width: 100%;
         height: 214px;
-        background-image: url(${headerMobileImg});
+        background-image: url(${props => props.headerMobileImg || headerMobileImg});
         background-repeat:no-repeat;
         background-position:center;
     }
@@ -578,7 +578,7 @@ const MCIResourceView = ({data}) => {
     }
 
     return (
-        <MCIResourceContainer>
+        <MCIResourceContainer headerImg={data.MCI_header} headerMobileImg={data.MCI_header_mobile}>
             <div className='resourceBreadcrumbContainer'>
                 <div className='resourceBreadcrumb'>
                     <NavLink className="breadcrumbLink" to='/'>Home</NavLink>
@@ -672,8 +672,8 @@ const MCIResourceView = ({data}) => {
                                                             }
                                                             {mciItem.content && mciItem.content.includes('CCDI Data Ecosystem?') && 
                                                             <>
-                                                                <img className="ecosystemImg" src={ccdiDataEcosystemImg} alt="Infographic depicting the MCI assays and data types, and the data flow to patients, providers, and the CCDI Data Ecosystem"/>
-                                                                <img className="ecosystemImgMobile" src={ccdiDataEcosystemMobileImg} alt="Infographic depicting the MCI assays and data types, and the data flow to patients, providers, and the CCDI Data Ecosystem"/>
+                                                                <img className="ecosystemImg" src={data.MCI_CCDI_Data_Ecosystem || ccdiDataEcosystemImg} alt="Infographic depicting the MCI assays and data types, and the data flow to patients, providers, and the CCDI Data Ecosystem"/>
+                                                                <img className="ecosystemImgMobile" src={data.MCI_CCDI_Data_Ecosystem_Mobile || ccdiDataEcosystemMobileImg} alt="Infographic depicting the MCI assays and data types, and the data flow to patients, providers, and the CCDI Data Ecosystem"/>
                                                                 <h3 style={{ marginTop: '24px' }}>Community Tools and Scripts</h3>
                                                                 <p>Convert COG-formatted JSON files to TSV format with CCDI’s MCI_JSON2TSV tool <a href="https://github.com/CBIIT/ChildhoodCancerDataInitiative-MCI_JSON2TSV" target='blank' rel="noopener noreferrer">here</a>.</p>
                                                             </>

@@ -943,7 +943,7 @@ const LandingView = ({
           </StatsBox>
         </StatsContainer>
       </StatsSection>
-      <LatestUpdate newsList={newsData.newsList} releaseNotesList={newsData.releaseNotesList} altList={newsData.altList} />
+      <LatestUpdate newsList={newsData.newsList} srcList={newsData.newsImgUrlList} releaseNotesList={newsData.releaseNotesList} altList={newsData.altList} />
       {/* <LatestUpdate /> */}
       <ResourcesSection>
         <ResourcesOverlayRight />

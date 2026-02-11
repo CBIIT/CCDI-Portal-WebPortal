@@ -65,6 +65,18 @@ const studycBioPortalLinks = {
   'phs003519': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=openpedcan_v15',
 };
 
+const studyClinicalDataLinks = {
+  'phs000463': ['https://d2l5jy2ao2mx5b.cloudfront.net/target/TARGET_ALL_ClinicalData_Phase_I_20190325.xlsx'],
+  'phs000464': ['https://d2l5jy2ao2mx5b.cloudfront.net/target/TARGET_ALL_ClinicalData_Phase_II_Discovery_20211118.xlsx', 'https://d2l5jy2ao2mx5b.cloudfront.net/target/TARGET_ALL_ClinicalData_Phase_II_Validation_20211118.xlsx','https://d2l5jy2ao2mx5b.cloudfront.net/target/TARGET_ALL_ClinicalData_Phase_III_20181213.xlsx'],
+  'phs000465': ['https://d2l5jy2ao2mx5b.cloudfront.net/target/TARGET_AML_ClinicalData_Discovery_20211201.xlsx', 'https://d2l5jy2ao2mx5b.cloudfront.net/target/TARGET_AML_ClinicalData_Validation_20211201.xlsx'],
+  'phs000466': ['https://d2l5jy2ao2mx5b.cloudfront.net/target/TARGET_CCSK_ClinicalData_Discovery_20170525.xlsx'],
+  'phs000467': ['https://d2l5jy2ao2mx5b.cloudfront.net/target/TARGET_NBL_ClinicalData_Discovery_20220125.xlsx', 'https://d2l5jy2ao2mx5b.cloudfront.net/target/TARGET_NBL_ClinicalData_Validation_20220125.xlsx'],
+  'phs000468': ['https://d2l5jy2ao2mx5b.cloudfront.net/target/TARGET_OS_ClinicalData_Discovery_20210520.xlsx', 'https://d2l5jy2ao2mx5b.cloudfront.net/target/TARGET_OS_ClinicalData_Validation_20211108.xlsx'],
+  'phs000469': ['https://d2l5jy2ao2mx5b.cloudfront.net/target/TARGET_MDLS-NBL_ClinicalData_20151124.xlsx'],
+  'phs000470': ['https://d2l5jy2ao2mx5b.cloudfront.net/target/TARGET_RT_ClinicalData_Discovery_20211111.xlsx', 'https://d2l5jy2ao2mx5b.cloudfront.net/target/TARGET_RT_ClinicalData_Validation_20211111.xlsx'],
+  'phs000471': ['https://d2l5jy2ao2mx5b.cloudfront.net/target/TARGET_WT_ClinicalData_Discovery_20211111.xlsx', 'https://d2l5jy2ao2mx5b.cloudfront.net/target/TARGET_WT_ClinicalData_Validation_20211111.xlsx'],
+};
+
 export async function openDoubleLink(url, fileName) {
   let urlContent = await fetch(url);
   if (urlContent.ok) {
@@ -192,5 +204,6 @@ export {
   GET_STUDIES_DATA_QUERY,
   GET_NUMBER_OF_STUDIES,
   studyDownloadLinks,
-  studycBioPortalLinks
+  studycBioPortalLinks,
+  studyClinicalDataLinks,
 };

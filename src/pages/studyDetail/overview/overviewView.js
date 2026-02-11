@@ -2,7 +2,7 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import exportIcon from '../../../assets/studies/exportIcon.svg';
 import manifestIcon from '../../../assets/studies/manifestIcon.svg';
-import { studyDownloadLinks, studycBioPortalLinks } from '../../../bento/studiesData';
+import { studyDownloadLinks, studycBioPortalLinks, studyClinicalDataLinks } from '../../../bento/studiesData';
 import TabsView from './tabs/TabsView';
 import ModalView from './modal/ModalView';
 import { styles } from './overviewStyle';
@@ -57,6 +57,19 @@ const OverviewView = ({ data, classes }) => {
                             Download Study Manifest
                             <img className={classes.studyManifestIcon} src={manifestIcon} alt="manifestIcon" />
                         </a>
+                        {studyClinicalDataLinks[data.study_id] && <>
+                            {studyClinicalDataLinks[data.study_id].map((clinicalDataLink, idx) => {
+                                const fileName = clinicalDataLink.split('/').pop() || `File ${idx + 1}`;
+                                return (
+                                    <div key={idx}>
+                                        <a href={clinicalDataLink} target="_blank" rel="noopener noreferrer">
+                                            Source File - {fileName}
+                                            <img className={classes.studyManifestIcon} src={manifestIcon} alt="manifestIcon" />
+                                        </a>
+                                    </div>
+                                )
+                            })}
+                        </>}
                         {studycBioPortalLinks[data.study_id] && <>
                             <br/>
                             <a href={studycBioPortalLinks[data.study_id]} target="_blank" rel="noopener noreferrer">

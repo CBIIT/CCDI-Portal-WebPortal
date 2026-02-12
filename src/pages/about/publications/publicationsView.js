@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef }from 'react';
 import {
-  withStyles, ClickAwayListener
+  withStyles, ClickAwayListener, Tooltip
 } from '@material-ui/core';
 import ReactHtmlParser from 'html-react-parser';
 import Pagination from '@material-ui/lab/Pagination';
@@ -11,6 +11,7 @@ import publicationsHeaderImg from '../../../assets/about/Publications_Header.png
 import searchIcon from '../../../assets/header/Search_Small_Icon.svg';
 import arrowDownIcon from '../../../assets/about/arrowDownGreen.svg';
 import arrowUpIcon from '../../../assets/about/arrowUpGreen.svg';
+import questionIcon from '../../../assets/icons/Question_Icon.svg';
 
 const PublicationsContainer = styled.div`
   // width: 1420px;
@@ -67,7 +68,7 @@ const PublicationsContainer = styled.div`
     position: absolute;
     left: 15px;
     padding: 0;
-    margin: 0 auto 52px auto;
+    margin: 0 auto 0 auto;
     width: calc(100vw - 45px);;
     border: 2px solid #08838D;
     background: white;
@@ -99,6 +100,64 @@ const PublicationsContainer = styled.div`
     float: right;
   }
 
+  .learnMoreMobile {
+    display: none;
+  }
+
+  .learnMoreModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.92);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+  }
+
+  .learnMoreModalContent {
+    max-width: 800px;
+    width: 100%;
+    color: #FFFFFF;
+    font-family: Inter;
+  }
+
+  .learnMoreModalClose {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    font-size: 40px;
+    color: #FFFFFF;
+    cursor: pointer;
+    background: none;
+    border: none;
+    line-height: 1;
+  }
+
+  .learnMoreModalClose:hover {
+    opacity: 0.7;
+  }
+
+  .categoryDescription {
+    margin-bottom: 40px;
+  }
+
+  .categoryTitle {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 28px;
+    margin-bottom: 10px;
+  }
+
+  .categoryText {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+  }
+
   .tabListItem {
     font-family: 'Poppins';
     font-weight: 500;
@@ -106,6 +165,10 @@ const PublicationsContainer = styled.div`
     line-height: 16px;
     color: #298085;
     margin-left: 60px;
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 3px;
+    position: relative;
   }
 
   .tabListItemActive {
@@ -115,8 +178,38 @@ const PublicationsContainer = styled.div`
     line-height: 16px;
     color: #0A5E63;
     margin-left: 60px;
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 3px;
+    position: relative;
+  }
+
+  .tabLabel {
+    padding-bottom: 5px;
+    border-bottom: 4px solid transparent;
+  }
+
+  .tabLabelActive {
     padding-bottom: 5px;
     border-bottom: 4px solid #0A5E63;
+  }
+
+  .helpIcon {
+    width: 10px;
+    height: 10px;
+    cursor: help;
+    display: inline-block;
+    margin-top: 1px;
+    flex-shrink: 0;
+  }
+
+  .helpIconActive {
+    width: 10px;
+    height: 10px;
+    cursor: help;
+    display: inline-block;
+    margin-top: 1px;
+    flex-shrink: 0;
   }
 
   .tabListItemActive:hover {
@@ -411,10 +504,65 @@ const PublicationsContainer = styled.div`
 
     .tabDropdown {
       display: block;
+      position: static;
+      left: auto;
+      width: auto;
+      margin: 0 15px 0 15px;
+    }
+
+    .learnMoreMobile {
+      display: block;
+      margin: 20px 15px 20px 15px;
+      background: #F0F0F0;
+      padding-top: 8px;
+      padding-right: 30px;
+      padding-bottom: 8px;
+      padding-left: 30px;
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+    .learnMoreLink {
+      color: #6D6D6D;
+      font-family: Inter;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 14px;
+      line-height: 22px;
+      letter-spacing: 0;
+      text-decoration: underline;
+      text-decoration-style: solid;
+      cursor: pointer;
+    }
+
+    .learnMoreModal {
+      padding: 20px;
+    }
+
+    .learnMoreModalContent {
+      max-width: 100%;
+    }
+
+    .learnMoreModalClose {
+      top: 15px;
+      right: 15px;
+      font-size: 30px;
+    }
+
+    .categoryDescription {
+      margin-bottom: 30px;
+    }
+
+    .categoryTitle {
+      font-size: 18px;
+    }
+
+    .categoryText {
+      font-size: 14px;
     }
 
     .totalNumContainer {
-      margin-top: 85px;
+      margin-top: 0px;
     }
 
     .publicationsItemContent {
@@ -553,6 +701,7 @@ const PublicationsView = ({classes, headerImg, bannerText, publicationsList}) =>
   const [keyword, setKeyword] = useState('');
   const [deleteIconShow, setDeleteIconShow] = useState('none');
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [learnMoreModalOpen, setLearnMoreModalOpen] = useState(false);
   useOutsideAlerter(perPageSelection);
 
   const [inputRef, setInputFocus] = useFocus();
@@ -645,6 +794,16 @@ const PublicationsView = ({classes, headerImg, bannerText, publicationsList}) =>
     setDropdownOpen(false);
   };
 
+  const getTooltipText = (tabName) => {
+    if (tabName === 'Primary') {
+      return 'Publications directly supported by CCDI funding (e.g., CCDI‑funded projects, grants, or contracts).';
+    }
+    if (tabName === 'Secondary') {
+      return 'Publications that use data from the CCDI Data Ecosystem or reference CCDI, but were not directly funded by CCDI.';
+    }
+    return '';
+  };
+
   return (
     <PublicationsContainer headerImg={headerImg}>
       <div className='pageHeader'>
@@ -665,8 +824,27 @@ const PublicationsView = ({classes, headerImg, bannerText, publicationsList}) =>
         {
           newsTabList.map((newsTabItem, idx) => {
             const tabkey = `tabkey_${idx}`;
+            const showIcon = newsTabItem === 'Primary' || newsTabItem === 'Secondary';
+            const tooltipText = getTooltipText(newsTabItem);
+            
             return (
-            <div key={tabkey} className={selectedTab === newsTabItem ? 'tabListItemActive' : 'tabListItem'} onClick={() => onClickTab(newsTabItem)}>{newsTabItem}</div>
+              <div key={tabkey} className={selectedTab === newsTabItem ? 'tabListItemActive' : 'tabListItem'} onClick={() => onClickTab(newsTabItem)}>
+                <span className={selectedTab === newsTabItem ? 'tabLabelActive' : 'tabLabel'}>{newsTabItem}</span>
+                {showIcon && (
+                  <Tooltip 
+                    title={tooltipText} 
+                    arrow 
+                    placement="top"
+                    classes={{ tooltip: classes.tooltip, arrow: classes.arrow }}
+                  >
+                    <img 
+                      src={questionIcon} 
+                      alt="info" 
+                      className={selectedTab === newsTabItem ? 'helpIconActive' : 'helpIcon'} 
+                    />
+                  </Tooltip>
+                )}
+              </div>
             )
           })
         }
@@ -686,14 +864,22 @@ const PublicationsView = ({classes, headerImg, bannerText, publicationsList}) =>
           {
             dropdownOpen && newsTabList.map((newsTabItem, idx) => {
               const tabkey = `tabkey_${idx}`;
+              
               return (
-                <li key={tabkey} className='tabDropdownItem' onClick={() => onClickDropdownItem(newsTabItem)}>{newsTabItem}</li>
+                <li key={tabkey} className='tabDropdownItem' onClick={() => onClickDropdownItem(newsTabItem)}>
+                  <span>{newsTabItem}</span>
+                </li>
               )
             })
           }
           </div>
         </ClickAwayListener>
       </ul>
+      <div className='learnMoreMobile'>
+        <div className='learnMoreLink' onClick={() => setLearnMoreModalOpen(true)}>
+          Learn More about these categories &gt;
+        </div>
+      </div>
       <div className='totalNumContainer'><span className="totalNum">{filteredData.length}</span> results</div>
       <div className='publicationsList'>
         {
@@ -800,12 +986,66 @@ const PublicationsView = ({classes, headerImg, bannerText, publicationsList}) =>
           </div>
         </div>
       }
+      {learnMoreModalOpen && (
+        <div className='learnMoreModal' onClick={() => setLearnMoreModalOpen(false)}>
+          <button className='learnMoreModalClose' onClick={() => setLearnMoreModalOpen(false)}>&times;</button>
+          <div className='learnMoreModalContent' onClick={(e) => e.stopPropagation()}>
+            <div className='categoryDescription'>
+              <div className='categoryTitle'>Primary category:</div>
+              <div className='categoryText'>
+                Publications directly supported by CCDI funding (e.g., CCDI‑funded projects, grants, or contracts).
+              </div>
+            </div>
+            <div className='categoryDescription'>
+              <div className='categoryTitle'>Secondary category:</div>
+              <div className='categoryText'>
+                Publications that use data from the CCDI Data Ecosystem or reference CCDI, but were not directly funded by CCDI.
+              </div>
+            </div>
+            <div className='categoryDescription'>
+              <div className='categoryTitle'>Abstract:</div>
+              <div className='categoryText'>
+                Publications that use data from the CCDI Data Ecosystem or reference CCDI, but were not directly funded by CCDI.
+              </div>
+            </div>
+            <div className='categoryDescription'>
+              <div className='categoryTitle'>CCDI Data:</div>
+              <div className='categoryText'>
+                Publications that use data from the CCDI Data Ecosystem or reference CCDI, but were not directly funded by CCDI.
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </PublicationsContainer>
     
   )
 };
 
 const styles = {
+  tooltip: {
+    backgroundColor: '#FFFFFF',
+    color: '#000000',
+    fontFamily: 'Poppins',
+    fontWeight: '400',
+    fontStyle: 'normal',
+    fontSize: '13px',
+    lineHeight: '17.5px',
+    letterSpacing: '-0.01em',
+    paddingTop: '13px',
+    paddingRight: '16px',
+    paddingBottom: '13px',
+    paddingLeft: '16px',
+    maxWidth: '500px',
+    boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.25)',
+    border: '1px solid #676767',
+  },
+  arrow: {
+    color: '#FFFFFF',
+    '&::before': {
+      border: '1px solid #676767',
+    },
+  },
   prevButtonContainer: {
     marginLeft: '10px',
     border: '1px solid #99A1B7',

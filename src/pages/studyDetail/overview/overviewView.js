@@ -62,7 +62,7 @@ const OverviewView = ({ data, classes }) => {
                                 const fileName = clinicalDataLink.split('/').pop() || `File ${idx + 1}`;
                                 return (
                                     <div key={idx}>
-                                        <a href={clinicalDataLink} target="_blank" rel="noopener noreferrer">
+                                        <a href={clinicalDataLink}  style={{ whiteSpace: 'nowrap' }} target="_blank" rel="noopener noreferrer">
                                             Source File - {fileName}
                                             <img className={classes.studyManifestIcon} src={manifestIcon} alt="manifestIcon" />
                                         </a>

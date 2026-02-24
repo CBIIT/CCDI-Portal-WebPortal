@@ -9,13 +9,14 @@ const InventoryController = (() => {
 
   const activeFilters = useSelector((state) => state.inventoryReducer.activeFilters);
   const dashData = useSelector((state) => state.inventoryReducer.dashData);
+  const unknownAgesState = useSelector((state) => state.statusReducer.unknownAgesState);
 
   return (
     <>
       <CohortStateProvider>
         <CohortModalProvider>
           <InventoryCover />
-          <InventoryView dashData={dashData} activeFilters={activeFilters} />
+          <InventoryView dashData={dashData} activeFilters={activeFilters} unknownAgesState={unknownAgesState} />
         </CohortModalProvider>
       </CohortStateProvider>
     </>

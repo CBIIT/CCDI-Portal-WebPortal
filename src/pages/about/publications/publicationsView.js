@@ -21,7 +21,7 @@ const PublicationsContainer = styled.div`
     width: 1142px;
     height: 140px;
     margin: 0 auto;
-    background-image: url(${publicationsHeaderImg});
+    background-image: url(${props => props.headerImg || publicationsHeaderImg});
     background-repeat: no-repeat;
     background-color: #87D7DCCC; 
     border-radius: 0px 0px 20px 20px;
@@ -537,7 +537,7 @@ const useFocus = () => {
   return [ htmlElRef, setFocus ] 
 };
 
-const PublicationsView = ({classes, bannerText, publicationsList}) => {
+const PublicationsView = ({classes, headerImg, bannerText, publicationsList}) => {
   const [selectedTab, setSelectedTab] = useState("All");
   const newsTabList = ['All', 'Primary', 'Secondary', 'Abstracts'];
   const sizelist = [10,20,50,100];
@@ -646,7 +646,7 @@ const PublicationsView = ({classes, bannerText, publicationsList}) => {
   };
 
   return (
-    <PublicationsContainer>
+    <PublicationsContainer headerImg={headerImg}>
       <div className='pageHeader'>
         <div className='pageHeaderText'>CCDI-Supported Publications</div>
         <div className='pageHeaderSubtext'>{bannerText}</div>

@@ -136,26 +136,33 @@ export const tabIndex = [
 ];
 
 export const DASHBOARD_QUERY_NEW = gql`
-query search (          
+query search (
+    $import_data: [String],    
     $participant_ids: [String],
     $sex_at_birth: [String] ,
     $race: [String] ,
     $age_at_diagnosis: [Int] ,
+    $age_at_diagnosis_unknownAges: [String],
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
     $diagnosis: [String] ,
     $diagnosis_classification_system: [String] ,
+    $diagnosis_category: [String],
     $diagnosis_basis: [String] ,
     $last_known_survival_status: [String] ,
     $age_at_last_known_survival_status: [Int],
+    $age_at_last_known_survival_status_unknownAges: [String],
     $first_event: [String],
     $treatment_type: [String],
     $treatment_agent: [String],
     $age_at_treatment_start: [Int] ,
+    $age_at_treatment_start_unknownAges: [String],
     $response_category: [String] ,
     $age_at_response: [Int] ,
+    $age_at_response_unknownAges: [String],
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
+    $participant_age_at_collection_unknownAges: [String],
     $sample_tumor_status: [String] ,
     $tumor_classification: [String] ,
     $data_category: [String],
@@ -169,26 +176,33 @@ query search (
     $library_strategy: [String],
     $file_mapping_level: [String],
 ){
-    searchParticipants (          
+    searchParticipants (
+        import_data: $import_data,          
         participant_ids: $participant_ids,
         sex_at_birth: $sex_at_birth,
         race: $race,
         age_at_diagnosis: $age_at_diagnosis,
+        age_at_diagnosis_unknownAges: $age_at_diagnosis_unknownAges,
         diagnosis_anatomic_site: $diagnosis_anatomic_site,
         disease_phase: $disease_phase,
         diagnosis: $diagnosis,
         diagnosis_classification_system: $diagnosis_classification_system,
+        diagnosis_category: $diagnosis_category,
         diagnosis_basis: $diagnosis_basis,
         last_known_survival_status: $last_known_survival_status,
         age_at_last_known_survival_status: $age_at_last_known_survival_status,
+        age_at_last_known_survival_status_unknownAges: $age_at_last_known_survival_status_unknownAges,
         first_event: $first_event,
         treatment_type: $treatment_type,
         treatment_agent: $treatment_agent,
         age_at_treatment_start: $age_at_treatment_start,
+        age_at_treatment_start_unknownAges: $age_at_treatment_start_unknownAges,
         response_category: $response_category,
         age_at_response: $age_at_response,
+        age_at_response_unknownAges: $age_at_response_unknownAges,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
+        participant_age_at_collection_unknownAges: $participant_age_at_collection_unknownAges,
         sample_tumor_status: $sample_tumor_status,
         tumor_classification: $tumor_classification,
         data_category: $data_category,
@@ -269,6 +283,10 @@ query search (
             subjects
         }
         filterParticipantCountByDiagnosisBasis{
+          group
+          subjects
+        }
+        filterParticipantCountByDiagnosisCategory{
           group
           subjects
         }
@@ -379,25 +397,32 @@ query search (
 
 export const GET_FILES_OVERVIEW_QUERY = gql`
 query fileOverview(
+    $import_data: [String],
     $participant_ids: [String],
     $sex_at_birth: [String] ,
     $race: [String] ,
     $age_at_diagnosis: [Int] ,
+    $age_at_diagnosis_unknownAges: [String],
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
     $diagnosis: [String] ,
     $diagnosis_classification_system: [String] ,
+    $diagnosis_category: [String],
     $diagnosis_basis: [String] ,
     $last_known_survival_status: [String] ,
     $age_at_last_known_survival_status: [Int],
+    $age_at_last_known_survival_status_unknownAges: [String],
     $first_event: [String],
     $treatment_type: [String],
     $treatment_agent: [String],
     $age_at_treatment_start: [Int] ,
+    $age_at_treatment_start_unknownAges: [String],
     $response_category: [String] ,
     $age_at_response: [Int] ,
+    $age_at_response_unknownAges: [String],
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
+    $participant_age_at_collection_unknownAges: [String],
     $sample_tumor_status: [String] ,
     $tumor_classification: [String] ,
     $data_category: [String],
@@ -415,25 +440,32 @@ query fileOverview(
     $order_by: String,
     $sort_direction: String ){
     fileOverview(
+        import_data: $import_data,
         participant_ids: $participant_ids,
         sex_at_birth: $sex_at_birth,
         race: $race,
         age_at_diagnosis: $age_at_diagnosis,
+        age_at_diagnosis_unknownAges: $age_at_diagnosis_unknownAges,
         diagnosis_anatomic_site: $diagnosis_anatomic_site,
         disease_phase: $disease_phase,
         diagnosis: $diagnosis,
         diagnosis_classification_system: $diagnosis_classification_system,
+        diagnosis_category: $diagnosis_category,
         diagnosis_basis: $diagnosis_basis,
         last_known_survival_status: $last_known_survival_status,
         age_at_last_known_survival_status: $age_at_last_known_survival_status,
+        age_at_last_known_survival_status_unknownAges: $age_at_last_known_survival_status_unknownAges,
         first_event: $first_event,
         treatment_type: $treatment_type,
         treatment_agent: $treatment_agent,
         age_at_treatment_start: $age_at_treatment_start,
+        age_at_treatment_start_unknownAges: $age_at_treatment_start_unknownAges,
         response_category: $response_category,
         age_at_response: $age_at_response,
+        age_at_response_unknownAges: $age_at_response_unknownAges,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
+        participant_age_at_collection_unknownAges: $participant_age_at_collection_unknownAges,
         sample_tumor_status: $sample_tumor_status,
         tumor_classification: $tumor_classification,
         data_category: $data_category,
@@ -500,6 +532,7 @@ cohortMetadata(
             diagnosis_id
             diagnosis
             diagnosis_classification_system
+            diagnosis_category,
             diagnosis_basis
             disease_phase
             anatomic_site
@@ -583,25 +616,32 @@ export const GET_COHORT_MANIFEST_QUERY = gql`
 
 export const GET_SAMPLES_OVERVIEW_QUERY = gql`
 query sampleOverview(
+    $import_data: [String],
     $participant_ids: [String],
     $sex_at_birth: [String] ,
     $race: [String] ,
     $age_at_diagnosis: [Int] ,
+    $age_at_diagnosis_unknownAges: [String],
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
     $diagnosis: [String] ,
     $diagnosis_classification_system: [String] ,
+    $diagnosis_category: [String],
     $diagnosis_basis: [String] ,
     $last_known_survival_status: [String] ,
     $age_at_last_known_survival_status: [Int],
+    $age_at_last_known_survival_status_unknownAges: [String],
     $first_event: [String],
     $treatment_type: [String],
     $treatment_agent: [String],
     $age_at_treatment_start: [Int] ,
+    $age_at_treatment_start_unknownAges: [String],
     $response_category: [String] ,
     $age_at_response: [Int] ,
+    $age_at_response_unknownAges: [String],
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
+    $participant_age_at_collection_unknownAges: [String],
     $sample_tumor_status: [String] ,
     $tumor_classification: [String] ,
     $data_category: [String],
@@ -619,25 +659,32 @@ query sampleOverview(
     $order_by: String,
     $sort_direction: String ){
     sampleOverview(
+        import_data: $import_data,
         participant_ids: $participant_ids,
         sex_at_birth: $sex_at_birth,
         race: $race,
         age_at_diagnosis: $age_at_diagnosis,
+        age_at_diagnosis_unknownAges: $age_at_diagnosis_unknownAges,
         diagnosis_anatomic_site: $diagnosis_anatomic_site,
         disease_phase: $disease_phase,
         diagnosis: $diagnosis,
         diagnosis_classification_system: $diagnosis_classification_system,
+        diagnosis_category: $diagnosis_category,
         diagnosis_basis: $diagnosis_basis,
         last_known_survival_status: $last_known_survival_status,
         age_at_last_known_survival_status: $age_at_last_known_survival_status,
+        age_at_last_known_survival_status_unknownAges: $age_at_last_known_survival_status_unknownAges,
         first_event: $first_event,
         treatment_type: $treatment_type,
         treatment_agent: $treatment_agent,
         age_at_treatment_start: $age_at_treatment_start,
+        age_at_treatment_start_unknownAges: $age_at_treatment_start_unknownAges,
         response_category: $response_category,
         age_at_response: $age_at_response,
+        age_at_response_unknownAges: $age_at_response_unknownAges,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
+        participant_age_at_collection_unknownAges: $participant_age_at_collection_unknownAges,
         sample_tumor_status: $sample_tumor_status,
         tumor_classification: $tumor_classification,
         data_category: $data_category,
@@ -664,31 +711,39 @@ query sampleOverview(
         sample_tumor_status
         tumor_classification
         diagnosis
+        diagnosis_category
     }
 }
 `;
 
 export const GET_PARTICIPANTS_OVERVIEW_QUERY = gql`
 query participantOverview(
+    $import_data: [String],
     $participant_ids: [String],
     $sex_at_birth: [String] ,
     $race: [String] ,
     $age_at_diagnosis: [Int] ,
+    $age_at_diagnosis_unknownAges: [String],
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
     $diagnosis: [String] ,
     $diagnosis_classification_system: [String] ,
+    $diagnosis_category: [String],
     $diagnosis_basis: [String] ,
     $last_known_survival_status: [String] ,
     $age_at_last_known_survival_status: [Int],
+    $age_at_last_known_survival_status_unknownAges: [String],
     $first_event: [String],
     $treatment_type: [String],
     $treatment_agent: [String],
     $age_at_treatment_start: [Int] ,
+    $age_at_treatment_start_unknownAges: [String],
     $response_category: [String] ,
     $age_at_response: [Int] ,
+    $age_at_response_unknownAges: [String],
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
+    $participant_age_at_collection_unknownAges: [String],
     $sample_tumor_status: [String] ,
     $tumor_classification: [String] ,
     $data_category: [String],
@@ -706,25 +761,32 @@ query participantOverview(
     $order_by: String,
     $sort_direction: String ){
     participantOverview(
+        import_data: $import_data,
         participant_ids: $participant_ids,
         sex_at_birth: $sex_at_birth,
         race: $race,
         age_at_diagnosis: $age_at_diagnosis,
+        age_at_diagnosis_unknownAges: $age_at_diagnosis_unknownAges,
         diagnosis_anatomic_site: $diagnosis_anatomic_site,
         disease_phase: $disease_phase,
         diagnosis: $diagnosis,
         diagnosis_classification_system: $diagnosis_classification_system,
+        diagnosis_category: $diagnosis_category,
         diagnosis_basis: $diagnosis_basis,
         last_known_survival_status: $last_known_survival_status,
         age_at_last_known_survival_status: $age_at_last_known_survival_status,
+        age_at_last_known_survival_status_unknownAges: $age_at_last_known_survival_status_unknownAges,
         first_event: $first_event,
         treatment_type: $treatment_type,
         treatment_agent: $treatment_agent,
         age_at_treatment_start: $age_at_treatment_start,
+        age_at_treatment_start_unknownAges: $age_at_treatment_start_unknownAges,
         response_category: $response_category,
         age_at_response: $age_at_response,
+        age_at_response_unknownAges: $age_at_response_unknownAges,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
+        participant_age_at_collection_unknownAges: $participant_age_at_collection_unknownAges,
         sample_tumor_status: $sample_tumor_status,
         tumor_classification: $tumor_classification,
         data_category: $data_category,
@@ -749,6 +811,7 @@ query participantOverview(
         race
         sex_at_birth
         diagnosis
+        diagnosis_category
         anatomic_site
         age_at_diagnosis
         treatment_agent
@@ -772,25 +835,32 @@ query participantOverview(
 
 export const GET_STUDY_OVERVIEW_QUERY = gql`
 query studyOverview(
+    $import_data: [String],
     $participant_ids: [String],
     $sex_at_birth: [String] ,
     $race: [String] ,
     $age_at_diagnosis: [Int] ,
+    $age_at_diagnosis_unknownAges: [String],
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
     $diagnosis: [String] ,
     $diagnosis_basis: [String] ,
     $diagnosis_classification_system: [String] ,
+    $diagnosis_category: [String],
     $last_known_survival_status: [String] ,
     $age_at_last_known_survival_status: [Int],
+    $age_at_last_known_survival_status_unknownAges: [String],
     $first_event: [String],
     $treatment_type: [String],
     $treatment_agent: [String],
     $age_at_treatment_start: [Int] ,
+    $age_at_treatment_start_unknownAges: [String],
     $response_category: [String] ,
     $age_at_response: [Int] ,
+    $age_at_response_unknownAges: [String],
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
+    $participant_age_at_collection_unknownAges: [String],
     $sample_tumor_status: [String] ,
     $tumor_classification: [String] ,
     $data_category: [String],
@@ -808,25 +878,32 @@ query studyOverview(
     $order_by: String,
     $sort_direction: String ){
     studyOverview(
+        import_data: $import_data,
         participant_ids: $participant_ids,
         sex_at_birth: $sex_at_birth,
         race: $race,
         age_at_diagnosis: $age_at_diagnosis,
+        age_at_diagnosis_unknownAges: $age_at_diagnosis_unknownAges,
         diagnosis_anatomic_site: $diagnosis_anatomic_site,
         disease_phase: $disease_phase,
         diagnosis: $diagnosis,
         diagnosis_classification_system: $diagnosis_classification_system,
+        diagnosis_category: $diagnosis_category,
         diagnosis_basis: $diagnosis_basis,
         last_known_survival_status: $last_known_survival_status,
         age_at_last_known_survival_status: $age_at_last_known_survival_status,
+        age_at_last_known_survival_status_unknownAges: $age_at_last_known_survival_status_unknownAges,
         first_event: $first_event,
         treatment_type: $treatment_type,
         treatment_agent: $treatment_agent,
         age_at_treatment_start: $age_at_treatment_start,
+        age_at_treatment_start_unknownAges: $age_at_treatment_start_unknownAges,
         response_category: $response_category,
         age_at_response: $age_at_response,
+        age_at_response_unknownAges: $age_at_response_unknownAges,
         sample_anatomic_site: $sample_anatomic_site,
         participant_age_at_collection: $participant_age_at_collection,
+        participant_age_at_collection_unknownAges: $participant_age_at_collection_unknownAges,
         sample_tumor_status: $sample_tumor_status,
         tumor_classification: $tumor_classification,
         data_category: $data_category,
@@ -913,25 +990,32 @@ query search (
 
 export const GET_ALL_FILEIDS_FROM_PARTICIPANTSTAB_FOR_ADD_ALL_CART = gql`
 query participantsAddAllToCart(
+    $import_data: [String],
     $participant_ids: [String],
     $sex_at_birth: [String] ,
     $race: [String] ,
     $age_at_diagnosis: [Int] ,
+    $age_at_diagnosis_unknownAges: [String],
     $diagnosis_anatomic_site: [String] ,
     $disease_phase: [String] ,
     $diagnosis: [String] ,
     $diagnosis_classification_system: [String] ,
+    $diagnosis_category: [String],
     $diagnosis_basis: [String] ,
     $last_known_survival_status: [String] ,
     $age_at_last_known_survival_status: [Int],
+    $age_at_last_known_survival_status_unknownAges: [String],
     $first_event: [String],
     $treatment_type: [String],
     $treatment_agent: [String],
     $age_at_treatment_start: [Int] ,
+    $age_at_treatment_start_unknownAges: [String],
     $response_category: [String] ,
     $age_at_response: [Int] ,
+    $age_at_response_unknownAges: [String],
     $sample_anatomic_site: [String] ,
     $participant_age_at_collection: [Int] ,
+    $participant_age_at_collection_unknownAges: [String],
     $sample_tumor_status: [String] ,
     $tumor_classification: [String] ,
     $data_category: [String],
@@ -950,25 +1034,32 @@ query participantsAddAllToCart(
     $sort_direction: String = "asc" 
   ){
     participantOverview(
+      import_data: $import_data,
       participant_ids: $participant_ids,
       sex_at_birth: $sex_at_birth,
       race: $race,
       age_at_diagnosis: $age_at_diagnosis,
+      age_at_diagnosis_unknownAges: $age_at_diagnosis_unknownAges,
       diagnosis_anatomic_site: $diagnosis_anatomic_site,
       disease_phase: $disease_phase,
       diagnosis: $diagnosis,
       diagnosis_classification_system: $diagnosis_classification_system,
+      diagnosis_category: $diagnosis_category,
       diagnosis_basis: $diagnosis_basis,
       last_known_survival_status: $last_known_survival_status,
       age_at_last_known_survival_status: $age_at_last_known_survival_status,
+      age_at_last_known_survival_status_unknownAges: $age_at_last_known_survival_status_unknownAges,
       first_event: $first_event,
       treatment_type: $treatment_type,
       treatment_agent: $treatment_agent,
       age_at_treatment_start: $age_at_treatment_start,
+      age_at_treatment_start_unknownAges: $age_at_treatment_start_unknownAges,
       response_category: $response_category,
       age_at_response: $age_at_response,
+      age_at_response_unknownAges: $age_at_response_unknownAges,
       sample_anatomic_site: $sample_anatomic_site,
       participant_age_at_collection: $participant_age_at_collection,
+      participant_age_at_collection_unknownAges: $participant_age_at_collection_unknownAges,
       sample_tumor_status: $sample_tumor_status,
       tumor_classification: $tumor_classification,
       data_category: $data_category,
@@ -980,7 +1071,7 @@ query participantsAddAllToCart(
       library_source_material: $library_source_material,
       library_source_molecule: $library_source_molecule,
       library_strategy: $library_strategy,
-      file_mapping_level: $file_mapping_level
+      file_mapping_level: $file_mapping_level,
       first: $first,
       offset: $offset,
       order_by: $order_by,
@@ -993,6 +1084,7 @@ query participantsAddAllToCart(
 
 export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
     query samplesAddAllToCart(
+      $import_data: [String],
       $participant_ids: [String],
       $sex_at_birth: [String] ,
       $race: [String] ,
@@ -1002,16 +1094,21 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
       $diagnosis: [String] ,
       $diagnosis_basis: [String] ,
       $diagnosis_classification_system: [String] ,
+      $diagnosis_category: [String],
       $last_known_survival_status: [String] ,
       $age_at_last_known_survival_status: [Int],
+    $age_at_last_known_survival_status_unknownAges: [String],
       $first_event: [String],
       $treatment_type: [String],
       $treatment_agent: [String],
       $age_at_treatment_start: [Int] ,
+    $age_at_treatment_start_unknownAges: [String],
       $response_category: [String] ,
       $age_at_response: [Int] ,
+    $age_at_response_unknownAges: [String],
       $sample_anatomic_site: [String] ,
       $participant_age_at_collection: [Int] ,
+    $participant_age_at_collection_unknownAges: [String],
       $sample_tumor_status: [String] ,
       $tumor_classification: [String] ,
       $data_category: [String],
@@ -1029,25 +1126,32 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
       $order_by: String = "file_id",
       $sort_direction: String = "asc" ){
       sampleOverview(
+          import_data: $import_data,
           participant_ids: $participant_ids,
           sex_at_birth: $sex_at_birth,
           race: $race,
           age_at_diagnosis: $age_at_diagnosis,
+        age_at_diagnosis_unknownAges: $age_at_diagnosis_unknownAges,
           diagnosis_anatomic_site: $diagnosis_anatomic_site,
           disease_phase: $disease_phase,
           diagnosis: $diagnosis ,
           diagnosis_basis: $diagnosis_basis ,
           diagnosis_classification_system: $diagnosis_classification_system ,
+          diagnosis_category: $diagnosis_category,
           last_known_survival_status: $last_known_survival_status,
           age_at_last_known_survival_status: $age_at_last_known_survival_status,
+        age_at_last_known_survival_status_unknownAges: $age_at_last_known_survival_status_unknownAges,
           first_event: $first_event,
           treatment_type: $treatment_type,
           treatment_agent: $treatment_agent,
           age_at_treatment_start: $age_at_treatment_start,
+        age_at_treatment_start_unknownAges: $age_at_treatment_start_unknownAges,
           response_category: $response_category,
           age_at_response: $age_at_response,
+        age_at_response_unknownAges: $age_at_response_unknownAges,
           sample_anatomic_site: $sample_anatomic_site,
           participant_age_at_collection: $participant_age_at_collection,
+        participant_age_at_collection_unknownAges: $participant_age_at_collection_unknownAges,
           sample_tumor_status: $sample_tumor_status,
           tumor_classification: $tumor_classification,
           data_category: $data_category,
@@ -1072,25 +1176,32 @@ export const GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART = gql`
 
 export const GET_ALL_FILEIDS_FROM_FILESTAB_FOR_ADD_ALL_CART = gql`
 query fileAddAllToCart(
+  $import_data: [String],
   $participant_ids: [String],
   $sex_at_birth: [String] ,
   $race: [String] ,
   $age_at_diagnosis: [Int] ,
+  $age_at_diagnosis_unknownAges: [String],
   $diagnosis_anatomic_site: [String] ,
   $disease_phase: [String] ,
   $diagnosis: [String] ,
   $diagnosis_classification_system: [String] ,
+  $diagnosis_category: [String],
   $diagnosis_basis: [String] ,
   $last_known_survival_status: [String] ,
   $age_at_last_known_survival_status: [Int],
+  $age_at_last_known_survival_status_unknownAges: [String],
   $first_event: [String],
   $treatment_type: [String],
   $treatment_agent: [String],
   $age_at_treatment_start: [Int] ,
+  $age_at_treatment_start_unknownAges: [String],
   $response_category: [String] ,
   $age_at_response: [Int] ,
+  $age_at_response_unknownAges: [String],
   $sample_anatomic_site: [String] ,
   $participant_age_at_collection: [Int] ,
+  $participant_age_at_collection_unknownAges: [String],
   $sample_tumor_status: [String] ,
   $tumor_classification: [String] ,
   $data_category: [String],
@@ -1109,25 +1220,32 @@ query fileAddAllToCart(
   $sort_direction: String = "asc"
  ){
   fileOverview(
+      import_data: $import_data,
       participant_ids: $participant_ids,
       sex_at_birth: $sex_at_birth,
       race: $race,
       age_at_diagnosis: $age_at_diagnosis,
+      age_at_diagnosis_unknownAges: $age_at_diagnosis_unknownAges,
       diagnosis_anatomic_site: $diagnosis_anatomic_site,
       disease_phase: $disease_phase,
       diagnosis: $diagnosis,
       diagnosis_classification_system: $diagnosis_classification_system,
+      diagnosis_category: $diagnosis_category,
       diagnosis_basis: $diagnosis_basis,
       last_known_survival_status: $last_known_survival_status,
       age_at_last_known_survival_status: $age_at_last_known_survival_status,
+      age_at_last_known_survival_status_unknownAges: $age_at_last_known_survival_status_unknownAges,
       first_event: $first_event,
       treatment_type: $treatment_type,
       treatment_agent: $treatment_agent,
       age_at_treatment_start: $age_at_treatment_start,
+      age_at_treatment_start_unknownAges: $age_at_treatment_start_unknownAges,
       response_category: $response_category,
       age_at_response: $age_at_response,
+      age_at_response_unknownAges: $age_at_response_unknownAges,
       sample_anatomic_site: $sample_anatomic_site,
       participant_age_at_collection: $participant_age_at_collection,
+      participant_age_at_collection_unknownAges: $participant_age_at_collection_unknownAges,
       sample_tumor_status: $sample_tumor_status,
       tumor_classification: $tumor_classification,
       data_category: $data_category,
@@ -1139,7 +1257,7 @@ query fileAddAllToCart(
       library_source_material: $library_source_material,
       library_source_molecule: $library_source_molecule,
       library_strategy: $library_strategy,
-      file_mapping_level: $file_mapping_level
+      file_mapping_level: $file_mapping_level,
       first: $first,
       offset: $offset,
       order_by: $order_by,
@@ -1152,25 +1270,32 @@ query fileAddAllToCart(
 
 export const GET_ALL_FILEIDS_FROM_DIAGNOSISTAB_FOR_ADD_ALL_CART = gql`
 query diagnosisAddAllToCart(
+  $import_data: [String],
   $participant_ids: [String],
   $sex_at_birth: [String] ,
   $race: [String] ,
   $age_at_diagnosis: [Int] ,
+  $age_at_diagnosis_unknownAges: [String],
   $diagnosis_anatomic_site: [String] ,
   $disease_phase: [String] ,
   $diagnosis: [String] ,
   $diagnosis_classification_system: [String] ,
+  $diagnosis_category: [String],
   $diagnosis_basis: [String] ,
   $last_known_survival_status: [String] ,
   $age_at_last_known_survival_status: [Int],
+  $age_at_last_known_survival_status_unknownAges: [String],
   $first_event: [String],
   $treatment_type: [String],
   $treatment_agent: [String],
   $age_at_treatment_start: [Int] ,
+  $age_at_treatment_start_unknownAges: [String],
   $response_category: [String] ,
   $age_at_response: [Int] ,
+  $age_at_response_unknownAges: [String],
   $sample_anatomic_site: [String] ,
   $participant_age_at_collection: [Int] ,
+  $participant_age_at_collection_unknownAges: [String],
   $sample_tumor_status: [String] ,
   $tumor_classification: [String] ,
   $data_category: [String],
@@ -1188,25 +1313,32 @@ query diagnosisAddAllToCart(
   $order_by: String = "file_id",
   $sort_direction: String = "asc" ){
   diagnosisOverview(
+      import_data: $import_data,
       participant_ids: $participant_ids,
       sex_at_birth: $sex_at_birth,
       race: $race,
       age_at_diagnosis: $age_at_diagnosis,
+      age_at_diagnosis_unknownAges: $age_at_diagnosis_unknownAges,
       diagnosis_anatomic_site: $diagnosis_anatomic_site,
       disease_phase: $disease_phase,
       diagnosis: $diagnosis,
       diagnosis_classification_system: $diagnosis_classification_system,
+      diagnosis_category: $diagnosis_category,
       diagnosis_basis: $diagnosis_basis,
       last_known_survival_status: $last_known_survival_status,
       age_at_last_known_survival_status: $age_at_last_known_survival_status,
+      age_at_last_known_survival_status_unknownAges: $age_at_last_known_survival_status_unknownAges,
       first_event: $first_event,
       treatment_type: $treatment_type,
       treatment_agent: $treatment_agent,
       age_at_treatment_start: $age_at_treatment_start,
+      age_at_treatment_start_unknownAges: $age_at_treatment_start_unknownAges,
       response_category: $response_category,
       age_at_response: $age_at_response,
+      age_at_response_unknownAges: $age_at_response_unknownAges,
       sample_anatomic_site: $sample_anatomic_site,
       participant_age_at_collection: $participant_age_at_collection,
+      participant_age_at_collection_unknownAges: $participant_age_at_collection_unknownAges,
       sample_tumor_status: $sample_tumor_status,
       tumor_classification: $tumor_classification,
       data_category: $data_category,
@@ -1218,7 +1350,7 @@ query diagnosisAddAllToCart(
       library_source_material: $library_source_material,
       library_source_molecule: $library_source_molecule,
       library_strategy: $library_strategy,
-      file_mapping_level: $file_mapping_level
+      file_mapping_level: $file_mapping_level,
       first: $first,
       offset: $offset,
       order_by: $order_by,
@@ -1231,25 +1363,32 @@ query diagnosisAddAllToCart(
 
 export const GET_ALL_FILEIDS_FROM_STUDYTAB_FOR_ADD_ALL_CART = gql`
 query studyAddAllToCart(
+  $import_data: [String],
   $participant_ids: [String],
   $sex_at_birth: [String] ,
   $race: [String] ,
   $age_at_diagnosis: [Int] ,
+  $age_at_diagnosis_unknownAges: [String],
   $diagnosis_anatomic_site: [String] ,
   $disease_phase: [String] ,
   $diagnosis: [String] ,
   $diagnosis_classification_system: [String] ,
+  $diagnosis_category: [String],
   $diagnosis_basis: [String] ,
   $last_known_survival_status: [String] ,
   $age_at_last_known_survival_status: [Int],
+  $age_at_last_known_survival_status_unknownAges: [String],
   $first_event: [String],
   $treatment_type: [String],
   $treatment_agent: [String],
   $age_at_treatment_start: [Int] ,
+  $age_at_treatment_start_unknownAges: [String],
   $response_category: [String] ,
   $age_at_response: [Int] ,
+  $age_at_response_unknownAges: [String],
   $sample_anatomic_site: [String] ,
   $participant_age_at_collection: [Int] ,
+  $participant_age_at_collection_unknownAges: [String],
   $sample_tumor_status: [String] ,
   $tumor_classification: [String] ,
   $data_category: [String],
@@ -1267,25 +1406,32 @@ query studyAddAllToCart(
   $order_by: String = "file_id",
   $sort_direction: String = "asc" ){
   studyOverview(
+      import_data: $import_data,
       participant_ids: $participant_ids,
       sex_at_birth: $sex_at_birth,
       race: $race,
       age_at_diagnosis: $age_at_diagnosis,
+      age_at_diagnosis_unknownAges: $age_at_diagnosis_unknownAges,
       diagnosis_anatomic_site: $diagnosis_anatomic_site,
       disease_phase: $disease_phase,
       diagnosis: $diagnosis,
       diagnosis_classification_system: $diagnosis_classification_system,
+      diagnosis_category: $diagnosis_category,
       diagnosis_basis: $diagnosis_basis,
       last_known_survival_status: $last_known_survival_status,
       age_at_last_known_survival_status: $age_at_last_known_survival_status,
+      age_at_last_known_survival_status_unknownAges: $age_at_last_known_survival_status_unknownAges,
       first_event: $first_event,
       treatment_type: $treatment_type,
       treatment_agent: $treatment_agent,
       age_at_treatment_start: $age_at_treatment_start,
+      age_at_treatment_start_unknownAges: $age_at_treatment_start_unknownAges,
       response_category: $response_category,
       age_at_response: $age_at_response,
+      age_at_response_unknownAges: $age_at_response_unknownAges,
       sample_anatomic_site: $sample_anatomic_site,
       participant_age_at_collection: $participant_age_at_collection,
+      participant_age_at_collection_unknownAges: $participant_age_at_collection_unknownAges,
       sample_tumor_status: $sample_tumor_status,
       tumor_classification: $tumor_classification,
       data_category: $data_category,
@@ -1335,6 +1481,123 @@ export const GET_FILE_IDS_FROM_FILE_NAME = gql`
           file_id
       }
   }`;
+
+// --------------- GraphQL query - Search files by filename --------------
+export const GET_FILENAMES_QUERY = gql`
+query getFilenames(
+    $filename: String,
+    $import_data: [String],
+    $participant_ids: [String],
+    $sex_at_birth: [String],
+    $race: [String],
+    $age_at_diagnosis: [Int],
+    $age_at_diagnosis_unknownAges: [String],
+    $diagnosis_anatomic_site: [String],
+    $disease_phase: [String],
+    $diagnosis: [String],
+    $diagnosis_classification_system: [String],
+    $diagnosis_category: [String],
+    $diagnosis_basis: [String],
+    $last_known_survival_status: [String],
+    $age_at_last_known_survival_status: [Int],
+    $age_at_last_known_survival_status_unknownAges: [String],
+    $first_event: [String],
+    $treatment_type: [String],
+    $treatment_agent: [String],
+    $age_at_treatment_start: [Int],
+    $age_at_treatment_start_unknownAges: [String],
+    $response_category: [String],
+    $age_at_response: [Int],
+    $age_at_response_unknownAges: [String],
+    $sample_anatomic_site: [String],
+    $participant_age_at_collection: [Int],
+    $participant_age_at_collection_unknownAges: [String],
+    $sample_tumor_status: [String],
+    $tumor_classification: [String],
+    $data_category: [String],
+    $file_type: [String],
+    $dbgap_accession: [String],
+    $study_name: [String],
+    $study_status: [String],
+    $library_selection: [String],
+    $library_source_material: [String],
+    $library_source_molecule: [String],
+    $library_strategy: [String],
+    $file_mapping_level: [String],
+    $first: Int,
+    $offset: Int,
+    $order_by: String,
+    $sort_direction: String
+){
+    getFilenames(
+        filename: $filename,
+        import_data: $import_data,
+        participant_ids: $participant_ids,
+        sex_at_birth: $sex_at_birth,
+        race: $race,
+        age_at_diagnosis: $age_at_diagnosis,
+        age_at_diagnosis_unknownAges: $age_at_diagnosis_unknownAges,
+        diagnosis_anatomic_site: $diagnosis_anatomic_site,
+        disease_phase: $disease_phase,
+        diagnosis: $diagnosis,
+        diagnosis_classification_system: $diagnosis_classification_system,
+        diagnosis_category: $diagnosis_category,
+        diagnosis_basis: $diagnosis_basis,
+        last_known_survival_status: $last_known_survival_status,
+        age_at_last_known_survival_status: $age_at_last_known_survival_status,
+        age_at_last_known_survival_status_unknownAges: $age_at_last_known_survival_status_unknownAges,
+        first_event: $first_event,
+        treatment_type: $treatment_type,
+        treatment_agent: $treatment_agent,
+        age_at_treatment_start: $age_at_treatment_start,
+        age_at_treatment_start_unknownAges: $age_at_treatment_start_unknownAges,
+        response_category: $response_category,
+        age_at_response: $age_at_response,
+        age_at_response_unknownAges: $age_at_response_unknownAges,
+        sample_anatomic_site: $sample_anatomic_site,
+        participant_age_at_collection: $participant_age_at_collection,
+        participant_age_at_collection_unknownAges: $participant_age_at_collection_unknownAges,
+        sample_tumor_status: $sample_tumor_status,
+        tumor_classification: $tumor_classification,
+        data_category: $data_category,
+        file_type: $file_type,
+        dbgap_accession: $dbgap_accession,
+        study_name: $study_name,
+        study_status: $study_status,
+        library_selection: $library_selection,
+        library_source_material: $library_source_material,
+        library_source_molecule: $library_source_molecule,
+        library_strategy: $library_strategy,
+        file_mapping_level: $file_mapping_level,
+        first: $first,
+        offset: $offset,
+        order_by: $order_by,
+        sort_direction: $sort_direction
+    ){
+        totalCount
+        files {
+            id
+            file_name
+            data_category
+            file_description
+            file_type
+            file_size
+            study_id
+            participant_id
+            sample_id
+            file_id
+            guid
+            md5sum
+            library_selection
+            library_source_material
+            library_source_molecule
+            library_strategy
+            file_access
+            file_mapping_level
+        }
+    }
+}
+`;
 
 // --------------- Tabs Table configuration --------------
 export const tabContainers = [
@@ -1416,6 +1679,14 @@ export const tabContainers = [
       {
         dataField: 'anatomic_site',
         header: 'Diagnosis Anatomic Site',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+        hideable: true,
+      },
+      {
+        dataField: 'diagnosis_category',
+        header: 'Diagnosis Category',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
@@ -1726,7 +1997,7 @@ export const tabContainers = [
         cellType: cellTypes.CUSTOM_ELEM,
         cellStyle: cellStyles.TRANSFORM,
         dataFormatter: (dt) => {
-          if (dt === -999) {
+          if (!dt || dt === -999) {
             return 'Not Reported';
           }
           return dt.toString();
@@ -1753,6 +2024,14 @@ export const tabContainers = [
       {
         dataField: 'diagnosis',
         header: 'Sample Diagnosis',
+        display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+        hideable: true,
+      },
+      {
+        dataField: 'diagnosis_category',
+        header: 'Diagnosis Category',
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
@@ -1812,14 +2091,14 @@ export const tabContainers = [
         cellType: cellTypes.CUSTOM_ELEM,
         cellStyle: cellStyles.TRANSFORM,
         dataFormatter: (dt) => {
-          if(dt instanceof Array){
+          if (dt instanceof Array) {
             return dt.join(',')
           }
-          else if(dt === null){
+          else if (dt === null) {
             return "";
           }
-          else if(dt.toString().charAt(0) === '[' && dt.toString().charAt(dt.toString().length - 1) === ']'){
-            return dt.toString().substring(1,dt.length-1)
+          else if (dt.toString().charAt(0) === '[' && dt.toString().charAt(dt.toString().length - 1) === ']') {
+            return dt.toString().substring(1, dt.length - 1)
           }
           return dt.toString();
         },
@@ -1871,6 +2150,8 @@ export const tabContainers = [
         header: 'Participant ID',
         display: true,
         tooltipText: 'sort',
+        cellType: cellTypes.CUSTOM_ELEM,
+        cellStyle: cellStyles.MODAL,
         role: cellTypes.DISPLAY,
       },
       {
@@ -1878,6 +2159,8 @@ export const tabContainers = [
         header: 'Sample ID',
         display: true,
         tooltipText: 'sort',
+        cellType: cellTypes.CUSTOM_ELEM,
+        cellStyle: cellStyles.MODAL,
         role: cellTypes.DISPLAY,
       },
       {
@@ -1954,4 +2237,3 @@ export const tabContainers = [
   },
 ];
 
-  

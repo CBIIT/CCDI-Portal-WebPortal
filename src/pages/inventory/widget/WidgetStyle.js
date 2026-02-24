@@ -4,7 +4,6 @@ const styles = (theme) => ({
   },
   dashboardDivider: {
     height: 16,
-    marginTop: '32px',
     backgroundColor: '#E2E7EC',
   },
   dashboardDividerTop: {
@@ -52,13 +51,11 @@ const styles = (theme) => ({
   },
   widgetsCollapse: {
     background: theme.palette.widgetBackground.main,
+    display: 'flex',
+    justifyContent: 'flex-end',
   },
-  floatRight: {
-    float: 'right',
-    marginRight: '80px',
-  },
-  floatLeft: {
-    float: 'left',
+  buttonCollapseContainer: {
+    paddingRight: '80px',
   },
   customSwitch: {
     marginTop: '-6px',
@@ -79,6 +76,8 @@ const styles = (theme) => ({
   },
   backgroundWidgets: {
     background: theme.palette.widgetBackground.main,
+    paddingLeft: '30px',
+    paddingRight: '60px',
   },
   sideBar: {
     width: '250px',

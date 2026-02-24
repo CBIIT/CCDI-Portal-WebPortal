@@ -68,11 +68,11 @@ const DonutChart = ({
                   </text>
                   <text
                     x={cx}
-                    y={cy+130}
+                    y={cy+135}
                     dy="12"
                     textAnchor="middle"
                     fill={textColor}
-                    fontSize="16px"
+                    fontSize="19px"
                     fontWeight="500"
                     fontFamily="Nunito"
                   >

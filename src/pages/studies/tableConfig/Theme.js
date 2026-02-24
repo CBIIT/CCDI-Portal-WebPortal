@@ -1,5 +1,8 @@
 export const tblHeader = {
   MuiTableCell: {
+    root: {
+      padding: '5px 16px',
+    },
     head: {
       color: '#0F253A',
       position: 'relative',
@@ -14,10 +17,11 @@ export const tblHeader = {
     root: {
       color: '#0F253A',
       position: 'relative',
-      fontSize: '15px',
+      fontSize: '17px',
       fontFamily: 'Open Sans',
       fontWeight: '700',
-      letterSpacing: '0.06em',
+      letterSpacing: '-0.019em',
+      lineHeight: '18px',
       textDecoration: 'none',
       '&:hover': {
         color: '#13344A',
@@ -38,7 +42,7 @@ const tblBody = {
   MuiTableCell: {
     root: {
       minHeight: '45px',
-      padding: '5px 5px 5px 20px',
+      padding: '10px 5px 10px 20px',
       color: '#004C73',
       borderBottom: 'none',
     },
@@ -48,11 +52,13 @@ const tblBody = {
     },
     body: {
       fontFamily: 'Open Sans',
-      fontSize: '14px',
+      fontSize: '16px',
+      lineHeight: '19.2px',
       color: '#24415C',
       '& p': {
         fontFamily: 'Open Sans',
-        fontSize: '14px',
+        fontSize: '16px',
+        lineHeight: '19.2px',
       },
       '&.pubmed_id': {
         minWidth: '150px',
@@ -227,11 +233,11 @@ export const toolbar = {
 export const tblPgn = {
   MuiTablePagination: {
     root: {
-      paddingRight: '50px',
+      paddingRight: '48px',
       marginLeft: 'auto',
       // borderBottom: '1px solid #8A7F7C',
       '&:last-child': {
-        paddingRight: '50px',
+        paddingRight: '48px',
       }
     },
     toolbar: {

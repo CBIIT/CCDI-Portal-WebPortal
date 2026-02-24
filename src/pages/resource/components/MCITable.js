@@ -56,7 +56,7 @@ const MCITableContainer = styled.div`
     .mciTableBodyListItem {
         padding: 16.5px;
         font-family: Open Sans;
-        font-size: 14px;
+        font-size: 16px;
         font-weight: 400;
         line-height: 17px;
         letter-spacing: 0em;

@@ -10,7 +10,7 @@ height: 900;
 .mciTableTitle {
     padding: 15px;
     font-family: Poppins;
-    font-size: 19px;
+    font-size: 21px;
     font-weight: 400;
     line-height: 21px;
     letter-spacing: 0.02em;
@@ -82,9 +82,9 @@ height: 900;
 }
 
 .mciTableBodyListItem {
-    padding: 6px 16.5px;
+    height: 77px;
     font-family: Open Sans;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
     line-height: 17px;
     letter-spacing: 0em;

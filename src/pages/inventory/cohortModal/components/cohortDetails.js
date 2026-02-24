@@ -19,8 +19,10 @@ const CohortDetails = (props) => {
         classes,
         config,
         activeCohort,
+        temporaryCohort,
         closeModal,
         handleSaveCohort,
+        handleSetCurrentCohortChanges,
         downloadCohortManifest,
         downloadCohortMetadata,
         deleteConfirmationClasses,
@@ -30,15 +32,18 @@ const CohortDetails = (props) => {
         return null;
     }
 
+    let matchingCohortID = temporaryCohort && temporaryCohort.cohortId === activeCohort.cohortId;
+
     const [selectedColumn, setSelectedColumn] = useState(['participant_id', 'ascending']);
-    const [searchText, setSearchText] = useState('');
+    const [searchText, setSearchText] = useState(matchingCohortID && temporaryCohort['searchText'] ? temporaryCohort['searchText'] : '');
 
     const [localCohort, setLocalCohort] = useState({
-        cohortId: activeCohort.cohortId,
-        cohortName: activeCohort.cohortName,
-        cohortDescription: activeCohort.cohortDescription,
-        participants: JSON.parse(JSON.stringify(activeCohort.participants)),
+        cohortId: matchingCohortID ? temporaryCohort.cohortId : activeCohort.cohortId,
+        cohortName: matchingCohortID ? temporaryCohort.cohortName : activeCohort.cohortName,
+        cohortDescription: matchingCohortID ? temporaryCohort.cohortDescription : activeCohort.cohortDescription,
+        participants: matchingCohortID ? JSON.parse(JSON.stringify(temporaryCohort.participants)) : JSON.parse(JSON.stringify(activeCohort.participants)),
     });
+
     const [isEditingName, setIsEditingName] = useState(false);
     const [isEditingDescription, setIsEditingDescription] = useState(false);
     const [showDownloadDropdown, setShowDownloadDropdown] = useState(false);
@@ -46,6 +51,7 @@ const CohortDetails = (props) => {
 
     const scrollContainerRef = useRef(null);
     const dropdownRef = useRef(null);
+    const saveButtonRef = useRef(null);
 
 
     useEffect(() => {
@@ -94,12 +100,52 @@ const CohortDetails = (props) => {
         setIsEditingDescription(true);
     };
 
-    const handleSaveName = () => {
-        setIsEditingName(false);
+    const handleSaveName = (e) => {
+        // If the input loses focus because the user clicked the Save Changes button,
+        if (
+            e.nativeEvent.relatedTarget &&
+            saveButtonRef.current &&
+            e.nativeEvent.relatedTarget === saveButtonRef.current
+        ) {
+            // If the Save Changes button was clicked, save the cohort
+            handleSaveCohort(localCohort)
+
+        } else {
+            setIsEditingName(false);
+            handleSetCurrentCohortChanges({
+                ...temporaryCohort,
+                ...localCohort,
+                [e.target.name]: e.target.value,
+            });
+        }
     };
 
-    const handleSaveDescription = () => {
-        setIsEditingDescription(false);
+    const handleSaveDescription = (e) => {
+        // If the input loses focus because the user clicked the Save Changes button,
+        if (
+            e.nativeEvent.relatedTarget &&
+            saveButtonRef.current &&
+            e.nativeEvent.relatedTarget === saveButtonRef.current
+        ) {
+            // If the Save Changes button was clicked, save the cohort
+            handleSaveCohort(localCohort)
+
+        } else {
+            setIsEditingDescription(false);
+            handleSetCurrentCohortChanges({
+                ...temporaryCohort,
+                ...localCohort,
+                [e.target.name]: e.target.value,
+            });
+        }
+    };
+
+    const handleSetSearch = (e) => {
+        handleSetCurrentCohortChanges({
+            ...temporaryCohort,
+            ...localCohort,
+            searchText: e.target.value,
+        });
     };
 
     const handleDownloadDropdown = () => {
@@ -132,10 +178,20 @@ const CohortDetails = (props) => {
             ...localCohort,
             participants: localCohort.participants.filter(participant => participant.id !== id),
         });
+        handleSetCurrentCohortChanges({
+            ...temporaryCohort,
+            ...localCohort,
+            participants: localCohort.participants.filter(participant => participant.id !== id),
+        });
     };
 
     const handleDeleteAllParticipants = () => {
         setLocalCohort({
+            ...localCohort,
+            participants: [],
+        });
+        handleSetCurrentCohortChanges({
+            ...temporaryCohort,
             ...localCohort,
             participants: [],
         });
@@ -198,7 +254,7 @@ const CohortDetails = (props) => {
                                 type="text"
                                 name="cohortName"
                                 value={localCohort['cohortName']}
-                                onBlur={handleSaveName}
+                                onBlur={(e) => handleSaveName(e)}
                                 onChange={(e) => handleTextChange(e)}
                                 maxLength={20}
                                 autoFocus
@@ -223,7 +279,7 @@ const CohortDetails = (props) => {
                         <textarea
                         className={classes.editingCohortDescription}
                         value={localCohort['cohortDescription']}
-                        onBlur={handleSaveDescription}
+                        onBlur={(e) => {handleSaveDescription(e)}}
                         name="cohortDescription"
                         onChange={(e) => handleTextChange(e)}
                         rows={2}
@@ -249,6 +305,7 @@ const CohortDetails = (props) => {
                             className={classes.participantSearchBar}
                             value={searchText}
                             onChange={(e) => setSearchText(e.target.value)}
+                            onBlur={(e) => handleSetSearch(e)}
                         />
                         <span className={classes.searchIcon}>
                             <img
@@ -324,7 +381,12 @@ const CohortDetails = (props) => {
                         <Button variant="contained" className={classes.cancelButton} onClick={closeModal}>
                             Cancel
                         </Button>
-                        <Button variant="contained" className={classes.saveButton} onClick={() => handleSaveCohort(localCohort)}>
+                        <Button
+                            variant="contained"
+                            className={classes.saveButton}
+                            ref={saveButtonRef}
+                            onClick={() => handleSaveCohort(localCohort)}
+                        >
                             Save Changes
                         </Button>
                         <div className={classes.dropdownSection} ref={dropdownRef}>

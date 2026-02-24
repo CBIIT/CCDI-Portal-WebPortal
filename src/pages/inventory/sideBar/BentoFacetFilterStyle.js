@@ -1,10 +1,19 @@
 export default () => ({
   inputRoot: {
-    height: '26px',
+    height: '30px',
     borderRadius: '8px',
     color: '#646464',
     fontFamily: 'Nunito',
-    fontSize: 9,
+    fontSize: '14px',
+    '& input': {
+      height: '7px',
+      fontSize: '14px',
+      paddingLeft: '12px !important',
+    },
+    '& input::placeholder': {
+      color: '#757575',
+      opacity: 1,
+    },
     '& fieldset': {
       borderWidth: '1px !important',
       borderColor: '#003F74 !important',
@@ -72,7 +81,7 @@ export default () => ({
     fontWeight: 400,
     lineHeight: '18px',
     marginLeft: '5px',
-    textTransform: 'uppercase',
+    textTransform: 'capitalize',
     letterSpacing: '-0.02em',
   },
   dropDownIconSubSection: {
@@ -161,10 +170,11 @@ export default () => ({
   },
   searchContainer: {
     margin: '0 2px',
-    marginBottom: '20px',
-    marginLeft:'20px',
-    marginRight: '20px',
     marginTop: '-15px',
+    paddingTop: '15px',
+    marginRight: '6px',
+    marginLeft: '10px',
+    paddingBottom: '15px',
   },
   findCaseButton: {
     // marginLeft: '105px',
@@ -227,5 +237,5 @@ export default () => ({
     fontSize: 11,
     fontWeight: '400',
     fontStyle: 'normal',
-  }
+  },
 });

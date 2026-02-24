@@ -291,7 +291,7 @@ const NavBar = () => {
                   &&
                   <LiSection key={navkey}>
                     <div className='navTitle directLink'>
-                      <NavLink to={navMobileItem.link}>
+                      <NavLink to={navMobileItem.link} state={{ navigationType: 'main_menu' }}>
                         <div
                           className='navText directLink'
                           onKeyDown={onKeyPressHandler}
@@ -337,7 +337,7 @@ const NavBar = () => {
                   return (
                     <>
                       {dropItem.link
-                      ? dropItem.link.includes("http") || dropItem.link.includes("pdf")
+                      ? dropItem.link.includes("http") || dropItem.link.includes("pdf") || dropItem.link.includes("release-notes")
                       ? <a href={dropItem.link} className="dropdownItem" target="_blank" rel="noopener noreferrer" key={dropkey} onClick={() => setClickedTitle("")}>{dropItem.name}</a>
                       : <NavLink to={dropItem.link} className="dropdownItem" key={dropkey} onClick={() => setClickedTitle("")}>{dropItem.name}</NavLink>
                       : null}

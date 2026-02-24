@@ -86,8 +86,7 @@ const WidgetView = ({
   return (
     <>
       <div className={classes.widgetsCollapse}>
-        <div className={classes.floatLeft} />
-        <div className={classes.floatRight}>
+        <div className={classes.buttonCollapseContainer}>
           <FormControlLabel
             control={(
               <Button className={classes.customButton} onClick={handleChange}>
@@ -124,8 +123,12 @@ const WidgetView = ({
               <Grid key={index} item lg={4} md={6} sm={12} xs={12}
                 style={{
                   paddingLeft: '30px',
-                  paddingTop: '40px',
+                  paddingRight: '45px',
+                  paddingTop: '15px',
+                  paddingBottom: '30px',
                   borderRadius: '30px',
+                  minWidth: '330px',
+                  maxWidth: '450px',
                 }}
               >
                 <div
@@ -134,7 +137,7 @@ const WidgetView = ({
                   <Widget
                     header={(
                       <>
-                        <Typography size="md" weight="normal" family="Nunito" style={{ color: '#4A5C5E' }}>
+                        <Typography size="md" weight="normal"  style={{ color: '#4A5C5E', fontFamily:"Poppins", fontSize:"18.5px", lineHeight:"19.707px", letterSpacing:"-0.37px" }}>
                           {widget.title}
                         </Typography>
                         {widget.title === 'Diagnosis' &&

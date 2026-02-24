@@ -75,11 +75,6 @@ export const navbarSublists = {
     className: 'navMobileSubItem',
   },
   {
-    name:'Clinical Interpretation of Variants in Cancer',
-    link: 'https://civicdb.org',
-    className: 'navMobileSubItem',
-  },
-  {
     name: 'Molecular Characterization Initiative',
     link: '/MCI',
     className: 'navMobileSubItem',
@@ -105,6 +100,11 @@ export const navbarSublists = {
     className: 'navMobileSubItem',
   },
   {
+    name: 'CCDI cBioPortal',
+    link: 'https://cbioportal.ccdi.cancer.gov',
+    className: 'navMobileSubItem',
+  },
+  {
     name:'NCCR Data Platform',
     link: 'https://nccrdataplatform.ccdi.cancer.gov/home',
     className: 'navMobileSubItem',
@@ -120,20 +120,25 @@ export const navbarSublists = {
   //   className: 'navMobileSubItem',
   // },
   {
-    name:'CCDI Extrachromosomal DNA (ecDNA)',
-    link: 'https://ccdi-ecdna.org',
-    className: 'navMobileSubItem',
-  },
-  {
     name:'Tools',
     link: '/tools',
     className: 'navMobileSubItem',
   },
+  // {
+  //   name:'CCDI Pediatric, Adolescent, and Young Adult Rare Cancer Study',
+  //   link: '/pediatric-adolescent-and-young-adult-rare-cancer-study',
+  //   className: 'navMobileSubItem',
+  // },
   ],
   "About": [
     {
       name: 'About CCDI Hub',
       link: '/about',
+      className: 'navMobileSubItem',
+    },
+    {
+      name: 'CCDI Data Ecosystem and AI Readiness (PDF)',
+      link: '/Ecosystem_AI_Readiness.pdf',
       className: 'navMobileSubItem',
     },
     {
@@ -169,6 +174,11 @@ export const navbarSublists = {
     {
       name: 'User Guide',
       link: '/user-guide.pdf',
+      className: 'navMobileSubItem',
+    },
+    {
+      name: 'CCDI Events Announcements',
+      link: '/ccdi-events-announcements',
       className: 'navMobileSubItem',
     },
   ],

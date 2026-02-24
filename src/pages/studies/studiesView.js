@@ -16,7 +16,8 @@ const StudiesContainer = styled.div`
     font-weight: 400;
     font-size: 16px;
     line-height: 162%;
-    margin-left: 50px;
+    padding-left: 30px;
+    // margin-left: 50px;
     padding-top: 8px;
     padding-bottom: 8px;
   }
@@ -41,7 +42,7 @@ const StudiesContainer = styled.div`
   .resourceHeaderText {
     // width: 1420px;
     margin: 0 auto;
-    padding: 150px 0 0 75px;
+    padding: 150px 0 0 88px;
     color: #19676D;
     font-family: Poppins;
     font-size: 40px;
@@ -62,15 +63,25 @@ const StudiesContainer = styled.div`
     font-weight: 600;
     color: #ffffff;
     font-size: 35px;
-    padding: 15px 0 15px 75px;
+    padding: 13px 0 13px 88px;
   }
+
   .resourceBody {
-    margin-left: 50px;
-    margin-right: 50px;
+    margin-left: 45px;
+    margin-right: 45px;
+    padding-top: 45px;
+    padding-bottom: 45px;
   }
 
   .studyIcon{
     margin-left: 30px;
+  }
+
+  @media (min-width: 1420px) {
+    .breadcrumb {
+        width: 1420px;
+        margin: 0 auto;
+    }
   }
 `;
 
@@ -90,7 +101,8 @@ const StudiesView = () => {
     sortOrder: table.defaultSortDirection,
     extendedViewConfig: table.extendedViewConfig,
     selectedRows: [],
-    rowsPerPage: 10,
+    rowsPerPageOptions: [50, 100],
+    rowsPerPage: 50,
     page: 0,
   });
 

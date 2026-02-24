@@ -1,10 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { withStyles, Collapse, Tooltip, ClickAwayListener } from '@material-ui/core';
-import html2pdf from "html2pdf.js";
 import ReactHtmlParser from "html-react-parser";
 // import { releaseNotesList } from '../../bento/newsData';
-import NCILogoExport from '../../assets/about/NCI_Logo.png';
 import ArrowDownIcon from '../../assets/about/Arrow_Down_Black_Icon.svg';
 import arrowDownGreenIcon from '../../assets/about/arrowDownGreen.svg';
 import arrowUpGreenIcon from '../../assets/about/arrowUpGreen.svg';
@@ -353,7 +351,7 @@ const SiteUpdateExport = styled.div`
 
     .spanText {
         display: flex;
-        width: 167px;
+        width: 125px;
         padding: 10px 18px;
         color: #FFFFFF;
         font-family: Poppins;
@@ -432,7 +430,7 @@ const SiteUpdateCardDescription = styled.div`
     }
 `;
 
-const ReleaseNotesPageView = ( {releaseNotesList} ) => {
+const ReleaseNotesPageView = ( {contentTypeUrlList, releaseNotesList} ) => {
     const [selectedIdx, setSelectedIdx] = useState(0);
     const [siteUpdateNav, setSiteUpdateNav] = useState([]);
     const [open, setOpen] = useState([]);
@@ -548,82 +546,8 @@ const ReleaseNotesPageView = ( {releaseNotesList} ) => {
       }
     }, [siteUpdateNav]);
 
-    const handleExport = (idx) => {
-        const img = document.createElement("img");
-        img.src = NCILogoExport;
-        img.width = '1';
-        const element = document.getElementById(`${idx}_desc`);
-        const elementClone = element.cloneNode(true);
-        const titleDiv = document.getElementById(`${idx}_title`);
-        const dateDiv = document.getElementById(`${idx}_date`);
-        const version = document.getElementById(`${idx}_version`).innerText;
-        const newDiv = document.createElement("div");
-        const newDivTitle = document.createElement("div");
-        newDivTitle.style = "display: flex;margin-bottom: 15px;";
-        const titleSpan = document.createElement('span');
-        titleSpan.style = "color: #004187;font-family: Inter;font-size: 28px;font-weight:600;";
-        titleSpan.appendChild(document.createTextNode("Site Update Release Notes"));
-        newDivTitle.appendChild(titleSpan);
-        const newDivUpdate = document.createElement("div");
-        newDivUpdate.style = "display: flex;";
-        const updateSpan = document.createElement('span');
-        updateSpan.style = "color: #567aac;font-family: Inter;font-size: 14px;line-height: 25px;";
-        updateSpan.appendChild(document.createTextNode("UPDATE TITLE:"));
-        const updateSpanValue = document.createElement('span');
-        updateSpanValue.style = "margin-left: 45px;color: #004187;font-family: Inter;font-size: 16px;font-weight:600;line-height: 25px;";
-        updateSpanValue.appendChild(document.createTextNode(titleDiv.innerText));
-        newDivUpdate.appendChild(updateSpan);
-        newDivUpdate.appendChild(updateSpanValue);
-        const newDivDate = document.createElement("div");
-        newDivDate.style = "display: flex;";
-        const dateSpan = document.createElement('span');
-        dateSpan.style = "color: #567aac;font-family: Inter;font-size: 14px;line-height: 25px;";
-        dateSpan.appendChild(document.createTextNode("DATE OF RELEASE:"));
-        const dateSpanValue = document.createElement('span');
-        dateSpanValue.style = "margin-left: 20px;color: #004187;font-family: Inter;font-size: 16px;font-weight:600;line-height: 25px;";
-        dateSpanValue.appendChild(document.createTextNode(dateDiv.innerText));
-        newDivDate.appendChild(dateSpan);
-        newDivDate.appendChild(dateSpanValue);
-        const breakline = document.createElement("HR");
-        breakline.style = "height: 1px; background-color: #3b6697; margin-bottom: 40px;";
-        newDiv.appendChild(newDivTitle);
-        newDiv.appendChild(newDivUpdate);
-        newDiv.appendChild(newDivDate);
-        newDiv.appendChild(breakline);
-        newDiv.appendChild(elementClone);
-        const opt = {
-          margin: [35, 15, 20, 15],
-          filename: 'CCDI_Hub_'+version+"_Release_Notes.pdf",
-          image: {type: 'jpeg', quality: 1},
-          html2canvas: {dpi: 72, scale: 4, letterRendering: true},
-          jsPDF: {unit: 'mm', format: 'a4', orientation: 'portrait'}
-        };
-  
-        html2pdf().from(newDiv).set(opt).toContainer()
-        .toCanvas()
-        .toPdf()
-        .get('pdf')
-        .then((pdf) => {
-          const totalPages = pdf.internal.getNumberOfPages();
-          for (let i = 1; i <= totalPages; i += 1) {
-              pdf.setPage(i);
-              pdf.addImage(img, 'PNG', 13, 7, 120, 15);
-              pdf.setDrawColor("#606061");
-              pdf.setLineWidth(1.0);
-              pdf.line(15, 27, 195, 27);
-              pdf.setDrawColor("#3b6697");
-              pdf.setLineWidth(0.2);
-              pdf.line(15, 280, 195, 280);
-              pdf.setFontSize(8);
-              pdf.setFont(pdf.getFont().fontName, "normal");
-              pdf.setTextColor("#000000");
-              pdf.text('U.S. Department of Health and Human Services | National Institutes of Health | National Cancer Institute', 35,
-                  pdf.internal.pageSize.getHeight() / 1.04);
-              pdf.setFont(pdf.getFont().fontName, "bold");
-              pdf.text(`Page ${i} of ${totalPages}`, 180, pdf.internal.pageSize.getHeight() / 1.04);
-          }
-          })
-          .save();
+    const handleViewPDF = () => {
+        window.open('/CCDI_Hub_Release_Notes.pdf', '_blank');
     };
 
     const handleClick = (idx) => {
@@ -731,9 +655,9 @@ const ReleaseNotesPageView = ( {releaseNotesList} ) => {
                                   <div id={`${releaseNotesList[selectedIdx].id}_version`} style={{display: 'none'}}>{releaseNotesList[selectedIdx].version}</div>
                               </div>
                               <SiteUpdateExport>
-                                  <div className="spanText" onClick={() => handleExport(releaseNotesList[selectedIdx].id)}>
-                                      <div className='downloadPDFText'>DOWNLOAD PDF</div>
-                                      <div className='downloadPDFImg'><img src={UploadIcon} alt="download pdf icon" /></div>
+                                  <div className="spanText" onClick={handleViewPDF}>
+                                      <div className='downloadPDFText'>VIEW PDF</div>
+                                      <div className='downloadPDFImg'><img src={UploadIcon} alt="view pdf icon" /></div>
                                   </div>
                               </SiteUpdateExport>
                           </div>
@@ -751,7 +675,7 @@ const ReleaseNotesPageView = ( {releaseNotesList} ) => {
                                       arrow
                                       PopperProps={{ style: { marginTop: -8 } }}
                                     >
-                                      <img src={iconSrc[newType]} className= "typeIcon" alt={iconAlt[newType]} />
+                                      <img src={contentTypeUrlList ? contentTypeUrlList[newType] : iconSrc[newType]} className= "typeIcon" alt={iconAlt[newType]} />
                                     </LightTooltip>
                                   );
                                 })

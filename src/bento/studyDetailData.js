@@ -23,6 +23,10 @@ query studyDetails($study_id: String) {
           group
           subjects
         }
+        supporting_data {
+          data_category
+          data_object
+        }
         __typename
     }
   }`;

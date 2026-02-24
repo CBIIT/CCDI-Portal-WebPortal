@@ -13,6 +13,8 @@ import wheel9 from '../assets/landing/cpi_carousel.png';
 import wheel10 from '../assets/landing/nccrdata_carousel.png';
 import wheel11 from '../assets/landing/c3dc_carousel.png';
 import wheel12 from '../assets/landing/ecDNA_carousel.png';
+import wheel13 from '../assets/landing/cBioPortal_carousel.png';
+// import wheel14 from '../assets/landing/CCDI_Rare_Cancer_Initiative_carousel.png';
 import c3dcLogo from '../assets/landing/c3dc_logo.svg';
 import ccdcMobile from '../assets/landing/ccdc_mobile.png';
 import civicMobile from '../assets/landing/civic_mobile.png';
@@ -26,6 +28,8 @@ import cpiMobile from '../assets/landing/cpi_mobile.png';
 import nccrdataMobile from '../assets/landing/nccrdata_mobile.png';
 import c3dcMobile from '../assets/landing/c3dc_mobile.png';
 import ecDNAMobile from '../assets/landing/ecDNA_mobile.png';
+import cBioPortalMobile from '../assets/landing/cBioPortal_mobile.png';
+// import rareCancerMobile from '../assets/landing/CCDI_Rare_Cancer_Initiative_mobile.png';
 import ccdcLogo from '../assets/landing/ccdc_logo.svg';
 import civicLogo from '../assets/landing/civic_logo.svg';
 import mciLogo from '../assets/landing/mci_logo.svg';
@@ -37,6 +41,8 @@ import federationLogo from '../assets/landing/federation_logo.svg';
 import cpiLogo from '../assets/landing/cpi_logo.svg';
 import nccrdataLogo from '../assets/landing/nccrdata_logo.svg';
 import ecDNALogo from '../assets/landing/ecDNA_logo.svg';
+import cBioPortalLogo from '../assets/landing/cBioPortal_logo.svg';
+// import rareCancerLogo from '../assets/landing/CCDI_Rare_Cancer_Initiative_logo.svg';
 
 export const introData = {
   landingIntroPic: landingImg,
@@ -165,6 +171,20 @@ export const resourcesAppliationsListData = [
     link: 'https://ccdi-ecdna.org',
     img: ecDNALogo,
   },
+  {
+    id: 'cBioPortal',
+    title: 'cBioPortal Cancer Data Explorer',
+    content: 'CCDI’s customized cBioPortal instance allows users to explore and visualize complex genomic and clinical data without the need to download large datasets.',
+    link: 'https://cbioportal.ccdi.cancer.gov',
+    img: cBioPortalLogo,
+  },
+  // {
+  //   id: 'CCDIRareCancerInitiative',
+  //   title: 'CCDI Pediatric, Adolescent, and Young Adult Rare Cancer Study',
+  //   content: 'This initiative advances understanding of very rare childhood cancers through standardized data collection and collaboration to improve outcomes for young patients.',
+  //   link: '/pediatric-adolescent-and-young-adult-rare-cancer-study',
+  //   img: rareCancerLogo,
+  // },
 ];
 
 export const resourcesCloudListData = [
@@ -269,6 +289,18 @@ export const carouselList = [
     content: 'CCDI Extrachromosomal DNA (ecDNA)',
     link: 'https://ccdi-ecdna.org',
   },
+  {
+    img: wheel13,
+    mobile: cBioPortalMobile,
+    content: 'CCDI cBioPortal',
+    link: 'https://cbioportal.ccdi.cancer.gov',
+  },
+  // {
+  //   img: wheel14,
+  //   mobile: rareCancerMobile,
+  //   content: 'CCDI Pediatric, Adolescent, and Young Adult Rare Cancer Study',
+  //   link: '/pediatric-adolescent-and-young-adult-rare-cancer-study',
+  // },
 ];
 
 export const LANDING_DATA_QUERY = gql`{

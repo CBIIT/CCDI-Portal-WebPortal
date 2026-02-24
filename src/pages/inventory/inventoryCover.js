@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import {
     useLocation,
@@ -11,7 +11,7 @@ import { updateUploadData, updateAutocompleteData, updateUploadMetadata, resetUp
 import store from '../../store';
 import { withStyles, CircularProgress, Backdrop } from '@material-ui/core';
 import {
-    inDataloading, syncUpDashboard, afterInitialLoading, return2Page, returnQueryUrl, changeTab, restoreActionType,
+    inDataloading, updateImportfrom, syncUpDashboard, afterInitialLoading, return2Page, returnQueryUrl, changeTab, restoreActionType,
 } from '../../components/Inventory/InventoryState';
 import styles from './inventoryStyle';
 import { DASHBOARD_QUERY_NEW } from '../../bento/dashboardTabData';
@@ -33,6 +33,11 @@ const InventoryCover = ({
     const client = useApolloClient();
 
     const query = new URLSearchParams(useLocation().search);
+
+    const location = useLocation();
+
+    const navigationType = location.state && location.state.navigationType;
+
     const navigate = useNavigate();
 
     async function getData(filters) {
@@ -46,8 +51,10 @@ const InventoryCover = ({
 
     const generateFacetFilters = (filters, query, queryParams) => {
         let newFilterState = {};
+        let unknownAgesState = {};
+        
         queryParams.forEach((param) => {
-            if (param === 'p_id' || param === 'u' || param === 'u_fc' || param === 'u_um' || param === 'tab') {
+            if (param === 'import_from' || param === 'p_id' || param === 'u' || param === 'u_fc' || param === 'u_um' || param === 'tab') {
                     return;
             }
             const paramValues = query.get(param);
@@ -61,6 +68,16 @@ const InventoryCover = ({
                     } else {
                         filters[param] = [lowerBound, upperBound];
                         newFilterState[param] = [lowerBound, upperBound];
+                        
+                        // Handle unknownAges parameter for age-related filters
+                        const unknownAgesParam = `${param}_unknownAges`;
+                        const unknownAgesValue = query.get(unknownAgesParam);
+                        if (unknownAgesValue) {
+                            unknownAgesState[param] = unknownAgesValue;
+                        } else {
+                            // Default to "include" if not specified
+                            unknownAgesState[param] = 'include';
+                        }
                     }
                 } else {
                     filters[param] = paramValues.split('|');
@@ -71,18 +88,43 @@ const InventoryCover = ({
                 }
             }
         });
-        return newFilterState;
+        
+        // Set default unknownAges values for age-related parameters that don't have values
+        const ageRelatedParams = ['age_at_diagnosis', 'age_at_treatment_start', 'age_at_response', 'age_at_last_known_survival_status', 'participant_age_at_collection'];
+        ageRelatedParams.forEach(param => {
+            if (!unknownAgesState[param]) {
+                unknownAgesState[param] = 'include';
+            }
+        });
+        
+        // Add unknownAgesState to the return object
+        return { newFilterState, unknownAgesState };
     }
 
     useEffect(() => {
-        if (query.size === 0 && return_2_page) {
+
+        // If there are no query parameters and the user is returning to a page,
+        if (query.size === 0 && return_2_page === true) {
             navigate(`/explore${return_query_url}`);
-        } else {
-            let filters = {};
-            const participant_id = query.get('p_id');
-            const upload = query.get('u');
-            const upload_filecontent = query.get('u_fc');
-            const upload_unmatched = query.get('u_um');
+            return;
+        }
+
+        //Check if the user is returning to the same page from the main menu
+        if (query.size === 0 && return_2_page === false && return_query_url !== '' && navigationType === 'main_menu') {
+            navigate(`/explore${return_query_url}`);
+            return;
+        }
+        
+        // Parse all query params
+        let filters = {};
+        const import_from = query.get('import_from');
+        const participant_id = query.get('p_id');
+        const upload = query.get('u');
+        const upload_filecontent = query.get('u_fc');
+        const upload_unmatched = query.get('u_um');
+        const tab = query.get('tab');
+        // Helper to finish the rest of the logic after import_from is handled
+        const continueWithFilters = (extraParticipantIds = []) => {
             filters.participant_ids = [];
             if (participant_id) {
                 filters.participant_ids = [...filters.participant_ids, ...participant_id.split('|')];
@@ -90,25 +132,39 @@ const InventoryCover = ({
             if (upload) {
                 filters.participant_ids = [...filters.participant_ids, ...upload.split('|')];
             }
-            const newFilterState = generateFacetFilters(filters, query, queryParams);
-            // need to update local find component and query bar component for initial loading
+            if (extraParticipantIds.length > 0) {
+                filters.import_data = extraParticipantIds;
+            }
+            const { newFilterState, unknownAgesState } = generateFacetFilters(filters, query, queryParams);
+
+            // Add unknownAges parameters to filters for GraphQL query
+            // Only include unknownAges parameters if they are not "include" (default)
+            Object.keys(unknownAgesState).forEach(key => {
+                const unknownAgesValue = unknownAgesState[key];
+                // Handle both string and array values
+                const value = Array.isArray(unknownAgesValue) ? unknownAgesValue[0] : unknownAgesValue;
+                if (value && value !== 'include') {
+                    const unknownAgesParam = `${key}_unknownAges`;
+                    filters[unknownAgesParam] = [value];
+                }
+            });
+
+            // Update autocomplete data
             if (participant_id) {
-                const data = participant_id.split('|').map((item) => {
-                    return {
-                        type: 'participantIds',
-                        title: item,
-                    };
-                });
+                const data = participant_id.split('|').map((item) => ({
+                    type: 'participantIds',
+                    title: item,
+                }));
                 store.dispatch(updateAutocompleteData(data));
             } else {
                 store.dispatch(updateAutocompleteData([]));
             }
+
+            // Update upload data and metadata
             if (upload) {
-                const data = upload.split('|').map((item) => {
-                    return {
-                        participant_id: item,
-                    };
-                });
+                const data = upload.split('|').map((item) => ({
+                    participant_id: item,
+                }));
                 let fc = '';
                 let um = [];
                 if (upload_filecontent && upload_unmatched) {
@@ -122,21 +178,25 @@ const InventoryCover = ({
                     filename: "",
                     fileContent: fc,
                     matched: data,
-                    unmatched: um
-                }
+                    unmatched: um,
+                };
                 store.dispatch(updateUploadData(data));
                 store.dispatch(updateUploadMetadata(metadata));
             } else {
                 store.dispatch(resetUploadData());
             }
+
             store.dispatch(updateFilterState(newFilterState));
-            const tab = query.get('tab');
+
+            // Handle tab
             if (tab) {
                 const tab_number = parseInt(tab, 10);
-                !isNaN(tab_number) && store.dispatch(changeTab(parseInt(tab, 10), 'facet'));
+                !isNaN(tab_number) && store.dispatch(changeTab(tab_number, 'facet'));
             } else {
                 store.dispatch(changeTab(0, 'facet'));
             }
+
+            // Data loading logic
             if (action_type === "facet") {
                 store.dispatch(inDataloading(true));
                 getData(filters).then((result) => {
@@ -153,12 +213,65 @@ const InventoryCover = ({
                 store.dispatch(returnQueryUrl(window.location.search));
                 store.dispatch(restoreActionType());
             }
+        };
+
+        // Handle import_from if present
+        if (import_from) {
+            fetch(import_from)
+                .then(response => response.json())
+                .then(jsonData => {
+                    store.dispatch(updateImportfrom(import_from, jsonData));
+                    // If jsonData is an array of participant IDs, pass them to continueWithFilters
+                    continueWithFilters(Array.isArray(jsonData) ? jsonData.map(obj => JSON.stringify(obj)) : []);
+                })
+                .catch(error => {
+                    console.error("Failed to fetch import_from JSON:", error);
+                    store.dispatch(updateImportfrom(null, []));
+                    continueWithFilters();
+                });
+        } else {
+            store.dispatch(updateImportfrom(null, []));
+            continueWithFilters();
         }
-    }, [searchParams]);
+    }, [searchParams, navigationType]);
+
+    // Listen for unknownAgesState changes and update URL
+    const unknownAgesState = useSelector((state) => state.statusReducer.unknownAgesState);
+    const [previousUnknownAgesState, setPreviousUnknownAgesState] = useState(null);
+    
+    useEffect(() => {
+        if (unknownAgesState && previousUnknownAgesState !== unknownAgesState) {
+            const query = new URLSearchParams(window.location.search);
+            let hasChanges = false;
+            
+            // Update URL with unknownAges parameters
+            Object.keys(unknownAgesState).forEach(key => {
+                const unknownAgesParam = `${key}_unknownAges`;
+                const value = unknownAgesState[key];
+                // Only update URL if value is not "include" (default)
+                if (value && value !== 'include') {
+                    query.set(unknownAgesParam, value);
+                    hasChanges = true;
+                } else if (value === 'include') {
+                    // Remove parameter if it's the default value
+                    query.delete(unknownAgesParam);
+                    hasChanges = true;
+                }
+            });
+            
+            // Update URL if there are changes
+            if (hasChanges) {
+                const newUrl = `/explore${query.toString() ? '?' + query.toString() : ''}`;
+                navigate(newUrl, { replace: true });
+            }
+            
+            setPreviousUnknownAgesState(unknownAgesState);
+        }
+    }, [unknownAgesState, navigate, previousUnknownAgesState]);
 
     useEffect(() => {
         return () => {
-            // console.log("do something when left!");
+            console.log("do something when left!");
             store.dispatch(return2Page(true));
         };
     }, []);

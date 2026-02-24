@@ -17,7 +17,7 @@ const LandingViewContainer = styled.div`
     background: white;
     
     @media (min-width: 1200px) {
-      height: 3180px;
+      // height: 3180px;
     }
 `;
 
@@ -943,7 +943,7 @@ const LandingView = ({
           </StatsBox>
         </StatsContainer>
       </StatsSection>
-      <LatestUpdate newsList={newsData.newsList} releaseNotesList={newsData.releaseNotesList} altList={newsData.altList} />
+      <LatestUpdate newsList={newsData.newsList} srcList={newsData.newsImgUrlList} releaseNotesList={newsData.releaseNotesList} altList={newsData.altList} />
       {/* <LatestUpdate /> */}
       <ResourcesSection>
         <ResourcesOverlayRight />

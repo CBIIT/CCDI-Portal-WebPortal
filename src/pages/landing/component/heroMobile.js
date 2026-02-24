@@ -230,6 +230,16 @@ const HeroMobileSection = styled.div`
     visibility: hidden;
   }
 
+  .carouselMobileItem:nth-child(13) {
+    transform: translateX(825%);
+    visibility: hidden;
+  }
+
+  // .carouselMobileItem:nth-child(14) {
+  //   transform: translateX(830%);
+  //   visibility: hidden;
+  // }
+
 
   @media (min-width: 1200px) {
     display: none;

@@ -44,6 +44,7 @@ const studyDownloadLinks = {
   "phs003215": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs003215_CCDI_Study_Manifest_v3.1.0.xlsx",
   "phs003432": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs003432_CCDI_Study_Manifest_v3.1.0.xlsx",
   "phs003519": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs003519_CCDI_Study_Manifest_v3.1.0.xlsx",
+  "phs003975": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs003975_CCDI_Study_Manifest_v3.1.0.xlsx",
 };
 
 const studycBioPortalLinks = {

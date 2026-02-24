@@ -102,7 +102,6 @@ const studyClinicalDataLinks = {
   ],
 };
 
-
 export async function openDoubleLink(url, fileName) {
   let urlContent = await fetch(url);
   if (urlContent.ok) {

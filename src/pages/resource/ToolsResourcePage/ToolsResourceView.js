@@ -236,6 +236,7 @@ const ToolsBody = styled.div`
             font-weight: 700;
             text-decoration: underline;
             text-underline-position: under;
+            line-break: anywhere;
         }
 
         h4 {
@@ -246,9 +247,17 @@ const ToolsBody = styled.div`
             letter-spacing: 0.02em;
         }
 
+        ul {
+            padding-left: 30px;
+        }
+
         .link {
             padding-right: 20px;
             background: url(${exportIconBlue}) right center no-repeat;
+        }
+
+        &.nestedContent {
+            margin-left: 20px;
         }
     }
 
@@ -335,6 +344,14 @@ const ToolsBody = styled.div`
 
         .mciContentContainer {
             margin-left: 0;
+
+            &.nestedContent {
+                margin-left: 0;
+            }
+        }
+
+        .mciSubtitle {
+            margin-left: 0;
         }
     }
 `;
@@ -344,6 +361,8 @@ const ToolsResourceView = ({data}) => {
     const [stickyNavStyle, setStickyNavStyle] = useState('navList');
     const toolsContent = data.toolsContent;
     const sectionList = useRef([]);
+    // Check if any item has a list property to determine structure type
+    const hasNestedStructure = toolsContent && toolsContent.some(item => item.list && Array.isArray(item.list));
     sectionList.current = toolsContent.map((element, i) => {
         return sectionList.current[i] || createRef()
     });
@@ -411,6 +430,25 @@ const ToolsResourceView = ({data}) => {
                         {
                             toolsContent && toolsContent.map((toolsItem, topicid) => {
                                 const topickey = `topic_${topicid}`;
+                                // Handle nested structure (with list)
+                                if (hasNestedStructure && toolsItem.list && Array.isArray(toolsItem.list)) {
+                                    return (
+                                        <>
+                                            <div name={toolsItem.id} className={selectedNavTitle === toolsItem.id ? 'navTopicItem selected' : 'navTopicItem'} key={topickey} onClick={handleClickEvent}>{toolsItem.topic}</div>
+                                            <div>
+                                                {
+                                                    toolsItem.list.map((listItem, idx) => {
+                                                        const listItemKey = `listItem_${topicid}_${idx}`;
+                                                        return (
+                                                            <div name={listItem.id} className={selectedNavTitle === listItem.id ? 'navTopicItem selected subtitle' : 'navTopicItem subtitle'} key={listItemKey} onClick={handleClickEvent}>{listItem.subtopic}</div>
+                                                        )
+                                                    })
+                                                }
+                                            </div>
+                                        </>
+                                    )
+                                }
+                                // Handle flat structure (without list)
                                 if (toolsItem.topic) {
                                     return (
                                         <div name={toolsItem.id} className={selectedNavTitle === toolsItem.id ? 'navTopicItem selected' : 'navTopicItem'} key={topickey} onClick={handleClickEvent}>{toolsItem.topic}</div>
@@ -429,6 +467,31 @@ const ToolsResourceView = ({data}) => {
                         {
                             toolsContent && toolsContent.map((toolsItem, toolid) => {
                                 const toolkey = `federation_${toolid}`;
+                                // Handle nested structure (with list)
+                                if (hasNestedStructure && toolsItem.list && Array.isArray(toolsItem.list)) {
+                                    return (
+                                        <div key={toolkey}>
+                                            <div id={toolsItem.id} className='mciTitle'>{toolsItem.topic && toolsItem.topic}</div>
+                                            <div id={toolsItem.id} name={toolid} className='mciTitleMobile sectionCollapse' onClick={handleCollapseSection}>{toolsItem.topic && toolsItem.topic}</div>
+                                            <div className="mciSection mobileCollapse" ref={sectionList.current[toolid]}>
+                                                {
+                                                    toolsItem.list.map((listItem, idx) => {
+                                                        return (
+                                                            <>
+                                                                <div id={listItem.id} className='mciSubtitle'>{listItem.subtopic && listItem.subtopic}</div>
+                                                                <div className='mciContentContainer nestedContent'>
+                                                                    {listItem.content && ReactHtmlParser(listItem.content)}
+                                                                </div>
+                                                                {listItem.content && <div style={{height: '40px'}} />}
+                                                            </>
+                                                        )
+                                                    })
+                                                }
+                                            </div>
+                                        </div>
+                                    )
+                                }
+                                // Handle flat structure (without list)
                                 return (
                                     <div key={toolkey}>
                                         <div id={toolsItem.id} className='mciTitle'>{toolsItem.topic && toolsItem.topic}</div>

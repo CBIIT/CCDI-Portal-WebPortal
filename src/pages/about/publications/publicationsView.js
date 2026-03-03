@@ -1008,12 +1008,6 @@ const PublicationsView = ({classes, headerImg, bannerText, publicationsList}) =>
                 Publications that use data from the CCDI Data Ecosystem or reference CCDI, but were not directly funded by CCDI.
               </div>
             </div>
-            <div className='categoryDescription'>
-              <div className='categoryTitle'>CCDI Data:</div>
-              <div className='categoryText'>
-                Publications that use data from the CCDI Data Ecosystem or reference CCDI, but were not directly funded by CCDI.
-              </div>
-            </div>
           </div>
         </div>
       )}

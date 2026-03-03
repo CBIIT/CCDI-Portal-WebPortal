@@ -429,6 +429,7 @@ const LatestUpdate = ({newsList, srcList, releaseNotesList, altList}) => {
 
     const nextItem = () => {
         const list = document.getElementById("latestList");
+        if (!list || !list.firstChild) return;
         const firstitem = list.firstChild;
         list.removeChild(firstitem);
         list.appendChild(firstitem);
@@ -443,6 +444,7 @@ const LatestUpdate = ({newsList, srcList, releaseNotesList, altList}) => {
 
     const prevItem = () => {
       const list = document.getElementById("latestList");
+      if (!list || !list.lastChild) return;
       const lastitem = list.lastChild;
       list.removeChild(lastitem);
       list.insertBefore(lastitem, list.firstChild);

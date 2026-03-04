@@ -425,6 +425,18 @@ const MCIResourceBody = styled.div`
         display: none;
     }
 
+    .ImgCaption {
+        color: #000;
+        // text-align: center;
+        font-family: Inter;
+        font-size: 14px;
+        font-style: italic;
+        font-weight: 500;
+        line-height: 22px; /* 157.143% */
+        letter-spacing: -0.28px;
+        padding: 10px 35px;
+    }
+
     .MapMobileContainer {
         display: none;
     }
@@ -674,6 +686,7 @@ const MCIResourceView = ({data}) => {
                                                             <>
                                                                 <img className="ecosystemImg" src={data.MCI_CCDI_Data_Ecosystem || ccdiDataEcosystemImg} alt="Infographic depicting the MCI assays and data types, and the data flow to patients, providers, and the CCDI Data Ecosystem"/>
                                                                 <img className="ecosystemImgMobile" src={data.MCI_CCDI_Data_Ecosystem_Mobile || ccdiDataEcosystemMobileImg} alt="Infographic depicting the MCI assays and data types, and the data flow to patients, providers, and the CCDI Data Ecosystem"/>
+                                                                <div className='ImgCaption'>{data.MCI_Workflow_Diagram_Caption}</div>
                                                                 <h3 style={{ marginTop: '24px' }}>Community Tools and Scripts</h3>
                                                                 <p>Convert COG-formatted JSON files to TSV format with CCDI’s MCI_JSON2TSV tool <a href="https://github.com/CBIIT/ChildhoodCancerDataInitiative-MCI_JSON2TSV" target='blank' rel="noopener noreferrer">here</a>.</p>
                                                             </>

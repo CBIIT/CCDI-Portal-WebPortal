@@ -109,6 +109,11 @@ export const navbarSublists = {
     link: 'https://nccrdataplatform.ccdi.cancer.gov/home',
     className: 'navMobileSubItem',
   },
+  {
+    name:'Pediatric Molecular Target List',
+    link: '/PMTL',
+    className: 'navMobileSubItem',
+  },
   // {
   //   name:'Cancer Genomics Cloud',
   //   link: 'https://www.cancergenomicscloud.org',

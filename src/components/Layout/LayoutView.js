@@ -15,6 +15,7 @@ import Inventory from '../../pages/inventory/inventoryController';
 import Cart from '../../pages/cart/cartController';
 import ScrollButton from '../ScrollButton/ScrollButtonView';
 import MCIResourceView from '../../pages/resource/MCIResourcePage/MCIResourceController'
+import PMTLResourceView from '../../pages/resource/PMTLResourcePage/PMTLResourceController';
 import FederationResourceView from "../../pages/resource/FederationResourcePage/FederationResourceController";
 import FederationDataModelNavigator from "../../pages/resource/FederationDMN/FederationDMN";
 import CPIResourceView from "../../pages/resource/CPIResourcePage/CPIResourceController";
@@ -45,6 +46,7 @@ const Layout = () => {
           <Route path="/explore" element={<Inventory />} />
           <Route path="/fileCentricCart" element={<Cart />} />
           <Route path="/MCI" element={<MCIResourceView />} />
+          <Route path="/PMTL" element={<PMTLResourceView />} />
           <Route path="/data-federation-resource" element={<FederationResourceView/>} />
           <Route path="/data-federation-data-model" element={<FederationDataModelNavigator />} />
           <Route path="/data-usage-policies" element={<DataUsagePoliciesView />} />

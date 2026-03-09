@@ -198,7 +198,7 @@ const DropdownContainer = styled.div`
       background: #1F4671;
       display: grid;
       grid-template-columns: 25% 25% 25% 25%;
-      padding: 32px 33px 0 33px;
+      padding: 32px 16px 0 16px;
     }
 
     .dropdownItem {
@@ -211,6 +211,7 @@ const DropdownContainer = styled.div`
       line-height: 110%;
       color: #FFFFFF;
       text-decoration: none;
+      max-width: 344px;
   }
 
   .dropdownItem:hover {

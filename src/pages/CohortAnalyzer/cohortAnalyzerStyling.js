@@ -200,13 +200,12 @@ export const useStyle = makeStyles((theme) => ({
         display: 'flex',
         alignItems: 'flex-end',
         justifyContent: 'flex-end',
-        width: '90%',
+        // width: '90%',
         paddingBottom: 10,
-        borderTop: '1.02px #8A7F7C solid'
     },
     rightSideAnalyzer: {
         width: 1327,
-        height: 1149,
+        height: '100%',
         borderRadius: '35px',
         border: '4px solid #4E8191',
         margin: 100,
@@ -215,6 +214,7 @@ export const useStyle = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        overflowX: 'hidden',
         overflowY: 'hidden'
     },
     rightSideAnalyzerHeader: {
@@ -252,6 +252,13 @@ export const useStyle = makeStyles((theme) => ({
             textAlign: 'left',
             color: '#8A7F7C'
         }
+    },
+    rightSideAnalyzerFooter: {
+        width: '90%',
+        border: '1px solid #8B98AF',
+        borderRadius: '14px',
+        marginBottom: '20px',
+        overflow: 'hidden',
     },
     cohortChildContent: {
         width: '95%', display: 'flex',
@@ -320,10 +327,9 @@ export const useStyle = makeStyles((theme) => ({
         }
     },
     rightSideTableContainer: {
-        width: '90%',
-        height: 540,
+        minHeight: 500,
         overflowY: 'scroll',
-        borderTop: "3.07px #8A7F7C solid",
+        borderTop: "2px #8A7F7C solid",
         '&::-webkit-scrollbar': {
             width: "6px"
         },

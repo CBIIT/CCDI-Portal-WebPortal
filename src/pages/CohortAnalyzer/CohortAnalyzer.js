@@ -687,37 +687,39 @@ export const CohortAnalyzer = () => {
                         }
 
                     </div>
-                    <div className={classes.cohortCountSection}>
+                    <div className={classes.rightSideAnalyzerFooter}>
+                        <div className={classes.cohortCountSection}>
 
-                        <div style={{ display: 'flex', justifyContent: 'space-evenly', width: '45%' }}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                <button onClick={() => handleClick()} className={(selectedCohortSection.length === 0 || rowData.length === 0) ? classes.createCohortOpacity : classes.createCohort} >CREATE NEW COHORT</button>
-                                <ToolTip title={"Click to create a new cohort based on these analysis results."} arrow placement="top">
-                                    <div
-                                        style={{ textAlign: 'right', marginLeft: 5, marginRight: 10 }}
-                                    >
-                                        <img src={questionIcon} alt="question-icon" width={10} style={{ fontSize: 10, position: 'relative', top: -5, left: -3 }} />
-                                    </div>
-                                </ToolTip>
+                            <div style={{ display: 'flex', justifyContent: 'space-evenly', paddingRight: '15px'}}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                    <button onClick={() => handleClick()} className={(selectedCohortSection.length === 0 || rowData.length === 0) ? classes.createCohortOpacity : classes.createCohort} >CREATE NEW COHORT</button>
+                                    <ToolTip title={"Click to create a new cohort based on these analysis results."} arrow placement="top">
+                                        <div
+                                            style={{ textAlign: 'right', marginLeft: 5, marginRight: 10 }}
+                                        >
+                                            <img src={questionIcon} alt="question-icon" width={10} style={{ fontSize: 10, position: 'relative', top: -5, left: -3 }} />
+                                        </div>
+                                    </ToolTip>
+                                </div>
+                                <DownloadSelectedCohort queryVariable={queryVariable} isSelected={selectedCohorts.length > 0 && rowData.length > 0} />
+
                             </div>
-                            <DownloadSelectedCohort queryVariable={queryVariable} isSelected={selectedCohorts.length > 0 && rowData.length > 0} />
-
                         </div>
-                    </div>
-                    <div className={classes.rightSideTableContainer}>
+                        <div className={classes.rightSideTableContainer}>
 
-                        {refershTableContent &&
+                            {refershTableContent &&
 
-                            <TableView
-                                initState={refershInit ? initTblState : initTblState}
-                                themeConfig={themeConfig}
-                                tblRows={rowData}
-                                queryVariables={queryVariable}
-                                server={false}
-                                totalRowCount={rowData.length}
-                                activeTab={"Participant"}
-                            />
-                        }
+                                <TableView
+                                    initState={refershInit ? initTblState : initTblState}
+                                    themeConfig={themeConfig}
+                                    tblRows={rowData}
+                                    queryVariables={queryVariable}
+                                    server={false}
+                                    totalRowCount={rowData.length}
+                                    activeTab={"Participant"}
+                                />
+                            }
+                        </div>
                     </div>
                 </div>
             </div>

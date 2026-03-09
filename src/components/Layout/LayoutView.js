@@ -26,7 +26,7 @@ import OverlayWindow from '../OverlayWindow/OverlayWindow';
 import CohortAnalyzerController  from "../../pages/CohortAnalyzer/CohortAnalyzerController";
 import ToolsResourceView from "../../pages/resource/ToolsResourcePage/ToolsResourceController";
 import CCDIEventAnnouncementsResourceView from "../../pages/resource/CCDIEventAnnouncementsResourcePage/CCDIEventAnnouncementsResourceController";
-// import RareCancerResourceView from "../../pages/resource/RareCancerResourcePage/RareCancerResourceController";
+import RareCancerResourceView from "../../pages/resource/RareCancerResourcePage/RareCancerResourceController";
 // import NewsDetail from '../../pages/news/newsDetailView';
 
 const Layout = () => {
@@ -52,7 +52,7 @@ const Layout = () => {
           <Route path="/publications" element={<PublicationsView />} />
           <Route path="/tools" element={<ToolsResourceView />} />
           <Route path="/ccdi-events-announcements" element={<CCDIEventAnnouncementsResourceView />} />
-          {/* <Route path="/pediatric-adolescent-and-young-adult-rare-cancer-study" element={<RareCancerResourceView/>} /> */}
+          <Route path="/pediatric-adolescent-and-young-adult-rare-cancer-study" element={<RareCancerResourceView/>} />
           <Route path="/release-notes" element={<ReleaseNotesPageView />} />
           <Route path="/cohortAnalyzer" element={<CohortAnalyzerController />} />
           <Route path="/studies" >

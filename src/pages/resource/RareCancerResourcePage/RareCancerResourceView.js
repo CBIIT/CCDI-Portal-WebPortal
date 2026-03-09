@@ -50,7 +50,7 @@ const ResourceContainer = styled.div`
     .resourceHeaderBackground {
         width: 100%;
         height: 214px;
-        background-image: url(${headerImg});
+        background-image: url(${props => props.headerImg || headerImg});
         background-repeat:no-repeat;
         background-position:center;
     }
@@ -494,7 +494,7 @@ const RareCancerResourceView = ({data}) => {
     }
 
     return (
-        <ResourceContainer>
+        <ResourceContainer headerImg={data.RCI_Header}>
             <div className='resourceBreadcrumbContainer'>
                 <div className='resourceBreadcrumb'>
                     <NavLink className="breadcrumbLink" to='/'>Home</NavLink>
@@ -543,7 +543,7 @@ const RareCancerResourceView = ({data}) => {
                     <div className='contentList'>
                         {data.rareCancerIntroText && <div className='introContainer'>{ReactHtmlParser(data.rareCancerIntroText)}</div>}
                         <div style={{ justifyContent: 'center', display: 'flex'}}>
-                            <img className="introImg" src={introImg} alt="RCI img"/>
+                            <img className="introImg" src={data.RCI_Data_Flow_Chart_URL || introImg} alt="RCI data flow" />
                         </div>
                         {
                             MCIContent && MCIContent.map((mci, mciidx) => {

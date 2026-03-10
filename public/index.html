@@ -52,6 +52,18 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+  <script>
+    window.downloadContactForm = function (e) {
+      e.preventDefault();
+      const link = document.createElement('a');
+      link.href = "https://github.com/CBIIT/ccdi-ods-content/blob/main/pages/documents/data-sharing-champions/Childhood_Cancer_Data_Intiative.pdf";
+      //link.href = '/RCI_questionnaire_form_20260309.pdf';
+      link.download = 'rare-cancer-study_contact.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    };
+  </script>
   <style type="text/css">
     body {
       padding-right: 0px;

@@ -129,11 +129,11 @@ export const navbarSublists = {
     link: '/tools',
     className: 'navMobileSubItem',
   },
-  // {
-  //   name:'CCDI Pediatric, Adolescent, and Young Adult Rare Cancer Study',
-  //   link: '/pediatric-adolescent-and-young-adult-rare-cancer-study',
-  //   className: 'navMobileSubItem',
-  // },
+  {
+    name:'CCDI Pediatric, Adolescent, and Young Adult Rare Cancer Study',
+    link: '/pediatric-adolescent-and-young-adult-rare-cancer-study',
+    className: 'navMobileSubItem',
+  },
   ],
   "About": [
     {

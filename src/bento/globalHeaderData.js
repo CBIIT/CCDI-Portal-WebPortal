@@ -111,7 +111,7 @@ export const navbarSublists = {
   },
   {
     name:'Pediatric Molecular Target List',
-    link: '/PMTL',
+    link: '/pmtl',
     className: 'navMobileSubItem',
   },
   // {

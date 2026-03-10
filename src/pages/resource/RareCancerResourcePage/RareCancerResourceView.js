@@ -429,6 +429,74 @@ const ResourceBody = styled.div`
     }
 `;
 
+const DOWNLOAD_CONFIG = {
+    url: 'https://raw.githubusercontent.com/CBIIT/CCDI_Hub_Assets/main/PDF/Resources/RCI/rare-cancer-study_contact.pdf',
+    filename: 'Pediatric_Adolescent_and_Young_Adult_Rare_Cancer_Study_Data_Access_User_Guide.pdf',
+};
+
+async function handleContactFormDownload(e) {
+  e.preventDefault();
+  const { url, filename } = DOWNLOAD_CONFIG;
+  const downloadUrl = url
+
+  const isSameOrigin = (targetUrl) => {
+    try {
+      return new URL(targetUrl, window.location.origin).origin === window.location.origin;
+    } catch {
+      return true; // relative path
+    }
+  };
+
+  if (isSameOrigin(downloadUrl)) {
+    const link = document.createElement('a');
+    link.href = downloadUrl;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    return;
+  }
+
+  try {
+    const res = await fetch(downloadUrl, { mode: 'cors' });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const blob = await res.blob();
+    const blobUrl = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = blobUrl;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(blobUrl);
+  } catch (err) {
+    console.error('Download failed:', err);
+    window.open(downloadUrl, '_blank');
+  }
+}
+
+function ResourceContent({ htmlContent }) {
+  const containerRef = useRef(null);
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+    const links = container.querySelectorAll('[data-action="download-contact-form"]');
+    links.forEach((el) => {
+      el.addEventListener('click', handleContactFormDownload);
+    });
+    return () => {
+      links.forEach((el) => {
+        el.removeEventListener('click', handleContactFormDownload);
+      });
+    };
+  }, [htmlContent]);
+  return (
+    <div ref={containerRef}>
+      {ReactHtmlParser(htmlContent)}
+    </div>
+  );
+}
+
 const RareCancerResourceView = ({data}) => {
     const [selectedNavTitle, setSelectedNavTitle] = useState('');
     const [stickyNavStyle, setStickyNavStyle] = useState('navList');
@@ -541,7 +609,7 @@ const RareCancerResourceView = ({data}) => {
                 </div>
                 <div className='contentSection'>
                     <div className='contentList'>
-                        {data.rareCancerIntroText && <div className='introContainer'>{ReactHtmlParser(data.rareCancerIntroText)}</div>}
+                        {data.rareCancerIntroText && <div className='introContainer'><ResourceContent htmlContent={data.rareCancerIntroText} /></div>}
                         <div style={{ justifyContent: 'center', display: 'flex'}}>
                             <img className="introImg" src={data.RCI_Data_Flow_Chart_URL || introImg} alt="RCI data flow" />
                         </div>
@@ -559,7 +627,7 @@ const RareCancerResourceView = ({data}) => {
                                                     <>
                                                         <div id={mciItem.id} className='mciSubtitle'>{mciItem.subtopic && mciItem.subtopic}</div>
                                                         <div className='mciContentContainer'>
-                                                            {mciItem.content && ReactHtmlParser(mciItem.content)}
+                                                            {mciItem.content && <ResourceContent htmlContent={mciItem.content} />}
                                                         </div>
                                                         {mciItem.content && <div style={{height: '40px'}} />}
                                                     </>

@@ -430,15 +430,15 @@ const ResourceBody = styled.div`
     }
 `;
 
-const DOWNLOAD_CONFIG = {
-    url: 'https://raw.githubusercontent.com/CBIIT/CCDI_Hub_Assets/main/PDF/Resources/RCI/rare-cancer-study_contact.pdf',
-    filename: 'Pediatric_Adolescent_and_Young_Adult_Rare_Cancer_Study_Data_Access_User_Guide.pdf',
+const DEFAULT_DOWNLOAD_CONFIG = {
+  url: 'https://raw.githubusercontent.com/CBIIT/CCDI_Hub_Assets/main/PDF/Resources/RCI/rare-cancer-study_contact.pdf',
+  filename: 'Pediatric_Adolescent_and_Young_Adult_Rare_Cancer_Study_Data_Access_User_Guide.pdf',
 };
 
-async function handleContactFormDownload(e) {
+async function handleContactFormDownload(e, config) {
   e.preventDefault();
-  const { url, filename } = DOWNLOAD_CONFIG;
-  const downloadUrl = url
+  const { url, filename } = config && config.url ? config : DEFAULT_DOWNLOAD_CONFIG;
+  const downloadUrl = url;
 
   const isSameOrigin = (targetUrl) => {
     try {
@@ -476,21 +476,23 @@ async function handleContactFormDownload(e) {
   }
 }
 
-function ResourceContent({ htmlContent }) {
+function ResourceContent({ htmlContent, downloadConfig }) {
   const containerRef = useRef(null);
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
+    const config = downloadConfig || DEFAULT_DOWNLOAD_CONFIG;
+    const handler = (e) => handleContactFormDownload(e, config);
     const links = container.querySelectorAll('[data-action="download-contact-form"]');
     links.forEach((el) => {
-      el.addEventListener('click', handleContactFormDownload);
+      el.addEventListener('click', handler);
     });
     return () => {
       links.forEach((el) => {
-        el.removeEventListener('click', handleContactFormDownload);
+        el.removeEventListener('click', handler);
       });
     };
-  }, [htmlContent]);
+  }, [htmlContent, downloadConfig]);
   return (
     <div ref={containerRef}>
       {ReactHtmlParser(htmlContent)}
@@ -546,13 +548,11 @@ const RareCancerResourceView = ({data}) => {
 
     // Scroll to hash anchor when data is loaded (YAML is async)
     useEffect(() => {
-        const hash = location.hash ? location.hash.slice(1) : null;
-        console.log('hash', hash);
+        const hash = location.hash ? location.hash.slice(1).toUpperCase() : null;
         if (!hash || !MCIContent) return;
 
         const scrollToAnchor = () => {
-            const element = document.getElementById(hash);
-            console.log('element', element);    
+            const element = document.getElementById(hash);  
             if (element) {
                 setSelectedNavTitle(hash);
                 window.scrollTo({
@@ -563,7 +563,6 @@ const RareCancerResourceView = ({data}) => {
         };
 
         scrollToAnchor();
-        console.log('selectedNavTitle', selectedNavTitle);
         // Retry after a short delay in case DOM hasn't finished painting
         const timer = setTimeout(scrollToAnchor, 1000);
         return () => clearTimeout(timer);
@@ -639,7 +638,7 @@ const RareCancerResourceView = ({data}) => {
                 </div>
                 <div className='contentSection'>
                     <div className='contentList'>
-                        {data.rareCancerIntroText && <div className='introContainer'><ResourceContent htmlContent={data.rareCancerIntroText} /></div>}
+                        {data.rareCancerIntroText && <div className='introContainer'><ResourceContent htmlContent={data.rareCancerIntroText} downloadConfig={data.RCI_DOWNLOAD_CONFIG} /></div>}
                         <div style={{ justifyContent: 'center', display: 'flex'}}>
                             <img className="introImg" src={data.RCI_Data_Flow_Chart_URL || introImg} alt="RCI data flow" />
                         </div>
@@ -657,7 +656,7 @@ const RareCancerResourceView = ({data}) => {
                                                     <>
                                                         <div id={mciItem.id} className='mciSubtitle'>{mciItem.subtopic && mciItem.subtopic}</div>
                                                         <div className='mciContentContainer'>
-                                                            {mciItem.content && <ResourceContent htmlContent={mciItem.content} />}
+                                                            {mciItem.content && <ResourceContent htmlContent={mciItem.content} downloadConfig={data.RCI_DOWNLOAD_CONFIG} />}
                                                         </div>
                                                         {mciItem.content && <div style={{height: '40px'}} />}
                                                     </>

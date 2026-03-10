@@ -432,7 +432,7 @@ const ResourceBody = styled.div`
 
 const DEFAULT_DOWNLOAD_CONFIG = {
   url: 'https://raw.githubusercontent.com/CBIIT/CCDI_Hub_Assets/main/PDF/Resources/RCI/rare-cancer-study_contact.pdf',
-  filename: 'Pediatric_Adolescent_and_Young_Adult_Rare_Cancer_Study_Data_Access_User_Guide.pdf',
+  filename: 'rare-cancer-study_contact.pdf',
 };
 
 async function handleContactFormDownload(e, config) {

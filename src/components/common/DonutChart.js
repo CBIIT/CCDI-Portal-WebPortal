@@ -48,7 +48,7 @@ const DonutChart = ({
                     dy="0"
                     textAnchor="middle"
                     fill={textColor}
-                    fontSize="14px"
+                    fontSize="16px"
                     fontWeight="700"
                     fontFamily="Nunito"
                   >
@@ -60,7 +60,7 @@ const DonutChart = ({
                     dy="0"
                     textAnchor="middle"
                     fill={textColor}
-                    fontSize="14px"
+                    fontSize="16px"
                     fontWeight="400"
                     fontFamily="Nunito"
                   >
@@ -72,9 +72,9 @@ const DonutChart = ({
                     dy="12"
                     textAnchor="middle"
                     fill={textColor}
-                    fontSize="19px"
-                    fontWeight="500"
-                    fontFamily="Nunito"
+                    fontSize="21px"
+                    fontWeight="400"
+                    fontFamily="Poppins"
                   >
                       {payload.name.length > 20 ? <title>{payload.name}</title> : null}
                       {payload.name.length > 20 ? `${payload.name.substring(0, 20)}...` : payload.name}

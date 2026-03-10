@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, createRef } from 'react';
 import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
 import ReactHtmlParser from 'html-react-parser';
 import { NavLink } from 'react-router-dom';
 // import { MCIContent, introText } from '../../../bento/mciData';
@@ -501,6 +502,7 @@ const RareCancerResourceView = ({data}) => {
     const [selectedNavTitle, setSelectedNavTitle] = useState('');
     const [stickyNavStyle, setStickyNavStyle] = useState('navList');
     const sectionList = useRef([]);
+    const location = useLocation();
     const MCIContent = data.rareCancerContent;
     if (MCIContent) {
         sectionList.current = MCIContent.map((element, i) => {
@@ -532,12 +534,40 @@ const RareCancerResourceView = ({data}) => {
     }
 
     useEffect(() => {
-        window.scrollTo(0, 0);
+        const hash = location.hash ? location.hash.slice(1) : null;
+        if (!hash) {
+            window.scrollTo(0, 0);
+        }
         document.addEventListener("scroll", handleScroll);
         return () => {
             document.removeEventListener("scroll", handleScroll);
         };
-    }, [])
+    }, []);
+
+    // Scroll to hash anchor when data is loaded (YAML is async)
+    useEffect(() => {
+        const hash = location.hash ? location.hash.slice(1) : null;
+        console.log('hash', hash);
+        if (!hash || !MCIContent) return;
+
+        const scrollToAnchor = () => {
+            const element = document.getElementById(hash);
+            console.log('element', element);    
+            if (element) {
+                setSelectedNavTitle(hash);
+                window.scrollTo({
+                    top: element.offsetTop - 55,
+                    behavior: 'smooth'
+                });
+            }
+        };
+
+        scrollToAnchor();
+        console.log('selectedNavTitle', selectedNavTitle);
+        // Retry after a short delay in case DOM hasn't finished painting
+        const timer = setTimeout(scrollToAnchor, 1000);
+        return () => clearTimeout(timer);
+    }, [location.hash, MCIContent]);
 
     const handleClickEvent = (event) => {
         const id = event.target.getAttribute('name');

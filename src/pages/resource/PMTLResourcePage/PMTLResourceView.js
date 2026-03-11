@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import ReactHtmlParser from 'html-react-parser';
 import { NavLink } from 'react-router-dom';
 // import { MCIContent, introText } from '../../../bento/mciData';
-import headerImg from '../../../assets/resources/MCI_header_white.png';
-import headerMobileImg from '../../../assets/resources/MCI_header_white_mobile.png';
+import headerImg from '../../../assets/resources/PMTL_header.png';
+import headerMobileImg from '../../../assets/resources/PMTL_header.png';
 import exportIcon from '../../../assets/resources/Explore_Icon.svg';
 import exportIconBlue from '../../../assets/icons/Export_Icon.svg';
 import closeIcon from '../../../assets/icons/Close_Icon.svg';
@@ -94,7 +94,7 @@ const PMTLResourceContainer = styled.div`
         // width: 1420px;
         margin: 0 auto;
         padding: 150px 0 0 75px;
-        color: #19676D;
+        color: #ffffff;
         font-family: Poppins;
         font-size: 40px;
         font-weight: 400;
@@ -594,7 +594,7 @@ const PMTLResourceView = ({data}) => {
             </div>
             <div className='resourceTitleContainer'>
                 <div className='resourceTitle'>
-                    <div className='resourceTitleText'>Pediatric, Adolescent, and Young Adult Rare Cancer Study</div>
+                    <div className='resourceTitleText'>Pediatric Molecular Target Lists</div>
                     {/* <div className='goToSiteButton'>
                         <a className='goToSiteText' href="https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs002790" target="_blank" rel="noopener noreferrer">Request Access (dbGaP)</a>
                     </div> */}

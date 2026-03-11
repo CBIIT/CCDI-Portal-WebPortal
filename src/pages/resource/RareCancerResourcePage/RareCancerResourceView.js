@@ -85,7 +85,6 @@ const ResourceContainer = styled.div`
     .resourceTitleText {
         padding: 15px 0;
         padding-left: 75px;
-        max-width: 640px;
     }
 
     .goToSiteButton {
@@ -145,7 +144,6 @@ const ResourceContainer = styled.div`
 
         .resourceTitleText {
             padding-left: 16px;
-            max-width: 600px;
         }
 
         .goToSiteButton {
@@ -605,9 +603,6 @@ const RareCancerResourceView = ({data}) => {
             <div className='resourceTitleContainer'>
                 <div className='resourceTitle'>
                     <div className='resourceTitleText'>Pediatric, Adolescent, and Young Adult Rare Cancer Study</div>
-                    <div className='goToSiteButton'>
-                        <a className='goToSiteText' href="https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs002790" target="_blank" rel="noopener noreferrer">Request Access (dbGaP)</a>
-                    </div>
                 </div>
             </div>
             <ResourceBody id='MCIBody'>

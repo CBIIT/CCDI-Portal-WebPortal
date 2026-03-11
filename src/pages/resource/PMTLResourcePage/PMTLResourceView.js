@@ -594,7 +594,7 @@ const PMTLResourceView = ({data}) => {
             </div>
             <div className='resourceTitleContainer'>
                 <div className='resourceTitle'>
-                    <div className='resourceTitleText'>Pediatric, Adolescent, and Young Adult Rare Cancer Study</div>
+                    <div className='resourceTitleText'>Pediatric Molecular Target Lists</div>
                     {/* <div className='goToSiteButton'>
                         <a className='goToSiteText' href="https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs002790" target="_blank" rel="noopener noreferrer">Request Access (dbGaP)</a>
                     </div> */}

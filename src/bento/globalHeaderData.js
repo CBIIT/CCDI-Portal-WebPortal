@@ -110,7 +110,7 @@ export const navbarSublists = {
     className: 'navMobileSubItem',
   },
   {
-    name:'Pediatric Molecular Target List',
+    name:'Pediatric Molecular Target Lists',
     link: '/PMTL',
     className: 'navMobileSubItem',
   },

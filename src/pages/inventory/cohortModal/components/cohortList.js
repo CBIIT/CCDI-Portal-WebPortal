@@ -40,6 +40,9 @@ const CohortList = (props) => {
         return new Date(state[b].lastUpdated) - new Date(state[a].lastUpdated);
     });
 
+    // Check if the cohort limit has been reached
+    const isDuplicateDisabled = Object.keys(state).length >= 20;
+
     if (Object.keys(state).length === 0) {
         closeParentModal();
     }
@@ -87,7 +90,7 @@ const CohortList = (props) => {
             <div className={classes.cohortListSection}>
                 <div className={classes.cohortListHeading}>
                     <span>
-                        {listHeading} ({Object.keys(state).length})
+                        {listHeading} ({Object.keys(state).length}/20)
                     </span>
                     <span>
                         <img
@@ -142,12 +145,17 @@ const CohortList = (props) => {
                                     {state[cohort].cohortId}
                                 </span>
                                 <span className={classes.cohortListItemActions}>
-                                    <ToolTip title="Duplicate cohort" placement="top" arrow>
+                                    <ToolTip title={isDuplicateDisabled ? "Cohort limit reached" : "Duplicate Cohort"} placement="top" arrow>
                                         <Button
                                             className={classes.actionButton}
+                                            disabled={isDuplicateDisabled}
                                             onClick={(e) => {
                                                 e.stopPropagation();
-                                                handleDuplicateCohort(state[cohort].cohortId);
+                                                // Check if the cohort limit has been reached
+                                                if (!isDuplicateDisabled) {
+                                                    // Duplicate the cohort
+                                                    handleDuplicateCohort(state[cohort].cohortId);
+                                                }
                                             }}
                                         >
                                             <img
@@ -157,7 +165,7 @@ const CohortList = (props) => {
                                             />
                                         </Button>
                                     </ToolTip>
-                                    <ToolTip title="Delete cohort" placement="top-end" arrow>
+                                    <ToolTip title="Delete Cohort" placement="top-end" arrow>
                                         <Button
                                             className={classes.actionButton}
                                             onClick={(e) => {
@@ -266,7 +274,6 @@ const styles = () => ({
         '&:first-child': {
             borderTop: '1px solid #73C7BE',
         },
-        cursor: 'pointer',
     },
     cohortListItemText:{
         overflow: 'hidden',
@@ -300,6 +307,14 @@ const styles = () => ({
         padding: '4px',
         '&:hover': {
             backgroundColor: 'rgba(255, 255, 255, 0.1)',
+        },
+        '&:disabled': {
+            cursor: 'not-allowed !important',
+            opacity: 0.5,
+            pointerEvents: 'auto',
+            '& img': {
+                cursor: 'not-allowed !important',
+            },
         },
     },
 });

@@ -136,6 +136,10 @@ export const CohortModalGenerator = (uiConfig = DEFAULT_CONFIG) => {
 
     // Handle duplicating a cohort
     const handleDuplicateCohort = (cohortId) => {
+        // Check if the cohort limit has been reached
+        if (Object.keys(state).length >= 20) return;
+
+        // Get the cohort to duplicate
         const cohortToDuplicate = state[cohortId];
         if (!cohortToDuplicate) return;
 

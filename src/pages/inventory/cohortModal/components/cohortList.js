@@ -90,7 +90,7 @@ const CohortList = (props) => {
             <div className={classes.cohortListSection}>
                 <div className={classes.cohortListHeading}>
                     <span>
-                        {listHeading} ({Object.keys(state).length}/20)
+                        {listHeading} ({Object.keys(state).length})
                     </span>
                     <span>
                         <img
@@ -269,7 +269,7 @@ const styles = () => ({
         fontSize: 14,
         fontWeight: '300',
         lineHeight: '15px',
-        backgroundColor: '#4E8191',
+        backgroundColor: '#4B7B8B',
         borderBottom: '1px solid #73C7BE',
         '&:first-child': {
             borderTop: '1px solid #73C7BE',
@@ -300,17 +300,17 @@ const styles = () => ({
     cohortListItemActions: {
         display: 'flex',
         alignItems: 'center',
-        gap: '10px',
+        gap: '16px',
     },
     actionButton: {
         minWidth: 'auto',
-        padding: '4px',
+        padding: '0',
         '&:hover': {
             backgroundColor: 'rgba(255, 255, 255, 0.1)',
         },
         '&:disabled': {
             cursor: 'not-allowed !important',
-            opacity: 0.5,
+            opacity: 0.3,
             pointerEvents: 'auto',
             '& img': {
                 cursor: 'not-allowed !important',

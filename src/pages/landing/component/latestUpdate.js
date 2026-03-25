@@ -403,7 +403,7 @@ const LatestUpdate = ({newsList, srcList, releaseNotesList, altList}) => {
       const fullList = (newsList.concat(releaseNotesList)).sort((a,b) => {
         return new Date(a.date).getTime() - new Date(b.date).getTime();
       }).reverse();
-      const latestUpdateList = fullList.filter((item) => item.latestUpdate);
+      const latestUpdateList = fullList.filter((item) => item.latestUpdate).sort((a, b) => a.latestUpdateOrder - b.latestUpdateOrder);
       let newItemList = [latestUpdateList[2]]
       newItemList = newItemList.concat(latestUpdateList.slice(0,3));
       newItemList = newItemList.concat(latestUpdateList.slice(0,2));

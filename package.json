@@ -140,6 +140,8 @@
       "react-app-polyfill/jsdom"
     ],
     "testMatch": [
+      "<rootDir>/tests/**/*.test.{js,jsx,ts,tsx}",
+      "<rootDir>/tests/**/*.spec.{js,jsx,ts,tsx}",
       "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
       "<rootDir>/src/**/?(*.)(spec|test).{js,jsx,ts,tsx}"
     ],

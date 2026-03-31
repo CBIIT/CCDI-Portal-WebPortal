@@ -910,7 +910,7 @@ const LandingView = ({
       <HeroMobile />
       <StatsSection>
         <StatsContainer>
-          <StatsBox>
+          <StatsBox data-testid="landing-stats-section">
             <div className='leftbox' />
             <div className='rightbox' />
             <div className='borderTop' />

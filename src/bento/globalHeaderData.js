@@ -109,6 +109,11 @@ export const navbarSublists = {
     link: 'https://nccrdataplatform.ccdi.cancer.gov/home',
     className: 'navMobileSubItem',
   },
+  {
+    name:'Pediatric Molecular Target Lists',
+    link: '/pmtl',
+    className: 'navMobileSubItem',
+  },
   // {
   //   name:'Cancer Genomics Cloud',
   //   link: 'https://www.cancergenomicscloud.org',
@@ -124,11 +129,11 @@ export const navbarSublists = {
     link: '/tools',
     className: 'navMobileSubItem',
   },
-  // {
-  //   name:'CCDI Pediatric, Adolescent, and Young Adult Rare Cancer Study',
-  //   link: '/pediatric-adolescent-and-young-adult-rare-cancer-study',
-  //   className: 'navMobileSubItem',
-  // },
+  {
+    name:'CCDI Pediatric, Adolescent, and Young Adult Rare Cancer Study',
+    link: '/pediatric-adolescent-and-young-adult-rare-cancer-study',
+    className: 'navMobileSubItem',
+  },
   ],
   "About": [
     {

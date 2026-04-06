@@ -522,7 +522,7 @@ const useOutsideAlerter = (ref) => {
   }, [ref]);
 };
 
-const NewsView = ({classes, srcList, newsList, altList, releaseNotesList}) => {
+const NewsView = ({classes, srcList,newsList, altList, releaseNotesList}) => {
   // const getPageResults = (selectedTab, pageInfo) => {
   //   const resultList = getResultList(selectedTab);
   //   const allids = [];

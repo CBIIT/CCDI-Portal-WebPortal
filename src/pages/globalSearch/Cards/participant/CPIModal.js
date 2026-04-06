@@ -27,7 +27,6 @@ import styles from './ModalStyle';
 import HeaderCell from './CustomCell';
 import defaultTheme from './DefaultThemConfig';
 import questionIcon from '../../assets/Question_Icon.svg';
-import cartIcon from '../../assets/Cart_Icon.svg';
 import downloadIcon from '../../assets/download.svg';
 import { useNavigate } from 'react-router-dom';
 import AddFileButtonView from './ReduxAddFile';
@@ -206,28 +205,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-
-const tooltipContentAddAll = {
-  tooltipText: 'Click button to add all Hub files associated with this participant to the cart.',
-  icon: questionIcon,
-  alt: 'tooltipIcon',
-  Participants: 'Click button to add all files associated with the filtered row(s).',
-  arrow: true,
-  styles: {
-    border: '#03A383 1px solid',
-  },
-};
-
-const tooltipContent = {
-  tooltipText: 'Click button to add all selected files associated with this participant to the cart.',
-  icon: questionIcon,
-  alt: 'tooltipIcon',
-  Participants: 'Click button to add files associated with the selected row(s).',
-  arrow: true,
-  styles: {
-    border: '#03A383 1px solid',
-  },
-};
 
 const CustomTableContainer = (props) => {
   const { children, themeConfig, className } = props;

@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { CohortStateContext } from "../../components/CohortSelectorState/CohortStateContext";
 import { configColumn } from "../inventory/tabs/tableConfig/Column";
 import { TableView } from "@bento-core/paginated-table";
@@ -39,6 +40,7 @@ import styled from "styled-components";
 export const CohortAnalyzer = () => {
     const classes = useStyle();
     const { state, dispatch } = useContext(CohortStateContext);
+    const location = useLocation();
     const [selectedCohorts, setSelectedCohorts] = useState([]);
     const [queryVariable, setQueryVariable] = useState({});
     const [rowData, setRowData] = useState([]);
@@ -70,6 +72,21 @@ export const CohortAnalyzer = () => {
     const handleMouseLeave = () => {
         setHoveredCohort("");
     }
+
+    useEffect(() => {
+        if (location && location.state) {
+            const viewCohort = location.state.cohort;
+            if (viewCohort && viewCohort.cohortId && state[viewCohort.cohortId]) {
+                // Auto-select the cohort if it exists in the state
+                if (!selectedCohorts.includes(viewCohort.cohortId)) {
+                    setSelectedCohorts([viewCohort.cohortId]);
+                }
+                // Scroll to top of page
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+    }, [location]);
+
     const searchRef = useRef();
 
 
@@ -426,12 +443,12 @@ export const CohortAnalyzer = () => {
             // Remove duplicates by id
             const uniqueParticipantData = [];
             const seenIds = new Set();
-            for (const p of participantData) {
-                if (!seenIds.has(p.id)) {
-                    uniqueParticipantData.push(p);
-                    seenIds.add(p.id);
+            participantData.forEach((participant) => {
+                if (!seenIds.has(participant.id)) {
+                    uniqueParticipantData.push(participant);
+                    seenIds.add(participant.id);
                 }
-            }
+            });
 
             setCurrentCohortChanges(null);
             dispatch(onCreateNewCohort(
@@ -670,37 +687,39 @@ export const CohortAnalyzer = () => {
                         }
 
                     </div>
-                    <div className={classes.cohortCountSection}>
+                    <div className={classes.rightSideAnalyzerFooter}>
+                        <div className={classes.cohortCountSection}>
 
-                        <div style={{ display: 'flex', justifyContent: 'space-evenly', width: '45%' }}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                <button onClick={() => handleClick()} className={(selectedCohortSection.length === 0 || rowData.length === 0) ? classes.createCohortOpacity : classes.createCohort} >CREATE NEW COHORT</button>
-                                <ToolTip title={"Click to create a new cohort based on these analysis results."} arrow placement="top">
-                                    <div
-                                        style={{ textAlign: 'right', marginLeft: 5, marginRight: 10 }}
-                                    >
-                                        <img src={questionIcon} alt="question-icon" width={10} style={{ fontSize: 10, position: 'relative', top: -5, left: -3 }} />
-                                    </div>
-                                </ToolTip>
+                            <div style={{ display: 'flex', justifyContent: 'space-evenly', paddingRight: '15px'}}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                    <button onClick={() => handleClick()} className={(selectedCohortSection.length === 0 || rowData.length === 0) ? classes.createCohortOpacity : classes.createCohort} >CREATE NEW COHORT</button>
+                                    <ToolTip title={"Click to create a new cohort based on these analysis results."} arrow placement="top">
+                                        <div
+                                            style={{ textAlign: 'right', marginLeft: 5, marginRight: 10 }}
+                                        >
+                                            <img src={questionIcon} alt="question-icon" width={10} style={{ fontSize: 10, position: 'relative', top: -5, left: -3 }} />
+                                        </div>
+                                    </ToolTip>
+                                </div>
+                                <DownloadSelectedCohort queryVariable={queryVariable} isSelected={selectedCohorts.length > 0 && rowData.length > 0} />
+
                             </div>
-                            <DownloadSelectedCohort queryVariable={queryVariable} isSelected={selectedCohorts.length > 0 && rowData.length > 0} />
-
                         </div>
-                    </div>
-                    <div className={classes.rightSideTableContainer}>
+                        <div className={classes.rightSideTableContainer}>
 
-                        {refershTableContent &&
+                            {refershTableContent &&
 
-                            <TableView
-                                initState={refershInit ? initTblState : initTblState}
-                                themeConfig={themeConfig}
-                                tblRows={rowData}
-                                queryVariables={queryVariable}
-                                server={false}
-                                totalRowCount={rowData.length}
-                                activeTab={"Participant"}
-                            />
-                        }
+                                <TableView
+                                    initState={refershInit ? initTblState : initTblState}
+                                    themeConfig={themeConfig}
+                                    tblRows={rowData}
+                                    queryVariables={queryVariable}
+                                    server={false}
+                                    totalRowCount={rowData.length}
+                                    activeTab={"Participant"}
+                                />
+                            }
+                        </div>
                     </div>
                 </div>
             </div>

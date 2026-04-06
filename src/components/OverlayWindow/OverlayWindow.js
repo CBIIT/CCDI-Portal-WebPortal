@@ -24,11 +24,11 @@ const OverlayWindow = () => {
   const handleClose = () => {
     setOpen(false);
     setOverLayWindow(false);
-    sessionStorage.setItem('overlayLoad', 'true');
+    localStorage.setItem('overlayLoad', 'true');
   };
 
-  useEffect(() => {
-    if (!sessionStorage.length) {
+  useEffect(() => { 
+    if (!localStorage.getItem('overlayLoad')) {
       setOpen(true);
       setOverLayWindow(true);
     }

@@ -15,6 +15,7 @@ import Inventory from '../../pages/inventory/inventoryController';
 import Cart from '../../pages/cart/cartController';
 import ScrollButton from '../ScrollButton/ScrollButtonView';
 import MCIResourceView from '../../pages/resource/MCIResourcePage/MCIResourceController'
+import PMTLResourceView from '../../pages/resource/PMTLResourcePage/PMTLResourceController';
 import FederationResourceView from "../../pages/resource/FederationResourcePage/FederationResourceController";
 import FederationDataModelNavigator from "../../pages/resource/FederationDMN/FederationDMN";
 import CPIResourceView from "../../pages/resource/CPIResourcePage/CPIResourceController";
@@ -26,7 +27,7 @@ import OverlayWindow from '../OverlayWindow/OverlayWindow';
 import CohortAnalyzerController  from "../../pages/CohortAnalyzer/CohortAnalyzerController";
 import ToolsResourceView from "../../pages/resource/ToolsResourcePage/ToolsResourceController";
 import CCDIEventAnnouncementsResourceView from "../../pages/resource/CCDIEventAnnouncementsResourcePage/CCDIEventAnnouncementsResourceController";
-// import RareCancerResourceView from "../../pages/resource/RareCancerResourcePage/RareCancerResourceController";
+import RareCancerResourceView from "../../pages/resource/RareCancerResourcePage/RareCancerResourceController";
 // import NewsDetail from '../../pages/news/newsDetailView';
 
 const Layout = () => {
@@ -45,6 +46,7 @@ const Layout = () => {
           <Route path="/explore" element={<Inventory />} />
           <Route path="/fileCentricCart" element={<Cart />} />
           <Route path="/MCI" element={<MCIResourceView />} />
+          <Route path="/pmtl" element={<PMTLResourceView />} />
           <Route path="/data-federation-resource" element={<FederationResourceView/>} />
           <Route path="/data-federation-data-model" element={<FederationDataModelNavigator />} />
           <Route path="/data-usage-policies" element={<DataUsagePoliciesView />} />
@@ -52,7 +54,7 @@ const Layout = () => {
           <Route path="/publications" element={<PublicationsView />} />
           <Route path="/tools" element={<ToolsResourceView />} />
           <Route path="/ccdi-events-announcements" element={<CCDIEventAnnouncementsResourceView />} />
-          {/* <Route path="/pediatric-adolescent-and-young-adult-rare-cancer-study" element={<RareCancerResourceView/>} /> */}
+          <Route path="/pediatric-adolescent-and-young-adult-rare-cancer-study" element={<RareCancerResourceView/>} />
           <Route path="/release-notes" element={<ReleaseNotesPageView />} />
           <Route path="/cohortAnalyzer" element={<CohortAnalyzerController />} />
           <Route path="/studies" >

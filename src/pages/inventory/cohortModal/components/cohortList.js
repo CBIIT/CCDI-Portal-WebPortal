@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { withStyles } from '@material-ui/core';
+import { withStyles, Button } from '@material-ui/core';
+import ToolTip from '@bento-core/tool-tip';
 import TrashCanIconGray from '../../../../assets/icons/Trash_Can_Icon_Gray.svg';
 import TrashCanIconWhite from '../../../../assets/icons/Trash_Can_Icon_White.svg';
+import DuplicateIconWhite from '../../../../assets/icons/Duplicate_Icon_White.svg';
 import DEFAULT_CONFIG from '../config';
 import DeleteConfirmationModal from './deleteConfirmationModal';
 import { deletionTypes } from './deleteConfirmationModal';
@@ -23,6 +25,7 @@ const CohortList = (props) => {
         closeParentModal,
         handleDeleteCohort,
         handleDeleteAllCohorts,
+        handleDuplicateCohort,
         handleClearCurrentCohortChanges,
         state,
     } = props;
@@ -36,6 +39,9 @@ const CohortList = (props) => {
     const cohortOrderedList = Object.keys(state).sort((a, b) => {
         return new Date(state[b].lastUpdated) - new Date(state[a].lastUpdated);
     });
+
+    // Check if the cohort limit has been reached
+    const isDuplicateDisabled = Object.keys(state).length >= 20;
 
     if (Object.keys(state).length === 0) {
         closeParentModal();
@@ -138,20 +144,46 @@ const CohortList = (props) => {
                                 <span className={classes.cohortListItemText}>
                                     {state[cohort].cohortId}
                                 </span>
-                                <span>
-                                    <img
-                                        src={TrashCanIconWhite}
-                                        alt="delete cohort icon"
-                                        className={classes.whiteTrashCan}
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                            setDeleteModalProps({
-                                                handleDelete: () => handleDeleteCohort(state[cohort].cohortId),
-                                                deletionType: deletionTypes.DELETE_SINGLE_COHORT,
-                                            });
-                                            setShowDeleteConfirmation(true);
-                                        }}
-                                    />
+                                <span className={classes.cohortListItemActions}>
+                                    <ToolTip title={isDuplicateDisabled ? "Cohort limit reached" : "Duplicate Cohort"} placement="top" arrow>
+                                        <Button
+                                            className={classes.actionButton}
+                                            disabled={isDuplicateDisabled}
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                // Check if the cohort limit has been reached
+                                                if (!isDuplicateDisabled) {
+                                                    // Duplicate the cohort
+                                                    handleDuplicateCohort(state[cohort].cohortId);
+                                                }
+                                            }}
+                                        >
+                                            <img
+                                                src={DuplicateIconWhite}
+                                                alt="duplicate cohort icon"
+                                                className={classes.whiteDuplicateIcon}
+                                            />
+                                        </Button>
+                                    </ToolTip>
+                                    <ToolTip title="Delete Cohort" placement="top-end" arrow>
+                                        <Button
+                                            className={classes.actionButton}
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                setDeleteModalProps({
+                                                    handleDelete: () => handleDeleteCohort(state[cohort].cohortId),
+                                                    deletionType: deletionTypes.DELETE_SINGLE_COHORT,
+                                                });
+                                                setShowDeleteConfirmation(true);
+                                            }}
+                                        >
+                                            <img
+                                                src={TrashCanIconWhite}
+                                                alt="delete cohort icon"
+                                                className={classes.whiteTrashCan}
+                                            />
+                                        </Button>
+                                    </ToolTip>
                                 </span>
                             </div>
                         );
@@ -237,12 +269,11 @@ const styles = () => ({
         fontSize: 14,
         fontWeight: '300',
         lineHeight: '15px',
-        backgroundColor: '#4E8191',
+        backgroundColor: '#4B7B8B',
         borderBottom: '1px solid #73C7BE',
         '&:first-child': {
             borderTop: '1px solid #73C7BE',
         },
-        cursor: 'pointer',
     },
     cohortListItemText:{
         overflow: 'hidden',
@@ -257,6 +288,33 @@ const styles = () => ({
         width: 14,
         '&:hover': {
             cursor: 'pointer',
+        },
+    },
+    whiteDuplicateIcon: {
+        width: 14,
+        color: 'white',
+        '&:hover': {
+            cursor: 'pointer',
+        },
+    },
+    cohortListItemActions: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '16px',
+    },
+    actionButton: {
+        minWidth: 'auto',
+        padding: '0',
+        '&:hover': {
+            backgroundColor: 'rgba(255, 255, 255, 0.1)',
+        },
+        '&:disabled': {
+            cursor: 'not-allowed !important',
+            opacity: 0.3,
+            pointerEvents: 'auto',
+            '& img': {
+                cursor: 'not-allowed !important',
+            },
         },
     },
 });

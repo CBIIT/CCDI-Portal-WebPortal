@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, createRef } from 'react';
 import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
 import ReactHtmlParser from 'html-react-parser';
 import { NavLink } from 'react-router-dom';
 // import { MCIContent, introText } from '../../../bento/mciData';
@@ -50,7 +51,7 @@ const ResourceContainer = styled.div`
     .resourceHeaderBackground {
         width: 100%;
         height: 214px;
-        background-image: url(${headerImg});
+        background-image: url(${props => props.headerImg || headerImg});
         background-repeat:no-repeat;
         background-position:center;
     }
@@ -84,7 +85,6 @@ const ResourceContainer = styled.div`
     .resourceTitleText {
         padding: 15px 0;
         padding-left: 75px;
-        max-width: 640px;
     }
 
     .goToSiteButton {
@@ -144,7 +144,6 @@ const ResourceContainer = styled.div`
 
         .resourceTitleText {
             padding-left: 16px;
-            max-width: 600px;
         }
 
         .goToSiteButton {
@@ -429,10 +428,81 @@ const ResourceBody = styled.div`
     }
 `;
 
+const DEFAULT_DOWNLOAD_CONFIG = {
+  url: 'https://raw.githubusercontent.com/CBIIT/CCDI_Hub_Assets/main/PDF/Resources/RCI/rare-cancer-study_contact.pdf',
+  filename: 'rare-cancer-study_contact.pdf',
+};
+
+async function handleContactFormDownload(e, config) {
+  e.preventDefault();
+  const { url, filename } = config && config.url ? config : DEFAULT_DOWNLOAD_CONFIG;
+  const downloadUrl = url;
+
+  const isSameOrigin = (targetUrl) => {
+    try {
+      return new URL(targetUrl, window.location.origin).origin === window.location.origin;
+    } catch {
+      return true; // relative path
+    }
+  };
+
+  if (isSameOrigin(downloadUrl)) {
+    const link = document.createElement('a');
+    link.href = downloadUrl;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    return;
+  }
+
+  try {
+    const res = await fetch(downloadUrl, { mode: 'cors' });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const blob = await res.blob();
+    const blobUrl = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = blobUrl;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(blobUrl);
+  } catch (err) {
+    console.error('Download failed:', err);
+    window.open(downloadUrl, '_blank');
+  }
+}
+
+function ResourceContent({ htmlContent, downloadConfig }) {
+  const containerRef = useRef(null);
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+    const config = downloadConfig || DEFAULT_DOWNLOAD_CONFIG;
+    const handler = (e) => handleContactFormDownload(e, config);
+    const links = container.querySelectorAll('[data-action="download-contact-form"]');
+    links.forEach((el) => {
+      el.addEventListener('click', handler);
+    });
+    return () => {
+      links.forEach((el) => {
+        el.removeEventListener('click', handler);
+      });
+    };
+  }, [htmlContent, downloadConfig]);
+  return (
+    <div ref={containerRef}>
+      {ReactHtmlParser(htmlContent)}
+    </div>
+  );
+}
+
 const RareCancerResourceView = ({data}) => {
     const [selectedNavTitle, setSelectedNavTitle] = useState('');
     const [stickyNavStyle, setStickyNavStyle] = useState('navList');
     const sectionList = useRef([]);
+    const location = useLocation();
     const MCIContent = data.rareCancerContent;
     if (MCIContent) {
         sectionList.current = MCIContent.map((element, i) => {
@@ -464,12 +534,37 @@ const RareCancerResourceView = ({data}) => {
     }
 
     useEffect(() => {
-        window.scrollTo(0, 0);
+        const hash = location.hash ? location.hash.slice(1) : null;
+        if (!hash) {
+            window.scrollTo(0, 0);
+        }
         document.addEventListener("scroll", handleScroll);
         return () => {
             document.removeEventListener("scroll", handleScroll);
         };
-    }, [])
+    }, []);
+
+    // Scroll to hash anchor when data is loaded (YAML is async)
+    useEffect(() => {
+        const hash = location.hash ? location.hash.slice(1).toUpperCase() : null;
+        if (!hash || !MCIContent) return;
+
+        const scrollToAnchor = () => {
+            const element = document.getElementById(hash);  
+            if (element) {
+                setSelectedNavTitle(hash);
+                window.scrollTo({
+                    top: element.offsetTop - 55,
+                    behavior: 'smooth'
+                });
+            }
+        };
+
+        scrollToAnchor();
+        // Retry after a short delay in case DOM hasn't finished painting
+        const timer = setTimeout(scrollToAnchor, 1000);
+        return () => clearTimeout(timer);
+    }, [location.hash, MCIContent]);
 
     const handleClickEvent = (event) => {
         const id = event.target.getAttribute('name');
@@ -494,7 +589,7 @@ const RareCancerResourceView = ({data}) => {
     }
 
     return (
-        <ResourceContainer>
+        <ResourceContainer headerImg={data.RCI_Header}>
             <div className='resourceBreadcrumbContainer'>
                 <div className='resourceBreadcrumb'>
                     <NavLink className="breadcrumbLink" to='/'>Home</NavLink>
@@ -508,9 +603,6 @@ const RareCancerResourceView = ({data}) => {
             <div className='resourceTitleContainer'>
                 <div className='resourceTitle'>
                     <div className='resourceTitleText'>Pediatric, Adolescent, and Young Adult Rare Cancer Study</div>
-                    <div className='goToSiteButton'>
-                        <a className='goToSiteText' href="https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs002790" target="_blank" rel="noopener noreferrer">Request Access (dbGaP)</a>
-                    </div>
                 </div>
             </div>
             <ResourceBody id='MCIBody'>
@@ -541,9 +633,9 @@ const RareCancerResourceView = ({data}) => {
                 </div>
                 <div className='contentSection'>
                     <div className='contentList'>
-                        {data.rareCancerIntroText && <div className='introContainer'>{ReactHtmlParser(data.rareCancerIntroText)}</div>}
+                        {data.rareCancerIntroText && <div className='introContainer'><ResourceContent htmlContent={data.rareCancerIntroText} downloadConfig={data.RCI_DOWNLOAD_CONFIG} /></div>}
                         <div style={{ justifyContent: 'center', display: 'flex'}}>
-                            <img className="introImg" src={introImg} alt="RCI img"/>
+                            <img className="introImg" src={data.RCI_Data_Flow_Chart_URL || introImg} alt="RCI data flow" />
                         </div>
                         {
                             MCIContent && MCIContent.map((mci, mciidx) => {
@@ -559,7 +651,7 @@ const RareCancerResourceView = ({data}) => {
                                                     <>
                                                         <div id={mciItem.id} className='mciSubtitle'>{mciItem.subtopic && mciItem.subtopic}</div>
                                                         <div className='mciContentContainer'>
-                                                            {mciItem.content && ReactHtmlParser(mciItem.content)}
+                                                            {mciItem.content && <ResourceContent htmlContent={mciItem.content} downloadConfig={data.RCI_DOWNLOAD_CONFIG} />}
                                                         </div>
                                                         {mciItem.content && <div style={{height: '40px'}} />}
                                                     </>

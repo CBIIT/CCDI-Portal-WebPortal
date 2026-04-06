@@ -1,5 +1,7 @@
+import React from 'react';
 import gql from 'graphql-tag';
-import { cellTypes } from '@bento-core/table';
+import { cellTypes, headerTypes } from '@bento-core/table';
+import DataAvailabilityHeader from '../pages/studies/tableConfig/DataAvailabilityHeader';
 
 const studyDownloadLinks = {
   "phs000463": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs000463_CCDI_Study_Manifest_v3.1.0.xlsx",
@@ -42,6 +44,7 @@ const studyDownloadLinks = {
   "phs003215": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs003215_CCDI_Study_Manifest_v3.1.0.xlsx",
   "phs003432": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs003432_CCDI_Study_Manifest_v3.1.0.xlsx",
   "phs003519": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs003519_CCDI_Study_Manifest_v3.1.0.xlsx",
+  "phs003975": "https://d2xnga7irezzit.cloudfront.net/metadata_files/phs003975_CCDI_Study_Manifest_v3.1.0.xlsx",
 };
 
 const studycBioPortalLinks = {
@@ -60,6 +63,44 @@ const studycBioPortalLinks = {
   'phs002883': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=openpedcan_v15',
   'phs003432': 'https://cbioportal.ccdi.cancer.gov/study/summary?id=openpedcan_v15',
 };
+
+const studyClinicalDataLinks = {
+  phs000463: [
+    'https://d2l5jy2ao2mx5b.cloudfront.net/target/phs000463/TARGET_ALL_ClinicalData_Phase_I_20190325.xlsx',
+  ],
+  phs000464: [
+    'https://d2l5jy2ao2mx5b.cloudfront.net/target/phs000464/TARGET_ALL_ClinicalData_Phase_II_Discovery_20211118.xlsx',
+    'https://d2l5jy2ao2mx5b.cloudfront.net/target/phs000464/TARGET_ALL_ClinicalData_Phase_II_Validation_20211118.xlsx',
+    'https://d2l5jy2ao2mx5b.cloudfront.net/target/phs000464/TARGET_ALL_ClinicalData_Phase_III_20181213.xlsx',
+  ],
+  phs000465: [
+    'https://d2l5jy2ao2mx5b.cloudfront.net/target/phs000465/TARGET_AML_ClinicalData_Discovery_20211201.xlsx',
+    'https://d2l5jy2ao2mx5b.cloudfront.net/target/phs000465/TARGET_AML_ClinicalData_Validation_20211201.xlsx',
+  ],
+  phs000466: [
+    'https://d2l5jy2ao2mx5b.cloudfront.net/target/phs000466/TARGET_CCSK_ClinicalData_Discovery_20170525.xlsx',
+  ],
+  phs000467: [
+    'https://d2l5jy2ao2mx5b.cloudfront.net/target/phs000467/TARGET_NBL_ClinicalData_Discovery_20220125.xlsx',
+    'https://d2l5jy2ao2mx5b.cloudfront.net/target/phs000467/TARGET_NBL_ClinicalData_Validation_20220125.xlsx',
+  ],
+  phs000468: [
+    'https://d2l5jy2ao2mx5b.cloudfront.net/target/phs000468/TARGET_OS_ClinicalData_Discovery_20210520.xlsx',
+    'https://d2l5jy2ao2mx5b.cloudfront.net/target/phs000468/TARGET_OS_ClinicalData_Validation_20211108.xlsx',
+  ],
+  phs000469: [
+    'https://d2l5jy2ao2mx5b.cloudfront.net/target/phs000469/TARGET_MDLS-NBL_ClinicalData_20151124.xlsx',
+  ],
+  phs000470: [
+    'https://d2l5jy2ao2mx5b.cloudfront.net/target/phs000470/TARGET_RT_ClinicalData_Discovery_20211111.xlsx',
+    'https://d2l5jy2ao2mx5b.cloudfront.net/target/phs000470/TARGET_RT_ClinicalData_Validation_20211111.xlsx',
+  ],
+  phs000471: [
+    'https://d2l5jy2ao2mx5b.cloudfront.net/target/phs000471/TARGET_WT_ClinicalData_Discovery_20211111.xlsx',
+    'https://d2l5jy2ao2mx5b.cloudfront.net/target/phs000471/TARGET_WT_ClinicalData_Validation_20211111.xlsx',
+  ],
+};
+
 
 export async function openDoubleLink(url, fileName) {
   let urlContent = await fetch(url);
@@ -93,6 +134,10 @@ const GET_STUDIES_DATA_QUERY = gql`
         num_of_samples
         num_of_diagnoses
         num_of_files
+        num_of_study_files
+        num_of_participant_files
+        num_of_sample_files
+        num_of_publications
       }
     }
 `;
@@ -133,6 +178,25 @@ const table = {
       display: true,
     },
     {
+      dataField: 'data_availability',
+      header: 'Data Availability',
+      headerType: headerTypes.CUSTOM_ELEM,
+      customColHeaderRender: () => <DataAvailabilityHeader />,
+      tooltipText: 'Data Availability',
+      cellType: cellTypes.STUDIES,
+      sortable: false,
+      display: true,
+      customCellData: {
+        width: '400px',
+        fields: [
+          'num_of_study_files',
+          'num_of_participant_files',
+          'num_of_sample_files',
+          'num_of_publications'
+        ]
+      }
+    },
+    {
       dataField: 'num_of_participants',
       header: 'Participants Count',
       tooltipText: 'Sort by Participants Count',
@@ -165,5 +229,6 @@ export {
   GET_STUDIES_DATA_QUERY,
   GET_NUMBER_OF_STUDIES,
   studyDownloadLinks,
-  studycBioPortalLinks
+  studycBioPortalLinks,
+  studyClinicalDataLinks,
 };

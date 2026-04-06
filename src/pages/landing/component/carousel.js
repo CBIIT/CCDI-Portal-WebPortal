@@ -449,7 +449,7 @@ const Carousel = () => {
                                     if (!item.link.includes('http')) {
                                         return (
                                             <div key={key} className='carousel__item'>
-                                                <div className='itemImgBox'><img className='itemImg' src={item.img} alt={key} width="243px" height="102px" /></div>
+                                                <div className='itemImgBox'><img className='itemImg' src={item.img} alt={item.content} width="243px" height="102px" /></div>
                                                 <NavLink className='listItemContent' to={item.link}>{item.content}</NavLink>
                                                 <NavLink className="exportContainer" to={item.link}>
                                                     <img className='exportIcon' src={exportIcon} alt="exportIcon"/>
@@ -459,7 +459,7 @@ const Carousel = () => {
                                     }
                                     return (
                                         <div key={key} className='carousel__item'>
-                                            <div className='itemImgBox'><img className='itemImg' src={item.img} alt={key} width="243px" height="102px" /></div>
+                                            <div className='itemImgBox'><img className='itemImg' src={item.img} alt={item.content} width="243px" height="102px" /></div>
                                             <a className='listItemContent' href={item.link} target="_blank" rel="noopener noreferrer">{item.content}</a>
                                             <a className="exportContainer" href={item.link} target="_blank" rel="noopener noreferrer">
                                                 <img className='exportIcon' src={exportIcon} alt="exportIcon"/>

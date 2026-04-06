@@ -4,6 +4,7 @@ import {
     onDeleteSingleCohort,
     onDeleteAllCohort,
     onMutateSingleCohort,
+    onCreateNewCohort,
 } from '../../../components/CohortSelectorState/store/action.js';
 import {
     Modal, withStyles,
@@ -128,6 +129,71 @@ export const CohortModalGenerator = (uiConfig = DEFAULT_CONFIG) => {
         ));
     };
 
+    // Helper function to escape special regex characters
+    const escapeRegExp = (string) => {
+        return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    };
+
+    // Handle duplicating a cohort
+    const handleDuplicateCohort = (cohortId) => {
+        // Check if the cohort limit has been reached
+        if (Object.keys(state).length >= 20) return;
+
+        // Get the cohort to duplicate
+        const cohortToDuplicate = state[cohortId];
+        if (!cohortToDuplicate) return;
+
+        // Extract the base name by removing existing copy suffixes
+        let baseName = cohortToDuplicate.cohortName;
+
+        // Remove existing " (Copy)" or " (Copy N)" patterns
+        baseName = baseName.replace(/\s*\(Copy(?:\s+\d+)?\)$/, '');
+
+        // Find the highest copy number for this base name
+        let highestCopyNumber = 0;
+        const existingCohortNames = Object.values(state).map(cohort => cohort.cohortName);
+
+        existingCohortNames.forEach(name => {
+            if (name === baseName) {
+                // Original exists, so we need at least Copy
+                highestCopyNumber = Math.max(highestCopyNumber, 0);
+            } else if (name === `${baseName} (Copy)`) {
+                // First copy exists
+                highestCopyNumber = Math.max(highestCopyNumber, 1);
+            } else {
+                // Check for numbered copies
+                const match = name.match(new RegExp(`^${escapeRegExp(baseName)}\\s*\\(Copy\\s+(\\d+)\\)$`));
+                if (match) {
+                    const copyNumber = parseInt(match[1], 10);
+                    highestCopyNumber = Math.max(highestCopyNumber, copyNumber);
+                }
+            }
+        });
+
+        // Generate the new name
+        let newCohortName;
+        if (highestCopyNumber === 0) {
+            newCohortName = `${baseName} (Copy)`;
+        } else {
+            newCohortName = `${baseName} (Copy ${highestCopyNumber + 1})`;
+        }
+
+        dispatch(onCreateNewCohort(
+            newCohortName, // Use the new cohort name as the ID
+            cohortToDuplicate.cohortDescription,
+            cohortToDuplicate.participants,
+            () => {
+                setAlert({ type: 'success', message: 'Cohort duplicated successfully!' });
+                // The new cohort ID will be the normalized version of newCohortName
+                const normalizedCohortId = newCohortName.trim().toLowerCase();
+                setSelectedCohort(normalizedCohortId);
+            },
+            (error) => {
+                setAlert({ type: 'error', message: `Failed to duplicate cohort: ${error.message}` });
+            }
+        ));
+    };
+
     return {
         CohortModal: withStyles(DEFAULT_STYLES, { withTheme: true })((props) => {
             const {
@@ -203,6 +269,7 @@ export const CohortModalGenerator = (uiConfig = DEFAULT_CONFIG) => {
                                 closeParentModal={unSavedChangesCheck}
                                 handleDeleteCohort={handleDeleteCohort}
                                 handleDeleteAllCohorts={handleDeleteAllCohorts}
+                                handleDuplicateCohort={handleDuplicateCohort}
                                 handleClearCurrentCohortChanges={handleClearCurrentCohortChanges}
                                 deleteConfirmationClasses={deleteConfirmationClasses}
                                 state={state}
@@ -218,6 +285,7 @@ export const CohortModalGenerator = (uiConfig = DEFAULT_CONFIG) => {
                                 downloadCohortManifest={downloadCohortManifest}
                                 downloadCohortMetadata={downloadCohortMetadata}
                                 deleteConfirmationClasses={deleteConfirmationClasses}
+                                setAlert={setAlert}
                             />
                         </div>
                     </div>

@@ -4,8 +4,30 @@ import { cellTypes, cellStyles } from '@bento-core/table';
 import { customParticipantsTabDownloadCSV, customFilesTabDownloadCSV, customSamplesTabDownloadCSV, customStudyTabDownloadCSV } from './tableDownloadCSV';
 import { dataFormatTypes } from '@bento-core/table';
 import questionIcon from '../assets/icons/Question_Icon.svg';
+import React from 'react';
 
 // --------------- Tooltip configuration --------------
+const createNewCohortToolTip = 
+  <p style={{ fontFamily: "Poppins", fontWeight: 400, margin: 0 }}>
+    Create a new cohort using the selected Participant IDs.
+    <br/> 
+    <div style={{height: 10}}/>
+    <b>
+      Note:&nbsp;
+    </b> 
+    The optimal number of participants in a cohort is =&lt; 4000 participants
+  </p>;
+const addExistingCohortToolTip = 
+  <p style={{ fontFamily: "Poppins", fontWeight: 400, margin: 0 }}>
+    Add selected Participant IDs to an existing cohort.
+    <br/>
+    <div style={{height: 10}}/>
+    <b>
+      Note:&nbsp;
+    </b>
+    The optimal number of participants in a cohort is =&lt; 4000 participants
+  </p>;
+  
 export const tooltipContentAddAll = {
   icon: questionIcon,
   alt: 'tooltipIcon',
@@ -34,11 +56,11 @@ export const tooltipContent = {
 export const tooltipContentAddToNewCohort = {
   icon: questionIcon,
   alt: 'tooltipIcon',
-  Participants: 'Create a new cohort using the selected Participant IDs',
-  Studies: 'Create a new cohort using the selected Participant IDs',
-  Treatment: 'Create a new cohort using the selected Participant IDs',
-  Survival: 'Create a new cohort using the selected Participant IDs ',
-  "Treatment Response": 'Create a new cohort using the selected Participant IDs',
+  Participants: createNewCohortToolTip,
+  Studies: createNewCohortToolTip,
+  Treatment: createNewCohortToolTip,
+  Survival: createNewCohortToolTip,
+  "Treatment Response": createNewCohortToolTip,
   arrow: true,
   styles: {
     border: '1px red solid'
@@ -48,11 +70,11 @@ export const tooltipContentAddToNewCohort = {
 export const tooltipContentAddToExistingCohort = {
   icon: questionIcon,
   alt: 'tooltipIcon',
-  Participants: 'Add selected Participant IDs to an existing cohort',
-  Studies: 'Add selected Participant IDs to an existing cohort',
-  Survival: 'Add selected Participant IDs to an existing cohort',
-  Treatment: 'Add selected Participant IDs to an existing cohort',
-  "Treatment Response": 'Add selected Participant IDs to an existing cohort',
+  Participants: addExistingCohortToolTip,
+  Studies: addExistingCohortToolTip,
+  Survival: addExistingCohortToolTip,
+  Treatment: addExistingCohortToolTip,
+  "Treatment Response": addExistingCohortToolTip,
   arrow: true,
   styles: {
   }
@@ -1643,7 +1665,15 @@ export const tabContainers = [
         display: true,
         tooltipText: 'sort',
         role: cellTypes.DISPLAY,
-        cellType: cellTypes.CPI,
+      },
+      {
+        dataField: 'cpi_data',
+        header: 'Available CPI Mapping',
+        display: true,
+        sortable: false,
+        role: cellTypes.DISPLAY,
+        cellType: cellTypes.CPI_MAPPING,
+        cellStyle: cellStyles.EXCLUDE_FROM_DOWNLOAD,
       },
       {
         dataField: 'study_id',

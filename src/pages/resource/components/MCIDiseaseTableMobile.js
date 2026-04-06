@@ -31,7 +31,7 @@ height: 900;
 .mciTableHeaderListItem {
     padding: 10px 0;
     font-family: Open Sans;
-    font-size: 15px;
+    font-size: 17px;
     font-weight: 700;
     line-height: 20px;
     letter-spacing: -0.02em;

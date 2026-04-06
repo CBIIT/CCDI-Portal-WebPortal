@@ -51,7 +51,8 @@ export default (theme) => ({
   modalContainer: {
     display: 'flex',
     justifyContent: 'space-between',
-    padding: '34px 51px 79px 32px',
+    padding: '34px 51px 40px 32px',
+    // padding: '34px 51px 79px 32px',
     gap: '37px',
     width: '100%',
     flexGrow: 1,

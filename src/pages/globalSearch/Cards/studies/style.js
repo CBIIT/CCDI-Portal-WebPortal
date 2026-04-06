@@ -273,6 +273,7 @@ const useStyles = makeStyles((theme) => {
       flexDirection: 'column',
       margin: '0px',
       padding: '0px',
+      position: 'relative',
       [mdBreakpoint]: {
         flexDirection: 'row',
         alignItems: 'flex-start',
@@ -306,6 +307,94 @@ const useStyles = makeStyles((theme) => {
           minWidth: 0,
           flex: 1,
         },
+      },
+    },
+    expandToggle: {
+      cursor: 'pointer',
+      position: 'absolute',
+      top: '5px',
+      right: '20px',
+      display: 'flex',
+      alignItems: 'flex-start',
+      '&:hover': {
+        opacity: '0.7',
+      },
+      '@media (max-width: 600px)': {
+        top: '18px',
+        right: '0px',
+      },
+    },
+    expandIcon: {
+      fontSize: '18px',
+      color: '#000000',
+      [mdBreakpoint]: {
+        fontSize: '18px',
+      },
+      '@media (max-width: 600px)': {
+        fontSize: '16px',
+      },
+    },
+    treatmentTextContainer: {
+      width: '100%',
+      minWidth: 0,
+    },
+    consentCodesRow: {
+      [mdBreakpoint]: {
+        alignItems: 'baseline',
+      },
+    },
+    consentCodesContainer: {
+      paddingLeft: '15px',
+      width: '100%',
+      paddingRight: '30px',
+      lineHeight: '18px',
+      flex: 1,
+      minWidth: 0,
+      [mdBreakpoint]: {
+        paddingLeft: '15px',
+        paddingRight: '35px',
+      },
+      '@media (max-width: 600px)': {
+        paddingLeft: '8px',
+        paddingRight: '28px',
+      },
+    },
+    consentCodeItem: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: '2px',
+      verticalAlign: 'baseline',
+    },
+    consentCodeLink: {
+      fontFamily: 'Inter',
+      fontSize: '14.25px',
+      fontWeight: '600',
+      lineHeight: '18px',
+      letterSpacing: '2.25%',
+      textAlign: 'left',
+      margin: '0',
+      padding: '0px',
+      textTransform: 'none',
+      color: 'blue',
+      whiteSpace: 'normal',
+      textDecoration: 'underline',
+      backgroundColor: 'transparent',
+      '&:hover': {
+        textDecoration: 'underline',
+        backgroundColor: 'transparent',
+      },
+    },
+    consentExternalIcon: {
+      fontSize: '14px',
+      color: 'blue',
+      flexShrink: 0,
+      display: 'inline-block',
+      verticalAlign: 'middle',
+    },
+    clickableText: {
+      cursor: 'pointer',
+      '&:hover': {
+        opacity: '0.7',
       },
     },
   }

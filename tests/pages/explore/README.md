@@ -1,23 +1,44 @@
-# Explore Page Participant Count Tests
+# Explore Page Tests
 
 ## Overview
 
-This directory contains comprehensive integration tests for the explore page (`/explore`) participant count functionality. These tests verify the complete data flow from API calls through Redux state management to UI display, including user filter interactions.
+This directory contains integration tests for the explore page (`/explore`): participant counts in tab headers, Redux/API wiring, and (in one suite) real sidebar facet interactions with mocked GraphQL.
+
+| File | Focus |
+|------|--------|
+| `exploreParticipantCount.test.js` | `TabsView` counts, filter variables in Redux, and data-flow assertions (mostly isolated components + mock store) |
+| `exploreFacetFilterUi.test.js` | End-to-end UI: open facet panel, select **Sex at Birth → Female**, assert refetch variables and updated counts |
+
+Shared mock shapes live in **`../fixtures/explore/apiResponses.js`**.
 
 ## Test Files
 
-### Primary Test File
-- **`exploreParticipantCount.test.js`** - Main test suite (23 tests)
-  - Tests the participant count display in tab headers
-  - Validates filtering and API integration
-  - Verifies the complete data flow from API to UI
+### `exploreParticipantCount.test.js` (23 tests)
 
-### Test Fixtures
-- **`../fixtures/explore/apiResponses.js`** - Mock data and helper functions
-  - Sample dashboard data
-  - Sample participant records
-  - Redux store mocking utilities
-  - GraphQL response mocks
+- Participant count display in tab headers (`dashboardStats` / formatting)
+- Filter variables stored in Redux and passed to GraphQL-style mocks
+- Redux → `TabsView` integration and edge cases (zero results, large numbers, etc.)
+
+This suite does **not** mount the full `Inventory` tree; it targets `TabsView` and controlled store updates.
+
+### `exploreFacetFilterUi.test.js` (1 test)
+
+- Renders **`Inventory`** from `inventoryController.js` at `/explore` with the **real `src/store` singleton** (required because `inventoryCover.js` dispatches dashboard updates to that store, not only React context).
+- Mocks **`useApolloClient`** so `getData()` returns fixture payloads from `apiResponses.js`:
+  - Initial load: `exploreDashboardWithSexAtBirthFacets` (facet buckets for Female/Male).
+  - After selecting Female: `exploreDashboardFemaleOnly` (filtered counts aligned with `sampleParticipants`).
+- Mocks heavy or environment-dependent modules (`env`, `graphqlClient`, `WidgetView`, `TabPanel`, cohort modal/context) so the page mounts in JSDOM.
+- Interaction: open **Demographics** → expand **Sex at Birth** → click the **Female** facet row (via MUI label / leaf text; checkbox queries alone are unreliable).
+- Assertions: `dashData.numberOfParticipants`, `activeFilters.sex_at_birth`, **Participants** tab label includes the new count, and `client.query` was invoked with `variables.sex_at_birth` containing `Female`.
+
+Facet list container queries use `[class*="contentPanelBody"]` (the sidebar body used by the inventory layout).
+
+### Test fixtures — `../fixtures/explore/apiResponses.js`
+
+- **`sampleDashboardData`** / **`sampleParticipants`** — baseline dashboard and participant rows used across tests.
+- **`dashboardQueryResponseData`**, **`createMockStore`**, **`createDashboardQueryMock`** — helpers for participant-count tests.
+- **`exploreDashboardWithSexAtBirthFacets`** — extends `sampleDashboardData` with `participantCountBySexAtBirth` and `filterParticipantCountBySexAtBirth` buckets (e.g. Female 2, Male 1) so the facet UI renders options; still **3** participants overall.
+- **`exploreDashboardFemaleOnly`** — filtered dashboard payload (`numberOfParticipants: 2`, adjusted entity counts, single Female bucket) returned when the mock sees `sex_at_birth` including `Female`, matching two Female rows in `sampleParticipants`.
 
 ## Test Architecture
 
@@ -142,17 +163,22 @@ Tests the complete data flow from Redux state management to UI rendering.
 
 These tests validate actual production code:
 
-### Components
-- **`TabsView.js`** - Main tab component
-- **`getTabs()` function** - Count formatting logic
-- **`inventoryReducer`** - Redux state management
+### Components (`exploreParticipantCount`)
+- **`TabsView.js`** — Tab headers and counts
+- **`getTabs()`** — Count formatting logic
+- **`inventoryReducer`** — Redux state management
+
+### Components (`exploreFacetFilterUi`)
+- **`inventoryController.js` / `inventoryView.js`** — Explore layout and sidebar
+- **`inventoryCover.js`** — `getData()` / Apollo `client.query` and Redux sync
+- **`BentoFacetFilter.js`** (and related sidebar) — Facet sections and checkbox UI
 
 ### Configuration
-- **`tabs`** array from `dashboardTabData.js` - Tab configuration
-- **`DASHBOARD_QUERY_NEW`** - GraphQL query structure
+- **`tabs`** array from `dashboardTabData.js` — Tab configuration
+- **`DASHBOARD_QUERY_NEW`** — GraphQL query structure
 
 ### Formatting
-- **`.toLocaleString('en-US')`** - Number formatting with thousand separators
+- **`.toLocaleString('en-US')`** — Number formatting with thousand separators
 
 ## Filter Variable Structure
 
@@ -230,86 +256,84 @@ The fixture includes 3 sample participants:
 
 ## Running the Tests
 
-### Run All Explore Tests
+### Run all explore tests (both files)
+
+In Create React App, pass **`CI=true`** (or **`--watchAll=false`**) so Jest exits after one run instead of staying in watch mode:
+
+```bash
+CI=true npm test -- --testPathPattern=tests/pages/explore --watchAll=false
+```
+
+### Participant count suite only
 ```bash
 npm test -- tests/pages/explore/exploreParticipantCount.test.js
 ```
 
-### Run in Watch Mode
+### Facet filter UI suite only
+```bash
+npm test -- tests/pages/explore/exploreFacetFilterUi.test.js
+```
+
+### Watch mode (example: participant count file)
 ```bash
 npm test -- tests/pages/explore/exploreParticipantCount.test.js --watch
 ```
 
-### Run with Coverage
+### Coverage (example)
 ```bash
 npm test -- tests/pages/explore/exploreParticipantCount.test.js --coverage
 ```
 
-### Run a Specific Test
+### Single test by name
 ```bash
 npm test -- tests/pages/explore/exploreParticipantCount.test.js -t "should update participant count from 3 to 1"
 ```
 
 ## Expected Test Output
 
+Running `npm test -- --testPathPattern=tests/pages/explore` should report **2** suites (**24** tests total: **23** + **1**). Individual file runs show only that file’s tests.
+
+Example (participant count file only):
+
 ```
 PASS tests/pages/explore/exploreParticipantCount.test.js
-  Explore Page - Participant Count Display (TabsView)
-    Component Rendering
-      ✓ should render without crashing
-      ✓ should render all tabs (Participants, Studies, Samples, Files)
-    Participant Count Display
-      ✓ should display participant count in the tab header from dashboardStats
-      ✓ should display large participant count with thousand separators
-      ✓ should use the correct count field from tabs configuration
-      ✓ should display all tab counts correctly
-    Count Formatting
-      ✓ should format zero participants correctly
-      ✓ should format very large participant counts correctly
-      ✓ should use en-US locale formatting
-    Edge Cases
-      ✓ should handle missing dashboardStats gracefully
-      ✓ should handle single digit participant counts
-      ✓ should handle counts in the thousands correctly
-  Explore Page - Full Integration (API → Redux → Display)
-    Filtered API Calls (User Input)
-      ✓ should call API with filter variables when user selects a facet
-      ✓ should update participant count from 3 to 1 when filtering by Female
-      ✓ should call API with multiple filter variables
-      ✓ should handle zero results when filters exclude all participants
-      ✓ should correctly format filter variables for GraphQL query
-      ✓ should update all tab counts when filters are applied
-    Redux State Flow
-      ✓ should update Redux state when API returns data
-      ✓ should pass dashData from Redux to TabsView component
-    Complete Data Flow Verification
-      ✓ should complete the full flow: API Response → Redux → Component → Display
-      ✓ should match the exact data structure from DASHBOARD_QUERY_NEW
-      ✓ should format counts correctly when passed through Redux to component
-
+...
 Test Suites: 1 passed, 1 total
 Tests:       23 passed, 23 total
 ```
 
+Example (facet UI file):
+
+```
+PASS tests/pages/explore/exploreFacetFilterUi.test.js
+  Explore — facet filter UI (Sex at Birth)
+    ✓ opens Demographics, selects Female, refetches with sex_at_birth and updates participant count
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+```
+
 ## What's NOT Tested
 
-These tests focus on the count display and filtering. They do NOT test:
-- ❌ The actual API network calls (mocked with fixtures)
-- ❌ Full `InventoryController` component rendering (too complex)
-- ❌ Side panel filter UI interactions
-- ❌ URL parameter parsing and routing
-- ❌ Tab switching functionality
-- ❌ Participant table data display
+Across these suites, the following are still out of scope unless noted above:
+
+- Real network I/O (GraphQL is mocked; no backend required).
+- **URL/query-string driven filters** — `exploreFacetFilterUi` exercises sidebar clicks, not deep-linking or `useSearchParams` behavior.
+- **Tab switching** — not asserted in the facet UI test (focus is filter + counts).
+- **Participant table row data** — table contents are not the assertion target.
+- **Production Apollo client** — `useApolloClient` is mocked in the facet UI test.
+
+The participant-count suite intentionally avoids full-page `Inventory` mount; the facet UI suite covers that path instead.
 
 ## Future Test Additions
 
-Consider adding tests for:
-1. **URL Parameter Integration** - Test that URL query params correctly trigger filtered API calls
-2. **Filter UI Interactions** - Test clicking checkboxes in the side panel
-3. **Tab Switching** - Test that switching tabs maintains filter state
-4. **Loading States** - Test loading indicators while API calls are in progress
-5. **Error Handling** - Test API error scenarios
-6. **Debouncing** - Test that rapid filter changes don't cause excessive API calls
+Ideas that would complement the current coverage:
+
+1. **URL parameter integration** — filters applied from the URL trigger the same `getData()` path as sidebar actions.
+2. **Additional facet sections** — repeat the facet UI pattern for another demographic or file facet using new fixture branches in `apiResponses.js`.
+3. **Tab switching with filters** — ensure counts and filter state stay consistent when changing tabs.
+4. **Loading and error paths** — loading UI and failed `client.query` handling in `inventoryCover`.
+5. **Debouncing** — rapid facet toggles do not spam redundant queries (if applicable to product behavior).
 
 ## Test Pattern Examples
 
@@ -354,29 +378,39 @@ it('should format large numbers correctly', () => {
 ## Related Files
 
 ### Source Code
-- `/src/pages/inventory/inventoryController.js` - Main controller
-- `/src/pages/inventory/inventoryCover.js` - API call logic
-- `/src/pages/inventory/tabs/TabsView.js` - Tab display component
-- `/src/bento/dashboardTabData.js` - GraphQL queries and tab config
-- `/src/components/Inventory/InventoryState.js` - Redux reducer
+- `/src/pages/inventory/inventoryController.js` — Explore entry (renders `Inventory`)
+- `/src/pages/inventory/inventoryCover.js` — `getData()`, Apollo, Redux sync
+- `/src/pages/inventory/inventoryView.js` — Layout including facet sidebar
+- `/src/pages/inventory/sideBar/BentoFacetFilter.js` — Facet groups and checkboxes
+- `/src/pages/inventory/tabs/TabsView.js` — Tab display component (participant count tests)
+- `/src/store` — Singleton store used by `exploreFacetFilterUi` tests
+- `/src/bento/dashboardTabData.js` — `DASHBOARD_QUERY_NEW` and tab config
+- `/src/components/Inventory/InventoryState.js` — Redux reducer (`inventoryReducer`)
+
+### Test and fixture paths
+- `/tests/pages/explore/exploreParticipantCount.test.js`
+- `/tests/pages/explore/exploreFacetFilterUi.test.js`
+- `/tests/fixtures/explore/apiResponses.js`
 
 ### Other Test Files
-- `/tests/pages/landing/landingView.test.js` - Example test structure
-- `/tests/helpers/landingApiMocks.js` - Example API mock helpers
+- `/tests/pages/landing/landingView.test.js` — Example test structure
+- `/tests/helpers/landingApiMocks.js` — Example API mock helpers
 
 ## Maintenance Notes
 
 ### Updating Tests When API Changes
 If the `DASHBOARD_QUERY_NEW` GraphQL query structure changes:
-1. Update `tests/fixtures/explore/apiResponses.js` mock data structure
-2. Update filter variable tests to match new filter parameters
-3. Verify field names match (e.g., `numberOfParticipants`)
+1. Update `tests/fixtures/explore/apiResponses.js` mock data structure (including `exploreDashboardWithSexAtBirthFacets` / `exploreDashboardFemaleOnly` if facet buckets or counts change).
+2. Update filter variable tests in `exploreParticipantCount.test.js` to match new filter parameters.
+3. Re-run `exploreFacetFilterUi.test.js` and adjust mocks/assertions if `getData()` or variable names change.
+4. Verify field names match (e.g., `numberOfParticipants`).
 
 ### Adding New Filter Types
 To add tests for a new filter type:
-1. Add sample filter data to fixtures
-2. Add a test case in "Filtered API Calls" section
-3. Verify the filter structure matches GraphQL schema
+1. Add sample filter data to fixtures (`apiResponses.js`).
+2. Add a case in `exploreParticipantCount.test.js` (Redux / variable shape) as needed.
+3. For UI coverage, follow `exploreFacetFilterUi.test.js`: extend the `mockQuery` implementation and add facet bucket data so the sidebar renders options.
+4. Verify the filter structure matches the GraphQL schema.
 
 ## Contributing
 

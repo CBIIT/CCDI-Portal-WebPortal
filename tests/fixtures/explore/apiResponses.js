@@ -175,3 +175,33 @@ export function createDashboardQueryMock(overrides = {}) {
   };
   return jest.fn(() => Promise.resolve({ data }));
 }
+
+/**
+ * Unfiltered dashboard payload with Sex at Birth facet buckets populated so the
+ * explore facet panel renders Female / Male checkbox options (UI tests).
+ * @see sampleParticipants — two Female, one Male
+ */
+export const exploreDashboardWithSexAtBirthFacets = {
+  ...sampleDashboardData,
+  participantCountBySexAtBirth: [
+    { group: 'Female', subjects: 2 },
+    { group: 'Male', subjects: 1 },
+  ],
+  filterParticipantCountBySexAtBirth: [
+    { group: 'Female', subjects: 2 },
+    { group: 'Male', subjects: 1 },
+  ],
+};
+
+/**
+ * Mock API result after filtering to Female only (matches sampleParticipants).
+ */
+export const exploreDashboardFemaleOnly = {
+  ...exploreDashboardWithSexAtBirthFacets,
+  numberOfParticipants: 2,
+  numberOfStudies: 1,
+  numberOfSamples: 4,
+  numberOfFiles: 8,
+  participantCountBySexAtBirth: [{ group: 'Female', subjects: 2 }],
+  filterParticipantCountBySexAtBirth: [{ group: 'Female', subjects: 2 }],
+};

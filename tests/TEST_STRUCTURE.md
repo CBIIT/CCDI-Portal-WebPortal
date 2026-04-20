@@ -53,7 +53,9 @@ Adapt section names (e.g. “Hero section”, “Stats section”) to match the 
 - **Resource pages (YAML from static content):**
   - `tests/fixtures/resource/mciViewProps.js`, `pmtlViewProps.js` — dedicated YAML shapes for Group A views.
   - `tests/fixtures/resource/resourceDataViewProps.js` — minimal keys for `resourceData.yaml` (Group B).
+  - `tests/fixtures/resource/cpiResourceFixtures.js` — CPI page: YAML keys + participant-index JSON shape + stats URL constant (Group C).
   - `tests/helpers/resourceYamlApiMocks.js` — `createDedicatedYamlAxiosMock` for mocked `axios.get` (`/mciData.yaml`, `/pmtlData.yaml`, `/resourceData.yaml`, etc.).
+  - `tests/helpers/cpiApiMocks.js` — `createCpiStatsFetchSuccessMock`, `createCpiStatsFetchHttpErrorMock` for mocked `global.fetch` to the CPI statistics endpoint.
 - **Adding new areas:** Create `tests/fixtures/<feature>/` and optional `tests/helpers/<feature>Mocks.js` following the same pattern.
 
 ---
@@ -108,7 +110,9 @@ When you need to verify that the frontend calls the correct APIs and displays th
 | **Pure view / static props** | `tests/pages/landing/landingView.test.js` | `MemoryRouter`, mocked heavy children, fixtures from `tests/fixtures/landing/`, sections: Rendering → features → side effects → edge cases |
 | **Controller + mocked HTTP/GraphQL** | `tests/pages/landing/landingController.test.js` | `waitFor`, mocked `fetch` / Apollo `useApolloClient`, Redux `Provider`, asserts **calls** and **DOM** from fixtures |
 | **Resource view (YAML-shaped props)** | `tests/pages/resource/MCIResourcePage/mciResourceView.test.js` (and other `*ResourceView.test.js`) | Same section order; mock tables/maps; `tests/fixtures/resource/`; extra `<footer>` nodes when scroll sync needs them; `hidden: true` for links inside `display:none` regions |
+| **Resource view (YAML + API-driven stats)** | `tests/pages/resource/CPIResourcePage/cpiResourceView.test.js` | Same section order; pass `cpiStats` / `loadingCpiStats` / `cpiStatsError` with `cpiResourceFixtures.js`; assert loading, unavailable, and formatted stat rows |
 | **Resource controller (mocked axios YAML)** | `tests/pages/resource/MCIResourcePage/mciResourceController.test.js` (and other `*ResourceController.test.js`) | `createDedicatedYamlAxiosMock`, mock `env` + `axios`, nested `describe('Mocked axios …')`, assert `/mciData.yaml?ts=` or `/resourceData.yaml?ts=` URL + fixture text |
+| **Resource controller (YAML + external fetch)** | `tests/pages/resource/CPIResourcePage/cpiResourceController.test.js` | Same axios/YAML mocks plus **`global.fetch`** to `participantindex.ccdi.cancer.gov/v1/statistic`; assert both URLs and DOM from `cpiResourceFixtures.js` |
 | **Component co-located** | `src/components/CustomIcon/CustomIconView.test.js` | Small presentational component: roles, attributes, edge cases without router |
 | **Tabs / props-only display** | `tests/pages/explore/exploreParticipantCount.test.js` | `TabsView` + `createMockStore`, formatting, Redux dispatch simulations, before/after filter **state** via two renders |
 | **Full UI + user input** | `tests/pages/explore/exploreFacetFilterUi.test.js` | Real `Inventory` + singleton `src/store`, `fireEvent`, `waitFor`, mock `useApolloClient` branches on variables |

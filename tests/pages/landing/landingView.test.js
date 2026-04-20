@@ -1,7 +1,7 @@
 /**
  * Unit tests for LandingView (home page).
  *
- * Structure follows src/docs/TEST_STRUCTURE.md for consistency across the app:
+ * Structure follows tests/TEST_STRUCTURE.md for consistency across the app:
  * Rendering → Feature sections (Hero, Stats, Resources, etc.) → Side effects → Edge cases.
  * Default props come from tests/fixtures/landing/landingViewProps.js (no network).
  */

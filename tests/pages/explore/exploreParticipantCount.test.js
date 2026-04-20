@@ -6,7 +6,7 @@
  * 2. The participant count is correctly displayed in the tab header
  * 3. The count formatting with locale string
  *
- * Structure follows src/docs/TEST_STRUCTURE.md:
+ * Structure follows tests/TEST_STRUCTURE.md:
  * - Component rendering tests
  * - API integration tests
  * - Tab display tests

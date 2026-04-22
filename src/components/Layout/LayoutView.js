@@ -14,7 +14,7 @@ import Search from '../../pages/globalSearch/searchController';
 import Inventory from '../../pages/inventory/inventoryController';
 import Cart from '../../pages/cart/cartController';
 import ScrollButton from '../ScrollButton/ScrollButtonView';
-import MCIResourceView from '../../pages/resource/MCIResourcePage/MCIResourceController'
+import MCIResourceView from '../../pages/resource/MCIResourcePage/MCIResourceMarkdownController'
 import PMTLResourceView from '../../pages/resource/PMTLResourcePage/PMTLResourceController';
 import FederationResourceView from "../../pages/resource/FederationResourcePage/FederationResourceController";
 import FederationDataModelNavigator from "../../pages/resource/FederationDMN/FederationDMN";

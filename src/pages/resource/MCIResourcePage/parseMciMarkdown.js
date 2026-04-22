@@ -165,7 +165,7 @@ function extractWidgets(text) {
 
 /**
  * Parses a single .md file with YAML front matter and a body structured as:
- * - Optional intro (markdown) before the first ## heading
+ * - Optional lead prose (markdown) in the body before the first `##` (ODS style; legacy `introText` in front matter is still read if the body has no lead)
  * - ## Topic {#optionalId} / ### Subtopic {#optionalId} with markdown + fenced ```mci-*``` widgets
  * @param {string} raw - full file contents
  * @returns {object} Same general shape as mciData.yaml for MCIResourceView: introText, mciContent, plus FM keys
@@ -173,10 +173,14 @@ function extractWidgets(text) {
 export function parseMciMarkdown(raw) {
   const { data: fm, content: body } = matter(raw || '');
   const { intro: introFromBody, rest } = extractIntroAndRest(body || '');
+  // ODS-style: intro lives in the markdown body before the first `##` (not in front matter)
+  const { introText: _legacyFmIntro, ...restFm } = fm;
   const introText =
-    fm.introText !== undefined && fm.introText !== null
-      ? fm.introText
-      : introFromBody;
+    String(introFromBody || '').trim() !== ''
+      ? introFromBody
+      : _legacyFmIntro != null
+        ? _legacyFmIntro
+        : '';
 
   const topics = splitH2(rest);
   const mciContent = topics.map((t) => {
@@ -202,7 +206,7 @@ export function parseMciMarkdown(raw) {
   });
 
   return {
-    ...fm,
+    ...restFm,
     introText,
     mciContent,
   };

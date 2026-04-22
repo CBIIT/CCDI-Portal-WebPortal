@@ -640,7 +640,11 @@ const MCIResourceMarkdownView = ({ data }) => {
                 </div>
                 <div className='contentSection'>
                     <div className='contentList'>
-                        {data.introText && <div className='introContainer'><MciMarkdown>{data.introText}</MciMarkdown></div>}
+                        {data.introText && (
+                            <div className='introContainer'>
+                                <MciMarkdown>{data.introText}</MciMarkdown>
+                            </div>
+                        )}
                         {
                             MCIContent && MCIContent.map((mci, mciidx) => {
                                 const mcikey = `mci_${mciidx}`;

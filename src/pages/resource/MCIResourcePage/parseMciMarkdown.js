@@ -1,13 +1,14 @@
 import matter from 'gray-matter';
 import yaml from 'js-yaml';
 
-const WIDGET_LANG = '(mci-disease-table|mci-map|mci-search-table|mci-table|mci-ecosystem)';
+const WIDGET_LANG = '(mci-disease-table|mci-map|mci-search-table|mci-table|responsive-img)';
 
 const WIDGET_KEY = {
   'mci-disease-table': 'diseaseTable',
   'mci-map': 'map',
   'mci-search-table': 'searchTable',
   'mci-table': 'table',
+  'responsive-img': 'responsiveImg',
 };
 
 function slugify(text) {
@@ -126,27 +127,11 @@ function extractWidgets(text) {
   );
   const out = {
     contentMarkdown: text,
-    showEcosystemDiagram: false,
   };
   const matches = [...text.matchAll(re)];
   matches.forEach((m) => {
     const kind = m[1].toLowerCase();
     const raw = m[2];
-    if (kind === 'mci-ecosystem') {
-      out.showEcosystemDiagram = true;
-      const t = raw.trim();
-      if (t) {
-        try {
-          const parsed = yaml.safeLoad(raw);
-          if (parsed && typeof parsed === 'object' && parsed.showEcosystemDiagram === false) {
-            out.showEcosystemDiagram = false;
-          }
-        } catch (_e) {
-          /* keep true */
-        }
-      }
-      return;
-    }
     const key = WIDGET_KEY[kind];
     if (!key) return;
     try {
@@ -166,7 +151,7 @@ function extractWidgets(text) {
 /**
  * Parses a single .md file with YAML front matter and a body structured as:
  * - Optional lead prose (markdown) in the body before the first `##` (ODS style; legacy `introText` in front matter is still read if the body has no lead)
- * - ## Topic {#optionalId} / ### Subtopic {#optionalId} with markdown + fenced ```mci-*``` widgets
+ * - ## Topic {#optionalId} / ### Subtopic {#optionalId} with markdown + fenced mci-* code blocks (and responsive-img: YAML wide, mobile, optional alt / caption)
  * @param {string} raw - full file contents
  * @returns {object} Same general shape as mciData.yaml for MCIResourceView: introText, mciContent, plus FM keys
  */
@@ -195,7 +180,7 @@ export function parseMciMarkdown(raw) {
         map: w.map,
         table: w.table,
         searchTable: w.searchTable,
-        showEcosystemDiagram: w.showEcosystemDiagram,
+        responsiveImg: w.responsiveImg,
       };
     });
     return {

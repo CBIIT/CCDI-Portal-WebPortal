@@ -9,8 +9,6 @@ import exportIcon from '../../../assets/resources/Explore_Icon.svg';
 import exportIconBlue from '../../../assets/icons/Export_Icon.svg';
 import closeIcon from '../../../assets/icons/Close_Icon.svg';
 import arrowDownIcon from '../../../assets/icons/Arrow_Down.svg';
-import ccdiDataEcosystemImg from '../../../assets/resources/MCI_CCDI_Data_Ecosystem.png';
-import ccdiDataEcosystemMobileImg from '../../../assets/resources/MCI_CCDI_Data_Ecosystem_Mobile.png';
 import MCITable from '../components/MCITable';
 import MCITableMobile from '../components/MCITableMobile';
 import MCISearchTable from '../components/MCISearchTable';
@@ -425,6 +423,17 @@ const MCIResourceBody = styled.div`
         display: none;
     }
 
+    .mciContentContainer .mci-md-img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .introContainer .mci-md-img {
+        max-width: 100%;
+        height: auto;
+    }
+
     .ImgCaption {
         color: #000;
         // text-align: center;
@@ -655,11 +664,23 @@ const MCIResourceMarkdownView = ({ data }) => {
                                         <div className="mciSection mobileCollapse" ref={sectionList.current[mciidx]}>
                                         {
                                             mci.list.map((mciItem, idx) => {
+                                                const ri = mciItem.responsiveImg;
+                                                const riCaption = ri
+                                                  && (ri.caption != null ? ri.caption : data.MCI_Workflow_Diagram_Caption);
                                                 return (
                                                     <>
                                                         <div id={mciItem.id} className='mciSubtitle'>{mciItem.subtopic && mciItem.subtopic}</div>
                                                         <div className='mciContentContainer'>
                                                             {mciItem.content && <MciMarkdown>{mciItem.content}</MciMarkdown>}
+                                                            {ri && ri.wide && ri.mobile && (
+                                                            <>
+                                                                <img className="ecosystemImg" src={ri.wide} alt={ri.alt || ''} loading="lazy" />
+                                                                <img className="ecosystemImgMobile" src={ri.mobile} alt={ri.altMobile || ri.alt || ''} loading="lazy" />
+                                                                {riCaption && (
+                                                                    <div className="ImgCaption">{riCaption}</div>
+                                                                )}
+                                                            </>
+                                                            )}
                                                             {/* {mciItem.donut && 
                                                             <div className='donutContainer'>
                                                                 <div className='donutTitleContainer'><h4>{mciItem.donut.title}</h4></div>
@@ -684,15 +705,6 @@ const MCIResourceMarkdownView = ({ data }) => {
                                                             <>
                                                                 <div className='MapContainer'><MapView mapData={mciItem.map} /></div>
                                                                 <div className='MapMobileContainer'><MapViewMobile mapData={mciItem.map}/></div>
-                                                            </>
-                                                            }
-                                                            {(mciItem.showEcosystemDiagram || (mciItem.content && typeof mciItem.content === 'string' && mciItem.content.includes('CCDI Data Ecosystem?'))) &&
-                                                            <>
-                                                                <img className="ecosystemImg" src={data.MCI_CCDI_Data_Ecosystem || ccdiDataEcosystemImg} alt="Infographic depicting the MCI assays and data types, and the data flow to patients, providers, and the CCDI Data Ecosystem"/>
-                                                                <img className="ecosystemImgMobile" src={data.MCI_CCDI_Data_Ecosystem_Mobile || ccdiDataEcosystemMobileImg} alt="Infographic depicting the MCI assays and data types, and the data flow to patients, providers, and the CCDI Data Ecosystem"/>
-                                                                <div className='ImgCaption'>{data.MCI_Workflow_Diagram_Caption}</div>
-                                                                <h3 style={{ marginTop: '24px' }}>Community Tools and Scripts</h3>
-                                                                <p>Convert COG-formatted JSON files to TSV format with CCDI’s MCI_JSON2TSV tool <a href="https://github.com/CBIIT/ChildhoodCancerDataInitiative-MCI_JSON2TSV" target='blank' rel="noopener noreferrer">here</a>.</p>
                                                             </>
                                                             }
                                                             {mciItem.table &&

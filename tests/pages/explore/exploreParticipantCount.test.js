@@ -1,16 +1,11 @@
 /**
- * Integration tests for Explore page (/explore) - Participant Count.
+ * Integration tests for Explore page (/explore) — Participant Count (`TabsView`).
  *
- * This test suite validates:
- * 1. The GraphQL API call via Apollo Client (DASHBOARD_QUERY_NEW)
- * 2. The participant count is correctly displayed in the tab header
- * 3. The count formatting with locale string
+ * Validates tab header counts/formatting from `dashboardStats`, Redux-driven updates, and GraphQL-shaped mocks (`DASHBOARD_QUERY_NEW`).
  *
- * Structure follows tests/TEST_STRUCTURE.md:
- * - Component rendering tests
- * - API integration tests
- * - Tab display tests
- * - Edge cases
+ * Test types (tests/TEST_STRUCTURE.md §§133–153):
+ * - **§1 Pure frontend:** first `describe` — props/fixtures, formatting, edge cases.
+ * - **§2 / §3 Mocked integration + state:** second `describe` — API variable shape, filter-driven count changes, Redux → `TabsView`.
  */
 
 import React from 'react';

@@ -205,3 +205,38 @@ export const exploreDashboardFemaleOnly = {
   participantCountBySexAtBirth: [{ group: 'Female', subjects: 2 }],
   filterParticipantCountBySexAtBirth: [{ group: 'Female', subjects: 2 }],
 };
+
+/**
+ * Full widget-chart slices for `WidgetView`, aligned with **`sampleParticipants`** and the same
+ * **`numberOfParticipants: 3`** story as **`sampleDashboardData`** / **`exploreDashboardWithSexAtBirthFacets`**:
+ *
+ * | Widget field | Alignment |
+ * |--------------|-----------|
+ * | `participantCountByStudy` | All three rows use **`study_id` `phs002431`** |
+ * | `participantCountBySexAtBirth` | **`exploreDashboardWithSexAtBirthFacets`** (Female 2, Male 1) |
+ * | `participantCountByRace` | Two **`White`**, one **`Hispanic or Latino;White`** |
+ * | `participantCountByDiagnosis` | **`diagnosis_str`** values, one subject each |
+ * | `participantCountByDiagnosisAge` | Single bucket totaling **3** participants (matches cohort size) |
+ * | `participantCountByDataCategory` | Three buckets totaling **3** (illustrative file-level mix) |
+ *
+ * Used by `tests/fixtures/explore/widgetDashboardData.js` and `exploreWidgetView.test.js`.
+ */
+export const exploreDashboardWithAllWidgetsForTests = {
+  ...exploreDashboardWithSexAtBirthFacets,
+  participantCountByStudy: [{ group: 'phs002431', subjects: 3 }],
+  participantCountByDiagnosis: [
+    { group: 'Glioblastoma, NOS', subjects: 1 },
+    { group: 'Mixed phenotype acute leukemia with t(v;11q23); MLL rearranged', subjects: 1 },
+    { group: 'Astrocytoma, anaplastic, NOS', subjects: 1 },
+  ],
+  participantCountByDiagnosisAge: [{ group: '0-3650 days', subjects: 3 }],
+  participantCountByRace: [
+    { group: 'White', subjects: 2 },
+    { group: 'Hispanic or Latino;White', subjects: 1 },
+  ],
+  participantCountByDataCategory: [
+    { group: 'Genomic', subjects: 1 },
+    { group: 'Clinical', subjects: 1 },
+    { group: 'Aggregated', subjects: 1 },
+  ],
+};

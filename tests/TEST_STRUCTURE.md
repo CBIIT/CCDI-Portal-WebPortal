@@ -116,6 +116,15 @@ When you need to verify that the frontend calls the correct APIs and displays th
 | **Component co-located** | `src/components/CustomIcon/CustomIconView.test.js` | Small presentational component: roles, attributes, edge cases without router |
 | **Tabs / props-only display** | `tests/pages/explore/exploreParticipantCount.test.js` | `TabsView` + `createMockStore`, formatting, Redux dispatch simulations, before/after filter **state** via two renders |
 | **Full UI + user input** | `tests/pages/explore/exploreFacetFilterUi.test.js` | Real `Inventory` + singleton `src/store`, `fireEvent`, `waitFor`, mock `useApolloClient` branches on variables |
+| **URL / search params + data layer (Explore 2.1)** | `tests/pages/explore/exploreUrlQuery.test.js` | `MemoryRouter` `initialEntries`, `resetExploreSingletonStore`, facet pipes (`\|`), age ranges + `*_unknownAges`, `p_id` / `u` / upload metadata, mocked `import_from` `fetch`, `tab`; assert `client.query` `variables` and Redux from `inventoryCover` |
+| **Main tab strip + router (Explore 2.2)** | `tests/pages/explore/exploreTabSwitching.test.js` | `createMemoryRouter` / `RouterProvider`, click `role="tab"` (Studies / Files / Participants), assert `location.search` has `tab=`, Redux `inventoryReducer.tab`, `mockQuery` count stable on tab-only navigation |
+| **Tabs + active facet (Explore 2.3)** | `tests/pages/explore/exploreTabWithFilters.test.js` | Facet UI selects **Female**, then tab clicks; assert **`activeFilters` + `dashData`**, URL includes **facet + `tab`**, **`mockQuery` count** unchanged after tab-only navigation |
+| **Clear all filters (Explore 2.4)** | `tests/pages/explore/exploreClearFilters.test.js` | **`#button_sidebar_clear_all_filters`** after **Female**; URL + **`dashData`** reset, **`mockQuery`** without facet vars; disabled when no filters |
+| **Dashboard async / loading (Explore 2.5)** | `tests/pages/explore/exploreDashboardAsync.test.js` | Delayed **`mockQuery`** → **`isDataloading`**; **`data: {}`** with no **`searchParticipants`** → **`dashData` null**, loading **`progressbar`** |
+| **Restore URL + import failure (Explore 2.6)** | `tests/pages/explore/exploreInventoryRestore.test.js` | **`return_2_page`** / **main menu** + **`return_query_url`**; **`fetch`** reject on **`import_from`**; relies on **`inventoryCover`** empty-query check compatible with Jest |
+| **Tab strip + `TabPanel` table wiring** | `tests/pages/explore/exploreTabTables.test.js` | Real **`TabsView`/`TabPanel`**, mocked **`@bento-core/paginated-table`**; assert **`paginationAPIField`**, **`activeTab`**, tab clicks, **`queryVariables`** |
+| **`TabPanel` + real Bento table (rows/columns)** | `tests/pages/explore/exploreTabTableRows.test.js` | Type **2** (+**3** for facet): real paginated table; mocked **`useApolloClient().query`**; **`tests/fixtures/explore/participantOverviewTableRows.js`**, **`studyOverviewTableRows.js`**; **`getByRole('columnheader')`**, fixture-derived cell text |
+| **Explore `WidgetView` (Bento charts)** | `tests/pages/explore/exploreWidgetView.test.js` | Type **1** + **3**: **`createMuiTheme` + `ThemeProvider`**, fixtures **`widgetDashboardData.js`**, real **`@bento-core/widgets`**; assert widget **titles** + **COLLAPSE / OPEN** control; no `MemoryRouter` (no routes) |
 
 More detail on Explore: [`tests/pages/explore/README.md`](pages/explore/README.md).
 
@@ -133,13 +142,31 @@ More detail on Explore: [`tests/pages/explore/README.md`](pages/explore/README.m
 - Prefer queries in this order: `getByRole` → `getByLabelText` → `getByText`; use `within()` for regions.
 - **Do not** rely on live backends or env-specific URLs unless you assert the **string the app passes** (contract test) with mocks intercepting the call.
 
-**Baseline:** `landingView.test.js`, `CustomIconView.test.js`, the `TabsView`-focused sections of `exploreParticipantCount.test.js`.
+**Baseline:** `landingView.test.js`, `CustomIconView.test.js`, the `TabsView`-focused sections of `exploreParticipantCount.test.js`, `tests/pages/explore/exploreWidgetView.test.js` (widget titles from `dashData` fixtures, MUI theme only).
 
 ### 2. API / data layer (mocked integration)
 
 **Goal:** Prove the frontend **requests the right thing** and **shows the right thing** after async resolution—without real I/O. This overlaps with **Controller tests and mocked APIs** above; use fixtures, helpers, `waitFor`, and assert both **call contract** (`fetch` / `mockQuery` arguments) and **DOM** (fixture-derived text).
 
 **Baseline:** `landingController.test.js`.
+
+**Explore (`tests/pages/explore/`):** All explore suites use **`tests/fixtures/explore/`** and **mocked Apollo / `fetch` / `env`**—no live I/O (same “no live backends” rule as §1). Each file’s role relative to types **1–3** is fixed in the table below.
+
+| File | Type(s) | Role |
+|------|---------|------|
+| `exploreParticipantCount.test.js` | **1**, **3** | **1:** `TabsView` counts/formatting from props + fixtures. **3:** simulated filter API → Redux → tab counts (“3 → 1”). |
+| `exploreTabTables.test.js` | **2**, **3** | **2:** Stubbed `TableView`; assert `paginationAPIField`, `queryVariables`, wiring. **3:** tab clicks → `activeTab` / Redux. |
+| `exploreTabTableRows.test.js` | **2**, **3** | **2:** Real Bento table; mocked `useApolloClient().query`; fixture-derived headers/cells. **3:** `activeFilters` → subset of rows. |
+| `exploreUrlQuery.test.js` | **2** | URL/search params → `mockQuery` variables + Redux (`inventoryCover`). |
+| `exploreDashboardAsync.test.js` | **2** | Delayed / empty dashboard response → loading UI + `dashData`. |
+| `exploreFacetFilterUi.test.js` | **3** | Full `Inventory` + facet sidebar interaction. |
+| `exploreTabSwitching.test.js` | **3** | Tab strip + URL + singleton store (pattern **C**). |
+| `exploreTabWithFilters.test.js` | **3** | Facet active, then tabs; counts + filters (pattern **D**). |
+| `exploreClearFilters.test.js` | **3** | Clear-all control; URL + Redux reset (pattern **E**). |
+| `exploreInventoryRestore.test.js` | **3**, **2** | Restore navigation / menu (pattern **G**); `import_from` **`fetch`** mocked. |
+| `exploreWidgetView.test.js` | **1**, **3** | **1:** `WidgetView` + `ThemeProvider` + `widgetDashboardData` fixtures; **3:** collapse / open control (`getByText` for MUI button label). Real **`@bento-core/widgets`**; no Apollo. |
+
+Queries should follow §1 order where applicable: **`getByRole`** → **`getByLabelText`** → **`getByText`**; use **`within()`** for tables/regions (see `exploreTabTableRows.test.js`).
 
 ### 3. Before and after user input (interaction + state)
 
@@ -149,6 +176,14 @@ More detail on Explore: [`tests/pages/explore/README.md`](pages/explore/README.m
 |--------|------|----------|
 | **A. Full interaction** | Mount the real page/container, `fireEvent` on real DOM, mock Apollo/client to return different data when `variables` include filters | `exploreFacetFilterUi.test.js` |
 | **B. Two-phase render or dispatch** | Render or dispatch with **unfiltered** props/state, assert `(3)`; then render again or dispatch with **filtered** data, assert `(1)` | `exploreParticipantCount.test.js` (“Filtered API Calls”, “update from 3 to 1”) |
+| **C. Tab strip + URL** | `createMemoryRouter` + `RouterProvider`, click `role="tab"`, assert `router.state.location` and singleton store `inventoryReducer.tab` | `exploreTabSwitching.test.js` |
+| **D. Facet then tab** | Apply filter via sidebar (same steps as facet UI test), then switch tabs; assert filter + counts persist and no spurious refetch | `exploreTabWithFilters.test.js` |
+| **E. Clear all filters** | Select a facet, click **Clear all**; assert URL + Redux + tab counts reset | `exploreClearFilters.test.js` |
+| **F. Loading + empty API shape** | Delayed Apollo resolve to assert **`isDataloading`**; empty **`searchParticipants`** keeps loading UI | `exploreDashboardAsync.test.js` |
+| **G. Redux + router restore** | Dispatch **`return_2_page`** / saved URL; **`MemoryRouter`** `state`; assert **`location.search`** + **`mockQuery`** | `exploreInventoryRestore.test.js` |
+| **H. Tabs + table stubs** | **`TabsView`/`TabPanel`** with mocked paginated table; **`getByRole(..., { hidden: true })`** | `exploreTabTables.test.js` |
+| **I. Tabs + real table DOM** | **`TabPanel`** with real **`@bento-core/paginated-table`** / **`@bento-core/table`**; mocked **`useApolloClient().query`**; fixtures mirror overview query shapes; assert **`columnheader`** + cell text (type **2**); optional facet props for row subset (type **3**) | `exploreTabTableRows.test.js` |
+| **J. Explore `WidgetView` (charts)** | **`createMuiTheme`** from **`src/themes/light`**, **`ThemeProvider`**; **`tests/fixtures/explore/widgetDashboardData.js`**; polyfill **`ResizeObserver`**; use **`getByText(/COLLAPSE VIEW/i)`** for the collapse control (MUI may not set the button’s accessible name) | `exploreWidgetView.test.js` |
 
 **Rules of thumb:**
 

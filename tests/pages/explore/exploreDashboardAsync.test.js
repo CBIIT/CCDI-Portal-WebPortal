@@ -1,11 +1,12 @@
 /**
- * UI integration: explore facet sidebar — open Demographics, select Sex at Birth → Female,
- * verify dashboard query variables and participant tab count update (mocked Apollo).
+ * Explore milestone 2.5 — `inventoryCover` dashboard fetch lifecycle: Redux **`isDataloading`**
+ * during an in-flight `client.query`, and the Explore body stays on the **loading** UI when the
+ * GraphQL payload has no **`searchParticipants`** (so `syncUpDashboard` never runs).
  *
- * inventoryCover dispatches to the singleton src/store (not only React context), so this
- * test must use that same store instance in <Provider>.
+ * Does not rely on rejected promises (the app does not attach `.catch` to `getData`), avoiding
+ * unhandled-rejection noise in Jest.
  *
- * Uses fixtures from tests/fixtures/explore/apiResponses.js
+ * @see src/pages/inventory/inventoryCover.js (`getData`, `inDataloading`, `syncUpDashboard`)
  */
 
 jest.mock('../../../src/utils/env', () => ({
@@ -100,11 +101,13 @@ import { useApolloClient } from '@apollo/client';
 import store from '../../../src/store';
 import Inventory from '../../../src/pages/inventory/inventoryController';
 import {
-  exploreDashboardWithSexAtBirthFacets,
   exploreDashboardFemaleOnly,
+  exploreDashboardWithSexAtBirthFacets,
 } from '../../fixtures/explore/apiResponses';
+import { resetExploreSingletonStore } from '../../helpers/exploreStoreReset';
+import { syncUpDashboard } from '../../../src/components/Inventory/InventoryState';
 
-function renderExplorePage() {
+function renderExplore() {
   return render(
     <Provider store={store}>
       <MemoryRouter initialEntries={['/explore']}>
@@ -116,24 +119,52 @@ function renderExplorePage() {
   );
 }
 
-describe('Explore — facet filter UI (Sex at Birth)', () => {
+async function selectSexAtBirthFemale() {
+  const demoHeading = screen.getByText('Demographics');
+  fireEvent.click(demoHeading.closest('li') || demoHeading);
+
+  await waitFor(() => {
+    expect(screen.getByText('Sex at Birth')).toBeInTheDocument();
+  });
+
+  fireEvent.click(screen.getByText('Sex at Birth'));
+
+  const facetsRoot = await waitFor(() => {
+    const el = document.querySelector('[class*="contentPanelBody"]');
+    expect(el).toBeTruthy();
+    return el;
+  });
+
+  await waitFor(() => {
+    expect(facetsRoot.querySelector('input[type="checkbox"], [role="checkbox"]')).toBeTruthy();
+  });
+
+  const femaleTarget = await waitFor(() => {
+    const leaves = facetsRoot.querySelectorAll('*');
+    const textNode = [...leaves].find(
+      (n) => n.children.length === 0 && /\bFemale\b/i.test((n.textContent || '').trim()),
+    );
+    expect(textNode).toBeTruthy();
+    const clickable = textNode.closest('.MuiFormControlLabel-root')
+      || textNode.closest('button')
+      || textNode.closest('li')
+      || textNode.parentElement;
+    expect(clickable).toBeTruthy();
+    return clickable;
+  });
+
+  fireEvent.click(femaleTarget);
+}
+
+describe('Explore — dashboard query async behavior (inventoryCover)', () => {
   let mockQuery;
 
   beforeEach(() => {
     jest.clearAllMocks();
+    resetExploreSingletonStore();
+
     mockQuery = jest.fn();
     useApolloClient.mockReturnValue({ query: mockQuery });
-
-    mockQuery.mockImplementation(async ({ variables }) => {
-      if (
-        variables
-        && Array.isArray(variables.sex_at_birth)
-        && variables.sex_at_birth.includes('Female')
-      ) {
-        return { data: { searchParticipants: exploreDashboardFemaleOnly } };
-      }
-      return { data: { searchParticipants: exploreDashboardWithSexAtBirthFacets } };
-    });
 
     global.ResizeObserver = jest.fn().mockImplementation(() => ({
       observe: jest.fn(),
@@ -150,71 +181,56 @@ describe('Explore — facet filter UI (Sex at Birth)', () => {
     };
   });
 
-  it('should open Demographics, select Female, refetch with sex_at_birth, and update participant count', async () => {
-    renderExplorePage();
+  it('should set isDataloading until a delayed facet refetch resolves', async () => {
+    let calls = 0;
+    mockQuery.mockImplementation(() => {
+      calls += 1;
+      if (calls === 1) {
+        return Promise.resolve({ data: { searchParticipants: exploreDashboardWithSexAtBirthFacets } });
+      }
+      return new Promise((resolve) => {
+        setTimeout(
+          () => resolve({ data: { searchParticipants: exploreDashboardFemaleOnly } }),
+          200,
+        );
+      });
+    });
+
+    renderExplore();
 
     await waitFor(() => {
-      const participantTabInitial = screen.getAllByRole('tab').find((el) => /Participants/i.test(el.textContent));
-      expect(participantTabInitial).toBeTruthy();
-      expect(participantTabInitial.textContent).toMatch(/\(3\)/);
+      expect(screen.getAllByRole('tab').some((el) => /Participants/i.test(el.textContent))).toBe(true);
     });
 
-    expect(mockQuery).toHaveBeenCalled();
-    const firstCallVars = mockQuery.mock.calls[0][0].variables;
-    expect(firstCallVars.sex_at_birth).toBeUndefined();
-
-    const demoHeading = screen.getByText('Demographics');
-    fireEvent.click(demoHeading.closest('li') || demoHeading);
+    await selectSexAtBirthFemale();
 
     await waitFor(() => {
-      expect(screen.getByText('Sex at Birth')).toBeInTheDocument();
+      expect(store.getState().inventoryReducer.isDataloading).toBe(true);
     });
 
-    fireEvent.click(screen.getByText('Sex at Birth'));
-
-    const facetsRoot = await waitFor(() => {
-      const el = document.querySelector('[class*="contentPanelBody"]');
-      expect(el).toBeTruthy();
-      return el;
-    });
-
-    await waitFor(() => {
-      const anyFacet = facetsRoot.querySelector('input[type="checkbox"], [role="checkbox"]');
-      expect(anyFacet).toBeTruthy();
-    });
-
-    const femaleTarget = await waitFor(() => {
-      const leaves = facetsRoot.querySelectorAll('*');
-      const textNode = [...leaves].find(
-        (n) => n.children.length === 0 && /\bFemale\b/i.test((n.textContent || '').trim()),
-      );
-      expect(textNode).toBeTruthy();
-      const clickable = textNode.closest('.MuiFormControlLabel-root')
-        || textNode.closest('button')
-        || textNode.closest('li')
-        || textNode.parentElement;
-      expect(clickable).toBeTruthy();
-      return clickable;
-    });
-
-    fireEvent.click(femaleTarget);
+    await waitFor(
+      () => {
+        expect(store.getState().inventoryReducer.isDataloading).toBe(false);
+      },
+      { timeout: 4000 },
+    );
 
     await waitFor(() => {
       expect(store.getState().inventoryReducer.dashData.numberOfParticipants).toBe(2);
     });
+  });
 
-    expect(store.getState().inventoryReducer.activeFilters.sex_at_birth).toEqual(['Female']);
+  it('should keep Explore on the loading layout when searchParticipants is missing from the response', async () => {
+    store.dispatch(syncUpDashboard(null, null));
 
-    const participantTab = screen.getAllByRole('tab').find((el) => /Participants/i.test(el.textContent));
-    expect(participantTab).toBeTruthy();
-    expect(participantTab.textContent).toMatch(/\(2\)/);
+    mockQuery.mockResolvedValue({ data: {} });
 
-    const femaleCall = mockQuery.mock.calls.find(
-      (call) => call[0].variables
-        && Array.isArray(call[0].variables.sex_at_birth)
-        && call[0].variables.sex_at_birth.includes('Female'),
-    );
-    expect(femaleCall).toBeTruthy();
-    expect(femaleCall[0].variables.sex_at_birth).toEqual(['Female']);
+    renderExplore();
+
+    await waitFor(() => {
+      expect(screen.getByRole('progressbar')).toBeInTheDocument();
+    });
+
+    expect(store.getState().inventoryReducer.dashData).toBeNull();
   });
 });

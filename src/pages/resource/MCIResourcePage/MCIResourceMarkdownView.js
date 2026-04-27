@@ -427,6 +427,18 @@ const MCIResourceBody = styled.div`
         margin-top: -12px;
     }
 
+    /* #### in markdown (react-markdown) */
+    h4 {
+        color: #05555C;
+        font-family: Poppins;
+        font-size: 18px;
+        font-style: italic;
+        font-weight: 500;
+        line-height: 26px; /* 144.444% */
+        letter-spacing: -0.036px;
+        margin-bottom: 24px;
+    }
+
     .mciContentContainer {
         font-family: Inter;
         font-weight: 400;
@@ -440,14 +452,6 @@ const MCIResourceBody = styled.div`
             text-decoration: underline;
             text-underline-position: under;
             line-break: anywhere;
-        }
-
-        h4 {
-            font-family: Poppins;
-            font-weight: 400;
-            font-size: 19px;
-            line-height: 21px;
-            letter-spacing: 0.02em;
         }
 
         ul {

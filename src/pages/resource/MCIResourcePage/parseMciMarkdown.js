@@ -149,9 +149,34 @@ function extractWidgets(text) {
 }
 
 /**
+ * Caption for a `responsive-img` block: `Caption` (or `caption`) in YAML, then legacy
+ * `MCI_Workflow_Diagram_Caption` in the block, else front matter `MCI_Workflow_Diagram_Caption`.
+ * @param {object|undefined} responsiveImg
+ * @param {object|undefined} data
+ */
+export function resolveResponsiveImgCaption(responsiveImg, data) {
+  if (!responsiveImg) {
+    return null;
+  }
+  if (responsiveImg.Caption != null) {
+    return responsiveImg.Caption;
+  }
+  if (responsiveImg.caption != null) {
+    return responsiveImg.caption;
+  }
+  if (responsiveImg.MCI_Workflow_Diagram_Caption != null) {
+    return responsiveImg.MCI_Workflow_Diagram_Caption;
+  }
+  if (data && data.MCI_Workflow_Diagram_Caption != null) {
+    return data.MCI_Workflow_Diagram_Caption;
+  }
+  return null;
+}
+
+/**
  * Parses a single .md file with YAML front matter and a body structured as:
  * - Optional lead prose (markdown) in the body before the first `##` (ODS style; legacy `introText` in front matter is still read if the body has no lead)
- * - ## Topic {#optionalId} / ### Subtopic {#optionalId} with markdown + fenced mci-* code blocks (and responsive-img: YAML wide, mobile, optional alt / caption)
+ * - ## Topic {#optionalId} / ### Subtopic {#optionalId} with markdown + fenced mci-* and responsive-img (wide, mobile, alt, Caption or caption)
  * @param {string} raw - full file contents
  * @returns {object} Same general shape as mciData.yaml for MCIResourceView: introText, mciContent, plus FM keys
  */

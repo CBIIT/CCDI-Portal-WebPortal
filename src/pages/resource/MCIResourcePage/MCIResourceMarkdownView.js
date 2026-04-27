@@ -20,6 +20,7 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 //import DonutChart from '../../components/common/DonutChart';
 import MapView from '../../../components/common/mapGenerator';
 import MapViewMobile from '../components/MapViewMobile';
+import { resolveResponsiveImgCaption } from './parseMciMarkdown';
 
 const MCIResourceContainer = styled.div`
     width: 100%;
@@ -665,8 +666,7 @@ const MCIResourceMarkdownView = ({ data }) => {
                                         {
                                             mci.list.map((mciItem, idx) => {
                                                 const ri = mciItem.responsiveImg;
-                                                const riCaption = ri
-                                                  && (ri.caption != null ? ri.caption : data.MCI_Workflow_Diagram_Caption);
+                                                const riCaption = ri && resolveResponsiveImgCaption(ri, data);
                                                 return (
                                                     <>
                                                         <div id={mciItem.id} className='mciSubtitle'>{mciItem.subtopic && mciItem.subtopic}</div>

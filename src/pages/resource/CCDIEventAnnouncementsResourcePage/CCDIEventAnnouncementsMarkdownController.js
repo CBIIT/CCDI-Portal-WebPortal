@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import env from '../../../utils/env';
-import yaml from 'js-yaml';
 import axios from 'axios';
 import parseCcdiEventAnnouncementsMarkdown from './parseCcdiEventAnnouncementsMarkdown';
 import CCDIEventAnnouncementsMarkdownView from './CCDIEventAnnouncementsMarkdownView';
 
-const CCDI_EVENTS_MD_URL = `${env.REACT_APP_STATIC_CONTENT_URL}/ccdiEventAnnouncements.md`;
-const RESOURCE_DATA_YAML_URL = `${env.REACT_APP_STATIC_CONTENT_URL}/resourceData.yaml`;
+const CCDI_EVENTS_MD_URL = `${env.REACT_APP_STATIC_CONTENT_URL}/pages/About/ccdi-events-announcements.md`;
 
 const CCDIEventAnnouncementsMarkdownController = () => {
   const [data, setData] = useState({});
@@ -18,14 +16,8 @@ const CCDIEventAnnouncementsMarkdownController = () => {
         const fileUrl = `${CCDI_EVENTS_MD_URL}?ts=${new Date().getTime()}`;
         const result = await axios.get(fileUrl);
         resultData = parseCcdiEventAnnouncementsMarkdown(result.data);
-      } catch (_mdError) {
-        try {
-          const fileUrl = `${RESOURCE_DATA_YAML_URL}?ts=${new Date().getTime()}`;
-          const result = await axios.get(fileUrl);
-          resultData = yaml.safeLoad(result.data) || {};
-        } catch (_yamlError) {
-          resultData = {};
-        }
+      } catch (_error) {
+        resultData = {};
       }
       setData(resultData);
     };

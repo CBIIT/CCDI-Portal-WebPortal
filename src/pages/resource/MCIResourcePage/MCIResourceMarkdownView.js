@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, createRef } from 'react';
+import React, { Fragment, useState, useEffect, useRef, createRef } from 'react';
 import styled from 'styled-components';
 import MciMarkdown from './MciMarkdown';
 import { NavLink } from 'react-router-dom';
@@ -21,6 +21,78 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import MapView from '../../../components/common/mapGenerator';
 import MapViewMobile from '../components/MapViewMobile';
 import { resolveResponsiveImgCaption } from './parseMciMarkdown';
+
+function MciSubtopicSegments({ segments, pageData }) {
+  if (!Array.isArray(segments) || segments.length === 0) {
+    return null;
+  }
+  return (
+    <>
+      {segments.map((seg, i) => {
+        const k = `mci_seg_${i}`;
+        if (seg.type === 'markdown' && seg.markdown) {
+          return <MciMarkdown key={k}>{seg.markdown}</MciMarkdown>;
+        }
+        if (seg.type !== 'widget' || !seg.data) {
+          return null;
+        }
+        if (seg.widget === 'diseaseTable') {
+          const t = seg.data;
+          return (
+            <Fragment key={k}>
+              <div className='MCIDiseaseTableContainer'><MCIDiseaseTable table={t}/></div>
+              <div className='MCIDiseaseTableMobileContainer'><MCIDiseaseTableMobile table={t}/></div>
+              <p>{t.footer}</p>
+            </Fragment>
+          );
+        }
+        if (seg.widget === 'map') {
+          return (
+            <Fragment key={k}>
+              <div className='MapContainer'><MapView mapData={seg.data} /></div>
+              <div className='MapMobileContainer'><MapViewMobile mapData={seg.data}/></div>
+            </Fragment>
+          );
+        }
+        if (seg.widget === 'table') {
+          const t = seg.data;
+          return (
+            <Fragment key={k}>
+              <div className='MCITableContainer'><MCITable table={t} /></div>
+              <div className='MCITableMobileContainer'><MCITableMobile table={t} /></div>
+              <p>{t.footer}</p>
+            </Fragment>
+          );
+        }
+        if (seg.widget === 'searchTable') {
+          return (
+            <Fragment key={k}>
+              <div className='MCISearchTableContainer'><MCISearchTable table={seg.data} /></div>
+              <div className='MCISearchTableMobileContainer'><MCISearchTableMobile table={seg.data}/></div>
+            </Fragment>
+          );
+        }
+        if (seg.widget === 'responsiveImg') {
+          const ri = seg.data;
+          if (!ri || !ri.wide || !ri.mobile) {
+            return null;
+          }
+          const riCaption = resolveResponsiveImgCaption(ri, pageData);
+          return (
+            <Fragment key={k}>
+              <img className="ecosystemImg" src={ri.wide} alt={ri.alt || ''} loading="lazy" />
+              <img className="ecosystemImgMobile" src={ri.mobile} alt={ri.altMobile || ri.alt || ''} loading="lazy" />
+              {riCaption && (
+                <div className="ImgCaption">{riCaption}</div>
+              )}
+            </Fragment>
+          );
+        }
+        return null;
+      })}
+    </>
+  );
+}
 
 const MCIResourceContainer = styled.div`
     width: 100%;
@@ -665,73 +737,18 @@ const MCIResourceMarkdownView = ({ data }) => {
                                         <div className="mciSection mobileCollapse" ref={sectionList.current[mciidx]}>
                                         {
                                             mci.list.map((mciItem, idx) => {
-                                                const ri = mciItem.responsiveImg;
-                                                const riCaption = ri && resolveResponsiveImgCaption(ri, data);
                                                 return (
                                                     <>
                                                         <div id={mciItem.id} className='mciSubtitle'>{mciItem.subtopic && mciItem.subtopic}</div>
                                                         <div className='mciContentContainer'>
-                                                            {mciItem.content && <MciMarkdown>{mciItem.content}</MciMarkdown>}
-                                                            {ri && ri.wide && ri.mobile && (
-                                                            <>
-                                                                <img className="ecosystemImg" src={ri.wide} alt={ri.alt || ''} loading="lazy" />
-                                                                <img className="ecosystemImgMobile" src={ri.mobile} alt={ri.altMobile || ri.alt || ''} loading="lazy" />
-                                                                {riCaption && (
-                                                                    <div className="ImgCaption">{riCaption}</div>
-                                                                )}
-                                                            </>
-                                                            )}
-                                                            {/* {mciItem.donut && 
-                                                            <div className='donutContainer'>
-                                                                <div className='donutTitleContainer'><h4>{mciItem.donut.title}</h4></div>
-                                                                <DonutChart
-                                                                    data={mciItem.donut.data}
-                                                                    innerRadiusP={65}
-                                                                    outerRadiusP={115}
-                                                                    paddingSpace={mciItem.donut.length === 1 ? 0 : 0.5}
-                                                                    textColor="black"
-                                                                />
-                                                            </div>
-                                                            } */}
-                                                            {mciItem.diseaseTable && 
-                                                            <>
-                                                                <div className='MCIDiseaseTableContainer'><MCIDiseaseTable table={mciItem.diseaseTable}/></div>
-
-                                                                <div className='MCIDiseaseTableMobileContainer'><MCIDiseaseTableMobile table={mciItem.diseaseTable}/></div>
-                                                                <p>{mciItem.diseaseTable.footer}</p>
-                                                            </>
-                                                            }
-                                                            {mciItem.map &&
-                                                            <>
-                                                                <div className='MapContainer'><MapView mapData={mciItem.map} /></div>
-                                                                <div className='MapMobileContainer'><MapViewMobile mapData={mciItem.map}/></div>
-                                                            </>
-                                                            }
-                                                            {mciItem.table &&
-                                                            <>
-                                                                <div className='MCITableContainer'><MCITable table={mciItem.table} /></div>
-                                                                <div className='MCITableMobileContainer'><MCITableMobile table={mciItem.table} /></div>
-                                                                <p>{mciItem.table.footer}</p>
-                                                            </>
-                                                            }
+                                                            <MciSubtopicSegments segments={mciItem.segments} pageData={data} />
                                                             {mciItem.annotation && 
                                                             <>
                                                                 <p style={{marginTop: "1em"}}>{mciItem.annotation}</p>
                                                             </>
                                                             }
-                                                            {mciItem.searchTable &&
-                                                            <>
-                                                                <div className='MCISearchTableContainer'><MCISearchTable table={mciItem.searchTable} /></div>
-                                                                <div className='MCISearchTableMobileContainer'><MCISearchTableMobile table={mciItem.searchTable} /></div>
-                                                            </> }
-                                                            {/* {mciItem.numberTable && 
-                                                            <>
-                                                                <MCINumberTable table={mciItem.numberTable} />
-                                                                <div>{mciItem.numberTable.footer}</div>
-                                                            </>
-                                                            } */}
                                                         </div>
-                                                        {mciItem.content && <div style={{height: '40px'}} />}
+                                                        {mciItem.segments && mciItem.segments.length > 0 && <div style={{height: '40px'}} />}
                                                     </>
                                                 )
                                             })

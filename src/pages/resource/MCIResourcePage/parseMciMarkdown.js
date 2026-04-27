@@ -120,32 +120,58 @@ function splitH3InTopic(topicBody) {
   return subs;
 }
 
-function extractWidgets(text) {
+function trimMd(s) {
+  return String(s || '')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+}
+
+/**
+ * Walks a ### subtopic body in source order: markdown runs and ` ```${lang}` widgets alternate.
+ * @returns {Array<{ type: 'markdown', markdown: string }|{ type: 'widget', widget: string, data: * }>}
+ */
+function buildSegments(body) {
+  const rawText = String(body || '');
   const re = new RegExp(
     '```' + WIDGET_LANG + '\\s*\\n([\\s\\S]*?)```',
     'gi',
   );
-  const out = {
-    contentMarkdown: text,
-  };
-  const matches = [...text.matchAll(re)];
-  matches.forEach((m) => {
+  const matches = [];
+  let m;
+  while ((m = re.exec(rawText)) !== null) {
+    matches.push(m);
+  }
+  const segments = [];
+  let lastIndex = 0;
+  for (let j = 0; j < matches.length; j += 1) {
+    m = matches[j];
+    const full = m[0];
     const kind = m[1].toLowerCase();
-    const raw = m[2];
-    const key = WIDGET_KEY[kind];
-    if (!key) return;
-    try {
-      out[key] = yaml.safeLoad(raw);
-    } catch (e) {
-      console.warn('[parseMciMarkdown] widget YAML failed:', kind, e);
+    const fenceBody = m[2];
+    const start = m.index;
+    if (start > lastIndex) {
+      const chunk = trimMd(rawText.slice(lastIndex, start));
+      if (chunk) {
+        segments.push({ type: 'markdown', markdown: chunk });
+      }
     }
-  });
-  let md = text;
-  matches.forEach((m) => {
-    md = md.replace(m[0], '\n\n');
-  });
-  out.contentMarkdown = md.replace(/\n{3,}/g, '\n\n').trim();
-  return out;
+    const widget = WIDGET_KEY[kind];
+    if (widget) {
+      try {
+        segments.push({ type: 'widget', widget, data: yaml.safeLoad(fenceBody) });
+      } catch (e) {
+        console.warn('[parseMciMarkdown] widget YAML failed:', kind, e);
+      }
+    }
+    lastIndex = start + full.length;
+  }
+  if (lastIndex < rawText.length) {
+    const chunk = trimMd(rawText.slice(lastIndex));
+    if (chunk) {
+      segments.push({ type: 'markdown', markdown: chunk });
+    }
+  }
+  return segments;
 }
 
 /**
@@ -176,7 +202,7 @@ export function resolveResponsiveImgCaption(responsiveImg, data) {
 /**
  * Parses a single .md file with YAML front matter and a body structured as:
  * - Optional lead prose (markdown) in the body before the first `##` (ODS style; legacy `introText` in front matter is still read if the body has no lead)
- * - ## Topic {#optionalId} / ### Subtopic {#optionalId} with markdown + fenced mci-* and responsive-img (wide, mobile, alt, Caption or caption)
+ * - ## / ### with markdown and fenced mci-* widgets; order is preserved via `list[].segments`
  * @param {string} raw - full file contents
  * @returns {object} Same general shape as mciData.yaml for MCIResourceView: introText, mciContent, plus FM keys
  */
@@ -195,19 +221,11 @@ export function parseMciMarkdown(raw) {
   const topics = splitH2(rest);
   const mciContent = topics.map((t) => {
     const subs = splitH3InTopic(t.body);
-    const list = subs.map((s) => {
-      const w = extractWidgets(s.body);
-      return {
-        id: s.id,
-        subtopic: s.subtopic,
-        content: w.contentMarkdown,
-        diseaseTable: w.diseaseTable,
-        map: w.map,
-        table: w.table,
-        searchTable: w.searchTable,
-        responsiveImg: w.responsiveImg,
-      };
-    });
+    const list = subs.map((s) => ({
+      id: s.id,
+      subtopic: s.subtopic,
+      segments: buildSegments(s.body),
+    }));
     return {
       id: t.id,
       topic: t.topic,

@@ -1,6 +1,6 @@
 ---
-CCDI_Event_Announcements_Header: "https://raw.githubusercontent.com/CBIIT/CCDI_Hub_Assets/main/Image/About/Data_Usage_Policies_Header.png"
 ---
+![Data Usage Policies and CCDI events](https://raw.githubusercontent.com/CBIIT/CCDI_Hub_Assets/main/Image/About/Data_Usage_Policies_Header.png "CCDI Events and announcements header")
 
 The CCDI Events Announcements page brings together news announcements and details on past events, webinars, and workshops.
 

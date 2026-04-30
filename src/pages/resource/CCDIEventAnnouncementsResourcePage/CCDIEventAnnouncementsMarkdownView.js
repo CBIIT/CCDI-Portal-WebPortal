@@ -90,6 +90,13 @@ const CCDIBody = styled.div`
             text-underline-position: under;
             line-break: anywhere;
         }
+
+        .mci-md-img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin-bottom: 16px;
+        }
     }
 
     .navList {
@@ -406,7 +413,12 @@ const CCDIEventAnnouncementsMarkdownView = ({ data }) => {
     }
 
     return (
-        <CCDIContainer headerImg={data.CCDI_Event_Announcements_Header}>
+        <CCDIContainer
+            headerImg={
+                data.ccdiEventAnnouncementsHeaderImageUrl
+                || data.CCDI_Event_Announcements_Header
+            }
+        >
              <div className='headerContainer'><div className='headerText'>CCDI Events Announcements</div></div>
             <CCDIBody id='CCDIEventArchiveBody'>
                 <div className='navSection'>

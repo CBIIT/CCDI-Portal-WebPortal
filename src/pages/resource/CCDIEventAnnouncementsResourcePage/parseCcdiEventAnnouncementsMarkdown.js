@@ -1,5 +1,20 @@
 import matter from 'gray-matter';
 
+function stripMarkdownHeadingBraceId(rawHeadingInner) {
+  return String(rawHeadingInner || '')
+    .trim()
+    .replace(/\s*\{#[^}]+\}\s*$/, '')
+    .trim();
+}
+
+function slugifyHeadingId(text) {
+  const s = stripMarkdownHeadingBraceId(text)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+  return (s || 'section').slice(0, 120);
+}
+
 /**
  * One-line CommonMark / GFM image: ![alt](src) or ![alt](src "title")
  * or ![alt](<https://x>) (optional "title" after)
@@ -57,21 +72,15 @@ function extractLeadingImageFromIntro(introMd) {
   return { headerImage: img, introWithoutHeaderImage: rest || '' };
 }
 
-function slugify(text) {
-  const s = String(text)
-    .trim()
-    .replace(/[^a-zA-Z0-9]+/g, '_')
-    .replace(/^_+|_+$/g, '');
-  return (s || 'section').slice(0, 120);
-}
-
 function parseHeadingH2(line) {
-  const re = /^##\s+(.+?)(?:\s*\{#([^}]+)\})?\s*$/;
+  const re = /^##\s+(.+)$/;
   const m = line.match(re);
   if (!m) {
     return null;
   }
-  return { title: m[1].trim(), id: m[2] || slugify(m[1]) };
+  const rawInner = m[1];
+  const title = stripMarkdownHeadingBraceId(rawInner);
+  return { title, id: slugifyHeadingId(rawInner) };
 }
 
 function splitH2Sections(body) {
@@ -92,11 +101,12 @@ function splitH2Sections(body) {
         });
       }
       const p = parseHeadingH2(line);
+      const rawH2 = line.replace(/^##\s+/, '').trim();
       cur = p
         ? { topic: p.title, id: p.id, lines: [] }
         : {
-            topic: line.replace(/^##\s+/, '').trim(),
-            id: slugify(line),
+            topic: stripMarkdownHeadingBraceId(rawH2),
+            id: slugifyHeadingId(rawH2),
             lines: [],
           };
     } else if (cur) {
@@ -138,8 +148,8 @@ function extractIntroAndRestFromBody(body) {
  * CCDI Events & Announcements: intro (before the first `##`) may start with
  * `![alt](url "title")` — the FE uses `url` for `CCDIContainer` / header background and
  * strips that line from intro body. `CCDI_Event_Announcements_Header` in front matter is
- * used only as a fallback when there is no such lead image line. Then `## Topic {#anchorId}` and
- * section bodies (often HTML).
+ * used only as a fallback when there is no such lead image line. Each `## Topic` gets an
+ * auto id from the title (hyphen-separated slug); optional `{#…}` in source is ignored for ids.
  */
 export function parseCcdiEventAnnouncementsMarkdown(raw) {
   const { data: fm, content: body } = matter(raw || '');

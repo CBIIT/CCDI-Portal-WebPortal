@@ -1,10 +1,8 @@
----
----
 ![Data Usage Policies and CCDI events](https://raw.githubusercontent.com/CBIIT/CCDI_Hub_Assets/main/Image/About/Data_Usage_Policies_Header.png "CCDI Events and announcements header")
 
 The CCDI Events Announcements page brings together news announcements and details on past events, webinars, and workshops.
 
-## Past Events, Webinars, and Workshops {#CCDI_Event_Archive_1}
+## Past Events, Webinars, and Workshops
 
 <p>
 <a class="link" href="https://d2xnga7irezzit.cloudfront.net/ccdi_hub_files/ccdi_events_announcements/Childhood%20Cancer%20Clinical%20Data%20Commons%E2%80%94A%20New%20Web%20Application%20for%20Your%20Data%20Needs.pdf" target="_blank" rel="noopener noreferrer">Childhood Cancer Clinical Data Commons: A New Web Application for Your Data Needs</a><br>3/11/24<br><br>
@@ -24,6 +22,6 @@ The CCDI Events Announcements page brings together news announcements and detail
 <a class="link" href="https://d2xnga7irezzit.cloudfront.net/ccdi_hub_files/ccdi_events_announcements/Watch+the+New+Childhood+Cancer+Data+Initiative+Vision+Video.pdf" target="_blank" rel="noopener noreferrer">Watch the New Childhood Cancer Data Initiative Vision Video</a><br>10/15/20
 </p>
 
-## Contact {#CCDI_Event_Archive_2}
+## Contact
 
 <p>If you have questions about a specific event or would like more information, please contact <a class="link" href="mailto:NCIChildhoodCancerDataInitiative@mail.nih.gov" target="_blank" rel="noopener noreferrer">NCIChildhoodCancerDataInitiative@mail.nih.gov</a>.</p>

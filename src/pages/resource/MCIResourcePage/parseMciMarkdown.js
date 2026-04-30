@@ -1,6 +1,21 @@
 import matter from 'gray-matter';
 import yaml from 'js-yaml';
 
+function stripMarkdownHeadingBraceId(rawHeadingInner) {
+  return String(rawHeadingInner || '')
+    .trim()
+    .replace(/\s*\{#[^}]+\}\s*$/, '')
+    .trim();
+}
+
+function slugifyHeadingId(text) {
+  const s = stripMarkdownHeadingBraceId(text)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+  return (s || 'section').slice(0, 120);
+}
+
 const WIDGET_LANG = '(mci-disease-table|mci-map|mci-search-table|mci-table|responsive-img)';
 
 const WIDGET_KEY = {
@@ -11,22 +26,13 @@ const WIDGET_KEY = {
   'responsive-img': 'responsiveImg',
 };
 
-function slugify(text) {
-  const s = String(text)
-    .trim()
-    .replace(/[^a-zA-Z0-9]+/g, '_')
-    .replace(/^_+|_+$/g, '');
-  return (s || 'section').slice(0, 120);
-}
-
 function parseHeadingLine(line, level) {
-  const re =
-    level === 2
-      ? /^##\s+(.+?)(?:\s*\{#([^}]+)\})?\s*$/
-      : /^###\s+(.+?)(?:\s*\{#([^}]+)\})?\s*$/;
+  const re = level === 2 ? /^##\s+(.+)$/ : /^###\s+(.+)$/;
   const m = line.match(re);
   if (!m) return null;
-  return { title: m[1].trim(), id: m[2] || slugify(m[1]) };
+  const rawInner = m[1];
+  const title = stripMarkdownHeadingBraceId(rawInner);
+  return { title, id: slugifyHeadingId(rawInner) };
 }
 
 function extractIntroAndRest(body) {
@@ -66,9 +72,14 @@ function splitH2(rest) {
         });
       }
       const p = parseHeadingLine(line, 2);
+      const rawH2 = line.replace(/^##\s+/, '').trim();
       cur = p
         ? { title: p.title, id: p.id, lines: [] }
-        : { title: line.replace(/^##\s+/, '').trim(), id: slugify(line), lines: [] };
+        : {
+            title: stripMarkdownHeadingBraceId(rawH2),
+            id: slugifyHeadingId(rawH2),
+            lines: [],
+          };
     } else if (cur) {
       cur.lines.push(line);
     }
@@ -99,11 +110,12 @@ function splitH3InTopic(topicBody) {
         });
       }
       const p = parseHeadingLine(line, 3);
+      const rawH3 = line.replace(/^###\s+/, '').trim();
       cur = p
         ? { subtopic: p.title, id: p.id, lines: [] }
         : {
-            subtopic: line.replace(/^###\s+/, '').trim(),
-            id: slugify(line),
+            subtopic: stripMarkdownHeadingBraceId(rawH3),
+            id: slugifyHeadingId(rawH3),
             lines: [],
           };
     } else if (cur) {
@@ -202,7 +214,8 @@ export function resolveResponsiveImgCaption(responsiveImg, data) {
 /**
  * Parses a single .md file with YAML front matter and a body structured as:
  * - Optional lead prose (markdown) in the body before the first `##` (ODS style; legacy `introText` in front matter is still read if the body has no lead)
- * - ## / ### with markdown and fenced mci-* widgets; order is preserved via `list[].segments`
+ * - ## / ### with markdown and fenced mci-* widgets; order is preserved via `list[].segments`.
+ *   Topic/subtopic ids are generated from heading titles (hyphen-separated slugs); optional `{#…}` in source is ignored for ids.
  * @param {string} raw - full file contents
  * @returns {object} Same general shape as mciData.yaml for MCIResourceView: introText, mciContent, plus FM keys
  */

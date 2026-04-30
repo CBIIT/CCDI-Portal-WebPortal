@@ -145,29 +145,50 @@ function extractIntroAndRestFromBody(body) {
 }
 
 /**
- * CCDI Events & Announcements: intro (before the first `##`) may start with
- * `![alt](url "title")` — the FE uses `url` for `CCDIContainer` / header background and
- * strips that line from intro body. `CCDI_Event_Announcements_Header` in front matter is
- * used only as a fallback when there is no such lead image line. Each `## Topic` gets an
- * auto id from the title (hyphen-separated slug); optional `{#…}` in source is ignored for ids.
+ * ODS-style markdown (aligned with MCI): YAML front matter (`title`, optional headers, …),
+ * then body intro before the first `##`. Intro may start with `![alt](url "title")` for the
+ * hero background (stripped from rendered intro). FM `introText` or legacy
+ * `ccdiEventAnnouncementsIntroText` supplies HTML intro only when the body has no intro prose.
+ * `CCDI_Event_Announcements_Header` in front matter is a header fallback when there is no
+ * lead image line. Section bodies under each `##` are markdown (e.g. `[label](url "title")`);
+ * legacy HTML strings from YAML still render via the same pipeline where supported.
  */
 export function parseCcdiEventAnnouncementsMarkdown(raw) {
   const { data: fm, content: body } = matter(raw || '');
-  const { ccdiEventAnnouncementsIntroText: _fmIntro, ...restFm } = fm;
+  const {
+    introText: _fmIntroText,
+    ccdiEventAnnouncementsIntroText: _fmLegacyIntroHtml,
+    ...restFm
+  } = fm;
   const { introMarkdown, rest } = extractIntroAndRestFromBody(body || '');
   const ccdiEventAnnouncementsContent = splitH2Sections(rest);
   const { headerImage, introWithoutHeaderImage } = extractLeadingImageFromIntro(
     introMarkdown
   );
-  const introFromBody = String(introWithoutHeaderImage || '').trim() !== '' ? introWithoutHeaderImage : undefined;
+  const introFromBody = String(introWithoutHeaderImage || '').trim() !== ''
+    ? introWithoutHeaderImage
+    : undefined;
   const headerFromImage = headerImage && headerImage.src ? String(headerImage.src) : undefined;
+
+  const fmIntroFallback =
+    _fmIntroText != null && String(_fmIntroText).trim() !== ''
+      ? _fmIntroText
+      : _fmLegacyIntroHtml;
+
+  const introMdOut = introFromBody;
+  const introHtmlOut =
+    introMdOut != null && String(introMdOut).trim() !== ''
+      ? undefined
+      : fmIntroFallback != null && String(fmIntroFallback).trim() !== ''
+        ? fmIntroFallback
+        : undefined;
 
   return {
     ...restFm,
     ccdiEventAnnouncementsContent,
     ccdiEventAnnouncementsHeaderImageUrl: headerFromImage,
-    ccdiEventAnnouncementsIntroMarkdown: introFromBody,
-    ccdiEventAnnouncementsIntroText: _fmIntro,
+    ccdiEventAnnouncementsIntroMarkdown: introMdOut,
+    ccdiEventAnnouncementsIntroText: introHtmlOut,
   };
 }
 

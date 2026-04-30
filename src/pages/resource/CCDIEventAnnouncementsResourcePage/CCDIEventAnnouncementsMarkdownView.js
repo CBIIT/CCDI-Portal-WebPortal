@@ -419,7 +419,7 @@ const CCDIEventAnnouncementsMarkdownView = ({ data }) => {
                 || data.CCDI_Event_Announcements_Header
             }
         >
-             <div className='headerContainer'><div className='headerText'>CCDI Events Announcements</div></div>
+             <div className='headerContainer'><div className='headerText'>{data.title || 'CCDI Events Announcements'}</div></div>
             <CCDIBody id='CCDIEventArchiveBody'>
                 <div className='navSection'>
                     <div className={stickyNavStyle} id='leftNav'>
@@ -459,7 +459,9 @@ const CCDIEventAnnouncementsMarkdownView = ({ data }) => {
                                         <div id={ccdiItem.id} name={ccdiId} className='mciTitleMobile sectionCollapse' onClick={handleCollapseSection}>{ccdiItem.topic && ccdiItem.topic}</div>
                                         <div className="mciSection mobileCollapse" ref={sectionList.current[ccdiId]}>
                                             <div className='mciContentContainer'>
-                                                {ccdiItem.content && ReactHtmlParser(ccdiItem.content)}
+                                                {ccdiItem.content && (String(ccdiItem.content).trim().startsWith('<')
+                                                    ? ReactHtmlParser(ccdiItem.content)
+                                                    : <MciMarkdown>{ccdiItem.content}</MciMarkdown>)}
                                             </div>
                                             {ccdiItem.content && <div style={{height: '40px'}} />}
                                         </div>

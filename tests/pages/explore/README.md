@@ -2,9 +2,20 @@
 
 ## Overview
 
-This directory contains integration tests for the explore page (`/explore`): participant counts in tab headers, **dashboard `WidgetView` charts** (Bento widgets), **main tab strip navigation** (`tab` in the URL), **tabs while facets are active**, **clear-all filters** in the sidebar, **dashboard `client.query` loading / empty payload** behavior, Redux/API wiring, sidebar facet interactions, **deep-link query strings** with mocked GraphQL, and **`TabPanel` table headers/cells** via real Bento paginated table (mocked Apollo only).
+This directory contains **all automated tests for the Explore page** (`/explore`): integration suites at this level (`explore*.test.js`) plus **subfolders** that mirror `src/pages/inventory/` for focused units (widgets, query bar, sidebar utils, tab table config). Production source still lives under `src/pages/inventory/`; tests are grouped here so Explore stays one section.
+
+Topics covered: participant counts in tab headers, **dashboard `WidgetView` charts** (Bento widgets), **main tab strip navigation** (`tab` in the URL), **tabs while facets are active**, **clear-all filters** in the sidebar, **dashboard `client.query` loading / empty payload** behavior, Redux/API wiring, sidebar facet interactions, **deep-link query strings** with mocked GraphQL, and **`TabPanel` table headers/cells** via real Bento paginated table (mocked Apollo only).
 
 Classification vs **`tests/TEST_STRUCTURE.md`** (§§133–153 — test types **1–3**) is summarized in that doc’s **Explore** table under **§2 API / data layer**.
+
+### Folder layout (mirrored units)
+
+| Path under `tests/pages/explore/` | Maps to source |
+|-----------------------------------|----------------|
+| `widget/WidgetUtils.test.js` | `src/pages/inventory/widget/WidgetUtils.js` |
+| `filterQueryBar/QueryBarView.test.js` | `src/pages/inventory/filterQueryBar/QueryBarView.js` |
+| `sideBar/BentoFilterUtils.test.js` | `src/pages/inventory/sideBar/BentoFilterUtils.js` |
+| `tabs/tableConfig/Column.test.js` | `src/pages/inventory/tabs/tableConfig/Column.js` |
 
 | File | Focus |
 |------|--------|
@@ -19,6 +30,10 @@ Classification vs **`tests/TEST_STRUCTURE.md`** (§§133–153 — test types **
 | `exploreTabTables.test.js` | **Real `TabsView` + `TabPanel`** with **mocked** `@bento-core/paginated-table`: four tab **pagination** fields (`participantOverview` … `fileOverview`), **`activeTab`**, tab clicks, **`queryVariables`** with **`activeFilters`** |
 | `exploreTabTableRows.test.js` | **Real `TabPanel`** + **real** `@bento-core/paginated-table` / `@bento-core/table`; mocked **`useApolloClient().query`**; fixture rows for **Participants** / **Studies**; **`getByRole('columnheader')`**, cell text; facet filter → subset of rows |
 | `exploreWidgetView.test.js` | **`WidgetView`** (six Bento chart cards + collapse); **`ThemeProvider` + `createMuiTheme(light)`**; fixtures **`widgetDashboardData.js`**; **no** `MemoryRouter` (no hooks); collapse / open via **`getByText`** |
+| `widget/WidgetUtils.test.js` | **`formatWidgetData`**: donut zero-subject filtering + sunburst branch; mocked **`uuid`** |
+| `filterQueryBar/QueryBarView.test.js` | **`QueryBarView`**: mocked **`QueryBarGenerator`** — **`clearAll`** / clear-import / **clear-upload** / **clear-autocomplete**, **`deleteAutocompleteItem`**, **`resetFacetSection`**, **`resetFacetSlider`** (slider vs unknown-ages chip), **`resetUnknownAges`**, **`resetFacetCheckbox`**, plus unknown-ages chip mapping |
+| `sideBar/BentoFilterUtils.test.js` | **`getAllIds` / `getAllParticipantIds`** with mocked **`graphqlClient`**; **`getFacetValues`**; facet dispatch bridge |
+| `tabs/tableConfig/Column.test.js` | **`configColumn`** CUSTOM_ELEM wiring; **`CustomCellView`** default / **`DBGAP`** / **`EXPAND`** |
 
 Shared mock shapes live in **`../fixtures/explore/apiResponses.js`**; overview table row shapes live in **`../fixtures/explore/participantOverviewTableRows.js`** and **`../fixtures/explore/studyOverviewTableRows.js`**; widget `dashData` slices live in **`../fixtures/explore/widgetDashboardData.js`**.
 

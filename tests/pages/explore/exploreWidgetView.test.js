@@ -84,6 +84,14 @@ describe('Explore — WidgetView (dashboard widgets)', () => {
   });
 
   beforeEach(() => {
+    if (!document.createRange) {
+      document.createRange = () => ({
+        setStart: () => {},
+        setEnd: () => {},
+        commonAncestorContainer: document.body,
+      });
+    }
+
     global.ResizeObserver = jest.fn().mockImplementation(() => ({
       observe: jest.fn(),
       unobserve: jest.fn(),
@@ -175,6 +183,27 @@ describe('Explore — WidgetView (dashboard widgets)', () => {
       expect(screen.getByText(/open view/i)).toBeInTheDocument();
       fireEvent.click(screen.getByText(/open view/i));
       expect(screen.getByText(/collapse view/i)).toBeInTheDocument();
+    });
+  });
+
+  describe('Diagnosis widget behavior', () => {
+    it('should show top-20 diagnosis tooltip copy when only participant_ids filter is active', async () => {
+      const diagnosisBuckets = Array.from({ length: 25 }, (_, idx) => ({
+        group: `Diagnosis ${idx + 1}`,
+        subjects: 1,
+      }));
+
+      renderWidgetView({
+        data: {
+          ...dashboardDataAllWidgetsPopulated,
+          participantCountByDiagnosis: diagnosisBuckets,
+        },
+        activeFilters: { participant_ids: [] },
+      });
+
+      fireEvent.mouseOver(screen.getByRole('img', { name: /diagnosis tooltip/i }));
+
+      expect(await screen.findByText('Showing top 20 out of 25 total diagnoses')).toBeInTheDocument();
     });
   });
 });

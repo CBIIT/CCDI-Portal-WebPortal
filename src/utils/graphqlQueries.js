@@ -1,4 +1,4 @@
-import gql from '@apollo/client';
+import gql from 'graphql-tag';
 
 export const GET_CASE_DETAIL_DATA_QUERY = gql`
   query subjectDetail($subject_id: String) {

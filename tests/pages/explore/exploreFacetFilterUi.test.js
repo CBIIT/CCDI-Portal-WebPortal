@@ -217,4 +217,47 @@ describe('Explore — facet filter UI (Sex at Birth)', () => {
     expect(femaleCall).toBeTruthy();
     expect(femaleCall[0].variables.sex_at_birth).toEqual(['Female']);
   });
+
+  it('should close the sidebar content panel when close icon is clicked', async () => {
+    renderExplorePage();
+
+    await waitFor(() => {
+      expect(screen.getByText('Demographics')).toBeInTheDocument();
+    });
+
+    fireEvent.click(screen.getByText('Demographics').closest('li'));
+
+    await waitFor(() => {
+      expect(screen.getByAltText('vector')).toBeInTheDocument();
+    });
+
+    fireEvent.click(screen.getByAltText('close').closest('a'));
+
+    await waitFor(() => {
+      expect(screen.queryByAltText('vector')).not.toBeInTheDocument();
+    });
+  });
+
+  it('should collapse the category row when the same section heading is clicked twice', async () => {
+    renderExplorePage();
+
+    await waitFor(() => {
+      expect(screen.getByText('Demographics')).toBeInTheDocument();
+    });
+
+    const demoRow = screen.getByText('Demographics').closest('li');
+    expect(demoRow).toBeTruthy();
+
+    fireEvent.click(demoRow);
+
+    await waitFor(() => {
+      expect(screen.getByAltText('vector')).toBeInTheDocument();
+    });
+
+    fireEvent.click(demoRow);
+
+    await waitFor(() => {
+      expect(screen.queryByAltText('vector')).not.toBeInTheDocument();
+    });
+  });
 });

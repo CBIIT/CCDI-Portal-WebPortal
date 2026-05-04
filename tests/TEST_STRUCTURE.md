@@ -7,6 +7,7 @@ This document is the **single reference** for how we write tests in this repo: f
 ## File placement
 
 - **Tests folder:** Use the root-level `tests/` directory for all test files. Keep the same folder structure as `src/` so each test file mirrors its source (e.g. `src/pages/landing/landingView.js` → `tests/pages/landing/landingView.test.js`).
+- **Explore (`/explore`):** All tests for the Explore experience live under **`tests/pages/explore/`** (integration flows at the folder root as `explore*.test.js`, plus subfolders that mirror `src/pages/inventory/` where useful: e.g. `tests/pages/explore/widget/`, `filterQueryBar/`, `sideBar/`, `tabs/…`). Source code remains under `src/pages/inventory/` (historical package layout); grouping tests under `explore/` keeps one place for “this page” without splitting across two top-level test folders.
 - **Naming:** `ComponentName.test.js`, `viewName.test.js`, or `controllerName.test.js` next to the path that mirrors the source. Use a separate test file for controllers when testing data-fetching and mocked APIs (e.g. `landingController.test.js` alongside `landingView.test.js`).
 - **Colocation:** Jest also picks up `src/**/__tests__/**` and `src/**/*.test.js` (see `package.json` `testMatch`). Prefer `tests/` for page-level suites unless colocating a small component test (e.g. `CustomIconView.test.js`).
 - **Fixtures:** Put shared, stable mock data and API response shapes under `tests/fixtures/<area>/` (e.g. `tests/fixtures/landing/apiResponses.js`, `tests/fixtures/landing/landingViewProps.js`). Import these in test files so values stay consistent across suites.
@@ -125,6 +126,17 @@ When you need to verify that the frontend calls the correct APIs and displays th
 | **Tab strip + `TabPanel` table wiring** | `tests/pages/explore/exploreTabTables.test.js` | Real **`TabsView`/`TabPanel`**, mocked **`@bento-core/paginated-table`**; assert **`paginationAPIField`**, **`activeTab`**, tab clicks, **`queryVariables`** |
 | **`TabPanel` + real Bento table (rows/columns)** | `tests/pages/explore/exploreTabTableRows.test.js` | Type **2** (+**3** for facet): real paginated table; mocked **`useApolloClient().query`**; **`tests/fixtures/explore/participantOverviewTableRows.js`**, **`studyOverviewTableRows.js`**; **`getByRole('columnheader')`**, fixture-derived cell text |
 | **Explore `WidgetView` (Bento charts)** | `tests/pages/explore/exploreWidgetView.test.js` | Type **1** + **3**: **`createMuiTheme` + `ThemeProvider`**, fixtures **`widgetDashboardData.js`**, real **`@bento-core/widgets`**; assert widget **titles** + **COLLAPSE / OPEN** control; no `MemoryRouter` (no routes) |
+| **`WidgetUtils.formatWidgetData`** | `tests/pages/explore/widget/WidgetUtils.test.js` | Pure unit: donut zero-subject removal + sunburst tree from minimal **`custodianConfig`**; mock **`uuid`** |
+| **`QueryBarView` (query bar actions)** | `tests/pages/explore/filterQueryBar/QueryBarView.test.js` | Mock **`@bento-core/query-bar`** + **`graphqlClient`**; assert **`clearAll`**, clear-import / upload / autocomplete, **`deleteAutocompleteItem`**, **`resetFacetSection`**, **`resetFacetSlider`** / **`resetUnknownAges`**, **`resetFacetCheckbox`**, unknown-ages chip props |
+| **`BentoFilterUtils`** | `tests/pages/explore/sideBar/BentoFilterUtils.test.js` | Mock **`graphqlClient`**; **`getAllIds`**, **`getAllParticipantIds`**, **`getFacetValues`**, dispatch bridge |
+| **`configColumn` / `CustomCellView`** | `tests/pages/explore/tabs/tableConfig/Column.test.js` | **`cellTypes` / `headerTypes`** wiring; **`CustomCellView`** default, **`DBGAP`**, **`EXPAND`** |
+| **MY FILES cart view** | `tests/pages/cart/cartView.test.js` | Mock **`graphqlClient`**; **`TableView`** stub + **`jest.requireActual('@bento-core/paginated-table')`** so **`types`** loads with **`fileCentricCartWorkflowData`**; mocked **`cartWrapper`**; asserts **`file_ids`** + instructions |
+| **MY FILES cart controller** | `tests/pages/cart/cartController.test.js` | Redux **`cartReducer.filesId`**; mocked **`CartView`**; asserts **`filesId`** + **`table`** |
+| **MY FILES table columns** | `tests/pages/cart/tableConfig/Column.test.js` | **`CustomCellView`** bracket stripping; **`configColumn`** row delete + bulk delete (**`cellTypes`** / **`headerTypes`**) |
+| **Cohort Analyzer util** | `tests/pages/CohortAnalyzer/CohortAnalyzerUtil.test.js` | Pure helpers: filters, **`generateQueryVariable`**, sort, delete, popup, **`SearchBox`** |
+| **Cohort Analyzer download** | `tests/pages/CohortAnalyzer/downloadCohort/DownloadSelectedCohorts.test.js` | Mock **`graphqlClient`** + **`createCohortDownloadClientQueryMock`** (**`GET_COHORT_MANIFEST_QUERY`** / **`GET_COHORT_METADATA_QUERY`** from **`dashboardTabData`**); assert CSV/JSON download utils |
+| **Cohort Analyzer controller** | `tests/pages/CohortAnalyzer/CohortAnalyzerController.test.js` | Mocked **`CohortAnalyzer`** + lightweight **`CohortStateProvider`** |
+| **Cohort checkbox cap** | `tests/pages/CohortAnalyzer/customCheckbox/CustomCheckbox.test.js` | Max 3 selections — checked / styled state |
 
 More detail on Explore: [`tests/pages/explore/README.md`](pages/explore/README.md).
 

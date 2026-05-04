@@ -240,6 +240,26 @@ describe('Explore — URL query integration (inventoryCover)', () => {
       expect(v.age_at_diagnosis).toEqual([0, 18]);
       expect(v.age_at_diagnosis_unknownAges).toEqual(['exclude']);
     });
+
+    it('should omit age_at_diagnosis from query variables when the range is not two comma-separated numbers', async () => {
+      renderExploreAtPath('/explore?age_at_diagnosis=5');
+
+      await waitFor(() => {
+        expect(mockQuery).toHaveBeenCalled();
+      });
+
+      expect(mockQuery.mock.calls[0][0].variables.age_at_diagnosis).toBeUndefined();
+    });
+
+    it('should omit age_at_diagnosis when the range has invalid numeric bounds', async () => {
+      renderExploreAtPath('/explore?age_at_diagnosis=NaN,10');
+
+      await waitFor(() => {
+        expect(mockQuery).toHaveBeenCalled();
+      });
+
+      expect(mockQuery.mock.calls[0][0].variables.age_at_diagnosis).toBeUndefined();
+    });
   });
 
   describe('Participant id and upload query params', () => {

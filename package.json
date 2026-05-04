@@ -135,6 +135,9 @@
       "src/**/*.{js,jsx,ts,tsx}",
       "!src/**/*.d.ts"
     ],
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/src/bento/*PageData.js"
+    ],
     "resolver": "jest-pnp-resolver",
     "setupFiles": [
       "react-app-polyfill/jsdom"
@@ -158,7 +161,8 @@
     ],
     "moduleNameMapper": {
       "^react-native$": "react-native-web",
-      "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy"
+      "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy",
+      "^@bento-core/authentication$": "<rootDir>/tests/__mocks__/bento-core-authentication.js"
     },
     "moduleFileExtensions": [
       "web.js",

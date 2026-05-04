@@ -261,4 +261,42 @@ describe('Explore — restore navigation & import_from failure (inventoryCover)'
       expect(firstVars.import_data).toBeUndefined();
     });
   });
+
+  describe('Unknown-age URL sync', () => {
+    it('should add and remove age_at_diagnosis_unknownAges in URL when unknownAges state changes', async () => {
+      renderExploreAtEntry('/explore?age_at_diagnosis=0,18');
+
+      await waitFor(() => {
+        expect(mockQuery).toHaveBeenCalled();
+      });
+
+      store.dispatch({
+        type: 'UNKNOWN_AGES_CHANGED',
+        payload: {
+          datafield: 'age_at_diagnosis',
+          unknownAges: 'exclude',
+        },
+      });
+
+      await waitFor(() => {
+        expect(screen.getByTestId('location-probe').getAttribute('data-search')).toMatch(
+          /age_at_diagnosis_unknownAges=exclude/,
+        );
+      });
+
+      store.dispatch({
+        type: 'UNKNOWN_AGES_CHANGED',
+        payload: {
+          datafield: 'age_at_diagnosis',
+          unknownAges: 'include',
+        },
+      });
+
+      await waitFor(() => {
+        expect(screen.getByTestId('location-probe').getAttribute('data-search')).not.toMatch(
+          /age_at_diagnosis_unknownAges=/,
+        );
+      });
+    });
+  });
 });

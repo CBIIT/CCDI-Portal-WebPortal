@@ -131,7 +131,7 @@ const SessionTimeOutModal = ({
           </Button>
           <Button
             variant="contained"
-            color="blueGrey"
+            color="primary"
             onClick={() => { submit(); closeModal(); }}
             style={{ backgroundColor: '#437BBE' }}
             className={classes.button}

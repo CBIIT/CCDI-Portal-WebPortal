@@ -9,7 +9,6 @@ import React, {
 import * as echarts from 'echarts';
 import { buildEnrollmentMapTitle } from '../../utils/mciEnrollmentMapTitle';
 
-const CHART_MARGIN_TOP_PX = 12;
 const MARKER_SERIES_INDEX = 1;
 
 /** Geo SVG sits above the scatter canvas in the DOM; without this, the browser never delivers pointer events to markers. */
@@ -327,6 +326,19 @@ const MapView = ({ mapData }) => {
           tooltip: {
             show: false,
           },
+          title: {
+            text: buildEnrollmentMapTitle(mapData),
+            left: 'center',
+            top: 21,
+            textStyle: {
+              fontFamily: 'Poppins, sans-serif',
+              fontSize: 19,
+              fontWeight: 400,
+              lineHeight: 21,
+              letterSpacing: 0.38,
+              color: '#05555C',
+            },
+          },
           geo: {
             map: 'usa_svg',
             /** Required so scatter markers receive hover/click; otherwise geo SVG regions sit on top and steal hit tests. */
@@ -334,7 +346,7 @@ const MapView = ({ mapData }) => {
             roam: false,
             layoutSize: '100%',
             aspectScale: 1,
-            top: CHART_MARGIN_TOP_PX,
+            top: 0,
             bottom: 0,
             left: 0,
             right: 0,
@@ -655,19 +667,19 @@ const MapView = ({ mapData }) => {
       <h4
         id={headingId}
         style={{
-          fontFamily: 'Poppins, sans-serif',
-          fontSize: 19,
-          fontWeight: 400,
-          lineHeight: '21px',
-          letterSpacing: '0.02em',
-          textAlign: 'center',
-          color: '#05555C',
-          margin: '0 0 8px',
+          position: 'absolute',
+          width: '1px',
+          height: '1px',
+          padding: 0,
+          margin: '-1px',
+          overflow: 'hidden',
+          clip: 'rect(0, 0, 0, 0)',
+          whiteSpace: 'nowrap',
+          border: 0,
         }}
       >
         {chartTitle}
       </h4>
-  
 
       <div
         className="mci-map-keyboard-region"
@@ -712,7 +724,7 @@ const MapView = ({ mapData }) => {
             position: 'relative',
             width: '100%',
             height: `${heightPx}px`,
-            marginTop: '4px',
+            marginTop: 0,
           }}
         >
           <div
@@ -763,96 +775,6 @@ const MapView = ({ mapData }) => {
         `}
       </style>
 
-      <details
-        className="mci-enrollment-map-a11y-details"
-        open
-        style={{
-          marginTop: '20px',
-          border: '1px solid #BDBDBD',
-          borderRadius: 4,
-          padding: '4px 12px 12px',
-          background: '#FAFAFA',
-        }}
-      >
-        <summary
-          style={{
-            fontFamily: 'Poppins, sans-serif',
-            fontSize: 16,
-            fontWeight: 600,
-            color: '#05555C',
-            cursor: 'pointer',
-            padding: '8px 0',
-            outline: 'none',
-          }}
-        >
-          Enrollment by state (full data table)
-        </summary>
-        <p
-          id="mci-map-table-instructions"
-          style={{ fontFamily: 'Inter, sans-serif', fontSize: 13, margin: '8px 0 12px' }}
-        >
-          Use Tab to enter table rows, Arrow Up and Arrow Down to change row, Home and End for first and last
-          state. All states are listed here; the map keyboard control only cycles states with at least one
-          enrollee.
-        </p>
-        <div style={{ overflowX: 'auto', maxHeight: 360, overflowY: 'auto' }}>
-          <table
-            id={tableId}
-            tabIndex={-1}
-            style={{
-              width: '100%',
-              borderCollapse: 'collapse',
-              fontFamily: 'Inter, sans-serif',
-              fontSize: 14,
-            }}
-            aria-describedby="mci-map-table-instructions"
-            aria-labelledby={headingId}
-          >
-            <caption style={{ captionSide: 'top', textAlign: 'left', padding: '8px 8px 12px' }}>
-              {chartTitle}; all jurisdictions from enrollment metrics.
-            </caption>
-            <thead>
-              <tr style={{ borderBottom: '2px solid #42779A' }}>
-                <th scope="col" style={{ textAlign: 'left', padding: '8px' }}>
-                  State
-                </th>
-                <th scope="col" style={{ textAlign: 'right', padding: '8px' }}>
-                  Number enrolled
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {sortedRows.map((row, idx) => {
-                const name = row[2];
-                const count = typeof row[3] === 'number' ? row[3] : Number(row[3]);
-                const displayCount = Number.isFinite(count) ? count : row[3];
-                return (
-                  <tr
-                    key={String(name)}
-                    ref={(el) => {
-                      rowRefs.current[idx] = el;
-                    }}
-                    tabIndex={focusedRowIndex === idx ? 0 : -1}
-                    style={{
-                      borderBottom: '1px solid #e0e0e0',
-                      outline: 'none',
-                    }}
-                    className="mci-enrollment-map-row"
-                    onFocus={(e) => onTableRowFocus(e, row, idx)}
-                    onBlur={onTableRowBlur}
-                    onClick={(e) => onTableRowFocus(e, row, idx)}
-                    onKeyDown={(e) => onRowKeyDown(e, idx)}
-                    aria-label={`${name}, ${displayCount} enrolled`}
-                  >
-                    <td style={{ padding: '8px' }}>{name}</td>
-                    <td style={{ padding: '8px', textAlign: 'right' }}>{displayCount}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-      </details>
 
       {tableRowTooltip && (
         <div

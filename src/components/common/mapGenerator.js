@@ -681,6 +681,28 @@ const MapView = ({ mapData }) => {
         {chartTitle}
       </h4>
 
+      <p
+        id={descId}
+        style={{
+          fontFamily: 'Inter, sans-serif',
+          fontSize: 14,
+          fontWeight: 400,
+          lineHeight: '20px',
+          color: '#1B1B1B',
+          margin: '0 0 12px',
+          maxWidth: 720,
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          textAlign: 'center',
+        }}
+      >
+        <strong>Keyboard:</strong> press Tab to enter the map region below, then use Arrow keys to move between
+        enrollment markers (tooltip shows counts). Home and End jump to the first or last marker. Tab again to
+        leave the map, or use the skip link to jump to the data table. The canvas itself is not focused—keyboard
+        control uses the surrounding region so focus cannot get trapped inside the graphic.
+      </p>
+     
+
       <div
         className="mci-map-keyboard-region"
         tabIndex={0}
@@ -775,6 +797,89 @@ const MapView = ({ mapData }) => {
         `}
       </style>
 
+      <details
+        className="mci-enrollment-map-a11y-details"
+        open
+        style={{
+          marginTop: '20px',
+          border: '1px solid #BDBDBD',
+          borderRadius: 4,
+          padding: '4px 12px 12px',
+          background: '#FAFAFA',
+        }}
+      >
+        <summary
+          style={{
+            fontFamily: 'Poppins, sans-serif',
+            fontSize: 16,
+            fontWeight: 600,
+            color: '#05555C',
+            cursor: 'pointer',
+            padding: '8px 0',
+            outline: 'none',
+          }}
+        >
+          Enrollment by state (full data table)
+        </summary>
+     
+        <div style={{ overflowX: 'auto', maxHeight: 360, overflowY: 'auto' }}>
+          <table
+            id={tableId}
+            tabIndex={-1}
+            style={{
+              width: '100%',
+              borderCollapse: 'collapse',
+              fontFamily: 'Inter, sans-serif',
+              fontSize: 14,
+            }}
+            aria-describedby="mci-map-table-instructions"
+            aria-labelledby={headingId}
+          >
+            <caption style={{ captionSide: 'top', textAlign: 'left', padding: '8px 8px 12px' }}>
+              {chartTitle}; all jurisdictions from enrollment metrics.
+            </caption>
+            <thead>
+              <tr style={{ borderBottom: '2px solid #42779A' }}>
+                <th scope="col" style={{ textAlign: 'left', padding: '8px' }}>
+                  State
+                </th>
+                <th scope="col" style={{ textAlign: 'right', padding: '8px' }}>
+                  Number enrolled
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {sortedRows.map((row, idx) => {
+                const name = row[2];
+                const count = typeof row[3] === 'number' ? row[3] : Number(row[3]);
+                const displayCount = Number.isFinite(count) ? count : row[3];
+                return (
+                  <tr
+                    key={String(name)}
+                    ref={(el) => {
+                      rowRefs.current[idx] = el;
+                    }}
+                    tabIndex={focusedRowIndex === idx ? 0 : -1}
+                    style={{
+                      borderBottom: '1px solid #e0e0e0',
+                      outline: 'none',
+                    }}
+                    className="mci-enrollment-map-row"
+                    onFocus={(e) => onTableRowFocus(e, row, idx)}
+                    onBlur={onTableRowBlur}
+                    onClick={(e) => onTableRowFocus(e, row, idx)}
+                    onKeyDown={(e) => onRowKeyDown(e, idx)}
+                    aria-label={`${name}, ${displayCount} enrolled`}
+                  >
+                    <td style={{ padding: '8px' }}>{name}</td>
+                    <td style={{ padding: '8px', textAlign: 'right' }}>{displayCount}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </details>
 
       {tableRowTooltip && (
         <div

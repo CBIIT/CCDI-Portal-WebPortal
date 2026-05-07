@@ -719,7 +719,6 @@ const MapView = ({ mapData }) => {
         }}
         style={{
           position: 'relative',
-          outline: 'none',
           borderRadius: 4,
         }}
       >
@@ -786,8 +785,9 @@ const MapView = ({ mapData }) => {
       <style>
         {`
           .mci-map-keyboard-region:focus {
-            outline: 2px solid #035D63;
-            outline-offset: 4px;
+            outline: 3px solid #42779A;
+            outline-offset: 3px;
+            box-shadow: 0 0 0 2px rgba(66, 119, 154, 0.35);
           }
           .mci-enrollment-map-row:focus {
             outline: 2px solid #035D63;

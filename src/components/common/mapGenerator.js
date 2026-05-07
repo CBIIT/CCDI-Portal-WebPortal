@@ -713,7 +713,7 @@ const MapView = ({ mapData }) => {
         onFocus={onMapRegionFocus}
         onBlur={onMapRegionBlur}
         onMouseDown={(e) => {
-          if (e.button === 0) {
+          if (e.button === 0 && e.currentTarget.contains(document.activeElement)) {
             e.preventDefault();
           }
         }}

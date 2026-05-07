@@ -102,7 +102,6 @@ const MapView = ({ mapData }) => {
 
   const headingId = useMemo(() => `mci-map-title-${chartIdRef.current}`, []);
   const descId = useMemo(() => `mci-map-desc-${chartIdRef.current}`, []);
-  const mapKeyboardHelpId = 'mci-map-keyboard-help';
   const tableId = 'mci-enrollment-keyboard-table';
 
   const chartTitle = useMemo(() => buildEnrollmentMapTitle(mapData), [mapData]);
@@ -823,6 +822,22 @@ const MapView = ({ mapData }) => {
         </summary>
      
         <div style={{ overflowX: 'auto', maxHeight: 360, overflowY: 'auto' }}>
+          <p
+            id="mci-map-table-instructions"
+            style={{
+              position: 'absolute',
+              width: 1,
+              height: 1,
+              padding: 0,
+              margin: -1,
+              overflow: 'hidden',
+              clip: 'rect(0, 0, 0, 0)',
+              whiteSpace: 'nowrap',
+              border: 0,
+            }}
+          >
+            Full enrollment table by jurisdiction. Use Tab to move to rows, then use Arrow keys to move between rows.
+          </p>
           <table
             id={tableId}
             tabIndex={-1}

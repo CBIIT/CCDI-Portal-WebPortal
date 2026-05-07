@@ -836,7 +836,7 @@ const MapView = ({ mapData }) => {
               border: 0,
             }}
           >
-            Full enrollment table by jurisdiction. Use Tab to move to rows, then use Arrow keys to move between rows.
+            Full enrollment table by jurisdiction. Use Tab to reach the table, then use Arrow keys to move between rows.
           </p>
           <table
             id={tableId}

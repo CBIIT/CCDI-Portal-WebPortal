@@ -708,7 +708,7 @@ const MapView = ({ mapData }) => {
         tabIndex={0}
         role="group"
         aria-label={`${chartTitle}. Keyboard: Arrow keys move between enrollment markers. Tab exits.`}
-        aria-describedby={mapKeyboardHelpId}
+        aria-describedby={descId}
         onKeyDown={onMapRegionKeyDown}
         onFocus={onMapRegionFocus}
         onBlur={onMapRegionBlur}

@@ -7,7 +7,6 @@ import React, {
   useState,
 } from 'react';
 import * as echarts from 'echarts';
-import { buildEnrollmentMapTitle } from '../../utils/mciEnrollmentMapTitle';
 
 const MARKER_SERIES_INDEX = 1;
 
@@ -104,7 +103,10 @@ const MapView = ({ mapData }) => {
   const descId = useMemo(() => `mci-map-desc-${chartIdRef.current}`, []);
   const tableId = 'mci-enrollment-keyboard-table';
 
-  const chartTitle = useMemo(() => buildEnrollmentMapTitle(mapData), [mapData]);
+  const chartTitle = useMemo(() => {
+    if (!mapData || mapData.title == null || mapData.title === '') return '';
+    return String(mapData.title);
+  }, [mapData]);
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== 'undefined' ? window.innerWidth : 1200
   );
@@ -326,7 +328,7 @@ const MapView = ({ mapData }) => {
             show: false,
           },
           title: {
-            text: buildEnrollmentMapTitle(mapData),
+            text: mapData.title != null && mapData.title !== '' ? String(mapData.title) : '',
             left: 'center',
             top: 21,
             textStyle: {

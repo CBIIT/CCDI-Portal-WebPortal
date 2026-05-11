@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { withStyles, CssBaseline } from '@material-ui/core';
 import { Route, Routes, } from 'react-router-dom';
 import Footer from '../ResponsiveFooter/';
@@ -31,11 +31,24 @@ import RareCancerResourceView from "../../pages/resource/RareCancerResourcePage/
 // import NewsDetail from '../../pages/news/newsDetailView';
 
 const Layout = () => {
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+    sessionStorage.setItem('overlayLoad', 'true');
+  };
+
+  useEffect(() => {
+    if (!sessionStorage.length) {
+      setOpen(true);
+    }
+  }, [open]);
+
     return (
     <>
       <CssBaseline />
         <Header />
-        <OverlayWindow />
+        {open && <OverlayWindow open={open} handleClose={handleClose} />}
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />

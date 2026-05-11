@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
   Dialog,
   DialogContent,
@@ -13,27 +13,10 @@ import {
   DialogActions,
 } from '@material-ui/core';
 import FiberManualRecord from '@material-ui/icons/FiberManualRecord';
-// import { useSelector } from 'react-redux';
 import * as text from './OverlayText.json';
 import DialogThemeProvider from './OverlayThemConfig';
-import { setOverLayWindow } from '../../pages/search/store/sitesearchReducer';
 
-const OverlayWindow = () => {
-  const [open, setOpen] = useState(false);
-
-  const handleClose = () => {
-    setOpen(false);
-    setOverLayWindow(false);
-    localStorage.setItem('overlayLoad', 'true');
-  };
-
-  useEffect(() => { 
-    if (!localStorage.getItem('overlayLoad')) {
-      setOpen(true);
-      setOverLayWindow(true);
-    }
-  }, [open]);
-
+const OverlayWindow = ({ open, handleClose }) => {
   const content = text.content.map((item, index) => (
     <DialogContentText key={`${index}`} id="alert-dialog-description">{item}</DialogContentText>
   ));

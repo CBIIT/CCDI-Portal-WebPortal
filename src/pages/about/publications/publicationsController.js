@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import env from '../../../utils/env'
-import yaml from "js-yaml";
+import env from '../../../utils/env';
 import axios from "axios";
 import PublicationsView from "./publicationsView";
+import { parsePublicationsMarkdown } from "./parsePublicationsMarkdown";
 
-const PUBLICATIONS_URL = `${env.REACT_APP_STATIC_CONTENT_URL}/publicationsData.yaml`;
+const PUBLICATIONS_URL = `${env.REACT_APP_STATIC_CONTENT_URL}/publicationsData.md`;
 
 const PublicationsController = () => {
   const [data, setData] = useState([]);
@@ -12,16 +12,12 @@ const PublicationsController = () => {
   useEffect(() => {
     const fetchData = async () => {
       let resultData = [];
-      let result = [];
       try {
         const fileUrl = `${PUBLICATIONS_URL}?ts=${new Date().getTime()}`;
-        result = await axios.get(
-          fileUrl
-        );
-        resultData = yaml.safeLoad(result.data);
+        const result = await axios.get(fileUrl);
+        resultData = parsePublicationsMarkdown(result.data);
       } catch (_error) {
-        // result = await axios.get(YAMLData);
-        // resultData = yaml.safeLoad(result.data);
+        // leave resultData as []
       }
 
       setData(resultData);

@@ -19,12 +19,23 @@ function stripGeoSvgPointerEvents(chart) {
   });
 }
 
-/** Matches enrollmentMarkers symbolSize (half-width ≈ hit radius). */
-function markerHitRadiusPx(enrollmentCount) {
+/** Scatter symbol diameter (px) for enrollment hex markers — scales gently with count, capped for readability. */
+function enrollmentMarkerSymbolSizePx(enrollmentCount) {
   const n = typeof enrollmentCount === 'number' ? enrollmentCount : Number(enrollmentCount);
   if (!n || n <= 0) return 0;
-  const size = Math.min(48, Math.max(14, 10 + Math.sqrt(n) * 1.65));
-  return size / 2 + 12;
+  return Math.min(34, Math.max(10, 7 + Math.sqrt(n) * 1.28));
+}
+
+/** Matches enrollmentMarkers symbolSize (half-width ≈ hit radius). */
+function markerHitRadiusPx(enrollmentCount) {
+  const size = enrollmentMarkerSymbolSizePx(enrollmentCount);
+  if (!size) return 0;
+  return size / 2 + 8;
+}
+
+/** Horizontal gap from marker center to tooltip’s left edge (tooltip sits to the right of the pin). */
+function tooltipAnchorOffsetPx(enrollmentCount) {
+  return markerHitRadiusPx(enrollmentCount) + 10;
 }
 
 /** Pixel-space nearest marker under the pointer (works when ECharts item tooltip does not). */
@@ -395,9 +406,7 @@ const MapView = ({ mapData }) => {
               symbol: `image://${hexUrl}`,
               symbolKeepAspect: true,
               symbolSize(value) {
-                const n = value[3];
-                if (!n || n <= 0) return 0;
-                return Math.min(48, Math.max(14, 10 + Math.sqrt(n) * 1.65));
+                return enrollmentMarkerSymbolSizePx(value[3]);
               },
               itemStyle: {
                 color: '#187C85',
@@ -536,7 +545,7 @@ const MapView = ({ mapData }) => {
     const pad = 8;
     const estimatedWidth = 220;
     setTableRowTooltip({
-      top: rect.top,
+      top: rect.top + rect.height / 2,
       left: Math.min(rect.right + pad, window.innerWidth - estimatedWidth),
       name: row[2],
       count: row[3],
@@ -552,13 +561,49 @@ const MapView = ({ mapData }) => {
     setTableRowTooltip(null);
   }, []);
 
+  const liveRow = markerRows[keyboardMarkerIndex];
+
+  const mapKeyboardTooltipStyle = useMemo(() => {
+    if (!markerTooltipPos || markerTooltipPos.fallback) {
+      return {
+        position: 'absolute',
+        zIndex: 50,
+        right: 12,
+        top: 12,
+        pointerEvents: 'none',
+      };
+    }
+    const count = liveRow ? liveRow[3] : 0;
+    const dx = tooltipAnchorOffsetPx(count);
+    return {
+      position: 'absolute',
+      zIndex: 50,
+      left: markerTooltipPos.left + dx,
+      top: markerTooltipPos.top,
+      transform: 'translateY(-50%)',
+      pointerEvents: 'none',
+    };
+  }, [markerTooltipPos, liveRow]);
+
+  const mouseHoverTooltipStyle = useMemo(() => {
+    if (!mouseHoverTip) return {};
+    const dx = tooltipAnchorOffsetPx(mouseHoverTip.count);
+    return {
+      position: 'absolute',
+      zIndex: 55,
+      left: mouseHoverTip.left + dx,
+      top: mouseHoverTip.top,
+      transform: 'translateY(-50%)',
+      pointerEvents: 'none',
+    };
+  }, [mouseHoverTip]);
+
   if (!mapData || !Array.isArray(mapData.data) || mapData.data.length === 0) {
     return null;
   }
 
   const heightPx = Math.max(400, Math.min(720, windowWidth * 0.5));
 
-  const liveRow = markerRows[keyboardMarkerIndex];
   const liveMessage = liveRow
     ? `Selected: ${liveRow[2]}, ${liveRow[3]} enrolled.`
     : 'No states with enrollees.';
@@ -574,57 +619,6 @@ const MapView = ({ mapData }) => {
     whiteSpace: 'nowrap',
     border: 0,
   };
-
-  const mapKeyboardTooltipStyle = useMemo(() => {
-    const base = {
-      position: 'absolute',
-      zIndex: 50,
-      border: '1px solid #000000',
-      borderRadius: 8,
-      padding: '10px 12px',
-      background: '#ffffff',
-      fontFamily: 'Poppins, sans-serif',
-      fontSize: 13,
-      fontWeight: 400,
-      color: '#286067',
-      lineHeight: '15px',
-      boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
-      pointerEvents: 'none',
-      maxWidth: 240,
-    };
-    if (!markerTooltipPos || markerTooltipPos.fallback) {
-      return { ...base, right: 12, top: 12 };
-    }
-    return {
-      ...base,
-      left: markerTooltipPos.left,
-      top: markerTooltipPos.top,
-      transform: 'translate(-50%, calc(-100% - 10px))',
-    };
-  }, [markerTooltipPos]);
-
-  const mouseHoverTooltipStyle = useMemo(() => {
-    if (!mouseHoverTip) return {};
-    return {
-      position: 'absolute',
-      zIndex: 55,
-      left: mouseHoverTip.left,
-      top: mouseHoverTip.top,
-      transform: 'translate(-50%, calc(-100% - 10px))',
-      border: '1px solid #000000',
-      borderRadius: 8,
-      padding: '10px 12px',
-      background: '#ffffff',
-      fontFamily: 'Poppins, sans-serif',
-      fontSize: 13,
-      fontWeight: 400,
-      color: '#286067',
-      lineHeight: '15px',
-      boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
-      pointerEvents: 'none',
-      maxWidth: 240,
-    };
-  }, [mouseHoverTip]);
 
   const skipLinkVisibleStyle = {
     position: 'fixed',
@@ -760,7 +754,7 @@ const MapView = ({ mapData }) => {
           />
           {mapRegionFocused && liveRow && !mouseHoverTip && (
             <div
-              className="mci-map-keyboard-tooltip-mirror"
+              className={`mci-map-keyboard-tooltip-mirror mci-map-tooltip-floating ${!markerTooltipPos || markerTooltipPos.fallback ? '' : 'mci-map-tooltip-floating--arrow-left'}`}
               role="tooltip"
               style={mapKeyboardTooltipStyle}
             >
@@ -771,7 +765,7 @@ const MapView = ({ mapData }) => {
           )}
           {mouseHoverTip && (
             <div
-              className="mci-map-mouse-tooltip"
+              className="mci-map-mouse-tooltip mci-map-tooltip-floating mci-map-tooltip-floating--arrow-left"
               style={mouseHoverTooltipStyle}
               aria-hidden
             >
@@ -794,6 +788,42 @@ const MapView = ({ mapData }) => {
             outline: 2px solid #035D63;
             outline-offset: 2px;
             background: rgba(3, 93, 99, 0.06);
+          }
+          .mci-map-tooltip-floating {
+            border: 1px solid #000000;
+            border-radius: 8px;
+            padding: 10px 12px;
+            background: #ffffff;
+            font-family: Poppins, sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            color: #286067;
+            line-height: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+            max-width: 240px;
+          }
+          .mci-map-tooltip-floating--arrow-left {
+            position: relative;
+          }
+          .mci-map-tooltip-floating--arrow-left::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-style: solid;
+            border-width: 4px 6px 4px 0;
+            border-color: transparent #000000 transparent transparent;
+          }
+          .mci-map-tooltip-floating--arrow-left::after {
+            content: '';
+            position: absolute;
+            left: -5px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-style: solid;
+            border-width: 3px 5px 3px 0;
+            border-color: transparent #ffffff transparent transparent;
           }
         `}
       </style>
@@ -901,23 +931,14 @@ const MapView = ({ mapData }) => {
       {tableRowTooltip && (
         <div
           role="tooltip"
+          className="mci-map-tooltip-floating mci-map-tooltip-floating--arrow-left"
           style={{
             position: 'fixed',
             top: tableRowTooltip.top,
             left: tableRowTooltip.left,
             zIndex: 100002,
-            border: '1px solid #000000',
-            borderRadius: 8,
-            padding: '10px 12px',
-            background: '#ffffff',
-            fontFamily: 'Poppins, sans-serif',
-            fontSize: 13,
-            fontWeight: 400,
-            color: '#286067',
-            lineHeight: '15px',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
             pointerEvents: 'none',
-            maxWidth: 240,
+            transform: 'translateY(-50%)',
           }}
         >
           <span style={{ fontWeight: 700, fontSize: 10 }}>{tableRowTooltip.name}:</span>

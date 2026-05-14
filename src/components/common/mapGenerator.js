@@ -101,6 +101,21 @@ function applyMapKeyboardSelection(chart, markerRows, index) {
   });
 }
 
+/** CamelCase labels with a leading capital (e.g. "North Carolina" → "NorthCarolina", "alabama" → "Alabama"). */
+function toCamelCaseLabel(value) {
+  const words = String(value).trim().split(/\s+/).filter(Boolean);
+  if (words.length === 0) return '';
+  const normalized = words.map((w) => w.toLowerCase());
+  const lowerCamel =
+    normalized[0] +
+    normalized
+      .slice(1)
+      .map((w) => (w.length ? w.charAt(0).toUpperCase() + w.slice(1) : ''))
+      .join('');
+  if (!lowerCamel) return '';
+  return lowerCamel.charAt(0).toUpperCase() + lowerCamel.slice(1);
+}
+
 /**
  * US enrollment symbol map — keyboard: Tab to the map region, Arrow keys / Home / End move between markers.
  * Table remains an alternative for full state list navigation.
@@ -789,6 +804,46 @@ const MapView = ({ mapData }) => {
             outline-offset: 2px;
             background: rgba(3, 93, 99, 0.06);
           }
+          .mci-enrollment-map-a11y-details > summary {
+            list-style: none;
+            cursor: pointer;
+          }
+          .mci-enrollment-map-a11y-details > summary::-webkit-details-marker {
+            display: none;
+          }
+          .mci-enrollment-details-chevron {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            width: 10px;
+            height: 10px;
+            margin-top: -5px;
+            border-right: 2px solid #1b1b1b;
+            border-bottom: 2px solid #1b1b1b;
+            transform: translateY(-50%) rotate(45deg);
+            transition: transform 0.2s ease;
+            pointer-events: none;
+          }
+          .mci-enrollment-map-a11y-details[open] .mci-enrollment-details-chevron {
+            transform: translateY(-50%) rotate(-135deg);
+          }
+          .mci-enrollment-map-sr-caption {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+          }
+          .mci-enrollment-map-details-divider {
+            border-bottom: 1px solid #cfd8e3;
+          }
+          .mci-enrollment-map-a11y-details[open] .mci-enrollment-map-details-divider {
+            border-bottom: 4px solid #42779A;
+          }
           .mci-map-tooltip-floating {
             border: 1px solid #000000;
             border-radius: 8px;
@@ -830,30 +885,64 @@ const MapView = ({ mapData }) => {
 
       <details
         className="mci-enrollment-map-a11y-details"
-        open
         style={{
           marginTop: '20px',
-          border: '1px solid #BDBDBD',
+          border: '1px solid #cfd8e3',
           borderRadius: 4,
-          padding: '4px 12px 12px',
-          background: '#FAFAFA',
+          padding: 0,
+          background: '#e8edf2',
         }}
       >
         <summary
           style={{
-            fontFamily: 'Poppins, sans-serif',
-            fontSize: 16,
-            fontWeight: 600,
-            color: '#05555C',
-            cursor: 'pointer',
-            padding: '8px 0',
+            fontFamily: 'Inter, sans-serif',
             outline: 'none',
+            padding: 0,
           }}
         >
-          Enrollment by state (full data table)
+          <div style={{ position: 'relative', padding: '20px 48px 16px' }}>
+            <span className="mci-enrollment-details-chevron" aria-hidden />
+            <div
+              style={{
+                textAlign: 'center',
+                color: '#1b1b1b',
+                fontWeight: 700,
+                fontSize: 20,
+                lineHeight: 1.3,
+              }}
+            >
+              {chartTitle ? `${chartTitle} (full data table)` : 'Enrollment counts by state (full data table)'}
+            </div>
+            <div
+              style={{
+                textAlign: 'center',
+                color: '#1b1b1b',
+                fontWeight: 400,
+                fontSize: 14,
+                lineHeight: '20px',
+                marginTop: 10,
+                maxWidth: 720,
+                marginLeft: 'auto',
+                marginRight: 'auto',
+              }}
+            >
+              {chartTitle
+                ? `${chartTitle}; all jurisdictions from enrollment metrics.`
+                : 'Enrollment counts by state; all jurisdictions from enrollment metrics.'}
+            </div>
+          </div>
+          <div className="mci-enrollment-map-details-divider" />
         </summary>
-     
-        <div style={{ overflowX: 'auto', maxHeight: 360, overflowY: 'auto' }}>
+
+        <div
+          style={{
+            overflowX: 'auto',
+            maxHeight: 360,
+            overflowY: 'auto',
+            background: '#ffffff',
+            padding: '0 0 16px',
+          }}
+        >
           <p
             id="mci-map-table-instructions"
             style={{
@@ -875,31 +964,72 @@ const MapView = ({ mapData }) => {
             tabIndex={-1}
             style={{
               width: '100%',
-              borderCollapse: 'collapse',
+              borderCollapse: 'separate',
+              borderSpacing: 0,
+              tableLayout: 'fixed',
               fontFamily: 'Inter, sans-serif',
-              fontSize: 14,
+              color: '#1b1b1b',
             }}
             aria-describedby="mci-map-table-instructions"
             aria-labelledby={headingId}
           >
-            <caption style={{ captionSide: 'top', textAlign: 'left', padding: '8px 8px 12px' }}>
-              {chartTitle}; all jurisdictions from enrollment metrics.
+            <caption className="mci-enrollment-map-sr-caption">
+              {chartTitle
+                ? `${chartTitle}; all jurisdictions from enrollment metrics.`
+                : 'Enrollment counts by state; all jurisdictions from enrollment metrics.'}
             </caption>
+            <colgroup>
+              <col style={{ width: '72%' }} />
+              <col style={{ width: '28%' }} />
+            </colgroup>
             <thead>
-              <tr style={{ borderBottom: '2px solid #42779A' }}>
-                <th scope="col" style={{ textAlign: 'left', padding: '8px' }}>
-                  State
+              <tr style={{ fontSize: '17px' }}>
+                <th
+                  scope="col"
+                  style={{
+                    position: 'sticky',
+                    top: 0,
+                    zIndex: 3,
+                    textAlign: 'center',
+                    padding: '12px 10px',
+                    fontWeight: 700,
+                    borderRight: '1px solid #bdbdbd',
+                    borderBottom: 'none',
+                    boxShadow: 'inset 0 -4px 0 0 #42779A',
+                    verticalAlign: 'middle',
+                    backgroundColor: '#ffffff',
+                    backgroundClip: 'padding-box',
+                  }}
+                >
+                  State Name
                 </th>
-                <th scope="col" style={{ textAlign: 'right', padding: '8px' }}>
-                  Number enrolled
+                <th
+                  scope="col"
+                  style={{
+                    position: 'sticky',
+                    top: 0,
+                    zIndex: 2,
+                    textAlign: 'center',
+                    padding: '12px 10px',
+                    fontWeight: 700,
+                    borderBottom: 'none',
+                    boxShadow: 'inset 0 -4px 0 0 #42779A',
+                    verticalAlign: 'middle',
+                    backgroundColor: '#ffffff',
+                    backgroundClip: 'padding-box',
+                  }}
+                >
+                  Number Enrolled
                 </th>
               </tr>
             </thead>
             <tbody>
               {sortedRows.map((row, idx) => {
                 const name = row[2];
+                const displayName = toCamelCaseLabel(name);
                 const count = typeof row[3] === 'number' ? row[3] : Number(row[3]);
                 const displayCount = Number.isFinite(count) ? count : row[3];
+                const stripeBg = idx % 2 === 0 ? '#ffffff' : '#f0f2f5';
                 return (
                   <tr
                     key={String(name)}
@@ -908,18 +1038,36 @@ const MapView = ({ mapData }) => {
                     }}
                     tabIndex={focusedRowIndex === idx ? 0 : -1}
                     style={{
-                      borderBottom: '1px solid #e0e0e0',
                       outline: 'none',
+                      fontSize: '16px',
+                      backgroundColor: stripeBg,
                     }}
                     className="mci-enrollment-map-row"
                     onFocus={(e) => onTableRowFocus(e, row, idx)}
                     onBlur={onTableRowBlur}
                     onClick={(e) => onTableRowFocus(e, row, idx)}
                     onKeyDown={(e) => onRowKeyDown(e, idx)}
-                    aria-label={`${name}, ${displayCount} enrolled`}
+                    aria-label={`${displayName}, ${displayCount} enrolled`}
                   >
-                    <td style={{ padding: '8px' }}>{name}</td>
-                    <td style={{ padding: '8px', textAlign: 'right' }}>{displayCount}</td>
+                    <td
+                      style={{
+                        padding: '10px 12px 10px 85px',
+                        textAlign: 'left',
+                        borderRight: '1px solid #bdbdbd',
+                        verticalAlign: 'middle',
+                      }}
+                    >
+                      {displayName}
+                    </td>
+                    <td
+                      style={{
+                        padding: '10px 12px 10px 0px',
+                        textAlign: 'center',
+                        verticalAlign: 'middle',
+                      }}
+                    >
+                      {displayCount}
+                    </td>
                   </tr>
                 );
               })}

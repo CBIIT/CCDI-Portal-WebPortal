@@ -891,6 +891,9 @@ const MapView = ({ mapData }) => {
           borderRadius: 4,
           padding: 0,
           background: '#e8edf2',
+          width: '80%',
+          marginLeft: 'auto',
+          marginRight: 'auto',
         }}
       >
         <summary
@@ -898,6 +901,7 @@ const MapView = ({ mapData }) => {
             fontFamily: 'Inter, sans-serif',
             outline: 'none',
             padding: 0,
+             
           }}
         >
           <div style={{ position: 'relative', padding: '20px 48px 16px' }}>
@@ -906,24 +910,28 @@ const MapView = ({ mapData }) => {
               style={{
                 textAlign: 'center',
                 color: '#1b1b1b',
-                fontWeight: 700,
-                fontSize: 20,
+                fontWeight: 400,
+                fontSize: 21,
+                fontFamily: 'Poppins',
+                color: '#000000',
                 lineHeight: 1.3,
               }}
             >
-              {chartTitle ? `${chartTitle} (full data table)` : 'Enrollment counts by state (full data table)'}
+              { 'Enrollment counts by state (full data table)'}
             </div>
             <div
               style={{
                 textAlign: 'center',
                 color: '#1b1b1b',
                 fontWeight: 400,
-                fontSize: 14,
+                fontSize: 16,
+                fontFamily: 'Open Sans',
                 lineHeight: '20px',
                 marginTop: 10,
                 maxWidth: 720,
                 marginLeft: 'auto',
                 marginRight: 'auto',
+               
               }}
             >
               {chartTitle
@@ -993,7 +1001,7 @@ const MapView = ({ mapData }) => {
                     textAlign: 'center',
                     padding: '12px 10px',
                     fontWeight: 700,
-                    borderRight: '1px solid #bdbdbd',
+                    borderRight: '1px solid #000000',
                     borderBottom: 'none',
                     boxShadow: 'inset 0 -4px 0 0 #42779A',
                     verticalAlign: 'middle',
@@ -1053,7 +1061,7 @@ const MapView = ({ mapData }) => {
                       style={{
                         padding: '10px 12px 10px 85px',
                         textAlign: 'left',
-                        borderRight: '1px solid #bdbdbd',
+                        borderRight: '1px solid #000000',
                         verticalAlign: 'middle',
                       }}
                     >

@@ -9,9 +9,11 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
+import { clickTopicNav, triggerResourceScroll, toggleMobileSection } from '../shared/resourceViewTestUtils';
 import '@testing-library/jest-dom';
 import CBioPortalResourceView from '../../../../src/pages/resource/cBioPortalResourcePage/cBioPortalResourceView';
 import { minimalCBioPortalResourceData } from '../../../fixtures/resource/resourceDataViewProps';
+import { multiTopicCBioData } from '../../../fixtures/resource/resourceInteractionData';
 
 function renderCBioView(data = minimalCBioPortalResourceData) {
   return render(
@@ -78,6 +80,29 @@ describe('CBioPortalResourceView', () => {
       renderCBioView({ ...minimalCBioPortalResourceData, cpiIntroText: '' });
       expect(screen.queryByText(/cBioPortal intro for unit test/i)).not.toBeInTheDocument();
       expect(screen.getAllByText('cBioPortal Topic').length).toBeGreaterThan(0);
+    });
+  });
+
+  describe('Navigation interactions', () => {
+    it('should highlight topic when nav item is clicked', () => {
+      const scrollTo = jest.fn();
+      window.scrollTo = scrollTo;
+      renderCBioView(multiTopicCBioData);
+      const topic = clickTopicNav('cBio B');
+      expect(topic).toHaveClass('selected');
+      expect(scrollTo).toHaveBeenCalled();
+    });
+
+    it('should apply sticky nav on scroll', () => {
+      renderCBioView(multiTopicCBioData);
+      triggerResourceScroll('FederationBody');
+      expect(document.getElementById('leftNav').className).toContain('navListSticky');
+    });
+
+    it('should toggle mobile section visibility', () => {
+      renderCBioView(multiTopicCBioData);
+      const mobileHeader = toggleMobileSection();
+      expect(mobileHeader.className).not.toContain('sectionCollapse');
     });
   });
 });

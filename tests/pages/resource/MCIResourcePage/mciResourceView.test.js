@@ -9,9 +9,11 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
+import { clickTopicNav, triggerResourceScroll, toggleMobileSection } from '../shared/resourceViewTestUtils';
 import '@testing-library/jest-dom';
 import MCIResourceView from '../../../../src/pages/resource/MCIResourcePage/MCIResourceView';
 import { defaultMciViewData } from '../../../fixtures/resource/mciViewProps';
+import { multiTopicMciData } from '../../../fixtures/resource/resourceInteractionData';
 
 // Mock heavy resource components (tables, maps) — isolate MCIResourceView
 jest.mock('../../../../src/pages/resource/components/MCITable', () => function MockMCITable() {
@@ -120,6 +122,29 @@ describe('MCIResourceView', () => {
         renderMciView({ introText: '<p>Only intro.</p>' }),
       ).not.toThrow();
       expect(screen.getByText(/Only intro/i)).toBeInTheDocument();
+    });
+  });
+
+  describe('Navigation interactions', () => {
+    it('should highlight topic when nav item is clicked', () => {
+      const scrollTo = jest.fn();
+      window.scrollTo = scrollTo;
+      renderMciView(multiTopicMciData);
+      const topic = clickTopicNav('MCI Topic B');
+      expect(topic).toHaveClass('selected');
+      expect(scrollTo).toHaveBeenCalled();
+    });
+
+    it('should apply sticky nav on scroll', () => {
+      renderMciView(multiTopicMciData);
+      triggerResourceScroll('MCIBody');
+      expect(document.getElementById('leftNav').className).toContain('navListSticky');
+    });
+
+    it('should toggle mobile section visibility', () => {
+      renderMciView(multiTopicMciData);
+      const mobileHeader = toggleMobileSection();
+      expect(mobileHeader.className).not.toContain('sectionCollapse');
     });
   });
 });

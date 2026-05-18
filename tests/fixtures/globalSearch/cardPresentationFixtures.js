@@ -12,6 +12,17 @@ export const studiesCardRow = {
   num_of_files: 99,
 };
 
+/** Study without manifest link — exercises download warning branch. */
+export const studiesCardRowNoManifest = {
+  ...studiesCardRow,
+  study_id: 'phsUNKNOWN_NO_LINK',
+};
+
+export const longTitleStudiesCardRow = {
+  ...studiesCardRow,
+  study_id: `phsCARD_${'X'.repeat(80)}_LONG`,
+};
+
 export const samplesCardRow = {
   sample_id: 'SMP-CARD-001',
   participant_id: 'PART-CARD-001',
@@ -34,10 +45,29 @@ export const modelsCardRow = {
   category_type: 'demographic',
 };
 
+/** Hides property rows — only node label is shown. */
+export const modelsCardNodeOnlyRow = {
+  ...modelsCardRow,
+  category_type: 'node',
+  value: 'Participant Node Label That Is Intentionally Long For Truncation',
+};
+
 /** `AboutCard`: `data.text` must be an array of strings (see `AboutCard.js`). */
 export const aboutCardPayload = {
   title: 'About Page Card Title',
   text: ['First sentence about $search$.'],
+  page: '/about',
+};
+
+export const aboutCardExternalLinkPayload = {
+  title: 'External About Resource With A Very Long Title For Truncation Testing',
+  text: ['Visit https://example.com for details.', 'Another sentence,'],
+  page: 'https://example.com/about-resource',
+};
+
+export const aboutCardHighlightPayload = {
+  title: 'Highlight Test',
+  text: ['Results mention tumor biology.'],
   page: '/about',
 };
 
@@ -82,4 +112,26 @@ export const filesCardRow = {
   file_type: 'vcf',
   sample_id: 'SMP-GS-1',
   file_size: 4096,
+};
+
+export const filesCardRowNoParticipant = {
+  ...filesCardRow,
+  id: 'file-gs-2',
+  participant_id: null,
+  file_name: 'orphan_file.bam',
+};
+
+export const filesCardRowLongIds = {
+  ...filesCardRow,
+  id: 'file-gs-3',
+  participant_id: `[${'PART-LONG-'.repeat(12)}PART-END]`,
+  sample_id: `[${'SMP-LONG-'.repeat(12)}SMP-END]`,
+  data_category: '[Genomic, Transcriptomic]',
+};
+
+export const filesCardRowBracketedParticipant = {
+  ...filesCardRow,
+  id: 'file-gs-4',
+  participant_id: '[PART-A, PART-B]',
+  data_category: '[Genomic, Transcriptomic]',
 };

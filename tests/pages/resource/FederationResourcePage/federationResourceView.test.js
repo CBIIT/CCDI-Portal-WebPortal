@@ -8,10 +8,16 @@
 
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import FederationResourceView from '../../../../src/pages/resource/FederationResourcePage/FederationResourceView';
 import { minimalFederationResourceData } from '../../../fixtures/resource/resourceDataViewProps';
+import { multiTopicFederationData } from '../../../fixtures/resource/resourceInteractionData';
+import {
+  clickTopicNav,
+  triggerResourceScroll,
+  toggleMobileSection,
+} from '../shared/resourceViewTestUtils';
 
 function renderFederationView(data = minimalFederationResourceData) {
   return render(
@@ -70,6 +76,35 @@ describe('FederationResourceView', () => {
       window.scrollTo = scrollToMock;
       renderFederationView();
       expect(scrollToMock).toHaveBeenCalledWith(0, 0);
+    });
+
+    it('should apply sticky nav class when page is scrolled', () => {
+      renderFederationView(multiTopicFederationData);
+      triggerResourceScroll('FederationBody');
+      expect(document.getElementById('leftNav').className).toContain('navListSticky');
+    });
+  });
+
+  describe('Navigation interactions', () => {
+    it('should highlight topic and scroll when a nav item is clicked', () => {
+      const scrollTo = jest.fn();
+      window.scrollTo = scrollTo;
+      renderFederationView(multiTopicFederationData);
+
+      const topicB = clickTopicNav('Topic B');
+      expect(topicB).toHaveClass('selected');
+      expect(scrollTo).toHaveBeenCalled();
+    });
+
+    it('should toggle mobile section visibility', () => {
+      renderFederationView(multiTopicFederationData);
+      const mobileHeader = toggleMobileSection();
+      expect(mobileHeader.className).not.toContain('sectionCollapse');
+    });
+
+    it('should render federation data access infographic when section id matches', () => {
+      renderFederationView(multiTopicFederationData);
+      expect(screen.getByAltText(/Federation Service ecosystem/i)).toBeInTheDocument();
     });
   });
 });

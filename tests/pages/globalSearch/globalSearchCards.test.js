@@ -53,14 +53,24 @@ import FilesCard from '../../../src/pages/globalSearch/Cards/files/FilesCard';
 import { CohortStateContext } from '../../../src/components/CohortSelectorState/CohortStateContext';
 import * as ReactRouterDOM from 'react-router-dom';
 
+import { openDoubleLink } from '../../../src/bento/studiesData';
+import { enableTitleTruncationMocks } from '../../helpers/globalSearchCardTestUtils';
 import {
   studiesCardRow,
+  studiesCardRowNoManifest,
+  longTitleStudiesCardRow,
   samplesCardRow,
   modelsCardRow,
+  modelsCardNodeOnlyRow,
   aboutCardPayload,
+  aboutCardExternalLinkPayload,
+  aboutCardHighlightPayload,
   participantCardRow,
   participantCardRowWithCpi,
   filesCardRow,
+  filesCardRowNoParticipant,
+  filesCardRowLongIds,
+  filesCardRowBracketedParticipant,
 } from '../../fixtures/globalSearch/cardPresentationFixtures';
 
 const theme = createMuiTheme();
@@ -103,6 +113,61 @@ describe('Explore — Global Search cards', () => {
       expect(screen.getByText('DOWNLOAD MANIFEST')).toBeInTheDocument();
       expect(screen.getByText('CCDI CBioPortal')).toBeInTheDocument();
     });
+
+    it('should navigate to study page when VIEW STUDY is selected', () => {
+      renderWithRouter(<StudiesCard data={studiesCardRow} index={0} />);
+      fireEvent.click(screen.getByText('AVAILABLE ACTIONS'));
+      fireEvent.click(screen.getByText('VIEW STUDY'));
+      expect(mockNavigate).toHaveBeenCalledWith(`/studies/${studiesCardRow.study_id}`);
+    });
+
+    it('should download manifest when link exists for study', () => {
+      renderWithRouter(<StudiesCard data={studiesCardRow} index={0} />);
+      fireEvent.click(screen.getByText('AVAILABLE ACTIONS'));
+      fireEvent.click(screen.getByText('DOWNLOAD MANIFEST'));
+      expect(openDoubleLink).toHaveBeenCalledWith(
+        'https://example.com/mock-study-manifest.xlsx',
+        `${studiesCardRow.study_id}_CCDI_Study_Manifest.xlsx`,
+      );
+    });
+
+    it('should warn when manifest link is missing for study', () => {
+      const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+      renderWithRouter(<StudiesCard data={studiesCardRowNoManifest} index={0} />);
+      fireEvent.click(screen.getByText('AVAILABLE ACTIONS'));
+      fireEvent.click(screen.getByText('DOWNLOAD MANIFEST'));
+      expect(warnSpy).toHaveBeenCalledWith(
+        expect.stringContaining(studiesCardRowNoManifest.study_id),
+      );
+      warnSpy.mockRestore();
+    });
+
+    it('should open cBioPortal in a new window', () => {
+      window.open = jest.fn();
+      renderWithRouter(<StudiesCard data={studiesCardRow} index={0} />);
+      fireEvent.click(screen.getByText('AVAILABLE ACTIONS'));
+      fireEvent.click(screen.getByText('CCDI CBioPortal'));
+      expect(window.open).toHaveBeenCalledWith('https://cbioportal.ccdi.cancer.gov/', '_blank');
+    });
+
+    it('should close dropdown when clicking outside', () => {
+      renderWithRouter(<StudiesCard data={studiesCardRow} index={0} />);
+      fireEvent.click(screen.getByText('AVAILABLE ACTIONS'));
+      expect(screen.getByText('VIEW STUDY')).toBeInTheDocument();
+      fireEvent.mouseDown(document.body);
+      expect(screen.queryByText('VIEW STUDY')).not.toBeInTheDocument();
+    });
+
+    it('should truncate long study id title when card is narrow', () => {
+      const truncation = enableTitleTruncationMocks();
+      const { container } = renderWithRouter(
+        <StudiesCard data={longTitleStudiesCardRow} index={0} />,
+      );
+      truncation.setCardWidth(container.firstChild);
+      truncation.triggerResize();
+      expect(container.textContent).toMatch(/\.\.\./);
+      truncation.restore();
+    });
   });
 
   describe('SamplesCard', () => {
@@ -112,6 +177,27 @@ describe('Explore — Global Search cards', () => {
       expect(screen.getByText('SAMPLES')).toBeInTheDocument();
       expect(screen.getByText(samplesCardRow.sample_id)).toBeInTheDocument();
       expect(screen.getByText(samplesCardRow.participant_id)).toBeInTheDocument();
+    });
+
+    it('should navigate to explore when VIEW IN EXPLORE is clicked', () => {
+      renderWithRouter(<SamplesCard data={samplesCardRow} index={1} />);
+      fireEvent.click(screen.getByText('VIEW IN EXPLORE'));
+      expect(mockNavigate).toHaveBeenCalledWith(
+        `/explore?p_id=${samplesCardRow.participant_id}&tab=2`,
+      );
+    });
+
+    it('should truncate long sample id when card is narrow', () => {
+      const truncation = enableTitleTruncationMocks();
+      const longSample = {
+        ...samplesCardRow,
+        sample_id: `SMP-${'Y'.repeat(80)}-LONG`,
+      };
+      const { container } = renderWithRouter(<SamplesCard data={longSample} index={1} />);
+      truncation.setCardWidth(container.firstChild);
+      truncation.triggerResize();
+      expect(container.textContent).toMatch(/\.\.\./);
+      truncation.restore();
     });
   });
 
@@ -123,24 +209,68 @@ describe('Explore — Global Search cards', () => {
       expect(screen.getByText(modelsCardRow.node)).toBeInTheDocument();
       expect(screen.getByText(modelsCardRow.property)).toBeInTheDocument();
     });
+
+    it('should navigate to data model when action button is clicked', () => {
+      renderWithRouter(<ModelsCard data={modelsCardRow} index={2} />);
+      fireEvent.click(screen.getByText('GO TO DATA MODEL NAVIGATOR'));
+      expect(mockNavigate).toHaveBeenCalledWith('/data-model');
+    });
+
+    it('should hide property fields when category_type is node', () => {
+      renderWithRouter(<ModelsCard data={modelsCardNodeOnlyRow} index={2} />);
+      expect(screen.getByText('Data Model Node:')).toBeInTheDocument();
+      expect(screen.queryByText('Property Name:')).not.toBeInTheDocument();
+    });
+
+    it('should truncate long model value when card is narrow', () => {
+      const truncation = enableTitleTruncationMocks();
+      const { container } = renderWithRouter(
+        <ModelsCard data={modelsCardNodeOnlyRow} index={2} />,
+      );
+      truncation.setCardWidth(container.firstChild);
+      truncation.triggerResize();
+      expect(container.textContent).toMatch(/\.\.\./);
+      truncation.restore();
+    });
   });
 
   describe('AboutCard', () => {
-    it('should render title and about snippet', () => {
-      render(
+    function renderAboutCard(data, searchText = 'search', index = 3) {
+      return render(
         <ThemeProvider theme={theme}>
           <MemoryRouter>
-            <AboutCard
-              searchText="search"
-              data={aboutCardPayload}
-              index={3}
-            />
+            <AboutCard searchText={searchText} data={data} index={index} />
           </MemoryRouter>
         </ThemeProvider>,
       );
+    }
+
+    it('should render title and about snippet', () => {
+      renderAboutCard(aboutCardPayload);
 
       expect(screen.getByText('ABOUT')).toBeInTheDocument();
       expect(screen.getByText(aboutCardPayload.title)).toBeInTheDocument();
+    });
+
+    it('should render external page link with https href', () => {
+      renderAboutCard(aboutCardExternalLinkPayload);
+      const link = screen.getByRole('link');
+      expect(link).toHaveAttribute('href', aboutCardExternalLinkPayload.page);
+      expect(link).toHaveAttribute('target', '_blank');
+    });
+
+    it('should highlight matching search text in the body', () => {
+      renderAboutCard(aboutCardHighlightPayload, 'tumor');
+      expect(screen.getByText('tumor', { selector: 'span' })).toBeInTheDocument();
+    });
+
+    it('should truncate long titles when card width is limited', () => {
+      const truncation = enableTitleTruncationMocks();
+      const { container } = renderAboutCard(aboutCardExternalLinkPayload);
+      truncation.setCardWidth(container.querySelector('#global_search_card_3'));
+      truncation.triggerResize();
+      expect(container.textContent).toMatch(/\.\.\./);
+      truncation.restore();
     });
   });
 
@@ -377,6 +507,88 @@ describe('Explore — Global Search cards', () => {
       expect(screen.getByText('FILES')).toBeInTheDocument();
       expect(screen.getByText(filesCardRow.file_name)).toBeInTheDocument();
       expect(screen.getByRole('button', { name: /add to cart/i })).toBeInTheDocument();
+    });
+
+    it('should add file to cart and show success notification', () => {
+      const addFiles = jest.fn();
+      renderWithRouter(
+        <FilesCard data={filesCardRow} index={5} addFiles={addFiles} cartFiles={[]} />,
+      );
+      fireEvent.click(screen.getByRole('button', { name: /add to cart/i }));
+      expect(addFiles).toHaveBeenCalledWith([filesCardRow.id]);
+      expect(screen.getByText(/successfully added/i)).toBeInTheDocument();
+    });
+
+    it('should show error when file is already in cart', () => {
+      renderWithRouter(
+        <FilesCard
+          data={filesCardRow}
+          index={5}
+          addFiles={jest.fn()}
+          cartFiles={[filesCardRow.id]}
+        />,
+      );
+      fireEvent.click(screen.getByRole('button', { name: /add to cart/i }));
+      expect(screen.getByText(/already in cart/i)).toBeInTheDocument();
+    });
+
+    it('should show error when cart is at limit', () => {
+      const nearFullCart = Array.from({ length: 200000 }, (_, i) => `f-${i}`);
+      renderWithRouter(
+        <FilesCard
+          data={filesCardRow}
+          index={5}
+          addFiles={jest.fn()}
+          cartFiles={nearFullCart}
+        />,
+      );
+      fireEvent.click(screen.getByRole('button', { name: /add to cart/i }));
+      expect(screen.getByText(/cart limit reached/i)).toBeInTheDocument();
+    });
+
+    it('should render plain file title when participant_id is absent', () => {
+      renderWithRouter(
+        <FilesCard
+          data={filesCardRowNoParticipant}
+          index={6}
+          addFiles={jest.fn()}
+          cartFiles={[]}
+        />,
+      );
+      expect(screen.getByText(filesCardRowNoParticipant.file_name)).toBeInTheDocument();
+    });
+
+    it('should expand long participant id text when truncated', () => {
+      Object.defineProperty(window, 'innerWidth', {
+        configurable: true,
+        writable: true,
+        value: 800,
+      });
+      renderWithRouter(
+        <FilesCard
+          data={filesCardRowLongIds}
+          index={7}
+          addFiles={jest.fn()}
+          cartFiles={[]}
+        />,
+      );
+      const expandToggle = document.querySelector('span[class*="expandToggle"]');
+      expect(expandToggle).toBeTruthy();
+      fireEvent.click(expandToggle);
+      expect(screen.getByText(/PART-LONG-/)).toBeInTheDocument();
+    });
+
+    it('should format bracketed data category and participant ids for display', () => {
+      renderWithRouter(
+        <FilesCard
+          data={filesCardRowBracketedParticipant}
+          index={8}
+          addFiles={jest.fn()}
+          cartFiles={[]}
+        />,
+      );
+      expect(screen.getByText('PART-A; PART-B')).toBeInTheDocument();
+      expect(screen.getByText(/Genomic.*Transcriptomic/)).toBeInTheDocument();
     });
   });
 });

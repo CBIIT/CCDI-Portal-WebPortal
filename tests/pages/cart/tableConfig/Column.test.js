@@ -31,6 +31,13 @@ describe('cart table Column', () => {
       render(<CustomCellView dataField="file_name" label="readme.txt" />);
       expect(screen.getByText('readme.txt')).toBeInTheDocument();
     });
+
+    it('should return empty label unchanged when brackets are stripped from blank values', () => {
+      const { container } = render(
+        <CustomCellView dataField="participant_id" label="" />,
+      );
+      expect(container.textContent).toBe('');
+    });
   });
 
   describe('CustomHeaderCellView', () => {
@@ -81,6 +88,46 @@ describe('cart table Column', () => {
 
       deleteCol.headerEventHandler();
       expect(deleteAllFiles).toHaveBeenCalled();
+    });
+
+    it('should pass through standard columns and wire custom header renderers', () => {
+      const deleteAllFiles = jest.fn();
+      const deleteCartFile = jest.fn();
+
+      const columns = [
+        {
+          dataField: 'file_name',
+          header: 'File',
+          display: true,
+        },
+        {
+          dataField: 'hidden_field',
+          display: false,
+        },
+        {
+          dataField: 'notes',
+          header: 'Notes',
+          display: true,
+          headerType: headerTypes.CUSTOM_ELEM,
+        },
+      ];
+
+      const configured = configColumn({
+        columns,
+        deleteAllFiles,
+        deleteCartFile,
+      });
+
+      expect(configured).toHaveLength(2);
+
+      const plainCol = configured.find((c) => c.dataField === 'file_name');
+      expect(plainCol.customCellRender).toBeUndefined();
+      expect(plainCol.cellEventHandler).toBeUndefined();
+
+      const customHeaderCol = configured.find((c) => c.dataField === 'notes');
+      expect(typeof customHeaderCol.customColHeaderRender).toBe('function');
+      const { container } = render(customHeaderCol.customColHeaderRender({}));
+      expect(container.firstChild).toBeNull();
     });
   });
 });

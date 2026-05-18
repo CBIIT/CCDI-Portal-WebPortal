@@ -33,5 +33,15 @@ describe('SearchBarTablet', () => {
 
       expect(mockNavigate).toHaveBeenCalledWith('/sitesearch?keyword=trial');
     });
+
+    it('should navigate when Enter is pressed in the search field', () => {
+      render(<SearchBarTablet />);
+
+      const input = screen.getByPlaceholderText('search');
+      fireEvent.change(input, { target: { value: 'pediatric' } });
+      fireEvent.keyPress(input, { key: 'Enter', code: 'Enter', charCode: 13 });
+
+      expect(mockNavigate).toHaveBeenCalledWith('/sitesearch?keyword=pediatric');
+    });
   });
 });

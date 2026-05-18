@@ -22,6 +22,7 @@ import { MemoryRouter } from 'react-router-dom';
 
 import ValueCard from '../../../src/pages/globalSearch/Cards/ValueCard';
 
+import { enableTitleTruncationMocks } from '../../helpers/globalSearchCardTestUtils';
 import { valueCardRow } from '../../fixtures/globalSearch/cardPresentationFixtures';
 
 const theme = createMuiTheme();
@@ -62,5 +63,40 @@ describe('Global Search — ValueCard', () => {
       'href',
       '/data-model',
     );
+  });
+
+  it('should truncate long model title when card is narrow', () => {
+    const truncation = enableTitleTruncationMocks();
+    const longValueRow = {
+      ...valueCardRow,
+      value: `MODEL_${'X'.repeat(80)}_LONG`,
+    };
+    const { container } = render(
+      <ThemeProvider theme={theme}>
+        <MemoryRouter>
+          <ValueCard data={longValueRow} index={1} />
+        </MemoryRouter>
+      </ThemeProvider>,
+    );
+    truncation.setCardWidth(container.querySelector('#global_search_card_1'));
+    truncation.triggerResize();
+    expect(container.textContent).toMatch(/\.\.\./);
+    truncation.restore();
+  });
+
+  it('should render property description row when description is provided', () => {
+    const rowWithDescription = {
+      ...valueCardRow,
+      property_description: 'Detailed field description',
+    };
+    render(
+      <ThemeProvider theme={theme}>
+        <MemoryRouter>
+          <ValueCard data={rowWithDescription} index={2} />
+        </MemoryRouter>
+      </ThemeProvider>,
+    );
+    expect(screen.getByText('Property Description:')).toBeInTheDocument();
+    expect(screen.getByText('Detailed field description')).toBeInTheDocument();
   });
 });

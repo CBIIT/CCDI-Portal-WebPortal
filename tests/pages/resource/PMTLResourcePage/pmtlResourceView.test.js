@@ -9,9 +9,11 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
+import { clickTopicNav, triggerResourceScroll, toggleMobileSection } from '../shared/resourceViewTestUtils';
 import '@testing-library/jest-dom';
 import PMTLResourceView from '../../../../src/pages/resource/PMTLResourcePage/PMTLResourceView';
 import { defaultPmtlViewData } from '../../../fixtures/resource/pmtlViewProps';
+import { multiTopicPmtlData } from '../../../fixtures/resource/resourceInteractionData';
 
 // Mock heavy resource components — isolate PMTLResourceView
 jest.mock('../../../../src/pages/resource/components/PMTLTable', () => function MockPMTLTable() {
@@ -109,6 +111,29 @@ describe('PMTLResourceView', () => {
         renderPmtlView({ introText: '<p>Intro only.</p>' }),
       ).not.toThrow();
       expect(screen.getByText(/Intro only/i)).toBeInTheDocument();
+    });
+  });
+
+  describe('Navigation interactions', () => {
+    it('should highlight topic when nav item is clicked', () => {
+      const scrollTo = jest.fn();
+      window.scrollTo = scrollTo;
+      renderPmtlView(multiTopicPmtlData);
+      const topic = clickTopicNav('PMTL Topic B');
+      expect(topic).toHaveClass('selected');
+      expect(scrollTo).toHaveBeenCalled();
+    });
+
+    it('should apply sticky nav on scroll', () => {
+      renderPmtlView(multiTopicPmtlData);
+      triggerResourceScroll('PMTLBody');
+      expect(document.getElementById('leftNav').className).toContain('navListSticky');
+    });
+
+    it('should toggle mobile section visibility', () => {
+      renderPmtlView(multiTopicPmtlData);
+      const mobileHeader = toggleMobileSection('.pmtlTitleMobile');
+      expect(mobileHeader.className).not.toContain('sectionCollapse');
     });
   });
 });

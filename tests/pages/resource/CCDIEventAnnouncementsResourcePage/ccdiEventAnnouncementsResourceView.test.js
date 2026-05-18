@@ -9,9 +9,11 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
+import { clickTopicNav, triggerResourceScroll, toggleMobileSection } from '../shared/resourceViewTestUtils';
 import '@testing-library/jest-dom';
 import CCDIEventAnnouncementsResourceView from '../../../../src/pages/resource/CCDIEventAnnouncementsResourcePage/CCDIEventAnnouncementsResourceView';
 import { minimalCcdiEventAnnouncementsResourceData } from '../../../fixtures/resource/resourceDataViewProps';
+import { multiTopicCcdiEventsData } from '../../../fixtures/resource/resourceInteractionData';
 
 function renderCcdiView(data = minimalCcdiEventAnnouncementsResourceData) {
   return render(
@@ -61,6 +63,29 @@ describe('CCDIEventAnnouncementsResourceView', () => {
       window.scrollTo = scrollToMock;
       renderCcdiView();
       expect(scrollToMock).toHaveBeenCalledWith(0, 0);
+    });
+
+    it('should apply sticky nav class when page is scrolled', () => {
+      renderCcdiView(multiTopicCcdiEventsData);
+      triggerResourceScroll('CCDIEventArchiveBody');
+      expect(document.getElementById('leftNav').className).toContain('navListSticky');
+    });
+  });
+
+  describe('Navigation interactions', () => {
+    it('should highlight topic when nav item is clicked', () => {
+      const scrollTo = jest.fn();
+      window.scrollTo = scrollTo;
+      renderCcdiView(multiTopicCcdiEventsData);
+      const topic = clickTopicNav('Events B');
+      expect(topic).toHaveClass('selected');
+      expect(scrollTo).toHaveBeenCalled();
+    });
+
+    it('should toggle mobile section visibility', () => {
+      renderCcdiView(multiTopicCcdiEventsData);
+      const mobileHeader = toggleMobileSection();
+      expect(mobileHeader.className).not.toContain('sectionCollapse');
     });
   });
 });

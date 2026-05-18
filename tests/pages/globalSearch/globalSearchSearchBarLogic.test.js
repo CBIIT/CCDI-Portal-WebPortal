@@ -92,6 +92,19 @@ describe('globalSearchSearchBarLogic', () => {
       public: [],
     };
 
+    it('should return empty array when value is whitespace only', async () => {
+      const getSug = createGetSearchSuggestions({
+        authCheck: () => true,
+        queryAutocompleteAPI: jest.fn(),
+        SEARCH_PAGE_KEYS,
+        SEARCH_PAGE_DATAFIELDS,
+        setSearchText: jest.fn(),
+        setSearchCounts: jest.fn(),
+      });
+      const out = await getSug({}, '   ', 'type');
+      expect(out).toEqual([]);
+    });
+
     it('should clear search state and return [] when value is empty', async () => {
       const setSearchText = jest.fn();
       const setSearchCounts = jest.fn();

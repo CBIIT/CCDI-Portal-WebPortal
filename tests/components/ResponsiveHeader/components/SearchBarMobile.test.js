@@ -33,5 +33,15 @@ describe('SearchBarMobile', () => {
 
       expect(mockNavigate).toHaveBeenCalledWith('/sitesearch?keyword=gene');
     });
+
+    it('should navigate when Enter is pressed in the search field', () => {
+      render(<SearchBarMobile />);
+
+      const input = screen.getByPlaceholderText('search');
+      fireEvent.change(input, { target: { value: '  cohort  ' } });
+      fireEvent.keyPress(input, { key: 'Enter', code: 'Enter', charCode: 13 });
+
+      expect(mockNavigate).toHaveBeenCalledWith('/sitesearch?keyword=cohort');
+    });
   });
 });

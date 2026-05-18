@@ -31,6 +31,7 @@ jest.mock('../../../src/pages/globalSearch/Cards', () => ({
 }));
 
 let capturedSearchBarFunctions;
+let capturedSearchResultsFunctions;
 
 jest.mock('@bento-core/global-search', () => ({
   SearchBarGenerator: (opts) => {
@@ -41,15 +42,18 @@ jest.mock('@bento-core/global-search', () => ({
       },
     };
   },
-  SearchResultsGenerator: jest.fn(() => ({
-    SearchResults: function MockSearchResults({ searchText }) {
-      return (
-        <div data-testid="mock-global-search-results">
-          {searchText || ''}
-        </div>
-      );
-    },
-  })),
+  SearchResultsGenerator: (opts) => {
+    capturedSearchResultsFunctions = opts.functions;
+    return {
+      SearchResults: function MockSearchResults({ searchText }) {
+        return (
+          <div data-testid="mock-global-search-results">
+            {searchText || ''}
+          </div>
+        );
+      },
+    };
+  },
   countValues: jest.fn(() => 0),
 }));
 
@@ -85,6 +89,7 @@ describe('Global Search — searchView page', () => {
     jest.clearAllMocks();
     mockNavigate.mockClear();
     capturedSearchBarFunctions = undefined;
+    capturedSearchResultsFunctions = undefined;
     global.MutationObserver = class {
       constructor() {
         this.observe = jest.fn();
@@ -227,5 +232,61 @@ describe('Global Search — searchView page', () => {
 
     expect(queryAutocompleteAPI).toHaveBeenCalledWith('gene', false);
     expect(suggestions).toEqual(['GENE', 'PID1', 'MODEL1']);
+  });
+
+  it('should return empty suggestions when keyword is whitespace only', async () => {
+    render(
+      <ThemeProvider theme={theme}>
+        <MemoryRouter initialEntries={['/sitesearch']}>
+          <Routes>
+            <Route
+              path="/sitesearch"
+              element={(
+                <SearchView
+                  isSignedIn
+                  isAuthorized
+                  publicAccessEnabled={false}
+                />
+              )}
+            />
+          </Routes>
+        </MemoryRouter>
+      </ThemeProvider>,
+    );
+
+    await waitFor(() => expect(capturedSearchBarFunctions?.getSuggestions).toBeDefined());
+
+    let suggestions;
+    await act(async () => {
+      suggestions = await capturedSearchBarFunctions.getSuggestions({}, '   ', '');
+    });
+    expect(suggestions).toEqual([]);
+  });
+
+  it('should no-op inactive tab change when signed in but not authorized', async () => {
+    render(
+      <ThemeProvider theme={theme}>
+        <MemoryRouter initialEntries={['/sitesearch?keyword=test']}>
+          <Routes>
+            <Route
+              path="/sitesearch"
+              element={(
+                <SearchView
+                  isSignedIn
+                  isAuthorized={false}
+                  publicAccessEnabled={false}
+                />
+              )}
+            />
+          </Routes>
+        </MemoryRouter>
+      </ThemeProvider>,
+    );
+
+    await waitFor(() => expect(capturedSearchResultsFunctions?.onTabChange).toBeDefined());
+    expect(() => {
+      capturedSearchResultsFunctions.onTabChange({}, 'inactive-2');
+    }).not.toThrow();
+    expect(mockNavigate).not.toHaveBeenCalled();
   });
 });

@@ -9,6 +9,7 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
+import { clickTopicNav, triggerResourceScroll, toggleMobileSection } from '../shared/resourceViewTestUtils';
 import '@testing-library/jest-dom';
 import CPIResourceView from '../../../../src/pages/resource/CPIResourcePage/CPIResourceView';
 import {
@@ -119,6 +120,29 @@ describe('CPIResourceView', () => {
         cpiStatsError: false,
       });
       expect(screen.getByText('Statistic Temporarily Unavailable')).toBeInTheDocument();
+    });
+  });
+
+  describe('Navigation interactions', () => {
+    it('should highlight topic when nav item is clicked', () => {
+      const scrollTo = jest.fn();
+      window.scrollTo = scrollTo;
+      renderCpiView();
+      const topic = clickTopicNav('Components Topic');
+      expect(topic).toHaveClass('selected');
+      expect(scrollTo).toHaveBeenCalled();
+    });
+
+    it('should apply sticky nav on scroll', () => {
+      renderCpiView();
+      triggerResourceScroll('FederationBody');
+      expect(document.getElementById('leftNav').className).toContain('navListSticky');
+    });
+
+    it('should toggle mobile section visibility', () => {
+      renderCpiView();
+      const mobileHeader = toggleMobileSection();
+      expect(mobileHeader.className).not.toContain('sectionCollapse');
     });
   });
 });

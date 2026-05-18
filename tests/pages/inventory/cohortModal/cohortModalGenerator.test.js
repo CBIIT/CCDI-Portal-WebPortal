@@ -133,4 +133,70 @@ describe('CohortModalGenerator', () => {
       expect(client.query).toHaveBeenCalled();
     });
   });
+
+  it('should call client.query when choosing Metadata JSON from the download menu', async () => {
+    renderModalTree();
+
+    await waitFor(() => {
+      expect(screen.getByText('View of All Cohorts')).toBeInTheDocument();
+    });
+
+    fireEvent.click(screen.getByRole('button', { name: /selected cohorts/i }));
+    fireEvent.click(screen.getByText('Metadata JSON'));
+
+    await waitFor(() => {
+      expect(client.query).toHaveBeenCalled();
+    });
+  });
+
+  it('should prompt before closing when there are unsaved cohort changes', async () => {
+    const onCloseModal = jest.fn();
+    render(
+      <ThemeProvider theme={theme}>
+        <MemoryRouter initialEntries={['/explore']}>
+          <CohortModalProvider>
+            <CohortStateContext.Provider value={{ state: mockCohortState, dispatch: jest.fn() }}>
+              <CohortModalHarness onCloseModal={onCloseModal} open />
+            </CohortStateContext.Provider>
+          </CohortModalProvider>
+        </MemoryRouter>
+      </ThemeProvider>,
+    );
+
+    await waitFor(() => {
+      expect(screen.getByText('My Cohort')).toBeInTheDocument();
+    });
+
+    fireEvent.click(screen.getByAltText('edit cohort name icon'));
+    const nameInput = screen.getByDisplayValue('My Cohort');
+    fireEvent.change(nameInput, { target: { name: 'cohortName', value: 'Changed Name' } });
+    fireEvent.blur(nameInput);
+
+    fireEvent.click(screen.getByAltText('close icon'));
+    expect(screen.getByText(/lose all unsaved changes/i)).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Confirm' }));
+    expect(onCloseModal).toHaveBeenCalled();
+  });
+
+  it('should close modal when onCloseModal is invoked', async () => {
+    const onCloseModal = jest.fn();
+    render(
+      <ThemeProvider theme={theme}>
+        <MemoryRouter initialEntries={['/explore']}>
+          <CohortModalProvider>
+            <CohortStateContext.Provider value={{ state: mockCohortState, dispatch: jest.fn() }}>
+              <CohortModalHarness onCloseModal={onCloseModal} open />
+            </CohortStateContext.Provider>
+          </CohortModalProvider>
+        </MemoryRouter>
+      </ThemeProvider>,
+    );
+
+    await waitFor(() => {
+      expect(screen.getByText('View of All Cohorts')).toBeInTheDocument();
+    });
+
+    fireEvent.click(screen.getByAltText('close icon'));
+    expect(onCloseModal).toHaveBeenCalled();
+  });
 });

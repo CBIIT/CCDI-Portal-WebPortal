@@ -8,6 +8,14 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import DataUsagePoliciesView from '../../../../src/pages/about/DataUsagePoliciesPage/DataUsagePoliciesView';
+import {
+  setupResourceViewDom,
+  teardownResourceViewDom,
+  clickSubtopicNav,
+  triggerResourceScroll,
+  triggerResourceScrollAbsolute,
+  triggerResourceScrollToTop,
+} from '../../resource/shared/resourceViewTestUtils';
 
 const viewData = {
   Data_Usage_Policies_Header: '',
@@ -29,6 +37,16 @@ const viewData = {
 describe('DataUsagePoliciesView', () => {
   beforeEach(() => {
     window.scrollTo = jest.fn();
+    setupResourceViewDom();
+    Object.defineProperty(window, 'innerWidth', {
+      configurable: true,
+      writable: true,
+      value: 1400,
+    });
+  });
+
+  afterEach(() => {
+    teardownResourceViewDom();
   });
 
   it('should render page header, nav topics, intro text, and content', () => {
@@ -47,16 +65,67 @@ describe('DataUsagePoliciesView', () => {
   it('should scroll to section when a nav topic is clicked', () => {
     render(<DataUsagePoliciesView data={viewData} />);
 
+    const section = document.createElement('div');
+    Object.defineProperty(section, 'offsetTop', { configurable: true, value: 300 });
+    jest.spyOn(document, 'getElementById').mockImplementation((id) => {
+      if (id === 'Data_Use_Expectations') return section;
+      return document.querySelector(`#${id}`) || null;
+    });
+
     const navTarget = document.querySelector('.navTopicItem');
     fireEvent.click(navTarget);
 
-    expect(window.scrollTo).toHaveBeenCalled();
     expect(window.scrollTo).toHaveBeenCalledWith(
       expect.objectContaining({
-        top: expect.any(Number),
+        top: 245,
         behavior: 'smooth',
       }),
     );
+    document.getElementById.mockRestore();
+  });
+
+  it('should apply selected class when a subtopic nav item is clicked', () => {
+    render(<DataUsagePoliciesView data={viewData} />);
+    const subtopic = clickSubtopicNav('Data Disclaimers');
+    expect(subtopic).toHaveClass('selected');
+  });
+
+  it('should scroll to top on mount', () => {
+    render(<DataUsagePoliciesView data={viewData} />);
+    expect(window.scrollTo).toHaveBeenCalledWith(0, 0);
+  });
+
+  it('should use sticky nav when page is scrolled past body top', () => {
+    render(<DataUsagePoliciesView data={viewData} />);
+    triggerResourceScroll('DataUsagePoliciesBody');
+    expect(document.getElementById('leftNav')).toHaveClass('navListSticky');
+  });
+
+  it('should use absolute nav when footer is near the nav', () => {
+    render(<DataUsagePoliciesView data={viewData} />);
+    triggerResourceScrollAbsolute('DataUsagePoliciesBody', 50);
+    expect(document.getElementById('leftNav')).toHaveClass('navListAbsolute');
+  });
+
+  it('should reset nav to static when scrolled back to top', () => {
+    render(<DataUsagePoliciesView data={viewData} />);
+    triggerResourceScroll('DataUsagePoliciesBody');
+    triggerResourceScrollToTop('DataUsagePoliciesBody');
+    expect(document.getElementById('leftNav')).toHaveClass('navList');
+  });
+
+  it('should pick tablet footer when viewport width is between 768 and 1204', () => {
+    Object.defineProperty(window, 'innerWidth', { configurable: true, value: 900 });
+    render(<DataUsagePoliciesView data={viewData} />);
+    triggerResourceScroll('DataUsagePoliciesBody');
+    expect(document.getElementById('leftNav')).toHaveClass('navListSticky');
+  });
+
+  it('should pick mobile footer when viewport width is 767 or below', () => {
+    Object.defineProperty(window, 'innerWidth', { configurable: true, value: 500 });
+    render(<DataUsagePoliciesView data={viewData} />);
+    triggerResourceScroll('DataUsagePoliciesBody');
+    expect(document.getElementById('leftNav')).toHaveClass('navListSticky');
   });
 
   it('should toggle mobile section collapse class and display', () => {

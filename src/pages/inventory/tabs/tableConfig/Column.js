@@ -280,7 +280,7 @@ export const CustomCellView = (props) => {
     let ids = [];
     
     if (rawData) {
-      const cleaned = rawData.replace(/[\[\]]/g, '').trim();
+      const cleaned = rawData.replace(/[[\]]/g, '').trim();
       if (cleaned) {
         ids = cleaned.split(',').map(id => id.trim()).filter(id => id.length > 0);
       }

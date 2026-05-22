@@ -14,7 +14,7 @@ import Search from '../../pages/globalSearch/searchController';
 import Inventory from '../../pages/inventory/inventoryController';
 import Cart from '../../pages/cart/cartController';
 import ScrollButton from '../ScrollButton/ScrollButtonView';
-import MCIResourceView from '../../pages/resource/MCIResourcePage/MCIResourceController'
+import MCIResourceView from '../../pages/resource/MCIResourcePage/MCIResourceMarkdownController'
 import PMTLResourceView from '../../pages/resource/PMTLResourcePage/PMTLResourceController';
 import FederationResourceView from "../../pages/resource/FederationResourcePage/FederationResourceController";
 import FederationDataModelNavigator from "../../pages/resource/FederationDMN/FederationDMN";
@@ -26,7 +26,7 @@ import StudiesDetail from "../../pages/studyDetail/studyDetailController";
 import OverlayWindow from '../OverlayWindow/OverlayWindow';
 import CohortAnalyzerController  from "../../pages/CohortAnalyzer/CohortAnalyzerController";
 import ToolsResourceView from "../../pages/resource/ToolsResourcePage/ToolsResourceController";
-import CCDIEventAnnouncementsResourceView from "../../pages/resource/CCDIEventAnnouncementsResourcePage/CCDIEventAnnouncementsResourceController";
+import CCDIEventAnnouncementsMarkdown from "../../pages/resource/CCDIEventAnnouncementsResourcePage/CCDIEventAnnouncementsMarkdownController";
 import RareCancerResourceView from "../../pages/resource/RareCancerResourcePage/RareCancerResourceController";
 // import NewsDetail from '../../pages/news/newsDetailView';
 
@@ -53,7 +53,7 @@ const Layout = () => {
           <Route path="/ccdi-participant-index" element={<CPIResourceView />} />
           <Route path="/publications" element={<PublicationsView />} />
           <Route path="/tools" element={<ToolsResourceView />} />
-          <Route path="/ccdi-events-announcements" element={<CCDIEventAnnouncementsResourceView />} />
+          <Route path="/ccdi-events-announcements" element={<CCDIEventAnnouncementsMarkdown />} />
           <Route path="/pediatric-adolescent-and-young-adult-rare-cancer-study" element={<RareCancerResourceView/>} />
           <Route path="/release-notes" element={<ReleaseNotesPageView />} />
           <Route path="/cohortAnalyzer" element={<CohortAnalyzerController />} />

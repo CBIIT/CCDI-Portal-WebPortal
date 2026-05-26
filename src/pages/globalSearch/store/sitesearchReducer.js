@@ -1,10 +1,6 @@
 /* eslint-disable arrow-body-style */
 /* eslint-disable react/destructuring-assignment */
 import store from '../../../store';
-import client from '../../../utils/graphqlClient';
-import {
-  SEARCH_PAGE_RESULTS_PUBLIC,
-} from '../../../bento/sitesearch';
 
 const storeKey = 'dashboardTab';
 
@@ -13,22 +9,10 @@ const initialState = {
   isOverlayOpen: false,
 };
 
-export async function getPublicSearchPageResults(inputValue) {
-  const allIds = await client.query({
-    query: SEARCH_PAGE_RESULTS_PUBLIC,
-    variables: {
-      input: inputValue,
-    },
-    context: { clientName: 'publicService' },
-  }).then((response) => response.data.globalSearch);
-  return allIds;
-}
-
 export function setOverLayWindow(item) {
   store.dispatch({ type: 'SET_OVERLAY_WINDOW', payload: item });
 }
 
-// reducers
 const reducers = {
   SET_SEARCH_CRITERIA: (state, item) => ({
     ...state,
@@ -100,6 +84,5 @@ const reducers = {
   }),
 };
 
-// INJECT-REDUCERS INTO REDUX STORE
 store.injectReducer(storeKey, (state = initialState, { type, payload }) => (
   reducers[type] ? reducers[type](state, payload) : state));

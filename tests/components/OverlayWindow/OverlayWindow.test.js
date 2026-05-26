@@ -2,14 +2,14 @@
  * Overlay consent dialog — opens when overlay flag absent; Continue persists preference.
  */
 
-jest.mock('../../../src/pages/search/store/sitesearchReducer', () => ({
+jest.mock('../../../src/pages/globalSearch/store/sitesearchReducer', () => ({
   setOverLayWindow: jest.fn(),
 }));
 
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { setOverLayWindow } from '../../../src/pages/search/store/sitesearchReducer';
+import { setOverLayWindow } from '../../../src/pages/globalSearch/store/sitesearchReducer';
 import OverlayWindow from '../../../src/components/OverlayWindow/OverlayWindow';
 
 describe('OverlayWindow', () => {

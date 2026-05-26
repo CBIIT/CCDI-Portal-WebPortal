@@ -29,7 +29,7 @@ jest.mock('chartjs-chart-venn', () => ({
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { VennDiagramChart } from 'chartjs-chart-venn';
+import { VennDiagramChart, extractSets } from 'chartjs-chart-venn';
 import ChartVenn from '../../../../src/pages/CohortAnalyzer/vennDiagram/ChartVenn';
 
 const defaultCohortData = [
@@ -170,5 +170,72 @@ describe('ChartVenn', () => {
       expect(VennDiagramChart.mock.calls.length).toBeGreaterThan(callsAfterFirst);
     });
     expect(mockDestroy).toHaveBeenCalled();
+  });
+
+  describe('Edge cases', () => {
+    it('should drop null / undefined / duplicate participant ids when building base sets', async () => {
+      const cohortData = [
+        {
+          cohortName: 'WithNulls',
+          participants: [
+            { id: 'p1' },
+            { id: null },
+            { id: undefined },
+            { id: 'p1' },
+            { id: 'p2' },
+          ],
+        },
+      ];
+      setup({ cohortData });
+      await waitFor(() => expect(VennDiagramChart).toHaveBeenCalled());
+
+      const lastCall = extractSets.mock.calls.at(-1)[0];
+      // Only unique non-null ids should make it through the filter.
+      expect(lastCall[0].values).toEqual(['p1', 'p2']);
+    });
+
+    it('should toggle off an already-selected segment on click', async () => {
+      const setSelectedChart = jest.fn();
+      const setSelectedCohortSections = jest.fn();
+      mockGetElementsAtEventForMode.mockReturnValue([
+        { datasetIndex: 0, index: 0 },
+      ]);
+
+      setup({
+        setSelectedChart,
+        setSelectedCohortSections,
+        selectedCohortSection: ['Alpha (2)'],
+      });
+
+      await waitFor(() => expect(VennDiagramChart).toHaveBeenCalled());
+      const [, chartConfig] = VennDiagramChart.mock.calls[VennDiagramChart.mock.calls.length - 1];
+      chartConfig.options.onClick({ clientX: 0, clientY: 0 });
+
+      expect(setSelectedCohortSections).toHaveBeenCalledWith([]);
+    });
+
+    it('should color multi-set intersections via the intersection palette', async () => {
+      // One-shot extractSets override: produce a region with `sets.length > 1`
+      extractSets.mockImplementationOnce((input) => ({
+        datasets: [{
+          data: (input || []).map((item, index) => ({
+            label: item.label,
+            values: item.values || [],
+            sets: index === 0
+              ? ['region-a', 'region-b']
+              : [`region-${index}`],
+          })),
+        }],
+      }));
+
+      setup({ selectedCohortSection: ['Alpha (2)'] });
+
+      await waitFor(() => expect(VennDiagramChart).toHaveBeenCalled());
+
+      const [, chartConfig] = VennDiagramChart.mock.calls[VennDiagramChart.mock.calls.length - 1];
+      const colors = chartConfig.data.datasets[0].backgroundColor;
+      // Intersection region (index 0) should resolve to a non-empty rgba string.
+      expect(colors[0]).toEqual(expect.stringMatching(/^rgba\(/));
+    });
   });
 });

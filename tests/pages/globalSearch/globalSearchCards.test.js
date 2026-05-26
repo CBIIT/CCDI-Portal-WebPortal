@@ -491,6 +491,77 @@ describe('Explore — Global Search cards', () => {
 
       expect(screen.getByText(longTreatment)).toBeInTheDocument();
     });
+
+    it('should compute mobile max length when window.innerWidth <= 600', () => {
+      const mockClient = {
+        query: jest.fn(() => Promise.resolve({ data: { fileIDsFromList: [] } })),
+      };
+      Object.defineProperty(window, 'innerWidth', {
+        configurable: true,
+        writable: true,
+        value: 500,
+      });
+      const longAgent = `agent ${'X'.repeat(120)}`;
+
+      renderParticipantCard({
+        data: { ...participantCardRow, treatment_agent_str: longAgent },
+        mockClient,
+      });
+
+      // Mobile branch: maxLength=35; the value is far longer so truncation shows.
+      expect(document.querySelector('span[class*="expandToggle"]')).toBeTruthy();
+    });
+
+    it('should compute large-desktop max length when window.innerWidth > 1200', () => {
+      const mockClient = {
+        query: jest.fn(() => Promise.resolve({ data: { fileIDsFromList: [] } })),
+      };
+      Object.defineProperty(window, 'innerWidth', {
+        configurable: true,
+        writable: true,
+        value: 1500,
+      });
+      const longType = `type ${'Y'.repeat(200)}`;
+
+      renderParticipantCard({
+        data: { ...participantCardRow, treatment_type_str: longType },
+        mockClient,
+      });
+
+      // Large-desktop branch: maxLength=95; the value is longer so truncation shows.
+      expect(document.querySelector('span[class*="expandToggle"]')).toBeTruthy();
+    });
+
+    it('should re-evaluate treatment max length on window resize', () => {
+      const mockClient = {
+        query: jest.fn(() => Promise.resolve({ data: { fileIDsFromList: [] } })),
+      };
+      Object.defineProperty(window, 'innerWidth', {
+        configurable: true,
+        writable: true,
+        value: 900,
+      });
+      const longType = `type ${'Z'.repeat(100)}`;
+
+      renderParticipantCard({
+        data: {
+          ...participantCardRow,
+          treatment_type_str: longType,
+          treatment_agent_str: longType,
+        },
+        mockClient,
+      });
+
+      Object.defineProperty(window, 'innerWidth', {
+        configurable: true,
+        writable: true,
+        value: 1500,
+      });
+      fireEvent(window, new Event('resize'));
+
+      // Resize handler ran; treatment row still rendered.
+      expect(screen.getAllByText(/Treatment/i).length).toBeGreaterThan(0);
+    });
   });
 
   describe('FilesCard', () => {

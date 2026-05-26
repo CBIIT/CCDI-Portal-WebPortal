@@ -90,4 +90,37 @@ describe('DownloadSelectedCohort', () => {
     fireEvent.click(screen.getByRole('button', { name: /download results/i }));
     expect(screen.queryByText('Manifest CSV')).not.toBeInTheDocument();
   });
+
+  it('should close the dropdown when clicking outside', () => {
+    render(
+      <div>
+        <DownloadSelectedCohort
+          queryVariable={{ id: ['p1'], first: 12000 }}
+          isSelected
+        />
+        <button data-testid="outside">outside</button>
+      </div>,
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: /download results/i }));
+    expect(screen.getByText('Manifest CSV')).toBeInTheDocument();
+
+    fireEvent.mouseDown(screen.getByTestId('outside'));
+    expect(screen.queryByText('Manifest CSV')).not.toBeInTheDocument();
+  });
+
+  it('should keep the dropdown open when clicking inside the menu', () => {
+    render(
+      <DownloadSelectedCohort
+        queryVariable={{ id: ['p1'], first: 12000 }}
+        isSelected
+      />,
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: /download results/i }));
+    const menuItem = screen.getByText('Manifest CSV');
+    fireEvent.mouseDown(menuItem);
+    // Still open after a mousedown that originated inside the dropdown.
+    expect(screen.getByText('Manifest CSV')).toBeInTheDocument();
+  });
 });

@@ -96,4 +96,97 @@ describe('CPIFilesView', () => {
     fireEvent.click(screen.getByRole('button', { name: 'ADD ALL FILES' }));
     expect(setAlterDisplay).toHaveBeenCalledWith(true);
   });
+
+  it('should request alter display when duplicates can not save the cart', async () => {
+    const upperLimit = 200000;
+    const cart = Array.from({ length: upperLimit - 1 }, (_, i) => `cart-${i}`);
+    // Both new IDs are not in the cart, so duplicates can't bring count under the limit.
+    getFilesID.mockImplementation(() => () =>
+      Promise.resolve({ fileIDsFromList: ['new-a', 'new-b'] }),
+    );
+    const setAlterDisplay = jest.fn();
+
+    render(
+      <CPIFilesView
+        {...defaultProps}
+        cartFiles={cart}
+        setAlterDisplay={setAlterDisplay}
+      />,
+    );
+    fireEvent.click(screen.getByRole('button', { name: 'ADD ALL FILES' }));
+
+    await waitFor(() => {
+      expect(setAlterDisplay).toHaveBeenCalledWith(true);
+    });
+  });
+
+  it('should request alter display when resolved file count exceeds the upper limit', async () => {
+    const upperLimit = 200000;
+    const huge = Array.from({ length: upperLimit + 1 }, (_, i) => `f-${i}`);
+    getFilesID.mockImplementation(() => () =>
+      Promise.resolve({ fileIDsFromList: huge }),
+    );
+    const setAlterDisplay = jest.fn();
+
+    render(<CPIFilesView {...defaultProps} setAlterDisplay={setAlterDisplay} />);
+    fireEvent.click(screen.getByRole('button', { name: 'ADD ALL FILES' }));
+
+    await waitFor(() => {
+      expect(setAlterDisplay).toHaveBeenCalledWith(true);
+    });
+  });
+
+  it('should add files via ADD_SELECTED_FILES branch (no internal filter)', async () => {
+    const addFiles = jest.fn();
+    getFilesID.mockImplementation(() => () =>
+      Promise.resolve({ fileIDsFromList: ['selected-file-1'] }),
+    );
+
+    render(
+      <CPIFilesView
+        {...defaultProps}
+        btnType="ADD_SELECTED_FILES"
+        title="ADD SELECTED"
+        participantIds={['p-x']}
+        rowID={['row-x']}
+        addFiles={addFiles}
+      />,
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: 'ADD SELECTED' }));
+
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: 'Yes' })).toBeInTheDocument();
+    });
+
+    fireEvent.click(screen.getByRole('button', { name: 'Yes' }));
+    expect(addFiles).toHaveBeenCalledWith(['selected-file-1']);
+  });
+
+  it('should call setOpenSnackbar when files are confirmed via Yes click', async () => {
+    const setOpenSnackbar = jest.fn();
+    getFilesID.mockImplementation(() => () =>
+      Promise.resolve({ fileIDsFromList: ['snack-file-1'] }),
+    );
+
+    render(<CPIFilesView {...defaultProps} setOpenSnackbar={setOpenSnackbar} />);
+    fireEvent.click(screen.getByRole('button', { name: 'ADD ALL FILES' }));
+
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: 'Yes' })).toBeInTheDocument();
+    });
+
+    fireEvent.click(screen.getByRole('button', { name: 'Yes' }));
+    expect(setOpenSnackbar).toHaveBeenCalledWith(true);
+  });
+
+  it('should render tooltip image when tooltipCofig is provided', () => {
+    render(
+      <CPIFilesView
+        {...defaultProps}
+        tooltipCofig={{ src: '/tip.png', alt: 'cpi-tip', participant: 'Add CPI files' }}
+      />,
+    );
+    expect(screen.getByAltText('cpi-tip')).toBeInTheDocument();
+  });
 });

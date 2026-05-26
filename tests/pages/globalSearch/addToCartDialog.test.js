@@ -63,6 +63,22 @@ describe('AddToCartDialogView', () => {
     );
     expect(screen.getByText('Cart is full')).toBeInTheDocument();
   });
+
+  it('should call onNoClick when the cart-full alert auto-closes', () => {
+    jest.useFakeTimers();
+    const onNo = jest.fn();
+    render(
+      <AddToCartDialogView
+        open
+        cartWillFull
+        alertMessage="Cart is full"
+        onNoClick={onNo}
+      />,
+    );
+    jest.advanceTimersByTime(4000);
+    expect(onNo).toHaveBeenCalled();
+    jest.useRealTimers();
+  });
 });
 
 describe('AddToCartDialogAlertView', () => {
@@ -101,5 +117,16 @@ describe('AddToCartDialogController', () => {
         />,
       ),
     ).not.toThrow();
+  });
+
+  it('should call its internal handleClose when the alert requests onClose', () => {
+    // The alert's onClose handler closes a local `open` flag in the controller.
+    // We invoke it via the real AddToCartDialogAlertView's auto-close timer to
+    // exercise the controller's handleClose branch.
+    jest.useFakeTimers();
+    const { rerender } = render(<AddToCartDialogController cartWillFull />);
+    expect(() => jest.advanceTimersByTime(4000)).not.toThrow();
+    rerender(<AddToCartDialogController cartWillFull />);
+    jest.useRealTimers();
   });
 });

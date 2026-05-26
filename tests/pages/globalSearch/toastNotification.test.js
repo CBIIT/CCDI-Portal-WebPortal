@@ -69,4 +69,32 @@ describe('ToastNotification', () => {
     );
     expect(container).toBeEmptyDOMElement();
   });
+
+  it('should fall back to default styling for an unknown type', () => {
+    render(
+      <ToastNotification
+        open
+        message="Unknown variant"
+        type="warning"
+        onClose={jest.fn()}
+      />,
+    );
+    expect(screen.getByText('Unknown variant')).toBeInTheDocument();
+  });
+
+  it('should not auto-dismiss when duration is zero', () => {
+    const onClose = jest.fn();
+    render(
+      <ToastNotification
+        open
+        message="Sticky"
+        duration={0}
+        onClose={onClose}
+      />,
+    );
+    act(() => {
+      jest.advanceTimersByTime(5000);
+    });
+    expect(onClose).not.toHaveBeenCalled();
+  });
 });

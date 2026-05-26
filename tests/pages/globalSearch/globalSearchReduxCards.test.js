@@ -28,13 +28,19 @@ jest.mock('@apollo/client', () => ({
   })),
 }));
 
+jest.mock('@bento-core/cart', () => ({
+  __esModule: true,
+  ...jest.requireActual('@bento-core/cart'),
+  onAddCartFiles: (files) => ({ type: 'TEST/ADD_CART_FILES', payload: files }),
+}));
+
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useNavigate: jest.fn(() => jest.fn()),
 }));
 
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
@@ -89,6 +95,43 @@ describe('Global Search — Redux cards', () => {
       expect(screen.getByText('FILES')).toBeInTheDocument();
       expect(screen.getByText(filesCardRow.file_name)).toBeInTheDocument();
       expect(screen.getByRole('button', { name: /add to cart/i })).toBeInTheDocument();
+    });
+
+    it('should dispatch onAddCartFiles via addFiles when ADD TO CART is clicked', () => {
+      const dispatched = [];
+      const reducer = (state = {}, action) => {
+        dispatched.push(action);
+        return state;
+      };
+      const store = createStore(() => ({
+        cartReducer: { count: 0, filesId: [] },
+      }));
+      // Wrap the store's dispatch to capture mapDispatchToProps actions.
+      const originalDispatch = store.dispatch;
+      store.dispatch = (action) => {
+        reducer(undefined, action);
+        return originalDispatch(action);
+      };
+
+      render(
+        <Provider store={store}>
+          <MemoryRouter>
+            <FilesCardRedux data={filesCardRow} index={0} />
+          </MemoryRouter>
+        </Provider>,
+      );
+
+      fireEvent.click(screen.getByRole('button', { name: /add to cart/i }));
+      // Bento `onAddCartFiles` returns thunk-shaped actions; assert at least
+      // one action was dispatched with the file id wired through props.
+      const cartAction = dispatched.find(
+        (a) => a && (
+          (Array.isArray(a.payload) && a.payload.includes(filesCardRow.id))
+          || (Array.isArray(a.files) && a.files.includes(filesCardRow.id))
+          || (a.type && a.type.toLowerCase().includes('cart'))
+        ),
+      );
+      expect(cartAction).toBeDefined();
     });
   });
 

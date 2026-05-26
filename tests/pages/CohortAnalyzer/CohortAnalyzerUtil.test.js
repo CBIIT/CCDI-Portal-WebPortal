@@ -129,6 +129,16 @@ describe('CohortAnalyzerUtil', () => {
       expect(ordered[0]).toBe('b');
       expect(ordered.slice(1).sort()).toEqual(['a', 'c']);
     });
+
+    it('should sort by participant count when sortByReturn type is not alphabet', () => {
+      const localState = {
+        a: { participants: [1, 2, 3] },
+        b: { participants: [1] },
+        c: { participants: [1, 2] },
+      };
+      const ordered = sortByReturn('count', ['a', 'b', 'c'], localState, []);
+      expect(ordered).toEqual(['b', 'c', 'a']);
+    });
   });
 
   describe('handleDelete', () => {

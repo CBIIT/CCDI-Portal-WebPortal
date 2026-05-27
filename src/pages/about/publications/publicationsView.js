@@ -685,7 +685,7 @@ const useFocus = () => {
   return [ htmlElRef, setFocus ] 
 };
 
-const PublicationsView = ({classes, headerImg, bannerText, publicationsList}) => {
+const PublicationsView = ({classes, headerImg, bannerText, publicationsList = []}) => {
   const [selectedTab, setSelectedTab] = useState("All");
   const newsTabList = ['All', 'Primary', 'Secondary', 'Abstracts'];
   const sizelist = [10,20,50,100];
@@ -716,7 +716,7 @@ const PublicationsView = ({classes, headerImg, bannerText, publicationsList}) =>
     }
     setFilteredData(resultList);
     setPageTotal(resultList.length);
-  }, [selectedTab, keyword]);
+  }, [selectedTab, keyword, publicationsList]);
 
   useEffect(() => {
     const allids = [];

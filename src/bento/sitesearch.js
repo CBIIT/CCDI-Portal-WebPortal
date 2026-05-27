@@ -143,6 +143,7 @@ export const SEARCH_PAGE_RESULT_PARTICIPANTS = gql`
         race_str
         last_known_survival_status_str
         diagnosis_category_str
+        consent_codes
         cpi_data {
           associated_id
           repository_of_synonym_id
@@ -171,6 +172,7 @@ export const SEARCH_PAGE_RESULT_STUDIES = gql`
         num_of_participants
         num_of_samples
         num_of_files
+        consent_codes
       }
     }
   }

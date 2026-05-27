@@ -10,6 +10,7 @@ import exportIconBlue from '../../../assets/icons/Export_Icon.svg';
 import closeIcon from '../../../assets/icons/Close_Icon.svg';
 import arrowDownIcon from '../../../assets/icons/Arrow_Down.svg';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import GetAppIcon from '@material-ui/icons/GetApp';
 import introImg from '../../../assets/resources/RCI_data_flow_chart.png'
 
 const ResourceContainer = styled.div`
@@ -428,10 +429,81 @@ const ResourceBody = styled.div`
     }
 `;
 
+const ContactFormDownloadButtonWrap = styled.div`
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 14px 0;
+`;
+
+const ContactFormDownloadButton = styled.button`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px;
+    width: 189px;
+    height: 41px;
+    padding: 0 6px 0 8px;
+    box-sizing: border-box;
+    background: #2d545e;
+    border: 1px solid #8fb1cc;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #ffffff;
+
+    &:hover {
+        filter: brightness(1.06);
+    }
+
+    &:focus {
+        outline: 2px solid #8fb1cc;
+        outline-offset: 2px;
+    }
+
+    .contactFormDownloadButtonText {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        font-family: Poppins, sans-serif;
+        font-weight: 600;
+        font-style: normal;
+        font-size: 12px;
+        line-height: 13px;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        vertical-align: middle;
+        leading-trim: none;
+        color: #ffffff;
+    }
+
+    .contactFormDownloadIcon {
+        flex-shrink: 0;
+        width: 22px;
+        height: 22px;
+        font-size: 22px;
+        color: #ffffff;
+    }
+`;
+
 const DEFAULT_DOWNLOAD_CONFIG = {
   url: 'https://raw.githubusercontent.com/CBIIT/CCDI_Hub_Assets/main/PDF/Resources/RCI/rare-cancer-study_contact.pdf',
   filename: 'rare-cancer-study_contact.pdf',
 };
+
+/** Splits HTML after the first </p> so a control can be inserted between paragraphs. */
+function splitHtmlAfterFirstClosingP(html) {
+  if (!html || typeof html !== 'string') {
+    return { before: '', after: '' };
+  }
+  const lower = html.toLowerCase();
+  const idx = lower.indexOf('</p>');
+  if (idx === -1) {
+    return { before: html, after: '' };
+  }
+  const end = idx + '</p>'.length;
+  return { before: html.slice(0, end), after: html.slice(end) };
+}
 
 async function handleContactFormDownload(e, config) {
   e.preventDefault();
@@ -472,6 +544,29 @@ async function handleContactFormDownload(e, config) {
     console.error('Download failed:', err);
     window.open(downloadUrl, '_blank');
   }
+}
+
+function ContactInformationContent({ htmlContent }) {
+  const { before, after } = splitHtmlAfterFirstClosingP(htmlContent);
+  return (
+    <>
+      <ResourceContent htmlContent={before} />
+      <ContactFormDownloadButtonWrap>
+        <ContactFormDownloadButton
+          type="button"
+          aria-label="Download contact form PDF"
+          onClick={(e) => handleContactFormDownload(e, DEFAULT_DOWNLOAD_CONFIG)}
+        >
+          <span className="contactFormDownloadButtonText">
+            <span>DOWNLOAD</span>
+            <span>CONTACT FORM</span>
+          </span>
+          <GetAppIcon className="contactFormDownloadIcon" aria-hidden />
+        </ContactFormDownloadButton>
+      </ContactFormDownloadButtonWrap>
+      {after ? <ResourceContent htmlContent={after} /> : null}
+    </>
+  );
 }
 
 function ResourceContent({ htmlContent, downloadConfig }) {
@@ -651,7 +746,13 @@ const RareCancerResourceView = ({data}) => {
                                                     <>
                                                         <div id={mciItem.id} className='mciSubtitle'>{mciItem.subtopic && mciItem.subtopic}</div>
                                                         <div className='mciContentContainer'>
-                                                            {mciItem.content && <ResourceContent htmlContent={mciItem.content} downloadConfig={data.RCI_DOWNLOAD_CONFIG} />}
+                                                            {mciItem.content && (
+                                                                mciItem.id === 'CONTACT_INFORMATION' ? (
+                                                                    <ContactInformationContent htmlContent={mciItem.content} />
+                                                                ) : (
+                                                                    <ResourceContent htmlContent={mciItem.content} />
+                                                                )
+                                                            )}
                                                         </div>
                                                         {mciItem.content && <div style={{height: '40px'}} />}
                                                     </>

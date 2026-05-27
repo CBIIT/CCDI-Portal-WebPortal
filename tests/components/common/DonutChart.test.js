@@ -10,12 +10,18 @@ jest.mock('recharts', () => {
     ),
     PieChart: ({ children }) => <div data-testid="pie-chart">{children}</div>,
     Pie: ({
-      data, activeShape, activeIndex,
+      data, activeShape, activeIndex, onMouseEnter,
     }) => {
       const Active = activeShape;
       const entry = data[activeIndex] || data[0];
       return (
-        <div data-testid="pie">
+        <div
+          data-testid="pie"
+          role="button"
+          tabIndex={0}
+          onMouseEnter={() => onMouseEnter && onMouseEnter(null, 1)}
+          onKeyDown={() => {}}
+        >
           {Active && entry && Active({
             cx: 150,
             cy: 150,
@@ -36,7 +42,7 @@ jest.mock('recharts', () => {
 });
 
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import DonutChart from '../../../src/components/common/DonutChart';
 
@@ -85,5 +91,33 @@ describe('DonutChart', () => {
     );
 
     expect(screen.getByText('10')).toBeInTheDocument();
+  });
+
+  it('should update active slice on mouse enter', () => {
+    render(
+      <DonutChart
+        data={chartData}
+        innerRadiusP={60}
+        outerRadiusP={90}
+        paddingSpace={2}
+        textColor="#000000"
+      />,
+    );
+
+    fireEvent.mouseEnter(screen.getByTestId('pie'));
+    expect(screen.getByText('50')).toBeInTheDocument();
+  });
+
+  it('should render short labels without truncation', () => {
+    render(
+      <DonutChart
+        data={[{ name: 'Short', value: 5 }]}
+        innerRadiusP={60}
+        outerRadiusP={90}
+        paddingSpace={2}
+        textColor="#000000"
+      />,
+    );
+    expect(screen.getByText('Short')).toBeInTheDocument();
   });
 });

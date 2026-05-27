@@ -136,4 +136,26 @@ describe('CohortList', () => {
     expect(setChangingConfirmation).toHaveBeenCalled();
     expect(setShowChangingConfirmation).toHaveBeenCalledWith(true);
   });
+
+  it('should disable duplicate when cohort limit is reached', () => {
+    const manyCohorts = Object.fromEntries(
+      Array.from({ length: 20 }, (_, i) => [
+        `cohort-${i}`,
+        {
+          cohortId: `cohort-${i}`,
+          cohortName: `Cohort ${i}`,
+          lastUpdated: `2026-01-${String(i + 1).padStart(2, '0')}T00:00:00.000Z`,
+          participants: [],
+        },
+      ]),
+    );
+    const { handleDuplicateCohort } = renderCohortList({
+      state: manyCohorts,
+      selectedCohort: 'cohort-0',
+    });
+    const duplicateButton = screen.getAllByAltText('duplicate cohort icon')[0].closest('button');
+    expect(duplicateButton).toBeDisabled();
+    fireEvent.click(duplicateButton);
+    expect(handleDuplicateCohort).not.toHaveBeenCalled();
+  });
 });

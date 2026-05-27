@@ -27,6 +27,7 @@ import {
   overviewViewDataFixture,
   overviewViewClinicalDataFixture,
   overviewViewCBioPortalFixture,
+  overviewViewConsentFixture,
 } from '../../../fixtures/studyDetail/overviewViewProps';
 import {
   studyDownloadLinks,
@@ -83,6 +84,52 @@ describe('OverviewView', () => {
     it('should show N/A when pubmed_ids is empty', () => {
       renderOverview({ ...overviewViewDataFixture, pubmed_ids: '' });
       expect(screen.getByText('N/A')).toBeInTheDocument();
+    });
+
+    it('should render formatted participant and sample counts', () => {
+      renderOverview(overviewViewDataFixture);
+      expect(screen.getByText('Participants Count')).toBeInTheDocument();
+      expect(screen.getByText('Samples Count')).toBeInTheDocument();
+      expect(screen.getByText('1,200')).toBeInTheDocument();
+      expect(screen.getByText('3,400')).toBeInTheDocument();
+    });
+  });
+
+  describe('Consent codes', () => {
+    it('should render consent glossary links when codes are present', () => {
+      renderOverview(overviewViewConsentFixture);
+
+      expect(screen.getByText('Consent Codes:')).toBeInTheDocument();
+      expect(screen.getByRole('link', { name: /GRU \(opens dbGaP consent glossary/i })).toHaveAttribute(
+        'href',
+        expect.stringContaining('consentgloss'),
+      );
+      expect(screen.getByRole('link', { name: /HMB-IRB \(opens dbGaP consent glossary/i })).toBeInTheDocument();
+    });
+
+    it('should show not available when consent codes are missing', () => {
+      renderOverview({ ...overviewViewDataFixture, consent_codes: null });
+      expect(screen.getByText('Not available')).toBeInTheDocument();
+    });
+
+    it('should render consent links when consent_codes is an array', () => {
+      renderOverview({
+        ...overviewViewDataFixture,
+        consent_codes: ['[GRU]', '[HMB-IRB]'],
+      });
+
+      expect(screen.getByRole('link', { name: /GRU \(opens dbGaP consent glossary/i })).toBeInTheDocument();
+      expect(screen.getByRole('link', { name: /HMB-IRB \(opens dbGaP consent glossary/i })).toBeInTheDocument();
+    });
+
+    it('should parse comma-separated consent codes without brackets', () => {
+      renderOverview({
+        ...overviewViewDataFixture,
+        consent_codes: 'GRU, HMB-IRB',
+      });
+
+      expect(screen.getByRole('link', { name: /GRU \(opens dbGaP consent glossary/i })).toBeInTheDocument();
+      expect(screen.getByRole('link', { name: /HMB-IRB \(opens dbGaP consent glossary/i })).toBeInTheDocument();
     });
   });
 

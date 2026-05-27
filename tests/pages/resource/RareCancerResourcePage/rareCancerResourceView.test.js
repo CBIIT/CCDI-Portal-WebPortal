@@ -156,7 +156,7 @@ describe('RareCancerResourceView', () => {
       });
 
       expect(window.open).toHaveBeenCalledWith(
-        'https://cdn.example.com/rare-cancer-contact.pdf',
+        'https://raw.githubusercontent.com/CBIIT/CCDI_Hub_Assets/main/PDF/Resources/RCI/rare-cancer-study_contact.pdf',
         '_blank',
       );
       consoleError.mockRestore();

@@ -44,6 +44,44 @@ describe('Wrappers', () => {
       withTheme(<Typography>Default text</Typography>);
       expect(screen.getByText('Default text')).toHaveStyle({ fontWeight: '400' });
     });
+
+    it('should support light, medium, and all font size multipliers', () => {
+      withTheme(
+        <>
+          <Typography weight="light" size="xs" data-testid="xs-text">
+            XS
+          </Typography>
+          <Typography weight="medium" size="sm" data-testid="sm-text">
+            SM
+          </Typography>
+          <Typography size="md" data-testid="md-text">
+            MD
+          </Typography>
+          <Typography size="l" variant="h6" data-testid="l-text">
+            L
+          </Typography>
+          <Typography size="xl" data-testid="xl-text">
+            XL
+          </Typography>
+          <Typography size="xxl" data-testid="xxl-text">
+            XXL
+          </Typography>
+        </>,
+      );
+      expect(screen.getByTestId('xs-text')).toHaveStyle({ fontWeight: '300' });
+      expect(screen.getByTestId('sm-text')).toHaveStyle({ fontWeight: '500' });
+      expect(screen.getByTestId('xl-text')).toHaveStyle({ fontSize: 'calc(14px * 1.7)' });
+      expect(screen.getByTestId('xxl-text')).toHaveStyle({ fontSize: 'calc(14px * 2)' });
+    });
+
+    it('should apply custom font family when provided', () => {
+      withTheme(
+        <Typography family="Inter, sans-serif">
+          Custom family
+        </Typography>,
+      );
+      expect(screen.getByText('Custom family')).toHaveStyle({ fontFamily: 'Inter, sans-serif' });
+    });
   });
 
   describe('Badge', () => {
@@ -55,6 +93,15 @@ describe('Wrappers', () => {
       );
       expect(screen.getByText('Inbox')).toBeInTheDocument();
       expect(screen.getByText('3')).toBeInTheDocument();
+    });
+
+    it('should accept colorBrightness for palette shade', () => {
+      withTheme(
+        <Badge color="primary" colorBrightness="light" badgeContent={1}>
+          <span>Alerts</span>
+        </Badge>,
+      );
+      expect(screen.getByText('Alerts')).toBeInTheDocument();
     });
   });
 

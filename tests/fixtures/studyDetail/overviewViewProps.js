@@ -23,6 +23,12 @@ export const overviewViewCBioPortalFixture = {
   study_name: 'Study With cBioPortal',
 };
 
+/** Study with consent codes for ACCESS DATA consent glossary links. */
+export const overviewViewConsentFixture = {
+  ...studyDetailsMinimalFixture,
+  consent_codes: '[GRU], [HMB-IRB]',
+};
+
 export const chartDataFixture = [
   { group: 'Clinical', subjects: 10 },
   { group: 'Sequencing', subjects: 20 },

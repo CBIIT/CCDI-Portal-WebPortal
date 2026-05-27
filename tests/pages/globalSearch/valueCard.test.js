@@ -15,7 +15,7 @@ jest.mock('@bento-core/util', () => ({
 }));
 
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { MemoryRouter } from 'react-router-dom';
@@ -46,13 +46,17 @@ describe('Global Search — ValueCard', () => {
   });
 
   it('should render model header and bound property rows', () => {
-    render(
+    const { container } = render(
       <ThemeProvider theme={theme}>
         <MemoryRouter>
           <ValueCard data={valueCardRow} index={0} />
         </MemoryRouter>
       </ThemeProvider>,
     );
+
+    const card = container.querySelector('#global_search_card_0');
+    Object.defineProperty(card, 'offsetWidth', { configurable: true, value: 2400 });
+    fireEvent(window, new Event('resize'));
 
     expect(screen.getByText(`MODEL: ${valueCardRow.value}`)).toBeInTheDocument();
     expect(screen.getByText('Data Model Node:')).toBeInTheDocument();

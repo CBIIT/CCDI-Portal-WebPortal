@@ -2,7 +2,7 @@
  * Session timeout modal — cancel / login actions and title rendering.
  */
 
-import React from 'react';
+import React, { createRef } from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { ThemeProvider, createTheme } from '@material-ui/core/styles';
@@ -61,6 +61,37 @@ describe('SessionTimeOutModal', () => {
       const { closeModal } = renderModal();
       fireEvent.click(screen.getByAltText('close icon'));
       expect(closeModal).toHaveBeenCalledTimes(1);
+    });
+
+    it('should expose clear on ref via useImperativeHandle', () => {
+      const ref = createRef();
+      render(
+        <ThemeProvider theme={theme}>
+          <SessionTimeOutModal
+            ref={ref}
+            open
+            title="Session expired"
+            closeModal={jest.fn()}
+            submit={jest.fn()}
+          />
+        </ThemeProvider>,
+      );
+      expect(ref.current).toBeDefined();
+      expect(() => ref.current.clear()).not.toThrow();
+    });
+
+    it('should not render dialog content when open is false', () => {
+      render(
+        <ThemeProvider theme={theme}>
+          <SessionTimeOutModal
+            open={false}
+            title="Hidden"
+            closeModal={jest.fn()}
+            submit={jest.fn()}
+          />
+        </ThemeProvider>,
+      );
+      expect(screen.queryByText('Hidden')).not.toBeInTheDocument();
     });
   });
 });

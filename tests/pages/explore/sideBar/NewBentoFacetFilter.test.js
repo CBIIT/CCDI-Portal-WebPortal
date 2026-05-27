@@ -35,7 +35,7 @@ jest.mock('../../../../src/bento/dashTemplate', () => ({
   facetSectionVariables: { DEMOGRAPHICS: { hasSearch: true } },
   resetIcon: 'icon',
   sectionLabel: {},
-  queryParams: {},
+  queryParams: ['import_from', 'p_id', 'u', 'u_fc', 'u_um', 'tab'],
 }));
 
 jest.mock('../../../../src/utils/graphqlClient', () => ({

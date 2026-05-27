@@ -83,5 +83,32 @@ describe('cohortModal utils', () => {
         expect.stringMatching(/^Metadata_cid_\d{4}-\d{2}-\d{2} \d{2}-\d{2}-\d{2}\.json$/),
       );
     });
+
+    it('should escape commas and quotes in CSV cells', () => {
+      const rows = [
+        {
+          participant_id: 'P,1',
+          dbgap_accession: 'phs"001',
+          sex_at_birth: 'F',
+          race: 'A',
+          diagnosis: 'X',
+        },
+      ];
+      arrayToCSVDownload(rows, 'csv-cohort');
+
+      const blobArg = createObjectURLSpy.mock.calls[0][0];
+      expect(blobArg).toBeInstanceOf(Blob);
+      expect(mockLink.click).toHaveBeenCalled();
+    });
+
+    it('should strip __typename from nested arrays in metadata download', () => {
+      objectToJsonDownload(
+        [{ __typename: 'Row', value: 1 }, { value: 2 }],
+        'array-cohort',
+      );
+
+      expect(createObjectURLSpy).toHaveBeenCalled();
+      expect(mockLink.click).toHaveBeenCalled();
+    });
   });
 });

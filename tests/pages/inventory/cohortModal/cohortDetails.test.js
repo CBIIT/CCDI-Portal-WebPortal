@@ -154,4 +154,91 @@ describe('CohortDetails', () => {
       state: expect.objectContaining({ cohort: expect.any(Object) }),
     }));
   });
+
+  it('should edit cohort description and track changes on blur', () => {
+    const { handleSetCurrentCohortChanges } = renderCohortDetails({
+      temporaryCohort: { ...activeCohort, searchText: '' },
+    });
+    fireEvent.click(screen.getByAltText('edit cohort description icon'));
+    const descriptionInput = screen.getByDisplayValue('Test description');
+    fireEvent.change(descriptionInput, {
+      target: { name: 'cohortDescription', value: 'Updated description' },
+    });
+    fireEvent.blur(descriptionInput);
+    expect(handleSetCurrentCohortChanges).toHaveBeenCalled();
+  });
+
+  it('should save cohort when name blur targets Save Changes button', () => {
+    const { handleSaveCohort } = renderCohortDetails({
+      temporaryCohort: { ...activeCohort, searchText: '' },
+    });
+    fireEvent.click(screen.getByAltText('edit cohort name icon'));
+    const nameInput = screen.getByDisplayValue('Test Cohort');
+    const saveButton = screen.getByRole('button', { name: 'Save Changes' });
+    fireEvent.change(nameInput, { target: { name: 'cohortName', value: 'Saved Via Blur' } });
+    fireEvent.blur(nameInput, { relatedTarget: saveButton });
+    expect(handleSaveCohort).toHaveBeenCalled();
+  });
+
+  it('should sort participants by study id when header is clicked', () => {
+    renderCohortDetails();
+    fireEvent.click(screen.getByText('Study ID'));
+    expect(screen.getByText('P-100')).toBeInTheDocument();
+    fireEvent.click(screen.getByText('Study ID'));
+    expect(screen.getByText('P-200')).toBeInTheDocument();
+  });
+
+  it('should download manifest CSV from the download menu', () => {
+    const { downloadCohortManifest } = renderCohortDetails();
+    fireEvent.click(screen.getByRole('button', { name: /download/i }));
+    fireEvent.click(screen.getByText('Manifest CSV'));
+    expect(downloadCohortManifest).toHaveBeenCalled();
+  });
+
+  it('should close download menu when clicking outside', () => {
+    renderCohortDetails();
+    fireEvent.click(screen.getByRole('button', { name: /download/i }));
+    expect(screen.getByText('Manifest CSV')).toBeInTheDocument();
+    fireEvent.mouseDown(document.body);
+    expect(screen.queryByText('Manifest CSV')).not.toBeInTheDocument();
+  });
+
+  it('should delete all participants after confirmation', () => {
+    const { handleSetCurrentCohortChanges } = renderCohortDetails({
+      temporaryCohort: { ...activeCohort, searchText: '' },
+    });
+    const deleteAllIcon = screen.getByAltText('delete cohort icon');
+    fireEvent.click(deleteAllIcon);
+    fireEvent.click(screen.getByRole('button', { name: 'Confirm' }));
+    expect(handleSetCurrentCohortChanges).toHaveBeenCalled();
+    expect(screen.getByText('No Data')).toBeInTheDocument();
+  });
+
+  it('should call closeModal when Cancel is clicked', () => {
+    const { closeModal } = renderCohortDetails();
+    fireEvent.click(screen.getByRole('button', { name: 'Cancel' }));
+    expect(closeModal).toHaveBeenCalled();
+  });
+
+  it('should show empty search message when filter matches nothing', () => {
+    renderCohortDetails();
+    fireEvent.change(screen.getByPlaceholderText('Search Participant ID here'), {
+      target: { value: 'NO-MATCH' },
+    });
+    expect(screen.getByText('No matching Participant Id')).toBeInTheDocument();
+  });
+
+  it('should set error alert when navigation to cohort analyzer fails', () => {
+    const navigate = jest.fn(() => {
+      throw new Error('navigation blocked');
+    });
+    const setAlert = jest.fn();
+    useNavigate.mockReturnValue(navigate);
+    renderCohortDetails({ setAlert });
+    fireEvent.click(screen.getByRole('button', { name: /view in cohort analyzer/i }));
+    expect(setAlert).toHaveBeenCalledWith({
+      type: 'error',
+      message: 'Failed to navigate to Cohort Analyzer. Please try again.',
+    });
+  });
 });

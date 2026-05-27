@@ -1,5 +1,5 @@
 /**
- * Publications page — **controller** loads YAML and renders **`PublicationsView`** when data is present.
+ * Publications page — **controller** loads markdown and renders **`PublicationsView`** when data is present.
  *
  * @see src/pages/about/publications/publicationsController.js
  */
@@ -13,36 +13,36 @@ jest.mock('../../../../src/utils/env', () => ({
 
 jest.mock('axios');
 
-jest.mock('js-yaml', () => ({
-  safeLoad: jest.fn(() => ({
+jest.mock('../../../../src/pages/about/publications/parsePublicationsMarkdown', () => ({
+  parsePublicationsMarkdown: jest.fn(() => ({
     publicationsList: [
       {
         id: 'pub-1',
-        title: 'Loaded From YAML',
+        title: 'Loaded From Markdown',
         date: '2024',
-        summary: 'Summary content for testing.',
+        summary: '<p>Summary content for testing.</p>',
         tag: 'test',
         category: 'Primary',
         link: 'https://example.test/pub',
       },
     ],
     Publications_Header: '',
-    bannerText: 'Banner from YAML',
+    bannerText: 'Banner from markdown',
   })),
 }));
 
 import React from 'react';
 import axios from 'axios';
-import yaml from 'js-yaml';
 import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 import PublicationsController from '../../../../src/pages/about/publications/publicationsController';
+import { parsePublicationsMarkdown } from '../../../../src/pages/about/publications/parsePublicationsMarkdown';
 
 describe('PublicationsController', () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    axios.get.mockResolvedValue({ data: 'mock-yaml-bytes' });
+    axios.get.mockResolvedValue({ data: 'mock-markdown-bytes' });
     global.MutationObserver = class {
       constructor() {
         this.observe = jest.fn();
@@ -53,23 +53,24 @@ describe('PublicationsController', () => {
     window.scrollTo = jest.fn();
   });
 
-  it('should fetch publications YAML and render the publications view', async () => {
+  it('should fetch publications markdown and render the publications view', async () => {
     render(<PublicationsController />);
 
     await waitFor(() => {
       expect(axios.get).toHaveBeenCalled();
     });
-    expect(yaml.safeLoad).toHaveBeenCalledWith('mock-yaml-bytes');
+    expect(axios.get.mock.calls[0][0]).toMatch(/\/publicationsData\.md\?ts=/);
+    expect(parsePublicationsMarkdown).toHaveBeenCalledWith('mock-markdown-bytes');
 
     await waitFor(() => {
       expect(screen.getByText('CCDI-Supported Publications')).toBeInTheDocument();
     });
-    expect(screen.getByText('Banner from YAML')).toBeInTheDocument();
-    expect(screen.getByText('Loaded From YAML')).toBeInTheDocument();
+    expect(screen.getByText('Banner from markdown')).toBeInTheDocument();
+    expect(screen.getByText('Loaded From Markdown')).toBeInTheDocument();
   });
 
   it('should render empty shell when publicationsList is missing', async () => {
-    yaml.safeLoad.mockReturnValueOnce({});
+    parsePublicationsMarkdown.mockReturnValueOnce({});
     render(<PublicationsController />);
 
     await waitFor(() => {

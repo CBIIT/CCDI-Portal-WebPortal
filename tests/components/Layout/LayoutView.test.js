@@ -115,7 +115,7 @@ jest.mock('../../../src/pages/cart/cartController', () => {
   };
 });
 
-jest.mock('../../../src/pages/resource/MCIResourcePage/MCIResourceController', () => {
+jest.mock('../../../src/pages/resource/MCIResourcePage/MCIResourceMarkdownController', () => {
   const React = require('react');
   return {
     __esModule: true,
@@ -195,7 +195,7 @@ jest.mock('../../../src/pages/resource/ToolsResourcePage/ToolsResourceController
   };
 });
 
-jest.mock('../../../src/pages/resource/CCDIEventAnnouncementsResourcePage/CCDIEventAnnouncementsResourceController', () => {
+jest.mock('../../../src/pages/resource/CCDIEventAnnouncementsResourcePage/CCDIEventAnnouncementsMarkdownController', () => {
   const React = require('react');
   return {
     __esModule: true,

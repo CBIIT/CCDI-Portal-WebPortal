@@ -1,0 +1,88 @@
+/* eslint-disable arrow-body-style */
+/* eslint-disable react/destructuring-assignment */
+import store from '../../../store';
+
+const storeKey = 'dashboardTab';
+
+const initialState = {
+  sitesearch: {},
+  isOverlayOpen: false,
+};
+
+export function setOverLayWindow(item) {
+  store.dispatch({ type: 'SET_OVERLAY_WINDOW', payload: item });
+}
+
+const reducers = {
+  SET_SEARCH_CRITERIA: (state, item) => ({
+    ...state,
+    searchCriteria: item,
+  }),
+  SET_OVERLAY_WINDOW: (state, item) => ({
+    ...state,
+    isOverlayOpen: item,
+  }),
+  REQUEST_DASHBOARDTAB: (state) => ({ ...state, isLoading: true }),
+  SET_SIDEBAR_LOADING: (state) => ({ ...state, setSideBarLoading: true }),
+  SET_SINGLE_FILTER: (state, item) => (
+    {
+      ...state,
+      allActiveFilters: item,
+    }
+  ),
+  SET_DASHBOARDTABLE_LOADING: (state) => ({ ...state, isDashboardTableLoading: true }),
+  CLEAR_TABLE_SELECTION: (state) => ({
+    ...state,
+    dataCaseSelected: {
+      selectedRowInfo: [],
+      selectedRowIndex: [],
+    },
+    dataSampleSelected: {
+      selectedRowInfo: [],
+      selectedRowIndex: [],
+    },
+    dataFileSelected: {
+      selectedRowInfo: [],
+      selectedRowIndex: [],
+    },
+  }),
+  RESET_ALL: (state) => ({
+    ...state,
+    autoCompleteSelection: {
+      subject_ids: [],
+      sample_ids: [],
+      file_ids: [],
+    },
+    bulkUpload: {
+      subject_ids: [],
+      sample_ids: [],
+      file_ids: [],
+    },
+    allActiveFilters: {},
+  }),
+  RESET_ALL_EXCEPT_BULK_UPLOAD: (state) => ({
+    ...state,
+    autoCompleteSelection: {
+      subject_ids: [],
+      sample_ids: [],
+      file_ids: [],
+    },
+    allActiveFilters: {},
+  }),
+  ADD_AUTOCOMPLETE_DATA: (state, { type, value }) => ({
+    ...state,
+    autoCompleteSelection: {
+      ...state.autoCompleteSelection,
+      [`${type}_ids`]: value,
+    },
+  }),
+  ADD_BULKSEARCHDATA: (state, { type, value }) => ({
+    ...state,
+    bulkUpload: {
+      [`${type}_ids`]: value,
+    },
+  }),
+};
+
+store.injectReducer(storeKey, (state = initialState, { type, payload }) => (
+  reducers[type] ? reducers[type](state, payload) : state));

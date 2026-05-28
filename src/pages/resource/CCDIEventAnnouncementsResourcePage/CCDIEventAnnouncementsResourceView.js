@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef, createRef } from 'react';
 import styled from 'styled-components';
 import ReactHtmlParser from 'html-react-parser';
+import { Link } from 'react-router-dom';
 import headerImg from '../../../assets/about/Data_Usage_Policies_Header.png';
 import exportIconBlue from '../../../assets/icons/Export_Icon.svg';
 import closeIcon from '../../../assets/icons/Close_Icon.svg';
 import arrowDownIcon from '../../../assets/icons/Arrow_Down.svg';
+import { EVENT_ROUTE_BASE, slugify } from './eventsUtils';
 
 const CCDIContainer = styled.div`
     width: 100%;
@@ -338,6 +340,32 @@ const CCDIBody = styled.div`
     }
 `;
 
+const PDF_LINK_HOST = 'd2xnga7irezzit.cloudfront.net';
+
+const transformPdfLinks = {
+    replace: (node) => {
+        if (node.type !== 'tag' || node.name !== 'a') return undefined;
+        const href = node.attribs && node.attribs.href;
+        if (!href || !href.includes(PDF_LINK_HOST)) return undefined;
+
+        const childText = (node.children || [])
+            .filter((child) => child.type === 'text')
+            .map((child) => child.data)
+            .join('')
+            .trim();
+        if (!childText) return undefined;
+
+        const slug = slugify(childText);
+        const className = (node.attribs && node.attribs.class) || '';
+
+        return (
+            <Link className={className} to={`${EVENT_ROUTE_BASE}/${slug}`}>
+                {childText}
+            </Link>
+        );
+    },
+};
+
 const CCDIEventAnnouncementsResourceView = ({data}) => {
     const [selectedNavTitle, setSelectedNavTitle] = useState('');
     const [stickyNavStyle, setStickyNavStyle] = useState('navList');
@@ -435,7 +463,7 @@ const CCDIEventAnnouncementsResourceView = ({data}) => {
                                         <div id={ccdiItem.id} name={ccdiId} className='mciTitleMobile sectionCollapse' onClick={handleCollapseSection}>{ccdiItem.topic && ccdiItem.topic}</div>
                                         <div className="mciSection mobileCollapse" ref={sectionList.current[ccdiId]}>
                                             <div className='mciContentContainer'>
-                                                {ccdiItem.content && ReactHtmlParser(ccdiItem.content)}
+                                                {ccdiItem.content && ReactHtmlParser(ccdiItem.content, transformPdfLinks)}
                                             </div>
                                             {ccdiItem.content && <div style={{height: '40px'}} />}
                                         </div>

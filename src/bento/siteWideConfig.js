@@ -29,6 +29,9 @@ export const PUBLIC_ACCESS = env.PUBLIC_ACCESS || 'Metadata Only';
 export const NODE_LEVEL_ACCESS = getEnvBoolean(env.NODE_LEVEL_ACCESS, true);
 export const NODE_LABEL = env.NODE_LABEL || 'Study Arm(s)';
 
+// Client-side hash routing: last visited hash persisted for restore flows.
+export const LAST_VISITED_HASH_KEY = 'lastVisitedHash';
+
 // Redirect configs.
 export const REDIRECT_AFTER_SIGN_OUT = '/';
 

@@ -195,11 +195,19 @@ jest.mock('../../../src/pages/resource/ToolsResourcePage/ToolsResourceController
   };
 });
 
-jest.mock('../../../src/pages/resource/CCDIEventAnnouncementsResourcePage/CCDIEventAnnouncementsMarkdownController', () => {
+jest.mock('../../../src/pages/resource/CCDIEventAnnouncementsResourcePage/CCDIEventAnnouncementsResourceController', () => {
   const React = require('react');
   return {
     __esModule: true,
     default: () => <div data-testid="route-events" />,
+  };
+});
+
+jest.mock('../../../src/pages/resource/CCDIEventAnnouncementsResourcePage/EventDetailController', () => {
+  const React = require('react');
+  return {
+    __esModule: true,
+    default: () => <div data-testid="route-event-detail" />,
   };
 });
 

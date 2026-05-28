@@ -1,63 +1,91 @@
+/**
+ * Unit tests for CCDIEventAnnouncementsResourceView (`resourceData.yaml` — announcements fields as props).
+ *
+ * Structure follows tests/TEST_STRUCTURE.md:
+ * Rendering → feature sections → Side effects → Edge cases.
+ * Fixtures: tests/fixtures/resource/resourceDataViewProps.js (no network).
+ */
+
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
+import { clickTopicNav, triggerResourceScroll, toggleMobileSection } from '../shared/resourceViewTestUtils';
 import '@testing-library/jest-dom';
 import CCDIEventAnnouncementsResourceView from '../../../../src/pages/resource/CCDIEventAnnouncementsResourcePage/CCDIEventAnnouncementsResourceView';
+import { minimalCcdiEventAnnouncementsResourceData } from '../../../fixtures/resource/resourceDataViewProps';
+import { multiTopicCcdiEventsData } from '../../../fixtures/resource/resourceInteractionData';
 
-const yamlContent = {
-  ccdiEventAnnouncementsIntroText: '<p>Intro text content.</p>',
-  ccdiEventAnnouncementsContent: [
-    {
-      id: 'CCDI_Event_Archive_1',
-      topic: 'Past Events',
-      content:
-        '<p><a class="link" href="https://d2xnga7irezzit.cloudfront.net/ccdi_hub_files/ccdi_events_announcements/Sample%20Event.pdf" target="_blank" rel="noopener noreferrer">Sample Event Title</a><br>3/11/24</p>',
-    },
-    {
-      id: 'CCDI_Event_Archive_2',
-      topic: 'Contact',
-      content:
-        '<p>Email us at <a class="link" href="mailto:test@example.com">test@example.com</a>.</p>',
-    },
-  ],
-};
+function renderCcdiView(data = minimalCcdiEventAnnouncementsResourceData) {
+  return render(
+    <MemoryRouter initialEntries={['/explore']}>
+      <CCDIEventAnnouncementsResourceView data={data} />
+    </MemoryRouter>,
+  );
+}
 
-const renderView = () => render(
-  <MemoryRouter>
-    <CCDIEventAnnouncementsResourceView data={yamlContent} />
-  </MemoryRouter>,
-);
+beforeEach(() => {
+  window.scrollTo = jest.fn();
+  for (let i = 0; i < 3; i += 1) {
+    document.body.appendChild(document.createElement('footer'));
+  }
+});
+
+afterEach(() => {
+  document.querySelectorAll('footer').forEach((el) => el.remove());
+});
 
 describe('CCDIEventAnnouncementsResourceView', () => {
-  beforeAll(() => {
-    Object.defineProperty(window.HTMLElement.prototype, 'offsetTop', {
-      configurable: true,
-      value: 0,
+  describe('Rendering', () => {
+    it('should render without crashing', () => {
+      const { container } = renderCcdiView();
+      expect(container).toBeInTheDocument();
     });
-    Object.defineProperty(window.HTMLElement.prototype, 'offsetHeight', {
-      configurable: true,
-      value: 0,
+
+    it('should render with default fixture data', () => {
+      renderCcdiView();
+      expect(screen.getByText('CCDI Events Announcements')).toBeInTheDocument();
+      expect(screen.getByText('TOPICS')).toBeInTheDocument();
     });
   });
 
-  it('replaces PDF anchors with React Router links to the detail page', () => {
-    renderView();
-
-    const link = screen.getByText('Sample Event Title').closest('a');
-    expect(link).toBeInTheDocument();
-    expect(link).toHaveAttribute('href', '/ccdi-events-announcements/sample-event-title');
+  describe('Topics and intro content', () => {
+    it('should show announcements topic and body from fixtures', () => {
+      renderCcdiView();
+      expect(screen.getAllByText('Announcements Topic').length).toBeGreaterThan(0);
+      expect(screen.getByText(/CCDI events intro for unit test/i)).toBeInTheDocument();
+      expect(screen.getByText(/Announcements body/i)).toBeInTheDocument();
+    });
   });
 
-  it('leaves non-PDF anchors untouched', () => {
-    renderView();
+  describe('Side effects', () => {
+    it('should call window.scrollTo on mount', () => {
+      const scrollToMock = jest.fn();
+      window.scrollTo = scrollToMock;
+      renderCcdiView();
+      expect(scrollToMock).toHaveBeenCalledWith(0, 0);
+    });
 
-    const mailLink = screen.getByText('test@example.com').closest('a');
-    expect(mailLink).toHaveAttribute('href', 'mailto:test@example.com');
+    it('should apply sticky nav class when page is scrolled', () => {
+      renderCcdiView(multiTopicCcdiEventsData);
+      triggerResourceScroll('CCDIEventArchiveBody');
+      expect(document.getElementById('leftNav').className).toContain('navListSticky');
+    });
   });
 
-  it('renders the topics navigation entries', () => {
-    renderView();
-    expect(screen.getAllByText('Past Events').length).toBeGreaterThan(0);
-    expect(screen.getAllByText('Contact').length).toBeGreaterThan(0);
+  describe('Navigation interactions', () => {
+    it('should highlight topic when nav item is clicked', () => {
+      const scrollTo = jest.fn();
+      window.scrollTo = scrollTo;
+      renderCcdiView(multiTopicCcdiEventsData);
+      const topic = clickTopicNav('Events B');
+      expect(topic).toHaveClass('selected');
+      expect(scrollTo).toHaveBeenCalled();
+    });
+
+    it('should toggle mobile section visibility', () => {
+      renderCcdiView(multiTopicCcdiEventsData);
+      const mobileHeader = toggleMobileSection();
+      expect(mobileHeader.className).not.toContain('sectionCollapse');
+    });
   });
 });

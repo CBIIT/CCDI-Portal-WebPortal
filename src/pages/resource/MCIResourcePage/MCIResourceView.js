@@ -21,7 +21,6 @@ import MCIDiseaseTableMobile from '../components/MCIDiseaseTableMobile';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 //import DonutChart from '../../components/common/DonutChart';
 import MapView from '../../../components/common/mapGenerator';
-import MapViewMobile from '../components/MapViewMobile';
 
 const MCIResourceContainer = styled.div`
     width: 100%;
@@ -676,12 +675,9 @@ const MCIResourceView = ({data}) => {
                                                                 <p>{mciItem.diseaseTable.footer}</p>
                                                             </>
                                                             }
-                                                            {mciItem.map &&
-                                                            <>
+                                                            {mciItem.map && (
                                                                 <div className='MapContainer'><MapView mapData={mciItem.map} /></div>
-                                                                <div className='MapMobileContainer'><MapViewMobile mapData={mciItem.map}/></div>
-                                                            </>
-                                                            }
+                                                            )}
                                                             {mciItem.content && mciItem.content.includes('CCDI Data Ecosystem?') && 
                                                             <>
                                                                 <img className="ecosystemImg" src={data.MCI_CCDI_Data_Ecosystem || ccdiDataEcosystemImg} alt="Infographic depicting the MCI assays and data types, and the data flow to patients, providers, and the CCDI Data Ecosystem"/>

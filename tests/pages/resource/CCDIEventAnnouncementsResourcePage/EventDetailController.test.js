@@ -3,7 +3,6 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import EventDetailController from '../../../../src/pages/resource/CCDIEventAnnouncementsResourcePage/EventDetailController';
-import { getAllEvents } from '../../../../src/pages/resource/CCDIEventAnnouncementsResourcePage/eventsUtils';
 
 const renderAtRoute = (path) => render(
   <MemoryRouter initialEntries={[path]}>
@@ -16,11 +15,11 @@ const renderAtRoute = (path) => render(
 
 describe('EventDetailController', () => {
   it('renders the EventDetailView for a known slug', () => {
-    const event = getAllEvents()[0];
-    renderAtRoute(`/ccdi-events-announcements/${event.slug}`);
+    renderAtRoute('/ccdi-events-announcements/ccdi-march-2024-community-forum');
 
-    expect(screen.getByRole('heading', { name: event.title })).toBeInTheDocument();
-    expect(screen.getByText(event.displayDate)).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'CCDI March Community Forum' })).toBeInTheDocument();
+    expect(screen.getByText('March 18, 2024')).toBeInTheDocument();
+    expect(screen.getByAltText('CCDI March Community Forum')).toBeInTheDocument();
   });
 
   it('redirects to the root events page for an unknown slug', () => {

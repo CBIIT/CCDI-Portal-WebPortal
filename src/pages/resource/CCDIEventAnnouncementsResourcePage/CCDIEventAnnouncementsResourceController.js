@@ -3,35 +3,53 @@ import env from '../../../utils/env';
 import yaml from "js-yaml";
 import axios from "axios";
 import CCDIEventAnnouncementsResourceView from "./CCDIEventAnnouncementsResourceView";
+import {
+  buildDetailPageListEntryHtml,
+  getAllEvents,
+} from './eventsUtils';
 
 const RESOURCE_URL = env.REACT_APP_STATIC_CONTENT_URL + '/resourceData.yaml';
 
+const buildFallbackAnnouncementsData = () => ({
+  ccdiEventAnnouncementsIntroText: (
+    '<p>The CCDI Events Announcements page brings together news announcements '
+    + 'and details on past events, webinars, and workshops.</p>'
+  ),
+  ccdiEventAnnouncementsContent: [
+    {
+      id: 'CCDI_Event_Archive_1',
+      topic: 'Past Events, Webinars, and Workshops',
+      content: `<p>${getAllEvents().map(buildDetailPageListEntryHtml).join('<br><br>')}</p>`,
+    },
+  ],
+});
+
 const CCDIEventAnnouncementsResourceController = ({ match }) => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      let resultData = [];
-      let result = [];
+      let resultData = {};
       try {
         const fileUrl = `${RESOURCE_URL}?ts=${new Date().getTime()}`;
-        result = await axios.get(
-          fileUrl
-        );
-        resultData = yaml.safeLoad(result.data);
+        const result = await axios.get(fileUrl);
+        resultData = yaml.safeLoad(result.data) || {};
       } catch (_error) {
-        // result = await axios.get(YAMLData);
-        // resultData = yaml.safeLoad(result.data);
+        resultData = {};
       }
 
-      setData(resultData);
+      if (!resultData.ccdiEventAnnouncementsContent) {
+        setData(buildFallbackAnnouncementsData());
+      } else {
+        setData(resultData);
+      }
     };
     fetchData();
   }, []);
-  if (data.ccdiEventAnnouncementsContent) {
+
+  if (data && data.ccdiEventAnnouncementsContent) {
     return <CCDIEventAnnouncementsResourceView data={data} />;
-  } else {
-    return <div />
   }
+  return <div />;
 };
 export default CCDIEventAnnouncementsResourceController;

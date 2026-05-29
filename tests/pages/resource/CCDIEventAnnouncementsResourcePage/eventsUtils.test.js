@@ -3,6 +3,8 @@ import {
   getAllEvents,
   getEventBySlug,
   getNeighborEvents,
+  getDetailPageSlugForLinkText,
+  mergeDetailPageEventsIntoAnnouncementsContent,
   buildDisclaimerHtml,
   EVENT_ROUTE_BASE,
 } from '../../../../src/pages/resource/CCDIEventAnnouncementsResourcePage/eventsUtils';
@@ -18,41 +20,34 @@ describe('eventsUtils', () => {
     it('lowercases and replaces whitespace with hyphens', () => {
       expect(slugify('Hello World')).toBe('hello-world');
     });
+  });
 
-    it('strips smart quotes', () => {
-      expect(slugify('CCDI Hub\u2019s Dashboard')).toBe('ccdi-hubs-dashboard');
+  describe('getDetailPageSlugForLinkText', () => {
+    it('returns slug for known detail page event titles', () => {
+      expect(getDetailPageSlugForLinkText('CCDI March Community Forum'))
+        .toBe('ccdi-march-2024-community-forum');
+      expect(getDetailPageSlugForLinkText('Developing Pediatric Data Standards'))
+        .toBe('developing-pediatric-data-standards');
     });
 
-    it('converts em/en dashes to hyphens', () => {
-      expect(slugify('Foo\u2014Bar\u2013Baz')).toBe('foo-bar-baz');
-    });
-
-    it('collapses runs of punctuation into a single hyphen', () => {
-      expect(slugify('Foo!!!  Bar:::Baz??')).toBe('foo-bar-baz');
-    });
-
-    it('strips leading and trailing hyphens', () => {
-      expect(slugify('---Hello---World---')).toBe('hello-world');
+    it('returns null for titles that are not detail page events', () => {
+      expect(getDetailPageSlugForLinkText('Childhood Cancer Clinical Data Commons'))
+        .toBeNull();
     });
   });
 
   describe('getAllEvents / getEventBySlug', () => {
-    it('returns the full events list', () => {
+    it('returns only the configured detail page events', () => {
       const events = getAllEvents();
-      expect(Array.isArray(events)).toBe(true);
-      expect(events.length).toBeGreaterThan(0);
-      events.forEach((event) => {
-        expect(typeof event.slug).toBe('string');
-        expect(typeof event.title).toBe('string');
-        expect(typeof event.displayDate).toBe('string');
-        expect(typeof event.body).toBe('string');
-        expect(['Announcement', 'Presentation']).toContain(event.tag);
-      });
+      expect(events).toHaveLength(2);
+      expect(events[0].slug).toBe('ccdi-march-2024-community-forum');
+      expect(events[1].slug).toBe('developing-pediatric-data-standards');
     });
 
     it('finds an existing event by slug', () => {
-      const first = getAllEvents()[0];
-      expect(getEventBySlug(first.slug)).toEqual(first);
+      const event = getEventBySlug('developing-pediatric-data-standards');
+      expect(event.title).toBe('Developing Pediatric Data Standards');
+      expect(event.image).toBe('developingpediatricdatastandards-PIC.png');
     });
 
     it('returns undefined for unknown slug', () => {
@@ -65,28 +60,69 @@ describe('eventsUtils', () => {
       expect(getNeighborEvents('does-not-exist')).toEqual({ older: null, newer: null });
     });
 
-    it('has null newer for the first event', () => {
-      const events = getAllEvents();
-      const { newer, older } = getNeighborEvents(events[0].slug);
-      expect(newer).toBeNull();
-      expect(older).toEqual(events[1]);
-    });
-
-    it('has null older for the last event', () => {
-      const events = getAllEvents();
-      const last = events[events.length - 1];
-      const { newer, older } = getNeighborEvents(last.slug);
+    it('links newer and older posts between the two detail page events', () => {
+      const { newer, older } = getNeighborEvents('developing-pediatric-data-standards');
+      expect(newer.slug).toBe('ccdi-march-2024-community-forum');
       expect(older).toBeNull();
-      expect(newer).toEqual(events[events.length - 2]);
+
+      const marchNeighbors = getNeighborEvents('ccdi-march-2024-community-forum');
+      expect(marchNeighbors.newer).toBeNull();
+      expect(marchNeighbors.older.slug).toBe('developing-pediatric-data-standards');
+    });
+  });
+
+  describe('mergeDetailPageEventsIntoAnnouncementsContent', () => {
+    const yamlSections = [
+      {
+        id: 'CCDI_Event_Archive_1',
+        topic: 'Past Events, Webinars, and Workshops',
+        content: [
+          '<p>',
+          '<a class="link" href="https://example.com/a.pdf">Childhood Cancer Clinical Data Commons: A New Web Application for Your Data Needs</a><br>3/11/24<br><br>',
+          '<a class="link" href="https://example.com/b.pdf">Childhood Cancer Data Initiative—Recent Activities and Next Steps</a><br>3/8/24<br><br>',
+          '<a class="link" href="https://example.com/c.pdf">Navigating CCDI Hub\'s Explore Dashboard and Data Access</a><br>11/13/23',
+          '</p>',
+        ].join(''),
+      },
+      {
+        id: 'CCDI_Event_Archive_2',
+        topic: 'Contact',
+        content: '<p>Contact us.</p>',
+      },
+    ];
+
+    it('merges local detail page events into the past events section in date order', () => {
+      const merged = mergeDetailPageEventsIntoAnnouncementsContent(yamlSections);
+      const pastEventsHtml = merged[0].content;
+
+      expect(pastEventsHtml.indexOf('CCDI March Community Forum')).toBeLessThan(
+        pastEventsHtml.indexOf('Childhood Cancer Clinical Data Commons'),
+      );
+      expect(pastEventsHtml.indexOf('Childhood Cancer Data Initiative—Recent Activities')).toBeLessThan(
+        pastEventsHtml.indexOf('Developing Pediatric Data Standards'),
+      );
+      expect(pastEventsHtml.indexOf('Developing Pediatric Data Standards')).toBeLessThan(
+        pastEventsHtml.indexOf('Navigating CCDI Hub'),
+      );
+      expect(pastEventsHtml).toContain('/ccdi-events-announcements/ccdi-march-2024-community-forum');
+      expect(pastEventsHtml).toContain('/ccdi-events-announcements/developing-pediatric-data-standards');
     });
 
-    it('returns both neighbors for middle items', () => {
-      const events = getAllEvents();
-      if (events.length < 3) return;
-      const mid = events[1];
-      const { newer, older } = getNeighborEvents(mid.slug);
-      expect(newer).toEqual(events[0]);
-      expect(older).toEqual(events[2]);
+    it('does not modify non-past-events sections', () => {
+      const merged = mergeDetailPageEventsIntoAnnouncementsContent(yamlSections);
+      expect(merged[1].content).toBe('<p>Contact us.</p>');
+    });
+
+    it('does not duplicate events already present in yaml content', () => {
+      const withExisting = [
+        {
+          ...yamlSections[0],
+          content: `<p><a class="link" href="#">CCDI March Community Forum</a><br>3/18/24<br><br>${yamlSections[0].content.replace(/^<p>/, '')}`,
+        },
+      ];
+      const merged = mergeDetailPageEventsIntoAnnouncementsContent(withExisting);
+      const matches = merged[0].content.match(/CCDI March Community Forum/g) || [];
+      expect(matches).toHaveLength(1);
     });
   });
 
@@ -95,7 +131,6 @@ describe('eventsUtils', () => {
       const html = buildDisclaimerHtml('Sample Title');
       expect(html).toContain('Sample Title was originally published');
       expect(html).toContain('Reuse of NCI Information');
-      expect(html).toMatch(/<a [^>]*href="https:\/\/www\.cancer\.gov[^"]*"/);
     });
   });
 

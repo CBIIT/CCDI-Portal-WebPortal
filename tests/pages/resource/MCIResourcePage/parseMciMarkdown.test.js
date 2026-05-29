@@ -2,10 +2,16 @@
  * Unit tests for parseMciMarkdown (mciData.md → view props).
  */
 
-import parseMciMarkdown, { resolveResponsiveImgCaption } from '../../../../src/pages/resource/MCIResourcePage/parseMciMarkdown';
+import parseMciMarkdown, {
+  buildNavTitleSet,
+  normalizeNavTitleKey,
+  resolveResponsiveImgCaption,
+  resolveShowInNav,
+} from '../../../../src/pages/resource/MCIResourcePage/parseMciMarkdown';
 import {
   sampleMciMarkdownRaw,
   sampleMciMarkdownWithFmIntro,
+  sampleMciMarkdownBackToBackH3,
   sampleResponsiveImgYaml,
 } from '../../../fixtures/resource/mciMarkdownSamples';
 
@@ -22,12 +28,17 @@ describe('parseMciMarkdown', () => {
 
       const firstSub = data.mciContent[0].list[0];
       expect(firstSub.subtopic).toBe('First Subsection');
+      expect(firstSub.showInNav).toBe(true);
+      expect(data.navTitles).toEqual(['First Subsection']);
+
+      const widgetSub = data.mciContent[0].list[1];
+      expect(widgetSub.showInNav).toBe(false);
+
       expect(firstSub.segments[0]).toEqual({
         type: 'markdown',
         markdown: 'Subsection body copy for testing.',
       });
 
-      const widgetSub = data.mciContent[0].list[1];
       expect(widgetSub.segments.some((s) => s.type === 'widget' && s.widget === 'table')).toBe(true);
       const tableSeg = widgetSub.segments.find((s) => s.widget === 'table');
       expect(tableSeg.data.title).toBe('Widget Table');
@@ -43,6 +54,36 @@ describe('parseMciMarkdown', () => {
       const data = parseMciMarkdown('---\n---\nIntro only, no sections.');
       expect(data.introText).toContain('Intro only');
       expect(data.mciContent).toEqual([]);
+    });
+
+    it('should set showInNav from navTitles and merge back-to-back ### sections', () => {
+      const data = parseMciMarkdown(sampleMciMarkdownBackToBackH3);
+      const list = data.mciContent[0].list;
+
+      expect(list).toHaveLength(2);
+      expect(list[0].subtopic).toBe('Testing Types');
+      expect(list[0].showInNav).toBe(true);
+      expect(list[1].subtopic).toBe('Not In Nav List');
+      expect(list[1].showInNav).toBe(false);
+
+      const mergedMarkdown = list[0].segments.find((s) => s.type === 'markdown');
+      expect(mergedMarkdown.markdown).toContain('### What types of clinical testing are conducted?');
+    });
+
+    it('should show all ### in nav when navTitles is omitted', () => {
+      const data = parseMciMarkdown(sampleMciMarkdownWithFmIntro);
+      expect(data.navTitles).toBeUndefined();
+      expect(data.mciContent[0].list[0].showInNav).toBe(true);
+    });
+  });
+
+  describe('navTitles helpers', () => {
+    it('should normalize titles for case-insensitive matching', () => {
+      expect(normalizeNavTitleKey('  Testing Types  ')).toBe('testing types');
+      const set = buildNavTitleSet(['Testing Types']);
+      expect(resolveShowInNav('testing types', set)).toBe(true);
+      expect(resolveShowInNav('Other', set)).toBe(false);
+      expect(resolveShowInNav('Any', null)).toBe(true);
     });
   });
 

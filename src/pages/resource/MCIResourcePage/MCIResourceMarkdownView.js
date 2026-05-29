@@ -711,6 +711,9 @@ const MCIResourceMarkdownView = ({ data }) => {
                                         <div>
                                             {
                                                 mci.list.map((mciItem, idx) => {
+                                                    if (mciItem.showInNav === false) {
+                                                        return null;
+                                                    }
                                                     const listItemKey = `listItem_${idx}`;
                                                         return (
                                                             <div name={mciItem.id} className={selectedNavTitle === mciItem.id ? 'navTopicItem selected subtitle' : 'navTopicItem subtitle'} key={listItemKey} onClick={handleClickEvent}>{mciItem.subtopic}</div>

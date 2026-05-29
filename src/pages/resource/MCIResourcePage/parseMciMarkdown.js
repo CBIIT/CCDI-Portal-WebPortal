@@ -16,6 +16,49 @@ function slugifyHeadingId(text) {
   return (s || 'section').slice(0, 120);
 }
 
+/** Case-insensitive key for matching front matter navTitles to ### headings. */
+export function normalizeNavTitleKey(title) {
+  return stripMarkdownHeadingBraceId(String(title || ''))
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, ' ');
+}
+
+/**
+ * @param {string[]|undefined|null} raw - YAML navTitles from front matter
+ * @returns {Set<string>|null} null when metadata omitted (show all ### in nav)
+ */
+export function buildNavTitleSet(raw) {
+  if (raw === undefined || raw === null) {
+    return null;
+  }
+  if (!Array.isArray(raw)) {
+    return new Set();
+  }
+  return new Set(
+    raw
+      .map((entry) => normalizeNavTitleKey(entry))
+      .filter((key) => key.length > 0),
+  );
+}
+
+export function resolveShowInNav(subtopic, navTitleSet) {
+  if (navTitleSet === null) {
+    return true;
+  }
+  return navTitleSet.has(normalizeNavTitleKey(subtopic));
+}
+
+function firstDefined(...values) {
+  for (let i = 0; i < values.length; i += 1) {
+    const v = values[i];
+    if (v !== undefined && v !== null) {
+      return v;
+    }
+  }
+  return undefined;
+}
+
 const WIDGET_LANG = '(mci-disease-table|mci-map|mci-search-table|mci-table|responsive-img)';
 
 const WIDGET_KEY = {
@@ -94,6 +137,22 @@ function splitH2(rest) {
   return topics;
 }
 
+/** True when a ### section has no prose/widgets yet (only blanks or absorbed ### lines). */
+function h3SectionHasSubstantiveContent(lines) {
+  return lines.some((line) => {
+    const t = line.trim();
+    return t && !/^###\s/.test(t);
+  });
+}
+
+function pushH3Sub(subs, cur) {
+  subs.push({
+    subtopic: cur.subtopic,
+    id: cur.id,
+    body: cur.lines.join('\n'),
+  });
+}
+
 function splitH3InTopic(topicBody) {
   if (!topicBody || !topicBody.trim()) return [];
   const lines = topicBody.split('\n');
@@ -103,31 +162,37 @@ function splitH3InTopic(topicBody) {
     const line = lines[i];
     if (/^###\s/.test(line)) {
       if (cur) {
-        subs.push({
-          subtopic: cur.subtopic,
-          id: cur.id,
-          body: cur.lines.join('\n'),
-        });
+        if (!h3SectionHasSubstantiveContent(cur.lines)) {
+          cur.lines.push(line);
+        } else {
+          pushH3Sub(subs, cur);
+          const p = parseHeadingLine(line, 3);
+          const rawH3 = line.replace(/^###\s+/, '').trim();
+          cur = p
+            ? { subtopic: p.title, id: p.id, lines: [] }
+            : {
+                subtopic: stripMarkdownHeadingBraceId(rawH3),
+                id: slugifyHeadingId(rawH3),
+                lines: [],
+              };
+        }
+      } else {
+        const p = parseHeadingLine(line, 3);
+        const rawH3 = line.replace(/^###\s+/, '').trim();
+        cur = p
+          ? { subtopic: p.title, id: p.id, lines: [] }
+          : {
+              subtopic: stripMarkdownHeadingBraceId(rawH3),
+              id: slugifyHeadingId(rawH3),
+              lines: [],
+            };
       }
-      const p = parseHeadingLine(line, 3);
-      const rawH3 = line.replace(/^###\s+/, '').trim();
-      cur = p
-        ? { subtopic: p.title, id: p.id, lines: [] }
-        : {
-            subtopic: stripMarkdownHeadingBraceId(rawH3),
-            id: slugifyHeadingId(rawH3),
-            lines: [],
-          };
     } else if (cur) {
       cur.lines.push(line);
     }
   }
   if (cur) {
-    subs.push({
-      subtopic: cur.subtopic,
-      id: cur.id,
-      body: cur.lines.join('\n'),
-    });
+    pushH3Sub(subs, cur);
   }
   return subs;
 }
@@ -216,6 +281,7 @@ export function resolveResponsiveImgCaption(responsiveImg, data) {
  * - Optional lead prose (markdown) in the body before the first `##` (ODS style; legacy `introText` in front matter is still read if the body has no lead)
  * - ## / ### with markdown and fenced mci-* widgets; order is preserved via `list[].segments`.
  *   Topic/subtopic ids are generated from heading titles (hyphen-separated slugs); optional `{#…}` in source is ignored for ids.
+ *   Front matter `navTitles` lists ### headings that appear in the left nav (`showInNav`). Consecutive ### with no body between are merged for content; only the first heading is used for nav matching.
  * @param {string} raw - full file contents
  * @returns {object} Same general shape as mciData.yaml for MCIResourceView: introText, mciContent, plus FM keys
  */
@@ -223,7 +289,16 @@ export function parseMciMarkdown(raw) {
   const { data: fm, content: body } = matter(raw || '');
   const { intro: introFromBody, rest } = extractIntroAndRest(body || '');
   // ODS-style: intro lives in the markdown body before the first `##` (not in front matter)
-  const { introText: _legacyFmIntro, ...restFm } = fm;
+  const {
+    introText: _legacyFmIntro,
+    navTitles: fmNavTitles,
+    mciNavTitles,
+    nav_titles: fmNavTitlesSnake,
+    ...restFm
+  } = fm;
+  const rawNavTitles = firstDefined(fmNavTitles, mciNavTitles, fmNavTitlesSnake);
+  const navTitleSet = buildNavTitleSet(rawNavTitles);
+  const navTitles = Array.isArray(rawNavTitles) ? rawNavTitles : undefined;
   const introText =
     String(introFromBody || '').trim() !== ''
       ? introFromBody
@@ -237,6 +312,7 @@ export function parseMciMarkdown(raw) {
     const list = subs.map((s) => ({
       id: s.id,
       subtopic: s.subtopic,
+      showInNav: resolveShowInNav(s.subtopic, navTitleSet),
       segments: buildSegments(s.body),
     }));
     return {
@@ -249,6 +325,7 @@ export function parseMciMarkdown(raw) {
   return {
     ...restFm,
     introText,
+    navTitles,
     mciContent,
   };
 }

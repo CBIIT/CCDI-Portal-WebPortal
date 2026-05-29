@@ -4,6 +4,8 @@
 
 export const sampleMciMarkdownRaw = `---
 MCI_Workflow_Diagram_Caption: Workflow caption from front matter
+navTitles:
+  - First Subsection
 ---
 Unit test intro for MCI markdown page.
 
@@ -31,6 +33,24 @@ introText: Legacy intro from front matter
 ### Sub A
 
 Body A.
+`;
+
+export const sampleMciMarkdownBackToBackH3 = `---
+navTitles:
+  - Testing Types
+---
+## Results
+
+### Testing Types
+
+### What types of clinical testing are conducted?
+
+Body under the second title.
+
+### Not In Nav List
+
+Standalone subsection body.
+
 `;
 
 export const sampleResponsiveImgYaml = `---

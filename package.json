@@ -138,11 +138,16 @@
       "src/**/*.{js,jsx,ts,tsx}",
       "!src/**/*.d.ts"
     ],
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/src/bento/*PageData.js"
+    ],
     "resolver": "jest-pnp-resolver",
     "setupFiles": [
       "react-app-polyfill/jsdom"
     ],
     "testMatch": [
+      "<rootDir>/tests/**/*.test.{js,jsx,ts,tsx}",
+      "<rootDir>/tests/**/*.spec.{js,jsx,ts,tsx}",
       "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
       "<rootDir>/src/**/?(*.)(spec|test).{js,jsx,ts,tsx}",
       "<rootDir>/tests/**/?(*.)(spec|test).{js,jsx,ts,tsx}"
@@ -160,7 +165,8 @@
     ],
     "moduleNameMapper": {
       "^react-native$": "react-native-web",
-      "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy"
+      "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy",
+      "^@bento-core/authentication$": "<rootDir>/tests/__mocks__/bento-core-authentication.js"
     },
     "moduleFileExtensions": [
       "web.js",
@@ -190,6 +196,7 @@
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-react": "^7.20.5",
     "eslint-plugin-react-hooks": "^1.7.0",
+    "redux-mock-store": "^1.5.5",
     "use-reducer-logger": "^1.0.2"
   }
 }

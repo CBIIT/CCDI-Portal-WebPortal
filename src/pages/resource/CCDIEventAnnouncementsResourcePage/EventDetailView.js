@@ -3,6 +3,13 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import ReactHtmlParser from 'html-react-parser';
 import { EVENT_ROUTE_BASE, buildDisclaimerHtml } from './eventsUtils';
+import communityForumImg from './assets/ccdimarchcommunityforum-PIC.png';
+import pediatricStandardsImg from './assets/developingpediatricdatastandards-PIC.png';
+
+const EVENT_IMAGES = {
+  'ccdimarchcommunityforum-PIC.png': communityForumImg,
+  'developingpediatricdatastandards-PIC.png': pediatricStandardsImg,
+};
 
 const EventDetailContainer = styled.div`
   width: 100%;
@@ -84,6 +91,32 @@ const Body = styled.div`
     font-size: 13px;
     font-weight: 500;
     background: transparent;
+  }
+
+  .eventImageContainer {
+    margin-bottom: 28px;
+    max-width: 300px;
+  }
+
+  .eventImage {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    display: block;
+    border: 2px solid #848484;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .eventImageCaption {
+    margin-top: -2px;
+    background: #4C4C4C;
+    font-family: Inter, sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 15px;
+    color: #FFFFFF;
+    padding: 8px 10px;
+    border-radius: 0 0 12px 12px;
   }
 
   .bodyContent {
@@ -213,6 +246,9 @@ const Body = styled.div`
 `;
 
 const EventDetailView = ({ event, older, newer }) => {
+  const eventTags = event.tags || (event.tag ? [event.tag] : []);
+  const eventImageSrc = event.image ? EVENT_IMAGES[event.image] : null;
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [event.slug]);
@@ -230,8 +266,19 @@ const EventDetailView = ({ event, older, newer }) => {
         <div className="eventDate">{event.displayDate}</div>
         <h1 className="eventTitle">{event.title}</h1>
         <div className="tags">
-          <span className="tag">{event.tag}</span>
+          {eventTags.map((tag) => (
+            <span className="tag" key={tag}>{tag}</span>
+          ))}
         </div>
+
+        {eventImageSrc && (
+          <div className="eventImageContainer">
+            <img className="eventImage" src={eventImageSrc} alt={event.title} />
+            {event.imageCaption && (
+              <div className="eventImageCaption">{event.imageCaption}</div>
+            )}
+          </div>
+        )}
 
         <div className="bodyContent">
           {event.body ? ReactHtmlParser(event.body) : null}

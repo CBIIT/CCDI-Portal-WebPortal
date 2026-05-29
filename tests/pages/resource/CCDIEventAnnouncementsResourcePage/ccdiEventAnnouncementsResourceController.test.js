@@ -65,7 +65,7 @@ describe('CCDIEventAnnouncementsResourceController', () => {
       );
     });
 
-    it('should render an empty div when YAML lacks ccdiEventAnnouncementsContent', async () => {
+    it('should render local detail page events when YAML lacks ccdiEventAnnouncementsContent', async () => {
       axios.get.mockImplementation(
         createDedicatedYamlAxiosMock({
           '/resourceData.yaml': {},
@@ -79,10 +79,11 @@ describe('CCDIEventAnnouncementsResourceController', () => {
       );
 
       await waitFor(() => {
-        expect(axios.get).toHaveBeenCalled();
+        expect(screen.getByText('CCDI Events Announcements')).toBeInTheDocument();
       });
 
-      expect(screen.queryByText('CCDI Events Announcements')).not.toBeInTheDocument();
+      expect(screen.getByText('CCDI March Community Forum')).toBeInTheDocument();
+      expect(screen.getByText('Developing Pediatric Data Standards')).toBeInTheDocument();
     });
   });
 });

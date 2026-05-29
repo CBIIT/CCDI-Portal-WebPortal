@@ -41,6 +41,52 @@ describe('EventDetailView', () => {
     expect(screen.getByText('March forum caption text.')).toBeInTheDocument();
   });
 
+  it('floats a 300x300 image beside the body content', () => {
+    renderView();
+
+    const wrapper = screen.getByTestId('event-body-with-image');
+    const figure = screen.getByTestId('event-image-figure');
+    const image = screen.getByAltText('CCDI March Community Forum');
+    const bodyContent = screen.getByTestId('event-body-content');
+
+    expect(wrapper).toContainElement(figure);
+    expect(wrapper).toContainElement(bodyContent);
+    expect(figure).toHaveStyle({
+      float: 'left',
+      width: '300px',
+      height: '300px',
+    });
+    expect(image).toHaveStyle({
+      width: '300px',
+      height: '300px',
+      objectFit: 'cover',
+    });
+  });
+
+  it('renders the caption overlaid on the image without a grey frame', () => {
+    renderView();
+
+    const figure = screen.getByTestId('event-image-figure');
+    const caption = screen.getByTestId('event-image-caption');
+
+    expect(caption).toHaveTextContent('March forum caption text.');
+    expect(caption).toHaveStyle({ position: 'absolute' });
+    expect(figure).toContainElement(caption);
+    expect(screen.queryByTestId('event-image-frame')).not.toBeInTheDocument();
+  });
+
+  it('indents the bullet list slightly to the right of paragraph text', () => {
+    renderView();
+
+    const list = screen.getByText('Item one').closest('ul');
+    expect(list).toHaveStyle({
+      marginLeft: '23em',
+      paddingLeft: '1em',
+      listStyleType: 'disc',
+      listStylePosition: 'outside',
+    });
+  });
+
   it('renders the body HTML content', () => {
     renderView();
 

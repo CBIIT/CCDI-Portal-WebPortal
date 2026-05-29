@@ -93,30 +93,42 @@ const Body = styled.div`
     background: transparent;
   }
 
-  .eventImageContainer {
-    margin-bottom: 28px;
-    max-width: 300px;
+  .bodyWithImage::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+
+  .eventImageFigure {
+    float: left;
+    width: 300px;
+    height: 300px;
+    margin: 0 64px 16px 0;
+    position: relative;
   }
 
   .eventImage {
-    width: 100%;
-    max-width: 300px;
-    height: auto;
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
     display: block;
     border: 2px solid #848484;
-    border-radius: 12px 12px 0 0;
+    border-radius: 12px;
   }
 
   .eventImageCaption {
-    margin-top: -2px;
-    background: #4C4C4C;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(76, 76, 76, 0.92);
     font-family: Inter, sans-serif;
     font-weight: 600;
     font-size: 13px;
     line-height: 15px;
     color: #FFFFFF;
     padding: 8px 10px;
-    border-radius: 0 0 12px 12px;
+    border-radius: 0 0 10px 10px;
   }
 
   .bodyContent {
@@ -131,8 +143,10 @@ const Body = styled.div`
     }
 
     ul {
-      margin: 0 0 16px;
-      padding-left: 24px;
+      margin: 0 0 16px 23em;
+      padding-left: 1em;
+      list-style-type: disc;
+      list-style-position: outside;
     }
 
     li {
@@ -157,6 +171,7 @@ const Body = styled.div`
 
   .disclaimer {
     margin-top: 36px;
+    clear: both;
     background: #A2E0D2;
     border-radius: 6px;
     padding: 18px 22px;
@@ -199,17 +214,21 @@ const EventDetailView = ({ event }) => {
           ))}
         </div>
 
-        {eventImageSrc && (
-          <div className="eventImageContainer">
-            <img className="eventImage" src={eventImageSrc} alt={event.title} />
-            {event.imageCaption && (
-              <div className="eventImageCaption">{event.imageCaption}</div>
-            )}
-          </div>
-        )}
+        <div className="bodyWithImage" data-testid="event-body-with-image">
+          {eventImageSrc && (
+            <figure className="eventImageFigure" data-testid="event-image-figure">
+              <img className="eventImage" src={eventImageSrc} alt={event.title} />
+              {event.imageCaption && (
+                <figcaption className="eventImageCaption" data-testid="event-image-caption">
+                  {event.imageCaption}
+                </figcaption>
+              )}
+            </figure>
+          )}
 
-        <div className="bodyContent">
-          {event.body ? ReactHtmlParser(event.body) : null}
+          <div className="bodyContent" data-testid="event-body-content">
+            {event.body ? ReactHtmlParser(event.body) : null}
+          </div>
         </div>
 
         {event.disclaimer && (

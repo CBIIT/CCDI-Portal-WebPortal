@@ -102,9 +102,7 @@ const Body = styled.div`
   .eventImageFigure {
     float: left;
     width: 300px;
-    height: 300px;
     margin: 0 64px 16px 0;
-    position: relative;
   }
 
   .eventImage {
@@ -113,22 +111,22 @@ const Body = styled.div`
     object-fit: cover;
     display: block;
     border: 2px solid #848484;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .eventImageFigure:not(:has(figcaption)) .eventImage {
     border-radius: 12px;
   }
 
   .eventImageCaption {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(76, 76, 76, 0.92);
+    background: #4C4C4C;
     font-family: Inter, sans-serif;
     font-weight: 600;
     font-size: 13px;
     line-height: 15px;
     color: #FFFFFF;
     padding: 8px 10px;
-    border-radius: 0 0 10px 10px;
+    border-radius: 0 0 12px 12px;
   }
 
   .bodyContent {

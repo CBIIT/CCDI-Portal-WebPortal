@@ -2,8 +2,8 @@ import {
   slugify,
   getAllEvents,
   getEventBySlug,
-  getNeighborEvents,
   getDetailPageSlugForLinkText,
+  buildDetailPageListEntryHtml,
   mergeDetailPageEventsIntoAnnouncementsContent,
   buildDisclaimerHtml,
   EVENT_ROUTE_BASE,
@@ -55,19 +55,14 @@ describe('eventsUtils', () => {
     });
   });
 
-  describe('getNeighborEvents', () => {
-    it('returns null neighbors when slug is unknown', () => {
-      expect(getNeighborEvents('does-not-exist')).toEqual({ older: null, newer: null });
-    });
+  describe('buildDetailPageListEntryHtml', () => {
+    it('builds list entries without the pdf export link class', () => {
+      const event = getAllEvents()[0];
+      const html = buildDetailPageListEntryHtml(event);
 
-    it('links newer and older posts between the two detail page events', () => {
-      const { newer, older } = getNeighborEvents('developing-pediatric-data-standards');
-      expect(newer.slug).toBe('ccdi-march-2024-community-forum');
-      expect(older).toBeNull();
-
-      const marchNeighbors = getNeighborEvents('ccdi-march-2024-community-forum');
-      expect(marchNeighbors.newer).toBeNull();
-      expect(marchNeighbors.older.slug).toBe('developing-pediatric-data-standards');
+      expect(html).toContain(event.title);
+      expect(html).toContain(`${EVENT_ROUTE_BASE}/${event.slug}`);
+      expect(html).not.toContain('class="link"');
     });
   });
 

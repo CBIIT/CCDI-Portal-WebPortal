@@ -39,7 +39,7 @@ const getEntrySortDate = (entryHtml) => {
 const LIST_ENTRY_PATTERN = /<a class="link"[\s\S]*?<\/a><br>\s*[\d/]+/g;
 
 export const buildDetailPageListEntryHtml = (event) => (
-  `<a class="link" href="${EVENT_ROUTE_BASE}/${event.slug}">${event.title}</a><br>${event.rawDate}`
+  `<a href="${EVENT_ROUTE_BASE}/${event.slug}">${event.title}</a><br>${event.rawDate}`
 );
 
 export const mergeDetailPageEventsIntoAnnouncementsContent = (sections) => {
@@ -76,17 +76,6 @@ export const getAllEvents = () => events;
 
 export const getEventBySlug = (slug) => events.find((event) => event.slug === slug);
 
-export const getNeighborEvents = (slug) => {
-  const idx = events.findIndex((event) => event.slug === slug);
-  if (idx === -1) {
-    return { older: null, newer: null };
-  }
-  return {
-    newer: idx > 0 ? events[idx - 1] : null,
-    older: idx < events.length - 1 ? events[idx + 1] : null,
-  };
-};
-
 export const REPRODUCTION_DISCLAIMER = (
   'If you would like to reproduce some or all of this content, see '
   + '<a class="link" href="https://www.cancer.gov/policies/copyright-reuse" '
@@ -108,6 +97,5 @@ export default {
   mergeDetailPageEventsIntoAnnouncementsContent,
   getAllEvents,
   getEventBySlug,
-  getNeighborEvents,
   buildDisclaimerHtml,
 };

@@ -93,30 +93,42 @@ const Body = styled.div`
     background: transparent;
   }
 
-  .eventImageContainer {
-    margin-bottom: 28px;
-    max-width: 300px;
+  .bodyWithImage::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+
+  .eventImageFigure {
+    float: left;
+    width: 300px;
+    height: 300px;
+    margin: 0 64px 16px 0;
+    position: relative;
   }
 
   .eventImage {
-    width: 100%;
-    max-width: 300px;
-    height: auto;
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
     display: block;
     border: 2px solid #848484;
-    border-radius: 12px 12px 0 0;
+    border-radius: 12px;
   }
 
   .eventImageCaption {
-    margin-top: -2px;
-    background: #4C4C4C;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(76, 76, 76, 0.92);
     font-family: Inter, sans-serif;
     font-weight: 600;
     font-size: 13px;
     line-height: 15px;
     color: #FFFFFF;
     padding: 8px 10px;
-    border-radius: 0 0 12px 12px;
+    border-radius: 0 0 10px 10px;
   }
 
   .bodyContent {
@@ -131,8 +143,10 @@ const Body = styled.div`
     }
 
     ul {
-      margin: 0 0 16px;
-      padding-left: 24px;
+      margin: 0 0 16px 23em;
+      padding-left: 1em;
+      list-style-type: disc;
+      list-style-position: outside;
     }
 
     li {
@@ -157,6 +171,7 @@ const Body = styled.div`
 
   .disclaimer {
     margin-top: 36px;
+    clear: both;
     background: #A2E0D2;
     border-radius: 6px;
     padding: 18px 22px;
@@ -171,81 +186,9 @@ const Body = styled.div`
       text-decoration: underline;
     }
   }
-
-  .postNav {
-    margin-top: 48px;
-    border-top: 1px solid #E0E0E0;
-    padding-top: 24px;
-    display: flex;
-    justify-content: space-between;
-    gap: 24px;
-
-    .postNavLink {
-      display: flex;
-      flex-direction: column;
-      text-decoration: none;
-      color: #4D889E;
-      max-width: 360px;
-    }
-
-    .postNavLink--older {
-      align-items: flex-start;
-      text-align: left;
-    }
-
-    .postNavLink--newer {
-      align-items: flex-end;
-      text-align: right;
-      margin-left: auto;
-    }
-
-    .postNavLabel {
-      font-family: Inter, sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: #4D889E;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 6px;
-    }
-
-    .postNavArrow {
-      font-size: 16px;
-      line-height: 1;
-      color: #4D889E;
-    }
-
-    .postNavTitle {
-      color: #4A4A4A;
-      font-family: Inter, sans-serif;
-      font-size: 14px;
-      font-weight: 500;
-      line-height: 20px;
-    }
-
-    .postNavLink:hover .postNavTitle {
-      text-decoration: underline;
-    }
-  }
-
-  @media (max-width: 767px) {
-    .postNav {
-      flex-direction: column;
-      gap: 18px;
-
-      .postNavLink--newer {
-        align-items: flex-start;
-        text-align: left;
-        margin-left: 0;
-      }
-    }
-  }
 `;
 
-const EventDetailView = ({ event, older, newer }) => {
+const EventDetailView = ({ event }) => {
   const eventTags = event.tags || (event.tag ? [event.tag] : []);
   const eventImageSrc = event.image ? EVENT_IMAGES[event.image] : null;
 
@@ -271,17 +214,21 @@ const EventDetailView = ({ event, older, newer }) => {
           ))}
         </div>
 
-        {eventImageSrc && (
-          <div className="eventImageContainer">
-            <img className="eventImage" src={eventImageSrc} alt={event.title} />
-            {event.imageCaption && (
-              <div className="eventImageCaption">{event.imageCaption}</div>
-            )}
-          </div>
-        )}
+        <div className="bodyWithImage" data-testid="event-body-with-image">
+          {eventImageSrc && (
+            <figure className="eventImageFigure" data-testid="event-image-figure">
+              <img className="eventImage" src={eventImageSrc} alt={event.title} />
+              {event.imageCaption && (
+                <figcaption className="eventImageCaption" data-testid="event-image-caption">
+                  {event.imageCaption}
+                </figcaption>
+              )}
+            </figure>
+          )}
 
-        <div className="bodyContent">
-          {event.body ? ReactHtmlParser(event.body) : null}
+          <div className="bodyContent" data-testid="event-body-content">
+            {event.body ? ReactHtmlParser(event.body) : null}
+          </div>
         </div>
 
         {event.disclaimer && (
@@ -289,37 +236,6 @@ const EventDetailView = ({ event, older, newer }) => {
             {ReactHtmlParser(buildDisclaimerHtml(event.title))}
           </div>
         )}
-
-        <div className="postNav">
-          {older ? (
-            <Link
-              className="postNavLink postNavLink--older"
-              to={`${EVENT_ROUTE_BASE}/${older.slug}`}
-            >
-              <span className="postNavLabel">
-                <span className="postNavArrow">&#9664;</span>
-                Older Post
-              </span>
-              <span className="postNavTitle">{older.title}</span>
-            </Link>
-          ) : (
-            <span />
-          )}
-          {newer ? (
-            <Link
-              className="postNavLink postNavLink--newer"
-              to={`${EVENT_ROUTE_BASE}/${newer.slug}`}
-            >
-              <span className="postNavLabel">
-                Newer Post
-                <span className="postNavArrow">&#9654;</span>
-              </span>
-              <span className="postNavTitle">{newer.title}</span>
-            </Link>
-          ) : (
-            <span />
-          )}
-        </div>
       </Body>
     </EventDetailContainer>
   );

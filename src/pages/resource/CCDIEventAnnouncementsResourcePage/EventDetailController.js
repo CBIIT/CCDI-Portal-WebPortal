@@ -3,7 +3,6 @@ import { useParams, Navigate } from 'react-router-dom';
 import {
   EVENT_ROUTE_BASE,
   getEventBySlug,
-  getNeighborEvents,
 } from './eventsUtils';
 import EventDetailView from './EventDetailView';
 
@@ -15,9 +14,7 @@ const EventDetailController = () => {
     return <Navigate to={EVENT_ROUTE_BASE} replace />;
   }
 
-  const { older, newer } = getNeighborEvents(slug);
-
-  return <EventDetailView event={event} older={older} newer={newer} />;
+  return <EventDetailView event={event} />;
 };
 
 export default EventDetailController;

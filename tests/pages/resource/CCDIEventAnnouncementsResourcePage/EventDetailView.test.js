@@ -15,15 +15,15 @@ const baseEvent = {
   disclaimer: false,
 };
 
-const renderView = (props) => render(
+const renderView = (event = baseEvent) => render(
   <MemoryRouter>
-    <EventDetailView {...props} />
+    <EventDetailView event={event} />
   </MemoryRouter>,
 );
 
 describe('EventDetailView', () => {
   it('renders the breadcrumb with link back to root events page', () => {
-    renderView({ event: baseEvent, older: null, newer: null });
+    renderView();
 
     const breadcrumbLink = screen.getByRole('link', { name: /events announcements/i });
     expect(breadcrumbLink).toHaveAttribute('href', '/ccdi-events-announcements');
@@ -31,7 +31,7 @@ describe('EventDetailView', () => {
   });
 
   it('renders date, title, tags, image, and caption', () => {
-    renderView({ event: baseEvent, older: null, newer: null });
+    renderView();
 
     expect(screen.getByText('March 18, 2024')).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'CCDI March Community Forum' })).toBeInTheDocument();
@@ -41,42 +41,76 @@ describe('EventDetailView', () => {
     expect(screen.getByText('March forum caption text.')).toBeInTheDocument();
   });
 
+  it('floats a 300x300 image beside the body content', () => {
+    renderView();
+
+    const wrapper = screen.getByTestId('event-body-with-image');
+    const figure = screen.getByTestId('event-image-figure');
+    const image = screen.getByAltText('CCDI March Community Forum');
+    const bodyContent = screen.getByTestId('event-body-content');
+
+    expect(wrapper).toContainElement(figure);
+    expect(wrapper).toContainElement(bodyContent);
+    expect(figure).toHaveStyle({
+      float: 'left',
+      width: '300px',
+      height: '300px',
+    });
+    expect(image).toHaveStyle({
+      width: '300px',
+      height: '300px',
+      objectFit: 'cover',
+    });
+  });
+
+  it('renders the caption overlaid on the image without a grey frame', () => {
+    renderView();
+
+    const figure = screen.getByTestId('event-image-figure');
+    const caption = screen.getByTestId('event-image-caption');
+
+    expect(caption).toHaveTextContent('March forum caption text.');
+    expect(caption).toHaveStyle({ position: 'absolute' });
+    expect(figure).toContainElement(caption);
+    expect(screen.queryByTestId('event-image-frame')).not.toBeInTheDocument();
+  });
+
+  it('indents the bullet list slightly to the right of paragraph text', () => {
+    renderView();
+
+    const list = screen.getByText('Item one').closest('ul');
+    expect(list).toHaveStyle({
+      marginLeft: '23em',
+      paddingLeft: '1em',
+      listStyleType: 'disc',
+      listStylePosition: 'outside',
+    });
+  });
+
   it('renders the body HTML content', () => {
-    renderView({ event: baseEvent, older: null, newer: null });
+    renderView();
 
     expect(screen.getByText('Hello world.')).toBeInTheDocument();
     expect(screen.getByText('Item one')).toBeInTheDocument();
     expect(screen.getByText('Item two')).toBeInTheDocument();
   });
 
+  it('does not render older or newer post navigation', () => {
+    renderView();
+
+    expect(screen.queryByText(/older post/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/newer post/i)).not.toBeInTheDocument();
+  });
+
   it('only renders the disclaimer when event.disclaimer is true', () => {
-    const { rerender } = renderView({
-      event: { ...baseEvent, disclaimer: false },
-      older: null,
-      newer: null,
-    });
+    const { rerender } = renderView({ ...baseEvent, disclaimer: false });
     expect(screen.queryByText(/reuse of nci information/i)).not.toBeInTheDocument();
 
     rerender(
       <MemoryRouter>
-        <EventDetailView
-          event={{ ...baseEvent, disclaimer: true }}
-          older={null}
-          newer={null}
-        />
+        <EventDetailView event={{ ...baseEvent, disclaimer: true }} />
       </MemoryRouter>,
     );
     expect(screen.getByText(/reuse of nci information/i)).toBeInTheDocument();
-  });
-
-  it('renders older and newer post navigation when provided', () => {
-    const older = { slug: 'developing-pediatric-data-standards', title: 'Developing Pediatric Data Standards' };
-    const newer = { slug: 'newer-slug', title: 'A Newer Post' };
-    renderView({ event: baseEvent, older, newer });
-
-    expect(screen.getByText('Developing Pediatric Data Standards').closest('a'))
-      .toHaveAttribute('href', '/ccdi-events-announcements/developing-pediatric-data-standards');
-    expect(screen.getByText('A Newer Post').closest('a'))
-      .toHaveAttribute('href', '/ccdi-events-announcements/newer-slug');
   });
 });

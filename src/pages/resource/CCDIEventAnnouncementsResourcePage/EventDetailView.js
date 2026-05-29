@@ -171,81 +171,9 @@ const Body = styled.div`
       text-decoration: underline;
     }
   }
-
-  .postNav {
-    margin-top: 48px;
-    border-top: 1px solid #E0E0E0;
-    padding-top: 24px;
-    display: flex;
-    justify-content: space-between;
-    gap: 24px;
-
-    .postNavLink {
-      display: flex;
-      flex-direction: column;
-      text-decoration: none;
-      color: #4D889E;
-      max-width: 360px;
-    }
-
-    .postNavLink--older {
-      align-items: flex-start;
-      text-align: left;
-    }
-
-    .postNavLink--newer {
-      align-items: flex-end;
-      text-align: right;
-      margin-left: auto;
-    }
-
-    .postNavLabel {
-      font-family: Inter, sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: #4D889E;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 6px;
-    }
-
-    .postNavArrow {
-      font-size: 16px;
-      line-height: 1;
-      color: #4D889E;
-    }
-
-    .postNavTitle {
-      color: #4A4A4A;
-      font-family: Inter, sans-serif;
-      font-size: 14px;
-      font-weight: 500;
-      line-height: 20px;
-    }
-
-    .postNavLink:hover .postNavTitle {
-      text-decoration: underline;
-    }
-  }
-
-  @media (max-width: 767px) {
-    .postNav {
-      flex-direction: column;
-      gap: 18px;
-
-      .postNavLink--newer {
-        align-items: flex-start;
-        text-align: left;
-        margin-left: 0;
-      }
-    }
-  }
 `;
 
-const EventDetailView = ({ event, older, newer }) => {
+const EventDetailView = ({ event }) => {
   const eventTags = event.tags || (event.tag ? [event.tag] : []);
   const eventImageSrc = event.image ? EVENT_IMAGES[event.image] : null;
 
@@ -289,37 +217,6 @@ const EventDetailView = ({ event, older, newer }) => {
             {ReactHtmlParser(buildDisclaimerHtml(event.title))}
           </div>
         )}
-
-        <div className="postNav">
-          {older ? (
-            <Link
-              className="postNavLink postNavLink--older"
-              to={`${EVENT_ROUTE_BASE}/${older.slug}`}
-            >
-              <span className="postNavLabel">
-                <span className="postNavArrow">&#9664;</span>
-                Older Post
-              </span>
-              <span className="postNavTitle">{older.title}</span>
-            </Link>
-          ) : (
-            <span />
-          )}
-          {newer ? (
-            <Link
-              className="postNavLink postNavLink--newer"
-              to={`${EVENT_ROUTE_BASE}/${newer.slug}`}
-            >
-              <span className="postNavLabel">
-                Newer Post
-                <span className="postNavArrow">&#9654;</span>
-              </span>
-              <span className="postNavTitle">{newer.title}</span>
-            </Link>
-          ) : (
-            <span />
-          )}
-        </div>
       </Body>
     </EventDetailContainer>
   );

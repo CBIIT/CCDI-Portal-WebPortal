@@ -26,10 +26,13 @@ const transformDetailPageLinks = {
         const slug = getDetailPageSlugForLinkText(childText);
         if (!slug) return undefined;
 
-        const className = (node.attribs && node.attribs.class) || '';
+        const className = ((node.attribs && node.attribs.class) || '')
+            .split(/\s+/)
+            .filter((cls) => cls && cls !== 'link')
+            .join(' ');
 
         return (
-            <Link className={className} to={`${EVENT_ROUTE_BASE}/${slug}`}>
+            <Link className={className || undefined} to={`${EVENT_ROUTE_BASE}/${slug}`}>
                 {childText}
             </Link>
         );

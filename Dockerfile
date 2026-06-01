@@ -23,9 +23,9 @@ COPY --from=build /usr/src/app/config/inject.template.js /usr/share/nginx/html/i
 COPY --from=build /usr/src/app/config/nginx.conf /etc/nginx/conf.d/configfile.template
 COPY --from=build /usr/src/app/config/entrypoint.sh /
 
-ENV PORT 80
+ENV PORT=80
 
-ENV HOST 0.0.0.0
+ENV HOST=0.0.0.0
 
 RUN sh -c "envsubst '\$PORT'  < /etc/nginx/conf.d/configfile.template > /etc/nginx/conf.d/default.conf"
 

@@ -54,7 +54,6 @@ describe('EventDetailView', () => {
     expect(figure).toHaveStyle({
       float: 'left',
       width: '300px',
-      height: '300px',
     });
     expect(image).toHaveStyle({
       width: '300px',
@@ -63,15 +62,18 @@ describe('EventDetailView', () => {
     });
   });
 
-  it('renders the caption overlaid on the image without a grey frame', () => {
+  it('renders the caption below the image without overlaying it', () => {
     renderView();
 
     const figure = screen.getByTestId('event-image-figure');
+    const image = screen.getByAltText('CCDI March Community Forum');
     const caption = screen.getByTestId('event-image-caption');
 
     expect(caption).toHaveTextContent('March forum caption text.');
-    expect(caption).toHaveStyle({ position: 'absolute' });
+    expect(caption).not.toHaveStyle({ position: 'absolute' });
+    expect(caption).toHaveStyle({ backgroundColor: 'rgb(76, 76, 76)' });
     expect(figure).toContainElement(caption);
+    expect(image.compareDocumentPosition(caption) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(screen.queryByTestId('event-image-frame')).not.toBeInTheDocument();
   });
 

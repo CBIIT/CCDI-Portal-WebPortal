@@ -13,7 +13,7 @@ RUN NODE_OPTIONS="--max-old-space-size=4096" npm run build --silent
 
 # FROM nginx:1.23.3-alpine
 #FROM nginx:1.25.5
-FROM nginx:stable-alpine3.22 AS fnl_base_image
+FROM nginx:1.27.5-alpine-slim AS fnl_base_image
 RUN apk add --no-cache ca-certificates && update-ca-certificates
 RUN apk --no-cache upgrade && apk add --no-cache --upgrade openssl busybox 'zlib>=1.3.2-r0' 'musl>=1.2.5-r3'
 

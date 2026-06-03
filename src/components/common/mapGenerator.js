@@ -10,6 +10,48 @@ import * as echarts from 'echarts';
 
 const MARKER_SERIES_INDEX = 1;
 
+function normalizeKeyboardInstructionItem(item) {
+  if (!item || typeof item !== 'object') {
+    return null;
+  }
+  const label = item.label != null ? String(item.label) : '';
+  const text = item.text != null
+    ? String(item.text)
+    : item.description != null
+      ? String(item.description)
+      : '';
+  if (!label && !text) {
+    return null;
+  }
+  return { label, text };
+}
+
+/** Reads `keyboardInstructions` from mci-map YAML (title + items[] with label/text). */
+export function resolveKeyboardInstructions(mapData) {
+  const raw = mapData && (mapData.keyboardInstructions || mapData.keyboard_instructions);
+  if (!raw) {
+    return null;
+  }
+  const itemsSource = Array.isArray(raw.items)
+    ? raw.items
+    : Array.isArray(raw)
+      ? raw
+      : null;
+  if (!itemsSource) {
+    return null;
+  }
+  const items = itemsSource
+    .map(normalizeKeyboardInstructionItem)
+    .filter(Boolean);
+  if (items.length === 0) {
+    return null;
+  }
+  const title = raw.title != null && String(raw.title).trim() !== ''
+    ? String(raw.title)
+    : '';
+  return { title, items };
+}
+
 /** Geo SVG sits above the scatter canvas in the DOM; without this, the browser never delivers pointer events to markers. */
 function stripGeoSvgPointerEvents(chart) {
   const root = chart.getDom();
@@ -115,6 +157,10 @@ const MapView = ({ mapData }) => {
     if (!mapData || mapData.title == null || mapData.title === '') return '';
     return String(mapData.title);
   }, [mapData]);
+  const keyboardInstructions = useMemo(
+    () => resolveKeyboardInstructions(mapData),
+    [mapData],
+  );
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== 'undefined' ? window.innerWidth : 1200
   );
@@ -536,7 +582,7 @@ const MapView = ({ mapData }) => {
     <section
       className="mci-enrollment-map-section"
       aria-labelledby={headingId}
-      aria-describedby={descId}
+      aria-describedby={keyboardInstructions ? descId : undefined}
       style={{ marginTop: '24px', position: 'relative' }}
     >
       <h4
@@ -561,7 +607,7 @@ const MapView = ({ mapData }) => {
         tabIndex={0}
         role="group"
         aria-label={`${chartTitle}. Keyboard: Arrow keys move between enrollment markers. Tab exits.`}
-        aria-describedby={descId}
+        aria-describedby={keyboardInstructions ? descId : undefined}
         onKeyDown={onMapRegionKeyDown}
         onFocus={onMapRegionFocus}
         onBlur={onMapRegionBlur}
@@ -635,43 +681,41 @@ const MapView = ({ mapData }) => {
         </div>
       </div>
 
-      <div
-        id={descId}
-        className="mci-map-keyboard-instructions"
-        style={{
-          marginTop: 16,
-          marginLeft: 'auto',
-          marginRight: 'auto',
-          padding: '16px 20px',
-          border: '1px solid #BDBDBD',
-          borderRadius: 4,
-          width: '100%',
-          fontFamily: 'Inter, sans-serif',
-          fontSize: 14,
-          paddingLeft:0,
-          fontWeight: 400,
-          color: '#1B1B1B',
-        }}
-      >
-        <p className="mci-map-keyboard-instructions-title">
-          Keyboard Navigation Instructions
-        </p>
-        <ul className="mci-map-keyboard-instructions-list">
-          <li>
-            <strong>Enter the map:</strong> Press Tab to move focus into the map region.
-          </li>
-          <li>
-            <strong>Move between markers:</strong> Use the Arrow keys to navigate enrollment markers. A tooltip
-            will display the count for each marker.
-          </li>
-          <li>
-            <strong>Jump to first/last marker:</strong> Press Home or End.
-          </li>
-          <li>
-            <strong>Leave the map:</strong> Press Tab again.
-          </li>
-        </ul>
-      </div>
+      {keyboardInstructions && (
+        <div
+          id={descId}
+          className="mci-map-keyboard-instructions"
+          style={{
+            marginTop: 16,
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            padding: '16px 20px',
+            border: '1px solid #BDBDBD',
+            borderRadius: 4,
+            width: '100%',
+            fontFamily: 'Inter, sans-serif',
+            fontSize: 14,
+            paddingLeft: 0,
+            fontWeight: 400,
+            color: '#1B1B1B',
+          }}
+        >
+          {keyboardInstructions.title ? (
+            <p className="mci-map-keyboard-instructions-title">
+              {keyboardInstructions.title}
+            </p>
+          ) : null}
+          <ul className="mci-map-keyboard-instructions-list">
+            {keyboardInstructions.items.map((item, idx) => (
+              <li key={idx}>
+                {item.label ? <strong>{item.label}</strong> : null}
+                {item.label && item.text ? ' ' : null}
+                {item.text}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       <style>
         {`

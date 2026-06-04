@@ -21,7 +21,7 @@ import React from 'react';
 import { render, waitFor, act, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import * as echarts from 'echarts';
-import MapView from '../../../src/components/common/mapGenerator';
+import MapView, { resolveKeyboardInstructions } from '../../../src/components/common/mapGenerator';
 
 const sampleMapData = {
   title: 'Enrollment by State',
@@ -99,6 +99,39 @@ describe('mapGenerator (MapView)', () => {
     const sizeFn = enrollmentMarkers.symbolSize;
     expect(sizeFn([0, 0, 'TEXAS', 0])).toBe(0);
     expect(sizeFn([0, 0, 'CALIFORNIA', 12])).toBeGreaterThan(0);
+  });
+
+  it('should render keyboard instructions from mapData YAML', async () => {
+    const mapDataWithInstructions = {
+      ...sampleMapData,
+      keyboardInstructions: {
+        title: 'Custom Keyboard Help',
+        items: [
+          { label: 'Step one:', text: 'Do something.' },
+        ],
+      },
+    };
+    const view = render(<MapView mapData={mapDataWithInstructions} />);
+
+    await waitFor(() => {
+      expect(setOption).toHaveBeenCalled();
+    });
+
+    expect(view.getByText('Custom Keyboard Help')).toBeInTheDocument();
+    expect(view.getByText('Step one:')).toBeInTheDocument();
+    expect(view.getByText(/Do something\./)).toBeInTheDocument();
+  });
+
+  it('should not render keyboard instructions when YAML is omitted', async () => {
+    expect(resolveKeyboardInstructions(sampleMapData)).toBeNull();
+
+    const view = render(<MapView mapData={sampleMapData} />);
+
+    await waitFor(() => {
+      expect(setOption).toHaveBeenCalled();
+    });
+
+    expect(view.container.querySelector('.mci-map-keyboard-instructions')).not.toBeInTheDocument();
   });
 
   it('should show enrollment text in the keyboard tooltip mirror', async () => {

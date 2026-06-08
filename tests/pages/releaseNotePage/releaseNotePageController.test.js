@@ -1,11 +1,8 @@
 /**
- * ReleaseNotePageController — loads release notes YAML via axios.
+ * ReleaseNotePageController — loads release notes markdown via axios.
  */
 
 jest.mock('axios');
-jest.mock('js-yaml', () => ({
-  safeLoad: jest.fn((data) => data),
-}));
 
 jest.mock('../../../src/utils/env', () => ({
   __esModule: true,
@@ -42,18 +39,16 @@ if (typeof global.MutationObserver === 'undefined') {
   };
 }
 import axios from 'axios';
-import yaml from 'js-yaml';
 import ReleaseNotePageController from '../../../src/pages/releaseNotePage/releaseNotePageController';
-import { minimalReleaseNotesPayload } from '../../fixtures/resource/releaseNoteFixtures';
+import { sampleReleaseNotesMarkdownRaw } from '../../fixtures/resource/releaseNotesMarkdownSamples';
 
 describe('ReleaseNotePageController', () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    yaml.safeLoad.mockImplementation((data) => data);
   });
 
-  it('should fetch YAML and render release notes view when data is valid', async () => {
-    axios.get.mockResolvedValue({ data: minimalReleaseNotesPayload });
+  it('should fetch markdown and render release notes view when data is valid', async () => {
+    axios.get.mockResolvedValue({ data: sampleReleaseNotesMarkdownRaw });
 
     render(<ReleaseNotePageController />);
 
@@ -62,14 +57,15 @@ describe('ReleaseNotePageController', () => {
     });
 
     expect(axios.get).toHaveBeenCalledWith(
-      expect.stringMatching(/^https:\/\/static\.example\/newsData\.yaml\?ts=/),
+      expect.stringMatching(/^https:\/\/static\.example\/releaseNotesData\.md\?ts=/),
     );
-    expect(screen.getByText('Spring 2024 Release')).toBeInTheDocument();
-    expect(screen.getByText('Winter 2023 Release')).toBeInTheDocument();
+    expect(axios.get).toHaveBeenCalledTimes(1);
+    expect(screen.getByText('CCDI Hub Release 2.10.0')).toBeInTheDocument();
+    expect(screen.getByText('CCDI Hub Minor Release 2.5.1')).toBeInTheDocument();
   });
 
-  it('should render empty container when YAML has no releaseNotesList', async () => {
-    axios.get.mockResolvedValue({ data: { contentTypeUrlList: {} } });
+  it('should render empty container when markdown has no release entries', async () => {
+    axios.get.mockResolvedValue({ data: '' });
 
     const { container } = render(<ReleaseNotePageController />);
 

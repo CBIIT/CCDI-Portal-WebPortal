@@ -3,10 +3,6 @@
  */
 
 export const minimalReleaseNotesPayload = {
-  contentTypeUrlList: {
-    Clinical: 'clinical-icon.png',
-    Genomics: 'genomics-icon.png',
-  },
   releaseNotesList: [
     {
       id: 'release_2024_q1',

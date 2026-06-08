@@ -3,6 +3,7 @@ import env from '../../utils/env'
 import yaml from "js-yaml";
 import axios from "axios";
 import NewsView from "./newsView";
+import { fetchReleaseNotesData } from "../releaseNotePage/parseReleaseNotesMarkdown";
 
 const NEWS_URL = `${env.REACT_APP_STATIC_CONTENT_URL}/newsData.yaml`;
 
@@ -11,20 +12,17 @@ const NewsController = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      let resultData = [];
-      let result = [];
+      let resultData = {};
       try {
         const fileUrl = `${NEWS_URL}?ts=${new Date().getTime()}`;
-        result = await axios.get(
-          fileUrl
-        );
-        resultData = yaml.safeLoad(result.data);
+        const result = await axios.get(fileUrl);
+        resultData = yaml.safeLoad(result.data) || {};
       } catch (_error) {
-        // result = await axios.get(YAMLData);
-        // resultData = yaml.safeLoad(result.data);
+        // resultData stays {}
       }
 
-      setData(resultData);
+      const { releaseNotesList } = await fetchReleaseNotesData();
+      setData({ ...resultData, releaseNotesList });
     };
     fetchData();
   }, []);

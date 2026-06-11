@@ -8,9 +8,7 @@ const baseEvent = {
   slug: 'ccdi-march-2024-community-forum',
   title: 'CCDI March Community Forum',
   displayDate: 'March 18, 2024',
-  tags: ['Presentation', 'Webinar'],
   image: 'ccdimarchcommunityforum-PIC.png',
-  imageCaption: 'March forum caption text.',
   body: '<p>Hello world.</p><ul><li>Item one</li><li>Item two</li></ul>',
   disclaimer: false,
 };
@@ -22,6 +20,10 @@ const renderView = (event = baseEvent) => render(
 );
 
 describe('EventDetailView', () => {
+  beforeEach(() => {
+    window.scrollTo = jest.fn();
+  });
+
   it('renders the breadcrumb with link back to root events page', () => {
     renderView();
 
@@ -30,15 +32,26 @@ describe('EventDetailView', () => {
     expect(screen.getAllByText(baseEvent.title).length).toBeGreaterThan(0);
   });
 
-  it('renders date, title, tags, image, and caption', () => {
+  it('renders date, title, and image', () => {
     renderView();
 
     expect(screen.getByText('March 18, 2024')).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'CCDI March Community Forum' })).toBeInTheDocument();
-    expect(screen.getByText('Presentation')).toBeInTheDocument();
-    expect(screen.getByText('Webinar')).toBeInTheDocument();
     expect(screen.getByAltText('CCDI March Community Forum')).toBeInTheDocument();
-    expect(screen.getByText('March forum caption text.')).toBeInTheDocument();
+  });
+
+  it('scrolls to top when the event slug changes', () => {
+    const { rerender } = renderView();
+
+    expect(window.scrollTo).toHaveBeenCalledWith(0, 0);
+
+    rerender(
+      <MemoryRouter>
+        <EventDetailView event={{ ...baseEvent, slug: 'developing-pediatric-data-standards' }} />
+      </MemoryRouter>,
+    );
+
+    expect(window.scrollTo).toHaveBeenCalledTimes(2);
   });
 
   it('floats a 300x300 image beside the body content', () => {
@@ -62,19 +75,22 @@ describe('EventDetailView', () => {
     });
   });
 
-  it('renders the caption below the image without overlaying it', () => {
+  it('renders the image without a caption', () => {
     renderView();
 
     const figure = screen.getByTestId('event-image-figure');
     const image = screen.getByAltText('CCDI March Community Forum');
-    const caption = screen.getByTestId('event-image-caption');
 
-    expect(caption).toHaveTextContent('March forum caption text.');
-    expect(caption).not.toHaveStyle({ position: 'absolute' });
-    expect(caption).toHaveStyle({ backgroundColor: 'rgb(76, 76, 76)' });
-    expect(figure).toContainElement(caption);
-    expect(image.compareDocumentPosition(caption) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    expect(screen.queryByTestId('event-image-frame')).not.toBeInTheDocument();
+    expect(figure).toContainElement(image);
+    expect(figure.querySelector('figcaption')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('event-image-caption')).not.toBeInTheDocument();
+  });
+
+  it('does not render an image when event.image is missing', () => {
+    renderView({ ...baseEvent, image: null });
+
+    expect(screen.queryByTestId('event-image-figure')).not.toBeInTheDocument();
+    expect(screen.getByTestId('event-body-content')).toBeInTheDocument();
   });
 
   it('indents the bullet list slightly to the right of paragraph text', () => {

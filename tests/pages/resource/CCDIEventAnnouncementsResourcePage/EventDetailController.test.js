@@ -14,6 +14,10 @@ const renderAtRoute = (path) => render(
 );
 
 describe('EventDetailController', () => {
+  beforeEach(() => {
+    window.scrollTo = jest.fn();
+  });
+
   it('renders the EventDetailView for a known slug', () => {
     renderAtRoute('/ccdi-events-announcements/ccdi-march-2024-community-forum');
 

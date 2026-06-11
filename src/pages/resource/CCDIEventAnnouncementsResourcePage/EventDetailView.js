@@ -72,7 +72,7 @@ const Body = styled.div`
     font-weight: 600;
     line-height: 34px;
     letter-spacing: -0.02em;
-    margin: 0 0 14px;
+    margin: 0 0 25px;
   }
 
   .tags {
@@ -187,7 +187,6 @@ const Body = styled.div`
 `;
 
 const EventDetailView = ({ event }) => {
-  const eventTags = event.tags || (event.tag ? [event.tag] : []);
   const eventImageSrc = event.image ? EVENT_IMAGES[event.image] : null;
 
   useEffect(() => {
@@ -206,21 +205,11 @@ const EventDetailView = ({ event }) => {
       <Body>
         <div className="eventDate">{event.displayDate}</div>
         <h1 className="eventTitle">{event.title}</h1>
-        <div className="tags">
-          {eventTags.map((tag) => (
-            <span className="tag" key={tag}>{tag}</span>
-          ))}
-        </div>
 
         <div className="bodyWithImage" data-testid="event-body-with-image">
           {eventImageSrc && (
             <figure className="eventImageFigure" data-testid="event-image-figure">
               <img className="eventImage" src={eventImageSrc} alt={event.title} />
-              {event.imageCaption && (
-                <figcaption className="eventImageCaption" data-testid="event-image-caption">
-                  {event.imageCaption}
-                </figcaption>
-              )}
             </figure>
           )}
 

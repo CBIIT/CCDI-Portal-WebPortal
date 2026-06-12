@@ -286,8 +286,6 @@ footer: 'Abbreviations: ES, exome sequencing; AWS, Amazon Web Services; SNV, sin
 
  Results are returned within 21 days of receipt of all required materials at the COG Biobank hosted by the Biopathology Center (BPC) at Nationwide Children’s Hospital. Once nucleic acid has been received within IGM from the BPC, results will be issued into the portal within 14 days. As each test is resulted, an email will be sent to the clinician and clinical research associate contacts listed on a contact form filled out by the participant’s care team. The email will include a link to the secure web portal where results can be accessed. Participants will receive results from their treating physician.
 
-### What type of results will be reported for exome sequencing ES
-
 ### What type of results will be reported for exome sequencing (ES)?
 
  Somatic disease–germline comparator sequencing is a paired tumor–normal exome analysis which incorporates an exome reagent assaying the coding regions of more than 19,000 protein-coding genes. In the setting of both germline and somatic analysis, only cancer-related genomic variation is reported.
@@ -307,8 +305,6 @@ body: 'A1CF, ABCA4, ABCD1, ABI1, ABL1, ABL2, ABRAXAS1, ACD, ACKR3, ACSL3, ACSL6,
 
 For reference table of variant classification and evidence criteria from clinical interpretation of results, please refer to this document: [MCI_IGM_ASCO_AMP_Table.pdf](https://d2xnga7irezzit.cloudfront.net/ccdi_hub_files/MCI_IGM_ASCO_AMP_Table.pdf)
 
-### What genes are included in the targeted RNA Solid Fusion assay
-
 ### What genes are included in the targeted RNA Solid Fusion assay?
 
  The gene targets below are included in the Solid Tumor fusion assay (v2), which utilizes anchored multiplex PCR (ArcherDx) followed by next-generation sequencing to identify gene fusions or intragenic structural rearrangements, such as internal tandem duplications. Based on the methodology, if one fusion partner is encompassed in the assay, there is a high sensitivity to detect the other partner. For example, the assay targets critical regions within BRAF known to be involved in gene fusion events, which would allow this test to detect a fusion with a common partner such as KIAA1549. This assay would also enable detection of more rare or novel gene partners associated with a BRAF fusion if the tumor harbored such an event.
@@ -319,8 +315,6 @@ Here are the gene targets included in this assay.
 title: 'Gene Targets included in this Assay (as of June 29, 2023)'
 body: 'ABL1, ABL2, ACVR2A, AKT1, AKT2, AKT3, ALK, AR, ARHGAP26, ARHGAP6, AXL, BCOR, BRAF, BRD3, BRD4, C11orf95, CAMTA1, CCNB3, CCND1, CD274, CIC, CREB3L2, CRTC1, CSF1, CSF1R, CTNNB1, DNAJB1, EGF, EGFR, EPC1, ERBB2, ERBB4, ERG, ESR1, ESRRA, ETV1, ETV4, ETV5, ETV6, EWSR1, FGF1, FGFR1, FGFR2, FGFR3, FGR, FOS, FOSB, FOXO1, FOXO4, FOXR2, FUS, GLI1, GRB7, HMGA2, HRAS, HTN3, IDH1, IDH2, IGF1R, INSR, JAK1, JAK2, JAK3, JAZF1, KIT, KRAS, MAML1, MAML2, MAML3, MAP2K1, MAST1, MAST2, MBTD1, MDM2, MEAF6, MET, MGEA5, MKL2, MN1, MSANTD3, MSMB, MUSK, MYB, MYBL1, MYC, MYOD1, NCOA1, NCOA2, NCOA3, NDRG1, NFATC2, NFE2L2, NFIB, NOTCH1, NOTCH2, NR4A3, NRAS, NRG1, NTRK1, NTRK2, NTRK3, NUMBL, NUTM1, PAX3, PAX7, PAX8, PDGFB, PDGFD, PDGFRA, PDGFRB, PHF1, PHKB, PIK3CA, PKN1, PLAG1, PPARG, PRDM10, PRKACA, PRKACB, PRKCA, PRKCB, PRKCD, PRKD1, PRKD2, PRKD3, QKI, RAD51B, RAF1, RELA, RET, ROS1, RSPO2, RSPO3, SETD2, SS18, SS18L1, STAT6, TAF15, TCF12, TERT, TFE3, TFEB, TFG, THADA, TMPRSS2, TTYH1, USP6, VGLL2, WWTR1, YAP1, YWHAE'
 ```
-
-### Will DNA methylation results be returned for all patients
 
 ### Will DNA methylation results be returned for all patients?
 
@@ -369,7 +363,7 @@ Convert COG-formatted JSON files to TSV format with CCDI’s MCI_JSON2TSV tool [
 
 ### Who should I contact with questions about MCI results and data?
 
- #### MCI Results Contacts
+#### MCI Results Contacts
 
  Technical questions about specimen submission should be directed to the Biopathology Center by email at [BPCBank@nationwidechildrens.org](mailto:BPCBank@nationwidechildrens.org).
 
@@ -384,10 +378,10 @@ Questions about results unrelated to a COG treatment trial should go to the foll
 ](mailto:MCIRAR@childrensoncologygroup.org) - Neuroblastoma group: [MCINBL@childrensoncologygroup.org
 ](mailto:MCINBL@childrensoncologygroup.org) - Ewing sarcoma group: [MCIEWS@childrensoncologygroup.org
 ](mailto:MCIEWS@childrensoncologygroup.org)
- #### MCI Data Contact
+#### MCI Data Contact
 
  For questions related to MCI data or accessing the CCDI Data Ecosystem, contact [ncichildhoodcancerdatainitiative@mail.nih.gov](mailto:ncichildhoodcancerdatainitiative@mail.nih.gov).
 
- #### Project:EveryChild Contact
+#### Project:EveryChild Contact
 
  For questions related to Project:EveryChild (APEC14B1), contact [projecteverychild@childrensoncologygroup.org](mailto:projecteverychild@childrensoncologygroup.org).

@@ -22,6 +22,15 @@ import MapView from '../../../components/common/mapGenerator';
 import MapViewMobile from '../components/MapViewMobile';
 import { resolveResponsiveImgCaption } from './parseMciMarkdown';
 
+/** ### subtopics ending with ? use italic question styling instead of uppercase section titles. */
+function isMciQuestionSubtopic(subtopic) {
+  return typeof subtopic === 'string' && subtopic.trim().endsWith('?');
+}
+
+function mciSubtopicTitleClassName(subtopic) {
+  return isMciQuestionSubtopic(subtopic) ? 'mciSubtopicQuestion' : 'mciSubtitle';
+}
+
 function MciSubtopicSegments({ segments, pageData }) {
   if (!Array.isArray(segments) || segments.length === 0) {
     return null;
@@ -405,6 +414,18 @@ const MCIResourceBody = styled.div`
         margin-bottom: 24px;
     }
 
+    .mciSubtopicQuestion {
+        color: #05555C;
+        font-family: Poppins;
+        font-size: 18px;
+        font-style: italic;
+        font-weight: 500;
+        line-height: 26px;
+        letter-spacing: -0.036px;
+        margin-left: 20px;
+        margin-bottom: 24px;
+    }
+
     p {
         font-weight: 500;
         margin-top: 0;
@@ -437,6 +458,18 @@ const MCIResourceBody = styled.div`
         line-height: 26px; /* 144.444% */
         letter-spacing: -0.036px;
         margin-bottom: 24px;
+    }
+
+    .mci-contact-subheading {
+        font-family: Poppins;
+        font-size: 19px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 28px;
+        letter-spacing: -0.04px;
+        margin-bottom: 24px;
+        margin-top: 0;
+        color: #4A4A4A
     }
 
     .mciContentContainer {
@@ -591,7 +624,8 @@ const MCIResourceBody = styled.div`
             }
         }
 
-        .mciSubtitle {
+        .mciSubtitle,
+        .mciSubtopicQuestion {
             margin-left: 0;
         }
 
@@ -746,7 +780,7 @@ const MCIResourceMarkdownView = ({ data }) => {
                                             mci.list.map((mciItem, idx) => {
                                                 return (
                                                     <>
-                                                        <div id={mciItem.id} className='mciSubtitle'>{mciItem.subtopic && mciItem.subtopic}</div>
+                                                        <div id={mciItem.id} className={mciSubtopicTitleClassName(mciItem.subtopic)}>{mciItem.subtopic && mciItem.subtopic}</div>
                                                         <div className='mciContentContainer'>
                                                             <MciSubtopicSegments segments={mciItem.segments} pageData={data} />
                                                             {mciItem.annotation && 

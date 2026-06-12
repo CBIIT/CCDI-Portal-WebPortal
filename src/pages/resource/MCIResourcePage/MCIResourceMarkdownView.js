@@ -461,7 +461,6 @@ const MCIResourceBody = styled.div`
     }
 
     .mci-contact-subheading {
-        color: #000;
         font-family: Poppins;
         font-size: 19px;
         font-style: normal;
@@ -470,6 +469,7 @@ const MCIResourceBody = styled.div`
         letter-spacing: -0.04px;
         margin-bottom: 24px;
         margin-top: 0;
+        color: #4A4A4A
     }
 
     .mciContentContainer {

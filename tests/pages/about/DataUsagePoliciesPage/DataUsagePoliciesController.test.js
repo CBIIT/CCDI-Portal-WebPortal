@@ -1,5 +1,5 @@
 /**
- * Data Usage Policies page — controller loads YAML and conditionally renders view.
+ * Data Usage Policies page — controller loads markdown and conditionally renders view.
  *
  * @see src/pages/about/DataUsagePoliciesPage/DataUsagePoliciesController.js
  */
@@ -13,12 +13,15 @@ jest.mock('../../../../src/utils/env', () => ({
 
 jest.mock('axios');
 
-jest.mock('js-yaml', () => ({
-  safeLoad: jest.fn(() => ({
+jest.mock('../../../../src/pages/about/DataUsagePoliciesPage/parseDataUsagePoliciesMarkdown', () => ({
+  __esModule: true,
+  default: jest.fn(() => ({
+    title: 'CCDI Data Usage Policies & Terms',
     Data_Usage_Policies_Header: '',
-    dataUsagePoliciesIntroText: '<p>Intro</p>',
+    introText: 'Intro',
+    introCallout: '',
     dataUsagePoliciesContent: [
-      { id: 'Policy_1', topic: 'Policy 1', content: '<p>Body</p>' },
+      { id: 'Policy_1', topic: 'Policy 1', markdown: 'Body', blockquoteVariant: 'default' },
     ],
   })),
 }));
@@ -31,7 +34,7 @@ jest.mock('../../../../src/pages/about/DataUsagePoliciesPage/DataUsagePoliciesVi
 
 import React from 'react';
 import axios from 'axios';
-import yaml from 'js-yaml';
+import parseDataUsagePoliciesMarkdown from '../../../../src/pages/about/DataUsagePoliciesPage/parseDataUsagePoliciesMarkdown';
 import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import DataUsagePoliciesController from '../../../../src/pages/about/DataUsagePoliciesPage/DataUsagePoliciesController';
@@ -39,7 +42,7 @@ import DataUsagePoliciesController from '../../../../src/pages/about/DataUsagePo
 describe('DataUsagePoliciesController', () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    axios.get.mockResolvedValue({ data: 'policies-yaml' });
+    axios.get.mockResolvedValue({ data: 'policies-markdown' });
     global.MutationObserver = class {
       constructor() {
         this.observe = jest.fn();
@@ -49,13 +52,13 @@ describe('DataUsagePoliciesController', () => {
     };
   });
 
-  it('should fetch/parse YAML and render DataUsagePoliciesView when content exists', async () => {
+  it('should fetch/parse markdown and render DataUsagePoliciesView when content exists', async () => {
     render(<DataUsagePoliciesController />);
 
     await waitFor(() => {
       expect(axios.get).toHaveBeenCalled();
     });
-    expect(yaml.safeLoad).toHaveBeenCalledWith('policies-yaml');
+    expect(parseDataUsagePoliciesMarkdown).toHaveBeenCalledWith('policies-markdown');
 
     await waitFor(() => {
       expect(screen.getByText('Policy 1')).toBeInTheDocument();
@@ -63,7 +66,7 @@ describe('DataUsagePoliciesController', () => {
   });
 
   it('should render empty div when content key is missing', async () => {
-    yaml.safeLoad.mockReturnValueOnce({});
+    parseDataUsagePoliciesMarkdown.mockReturnValueOnce({});
     const { container } = render(<DataUsagePoliciesController />);
 
     await waitFor(() => {

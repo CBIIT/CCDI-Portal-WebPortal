@@ -1,5 +1,5 @@
 /**
- * About page — controller loads YAML and renders AboutView.
+ * About page — controller loads markdown and renders AboutView.
  *
  * @see src/pages/about/AboutPage/AboutController.js
  */
@@ -13,11 +13,17 @@ jest.mock('../../../../src/utils/env', () => ({
 
 jest.mock('axios');
 
-jest.mock('js-yaml', () => ({
-  safeLoad: jest.fn(() => ({
-    About_Img: '',
+jest.mock('../../../../src/pages/about/AboutPage/parseAboutMarkdown', () => ({
+  __esModule: true,
+  default: jest.fn(() => ({
+    title: 'Childhood Cancer Data Initiative Hub',
+    About_Img: 'https://example.com/about.png',
     aboutData: {
-      upperTitle: 'About Upper',
+      upperTitle: 'Childhood Cancer Data Initiative Hub',
+      upperText: 'Upper markdown',
+      lowerTitle: 'Childhood Cancer Data Initiative',
+      lowerText: 'Lower markdown',
+      aboutText: 'Contact markdown',
     },
   })),
 }));
@@ -30,7 +36,7 @@ jest.mock('../../../../src/pages/about/AboutPage/AboutView', () => (
 
 import React from 'react';
 import axios from 'axios';
-import yaml from 'js-yaml';
+import parseAboutMarkdown from '../../../../src/pages/about/AboutPage/parseAboutMarkdown';
 import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import AboutController from '../../../../src/pages/about/AboutPage/AboutController';
@@ -38,7 +44,8 @@ import AboutController from '../../../../src/pages/about/AboutPage/AboutControll
 describe('AboutController', () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    axios.get.mockResolvedValue({ data: 'about-yaml' });
+    document.title = 'Initial Title';
+    axios.get.mockResolvedValue({ data: 'about-markdown' });
     global.MutationObserver = class {
       constructor() {
         this.observe = jest.fn();
@@ -48,16 +55,26 @@ describe('AboutController', () => {
     };
   });
 
-  it('should fetch and parse YAML then pass data to AboutView', async () => {
+  it('should fetch and parse markdown then pass data to AboutView', async () => {
     render(<AboutController />);
 
     await waitFor(() => {
-      expect(axios.get).toHaveBeenCalled();
+      expect(axios.get).toHaveBeenCalledWith(
+        expect.stringContaining('https://example.test/static/aboutData.md'),
+      );
     });
-    expect(yaml.safeLoad).toHaveBeenCalledWith('about-yaml');
+    expect(parseAboutMarkdown).toHaveBeenCalledWith('about-markdown');
 
     await waitFor(() => {
-      expect(screen.getByText('About Upper')).toBeInTheDocument();
+      expect(screen.getByText('Childhood Cancer Data Initiative Hub')).toBeInTheDocument();
+    });
+  });
+
+  it('should set document title from parsed front matter title', async () => {
+    render(<AboutController />);
+
+    await waitFor(() => {
+      expect(document.title).toBe('Childhood Cancer Data Initiative Hub');
     });
   });
 
@@ -69,5 +86,6 @@ describe('AboutController', () => {
       expect(axios.get).toHaveBeenCalled();
     });
     expect(screen.getByText('no-data')).toBeInTheDocument();
+    expect(document.title).toBe('Initial Title');
   });
 });

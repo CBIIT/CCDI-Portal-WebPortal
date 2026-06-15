@@ -4,19 +4,29 @@
  * @see src/pages/about/AboutPage/AboutView.js
  */
 
+jest.mock('../../../../src/pages/about/AboutPage/AboutMarkdown', () => (
+  function MockAboutMarkdown({ children, linkVariant }) {
+    return (
+      <div data-testid={`about-markdown-${linkVariant || 'default'}`}>
+        {children}
+      </div>
+    );
+  }
+));
+
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import AboutView from '../../../../src/pages/about/AboutPage/AboutView';
 
 const aboutViewData = {
-  About_Img: '',
+  About_Img: 'https://example.com/about.png',
   aboutData: {
     upperTitle: 'Childhood Cancer Data Initiative Hub',
-    upperText: '<p>Upper paragraph content.</p>',
+    upperText: 'Upper paragraph content.',
     lowerTitle: 'Childhood Cancer Data Initiative',
-    lowerText: '<p>Lower paragraph content.</p>',
-    aboutText: '<p>Contact paragraph content.</p>',
+    lowerText: 'Lower paragraph content.',
+    aboutText: 'Contact paragraph content.',
   },
 };
 
@@ -35,6 +45,9 @@ describe('AboutView', () => {
     expect(screen.getByText('Contact Us')).toBeInTheDocument();
     expect(screen.getByText('Contact paragraph content.')).toBeInTheDocument();
     expect(screen.getByAltText('about_img')).toBeInTheDocument();
+    expect(screen.getByTestId('about-markdown-default')).toBeInTheDocument();
+    expect(screen.getAllByTestId('about-markdown-aboutLink').length).toBe(2);
+    expect(screen.getByTestId('about-markdown-aboutContactLink')).toBeInTheDocument();
   });
 
   it('should render shell even when aboutData is missing', () => {

@@ -7,32 +7,25 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
+
+jest.mock('../../../../src/pages/about/DataUsagePoliciesPage/DataUsagePoliciesMarkdown', () => {
+  const React = require('react');
+  return function MockDataUsagePoliciesMarkdown({ children }) {
+    return <div data-testid="policies-markdown">{children}</div>;
+  };
+});
+
 import DataUsagePoliciesView from '../../../../src/pages/about/DataUsagePoliciesPage/DataUsagePoliciesView';
 import {
   setupResourceViewDom,
   teardownResourceViewDom,
-  clickSubtopicNav,
   triggerResourceScroll,
   triggerResourceScrollAbsolute,
   triggerResourceScrollToTop,
 } from '../../resource/shared/resourceViewTestUtils';
+import { defaultDataUsagePoliciesViewData } from '../../../fixtures/about/dataUsagePoliciesMarkdownSamples';
 
-const viewData = {
-  Data_Usage_Policies_Header: '',
-  dataUsagePoliciesIntroText: '<p>Policies intro content.</p>',
-  dataUsagePoliciesContent: [
-    {
-      id: 'Data_Use_Expectations',
-      topic: 'Data Use Expectations',
-      content: '<p>Expectation content.</p>',
-    },
-    {
-      id: 'Data_Disclaimers',
-      subtopic: 'Data Disclaimers',
-      content: '<p>Disclaimer content.</p>',
-    },
-  ],
-};
+const viewData = defaultDataUsagePoliciesViewData;
 
 describe('DataUsagePoliciesView', () => {
   beforeEach(() => {
@@ -56,9 +49,9 @@ describe('DataUsagePoliciesView', () => {
       screen.getByText('CCDI Data Usage Policies & Terms'),
     ).toBeInTheDocument();
     expect(screen.getByText('TOPICS')).toBeInTheDocument();
-    expect(screen.getByText('Policies intro content.')).toBeInTheDocument();
+    expect(screen.getByText('There are policies and terms to keep in mind when using CCDI-managed data.')).toBeInTheDocument();
     expect(screen.getAllByText('Data Use Expectations').length).toBeGreaterThan(0);
-    expect(screen.getByText('Expectation content.')).toBeInTheDocument();
+    expect(screen.getByText('The CCDI Hub allows the public to view and analyze cancer data.')).toBeInTheDocument();
     expect(screen.getAllByText('Data Disclaimers').length).toBeGreaterThan(0);
   });
 
@@ -84,10 +77,12 @@ describe('DataUsagePoliciesView', () => {
     document.getElementById.mockRestore();
   });
 
-  it('should apply selected class when a subtopic nav item is clicked', () => {
+  it('should apply selected class when a nav topic is clicked', () => {
     render(<DataUsagePoliciesView data={viewData} />);
-    const subtopic = clickSubtopicNav('Data Disclaimers');
-    expect(subtopic).toHaveClass('selected');
+    const navItems = document.querySelectorAll('.navTopicItem');
+    const disclaimersNav = Array.from(navItems).find((el) => el.textContent === 'Data Disclaimers');
+    fireEvent.click(disclaimersNav);
+    expect(disclaimersNav).toHaveClass('selected');
   });
 
   it('should scroll to top on mount', () => {

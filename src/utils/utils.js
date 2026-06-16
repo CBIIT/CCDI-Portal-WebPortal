@@ -1,4 +1,4 @@
-import { onClearAllAndSelectFacetValue } from '../pages/dashTemplate/sideBar/BentoFilterUtils';
+import { onClearAllAndSelectFacetValue } from '../pages/inventory/sideBar/BentoFilterUtils';
 
 /*
 * redirect to cases page and filter by study code

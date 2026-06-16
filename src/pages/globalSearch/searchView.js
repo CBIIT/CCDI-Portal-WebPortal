@@ -12,75 +12,12 @@ import {
 import { ParticipantCard, AboutCard, StudiesCard, SamplesCard, FilesCard, ModelsCard } from './Cards';
 import { useLocation } from 'react-router-dom';
 import searchBackground from './assets/globalSearchBackground.png';
-
-/**
- * Determine the correct datafield and offset for the All tab based
- * off of the current offset and the number of results for each datafield
- *
- * @param {string} searchText
- * @param {number} calcOffset
- * @param {number} pageSize
- * @param {boolean} isPublic
- */
-async function getAllQueryField(searchText, calcOffset, pageSize, isPublic) {
-  const searchResp = await queryCountAPI(searchText, isPublic);
-
-  const custodianConfigForTabData = [
-    { countField: 'participant_count', nameField: 'participants' },
-    { countField: 'study_count', nameField: 'studies' },
-    { countField: 'sample_count', nameField: 'samples' },
-    { countField: 'file_count', nameField: 'files' },
-    { countField: 'model_count', nameField: 'model' },
-    { countField: 'about_count', nameField: 'about_page' }
-  ];
-
-  let acc = 0;
-  const mapCountAndName = custodianConfigForTabData.map((obj) => {
-    acc += searchResp[obj.countField];
-    return { ...obj, value: acc };
-  });
-
-  // Create filter for next Query
-  const filter = mapCountAndName.filter((obj) => obj.value > calcOffset)[0];
-  const filterForOffset = mapCountAndName.filter((obj) => obj.value <= calcOffset);
-  const val = filterForOffset.length === 0
-    ? 0
-    : filterForOffset[filterForOffset.length - 1].value;
-
-  if (filter !== undefined) {
-    return {
-      datafieldValue: filter.nameField,
-      offsetValue: (Math.abs(calcOffset - val) / pageSize) * pageSize,
-    };
-  }
-
-  return { datafieldValue: 'participants', offsetValue: 0 };
-}
-
-/**
- * Wrapper for the queryResultAPI function to get the All tab's data
- *
- * @param {string} search the search input value
- * @param {number} offset the offset value
- * @param {number} pageSize the pagination page size
- * @param {boolean} isPublic whether to use a public or private query
- */
-async function queryAllAPI(search, offset, pageSize, isPublic) {
-  const {
-    datafieldValue, offsetValue,
-  } = await getAllQueryField(search, offset, pageSize, isPublic);
-  const input = {
-    input: search,
-    first: pageSize,
-    offset: offsetValue,
-  };
-  let results = await queryResultAPI(datafieldValue, input, isPublic)
-  results = results.map((e) => {
-    return { ...e, type: datafieldValue }
-  })
-
-  return results;
-}
+import { queryAllAPI } from './globalSearchTabQuery';
+import { createGetTabData } from './globalSearchGetTabData';
+import {
+  createOnSearchChange,
+  createGetSearchSuggestions,
+} from './globalSearchSearchBarLogic';
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -121,99 +58,30 @@ function searchView(props) {
     }
   };
 
-  /**
-   * Handle the search box input change event
-   *
-   * @param {string} value
-   * @returns void
-   */
-  const onSearchChange = (value) => {
-    if (!value || typeof value !== 'string') { return; }
-    if (value === searchText) { return; }
-    if (value.trim() === '') { return; }
+  const onSearchChange = createOnSearchChange({
+    getSearchText: () => searchText,
+    setSearchText,
+    setSearchCounts,
+    queryCountAPI,
+    navigate,
+  });
 
-    queryCountAPI(value).then((d) => {
-      setSearchText(value);
-      setSearchCounts(d);
-      navigate(`/sitesearch?keyword=${value}`)
-    });
-  };
+  const getSearchSuggestions = createGetSearchSuggestions({
+    authCheck,
+    queryAutocompleteAPI,
+    SEARCH_PAGE_KEYS,
+    SEARCH_PAGE_DATAFIELDS,
+    setSearchText,
+    setSearchCounts,
+  });
 
-  /**
-   * Perform the search bar auto complete search
-   *
-   * @param {object} _config search bar configuration
-   * @param {string} value search text
-   * @param {string} reason reason for the function call
-   */
-  const getSearchSuggestions = async (_config, value, reason) => {
-    if (!value || typeof value !== 'string') {
-      setSearchText('');
-      setSearchCounts([]);
-      /*if (reason === 'clear') {
-        history.push('/search');
-      }*/
-      return [];
-    }
-    if (value.trim() === '') { return []; }
-
-    const authed = authCheck();
-    const res = await queryAutocompleteAPI(value, !authed);
-    const mapOption = (authed ? SEARCH_PAGE_KEYS.private : SEARCH_PAGE_KEYS.public).map(
-      (key, index) => res[key].map(
-        (id) => (id[authed
-          ? SEARCH_PAGE_DATAFIELDS.private[index]
-          : SEARCH_PAGE_DATAFIELDS.public[index]]),
-      ),
-    );
-    const option = mapOption.length > 0
-      ? mapOption.reduce((acc = [], iterator) => [...acc, ...iterator]) : [];
-
-    return [...[value.toUpperCase()], ...option];
-  };
-
-  /**
-   * Helper function to get the data for a given tab
-   *
-   * @param {string} field the datafield property to search
-   * @param {number} pageSize the pagination page size
-   * @param {number} currentPage the current page offset
-   */
-  const getTabData = async (field, pageSize, currentPage) => {
-    const isPublic = true;
-
-    // Handle the 'All' tab search separately
-    if (field === 'all') {
-      const count = countValues(searchCounts);
-      let data = await queryAllAPI(searchText, (currentPage - 1) * pageSize, pageSize, isPublic);
-
-      // If the current set of data is less than the page size,
-      // we need to query the next datafield for it's data
-      if (data && (data.length !== pageSize)) {
-        let apiQueries = 0;
-        let calcOffset2 = (currentPage - 1) * pageSize + data.length;
-
-        // eslint-disable-next-line max-len
-        while (apiQueries < 5 && data.length !== count && calcOffset2 < count && data.length !== pageSize) {
-          // eslint-disable-next-line no-await-in-loop
-          const data2 = await queryAllAPI(searchText, calcOffset2, pageSize, isPublic);
-          data = [...data, ...data2];
-          calcOffset2 = (currentPage - 1) * pageSize + data.length;
-          apiQueries += 1;
-        }
-      }
-
-      return (data || []).slice(0, pageSize);
-    }
-    // Handle all of the other tabs
-    const input = {
-      input: searchText,
-      first: pageSize,
-      offset: (currentPage - 1) * pageSize,
-    };
-    const data = await queryResultAPI(field, input, isPublic);
-    return (data || []).slice(0, pageSize);
-  };
+  const getTabData = createGetTabData({
+    searchText,
+    searchCounts,
+    queryResultAPI,
+    queryAllAPI,
+    countValues,
+  });
 
   const { SearchBar } = SearchBarGenerator({
     classes,

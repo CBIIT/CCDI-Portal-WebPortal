@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import env from '../../utils/env'
 import yaml from "js-yaml";
 import axios from "axios";
+import { fetchReleaseNotesData } from '../releaseNotePage/parseReleaseNotesMarkdown';
 import { CircularProgress } from '@material-ui/core';
 import { statsData } from '../../bento/landingPageData';
 import LandingView from './landingView';
@@ -30,17 +31,15 @@ const getDashData = () => {
   }
 
   async function getNewsData() {
-    let resultData = [];
-    let result = [];
+    let resultData = {};
     try {
       const fileUrl = `${NEWS_URL}?ts=${new Date().getTime()}`;
-      result = await axios.get(
-        fileUrl
-      );
-      resultData = yaml.safeLoad(result.data);
+      const result = await axios.get(fileUrl);
+      resultData = yaml.safeLoad(result.data) || {};
     } catch (_error) {
     }
-    return resultData
+    const { releaseNotesList } = await fetchReleaseNotesData();
+    return { ...resultData, releaseNotesList };
   }
 
   const [statsDataNew, setStatsDataNew] = useState(statsData);

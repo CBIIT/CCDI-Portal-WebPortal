@@ -8,7 +8,47 @@ import { useNavigate } from 'react-router-dom';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
+import { ReactComponent as DownArrowIcon } from '../../assets/Down_Arrow.svg';
+import { ReactComponent as UpArrowIcon } from '../../assets/Up_Arrow.svg';
 import { studyDownloadLinks, openDoubleLink } from '../../../../bento/studiesData';
+
+const CONSENT_GLOSSARY_URL = 'https://www.ncbi.nlm.nih.gov/gap/docs/submissionguide/#consentgloss';
+
+const bareConsentSegment = (segment) => {
+  const t = String(segment).trim();
+  if (!t) return null;
+  const m = t.match(/^\[(.*)\]$/);
+  const inner = m ? m[1] : t;
+  const v = inner.trim();
+  return v || null;
+};
+
+const parseConsentCodes = (raw) => {
+  if (raw == null) return [];
+  if (Array.isArray(raw)) {
+    return raw
+      .filter((c) => c != null && String(c).trim() !== '')
+      .flatMap((c) => parseConsentCodes(c));
+  }
+  const s = String(raw).trim();
+  if (!s) return [];
+  const oneBracketPair = /^\[([^\]]*)\]$/;
+  const wrapped = s.match(oneBracketPair);
+  if (wrapped) {
+    return wrapped[1]
+      .split(',')
+      .map((part) => bareConsentSegment(part))
+      .filter(Boolean);
+  }
+  const bracketMatches = [...s.matchAll(/\[([^\]]+)\]/g)];
+  if (bracketMatches.length > 0) {
+    return bracketMatches.flatMap((m) => m[1]
+      .split(',')
+      .map((part) => bareConsentSegment(part))
+      .filter(Boolean));
+  }
+  return s.split(',').map((part) => bareConsentSegment(part)).filter(Boolean);
+};
 
 // Utility function to truncate title with start...end format
 const truncateTitle = (title, containerWidth) => {
@@ -63,12 +103,14 @@ const StudiesCard = ({ data = {}, index }) => {
     study_status,
     num_of_participants,
     num_of_files,
+    consent_codes,
   } = data;
 
   const classes = useStyles();
   const navigate = useNavigate();
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [consentCodesExpanded, setConsentCodesExpanded] = useState(false);
   const [containerWidth, setContainerWidth] = useState(0);
   const dropdownRef = useRef(null);
   const cardRef = useRef(null);
@@ -133,6 +175,129 @@ const StudiesCard = ({ data = {}, index }) => {
     </div>
   );
 
+  const renderConsentCodes = () => {
+    const codes = parseConsentCodes(consent_codes);
+
+    const getMaxLength = () => {
+      if (window.innerWidth <= 600) {
+        return 35;
+      }
+      if (window.innerWidth <= 900) {
+        return 55;
+      }
+      if (window.innerWidth <= 1200) {
+        return 75;
+      }
+      return 95;
+    };
+
+    const [maxLength, setMaxLength] = React.useState(getMaxLength());
+
+    React.useEffect(() => {
+      const handleResize = () => {
+        setMaxLength(getMaxLength());
+      };
+
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    if (codes.length === 0) {
+      return { content: null, arrow: null };
+    }
+
+    const joined = codes.join('; ');
+    const shouldTruncate = codes.length > 0 && joined.length > maxLength;
+
+    const getDisplayItems = () => {
+      if (!shouldTruncate || consentCodesExpanded) {
+        return codes.map((c) => ({ text: c, fullCode: c }));
+      }
+      let acc = '';
+      const visible = [];
+      for (let i = 0; i < codes.length; i += 1) {
+        const code = codes[i];
+        const sep = visible.length ? '; ' : '';
+        const next = acc + sep + code;
+        if (next.length > maxLength) {
+          if (visible.length === 0) {
+            return [{ text: `${code.substring(0, maxLength)}...`, fullCode: code }];
+          }
+          break;
+        }
+        visible.push(code);
+        acc = next;
+      }
+      return visible.map((c) => ({ text: c, fullCode: c }));
+    };
+
+    const displayItems = getDisplayItems();
+
+    const showMoreIndicator = shouldTruncate && !consentCodesExpanded && displayItems.length < codes.length;
+
+    const handleToggleExpand = () => {
+      setConsentCodesExpanded(!consentCodesExpanded);
+    };
+
+    return {
+      content: (
+        <div className={cn(classes.keyAndValueRow, classes.consentCodesRow)}>
+          <Typography variant="h6" className={classes.key} component="div">
+            CONSENT CODES:
+          </Typography>
+          <div className={classes.consentCodesContainer}>
+            <div className={classes.treatmentTextContainer}>
+              <span
+                className={shouldTruncate ? classes.clickableText : undefined}
+                style={{ display: 'inline', paddingLeft: 0 }}
+                onClick={shouldTruncate ? handleToggleExpand : undefined}
+                onKeyDown={
+                  shouldTruncate
+                    ? (e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        handleToggleExpand();
+                      }
+                    }
+                    : undefined
+                }
+                role={shouldTruncate ? 'button' : undefined}
+                tabIndex={shouldTruncate ? 0 : undefined}
+              >
+                {displayItems.map((item, i) => (
+                  <React.Fragment key={`${item.fullCode}-${i}`}>
+                    {i > 0 ? '; ' : ''}
+                    <span className={classes.consentCodeItem}>
+                      <a
+                        href={CONSENT_GLOSSARY_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={classes.consentCodeLink}
+                        onClick={(e) => e.stopPropagation()}
+                        aria-label={`${item.fullCode} (opens dbGaP consent glossary in a new tab)`}
+                      >
+                        {item.text}
+                      </a>
+                      <OpenInNewIcon className={classes.consentExternalIcon} fontSize="small" aria-hidden />
+                    </span>
+                  </React.Fragment>
+                ))}
+                {showMoreIndicator ? '...' : null}
+              </span>
+            </div>
+          </div>
+        </div>
+      ),
+      arrow: shouldTruncate && codes.length > 0 ? (
+        <span
+          className={classes.expandToggle}
+          onClick={handleToggleExpand}
+        >
+          {consentCodesExpanded ? <UpArrowIcon className={classes.expandIcon} /> : <DownArrowIcon className={classes.expandIcon} />}
+        </span>
+      ) : null,
+    };
+  };
 
   return (
     <div className={classes.card} ref={cardRef}>
@@ -239,6 +404,17 @@ const StudiesCard = ({ data = {}, index }) => {
             {renderInfo('Number of Files:', num_of_files)}
           </div>
         </div>
+
+        {(() => {
+          const consentBlock = renderConsentCodes();
+          if (!consentBlock.content) return null;
+          return (
+            <div className={classes.propertyLine}>
+              {consentBlock.content}
+              {consentBlock.arrow}
+            </div>
+          );
+        })()}
       </div>
     </div>
   );

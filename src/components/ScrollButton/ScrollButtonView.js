@@ -39,6 +39,7 @@ const ScrollButton = () => {
 
     useEffect(() => {
         window.addEventListener('scroll', toggleVisible);
+        return () => window.removeEventListener('scroll', toggleVisible);
     }, []);
 
     return (

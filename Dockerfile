@@ -13,9 +13,9 @@ RUN NODE_OPTIONS="--max-old-space-size=4096" npm run build --silent
 
 # FROM nginx:1.23.3-alpine
 #FROM nginx:1.25.5
-FROM nginx:1.26.3-alpine-slim AS fnl_base_image
+FROM nginx:1.27.5-alpine-slim AS fnl_base_image
 RUN apk add --no-cache ca-certificates && update-ca-certificates
-RUN apk update && apk add --no-cache --upgrade openssl busybox
+RUN apk --no-cache upgrade && apk add --no-cache --upgrade openssl busybox 'zlib>=1.3.2-r0' 'musl>=1.2.5-r3'
 
 
 COPY --from=build /usr/src/app/dist /usr/share/nginx/html
@@ -23,9 +23,9 @@ COPY --from=build /usr/src/app/config/inject.template.js /usr/share/nginx/html/i
 COPY --from=build /usr/src/app/config/nginx.conf /etc/nginx/conf.d/configfile.template
 COPY --from=build /usr/src/app/config/entrypoint.sh /
 
-ENV PORT 80
+ENV PORT=80
 
-ENV HOST 0.0.0.0
+ENV HOST=0.0.0.0
 
 RUN sh -c "envsubst '\$PORT'  < /etc/nginx/conf.d/configfile.template > /etc/nginx/conf.d/default.conf"
 

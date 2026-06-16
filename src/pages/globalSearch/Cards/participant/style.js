@@ -293,6 +293,61 @@ const useStyles = makeStyles((theme) => {
       width: '100%',
       minWidth: 0,
     },
+    /* Baseline-align label with value text (default keyAndValueRow uses flex-start). */
+    consentCodesRow: {
+      [mdBreakpoint]: {
+        alignItems: 'baseline',
+      },
+    },
+    consentCodesContainer: {
+      paddingLeft: '15px',
+      width: '100%',
+      paddingRight: '30px',
+      lineHeight: '18px',
+      flex: 1,
+      minWidth: 0,
+      [mdBreakpoint]: {
+        paddingLeft: '15px',
+        paddingRight: '35px',
+      },
+      '@media (max-width: 600px)': {
+        paddingLeft: '8px',
+        paddingRight: '28px',
+      },
+    },
+    consentCodeItem: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: '2px',
+      verticalAlign: 'baseline',
+    },
+    /* Same visual language as Study ID link (titleLink); preserve consent code casing. */
+    consentCodeLink: {
+      fontFamily: 'Inter',
+      fontSize: '14.25px',
+      fontWeight: '600',
+      lineHeight: '18px',
+      letterSpacing: '2.25%',
+      textAlign: 'left',
+      margin: '0',
+      padding: '0px',
+      textTransform: 'none',
+      color: 'blue',
+      whiteSpace: 'normal',
+      textDecoration: 'underline',
+      backgroundColor: 'transparent',
+      '&:hover': {
+        textDecoration: 'underline',
+        backgroundColor: 'transparent',
+      },
+    },
+    consentExternalIcon: {
+      fontSize: '14px',
+      color: 'blue',
+      flexShrink: 0,
+      display: 'inline-block',
+      verticalAlign: 'middle',
+    },
     clickableText: {
       cursor: 'pointer',
       '&:hover': {

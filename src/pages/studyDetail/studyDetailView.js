@@ -36,7 +36,8 @@ const StudiesDetailContainer = styled.div`
         width: 100%;
         background-image: url(${headerImg});
         background-repeat:no-repeat;
-        background-position:center; 
+        background-position:center;
+        background-size: 100% auto;
     }
 
     .resourceHeaderText {

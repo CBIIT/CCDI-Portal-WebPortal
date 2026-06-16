@@ -104,13 +104,14 @@ const InventoryCover = ({
     useEffect(() => {
 
         // If there are no query parameters and the user is returning to a page,
-        if (query.size === 0 && return_2_page === true) {
+        // (Use keys().length — URLSearchParams#size is not available in all Jest/jsdom/Node versions.)
+        if ([...query.keys()].length === 0 && return_2_page === true) {
             navigate(`/explore${return_query_url}`);
             return;
         }
 
         //Check if the user is returning to the same page from the main menu
-        if (query.size === 0 && return_2_page === false && return_query_url !== '' && navigationType === 'main_menu') {
+        if ([...query.keys()].length === 0 && return_2_page === false && return_query_url !== '' && navigationType === 'main_menu') {
             navigate(`/explore${return_query_url}`);
             return;
         }

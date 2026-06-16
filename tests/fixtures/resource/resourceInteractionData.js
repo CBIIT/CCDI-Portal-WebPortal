@@ -15,14 +15,11 @@ import { defaultPmtlViewData } from './pmtlViewProps';
 
 export const multiTopicFederationData = {
   ...minimalFederationResourceData,
+  navTitles: ['Topic A', 'Data Access', 'Topic B'],
   federationContent: [
-    { id: 'fed_a', topic: 'Topic A', content: '<p>Section A</p>' },
-    { id: 'fed_b', topic: 'Topic B', content: '<p>Section B</p>' },
-    {
-      id: 'Data_Access_block',
-      topic: 'Data Access',
-      content: '<p>Access details</p>',
-    },
+    { id: 'fed_a', topic: 'Topic A', content: 'Section A' },
+    { id: 'Data_Access', topic: 'Data Access', content: 'Access details' },
+    { id: 'fed_b', topic: 'Topic B', content: 'Section B' },
   ],
   CCDI_Federation_Data_Access: '/test-federation-infographic.png',
 };
@@ -37,16 +34,17 @@ export const multiTopicCcdiEventsData = {
 
 export const multiTopicToolsData = {
   ...minimalToolsResourceData,
+  navTitles: ['Tools A', 'Sub A', 'Tools B', 'Sub B'],
   toolsContent: [
     {
       id: 'tools_a',
       topic: 'Tools A',
-      list: [{ id: 'sub_a', subtopic: 'Sub A', content: '<p>Sub A body</p>' }],
+      list: [{ id: 'sub_a', subtopic: 'Sub A', content: 'Sub A body' }],
     },
     {
       id: 'tools_b',
       topic: 'Tools B',
-      list: [{ id: 'sub_b', subtopic: 'Sub B', content: '<p>Sub B body</p>' }],
+      list: [{ id: 'sub_b', subtopic: 'Sub B', content: 'Sub B body' }],
     },
   ],
 };

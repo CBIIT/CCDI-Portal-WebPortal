@@ -1,10 +1,16 @@
 /**
- * Unit tests for FederationResourceView (`resourceData.yaml` — federation fields as static props).
+ * Unit tests for FederationResourceView (federationData.md parsed props).
  *
  * Structure follows tests/TEST_STRUCTURE.md:
  * Rendering → feature sections → Side effects → Edge cases.
  * Fixtures: tests/fixtures/resource/resourceDataViewProps.js (no network).
  */
+
+jest.mock('../../../../src/pages/resource/FederationResourcePage/FederationMarkdown', () => (
+  function MockFederationMarkdown({ children }) {
+    return <div data-testid="federation-markdown">{children}</div>;
+  }
+));
 
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';

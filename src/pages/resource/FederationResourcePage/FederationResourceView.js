@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, createRef } from 'react';
 import styled from 'styled-components';
-import ReactHtmlParser from 'html-react-parser';
+import FederationMarkdown from './FederationMarkdown';
+import { buildFederationNavItems } from './parseFederationMarkdown';
 import headerImg from '../../../assets/resources/Federation_Header.png';
 import exportIcon from '../../../assets/resources/Explore_Icon.svg';
 import closeIcon from '../../../assets/icons/Close_Icon.svg';
@@ -418,6 +419,7 @@ const FederationResourceView = ({data}) => {
     const [stickyNavStyle, setStickyNavStyle] = useState('navList');
     const sectionList = useRef([]);
     const federationContent = data.federationContent;
+    const navItems = buildFederationNavItems(data.navTitles, federationContent);
     if (federationContent) {
         sectionList.current = federationContent.map((element, i) => {
             return sectionList.current[i] || createRef()
@@ -493,23 +495,25 @@ const FederationResourceView = ({data}) => {
                     <div className={stickyNavStyle} id='leftNav'>
                         <div className='navTitle'>TOPICS</div>
                         {
-                            federationContent && federationContent.map((federationItem, topicid) => {
-                                const topickey = `topic_${topicid}`;
-                                if (federationItem.topic) {
-                                    return (
-                                        <div name={federationItem.id} className={selectedNavTitle === federationItem.id ? 'navTopicItem selected' : 'navTopicItem'} key={topickey} onClick={handleClickEvent}>{federationItem.topic}</div>
-                                    )
-                                }
+                            navItems.map((navItem, navIdx) => {
+                                const navKey = `nav_${navIdx}`;
+                                const className = selectedNavTitle === navItem.id
+                                    ? 'navTopicItem selected'
+                                    : 'navTopicItem';
                                 return (
-                                    <div name={federationItem.id} className={selectedNavTitle === federationItem.id ? 'navTopicItem selected subtitle' : 'navTopicItem subtitle'} key={topickey} onClick={handleClickEvent}>{federationItem.subtopic}</div>
-                                )
+                                    <div name={navItem.id} className={className} key={navKey} onClick={handleClickEvent}>{navItem.label}</div>
+                                );
                             })
                         }
                     </div>
                 </div>
                 <div className='contentSection'>
                     <div className='contentList'>
-                        {data.federationIntroText && <div className='introContainer'>{ReactHtmlParser(data.federationIntroText)}</div>}
+                        {data.federationIntroText && (
+                            <div className='introContainer'>
+                                <FederationMarkdown>{data.federationIntroText}</FederationMarkdown>
+                            </div>
+                        )}
                         {
                             federationContent && federationContent.map((federationItem, mciid) => {
                                 const mcikey = `federation_${mciid}`;
@@ -519,13 +523,16 @@ const FederationResourceView = ({data}) => {
                                         <div id={federationItem.id} name={mciid} className='mciTitleMobile sectionCollapse' onClick={handleCollapseSection}>{federationItem.topic && federationItem.topic}</div>
                                         <div className="mciSection mobileCollapse" ref={sectionList.current[mciid]}>
                                             <div className='mciContentContainer'>
-                                                {federationItem.content && ReactHtmlParser(federationItem.content)}
-                                                
-                                                {federationItem.id && federationItem.id.includes('Data_Access') && 
+                                                {federationItem.content && (
+                                                    <FederationMarkdown>{federationItem.content}</FederationMarkdown>
+                                                )}
+
+                                                {federationItem.id && federationItem.id.includes('Data_Access')
+                                                && data.CCDI_Federation_Data_Access && (
                                                 <div style={{ justifyContent: 'center', display: 'flex'}}>
                                                     <img className="federationImg" src={data.CCDI_Federation_Data_Access} alt="Infographic displaying the CCDI Federation Service ecosystem. Users can directly access individual source nodes (KidsFirst, PCDC, St. Jude Cloud, Treehouse) or utilize the aggregation capabilities of the Federation Service to query data across all nodes simultaneously."/>
                                                 </div>
-                                                }
+                                                )}
                                             </div>
                                             {federationItem.content && <div style={{height: '40px'}} />}
                                         </div>

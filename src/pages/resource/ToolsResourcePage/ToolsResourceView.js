@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, createRef } from 'react';
 import styled from 'styled-components';
-import ReactHtmlParser from 'html-react-parser';
+import ToolsMarkdown from './ToolsMarkdown';
+import { buildToolsNavItems } from './parseToolsMarkdown';
 import headerImg from '../../../assets/about/Data_Usage_Policies_Header.png';
 import exportIconBlue from '../../../assets/icons/Export_Icon.svg';
 import closeIcon from '../../../assets/icons/Close_Icon.svg';
@@ -360,8 +361,8 @@ const ToolsResourceView = ({data}) => {
     const [selectedNavTitle, setSelectedNavTitle] = useState('');
     const [stickyNavStyle, setStickyNavStyle] = useState('navList');
     const toolsContent = data.toolsContent;
+    const navItems = buildToolsNavItems(data.navTitles, toolsContent);
     const sectionList = useRef([]);
-    // Check if any item has a list property to determine structure type
     const hasNestedStructure = toolsContent && toolsContent.some(item => item.list && Array.isArray(item.list));
     sectionList.current = toolsContent.map((element, i) => {
         return sectionList.current[i] || createRef()
@@ -428,42 +429,25 @@ const ToolsResourceView = ({data}) => {
                     <div className={stickyNavStyle} id='leftNav'>
                         <div className='navTitle'>TOPICS</div>
                         {
-                            toolsContent && toolsContent.map((toolsItem, topicid) => {
-                                const topickey = `topic_${topicid}`;
-                                // Handle nested structure (with list)
-                                if (hasNestedStructure && toolsItem.list && Array.isArray(toolsItem.list)) {
-                                    return (
-                                        <>
-                                            <div name={toolsItem.id} className={selectedNavTitle === toolsItem.id ? 'navTopicItem selected' : 'navTopicItem'} key={topickey} onClick={handleClickEvent}>{toolsItem.topic}</div>
-                                            <div>
-                                                {
-                                                    toolsItem.list.map((listItem, idx) => {
-                                                        const listItemKey = `listItem_${topicid}_${idx}`;
-                                                        return (
-                                                            <div name={listItem.id} className={selectedNavTitle === listItem.id ? 'navTopicItem selected subtitle' : 'navTopicItem subtitle'} key={listItemKey} onClick={handleClickEvent}>{listItem.subtopic}</div>
-                                                        )
-                                                    })
-                                                }
-                                            </div>
-                                        </>
-                                    )
-                                }
-                                // Handle flat structure (without list)
-                                if (toolsItem.topic) {
-                                    return (
-                                        <div name={toolsItem.id} className={selectedNavTitle === toolsItem.id ? 'navTopicItem selected' : 'navTopicItem'} key={topickey} onClick={handleClickEvent}>{toolsItem.topic}</div>
-                                    )
-                                }
+                            navItems.map((navItem, navIdx) => {
+                                const navKey = `nav_${navIdx}`;
+                                const className = navItem.isSubtitle
+                                    ? (selectedNavTitle === navItem.id ? 'navTopicItem selected subtitle' : 'navTopicItem subtitle')
+                                    : (selectedNavTitle === navItem.id ? 'navTopicItem selected' : 'navTopicItem');
                                 return (
-                                    <div name={toolsItem.id} className={selectedNavTitle === toolsItem.id ? 'navTopicItem selected subtitle' : 'navTopicItem subtitle'} key={topickey} onClick={handleClickEvent}>{toolsItem.subtopic}</div>
-                                )
+                                    <div name={navItem.id} className={className} key={navKey} onClick={handleClickEvent}>{navItem.label}</div>
+                                );
                             })
                         }
                     </div>
                 </div>
                 <div className='contentSection'>
                     <div className='contentList'>
-                    {data.toolsIntroText && <div className='introContainer'>{ReactHtmlParser(data.toolsIntroText)}</div>}
+                    {data.toolsIntroText && (
+                        <div className='introContainer'>
+                            <ToolsMarkdown>{data.toolsIntroText}</ToolsMarkdown>
+                        </div>
+                    )}
                         {
                             toolsContent && toolsContent.map((toolsItem, toolid) => {
                                 const toolkey = `federation_${toolid}`;
@@ -476,14 +460,15 @@ const ToolsResourceView = ({data}) => {
                                             <div className="mciSection mobileCollapse" ref={sectionList.current[toolid]}>
                                                 {
                                                     toolsItem.list.map((listItem, idx) => {
+                                                        const listItemKey = `listItem_${toolid}_${idx}`;
                                                         return (
-                                                            <>
+                                                            <div key={listItemKey}>
                                                                 <div id={listItem.id} className='mciSubtitle'>{listItem.subtopic && listItem.subtopic}</div>
                                                                 <div className='mciContentContainer nestedContent'>
-                                                                    {listItem.content && ReactHtmlParser(listItem.content)}
+                                                                    {listItem.content && <ToolsMarkdown>{listItem.content}</ToolsMarkdown>}
                                                                 </div>
                                                                 {listItem.content && <div style={{height: '40px'}} />}
-                                                            </>
+                                                            </div>
                                                         )
                                                     })
                                                 }
@@ -499,7 +484,7 @@ const ToolsResourceView = ({data}) => {
                                         <div id={toolsItem.id} name={toolid} className='mciTitleMobile sectionCollapse' onClick={handleCollapseSection}>{toolsItem.topic && toolsItem.topic}</div>
                                         <div className="mciSection mobileCollapse" ref={sectionList.current[toolid]}>
                                             <div className='mciContentContainer'>
-                                                {toolsItem.content && ReactHtmlParser(toolsItem.content)}
+                                                {toolsItem.content && <ToolsMarkdown>{toolsItem.content}</ToolsMarkdown>}
                                             </div>
                                             {toolsItem.content && <div style={{height: '40px'}} />}
                                         </div>

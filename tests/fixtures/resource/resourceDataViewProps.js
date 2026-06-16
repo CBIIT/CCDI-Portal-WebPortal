@@ -5,7 +5,10 @@
 
 /** ToolsResourceController requires `toolsContent` to render the view. */
 export const minimalToolsResourceData = {
-  toolsIntroText: '<p>Tools intro for unit test.</p>',
+  title: 'CCDI Hub Tools',
+  Tools_Header: 'https://example.com/tools-header.png',
+  toolsIntroText: 'Tools intro for unit test.',
+  navTitles: ['Tools Topic One', 'Tool Subsection A'],
   toolsContent: [
     {
       id: 'tools_section_one',
@@ -14,7 +17,7 @@ export const minimalToolsResourceData = {
         {
           id: 'tools_sub_a',
           subtopic: 'Tool Subsection A',
-          content: '<p>Tool section body for testing.</p>',
+          content: 'Tool section body for testing.',
         },
       ],
     },
@@ -22,12 +25,16 @@ export const minimalToolsResourceData = {
 };
 
 export const minimalFederationResourceData = {
-  federationIntroText: '<p>Federation intro for unit test.</p>',
+  title: 'CCDI Data Federation Resource',
+  Federation_Header: 'https://example.com/federation-header.png',
+  CCDI_Federation_Data_Access: 'https://example.com/federation-diagram.png',
+  federationIntroText: 'Federation intro for unit test.',
+  navTitles: ['Federation Overview'],
   federationContent: [
     {
       id: 'fed_overview',
       topic: 'Federation Overview',
-      content: '<p>Federation body content.</p>',
+      content: 'Federation body content.',
     },
   ],
 };

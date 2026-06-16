@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import aboutImg from '../../../assets/about/About_Img_Large.png';
 import exportIcon from '../../../assets/about/Export_Icon.svg';
 import exportBlackIcon from '../../../assets/landing/Export_Icon_Black.svg';
-import ReactHtmlParser from 'html-react-parser';
+import AboutMarkdown from './AboutMarkdown';
 
 const AboutContainer = styled.div`
   margin: 0 auto;
@@ -203,24 +203,40 @@ const AboutView = ({data}) => {
         <div className='upperContainer'>
           <div className='upperContentContainer'>
             {aboutData && <div className='aboutSubtitle'>{aboutData.upperTitle}</div>}
-            {aboutData && <div className='textParagraph'>{ReactHtmlParser(aboutData.upperText)}</div>}
+            {aboutData && (
+              <div className='textParagraph'>
+                <AboutMarkdown>{aboutData.upperText}</AboutMarkdown>
+              </div>
+            )}
             <div className='secondParagraph'>
               {aboutData && <div className='aboutSubtitle'>{aboutData.lowerTitle}</div>}
-              {aboutData && <div className='textParagraph'>{ReactHtmlParser(aboutData.lowerText)}</div>}
+              {aboutData && (
+                <div className='textParagraph'>
+                  <AboutMarkdown linkVariant="aboutLink">{aboutData.lowerText}</AboutMarkdown>
+                </div>
+              )}
             </div>
           </div>
           <img className='upperImg' src={data.About_Img || aboutImg} alt="about_img" />
         </div>
         <div className='lowerContainer'>
           {aboutData && <div className='aboutSubtitle'>{aboutData.lowerTitle}</div>}
-          {aboutData && <div className='textParagraph'>{ReactHtmlParser(aboutData.lowerText)}</div>}
+          {aboutData && (
+            <div className='textParagraph'>
+              <AboutMarkdown linkVariant="aboutLink">{aboutData.lowerText}</AboutMarkdown>
+            </div>
+          )}
         </div>
       </div>
       <div className='aboutContactUs'>
         <div className='aboutContactUsContainer'>
           <div className='aboutContactUsContent'>
             <div className='aboutContactUsHeader'>Contact Us</div>
-            {aboutData && <div>{ReactHtmlParser(aboutData.aboutText)}</div>}
+            {aboutData && (
+              <div>
+                <AboutMarkdown linkVariant="aboutContactLink">{aboutData.aboutText}</AboutMarkdown>
+              </div>
+            )}
           </div>
         </div>
       </div>

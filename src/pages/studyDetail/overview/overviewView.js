@@ -1,5 +1,8 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import Tooltip from '@material-ui/core/Tooltip';
+import OpenInNewIcon from '@material-ui/icons/OpenInNew';
+import Help from '@material-ui/icons/Help';
 import exportIcon from '../../../assets/studies/exportIcon.svg';
 import manifestIcon from '../../../assets/studies/manifestIcon.svg';
 import { studyDownloadLinks, studycBioPortalLinks, studyClinicalDataLinks } from '../../../bento/studiesData';
@@ -7,8 +10,49 @@ import TabsView from './tabs/TabsView';
 import ModalView from './modal/ModalView';
 import { styles } from './overviewStyle';
 
+const CONSENT_GLOSSARY_URL = 'https://www.ncbi.nlm.nih.gov/gap/docs/submissionguide/#consentgloss';
+
+const CONSENT_CODES_TOOLTIP_TEXT = 'Consent codes describe the permitted uses and restrictions for this data. The codes below link to dbGaP and include details on General access (GRU) and different types of request-only access (e.g. HMB–IRB–NPU, MDS, etc...).';
+
+const bareConsentSegment = (segment) => {
+    const t = String(segment).trim();
+    if (!t) return null;
+    const m = t.match(/^\[(.*)\]$/);
+    const inner = m ? m[1] : t;
+    const v = inner.trim();
+    return v || null;
+};
+
+const parseConsentCodes = (raw) => {
+    if (raw == null) return [];
+    if (Array.isArray(raw)) {
+        return raw
+            .filter((c) => c != null && String(c).trim() !== '')
+            .flatMap((c) => parseConsentCodes(c));
+    }
+    const s = String(raw).trim();
+    if (!s) return [];
+    const oneBracketPair = /^\[([^\]]*)\]$/;
+    const wrapped = s.match(oneBracketPair);
+    if (wrapped) {
+        return wrapped[1]
+            .split(',')
+            .map((part) => bareConsentSegment(part))
+            .filter(Boolean);
+    }
+    const bracketMatches = [...s.matchAll(/\[([^\]]+)\]/g)];
+    if (bracketMatches.length > 0) {
+        return bracketMatches.flatMap((m) => m[1]
+            .split(',')
+            .map((part) => bareConsentSegment(part))
+            .filter(Boolean));
+    }
+    return s.split(',').map((part) => bareConsentSegment(part)).filter(Boolean);
+};
+
 const OverviewView = ({ data, classes }) => {
-    console.log(data);
+    const consentCodes = parseConsentCodes(data.consent_codes);
+
     return (
         <div className={classes.container}>
             {/* Left Container for Study Details */}
@@ -25,6 +69,52 @@ const OverviewView = ({ data, classes }) => {
                 <div className={classes.studyItem}>
                     <div className={classes.studyItemTitle}>STUDY NAME</div>
                     <div className={classes.studyItemContent}>{data.study_name}</div>
+                </div>
+                <div className={classes.studyItem}>
+                    <div className={classes.studyItemTitle}>ACCESS DATA</div>
+                    <div className={classes.studyItemContent}>
+                        <div className={classes.consentCodesBox}>
+                            <div className={classes.consentCodesLabelRow}>
+                                <span className={classes.consentCodesInnerLabel}>Consent Codes:</span>
+                                <Tooltip
+                                    interactive
+                                    placement="top"
+                                    enterTouchDelay={0}
+                                    classes={{
+                                        tooltip: classes.consentCodesTooltip,
+                                        tooltipPlacementTop: classes.consentCodesTooltipPlacementTop,
+                                        tooltipPlacementBottom: classes.consentCodesTooltipPlacementBottom,
+                                    }}
+                                    title={(
+                                        <div className={classes.consentTooltipBody}>
+                                            {CONSENT_CODES_TOOLTIP_TEXT}
+                                            <span className={classes.consentTooltipCaret} aria-hidden />
+                                        </div>
+                                    )}
+                                >
+                                    <Help className={classes.consentHelpIcon} aria-label="About consent codes" />
+                                </Tooltip>
+                            </div>
+                            {consentCodes.length === 0 ? (
+                                <div>Not available</div>
+                            ) : (
+                                consentCodes.map((code, idx) => (
+                                    <div key={`${code}-${idx}`} className={classes.consentCodeLine}>
+                                        <a
+                                            href={CONSENT_GLOSSARY_URL}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className={classes.consentCodeLink}
+                                            aria-label={`${code} (opens dbGaP consent glossary in a new tab)`}
+                                        >
+                                            {code}
+                                        </a>
+                                        <OpenInNewIcon className={classes.consentExternalIcon} aria-hidden />
+                                    </div>
+                                ))
+                            )}
+                        </div>
+                    </div>
                 </div>
                 <div className={classes.studyItem}>
                     <div className={classes.studyItemTitle}>Study Description</div>

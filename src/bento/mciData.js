@@ -38,7 +38,8 @@ export const MCIContent = [
                 //     data: [{name: 'Central Nervous System', value: 3756}, {name: 'Soft Tissue Sarcoma', value: 1167}, {name: 'Rare Tumors', value: 554}, {name: 'Neuroblastoma', value: 331}],
                 // },
                 map: {
-                    data: [ 
+                    asOfDate: 'February 10, 2025',
+                    data: [
                         [110, 540, "ALASKA", 2], //AK
                         [638, 420, "ALABAMA", 122], //AL
                         [550, 390, "ARKANSAS", 16], //AR

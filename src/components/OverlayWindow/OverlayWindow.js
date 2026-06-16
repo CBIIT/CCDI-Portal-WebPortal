@@ -16,7 +16,7 @@ import FiberManualRecord from '@material-ui/icons/FiberManualRecord';
 // import { useSelector } from 'react-redux';
 import * as text from './OverlayText.json';
 import DialogThemeProvider from './OverlayThemConfig';
-import { setOverLayWindow } from '../../pages/search/store/sitesearchReducer';
+import { setOverLayWindow } from '../../pages/globalSearch/store/sitesearchReducer';
 
 const OverlayWindow = () => {
   const [open, setOpen] = useState(false);

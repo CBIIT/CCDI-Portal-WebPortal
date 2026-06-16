@@ -1,0 +1,249 @@
+/**
+ * Explore milestone 2.4 — “Clear all filtered selections” (sidebar): navigates to a
+ * cleared query string, resets local-find (`resetAllData`), restores default unknown-ages
+ * dispatches, and `inventoryCover` re-runs the dashboard query without facet variables.
+ *
+ * @see src/pages/inventory/inventoryView.js (`CustomClearAllFiltersBtn`, `id="button_sidebar_clear_all_filters"`)
+ */
+
+jest.mock('../../../src/utils/env', () => ({
+  __esModule: true,
+  default: {
+    REACT_APP_BACKEND_API: 'http://localhost:4000/graphql',
+    REACT_APP_INTEROP_SERVICE_API: 'http://localhost:5000/',
+  },
+}));
+
+jest.mock('../../../src/utils/graphqlClient', () => ({
+  __esModule: true,
+  default: {
+    query: jest.fn(() => Promise.resolve({ data: {} })),
+    mutate: jest.fn(),
+  },
+}));
+
+jest.mock('@apollo/client', () => {
+  const actual = jest.requireActual('@apollo/client');
+  return {
+    ...actual,
+    useApolloClient: jest.fn(),
+  };
+});
+
+jest.mock('../../../src/pages/inventory/widget/WidgetView', () => ({
+  __esModule: true,
+  default: function MockWidgetView() {
+    return null;
+  },
+}));
+
+jest.mock('../../../src/pages/inventory/tabs/TabPanel', () => ({
+  __esModule: true,
+  default: function TabPanel() {
+    const React = require('react');
+    return React.createElement('div', { 'data-testid': 'tab-panel' });
+  },
+}));
+
+jest.mock('../../../src/components/CohortSelectorState/CohortStateContext', () => {
+  const React = require('react');
+  const { initialState } = require('../../../src/components/CohortSelectorState/store/reducer');
+  const cohortDispatch = jest.fn();
+  const CohortStateContext = React.createContext({ state: initialState, dispatch: cohortDispatch });
+  return {
+    CohortStateContext,
+    CohortStateProvider: ({ children }) => (
+      React.createElement(CohortStateContext.Provider, {
+        value: { state: initialState, dispatch: cohortDispatch },
+      }, children)
+    ),
+  };
+});
+
+jest.mock('../../../src/pages/inventory/cohortModal/cohortModalGenerator', () => ({
+  __esModule: true,
+  default: () => ({
+    CohortModal: function CohortModal() {
+      return null;
+    },
+  }),
+}));
+
+jest.mock('../../../src/pages/inventory/cohortModal/CohortModalContext', () => {
+  const React = require('react');
+  const CohortModalContext = React.createContext();
+  const value = {
+    showCohortModal: false,
+    setShowCohortModal: jest.fn(),
+    warningMessage: '',
+    setWarningMessage: jest.fn(),
+    currentCohortChanges: null,
+    setCurrentCohortChanges: jest.fn(),
+  };
+  return {
+    CohortModalContext,
+    CohortModalProvider: ({ children }) => (
+      React.createElement(CohortModalContext.Provider, { value }, children)
+    ),
+  };
+});
+
+import React from 'react';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { createMemoryRouter, RouterProvider } from 'react-router-dom';
+import '@testing-library/jest-dom';
+import { useApolloClient } from '@apollo/client';
+
+import store from '../../../src/store';
+import Inventory from '../../../src/pages/inventory/inventoryController';
+import {
+  exploreDashboardWithSexAtBirthFacets,
+  exploreDashboardFemaleOnly,
+} from '../../fixtures/explore/apiResponses';
+import { resetExploreSingletonStore } from '../../helpers/exploreStoreReset';
+
+function renderExploreWithRouter() {
+  const router = createMemoryRouter(
+    [
+      {
+        path: '/explore',
+        element: (
+          <Provider store={store}>
+            <Inventory />
+          </Provider>
+        ),
+      },
+    ],
+    { initialEntries: ['/explore'] },
+  );
+  const utils = render(<RouterProvider router={router} />);
+  return { ...utils, router };
+}
+
+async function selectSexAtBirthFemale() {
+  const demoHeading = screen.getByText('Demographics');
+  fireEvent.click(demoHeading.closest('li') || demoHeading);
+
+  await waitFor(() => {
+    expect(screen.getByText('Sex at Birth')).toBeInTheDocument();
+  });
+
+  fireEvent.click(screen.getByText('Sex at Birth'));
+
+  const facetsRoot = await waitFor(() => {
+    const el = document.querySelector('[class*="contentPanelBody"]');
+    expect(el).toBeTruthy();
+    return el;
+  });
+
+  await waitFor(() => {
+    expect(facetsRoot.querySelector('input[type="checkbox"], [role="checkbox"]')).toBeTruthy();
+  });
+
+  const femaleTarget = await waitFor(() => {
+    const leaves = facetsRoot.querySelectorAll('*');
+    const textNode = [...leaves].find(
+      (n) => n.children.length === 0 && /\bFemale\b/i.test((n.textContent || '').trim()),
+    );
+    expect(textNode).toBeTruthy();
+    const clickable = textNode.closest('.MuiFormControlLabel-root')
+      || textNode.closest('button')
+      || textNode.closest('li')
+      || textNode.parentElement;
+    expect(clickable).toBeTruthy();
+    return clickable;
+  });
+
+  fireEvent.click(femaleTarget);
+
+  await waitFor(() => {
+    expect(store.getState().inventoryReducer.dashData.numberOfParticipants).toBe(2);
+  });
+}
+
+describe('Explore — clear all filters (sidebar)', () => {
+  let mockQuery;
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+    resetExploreSingletonStore();
+
+    mockQuery = jest.fn();
+    useApolloClient.mockReturnValue({ query: mockQuery });
+
+    mockQuery.mockImplementation(async ({ variables }) => {
+      if (
+        variables
+        && Array.isArray(variables.sex_at_birth)
+        && variables.sex_at_birth.includes('Female')
+      ) {
+        return { data: { searchParticipants: exploreDashboardFemaleOnly } };
+      }
+      return { data: { searchParticipants: exploreDashboardWithSexAtBirthFacets } };
+    });
+
+    global.ResizeObserver = jest.fn().mockImplementation(() => ({
+      observe: jest.fn(),
+      unobserve: jest.fn(),
+      disconnect: jest.fn(),
+    }));
+
+    global.MutationObserver = class {
+      constructor() {
+        this.observe = jest.fn();
+        this.disconnect = jest.fn();
+        this.takeRecords = jest.fn(() => []);
+      }
+    };
+  });
+
+  it('should clear facet query params, restore unfiltered counts, and issue a dashboard query without sex_at_birth', async () => {
+    const { router } = renderExploreWithRouter();
+
+    await waitFor(() => {
+      const participantTab = screen.getAllByRole('tab').find((el) => /Participants/i.test(el.textContent));
+      expect(participantTab.textContent).toMatch(/\(3\)/);
+    });
+
+    await selectSexAtBirthFemale();
+
+    expect(router.state.location.search).toMatch(/sex_at_birth/i);
+
+    const clearBtn = document.getElementById('button_sidebar_clear_all_filters');
+    expect(clearBtn).toBeTruthy();
+    expect(clearBtn).not.toBeDisabled();
+
+    fireEvent.click(clearBtn);
+
+    await waitFor(() => {
+      expect(router.state.location.search).not.toMatch(/sex_at_birth/i);
+    });
+
+    await waitFor(() => {
+      expect(store.getState().inventoryReducer.dashData.numberOfParticipants).toBe(3);
+    });
+
+    const participantsTab = screen.getAllByRole('tab').find((el) => /Participants/i.test(el.textContent));
+    expect(participantsTab.textContent).toMatch(/\(3\)/);
+
+    expect(store.getState().inventoryReducer.activeFilters?.sex_at_birth).toBeFalsy();
+
+    const unfilteredCall = mockQuery.mock.calls
+      .map((c) => c[0].variables)
+      .find((v) => !v.sex_at_birth);
+    expect(unfilteredCall).toBeTruthy();
+  });
+
+  it('should disable the clear-all control when there are no active filters', async () => {
+    renderExploreWithRouter();
+
+    await waitFor(() => {
+      expect(screen.getAllByRole('tab').some((el) => /Participants/i.test(el.textContent))).toBe(true);
+    });
+
+    const clearBtn = document.getElementById('button_sidebar_clear_all_filters');
+    expect(clearBtn).toBeTruthy();
+    expect(clearBtn).toBeDisabled();
+  });
+});

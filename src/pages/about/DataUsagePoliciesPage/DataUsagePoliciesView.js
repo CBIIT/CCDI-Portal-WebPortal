@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef, createRef } from 'react';
 import styled from 'styled-components';
-import ReactHtmlParser from 'html-react-parser';
 import headerImg from '../../../assets/about/Data_Usage_Policies_Header.png';
-// import { dataUsagePoliciesContent, introText } from '../../../bento/dataUsagePoliciesData';
+import DataUsagePoliciesMarkdown from './DataUsagePoliciesMarkdown';
 import exportIconBlue from '../../../assets/icons/Export_Icon.svg';
 import closeIcon from '../../../assets/icons/Close_Icon.svg';
 import arrowDownIcon from '../../../assets/icons/Arrow_Down.svg';
@@ -295,6 +294,34 @@ const DataUsagePoliciesBody = styled.div`
         }
     }
 
+    blockquote.calloutBox {
+        margin: 40px 40px;
+    }
+
+    .citationQuote {
+        margin: 0 0 20px 0;
+        padding: 0;
+        border: none;
+        font-family: Inter;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 22px;
+        color: inherit;
+    }
+
+  .citationQuote p {
+        margin: 0 0 16px 0;
+    }
+
+    .policiesBlockquote {
+        margin: 0 0 20px 0;
+        padding: 0 0 0 16px;
+        border-left: 3px solid #C8E0E4;
+        font-family: Inter;
+        font-size: 16px;
+        line-height: 22px;
+    }
+
      @media (max-width: 1400px) {
         padding: 55px calc(50% - 550px) 0 calc(50% - 550px); 
     }
@@ -336,14 +363,16 @@ const DataUsagePoliciesBody = styled.div`
     }
 `;
 
-const DataUsagePoliciesView = ({data}) => {
+const POLICIES_PAGE_BANNER_TITLE = 'CCDI Data Usage Policies & Terms';
+
+const DataUsagePoliciesView = ({ data }) => {
     const [selectedNavTitle, setSelectedNavTitle] = useState('');
     const [stickyNavStyle, setStickyNavStyle] = useState('navList');
-    const dataUsagePoliciesContent = data.dataUsagePoliciesContent;
+    const dataUsagePoliciesContent = data.dataUsagePoliciesContent || [];
     const sectionList = useRef([]);
-    sectionList.current = dataUsagePoliciesContent.map((element, i) => {
-        return sectionList.current[i] || createRef()
-    });
+    sectionList.current = dataUsagePoliciesContent.map((element, i) => (
+        sectionList.current[i] || createRef()
+    ));
     const handleScroll = () => {
         const bodyElement = document.getElementById('DataUsagePoliciesBody');
         const footerList = document.getElementsByTagName('footer');
@@ -400,45 +429,59 @@ const DataUsagePoliciesView = ({data}) => {
 
     return (
         <DataUsagePoliciesContainer headerImg={data.Data_Usage_Policies_Header}>
-             <div className='policiesHeaderContainer'><div className='policiesHeaderText'>CCDI Data Usage Policies & Terms</div></div>
+             <div className='policiesHeaderContainer'><div className='policiesHeaderText'>{POLICIES_PAGE_BANNER_TITLE}</div></div>
             <DataUsagePoliciesBody id='DataUsagePoliciesBody'>
                 <div className='navSection'>
                     <div className={stickyNavStyle} id='leftNav'>
                         <div className='navTitle'>TOPICS</div>
                         {
-                            dataUsagePoliciesContent && dataUsagePoliciesContent.map((policiesItem, topicid) => {
+                            dataUsagePoliciesContent.map((policiesItem, topicid) => {
                                 const topickey = `topic_${topicid}`;
-                                if (policiesItem.topic) {
-                                    return (
-                                        <div name={policiesItem.id} className={selectedNavTitle === policiesItem.id ? 'navTopicItem selected' : 'navTopicItem'} key={topickey} onClick={handleClickEvent}>{policiesItem.topic}</div>
-                                    )
-                                }
+                                const navLabel = policiesItem.topic || policiesItem.subtopic;
+                                const navClass = policiesItem.topic
+                                    ? (selectedNavTitle === policiesItem.id ? 'navTopicItem selected' : 'navTopicItem')
+                                    : (selectedNavTitle === policiesItem.id ? 'navTopicItem selected subtitle' : 'navTopicItem subtitle');
                                 return (
-                                    <div name={policiesItem.id} className={selectedNavTitle === policiesItem.id ? 'navTopicItem selected subtitle' : 'navTopicItem subtitle'} key={topickey} onClick={handleClickEvent}>{policiesItem.subtopic}</div>
-                                )
+                                    <div name={policiesItem.id} className={navClass} key={topickey} onClick={handleClickEvent}>{navLabel}</div>
+                                );
                             })
                         }
                     </div>
                 </div>
                 <div className='contentSection'>
                     <div className='contentList'>
-                    {data.dataUsagePoliciesIntroText && <div className='introContainer'>{ReactHtmlParser(data.dataUsagePoliciesIntroText)}</div>}
+                    {(data.introText || data.introCallout) && (
+                        <div className='introContainer'>
+                            {data.introText && (
+                                <DataUsagePoliciesMarkdown>{data.introText}</DataUsagePoliciesMarkdown>
+                            )}
+                            {data.introCallout && (
+                                <DataUsagePoliciesMarkdown blockquoteVariant="callout">
+                                    {data.introCallout}
+                                </DataUsagePoliciesMarkdown>
+                            )}
+                        </div>
+                    )}
                         {
-                            dataUsagePoliciesContent && dataUsagePoliciesContent.map((policiesItem, mciid) => {
+                            dataUsagePoliciesContent.map((policiesItem, mciid) => {
                                 const mcikey = `federation_${mciid}`;
+                                const sectionTitle = policiesItem.topic || policiesItem.subtopic;
                                 return (
                                     <div key={mcikey}>
-                                        <div id={policiesItem.id} className='mciTitle'>{policiesItem.topic && policiesItem.topic}</div>
-                                        {/* <div id={policiesItem.id} className='mciSubtitle'>{policiesItem.subtopic && policiesItem.subtopic}</div> */}
-                                        <div id={policiesItem.id} name={mciid} className='mciTitleMobile sectionCollapse' onClick={handleCollapseSection}>{policiesItem.topic && policiesItem.topic}</div>
+                                        <div id={policiesItem.id} className='mciTitle'>{sectionTitle}</div>
+                                        <div id={policiesItem.id} name={mciid} className='mciTitleMobile sectionCollapse' onClick={handleCollapseSection}>{sectionTitle}</div>
                                         <div className="mciSection mobileCollapse" ref={sectionList.current[mciid]}>
                                             <div className='mciContentContainer'>
-                                                {policiesItem.content && ReactHtmlParser(policiesItem.content)}
+                                                {policiesItem.markdown && (
+                                                    <DataUsagePoliciesMarkdown blockquoteVariant={policiesItem.blockquoteVariant}>
+                                                        {policiesItem.markdown}
+                                                    </DataUsagePoliciesMarkdown>
+                                                )}
                                             </div>
-                                            {policiesItem.content && <div style={{height: '40px'}} />}
+                                            {policiesItem.markdown && <div style={{height: '40px'}} />}
                                         </div>
                                     </div>
-                                )
+                                );
                             })
                         }
                     </div>

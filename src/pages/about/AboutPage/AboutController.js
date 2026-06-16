@@ -1,33 +1,41 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import env from '../../../utils/env';
-import yaml from "js-yaml";
-import axios from "axios";
-import AboutView from "./AboutView";
+import axios from 'axios';
+import parseAboutMarkdown from './parseAboutMarkdown';
+import AboutView from './AboutView';
 
-const ABOUT_URL = env.REACT_APP_STATIC_CONTENT_URL + '/aboutStaticData.yaml';
+const ABOUT_MD_URL = `${env.REACT_APP_STATIC_CONTENT_URL}/aboutData.md`;
 
-const AboutController = ({ match }) => {
-  const [data, setData] = useState([]);
+const AboutController = () => {
+  const [data, setData] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
-      let resultData = [];
-      let result = [];
+      let resultData = {};
       try {
-        const fileUrl = `${ABOUT_URL}?ts=${new Date().getTime()}`;
-        result = await axios.get(
-          fileUrl
-        );
-        resultData = yaml.safeLoad(result.data);
+        const fileUrl = `${ABOUT_MD_URL}?ts=${new Date().getTime()}`;
+        const result = await axios.get(fileUrl);
+        resultData = parseAboutMarkdown(result.data);
       } catch (_error) {
-        // result = await axios.get(YAMLData);
-        // resultData = yaml.safeLoad(result.data);
+        /* empty state; page still mounts */
       }
-
       setData(resultData);
     };
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (!data.title) {
+      return undefined;
+    }
+    const previousTitle = document.title;
+    document.title = data.title;
+    return () => {
+      document.title = previousTitle;
+    };
+  }, [data.title]);
+
   return <AboutView data={data} />;
 };
+
 export default AboutController;

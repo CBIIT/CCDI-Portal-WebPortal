@@ -682,7 +682,7 @@ const MCIResourceView = ({data}) => {
                                                                 <div className='MapMobileContainer'><MapViewMobile mapData={mciItem.map}/></div>
                                                             </>
                                                             }
-                                                            {mciItem.content && mciItem.content.includes('CCDI Data Ecosystem?') && 
+                                                            {mciItem.content && mciItem.content.includes('CCDI Data Ecosystem?') && (
                                                             <>
                                                                 <img className="ecosystemImg" src={data.MCI_CCDI_Data_Ecosystem || ccdiDataEcosystemImg} alt="Infographic depicting the MCI assays and data types, and the data flow to patients, providers, and the CCDI Data Ecosystem"/>
                                                                 <img className="ecosystemImgMobile" src={data.MCI_CCDI_Data_Ecosystem_Mobile || ccdiDataEcosystemMobileImg} alt="Infographic depicting the MCI assays and data types, and the data flow to patients, providers, and the CCDI Data Ecosystem"/>
@@ -690,7 +690,7 @@ const MCIResourceView = ({data}) => {
                                                                 <h3 style={{ marginTop: '24px' }}>Community Tools and Scripts</h3>
                                                                 <p>Convert COG-formatted JSON files to TSV format with CCDI’s MCI_JSON2TSV tool <a href="https://github.com/CBIIT/ChildhoodCancerDataInitiative-MCI_JSON2TSV" target='blank' rel="noopener noreferrer">here</a>.</p>
                                                             </>
-                                                            }
+                                                            )}
                                                             {mciItem.table &&
                                                             <>
                                                                 <div className='MCITableContainer'><MCITable table={mciItem.table} /></div>

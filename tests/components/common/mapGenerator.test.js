@@ -21,7 +21,15 @@ import React from 'react';
 import { render, waitFor, act, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import * as echarts from 'echarts';
-import MapView, { resolveKeyboardInstructions } from '../../../src/components/common/mapGenerator';
+import MapView, {
+  resolveKeyboardInstructions,
+  buildStateLabelSeriesData,
+  formatStateLabel,
+  findDistrictOfColumbiaRow,
+  getDcLabelGeoCoords,
+  resolveGeoPixelPosition,
+  resolveDcLabelLayout,
+} from '../../../src/components/common/mapGenerator';
 
 const sampleMapData = {
   title: 'Enrollment by State',
@@ -191,5 +199,94 @@ describe('mapGenerator (MapView)', () => {
     const { container } = render(<MapView mapData={{ title: 'Map', data: [] }} />);
     expect(container.firstChild).toBeNull();
     expect(global.fetch).not.toHaveBeenCalled();
+  });
+
+  it('should exclude District of Columbia from the ECharts state label series', () => {
+    const rows = [
+      [100, 200, 'MARYLAND', 10],
+      [790, 305, 'DISTRICT OF COLUMBIA', 54],
+    ];
+    const built = buildStateLabelSeriesData(rows);
+
+    expect(built).toEqual([rows[0]]);
+    expect(findDistrictOfColumbiaRow(rows)).toEqual(rows[1]);
+    expect(getDcLabelGeoCoords(rows[1])).toEqual({
+      marker: [790, 305],
+      label: [848, 329],
+    });
+    expect(formatStateLabel({ data: rows[0] })).toBe('MARYLAND');
+  });
+
+  it('should render DC as an HTML callout label after the chart is ready', async () => {
+    const mapData = {
+      title: 'Map',
+      data: [[790, 305, 'DISTRICT OF COLUMBIA', 54]],
+    };
+    const convertToPixel = jest.fn((coordSys, coords) => {
+      if (coords[0] === 790) return [360, 215];
+      if (coords[0] === 848) return [430, 238];
+      return [0, 0];
+    });
+    setOption.mockImplementation(() => {});
+    echarts.init.mockReturnValue({
+      setOption,
+      resize,
+      dispose,
+      getDom: () => document.createElement('div'),
+      getZr: () => ({ on: jest.fn(), off: jest.fn() }),
+      dispatchAction: jest.fn(),
+      convertToPixel,
+    });
+
+    const view = render(<MapView mapData={mapData} />);
+
+    await waitFor(() => {
+      expect(convertToPixel).toHaveBeenCalledWith('geo', [790, 305]);
+      expect(convertToPixel).toHaveBeenCalledWith('geo', [848, 329]);
+    });
+
+    await waitFor(() => {
+      const label = view.container.querySelector('.mci-map-dc-state-label');
+      const line = view.container.querySelector('.mci-map-dc-callout-line line');
+      expect(label).toBeInTheDocument();
+      expect(line).toBeInTheDocument();
+      expect(label.textContent).toContain('DISTRICT OF');
+      expect(label.textContent).toContain('COLUMBIA');
+      expect(line.getAttribute('x1')).toBe('360');
+      expect(line.getAttribute('y1')).toBe('215');
+      expect(line.getAttribute('x2')).toBe('430');
+      expect(line.getAttribute('y2')).toBe('238');
+    });
+
+    const layout = resolveDcLabelLayout(
+      { convertToPixel: jest.fn(() => [10, 20]) },
+      getDcLabelGeoCoords(mapData.data[0]),
+    );
+    expect(layout).toEqual({
+      marker: { left: 10, top: 20 },
+      label: { left: 10, top: 20 },
+    });
+  });
+
+  it('should pass non-DC state labels through to the stateLabels series', async () => {
+    const mapData = {
+      title: 'Map',
+      data: [[638, 420, 'ALABAMA', 12]],
+    };
+    let capturedOption;
+    setOption.mockImplementation((opt) => {
+      capturedOption = opt;
+    });
+
+    render(<MapView mapData={mapData} />);
+
+    await waitFor(() => {
+      expect(setOption).toHaveBeenCalled();
+    });
+
+    const stateLabels = capturedOption.series.find((s) => s.name === 'stateLabels');
+    expect(stateLabels.data).toEqual(mapData.data);
+    expect(stateLabels.label.clip).toBe(false);
+    expect(resolveGeoPixelPosition(null, [1, 2])).toBeNull();
   });
 });

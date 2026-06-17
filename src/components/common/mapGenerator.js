@@ -8,7 +8,7 @@ import React, {
 } from 'react';
 import * as echarts from 'echarts';
 
-const MARKER_SERIES_INDEX = 1;
+const MARKER_SERIES_INDEX = 0;
 
 function normalizeKeyboardInstructionItem(item) {
   if (!item || typeof item !== 'object') {
@@ -52,11 +52,75 @@ export function resolveKeyboardInstructions(mapData) {
   return { title, items };
 }
 
+const STATE_LABEL_COLOR = '#4B545B';
+
 const STATE_LABEL_STYLE = {
   fontFamily: 'Inter, sans-serif',
-  fontSize: 9,
-  color: '#1B1B1B',
+  fontSize: 8,
+  fontWeight: 400,
+  color: STATE_LABEL_COLOR,
 };
+
+function stateLabelFontString() {
+  return `${STATE_LABEL_STYLE.fontWeight} ${STATE_LABEL_STYLE.fontSize}px ${STATE_LABEL_STYLE.fontFamily}`;
+}
+
+/** DC label + leader line as ECharts graphics so text renders on the same canvas as other state labels. */
+export function buildDcLabelGraphicElements(layout) {
+  if (!layout || !layout.marker || !layout.label) return [];
+  const textLeft = layout.label.left + 4;
+  return [
+    {
+      id: 'mci-map-dc-callout-line',
+      type: 'line',
+      shape: {
+        x1: layout.marker.left,
+        y1: layout.marker.top,
+        x2: layout.label.left,
+        y2: layout.label.top,
+      },
+      style: {
+        stroke: STATE_LABEL_COLOR,
+        lineWidth: 0.7,
+      },
+      silent: true,
+      z: 100,
+    },
+    {
+      id: 'mci-map-dc-state-label',
+      type: 'text',
+      left: textLeft,
+      top: layout.label.top,
+      style: {
+        text: 'DISTRICT OF\nCOLUMBIA',
+        fill: STATE_LABEL_COLOR,
+        font: stateLabelFontString(),
+        lineHeight: 7,
+        textAlign: 'left',
+        textVerticalAlign: 'middle',
+      },
+      silent: true,
+      z: 101,
+    },
+  ];
+}
+
+function applyDcLabelGraphics(chart, dcRow) {
+  if (!chart) return;
+  if (!dcRow) {
+    chart.setOption({ graphic: [] }, { replaceMerge: ['graphic'] });
+    return;
+  }
+  const layout = resolveDcLabelLayout(chart, getDcLabelGeoCoords(dcRow));
+  if (!layout) {
+    chart.setOption({ graphic: [] }, { replaceMerge: ['graphic'] });
+    return;
+  }
+  chart.setOption(
+    { graphic: buildDcLabelGraphicElements(layout) },
+    { replaceMerge: ['graphic'] },
+  );
+}
 
 function isDistrictOfColumbia(name) {
   if (name == null) return false;
@@ -73,14 +137,9 @@ function stateLabelRowName(row) {
 }
 
 /**
- * ECharts scatter labels on SVG geo maps are unreliable for some points (see apache/echarts#19974).
- * DC is excluded from the scatter label series and rendered as an HTML overlay instead.
+ * State names are baked into public/map.svg; only DC is drawn dynamically because
+ * it is missing from the SVG and needs a callout line (see apache/echarts#19974).
  */
-export function buildStateLabelSeriesData(rows) {
-  if (!Array.isArray(rows)) return [];
-  return rows.filter((row) => !isDistrictOfColumbia(stateLabelRowName(row)));
-}
-
 export function findDistrictOfColumbiaRow(rows) {
   if (!Array.isArray(rows)) return null;
   for (let i = 0; i < rows.length; i += 1) {
@@ -121,19 +180,6 @@ export function resolveGeoPixelPosition(chart, coords) {
     return null;
   }
   return null;
-}
-
-export function formatStateLabel(params) {
-  let row;
-  if (Array.isArray(params.data)) {
-    row = params.data;
-  } else if (params.data && Array.isArray(params.data.value)) {
-    row = params.data.value;
-  } else {
-    row = params.value;
-  }
-  if (!row) return '';
-  return stateLabelRowName(row);
 }
 
 /** Geo SVG sits above the scatter canvas in the DOM; without this, the browser never delivers pointer events to markers. */
@@ -266,8 +312,6 @@ const MapView = ({ mapData }) => {
     () => findDistrictOfColumbiaRow(mapData && mapData.data),
     [mapData],
   );
-
-  const [dcLabelLayout, setDcLabelLayout] = useState(null);
 
   useEffect(() => {
     mapRegionFocusedRef.current = mapRegionFocused;
@@ -453,34 +497,6 @@ const MapView = ({ mapData }) => {
           },
           series: [
             {
-              name: 'stateLabels',
-              type: 'scatter',
-              coordinateSystem: 'geo',
-              geoIndex: 0,
-              zlevel: 0,
-              silent: true,
-              data: buildStateLabelSeriesData(mapData.data),
-              symbol: 'circle',
-              symbolSize: 0.001,
-              itemStyle: {
-                opacity: 0,
-              },
-              tooltip: { show: false },
-              emphasis: {
-                disabled: true,
-              },
-              label: {
-                show: true,
-                formatter: formatStateLabel,
-                ...STATE_LABEL_STYLE,
-                distance: 5,
-                clip: false,
-              },
-              labelLayout: {
-                hideOverlap: false,
-              },
-            },
-            {
               name: 'enrollmentMarkers',
               type: 'scatter',
               coordinateSystem: 'geo',
@@ -620,19 +636,16 @@ const MapView = ({ mapData }) => {
   }, [mapRegionFocused, chartReady, keyboardMarkerIndex, markerRows, windowWidth]);
 
   useLayoutEffect(() => {
-    if (!chartReady || !dcLabelRow) {
-      setDcLabelLayout(null);
+    if (!chartReady) {
       return undefined;
     }
     const chart = chartInstRef.current;
     if (!chart) {
-      setDcLabelLayout(null);
       return undefined;
     }
 
     const measure = () => {
-      const layout = getDcLabelGeoCoords(dcLabelRow);
-      setDcLabelLayout(resolveDcLabelLayout(chart, layout));
+      applyDcLabelGraphics(chart, dcLabelRow);
     };
 
     requestAnimationFrame(() => {
@@ -787,54 +800,6 @@ const MapView = ({ mapData }) => {
               <br />
               <span>{mouseHoverTip.count} enrolled</span>
             </div>
-          )}
-          {dcLabelLayout && (
-            <>
-              <svg
-                className="mci-map-dc-callout-line"
-                aria-hidden
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  width: '100%',
-                  height: '100%',
-                  zIndex: 3,
-                  pointerEvents: 'none',
-                  overflow: 'visible',
-                }}
-              >
-                <line
-                  x1={dcLabelLayout.marker.left}
-                  y1={dcLabelLayout.marker.top}
-                  x2={dcLabelLayout.label.left}
-                  y2={dcLabelLayout.label.top}
-                  stroke="#1B1B1B"
-                  strokeWidth={1}
-                />
-              </svg>
-              <div
-                className="mci-map-dc-state-label"
-                aria-hidden
-                style={{
-                  position: 'absolute',
-                  zIndex: 4,
-                  left: dcLabelLayout.label.left + 4,
-                  top: dcLabelLayout.label.top,
-                  transform: 'translateY(-50%)',
-                  pointerEvents: 'none',
-                  fontFamily: 'Inter, sans-serif',
-                  fontSize: 9,
-                  lineHeight: '11px',
-                  color: '#1B1B1B',
-                  textAlign: 'left',
-                  whiteSpace: 'nowrap',
-                }}
-              >
-                DISTRICT OF
-                <br />
-                COLUMBIA
-              </div>
-            </>
           )}
         </div>
       </div>

@@ -8,7 +8,7 @@ import React, {
 } from 'react';
 import * as echarts from 'echarts';
 
-const MARKER_SERIES_INDEX = 1;
+const MARKER_SERIES_INDEX = 0;
 
 function normalizeKeyboardInstructionItem(item) {
   if (!item || typeof item !== 'object') {
@@ -50,6 +50,136 @@ export function resolveKeyboardInstructions(mapData) {
     ? String(raw.title)
     : '';
   return { title, items };
+}
+
+const STATE_LABEL_COLOR = '#4B545B';
+
+const STATE_LABEL_STYLE = {
+  fontFamily: 'Inter, sans-serif',
+  fontSize: 8,
+  fontWeight: 400,
+  color: STATE_LABEL_COLOR,
+};
+
+function stateLabelFontString() {
+  return `${STATE_LABEL_STYLE.fontWeight} ${STATE_LABEL_STYLE.fontSize}px ${STATE_LABEL_STYLE.fontFamily}`;
+}
+
+/** DC label + leader line as ECharts graphics so text renders on the same canvas as other state labels. */
+export function buildDcLabelGraphicElements(layout) {
+  if (!layout || !layout.marker || !layout.label) return [];
+  const textLeft = layout.label.left + 4;
+  return [
+    {
+      id: 'mci-map-dc-callout-line',
+      type: 'line',
+      shape: {
+        x1: layout.marker.left,
+        y1: layout.marker.top,
+        x2: layout.label.left,
+        y2: layout.label.top,
+      },
+      style: {
+        stroke: STATE_LABEL_COLOR,
+        lineWidth: 0.7,
+      },
+      silent: true,
+      z: 100,
+    },
+    {
+      id: 'mci-map-dc-state-label',
+      type: 'text',
+      left: textLeft,
+      top: layout.label.top,
+      style: {
+        text: 'DISTRICT OF\nCOLUMBIA',
+        fill: STATE_LABEL_COLOR,
+        font: stateLabelFontString(),
+        lineHeight: 7,
+        textAlign: 'left',
+        textVerticalAlign: 'middle',
+      },
+      silent: true,
+      z: 101,
+    },
+  ];
+}
+
+function applyDcLabelGraphics(chart, dcRow) {
+  if (!chart) return;
+  if (!dcRow) {
+    chart.setOption({ graphic: [] }, { replaceMerge: ['graphic'] });
+    return;
+  }
+  const layout = resolveDcLabelLayout(chart, getDcLabelGeoCoords(dcRow));
+  if (!layout) {
+    chart.setOption({ graphic: [] }, { replaceMerge: ['graphic'] });
+    return;
+  }
+  chart.setOption(
+    { graphic: buildDcLabelGraphicElements(layout) },
+    { replaceMerge: ['graphic'] },
+  );
+}
+
+function isDistrictOfColumbia(name) {
+  if (name == null) return false;
+  const normalized = String(name).trim().toUpperCase();
+  return normalized === 'DISTRICT OF COLUMBIA'
+    || normalized === 'WASHINGTON DC'
+    || normalized === 'WASHINGTON, D.C.'
+    || normalized === 'D.C.'
+    || normalized === 'DC';
+}
+
+function stateLabelRowName(row) {
+  return Array.isArray(row) && row[2] != null ? String(row[2]) : '';
+}
+
+/**
+ * State names are baked into public/map.svg; only DC is drawn dynamically because
+ * it is missing from the SVG and needs a callout line (see apache/echarts#19974).
+ */
+export function findDistrictOfColumbiaRow(rows) {
+  if (!Array.isArray(rows)) return null;
+  for (let i = 0; i < rows.length; i += 1) {
+    const row = rows[i];
+    if (isDistrictOfColumbia(stateLabelRowName(row))) {
+      return row;
+    }
+  }
+  return null;
+}
+
+/** Callout anchor in SVG space — label sits southeast of the DC marker to clear Maryland. */
+export function getDcLabelGeoCoords(row) {
+  if (!Array.isArray(row)) return null;
+  return {
+    marker: [row[0], row[1]],
+    label: [row[0] + 48, row[1] + 24],
+  };
+}
+
+export function resolveDcLabelLayout(chart, layout) {
+  if (!chart || !layout) return null;
+  const marker = resolveGeoPixelPosition(chart, layout.marker);
+  const label = resolveGeoPixelPosition(chart, layout.label);
+  if (!marker || !label) return null;
+  return { marker, label };
+}
+
+export function resolveGeoPixelPosition(chart, coords) {
+  if (!chart || !Array.isArray(coords)) return null;
+  try {
+    const pixel = chart.convertToPixel('geo', coords);
+    if (Array.isArray(pixel) && pixel.length >= 2
+      && Number.isFinite(pixel[0]) && Number.isFinite(pixel[1])) {
+      return { left: pixel[0], top: pixel[1] };
+    }
+  } catch (_e) {
+    return null;
+  }
+  return null;
 }
 
 /** Geo SVG sits above the scatter canvas in the DOM; without this, the browser never delivers pointer events to markers. */
@@ -177,6 +307,11 @@ const MapView = ({ mapData }) => {
     if (!mapData || !Array.isArray(mapData.data)) return [];
     return mapData.data.filter((row) => row[3] > 0);
   }, [mapData]);
+
+  const dcLabelRow = useMemo(
+    () => findDistrictOfColumbiaRow(mapData && mapData.data),
+    [mapData],
+  );
 
   useEffect(() => {
     mapRegionFocusedRef.current = mapRegionFocused;
@@ -362,37 +497,6 @@ const MapView = ({ mapData }) => {
           },
           series: [
             {
-              name: 'stateLabels',
-              type: 'scatter',
-              coordinateSystem: 'geo',
-              geoIndex: 0,
-              zlevel: 0,
-              silent: true,
-              data: mapData.data,
-              symbol: 'circle',
-              symbolSize: 0.001,
-              itemStyle: {
-                opacity: 0,
-              },
-              tooltip: { show: false },
-              emphasis: {
-                disabled: true,
-              },
-              label: {
-                show: true,
-                formatter(p) {
-                  return p.data[2];
-                },
-                fontFamily: 'Inter, sans-serif',
-                fontSize: 9,
-                color: '#1B1B1B',
-                distance: 5,
-              },
-              labelLayout: {
-                hideOverlap: false,
-              },
-            },
-            {
               name: 'enrollmentMarkers',
               type: 'scatter',
               coordinateSystem: 'geo',
@@ -530,6 +634,25 @@ const MapView = ({ mapData }) => {
       requestAnimationFrame(measure);
     });
   }, [mapRegionFocused, chartReady, keyboardMarkerIndex, markerRows, windowWidth]);
+
+  useLayoutEffect(() => {
+    if (!chartReady) {
+      return undefined;
+    }
+    const chart = chartInstRef.current;
+    if (!chart) {
+      return undefined;
+    }
+
+    const measure = () => {
+      applyDcLabelGraphics(chart, dcLabelRow);
+    };
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(measure);
+    });
+    return undefined;
+  }, [chartReady, dcLabelRow, windowWidth]);
 
   const liveRow = markerRows[keyboardMarkerIndex];
 

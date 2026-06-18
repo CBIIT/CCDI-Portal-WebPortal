@@ -21,7 +21,14 @@ import React from 'react';
 import { render, waitFor, act, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import * as echarts from 'echarts';
-import MapView, { resolveKeyboardInstructions } from '../../../src/components/common/mapGenerator';
+import MapView, {
+  resolveKeyboardInstructions,
+  findDistrictOfColumbiaRow,
+  getDcLabelGeoCoords,
+  resolveGeoPixelPosition,
+  resolveDcLabelLayout,
+  buildDcLabelGraphicElements,
+} from '../../../src/components/common/mapGenerator';
 
 const sampleMapData = {
   title: 'Enrollment by State',
@@ -82,13 +89,15 @@ describe('mapGenerator (MapView)', () => {
     };
     let capturedOption;
     setOption.mockImplementation((opt) => {
-      capturedOption = opt;
+      if (opt && opt.series) {
+        capturedOption = opt;
+      }
     });
 
     render(<MapView mapData={mapData} />);
 
     await waitFor(() => {
-      expect(setOption).toHaveBeenCalled();
+      expect(capturedOption).toBeDefined();
     });
 
     expect(capturedOption.tooltip.show).toBe(false);
@@ -191,5 +200,118 @@ describe('mapGenerator (MapView)', () => {
     const { container } = render(<MapView mapData={{ title: 'Map', data: [] }} />);
     expect(container.firstChild).toBeNull();
     expect(global.fetch).not.toHaveBeenCalled();
+  });
+
+  it('should resolve District of Columbia map row and callout coords', () => {
+    const rows = [
+      [100, 200, 'MARYLAND', 10],
+      [790, 305, 'DISTRICT OF COLUMBIA', 54],
+    ];
+
+    expect(findDistrictOfColumbiaRow(rows)).toEqual(rows[1]);
+    expect(getDcLabelGeoCoords(rows[1])).toEqual({
+      marker: [790, 305],
+      label: [838, 329],
+    });
+  });
+
+  it('should build DC label graphics that match state label styling', () => {
+    const layout = {
+      marker: { left: 360, top: 215 },
+      label: { left: 430, top: 238 },
+    };
+    const graphics = buildDcLabelGraphicElements(layout);
+
+    expect(graphics).toHaveLength(2);
+    expect(graphics[0].type).toBe('line');
+    expect(graphics[0].style.stroke).toBe('#4B545B');
+    expect(graphics[1].type).toBe('text');
+    expect(graphics[1].style.fill).toBe('#4B545B');
+    expect(graphics[1].style.font).toBe('500 8px Inter, sans-serif');
+    expect(graphics[1].style.text).toContain('DISTRICT OF');
+    expect(graphics[1].style.text).toContain('COLUMBIA');
+    expect(buildDcLabelGraphicElements(null)).toEqual([]);
+  });
+
+  it('should render DC via ECharts graphics after the chart is ready', async () => {
+    const mapData = {
+      title: 'Map',
+      data: [[790, 305, 'DISTRICT OF COLUMBIA', 54]],
+    };
+    const convertToPixel = jest.fn((coordSys, coords) => {
+      if (coords[0] === 790) return [360, 215];
+      if (coords[0] === 838) return [430, 238];
+      return [0, 0];
+    });
+    setOption.mockImplementation(() => {});
+    echarts.init.mockReturnValue({
+      setOption,
+      resize,
+      dispose,
+      getDom: () => document.createElement('div'),
+      getZr: () => ({ on: jest.fn(), off: jest.fn() }),
+      dispatchAction: jest.fn(),
+      convertToPixel,
+    });
+
+    const view = render(<MapView mapData={mapData} />);
+
+    await waitFor(() => {
+      expect(convertToPixel).toHaveBeenCalledWith('geo', [790, 305]);
+      expect(convertToPixel).toHaveBeenCalledWith('geo', [838, 329]);
+    });
+
+    await waitFor(() => {
+      const graphicCalls = setOption.mock.calls.filter((call) => call[0] && call[0].graphic);
+      expect(graphicCalls.length).toBeGreaterThan(0);
+      const lastGraphic = graphicCalls[graphicCalls.length - 1][0].graphic;
+      const lineGraphic = lastGraphic.find((g) => g.id === 'mci-map-dc-callout-line');
+      const textGraphic = lastGraphic.find((g) => g.id === 'mci-map-dc-state-label');
+      expect(lineGraphic).toBeDefined();
+      expect(textGraphic).toBeDefined();
+      expect(textGraphic.style.text).toContain('DISTRICT OF');
+      expect(textGraphic.style.text).toContain('COLUMBIA');
+      expect(textGraphic.style.fill).toBe('#4B545B');
+      expect(textGraphic.style.font).toBe('500 8px Inter, sans-serif');
+      expect(lineGraphic.shape.x1).toBe(360);
+      expect(lineGraphic.shape.y1).toBe(215);
+      expect(lineGraphic.shape.x2).toBe(430);
+      expect(lineGraphic.shape.y2).toBe(238);
+    });
+
+    expect(view.container.querySelector('.mci-map-dc-state-label')).toBeNull();
+
+    const layout = resolveDcLabelLayout(
+      { convertToPixel: jest.fn(() => [10, 20]) },
+      getDcLabelGeoCoords(mapData.data[0]),
+    );
+    expect(layout).toEqual({
+      marker: { left: 10, top: 20 },
+      label: { left: 10, top: 20 },
+    });
+  });
+
+  it('should not add a duplicate stateLabels series because names are in map.svg', async () => {
+    const mapData = {
+      title: 'Map',
+      data: [[638, 420, 'ALABAMA', 12]],
+    };
+    let capturedOption;
+    setOption.mockImplementation((opt) => {
+      if (opt && opt.series) {
+        capturedOption = opt;
+      }
+    });
+
+    render(<MapView mapData={mapData} />);
+
+    await waitFor(() => {
+      expect(capturedOption).toBeDefined();
+    });
+
+    expect(capturedOption.series).toHaveLength(1);
+    expect(capturedOption.series[0].name).toBe('enrollmentMarkers');
+    expect(capturedOption.series.find((s) => s.name === 'stateLabels')).toBeUndefined();
+    expect(resolveGeoPixelPosition(null, [1, 2])).toBeNull();
   });
 });

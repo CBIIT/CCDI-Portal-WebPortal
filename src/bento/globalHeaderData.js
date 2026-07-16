@@ -80,11 +80,6 @@ export const navbarSublists = {
     className: 'navMobileSubItem',
   },
   {
-    name: 'Molecular Targets Platform',
-    link: 'https://moleculartargets.ccdi.cancer.gov',
-    className: 'navMobileSubItem',
-  },
-  {
     name:'National Childhood Cancer Registry Explorer',
     link: 'https://nccrexplorer.ccdi.cancer.gov',
     className: 'navMobileSubItem',

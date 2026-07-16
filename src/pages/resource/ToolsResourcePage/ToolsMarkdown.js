@@ -27,7 +27,7 @@ const ToolsMarkdown = ({ children }) => {
               href={href}
               className={external || mailto ? 'link' : undefined}
               target={external || mailto ? '_blank' : undefined}
-              rel={external || mailto ? 'noopener noreferrer' : undefined}
+              rel="noopener noreferrer"
             >
               {linkChildren}
             </a>

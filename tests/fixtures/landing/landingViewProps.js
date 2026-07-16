@@ -17,12 +17,6 @@ export const defaultLandingStatsData = [
     link: '/MCI',
   },
   {
-    num: 58867,
-    title: 'Potential Pediatric Molecular Targets',
-    detail: 'Molecular Targets Platform',
-    link: 'https://moleculartargets.ccdi.cancer.gov',
-  },
-  {
     num: 1700440,
     title: 'Reported Cases Under Age 40<br>(1995-2020)',
     detail: 'National Childhood Cancer Registry Explorer',

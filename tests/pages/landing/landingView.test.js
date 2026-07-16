@@ -107,7 +107,7 @@ describe('LandingView', () => {
     it('should render one stat item per statsData entry', () => {
       renderLandingView();
       const statsSection = screen.getByTestId('landing-stats-section');
-      const statLinks = within(statsSection).getAllByRole('link', { name: /Childhood Cancer Data Catalog|Molecular Characterization Initiative|Molecular Targets Platform|National Childhood Cancer Registry Explorer/i });
+      const statLinks = within(statsSection).getAllByRole('link', { name: /Childhood Cancer Data Catalog|Molecular Characterization Initiative|National Childhood Cancer Registry Explorer/i });
       expect(statLinks.length).toBe(4);
     });
 

@@ -2,8 +2,6 @@ import updateImgCCDC from '../assets/landing/Updates_CCDC.png';
 import updateImgNewApplicationRelease from '../assets/news/News_New_Application_Release.png';
 import updateImgMCI from '../assets/landing/Updates_Molecular.png';
 import updateImgSymposium from '../assets/landing/Updates_Symposium.png';
-import updateImgMTP from '../assets/news/News_MTP.png';
-import updateImgMTP2 from '../assets/news/News_MTP_2.png';
 import updateImgMCI2 from '../assets/news/News_Molecular_Characterization.png';
 import updateImgMiscNews from '../assets/news/News_Misc_News.png';
 import updateImgEHR from '../assets/news/News_EHR.png';
@@ -16,8 +14,6 @@ export const altList = {
     updateImgNewApplicationRelease: 'A laptop screen showing a major new release of a resource, featuring a healthcare website with a child and a doctor interacting, set against a desk with stationary items',
     updateImgMCI: 'Illustration of a person connected to a computer screen displaying a DNA sequence analysis, symbolizing the relationship between human genetics and data analysis.',
     updateImgSymposium: 'Simple icon of two human figures raising their arms together on a blue gradient background.',
-    updateImgMTP: 'A medical professional using a tablet with digital interface graphics and abstract data connections, representing advanced healthcare technology.',
-    updateImgMTP2: 'A laptop displaying a molecular targets platform with large arrows pointing upward, symbolizing growth and progress in the field.',
     updateImgMCI2: 'updateImgMCI2',
     updateImgMiscNews: 'Magnifying glass focusing on a network of people icons, representing detailed analysis or review',
     updateImgEHR: 'updateImgEHR',
@@ -31,8 +27,6 @@ export const srcList = {
     updateImgNewApplicationRelease: updateImgNewApplicationRelease,
     updateImgMCI: updateImgMCI,
     updateImgSymposium: updateImgSymposium,
-    updateImgMTP: updateImgMTP,
-    updateImgMTP2: updateImgMTP2,
     updateImgMCI2: updateImgMCI2,
     updateImgMiscNews: updateImgMiscNews,
     updateImgEHR: updateImgEHR,
@@ -342,19 +336,6 @@ export const newsList = [
         type: 'CCDI Application Updates',
         img: 'updateImgNewApplicationRelease',
     },
-    {
-        id: 'mtp_07212023',
-        title: 'Molecular Targets Platform (MTP) release allows interactive data visualizations',
-        date: 'JULY 21, 2023',
-        slug: 'New interactive plot displays and updates to the About page are part of the MTP 2.1 release.',
-        highlight: '<p>The Molecular Targets Platform (MTP) is now live with interactive visualizations of data via the <a href="https://moleculartargets.ccdi.cancer.gov/pediatric-cancer-data-navigation" target="_blank" rel="noopener noreferrer">Pediatric Data Navigation page</a>. There is also improved plot generation for the OpenPedCan Gene Expression and Differential Expression widgets, along with updated descriptions in the “Pediatric Cancer Data Visualizations” section on the <a href="https://moleculartargets.ccdi.cancer.gov/about" target="_blank" rel="noopener noreferrer">About page</a> regarding the chart types added in the previous MTP release.</p>',
-        fullText: '',
-        type: 'CCDI Application Updates',
-        img: 'updateImgMTP2',
-    },
-    {
-        id: 'molecularcharacterization_07202023',
-        title: 'Molecular Characterization and Clinical Data from Multiple Organizations Released',
         date: 'JULY 20, 2023',
         slug: 'Pediatric brain tumor data from several organizations are available pre-publication and without embargo. ',
         highlight: '<p>CCDI has facilitated the release of data from children and young adults diagnosed with pediatric brain tumors and other solid and hematologic malignancies. The data was collected from the Children’s Brain Tumor Network, the Pacific Pediatric Neuro-Oncology Consortium, and the Children’s Hospital of Philadelphia Division for Genomic Diagnostics. They include tumor and germline WGS, RNA-Seq, Clinical Panel Sequencing, and other omics and molecular data. <a href="https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs002517.v1.p1" rel="noreferrer noopener" target="_blank">Access these data through dbGaP</a>.</p>',
@@ -381,16 +362,6 @@ export const newsList = [
         fullText: '',
         type: 'CCDI Application Updates',
         img: 'updateImgCCDC',
-    },
-    {
-        id: 'mtp_06022023',
-        title: 'Molecular Targets Platform releases data updates and enhanced features',
-        date: 'JUNE 2, 2023',
-        slug: 'The latest update to the Molecular Targets Platform includes new data and enhanced features. Learn about the recent release.',
-        highlight: '<p>The <a href="https://moleculartargets.ccdi.cancer.gov/" target="_blank" rel="noopener noreferrer">Molecular Targets Platform</a> (MTP) expanded with new data and enhanced features. Researchers will find new and updated data from the Pediatric Brain Tumor Atlas and TARGET cohorts, including sequencing and methylation data. Improved features include enhanced gene expression graphs for childhood cancer data and a new widget to capture methylation data. Finally, the latest coding updates ensure that the data can be easily viewed and queried. <a href="https://moleculartargets.ccdi.cancer.gov/about" target="_blank" rel="noopener noreferrer">Learn more about how the MTP is helping advance childhood cancer research</a>.</p>',
-        fullText: '',
-        type: 'CCDI Application Updates',
-        img: 'updateImgMTP',
     },
     {
         id: 'ccdc_05172023',

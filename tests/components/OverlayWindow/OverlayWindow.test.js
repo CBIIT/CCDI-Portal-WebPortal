@@ -2,23 +2,19 @@
  * Overlay consent dialog — opens when overlay flag absent; Continue persists preference.
  */
 
-jest.mock('../../../src/pages/globalSearch/store/sitesearchReducer', () => ({
-  setOverLayWindow: jest.fn(),
-}));
-
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { setOverLayWindow } from '../../../src/pages/globalSearch/store/sitesearchReducer';
 import OverlayWindow from '../../../src/components/OverlayWindow/OverlayWindow';
 
 describe('OverlayWindow', () => {
   let store;
+  const originalSessionStorage = window.sessionStorage;
 
   beforeEach(() => {
     store = {};
     jest.clearAllMocks();
-    Object.defineProperty(window, 'localStorage', {
+    Object.defineProperty(window, 'sessionStorage', {
       configurable: true,
       value: {
         getItem: jest.fn((key) => (Object.prototype.hasOwnProperty.call(store, key) ? store[key] : null)),
@@ -36,6 +32,14 @@ describe('OverlayWindow', () => {
     });
   });
 
+  afterEach(() => {
+    Object.defineProperty(window, 'sessionStorage', {
+      configurable: true,
+      value: originalSessionStorage,
+      writable: true,
+    });
+  });
+
   describe('Rendering', () => {
     it('should show the warning dialog when overlay has not been acknowledged', () => {
       render(<OverlayWindow />);
@@ -45,13 +49,12 @@ describe('OverlayWindow', () => {
   });
 
   describe('Side effects', () => {
-    it('should set overlayLoad and clear overlay flag when Continue is clicked', () => {
+    it('should set overlayLoad when Continue is clicked', () => {
       render(<OverlayWindow />);
 
       fireEvent.click(screen.getByText('Continue'));
 
-      expect(localStorage.setItem).toHaveBeenCalledWith('overlayLoad', 'true');
-      expect(setOverLayWindow).toHaveBeenCalledWith(false);
+      expect(sessionStorage.setItem).toHaveBeenCalledWith('overlayLoad', 'true');
     });
   });
 });

@@ -25,7 +25,7 @@ const OverlayWindow = () => {
   };
 
   useEffect(() => {
-    if (sessionStorage.getItem('overlayLoad') !== 'true') {
+    if (!sessionStorage.length) {
       setOpen(true);
     }
   }, []);

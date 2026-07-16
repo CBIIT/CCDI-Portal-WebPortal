@@ -336,8 +336,11 @@ export const newsList = [
         type: 'CCDI Application Updates',
         img: 'updateImgNewApplicationRelease',
     },
+    {
+        id: 'molecularcharacterization_07202023',
+        title: 'Molecular Characterization and Clinical Data from Multiple Organizations Released',
         date: 'JULY 20, 2023',
-        slug: 'Pediatric brain tumor data from several organizations are available pre-publication and without embargo. ',
+        slug: 'Pediatric brain tumor data from several organizations are available pre-publication and without embargo. ',
         highlight: '<p>CCDI has facilitated the release of data from children and young adults diagnosed with pediatric brain tumors and other solid and hematologic malignancies. The data was collected from the Children’s Brain Tumor Network, the Pacific Pediatric Neuro-Oncology Consortium, and the Children’s Hospital of Philadelphia Division for Genomic Diagnostics. They include tumor and germline WGS, RNA-Seq, Clinical Panel Sequencing, and other omics and molecular data. <a href="https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs002517.v1.p1" rel="noreferrer noopener" target="_blank">Access these data through dbGaP</a>.</p>',
         fullText: '',
         type: 'News',

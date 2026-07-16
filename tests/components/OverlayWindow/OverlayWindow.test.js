@@ -46,6 +46,12 @@ describe('OverlayWindow', () => {
       expect(screen.getByText('Warning')).toBeInTheDocument();
       expect(screen.getByText('Continue')).toBeInTheDocument();
     });
+
+    it('should not show the warning dialog when overlay has been acknowledged', () => {
+      store.overlayLoad = 'true';
+      render(<OverlayWindow />);
+      expect(screen.queryByText('Warning')).not.toBeInTheDocument();
+    });
   });
 
   describe('Side effects', () => {

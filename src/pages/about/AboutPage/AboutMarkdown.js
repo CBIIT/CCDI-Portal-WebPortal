@@ -42,7 +42,7 @@ const AboutMarkdown = ({ children, linkVariant = 'default' }) => {
               href={href}
               className={className}
               target={external || mailto ? '_blank' : undefined}
-              rel={external || mailto ? 'noopener noreferrer' : undefined}
+              rel="noopener noreferrer"
             >
               {linkChildren}
             </a>

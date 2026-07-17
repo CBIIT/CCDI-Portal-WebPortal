@@ -4,7 +4,6 @@ import aboutImg from '../assets/landing/About_1.png';
 import wheel1 from '../assets/landing/ccdc_carousel.svg';
 import wheel2 from '../assets/landing/civic_carousel.svg';
 import wheel3 from '../assets/landing/mci_carousel.svg';
-import wheel4 from '../assets/landing/mtp_carousel.svg';
 import wheel5 from '../assets/landing/nccr_carousel.svg';
 import wheel6 from '../assets/landing/cgc_carousel.svg';
 import wheel7 from '../assets/landing/dbgap_carousel.svg';
@@ -19,7 +18,6 @@ import c3dcLogo from '../assets/landing/c3dc_logo.svg';
 import ccdcMobile from '../assets/landing/ccdc_mobile.png';
 import civicMobile from '../assets/landing/civic_mobile.png';
 import mciMobile from '../assets/landing/mci_mobile.png';
-import mtpMobile from '../assets/landing/mtp_mobile.png';
 import nccrMobile from '../assets/landing/nccr_mobile.png';
 import cgcMobile from '../assets/landing/cgc_mobile.png';
 import dbgapMobile from '../assets/landing/dbgap_mobile.png';
@@ -33,7 +31,6 @@ import cBioPortalMobile from '../assets/landing/cBioPortal_mobile.png';
 import ccdcLogo from '../assets/landing/ccdc_logo.svg';
 import civicLogo from '../assets/landing/civic_logo.svg';
 import mciLogo from '../assets/landing/mci_logo.svg';
-import mtpLogo from '../assets/landing/mtp_logo.svg';
 import nccrLogo from '../assets/landing/nccr_logo.svg';
 import cgcLogo from '../assets/landing/cgc_logo.svg';
 import dbgapLogo from '../assets/landing/dbgap_logo.svg';
@@ -73,12 +70,6 @@ export const statsData = [
     title: 'Participants with Available Genomic and Clinical Data',
     detail: 'Molecular Characterization Initiative',
     link: '/MCI',
-  },
-  {
-    num: 58867,
-    title: 'Potential Pediatric Molecular Targets',
-    detail: 'Molecular Targets Platform',
-    link: 'https://moleculartargets.ccdi.cancer.gov',
   },
   {
     num: 1700440,
@@ -123,14 +114,6 @@ export const resourcesAppliationsListData = [
     link: '/MCI',
     img: mciLogo,
     noLink: true,
-  },
-  {
-    id: 'mtp',
-    title: 'Molecular Targets Platform',
-    subtitle: 'MTP',
-    content: 'An instance of the Open Targets Platform with a focus on childhood cancer data that allows users to browse and identify associations between molecular targets, diseases, and drugs.',
-    link: 'https://moleculartargets.ccdi.cancer.gov',
-    img: mtpLogo,
   },
   {
     id: 'nccrexplorer',
@@ -254,12 +237,6 @@ export const carouselList = [
     mobile: mciMobile,
     content: 'Molecular Characterization Initiative',
     link: '/MCI',
-  },
-  {
-    img: wheel4,
-    mobile: mtpMobile,
-    content: 'Molecular Targets Platform',
-    link: 'https://moleculartargets.ccdi.cancer.gov',
   },
   {
     img: wheel5,

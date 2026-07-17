@@ -61,22 +61,17 @@ const MciMarkdown = ({ children }) => {
     <ReactMarkdown
       remarkPlugins={[remarkGfm]}
       components={{
-        a: ({ node: _a, children, href, ...rest }) => {
-          const ext = isExternal(href);
-          const externalProps = ext
-            ? { target: '_blank', rel: 'noopener noreferrer' }
-            : {};
-          return (
-            <a
-              {...rest}
-              href={href}
-              className={ext ? 'link' : undefined}
-              {...externalProps}
-            >
-              {children}
-            </a>
-          );
-        },
+        a: ({ node: _a, children, href, ...rest }) => (
+          <a
+            {...rest}
+            href={href}
+            className={isExternal(href) ? 'link' : undefined}
+            target={isExternal(href) ? '_blank' : undefined}
+            rel="noreferrer"
+          >
+            {children}
+          </a>
+        ),
         img: ({ node: _i, src, alt, title, ...rest }) => {
           const cls = inlineImgClassName(src);
           return (

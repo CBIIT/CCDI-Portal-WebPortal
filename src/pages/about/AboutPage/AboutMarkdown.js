@@ -45,6 +45,8 @@ const AboutMarkdown = ({ children, linkVariant = 'default' }) => {
               href={href}
               className={className}
               {...externalProps}
+              target={external || mailto ? '_blank' : undefined}
+              rel="noreferrer"
             >
               {linkChildren}
             </a>

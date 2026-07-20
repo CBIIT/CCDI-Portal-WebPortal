@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import env from '../../utils/env'
 import yaml from "js-yaml";
 import axios from "axios";
-import { fetchReleaseNotesData } from '../releaseNotePage/parseReleaseNotesMarkdown';
+import { fetchReleaseNotesData, mergeReleaseNotesLists } from '../releaseNotePage/parseReleaseNotesMarkdown';
 import { CircularProgress } from '@material-ui/core';
 import { statsData } from '../../bento/landingPageData';
 import LandingView from './landingView';
@@ -38,8 +38,11 @@ const getDashData = () => {
       resultData = yaml.safeLoad(result.data) || {};
     } catch (_error) {
     }
-    const { releaseNotesList } = await fetchReleaseNotesData();
-    return { ...resultData, releaseNotesList };
+    const { releaseNotesList, ccdiDataUpdatesList } = await fetchReleaseNotesData();
+    return {
+      ...resultData,
+      releaseNotesList: mergeReleaseNotesLists(releaseNotesList, ccdiDataUpdatesList),
+    };
   }
 
   const [statsDataNew, setStatsDataNew] = useState(statsData);

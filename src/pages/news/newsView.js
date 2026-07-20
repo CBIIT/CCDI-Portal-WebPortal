@@ -135,12 +135,13 @@ const NewsContainer = styled.div`
 
   .newsItem {
     width: 1047px;
-    height: 230px;
+    min-height: 230px;
+    height: auto;
     border: 1.5px solid transparent;
     border-radius: 0px 20px;
     margin: 0 auto;
     margin-bottom: 29px;
-    padding: 23px 32px 0 38px;
+    padding: 23px 32px 24px 38px;
     padding-right: 0px;
     box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.25);
     text-decoration: none;
@@ -268,8 +269,9 @@ const NewsContainer = styled.div`
     font-family: 'Inter';
     padding-right: 25%;
     margin-top: 13px;
-    height: 175px;
-    overflow-y: auto;
+    min-height: 120px;
+    height: auto;
+    overflow: visible;
     font-weight: 500;
     font-size: 16px;
     line-height: 24px;
@@ -281,17 +283,10 @@ const NewsContainer = styled.div`
       padding-right: 20px;
       background: url(${exportIcon}) right center no-repeat;
     }
-    &::-webkit-scrollbar {
-      width: 7px;
-      background-color: #E2E2E2;
-      border-left: 0.5px solid #1E1E1E;
-    }
-    &::-webkit-scrollbar-track {
-      background-color: #F1F1F1;
-    }
-    &::-webkit-scrollbar-thumb {
-      background-color: #82BBE8;
-    }
+  }
+
+  .newsItemContent.noCardImage {
+    padding-right: 32px;
   }
 
   .releaseNewsItemContent {
@@ -470,8 +465,9 @@ const NewsContainer = styled.div`
     }
     .newsItem {
       width: auto;
-      height: 300px;
-      overflow: hidden;
+      min-height: 300px;
+      height: auto;
+      overflow: visible;
     }
     .releaseNewsItem {
       width: auto;
@@ -481,7 +477,11 @@ const NewsContainer = styled.div`
     .newsItemContent {
       padding-right: 20px;
       margin-top: 0;
-      height: 130px;
+      min-height: 130px;
+      height: auto;
+    }
+    .newsItemContent.noCardImage {
+      padding-right: 20px;
     }
     .releaseNewsItemContent {
       padding-right: 20px;
@@ -522,7 +522,46 @@ const useOutsideAlerter = (ref) => {
   }, [ref]);
 };
 
-const NewsView = ({classes, srcList,newsList, altList, releaseNotesList}) => {
+function isReleaseNotesStyleCard(item) {
+  return item.type === 'Release Notes';
+}
+
+/** YAML news uses highlight; ecosystem/release-note markdown uses fullText or slug. */
+function getNewsItemHtmlContent(item) {
+  let html = '';
+  if (item.highlight != null && String(item.highlight).trim() !== '') {
+    html = String(item.highlight);
+  } else if (item.fullText != null && String(item.fullText).trim() !== '') {
+    html = String(item.fullText);
+  } else if (item.slug != null && String(item.slug).trim() !== '') {
+    html = `<p>${String(item.slug)}</p>`;
+  }
+  // Card images render in the right-side imgContainer, never inline in the blurb.
+  return html.replace(/<img\b[^>]*>/gi, '');
+}
+
+/** Prefer absolute URL from markdown &lt;img src&gt;; fall back to YAML newsImgUrlList key. */
+function resolveNewsImageSrc(item, srcList = {}) {
+  if (item.imgSrc != null && String(item.imgSrc).trim() !== '') {
+    return String(item.imgSrc);
+  }
+  if (item.img && srcList && srcList[item.img]) {
+    return srcList[item.img];
+  }
+  return undefined;
+}
+
+function resolveNewsImageAlt(item, altList = {}) {
+  if (item.img && altList && altList[item.img]) {
+    return altList[item.img];
+  }
+  if (item.img) {
+    return item.img;
+  }
+  return '';
+}
+
+const NewsView = ({classes, srcList, newsList, altList, releaseNotesList, ccdiDataUpdatesList = []}) => {
   // const getPageResults = (selectedTab, pageInfo) => {
   //   const resultList = getResultList(selectedTab);
   //   const allids = [];
@@ -534,15 +573,17 @@ const NewsView = ({classes, srcList,newsList, altList, releaseNotesList}) => {
   //   return allids;
   // }
 
-  const fullList = (newsList.concat(releaseNotesList)).sort((a,b) => {
+  const fullList = (newsList.concat(releaseNotesList).concat(ccdiDataUpdatesList)).sort((a,b) => {
     return new Date(a.date).getTime() - new Date(b.date).getTime();
   }).reverse();
 
 const getResultList = (tabName) => {
   if (tabName === "All") {
     return fullList;
-  } else if(tabName === "Release Notes"){
-    return releaseNotesList;
+  } else if (tabName === "Release Notes") {
+    return releaseNotesList.filter((item) => item.type === 'Release Notes');
+  } else if (tabName === 'CCDI Data Updates') {
+    return ccdiDataUpdatesList;
   } else {
     return newsList.filter(item => item.type === tabName);
   }
@@ -564,7 +605,7 @@ const getPageResults = (selectedTab, pageInfo) => {
 }
 
   const [selectedTab, setSelectedTab] = useState("All");
-  const newsTabList = ['All', 'News', 'CCDI Application Updates', 'Release Notes'];
+  const newsTabList = ['All', 'News', 'CCDI Application Updates', 'CCDI Data Updates', 'Release Notes'];
   const sizelist = [10,20,50,100];
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(sizelist[0]);
@@ -704,8 +745,10 @@ const getPageResults = (selectedTab, pageInfo) => {
         {
           data.length > 0 ? data.map((newsItem, idx) => {
             const newskey = `news_${idx}`;
+            const imageSrc = resolveNewsImageSrc(newsItem, srcList);
+            const imageAlt = resolveNewsImageAlt(newsItem, altList);
              return (
-              newsItem.type !== 'Release Notes' ? <div id={newsItem.id} key={newskey} className='newsItem'>
+              !isReleaseNotesStyleCard(newsItem) ? <div id={newsItem.id} key={newskey} className='newsItem'>
                 <div className="UpperContainer notMobile">
                   <div className='newsItemTextContainer'>
                     <div className='newsItemTitle'>{newsItem.title}</div>
@@ -714,25 +757,25 @@ const getPageResults = (selectedTab, pageInfo) => {
                       <div className='newsCategory'>{newsItem.type}</div>
                     </div>
                   </div>
-                  <div className='newsItemContent'>
+                  <div className={imageSrc ? 'newsItemContent' : 'newsItemContent noCardImage'}>
                     <div className='newsItemTitle newsItemTitleInner'>{newsItem.title}</div>
-                    {ReactHtmlParser(newsItem.highlight)}
+                    {ReactHtmlParser(getNewsItemHtmlContent(newsItem))}
                   </div>
-                  {newsItem.img && <div className='imgContainer'><img className='newsItemImgContainer' src={srcList[newsItem.img]} alt={altList[newsItem.img]}/></div>}
+                  {imageSrc && <div className='imgContainer'><img className='newsItemImgContainer' src={imageSrc} alt={imageAlt}/></div>}
                 </div>
                 <div className="UpperContainer Mobile">
                   <div className='newsItemTextContainer'>
                     <div className="titleImgContainer">
                       <div className='newsItemTitle'>{newsItem.title}</div>
-                      {newsItem.img && <div className='imgContainer'><img className='newsItemImgContainer' src={srcList[newsItem.img]} alt={altList[newsItem.img]}/></div>}
+                      {imageSrc && <div className='imgContainer'><img className='newsItemImgContainer' src={imageSrc} alt={imageAlt}/></div>}
                     </div>
                     <div className='newsSubtitle'>
                       <div className='newsItemDate'>{newsItem.date}</div>
                       <div className='newsCategory'>{newsItem.type}</div>
                     </div>
                   </div>
-                  <div className='newsItemContent'>
-                    {ReactHtmlParser(newsItem.highlight)}
+                  <div className={imageSrc ? 'newsItemContent' : 'newsItemContent noCardImage'}>
+                    {ReactHtmlParser(getNewsItemHtmlContent(newsItem))}
                   </div>
                 </div>
               </div> :
@@ -748,10 +791,10 @@ const getPageResults = (selectedTab, pageInfo) => {
                 </div>
                 <div id={`${newsItem.id}_desc`} className='releaseNewsItemContent'>
                   <div className='newsItemTitle newsItemTitleInner'>{newsItem.title}</div>
-                  {ReactHtmlParser(newsItem.fullText)}
+                  {ReactHtmlParser(getNewsItemHtmlContent(newsItem))}
                 </div>
-                {newsItem.img && <div className='imgContainer'>
-                  <img className='newsItemImgContainer' src={srcList[newsItem.img]} alt={altList[newsItem.img]}/>
+                {imageSrc && <div className='imgContainer'>
+                  <img className='newsItemImgContainer' src={imageSrc} alt={imageAlt}/>
                   <Button className='downloadPDF Desktop' onClick={handleViewPDF}>View PDF<img src={UploadIcon} alt="view pdf icon" /></Button>
                   <Button className='downloadPDF Tablet' onClick={handleViewPDF}>PDF<img src={UploadIcon} alt="view pdf icon" /></Button>
                   <Button className='readMore Desktop' onClick={() => handleReadMore(newsItem.id)}>Read More<img src={exportIcon} alt="outlink icon" /></Button>
@@ -762,8 +805,8 @@ const getPageResults = (selectedTab, pageInfo) => {
                 <div className='newsItemTextContainer'>
                   <div className="titleImgContainer">
                     <div className='newsItemTitle'>{newsItem.title}</div>
-                    {newsItem.img && <div className='imgContainer'>
-                      <img className='newsItemImgContainer' src={srcList[newsItem.img]} alt={altList[newsItem.img]}/>
+                    {imageSrc && <div className='imgContainer'>
+                      <img className='newsItemImgContainer' src={imageSrc} alt={imageAlt}/>
                       </div>}
                   </div>
                   <div className='newsSubtitle'>
@@ -772,7 +815,7 @@ const getPageResults = (selectedTab, pageInfo) => {
                   </div>
                 </div>
                 <div className='releaseNewsItemContent'>
-                  {ReactHtmlParser(newsItem.fullText)}
+                  {ReactHtmlParser(getNewsItemHtmlContent(newsItem))}
                 </div>
                 <Button className='downloadPDF' onClick={handleViewPDF}>View PDF<img src={UploadIcon} alt="view pdf icon" /></Button>
                 <Button className='readMore' onClick={() => handleReadMore(newsItem.id)}>Read More<img src={exportIcon} alt="outlink icon" /></Button>

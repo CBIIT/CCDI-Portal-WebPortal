@@ -21,13 +21,21 @@ const NewsController = () => {
         // resultData stays {}
       }
 
-      const { releaseNotesList } = await fetchReleaseNotesData();
-      setData({ ...resultData, releaseNotesList });
+      const { releaseNotesList, ccdiDataUpdatesList } = await fetchReleaseNotesData();
+      setData({ ...resultData, releaseNotesList, ccdiDataUpdatesList });
     };
     fetchData();
   }, []);
   if (data.newsList) {
-    return <NewsView newsList={data.newsList} srcList={data.newsImgUrlList} altList={data.altList} releaseNotesList={data.releaseNotesList} />;
+    return (
+      <NewsView
+        newsList={data.newsList}
+        srcList={data.newsImgUrlList}
+        altList={data.altList}
+        releaseNotesList={data.releaseNotesList}
+        ccdiDataUpdatesList={data.ccdiDataUpdatesList}
+      />
+    );
   } else {
     return <div />
   }

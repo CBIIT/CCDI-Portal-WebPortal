@@ -1,15 +1,12 @@
 import gql from 'graphql-tag';
-import {
-  C3DC_BASE_URL,
-  C3DC_BACKEND_API,
-  resolveC3dcBaseUrl,
-} from '../../../../utils/c3dcEnv';
+import env from '../../../../utils/env';
 
-export {
-  C3DC_BASE_URL,
-  C3DC_BACKEND_API,
-  resolveC3dcBaseUrl,
-};
+export const C3DC_BASE_URL = (
+  env.REACT_APP_C3DC_URL || 'https://clinicalcommons-integrated-dev.ccdi.cancer.gov'
+).replace(/\/$/, '');
+
+export const C3DC_BACKEND_API = env.REACT_APP_C3DC_BACKEND_API
+  || `${C3DC_BASE_URL}/v1/graphql/`;
 
 /**
  * Build a C3DC Explore deep-link (`p_id` only, optional `tab` / `path`).

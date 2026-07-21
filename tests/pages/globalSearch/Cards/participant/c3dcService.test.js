@@ -2,42 +2,17 @@
  * c3dcService — Explore URL builder and CPI GraphQL fetch helpers.
  */
 
-jest.mock('../../../../../src/utils/env', () => ({
-  __esModule: true,
-  default: {
-    REACT_APP_BACKEND_API: 'https://ccdi-dev.cancer.gov/v1/graphql/',
-  },
-}));
-
 import {
   buildC3dcExploreUrl,
   buildC3dcStudyUrl,
   fetchParticipantCpiData,
+  openC3dcExplore,
   openC3dcExploreFiles,
   openC3dcDataModel,
   openC3dcStudy,
-  resolveC3dcBaseUrl,
 } from '../../../../../src/pages/globalSearch/Cards/participant/c3dcService';
 
 describe('c3dcService', () => {
-  it('maps Hub backend hosts to matching C3DC tiers', () => {
-    expect(resolveC3dcBaseUrl('https://ccdi-dev.cancer.gov/v1/graphql/')).toBe(
-      'https://clinicalcommons-integrated-dev.ccdi.cancer.gov',
-    );
-    expect(resolveC3dcBaseUrl('https://ccdi-qa.cancer.gov/v1/graphql/')).toBe(
-      'https://clinicalcommons-qa.ccdi.cancer.gov',
-    );
-    expect(resolveC3dcBaseUrl('https://ccdi-stage.cancer.gov/v1/graphql/')).toBe(
-      'https://clinicalcommons-stage.ccdi.cancer.gov',
-    );
-    expect(resolveC3dcBaseUrl('https://ccdi.cancer.gov/v1/graphql/')).toBe(
-      'https://clinicalcommons.ccdi.cancer.gov',
-    );
-    expect(resolveC3dcBaseUrl('http://localhost:8080/v1/graphql/')).toBe(
-      'https://clinicalcommons-integrated-dev.ccdi.cancer.gov',
-    );
-  });
-
   it('builds a C3DC explore URL with participant id only', () => {
     expect(buildC3dcExploreUrl('P001')).toBe(
       'https://clinicalcommons-integrated-dev.ccdi.cancer.gov/exploreParticipants?p_id=P001',

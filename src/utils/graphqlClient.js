@@ -11,9 +11,15 @@ import env from './env';
 
 const BACKEND = env.REACT_APP_BACKEND_API;
 const INTEROP_SERVICE = `${env.REACT_APP_INTEROP_SERVICE_API}graphql`;
+const C3DC_BACKEND = env.REACT_APP_C3DC_BACKEND_API
+  || `${(env.REACT_APP_C3DC_URL || 'https://clinicalcommons-integrated-dev.ccdi.cancer.gov').replace(/\/$/, '')}/v1/graphql/`;
 
 const interopService = new HttpLink({
   uri: INTEROP_SERVICE,
+});
+
+const c3dcService = new HttpLink({
+  uri: C3DC_BACKEND,
 });
 
 const backendService = new HttpLink({
@@ -24,7 +30,7 @@ const backendService = new HttpLink({
 const dynamicFetchPolicyLink = new ApolloLink((operation, forward) => {
   // Set fetchPolicy based on clientName in context
   const clientName = operation.getContext().clientName;
-  if (clientName === 'interopService') {
+  if (clientName === 'interopService' || clientName === 'c3dcService') {
     operation.setContext(({ fetchOptions = {} }) => ({
       fetchOptions: {
         ...fetchOptions,
@@ -42,17 +48,6 @@ const dynamicFetchPolicyLink = new ApolloLink((operation, forward) => {
   return forward(operation);
 });
 
-// const client = new ApolloClient({
-//   cache: new InMemoryCache(),
-//   defaultOptions,
-//   link: ApolloLink.split( // This is 3rd level of ApolloLink.
-//             (operation) => operation.getContext().clientName === 'interopService',
-//             // the string "interopService" can be anything you want,
-//             interopService, // <= apollo will send to this if clientName is "interopService"
-//             backendService, // <= otherwise will send to this
-//           ), // <= otherwise will send to this
-// });
-
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: ApolloLink.from([
@@ -60,7 +55,11 @@ const client = new ApolloClient({
     ApolloLink.split(
       (operation) => operation.getContext().clientName === 'interopService',
       interopService,
-      backendService,
+      ApolloLink.split(
+        (operation) => operation.getContext().clientName === 'c3dcService',
+        c3dcService,
+        backendService,
+      ),
     ),
   ]),
 });

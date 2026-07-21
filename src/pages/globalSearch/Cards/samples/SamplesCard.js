@@ -4,7 +4,7 @@ import {
 } from '@material-ui/core';
 import useStyles from './style';
 import { cn } from 'bento-components';
-import { useNavigate } from 'react-router-dom';
+import { openC3dcExplore } from '../participant/c3dcService';
 
 /* const removeSquareBracketsFromString = (text) => {
   return text.replace(/\[|\]/g, '');
@@ -68,7 +68,6 @@ const SamplesCard = ({ data = {}, index }) => {
     diagnosis_category_str,
   } = data;
   const classes = useStyles();
-  const navigate = useNavigate();
   const [containerWidth, setContainerWidth] = useState(0);
   const cardRef = useRef(null);
 
@@ -86,7 +85,7 @@ const SamplesCard = ({ data = {}, index }) => {
   }, []);
 
   const handleClick = () => {
-    navigate(`/explore?p_id=${participant_id}&tab=2`);
+    openC3dcExplore(participant_id, { tab: 7 });
   };
 
   const renderInfo = (label, value = '') => (

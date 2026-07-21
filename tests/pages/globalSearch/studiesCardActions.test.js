@@ -1,19 +1,15 @@
 /**
- * StudiesCard — actions menu, navigation, and manifest download.
+ * StudiesCard — actions menu and C3DC / cBioPortal links.
  */
 
-const mockNavigate = jest.fn();
-
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useNavigate: () => mockNavigate,
+jest.mock('../../../src/pages/globalSearch/Cards/participant/c3dcService', () => ({
+  openC3dcStudy: jest.fn(),
 }));
 
 jest.mock('../../../src/bento/studiesData', () => ({
-  studyDownloadLinks: {
-    phsCARD_TEST_001: 'https://example.com/mock-study-manifest.xlsx',
+  studycBioPortalLinks: {
+    phs002790: 'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs002790',
   },
-  openDoubleLink: jest.fn(),
 }));
 
 import React from 'react';
@@ -22,12 +18,11 @@ import '@testing-library/jest-dom';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { MemoryRouter } from 'react-router-dom';
 import StudiesCard from '../../../src/pages/globalSearch/Cards/studies/StudiesCard';
+import { openC3dcStudy } from '../../../src/pages/globalSearch/Cards/participant/c3dcService';
 import {
   studiesCardRow,
-  studiesCardRowNoManifest,
   longTitleStudiesCardRow,
 } from '../../fixtures/globalSearch/cardPresentationFixtures';
-import { openDoubleLink } from '../../../src/bento/studiesData';
 
 const theme = createMuiTheme();
 
@@ -46,7 +41,6 @@ describe('StudiesCard actions', () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
-    mockNavigate.mockClear();
     openSpy = jest.spyOn(window, 'open').mockImplementation(() => null);
     Object.defineProperty(HTMLElement.prototype, 'offsetWidth', {
       configurable: true,
@@ -64,46 +58,38 @@ describe('StudiesCard actions', () => {
     fireEvent.click(screen.getByRole('button', { name: /available actions/i }));
   };
 
-  it('should navigate to study detail when VIEW STUDY is selected', () => {
+  it('should open the C3DC study page when VIEW STUDY is selected', () => {
     renderStudiesCard(studiesCardRow);
     openActionsMenu();
     fireEvent.click(screen.getByText('VIEW STUDY'));
 
-    expect(mockNavigate).toHaveBeenCalledWith(`/studies/${studiesCardRow.study_id}`);
+    expect(openC3dcStudy).toHaveBeenCalledWith(studiesCardRow.study_id);
   });
 
-  it('should download manifest via openDoubleLink when configured', () => {
+  it('should not show DOWNLOAD MANIFEST', () => {
     renderStudiesCard(studiesCardRow);
     openActionsMenu();
-    fireEvent.click(screen.getByText('DOWNLOAD MANIFEST'));
-
-    expect(openDoubleLink).toHaveBeenCalledWith(
-      'https://example.com/mock-study-manifest.xlsx',
-      `${studiesCardRow.study_id}_CCDI_Study_Manifest.xlsx`,
-    );
+    expect(screen.queryByText('DOWNLOAD MANIFEST')).not.toBeInTheDocument();
   });
 
-  it('should warn when manifest link is missing', () => {
-    const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
-    renderStudiesCard(studiesCardRowNoManifest);
-    openActionsMenu();
-    fireEvent.click(screen.getByText('DOWNLOAD MANIFEST'));
-
-    expect(openDoubleLink).not.toHaveBeenCalled();
-    expect(warnSpy).toHaveBeenCalledWith(
-      expect.stringContaining(studiesCardRowNoManifest.study_id),
-    );
-    warnSpy.mockRestore();
-  });
-
-  it('should open cBioPortal in a new tab', () => {
+  it('should hide cBioPortal when the study has no portal link', () => {
     renderStudiesCard(studiesCardRow);
+    openActionsMenu();
+    expect(screen.queryByText('CCDI CBioPortal')).not.toBeInTheDocument();
+  });
+
+  it('should open the study-specific cBioPortal URL when configured', () => {
+    renderStudiesCard({
+      ...studiesCardRow,
+      study_id: 'phs002790',
+    });
     openActionsMenu();
     fireEvent.click(screen.getByText('CCDI CBioPortal'));
 
     expect(openSpy).toHaveBeenCalledWith(
-      'https://cbioportal.ccdi.cancer.gov/',
+      'https://cbioportal.ccdi.cancer.gov/study/summary?id=phs002790',
       '_blank',
+      'noopener,noreferrer',
     );
   });
 

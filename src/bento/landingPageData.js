@@ -52,9 +52,9 @@ export const introData = {
 
 export const titleData = {
   latestUpdatesTitle: 'Latest Updates',
-  resourceTitle: 'Core CCDI-supported resources',
+  resourceTitle: 'Resources',
   applicationsTitle: 'CCDI-SUPPORTED RESOURCES',
-  cloudResourcesTitle: 'Broader Ecosystem Tools',
+  cloudResourcesTitle: 'Other Resources',
   aboutTitle: 'About the CCDI Community',
 };
 

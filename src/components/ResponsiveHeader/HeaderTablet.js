@@ -6,7 +6,7 @@ import SearchBar from '../ResponsiveHeader/components/SearchBarTablet';
 import menuClearIcon from '../../assets/header/Menu_Cancel_Icon.svg';
 import rightArrowIcon from '../../assets/header/Right_Arrow.svg';
 import leftArrowIcon from '../../assets/header/Left_Arrow.svg';
-import { navMobileList, navbarSublists, navBarCartData } from '../../bento/globalHeaderData'
+import { navMobileList, navbarSublists, navBarCartData, flattenNavbarSublist } from '../../bento/globalHeaderData'
 import { USGovBannerData } from '../../bento/globalHeaderData';
 
 const HeaderBanner = styled.div`
@@ -150,6 +150,16 @@ const MenuArea = styled.div`
         padding-left: 24px;
     }
 
+    .navMobileSubSection {
+        font-weight: 700;
+        background-color: #f0f0f0;
+        pointer-events: none;
+    }
+
+    .navMobileSubSection:hover {
+        background-color: #f0f0f0;
+    }
+
     .clickable {
         background: url(${rightArrowIcon}) 90% no-repeat;
     }
@@ -225,7 +235,13 @@ const Header = () => {
 
   useEffect(() => {
     if (clickTitle) {
-      setNavbarMobileList(navbarSublists[clickTitle].sort((a, b) => a.name.localeCompare(b.name)));
+      const sublist = navbarSublists[clickTitle] || [];
+      const hasSections = sublist.some((item) => item.className === 'navMobileSubSection');
+      setNavbarMobileList(
+        hasSections
+          ? flattenNavbarSublist(sublist)
+          : [...sublist].sort((a, b) => a.name.localeCompare(b.name)),
+      );
     } else {
       setNavbarMobileList(navMobileList);
     }
@@ -268,8 +284,13 @@ const Header = () => {
                             const mobilekey = `mobile_${idx}`;
                             return (
                                 <>
-                                    {navMobileItem.className === 'navMobileItem' && <NavLink to={navMobileItem.link} state={{ navigationType: 'main_menu' }} key={mobilekey} onClick={() => setNavMobileDisplay('none')}><div className='navMobileItem'>{navMobileItem.name}</div></NavLink>}
+                                    {navMobileItem.className === 'navMobileItem' && (
+                                      navMobileItem.link.startsWith('http://') || navMobileItem.link.startsWith('https://')
+                                        ? <a href={navMobileItem.link} key={mobilekey} onClick={() => setNavMobileDisplay('none')}><div className='navMobileItem'>{navMobileItem.name}</div></a>
+                                        : <NavLink to={navMobileItem.link} state={{ navigationType: 'main_menu' }} key={mobilekey} onClick={() => setNavMobileDisplay('none')}><div className='navMobileItem'>{navMobileItem.name}</div></NavLink>
+                                    )}
                                     {navMobileItem.className === 'navMobileItem clickable' && <div key={mobilekey} className='navMobileItem clickable' onClick={clickNavItem}>{navMobileItem.name}</div>}
+                                    {navMobileItem.className === 'navMobileSubSection' && <div key={mobilekey} className='navMobileItem navMobileSubSection'>{navMobileItem.name}</div>}
                                     {navMobileItem.className === 'navMobileSubItem' && <a href={navMobileItem.link} target={navMobileItem.link.includes("http") || navMobileItem.link.includes("pdf") || navMobileItem.link.includes("release-notes") ? "_blank" : ""} rel="noopener noreferrer" key={mobilekey}><div className='navMobileItem SubItem' onClick={() => setNavMobileDisplay('none')}>{navMobileItem.name}</div></a>}
                                     {navMobileItem.className === 'cart' && <NavLink to={navBarCartData.cartLink} key='cart_key' onClick={() => setNavMobileDisplay('none')}><div className='navMobileItem' style={{fontWeight: '600'}}>MY FILES</div></NavLink>}
                                 </>

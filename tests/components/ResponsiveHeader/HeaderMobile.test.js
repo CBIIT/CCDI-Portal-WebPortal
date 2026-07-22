@@ -11,6 +11,13 @@ if (typeof global.MutationObserver === 'undefined') {
   };
 }
 
+jest.mock('../../../src/utils/env', () => ({
+  __esModule: true,
+  default: {
+    REACT_APP_C3DC: 'https://clinicalcommons-dev.ccdi.cancer.gov',
+  },
+}));
+
 jest.mock('../../../src/components/ResponsiveHeader/components/LogoMobile', () => {
   const React = require('react');
   return { __esModule: true, default: () => <div data-testid="logo-mock" /> };
@@ -59,6 +66,28 @@ describe('HeaderMobile', () => {
 
       expect(screen.getByRole('link', { name: 'Home' })).toBeInTheDocument();
       expect(screen.getByText('MY FILES')).toBeInTheDocument();
+    });
+
+    it('should list primary nav without Cohort Analyzer and point Explore/Studies to C3DC', () => {
+      renderAt('/');
+
+      fireEvent.click(screen.getByText('Menu'));
+
+      expect(screen.getByRole('link', { name: 'Home' })).toBeInTheDocument();
+      expect(screen.getByRole('link', { name: 'Explore' })).toHaveAttribute(
+        'href',
+        'https://clinicalcommons-dev.ccdi.cancer.gov/explore',
+      );
+      expect(screen.getByRole('link', { name: 'Studies' })).toHaveAttribute(
+        'href',
+        'https://clinicalcommons-dev.ccdi.cancer.gov/studies',
+      );
+      expect(screen.getByRole('link', { name: 'Explore' })).not.toHaveAttribute('target');
+      expect(screen.getByRole('link', { name: 'Studies' })).not.toHaveAttribute('target');
+      expect(screen.getByText('Resources')).toBeInTheDocument();
+      expect(screen.getByRole('link', { name: 'News' })).toBeInTheDocument();
+      expect(screen.getByText('About')).toBeInTheDocument();
+      expect(screen.queryByText('Cohort Analyzer')).not.toBeInTheDocument();
     });
   });
 

@@ -33,6 +33,13 @@ jest.mock('../../../src/pages/globalSearch/Cards/participant/CPIModal', () => {
   return Mock;
 });
 
+jest.mock('../../../src/pages/globalSearch/Cards/participant/c3dcService', () => ({
+  openC3dcExplore: jest.fn(),
+  openC3dcExploreFiles: jest.fn(),
+  openC3dcStudy: jest.fn(),
+  openC3dcDataModel: jest.fn(),
+}));
+
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useNavigate: jest.fn(),
@@ -54,6 +61,7 @@ import { CohortStateContext } from '../../../src/components/CohortSelectorState/
 import * as ReactRouterDOM from 'react-router-dom';
 
 import { openDoubleLink } from '../../../src/bento/studiesData';
+import { openC3dcExplore, openC3dcExploreFiles, openC3dcDataModel } from '../../../src/pages/globalSearch/Cards/participant/c3dcService';
 import { enableTitleTruncationMocks } from '../../helpers/globalSearchCardTestUtils';
 import {
   studiesCardRow,
@@ -179,11 +187,12 @@ describe('Explore — Global Search cards', () => {
       expect(screen.getByText(samplesCardRow.participant_id)).toBeInTheDocument();
     });
 
-    it('should navigate to explore when VIEW IN EXPLORE is clicked', () => {
+    it('should open C3DC Explore when VIEW IN EXPLORE is clicked', () => {
       renderWithRouter(<SamplesCard data={samplesCardRow} index={1} />);
       fireEvent.click(screen.getByText('VIEW IN EXPLORE'));
-      expect(mockNavigate).toHaveBeenCalledWith(
-        `/explore?p_id=${samplesCardRow.participant_id}&tab=2`,
+      expect(openC3dcExplore).toHaveBeenCalledWith(
+        samplesCardRow.participant_id,
+        { tab: 7 },
       );
     });
 
@@ -213,7 +222,7 @@ describe('Explore — Global Search cards', () => {
     it('should navigate to data model when action button is clicked', () => {
       renderWithRouter(<ModelsCard data={modelsCardRow} index={2} />);
       fireEvent.click(screen.getByText('GO TO DATA MODEL NAVIGATOR'));
-      expect(mockNavigate).toHaveBeenCalledWith('/data-model');
+      expect(openC3dcDataModel).toHaveBeenCalled();
     });
 
     it('should hide property fields when category_type is node', () => {
@@ -334,8 +343,8 @@ describe('Explore — Global Search cards', () => {
       fireEvent.click(screen.getByText('AVAILABLE ACTIONS'));
       fireEvent.click(screen.getByText('VIEW IN EXPLORE DASHBOARD'));
 
-      expect(mockNavigate).toHaveBeenCalledWith(
-        `/explore?p_id=${participantCardRowWithCpi.participant_id}`,
+      expect(openC3dcExplore).toHaveBeenCalledWith(
+        participantCardRowWithCpi.participant_id,
       );
     });
 
@@ -565,56 +574,25 @@ describe('Explore — Global Search cards', () => {
   });
 
   describe('FilesCard', () => {
-    it('should render file header, metadata, and add-to-cart control', () => {
+    it('should render file header, metadata, and view-in-explore control', () => {
       renderWithRouter(
         <FilesCard
           data={filesCardRow}
           index={5}
-          addFiles={jest.fn()}
-          cartFiles={[]}
         />,
       );
 
       expect(screen.getByText('FILES')).toBeInTheDocument();
       expect(screen.getByText(filesCardRow.file_name)).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: /add to cart/i })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /view in explore/i })).toBeInTheDocument();
     });
 
-    it('should add file to cart and show success notification', () => {
-      const addFiles = jest.fn();
+    it('should open C3DC Explore Files when View in Explore is clicked', () => {
       renderWithRouter(
-        <FilesCard data={filesCardRow} index={5} addFiles={addFiles} cartFiles={[]} />,
+        <FilesCard data={filesCardRow} index={5} />,
       );
-      fireEvent.click(screen.getByRole('button', { name: /add to cart/i }));
-      expect(addFiles).toHaveBeenCalledWith([filesCardRow.id]);
-      expect(screen.getByText(/successfully added/i)).toBeInTheDocument();
-    });
-
-    it('should show error when file is already in cart', () => {
-      renderWithRouter(
-        <FilesCard
-          data={filesCardRow}
-          index={5}
-          addFiles={jest.fn()}
-          cartFiles={[filesCardRow.id]}
-        />,
-      );
-      fireEvent.click(screen.getByRole('button', { name: /add to cart/i }));
-      expect(screen.getByText(/already in cart/i)).toBeInTheDocument();
-    });
-
-    it('should show error when cart is at limit', () => {
-      const nearFullCart = Array.from({ length: 200000 }, (_, i) => `f-${i}`);
-      renderWithRouter(
-        <FilesCard
-          data={filesCardRow}
-          index={5}
-          addFiles={jest.fn()}
-          cartFiles={nearFullCart}
-        />,
-      );
-      fireEvent.click(screen.getByRole('button', { name: /add to cart/i }));
-      expect(screen.getByText(/cart limit reached/i)).toBeInTheDocument();
+      fireEvent.click(screen.getByRole('button', { name: /view in explore/i }));
+      expect(openC3dcExploreFiles).toHaveBeenCalledWith();
     });
 
     it('should render plain file title when participant_id is absent', () => {
@@ -622,8 +600,6 @@ describe('Explore — Global Search cards', () => {
         <FilesCard
           data={filesCardRowNoParticipant}
           index={6}
-          addFiles={jest.fn()}
-          cartFiles={[]}
         />,
       );
       expect(screen.getByText(filesCardRowNoParticipant.file_name)).toBeInTheDocument();
@@ -639,8 +615,6 @@ describe('Explore — Global Search cards', () => {
         <FilesCard
           data={filesCardRowLongIds}
           index={7}
-          addFiles={jest.fn()}
-          cartFiles={[]}
         />,
       );
       const expandToggle = document.querySelector('span[class*="expandToggle"]');
@@ -654,8 +628,6 @@ describe('Explore — Global Search cards', () => {
         <FilesCard
           data={filesCardRowBracketedParticipant}
           index={8}
-          addFiles={jest.fn()}
-          cartFiles={[]}
         />,
       );
       expect(screen.getByText('PART-A; PART-B')).toBeInTheDocument();

@@ -38,13 +38,29 @@ function isInMercurialRepository() {
   }
 }
 
+// Jest 23 + sane FSEventsWatcher need fsevents v1 (callable). fsevents v2
+// exports an object, so watch mode crashes with "`fsevents` unavailable".
+function canUseFseventsWatcher() {
+  if (process.platform !== 'darwin') {
+    return true;
+  }
+  try {
+    // eslint-disable-next-line global-require, import/no-extraneous-dependencies
+    const fsevents = require('fsevents');
+    return typeof fsevents === 'function';
+  } catch (e) {
+    return false;
+  }
+}
+
 // Watch unless on CI, in coverage mode, explicitly adding `--no-watch`,
 // or explicitly running all tests
 if (
   !process.env.CI &&
   argv.indexOf('--coverage') === -1 &&
   argv.indexOf('--no-watch') === -1 &&
-  argv.indexOf('--watchAll') === -1
+  argv.indexOf('--watchAll') === -1 &&
+  canUseFseventsWatcher()
 ) {
   // https://github.com/facebook/create-react-app/issues/5210
   const hasSourceControl = isInGitRepository() || isInMercurialRepository();

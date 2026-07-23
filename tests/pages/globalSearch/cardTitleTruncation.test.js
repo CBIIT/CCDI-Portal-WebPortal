@@ -14,10 +14,17 @@
  * @see src/pages/globalSearch/Cards/files/FilesCard.js
  */
 
+jest.mock('../../../src/pages/globalSearch/Cards/participant/c3dcService', () => ({
+  openC3dcStudy: jest.fn(),
+  openC3dcDataModel: jest.fn(),
+  openC3dcExploreFiles: jest.fn(),
+}));
+
 jest.mock('../../../src/bento/studiesData', () => ({
   studyDownloadLinks: {
     phsCARD_TEST_001: 'https://example.com/mock-study-manifest.xlsx',
   },
+  studycBioPortalLinks: {},
   openDoubleLink: jest.fn(),
 }));
 

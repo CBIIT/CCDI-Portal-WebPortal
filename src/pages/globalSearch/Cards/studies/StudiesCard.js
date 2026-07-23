@@ -107,7 +107,7 @@ const StudiesCard = ({ data = {}, index }) => {
   } = data;
 
   const classes = useStyles();
-  const cBioPortalUrl = studycBioPortalLinks[study_id];
+  const cBioPortalUrl = studycBioPortalLinks && studycBioPortalLinks[study_id];
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [consentCodesExpanded, setConsentCodesExpanded] = useState(false);

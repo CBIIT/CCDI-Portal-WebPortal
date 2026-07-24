@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useLocation, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import { navMobileList, navbarSublists } from '../../../bento/globalHeaderData';
+import { navMobileList, navbarSublists, isAboutPathActive } from '../../../bento/globalHeaderData';
 
 const Nav = styled.div`
     top: 0;
@@ -217,6 +217,40 @@ const DropdownContainer = styled.div`
   .dropdownItem:hover {
     text-decoration: underline;
   }
+
+  .dropdownSection {
+    padding: 0 16px 32px 16px;
+    max-width: 344px;
+  }
+
+  .dropdownSectionTitle {
+    font-family: poppins;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 120%;
+    color: #FFFFFF;
+    margin: 0 0 16px 0;
+    text-transform: none;
+  }
+
+  .dropdownSectionItem {
+    display: block;
+    padding: 0 0 16px 0;
+    font-family: poppins;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 110%;
+    color: #FFFFFF;
+    text-decoration: none;
+  }
+
+  .dropdownSectionItem:last-child {
+    padding-bottom: 0;
+  }
+
+  .dropdownSectionItem:hover {
+    text-decoration: underline;
+  }
 `;
 
 
@@ -250,7 +284,7 @@ const useOutsideAlerter = (ref) => {
 
 const NavBar = () => {
   const path = useLocation().pathname;
-  const isAbout = navbarSublists["About"].some((navItem)=>navItem.link === path);
+  const isAbout = isAboutPathActive(path);
   const [clickedTitle, setClickedTitle] = useState("");
   const dropdownSelection = useRef(null);
   const clickableObject = navMobileList.filter(item => item.className === 'navMobileItem clickable');
@@ -275,6 +309,96 @@ const NavBar = () => {
     setClickedTitle("");
   }, []);
 
+  const renderDropdownLink = (dropItem, dropkey) => {
+    if (!dropItem.link) {
+      return null;
+    }
+    const isExternal = dropItem.link.includes('http')
+      || dropItem.link.includes('pdf')
+      || dropItem.link.includes('release-notes');
+    if (isExternal) {
+      return (
+        <a
+          href={dropItem.link}
+          className="dropdownSectionItem"
+          target="_blank"
+          rel="noopener noreferrer"
+          key={dropkey}
+          onClick={() => setClickedTitle('')}
+        >
+          {dropItem.name}
+        </a>
+      );
+    }
+    return (
+      <NavLink
+        to={dropItem.link}
+        className="dropdownSectionItem"
+        key={dropkey}
+        onClick={() => setClickedTitle('')}
+      >
+        {dropItem.name}
+      </NavLink>
+    );
+  };
+
+  const renderDropdownItems = () => {
+    if (clickedTitle === '') {
+      return null;
+    }
+    const sublist = navbarSublists[clickedTitle] || [];
+    const hasSections = sublist.some((item) => item.className === 'navMobileSubSection');
+
+    if (hasSections) {
+      return sublist.map((section, idx) => {
+        const sectionKey = `section_${idx}`;
+        return (
+          <div className="dropdownSection" key={sectionKey}>
+            <div className="dropdownSectionTitle">{section.name}</div>
+            {(section.children || []).map((child, childIdx) => (
+              renderDropdownLink(child, `${sectionKey}_item_${childIdx}`)
+            ))}
+          </div>
+        );
+      });
+    }
+
+    return [...sublist]
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .map((dropItem, idx) => {
+        const dropkey = `drop_${idx}`;
+        if (!dropItem.link) {
+          return null;
+        }
+        const isExternal = dropItem.link.includes('http')
+          || dropItem.link.includes('pdf')
+          || dropItem.link.includes('release-notes');
+        return isExternal
+          ? (
+            <a
+              href={dropItem.link}
+              className="dropdownItem"
+              target="_blank"
+              rel="noopener noreferrer"
+              key={dropkey}
+              onClick={() => setClickedTitle('')}
+            >
+              {dropItem.name}
+            </a>
+          )
+          : (
+            <NavLink
+              to={dropItem.link}
+              className="dropdownItem"
+              key={dropkey}
+              onClick={() => setClickedTitle('')}
+            >
+              {dropItem.name}
+            </NavLink>
+          );
+      });
+  };
+
   return (
     <>
     <Nav>
@@ -290,17 +414,32 @@ const NavBar = () => {
                   &&
                   <LiSection key={navkey}>
                     <div className='navTitle directLink'>
-                      <NavLink to={navMobileItem.link} state={{ navigationType: 'main_menu' }}>
-                        <div
-                          className='navText directLink'
-                          onKeyDown={onKeyPressHandler}
-                          role="button"
-                          onClick={handleMenuClick}
-                          style={path === navMobileItem.link || (path === '/' && navMobileItem.link === '/home') ? activeStyle : null}
-                        >
-                          {navMobileItem.name}
-                          </div>
-                        </NavLink>
+                      {navMobileItem.link.startsWith('http://') || navMobileItem.link.startsWith('https://')
+                        ? (
+                          <a href={navMobileItem.link}>
+                            <div
+                              className='navText directLink'
+                              onKeyDown={onKeyPressHandler}
+                              role="button"
+                              onClick={handleMenuClick}
+                            >
+                              {navMobileItem.name}
+                            </div>
+                          </a>
+                        )
+                        : (
+                          <NavLink to={navMobileItem.link} state={{ navigationType: 'main_menu' }}>
+                            <div
+                              className='navText directLink'
+                              onKeyDown={onKeyPressHandler}
+                              role="button"
+                              onClick={handleMenuClick}
+                              style={path === navMobileItem.link || (path === '/' && navMobileItem.link === '/home') ? activeStyle : null}
+                            >
+                              {navMobileItem.name}
+                            </div>
+                          </NavLink>
+                        )}
                       </div>
                     </LiSection>
                 }
@@ -330,21 +469,7 @@ const NavBar = () => {
       <Dropdown ref={dropdownSelection} style={clickedTitle === '' ? dropdownInvisibleStyle : null}>
         <DropdownContainer>
             <div className="dropdownList">
-              {
-                clickedTitle !== "" ? navbarSublists[clickedTitle].sort((a, b) => a.name.localeCompare(b.name)).map((dropItem, idx) => {
-                  const dropkey = `drop_${idx}`;
-                  return (
-                    <>
-                      {dropItem.link
-                      ? dropItem.link.includes("http") || dropItem.link.includes("pdf") || dropItem.link.includes("release-notes")
-                      ? <a href={dropItem.link} className="dropdownItem" target="_blank" rel="noopener noreferrer" key={dropkey} onClick={() => setClickedTitle("")}>{dropItem.name}</a>
-                      : <NavLink to={dropItem.link} className="dropdownItem" key={dropkey} onClick={() => setClickedTitle("")}>{dropItem.name}</NavLink>
-                      : null}
-                    </>
-                  )
-                })
-                :null
-              }
+              {renderDropdownItems()}
             </div>
         </DropdownContainer>
       </Dropdown>

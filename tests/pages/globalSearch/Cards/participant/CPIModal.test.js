@@ -15,8 +15,7 @@ jest.mock('../../../../../src/pages/globalSearch/Cards/participant/c3dcService',
 }));
 
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import '@testing-library/jest-dom';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import CPIModal from '../../../../../src/pages/globalSearch/Cards/participant/CPIModal';
@@ -62,6 +61,17 @@ function renderModal(props = {}) {
   );
 }
 
+function whenLoaded(assertions, done) {
+  setTimeout(() => {
+    try {
+      assertions();
+      done();
+    } catch (err) {
+      done.fail(err);
+    }
+  }, 100);
+}
+
 describe('Global Search — CPIModal', () => {
   beforeEach(() => {
     jest.clearAllMocks();
@@ -84,39 +94,39 @@ describe('Global Search — CPIModal', () => {
     }
   });
 
-  it('should load CPI rows from the C3DC endpoint', async () => {
+  it('should load CPI rows from the C3DC endpoint', (done) => {
     renderModal();
-    await waitFor(() => {
-      expect(fetchParticipantCpiData).toHaveBeenCalledWith(
-        expect.anything(),
-        {
-          participantId: 'PART-001',
-          studyId: 'phsCPI001',
-        },
-      );
-    });
-    expect(await screen.findByText('ASSOC-1')).toBeInTheDocument();
-    expect(screen.getByText('2 mapped identifiers')).toBeInTheDocument();
+    whenLoaded(() => {
+      // Avoid waitFor + expect.anything() — hangs under Jest 23 / jasmine.
+      expect(fetchParticipantCpiData.mock.calls.length).toBeGreaterThan(0);
+      expect(fetchParticipantCpiData.mock.calls[0][1].participantId).toBe('PART-001');
+      expect(fetchParticipantCpiData.mock.calls[0][1].studyId).toBe('phsCPI001');
+      expect(screen.getByText('ASSOC-1')).toBeTruthy();
+      expect(screen.getByText('2 mapped identifiers')).toBeTruthy();
+    }, done);
   });
 
-  it('should call onClose when the close icon is clicked', async () => {
+  it('should call onClose when the close icon is clicked', (done) => {
     const onClose = jest.fn();
     renderModal({ onClose });
-    await screen.findByText('ASSOC-1');
-    fireEvent.click(screen.getByLabelText('close'));
-    expect(onClose).toHaveBeenCalled();
+    whenLoaded(() => {
+      fireEvent.click(screen.getByLabelText('close'));
+      expect(onClose).toHaveBeenCalled();
+    }, done);
   });
 
-  it('should open C3DC Explore Participants with p_id only', async () => {
+  it('should open C3DC Explore Participants with p_id only', (done) => {
     renderModal();
-    await screen.findByText('ASSOC-1');
-    fireEvent.click(screen.getByRole('button', { name: /VIEW IN EXPLORE/i }));
-    expect(openC3dcExplore).toHaveBeenCalledWith('PART-001');
+    whenLoaded(() => {
+      fireEvent.click(screen.getByRole('button', { name: /VIEW IN EXPLORE/i }));
+      expect(openC3dcExplore).toHaveBeenCalledWith('PART-001');
+    }, done);
   });
 
-  it('should not show cart actions', async () => {
+  it('should not show cart actions', (done) => {
     renderModal();
-    await screen.findByText('ASSOC-1');
-    expect(screen.queryByText(/ADD TO OR GO TO CART/i)).not.toBeInTheDocument();
+    whenLoaded(() => {
+      expect(screen.queryByText(/ADD TO OR GO TO CART/i)).toBeNull();
+    }, done);
   });
 });

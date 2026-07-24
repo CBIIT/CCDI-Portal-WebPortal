@@ -38,10 +38,12 @@ function renderStudiesCard(data) {
 
 describe('StudiesCard actions', () => {
   let openSpy;
+  let originalOffsetWidth;
 
   beforeEach(() => {
     jest.clearAllMocks();
     openSpy = jest.spyOn(window, 'open').mockImplementation(() => null);
+    originalOffsetWidth = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'offsetWidth');
     Object.defineProperty(HTMLElement.prototype, 'offsetWidth', {
       configurable: true,
       get() {
@@ -52,6 +54,11 @@ describe('StudiesCard actions', () => {
 
   afterEach(() => {
     openSpy.mockRestore();
+    if (originalOffsetWidth) {
+      Object.defineProperty(HTMLElement.prototype, 'offsetWidth', originalOffsetWidth);
+    } else {
+      delete HTMLElement.prototype.offsetWidth;
+    }
   });
 
   const openActionsMenu = () => {

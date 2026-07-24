@@ -14,6 +14,9 @@ jest.mock('../../../src/bento/studiesData', () => ({
   studyDownloadLinks: {
     phsCARD_TEST_001: 'https://example.com/mock-study-manifest.xlsx',
   },
+  studycBioPortalLinks: {
+    phsCARD_TEST_001: 'https://cbioportal.test/study/phsCARD_TEST_001',
+  },
   openDoubleLink: jest.fn(),
 }));
 
@@ -60,12 +63,10 @@ import FilesCard from '../../../src/pages/globalSearch/Cards/files/FilesCard';
 import { CohortStateContext } from '../../../src/components/CohortSelectorState/CohortStateContext';
 import * as ReactRouterDOM from 'react-router-dom';
 
-import { openDoubleLink } from '../../../src/bento/studiesData';
-import { openC3dcExplore, openC3dcExploreFiles, openC3dcDataModel } from '../../../src/pages/globalSearch/Cards/participant/c3dcService';
+import { openC3dcExplore, openC3dcExploreFiles, openC3dcDataModel, openC3dcStudy } from '../../../src/pages/globalSearch/Cards/participant/c3dcService';
 import { enableTitleTruncationMocks } from '../../helpers/globalSearchCardTestUtils';
 import {
   studiesCardRow,
-  studiesCardRowNoManifest,
   longTitleStudiesCardRow,
   samplesCardRow,
   modelsCardRow,
@@ -118,36 +119,15 @@ describe('Explore — Global Search cards', () => {
 
       fireEvent.click(screen.getByText('AVAILABLE ACTIONS'));
       expect(screen.getByText('VIEW STUDY')).toBeInTheDocument();
-      expect(screen.getByText('DOWNLOAD MANIFEST')).toBeInTheDocument();
+      expect(screen.queryByText('DOWNLOAD MANIFEST')).not.toBeInTheDocument();
       expect(screen.getByText('CCDI CBioPortal')).toBeInTheDocument();
     });
 
-    it('should navigate to study page when VIEW STUDY is selected', () => {
+    it('should open C3DC study page when VIEW STUDY is selected', () => {
       renderWithRouter(<StudiesCard data={studiesCardRow} index={0} />);
       fireEvent.click(screen.getByText('AVAILABLE ACTIONS'));
       fireEvent.click(screen.getByText('VIEW STUDY'));
-      expect(mockNavigate).toHaveBeenCalledWith(`/studies/${studiesCardRow.study_id}`);
-    });
-
-    it('should download manifest when link exists for study', () => {
-      renderWithRouter(<StudiesCard data={studiesCardRow} index={0} />);
-      fireEvent.click(screen.getByText('AVAILABLE ACTIONS'));
-      fireEvent.click(screen.getByText('DOWNLOAD MANIFEST'));
-      expect(openDoubleLink).toHaveBeenCalledWith(
-        'https://example.com/mock-study-manifest.xlsx',
-        `${studiesCardRow.study_id}_CCDI_Study_Manifest.xlsx`,
-      );
-    });
-
-    it('should warn when manifest link is missing for study', () => {
-      const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
-      renderWithRouter(<StudiesCard data={studiesCardRowNoManifest} index={0} />);
-      fireEvent.click(screen.getByText('AVAILABLE ACTIONS'));
-      fireEvent.click(screen.getByText('DOWNLOAD MANIFEST'));
-      expect(warnSpy).toHaveBeenCalledWith(
-        expect.stringContaining(studiesCardRowNoManifest.study_id),
-      );
-      warnSpy.mockRestore();
+      expect(openC3dcStudy).toHaveBeenCalledWith(studiesCardRow.study_id);
     });
 
     it('should open cBioPortal in a new window', () => {
@@ -155,7 +135,11 @@ describe('Explore — Global Search cards', () => {
       renderWithRouter(<StudiesCard data={studiesCardRow} index={0} />);
       fireEvent.click(screen.getByText('AVAILABLE ACTIONS'));
       fireEvent.click(screen.getByText('CCDI CBioPortal'));
-      expect(window.open).toHaveBeenCalledWith('https://cbioportal.ccdi.cancer.gov/', '_blank');
+      expect(window.open).toHaveBeenCalledWith(
+        'https://cbioportal.test/study/phsCARD_TEST_001',
+        '_blank',
+        'noopener,noreferrer',
+      );
     });
 
     it('should close dropdown when clicking outside', () => {
@@ -363,119 +347,6 @@ describe('Explore — Global Search cards', () => {
 
       expect(screen.getByTestId('cpi-modal-open')).toBeInTheDocument();
     });
-
-    it('should dispatch add-to-cohort when a cohort is chosen from the submenu', () => {
-      const mockClient = {
-        query: jest.fn(() => Promise.resolve({ data: { fileIDsFromList: [] } })),
-      };
-      const cohortDispatch = jest.fn();
-
-      renderParticipantCard({
-        data: participantCardRowWithCpi,
-        mockClient,
-        cohortState: {
-          cohortA: {
-            cohortName: 'Cohort Alpha',
-            cohortDescription: 'd',
-            participants: [],
-          },
-        },
-        cohortDispatch,
-      });
-
-      fireEvent.click(screen.getByText('AVAILABLE ACTIONS'));
-      fireEvent.click(screen.getByText('ADD TO EXISTING COHORT'));
-      fireEvent.click(screen.getByText('Cohort Alpha'));
-
-      expect(cohortDispatch).toHaveBeenCalledWith(
-        expect.objectContaining({
-          type: 'ADD_PARTICIPANTS_TO_COHORT',
-        }),
-      );
-    });
-
-    it('should add resolved file IDs to the cart when ADD TO CART is used', async () => {
-      const addFiles = jest.fn();
-      const mockClient = {
-        query: jest.fn(() =>
-          Promise.resolve({
-            data: { fileIDsFromList: ['file-new-1', 'file-new-2'] },
-          }),
-        ),
-      };
-
-      renderParticipantCard({
-        data: participantCardRowWithCpi,
-        mockClient,
-        addFiles,
-      });
-
-      fireEvent.click(screen.getByText('AVAILABLE ACTIONS'));
-      fireEvent.click(screen.getByText('ADD TO CART'));
-
-      await waitFor(() => {
-        expect(addFiles).toHaveBeenCalledWith(['file-new-1', 'file-new-2']);
-      });
-    });
-
-    it('should show files-already-in-cart when GraphQL returns only IDs already in the cart', async () => {
-      const addFiles = jest.fn();
-      const mockClient = {
-        query: jest.fn(() =>
-          Promise.resolve({
-            data: { fileIDsFromList: ['file-dup'] },
-          }),
-        ),
-      };
-
-      renderParticipantCard({
-        data: participantCardRowWithCpi,
-        mockClient,
-        addFiles,
-        cartFiles: ['file-dup'],
-      });
-
-      fireEvent.click(screen.getByText('AVAILABLE ACTIONS'));
-      fireEvent.click(screen.getByText('ADD TO CART'));
-
-      await waitFor(() => {
-        expect(screen.getByText(/files already in cart/i)).toBeInTheDocument();
-      });
-      expect(addFiles).not.toHaveBeenCalled();
-    });
-
-    it(
-      'should request cart-limit alert when near-full cart cannot accept new files',
-      async () => {
-        const setAlterDisplay = jest.fn();
-        const cartNearFull = Array.from({ length: 199999 }, (_, i) => `cart-${i}`);
-        const mockClient = {
-          query: jest.fn(() =>
-            Promise.resolve({
-              data: { fileIDsFromList: ['new-a', 'new-b'] },
-            }),
-          ),
-        };
-
-        renderParticipantCard({
-          data: participantCardRowWithCpi,
-          mockClient,
-          cartFiles: cartNearFull,
-          setAlterDisplay,
-        });
-
-        fireEvent.click(screen.getByText('AVAILABLE ACTIONS'));
-        fireEvent.click(screen.getByText('ADD TO CART'));
-
-        await waitFor(
-          () => {
-            expect(setAlterDisplay).toHaveBeenCalledWith(true);
-          },
-          { timeout: 90000 },
-        );
-      },
-      120000,
-    );
 
     it('should expand long treatment type text when truncated', () => {
       const mockClient = {

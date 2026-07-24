@@ -3,6 +3,16 @@ import LogoSmall from '../assets/header/Portal_Logo_Small.svg';
 import searchbarIcon from '../assets/header/Search_Icon.svg';
 import cartLogo from '../assets/header/Cart_Logo.svg';
 import usFlagSmall from "../assets/header/us_flag_small.png";
+import env from '../utils/env';
+
+const C3DC_BASE_URL = String(env.REACT_APP_C3DC || '').replace(/\/$/, '');
+
+function c3dcUrl(path = '') {
+  if (!path) {
+    return `${C3DC_BASE_URL}/`;
+  }
+  return `${C3DC_BASE_URL}${path.startsWith('/') ? path : `/${path}`}`;
+}
 
 // globalHeaderLogo image 468x100
 // globalHeaderImage: image 2200x100
@@ -27,17 +37,12 @@ export const navMobileList = [
   },
   {
     name: 'Explore',
-    link: '/explore',
+    link: c3dcUrl('/explore'),
     className: 'navMobileItem',
   },
   {
     name: 'Studies',
-    link: '/studies',
-    className: 'navMobileItem',
-  },
-  {
-    name: 'Cohort Analyzer',
-    link: '/cohortAnalyzer',
+    link: c3dcUrl('/studies'),
     className: 'navMobileItem',
   },
   {
@@ -66,7 +71,7 @@ export const navbarSublists = {
   Resources: [
   {
     name: 'Childhood Cancer Clinical Data Commons',
-    link: 'https://clinicalcommons.ccdi.cancer.gov/',
+    link: c3dcUrl(),
     className: 'navMobileSubItem'
   },
   {
@@ -133,56 +138,112 @@ export const navbarSublists = {
   "About": [
     {
       name: 'About CCDI Hub',
-      link: '/about',
-      className: 'navMobileSubItem',
+      className: 'navMobileSubSection',
+      children: [
+        {
+          name: 'About CCDI Hub',
+          link: '/about',
+          className: 'navMobileSubItem',
+        },
+        {
+          name: 'Release Notes',
+          link: '/release-notes',
+          className: 'navMobileSubItem',
+        },
+      ],
     },
     {
-      name: 'CCDI Data Ecosystem and AI Readiness (PDF)',
-      link: '/Ecosystem_AI_Readiness.pdf',
-      className: 'navMobileSubItem',
+      name: 'About CCDI Data',
+      className: 'navMobileSubSection',
+      children: [
+        {
+          name: 'CCDI Data Ecosystem & AI Readiness (PDF)',
+          link: '/Ecosystem_AI_Readiness.pdf',
+          className: 'navMobileSubItem',
+        },
+        {
+          name: 'CCDI Data Model',
+          link: c3dcUrl('/data_model'),
+          className: 'navMobileSubItem',
+        },
+        {
+          name: 'CCDI Data Submission Guide (PDF)',
+          link: '/Submission_Guide.pdf',
+          className: 'navMobileSubItem',
+        },
+        {
+          name: 'CCDI Data Usage Policies & Terms',
+          link: '/data-usage-policies',
+          className: 'navMobileSubItem',
+        },
+      ],
     },
     {
-      name: 'CCDI Data Submission Guide (PDF)',
-      link: '/Submission_Guide.pdf',
-      className: 'navMobileSubItem',
+      name: 'CCDI Knowledge and Training',
+      className: 'navMobileSubSection',
+      children: [
+        {
+          name: 'CCDI Events Announcements',
+          link: '/ccdi-events-announcements',
+          className: 'navMobileSubItem',
+        },
+        {
+          name: 'CCDI-Supported Publications',
+          link: '/publications',
+          className: 'navMobileSubItem',
+        },
+      ],
     },
     {
-      name: 'CCDI Data Model',
-      link: '/data-model',
-      className: 'navMobileSubItem',
-    },
-    {
-      name: 'CCDI Data Usage Policies & Terms',
-      link: '/data-usage-policies',
-      className: 'navMobileSubItem',
-    },
-    {
-      name: 'CCDI-Supported Publications',
-      link: '/publications',
-      className: 'navMobileSubItem',
-    },
-    {
-      name: 'Hub Explore Dashboard Tutorial Video',
-      link: 'https://www.youtube.com/watch?v=Eu8y1GDTszU',
-      className: 'navMobileSubItem',
-    },
-    {
-      name: 'Release Notes',
-      link: '/release-notes',
-      className: 'navMobileSubItem',
-    },
-    {
-      name: 'User Guide',
-      link: '/user-guide.pdf',
-      className: 'navMobileSubItem',
-    },
-    {
-      name: 'CCDI Events Announcements',
-      link: '/ccdi-events-announcements',
-      className: 'navMobileSubItem',
+      name: 'Help',
+      className: 'navMobileSubSection',
+      children: [
+        {
+          name: 'CCDI FAQs',
+          link: '/faq',
+          className: 'navMobileSubItem',
+        },
+        {
+          name: 'User Guide',
+          link: '/user-guide.pdf',
+          className: 'navMobileSubItem',
+        },
+      ],
     },
   ],
 };
+
+/** Flatten nested About (or similar) sections for mobile/tablet lists. */
+export function flattenNavbarSublist(sublist) {
+  if (!Array.isArray(sublist)) {
+    return [];
+  }
+  return sublist.flatMap((item) => {
+    if (item.className === 'navMobileSubSection' && Array.isArray(item.children)) {
+      return [
+        { name: item.name, className: 'navMobileSubSection' },
+        ...item.children,
+      ];
+    }
+    return [item];
+  });
+}
+
+/** True when the current path matches a link under the About submenu (nested or flat). */
+export function isAboutPathActive(pathname, aboutSublist = navbarSublists.About) {
+  if (!Array.isArray(aboutSublist)) {
+    return false;
+  }
+  return aboutSublist.some((item) => {
+    if (item.link === pathname) {
+      return true;
+    }
+    if (Array.isArray(item.children)) {
+      return item.children.some((child) => child.link === pathname);
+    }
+    return false;
+  });
+}
 
 export const navBarCartData = {
   cartLabel: '',

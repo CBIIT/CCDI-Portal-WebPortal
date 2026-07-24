@@ -1,4 +1,5 @@
 import gql from 'graphql-tag';
+import env from '../utils/env';
 import landingImg from '../assets/landing/Hero_1.png'
 import aboutImg from '../assets/landing/About_1.png';
 import wheel1 from '../assets/landing/ccdc_carousel.svg';
@@ -41,6 +42,8 @@ import ecDNALogo from '../assets/landing/ecDNA_logo.svg';
 import cBioPortalLogo from '../assets/landing/cBioPortal_logo.svg';
 import rareCancerLogo from '../assets/landing/CCDI_Rare_Cancer_Initiative_logo.svg';
 import pmtlLogo from '../assets/landing/pmtl_logo.png';
+
+const C3DC_BASE_URL = String(env.REACT_APP_C3DC || '').replace(/\/$/, '');
 
 export const introData = {
   landingIntroPic: landingImg,
@@ -266,7 +269,7 @@ export const carouselList = [
     img: wheel11,
     mobile: c3dcMobile,
     content: 'Childhood Cancer Clinical Data Commons',
-    link: 'https://clinicalcommons.ccdi.cancer.gov',
+    link: C3DC_BASE_URL,
   },
   {
     img: wheel12,

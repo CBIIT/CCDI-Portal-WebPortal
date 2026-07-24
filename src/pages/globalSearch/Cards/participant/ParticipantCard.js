@@ -1,37 +1,17 @@
-import React, { useState, useRef, useEffect, useContext } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   Grid, Typography, Button, Box, List, ListItem, ListItemText, Tooltip
 } from '@material-ui/core';
 import useStyles from './style';
 import { cn } from 'bento-components';
 import CPIModal from './CPIModal';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
-import gql from 'graphql-tag';
 import { ReactComponent as DownArrowIcon } from '../../assets/Down_Arrow.svg';
 import { ReactComponent as UpArrowIcon } from '../../assets/Up_Arrow.svg';
-import { getFilesID } from './WrapperService';
-import { CohortStateContext } from '../../../../components/CohortSelectorState/CohortStateContext';
-import { onAddParticipantsToCohort } from '../../../../components/CohortSelectorState/store/action';
-import ToastNotification from './ToastNotification';
-
-/* const removeSquareBracketsFromString = (text) => {
-  return text.replace(/\[|\]/g, '');
-};*/
-
-const addFileQuery = gql`
-query search (          
-  $participant_ids: [String],
-){
-  fileIDsFromList (          
-      participant_ids: $participant_ids,
-  ) 
-}
-`;
-
-const checkDuplicate = (cartFiles, ids) => (ids.filter((id) => !cartFiles[id]));
+import { openC3dcExplore } from './c3dcService';
 
 const CONSENT_GLOSSARY_URL = 'https://www.ncbi.nlm.nih.gov/gap/docs/submissionguide/#consentgloss';
 
@@ -119,9 +99,8 @@ const truncateTitle = (title, containerWidth) => {
   };
 };
 
-const ParticipantCard = ({ data = {}, index, addFiles, setAlterDisplay, setOpenSnackbar, client, cartFiles = [], alertMessage }) => {
+const ParticipantCard = ({ data = {}, index }) => {
   const {
-    id,
     participant_id,
     diagnosis_str,
     study_id,
@@ -136,13 +115,9 @@ const ParticipantCard = ({ data = {}, index, addFiles, setAlterDisplay, setOpenS
   } = data;
 
   const classes = useStyles();
-  const navigation = useNavigate();
-  const { state: cohortState, dispatch: cohortDispatch } = useContext(CohortStateContext);
 
   const [modalOpen, setModalOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [cohortDropdownOpen, setCohortDropdownOpen] = useState(false);
-  const [notification, setNotification] = useState({ open: false, message: '', type: 'success' });
   const [treatmentTypeExpanded, setTreatmentTypeExpanded] = useState(false);
   const [treatmentAgentExpanded, setTreatmentAgentExpanded] = useState(false);
   const [consentCodesExpanded, setConsentCodesExpanded] = useState(false);
@@ -152,6 +127,7 @@ const ParticipantCard = ({ data = {}, index, addFiles, setAlterDisplay, setOpenS
 
   const handleModalOpen = () => {
     setModalOpen(true);
+    setDropdownOpen(false);
   };
 
   const handleModalClose = () => {
@@ -162,132 +138,16 @@ const ParticipantCard = ({ data = {}, index, addFiles, setAlterDisplay, setOpenS
     setDropdownOpen(!dropdownOpen);
   };
 
-  const handleCohortDropdownToggle = () => {
-    setCohortDropdownOpen(!cohortDropdownOpen);
-  };
-
-  const showNotification = (message, type = 'success') => {
-    setNotification({ open: true, message, type });
-  };
-
-  const handleNotificationClose = () => {
-    setNotification({ open: false, message: '', type: 'success' });
-  };
-
-  const handleAddToCohort = (cohortId) => {
-    const participantData = {
-      id: id,
-      participant_id: participant_id,
-      study_id: study_id,
-    };
-
-    const cohortName = (cohortState[cohortId] && cohortState[cohortId].cohortName) || 'cohort';
-
-    cohortDispatch(onAddParticipantsToCohort(
-      cohortId,
-      [participantData],
-      (count) => {
-        if (count === 0) {
-          showNotification(`Participant is already in ${cohortName}`, 'info');
-        } else {
-          showNotification(`Participant added to ${cohortName}`, 'success');
-        }
-      },
-      (error) => {
-        showNotification(`Failed to add participant to ${cohortName}`, 'error');
-      }
-    ));
-  };
-
   const handleExploreDashboard = () => {
-    navigation(`/explore?p_id=${participant_id}`);
+    openC3dcExplore(participant_id);
+    setDropdownOpen(false);
   };
-
-  const handleAddToCart = () => {
-    // Check if required props are available
-    if (!addFiles || !client) {
-      console.warn('Cart functionality not available: missing required props');
-      return;
-    }
-
-    const toAdd = [id];
-    const fileIds = getFilesID({
-      client,
-      variables: { participant_ids: toAdd },
-      query: addFileQuery,
-    });
-    const upperLimit = 200000;
-    const cartCount = cartFiles.length;
-    const responseKeys = ['fileIDsFromList'];
-
-    if (cartCount < upperLimit) {
-      fileIds().then((response) => {
-        const idsInitial = response[responseKeys[0]] || [];
-        const ids = [...new Set(idsInitial)];
-        const fileCount = ids.length;
-        if (fileCount <= upperLimit && cartCount < upperLimit) {
-                  if (cartCount + ids.length <= upperLimit) {
-                    // Check for duplicates first
-                    const cartFilesDict = {};
-                    cartFiles.forEach((file) => { cartFilesDict[file] = true; });
-                    const newIds = checkDuplicate(cartFilesDict, ids);
-                    
-                    if (newIds.length === 0) {
-                      // All files are already in cart
-                      showNotification('Files already in cart', 'info');
-                    } else {
-                      // Add new files to cart
-                      addFiles(newIds);
-                      showNotification(`${newIds.length} File(s) successfully added to your cart`, 'success');
-                    }
-
-                    if (setOpenSnackbar) {
-                      setOpenSnackbar(true);
-                    }
-                  } else {
-                    const cartFilesDict = {};
-                    cartFiles.forEach((file) => { cartFilesDict[file] = true; });
-                    const newIds = checkDuplicate(cartFilesDict, ids);
-                    if (cartCount + newIds.length <= upperLimit) {
-                      if (newIds.length === 0) {
-                        // All files are already in cart
-                        showNotification('Files already in cart', 'info');
-                      } else {
-                        // Add new files to cart
-                        addFiles(newIds);
-                        showNotification(`${newIds.length} File(s) successfully added to your cart`, 'success');
-                      }
-                      if (setOpenSnackbar) {
-                        setOpenSnackbar(true);
-                      }
-                    } else {
-                      if (setAlterDisplay) {
-                        setAlterDisplay(true);
-                      }
-                    }
-                  }
-        } else {
-          showNotification('Cart limit reached. Please remove some files first.', 'error');
-          if (setAlterDisplay) {
-            setAlterDisplay(true);
-          }
-        }
-      });
-    } else {
-      showNotification('Cart limit reached. Please remove some files first.', 'error');
-      if (setAlterDisplay) {
-        setAlterDisplay(true);
-      }
-    }
-  };
-
 
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setDropdownOpen(false);
-        setCohortDropdownOpen(false);
       }
     };
 
@@ -309,13 +169,6 @@ const ParticipantCard = ({ data = {}, index, addFiles, setAlterDisplay, setOpenS
     window.addEventListener('resize', measureWidth);
     return () => window.removeEventListener('resize', measureWidth);
   }, []);
-
-  // Get cohort data from state
-  const cohorts = Object.keys(cohortState).map(cohortId => ({
-    id: cohortId,
-    name: cohortState[cohortId].cohortName,
-    description: cohortState[cohortId].cohortDescription
-  }));
 
   const renderInfo = (label, value = '') => (
     <div className={classes.keyAndValueRow}>
@@ -590,11 +443,13 @@ const ParticipantCard = ({ data = {}, index, addFiles, setAlterDisplay, setOpenS
 
   return (
     <div className={classes.card} ref={cardRef}>
-      {data.cpi_data && data.cpi_data.length ? <CPIModal
-        row={data}
-        open={modalOpen}
-        onClose={handleModalClose}
-      /> : <></>}
+      {modalOpen ? (
+        <CPIModal
+          row={data}
+          open={modalOpen}
+          onClose={handleModalClose}
+        />
+      ) : null}
       
       {/* Header with participant title and actions button */}
       <div className={classes.cardHeader}>
@@ -654,41 +509,6 @@ const ParticipantCard = ({ data = {}, index, addFiles, setAlterDisplay, setOpenS
                         />
                       </ListItem>
                       
-                      {cohorts.length > 0 && (
-                        <ListItem 
-                          button 
-                          className={`${classes.dropdownItemWithSubmenu} ${cohortDropdownOpen ? '' : ''}`}
-                          style={{ borderBottom: cohortDropdownOpen ? 'none' : '1px solid #07679C' }}
-                          onClick={handleCohortDropdownToggle}
-                        >
-                          <ListItemText 
-                            primary="ADD TO EXISTING COHORT" 
-                            className={classes.dropdownItemText}
-                          />
-                          {cohortDropdownOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-                        </ListItem>
-                      )}
-                      
-                      {cohorts.length > 0 && cohortDropdownOpen && (
-                        <Box className={classes.cohortDropdown}>
-                          <List className={classes.cohortList}>
-                            {cohorts.map((cohort, index) => (
-                              <ListItem 
-                                key={cohort.id}
-                                button 
-                                className={classes.cohortItem}
-                                onClick={() => handleAddToCohort(cohort.id)}
-                              >
-                                <ListItemText 
-                                  primary={cohort.name} 
-                                  className={classes.cohortItemText}
-                                />
-                              </ListItem>
-                            ))}
-                          </List>
-                        </Box>
-                      )}
-                      
                       <ListItem 
                         button 
                         className={classes.dropdownItem}
@@ -696,17 +516,6 @@ const ParticipantCard = ({ data = {}, index, addFiles, setAlterDisplay, setOpenS
                       >
                         <ListItemText 
                           primary="VIEW IN EXPLORE DASHBOARD" 
-                          className={classes.dropdownItemText}
-                        />
-                      </ListItem>
-                      
-                      <ListItem 
-                        button 
-                        className={classes.dropdownItem}
-                        onClick={handleAddToCart}
-                      >
-                        <ListItemText 
-                          primary="ADD TO CART" 
                           className={classes.dropdownItemText}
                         />
                       </ListItem>
@@ -796,15 +605,8 @@ const ParticipantCard = ({ data = {}, index, addFiles, setAlterDisplay, setOpenS
           );
         })()}
       </div>
-              
-              <ToastNotification
-                open={notification.open}
-                message={notification.message}
-                type={notification.type}
-                onClose={handleNotificationClose}
-              />
-            </div>
-          );
-        };
+    </div>
+  );
+};
 
-        export default ParticipantCard;
+export default ParticipantCard;

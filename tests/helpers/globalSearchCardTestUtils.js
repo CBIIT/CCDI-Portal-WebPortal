@@ -11,8 +11,9 @@ export function enableTitleTruncationMocks({
   containerWidth = 400,
   measuredTitleWidth = 5000,
 } = {}) {
-  const originalAppend = document.body.appendChild.bind(document.body);
-  const appendSpy = jest.spyOn(document.body, 'appendChild').mockImplementation((el) => {
+  // Always call through the real DOM method so stacked spies cannot recurse.
+  const originalAppend = Node.prototype.appendChild;
+  const appendSpy = jest.spyOn(document.body, 'appendChild').mockImplementation(function appendChildMock(el) {
     if (
       el
       && el.nodeType === 1
@@ -25,7 +26,7 @@ export function enableTitleTruncationMocks({
         value: measuredTitleWidth,
       });
     }
-    return originalAppend(el);
+    return originalAppend.call(this, el);
   });
 
   const setCardWidth = (cardEl) => {

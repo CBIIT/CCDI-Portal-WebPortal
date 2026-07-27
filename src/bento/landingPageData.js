@@ -57,7 +57,7 @@ export const titleData = {
   latestUpdatesTitle: 'Latest Updates',
   resourceTitle: 'Resources',
   applicationsTitle: 'CCDI-SUPPORTED RESOURCES',
-  cloudResourcesTitle: 'OTHER RESOURCES',
+  cloudResourcesTitle: 'Other Resources',
   aboutTitle: 'About the CCDI Community',
 };
 
@@ -89,8 +89,8 @@ export const resourcesAppliationsListData = [
     id: 'c3dc',
     title: 'Childhood Cancer Clinical Data Commons',
     subtitle: 'C3DC',
-    content: 'A database that houses childhood cancer demographics and phenotypic clinical data.',
-    link: `${C3DC_BASE_URL}/`,
+    content: 'A searchable database of childhood cancer demographics and phenotypic clinical data.',
+    link: 'https://clinicalcommons.ccdi.cancer.gov/',
     img: c3dcLogo,
   },
   {

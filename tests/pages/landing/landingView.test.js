@@ -113,7 +113,7 @@ describe('LandingView', () => {
 
     it('should format stat numbers with en-US locale', () => {
       renderLandingView();
-      expect(screen.getByText('1,700,440')).toBeInTheDocument();
+      expect(screen.getByText('1,760,951')).toBeInTheDocument();
     });
 
     it('should show asterisk for Participants stat', () => {

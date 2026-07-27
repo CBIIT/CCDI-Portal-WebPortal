@@ -12,7 +12,7 @@ import yaml from 'js-yaml';
 
 import NewsController from '../../../src/pages/news/newsController';
 import { newsYamlFixture } from '../../fixtures/news/newsYamlMinimal';
-import { sampleReleaseNotesMarkdownRaw } from '../../fixtures/resource/releaseNotesMarkdownSamples';
+import { sampleReleaseNotesMarkdownRaw, sampleCcdiDataUpdatesMarkdownRaw } from '../../fixtures/resource/releaseNotesMarkdownSamples';
 
 if (typeof global.MutationObserver === 'undefined') {
   global.MutationObserver = class MutationObserver {
@@ -34,14 +34,16 @@ jest.mock('../../../src/utils/env', () => ({
   __esModule: true,
   default: {
     REACT_APP_STATIC_CONTENT_URL: 'https://static.example.com',
+    REACT_APP_DATA_RELEASES_URL: 'https://data-releases.example.com',
   },
 }));
 
-jest.mock('../../../src/pages/news/newsView', () => function MockNewsView({ newsList, releaseNotesList }) {
+jest.mock('../../../src/pages/news/newsView', () => function MockNewsView({ newsList, releaseNotesList, ccdiDataUpdatesList }) {
   return (
     <div data-testid="news-view-stub">
       <span data-testid="news-headline">{newsList?.[0]?.title ?? ''}</span>
       <span data-testid="release-notes-count">{releaseNotesList?.length ?? 0}</span>
+      <span data-testid="ccdi-data-updates-count">{ccdiDataUpdatesList?.length ?? 0}</span>
     </div>
   );
 });
@@ -54,6 +56,9 @@ function setupAxiosMock() {
     }
     if (pathPart.endsWith('/releaseNotesData.md')) {
       return Promise.resolve({ data: sampleReleaseNotesMarkdownRaw });
+    }
+    if (pathPart.endsWith('/ccdiDataUpdates.md')) {
+      return Promise.resolve({ data: sampleCcdiDataUpdatesMarkdownRaw });
     }
     return Promise.reject(new Error(`Unexpected axios.get URL in test: ${url}`));
   });
@@ -70,8 +75,8 @@ afterEach(() => {
 });
 
 describe('NewsController', () => {
-  describe('Mocked axios (newsData.yaml + releaseNotesData.md)', () => {
-    it('should request both static files and pass data into NewsView', async () => {
+  describe('Mocked axios (newsData.yaml + releaseNotesData.md + ccdiDataUpdates.md)', () => {
+    it('should request static files and pass hub and ecosystem lists into NewsView', async () => {
       render(<NewsController />);
 
       await waitFor(() => {
@@ -84,6 +89,9 @@ describe('NewsController', () => {
       expect(axios.get).toHaveBeenCalledWith(
         expect.stringMatching(/^https:\/\/static\.example\.com\/releaseNotesData\.md\?ts=\d+$/),
       );
+      expect(axios.get).toHaveBeenCalledWith(
+        expect.stringMatching(/^https:\/\/data-releases\.example\.com\/ccdiDataUpdates\.md\?ts=\d+$/),
+      );
 
       await waitFor(() => {
         expect(screen.getByTestId('news-headline')).toHaveTextContent(
@@ -91,6 +99,7 @@ describe('NewsController', () => {
         );
       });
       expect(screen.getByTestId('release-notes-count')).toHaveTextContent('2');
+      expect(screen.getByTestId('ccdi-data-updates-count')).toHaveTextContent('2');
     });
   });
 });

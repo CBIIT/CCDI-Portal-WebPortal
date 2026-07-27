@@ -40,6 +40,7 @@ export function createLandingGraphqlQueryMock(overrides = {}) {
 export function setupNewsYamlAxiosMock(overrides = {}) {
   const raw = overrides.newsYamlRaw ?? newsDataYamlRaw;
   const releaseNotesMarkdown = overrides.releaseNotesMarkdown ?? '';
+  const ccdiDataUpdatesMarkdown = overrides.ccdiDataUpdatesMarkdown ?? '';
   axios.get = jest.fn((url) => {
     const pathPart = String(url).split('?')[0];
     if (pathPart.endsWith('/newsData.yaml')) {
@@ -47,6 +48,9 @@ export function setupNewsYamlAxiosMock(overrides = {}) {
     }
     if (pathPart.endsWith('/releaseNotesData.md')) {
       return Promise.resolve({ data: releaseNotesMarkdown });
+    }
+    if (pathPart.endsWith('/ccdiDataUpdates.md')) {
+      return Promise.resolve({ data: ccdiDataUpdatesMarkdown });
     }
     return Promise.reject(new Error(`Unexpected axios.get URL in test: ${url}`));
   });

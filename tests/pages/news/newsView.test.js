@@ -37,6 +37,18 @@ const releaseNotesList = [
   },
 ];
 
+const ccdiDataUpdatesList = [
+  {
+    id: 'data-1',
+    type: 'CCDI Data Updates',
+    title: 'CCDI Data Update Item',
+    date: '2025-01-07',
+    version: 'v1.0.0',
+    fullText: '<p>Data update full text</p>',
+    img: 'img3',
+  },
+];
+
 const srcList = { img1: 'news1', img2: 'news2', img3: 'news3' };
 const altList = { img1: 'alt1', img2: 'alt2', img3: 'alt3' };
 
@@ -48,6 +60,7 @@ function renderNewsView(props = {}) {
         newsList={newsList}
         altList={altList}
         releaseNotesList={releaseNotesList}
+        ccdiDataUpdatesList={ccdiDataUpdatesList}
         {...props}
       />
     </ThemeProvider>,
@@ -73,7 +86,59 @@ describe('NewsView', () => {
     expect(screen.getByText('Hub News and Updates')).toBeInTheDocument();
     expect(screen.getAllByText('Regular News Item').length).toBeGreaterThan(0);
     expect(screen.getAllByText('Application Update Item').length).toBeGreaterThan(0);
-    expect(container.querySelector('.numResults')).toHaveTextContent('3 results');
+    expect(container.querySelector('.numResults')).toHaveTextContent('4 results');
+  });
+
+  it('should render ecosystem markdown news items that use fullText instead of highlight', () => {
+    renderNewsView({
+      ccdiDataUpdatesList: [
+        {
+          id: 'hub_04152026',
+          type: 'News',
+          title: 'April 2026 CCDI Hub updates',
+          date: 'April 15, 2026',
+          fullText: '<p>Updated tools, publications, and MCI enrollment</p>',
+        },
+      ],
+    });
+
+    expect(screen.getAllByText('April 2026 CCDI Hub updates').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('Updated tools, publications, and MCI enrollment').length).toBeGreaterThan(0);
+  });
+
+  it('should render CCDI Data Updates cards with parsed markdown highlight', async () => {
+    const { container } = renderNewsView({
+      ccdiDataUpdatesList: [
+        {
+          id: 'data-1',
+          type: 'CCDI Data Updates',
+          title: 'CCDI Data Update Item',
+          date: '2025-01-07',
+          highlight:
+            '<p>See the <a href="https://ccdi.cancer.gov/data-federation-resource">Federation resource</a>.</p>',
+          fullText:
+            '<p>See the <a href="https://ccdi.cancer.gov/data-federation-resource">Federation resource</a>.</p>',
+          img: 'updateImgCCDC',
+          imgSrc: 'https://raw.githubusercontent.com/CBIIT/CCDI_Hub_Assets/main/Image/News/News_CCDC.png',
+        },
+      ],
+    });
+    const dataUpdatesTab = Array.from(container.querySelectorAll('.tabListItem')).find(
+      (node) => node.textContent === 'CCDI Data Updates',
+    );
+    fireEvent.click(dataUpdatesTab);
+
+    await waitFor(() => {
+      expect(screen.getAllByText('CCDI Data Update Item').length).toBeGreaterThan(0);
+      const link = screen.getAllByRole('link', { name: 'Federation resource' })[0];
+      expect(link).toHaveAttribute('href', 'https://ccdi.cancer.gov/data-federation-resource');
+      const cardImg = container.querySelector('.newsItemImgContainer');
+      expect(cardImg).toHaveAttribute(
+        'src',
+        'https://raw.githubusercontent.com/CBIIT/CCDI_Hub_Assets/main/Image/News/News_CCDC.png',
+      );
+      expect(cardImg).toHaveAttribute('alt', 'updateImgCCDC');
+    });
   });
 
   it('should switch to release notes tab and open pdf/read more links', async () => {

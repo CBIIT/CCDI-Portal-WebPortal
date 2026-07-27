@@ -31,16 +31,22 @@ const parseUsShortDate = (dateStr) => {
   return `${fullYear}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
 };
 
-const getEntrySortDate = (entryHtml) => {
-  const match = entryHtml.match(/<br>\s*([\d/]+)/);
-  return parseUsShortDate(match ? match[1] : '');
+const getEntrySortDate = (entryMarkdown) => {
+  const match = String(entryMarkdown).match(/([\d/]+)(?:\s*-\s*[\d/]+)?\s*$/);
+  if (!match) return '';
+  const firstDate = match[1].split(/\s*-/)[0].trim();
+  return parseUsShortDate(firstDate);
 };
 
-const LIST_ENTRY_PATTERN = /<a class="link"[\s\S]*?<\/a><br>\s*[\d/]+/g;
+/** Markdown event list entry: [title](url) followed by a date line. */
+const MD_LIST_ENTRY_PATTERN = /\[[^\]]+\]\([^)]+\)\s*\n+\s*[\d/]+(?:\s*-\s*[\d/]+)?/g;
 
-export const buildDetailPageListEntryHtml = (event) => (
-  `<a href="${EVENT_ROUTE_BASE}/${event.slug}">${event.title}</a><br>${event.rawDate}`
+export const buildDetailPageListEntryMarkdown = (event) => (
+  `[${event.title}](${EVENT_ROUTE_BASE}/${event.slug})  \n${event.rawDate}`
 );
+
+/** @deprecated Prefer buildDetailPageListEntryMarkdown; kept for callers/tests during migration. */
+export const buildDetailPageListEntryHtml = buildDetailPageListEntryMarkdown;
 
 export const mergeDetailPageEventsIntoAnnouncementsContent = (sections) => {
   if (!Array.isArray(sections)) return sections;
@@ -59,15 +65,15 @@ export const mergeDetailPageEventsIntoAnnouncementsContent = (sections) => {
       return section;
     }
 
-    const existingEntries = (content.match(LIST_ENTRY_PATTERN) || []).map((entry) => entry.trim());
-    const detailEntries = detailEvents.map(buildDetailPageListEntryHtml);
+    const existingEntries = (content.match(MD_LIST_ENTRY_PATTERN) || []).map((entry) => entry.trim());
+    const detailEntries = detailEvents.map(buildDetailPageListEntryMarkdown);
     const mergedEntries = [...detailEntries, ...existingEntries].sort(
       (a, b) => getEntrySortDate(b).localeCompare(getEntrySortDate(a)),
     );
 
     return {
       ...section,
-      content: `<p>${mergedEntries.join('<br><br>')}</p>`,
+      content: mergedEntries.join('\n\n'),
     };
   });
 };
@@ -93,6 +99,7 @@ export default {
   EVENT_ROUTE_BASE,
   slugify,
   getDetailPageSlugForLinkText,
+  buildDetailPageListEntryMarkdown,
   buildDetailPageListEntryHtml,
   mergeDetailPageEventsIntoAnnouncementsContent,
   getAllEvents,

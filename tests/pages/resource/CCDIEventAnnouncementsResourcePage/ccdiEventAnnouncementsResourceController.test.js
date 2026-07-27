@@ -1,9 +1,44 @@
 /**
- * CCDIEventAnnouncementsResourceController — mocked axios GET for `resourceData.yaml`; view only when
- * `ccdiEventAnnouncementsContent` is present.
+ * CCDIEventAnnouncementsResourceController — fetches eventAnnouncements.md, parses markdown,
+ * renders view when `ccdiEventAnnouncementsContent` is present.
  *
  * Follows tests/TEST_STRUCTURE.md controller pattern (mock env/axios, waitFor, assert URL + DOM).
  */
+
+jest.mock('axios');
+jest.mock('../../../../src/utils/env', () => ({
+  REACT_APP_STATIC_CONTENT_URL: 'https://static.example.com',
+}));
+
+jest.mock('../../../../src/pages/resource/CCDIEventAnnouncementsResourcePage/parseEventAnnouncementsMarkdown', () => ({
+  __esModule: true,
+  default: jest.fn(() => ({
+    CCDI_Event_Announcements_Header: '',
+    ccdiEventAnnouncementsIntroText: 'CCDI events intro for unit test.',
+    ccdiEventAnnouncementsContent: [
+      {
+        id: 'event_section',
+        topic: 'Announcements Topic',
+        content: 'Announcements body.',
+      },
+    ],
+  })),
+}));
+
+jest.mock('../../../../src/pages/resource/CCDIEventAnnouncementsResourcePage/CCDIEventAnnouncementsResourceView', () => (
+  function MockCCDIEventAnnouncementsResourceView({ data }) {
+    const topics = (data?.ccdiEventAnnouncementsContent || []).map((item) => item.topic);
+    return (
+      <div>
+        <div>CCDI Events Announcements</div>
+        {topics.map((topic) => (
+          <div key={topic}>{topic}</div>
+        ))}
+        <div>{data?.ccdiEventAnnouncementsContent?.[0]?.content || ''}</div>
+      </div>
+    );
+  }
+));
 
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
@@ -11,45 +46,27 @@ import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import axios from 'axios';
 import CCDIEventAnnouncementsResourceController from '../../../../src/pages/resource/CCDIEventAnnouncementsResourcePage/CCDIEventAnnouncementsResourceController';
+import parseEventAnnouncementsMarkdown from '../../../../src/pages/resource/CCDIEventAnnouncementsResourcePage/parseEventAnnouncementsMarkdown';
 import { minimalCcdiEventAnnouncementsResourceData } from '../../../fixtures/resource/resourceDataViewProps';
-import { createDedicatedYamlAxiosMock } from '../../../helpers/resourceYamlApiMocks';
-
-if (typeof global.MutationObserver === 'undefined') {
-  global.MutationObserver = class MutationObserver {
-    disconnect() {}
-    observe() {}
-    takeRecords() {
-      return [];
-    }
-  };
-}
-
-jest.mock('axios');
-jest.mock('../../../../src/utils/env', () => ({
-  REACT_APP_STATIC_CONTENT_URL: 'https://static.example.com',
-}));
 
 beforeEach(() => {
-  window.scrollTo = jest.fn();
-  for (let i = 0; i < 3; i += 1) {
-    document.body.appendChild(document.createElement('footer'));
-  }
-});
-
-afterEach(() => {
   jest.clearAllMocks();
-  document.querySelectorAll('footer').forEach((el) => el.remove());
+  axios.get.mockResolvedValue({ data: 'event-announcements-markdown' });
+  parseEventAnnouncementsMarkdown.mockImplementation(() => ({
+    ...minimalCcdiEventAnnouncementsResourceData,
+  }));
+  global.MutationObserver = class {
+    constructor() {
+      this.observe = jest.fn();
+      this.disconnect = jest.fn();
+      this.takeRecords = jest.fn(() => []);
+    }
+  };
 });
 
 describe('CCDIEventAnnouncementsResourceController', () => {
-  describe('Mocked axios (resourceData.yaml)', () => {
-    it('should fetch resourceData.yaml and render announcements when content key exists', async () => {
-      axios.get.mockImplementation(
-        createDedicatedYamlAxiosMock({
-          '/resourceData.yaml': minimalCcdiEventAnnouncementsResourceData,
-        }),
-      );
-
+  describe('Mocked axios (eventAnnouncements.md)', () => {
+    it('should fetch eventAnnouncements.md and render announcements when content key exists', async () => {
       render(
         <MemoryRouter initialEntries={['/explore']}>
           <CCDIEventAnnouncementsResourceController />
@@ -61,16 +78,14 @@ describe('CCDIEventAnnouncementsResourceController', () => {
       });
 
       expect(axios.get).toHaveBeenCalledWith(
-        expect.stringMatching(/^https:\/\/static\.example\.com\/resourceData\.yaml\?ts=\d+$/),
+        expect.stringMatching(/^https:\/\/static\.example\.com\/eventAnnouncements\.md\?ts=\d+$/),
       );
+      expect(parseEventAnnouncementsMarkdown).toHaveBeenCalledWith('event-announcements-markdown');
+      expect(screen.getByText('Announcements Topic')).toBeInTheDocument();
     });
 
-    it('should render local detail page events when YAML lacks ccdiEventAnnouncementsContent', async () => {
-      axios.get.mockImplementation(
-        createDedicatedYamlAxiosMock({
-          '/resourceData.yaml': {},
-        }),
-      );
+    it('should render local detail page events when markdown lacks ccdiEventAnnouncementsContent', async () => {
+      parseEventAnnouncementsMarkdown.mockReturnValueOnce({});
 
       render(
         <MemoryRouter initialEntries={['/explore']}>
@@ -82,8 +97,23 @@ describe('CCDIEventAnnouncementsResourceController', () => {
         expect(screen.getByText('CCDI Events Announcements')).toBeInTheDocument();
       });
 
-      expect(screen.getByText('CCDI March Community Forum')).toBeInTheDocument();
-      expect(screen.getByText('Developing Pediatric Data Standards')).toBeInTheDocument();
+      expect(screen.getByText('Past Events, Webinars, and Workshops')).toBeInTheDocument();
+      expect(screen.getByText(/CCDI March Community Forum/)).toBeInTheDocument();
+      expect(screen.getByText(/Developing Pediatric Data Standards/)).toBeInTheDocument();
+    });
+
+    it('should render fallback detail events when fetch fails', async () => {
+      axios.get.mockRejectedValueOnce(new Error('network'));
+
+      render(
+        <MemoryRouter initialEntries={['/explore']}>
+          <CCDIEventAnnouncementsResourceController />
+        </MemoryRouter>,
+      );
+
+      await waitFor(() => {
+        expect(screen.getByText(/CCDI March Community Forum/)).toBeInTheDocument();
+      });
     });
   });
 });

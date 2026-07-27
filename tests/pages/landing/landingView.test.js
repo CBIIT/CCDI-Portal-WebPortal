@@ -107,14 +107,13 @@ describe('LandingView', () => {
     it('should render one stat item per statsData entry', () => {
       renderLandingView();
       const statsSection = screen.getByTestId('landing-stats-section');
-      const statLinks = within(statsSection).getAllByRole('link', { name: /Childhood Cancer Data Catalog|Molecular Characterization Initiative|Molecular Targets Platform|National Childhood Cancer Registry Explorer/i });
-      expect(statLinks.length).toBe(4);
+      const statLinks = within(statsSection).getAllByRole('link', { name: /Childhood Cancer Data Catalog|Molecular Characterization Initiative|National Childhood Cancer Registry Explorer/i });
+      expect(statLinks.length).toBe(3);
     });
 
     it('should format stat numbers with en-US locale', () => {
       renderLandingView();
       expect(screen.getByText('1,700,440')).toBeInTheDocument();
-      expect(screen.getByText('58,867')).toBeInTheDocument();
     });
 
     it('should show asterisk for Participants stat', () => {

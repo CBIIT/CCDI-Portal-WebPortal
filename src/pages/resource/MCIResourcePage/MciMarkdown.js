@@ -67,7 +67,7 @@ const MciMarkdown = ({ children }) => {
             href={href}
             className={isExternal(href) ? 'link' : undefined}
             target={isExternal(href) ? '_blank' : undefined}
-            rel={isExternal(href) ? 'noopener noreferrer' : undefined}
+            rel="noopener noreferrer"
           >
             {children}
           </a>

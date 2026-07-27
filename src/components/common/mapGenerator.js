@@ -57,7 +57,7 @@ const STATE_LABEL_COLOR = '#4B545B';
 const STATE_LABEL_STYLE = {
   fontFamily: 'Inter, sans-serif',
   fontSize: 8,
-  fontWeight: 400,
+  fontWeight: 500,
   color: STATE_LABEL_COLOR,
 };
 

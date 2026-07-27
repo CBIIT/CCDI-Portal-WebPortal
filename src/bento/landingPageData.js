@@ -1,10 +1,10 @@
 import gql from 'graphql-tag';
+import env from '../utils/env';
 import landingImg from '../assets/landing/Hero_1.png'
 import aboutImg from '../assets/landing/About_1.png';
 import wheel1 from '../assets/landing/ccdc_carousel.svg';
 import wheel2 from '../assets/landing/civic_carousel.svg';
 import wheel3 from '../assets/landing/mci_carousel.svg';
-import wheel4 from '../assets/landing/mtp_carousel.svg';
 import wheel5 from '../assets/landing/nccr_carousel.svg';
 import wheel6 from '../assets/landing/cgc_carousel.svg';
 import wheel7 from '../assets/landing/dbgap_carousel.svg';
@@ -19,7 +19,6 @@ import c3dcLogo from '../assets/landing/c3dc_logo.svg';
 import ccdcMobile from '../assets/landing/ccdc_mobile.png';
 import civicMobile from '../assets/landing/civic_mobile.png';
 import mciMobile from '../assets/landing/mci_mobile.png';
-import mtpMobile from '../assets/landing/mtp_mobile.png';
 import nccrMobile from '../assets/landing/nccr_mobile.png';
 import cgcMobile from '../assets/landing/cgc_mobile.png';
 import dbgapMobile from '../assets/landing/dbgap_mobile.png';
@@ -33,7 +32,6 @@ import cBioPortalMobile from '../assets/landing/cBioPortal_mobile.png';
 import ccdcLogo from '../assets/landing/ccdc_logo.svg';
 import civicLogo from '../assets/landing/civic_logo.svg';
 import mciLogo from '../assets/landing/mci_logo.svg';
-import mtpLogo from '../assets/landing/mtp_logo.svg';
 import nccrLogo from '../assets/landing/nccr_logo.svg';
 import cgcLogo from '../assets/landing/cgc_logo.svg';
 import dbgapLogo from '../assets/landing/dbgap_logo.svg';
@@ -44,6 +42,8 @@ import ecDNALogo from '../assets/landing/ecDNA_logo.svg';
 import cBioPortalLogo from '../assets/landing/cBioPortal_logo.svg';
 import rareCancerLogo from '../assets/landing/CCDI_Rare_Cancer_Initiative_logo.svg';
 import pmtlLogo from '../assets/landing/pmtl_logo.png';
+
+const C3DC_BASE_URL = String(env.REACT_APP_C3DC || '').replace(/\/$/, '');
 
 export const introData = {
   landingIntroPic: landingImg,
@@ -57,7 +57,7 @@ export const titleData = {
   latestUpdatesTitle: 'Latest Updates',
   resourceTitle: 'Resources',
   applicationsTitle: 'CCDI-SUPPORTED RESOURCES',
-  cloudResourcesTitle: 'OTHER RESOURCES',
+  cloudResourcesTitle: 'Other Resources',
   aboutTitle: 'About the CCDI Community',
 };
 
@@ -75,12 +75,6 @@ export const statsData = [
     link: '/MCI',
   },
   {
-    num: 58867,
-    title: 'Potential Pediatric Molecular Targets',
-    detail: 'Molecular Targets Platform',
-    link: 'https://moleculartargets.ccdi.cancer.gov',
-  },
-  {
     num: 1700440,
     title: 'Reported Cases Under Age 40<br>(1995-2020)',
     detail: 'National Childhood Cancer Registry Explorer',
@@ -95,7 +89,7 @@ export const resourcesAppliationsListData = [
     id: 'c3dc',
     title: 'Childhood Cancer Clinical Data Commons',
     subtitle: 'C3DC',
-    content: 'A database that houses childhood cancer demographics and phenotypic clinical data.',
+    content: 'A searchable database of childhood cancer demographics and phenotypic clinical data.',
     link: 'https://clinicalcommons.ccdi.cancer.gov/',
     img: c3dcLogo,
   },
@@ -123,14 +117,6 @@ export const resourcesAppliationsListData = [
     link: '/MCI',
     img: mciLogo,
     noLink: true,
-  },
-  {
-    id: 'mtp',
-    title: 'Molecular Targets Platform',
-    subtitle: 'MTP',
-    content: 'An instance of the Open Targets Platform with a focus on childhood cancer data that allows users to browse and identify associations between molecular targets, diseases, and drugs.',
-    link: 'https://moleculartargets.ccdi.cancer.gov',
-    img: mtpLogo,
   },
   {
     id: 'nccrexplorer',
@@ -256,12 +242,6 @@ export const carouselList = [
     link: '/MCI',
   },
   {
-    img: wheel4,
-    mobile: mtpMobile,
-    content: 'Molecular Targets Platform',
-    link: 'https://moleculartargets.ccdi.cancer.gov',
-  },
-  {
     img: wheel5,
     mobile: nccrMobile,
     content: 'National Childhood Cancer Registry Explorer',
@@ -289,7 +269,7 @@ export const carouselList = [
     img: wheel11,
     mobile: c3dcMobile,
     content: 'Childhood Cancer Clinical Data Commons',
-    link: 'https://clinicalcommons.ccdi.cancer.gov',
+    link: C3DC_BASE_URL,
   },
   {
     img: wheel12,

@@ -4,7 +4,7 @@ import {
 } from '@material-ui/core';
 import useStyles from './style';
 import { cn } from 'bento-components';
-import { useNavigate } from 'react-router-dom';
+import { openC3dcDataModel } from '../participant/c3dcService';
 
 /* const removeSquareBracketsFromString = (text) => {
   return text.replace(/\[|\]/g, '');
@@ -65,7 +65,6 @@ const ModelsCard = ({ data = {}, index }) => {
     category_type,
   } = data;
   const classes = useStyles();
-  const navigate = useNavigate();
   const [containerWidth, setContainerWidth] = useState(0);
   const cardRef = useRef(null);
 
@@ -81,10 +80,6 @@ const ModelsCard = ({ data = {}, index }) => {
     window.addEventListener('resize', measureWidth);
     return () => window.removeEventListener('resize', measureWidth);
   }, []);
-
-  const handleClick = () => {
-    navigate('/data-model');
-  };
 
   const renderInfo = (label, value = '') => (
     <div className={classes.keyAndValueRow}>
@@ -124,7 +119,7 @@ const ModelsCard = ({ data = {}, index }) => {
           
           {/* Button moved to top right */}
           <Grid item className={classes.buttonAlignWithTitle}>
-            <Button className={classes.button} variant="outlined" onClick={() => handleClick()}>
+            <Button className={classes.button} variant="outlined" onClick={openC3dcDataModel}>
               GO TO DATA MODEL NAVIGATOR
             </Button>
           </Grid>

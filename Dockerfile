@@ -1,5 +1,5 @@
-FROM node:16.20.1-alpine AS build
-RUN apk update && apk upgrade --no-cache openssl busybox
+FROM node:20-alpine AS build
+RUN apk update && apk upgrade --no-cache openssl busybox-binsh
 
 
 WORKDIR /usr/src/app
@@ -9,13 +9,13 @@ RUN npm cache clean --force
 
 RUN NODE_OPTIONS="--max-old-space-size=4096" npm set progress=false
 RUN NODE_OPTIONS="--max-old-space-size=4096" npm ci --legacy-peer-deps
-RUN NODE_OPTIONS="--max-old-space-size=4096" npm run build --silent
+RUN NODE_OPTIONS="--max-old-space-size=4096 --openssl-legacy-provider" npm run build --silent
 
 # FROM nginx:1.23.3-alpine
 #FROM nginx:1.25.5
-FROM nginx:1.27.5-alpine-slim AS fnl_base_image
+FROM nginx:1.30.4-alpine-slim AS fnl_base_image
 RUN apk add --no-cache ca-certificates && update-ca-certificates
-RUN apk --no-cache upgrade && apk add --no-cache --upgrade openssl busybox 'zlib>=1.3.2-r0' 'musl>=1.2.5-r3'
+RUN apk --no-cache upgrade && apk add --no-cache --upgrade openssl 'zlib>=1.3.2-r0' 'musl>=1.2.5-r3'
 
 
 COPY --from=build /usr/src/app/dist /usr/share/nginx/html

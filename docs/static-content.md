@@ -1,0 +1,106 @@
+# Static content updates (homepage & navigation)
+
+Hub homepage and primary navigation copy can be updated **without a portal code release** by editing YAML inside markdown files hosted in [`CBIIT/CCDI_Hub_Static_Contents`](https://github.com/CBIIT/CCDI_Hub_Static_Contents).
+
+The portal loads these files at runtime from `REACT_APP_STATIC_CONTENT_URL` (see `public/injectEnv.js` / `config/inject.template.js`).
+
+| File | Purpose |
+|------|---------|
+| `landingData.md` | Homepage hero, section titles, stats labels, resource cards, carousel |
+| `navData.md` | Primary nav + Resources / About submenus |
+
+Content format is **YAML front matter only** (markdown body is ignored). This matches gray-matter usage on other Hub pages while keeping structured lists easy to edit.
+
+## Environment URL
+
+| Env | Typical base |
+|-----|----------------|
+| Local / Dev | `https://raw.githubusercontent.com/CBIIT/CCDI_Hub_Static_Contents/dev` |
+| Prod | Same repo, production branch (set via k8s / `inject.template.js`) |
+
+Fetch URLs look like:
+
+```text
+${REACT_APP_STATIC_CONTENT_URL}/landingData.md?ts=<timestamp>
+${REACT_APP_STATIC_CONTENT_URL}/navData.md?ts=<timestamp>
+```
+
+The `?ts=` query busts CDN/browser caches so merges show up on the next page load.
+
+## `{{C3DC}}` token
+
+Use `{{C3DC}}` anywhere a C3DC base URL is needed. The portal substitutes `REACT_APP_C3DC` (no trailing slash) at parse time.
+
+Examples:
+
+```yaml
+link: "{{C3DC}}/explore"
+link: "{{C3DC}}/"
+```
+
+## Permissions & deploy
+
+1. Open a PR against the env branch in `CCDI_Hub_Static_Contents` (team members with administered permissions).
+2. Edit only the YAML between the `---` fences in `landingData.md` or `navData.md`.
+3. Merge the PR.
+4. Hard-refresh the Hub (or open a new session). No portal rebuild is required for content-only changes.
+
+Portal releases are only required when enabling or changing the **code** that reads these files.
+
+## YAML field cheat sheet
+
+### `navData.md`
+
+Required: `primary` (non-empty list).
+
+| Key | Shape |
+|-----|--------|
+| `primary[]` | `name`, `link`, `className` (`navMobileItem`, `navMobileItem clickable`, or `cart`) |
+| `resources[]` | `name`, `link` (becomes `navMobileSubItem`) |
+| `about[]` | Section: `name` + `children[]` with `name`, `link` **or** flat `name`/`link` |
+
+Quote values that contain `:` or special characters:
+
+```yaml
+className: "navMobileItem clickable"
+```
+
+### `landingData.md`
+
+Any of these keys may be present; missing keys keep the portal JS defaults.
+
+| Key | Notes |
+|-----|--------|
+| `heroTitle`, `heroSubtitle` | Hero headline / supporting text (`heroSubtitle` may use `\|` multiline) |
+| `introTitle3`, `introButtonTitle` | About buttons under the hero |
+| `latestUpdatesTitle`, `resourceTitle`, `applicationsTitle`, `cloudResourcesTitle` | Section headings |
+| `statsNote` | Footnote under stats |
+| `stats[]` | `title`, `detail`, `link`; optional static `num` (live MCI/CCDC counts still filled by the app) |
+| `resourcesApplications[]` / `resourcesCloud[]` | `id`, `title`, `subtitle?`, `content`, `link`, `img?`, `noLink?` |
+| `carousel[]` | `content`, `link`, `img?`, `mobile?` |
+
+HTML in titles (e.g. stats line breaks) must be quoted:
+
+```yaml
+title: "Reported Cases Under Age 40<br>(1995-2020)"
+```
+
+Image fields should be absolute URLs. If `img` / `mobile` are omitted, the portal keeps the bundled local asset for that `id` / carousel `content` when possible.
+
+## Failure behavior
+
+If a file is missing, YAML is invalid, or the network request fails, the Hub keeps the built-in JS content in `src/bento/landingPageData.js` and `src/bento/globalHeaderData.js` so the site never goes blank.
+
+## Verify after deploy
+
+1. Confirm the raw GitHub URL returns the new YAML (open in browser).
+2. Load Hub home: hero text, resource cards, carousel labels/links.
+3. Check primary nav: Explore / Studies C3DC links, Resources submenu, nested About sections.
+4. Confirm no portal redeploy was needed for the content change.
+
+## Fixtures in this repo
+
+Copy-starting samples (for tests and for seeding the static-contents repo):
+
+- `tests/fixtures/landing/landingMarkdownSamples.js`
+- `tests/fixtures/nav/navMarkdownSamples.js`

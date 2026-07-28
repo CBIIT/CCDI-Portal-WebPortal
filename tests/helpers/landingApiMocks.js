@@ -35,12 +35,14 @@ export function createLandingGraphqlQueryMock(overrides = {}) {
 }
 
 /**
- * axios.get for news YAML and release notes markdown — must be assigned after jest.mock in tests that mock axios.
+ * axios.get for news YAML, release notes markdown, and optional landingData.md.
+ * Must be assigned after jest.mock in tests that mock axios.
  */
 export function setupNewsYamlAxiosMock(overrides = {}) {
   const raw = overrides.newsYamlRaw ?? newsDataYamlRaw;
   const releaseNotesMarkdown = overrides.releaseNotesMarkdown ?? '';
   const ccdiDataUpdatesMarkdown = overrides.ccdiDataUpdatesMarkdown ?? '';
+  const landingMarkdown = overrides.landingMarkdown;
   axios.get = jest.fn((url) => {
     const pathPart = String(url).split('?')[0];
     if (pathPart.endsWith('/newsData.yaml')) {
@@ -51,6 +53,12 @@ export function setupNewsYamlAxiosMock(overrides = {}) {
     }
     if (pathPart.endsWith('/ccdiDataUpdates.md')) {
       return Promise.resolve({ data: ccdiDataUpdatesMarkdown });
+    }
+    if (pathPart.endsWith('/landingData.md')) {
+      if (landingMarkdown === undefined) {
+        return Promise.reject(new Error('landingData.md not available in test'));
+      }
+      return Promise.resolve({ data: landingMarkdown });
     }
     return Promise.reject(new Error(`Unexpected axios.get URL in test: ${url}`));
   });

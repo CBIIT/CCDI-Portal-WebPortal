@@ -6,8 +6,10 @@ import SearchBar from '../ResponsiveHeader/components/SearchBarMobile';
 import menuClearIcon from '../../assets/header/Menu_Cancel_Icon.svg';
 import rightArrowIcon from '../../assets/header/Right_Arrow.svg';
 import leftArrowIcon from '../../assets/header/Left_Arrow.svg';
-import { navMobileList, navbarSublists, navBarCartData, flattenNavbarSublist } from '../../bento/globalHeaderData'
+import { navBarCartData, flattenNavbarSublist } from '../../bento/globalHeaderData'
 import { USGovBannerData } from '../../bento/globalHeaderData';
+import { useNavContent } from './NavContentContext';
+
 
 const HeaderBanner = styled.div`
   width: 100%;
@@ -225,6 +227,7 @@ const USGovBanner = styled.div`
 
 const Header = () => {
   const path = useLocation().pathname;
+  const { navMobileList, navbarSublists } = useNavContent();
   const [clickTitle, setClickTitle] = useState('');
   const [navMobileDisplay, setNavMobileDisplay] = useState('none');
   const [navbarMobileList, setNavbarMobileList] = useState(navMobileList);
@@ -246,7 +249,7 @@ const Header = () => {
     } else {
       setNavbarMobileList(navMobileList);
     }
-  }, [clickTitle]);
+  }, [clickTitle, navbarSublists, navMobileList]);
 
   return (
     <>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import usePageVisibility from "./PageVisibility";
 import styled from 'styled-components';
-import { carouselList } from '../../../bento/landingPageData'
+import { useLandingContent } from '../LandingContentContext';
 import exportIcon from '../../../assets/landing/Export_Icon.svg';
 import arrowIcon from '../../../assets/landing/arrow.svg';
 
@@ -336,6 +336,7 @@ const getRandomList = (itemList) => {
 };
 
 const Carousel = () => {
+    const { carouselList } = useLandingContent();
     const [rCarouselList, setRCarouselList] = useState([]);
     const [pause, setPause] = useState(false);
     const isVisible = usePageVisibility();

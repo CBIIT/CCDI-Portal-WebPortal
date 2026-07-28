@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import { introData, titleData, statsNote, resourcesAppliationsListData, resourcesCloudListData } from '../../bento/landingPageData';
+import { useLandingContent } from './LandingContentContext';
 import ReactHtmlParser from 'html-react-parser';
 import Carousel from '../landing/component/carousel';
 import HeroMobile from '../landing/component/heroMobile'
@@ -874,6 +874,13 @@ const LandingView = ({
   statsData,
   newsData
 }) => {
+  const {
+    introData,
+    titleData,
+    statsNote,
+    resourcesAppliationsListData,
+    resourcesCloudListData,
+  } = useLandingContent();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -890,11 +897,26 @@ const LandingView = ({
         <FirstContainer>
           <IntroContainer>
             <IntroTextContainer>
-              <h1 className='introTextTitle1'>Discover<br/>CCDI<br/>Resources</h1>
+              <h1 className='introTextTitle1'>
+                {(introData.introTitle1 || 'Discover CCDI Resources')
+                  .split(/\s+/)
+                  .reduce((acc, word, idx, arr) => {
+                    acc.push(word);
+                    if (idx < arr.length - 1) {
+                      acc.push(<br key={`br_${idx}`} />);
+                    }
+                    return acc;
+                  }, [])}
+              </h1>
               <div className='introTextTitle2'>
-                <div>Explore the CCDI Hub, its applications,</div>
-                <div>and analytic tools by selecting an</div>
-                <div>available resource</div>
+                {(introData.introTitle2
+                  || 'Explore the CCDI Hub, its applications, and analytic tools by selecting an available resource')
+                  .split('\n')
+                  .map((line) => line.trim())
+                  .filter(Boolean)
+                  .map((line, idx) => (
+                    <div key={`hero_sub_${idx}`}>{line}</div>
+                  ))}
               </div>
               <IntroAboutButtonContainer>
                 <div><a className='introAboutButton' href="/about">{introData.introTitle3}</a></div>

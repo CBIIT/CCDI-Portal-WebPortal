@@ -134,4 +134,34 @@ describe('LandingController (mocked count APIs)', () => {
       expect.objectContaining({ query: LANDING_DATA_QUERY }),
     );
   });
+
+  it('should request landingData.md with cache-bust query', async () => {
+    renderLandingController();
+
+    await waitFor(() => {
+      expect(axios.get).toHaveBeenCalledWith(
+        expect.stringMatching(/\/landingData\.md\?ts=/),
+      );
+    });
+  });
+
+  it('should overlay hero title from landingData.md when fetch succeeds', async () => {
+    setupNewsYamlAxiosMock({
+      landingMarkdown: `---
+heroTitle: Remote Hero Title Here
+heroSubtitle: Remote subtitle from markdown
+introTitle3: ABOUT CCDI HUB
+introButtonTitle: ABOUT CCDI
+---
+`,
+    });
+
+    renderLandingController();
+
+    await waitFor(() => {
+      expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Remote');
+      expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Hero');
+      expect(screen.getByText(/Remote subtitle from markdown/)).toBeInTheDocument();
+    });
+  });
 });

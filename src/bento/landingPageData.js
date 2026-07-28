@@ -47,8 +47,9 @@ const C3DC_BASE_URL = String(env.REACT_APP_C3DC || '').replace(/\/$/, '');
 
 export const introData = {
   landingIntroPic: landingImg,
-  introTitle1: 'Discover CCDI applications, data, resources, and other tools',
-  introTitle2: 'Explore the CCDI Hub by selecting an available resource on the Hub Wheel',
+  // Word-split with <br /> in landingView; keep three short words for the hero stack.
+  introTitle1: 'Discover CCDI Resources',
+  introTitle2: 'Explore the CCDI Hub, its applications,\nand analytic tools by selecting an\navailable resource',
   introTitle3: 'ABOUT CCDI HUB',
   introButtonTitle: 'ABOUT CCDI',
 };
@@ -90,7 +91,7 @@ export const resourcesAppliationsListData = [
     title: 'Childhood Cancer Clinical Data Commons',
     subtitle: 'C3DC',
     content: 'A searchable database of childhood cancer demographics and phenotypic clinical data.',
-    link: 'https://clinicalcommons.ccdi.cancer.gov/',
+    link: `${C3DC_BASE_URL}/`,
     img: c3dcLogo,
   },
   {

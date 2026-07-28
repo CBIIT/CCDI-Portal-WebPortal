@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import usePageVisibility from "./PageVisibility";
-import { carouselList } from '../../../bento/landingPageData';
+import { useLandingContent } from '../LandingContentContext';
 import exportIconText from '../../../assets/landing/Export_Icon_White.svg';
 import startIcon from '../../../assets/icons/Start_Icon.svg';
 import pauseIcon from '../../../assets/icons/Pause_Icon.svg';
@@ -260,6 +260,7 @@ const HeroMobileSection = styled.div`
 `;
 
 const HeroMobile = () => {
+    const { carouselList, introData } = useLandingContent();
     const isVisible = usePageVisibility();
     const [pause, setPause] = useState(false);
 
@@ -344,7 +345,9 @@ const HeroMobile = () => {
                     CCDI {window.innerWidth < 872 ? <br/> : <></>}
                     Resources
                 </h1>
-                <div className='introTitle2'>Explore the CCDI Hub </div>
+                <div className='introTitle2'>
+                  {(introData.introTitle2 || 'Explore the CCDI Hub ').split('\n')[0].trim()}
+                </div>
                 <div id="mcarouselList" className='carouselMobileList'>
                     {
                         carouselList.map((mcarouselItem, idx) => {

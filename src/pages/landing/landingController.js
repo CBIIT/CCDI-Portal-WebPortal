@@ -7,16 +7,19 @@ import axios from 'axios';
 import { fetchReleaseNotesData, mergeReleaseNotesLists } from '../releaseNotePage/parseReleaseNotesMarkdown';
 import { CircularProgress } from '@material-ui/core';
 import {
-  introData as defaultIntroData,
-  titleData as defaultTitleData,
-  statsData as defaultStatsData,
-  statsNote as defaultStatsNote,
-  resourcesAppliationsListData as defaultResourcesApplications,
-  resourcesCloudListData as defaultResourcesCloud,
-  carouselList as defaultCarouselList,
+  introData as assetIntroData,
+  titleData as assetTitleData,
+  statsData as assetStatsData,
+  statsNote as assetStatsNote,
+  resourcesAppliationsListData as assetResourcesApplications,
+  resourcesCloudListData as assetResourcesCloud,
+  carouselList as assetCarouselList,
   LANDING_DATA_QUERY,
 } from '../../bento/landingPageData';
-import parseLandingMarkdown, { mergeLandingContent } from './parseLandingMarkdown';
+import parseLandingMarkdown, {
+  createEmptyLandingContent,
+  mergeLandingContent,
+} from './parseLandingMarkdown';
 import { LandingContentProvider } from './LandingContentContext';
 import LandingView from './landingView';
 
@@ -24,15 +27,18 @@ const CCDCurl = 'https://datacatalog.ccdi.cancer.gov/service/datasets/count';
 const NEWS_URL = `${env.REACT_APP_STATIC_CONTENT_URL}/newsData.yaml`;
 const LANDING_MD_URL = `${env.REACT_APP_STATIC_CONTENT_URL}/landingData.md`;
 
-const defaultLandingContent = {
-  introData: defaultIntroData,
-  titleData: defaultTitleData,
-  statsData: defaultStatsData,
-  statsNote: defaultStatsNote,
-  resourcesAppliationsListData: defaultResourcesApplications,
-  resourcesCloudListData: defaultResourcesCloud,
-  carouselList: defaultCarouselList,
+/** Local webpack assets only — never used as copy fallback when MD is missing. */
+const landingAssetDefaults = {
+  introData: assetIntroData,
+  titleData: assetTitleData,
+  statsData: assetStatsData,
+  statsNote: assetStatsNote,
+  resourcesAppliationsListData: assetResourcesApplications,
+  resourcesCloudListData: assetResourcesCloud,
+  carouselList: assetCarouselList,
 };
+
+const emptyLandingContent = createEmptyLandingContent(landingAssetDefaults);
 
 const getDashData = () => {
   const client = useApolloClient();
@@ -72,14 +78,17 @@ const getDashData = () => {
       const fileUrl = `${LANDING_MD_URL}?ts=${new Date().getTime()}`;
       const result = await axios.get(fileUrl);
       const parsed = parseLandingMarkdown(result.data);
-      return mergeLandingContent(parsed, defaultLandingContent);
+      if (!parsed) {
+        return emptyLandingContent;
+      }
+      return mergeLandingContent(parsed, landingAssetDefaults);
     } catch (_error) {
-      return defaultLandingContent;
+      return emptyLandingContent;
     }
   }
 
-  const [landingContent, setLandingContent] = useState(defaultLandingContent);
-  const [statsDataNew, setStatsDataNew] = useState(defaultStatsData);
+  const [landingContent, setLandingContent] = useState(emptyLandingContent);
+  const [statsDataNew, setStatsDataNew] = useState([]);
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -124,7 +133,7 @@ const getDashData = () => {
 const LandingController = (() => {
   const { statsDataNew, data, landingContent } = getDashData();
 
-  if (!statsDataNew) {
+  if (statsDataNew == null) {
     return (
       <div style={{ height: '1200px', paddingTop: '10px' }}>
         <div style={{ margin: 'auto', display: 'flex', maxWidth: '1800px' }}>

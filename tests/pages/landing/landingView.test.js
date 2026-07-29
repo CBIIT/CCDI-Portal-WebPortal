@@ -11,6 +11,15 @@ import { MemoryRouter } from 'react-router-dom';
 import { render, screen, within } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import LandingView from '../../../src/pages/landing/landingView';
+import { LandingContentProvider } from '../../../src/pages/landing/LandingContentContext';
+import {
+  introData,
+  titleData,
+  statsNote,
+  resourcesAppliationsListData,
+  resourcesCloudListData,
+  carouselList,
+} from '../../../src/bento/landingPageData';
 import {
   defaultLandingStatsData,
   defaultLandingNewsData,
@@ -27,11 +36,22 @@ jest.mock('../../../src/pages/landing/component/latestUpdate', () => function La
   return <div data-testid="latest-update" />;
 });
 
+const landingContentForView = {
+  introData,
+  titleData,
+  statsNote,
+  resourcesAppliationsListData,
+  resourcesCloudListData,
+  carouselList,
+};
+
 function renderLandingView(props = {}) {
   const { statsData = defaultLandingStatsData, newsData = defaultLandingNewsData } = props;
   return render(
     <MemoryRouter>
-      <LandingView statsData={statsData} newsData={newsData} />
+      <LandingContentProvider value={landingContentForView}>
+        <LandingView statsData={statsData} newsData={newsData} />
+      </LandingContentProvider>
     </MemoryRouter>,
   );
 }

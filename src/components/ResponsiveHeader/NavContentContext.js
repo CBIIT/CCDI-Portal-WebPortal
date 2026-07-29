@@ -3,22 +3,23 @@ import React, {
 } from 'react';
 import axios from 'axios';
 import env from '../../utils/env';
-import {
-  navMobileList as defaultNavMobileList,
-  navbarSublists as defaultNavbarSublists,
-} from '../../bento/globalHeaderData';
 import parseNavMarkdown from '../../bento/parseNavMarkdown';
 
 const NAV_URL = `${env.REACT_APP_STATIC_CONTENT_URL}/navData.md`;
 
-const NavContentContext = createContext({
-  navMobileList: defaultNavMobileList,
-  navbarSublists: defaultNavbarSublists,
-});
+const emptyNav = {
+  navMobileList: [],
+  navbarSublists: {
+    Resources: [],
+    About: [],
+  },
+};
+
+const NavContentContext = createContext(emptyNav);
 
 export function NavContentProvider({ children }) {
-  const [navMobileList, setNavMobileList] = useState(defaultNavMobileList);
-  const [navbarSublists, setNavbarSublists] = useState(defaultNavbarSublists);
+  const [navMobileList, setNavMobileList] = useState(emptyNav.navMobileList);
+  const [navbarSublists, setNavbarSublists] = useState(emptyNav.navbarSublists);
 
   useEffect(() => {
     let cancelled = false;
@@ -27,27 +28,24 @@ export function NavContentProvider({ children }) {
         const fileUrl = `${NAV_URL}?ts=${new Date().getTime()}`;
         const result = await axios.get(fileUrl);
         const parsed = parseNavMarkdown(result.data);
-        if (!cancelled && parsed) {
-          // Preserve cart item from defaults when remote omits it.
-          const hasCart = parsed.navMobileList.some((item) => item.className === 'cart');
-          const mergedPrimary = hasCart
-            ? parsed.navMobileList
-            : [
-              ...parsed.navMobileList,
-              ...defaultNavMobileList.filter((item) => item.className === 'cart'),
-            ];
-          setNavMobileList(mergedPrimary);
+        if (cancelled) {
+          return;
+        }
+        if (parsed) {
+          setNavMobileList(parsed.navMobileList);
           setNavbarSublists({
-            Resources: parsed.navbarSublists.Resources.length
-              ? parsed.navbarSublists.Resources
-              : defaultNavbarSublists.Resources,
-            About: parsed.navbarSublists.About.length
-              ? parsed.navbarSublists.About
-              : defaultNavbarSublists.About,
+            Resources: parsed.navbarSublists.Resources || [],
+            About: parsed.navbarSublists.About || [],
           });
+        } else {
+          setNavMobileList(emptyNav.navMobileList);
+          setNavbarSublists(emptyNav.navbarSublists);
         }
       } catch (_error) {
-        /* keep JS defaults */
+        if (!cancelled) {
+          setNavMobileList(emptyNav.navMobileList);
+          setNavbarSublists(emptyNav.navbarSublists);
+        }
       }
     };
     fetchNav();

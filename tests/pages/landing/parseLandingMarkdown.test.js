@@ -74,8 +74,12 @@ describe('parseLandingMarkdown', () => {
 });
 
 describe('mergeLandingContent', () => {
-  it('should keep defaults when parsed is null', () => {
-    expect(mergeLandingContent(null, defaults)).toBe(defaults);
+  it('should return empty content when parsed is null (no JS copy fallback)', () => {
+    const merged = mergeLandingContent(null, defaults);
+    expect(merged.introData.introTitle1).toBe('');
+    expect(merged.statsData).toEqual([]);
+    expect(merged.resourcesAppliationsListData).toEqual([]);
+    expect(merged.carouselList).toEqual([]);
   });
 
   it('should overlay remote fields and keep local images by id', () => {

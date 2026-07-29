@@ -358,6 +358,7 @@ const Carousel = () => {
 
     const nextItem = () => {
         const list = document.getElementById("carouselList");
+        if (!list || !list.lastChild) return;
         const lastitem = list.lastChild;
         list.removeChild(lastitem);
         list.insertBefore(lastitem, list.firstChild);
@@ -373,6 +374,7 @@ const Carousel = () => {
 
     const prevItem = () => {
         const list = document.getElementById("carouselList");
+        if (!list || !list.firstChild) return;
         const firstitem = list.firstChild;
         list.removeChild(firstitem);
         list.appendChild(firstitem);
@@ -414,9 +416,14 @@ const Carousel = () => {
     }
 
     useEffect(() => {
-        if (rCarouselList.length === 0) {
-            setRCarouselList(getRandomList(carouselList.sort((a, b) => a.content.localeCompare(b.content))));
+        if (rCarouselList.length === 0 && carouselList.length > 0) {
+            setRCarouselList(getRandomList(
+                [...carouselList].sort((a, b) => String(a.content).localeCompare(String(b.content))),
+            ));
         }
+    }, [carouselList]);
+
+    useEffect(() => {
         if (!isVisible) {
             clearInterval(timer);
         }

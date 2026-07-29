@@ -283,6 +283,7 @@ const HeroMobile = () => {
 
     const nextItem = () => {
         const list = document.getElementById("mcarouselList");
+        if (!list || !list.firstChild) return;
         const firstitem = list.firstChild;
         list.removeChild(firstitem);
         list.appendChild(firstitem);
@@ -297,6 +298,7 @@ const HeroMobile = () => {
 
     const prevItem = () => {
       const list = document.getElementById("mcarouselList");
+      if (!list || !list.lastChild) return;
       const lastitem = list.lastChild;
       list.removeChild(lastitem);
       list.insertBefore(lastitem, list.firstChild);
@@ -341,12 +343,19 @@ const HeroMobile = () => {
                 <div className='carouselMobileListCover' />
                 <div className='carouselMobileListCoverColor' />
                 <h1 className='introTitle1'>
-                    Discover<br/>
-                    CCDI {window.innerWidth < 872 ? <br/> : <></>}
-                    Resources
+                  {String(introData.introTitle1 || '')
+                    .split(/\s+/)
+                    .filter(Boolean)
+                    .reduce((acc, word, idx, arr) => {
+                      acc.push(word);
+                      if (idx < arr.length - 1) {
+                        acc.push(<br key={`mbr_${idx}`} />);
+                      }
+                      return acc;
+                    }, [])}
                 </h1>
                 <div className='introTitle2'>
-                  {(introData.introTitle2 || 'Explore the CCDI Hub ').split('\n')[0].trim()}
+                  {String(introData.introTitle2 || '').split('\n')[0].trim()}
                 </div>
                 <div id="mcarouselList" className='carouselMobileList'>
                     {

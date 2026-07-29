@@ -898,8 +898,9 @@ const LandingView = ({
           <IntroContainer>
             <IntroTextContainer>
               <h1 className='introTextTitle1'>
-                {(introData.introTitle1 || 'Discover CCDI Resources')
+                {String(introData.introTitle1 || '')
                   .split(/\s+/)
+                  .filter(Boolean)
                   .reduce((acc, word, idx, arr) => {
                     acc.push(word);
                     if (idx < arr.length - 1) {
@@ -909,8 +910,7 @@ const LandingView = ({
                   }, [])}
               </h1>
               <div className='introTextTitle2'>
-                {(introData.introTitle2
-                  || 'Explore the CCDI Hub, its applications, and analytic tools by selecting an available resource')
+                {String(introData.introTitle2 || '')
                   .split('\n')
                   .map((line) => line.trim())
                   .filter(Boolean)

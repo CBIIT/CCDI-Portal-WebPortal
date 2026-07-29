@@ -1,5 +1,5 @@
 /**
- * NavContentProvider — fetches navData.md and falls back to JS defaults.
+ * NavContentProvider — fetches navData.md; no JS copy fallback on failure.
  */
 
 if (typeof global.MutationObserver === 'undefined') {
@@ -31,7 +31,8 @@ function NavProbe() {
   const { navMobileList, navbarSublists } = useNavContent();
   return (
     <div>
-      <div data-testid="explore-link">{navMobileList.find((i) => i.name === 'Explore')?.link}</div>
+      <div data-testid="explore-link">{navMobileList.find((i) => i.name === 'Explore')?.link || ''}</div>
+      <div data-testid="nav-count">{navMobileList.length}</div>
       <div data-testid="about-sections">{navbarSublists.About.length}</div>
     </div>
   );
@@ -64,7 +65,7 @@ describe('NavContentProvider', () => {
     expect(Number(screen.getByTestId('about-sections').textContent)).toBeGreaterThan(0);
   });
 
-  it('should keep JS defaults when navData.md fetch fails', async () => {
+  it('should leave nav empty when navData.md fetch fails', async () => {
     axios.get.mockRejectedValue(new Error('network'));
     render(
       <NavContentProvider>
@@ -76,6 +77,8 @@ describe('NavContentProvider', () => {
       expect(axios.get).toHaveBeenCalled();
     });
 
-    expect(screen.getByTestId('explore-link').textContent).toContain('/explore');
+    expect(screen.getByTestId('nav-count')).toHaveTextContent('0');
+    expect(screen.getByTestId('explore-link')).toHaveTextContent('');
+    expect(screen.getByTestId('about-sections')).toHaveTextContent('0');
   });
 });

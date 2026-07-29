@@ -2,8 +2,37 @@ import matter from 'gray-matter';
 import resolveContentTokens from '../../utils/resolveContentTokens';
 
 /**
+ * Empty landing shell (no JS copy fallback). Asset maps may still be passed into
+ * mergeLandingContent so remote rows can attach local webpack images by id/content.
+ */
+export function createEmptyLandingContent(assetDefaults = {}) {
+  const introPic = assetDefaults.introData && assetDefaults.introData.landingIntroPic;
+  return {
+    introData: {
+      landingIntroPic: introPic,
+      introTitle1: '',
+      introTitle2: '',
+      introTitle3: '',
+      introButtonTitle: '',
+    },
+    titleData: {
+      latestUpdatesTitle: '',
+      resourceTitle: '',
+      applicationsTitle: '',
+      cloudResourcesTitle: '',
+      aboutTitle: '',
+    },
+    statsData: [],
+    statsNote: '',
+    resourcesAppliationsListData: [],
+    resourcesCloudListData: [],
+    carouselList: [],
+  };
+}
+
+/**
  * Parse landingData.md — YAML front matter only (markdown body ignored).
- * Returns null when required structure is missing so callers keep JS fallbacks.
+ * Returns null when required structure is missing.
  */
 export default function parseLandingMarkdown(rawMarkdown) {
   if (rawMarkdown == null || String(rawMarkdown).trim() === '') {
@@ -62,16 +91,19 @@ export default function parseLandingMarkdown(rawMarkdown) {
 }
 
 /**
- * Merge remote landing YAML over local JS defaults.
- * Remote image URLs win when present; otherwise keep webpack-imported local assets by id/content.
+ * Build landing props from remote YAML only. Missing sections stay empty.
+ * Local assetDefaults are used only to attach webpack images by id/content when
+ * the remote row omits img/mobile URLs.
  */
-export function mergeLandingContent(parsed, defaults) {
+export function mergeLandingContent(parsed, assetDefaults = {}) {
   if (!parsed) {
-    return defaults;
+    return createEmptyLandingContent(assetDefaults);
   }
 
+  const empty = createEmptyLandingContent(assetDefaults);
+
   const introData = {
-    ...defaults.introData,
+    ...empty.introData,
     ...(parsed.heroTitle != null ? { introTitle1: parsed.heroTitle } : {}),
     ...(parsed.heroSubtitle != null ? { introTitle2: parsed.heroSubtitle } : {}),
     ...(parsed.introTitle3 != null ? { introTitle3: parsed.introTitle3 } : {}),
@@ -79,7 +111,7 @@ export function mergeLandingContent(parsed, defaults) {
   };
 
   const titleData = {
-    ...defaults.titleData,
+    ...empty.titleData,
     ...(parsed.latestUpdatesTitle != null
       ? { latestUpdatesTitle: parsed.latestUpdatesTitle } : {}),
     ...(parsed.resourceTitle != null ? { resourceTitle: parsed.resourceTitle } : {}),
@@ -89,86 +121,83 @@ export function mergeLandingContent(parsed, defaults) {
       ? { cloudResourcesTitle: parsed.cloudResourcesTitle } : {}),
   };
 
-  const statsData = mergeStats(parsed.stats, defaults.statsData);
-  const statsNote = parsed.statsNote != null ? parsed.statsNote : defaults.statsNote;
-  const resourcesAppliationsListData = mergeResourceList(
-    parsed.resourcesApplications,
-    defaults.resourcesAppliationsListData,
-  );
-  const resourcesCloudListData = mergeResourceList(
-    parsed.resourcesCloud,
-    defaults.resourcesCloudListData,
-  );
-  const carouselList = mergeCarouselList(parsed.carousel, defaults.carouselList);
+  const assetLists = {
+    statsData: assetDefaults.statsData || [],
+    resourcesAppliationsListData: assetDefaults.resourcesAppliationsListData || [],
+    resourcesCloudListData: assetDefaults.resourcesCloudListData || [],
+    carouselList: assetDefaults.carouselList || [],
+  };
 
   return {
     introData,
     titleData,
-    statsData,
-    statsNote,
-    resourcesAppliationsListData,
-    resourcesCloudListData,
-    carouselList,
+    statsData: mergeStats(parsed.stats, assetLists.statsData),
+    statsNote: parsed.statsNote != null ? parsed.statsNote : '',
+    resourcesAppliationsListData: mergeResourceList(
+      parsed.resourcesApplications,
+      assetLists.resourcesAppliationsListData,
+    ),
+    resourcesCloudListData: mergeResourceList(
+      parsed.resourcesCloud,
+      assetLists.resourcesCloudListData,
+    ),
+    carouselList: mergeCarouselList(parsed.carousel, assetLists.carouselList),
   };
 }
 
-function mergeStats(remote, local) {
+function mergeStats(remote, localAssets) {
   if (!Array.isArray(remote) || remote.length === 0) {
-    return local;
+    return [];
   }
   return remote.map((item, idx) => {
-    const fallback = local[idx] || {};
+    const asset = localAssets[idx] || {};
     return {
-      num: item.num != null ? item.num : (fallback.num != null ? fallback.num : ''),
-      title: item.title != null ? String(item.title) : (fallback.title || ''),
-      detail: item.detail != null ? String(item.detail) : (fallback.detail || ''),
-      link: item.link != null ? String(item.link) : (fallback.link || ''),
+      num: item.num != null ? item.num : (asset.num != null ? asset.num : ''),
+      title: item.title != null ? String(item.title) : '',
+      detail: item.detail != null ? String(item.detail) : '',
+      link: item.link != null ? String(item.link) : '',
     };
   });
 }
 
-function mergeResourceList(remote, local) {
+function mergeResourceList(remote, localAssets) {
   if (!Array.isArray(remote) || remote.length === 0) {
-    return local;
+    return [];
   }
   return remote.map((item) => {
-    const localMatch = Array.isArray(local)
-      ? local.find((entry) => entry.id && item.id && entry.id === item.id)
+    const localMatch = Array.isArray(localAssets)
+      ? localAssets.find((entry) => entry.id && item.id && entry.id === item.id)
       : null;
     return {
       id: item.id != null ? String(item.id) : (localMatch && localMatch.id),
-      title: item.title != null ? String(item.title) : (localMatch && localMatch.title) || '',
-      ...(item.subtitle != null || (localMatch && localMatch.subtitle)
-        ? { subtitle: item.subtitle != null ? String(item.subtitle) : localMatch.subtitle }
+      title: item.title != null ? String(item.title) : '',
+      ...(item.subtitle != null
+        ? { subtitle: String(item.subtitle) }
         : {}),
-      content: item.content != null
-        ? String(item.content)
-        : (localMatch && localMatch.content) || '',
-      link: item.link != null ? String(item.link) : (localMatch && localMatch.link) || '',
+      content: item.content != null ? String(item.content) : '',
+      link: item.link != null ? String(item.link) : '',
       img: item.img || (localMatch && localMatch.img),
-      ...(item.noLink != null || (localMatch && localMatch.noLink)
-        ? { noLink: item.noLink != null ? Boolean(item.noLink) : localMatch.noLink }
+      ...(item.noLink != null
+        ? { noLink: Boolean(item.noLink) }
         : {}),
     };
   });
 }
 
-function mergeCarouselList(remote, local) {
+function mergeCarouselList(remote, localAssets) {
   if (!Array.isArray(remote) || remote.length === 0) {
-    return local;
+    return [];
   }
   return remote.map((item, idx) => {
-    const byContent = Array.isArray(local)
-      ? local.find((entry) => entry.content && item.content
+    const byContent = Array.isArray(localAssets)
+      ? localAssets.find((entry) => entry.content && item.content
         && entry.content === item.content)
       : null;
-    const byIndex = Array.isArray(local) ? local[idx] : null;
+    const byIndex = Array.isArray(localAssets) ? localAssets[idx] : null;
     const localMatch = byContent || byIndex;
     return {
-      content: item.content != null
-        ? String(item.content)
-        : (localMatch && localMatch.content) || '',
-      link: item.link != null ? String(item.link) : (localMatch && localMatch.link) || '',
+      content: item.content != null ? String(item.content) : '',
+      link: item.link != null ? String(item.link) : '',
       img: item.img || (localMatch && localMatch.img),
       mobile: item.mobile || (localMatch && localMatch.mobile),
     };

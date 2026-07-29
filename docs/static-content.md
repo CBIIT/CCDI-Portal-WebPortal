@@ -67,7 +67,7 @@ className: "navMobileItem clickable"
 
 ### `landingData.md`
 
-Any of these keys may be present; missing keys keep the portal JS defaults.
+Any of these keys may be present; missing keys stay empty (no JS copy fallback).
 
 | Key | Notes |
 |-----|--------|
@@ -89,7 +89,9 @@ Image fields should be absolute URLs. If `img` / `mobile` are omitted, the porta
 
 ## Failure behavior
 
-If a file is missing, YAML is invalid, or the network request fails, the Hub keeps the built-in JS content in `src/bento/landingPageData.js` and `src/bento/globalHeaderData.js` so the site never goes blank.
+There is **no JS copy fallback**. If a file is missing, YAML is invalid, or the network request fails, homepage/nav content stays empty until valid remote MD loads. Local webpack images may still attach to remote rows by `id` / carousel `content` when the MD omits `img` / `mobile` URLs.
+
+Host `landingData.md` and `navData.md` on the static-contents branch before expecting a filled homepage or nav.
 
 ## Verify after deploy
 

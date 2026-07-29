@@ -32,16 +32,25 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
 import HeaderMobile from '../../../src/components/ResponsiveHeader/HeaderMobile';
+import NavContentContext from '../../../src/components/ResponsiveHeader/NavContentContext';
+import {
+  navMobileList,
+  navbarSublists,
+} from '../../../src/bento/globalHeaderData';
 
 function clickWithInnerText(element, text) {
   Object.defineProperty(element, 'innerText', { configurable: true, value: text });
   fireEvent.click(element);
 }
 
+const navValue = { navMobileList, navbarSublists };
+
 function renderAt(path) {
   return render(
     <MemoryRouter initialEntries={[path]}>
-      <HeaderMobile />
+      <NavContentContext.Provider value={navValue}>
+        <HeaderMobile />
+      </NavContentContext.Provider>
     </MemoryRouter>,
   );
 }

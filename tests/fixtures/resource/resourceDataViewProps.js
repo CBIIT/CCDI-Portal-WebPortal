@@ -41,12 +41,13 @@ export const minimalFederationResourceData = {
 
 /** CCDIEventAnnouncementsResourceController requires `ccdiEventAnnouncementsContent`. */
 export const minimalCcdiEventAnnouncementsResourceData = {
-  ccdiEventAnnouncementsIntroText: '<p>CCDI events intro for unit test.</p>',
+  CCDI_Event_Announcements_Header: '',
+  ccdiEventAnnouncementsIntroText: 'CCDI events intro for unit test.',
   ccdiEventAnnouncementsContent: [
     {
       id: 'event_section',
       topic: 'Announcements Topic',
-      content: '<p>Announcements body.</p>',
+      content: 'Announcements body.',
     },
   ],
 };

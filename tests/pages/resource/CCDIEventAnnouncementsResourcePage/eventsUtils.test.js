@@ -4,6 +4,7 @@ import {
   getEventBySlug,
   getDetailPageSlugForLinkText,
   buildDetailPageListEntryHtml,
+  buildDetailPageListEntryMarkdown,
   mergeDetailPageEventsIntoAnnouncementsContent,
   buildDisclaimerHtml,
   EVENT_ROUTE_BASE,
@@ -55,64 +56,78 @@ describe('eventsUtils', () => {
     });
   });
 
-  describe('buildDetailPageListEntryHtml', () => {
-    it('builds list entries without the pdf export link class', () => {
+  describe('buildDetailPageListEntryMarkdown', () => {
+    it('builds markdown list entries without the pdf export link class', () => {
       const event = getAllEvents()[0];
-      const html = buildDetailPageListEntryHtml(event);
+      const markdown = buildDetailPageListEntryMarkdown(event);
 
-      expect(html).toContain(event.title);
-      expect(html).toContain(`${EVENT_ROUTE_BASE}/${event.slug}`);
-      expect(html).not.toContain('class="link"');
+      expect(markdown).toContain(event.title);
+      expect(markdown).toContain(`${EVENT_ROUTE_BASE}/${event.slug}`);
+      expect(markdown).toContain(event.rawDate);
+      expect(markdown).not.toContain('class="link"');
+    });
+
+    it('keeps buildDetailPageListEntryHtml as an alias', () => {
+      const event = getAllEvents()[0];
+      expect(buildDetailPageListEntryHtml(event)).toBe(buildDetailPageListEntryMarkdown(event));
     });
   });
 
   describe('mergeDetailPageEventsIntoAnnouncementsContent', () => {
-    const yamlSections = [
+    const markdownSections = [
       {
         id: 'CCDI_Event_Archive_1',
         topic: 'Past Events, Webinars, and Workshops',
         content: [
-          '<p>',
-          '<a class="link" href="https://example.com/a.pdf">Childhood Cancer Clinical Data Commons: A New Web Application for Your Data Needs</a><br>3/11/24<br><br>',
-          '<a class="link" href="https://example.com/b.pdf">Childhood Cancer Data Initiative—Recent Activities and Next Steps</a><br>3/8/24<br><br>',
-          '<a class="link" href="https://example.com/c.pdf">Navigating CCDI Hub\'s Explore Dashboard and Data Access</a><br>11/13/23',
-          '</p>',
-        ].join(''),
+          '[Childhood Cancer Clinical Data Commons: A New Web Application for Your Data Needs](https://example.com/a.pdf)',
+          '3/11/24',
+          '',
+          '[Childhood Cancer Data Initiative—Recent Activities and Next Steps](https://example.com/b.pdf)',
+          '3/8/24',
+          '',
+          '[Navigating CCDI Hub\'s Explore Dashboard and Data Access](https://example.com/c.pdf)',
+          '11/13/23',
+        ].join('\n'),
       },
       {
         id: 'CCDI_Event_Archive_2',
         topic: 'Contact',
-        content: '<p>Contact us.</p>',
+        content: 'Contact us.',
       },
     ];
 
     it('merges local detail page events into the past events section in date order', () => {
-      const merged = mergeDetailPageEventsIntoAnnouncementsContent(yamlSections);
-      const pastEventsHtml = merged[0].content;
+      const merged = mergeDetailPageEventsIntoAnnouncementsContent(markdownSections);
+      const pastEventsMarkdown = merged[0].content;
 
-      expect(pastEventsHtml.indexOf('CCDI March Community Forum')).toBeLessThan(
-        pastEventsHtml.indexOf('Childhood Cancer Clinical Data Commons'),
+      expect(pastEventsMarkdown.indexOf('CCDI March Community Forum')).toBeLessThan(
+        pastEventsMarkdown.indexOf('Childhood Cancer Clinical Data Commons'),
       );
-      expect(pastEventsHtml.indexOf('Childhood Cancer Data Initiative—Recent Activities')).toBeLessThan(
-        pastEventsHtml.indexOf('Developing Pediatric Data Standards'),
+      expect(pastEventsMarkdown.indexOf('Childhood Cancer Data Initiative—Recent Activities')).toBeLessThan(
+        pastEventsMarkdown.indexOf('Developing Pediatric Data Standards'),
       );
-      expect(pastEventsHtml.indexOf('Developing Pediatric Data Standards')).toBeLessThan(
-        pastEventsHtml.indexOf('Navigating CCDI Hub'),
+      expect(pastEventsMarkdown.indexOf('Developing Pediatric Data Standards')).toBeLessThan(
+        pastEventsMarkdown.indexOf('Navigating CCDI Hub'),
       );
-      expect(pastEventsHtml).toContain('/ccdi-events-announcements/ccdi-march-2024-community-forum');
-      expect(pastEventsHtml).toContain('/ccdi-events-announcements/developing-pediatric-data-standards');
+      expect(pastEventsMarkdown).toContain('/ccdi-events-announcements/ccdi-march-2024-community-forum');
+      expect(pastEventsMarkdown).toContain('/ccdi-events-announcements/developing-pediatric-data-standards');
     });
 
     it('does not modify non-past-events sections', () => {
-      const merged = mergeDetailPageEventsIntoAnnouncementsContent(yamlSections);
-      expect(merged[1].content).toBe('<p>Contact us.</p>');
+      const merged = mergeDetailPageEventsIntoAnnouncementsContent(markdownSections);
+      expect(merged[1].content).toBe('Contact us.');
     });
 
-    it('does not duplicate events already present in yaml content', () => {
+    it('does not duplicate events already present in markdown content', () => {
       const withExisting = [
         {
-          ...yamlSections[0],
-          content: `<p><a class="link" href="#">CCDI March Community Forum</a><br>3/18/24<br><br>${yamlSections[0].content.replace(/^<p>/, '')}`,
+          ...markdownSections[0],
+          content: [
+            '[CCDI March Community Forum](/ccdi-events-announcements/ccdi-march-2024-community-forum)',
+            '3/18/24',
+            '',
+            markdownSections[0].content,
+          ].join('\n'),
         },
       ];
       const merged = mergeDetailPageEventsIntoAnnouncementsContent(withExisting);

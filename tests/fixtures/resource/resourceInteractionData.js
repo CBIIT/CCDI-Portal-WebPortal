@@ -27,8 +27,8 @@ export const multiTopicFederationData = {
 export const multiTopicCcdiEventsData = {
   ...minimalCcdiEventAnnouncementsResourceData,
   ccdiEventAnnouncementsContent: [
-    { id: 'event_a', topic: 'Events A', content: '<p>Event A body</p>' },
-    { id: 'event_b', topic: 'Events B', content: '<p>Event B body</p>' },
+    { id: 'event_a', topic: 'Events A', content: 'Event A body' },
+    { id: 'event_b', topic: 'Events B', content: 'Event B body' },
   ],
 };
 

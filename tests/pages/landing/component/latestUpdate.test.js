@@ -2,14 +2,11 @@ import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import LatestUpdate from '../../../../src/pages/landing/component/latestUpdate';
+import { LandingContentProvider } from '../../../../src/pages/landing/LandingContentContext';
 
 jest.mock('../../../../src/pages/landing/component/PageVisibility', () => ({
   __esModule: true,
   default: jest.fn(() => true),
-}));
-
-jest.mock('../../../../src/bento/landingPageData', () => ({
-  titleData: { latestUpdatesTitle: 'Latest Updates' },
 }));
 
 const newsList = [
@@ -24,6 +21,20 @@ const releaseNotesList = [
 
 const srcList = { img1: 's1', img2: 's2', img3: 's3', img4: 's4' };
 const altList = { img1: 'a1', img2: 'a2', img3: 'a3', img4: 'a4' };
+
+function renderLatestUpdate(props = {}) {
+  return render(
+    <LandingContentProvider value={{ titleData: { latestUpdatesTitle: 'Latest Updates' } }}>
+      <LatestUpdate
+        newsList={newsList}
+        srcList={srcList}
+        releaseNotesList={releaseNotesList}
+        altList={altList}
+        {...props}
+      />
+    </LandingContentProvider>,
+  );
+}
 
 describe('LatestUpdate', () => {
   beforeEach(() => {
@@ -40,14 +51,7 @@ describe('LatestUpdate', () => {
   });
 
   it('should render title and latest update cards', async () => {
-    const { container } = render(
-      <LatestUpdate
-        newsList={newsList}
-        srcList={srcList}
-        releaseNotesList={releaseNotesList}
-        altList={altList}
-      />,
-    );
+    const { container } = renderLatestUpdate();
 
     expect(screen.getByText('Latest Updates')).toBeInTheDocument();
     await waitFor(() => {
@@ -56,14 +60,7 @@ describe('LatestUpdate', () => {
   });
 
   it('should support carousel controls and pause toggle', async () => {
-    const { container } = render(
-      <LatestUpdate
-        newsList={newsList}
-        srcList={srcList}
-        releaseNotesList={releaseNotesList}
-        altList={altList}
-      />,
-    );
+    const { container } = renderLatestUpdate();
     await waitFor(() => {
       expect(container.querySelector('#latestList')).toBeInTheDocument();
     });

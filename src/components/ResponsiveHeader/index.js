@@ -7,6 +7,7 @@ import {
 import HeaderDesktop from './HeaderDesktop';
 import HeaderTablet from './HeaderTablet';
 import HeaderMobile from './HeaderMobile';
+import { NavContentProvider } from './NavContentContext';
 
 const HeaderContainer = styled.div`
  @media (min-width: 1024px) {
@@ -64,17 +65,19 @@ const Header = () => {
     dispatch(initCart());
   }, []);
   return (
-    <HeaderContainer>
-      <div className="desktop">
-        <HeaderDesktop />
-      </div>
-      <div className="tablet">
-        <HeaderTablet />
-      </div>
-      <div className="mobile">
-        <HeaderMobile />
-      </div>
-    </HeaderContainer>
+    <NavContentProvider>
+      <HeaderContainer>
+        <div className="desktop">
+          <HeaderDesktop />
+        </div>
+        <div className="tablet">
+          <HeaderTablet />
+        </div>
+        <div className="mobile">
+          <HeaderMobile />
+        </div>
+      </HeaderContainer>
+    </NavContentProvider>
   )
 };
 

@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useLocation, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import { navMobileList, navbarSublists, isAboutPathActive } from '../../../bento/globalHeaderData';
+import { isAboutPathActive } from '../../../bento/globalHeaderData';
+import { useNavContent } from '../NavContentContext';
 
 const Nav = styled.div`
     top: 0;
@@ -284,7 +285,8 @@ const useOutsideAlerter = (ref) => {
 
 const NavBar = () => {
   const path = useLocation().pathname;
-  const isAbout = isAboutPathActive(path);
+  const { navMobileList, navbarSublists } = useNavContent();
+  const isAbout = isAboutPathActive(path, navbarSublists.About);
   const [clickedTitle, setClickedTitle] = useState("");
   const dropdownSelection = useRef(null);
   const clickableObject = navMobileList.filter(item => item.className === 'navMobileItem clickable');

@@ -5,13 +5,12 @@ import {
 import useStyles from './style';
 import { cn } from 'bento-components';
 import CPIModal from './CPIModal';
-import { Link } from 'react-router-dom';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 import { ReactComponent as DownArrowIcon } from '../../assets/Down_Arrow.svg';
 import { ReactComponent as UpArrowIcon } from '../../assets/Up_Arrow.svg';
-import { openC3dcExplore } from './c3dcService';
+import { openC3dcExplore, openC3dcStudy } from './c3dcService';
 
 const CONSENT_GLOSSARY_URL = 'https://www.ncbi.nlm.nih.gov/gap/docs/submissionguide/#consentgloss';
 
@@ -143,6 +142,10 @@ const ParticipantCard = ({ data = {}, index }) => {
     setDropdownOpen(false);
   };
 
+  const handleViewStudy = () => {
+    openC3dcStudy(study_id);
+  };
+
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -179,7 +182,7 @@ const ParticipantCard = ({ data = {}, index }) => {
         <Typography variant="body1" className={classes.value}>
           {value}
         </Typography> :
-        <Button component={Link} to={`/studies/${study_id}`} className={classes.titleLink}>
+        <Button className={classes.titleLink} onClick={handleViewStudy}>
           {study_id}
         </Button>}
     </div>

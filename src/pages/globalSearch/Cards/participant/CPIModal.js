@@ -26,6 +26,7 @@ import defaultTheme from './DefaultThemConfig';
 import questionIcon from '../../assets/Question_Icon.svg';
 import downloadIcon from '../../assets/download.svg';
 import { fetchParticipantCpiData, openC3dcExplore } from './c3dcService';
+import { mergeCpiData } from './cpiMergeUtils';
 
 const useStyles = makeStyles(() => ({
   questionIcon: {
@@ -109,6 +110,7 @@ const CPIModal = ({
 
   useEffect(() => {
     let cancelled = false;
+    const hubRows = Array.isArray(row.cpi_data) ? row.cpi_data : [];
 
     const loadCpiData = async () => {
       if (!open) {
@@ -119,18 +121,19 @@ const CPIModal = ({
       setError(null);
 
       try {
-        const cpiRows = await fetchParticipantCpiData(client, {
+        const integratedRows = await fetchParticipantCpiData(client, {
           participantId,
           studyId,
         });
         if (!cancelled) {
-          setData(Array.isArray(cpiRows) ? cpiRows : []);
+          // Combine Hub globalSearch CPI with Integrated API CPI, de-duplicated.
+          setData(mergeCpiData(hubRows, Array.isArray(integratedRows) ? integratedRows : []));
         }
       } catch (err) {
         if (!cancelled) {
           setError('Unable to load CPI mappings from Clinical Commons.');
-          // Fall back to Hub search payload if C3DC request fails.
-          setData(Array.isArray(row.cpi_data) ? row.cpi_data : []);
+          // Still show Hub mappings when Integrated is unavailable.
+          setData(mergeCpiData(hubRows, []));
         }
       } finally {
         if (!cancelled) {
@@ -144,7 +147,8 @@ const CPIModal = ({
     return () => {
       cancelled = true;
     };
-  }, [open, client, participantId, studyId, row.cpi_data]);
+    // client from useApolloClient is stable in production; omit to avoid re-fetch loops.
+  }, [open, participantId, studyId, row.cpi_data]);
 
   const handleDownloadCSV = () => {
     const csvColumnOrder = displayColumns;

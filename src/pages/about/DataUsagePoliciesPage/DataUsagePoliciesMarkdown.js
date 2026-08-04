@@ -36,7 +36,7 @@ const DataUsagePoliciesMarkdown = ({ children, blockquoteVariant = 'default' }) 
             href={href}
             className={isExternal(href) ? 'link' : undefined}
             target={isExternal(href) ? '_blank' : undefined}
-            rel={isExternal(href) ? 'noopener noreferrer' : undefined}
+            rel="noreferrer"
           >
             {linkChildren}
           </a>

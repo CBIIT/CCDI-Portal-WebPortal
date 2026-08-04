@@ -35,14 +35,18 @@ const AboutMarkdown = ({ children, linkVariant = 'default' }) => {
           const className = getLinkClassName(href, linkVariant);
           const external = isExternal(href);
           const mailto = href && href.startsWith('mailto:');
+          const externalProps = (external || mailto)
+            ? { target: '_blank', rel: 'noopener noreferrer' }
+            : {};
 
           return (
             <a
               {...rest}
               href={href}
               className={className}
+              {...externalProps}
               target={external || mailto ? '_blank' : undefined}
-              rel={external || mailto ? 'noopener noreferrer' : undefined}
+              rel="noreferrer"
             >
               {linkChildren}
             </a>

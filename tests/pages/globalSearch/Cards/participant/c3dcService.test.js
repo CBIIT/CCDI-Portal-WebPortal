@@ -77,8 +77,13 @@ describe('c3dcService', () => {
           participantOverview: [
             {
               participant_id: 'P001',
+              study_id: 'phs000001',
               dbgap_accession: 'phs000001',
-              cpi_data: [{ associated_id: 'ALT-1', data_type: 'external' }],
+              cpi_data: [{
+                associated_id: 'ALT-1',
+                data_type: 'external',
+                p_id: null,
+              }],
             },
           ],
         },
@@ -94,11 +99,47 @@ describe('c3dcService', () => {
       expect.objectContaining({
         context: { clientName: 'c3dcService' },
         variables: expect.objectContaining({
-          participant_id: ['P001'],
+          participant_ids: ['P001'],
           dbgap_accession: ['phs000001'],
         }),
       }),
     );
-    expect(result).toEqual([{ associated_id: 'ALT-1', data_type: 'external' }]);
+    expect(result).toEqual([{
+      associated_id: 'ALT-1',
+      data_type: 'external',
+      p_id: null,
+    }]);
+  });
+
+  it('matches CPI rows by study_id when dbgap_accession differs', async () => {
+    const client = {
+      query: jest.fn().mockResolvedValue({
+        data: {
+          participantOverview: [
+            {
+              participant_id: 'P001',
+              study_id: 'OTHER',
+              dbgap_accession: 'phs-other',
+              cpi_data: [{ associated_id: 'WRONG' }],
+            },
+            {
+              participant_id: 'P001',
+              study_id: 'phs000001',
+              dbgap_accession: 'phs-alt',
+              cpi_data: [{ associated_id: 'RIGHT', data_type: 'internal', p_id: 'uuid-1' }],
+            },
+          ],
+        },
+      }),
+    };
+
+    const result = await fetchParticipantCpiData(client, {
+      participantId: 'P001',
+      studyId: 'phs000001',
+    });
+
+    expect(result).toEqual([
+      { associated_id: 'RIGHT', data_type: 'internal', p_id: 'uuid-1' },
+    ]);
   });
 });

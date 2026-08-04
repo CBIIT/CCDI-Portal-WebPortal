@@ -1,6 +1,8 @@
 import gql from 'graphql-tag';
 import env from '../../../../utils/env';
 
+export { getCpiDedupKey, mergeCpiData } from './cpiMergeUtils';
+
 export const C3DC_BASE_URL = (
   env.REACT_APP_C3DC || 'https://clinicalcommons-integrated-dev.ccdi.cancer.gov'
 ).replace(/\/$/, '');
@@ -55,20 +57,25 @@ export const openC3dcStudy = (studyId) => {
   window.open(url, '_blank', 'noopener,noreferrer');
 };
 
+/**
+ * Integrated participantOverview filter/result fields for CPI enrichment.
+ * Note: filter arg is `participant_ids` (plural); CPI enrichment adds `data_type` + `p_id`.
+ */
 export const GET_PARTICIPANT_CPI_QUERY = gql`
   query participantCpiMapping(
-    $participant_id: [String],
+    $participant_ids: [String],
     $dbgap_accession: [String],
     $first: Int,
     $offset: Int
   ) {
     participantOverview(
-      participant_id: $participant_id,
+      participant_ids: $participant_ids,
       dbgap_accession: $dbgap_accession,
       first: $first,
       offset: $offset
     ) {
       participant_id
+      study_id
       dbgap_accession
       cpi_data {
         associated_id
@@ -77,6 +84,7 @@ export const GET_PARTICIPANT_CPI_QUERY = gql`
         domain_category
         data_location
         data_type
+        p_id
         __typename
       }
       __typename
@@ -84,8 +92,16 @@ export const GET_PARTICIPANT_CPI_QUERY = gql`
   }
 `;
 
+const studyKeysMatch = (row, studyId) => {
+  if (!studyId || !row) {
+    return false;
+  }
+  return row.study_id === studyId || row.dbgap_accession === studyId;
+};
+
 /**
- * Fetch CPI mapping rows from the C3DC GraphQL API for a participant.
+ * Fetch CPI mapping rows from the C3DC (Integrated) GraphQL API for a participant.
+ * Matches Integrated PrivateESDataFetcher.participantOverview → insertCPIDataIntoParticipants.
  */
 export const fetchParticipantCpiData = async (client, {
   participantId,
@@ -96,10 +112,12 @@ export const fetchParticipantCpiData = async (client, {
   }
 
   const variables = {
-    participant_id: [participantId],
+    participant_ids: [participantId],
     first: 10,
     offset: 0,
   };
+  // Integrated filters studies via dbgap_accession; Hub cards typically pass study_id,
+  // which is the same accession for most C3DC studies.
   if (studyId) {
     variables.dbgap_accession = [studyId];
   }
@@ -116,9 +134,9 @@ export const fetchParticipantCpiData = async (client, {
     return [];
   }
 
-  // Prefer the row matching study accession when multiple are returned.
+  // Prefer the row matching study_id or dbgap_accession when multiple are returned.
   const matched = studyId
-    ? rows.find((row) => row.dbgap_accession === studyId) || rows[0]
+    ? rows.find((row) => studyKeysMatch(row, studyId)) || rows[0]
     : rows[0];
 
   return (matched && matched.cpi_data) || [];

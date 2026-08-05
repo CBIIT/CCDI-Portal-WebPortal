@@ -37,7 +37,7 @@ export const navMobileList = [
   },
   {
     name: 'Explore',
-    link: c3dcUrl('/explore'),
+    link: c3dcUrl('/exploreParticipants'),
     className: 'navMobileItem',
   },
   {

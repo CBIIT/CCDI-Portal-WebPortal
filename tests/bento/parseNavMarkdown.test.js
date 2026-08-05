@@ -20,7 +20,7 @@ describe('parseNavMarkdown', () => {
   it('should parse primary/resources/about and resolve {{C3DC}}', () => {
     const parsed = parseNavMarkdown(sampleNavMarkdownRaw);
     expect(parsed).not.toBeNull();
-    expect(parsed.navMobileList[1].link).toBe('https://c3dc.test.example/explore');
+    expect(parsed.navMobileList[1].link).toBe('https://c3dc.test.example/exploreParticipants');
     expect(parsed.navMobileList[2].link).toBe('https://c3dc.test.example/studies');
     expect(parsed.navbarSublists.Resources[0].link).toBe('https://c3dc.test.example/');
     expect(parsed.navbarSublists.Resources[0].className).toBe('navMobileSubItem');

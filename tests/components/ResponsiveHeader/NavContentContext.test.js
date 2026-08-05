@@ -59,7 +59,7 @@ describe('NavContentProvider', () => {
 
     await waitFor(() => {
       expect(screen.getByTestId('explore-link')).toHaveTextContent(
-        'https://c3dc.test.example/explore',
+        'https://c3dc.test.example/exploreParticipants',
       );
     });
     expect(Number(screen.getByTestId('about-sections').textContent)).toBeGreaterThan(0);

@@ -58,7 +58,7 @@ describe('NavbarDesktop', () => {
       renderNav();
       const explore = screen.getByRole('link', { name: 'Explore' });
       const studies = screen.getByRole('link', { name: 'Studies' });
-      expect(explore).toHaveAttribute('href', `${C3DC_URL}/explore`);
+      expect(explore).toHaveAttribute('href', `${C3DC_URL}/exploreParticipants`);
       expect(studies).toHaveAttribute('href', `${C3DC_URL}/studies`);
       expect(explore).not.toHaveAttribute('target');
       expect(studies).not.toHaveAttribute('target');

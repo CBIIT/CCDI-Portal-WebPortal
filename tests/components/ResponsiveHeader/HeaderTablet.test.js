@@ -85,7 +85,7 @@ describe('HeaderTablet', () => {
       expect(screen.getByRole('link', { name: 'Home' })).toBeInTheDocument();
       expect(screen.getByRole('link', { name: 'Explore' })).toHaveAttribute(
         'href',
-        'https://clinicalcommons-dev.ccdi.cancer.gov/explore',
+        'https://clinicalcommons-dev.ccdi.cancer.gov/exploreParticipants',
       );
       expect(screen.getByRole('link', { name: 'Studies' })).toHaveAttribute(
         'href',

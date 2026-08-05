@@ -9,7 +9,7 @@ primary:
     link: /home
     className: navMobileItem
   - name: Explore
-    link: "{{C3DC}}/explore"
+    link: "{{C3DC}}/exploreParticipants"
     className: navMobileItem
   - name: Studies
     link: "{{C3DC}}/studies"

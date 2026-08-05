@@ -15,8 +15,8 @@ import resolveContentTokens, {
 
 describe('resolveContentTokens', () => {
   it('should replace {{C3DC}} in a string', () => {
-    expect(resolveContentTokenString('{{C3DC}}/explore')).toBe(
-      'https://c3dc.test.example/explore',
+    expect(resolveContentTokenString('{{C3DC}}/exploreParticipants')).toBe(
+      'https://c3dc.test.example/exploreParticipants',
     );
   });
 

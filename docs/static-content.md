@@ -34,7 +34,7 @@ Use `{{C3DC}}` anywhere a C3DC base URL is needed. The portal substitutes `REACT
 Examples:
 
 ```yaml
-link: "{{C3DC}}/explore"
+link: "{{C3DC}}/exploreParticipants"
 link: "{{C3DC}}/"
 ```
 

@@ -24,7 +24,7 @@ stats:
   - title: "Reported Cases Under Age 40<br>(1995-2020)"
     detail: National Childhood Cancer Registry Explorer
     link: https://nccrexplorer.ccdi.cancer.gov
-    num: 1700440
+    num: 1760951
 resourcesApplications:
   - id: c3dc
     title: Childhood Cancer Clinical Data Commons

@@ -1,13 +1,12 @@
-type GS_About {
-    page: String
-    title: String
-    type: String
-    text: [String]
-}
+# Hub globalSearch GraphQL contract (reference).
+# About tab search is frontend-only (Fuse.js) — about_count / about_page are not queried.
 
 type GlobalSearchResult {
-    about_count: Int
-    about_page: [GS_About]
+    participant_count: Int
+    study_count: Int
+    sample_count: Int
+    file_count: Int
+    model_count: Int
 }
 
 schema {

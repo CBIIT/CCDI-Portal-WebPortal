@@ -12,17 +12,15 @@ export const globalSearchAutocompleteFixture = {
   samples: [{ sample_id: 'MOCK_SAMPLE_001' }],
   files: [{ file_name: 'mock_results.tsv' }],
   model: [{ node: 'MockModelNode' }],
-  about_page: [{ title: 'Mock About Page Hit' }],
 };
 
-/** Tab counts query `SEARCH_PAGE_RESULTS` — aggregate counts only. */
+/** Tab counts query `SEARCH_PAGE_RESULTS` — aggregate counts only (About is Fuse.js). */
 export const globalSearchCountsFixture = {
   participant_count: 12,
   study_count: 4,
   sample_count: 30,
   file_count: 55,
   model_count: 2,
-  about_count: 1,
 };
 
 /** `SEARCH_PAGE_RESULT_PARTICIPANTS` row (minimal fields used in UI tables). */
@@ -79,13 +77,5 @@ export const globalSearchModelRowsFixture = [
     value: 'Asian',
     highlight: '',
     category_type: 'demographic',
-  },
-];
-
-export const globalSearchAboutRowsFixture = [
-  {
-    text: '<p>Mock about content</p>',
-    page: '/about',
-    title: 'About CCDI',
   },
 ];

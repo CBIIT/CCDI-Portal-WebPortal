@@ -84,7 +84,7 @@ describe('NavbarDesktop', () => {
       expect(screen.getByText('Help')).toBeInTheDocument();
       expect(screen.getByRole('link', { name: 'About CCDI Hub' })).toHaveAttribute('href', '/about');
       expect(screen.getByRole('link', { name: 'Release Notes' })).toBeInTheDocument();
-      expect(screen.getByRole('link', { name: 'CCDI FAQs' })).toHaveAttribute('href', '/faq');
+      expect(screen.getByRole('link', { name: 'CCDI FAQs' })).toHaveAttribute('href', '/faqs');
       expect(screen.queryByText('Hub Explore Dashboard Tutorial Video')).not.toBeInTheDocument();
     });
 

@@ -1,11 +1,12 @@
 import React from "react";
 import { withStyles, CssBaseline } from '@material-ui/core';
-import { Route, Routes, } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import Footer from '../ResponsiveFooter/';
 import Header from '../ResponsiveHeader/';
 import Home from '../../pages/landing/landingController';
 import About from '../../pages/about/AboutPage/AboutController';
 import DataUsagePoliciesView from '../../pages/about/DataUsagePoliciesPage/DataUsagePoliciesController';
+import FaqView from '../../pages/about/FaqPage/FaqController';
 import PublicationsView from '../../pages/about/publications/publicationsController';
 import News from '../../pages/news/newsController';
 import DataModelNavigator from '../../pages/dmn/DataModelNavigator';
@@ -51,6 +52,8 @@ const Layout = () => {
           <Route path="/data-federation-resource" element={<FederationResourceView/>} />
           <Route path="/data-federation-data-model" element={<FederationDataModelNavigator />} />
           <Route path="/data-usage-policies" element={<DataUsagePoliciesView />} />
+          <Route path="/faqs" element={<FaqView />} />
+          <Route path="/faq" element={<Navigate to="/faqs" replace />} />
           <Route path="/ccdi-participant-index" element={<CPIResourceView />} />
           <Route path="/publications" element={<PublicationsView />} />
           <Route path="/tools" element={<ToolsResourceView />} />

@@ -200,7 +200,7 @@ export const navbarSublists = {
       children: [
         {
           name: 'CCDI FAQs',
-          link: '/faq',
+          link: '/faqs',
           className: 'navMobileSubItem',
         },
         {

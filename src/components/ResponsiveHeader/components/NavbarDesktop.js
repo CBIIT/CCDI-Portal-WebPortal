@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useLocation, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import { navMobileList, navbarSublists, isAboutPathActive } from '../../../bento/globalHeaderData';
+import { isAboutPathActive } from '../../../bento/globalHeaderData';
+import { useNavContent } from '../NavContentContext';
 
 const Nav = styled.div`
     top: 0;
@@ -221,26 +222,31 @@ const DropdownContainer = styled.div`
   .dropdownSection {
     padding: 0 16px 32px 16px;
     max-width: 344px;
+    text-align: left;
   }
 
   .dropdownSectionTitle {
-    font-family: poppins;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 120%;
+    font-family: Poppins;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 110%;
+    letter-spacing: 0;
     color: #FFFFFF;
-    margin: 0 0 16px 0;
+    margin: 0 0 12px 0;
+    text-align: left;
     text-transform: none;
   }
 
   .dropdownSectionItem {
     display: block;
-    padding: 0 0 16px 0;
-    font-family: poppins;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 110%;
+    padding: 0 0 8px 0;
+    font-family: 'Open Sans';
+    font-weight: 400;
+    font-size: 16.16px;
+    line-height: 100%;
+    letter-spacing: 0;
     color: #FFFFFF;
+    text-align: left;
     text-decoration: none;
   }
 
@@ -284,7 +290,8 @@ const useOutsideAlerter = (ref) => {
 
 const NavBar = () => {
   const path = useLocation().pathname;
-  const isAbout = isAboutPathActive(path);
+  const { navMobileList, navbarSublists } = useNavContent();
+  const isAbout = isAboutPathActive(path, navbarSublists.About);
   const [clickedTitle, setClickedTitle] = useState("");
   const dropdownSelection = useRef(null);
   const clickableObject = navMobileList.filter(item => item.className === 'navMobileItem clickable');

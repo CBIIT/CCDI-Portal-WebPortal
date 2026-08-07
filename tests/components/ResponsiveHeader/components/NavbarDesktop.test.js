@@ -14,14 +14,23 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
 import NavbarDesktop from '../../../../src/components/ResponsiveHeader/components/NavbarDesktop';
+import NavContentContext from '../../../../src/components/ResponsiveHeader/NavContentContext';
+import {
+  navMobileList,
+  navbarSublists,
+} from '../../../../src/bento/globalHeaderData';
 
 const C3DC_URL = 'https://clinicalcommons-dev.ccdi.cancer.gov';
+
+const navValue = { navMobileList, navbarSublists };
 
 describe('NavbarDesktop', () => {
   function renderNav(path = '/') {
     return render(
       <MemoryRouter initialEntries={[path]}>
-        <NavbarDesktop />
+        <NavContentContext.Provider value={navValue}>
+          <NavbarDesktop />
+        </NavContentContext.Provider>
       </MemoryRouter>,
     );
   }
@@ -49,7 +58,7 @@ describe('NavbarDesktop', () => {
       renderNav();
       const explore = screen.getByRole('link', { name: 'Explore' });
       const studies = screen.getByRole('link', { name: 'Studies' });
-      expect(explore).toHaveAttribute('href', `${C3DC_URL}/explore`);
+      expect(explore).toHaveAttribute('href', `${C3DC_URL}/exploreParticipants`);
       expect(studies).toHaveAttribute('href', `${C3DC_URL}/studies`);
       expect(explore).not.toHaveAttribute('target');
       expect(studies).not.toHaveAttribute('target');

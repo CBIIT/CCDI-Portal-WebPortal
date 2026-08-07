@@ -18,6 +18,7 @@ jest.mock('../../../../../src/pages/globalSearch/Cards/participant/CPIModal', ()
 
 jest.mock('../../../../../src/pages/globalSearch/Cards/participant/c3dcService', () => ({
   openC3dcExplore: jest.fn(),
+  openC3dcStudy: jest.fn(),
 }));
 
 import React from 'react';
@@ -26,7 +27,7 @@ import '@testing-library/jest-dom';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { MemoryRouter } from 'react-router-dom';
 import ParticipantCard from '../../../../../src/pages/globalSearch/Cards/participant/ParticipantCard';
-import { openC3dcExplore } from '../../../../../src/pages/globalSearch/Cards/participant/c3dcService';
+import { openC3dcExplore, openC3dcStudy } from '../../../../../src/pages/globalSearch/Cards/participant/c3dcService';
 import {
   participantCardRow,
   participantCardRowWithCpi,
@@ -75,10 +76,10 @@ describe('ParticipantCard', () => {
       expect(screen.queryByText('AVAILABLE ACTIONS')).not.toBeInTheDocument();
     });
 
-    it('should render Study ID as a link to the study route', () => {
+    it('should open C3DC study detail when Study ID is clicked', () => {
       renderParticipantCard({ data: participantCardRow });
-      const studyButton = screen.getByRole('button', { name: participantCardRow.study_id });
-      expect(studyButton).toHaveAttribute('href', `/studies/${participantCardRow.study_id}`);
+      fireEvent.click(screen.getByRole('button', { name: participantCardRow.study_id }));
+      expect(openC3dcStudy).toHaveBeenCalledWith(participantCardRow.study_id);
     });
 
     it('should not offer cohort or cart actions', () => {

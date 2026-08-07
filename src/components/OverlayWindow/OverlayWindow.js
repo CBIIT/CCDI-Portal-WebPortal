@@ -15,19 +15,17 @@ import {
 import FiberManualRecord from '@material-ui/icons/FiberManualRecord';
 import * as text from './OverlayText.json';
 import DialogThemeProvider from './OverlayThemeConfig';
-import { setOverLayWindow } from '../../pages/globalSearch/store/sitesearchReducer';
 
 const OverlayWindow = () => {
   const [open, setOpen] = useState(false);
 
   const handleClose = () => {
     setOpen(false);
-    localStorage.setItem('overlayLoad', 'true');
-    setOverLayWindow(false);
+    sessionStorage.setItem('overlayLoad', 'true');
   };
 
   useEffect(() => {
-    if (localStorage.getItem('overlayLoad') !== 'true') {
+    if (!sessionStorage.getItem('overlayLoad')) {
       setOpen(true);
     }
   }, []);

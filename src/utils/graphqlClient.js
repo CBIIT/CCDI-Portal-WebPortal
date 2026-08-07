@@ -11,8 +11,7 @@ import env from './env';
 
 const BACKEND = env.REACT_APP_BACKEND_API;
 const INTEROP_SERVICE = `${env.REACT_APP_INTEROP_SERVICE_API}graphql`;
-const C3DC_BACKEND = env.REACT_APP_C3DC_BACKEND_API
-  || `${(env.REACT_APP_C3DC_URL || 'https://clinicalcommons-integrated-dev.ccdi.cancer.gov').replace(/\/$/, '')}/v1/graphql/`;
+const C3DC_BACKEND = `${(env.REACT_APP_C3DC || 'https://clinicalcommons-integrated-dev.ccdi.cancer.gov').replace(/\/$/, '')}/v1/graphql/`;
 
 const interopService = new HttpLink({
   uri: INTEROP_SERVICE,

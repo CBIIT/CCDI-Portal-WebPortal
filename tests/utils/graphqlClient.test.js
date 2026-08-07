@@ -37,7 +37,7 @@ jest.mock('../../src/utils/env', () => ({
   default: {
     REACT_APP_BACKEND_API: 'https://backend.test/graphql',
     REACT_APP_INTEROP_SERVICE_API: 'https://interop.test/',
-    REACT_APP_C3DC_BACKEND_API: 'https://c3dc.test/v1/graphql/',
+    REACT_APP_C3DC: 'https://c3dc.test',
   },
 }));
 

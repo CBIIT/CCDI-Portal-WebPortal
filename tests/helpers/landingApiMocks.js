@@ -27,7 +27,7 @@ export function createCcdcFetchMock(overrides = {}) {
 }
 
 /**
- * GraphQL `client.query` mock for LANDING_DATA_QUERY.
+ * GraphQL `client.query` mock for LANDING_DATA_QUERY (C3DC `c3dcService`).
  */
 export function createLandingGraphqlQueryMock(overrides = {}) {
   const data = { ...landingDataQueryData, ...overrides.graphqlData };

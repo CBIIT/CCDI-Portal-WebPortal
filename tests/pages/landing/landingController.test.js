@@ -103,7 +103,7 @@ describe('LandingController (mocked count APIs)', () => {
     });
   });
 
-  it('should call MCI GraphQL query and display the mocked count', async () => {
+  it('should call MCI GraphQL query on C3DC and display the mocked count', async () => {
     renderLandingController();
 
     await waitFor(() => {
@@ -111,6 +111,8 @@ describe('LandingController (mocked count APIs)', () => {
         expect.objectContaining({
           query: LANDING_DATA_QUERY,
           variables: {},
+          context: { clientName: 'c3dcService' },
+          fetchPolicy: 'network-only',
         }),
       );
     });
@@ -132,7 +134,10 @@ describe('LandingController (mocked count APIs)', () => {
 
     expect(global.fetch).toHaveBeenCalledWith(ccdcDatasetsCountUrl);
     expect(mockQuery).toHaveBeenCalledWith(
-      expect.objectContaining({ query: LANDING_DATA_QUERY }),
+      expect.objectContaining({
+        query: LANDING_DATA_QUERY,
+        context: { clientName: 'c3dcService' },
+      }),
     );
   });
 

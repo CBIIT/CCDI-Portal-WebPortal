@@ -296,6 +296,7 @@ export const LANDING_DATA_QUERY = gql`{
     numberOfMCICount
   }
 `;
+// Queried against C3DC Integrated (`clientName: 'c3dcService'`) from landingController.
 
 export const GLOBAL_STATS_BAR_QUERY = gql`{
   numberOfParticipants,

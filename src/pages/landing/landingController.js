@@ -43,9 +43,12 @@ const emptyLandingContent = createEmptyLandingContent(landingAssetDefaults);
 const getDashData = () => {
   const client = useApolloClient();
   async function getData() {
+    // MCI participant count lives on C3DC Integrated OpenSearch, not Hub.
     const result = await client.query({
       query: LANDING_DATA_QUERY,
       variables: {},
+      context: { clientName: 'c3dcService' },
+      fetchPolicy: 'network-only',
     })
       .then((response) => response.data);
     return result;

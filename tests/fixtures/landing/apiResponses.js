@@ -19,6 +19,7 @@ export const ccdcDatasetsCountFormatted = '12,345';
 
 /**
  * GraphQL LANDING_DATA_QUERY — shape of `response.data` from Apollo client.query
+ * against C3DC Integrated (`clientName: 'c3dcService'`).
  * @see src/bento/landingPageData.js LANDING_DATA_QUERY
  */
 export const landingDataQueryData = {

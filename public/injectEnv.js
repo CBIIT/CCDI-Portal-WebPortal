@@ -11,10 +11,7 @@ window.injectedEnv = {
   REACT_APP_FILE_SERVICE_API: 'https://bento-tools.org/v1/graphql/',
   REACT_APP_INTEROP_SERVICE_API: 'https://ccdi-dev.cancer.gov/api/interoperation/',
   REACT_APP_DMN_URL: 'https://cbiit.github.io/crdc-data-model-navigator/?config=https://raw.githubusercontent.com/CBIIT/ccdi-model/refs/heads/dmn-dev/model-desc/',
-  // LOCAL FAQ PREVIEW: serve public/faqData.md from the CRA dev server.
-  // Revert to GitHub raw URL when done reviewing:
-  // 'https://raw.githubusercontent.com/CBIIT/CCDI_Hub_Static_Contents/dev'
-  REACT_APP_STATIC_CONTENT_URL: '',
+  REACT_APP_STATIC_CONTENT_URL: 'https://raw.githubusercontent.com/CBIIT/CCDI_Hub_Static_Contents/dev',
   REACT_APP_DATA_RELEASES_URL: 'https://raw.githubusercontent.com/CBIIT/CCDI_Ecosystem_Static_Contents/dev',
   REACT_APP_C3DC: 'https://clinicalcommons-dev.ccdi.cancer.gov',
   REACT_APP_C3DC_URL: 'https://clinicalcommons-integrated-dev.ccdi.cancer.gov',

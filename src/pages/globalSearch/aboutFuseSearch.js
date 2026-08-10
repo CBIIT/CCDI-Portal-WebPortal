@@ -1,14 +1,18 @@
 /**
  * Frontend About global search via Fuse.js (no Hub GraphQL / OpenSearch).
- * Corpus: src/content/aboutSearchContent.{yaml,json} — Hub static pages.
+ * Corpus: aboutSearchContent.md from REACT_APP_STATIC_CONTENT_URL.
  */
 // Import the CJS build explicitly. Webpack resolves fuse.js `module` (ESM),
 // which older CRA/babel does not transpile under node_modules (e.g. `??`).
 import FuseImport from 'fuse.js/dist/fuse.common';
-import aboutSearchContent from '../../content/aboutSearchContent.json';
+import axios from 'axios';
+import env from '../../utils/env';
+import parseAboutSearchMarkdown from './parseAboutSearchMarkdown';
 
 // Jest/Babel may expose the constructor on `.default`.
 const Fuse = FuseImport && FuseImport.default ? FuseImport.default : FuseImport;
+
+const ABOUT_SEARCH_MD_URL = `${env.REACT_APP_STATIC_CONTENT_URL}/aboutSearchContent.md`;
 
 const FUSE_OPTIONS = {
   includeScore: true,
@@ -21,11 +25,29 @@ const FUSE_OPTIONS = {
   ],
 };
 
+/** null until loaded or explicitly set (tests / ensureAboutSearchCorpusLoaded). */
+let aboutSearchCorpus = null;
+let aboutSearchLoadPromise = null;
+
+let fuseInstance = null;
+let fuseDocuments = null;
+
+/**
+ * Replace the in-memory About search corpus and clear the Fuse cache.
+ * Used by ensureAboutSearchCorpusLoaded and unit tests.
+ * @param {Array|null} corpus
+ */
+export const setAboutSearchCorpus = (corpus) => {
+  aboutSearchCorpus = Array.isArray(corpus) ? corpus : [];
+  fuseInstance = null;
+  fuseDocuments = null;
+};
+
 /**
  * Normalize YAML/JSON corpus rows into Fuse documents.
  * @param {Array} corpus
  */
-export const buildAboutSearchDocuments = (corpus = aboutSearchContent) => {
+export const buildAboutSearchDocuments = (corpus) => {
   const rows = Array.isArray(corpus) ? corpus : [];
   return rows
     .map((row) => {
@@ -48,6 +70,33 @@ export const buildAboutSearchDocuments = (corpus = aboutSearchContent) => {
       };
     })
     .filter(Boolean);
+};
+
+/**
+ * Fetch and cache aboutSearchContent.md from static contents.
+ * Failed / invalid responses yield an empty corpus (no JS fallback).
+ * @returns {Promise<Array>}
+ */
+export const ensureAboutSearchCorpusLoaded = async () => {
+  if (aboutSearchCorpus !== null) {
+    return aboutSearchCorpus;
+  }
+  if (!aboutSearchLoadPromise) {
+    aboutSearchLoadPromise = (async () => {
+      let pages = [];
+      try {
+        const fileUrl = `${ABOUT_SEARCH_MD_URL}?ts=${new Date().getTime()}`;
+        const result = await axios.get(fileUrl);
+        const parsed = parseAboutSearchMarkdown(result.data);
+        pages = Array.isArray(parsed) ? parsed : [];
+      } catch (_error) {
+        pages = [];
+      }
+      setAboutSearchCorpus(pages);
+      return aboutSearchCorpus;
+    })();
+  }
+  return aboutSearchLoadPromise;
 };
 
 /**
@@ -135,12 +184,9 @@ export const buildAboutSnippets = (doc, input) => {
   return fallback ? [fallback] : [];
 };
 
-let fuseInstance = null;
-let fuseDocuments = null;
-
 export const getAboutSearchDocuments = () => {
   if (!fuseDocuments) {
-    fuseDocuments = buildAboutSearchDocuments();
+    fuseDocuments = buildAboutSearchDocuments(aboutSearchCorpus || []);
   }
   return fuseDocuments;
 };
@@ -152,10 +198,12 @@ export const getAboutFuse = () => {
   return fuseInstance;
 };
 
-/** Test helper — reset singleton between suites. */
+/** Test helper — reset Fuse + corpus loader state between suites. */
 export const resetAboutFuseCache = () => {
   fuseInstance = null;
   fuseDocuments = null;
+  aboutSearchCorpus = null;
+  aboutSearchLoadPromise = null;
 };
 
 /**
@@ -204,6 +252,8 @@ export const searchAboutAutocomplete = (input, limit = 6) => {
 export default {
   buildAboutSearchDocuments,
   buildAboutSnippets,
+  ensureAboutSearchCorpusLoaded,
+  setAboutSearchCorpus,
   searchAboutPages,
   searchAboutAutocomplete,
   resetAboutFuseCache,

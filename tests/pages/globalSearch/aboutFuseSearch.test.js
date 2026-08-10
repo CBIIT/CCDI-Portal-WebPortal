@@ -1,18 +1,21 @@
 /**
- * Unit tests for Fuse.js About global search (FE corpus, no OpenSearch).
+ * Unit tests for Fuse.js About global search (FE corpus from static contents).
  */
 
+import aboutSearchFixture from '../../fixtures/about/aboutSearchContent.json';
 import {
   buildAboutSearchDocuments,
   buildAboutSnippets,
   resetAboutFuseCache,
   searchAboutAutocomplete,
   searchAboutPages,
+  setAboutSearchCorpus,
 } from '../../../src/pages/globalSearch/aboutFuseSearch';
 
 describe('aboutFuseSearch', () => {
   beforeEach(() => {
     resetAboutFuseCache();
+    setAboutSearchCorpus(aboutSearchFixture);
   });
 
   describe('buildAboutSearchDocuments', () => {

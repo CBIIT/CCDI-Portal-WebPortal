@@ -54,6 +54,47 @@ Copy-starting sample for tests and for seeding the static-contents repo:
 ### Global Search
 
 Frontend search renders GraphQL `about_page` hits only. Index FAQ content in the search backend with `page: '/faqs'`.
+
+## `newsData.md` (News + Latest Updates)
+
+| Item | Value |
+|------|--------|
+| Path | `${REACT_APP_STATIC_CONTENT_URL}/newsData.md?ts=<timestamp>` |
+| Hub routes | `/news`; homepage Latest Updates |
+| Format | Markdown blocks separated by `---` / `#` headings (not YAML front matter) |
+
+Each news item:
+
+```markdown
+# {title}
+### {date} | {type}
+
+| | |
+| --- | --- |
+| {highlight markdown} | <img src="{imageUrl}" width="220" alt="{imgKey}"> |
+
+| Property | Value |
+| --- | --- |
+| id | {id} |
+| slug | {slug}
+| latestUpdate | true
+| latestUpdateOrder | 1
+```
+
+| Field | Source |
+|-------|--------|
+| `title` | `#` heading |
+| `date` / `type` | `###` line around `\|` |
+| `highlight` | Left cell of the content table (MD → HTML `<p>…</p>`) |
+| `img` / image URL | `<img alt>` / `<img src>` (optional; type-based key + bundled asset if omitted) |
+| `id`, `slug`, `latestUpdate`, `latestUpdateOrder` | Property table |
+
+**Not in `newsData.md`:** release notes live in `releaseNotesData.md` (and ecosystem `ccdiDataUpdates.md`). Descriptive `altList` text uses a small code fallback map keyed by `img`.
+
+### Seed fixture
+
+- `tests/fixtures/news/newsMarkdownSamples.js`
+
 # Static content updates (homepage & navigation)
 
 Hub homepage and primary navigation copy can be updated **without a portal code release** by editing YAML inside markdown files hosted in [`CBIIT/CCDI_Hub_Static_Contents`](https://github.com/CBIIT/CCDI_Hub_Static_Contents).
@@ -64,6 +105,8 @@ The portal loads these files at runtime from `REACT_APP_STATIC_CONTENT_URL` (see
 |------|---------|
 | `landingData.md` | Homepage hero, section titles, stats labels, resource cards, carousel |
 | `navData.md` | Primary nav + Resources / About submenus |
+| `newsData.md` | News cards + homepage Latest Updates strip |
+| `releaseNotesData.md` | Hub release notes (News tab + release notes page) |
 
 Content format is **YAML front matter only** (markdown body is ignored). This matches gray-matter usage on other Hub pages while keeping structured lists easy to edit.
 
@@ -79,6 +122,8 @@ Fetch URLs look like:
 ```text
 ${REACT_APP_STATIC_CONTENT_URL}/landingData.md?ts=<timestamp>
 ${REACT_APP_STATIC_CONTENT_URL}/navData.md?ts=<timestamp>
+${REACT_APP_STATIC_CONTENT_URL}/newsData.md?ts=<timestamp>
+${REACT_APP_STATIC_CONTENT_URL}/releaseNotesData.md?ts=<timestamp>
 ```
 
 The `?ts=` query busts CDN/browser caches so merges show up on the next page load.
@@ -162,3 +207,4 @@ Copy-starting samples (for tests and for seeding the static-contents repo):
 
 - `tests/fixtures/landing/landingMarkdownSamples.js`
 - `tests/fixtures/nav/navMarkdownSamples.js`
+- `tests/fixtures/news/newsMarkdownSamples.js`

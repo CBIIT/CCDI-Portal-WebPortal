@@ -1,5 +1,5 @@
 /**
- * NewsController — mocked axios GET for `newsData.yaml` and `releaseNotesData.md`.
+ * NewsController — mocked axios GET for `newsData.md` and `releaseNotesData.md`.
  *
  * @see src/pages/news/newsController.js
  */
@@ -8,10 +8,9 @@ import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import axios from 'axios';
-import yaml from 'js-yaml';
 
 import NewsController from '../../../src/pages/news/newsController';
-import { newsYamlFixture } from '../../fixtures/news/newsYamlMinimal';
+import { newsMarkdownControllerFixture } from '../../fixtures/news/newsMarkdownSamples';
 import { sampleReleaseNotesMarkdownRaw, sampleCcdiDataUpdatesMarkdownRaw } from '../../fixtures/resource/releaseNotesMarkdownSamples';
 
 if (typeof global.MutationObserver === 'undefined') {
@@ -25,10 +24,6 @@ if (typeof global.MutationObserver === 'undefined') {
 }
 
 jest.mock('axios');
-
-jest.mock('js-yaml', () => ({
-  safeLoad: jest.fn((data) => data),
-}));
 
 jest.mock('../../../src/utils/env', () => ({
   __esModule: true,
@@ -51,8 +46,8 @@ jest.mock('../../../src/pages/news/newsView', () => function MockNewsView({ news
 function setupAxiosMock() {
   axios.get.mockImplementation((url) => {
     const pathPart = String(url).split('?')[0];
-    if (pathPart.endsWith('/newsData.yaml')) {
-      return Promise.resolve({ data: newsYamlFixture });
+    if (pathPart.endsWith('/newsData.md')) {
+      return Promise.resolve({ data: newsMarkdownControllerFixture });
     }
     if (pathPart.endsWith('/releaseNotesData.md')) {
       return Promise.resolve({ data: sampleReleaseNotesMarkdownRaw });
@@ -66,7 +61,6 @@ function setupAxiosMock() {
 
 beforeEach(() => {
   window.scrollTo = jest.fn();
-  yaml.safeLoad.mockImplementation((data) => data);
   setupAxiosMock();
 });
 
@@ -75,7 +69,7 @@ afterEach(() => {
 });
 
 describe('NewsController', () => {
-  describe('Mocked axios (newsData.yaml + releaseNotesData.md + ccdiDataUpdates.md)', () => {
+  describe('Mocked axios (newsData.md + releaseNotesData.md + ccdiDataUpdates.md)', () => {
     it('should request static files and pass hub and ecosystem lists into NewsView', async () => {
       render(<NewsController />);
 
@@ -84,7 +78,7 @@ describe('NewsController', () => {
       });
 
       expect(axios.get).toHaveBeenCalledWith(
-        expect.stringMatching(/^https:\/\/static\.example\.com\/newsData\.yaml\?ts=\d+$/),
+        expect.stringMatching(/^https:\/\/static\.example\.com\/newsData\.md\?ts=\d+$/),
       );
       expect(axios.get).toHaveBeenCalledWith(
         expect.stringMatching(/^https:\/\/static\.example\.com\/releaseNotesData\.md\?ts=\d+$/),
@@ -95,7 +89,7 @@ describe('NewsController', () => {
 
       await waitFor(() => {
         expect(screen.getByTestId('news-headline')).toHaveTextContent(
-          'Phase 4 controller YAML headline',
+          'Phase 4 controller MD headline',
         );
       });
       expect(screen.getByTestId('release-notes-count')).toHaveTextContent('2');

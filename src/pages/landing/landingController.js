@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useApolloClient } from '@apollo/client';
 import { connect } from 'react-redux';
 import env from '../../utils/env';
-import yaml from 'js-yaml';
 import axios from 'axios';
+import { fetchNewsData } from '../news/parseNewsMarkdown';
 import { fetchReleaseNotesData, mergeReleaseNotesLists } from '../releaseNotePage/parseReleaseNotesMarkdown';
 import { CircularProgress } from '@material-ui/core';
 import {
@@ -16,6 +16,7 @@ import {
   carouselList as assetCarouselList,
   LANDING_DATA_QUERY,
 } from '../../bento/landingPageData';
+import { srcList as localNewsSrcList } from '../../bento/newsData';
 import parseLandingMarkdown, {
   createEmptyLandingContent,
   mergeLandingContent,
@@ -24,7 +25,6 @@ import { LandingContentProvider } from './LandingContentContext';
 import LandingView from './landingView';
 
 const CCDCurl = 'https://datacatalog.ccdi.cancer.gov/service/datasets/count';
-const NEWS_URL = `${env.REACT_APP_STATIC_CONTENT_URL}/newsData.yaml`;
 const LANDING_MD_URL = `${env.REACT_APP_STATIC_CONTENT_URL}/landingData.md`;
 
 /** Local webpack assets only — never used as copy fallback when MD is missing. */
@@ -61,17 +61,12 @@ const getDashData = () => {
   }
 
   async function getNewsData() {
-    let resultData = {};
-    try {
-      const fileUrl = `${NEWS_URL}?ts=${new Date().getTime()}`;
-      const result = await axios.get(fileUrl);
-      resultData = yaml.safeLoad(result.data) || {};
-    } catch (_error) {
-      /* empty */
-    }
+    const news = await fetchNewsData();
     const { releaseNotesList, ccdiDataUpdatesList } = await fetchReleaseNotesData();
     return {
-      ...resultData,
+      newsList: news.newsList,
+      newsImgUrlList: { ...localNewsSrcList, ...news.newsImgUrlList },
+      altList: news.altList,
       releaseNotesList: mergeReleaseNotesLists(releaseNotesList, ccdiDataUpdatesList),
     };
   }

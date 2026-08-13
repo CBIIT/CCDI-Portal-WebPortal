@@ -29,7 +29,7 @@ describe('parseNavMarkdown', () => {
     expect(parsed.navbarSublists.About[0].className).toBe('navMobileSubSection');
     expect(parsed.navbarSublists.About[0].children[0].link).toBe('/about');
     expect(parsed.navbarSublists.About[1].children[1].link).toBe(
-      'https://c3dc.test.example/data_model',
+      'https://c3dc.test.example/data-model',
     );
   });
 

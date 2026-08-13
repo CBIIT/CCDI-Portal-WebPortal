@@ -157,7 +157,7 @@ export const navbarSublists = {
         },
         {
           name: 'CCDI Data Model',
-          link: c3dcUrl('/data_model'),
+          link: c3dcUrl('/data-model'),
           className: 'navMobileSubItem',
         },
         {

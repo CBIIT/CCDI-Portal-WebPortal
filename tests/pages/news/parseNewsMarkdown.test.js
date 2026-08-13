@@ -17,7 +17,7 @@ describe('parseNewsMarkdown', () => {
   it('should parse news blocks into newsList with highlight HTML and metadata', () => {
     const data = parseNewsMarkdown(sampleNewsMarkdownRaw);
 
-    expect(data.newsList).toHaveLength(3);
+    expect(data.newsList).toHaveLength(4);
 
     const first = data.newsList[0];
     expect(first.id).toBe('hub_04152026');
@@ -43,6 +43,20 @@ describe('parseNewsMarkdown', () => {
     expect(withImg.imgSrc).toBe('https://example.com/federation.png');
     expect(withImg.type).toBe('CCDI Application Updates');
     expect(data.newsImgUrlList.updateImgFederation).toBe('https://example.com/federation.png');
+  });
+
+  it('should preserve pre-authored HTML in highlight (not escape tags)', () => {
+    const data = parseNewsMarkdown(sampleNewsMarkdownRaw);
+    const htmlCard = data.newsList.find((item) => item.id === 'c3dc_08312026');
+
+    expect(htmlCard).toBeDefined();
+    expect(htmlCard.highlight).toContain('<p>');
+    expect(htmlCard.highlight).toContain('<a href="https://clinicalcommons.ccdi.cancer.gov/explore">');
+    expect(htmlCard.highlight).toContain('CCDI Explore in C3DC');
+    expect(htmlCard.highlight).not.toContain('&lt;p&gt;');
+    expect(htmlCard.highlight).not.toContain('&lt;a ');
+    expect(htmlCard.img).toBe('updateImgC3DC');
+    expect(htmlCard.imgSrc).toBe('https://example.com/c3dc.png');
   });
 
   it('should default Application Updates img key when no <img> is present', () => {

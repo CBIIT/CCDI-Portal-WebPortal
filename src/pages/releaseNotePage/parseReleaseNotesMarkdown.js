@@ -27,6 +27,11 @@ function formatInline(text) {
     .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, label, href) => `<a href="${escapeHtml(href)}">${label}</a>`);
 }
 
+/** True when the blurb already contains HTML tags (newsData.md often ships &lt;p&gt;/&lt;a&gt;). */
+function looksLikeHtml(text) {
+  return /<\/?[a-z][\s\S]*>/i.test(String(text || ''));
+}
+
 function newsBlurbToHtml(markdown) {
   // Card images render in the right-side imgContainer, never inline in the blurb.
   // Also drop the table-cell pipe that precedes the image tag.
@@ -35,6 +40,10 @@ function newsBlurbToHtml(markdown) {
     .trim();
   if (!text) {
     return '';
+  }
+  // Preserve pre-authored HTML so ReactHtmlParser can render links/markup on cards.
+  if (looksLikeHtml(text)) {
+    return text;
   }
   return `<p>${formatInline(text)}</p>`;
 }

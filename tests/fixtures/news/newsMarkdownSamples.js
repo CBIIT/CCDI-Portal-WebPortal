@@ -46,6 +46,20 @@ export const sampleNewsMarkdownRaw = `# April 2026 CCDI Hub updates
 | --- | --- |
 | id | ccdc_03312025 |
 | slug | The Childhood Cancer Data Catalog (CCDC) has a new resource |
+
+---
+
+# C3DC v2.0.0 Update
+### August 31, 2026 | CCDI Application Updates
+
+| | |
+| --- | --- |
+| <p>Try out the new <a href="https://clinicalcommons.ccdi.cancer.gov/explore">CCDI Explore in C3DC</a> today.</p> | <img src="https://example.com/c3dc.png" width="220" alt="updateImgC3DC"> |
+
+| Property | Value |
+| --- | --- |
+| id | c3dc_08312026 |
+| slug | Integrated Explore experience in C3DC
 `;
 
 /** Minimal single-item MD for NewsController integration tests */

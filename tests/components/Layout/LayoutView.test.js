@@ -59,6 +59,14 @@ jest.mock('../../../src/pages/about/DataUsagePoliciesPage/DataUsagePoliciesContr
   };
 });
 
+jest.mock('../../../src/pages/about/FaqPage/FaqController', () => {
+  const React = require('react');
+  return {
+    __esModule: true,
+    default: () => <div data-testid="route-faqs" />,
+  };
+});
+
 jest.mock('../../../src/pages/about/publications/publicationsController', () => {
   const React = require('react');
   return {

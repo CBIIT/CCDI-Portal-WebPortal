@@ -27,10 +27,9 @@ export const landingDataQueryData = {
 };
 
 /**
- * Raw YAML returned for newsData.yaml (axios.get). Parsed by landingController with js-yaml.
+ * Raw markdown returned for newsData.md (axios.get). Parsed by parseNewsMarkdown.
  */
-export const newsDataYamlRaw =
-  'newsList: []\nnewsImgUrlList: []\nreleaseNotesList: []\naltList: []';
+export const newsDataMarkdownRaw = '';
 
 export const landingPageApi = {
   ccdcDatasetsCount: {
@@ -41,7 +40,7 @@ export const landingPageApi = {
   landingDataQuery: {
     data: landingDataQueryData,
   },
-  newsYaml: {
-    raw: newsDataYamlRaw,
+  newsMarkdown: {
+    raw: newsDataMarkdownRaw,
   },
 };

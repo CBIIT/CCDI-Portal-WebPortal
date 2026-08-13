@@ -7,7 +7,7 @@ import {
   ccdcDatasetsCountUrl,
   ccdcDatasetsCountResponseBody,
   landingDataQueryData,
-  newsDataYamlRaw,
+  newsDataMarkdownRaw,
 } from '../fixtures/landing/apiResponses';
 
 /**
@@ -35,17 +35,18 @@ export function createLandingGraphqlQueryMock(overrides = {}) {
 }
 
 /**
- * axios.get for news YAML, release notes markdown, and optional landingData.md.
+ * axios.get for news markdown, release notes markdown, and optional landingData.md.
  * Must be assigned after jest.mock in tests that mock axios.
+ * @deprecated Prefer setupNewsMarkdownAxiosMock — alias kept for existing landing tests.
  */
-export function setupNewsYamlAxiosMock(overrides = {}) {
-  const raw = overrides.newsYamlRaw ?? newsDataYamlRaw;
+export function setupNewsMarkdownAxiosMock(overrides = {}) {
+  const raw = overrides.newsMarkdownRaw ?? overrides.newsYamlRaw ?? newsDataMarkdownRaw;
   const releaseNotesMarkdown = overrides.releaseNotesMarkdown ?? '';
   const ccdiDataUpdatesMarkdown = overrides.ccdiDataUpdatesMarkdown ?? '';
   const landingMarkdown = overrides.landingMarkdown;
   axios.get = jest.fn((url) => {
     const pathPart = String(url).split('?')[0];
-    if (pathPart.endsWith('/newsData.yaml')) {
+    if (pathPart.endsWith('/newsData.md')) {
       return Promise.resolve({ data: raw });
     }
     if (pathPart.endsWith('/releaseNotesData.md')) {
@@ -64,3 +65,6 @@ export function setupNewsYamlAxiosMock(overrides = {}) {
   });
   return axios.get;
 }
+
+/** @deprecated Use setupNewsMarkdownAxiosMock */
+export const setupNewsYamlAxiosMock = setupNewsMarkdownAxiosMock;

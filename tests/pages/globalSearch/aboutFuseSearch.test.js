@@ -97,6 +97,17 @@ describe('aboutFuseSearch', () => {
       expect(result.about_page.some((row) => row.page === '/data-usage-policies')).toBe(true);
     });
 
+    it('finds FAQ page for FAQ queries', () => {
+      const byTitle = searchAboutPages('CCDI FAQs', { first: 20, offset: 0 });
+      expect(byTitle.about_page.some((row) => row.page === '/faqs' && row.title === 'CCDI FAQs')).toBe(true);
+
+      const byKeyword = searchAboutPages('FAQ', { first: 20, offset: 0 });
+      expect(byKeyword.about_page.some((row) => row.page === '/faqs')).toBe(true);
+
+      const byContent = searchAboutPages('controlled data access', { first: 20, offset: 0 });
+      expect(byContent.about_page.some((row) => row.page === '/faqs')).toBe(true);
+    });
+
     it('paginates results with first and offset', () => {
       const all = searchAboutPages('cancer', { first: 100, offset: 0 });
       if (all.about_count < 2) {

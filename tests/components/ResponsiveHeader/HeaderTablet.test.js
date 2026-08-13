@@ -74,7 +74,7 @@ describe('HeaderTablet', () => {
       fireEvent.click(screen.getByText('Menu'));
 
       expect(screen.getByRole('link', { name: 'Home' })).toBeInTheDocument();
-      expect(screen.getByText('MY FILES')).toBeInTheDocument();
+      expect(screen.queryByText('MY FILES')).not.toBeInTheDocument();
     });
 
     it('should list primary nav without Cohort Analyzer and point Explore/Studies to C3DC', () => {

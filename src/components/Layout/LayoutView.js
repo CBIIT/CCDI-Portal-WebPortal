@@ -13,7 +13,6 @@ import DataModelNavigator from '../../pages/dmn/DataModelNavigator';
 import Error from '../../pages/error/Error';
 import Search from '../../pages/globalSearch/searchController';
 import Inventory from '../../pages/inventory/inventoryController';
-import Cart from '../../pages/cart/cartController';
 import ScrollButton from '../ScrollButton/ScrollButtonView';
 import MCIResourceView from '../../pages/resource/MCIResourcePage/MCIResourceMarkdownController'
 import PMTLResourceView from '../../pages/resource/PMTLResourcePage/PMTLResourceController';
@@ -46,7 +45,6 @@ const Layout = () => {
           <Route path="/data-model" element={<DataModelNavigator />} />
           <Route path="/sitesearch" element={<Search />} />
           <Route path="/explore" element={<Inventory />} />
-          <Route path="/fileCentricCart" element={<Cart />} />
           <Route path="/MCI" element={<MCIResourceView />} />
           <Route path="/pmtl" element={<PMTLResourceView />} />
           <Route path="/data-federation-resource" element={<FederationResourceView/>} />

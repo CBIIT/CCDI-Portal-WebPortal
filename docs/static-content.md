@@ -156,7 +156,7 @@ Required: `primary` (non-empty list).
 
 | Key | Shape |
 |-----|--------|
-| `primary[]` | `name`, `link`, `className` (`navMobileItem`, `navMobileItem clickable`, or `cart`) |
+| `primary[]` | `name`, `link`, `className` (`navMobileItem` or `navMobileItem clickable`) |
 | `resources[]` | `name`, `link` (becomes `navMobileSubItem`) |
 | `about[]` | Section: `name` + `children[]` with `name`, `link` **or** flat `name`/`link` |
 

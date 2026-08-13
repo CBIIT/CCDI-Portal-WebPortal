@@ -27,11 +27,15 @@ export default function parseNavMarkdown(rawMarkdown) {
     return null;
   }
 
-  const navMobileList = resolved.primary.map((item) => ({
-    name: item.name != null ? String(item.name) : '',
-    link: item.link != null ? String(item.link) : '',
-    className: item.className != null ? String(item.className) : 'navMobileItem',
-  }));
+  const navMobileList = resolved.primary
+    .map((item) => ({
+      name: item.name != null ? String(item.name) : '',
+      link: item.link != null ? String(item.link) : '',
+      className: item.className != null ? String(item.className) : 'navMobileItem',
+    }))
+    // Cart / My Files removed from Hub navigation.
+    .filter((item) => item.className !== 'cart'
+      && item.link !== '/fileCentricCart');
 
   const resources = Array.isArray(resolved.resources)
     ? resolved.resources.map((item) => ({

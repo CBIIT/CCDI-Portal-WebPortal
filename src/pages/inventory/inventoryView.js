@@ -1,6 +1,5 @@
 import React, { useState , useMemo } from 'react';
 import {
-  NavLink,
   useLocation,
   useNavigate,
 } from "react-router-dom";
@@ -356,7 +355,6 @@ const Inventory = ({
                 activeFilters={activeFilters}
                 unknownAgesState={unknownAgesState}
               />
-              <div className={classes.goToCartLink}><NavLink to='/fileCentricCart'>Go to cart &#62;</NavLink></div>
             </div>
           </RightContentPanel>
         </div>

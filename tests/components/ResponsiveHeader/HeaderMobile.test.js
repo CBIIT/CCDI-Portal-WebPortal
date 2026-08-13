@@ -68,13 +68,13 @@ describe('HeaderMobile', () => {
   });
 
   describe('Menu interaction', () => {
-    it('should open the menu and expose Home and MY FILES links', () => {
+    it('should open the menu and expose Home without MY FILES', () => {
       renderAt('/');
 
       fireEvent.click(screen.getByText('Menu'));
 
       expect(screen.getByRole('link', { name: 'Home' })).toBeInTheDocument();
-      expect(screen.getByText('MY FILES')).toBeInTheDocument();
+      expect(screen.queryByText('MY FILES')).not.toBeInTheDocument();
     });
 
     it('should list primary nav without Cohort Analyzer and point Explore/Studies to C3DC', () => {

@@ -22,6 +22,8 @@ describe('parseNavMarkdown', () => {
     expect(parsed).not.toBeNull();
     expect(parsed.navMobileList[1].link).toBe('https://c3dc.test.example/exploreParticipants');
     expect(parsed.navMobileList[2].link).toBe('https://c3dc.test.example/studies');
+    expect(parsed.navMobileList.some((item) => item.className === 'cart')).toBe(false);
+    expect(parsed.navMobileList.some((item) => item.link === '/fileCentricCart')).toBe(false);
     expect(parsed.navbarSublists.Resources[0].link).toBe('https://c3dc.test.example/');
     expect(parsed.navbarSublists.Resources[0].className).toBe('navMobileSubItem');
     expect(parsed.navbarSublists.About[0].className).toBe('navMobileSubSection');
@@ -29,6 +31,23 @@ describe('parseNavMarkdown', () => {
     expect(parsed.navbarSublists.About[1].children[1].link).toBe(
       'https://c3dc.test.example/data_model',
     );
+  });
+
+  it('should drop cart entries from remote primary nav', () => {
+    const raw = `---
+primary:
+  - name: Home
+    link: /home
+    className: navMobileItem
+  - name: My File
+    link: /fileCentricCart
+    className: cart
+---
+`;
+    const parsed = parseNavMarkdown(raw);
+    expect(parsed.navMobileList).toEqual([
+      { name: 'Home', link: '/home', className: 'navMobileItem' },
+    ]);
   });
 
   it('should return null when primary is missing', () => {

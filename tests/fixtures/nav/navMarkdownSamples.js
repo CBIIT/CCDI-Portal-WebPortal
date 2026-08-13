@@ -23,9 +23,6 @@ primary:
   - name: About
     link: /about
     className: "navMobileItem clickable"
-  - name: My File
-    link: /fileCentricCart
-    className: cart
 resources:
   - name: Childhood Cancer Clinical Data Commons
     link: "{{C3DC}}/"

@@ -4,7 +4,6 @@ import { useLocation } from 'react-router-dom';
 import Logo from '../ResponsiveHeader/components/LogoDesktop'
 import SearchBar from './components/SearchBarDesktop'
 import NavBar from './components/NavbarDesktop';
-import Cart from './components/CartDesktop';
 import { USGovBannerData } from "../../bento/globalHeaderData";
 
 const HeaderBanner = styled.div`
@@ -117,7 +116,6 @@ const Header = () => {
         </HeaderContainer>
         <NavBarContainer>
           <NavBar />
-          <Cart />
         </NavBarContainer>
       </HeaderBanner>
     </>

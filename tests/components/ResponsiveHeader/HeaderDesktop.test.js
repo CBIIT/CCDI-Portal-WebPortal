@@ -15,10 +15,6 @@ jest.mock('../../../src/components/ResponsiveHeader/components/NavbarDesktop', (
   const React = require('react');
   return { __esModule: true, default: () => <nav data-testid="navbar-mock" /> };
 });
-jest.mock('../../../src/components/ResponsiveHeader/components/CartDesktop', () => {
-  const React = require('react');
-  return { __esModule: true, default: () => <div data-testid="cart-mock" /> };
-});
 
 import React from 'react';
 import { render, screen } from '@testing-library/react';
@@ -44,7 +40,7 @@ describe('HeaderDesktop', () => {
       expect(screen.getByRole('banner')).toBeInTheDocument();
       expect(screen.getByTestId('logo-mock')).toBeInTheDocument();
       expect(screen.getByTestId('navbar-mock')).toBeInTheDocument();
-      expect(screen.getByTestId('cart-mock')).toBeInTheDocument();
+      expect(screen.queryByTestId('cart-mock')).not.toBeInTheDocument();
     });
 
     it('should show the search area when the path is not /sitesearch', () => {

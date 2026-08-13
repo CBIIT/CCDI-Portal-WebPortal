@@ -1,7 +1,6 @@
 import Logo from '../assets/header/Portal_Logo.svg';
 import LogoSmall from '../assets/header/Portal_Logo_Small.svg';
 import searchbarIcon from '../assets/header/Search_Icon.svg';
-import cartLogo from '../assets/header/Cart_Logo.svg';
 import usFlagSmall from "../assets/header/us_flag_small.png";
 import env from '../utils/env';
 
@@ -60,11 +59,6 @@ export const navMobileList = [
       link: '/about',
       className: 'navMobileItem clickable',
   },
-  {
-    name: 'My File',
-    link: '/fileCentricCart',
-    className: 'cart',
-},
 ];
 
 export const navbarSublists = {
@@ -244,11 +238,3 @@ export function isAboutPathActive(pathname, aboutSublist = navbarSublists.About)
     return false;
   });
 }
-
-export const navBarCartData = {
-  cartLabel: '',
-  cartLink: '/fileCentricCart',
-  cartIcon: cartLogo,
-  cartIconAlt: 'cart_logo',
-  cartLabelType: 'labelUnderCount',
-};

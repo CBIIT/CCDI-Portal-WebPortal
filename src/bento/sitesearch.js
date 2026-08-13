@@ -8,6 +8,7 @@ import {
   refineFederatedCounts,
 } from '../pages/globalSearch/federatedGlobalSearch';
 import {
+  ensureAboutSearchCorpusLoaded,
   searchAboutAutocomplete,
   searchAboutPages,
 } from '../pages/globalSearch/aboutFuseSearch';
@@ -281,7 +282,8 @@ export async function queryAutocompleteAPI(inputValue) {
       ? mergeGlobalSearchAutocomplete({}, c3dcData, { mergeCpiData })
       : mergeGlobalSearchAutocomplete(hubData, c3dcData, { mergeCpiData });
 
-    // About autocomplete is Fuse.js (FE corpus) — no Hub OpenSearch about_page.
+    // About autocomplete is Fuse.js over static aboutSearchContent.md.
+    await ensureAboutSearchCorpusLoaded();
     return {
       ...base,
       about_page: searchAboutAutocomplete(inputValue),
@@ -338,6 +340,7 @@ export async function queryCountAPI(inputValue) {
       mergeOptions: { mergeCpiData },
     });
 
+    await ensureAboutSearchCorpusLoaded();
     const about = searchAboutPages(inputValue, { first: 10000, offset: 0 });
     return {
       ...merged,
@@ -358,6 +361,7 @@ export async function queryCountAPI(inputValue) {
    */
   export async function queryResultAPI(datafield, input) {
     if (datafield === 'about_page') {
+      await ensureAboutSearchCorpusLoaded();
       const about = searchAboutPages(input.input, {
         first: input.first,
         offset: input.offset,

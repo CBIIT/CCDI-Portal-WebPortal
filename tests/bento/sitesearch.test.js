@@ -29,7 +29,12 @@ import {
   SEARCH_PAGE_RESULT_MODEL,
 } from '../../src/bento/sitesearch';
 import { clearFederatedUniqueMergeCache } from '../../src/pages/globalSearch/federatedGlobalSearch';
-import { searchAboutPages } from '../../src/pages/globalSearch/aboutFuseSearch';
+import {
+  resetAboutFuseCache,
+  searchAboutPages,
+  setAboutSearchCorpus,
+} from '../../src/pages/globalSearch/aboutFuseSearch';
+import aboutSearchFixture from '../fixtures/about/aboutSearchContent.json';
 
 import { createGlobalSearchClientQueryMock } from '../helpers/globalSearchApiMocks';
 import {
@@ -40,6 +45,11 @@ import {
 } from '../fixtures/globalSearch/globalSearchApiResponses';
 
 describe('sitesearch', () => {
+  beforeEach(() => {
+    resetAboutFuseCache();
+    setAboutSearchCorpus(aboutSearchFixture);
+  });
+
   describe('getResultQueryByField', () => {
     it('should map known datafields to the correct gql document', () => {
       expect(getResultQueryByField('all')).toBe(SEARCH_PAGE_RESULT_PARTICIPANTS);

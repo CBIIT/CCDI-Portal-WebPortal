@@ -51,7 +51,44 @@ Copy-starting sample for tests and for seeding the static-contents repo:
 
 - `tests/fixtures/about/faqMarkdownSamples.js`
 
-### Global Search
+## `aboutSearchContent.md` (Global Search — About tab)
+
+| Item | Value |
+|------|--------|
+| Path | `${REACT_APP_STATIC_CONTENT_URL}/aboutSearchContent.md?ts=<timestamp>` |
+| Used by | Hub Global Search About tab + autocomplete (`Fuse.js`) |
+| Format | YAML front matter only (markdown body ignored) |
+
+### Fields
+
+| Key | Notes |
+|-----|--------|
+| `pages[]` | Search corpus rows |
+| `pages[].page` | Hub route path (e.g. `/about`, `/`) |
+| `pages[].title` | Card / autocomplete title |
+| `pages[].content[]` | List of `{ paragraph }` searchable snippets |
+
+### Example
+
+```yaml
+---
+pages:
+  - page: "/about"
+    title: "About"
+    content:
+      - paragraph: "The Childhood Cancer Data Initiative (CCDI) Hub is an entry point for researchers."
+      - paragraph: "Explore Hub resources and tools."
+---
+```
+
+### Failure behavior
+
+If the file is missing, YAML is invalid, or the request fails, About search returns no hits until valid remote MD loads (no bundled JS fallback).
+
+### Seed fixture
+
+- `tests/fixtures/about/aboutSearchMarkdownSamples.js`
+- `tests/fixtures/about/aboutSearchContent.json` (full corpus for Fuse unit tests)
 
 About Global Search is frontend-only (Fuse.js). Mirror FAQ copy into `src/content/aboutSearchContent.yaml` and `aboutSearchContent.json` with `page: '/faqs'` so FAQ terms return the FAQ page. Keep YAML and JSON in sync after FAQ content changes.
 
@@ -105,6 +142,7 @@ The portal loads these files at runtime from `REACT_APP_STATIC_CONTENT_URL` (see
 |------|---------|
 | `landingData.md` | Homepage hero, section titles, stats labels, resource cards, carousel |
 | `navData.md` | Primary nav + Resources / About submenus |
+| `aboutSearchContent.md` | Global Search About-tab Fuse.js corpus |
 | `newsData.md` | News cards + homepage Latest Updates strip |
 | `releaseNotesData.md` | Hub release notes (News tab + release notes page) |
 
@@ -142,7 +180,7 @@ link: "{{C3DC}}/"
 ## Permissions & deploy
 
 1. Open a PR against the env branch in `CCDI_Hub_Static_Contents` (team members with administered permissions).
-2. Edit only the YAML between the `---` fences in `landingData.md` or `navData.md`.
+2. Edit only the YAML between the `---` fences in `landingData.md`, `navData.md`, or `aboutSearchContent.md`.
 3. Merge the PR.
 4. Hard-refresh the Hub (or open a new session). No portal rebuild is required for content-only changes.
 
@@ -192,7 +230,7 @@ Image fields should be absolute URLs. If `img` / `mobile` are omitted, the porta
 
 There is **no JS copy fallback**. If a file is missing, YAML is invalid, or the network request fails, homepage/nav content stays empty until valid remote MD loads. Local webpack images may still attach to remote rows by `id` / carousel `content` when the MD omits `img` / `mobile` URLs.
 
-Host `landingData.md` and `navData.md` on the static-contents branch before expecting a filled homepage or nav.
+Host `landingData.md`, `navData.md`, and `aboutSearchContent.md` on the static-contents branch before expecting a filled homepage, nav, or About search results.
 
 ## Verify after deploy
 
@@ -207,4 +245,6 @@ Copy-starting samples (for tests and for seeding the static-contents repo):
 
 - `tests/fixtures/landing/landingMarkdownSamples.js`
 - `tests/fixtures/nav/navMarkdownSamples.js`
+- `tests/fixtures/about/aboutSearchMarkdownSamples.js`
+- `tests/fixtures/about/aboutSearchContent.json`
 - `tests/fixtures/news/newsMarkdownSamples.js`

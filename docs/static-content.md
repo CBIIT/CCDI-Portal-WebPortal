@@ -53,7 +53,7 @@ Copy-starting sample for tests and for seeding the static-contents repo:
 
 ### Global Search
 
-Frontend search renders GraphQL `about_page` hits only. Index FAQ content in the search backend with `page: '/faqs'`.
+About Global Search is frontend-only (Fuse.js). Mirror FAQ copy into `src/content/aboutSearchContent.yaml` and `aboutSearchContent.json` with `page: '/faqs'` so FAQ terms return the FAQ page. Keep YAML and JSON in sync after FAQ content changes.
 
 ## `newsData.md` (News + Latest Updates)
 

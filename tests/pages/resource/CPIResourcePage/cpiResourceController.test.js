@@ -1,26 +1,56 @@
 /**
- * CPIResourceController — mocked `axios.get` for `resourceData.yaml` and `global.fetch` for CPI stats API.
+ * CPIResourceController — mocked `axios.get` for `cpiData.md` and `global.fetch` for CPI stats API.
  *
  * Follows tests/TEST_STRUCTURE.md: MutationObserver when needed, mock `env` / `axios` / `fetch`,
- * `createDedicatedYamlAxiosMock`, `waitFor`, assert URL contracts and fixture-derived DOM.
+ * assert URL contracts and fixture-derived DOM.
  */
+
+jest.mock('axios');
+jest.mock('../../../../src/utils/env', () => ({
+  REACT_APP_STATIC_CONTENT_URL: 'https://static.example.com',
+}));
+
+jest.mock('../../../../src/pages/resource/CPIResourcePage/parseCpiMarkdown', () => ({
+  __esModule: true,
+  default: jest.fn(() => ({
+    cpiIntroText: 'CPI intro for unit test.',
+    CPI_Header_URL: '',
+    CPI_Unique_Participants_Icon_URL: '',
+    CPI_Total_Mapped_Participants_Ids_Icon_URL: '',
+    CPI_Cross_Dataset_Linkages_Icon_URL: '',
+    CPI_Domain_Coverage_Icon_URL: '',
+    CPI_Img_URL: '',
+    cpiContent: [
+      {
+        id: 'overview_section',
+        topic: 'Overview Topic',
+        content: 'CPI section body for testing.',
+      },
+    ],
+  })),
+}));
+
+jest.mock('../../../../src/pages/resource/CPIResourcePage/CpiMarkdown', () => (
+  function MockCpiMarkdown({ children }) {
+    return <div data-testid="cpi-markdown">{children}</div>;
+  }
+));
 
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import axios from 'axios';
+import parseCpiMarkdown from '../../../../src/pages/resource/CPIResourcePage/parseCpiMarkdown';
 import CPIResourceController from '../../../../src/pages/resource/CPIResourcePage/CPIResourceController';
 import {
   CPI_PARTICIPANT_STATS_URL,
-  minimalCpiResourceYamlData,
   minimalCpiStatsApiResponse,
 } from '../../../fixtures/resource/cpiResourceFixtures';
 import {
   createCpiStatsFetchHttpErrorMock,
   createCpiStatsFetchSuccessMock,
 } from '../../../helpers/cpiApiMocks';
-import { createDedicatedYamlAxiosMock } from '../../../helpers/resourceYamlApiMocks';
 
 if (typeof global.MutationObserver === 'undefined') {
   global.MutationObserver = class MutationObserver {
@@ -32,12 +62,6 @@ if (typeof global.MutationObserver === 'undefined') {
   };
 }
 
-jest.mock('axios');
-
-jest.mock('../../../../src/utils/env', () => ({
-  REACT_APP_STATIC_CONTENT_URL: 'https://static.example.com',
-}));
-
 let originalFetch;
 
 beforeEach(() => {
@@ -46,11 +70,7 @@ beforeEach(() => {
   for (let i = 0; i < 3; i += 1) {
     document.body.appendChild(document.createElement('footer'));
   }
-  axios.get.mockImplementation(
-    createDedicatedYamlAxiosMock({
-      '/resourceData.yaml': minimalCpiResourceYamlData,
-    }),
-  );
+  axios.get.mockResolvedValue({ data: 'cpi-markdown' });
   global.fetch = createCpiStatsFetchSuccessMock(minimalCpiStatsApiResponse);
 });
 
@@ -61,8 +81,8 @@ afterEach(() => {
 });
 
 describe('CPIResourceController', () => {
-  describe('Mocked axios (resourceData.yaml) and fetch (participant statistics)', () => {
-    it('should request resourceData.yaml and CPI stats URL, then show formatted statistics', async () => {
+  describe('Mocked axios (cpiData.md) and fetch (participant statistics)', () => {
+    it('should request cpiData.md and CPI stats URL, then show formatted statistics', async () => {
       render(
         <MemoryRouter initialEntries={['/explore']}>
           <CPIResourceController />
@@ -74,8 +94,9 @@ describe('CPIResourceController', () => {
       });
 
       expect(axios.get).toHaveBeenCalledWith(
-        expect.stringMatching(/^https:\/\/static\.example\.com\/resourceData\.yaml\?ts=\d+$/),
+        expect.stringMatching(/^https:\/\/static\.example\.com\/cpiData\.md\?ts=\d+$/),
       );
+      expect(parseCpiMarkdown).toHaveBeenCalledWith('cpi-markdown');
       expect(global.fetch).toHaveBeenCalledWith(CPI_PARTICIPANT_STATS_URL);
 
       await waitFor(() => {

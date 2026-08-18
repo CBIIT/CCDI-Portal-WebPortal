@@ -6,7 +6,7 @@ import parseFaqMarkdown from '../../../../src/pages/about/FaqPage/parseFaqMarkdo
 import { sampleFaqMarkdownRaw } from '../../../fixtures/about/faqMarkdownSamples';
 
 describe('parseFaqMarkdown', () => {
-  it('should parse title, headerImage, categories, and faqs from YAML front matter', () => {
+  it('should parse title, headerImage, categories, and news-style FAQ blocks', () => {
     const data = parseFaqMarkdown(sampleFaqMarkdownRaw);
 
     expect(data.title).toBe('CCDI FAQs');
@@ -17,8 +17,11 @@ describe('parseFaqMarkdown', () => {
       name: 'Data Exploration and Data Access',
     });
     expect(data.faqs.length).toBe(14);
+    expect(data.faqs[0].id).toBe('controlled-access');
+    expect(data.faqs[0].category).toBe('data-exploration');
     expect(data.faqs[0].question).toContain('controlled data access');
     expect(data.faqs[0].answer).toContain('NIH eRA Commons');
+    expect(data.faqs[0].answer).not.toContain('| Property |');
   });
 
   it('should return null for empty or invalid markdown', () => {
@@ -30,17 +33,13 @@ describe('parseFaqMarkdown', () => {
   it('should return null when categories are missing', () => {
     expect(parseFaqMarkdown(`---
 title: CCDI FAQs
-faqs: []
 ---`)).toBeNull();
   });
 
-  it('should return null when faqs key is not an array', () => {
+  it('should return null when categories is not a list', () => {
     expect(parseFaqMarkdown(`---
 title: CCDI FAQs
-categories:
-  - id: support
-    name: Support
-faqs: not-a-list
+categories: not-a-list
 ---`)).toBeNull();
   });
 
@@ -50,33 +49,52 @@ title: CCDI FAQs
 categories:
   - id: support
     name: Support
-faqs:
-  - id: ok
-    category: support
-    question: Valid question?
-    answer: Yes.
-  - id: bad-cat
-    category: missing
-    question: Orphan?
-    answer: No.
-  - id: no-q
-    category: support
-    question: ""
-    answer: Empty question.
----`);
+---
+
+# Valid question?
+
+Yes.
+
+| Property | Value |
+| --- | --- |
+| id | ok |
+| category | support |
+
+---
+
+# Orphan?
+
+No.
+
+| Property | Value |
+| --- | --- |
+| id | bad-cat |
+| category | missing |
+
+---
+
+#${' '}
+
+Empty question.
+
+| Property | Value |
+| --- | --- |
+| id | no-q |
+| category | support |
+`);
 
     expect(data.faqs).toHaveLength(1);
     expect(data.faqs[0].id).toBe('ok');
   });
 
-  it('should allow empty faqs array when categories exist', () => {
+  it('should allow empty faqs when categories exist and body has no # blocks', () => {
     const data = parseFaqMarkdown(`---
 title: CCDI FAQs
 categories:
   - id: support
     name: Support
-faqs: []
----`);
+---
+`);
 
     expect(data.categories).toHaveLength(1);
     expect(data.faqs).toEqual([]);

@@ -1,6 +1,7 @@
 /**
- * Minimal shapes for pages that load `resourceData.yaml` (Group B).
- * Keys match what each *ResourceView reads from YAML-loaded `data`.
+ * Minimal shapes for resource *ResourceView props.
+ * Group B pages historically loaded `resourceData.yaml`; Tools / Federation / Rare Cancer
+ * now consume parsed markdown (`toolsData.md`, `federationData.md`, `rareCancerData.md`).
  */
 
 /** ToolsResourceController requires `toolsContent` to render the view. */
@@ -53,7 +54,9 @@ export const minimalCcdiEventAnnouncementsResourceData = {
 };
 
 export const minimalRareCancerResourceData = {
-  rareCancerIntroText: '<p>Rare cancer intro for unit test.</p>',
+  title: 'Pediatric, Adolescent, and Young Adult Rare Cancer Study',
+  rareCancerIntroText: 'Rare cancer intro for unit test.',
+  navTitles: ['Rare Cancer Topic', 'Rare Subsection'],
   rareCancerContent: [
     {
       id: 'rc_section',
@@ -62,7 +65,7 @@ export const minimalRareCancerResourceData = {
         {
           id: 'rc_sub',
           subtopic: 'Rare Subsection',
-          content: '<p>Rare cancer subsection body.</p>',
+          content: 'Rare cancer subsection body.',
         },
       ],
     },

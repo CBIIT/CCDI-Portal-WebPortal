@@ -1,10 +1,16 @@
 /**
- * Unit tests for RareCancerResourceView (`resourceData.yaml` — rare cancer fields as static props).
+ * Unit tests for RareCancerResourceView (rareCancerData.md parsed props).
  *
  * Structure follows tests/TEST_STRUCTURE.md:
  * Rendering → feature sections → Side effects → Edge cases.
  * Fixtures: tests/fixtures/resource/resourceDataViewProps.js (no network).
  */
+
+jest.mock('../../../../src/pages/resource/RareCancerResourcePage/RareCancerMarkdown', () => (
+  function MockRareCancerMarkdown({ children }) {
+    return <div data-testid="rare-cancer-markdown">{children}</div>;
+  }
+));
 
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
@@ -61,6 +67,17 @@ describe('RareCancerResourceView', () => {
       expect(screen.getByText('TOPICS')).toBeInTheDocument();
     });
 
+    it('should apply a quoted remote header URL so https:// is not treated as a CSS comment', () => {
+      renderRareCancerView({
+        ...minimalRareCancerResourceData,
+        RCI_Header: 'https://example.com/rare-cancer-header.png',
+      });
+      const css = Array.from(document.querySelectorAll('style'))
+        .map((el) => el.textContent)
+        .join('\n');
+      expect(css).toContain('url("https://example.com/rare-cancer-header.png")');
+    });
+
     it('should render RCI data flow image with custom URL when provided', () => {
       renderRareCancerView(rareCancerWithDownloadData);
       const img = screen.getByAltText('RCI data flow');
@@ -86,12 +103,20 @@ describe('RareCancerResourceView', () => {
   });
 
   describe('Contact form download', () => {
-    it('should trigger same-origin download when contact link is clicked', () => {
+    it('should insert the contact form button between the first and remaining paragraphs', () => {
+      renderRareCancerView(rareCancerWithDownloadData);
+      const button = screen.getByRole('button', { name: /Download contact form/i });
+      expect(button).toBeInTheDocument();
+      expect(screen.getByText(/If you are interested in participating/i)).toBeInTheDocument();
+      expect(screen.getByText(/For questions related to study data/i)).toBeInTheDocument();
+    });
+
+    it('should trigger same-origin download when contact form button is clicked', () => {
       renderRareCancerView(rareCancerWithDownloadData);
       const appendChildSpy = jest.spyOn(document.body, 'appendChild');
       const removeChildSpy = jest.spyOn(document.body, 'removeChild');
 
-      fireEvent.click(screen.getByText('Download contact form'));
+      fireEvent.click(screen.getByRole('button', { name: /Download contact form/i }));
 
       expect(appendChildSpy).toHaveBeenCalled();
       const appendedLink = appendChildSpy.mock.calls.find(
@@ -114,7 +139,7 @@ describe('RareCancerResourceView', () => {
       renderRareCancerView(rareCancerCrossOriginDownloadData);
       const appendChildSpy = jest.spyOn(document.body, 'appendChild');
 
-      fireEvent.click(screen.getByText('Download contact form'));
+      fireEvent.click(screen.getByRole('button', { name: /Download contact form/i }));
 
       await act(async () => {
         await Promise.resolve();
@@ -137,7 +162,7 @@ describe('RareCancerResourceView', () => {
       renderRareCancerView(malformedDownloadData);
       const appendChildSpy = jest.spyOn(document.body, 'appendChild');
 
-      fireEvent.click(screen.getByText('Download contact form'));
+      fireEvent.click(screen.getByRole('button', { name: /Download contact form/i }));
 
       expect(appendChildSpy).toHaveBeenCalled();
     });
@@ -149,14 +174,14 @@ describe('RareCancerResourceView', () => {
 
       renderRareCancerView(rareCancerCrossOriginDownloadData);
 
-      fireEvent.click(screen.getByText('Section download'));
+      fireEvent.click(screen.getByRole('button', { name: /Download contact form/i }));
 
       await act(async () => {
         await Promise.resolve();
       });
 
       expect(window.open).toHaveBeenCalledWith(
-        'https://raw.githubusercontent.com/CBIIT/CCDI_Hub_Assets/main/PDF/Resources/RCI/rare-cancer-study_contact.pdf',
+        'https://cdn.example.com/rare-cancer-contact.pdf',
         '_blank',
       );
       consoleError.mockRestore();
@@ -325,7 +350,7 @@ describe('RareCancerResourceView', () => {
   describe('Edge cases', () => {
     it('should render when rareCancerContent is missing without throwing', () => {
       expect(() =>
-        renderRareCancerView({ rareCancerIntroText: '<p>Intro only.</p>' }),
+        renderRareCancerView({ rareCancerIntroText: 'Intro only.' }),
       ).not.toThrow();
       expect(screen.getByText(/Intro only/i)).toBeInTheDocument();
     });

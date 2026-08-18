@@ -83,16 +83,17 @@ export const multiTopicPmtlData = {
 
 export const multiTopicRareCancerData = {
   ...minimalRareCancerResourceData,
+  navTitles: ['Rare Topic A', 'Rare Sub A', 'Rare Topic B', 'Rare Sub B'],
   rareCancerContent: [
     {
       id: 'RC_SECTION',
       topic: 'Rare Topic A',
-      list: [{ id: 'rc_sub_a', subtopic: 'Rare Sub A', content: '<p>Rare A</p>' }],
+      list: [{ id: 'rc_sub_a', subtopic: 'Rare Sub A', content: 'Rare A' }],
     },
     {
       id: 'rc_b',
       topic: 'Rare Topic B',
-      list: [{ id: 'rc_sub_b', subtopic: 'Rare Sub B', content: '<p>Rare B</p>' }],
+      list: [{ id: 'rc_sub_b', subtopic: 'Rare Sub B', content: 'Rare B' }],
     },
   ],
 };
@@ -100,28 +101,27 @@ export const multiTopicRareCancerData = {
 /** Same-origin contact-form download + custom flow-chart URL. */
 export const rareCancerWithDownloadData = {
   ...minimalRareCancerResourceData,
-  rareCancerIntroText:
-    '<p>Rare cancer intro with download.</p>'
-    + '<a href="#" data-action="download-contact-form">Download contact form</a>',
+  rareCancerIntroText: 'Rare cancer intro with download.',
   RCI_DOWNLOAD_CONFIG: {
     url: '/local/rare-cancer-contact.pdf',
     filename: 'rare-cancer-contact.pdf',
   },
   RCI_Data_Flow_Chart_URL: 'https://example.com/custom-rci-flow-chart.png',
+  navTitles: ['Rare Topic A', 'Contact Information', 'Rare Topic B', 'Rare Sub B'],
   rareCancerContent: [
     {
       id: 'RC_SECTION',
       topic: 'Rare Topic A',
       list: [{
-        id: 'rc_sub_a',
-        subtopic: 'Rare Sub A',
-        content: '<p>Section body <a href="#" data-action="download-contact-form">Section download</a></p>',
+        id: 'CONTACT_INFORMATION',
+        subtopic: 'Contact Information',
+        content: '#### Who should I contact?\n\nIf you are interested in participating, download the contact form.\n\nFor questions related to study data.',
       }],
     },
     {
       id: 'rc_b',
       topic: 'Rare Topic B',
-      list: [{ id: 'rc_sub_b', subtopic: 'Rare Sub B', content: '<p>Rare B</p>' }],
+      list: [{ id: 'rc_sub_b', subtopic: 'Rare Sub B', content: 'Rare B' }],
     },
   ],
 };

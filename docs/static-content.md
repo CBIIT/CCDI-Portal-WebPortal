@@ -132,6 +132,44 @@ Each news item:
 
 - `tests/fixtures/news/newsMarkdownSamples.js`
 
+## `rareCancerData.md` (Pediatric, Adolescent, and Young Adult Rare Cancer Study)
+
+| Item | Value |
+|------|--------|
+| Path | `${REACT_APP_STATIC_CONTENT_URL}/rareCancerData.md?ts=<timestamp>` |
+| Hub route | `/pediatric-adolescent-and-young-adult-rare-cancer-study` |
+| Format | YAML front matter + Markdown body (`##` / `###` / `####` + property-table ids) |
+
+### Fields
+
+| Key | Notes |
+|-----|--------|
+| `title` | Page banner title |
+| `RCI_Header` | Absolute URL for the hero banner background (bundled header used if omitted) |
+| `RCI_Data_Flow_Chart_URL` | Absolute URL for the data-flow image (bundled chart used if omitted) |
+| `RCI_DOWNLOAD_CONFIG` | `{ url, filename }` for the contact-form PDF download |
+| `navTitles[]` | Left-nav labels; must match `##` / `###` heading text exactly |
+
+Intro Markdown lives in the body **before the first `##`**. An optional `![RCI data flow chart](<url>)` image is stripped from the intro (the page renders the chart once from `RCI_Data_Flow_Chart_URL`). Nested `####` question headings stay in the subtopic body.
+
+Property tables set scroll/nav ids:
+
+```markdown
+| Property | Value |
+| --- | --- |
+| id | Rare_Cancer_Study_Introduction |
+```
+
+Known ids: topic `Rare_Cancer_Study_Introduction`; subtopics `HOW_TO_ACCESS_STUDY_DATA`, `GERMLINE_FINDINGS`, `CONTACT_INFORMATION`.
+
+### Failure behavior
+
+If the file is missing, YAML is invalid, or the request fails, the Rare Cancer page stays empty until valid remote MD loads (no `resourceData.yaml` fallback).
+
+### Seed fixture
+
+- `tests/fixtures/resource/rareCancerMarkdownSamples.js`
+
 # Static content updates (homepage & navigation)
 
 Hub homepage and primary navigation copy can be updated **without a portal code release** by editing YAML inside markdown files hosted in [`CBIIT/CCDI_Hub_Static_Contents`](https://github.com/CBIIT/CCDI_Hub_Static_Contents).
@@ -248,3 +286,4 @@ Copy-starting samples (for tests and for seeding the static-contents repo):
 - `tests/fixtures/about/aboutSearchMarkdownSamples.js`
 - `tests/fixtures/about/aboutSearchContent.json`
 - `tests/fixtures/news/newsMarkdownSamples.js`
+- `tests/fixtures/resource/rareCancerMarkdownSamples.js`

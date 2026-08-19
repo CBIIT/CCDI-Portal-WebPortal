@@ -1,5 +1,5 @@
 /**
- * Unit tests for CPIResourceView (static YAML-shaped `data` + optional `cpiStats` from API).
+ * Unit tests for CPIResourceView (static markdown-shaped `data` + optional `cpiStats` from API).
  *
  * Structure follows tests/TEST_STRUCTURE.md:
  * Rendering → feature sections → Side effects → Edge cases.
@@ -11,15 +11,22 @@ import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import { clickTopicNav, triggerResourceScroll, toggleMobileSection } from '../shared/resourceViewTestUtils';
 import '@testing-library/jest-dom';
+
+jest.mock('../../../../src/pages/resource/CPIResourcePage/CpiMarkdown', () => (
+  function MockCpiMarkdown({ children }) {
+    return <div data-testid="cpi-markdown">{children}</div>;
+  }
+));
+
 import CPIResourceView from '../../../../src/pages/resource/CPIResourcePage/CPIResourceView';
 import {
-  minimalCpiResourceYamlData,
+  minimalCpiResourceData,
   minimalCpiStatsApiResponse,
 } from '../../../fixtures/resource/cpiResourceFixtures';
 
 function renderCpiView(props = {}) {
   const {
-    data = minimalCpiResourceYamlData,
+    data = minimalCpiResourceData,
     cpiStats = minimalCpiStatsApiResponse,
     loadingCpiStats = false,
     cpiStatsError = false,

@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useRef, createRef } from 'react';
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
-import ReactHtmlParser from 'html-react-parser';
 import { NavLink } from 'react-router-dom';
-// import { MCIContent, introText } from '../../../bento/mciData';
 import headerImg from '../../../assets/resources/Rare_Cancer_Header.png';
 import exportIcon from '../../../assets/resources/Explore_Icon.svg';
 import exportIconBlue from '../../../assets/icons/Export_Icon.svg';
@@ -11,7 +9,9 @@ import closeIcon from '../../../assets/icons/Close_Icon.svg';
 import arrowDownIcon from '../../../assets/icons/Arrow_Down.svg';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import GetAppIcon from '@material-ui/icons/GetApp';
-import introImg from '../../../assets/resources/RCI_data_flow_chart.png'
+import introImg from '../../../assets/resources/RCI_data_flow_chart.png';
+import RareCancerMarkdown from './RareCancerMarkdown';
+import { buildRareCancerNavItems } from './parseRareCancerMarkdown';
 
 const ResourceContainer = styled.div`
     width: 100%;
@@ -52,7 +52,8 @@ const ResourceContainer = styled.div`
     .resourceHeaderBackground {
         width: 100%;
         height: 214px;
-        background-image: url(${props => props.headerImg || headerImg});
+        /* Quote the URL so https:// is not treated as a CSS // comment. */
+        background-image: url(${props => JSON.stringify(props.headerImg || headerImg)});
         background-repeat:no-repeat;
         background-position:center;
     }
@@ -486,23 +487,36 @@ const ContactFormDownloadButton = styled.button`
     }
 `;
 
+const DEFAULT_PAGE_TITLE = 'Pediatric, Adolescent, and Young Adult Rare Cancer Study';
+
 const DEFAULT_DOWNLOAD_CONFIG = {
   url: 'https://raw.githubusercontent.com/CBIIT/CCDI_Hub_Assets/main/PDF/Resources/RCI/rare-cancer-study_contact.pdf',
   filename: 'rare-cancer-study_contact.pdf',
 };
 
-/** Splits HTML after the first </p> so a control can be inserted between paragraphs. */
-function splitHtmlAfterFirstClosingP(html) {
-  if (!html || typeof html !== 'string') {
+/** Splits markdown after the first prose paragraph so the contact-form button can sit between paragraphs. */
+function splitMarkdownAfterFirstParagraph(markdown) {
+  if (!markdown || typeof markdown !== 'string') {
     return { before: '', after: '' };
   }
-  const lower = html.toLowerCase();
-  const idx = lower.indexOf('</p>');
-  if (idx === -1) {
-    return { before: html, after: '' };
+  const lines = markdown.split('\n');
+  let i = 0;
+  while (i < lines.length && !lines[i].trim()) {
+    i += 1;
   }
-  const end = idx + '</p>'.length;
-  return { before: html.slice(0, end), after: html.slice(end) };
+  while (i < lines.length && /^#{1,6}\s/.test(lines[i].trim())) {
+    i += 1;
+    while (i < lines.length && !lines[i].trim()) {
+      i += 1;
+    }
+  }
+  while (i < lines.length && lines[i].trim()) {
+    i += 1;
+  }
+  return {
+    before: lines.slice(0, i).join('\n').trim(),
+    after: lines.slice(i).join('\n').trim(),
+  };
 }
 
 async function handleContactFormDownload(e, config) {
@@ -546,16 +560,16 @@ async function handleContactFormDownload(e, config) {
   }
 }
 
-function ContactInformationContent({ htmlContent }) {
-  const { before, after } = splitHtmlAfterFirstClosingP(htmlContent);
+function ContactInformationContent({ markdown, downloadConfig }) {
+  const { before, after } = splitMarkdownAfterFirstParagraph(markdown);
   return (
     <>
-      <ResourceContent htmlContent={before} />
+      {before ? <RareCancerMarkdown>{before}</RareCancerMarkdown> : null}
       <ContactFormDownloadButtonWrap>
         <ContactFormDownloadButton
           type="button"
           aria-label="Download contact form PDF"
-          onClick={(e) => handleContactFormDownload(e, DEFAULT_DOWNLOAD_CONFIG)}
+          onClick={(e) => handleContactFormDownload(e, downloadConfig)}
         >
           <span className="contactFormDownloadButtonText">
             <span>DOWNLOAD</span>
@@ -564,41 +578,20 @@ function ContactInformationContent({ htmlContent }) {
           <GetAppIcon className="contactFormDownloadIcon" aria-hidden />
         </ContactFormDownloadButton>
       </ContactFormDownloadButtonWrap>
-      {after ? <ResourceContent htmlContent={after} /> : null}
+      {after ? <RareCancerMarkdown>{after}</RareCancerMarkdown> : null}
     </>
   );
 }
 
-function ResourceContent({ htmlContent, downloadConfig }) {
-  const containerRef = useRef(null);
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-    const config = downloadConfig || DEFAULT_DOWNLOAD_CONFIG;
-    const handler = (e) => handleContactFormDownload(e, config);
-    const links = container.querySelectorAll('[data-action="download-contact-form"]');
-    links.forEach((el) => {
-      el.addEventListener('click', handler);
-    });
-    return () => {
-      links.forEach((el) => {
-        el.removeEventListener('click', handler);
-      });
-    };
-  }, [htmlContent, downloadConfig]);
-  return (
-    <div ref={containerRef}>
-      {ReactHtmlParser(htmlContent)}
-    </div>
-  );
-}
-
-const RareCancerResourceView = ({data}) => {
+const RareCancerResourceView = ({ data = {} }) => {
     const [selectedNavTitle, setSelectedNavTitle] = useState('');
     const [stickyNavStyle, setStickyNavStyle] = useState('navList');
     const sectionList = useRef([]);
     const location = useLocation();
     const MCIContent = data.rareCancerContent;
+    const navItems = buildRareCancerNavItems(data.navTitles, MCIContent);
+    const pageTitle = data.title || DEFAULT_PAGE_TITLE;
+    const downloadConfig = data.RCI_DOWNLOAD_CONFIG || DEFAULT_DOWNLOAD_CONFIG;
     if (MCIContent) {
         sectionList.current = MCIContent.map((element, i) => {
             return sectionList.current[i] || createRef()
@@ -639,15 +632,16 @@ const RareCancerResourceView = ({data}) => {
         };
     }, []);
 
-    // Scroll to hash anchor when data is loaded (YAML is async)
+    // Scroll to hash anchor when data is loaded (markdown is async)
     useEffect(() => {
-        const hash = location.hash ? location.hash.slice(1).toUpperCase() : null;
-        if (!hash || !MCIContent) return;
+        const rawHash = location.hash ? location.hash.slice(1) : null;
+        if (!rawHash || !MCIContent) return;
 
         const scrollToAnchor = () => {
-            const element = document.getElementById(hash);  
+            const element = document.getElementById(rawHash)
+                || document.getElementById(rawHash.toUpperCase());
             if (element) {
-                setSelectedNavTitle(hash);
+                setSelectedNavTitle(element.id);
                 window.scrollTo({
                     top: element.offsetTop - 55,
                     behavior: 'smooth'
@@ -665,6 +659,9 @@ const RareCancerResourceView = ({data}) => {
         const id = event.target.getAttribute('name');
         setSelectedNavTitle(id);
         const element = document.getElementById(id);
+        if (!element) {
+            return;
+        }
         window.scrollTo({ 
             top: element.offsetTop - 55,
             behavior: "smooth" 
@@ -697,7 +694,7 @@ const RareCancerResourceView = ({data}) => {
             </div>
             <div className='resourceTitleContainer'>
                 <div className='resourceTitle'>
-                    <div className='resourceTitleText'>Pediatric, Adolescent, and Young Adult Rare Cancer Study</div>
+                    <div className='resourceTitleText'>{pageTitle}</div>
                 </div>
             </div>
             <ResourceBody id='MCIBody'>
@@ -705,30 +702,21 @@ const RareCancerResourceView = ({data}) => {
                     <div className={stickyNavStyle} id='leftNav'>
                         <div className='navTitle'>TOPICS</div>
                         {
-                            MCIContent && MCIContent.map((mci, topicid) => {
-                                const topickey = `topic_${topicid}`;
+                            navItems.map((navItem, navIdx) => {
+                                const navKey = `nav_${navIdx}`;
+                                const className = navItem.isSubtitle
+                                    ? (selectedNavTitle === navItem.id ? 'navTopicItem selected subtitle' : 'navTopicItem subtitle')
+                                    : (selectedNavTitle === navItem.id ? 'navTopicItem selected' : 'navTopicItem');
                                 return (
-                                    <>
-                                        <div name={mci.id} className={selectedNavTitle === mci.id ? 'navTopicItem selected' : 'navTopicItem'} key={topickey} onClick={handleClickEvent}>{mci.topic}</div>
-                                        <div>
-                                            {
-                                                mci.list.map((mciItem, idx) => {
-                                                    const listItemKey = `listItem_${idx}`;
-                                                        return (
-                                                            <div name={mciItem.id} className={selectedNavTitle === mciItem.id ? 'navTopicItem selected subtitle' : 'navTopicItem subtitle'} key={listItemKey} onClick={handleClickEvent}>{mciItem.subtopic}</div>
-                                                        )
-                                                })
-                                            }
-                                        </div>
-                                    </>
-                                )
+                                    <div name={navItem.id} className={className} key={navKey} onClick={handleClickEvent}>{navItem.label}</div>
+                                );
                             })
                         }
                     </div>
                 </div>
                 <div className='contentSection'>
                     <div className='contentList'>
-                        {data.rareCancerIntroText && <div className='introContainer'><ResourceContent htmlContent={data.rareCancerIntroText} downloadConfig={data.RCI_DOWNLOAD_CONFIG} /></div>}
+                        {data.rareCancerIntroText && <div className='introContainer'><RareCancerMarkdown>{data.rareCancerIntroText}</RareCancerMarkdown></div>}
                         <div style={{ justifyContent: 'center', display: 'flex'}}>
                             <img className="introImg" src={data.RCI_Data_Flow_Chart_URL || introImg} alt="RCI data flow" />
                         </div>
@@ -742,20 +730,21 @@ const RareCancerResourceView = ({data}) => {
                                         <div className="mciSection mobileCollapse" ref={sectionList.current[mciidx]}>
                                         {
                                             mci.list.map((mciItem, idx) => {
+                                                const listItemKey = `listItem_${mciidx}_${idx}`;
                                                 return (
-                                                    <>
+                                                    <div key={listItemKey}>
                                                         <div id={mciItem.id} className='mciSubtitle'>{mciItem.subtopic && mciItem.subtopic}</div>
                                                         <div className='mciContentContainer'>
                                                             {mciItem.content && (
                                                                 mciItem.id === 'CONTACT_INFORMATION' ? (
-                                                                    <ContactInformationContent htmlContent={mciItem.content} />
+                                                                    <ContactInformationContent markdown={mciItem.content} downloadConfig={downloadConfig} />
                                                                 ) : (
-                                                                    <ResourceContent htmlContent={mciItem.content} />
+                                                                    <RareCancerMarkdown>{mciItem.content}</RareCancerMarkdown>
                                                                 )
                                                             )}
                                                         </div>
                                                         {mciItem.content && <div style={{height: '40px'}} />}
-                                                    </>
+                                                    </div>
                                                 )
                                             })
                                         }

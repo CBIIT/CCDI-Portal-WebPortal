@@ -8,20 +8,22 @@ Hub pages can load YAML-in-Markdown from [`CBIIT/CCDI_Hub_Static_Contents`](http
 |------|--------|
 | Path | `${REACT_APP_STATIC_CONTENT_URL}/faqData.md?ts=<timestamp>` |
 | Hub route | `/faqs` (`/faq` redirects to `/faqs`) |
-| Format | YAML front matter only (markdown body ignored) |
+| Format | YAML front matter for title / header / categories; news-style `#` FAQ blocks |
 
 ### Fields
 
-| Key | Notes |
+| Key | Source |
 |-----|--------|
-| `title` | Banner title (e.g. `CCDI FAQs`) |
-| `headerImage` | Absolute URL for the hero banner background |
-| `categories[]` | `id`, `name` — left-index order |
-| `faqs[]` | `id`, `category` (must match a category `id`), `question`, `answer` (markdown) |
+| `title` | YAML front matter |
+| `headerImage` | YAML front matter (absolute URL) |
+| `categories[]` | YAML front matter: `id`, `name` — left-index order |
+| `question` | `#` heading |
+| `answer` | Markdown body until the property table |
+| `id` / `category` | Trailing `| Property | Value |` table (`category` must match a category `id`) |
 
 ### Example
 
-```yaml
+```markdown
 ---
 title: CCDI FAQs
 headerImage: https://example.com/faq-header.png
@@ -32,13 +34,16 @@ categories:
     name: Molecular Characterization Initiative (MCI)
   - id: support
     name: Support
-faqs:
-  - id: controlled-access
-    category: data-exploration
-    question: How can I apply for controlled data access to a CCDI-indexed study?
-    answer: |
-      Markdown answer with [links](https://example.com).
 ---
+
+# How can I apply for controlled data access to a CCDI-indexed study?
+
+Markdown answer with [links](https://example.com).
+
+| Property | Value |
+| --- | --- |
+| id | controlled-access |
+| category | data-exploration |
 ```
 
 ### Failure behavior
@@ -169,6 +174,52 @@ If the file is missing, YAML is invalid, or the request fails, the Rare Cancer p
 ### Seed fixture
 
 - `tests/fixtures/resource/rareCancerMarkdownSamples.js`
+## `cpiData.md` (CCDI Participant Index)
+
+| Item | Value |
+|------|--------|
+| Path | `${REACT_APP_STATIC_CONTENT_URL}/cpiData.md?ts=<timestamp>` |
+| Hub route | `/ccdi-participant-index` |
+| Format | YAML front matter for image URLs, then news-style `#` blocks separated by `---` |
+
+Front matter holds asset URLs only. Intro copy is the markdown before the first `#` heading. Each topic is a `#` section with a trailing property table for `id` (same pattern as `newsData.md`).
+
+```markdown
+---
+CPI_Header_URL: "https://example.com/cpi-header.png"
+CPI_Img_URL: "https://example.com/cpi-diagram.png"
+CPI_Cross_Dataset_Linkages_Icon_URL: "https://example.com/cpi-linkages.svg"
+CPI_Domain_Coverage_Icon_URL: "https://example.com/cpi-domains.svg"
+CPI_Total_Mapped_Participants_Ids_Icon_URL: "https://example.com/cpi-mapped.svg"
+CPI_Unique_Participants_Icon_URL: "https://example.com/cpi-unique.svg"
+---
+
+Intro paragraph for the Participant Index page.
+
+---
+
+# Components
+
+Markdown body with [links](https://example.com) and lists.
+
+| Property | Value |
+| --- | --- |
+| id | CPI_Components |
+```
+
+| Field | Source |
+|-------|--------|
+| Image URLs | YAML front matter (`CPI_*_URL`) |
+| Intro | Prose before the first `#` heading |
+| `topic` | `#` heading |
+| `content` | Markdown body (lists, links, bold) |
+| `id` | Property table (`CPI_Components` keeps the Components diagram) |
+
+Live CPI statistics still come from the Participant Index API, not from this file.
+
+### Seed fixture
+
+- `tests/fixtures/resource/cpiMarkdownSamples.js`
 
 # Static content updates (homepage & navigation)
 
@@ -183,6 +234,7 @@ The portal loads these files at runtime from `REACT_APP_STATIC_CONTENT_URL` (see
 | `aboutSearchContent.md` | Global Search About-tab Fuse.js corpus |
 | `newsData.md` | News cards + homepage Latest Updates strip |
 | `releaseNotesData.md` | Hub release notes (News tab + release notes page) |
+| `cpiData.md` | CCDI Participant Index page (`/ccdi-participant-index`) |
 
 Content format is **YAML front matter only** (markdown body is ignored). This matches gray-matter usage on other Hub pages while keeping structured lists easy to edit.
 
@@ -200,6 +252,7 @@ ${REACT_APP_STATIC_CONTENT_URL}/landingData.md?ts=<timestamp>
 ${REACT_APP_STATIC_CONTENT_URL}/navData.md?ts=<timestamp>
 ${REACT_APP_STATIC_CONTENT_URL}/newsData.md?ts=<timestamp>
 ${REACT_APP_STATIC_CONTENT_URL}/releaseNotesData.md?ts=<timestamp>
+${REACT_APP_STATIC_CONTENT_URL}/cpiData.md?ts=<timestamp>
 ```
 
 The `?ts=` query busts CDN/browser caches so merges show up on the next page load.
@@ -287,3 +340,4 @@ Copy-starting samples (for tests and for seeding the static-contents repo):
 - `tests/fixtures/about/aboutSearchContent.json`
 - `tests/fixtures/news/newsMarkdownSamples.js`
 - `tests/fixtures/resource/rareCancerMarkdownSamples.js`
+- `tests/fixtures/resource/cpiMarkdownSamples.js`

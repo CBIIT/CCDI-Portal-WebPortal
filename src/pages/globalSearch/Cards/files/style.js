@@ -196,11 +196,25 @@ const useStyles = makeStyles((theme) => {
       flexDirection: 'column',
       margin: '0px',
       padding: '0px',
-      position: 'relative', // For absolute positioning of arrow
       [mdBreakpoint]: {
         flexDirection: 'row',
         alignItems: 'flex-start',
       },
+    },
+    expandablePropertyLine: {
+      display: 'flex',
+      flexDirection: 'column',
+      width: '100%',
+      minWidth: 0,
+      margin: '0px',
+      padding: '0px',
+      position: 'relative', // Arrow uses same absolute right inset as other cards
+    },
+    expandableContent: {
+      width: '100%',
+      minWidth: 0,
+      maxWidth: '100%',
+      overflow: 'hidden',
     },
     groupedProperties: {
       display: 'flex',
@@ -260,31 +274,32 @@ const useStyles = makeStyles((theme) => {
     participantContainer: {
       paddingLeft: '15px',
       width: '100%',
-      paddingRight: '45px', // Make space for the arrow
+      paddingRight: '30px', // Match Participant/Studies expand rows; reserve arrow space
       lineHeight: '22px',
       boxSizing: 'border-box',
+      overflow: 'hidden',
+      minWidth: 0,
       [mdBreakpoint]: {
         paddingLeft: '15px',
-        paddingRight: '45px',
+        paddingRight: '35px',
       },
-      '@media (max-width: 749px)': {
+      '@media (max-width: 600px)': {
         paddingLeft: '8px',
-        paddingRight: '40px',
-        maxWidth: 'none', // Allow full width on mobile
+        paddingRight: '28px',
       },
     },
     expandToggle: {
       cursor: 'pointer',
       position: 'absolute',
       top: '5px',
-      right: '20px',
+      right: '20px', // Align with Participant/Studies expand arrows
       display: 'flex',
       alignItems: 'flex-start',
       '&:hover': {
         opacity: '0.7',
       },
       '@media (max-width: 600px)': {
-        top: '18px', // Position to align with value text on mobile
+        top: '18px',
         right: '0px',
       },
     },
@@ -297,6 +312,21 @@ const useStyles = makeStyles((theme) => {
       '@media (max-width: 600px)': {
         fontSize: '16px',
       },
+    },
+    truncatedValue: {
+      display: 'block',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap',
+      maxWidth: '100%',
+      paddingLeft: 0,
+    },
+    expandedValue: {
+      display: 'block',
+      whiteSpace: 'normal',
+      wordBreak: 'break-word',
+      overflowWrap: 'break-word',
+      paddingLeft: 0,
     },
     participantTextContainer: {
       width: '100%',
@@ -318,17 +348,18 @@ const useStyles = makeStyles((theme) => {
     sampleContainer: {
       paddingLeft: '15px',
       width: '100%',
-      paddingRight: '45px', // Make space for the arrow
+      paddingRight: '30px', // Match Participant/Studies expand rows; reserve arrow space
       lineHeight: '22px',
       boxSizing: 'border-box',
+      overflow: 'hidden',
+      minWidth: 0,
       [mdBreakpoint]: {
         paddingLeft: '15px',
-        paddingRight: '45px',
+        paddingRight: '35px',
       },
-      '@media (max-width: 749px)': {
+      '@media (max-width: 600px)': {
         paddingLeft: '8px',
-        paddingRight: '40px',
-        maxWidth: 'none', // Allow full width on mobile
+        paddingRight: '28px',
       },
     },
     sampleTextContainer: {

@@ -139,23 +139,21 @@ const FilesCard = ({ data = {}, index }) => {
   );
 
   const renderParticipant = (label, value = '') => {
-    // Simple, reliable character limits based on screen size
-    // Reduced to account for the '...' we add manually
+    // Character limits decide when the expand arrow appears; CSS ellipsis
+    // clips by available width so long unbroken IDs never cover the arrow.
     const getMaxLength = () => {
       if (window.innerWidth <= 749) {
-        return 85; // Mobile
+        return 75;
       } else if (window.innerWidth <= 900) {
-        return 47; // Tablet  
+        return 40;
       } else if (window.innerWidth <= 1200) {
-        return 67; // Small desktop
-      } else {
-        return 90; // Large desktop - conservative to prevent overflow
+        return 58;
       }
+      return 78;
     };
 
     const [maxLength, setMaxLength] = React.useState(getMaxLength());
 
-    // Update character limit on window resize
     React.useEffect(() => {
       const handleResize = () => {
         setMaxLength(getMaxLength());
@@ -166,9 +164,6 @@ const FilesCard = ({ data = {}, index }) => {
     }, []);
 
     const shouldTruncate = value && value.length > maxLength;
-    const displayValue = shouldTruncate && !participantExpanded 
-      ? value.substring(0, maxLength) 
-      : value;
 
     const handleToggleExpand = () => {
       setParticipantExpanded(!participantExpanded);
@@ -176,30 +171,29 @@ const FilesCard = ({ data = {}, index }) => {
 
     return {
       content: (
-        <div className={classes.keyAndValueRow}>
+        <div className={cn(classes.keyAndValueRow, classes.expandableContent)}>
           <Typography variant="h6" className={classes.key}>
             {label}
           </Typography>
           <div className={classes.participantContainer}>
-            <Typography 
-              variant="body1" 
-              className={`${classes.value} ${shouldTruncate ? classes.clickableText : ''}`}
-              style={{ 
-                paddingLeft: 0,
-                wordBreak: participantExpanded ? 'break-word' : 'normal',
-                whiteSpace: participantExpanded ? 'normal' : 'nowrap',
-                overflowWrap: 'break-word',
-              }}
+            <Typography
+              variant="body1"
+              component="div"
+              className={cn(
+                classes.value,
+                shouldTruncate && !participantExpanded && classes.truncatedValue,
+                participantExpanded && classes.expandedValue,
+                shouldTruncate && classes.clickableText,
+              )}
               onClick={shouldTruncate ? handleToggleExpand : undefined}
             >
-              {displayValue}
-              {shouldTruncate && !participantExpanded && '...'}
+              {value}
             </Typography>
           </div>
         </div>
       ),
       arrow: shouldTruncate ? (
-        <span 
+        <span
           className={classes.expandToggle}
           onClick={handleToggleExpand}
         >
@@ -210,23 +204,19 @@ const FilesCard = ({ data = {}, index }) => {
   };
 
   const renderSample = (label, value = '') => {
-    // Simple, reliable character limits based on screen size
-    // Reduced to account for the '...' we add manually
     const getMaxLength = () => {
       if (window.innerWidth <= 749) {
-        return 85; // Mobile
+        return 75;
       } else if (window.innerWidth <= 900) {
-        return 47; // Tablet  
+        return 40;
       } else if (window.innerWidth <= 1200) {
-        return 67; // Small desktop
-      } else {
-        return 90; // Large desktop - conservative to prevent overflow
+        return 58;
       }
+      return 78;
     };
 
     const [maxLength, setMaxLength] = React.useState(getMaxLength());
 
-    // Update character limit on window resize
     React.useEffect(() => {
       const handleResize = () => {
         setMaxLength(getMaxLength());
@@ -237,9 +227,6 @@ const FilesCard = ({ data = {}, index }) => {
     }, []);
 
     const shouldTruncate = value && value.length > maxLength;
-    const displayValue = shouldTruncate && !sampleExpanded 
-      ? value.substring(0, maxLength) 
-      : value;
 
     const handleToggleExpand = () => {
       setSampleExpanded(!sampleExpanded);
@@ -247,30 +234,29 @@ const FilesCard = ({ data = {}, index }) => {
 
     return {
       content: (
-        <div className={classes.keyAndValueRow}>
+        <div className={cn(classes.keyAndValueRow, classes.expandableContent)}>
           <Typography variant="h6" className={classes.key}>
             {label}
           </Typography>
           <div className={classes.sampleContainer}>
-            <Typography 
-              variant="body1" 
-              className={`${classes.value} ${shouldTruncate ? classes.clickableText : ''}`}
-              style={{ 
-                paddingLeft: 0,
-                wordBreak: sampleExpanded ? 'break-word' : 'normal',
-                whiteSpace: sampleExpanded ? 'normal' : 'nowrap',
-                overflowWrap: 'break-word',
-              }}
+            <Typography
+              variant="body1"
+              component="div"
+              className={cn(
+                classes.value,
+                shouldTruncate && !sampleExpanded && classes.truncatedValue,
+                sampleExpanded && classes.expandedValue,
+                shouldTruncate && classes.clickableText,
+              )}
               onClick={shouldTruncate ? handleToggleExpand : undefined}
             >
-              {displayValue}
-              {shouldTruncate && !sampleExpanded && '...'}
+              {value}
             </Typography>
           </div>
         </div>
       ),
       arrow: shouldTruncate ? (
-        <span 
+        <span
           className={classes.expandToggle}
           onClick={handleToggleExpand}
         >
@@ -392,7 +378,7 @@ const FilesCard = ({ data = {}, index }) => {
         </div>
 
         {/* Participant - Line 4 */}
-        <div className={classes.propertyLine} style={{ position: 'relative' }}>
+        <div className={classes.expandablePropertyLine}>
           {(() => {
             const participant = renderParticipant('Participant:', formatListWithSemicolons(participant_id));
             return (
@@ -410,7 +396,7 @@ const FilesCard = ({ data = {}, index }) => {
         </div>
 
         {/* Sample - Line 6 */}
-        <div className={classes.propertyLine} style={{ position: 'relative' }}>
+        <div className={classes.expandablePropertyLine}>
           {(() => {
             const sample = renderSample('Sample:', formatListWithSemicolons(sample_id));
             return (

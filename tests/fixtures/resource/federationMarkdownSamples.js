@@ -9,6 +9,8 @@ CCDI_Federation_Data_Access: https://example.com/federation-diagram.png
 navTitles:
   - Data Access
   - Additional Available Resources
+  - Agent Skill to support streamlined discovery and analysis
+  - Blog
   - Contribute to CCDI Data Federation Resource
   - Contact
 ---
@@ -30,6 +32,12 @@ To access participating nodes API, please click [here](https://cbiit.github.io/c
 ## Additional Available Resources
 
 The CCDI Data Federation Resource offers a suite of resources including the [OpenAPI Specification](https://cbiit.github.io/ccdi-federation-api-aggregation/swagger-aggr.yml).
+
+### Agent Skill to support streamlined discovery and analysis
+The CCDI Data Federation now includes a new Agent Skill.
+
+### Blog
+Read more about the CCDI Federation Agent Skill and API in the blog.
 
 ## Contribute to CCDI Data Federation Resource
 
@@ -54,4 +62,8 @@ Intro paragraph three.
 ## Topic Alpha
 
 Section alpha body.
+
+### Sub Alpha
+
+Sub alpha body.
 `;

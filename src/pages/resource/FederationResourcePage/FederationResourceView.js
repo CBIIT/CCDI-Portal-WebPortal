@@ -422,7 +422,7 @@ const FederationResourceView = ({data}) => {
     const navItems = buildFederationNavItems(data.navTitles, federationContent);
     if (federationContent) {
         sectionList.current = federationContent.map((element, i) => {
-            return sectionList.current[i] || createRef()
+            return sectionList.current[i] || createRef();
         });
     }
     const handleScroll = () => {
@@ -497,9 +497,9 @@ const FederationResourceView = ({data}) => {
                         {
                             navItems.map((navItem, navIdx) => {
                                 const navKey = `nav_${navIdx}`;
-                                const className = selectedNavTitle === navItem.id
-                                    ? 'navTopicItem selected'
-                                    : 'navTopicItem';
+                                const className = navItem.isSubtitle
+                                    ? (selectedNavTitle === navItem.id ? 'navTopicItem selected subtitle' : 'navTopicItem subtitle')
+                                    : (selectedNavTitle === navItem.id ? 'navTopicItem selected' : 'navTopicItem');
                                 return (
                                     <div name={navItem.id} className={className} key={navKey} onClick={handleClickEvent}>{navItem.label}</div>
                                 );
@@ -517,6 +517,44 @@ const FederationResourceView = ({data}) => {
                         {
                             federationContent && federationContent.map((federationItem, mciid) => {
                                 const mcikey = `federation_${mciid}`;
+                                const hasSubtopics = Array.isArray(federationItem.list) && federationItem.list.length > 0;
+                                const dataAccessImg = federationItem.id
+                                    && federationItem.id.includes('Data_Access')
+                                    && data.CCDI_Federation_Data_Access;
+
+                                if (hasSubtopics) {
+                                    return (
+                                        <div key={mcikey}>
+                                            <div id={federationItem.id} className='mciTitle'>{federationItem.topic && federationItem.topic}</div>
+                                            <div id={federationItem.id} name={mciid} className='mciTitleMobile sectionCollapse' onClick={handleCollapseSection}>{federationItem.topic && federationItem.topic}</div>
+                                            <div className="mciSection mobileCollapse" ref={sectionList.current[mciid]}>
+                                                {federationItem.content && (
+                                                    <div className='mciContentContainer'>
+                                                        <FederationMarkdown>{federationItem.content}</FederationMarkdown>
+                                                    </div>
+                                                )}
+                                                {federationItem.content && <div style={{height: '40px'}} />}
+                                                {
+                                                    federationItem.list.map((listItem, idx) => {
+                                                        const listItemKey = `listItem_${mciid}_${idx}`;
+                                                        return (
+                                                            <div key={listItemKey}>
+                                                                <div id={listItem.id} className='mciSubtitle'>{listItem.subtopic && listItem.subtopic}</div>
+                                                                <div className='mciContentContainer'>
+                                                                    {listItem.content && (
+                                                                        <FederationMarkdown>{listItem.content}</FederationMarkdown>
+                                                                    )}
+                                                                </div>
+                                                                {listItem.content && <div style={{height: '40px'}} />}
+                                                            </div>
+                                                        );
+                                                    })
+                                                }
+                                            </div>
+                                        </div>
+                                    );
+                                }
+
                                 return (
                                     <div key={mcikey}>
                                         <div id={federationItem.id} className='mciTitle'>{federationItem.topic && federationItem.topic}</div>
@@ -527,8 +565,7 @@ const FederationResourceView = ({data}) => {
                                                     <FederationMarkdown>{federationItem.content}</FederationMarkdown>
                                                 )}
 
-                                                {federationItem.id && federationItem.id.includes('Data_Access')
-                                                && data.CCDI_Federation_Data_Access && (
+                                                {dataAccessImg && (
                                                 <div style={{ justifyContent: 'center', display: 'flex'}}>
                                                     <img className="federationImg" src={data.CCDI_Federation_Data_Access} alt="Infographic displaying the CCDI Federation Service ecosystem. Users can directly access individual source nodes (KidsFirst, PCDC, St. Jude Cloud, Treehouse) or utilize the aggregation capabilities of the Federation Service to query data across all nodes simultaneously."/>
                                                 </div>
@@ -537,7 +574,7 @@ const FederationResourceView = ({data}) => {
                                             {federationItem.content && <div style={{height: '40px'}} />}
                                         </div>
                                     </div>
-                                )
+                                );
                             })
                         }
                     </div>

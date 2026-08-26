@@ -15,11 +15,27 @@ import { defaultPmtlViewData } from './pmtlViewProps';
 
 export const multiTopicFederationData = {
   ...minimalFederationResourceData,
-  navTitles: ['Topic A', 'Data Access', 'Topic B'],
+  navTitles: [
+    'Topic A',
+    'Data Access',
+    'Additional Available Resources',
+    'Agent Skill',
+    'Blog',
+    'Topic B',
+  ],
   federationContent: [
-    { id: 'fed_a', topic: 'Topic A', content: 'Section A' },
-    { id: 'Data_Access', topic: 'Data Access', content: 'Access details' },
-    { id: 'fed_b', topic: 'Topic B', content: 'Section B' },
+    { id: 'fed_a', topic: 'Topic A', content: 'Section A', list: [] },
+    { id: 'Data_Access', topic: 'Data Access', content: 'Access details', list: [] },
+    {
+      id: 'Additional_Available_Resources',
+      topic: 'Additional Available Resources',
+      content: 'Resources intro',
+      list: [
+        { id: 'Agent_Skill', subtopic: 'Agent Skill', content: 'Agent Skill body' },
+        { id: 'Blog', subtopic: 'Blog', content: 'Blog body' },
+      ],
+    },
+    { id: 'fed_b', topic: 'Topic B', content: 'Section B', list: [] },
   ],
   CCDI_Federation_Data_Access: '/test-federation-infographic.png',
 };

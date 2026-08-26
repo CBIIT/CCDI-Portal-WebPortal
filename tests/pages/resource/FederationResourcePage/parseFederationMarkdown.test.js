@@ -21,7 +21,7 @@ describe('parseFederationMarkdown', () => {
     expect(data.federationIntroText).toContain('pull data from across various resources');
     expect(data.federationIntroText).toContain('piloting data federation');
     expect(data.federationIntroText).toContain('will expand as more organizations');
-    expect(data.navTitles).toHaveLength(4);
+    expect(data.navTitles).toHaveLength(6);
     expect(data.federationContent).toHaveLength(4);
 
     const dataAccess = data.federationContent[0];
@@ -29,27 +29,55 @@ describe('parseFederationMarkdown', () => {
     expect(dataAccess.id).toBe('Data_Access');
     expect(dataAccess.content).toContain('deidentified individual-level data');
     expect(dataAccess.content).toContain('ccdi-federation-api-aggregation');
+    expect(dataAccess.list).toEqual([]);
   });
 
-  it('should build side nav from navTitles in order', () => {
+  it('should parse ### headings as nested subtopics under a topic', () => {
+    const data = parseFederationMarkdown(sampleFederationMarkdownRaw);
+    const resources = data.federationContent[1];
+
+    expect(resources.topic).toBe('Additional Available Resources');
+    expect(resources.content).toContain('OpenAPI Specification');
+    expect(resources.list).toHaveLength(2);
+    expect(resources.list[0].subtopic).toBe(
+      'Agent Skill to support streamlined discovery and analysis',
+    );
+    expect(resources.list[0].id).toBe(
+      'Agent_Skill_to_support_streamlined_discovery_and_analysis',
+    );
+    expect(resources.list[0].content).toContain('Agent Skill');
+    expect(resources.list[1].subtopic).toBe('Blog');
+    expect(resources.list[1].id).toBe('Blog');
+    expect(resources.list[1].content).toContain('blog');
+  });
+
+  it('should build side nav from navTitles including subtitle entries', () => {
     const data = parseFederationMarkdown(sampleFederationMarkdownRaw);
     const navItems = buildFederationNavItems(data.navTitles, data.federationContent);
 
     expect(navItems.map((item) => item.label)).toEqual([
       'Data Access',
       'Additional Available Resources',
+      'Agent Skill to support streamlined discovery and analysis',
+      'Blog',
       'Contribute to CCDI Data Federation Resource',
       'Contact',
     ]);
     expect(navItems[0].id).toBe('Data_Access');
+    expect(navItems[0].isSubtitle).toBe(false);
+    expect(navItems[2].isSubtitle).toBe(true);
+    expect(navItems[3].isSubtitle).toBe(true);
   });
 
   it('should fall back to document order when navTitles is omitted', () => {
     const data = parseFederationMarkdown(sampleFederationMarkdownNoNavTitles);
     const navItems = buildFederationNavItems(data.navTitles, data.federationContent);
 
-    expect(navItems).toHaveLength(1);
+    expect(navItems).toHaveLength(2);
     expect(navItems[0].label).toBe('Topic Alpha');
+    expect(navItems[0].isSubtitle).toBe(false);
+    expect(navItems[1].label).toBe('Sub Alpha');
+    expect(navItems[1].isSubtitle).toBe(true);
   });
 
   it('should split intro into paragraphs before first h2', () => {
@@ -72,6 +100,7 @@ describe('parseFederationMarkdown', () => {
     const parsed = parseFederationMarkdown(bom);
     expect(parsed.title).toBe('BOM Federation');
     expect(parsed.federationContent[0].content).toBe('Body.');
+    expect(parsed.federationContent[0].list).toEqual([]);
   });
 });
 

@@ -30,6 +30,8 @@ resources:
     link: https://datacatalog.ccdi.cancer.gov
   - name: Molecular Characterization Initiative
     link: /MCI
+  - name: CCDI MCI JSON2TSV
+    link: /MCI_JSON2TSV
   - name: National Childhood Cancer Registry Explorer
     link: https://nccrexplorer.ccdi.cancer.gov
   - name: CCDI Data Federation Resource

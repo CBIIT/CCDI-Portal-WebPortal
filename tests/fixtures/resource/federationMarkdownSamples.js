@@ -36,6 +36,12 @@ The CCDI Data Federation Resource offers a suite of resources including the [Ope
 ### Agent Skill to support streamlined discovery and analysis
 The CCDI Data Federation now includes a new Agent Skill.
 
+\`\`\`responsive-img
+wide: 'https://example.com/federation-agent-skill.png'
+alt: 'test'
+Caption: ""
+\`\`\`
+
 ### Blog
 Read more about the CCDI Federation Agent Skill and API in the blog.
 

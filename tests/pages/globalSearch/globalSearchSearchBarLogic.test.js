@@ -4,7 +4,6 @@
  * @see src/pages/globalSearch/globalSearchSearchBarLogic.js
  */
 
-import { waitFor } from '@testing-library/react';
 import {
   createOnSearchChange,
   createGetSearchSuggestions,
@@ -29,56 +28,50 @@ describe('globalSearchSearchBarLogic', () => {
   });
 
   describe('createOnSearchChange', () => {
-    it('should load counts, update state, and navigate on new keyword', async () => {
+    it('should update text, set loading, and navigate on new keyword', () => {
       const setSearchText = jest.fn();
-      const setSearchCounts = jest.fn();
+      const setCountsLoading = jest.fn();
       const navigate = jest.fn();
-      const queryCountAPI = jest.fn(() => Promise.resolve({ participant_count: 1 }));
       const onChange = createOnSearchChange({
-        getSearchText: () => '',
+        getSearchParam: () => '',
         setSearchText,
-        setSearchCounts,
-        queryCountAPI,
+        setCountsLoading,
         navigate,
       });
 
       onChange('glioma');
 
-      await waitFor(() => {
-        expect(setSearchText).toHaveBeenCalledWith('glioma');
-      });
-
-      expect(queryCountAPI).toHaveBeenCalledWith('glioma');
-      expect(setSearchCounts).toHaveBeenCalledWith({ participant_count: 1 });
+      expect(setSearchText).toHaveBeenCalledWith('glioma');
+      expect(setCountsLoading).toHaveBeenCalledWith(true);
       expect(navigate).toHaveBeenCalledWith('/sitesearch?keyword=glioma');
     });
 
-    it('should no-op when value equals current search text', () => {
-      const queryCountAPI = jest.fn();
+    it('should no-op when value equals current URL keyword', () => {
+      const setSearchText = jest.fn();
+      const navigate = jest.fn();
       const onChange = createOnSearchChange({
-        getSearchText: () => 'same',
-        setSearchText: jest.fn(),
-        setSearchCounts: jest.fn(),
-        queryCountAPI,
-        navigate: jest.fn(),
+        getSearchParam: () => 'same',
+        setSearchText,
+        setCountsLoading: jest.fn(),
+        navigate,
       });
       onChange('same');
-      expect(queryCountAPI).not.toHaveBeenCalled();
+      expect(setSearchText).not.toHaveBeenCalled();
+      expect(navigate).not.toHaveBeenCalled();
     });
 
     it('should no-op on empty or non-string', () => {
-      const queryCountAPI = jest.fn();
+      const navigate = jest.fn();
       const onChange = createOnSearchChange({
-        getSearchText: () => '',
+        getSearchParam: () => '',
         setSearchText: jest.fn(),
-        setSearchCounts: jest.fn(),
-        queryCountAPI,
-        navigate: jest.fn(),
+        setCountsLoading: jest.fn(),
+        navigate,
       });
       onChange('');
       onChange('   ');
       onChange(null);
-      expect(queryCountAPI).not.toHaveBeenCalled();
+      expect(navigate).not.toHaveBeenCalled();
     });
   });
 
@@ -100,6 +93,7 @@ describe('globalSearchSearchBarLogic', () => {
         SEARCH_PAGE_DATAFIELDS,
         setSearchText: jest.fn(),
         setSearchCounts: jest.fn(),
+        setCountsLoading: jest.fn(),
       });
       const out = await getSug({}, '   ', 'type');
       expect(out).toEqual([]);
@@ -108,6 +102,7 @@ describe('globalSearchSearchBarLogic', () => {
     it('should clear search state and return [] when value is empty', async () => {
       const setSearchText = jest.fn();
       const setSearchCounts = jest.fn();
+      const setCountsLoading = jest.fn();
       const getSug = createGetSearchSuggestions({
         authCheck: () => true,
         queryAutocompleteAPI: jest.fn(),
@@ -115,12 +110,14 @@ describe('globalSearchSearchBarLogic', () => {
         SEARCH_PAGE_DATAFIELDS,
         setSearchText,
         setSearchCounts,
+        setCountsLoading,
       });
 
       const out = await getSug({}, null, 'clear');
       expect(out).toEqual([]);
       expect(setSearchText).toHaveBeenCalledWith('');
-      expect(setSearchCounts).toHaveBeenCalledWith([]);
+      expect(setSearchCounts).toHaveBeenCalledWith({});
+      expect(setCountsLoading).toHaveBeenCalledWith(false);
     });
 
     it('should build suggestions from autocomplete when authed', async () => {
@@ -135,6 +132,7 @@ describe('globalSearchSearchBarLogic', () => {
         SEARCH_PAGE_DATAFIELDS,
         setSearchText: jest.fn(),
         setSearchCounts: jest.fn(),
+        setCountsLoading: jest.fn(),
       });
 
       const out = await getSug({}, 'abc', 'type');

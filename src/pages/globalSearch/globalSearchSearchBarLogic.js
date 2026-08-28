@@ -2,29 +2,30 @@
  * Search bar callbacks for Global Search — extracted for unit tests and **`searchView`** wiring.
  */
 
+/**
+ * On submit/select: update text immediately, show counts loading, and navigate.
+ * Tab counts are loaded by the URL (`keyword`) effect in **`searchView`**.
+ */
 export function createOnSearchChange({
-  getSearchText,
+  getSearchParam,
   setSearchText,
-  setSearchCounts,
-  queryCountAPI,
+  setCountsLoading,
   navigate,
 }) {
   return (value) => {
     if (!value || typeof value !== 'string') {
       return;
     }
-    if (value === getSearchText()) {
-      return;
-    }
     if (value.trim() === '') {
       return;
     }
+    if (value === getSearchParam()) {
+      return;
+    }
 
-    queryCountAPI(value).then((d) => {
-      setSearchText(value);
-      setSearchCounts(d);
-      navigate(`/sitesearch?keyword=${value}`);
-    });
+    setSearchText(value);
+    setCountsLoading(true);
+    navigate(`/sitesearch?keyword=${value}`);
   };
 }
 
@@ -35,11 +36,13 @@ export function createGetSearchSuggestions({
   SEARCH_PAGE_DATAFIELDS,
   setSearchText,
   setSearchCounts,
+  setCountsLoading,
 }) {
   return async (_config, value, _reason) => {
     if (!value || typeof value !== 'string') {
       setSearchText('');
-      setSearchCounts([]);
+      setSearchCounts({});
+      setCountsLoading(false);
       return [];
     }
     if (value.trim() === '') {

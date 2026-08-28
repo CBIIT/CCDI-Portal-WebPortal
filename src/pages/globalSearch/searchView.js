@@ -33,10 +33,14 @@ function searchView(props) {
   const searchparam = query.get("keyword") ? query.get("keyword").trim() : "";
   const navigate = useNavigate();
   const [searchText, setSearchText] = useState(searchparam);
-  const [searchCounts, setSearchCounts] = useState([]);
-
+  const [searchCounts, setSearchCounts] = useState({});
+  // Counts start unknown; pass null tab counts so PaginatedPanel keeps its spinner up.
+  const [countsLoading, setCountsLoading] = useState(Boolean(searchparam));
 
   const authCheck = () => isAuthorized || publicAccessEnabled;
+
+  /** Resolved count for tabs/panels; null while counts are still loading (not 0). */
+  const resolvedCount = (value) => (countsLoading ? null : (value || 0));
 
   /**
    * Handle the tab selection change event, and redirect the user
@@ -59,10 +63,9 @@ function searchView(props) {
   };
 
   const onSearchChange = createOnSearchChange({
-    getSearchText: () => searchText,
+    getSearchParam: () => searchparam,
     setSearchText,
-    setSearchCounts,
-    queryCountAPI,
+    setCountsLoading,
     navigate,
   });
 
@@ -73,6 +76,7 @@ function searchView(props) {
     SEARCH_PAGE_DATAFIELDS,
     setSearchText,
     setSearchCounts,
+    setCountsLoading,
   });
 
   const getTabData = createGetTabData({
@@ -145,7 +149,7 @@ function searchView(props) {
           nextButtonDisabled: classes.nextButtonDisabled,
           noData: classes.noData,
         },
-        count: countValues(searchCounts) || 0,
+        count: resolvedCount(countValues(searchCounts)),
         value: '1',
       },
       {
@@ -177,7 +181,7 @@ function searchView(props) {
           nextButtonDisabled: classes.nextButtonDisabled,
           noData: classes.noData,
         },
-        count: searchCounts.participant_count || 0,
+        count: resolvedCount(searchCounts.participant_count),
         value: `2`,
       },
       {
@@ -209,7 +213,7 @@ function searchView(props) {
           nextButtonDisabled: classes.nextButtonDisabled,
           noData: classes.noData,
         },
-        count: searchCounts.study_count || 0,
+        count: resolvedCount(searchCounts.study_count),
         value: `3`,
       },
       {
@@ -241,7 +245,7 @@ function searchView(props) {
           nextButtonDisabled: classes.nextButtonDisabled,
           noData: classes.noData,
         },
-        count: searchCounts.sample_count || 0,
+        count: resolvedCount(searchCounts.sample_count),
         value: '4',
       },
       {
@@ -273,7 +277,7 @@ function searchView(props) {
           nextButtonDisabled: classes.nextButtonDisabled,
           noData: classes.noData,
         },
-        count: searchCounts.file_count || 0,
+        count: resolvedCount(searchCounts.file_count),
         value: '5',
       },
       {
@@ -305,7 +309,7 @@ function searchView(props) {
           nextButtonDisabled: classes.nextButtonDisabled,
           noData: classes.noData,
         },
-        count: searchCounts.model_count || 0,
+        count: resolvedCount(searchCounts.model_count),
         value: `6`,
       },
       {
@@ -337,18 +341,39 @@ function searchView(props) {
           nextButtonDisabled: classes.nextButtonDisabled,
           noData: classes.noData,
         },
-        count: searchCounts.about_count || 0,
+        count: resolvedCount(searchCounts.about_count),
         value: `7`,
       },
     ],
   });
 
   useEffect(() => {
+    if (searchparam !== searchText) {
+      setSearchText(searchparam);
+    }
+
+    if (!searchparam) {
+      setSearchCounts({});
+      setCountsLoading(false);
+      return undefined;
+    }
+
+    let cancelled = false;
+    setCountsLoading(true);
     queryCountAPI(searchparam, !authCheck()).then((d) => {
-      setSearchCounts(d);
+      if (cancelled) { return; }
+      setSearchCounts(d || {});
+      setCountsLoading(false);
+    }).catch(() => {
+      if (cancelled) { return; }
+      setSearchCounts({});
+      setCountsLoading(false);
     });
 
-  }, []);
+    return () => {
+      cancelled = true;
+    };
+  }, [searchparam]);
 
   return (
     <>

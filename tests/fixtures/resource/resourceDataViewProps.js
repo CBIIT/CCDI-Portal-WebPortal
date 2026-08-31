@@ -36,6 +36,7 @@ export const minimalFederationResourceData = {
       id: 'fed_overview',
       topic: 'Federation Overview',
       content: 'Federation body content.',
+      segments: [{ type: 'markdown', markdown: 'Federation body content.' }],
       list: [],
     },
   ],

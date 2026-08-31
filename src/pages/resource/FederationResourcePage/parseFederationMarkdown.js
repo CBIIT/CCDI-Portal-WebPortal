@@ -1,6 +1,7 @@
 import matter from 'gray-matter';
 import {
   buildNavTitleSet,
+  buildSegments,
   normalizeNavTitleKey,
   resolveShowInNav,
 } from '../MCIResourcePage/parseMciMarkdown';
@@ -235,17 +236,22 @@ export default function parseFederationMarkdown(rawMarkdown) {
   const topics = splitH2(rest);
   const federationContent = topics.map((t) => {
     const { content, subs } = splitTopicBody(t.body);
-    const list = subs.map((s) => ({
-      id: s.id,
-      subtopic: s.subtopic,
-      showInNav: resolveShowInNav(s.subtopic, navTitleSet),
-      content: trimMd(s.body),
-    }));
+    const list = subs.map((s) => {
+      const bodyMd = trimMd(s.body);
+      return {
+        id: s.id,
+        subtopic: s.subtopic,
+        showInNav: resolveShowInNav(s.subtopic, navTitleSet),
+        content: bodyMd,
+        segments: buildSegments(bodyMd),
+      };
+    });
     return {
       id: t.id,
       topic: t.topic,
       showInNav: resolveShowInNav(t.topic, navTitleSet),
       content,
+      segments: buildSegments(content),
       list,
     };
   });

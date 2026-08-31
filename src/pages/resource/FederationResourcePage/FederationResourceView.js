@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, createRef } from 'react';
 import styled from 'styled-components';
 import FederationMarkdown from './FederationMarkdown';
+import FederationContentSegments from './FederationContentSegments';
 import { buildFederationNavItems } from './parseFederationMarkdown';
 import headerImg from '../../../assets/resources/Federation_Header.png';
 import exportIcon from '../../../assets/resources/Explore_Icon.svg';
@@ -9,6 +10,10 @@ import arrowDownIcon from '../../../assets/icons/Arrow_Down.svg';
 // import { federationContent, introText } from '../../../bento/federationData';
 import exportIconBlue from '../../../assets/icons/Export_Icon.svg';
 // import ccdiDataAccessImg from '../../../assets/resources/Federation_CCDI_Data_Access.png';
+
+function hasSegments(segments) {
+    return Array.isArray(segments) && segments.length > 0;
+}
 
 
 const FederationResourceContainer = styled.div`
@@ -361,6 +366,52 @@ const FederationResourceBody = styled.div`
         max-width: 467px;
     }
 
+    .MCITableMobileContainer {
+        display: none;
+    }
+
+    .MCISearchTableMobileContainer {
+        display: none;
+    }
+
+    .ecosystemImg {
+        width: 100%;
+    }
+
+    .ecosystemImgMobile {
+        display: none;
+    }
+
+    .mciContentContainer .federation-md-img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .introContainer .federation-md-img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .ImgCaption {
+        color: #000;
+        font-family: Inter;
+        font-size: 14px;
+        font-style: italic;
+        font-weight: 500;
+        line-height: 22px;
+        letter-spacing: -0.28px;
+        padding: 10px 35px;
+    }
+
+    .MapMobileContainer {
+        display: none;
+    }
+
+    .MCIDiseaseTableMobileContainer {
+        display: none;
+    }
+
     .donutContainer {
         display: flex;
     }
@@ -379,6 +430,39 @@ const FederationResourceBody = styled.div`
             margin: 120px 0 0 150px;
         }
 
+    }
+
+    @media (max-width: 1023px) {
+        .MCITableContainer {
+            display: none;
+        }
+        .MCITableMobileContainer {
+            display: block;
+        }
+
+        .MCISearchTableContainer {
+            display: none;
+        }
+
+        .MCISearchTableMobileContainer {
+            display: block;
+        }
+
+        .MapContainer {
+            display: none;
+        }
+
+        .MapMobileContainer {
+            display: block;
+        }
+
+        .MCIDiseaseTableContainer {
+            display: none;
+        }
+
+        .MCIDiseaseTableMobileContainer {
+            display: block;
+        }
     }
 
     @media (max-width: 767px) {
@@ -410,6 +494,16 @@ const FederationResourceBody = styled.div`
 
         .mciContentContainer {
             margin-left: 0;
+        }
+
+        .ecosystemImg {
+            display: none;
+        }
+
+        .ecosystemImgMobile {
+            display: block;
+            width: 310px;
+            margin: 10px auto;
         }
     }
 `;
@@ -528,12 +622,12 @@ const FederationResourceView = ({data}) => {
                                             <div id={federationItem.id} className='mciTitle'>{federationItem.topic && federationItem.topic}</div>
                                             <div id={federationItem.id} name={mciid} className='mciTitleMobile sectionCollapse' onClick={handleCollapseSection}>{federationItem.topic && federationItem.topic}</div>
                                             <div className="mciSection mobileCollapse" ref={sectionList.current[mciid]}>
-                                                {federationItem.content && (
+                                                {hasSegments(federationItem.segments) && (
                                                     <div className='mciContentContainer'>
-                                                        <FederationMarkdown>{federationItem.content}</FederationMarkdown>
+                                                        <FederationContentSegments segments={federationItem.segments} pageData={data} />
                                                     </div>
                                                 )}
-                                                {federationItem.content && <div style={{height: '40px'}} />}
+                                                {hasSegments(federationItem.segments) && <div style={{height: '40px'}} />}
                                                 {
                                                     federationItem.list.map((listItem, idx) => {
                                                         const listItemKey = `listItem_${mciid}_${idx}`;
@@ -541,11 +635,9 @@ const FederationResourceView = ({data}) => {
                                                             <div key={listItemKey}>
                                                                 <div id={listItem.id} className='mciSubtitle'>{listItem.subtopic && listItem.subtopic}</div>
                                                                 <div className='mciContentContainer'>
-                                                                    {listItem.content && (
-                                                                        <FederationMarkdown>{listItem.content}</FederationMarkdown>
-                                                                    )}
+                                                                    <FederationContentSegments segments={listItem.segments} pageData={data} />
                                                                 </div>
-                                                                {listItem.content && <div style={{height: '40px'}} />}
+                                                                {hasSegments(listItem.segments) && <div style={{height: '40px'}} />}
                                                             </div>
                                                         );
                                                     })
@@ -561,9 +653,7 @@ const FederationResourceView = ({data}) => {
                                         <div id={federationItem.id} name={mciid} className='mciTitleMobile sectionCollapse' onClick={handleCollapseSection}>{federationItem.topic && federationItem.topic}</div>
                                         <div className="mciSection mobileCollapse" ref={sectionList.current[mciid]}>
                                             <div className='mciContentContainer'>
-                                                {federationItem.content && (
-                                                    <FederationMarkdown>{federationItem.content}</FederationMarkdown>
-                                                )}
+                                                <FederationContentSegments segments={federationItem.segments} pageData={data} />
 
                                                 {dataAccessImg && (
                                                 <div style={{ justifyContent: 'center', display: 'flex'}}>
@@ -571,7 +661,7 @@ const FederationResourceView = ({data}) => {
                                                 </div>
                                                 )}
                                             </div>
-                                            {federationItem.content && <div style={{height: '40px'}} />}
+                                            {hasSegments(federationItem.segments) && <div style={{height: '40px'}} />}
                                         </div>
                                     </div>
                                 );

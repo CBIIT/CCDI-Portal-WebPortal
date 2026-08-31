@@ -24,18 +24,47 @@ export const multiTopicFederationData = {
     'Topic B',
   ],
   federationContent: [
-    { id: 'fed_a', topic: 'Topic A', content: 'Section A', list: [] },
-    { id: 'Data_Access', topic: 'Data Access', content: 'Access details', list: [] },
+    {
+      id: 'fed_a',
+      topic: 'Topic A',
+      content: 'Section A',
+      segments: [{ type: 'markdown', markdown: 'Section A' }],
+      list: [],
+    },
+    {
+      id: 'Data_Access',
+      topic: 'Data Access',
+      content: 'Access details',
+      segments: [{ type: 'markdown', markdown: 'Access details' }],
+      list: [],
+    },
     {
       id: 'Additional_Available_Resources',
       topic: 'Additional Available Resources',
       content: 'Resources intro',
+      segments: [{ type: 'markdown', markdown: 'Resources intro' }],
       list: [
-        { id: 'Agent_Skill', subtopic: 'Agent Skill', content: 'Agent Skill body' },
-        { id: 'Blog', subtopic: 'Blog', content: 'Blog body' },
+        {
+          id: 'Agent_Skill',
+          subtopic: 'Agent Skill',
+          content: 'Agent Skill body',
+          segments: [{ type: 'markdown', markdown: 'Agent Skill body' }],
+        },
+        {
+          id: 'Blog',
+          subtopic: 'Blog',
+          content: 'Blog body',
+          segments: [{ type: 'markdown', markdown: 'Blog body' }],
+        },
       ],
     },
-    { id: 'fed_b', topic: 'Topic B', content: 'Section B', list: [] },
+    {
+      id: 'fed_b',
+      topic: 'Topic B',
+      content: 'Section B',
+      segments: [{ type: 'markdown', markdown: 'Section B' }],
+      list: [],
+    },
   ],
   CCDI_Federation_Data_Access: '/test-federation-infographic.png',
 };

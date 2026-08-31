@@ -46,9 +46,31 @@ describe('parseFederationMarkdown', () => {
       'Agent_Skill_to_support_streamlined_discovery_and_analysis',
     );
     expect(resources.list[0].content).toContain('Agent Skill');
+    expect(resources.list[0].segments).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ type: 'markdown' }),
+        expect.objectContaining({
+          type: 'widget',
+          widget: 'responsiveImg',
+          data: expect.objectContaining({
+            wide: 'https://example.com/federation-agent-skill.png',
+            alt: 'test',
+            Caption: '',
+          }),
+        }),
+      ]),
+    );
     expect(resources.list[1].subtopic).toBe('Blog');
     expect(resources.list[1].id).toBe('Blog');
     expect(resources.list[1].content).toContain('blog');
+  });
+
+  it('should parse topic bodies into markdown/widget segments', () => {
+    const data = parseFederationMarkdown(sampleFederationMarkdownRaw);
+    const dataAccess = data.federationContent[0];
+    expect(dataAccess.segments).toHaveLength(1);
+    expect(dataAccess.segments[0].type).toBe('markdown');
+    expect(dataAccess.segments[0].markdown).toContain('deidentified individual-level data');
   });
 
   it('should build side nav from navTitles including subtitle entries', () => {

@@ -204,10 +204,11 @@ function trimMd(s) {
 }
 
 /**
- * Walks a ### subtopic body in source order: markdown runs and ` ```${lang}` widgets alternate.
+ * Walks markdown body in source order: markdown runs and fenced widgets alternate.
+ * Widgets: mci-disease-table, mci-map, mci-search-table, mci-table, responsive-img.
  * @returns {Array<{ type: 'markdown', markdown: string }|{ type: 'widget', widget: string, data: * }>}
  */
-function buildSegments(body) {
+export function buildSegments(body) {
   const rawText = String(body || '');
   const re = new RegExp(
     '```' + WIDGET_LANG + '\\s*\\n([\\s\\S]*?)```',

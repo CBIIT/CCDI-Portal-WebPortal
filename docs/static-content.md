@@ -216,6 +216,8 @@ Section body with [links](https://example.com) and images.
 
 Relative image paths (e.g. `assets/…`) resolve against `REACT_APP_STATIC_CONTENT_URL`. Prefer hosting figures under Static Contents or Hub Assets.
 
+Section bodies support the same fenced widgets as MCI (`responsive-img`, `mci-table`, `mci-search-table`, `mci-disease-table`, `mci-map`). Optional `###` subtopics (with leading property-table ids) nest under a `##` topic like other resource pages.
+
 Known ids: `FINDING_AND_EXPORTING_MCI_CLINICAL_JSON`, `RUNNING_JSON2TSV_IN_CGC`, `CGC_RESOURCES`, `CONTACT_AND_SOURCE_CODE`.
 
 ### Failure behavior

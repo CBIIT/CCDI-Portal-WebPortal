@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, createRef } from 'react';
 import styled from 'styled-components';
 import MCIJson2TsvMarkdown from './MCIJson2TsvMarkdown';
+import MCIJson2TsvContentSegments from './MCIJson2TsvContentSegments';
 import { buildMciJson2TsvNavItems } from './parseMciJson2TsvMarkdown';
 import headerImg from '../../../assets/resources/MCI_header_white.png';
 import exportIcon from '../../../assets/resources/Explore_Icon.svg';
@@ -12,6 +13,19 @@ const CGC_APP_URL = 'https://cgc.sbgenomics.com/u/rowan_letter_era/ccdi-mci-json
 
 function headerBackgroundUrl(url) {
   return `url(${JSON.stringify(url || headerImg)})`;
+}
+
+function hasSegments(segments) {
+  return Array.isArray(segments) && segments.length > 0;
+}
+
+/** ### subtopics ending with ? use italic question styling (same as MCI). */
+function isQuestionSubtopic(subtopic) {
+  return typeof subtopic === 'string' && subtopic.trim().endsWith('?');
+}
+
+function subtopicTitleClassName(subtopic) {
+  return isQuestionSubtopic(subtopic) ? 'mciSubtopicQuestion' : 'mciSubtitle';
 }
 
 const PageContainer = styled.div`
@@ -169,7 +183,8 @@ const PageBody = styled.div`
         img {
             max-width: 100%;
             height: auto;
-            margin: 16px 0;
+            margin: 16px auto;
+            display: block;
         }
 
         blockquote {
@@ -215,6 +230,10 @@ const PageBody = styled.div`
         line-height: 19px;
     }
 
+    .subtitle {
+        margin-left: 20px;
+    }
+
     .selected {
         font-family: Inter;
         font-weight: 600;
@@ -247,6 +266,31 @@ const PageBody = styled.div`
         @media (max-width: 767px) {
             display: none;
         }
+    }
+
+    .mciSubtitle {
+        color: #05555C;
+        font-family: Poppins;
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 26px;
+        letter-spacing: -0.044px;
+        text-transform: uppercase;
+        margin-left: 20px;
+        margin-bottom: 20px;
+    }
+
+    .mciSubtopicQuestion {
+        color: #05555C;
+        font-family: Poppins;
+        font-size: 18px;
+        font-style: italic;
+        font-weight: 500;
+        line-height: 26px;
+        letter-spacing: -0.036px;
+        margin-left: 20px;
+        margin-bottom: 20px;
     }
 
     .mciTitleMobile {
@@ -303,7 +347,7 @@ const PageBody = styled.div`
         img {
             max-width: 100%;
             height: auto;
-            margin: 16px 0;
+            margin: 16px auto;
             display: block;
         }
 
@@ -312,6 +356,96 @@ const PageBody = styled.div`
             padding: 12px 16px;
             border-left: 4px solid #087D6F;
             background: #f5fafa;
+        }
+
+        .mci-contact-subheading {
+            font-family: Poppins;
+            font-size: 19px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 28px;
+            letter-spacing: -0.04px;
+            margin-bottom: 24px;
+            margin-top: 0;
+        }
+    }
+
+    .ecosystemImg {
+        width: 100%;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .ecosystemImgMobile {
+        display: none;
+    }
+
+    .mciContentContainer .mci-md-img,
+    .introContainer .mci-md-img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 16px auto;
+    }
+
+    .ImgCaption {
+        color: #000;
+        font-family: Inter;
+        font-size: 14px;
+        font-style: italic;
+        font-weight: 500;
+        line-height: 22px;
+        letter-spacing: -0.28px;
+        padding: 10px 35px;
+        text-align: center;
+    }
+
+    .MCITableMobileContainer {
+        display: none;
+    }
+
+    .MCISearchTableMobileContainer {
+        display: none;
+    }
+
+    .MapMobileContainer {
+        display: none;
+    }
+
+    .MCIDiseaseTableMobileContainer {
+        display: none;
+    }
+
+    @media (max-width: 1023px) {
+        .MCITableContainer {
+            display: none;
+        }
+        .MCITableMobileContainer {
+            display: block;
+        }
+
+        .MCISearchTableContainer {
+            display: none;
+        }
+
+        .MCISearchTableMobileContainer {
+            display: block;
+        }
+
+        .MapContainer {
+            display: none;
+        }
+
+        .MapMobileContainer {
+            display: block;
+        }
+
+        .MCIDiseaseTableContainer {
+            display: none;
+        }
+
+        .MCIDiseaseTableMobileContainer {
+            display: block;
         }
     }
 
@@ -340,6 +474,21 @@ const PageBody = styled.div`
 
         .mciContentContainer {
             margin-left: 0;
+        }
+
+        .mciSubtitle,
+        .mciSubtopicQuestion {
+            margin-left: 0;
+        }
+
+        .ecosystemImg {
+            display: none;
+        }
+
+        .ecosystemImgMobile {
+            display: block;
+            width: 310px;
+            margin: 10px auto;
         }
     }
 `;
@@ -436,9 +585,9 @@ const MCIJson2TsvResourceView = ({ data }) => {
             <div className="navTitle">TOPICS</div>
             {navItems.map((navItem, navIdx) => {
               const navKey = `nav_${navIdx}`;
-              const className = selectedNavTitle === navItem.id
-                ? 'navTopicItem selected'
-                : 'navTopicItem';
+              const className = navItem.isSubtitle
+                ? (selectedNavTitle === navItem.id ? 'navTopicItem selected subtitle' : 'navTopicItem subtitle')
+                : (selectedNavTitle === navItem.id ? 'navTopicItem selected' : 'navTopicItem');
               return (
                 <div
                   name={navItem.id}
@@ -461,6 +610,7 @@ const MCIJson2TsvResourceView = ({ data }) => {
             )}
             {content && content.map((item, idx) => {
               const sectionKey = `json2tsv_${idx}`;
+              const hasSubtopics = Array.isArray(item.list) && item.list.length > 0;
               return (
                 <div key={sectionKey}>
                   <div id={item.id} className="mciTitle">{item.topic}</div>
@@ -473,12 +623,26 @@ const MCIJson2TsvResourceView = ({ data }) => {
                     {item.topic}
                   </div>
                   <div className="mciSection mobileCollapse" ref={sectionList.current[idx]}>
-                    <div className="mciContentContainer">
-                      {item.content && (
-                        <MCIJson2TsvMarkdown>{item.content}</MCIJson2TsvMarkdown>
-                      )}
-                    </div>
-                    {item.content && <div style={{ height: '40px' }} />}
+                    {hasSegments(item.segments) && (
+                      <div className="mciContentContainer">
+                        <MCIJson2TsvContentSegments segments={item.segments} pageData={data} />
+                      </div>
+                    )}
+                    {hasSegments(item.segments) && <div style={{ height: '40px' }} />}
+                    {hasSubtopics && item.list.map((listItem, listIdx) => {
+                      const listItemKey = `json2tsv_${idx}_${listIdx}`;
+                      return (
+                        <div key={listItemKey}>
+                          <div id={listItem.id} className={subtopicTitleClassName(listItem.subtopic)}>
+                            {listItem.subtopic}
+                          </div>
+                          <div className="mciContentContainer">
+                            <MCIJson2TsvContentSegments segments={listItem.segments} pageData={data} />
+                          </div>
+                          {hasSegments(listItem.segments) && <div style={{ height: '40px' }} />}
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               );

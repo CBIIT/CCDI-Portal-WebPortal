@@ -29,11 +29,15 @@ const viewData = {
       id: 'FINDING_SECTION',
       topic: 'Finding Section',
       content: 'Finding body content.',
+      segments: [{ type: 'markdown', markdown: 'Finding body content.' }],
+      list: [],
     },
     {
       id: 'CGC_RESOURCES',
       topic: 'CGC Resources',
       content: 'CGC resources body.',
+      segments: [{ type: 'markdown', markdown: 'CGC resources body.' }],
+      list: [],
     },
   ],
 };

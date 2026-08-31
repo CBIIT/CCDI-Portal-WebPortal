@@ -28,6 +28,32 @@ describe('parseMciJson2TsvMarkdown', () => {
     expect(finding.content).toContain('Explore Participants');
     expect(finding.content).not.toContain('| Property | Value |');
     expect(finding.content).toContain('FigureD1.png');
+    expect(finding.segments).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ type: 'markdown' }),
+        expect.objectContaining({
+          type: 'widget',
+          widget: 'responsiveImg',
+          data: expect.objectContaining({
+            wide: 'https://example.com/json2tsv-wide.png',
+            alt: 'JSON2TSV diagram',
+          }),
+        }),
+      ]),
+    );
+    expect(finding.list).toEqual([]);
+  });
+
+  it('should parse ### headings as nested subtopics with segments', () => {
+    const data = parseMciJson2TsvMarkdown(sampleMciJson2TsvMarkdownNoNavTitles);
+    expect(data.mciJson2TsvContent).toHaveLength(1);
+    const topic = data.mciJson2TsvContent[0];
+    expect(topic.list).toHaveLength(1);
+    expect(topic.list[0].subtopic).toBe('Sub Alpha');
+    expect(topic.list[0].id).toBe('SUB_ALPHA');
+    expect(topic.list[0].segments).toEqual([
+      { type: 'markdown', markdown: 'Sub alpha body.' },
+    ]);
   });
 
   it('should build side nav from navTitles in order using property-table ids', () => {
@@ -47,9 +73,12 @@ describe('parseMciJson2TsvMarkdown', () => {
     const data = parseMciJson2TsvMarkdown(sampleMciJson2TsvMarkdownNoNavTitles);
     const navItems = buildMciJson2TsvNavItems(data.navTitles, data.mciJson2TsvContent);
 
-    expect(navItems).toHaveLength(1);
+    expect(navItems).toHaveLength(2);
     expect(navItems[0].id).toBe('TOPIC_ALPHA');
     expect(navItems[0].label).toBe('Topic Alpha');
+    expect(navItems[0].isSubtitle).toBe(false);
+    expect(navItems[1].id).toBe('SUB_ALPHA');
+    expect(navItems[1].isSubtitle).toBe(true);
   });
 
   it('should handle empty input and strip BOM', () => {
@@ -66,6 +95,10 @@ describe('parseMciJson2TsvMarkdown', () => {
     expect(parsed.title).toBe('BOM JSON2TSV');
     expect(parsed.mciJson2TsvContent[0].content).toBe('Body.');
     expect(parsed.mciJson2TsvContent[0].id).toBe('Topic');
+    expect(parsed.mciJson2TsvContent[0].list).toEqual([]);
+    expect(parsed.mciJson2TsvContent[0].segments).toEqual([
+      { type: 'markdown', markdown: 'Body.' },
+    ]);
   });
 });
 

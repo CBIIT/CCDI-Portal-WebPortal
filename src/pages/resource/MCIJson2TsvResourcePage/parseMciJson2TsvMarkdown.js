@@ -1,6 +1,7 @@
 import matter from 'gray-matter';
 import {
   buildNavTitleSet,
+  buildSegments,
   normalizeNavTitleKey,
   resolveShowInNav,
 } from '../MCIResourcePage/parseMciMarkdown';
@@ -20,8 +21,9 @@ export function topicToSectionId(topic) {
     .replace(/[^a-zA-Z0-9_]/g, '');
 }
 
-function parseHeadingLine(line) {
-  const m = line.match(/^##\s+(.+)$/);
+function parseHeadingLine(line, level) {
+  const re = level === 2 ? /^##\s+(.+)$/ : /^###\s+(.+)$/;
+  const m = line.match(re);
   if (!m) return null;
   const rawInner = m[1];
   const title = stripMarkdownHeadingBraceId(rawInner);
@@ -126,7 +128,7 @@ function splitH2(rest) {
           body: trimMd(cur.lines.join('\n')),
         });
       }
-      const p = parseHeadingLine(line);
+      const p = parseHeadingLine(line, 2);
       const rawH2 = line.replace(/^##\s+/, '').trim();
       cur = p
         ? { title: p.title, id: p.id, lines: [] }
@@ -149,29 +151,99 @@ function splitH2(rest) {
   return topics;
 }
 
+function pushH3Sub(subs, cur) {
+  subs.push({
+    subtopic: cur.subtopic,
+    id: cur.id,
+    body: cur.lines.join('\n'),
+  });
+}
+
 /**
- * Builds ordered side-nav entries from front matter navTitles.
+ * Split a topic body into optional leading content (before first ###) and H3 subs.
+ */
+function splitTopicBody(topicBody) {
+  if (!topicBody || !topicBody.trim()) {
+    return { content: '', subs: [] };
+  }
+  const lines = topicBody.split('\n');
+  const leading = [];
+  const subs = [];
+  let cur = null;
+  let seenH3 = false;
+
+  for (let i = 0; i < lines.length; i += 1) {
+    const line = lines[i];
+    if (/^###\s/.test(line)) {
+      seenH3 = true;
+      if (cur) {
+        pushH3Sub(subs, cur);
+      }
+      const p = parseHeadingLine(line, 3);
+      const rawH3 = line.replace(/^###\s+/, '').trim();
+      cur = p
+        ? { subtopic: p.title, id: p.id, lines: [] }
+        : {
+            subtopic: stripMarkdownHeadingBraceId(rawH3),
+            id: topicToSectionId(rawH3),
+            lines: [],
+          };
+    } else if (cur) {
+      cur.lines.push(line);
+    } else if (!seenH3) {
+      leading.push(line);
+    }
+  }
+  if (cur) {
+    pushH3Sub(subs, cur);
+  }
+
+  return {
+    content: trimMd(leading.join('\n')),
+    subs,
+  };
+}
+
+/**
+ * Builds ordered side-nav entries from front matter navTitles (topics + subtopics).
  * Falls back to document order when navTitles is omitted.
  */
 export function buildMciJson2TsvNavItems(navTitles, content) {
   const sections = Array.isArray(content) ? content : [];
   if (!Array.isArray(navTitles) || navTitles.length === 0) {
-    return sections.map((topic) => ({
-      id: topic.id,
-      label: topic.topic,
-    }));
+    const items = [];
+    sections.forEach((topic) => {
+      items.push({ id: topic.id, label: topic.topic, isSubtitle: false });
+      (topic.list || []).forEach((sub) => {
+        items.push({ id: sub.id, label: sub.subtopic, isSubtitle: true });
+      });
+    });
+    return items;
   }
 
   const topicByKey = new Map();
+  const subByKey = new Map();
   sections.forEach((topic) => {
     topicByKey.set(normalizeNavTitleKey(topic.topic), topic);
+    (topic.list || []).forEach((sub) => {
+      subByKey.set(normalizeNavTitleKey(sub.subtopic), { topic, sub });
+    });
   });
 
   return navTitles
     .map((title) => {
-      const topic = topicByKey.get(normalizeNavTitleKey(title));
+      const key = normalizeNavTitleKey(title);
+      const topic = topicByKey.get(key);
       if (topic) {
-        return { id: topic.id, label: topic.topic };
+        return { id: topic.id, label: topic.topic, isSubtitle: false };
+      }
+      const subMatch = subByKey.get(key);
+      if (subMatch) {
+        return {
+          id: subMatch.sub.id,
+          label: subMatch.sub.subtopic,
+          isSubtitle: true,
+        };
       }
       return null;
     })
@@ -209,12 +281,27 @@ export default function parseMciJson2TsvMarkdown(rawMarkdown) {
 
   const topics = splitH2(rest);
   const mciJson2TsvContent = topics.map((t) => {
-    const { content, meta } = extractLeadingPropertyTable(t.body);
+    const { content: afterTopicTable, meta: topicMeta } = extractLeadingPropertyTable(t.body);
+    const { content: leading, subs } = splitTopicBody(afterTopicTable);
+    const list = subs.map((s) => {
+      const { content: subBody, meta: subMeta } = extractLeadingPropertyTable(s.body);
+      const bodyMd = trimMd(subBody);
+      return {
+        id: resolveSectionId(subMeta, s.id),
+        subtopic: s.subtopic,
+        showInNav: resolveShowInNav(s.subtopic, navTitleSet),
+        content: bodyMd,
+        segments: buildSegments(bodyMd),
+      };
+    });
+    const leadingMd = trimMd(leading);
     return {
-      id: resolveSectionId(meta, t.id),
+      id: resolveSectionId(topicMeta, t.id),
       topic: t.topic,
       showInNav: resolveShowInNav(t.topic, navTitleSet),
-      content: trimMd(content),
+      content: leadingMd,
+      segments: buildSegments(leadingMd),
+      list,
     };
   });
 

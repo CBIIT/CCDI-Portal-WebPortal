@@ -25,6 +25,12 @@ Filter down to the MCI study from the Explore Participants dashboard.
 
 ![Figure D1](assets/MCI%20JSON2TSV/FigureD1.png)
 
+\`\`\`responsive-img
+wide: 'https://example.com/json2tsv-wide.png'
+alt: 'JSON2TSV diagram'
+Caption: ""
+\`\`\`
+
 ## Running the JSON2TSV tool in the Cancer Genomics Cloud (CGC)
 
 | Property | Value |
@@ -63,4 +69,12 @@ Intro paragraph.
 | id | TOPIC_ALPHA |
 
 Section alpha body.
+
+### Sub Alpha
+
+| Property | Value |
+| --- | --- |
+| id | SUB_ALPHA |
+
+Sub alpha body.
 `;

@@ -33,6 +33,50 @@ export function resolveStaticContentAssetUrl(src) {
   return `${base}/${path}`;
 }
 
+/** Same class mapping as MciMarkdown — pairs with View `.ecosystemImg` / `.mci-md-img`. */
+const RESP = {
+  wide: 'ecosystemImg',
+  mobile: 'ecosystemImgMobile',
+  default: 'mci-md-img',
+};
+
+const MCI_CONTACT_SUBHEADINGS = new Set([
+  'MCI Results Contacts',
+  'MCI Data Contact',
+  'Project:EveryChild Contact',
+]);
+
+function flattenMarkdownText(children) {
+  if (children === undefined || children === null) {
+    return '';
+  }
+  if (Array.isArray(children)) {
+    return children.map(flattenMarkdownText).join('');
+  }
+  if (typeof children === 'string' || typeof children === 'number') {
+    return String(children);
+  }
+  if (children.props && children.props.children !== undefined) {
+    return flattenMarkdownText(children.props.children);
+  }
+  return '';
+}
+
+function inlineImgClassName(src) {
+  const raw = String(src || '').trim();
+  if (!raw) return RESP.default;
+  let u;
+  try {
+    u = new URL(raw, 'https://placeholder.local');
+  } catch {
+    return RESP.default;
+  }
+  const p = (u.searchParams.get('variant') || u.searchParams.get('mci') || '').trim().toLowerCase();
+  if (p === 'mobile' || p === 'narrow' || p === 'small') return RESP.mobile;
+  if (p === 'wide' || p === 'desktop' || p === 'large' || p === 'main') return RESP.wide;
+  return RESP.default;
+}
+
 const MCIJson2TsvMarkdown = ({ children }) => {
   if (children === undefined || children === null || children === '') {
     return null;
@@ -57,13 +101,27 @@ const MCIJson2TsvMarkdown = ({ children }) => {
             </a>
           );
         },
-        img: ({ node: _img, src, alt, ...rest }) => (
-          <img
-            {...rest}
-            src={resolveStaticContentAssetUrl(src)}
-            alt={alt || ''}
-          />
-        ),
+        img: ({ node: _img, src, alt, title, ...rest }) => {
+          const resolved = resolveStaticContentAssetUrl(src);
+          const cls = inlineImgClassName(resolved);
+          return (
+            <img
+              {...rest}
+              src={resolved}
+              alt={alt || ''}
+              title={title}
+              className={cls}
+              loading="lazy"
+            />
+          );
+        },
+        h4: ({ node: _h, children: headingChildren, ...rest }) => {
+          const text = flattenMarkdownText(headingChildren).trim();
+          if (MCI_CONTACT_SUBHEADINGS.has(text)) {
+            return <p className="mci-contact-subheading">{headingChildren}</p>;
+          }
+          return <h4 {...rest}>{headingChildren}</h4>;
+        },
       }}
     >
       {String(children)}

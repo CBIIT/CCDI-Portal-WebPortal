@@ -174,6 +174,60 @@ If the file is missing, YAML is invalid, or the request fails, the Rare Cancer p
 ### Seed fixture
 
 - `tests/fixtures/resource/rareCancerMarkdownSamples.js`
+
+## `MCI_JSON2TSV.md` (CCDI MCI JSON2TSV)
+
+| Item | Value |
+|------|--------|
+| Path | `${REACT_APP_STATIC_CONTENT_URL}/MCI_JSON2TSV.md?ts=<timestamp>` |
+| Hub route | `/MCI_JSON2TSV` |
+| Format | YAML front matter + Markdown body (`##` + leading property-table ids) |
+
+### Fields
+
+| Key | Notes |
+|-----|--------|
+| `title` | Page banner title (e.g. `CCDI MCI JSON2TSV`) |
+| `headerImage` / `JSON2TSV_Header` | Optional absolute URL for the hero banner (bundled MCI header used if omitted) |
+| `navTitles[]` | Left-nav labels; must match `##` heading text exactly |
+
+Intro Markdown lives in the body **before the first `##`**. Each section is a flat `##` topic with a leading property table for scroll/nav `id` (same idea as Rare Cancer).
+
+```markdown
+---
+title: CCDI MCI JSON2TSV
+navTitles:
+  - Finding and Exporting MCI Clinical JSON files in C3DC Explore Dashboard
+  - Running the JSON2TSV tool in the Cancer Genomics Cloud (CGC)
+---
+
+Intro paragraphs…
+
+## Finding and Exporting MCI Clinical JSON files in C3DC Explore Dashboard
+
+| Property | Value |
+| --- | --- |
+| id | FINDING_AND_EXPORTING_MCI_CLINICAL_JSON |
+
+Section body with [links](https://example.com) and images.
+
+![Figure D1](assets/MCI%20JSON2TSV/FigureD1.png)
+```
+
+Relative image paths (e.g. `assets/…`) resolve against `REACT_APP_STATIC_CONTENT_URL`. Prefer hosting figures under Static Contents or Hub Assets.
+
+Section bodies support the same fenced widgets as MCI (`responsive-img`, `mci-table`, `mci-search-table`, `mci-disease-table`, `mci-map`). Optional `###` subtopics (with leading property-table ids) nest under a `##` topic like other resource pages.
+
+Known ids: `FINDING_AND_EXPORTING_MCI_CLINICAL_JSON`, `RUNNING_JSON2TSV_IN_CGC`, `CGC_RESOURCES`, `CONTACT_AND_SOURCE_CODE`.
+
+### Failure behavior
+
+If the file is missing, YAML is invalid, or the request fails, the page stays empty until valid remote MD loads.
+
+### Seed fixture
+
+- `tests/fixtures/resource/mciJson2TsvMarkdownSamples.js`
+
 ## `cpiData.md` (CCDI Participant Index)
 
 | Item | Value |
@@ -235,6 +289,7 @@ The portal loads these files at runtime from `REACT_APP_STATIC_CONTENT_URL` (see
 | `newsData.md` | News cards + homepage Latest Updates strip |
 | `releaseNotesData.md` | Hub release notes (News tab + release notes page) |
 | `cpiData.md` | CCDI Participant Index page (`/ccdi-participant-index`) |
+| `MCI_JSON2TSV.md` | CCDI MCI JSON2TSV page (`/MCI_JSON2TSV`) |
 
 Content format is **YAML front matter only** (markdown body is ignored). This matches gray-matter usage on other Hub pages while keeping structured lists easy to edit.
 
@@ -253,6 +308,7 @@ ${REACT_APP_STATIC_CONTENT_URL}/navData.md?ts=<timestamp>
 ${REACT_APP_STATIC_CONTENT_URL}/newsData.md?ts=<timestamp>
 ${REACT_APP_STATIC_CONTENT_URL}/releaseNotesData.md?ts=<timestamp>
 ${REACT_APP_STATIC_CONTENT_URL}/cpiData.md?ts=<timestamp>
+${REACT_APP_STATIC_CONTENT_URL}/MCI_JSON2TSV.md?ts=<timestamp>
 ```
 
 The `?ts=` query busts CDN/browser caches so merges show up on the next page load.
@@ -340,4 +396,5 @@ Copy-starting samples (for tests and for seeding the static-contents repo):
 - `tests/fixtures/about/aboutSearchContent.json`
 - `tests/fixtures/news/newsMarkdownSamples.js`
 - `tests/fixtures/resource/rareCancerMarkdownSamples.js`
+- `tests/fixtures/resource/mciJson2TsvMarkdownSamples.js`
 - `tests/fixtures/resource/cpiMarkdownSamples.js`

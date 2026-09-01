@@ -219,6 +219,14 @@ jest.mock('../../../src/pages/resource/RareCancerResourcePage/RareCancerResource
   };
 });
 
+jest.mock('../../../src/pages/resource/MCIJson2TsvResourcePage/MCIJson2TsvResourceController', () => {
+  const React = require('react');
+  return {
+    __esModule: true,
+    default: () => <div data-testid="route-mci-json2tsv" />,
+  };
+});
+
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';

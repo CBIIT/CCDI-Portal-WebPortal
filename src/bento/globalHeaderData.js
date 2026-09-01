@@ -79,6 +79,11 @@ export const navbarSublists = {
     className: 'navMobileSubItem',
   },
   {
+    name: 'CCDI MCI JSON2TSV',
+    link: '/MCI_JSON2TSV',
+    className: 'navMobileSubItem',
+  },
+  {
     name:'National Childhood Cancer Registry Explorer',
     link: 'https://nccrexplorer.ccdi.cancer.gov',
     className: 'navMobileSubItem',

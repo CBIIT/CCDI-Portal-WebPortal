@@ -29,6 +29,7 @@ import ToolsResourceView from "../../pages/resource/ToolsResourcePage/ToolsResou
 import CCDIEventAnnouncementsResourceView from "../../pages/resource/CCDIEventAnnouncementsResourcePage/CCDIEventAnnouncementsResourceController";
 import CCDIEventDetailView from "../../pages/resource/CCDIEventAnnouncementsResourcePage/EventDetailController";
 import RareCancerResourceView from "../../pages/resource/RareCancerResourcePage/RareCancerResourceController";
+import MCIJson2TsvResourceView from "../../pages/resource/MCIJson2TsvResourcePage/MCIJson2TsvResourceController";
 // import NewsDetail from '../../pages/news/newsDetailView';
 
 const Layout = () => {
@@ -46,6 +47,7 @@ const Layout = () => {
           <Route path="/sitesearch" element={<Search />} />
           <Route path="/explore" element={<Inventory />} />
           <Route path="/MCI" element={<MCIResourceView />} />
+          <Route path="/MCI_JSON2TSV" element={<MCIJson2TsvResourceView />} />
           <Route path="/pmtl" element={<PMTLResourceView />} />
           <Route path="/data-federation-resource" element={<FederationResourceView/>} />
           <Route path="/data-federation-data-model" element={<FederationDataModelNavigator />} />

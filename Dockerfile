@@ -24,12 +24,18 @@ COPY --from=build /usr/src/app/config/inject.template.js /usr/share/nginx/html/i
 COPY --from=build /usr/src/app/config/nginx.conf /etc/nginx/nginx.conf.template
 COPY --from=build /usr/src/app/config/entrypoint.sh /
 
-ENV PORT=80
+ENV PORT=8081
 
 ENV HOST=0.0.0.0
 
 RUN sh -c "envsubst '\$PORT'  < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf"
 
-EXPOSE 80
+# Grant the built-in nginx user access to runtime paths so it can write pid, cache, logs, and the injected env file
+RUN chown -R nginx:nginx /usr/share/nginx/html /var/cache/nginx /var/log/nginx /run/nginx /etc/nginx/nginx.conf \
+    && chmod +x /entrypoint.sh
+
+USER nginx
+
+EXPOSE 8081
 
 ENTRYPOINT [ "sh", "/entrypoint.sh" ]

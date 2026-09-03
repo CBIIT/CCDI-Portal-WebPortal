@@ -22,25 +22,6 @@ const detailPageSlugByLinkText = events.reduce((map, event) => {
 export const getDetailPageSlugForLinkText = (text) =>
   detailPageSlugByLinkText.get(slugify(text)) || null;
 
-const parseUsShortDate = (dateStr) => {
-  if (!dateStr) return '';
-  const parts = dateStr.trim().split('/');
-  if (parts.length !== 3) return '';
-  const [month, day, year] = parts;
-  const fullYear = year.length === 2 ? `20${year}` : year;
-  return `${fullYear}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
-};
-
-const getEntrySortDate = (entryMarkdown) => {
-  const match = String(entryMarkdown).match(/([\d/]+)(?:\s*-\s*[\d/]+)?\s*$/);
-  if (!match) return '';
-  const firstDate = match[1].split(/\s*-/)[0].trim();
-  return parseUsShortDate(firstDate);
-};
-
-/** Markdown event list entry: [title](url) followed by a date line. */
-const MD_LIST_ENTRY_PATTERN = /\[[^\]]+\]\([^)]+\)\s*\n+\s*[\d/]+(?:\s*-\s*[\d/]+)?/g;
-
 export const buildDetailPageListEntryMarkdown = (event) => (
   `[${event.title}](${EVENT_ROUTE_BASE}/${event.slug})  \n${event.rawDate}`
 );
@@ -48,35 +29,11 @@ export const buildDetailPageListEntryMarkdown = (event) => (
 /** @deprecated Prefer buildDetailPageListEntryMarkdown; kept for callers/tests during migration. */
 export const buildDetailPageListEntryHtml = buildDetailPageListEntryMarkdown;
 
-export const mergeDetailPageEventsIntoAnnouncementsContent = (sections) => {
-  if (!Array.isArray(sections)) return sections;
-
-  return sections.map((section) => {
-    if (!section.topic || !/past events/i.test(section.topic)) {
-      return section;
-    }
-
-    const content = section.content || '';
-    const detailEvents = getAllEvents().filter(
-      (event) => !content.includes(event.title),
-    );
-
-    if (detailEvents.length === 0) {
-      return section;
-    }
-
-    const existingEntries = (content.match(MD_LIST_ENTRY_PATTERN) || []).map((entry) => entry.trim());
-    const detailEntries = detailEvents.map(buildDetailPageListEntryMarkdown);
-    const mergedEntries = [...detailEntries, ...existingEntries].sort(
-      (a, b) => getEntrySortDate(b).localeCompare(getEntrySortDate(a)),
-    );
-
-    return {
-      ...section,
-      content: mergedEntries.join('\n\n'),
-    };
-  });
-};
+/**
+ * Identity passthrough — Past Events are sourced from eventAnnouncements.md only.
+ * Local eventsData.json is used for detail-page routes, not list injection.
+ */
+export const mergeDetailPageEventsIntoAnnouncementsContent = (sections) => sections;
 
 export const getAllEvents = () => events;
 

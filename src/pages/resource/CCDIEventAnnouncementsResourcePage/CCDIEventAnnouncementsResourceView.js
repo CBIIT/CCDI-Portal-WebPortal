@@ -4,7 +4,6 @@ import headerImg from '../../../assets/about/Data_Usage_Policies_Header.png';
 import exportIconBlue from '../../../assets/icons/Export_Icon.svg';
 import closeIcon from '../../../assets/icons/Close_Icon.svg';
 import arrowDownIcon from '../../../assets/icons/Arrow_Down.svg';
-import { mergeDetailPageEventsIntoAnnouncementsContent } from './eventsUtils';
 import EventAnnouncementsMarkdown from './EventAnnouncementsMarkdown';
 
 const CCDIContainer = styled.div`
@@ -342,9 +341,7 @@ const CCDIBody = styled.div`
 const CCDIEventAnnouncementsResourceView = ({data}) => {
     const [selectedNavTitle, setSelectedNavTitle] = useState('');
     const [stickyNavStyle, setStickyNavStyle] = useState('navList');
-    const ccdiContent = mergeDetailPageEventsIntoAnnouncementsContent(
-      data.ccdiEventAnnouncementsContent,
-    );
+    const ccdiContent = data.ccdiEventAnnouncementsContent || [];
     const sectionList = useRef([]);
     sectionList.current = ccdiContent.map((element, i) => {
         return sectionList.current[i] || createRef()

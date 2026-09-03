@@ -84,25 +84,25 @@ describe('CCDIEventAnnouncementsResourceController', () => {
       expect(screen.getByText('Announcements Topic')).toBeInTheDocument();
     });
 
-    it('should render local detail page events when markdown lacks ccdiEventAnnouncementsContent', async () => {
+    it('should render empty when markdown lacks ccdiEventAnnouncementsContent', async () => {
       parseEventAnnouncementsMarkdown.mockReturnValueOnce({});
 
-      render(
+      const { container } = render(
         <MemoryRouter initialEntries={['/explore']}>
           <CCDIEventAnnouncementsResourceController />
         </MemoryRouter>,
       );
 
       await waitFor(() => {
-        expect(screen.getByText('CCDI Events Announcements')).toBeInTheDocument();
+        expect(axios.get).toHaveBeenCalled();
       });
 
-      expect(screen.getByText('Past Events, Webinars, and Workshops')).toBeInTheDocument();
-      expect(screen.getByText(/CCDI March Community Forum/)).toBeInTheDocument();
-      expect(screen.getByText(/Developing Pediatric Data Standards/)).toBeInTheDocument();
+      expect(screen.queryByText('CCDI Events Announcements')).not.toBeInTheDocument();
+      expect(screen.queryByText(/CCDI March Community Forum/)).not.toBeInTheDocument();
+      expect(container.querySelector('div')).toBeInTheDocument();
     });
 
-    it('should render fallback detail events when fetch fails', async () => {
+    it('should render empty when fetch fails (no local eventsData.json injection)', async () => {
       axios.get.mockRejectedValueOnce(new Error('network'));
 
       render(
@@ -112,8 +112,11 @@ describe('CCDIEventAnnouncementsResourceController', () => {
       );
 
       await waitFor(() => {
-        expect(screen.getByText(/CCDI March Community Forum/)).toBeInTheDocument();
+        expect(axios.get).toHaveBeenCalled();
       });
+
+      expect(screen.queryByText(/CCDI March Community Forum/)).not.toBeInTheDocument();
+      expect(screen.queryByText(/Developing Pediatric Data Standards/)).not.toBeInTheDocument();
     });
   });
 });

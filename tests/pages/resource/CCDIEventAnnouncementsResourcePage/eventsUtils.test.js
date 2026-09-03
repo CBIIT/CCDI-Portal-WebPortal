@@ -84,9 +84,6 @@ describe('eventsUtils', () => {
           '',
           '[Childhood Cancer Data Initiative—Recent Activities and Next Steps](https://example.com/b.pdf)',
           '3/8/24',
-          '',
-          '[Navigating CCDI Hub\'s Explore Dashboard and Data Access](https://example.com/c.pdf)',
-          '11/13/23',
         ].join('\n'),
       },
       {
@@ -96,21 +93,14 @@ describe('eventsUtils', () => {
       },
     ];
 
-    it('merges local detail page events into the past events section in date order', () => {
+    it('does not inject local eventsData.json titles into past events', () => {
       const merged = mergeDetailPageEventsIntoAnnouncementsContent(markdownSections);
       const pastEventsMarkdown = merged[0].content;
 
-      expect(pastEventsMarkdown.indexOf('CCDI March Community Forum')).toBeLessThan(
-        pastEventsMarkdown.indexOf('Childhood Cancer Clinical Data Commons'),
-      );
-      expect(pastEventsMarkdown.indexOf('Childhood Cancer Data Initiative—Recent Activities')).toBeLessThan(
-        pastEventsMarkdown.indexOf('Developing Pediatric Data Standards'),
-      );
-      expect(pastEventsMarkdown.indexOf('Developing Pediatric Data Standards')).toBeLessThan(
-        pastEventsMarkdown.indexOf('Navigating CCDI Hub'),
-      );
-      expect(pastEventsMarkdown).toContain('/ccdi-events-announcements/ccdi-march-2024-community-forum');
-      expect(pastEventsMarkdown).toContain('/ccdi-events-announcements/developing-pediatric-data-standards');
+      expect(pastEventsMarkdown).toBe(markdownSections[0].content);
+      expect(pastEventsMarkdown).not.toContain('CCDI March Community Forum');
+      expect(pastEventsMarkdown).not.toContain('Developing Pediatric Data Standards');
+      expect(pastEventsMarkdown).not.toContain('/ccdi-events-announcements/ccdi-march-2024-community-forum');
     });
 
     it('does not modify non-past-events sections', () => {
@@ -118,21 +108,8 @@ describe('eventsUtils', () => {
       expect(merged[1].content).toBe('Contact us.');
     });
 
-    it('does not duplicate events already present in markdown content', () => {
-      const withExisting = [
-        {
-          ...markdownSections[0],
-          content: [
-            '[CCDI March Community Forum](/ccdi-events-announcements/ccdi-march-2024-community-forum)',
-            '3/18/24',
-            '',
-            markdownSections[0].content,
-          ].join('\n'),
-        },
-      ];
-      const merged = mergeDetailPageEventsIntoAnnouncementsContent(withExisting);
-      const matches = merged[0].content.match(/CCDI March Community Forum/g) || [];
-      expect(matches).toHaveLength(1);
+    it('returns the same sections reference for identity passthrough', () => {
+      expect(mergeDetailPageEventsIntoAnnouncementsContent(markdownSections)).toBe(markdownSections);
     });
   });
 

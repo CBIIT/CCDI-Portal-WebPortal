@@ -121,8 +121,8 @@ function extractIntroAndRest(body) {
 }
 
 /**
- * Removes the dedicated flow-chart image from intro markdown so the view can
- * render it once from RCI_Data_Flow_Chart_URL (with a bundled fallback).
+ * Removes the dedicated flow-chart image from intro markdown.
+ * @deprecated Flow charts stay inline in the intro; prefer not calling this.
  */
 export function stripIntroFlowChart(intro, fmUrl) {
   const imgRe = /!\[[^\]]*\]\(([^)\s]+)(?:\s+"[^"]*")?\)/g;
@@ -286,7 +286,6 @@ function normalizeDownloadConfig(raw) {
  * @returns {{
  *   title: string,
  *   RCI_Header: string,
- *   RCI_Data_Flow_Chart_URL: string,
  *   RCI_DOWNLOAD_CONFIG: { url: string, filename: string }|undefined,
  *   rareCancerIntroText: string,
  *   navTitles: string[]|undefined,
@@ -299,7 +298,7 @@ export function parseRareCancerMarkdown(rawMarkdown) {
   const {
     title: fmTitle,
     RCI_Header: fmHeader,
-    RCI_Data_Flow_Chart_URL: fmFlowChart,
+    RCI_Data_Flow_Chart_URL: _legacyFlowChart,
     RCI_DOWNLOAD_CONFIG: fmDownload,
     rareCancerIntroText: legacyIntro,
     navTitles: fmNavTitles,
@@ -315,16 +314,12 @@ export function parseRareCancerMarkdown(rawMarkdown) {
   const navTitles = Array.isArray(rawNavTitles) ? rawNavTitles : undefined;
 
   const { intro: introFromBody, rest } = extractIntroAndRest(body || '');
-  const introRaw =
+  const rareCancerIntroText =
     String(introFromBody || '').trim() !== ''
-      ? introFromBody
+      ? trimMd(introFromBody)
       : legacyIntro != null
         ? String(legacyIntro)
         : '';
-
-  const fmFlowUrl = String(fmFlowChart || '').trim();
-  const { intro: rareCancerIntroText, extractedUrl } = stripIntroFlowChart(introRaw, fmFlowUrl);
-  const RCI_Data_Flow_Chart_URL = fmFlowUrl || extractedUrl;
 
   const topics = splitH2(rest);
   const rareCancerContent = topics.map((t) => {
@@ -351,7 +346,6 @@ export function parseRareCancerMarkdown(rawMarkdown) {
     ...restFm,
     title,
     RCI_Header,
-    RCI_Data_Flow_Chart_URL,
     RCI_DOWNLOAD_CONFIG: normalizeDownloadConfig(fmDownload),
     rareCancerIntroText,
     navTitles,

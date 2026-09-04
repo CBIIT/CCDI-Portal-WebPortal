@@ -612,9 +612,6 @@ const FederationResourceView = ({data}) => {
                             federationContent && federationContent.map((federationItem, mciid) => {
                                 const mcikey = `federation_${mciid}`;
                                 const hasSubtopics = Array.isArray(federationItem.list) && federationItem.list.length > 0;
-                                const dataAccessImg = federationItem.id
-                                    && federationItem.id.includes('Data_Access')
-                                    && data.CCDI_Federation_Data_Access;
 
                                 if (hasSubtopics) {
                                     return (
@@ -654,12 +651,6 @@ const FederationResourceView = ({data}) => {
                                         <div className="mciSection mobileCollapse" ref={sectionList.current[mciid]}>
                                             <div className='mciContentContainer'>
                                                 <FederationContentSegments segments={federationItem.segments} pageData={data} />
-
-                                                {dataAccessImg && (
-                                                <div style={{ justifyContent: 'center', display: 'flex'}}>
-                                                    <img className="federationImg" src={data.CCDI_Federation_Data_Access} alt="Infographic displaying the CCDI Federation Service ecosystem. Users can directly access individual source nodes (KidsFirst, PCDC, St. Jude Cloud, Treehouse) or utilize the aggregation capabilities of the Federation Service to query data across all nodes simultaneously."/>
-                                                </div>
-                                                )}
                                             </div>
                                             {hasSegments(federationItem.segments) && <div style={{height: '40px'}} />}
                                         </div>

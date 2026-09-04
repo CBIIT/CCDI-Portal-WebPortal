@@ -9,7 +9,6 @@ import closeIcon from '../../../assets/icons/Close_Icon.svg';
 import arrowDownIcon from '../../../assets/icons/Arrow_Down.svg';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import GetAppIcon from '@material-ui/icons/GetApp';
-import introImg from '../../../assets/resources/RCI_data_flow_chart.png';
 import RareCancerMarkdown from './RareCancerMarkdown';
 import { buildRareCancerNavItems } from './parseRareCancerMarkdown';
 
@@ -255,6 +254,13 @@ const ResourceBody = styled.div`
             padding-right: 20px;
             background: url(${exportIconBlue}) right center no-repeat;
         }
+
+        img {
+            display: block;
+            width: 75%;
+            max-width: 467px;
+            margin: 0 auto 30px auto;
+        }
     }
 
     .mciTitle {
@@ -385,12 +391,6 @@ const ResourceBody = styled.div`
             margin: 120px 0 0 150px;
         }
 
-    }
-
-    .introImg {
-        width: 75%;
-        max-width: 467px;
-        margin-bottom: 30px;
     }
 
     @media (max-width: 767px) {
@@ -717,9 +717,6 @@ const RareCancerResourceView = ({ data = {} }) => {
                 <div className='contentSection'>
                     <div className='contentList'>
                         {data.rareCancerIntroText && <div className='introContainer'><RareCancerMarkdown>{data.rareCancerIntroText}</RareCancerMarkdown></div>}
-                        <div style={{ justifyContent: 'center', display: 'flex'}}>
-                            <img className="introImg" src={data.RCI_Data_Flow_Chart_URL || introImg} alt="RCI data flow" />
-                        </div>
                         {
                             MCIContent && MCIContent.map((mci, mciidx) => {
                                 const mcikey = `mci_${mciidx}`;

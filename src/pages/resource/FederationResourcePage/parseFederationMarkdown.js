@@ -210,7 +210,7 @@ export default function parseFederationMarkdown(rawMarkdown) {
   const {
     title: fmTitle,
     Federation_Header: fmFederationHeader,
-    CCDI_Federation_Data_Access: fmDataAccessImg,
+    CCDI_Federation_Data_Access: _legacyDataAccessImg,
     federationIntroText: legacyIntro,
     navTitles: fmNavTitles,
     federationNavTitles,
@@ -220,7 +220,6 @@ export default function parseFederationMarkdown(rawMarkdown) {
 
   const title = String(fmTitle || '').trim();
   const Federation_Header = String(fmFederationHeader || '').trim();
-  const CCDI_Federation_Data_Access = String(fmDataAccessImg || '').trim();
   const rawNavTitles = firstDefined(fmNavTitles, federationNavTitles, fmNavTitlesSnake);
   const navTitleSet = buildNavTitleSet(rawNavTitles);
   const navTitles = Array.isArray(rawNavTitles) ? rawNavTitles : undefined;
@@ -260,7 +259,6 @@ export default function parseFederationMarkdown(rawMarkdown) {
     ...restFm,
     title,
     Federation_Header,
-    CCDI_Federation_Data_Access,
     federationIntroText,
     navTitles,
     federationContent,

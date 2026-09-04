@@ -123,9 +123,12 @@ describe('FederationResourceView', () => {
       expect(mobileHeader.className).not.toContain('sectionCollapse');
     });
 
-    it('should render federation data access infographic when section id matches', () => {
-      renderFederationView(multiTopicFederationData);
-      expect(screen.getByAltText(/Federation Service ecosystem/i)).toBeInTheDocument();
+    it('should not inject a FM-based data access infographic', () => {
+      renderFederationView({
+        ...multiTopicFederationData,
+        CCDI_Federation_Data_Access: '/test-federation-infographic.png',
+      });
+      expect(screen.queryByAltText(/Federation Service ecosystem/i)).not.toBeInTheDocument();
     });
   });
 });

@@ -18,14 +18,14 @@ describe('parseRareCancerMarkdown', () => {
 
     expect(data.title).toBe('Pediatric, Adolescent, and Young Adult Rare Cancer Study');
     expect(data.RCI_Header).toBe('https://example.com/rare-cancer-header.png');
-    expect(data.RCI_Data_Flow_Chart_URL).toBe('https://example.com/rci-flow-chart.png');
     expect(data.RCI_DOWNLOAD_CONFIG).toEqual({
       url: 'https://example.com/rare-cancer-study_contact.pdf',
       filename: 'rare-cancer-study_contact.pdf',
     });
     expect(data.rareCancerIntroText).toContain('longitudinal study');
     expect(data.rareCancerIntroText).toContain('cancer.gov');
-    expect(data.rareCancerIntroText).not.toContain('RCI data flow chart');
+    expect(data.rareCancerIntroText).toContain('![RCI data flow chart](https://example.com/rci-flow-chart.png)');
+    expect(data).not.toHaveProperty('RCI_Data_Flow_Chart_URL');
     expect(data.navTitles).toHaveLength(4);
     expect(data.rareCancerContent).toHaveLength(1);
 
@@ -80,17 +80,17 @@ describe('parseRareCancerMarkdown', () => {
     expect(navItems[1].isSubtitle).toBe(true);
   });
 
-  it('should take flow-chart URL from intro image when front matter omits it', () => {
+  it('should keep flow-chart image inline in intro markdown', () => {
     const data = parseRareCancerMarkdown(sampleRareCancerMarkdownFlowChartOnlyInBody);
-    expect(data.RCI_Data_Flow_Chart_URL).toBe('https://example.com/from-body-chart.png');
-    expect(data.rareCancerIntroText).toBe('Lead paragraph.');
+    expect(data.rareCancerIntroText).toContain('![RCI data flow chart](https://example.com/from-body-chart.png)');
+    expect(data.rareCancerIntroText).toContain('Lead paragraph.');
+    expect(data).not.toHaveProperty('RCI_Data_Flow_Chart_URL');
   });
 
   it('should handle empty input and strip BOM', () => {
     expect(parseRareCancerMarkdown('')).toEqual({
       title: '',
       RCI_Header: '',
-      RCI_Data_Flow_Chart_URL: '',
       RCI_DOWNLOAD_CONFIG: undefined,
       rareCancerIntroText: '',
       navTitles: undefined,

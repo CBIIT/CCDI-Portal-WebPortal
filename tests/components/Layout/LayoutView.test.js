@@ -35,6 +35,14 @@ jest.mock('../../../src/components/ScrollButton/ScrollButtonView', () => {
   };
 });
 
+jest.mock('../../../src/components/ExternalRedirect/ExternalRedirect', () => {
+  const React = require('react');
+  return {
+    __esModule: true,
+    default: ({ to }) => <div data-testid="external-redirect" data-to={to} />,
+  };
+});
+
 jest.mock('../../../src/pages/landing/landingController', () => {
   const React = require('react');
   return {
@@ -270,6 +278,15 @@ describe('LayoutView', () => {
     it('should render the FAQ controller on /faqs', () => {
       renderLayoutAt('/faqs');
       expect(screen.getByTestId('route-faqs')).toBeInTheDocument();
+    });
+
+    it('should redirect the legacy user guide PDF route', () => {
+      renderLayoutAt('/static/media/CCDI_Usage_Instructions_Nov2024_v2.5.0.69ea3cd5.pdf');
+
+      expect(screen.getByTestId('external-redirect')).toHaveAttribute(
+        'data-to',
+        'https://clinicalcommons.ccdi.cancer.gov/user_guide',
+      );
     });
   });
 

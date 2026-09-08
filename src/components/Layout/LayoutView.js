@@ -30,7 +30,11 @@ import CCDIEventAnnouncementsResourceView from "../../pages/resource/CCDIEventAn
 import CCDIEventDetailView from "../../pages/resource/CCDIEventAnnouncementsResourcePage/EventDetailController";
 import RareCancerResourceView from "../../pages/resource/RareCancerResourcePage/RareCancerResourceController";
 import MCIJson2TsvResourceView from "../../pages/resource/MCIJson2TsvResourcePage/MCIJson2TsvResourceController";
+import ExternalRedirect from '../ExternalRedirect/ExternalRedirect';
 // import NewsDetail from '../../pages/news/newsDetailView';
+
+const LEGACY_USER_GUIDE_PATH = '/static/media/CCDI_Usage_Instructions_Nov2024_v2.5.0.69ea3cd5.pdf';
+const USER_GUIDE_URL = 'https://clinicalcommons.ccdi.cancer.gov/user_guide';
 
 const Layout = () => {
     return (
@@ -62,6 +66,10 @@ const Layout = () => {
           <Route path="/pediatric-adolescent-and-young-adult-rare-cancer-study" element={<RareCancerResourceView/>} />
           <Route path="/release-notes" element={<ReleaseNotesPageView />} />
           <Route path="/cohortAnalyzer" element={<CohortAnalyzerController />} />
+          <Route
+            path={LEGACY_USER_GUIDE_PATH}
+            element={<ExternalRedirect to={USER_GUIDE_URL} />}
+          />
           <Route path="/studies" >
             <Route index={true} element={<StudiesView />}></Route>
             <Route path=":studyId" element={<StudiesDetail />} />

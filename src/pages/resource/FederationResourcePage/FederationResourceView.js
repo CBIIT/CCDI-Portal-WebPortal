@@ -15,6 +15,46 @@ function hasSegments(segments) {
     return Array.isArray(segments) && segments.length > 0;
 }
 
+/** True when section already has an inline graphic (MD image or responsive-img). */
+function hasInContentGraphic(content, segments) {
+    const md = String(content || '');
+    if (/!\[[^\]]*\]\([^)]+\)/.test(md) || /```responsive-img/.test(md)) {
+        return true;
+    }
+    if (!Array.isArray(segments)) {
+        return false;
+    }
+    return segments.some((seg) => {
+        if (seg.type === 'widget' && seg.widget === 'responsiveImg') {
+            return true;
+        }
+        if (seg.type === 'markdown' && /!\[[^\]]*\]\([^)]+\)/.test(String(seg.markdown || ''))) {
+            return true;
+        }
+        return false;
+    });
+}
+
+function shouldInjectLegacyDataAccessImg(federationItem, dataAccessUrl) {
+    if (!dataAccessUrl || !federationItem || !federationItem.id) {
+        return false;
+    }
+    if (!String(federationItem.id).includes('Data_Access')) {
+        return false;
+    }
+    if (hasInContentGraphic(federationItem.content, federationItem.segments)) {
+        return false;
+    }
+    const list = Array.isArray(federationItem.list) ? federationItem.list : [];
+    if (list.some((item) => hasInContentGraphic(item.content, item.segments))) {
+        return false;
+    }
+    return true;
+}
+
+const FEDERATION_DATA_ACCESS_IMG_ALT =
+    'Infographic displaying the CCDI Federation Service ecosystem. Users can directly access individual source nodes (KidsFirst, PCDC, St. Jude Cloud, Treehouse) or utilize the aggregation capabilities of the Federation Service to query data across all nodes simultaneously.';
+
 
 const FederationResourceContainer = styled.div`
     width: 100%;
@@ -612,6 +652,12 @@ const FederationResourceView = ({data}) => {
                             federationContent && federationContent.map((federationItem, mciid) => {
                                 const mcikey = `federation_${mciid}`;
                                 const hasSubtopics = Array.isArray(federationItem.list) && federationItem.list.length > 0;
+                                const dataAccessImg = shouldInjectLegacyDataAccessImg(
+                                    federationItem,
+                                    data.CCDI_Federation_Data_Access,
+                                )
+                                    ? data.CCDI_Federation_Data_Access
+                                    : '';
 
                                 if (hasSubtopics) {
                                     return (
@@ -639,6 +685,11 @@ const FederationResourceView = ({data}) => {
                                                         );
                                                     })
                                                 }
+                                                {dataAccessImg && (
+                                                    <div style={{ justifyContent: 'center', display: 'flex' }}>
+                                                        <img className="federationImg" src={dataAccessImg} alt={FEDERATION_DATA_ACCESS_IMG_ALT} />
+                                                    </div>
+                                                )}
                                             </div>
                                         </div>
                                     );
@@ -651,8 +702,13 @@ const FederationResourceView = ({data}) => {
                                         <div className="mciSection mobileCollapse" ref={sectionList.current[mciid]}>
                                             <div className='mciContentContainer'>
                                                 <FederationContentSegments segments={federationItem.segments} pageData={data} />
+                                                {dataAccessImg && (
+                                                    <div style={{ justifyContent: 'center', display: 'flex' }}>
+                                                        <img className="federationImg" src={dataAccessImg} alt={FEDERATION_DATA_ACCESS_IMG_ALT} />
+                                                    </div>
+                                                )}
                                             </div>
-                                            {hasSegments(federationItem.segments) && <div style={{height: '40px'}} />}
+                                            {(hasSegments(federationItem.segments) || dataAccessImg) && <div style={{height: '40px'}} />}
                                         </div>
                                     </div>
                                 );

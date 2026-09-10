@@ -25,6 +25,11 @@ describe('parseRareCancerMarkdown', () => {
     expect(data.rareCancerIntroText).toContain('longitudinal study');
     expect(data.rareCancerIntroText).toContain('cancer.gov');
     expect(data.rareCancerIntroText).toContain('![RCI data flow chart](https://example.com/rci-flow-chart.png)');
+    expect(data.rareCancerIntroSegments).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ type: 'markdown' }),
+      ]),
+    );
     expect(data).not.toHaveProperty('RCI_Data_Flow_Chart_URL');
     expect(data.navTitles).toHaveLength(4);
     expect(data.rareCancerContent).toHaveLength(1);
@@ -87,12 +92,57 @@ describe('parseRareCancerMarkdown', () => {
     expect(data).not.toHaveProperty('RCI_Data_Flow_Chart_URL');
   });
 
+  it('should inject legacy FM flow-chart URL into intro when body has no chart', () => {
+    const md = `---
+title: Rare Cancer
+RCI_Header: https://example.com/header.png
+RCI_Data_Flow_Chart_URL: https://example.com/fm-only-chart.png
+---
+
+Lead paragraph only.
+
+## Topic
+
+### Sub
+
+Body.
+`;
+    const data = parseRareCancerMarkdown(md);
+    expect(data.rareCancerIntroText).toContain('Lead paragraph only.');
+    expect(data.rareCancerIntroText).toContain('![RCI data flow chart](https://example.com/fm-only-chart.png)');
+    expect(data).not.toHaveProperty('RCI_Data_Flow_Chart_URL');
+  });
+
+  it('should not duplicate flow chart when body already has it and FM also sets URL', () => {
+    const md = `---
+title: Rare Cancer
+RCI_Header: https://example.com/header.png
+RCI_Data_Flow_Chart_URL: https://example.com/fm-chart.png
+---
+
+Intro.
+
+![RCI data flow chart](https://example.com/body-chart.png)
+
+## Topic
+
+### Sub
+
+Body.
+`;
+    const data = parseRareCancerMarkdown(md);
+    expect(data.rareCancerIntroText.match(/!\[RCI data flow chart\]/g)).toHaveLength(1);
+    expect(data.rareCancerIntroText).toContain('https://example.com/body-chart.png');
+    expect(data.rareCancerIntroText).not.toContain('https://example.com/fm-chart.png');
+  });
+
   it('should handle empty input and strip BOM', () => {
     expect(parseRareCancerMarkdown('')).toEqual({
       title: '',
       RCI_Header: '',
       RCI_DOWNLOAD_CONFIG: undefined,
       rareCancerIntroText: '',
+      rareCancerIntroSegments: [],
       navTitles: undefined,
       rareCancerContent: [],
     });

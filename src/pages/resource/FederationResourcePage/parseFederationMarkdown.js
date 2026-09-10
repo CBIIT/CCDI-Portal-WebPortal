@@ -210,7 +210,7 @@ export default function parseFederationMarkdown(rawMarkdown) {
   const {
     title: fmTitle,
     Federation_Header: fmFederationHeader,
-    CCDI_Federation_Data_Access: _legacyDataAccessImg,
+    CCDI_Federation_Data_Access: fmDataAccessImg,
     federationIntroText: legacyIntro,
     navTitles: fmNavTitles,
     federationNavTitles,
@@ -220,6 +220,8 @@ export default function parseFederationMarkdown(rawMarkdown) {
 
   const title = String(fmTitle || '').trim();
   const Federation_Header = String(fmFederationHeader || '').trim();
+  // Legacy non-banner FM field — view injects when Data Access body has no inline graphic.
+  const CCDI_Federation_Data_Access = String(fmDataAccessImg || '').trim();
   const rawNavTitles = firstDefined(fmNavTitles, federationNavTitles, fmNavTitlesSnake);
   const navTitleSet = buildNavTitleSet(rawNavTitles);
   const navTitles = Array.isArray(rawNavTitles) ? rawNavTitles : undefined;
@@ -259,6 +261,7 @@ export default function parseFederationMarkdown(rawMarkdown) {
     ...restFm,
     title,
     Federation_Header,
+    CCDI_Federation_Data_Access,
     federationIntroText,
     navTitles,
     federationContent,

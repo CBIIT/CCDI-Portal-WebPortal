@@ -9,11 +9,25 @@ All markdown-driven pages use one pattern for graphics so editors know which fie
 | Scenario | Required pattern |
 |----------|------------------|
 | Page banner | Front-matter field (page-level presentation metadata) |
-| Single in-content image | Inline HTML `<img>` with explicit `width`, or native MD `![alt](url)` when default width is acceptable |
+| Single in-content image | Native MD `![alt](url)` (default content width / page CSS). Prefer this over raw HTML `<img>` in ReactMarkdown bodies |
 | One graphic needing distinct desktop and mobile assets | Wide/mobile ` ```responsive-img``` ` fence, authored **inline** |
 | Any other in-content graphic | Inline in the body — **never** front matter |
 
 **Rule:** if an image is not the page banner, author it in the markdown body. Do not add non-banner image URLs to YAML front matter.
+
+### Peer left-nav MD loaders (all three patterns)
+
+These resource pages share the same content-loader stack and support **all three** graphics treatments:
+
+| MD file | Route | Banner FM | Inline `![…]` | `responsive-img` |
+|---------|-------|-----------|---------------|------------------|
+| `mciData.md` | `/MCI` | `MCI_header` / `MCI_header_mobile` | yes | yes |
+| `federationData.md` | `/data-federation-resource` | `Federation_Header` | yes | yes |
+| `MCI_JSON2TSV.md` | `/MCI_JSON2TSV` | `headerImage` / `JSON2TSV_Header` | yes | yes |
+| `rareCancerData.md` | `/pediatric-…` | `RCI_Header` | yes | yes |
+| `toolsData.md` | `/tools` | `Tools_Header` | yes | yes |
+
+Other MD pages (FAQ, DUP, About, CPI, Events, Publications, News) use **banner FM + inline images** where applicable; `responsive-img` is optional there. CPI still has legacy non-banner FM diagram/icon URLs (deferred). Landing card/carousel assets stay structured YAML (deferred).
 
 ### Front-matter image audit
 
@@ -28,23 +42,23 @@ Each row is a remote MD file that has (or had) an image-related field. Classific
 | `mciData.md` | `/MCI` | `MCI_header` / `MCI_header_mobile` | banner | done | Keep |
 | `mciData.md` | `/MCI` | `MCI_CCDI_Data_Ecosystem` / `_Mobile` | non-banner | done (portal) | MD view uses inline `responsive-img`; do not re-add to FM |
 | `federationData.md` | `/data-federation-resource` | `Federation_Header` | banner | done | Keep |
-| `federationData.md` | `/data-federation-resource` | `CCDI_Federation_Data_Access` | non-banner | done (portal) | Portal no longer injects FM diagram; author inline (`responsive-img` or `<img>`) |
+| `federationData.md` | `/data-federation-resource` | `CCDI_Federation_Data_Access` | non-banner | legacy fallback | Prefer inline (`responsive-img` or `![…]`); portal still injects FM URL on Data Access when that section has no in-content graphic |
 | `rareCancerData.md` | `/pediatric-adolescent-and-young-adult-rare-cancer-study` | `RCI_Header` | banner | done | Keep |
-| `rareCancerData.md` | `/pediatric-…` | `RCI_Data_Flow_Chart_URL` | non-banner | done (portal) | Flow chart stays in intro body as `![…](url)`; FM field ignored |
+| `rareCancerData.md` | `/pediatric-…` | `RCI_Data_Flow_Chart_URL` | non-banner | legacy fallback | Prefer inline in intro; portal injects FM URL into intro when no flow-chart image is present yet |
 | `cpiData.md` | `/ccdi-participant-index` | `CPI_Header_URL` | banner | done | Keep |
-| `cpiData.md` | `/ccdi-participant-index` | `CPI_Img_URL` | non-banner | **needs content + portal** | Components diagram still read from FM |
-| `cpiData.md` | `/ccdi-participant-index` | `CPI_*_Icon_URL` (4 icons) | non-banner | **needs content + portal** | Stats strip icons still read from FM |
+| `cpiData.md` | `/ccdi-participant-index` | `CPI_Img_URL` | non-banner | deferred | Components diagram still read from FM (out of peer left-nav scope) |
+| `cpiData.md` | `/ccdi-participant-index` | `CPI_*_Icon_URL` (4 icons) | non-banner | deferred | Stats strip icons still read from FM |
 | `aboutData.md` | `/about` | `About_Img` | banner | done | Same asset used as mobile header BG and desktop side image |
-| `eventAnnouncements.md` | `/ccdi-events-announcements` | *(leading `![…]` → header)* | banner | **needs FM move** | Banner should be YAML `headerImage` (or `CCDI_Event_Announcements_Header`); currently first-line body image |
-| `publicationsData.md` | `/publications` | *(leading `![…]` → header)* | banner | **needs FM move** | Same as events — move banner into FM |
+| `eventAnnouncements.md` | `/ccdi-events-announcements` | `CCDI_Event_Announcements_Header` / `headerImage` | banner | done | Prefer FM; leading body `![…]` still accepted as legacy fallback |
+| `publicationsData.md` | `/publications` | `Publications_Header` / `headerImage` | banner | done | Prefer FM; leading body `![…]` still accepted as legacy fallback |
 | `newsData.md` | `/news` | — | — | done | Card art is inline `<img>` in body; page chrome uses bundled header |
 | `releaseNotesData.md` | `/release-notes` | — | — | done | Inline body `<img>` only |
 | `ccdiDataUpdates.md` | `/news` | — | — | done | Inline body `<img>` only |
 | `navData.md` | (global) | — | — | done | No image fields |
 | `aboutSearchContent.md` | `/sitesearch` | — | — | done | No image fields |
-| `landingData.md` | `/` | `resources*[].img`, `carousel[].img` / `mobile` | non-banner (structured cards) | **deferred** | YAML card/carousel assets, not prose MD; hero BG is bundled CSS |
+| `landingData.md` | `/` | `resources*[].img`, `carousel[].img` / `mobile` | non-banner (structured cards) | deferred | YAML card/carousel assets, not prose MD; hero BG is bundled CSS |
 
-Remaining open migrations (static contents + portal): **CPI** non-banner URLs; **Publications** / **Events** banner into front matter; optional **landing** card asset policy.
+Remaining deferred (outside peer left-nav loaders): **CPI** non-banner URLs; optional **landing** card asset policy. Federation / Rare Cancer legacy FM image fields remain supported as fallbacks until Static Contents migrates them fully inline.
 
 ## `faqData.md` (CCDI FAQs)
 

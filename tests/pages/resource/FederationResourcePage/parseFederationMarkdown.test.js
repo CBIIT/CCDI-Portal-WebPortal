@@ -17,7 +17,7 @@ describe('parseFederationMarkdown', () => {
 
     expect(data.title).toBe('CCDI Data Federation Resource');
     expect(data.Federation_Header).toBe('https://example.com/federation-header.png');
-    expect(data).not.toHaveProperty('CCDI_Federation_Data_Access');
+    expect(data.CCDI_Federation_Data_Access).toBe('');
     expect(data.federationIntroText).toContain('pull data from across various resources');
     expect(data.federationIntroText).toContain('piloting data federation');
     expect(data.federationIntroText).toContain('will expand as more organizations');
@@ -123,6 +123,7 @@ describe('parseFederationMarkdown', () => {
     expect(parseFederationMarkdown('')).toEqual({
       title: '',
       Federation_Header: '',
+      CCDI_Federation_Data_Access: '',
       federationIntroText: '',
       navTitles: undefined,
       federationContent: [],
@@ -133,6 +134,24 @@ describe('parseFederationMarkdown', () => {
     expect(parsed.title).toBe('BOM Federation');
     expect(parsed.federationContent[0].content).toBe('Body.');
     expect(parsed.federationContent[0].list).toEqual([]);
+  });
+  it('should pass through legacy CCDI_Federation_Data_Access for view fallback', () => {
+    const md = `---
+title: Fed
+Federation_Header: https://example.com/h.png
+CCDI_Federation_Data_Access: https://example.com/fm-diagram.png
+---
+
+Intro.
+
+## Data Access
+
+Researchers can search.
+`;
+    const data = parseFederationMarkdown(md);
+    expect(data.CCDI_Federation_Data_Access).toBe('https://example.com/fm-diagram.png');
+    expect(data.federationContent[0].content).toBe('Researchers can search.');
+    expect(data.federationContent[0].content).not.toContain('fm-diagram.png');
   });
 });
 

@@ -1,6 +1,7 @@
 import matter from 'gray-matter';
 import {
   buildNavTitleSet,
+  buildSegments,
   normalizeNavTitleKey,
   resolveShowInNav,
 } from '../MCIResourcePage/parseMciMarkdown';
@@ -250,12 +251,16 @@ export default function parseToolsMarkdown(rawMarkdown) {
   const topics = splitH2(rest);
   const toolsContent = topics.map((t) => {
     const subs = splitH3InTopic(t.body);
-    const list = subs.map((s) => ({
-      id: s.id,
-      subtopic: s.subtopic,
-      showInNav: resolveShowInNav(s.subtopic, navTitleSet),
-      content: parseToolCardBody(s.body),
-    }));
+    const list = subs.map((s) => {
+      const content = parseToolCardBody(s.body);
+      return {
+        id: s.id,
+        subtopic: s.subtopic,
+        showInNav: resolveShowInNav(s.subtopic, navTitleSet),
+        content,
+        segments: buildSegments(content),
+      };
+    });
     return {
       id: t.id,
       topic: t.topic,
@@ -269,6 +274,7 @@ export default function parseToolsMarkdown(rawMarkdown) {
     title,
     Tools_Header,
     toolsIntroText,
+    toolsIntroSegments: buildSegments(toolsIntroText),
     navTitles,
     toolsContent,
   };

@@ -11,6 +11,11 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import RareCancerMarkdown from './RareCancerMarkdown';
 import { buildRareCancerNavItems } from './parseRareCancerMarkdown';
+import ResourceContentSegments from '../components/ResourceContentSegments';
+
+function hasSegments(segments) {
+    return Array.isArray(segments) && segments.length > 0;
+}
 
 const ResourceContainer = styled.div`
     width: 100%;
@@ -263,6 +268,25 @@ const ResourceBody = styled.div`
         }
     }
 
+    .ecosystemImg {
+        width: 100%;
+    }
+
+    .ecosystemImgMobile {
+        display: none;
+    }
+
+    .ImgCaption {
+        color: #000;
+        font-family: Inter;
+        font-size: 14px;
+        font-style: italic;
+        font-weight: 500;
+        line-height: 22px;
+        letter-spacing: -0.28px;
+        padding: 10px 35px;
+    }
+
     .mciTitle {
         font-family: Poppins;
         font-weight: 600;
@@ -422,6 +446,16 @@ const ResourceBody = styled.div`
 
         .mciSubtitle {
             margin-left: 0;
+        }
+
+        .ecosystemImg {
+            display: none;
+        }
+
+        .ecosystemImgMobile {
+            display: block;
+            width: 310px;
+            margin: 10px auto;
         }
 
         .mciContentContainer {
@@ -716,7 +750,22 @@ const RareCancerResourceView = ({ data = {} }) => {
                 </div>
                 <div className='contentSection'>
                     <div className='contentList'>
-                        {data.rareCancerIntroText && <div className='introContainer'><RareCancerMarkdown>{data.rareCancerIntroText}</RareCancerMarkdown></div>}
+                        {hasSegments(data.rareCancerIntroSegments) ? (
+                            <div className='introContainer'>
+                                <ResourceContentSegments
+                                    segments={data.rareCancerIntroSegments}
+                                    pageData={data}
+                                    MarkdownComponent={RareCancerMarkdown}
+                                    keyPrefix="rci_intro_seg"
+                                />
+                            </div>
+                        ) : (
+                            data.rareCancerIntroText ? (
+                                <div className='introContainer'>
+                                    <RareCancerMarkdown>{data.rareCancerIntroText}</RareCancerMarkdown>
+                                </div>
+                            ) : null
+                        )}
                         {
                             MCIContent && MCIContent.map((mci, mciidx) => {
                                 const mcikey = `mci_${mciidx}`;
@@ -728,19 +777,28 @@ const RareCancerResourceView = ({ data = {} }) => {
                                         {
                                             mci.list.map((mciItem, idx) => {
                                                 const listItemKey = `listItem_${mciidx}_${idx}`;
+                                                const useContact = mciItem.id === 'CONTACT_INFORMATION';
+                                                const body = useContact
+                                                    ? (mciItem.content && (
+                                                        <ContactInformationContent markdown={mciItem.content} downloadConfig={downloadConfig} />
+                                                    ))
+                                                    : (hasSegments(mciItem.segments) ? (
+                                                        <ResourceContentSegments
+                                                            segments={mciItem.segments}
+                                                            pageData={data}
+                                                            MarkdownComponent={RareCancerMarkdown}
+                                                            keyPrefix={`rci_${mciidx}_${idx}`}
+                                                        />
+                                                    ) : (
+                                                        mciItem.content && <RareCancerMarkdown>{mciItem.content}</RareCancerMarkdown>
+                                                    ));
                                                 return (
                                                     <div key={listItemKey}>
                                                         <div id={mciItem.id} className='mciSubtitle'>{mciItem.subtopic && mciItem.subtopic}</div>
                                                         <div className='mciContentContainer'>
-                                                            {mciItem.content && (
-                                                                mciItem.id === 'CONTACT_INFORMATION' ? (
-                                                                    <ContactInformationContent markdown={mciItem.content} downloadConfig={downloadConfig} />
-                                                                ) : (
-                                                                    <RareCancerMarkdown>{mciItem.content}</RareCancerMarkdown>
-                                                                )
-                                                            )}
+                                                            {body}
                                                         </div>
-                                                        {mciItem.content && <div style={{height: '40px'}} />}
+                                                        {(useContact ? mciItem.content : (hasSegments(mciItem.segments) || mciItem.content)) && <div style={{height: '40px'}} />}
                                                     </div>
                                                 )
                                             })

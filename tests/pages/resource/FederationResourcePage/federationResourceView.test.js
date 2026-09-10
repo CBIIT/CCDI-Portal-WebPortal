@@ -123,10 +123,33 @@ describe('FederationResourceView', () => {
       expect(mobileHeader.className).not.toContain('sectionCollapse');
     });
 
-    it('should not inject a FM-based data access infographic', () => {
+    it('should inject FM data-access infographic when section has no inline graphic', () => {
       renderFederationView({
         ...multiTopicFederationData,
         CCDI_Federation_Data_Access: '/test-federation-infographic.png',
+        federationContent: (multiTopicFederationData.federationContent || []).map((item) => (
+          item.id && String(item.id).includes('Data_Access')
+            ? { ...item, content: 'Researchers can search.', segments: [{ type: 'markdown', markdown: 'Researchers can search.' }], list: [] }
+            : item
+        )),
+      });
+      expect(screen.getByAltText(/Federation Service ecosystem/i)).toBeInTheDocument();
+    });
+
+    it('should not inject FM data-access infographic when section already has responsive-img', () => {
+      renderFederationView({
+        ...multiTopicFederationData,
+        CCDI_Federation_Data_Access: '/test-federation-infographic.png',
+        federationContent: (multiTopicFederationData.federationContent || []).map((item) => (
+          item.id && String(item.id).includes('Data_Access')
+            ? {
+              ...item,
+              content: '```responsive-img\nwide: https://example.com/inline.png\n```',
+              segments: [{ type: 'widget', widget: 'responsiveImg', data: { wide: 'https://example.com/inline.png', alt: 'inline' } }],
+              list: [],
+            }
+            : item
+        )),
       });
       expect(screen.queryByAltText(/Federation Service ecosystem/i)).not.toBeInTheDocument();
     });

@@ -2,6 +2,64 @@
 
 Hub pages can load YAML-in-Markdown from [`CBIIT/CCDI_Hub_Static_Contents`](https://github.com/CBIIT/CCDI_Hub_Static_Contents) via `REACT_APP_STATIC_CONTENT_URL`.
 
+## Page graphics standard
+
+All markdown-driven pages use one pattern for graphics so editors know which fields belong in front matter vs the body, and so images render at the correct content width.
+
+| Scenario | Required pattern |
+|----------|------------------|
+| Page banner | Front-matter field (page-level presentation metadata) |
+| Single in-content image | Native MD `![alt](url)` (default content width / page CSS). Prefer this over raw HTML `<img>` in ReactMarkdown bodies |
+| One graphic needing distinct desktop and mobile assets | Wide/mobile ` ```responsive-img``` ` fence, authored **inline** |
+| Any other in-content graphic | Inline in the body — **never** front matter |
+
+**Rule:** if an image is not the page banner, author it in the markdown body. Do not add non-banner image URLs to YAML front matter.
+
+### Peer left-nav MD loaders (all three patterns)
+
+These resource pages share the same content-loader stack and support **all three** graphics treatments:
+
+| MD file | Route | Banner FM | Inline `![…]` | `responsive-img` |
+|---------|-------|-----------|---------------|------------------|
+| `mciData.md` | `/MCI` | `MCI_header` / `MCI_header_mobile` | yes | yes |
+| `federationData.md` | `/data-federation-resource` | `Federation_Header` | yes | yes |
+| `MCI_JSON2TSV.md` | `/MCI_JSON2TSV` | `headerImage` / `JSON2TSV_Header` | yes | yes |
+| `rareCancerData.md` | `/pediatric-…` | `RCI_Header` | yes | yes |
+| `toolsData.md` | `/tools` | `Tools_Header` | yes | yes |
+
+Other MD pages (FAQ, DUP, About, CPI, Events, Publications, News) use **banner FM + inline images** where applicable; `responsive-img` is optional there. CPI still has legacy non-banner FM diagram/icon URLs (deferred). Landing card/carousel assets stay structured YAML (deferred).
+
+### Front-matter image audit
+
+Each row is a remote MD file that has (or had) an image-related field. Classification: **banner** = keep in front matter; **non-banner** = migrate to inline body.
+
+| MD file | Route | FM image field | Classification | Migration status | Notes |
+|---------|-------|----------------|----------------|------------------|-------|
+| `faqData.md` | `/faqs` | `headerImage` | banner | done | Keep |
+| `dataUsagePolicies.md` | `/data-usage-policies` | `Data_Usage_Policies_Header` | banner | done | Keep |
+| `toolsData.md` | `/tools` | `Tools_Header` | banner | done | Keep |
+| `MCI_JSON2TSV.md` | `/MCI_JSON2TSV` | `headerImage` / `JSON2TSV_Header` | banner | done | Keep (aliases) |
+| `mciData.md` | `/MCI` | `MCI_header` / `MCI_header_mobile` | banner | done | Keep |
+| `mciData.md` | `/MCI` | `MCI_CCDI_Data_Ecosystem` / `_Mobile` | non-banner | done (portal) | MD view uses inline `responsive-img`; do not re-add to FM |
+| `federationData.md` | `/data-federation-resource` | `Federation_Header` | banner | done | Keep |
+| `federationData.md` | `/data-federation-resource` | `CCDI_Federation_Data_Access` | non-banner | legacy fallback | Prefer inline (`responsive-img` or `![…]`); portal still injects FM URL on Data Access when that section has no in-content graphic |
+| `rareCancerData.md` | `/pediatric-adolescent-and-young-adult-rare-cancer-study` | `RCI_Header` | banner | done | Keep |
+| `rareCancerData.md` | `/pediatric-…` | `RCI_Data_Flow_Chart_URL` | non-banner | legacy fallback | Prefer inline in intro; portal injects FM URL into intro when no flow-chart image is present yet |
+| `cpiData.md` | `/ccdi-participant-index` | `CPI_Header_URL` | banner | done | Keep |
+| `cpiData.md` | `/ccdi-participant-index` | `CPI_Img_URL` | non-banner | deferred | Components diagram still read from FM (out of peer left-nav scope) |
+| `cpiData.md` | `/ccdi-participant-index` | `CPI_*_Icon_URL` (4 icons) | non-banner | deferred | Stats strip icons still read from FM |
+| `aboutData.md` | `/about` | `About_Img` | banner | done | Same asset used as mobile header BG and desktop side image |
+| `eventAnnouncements.md` | `/ccdi-events-announcements` | `CCDI_Event_Announcements_Header` / `headerImage` | banner | done | Prefer FM; leading body `![…]` still accepted as legacy fallback |
+| `publicationsData.md` | `/publications` | `Publications_Header` / `headerImage` | banner | done | Prefer FM; leading body `![…]` still accepted as legacy fallback |
+| `newsData.md` | `/news` | — | — | done | Card art is inline `<img>` in body; page chrome uses bundled header |
+| `releaseNotesData.md` | `/release-notes` | — | — | done | Inline body `<img>` only |
+| `ccdiDataUpdates.md` | `/news` | — | — | done | Inline body `<img>` only |
+| `navData.md` | (global) | — | — | done | No image fields |
+| `aboutSearchContent.md` | `/sitesearch` | — | — | done | No image fields |
+| `landingData.md` | `/` | `resources*[].img`, `carousel[].img` / `mobile` | non-banner (structured cards) | deferred | YAML card/carousel assets, not prose MD; hero BG is bundled CSS |
+
+Remaining deferred (outside peer left-nav loaders): **CPI** non-banner URLs; optional **landing** card asset policy. Federation / Rare Cancer legacy FM image fields remain supported as fallbacks until Static Contents migrates them fully inline.
+
 ## `faqData.md` (CCDI FAQs)
 
 | Item | Value |
@@ -151,11 +209,10 @@ Each news item:
 |-----|--------|
 | `title` | Page banner title |
 | `RCI_Header` | Absolute URL for the hero banner background (bundled header used if omitted) |
-| `RCI_Data_Flow_Chart_URL` | Absolute URL for the data-flow image (bundled chart used if omitted) |
 | `RCI_DOWNLOAD_CONFIG` | `{ url, filename }` for the contact-form PDF download |
 | `navTitles[]` | Left-nav labels; must match `##` / `###` heading text exactly |
 
-Intro Markdown lives in the body **before the first `##`**. An optional `![RCI data flow chart](<url>)` image is stripped from the intro (the page renders the chart once from `RCI_Data_Flow_Chart_URL`). Nested `####` question headings stay in the subtopic body.
+Intro Markdown lives in the body **before the first `##`**. Author the data-flow chart **inline** in the intro (e.g. `![RCI data flow chart](<url>)`) — do not put it in front matter. Nested `####` question headings stay in the subtopic body.
 
 Property tables set scroll/nav ids:
 
@@ -234,18 +291,15 @@ If the file is missing, YAML is invalid, or the request fails, the page stays em
 |------|--------|
 | Path | `${REACT_APP_STATIC_CONTENT_URL}/cpiData.md?ts=<timestamp>` |
 | Hub route | `/ccdi-participant-index` |
-| Format | YAML front matter for image URLs, then news-style `#` blocks separated by `---` |
+| Format | YAML front matter for **banner** URL only, then news-style `#` blocks separated by `---` |
 
-Front matter holds asset URLs only. Intro copy is the markdown before the first `#` heading. Each topic is a `#` section with a trailing property table for `id` (same pattern as `newsData.md`).
+Front matter holds the page banner (`CPI_Header_URL`). Intro copy is the markdown before the first `#` heading. Each topic is a `#` section with a trailing property table for `id` (same pattern as `newsData.md`).
+
+**Migration (graphics standard):** `CPI_Img_URL` and `CPI_*_Icon_URL` are legacy non-banner FM fields still consumed by the portal. New/edited content should move those graphics into the body (inline `<img>` / markdown images). Do not add new non-banner image keys to front matter.
 
 ```markdown
 ---
 CPI_Header_URL: "https://example.com/cpi-header.png"
-CPI_Img_URL: "https://example.com/cpi-diagram.png"
-CPI_Cross_Dataset_Linkages_Icon_URL: "https://example.com/cpi-linkages.svg"
-CPI_Domain_Coverage_Icon_URL: "https://example.com/cpi-domains.svg"
-CPI_Total_Mapped_Participants_Ids_Icon_URL: "https://example.com/cpi-mapped.svg"
-CPI_Unique_Participants_Icon_URL: "https://example.com/cpi-unique.svg"
 ---
 
 Intro paragraph for the Participant Index page.
@@ -263,11 +317,11 @@ Markdown body with [links](https://example.com) and lists.
 
 | Field | Source |
 |-------|--------|
-| Image URLs | YAML front matter (`CPI_*_URL`) |
+| `CPI_Header_URL` | YAML front matter (banner only) |
 | Intro | Prose before the first `#` heading |
 | `topic` | `#` heading |
 | `content` | Markdown body (lists, links, bold) |
-| `id` | Property table (`CPI_Components` keeps the Components diagram) |
+| `id` | Property table (`CPI_Components`) |
 
 Live CPI statistics still come from the Participant Index API, not from this file.
 

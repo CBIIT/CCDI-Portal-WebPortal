@@ -5,7 +5,6 @@
 export const sampleRareCancerMarkdownRaw = `---
 title: Pediatric, Adolescent, and Young Adult Rare Cancer Study
 RCI_Header: "https://example.com/rare-cancer-header.png"
-RCI_Data_Flow_Chart_URL: "https://example.com/rci-flow-chart.png"
 RCI_DOWNLOAD_CONFIG:
   url: "https://example.com/rare-cancer-study_contact.pdf"
   filename: rare-cancer-study_contact.pdf

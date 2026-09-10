@@ -1,90 +1,109 @@
 /**
- * ToolsResourceController — mocked axios GET for `resourceData.yaml`; renders ToolsResourceView when
- * `toolsContent` is present.
+ * ToolsResourceController — fetches toolsData.md, parses markdown, renders ToolsResourceView.
  *
- * Follows tests/TEST_STRUCTURE.md: mock `env` and `axios`, `createDedicatedYamlAxiosMock` from
- * tests/helpers/resourceYamlApiMocks.js, `waitFor` + assert URL and fixture-derived text.
+ * @see src/pages/resource/ToolsResourcePage/ToolsResourceController.js
  */
-
-import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
-import { render, screen, waitFor } from '@testing-library/react';
-import '@testing-library/jest-dom';
-import axios from 'axios';
-import ToolsResourceController from '../../../../src/pages/resource/ToolsResourcePage/ToolsResourceController';
-import { minimalToolsResourceData } from '../../../fixtures/resource/resourceDataViewProps';
-import { createDedicatedYamlAxiosMock } from '../../../helpers/resourceYamlApiMocks';
-
-if (typeof global.MutationObserver === 'undefined') {
-  global.MutationObserver = class MutationObserver {
-    disconnect() {}
-    observe() {}
-    takeRecords() {
-      return [];
-    }
-  };
-}
 
 jest.mock('axios');
 jest.mock('../../../../src/utils/env', () => ({
   REACT_APP_STATIC_CONTENT_URL: 'https://static.example.com',
 }));
 
-beforeEach(() => {
-  window.scrollTo = jest.fn();
-  for (let i = 0; i < 3; i += 1) {
-    document.body.appendChild(document.createElement('footer'));
-  }
-});
+jest.mock('../../../../src/pages/resource/ToolsResourcePage/parseToolsMarkdown', () => ({
+  __esModule: true,
+  default: jest.fn(() => ({
+    title: 'CCDI Hub Tools',
+    Tools_Header: 'https://example.com/tools.png',
+    toolsIntroText: 'Tools intro for unit test.',
+    navTitles: ['Tools Topic One', 'Tool Subsection A'],
+    toolsContent: [
+      {
+        id: 'tools_section_one',
+        topic: 'Tools Topic One',
+        list: [
+          {
+            id: 'tools_sub_a',
+            subtopic: 'Tool Subsection A',
+            content: 'Tool section body for testing.',
+          },
+        ],
+      },
+    ],
+  })),
+}));
 
-afterEach(() => {
+jest.mock('../../../../src/pages/resource/ToolsResourcePage/ToolsResourceView', () => (
+  function MockToolsResourceView({ data }) {
+    return <div>{data?.toolsContent?.[0]?.topic || 'no-content'}</div>;
+  }
+));
+
+import React from 'react';
+import { MemoryRouter } from 'react-router-dom';
+import { render, screen, waitFor } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import axios from 'axios';
+import parseToolsMarkdown from '../../../../src/pages/resource/ToolsResourcePage/parseToolsMarkdown';
+import ToolsResourceController from '../../../../src/pages/resource/ToolsResourcePage/ToolsResourceController';
+
+beforeEach(() => {
   jest.clearAllMocks();
-  document.querySelectorAll('footer').forEach((el) => el.remove());
+  document.title = 'Initial Title';
+  axios.get.mockResolvedValue({ data: 'tools-markdown' });
+  global.MutationObserver = class {
+    constructor() {
+      this.observe = jest.fn();
+      this.disconnect = jest.fn();
+      this.takeRecords = jest.fn(() => []);
+    }
+  };
 });
 
 describe('ToolsResourceController', () => {
-  describe('Mocked axios (resourceData.yaml)', () => {
-    it('should fetch resourceData.yaml and render tools content when toolsContent exists', async () => {
-      axios.get.mockImplementation(
-        createDedicatedYamlAxiosMock({
-          '/resourceData.yaml': minimalToolsResourceData,
-        }),
-      );
+  it('should fetch toolsData.md and render tools content when toolsContent exists', async () => {
+    render(
+      <MemoryRouter initialEntries={['/tools']}>
+        <ToolsResourceController />
+      </MemoryRouter>,
+    );
 
-      render(
-        <MemoryRouter initialEntries={['/explore']}>
-          <ToolsResourceController />
-        </MemoryRouter>,
-      );
-
-      await waitFor(() => {
-        expect(screen.getByText('Tools')).toBeInTheDocument();
-      });
-
+    await waitFor(() => {
       expect(axios.get).toHaveBeenCalledWith(
-        expect.stringMatching(/^https:\/\/static\.example\.com\/resourceData\.yaml\?ts=\d+$/),
+        expect.stringMatching(/^https:\/\/static\.example\.com\/toolsData\.md\?ts=\d+$/),
       );
-      expect(screen.getByText(/Tools intro for unit test/i)).toBeInTheDocument();
     });
+    expect(parseToolsMarkdown).toHaveBeenCalledWith('tools-markdown');
 
-    it('should render an empty div when YAML has no toolsContent', async () => {
-      axios.get.mockImplementation(
-        createDedicatedYamlAxiosMock({
-          '/resourceData.yaml': {},
-        }),
-      );
-
-      render(
-        <MemoryRouter initialEntries={['/explore']}>
-          <ToolsResourceController />
-        </MemoryRouter>,
-      );
-
-      await waitFor(() => {
-        expect(axios.get).toHaveBeenCalled();
-      });
-
-      expect(screen.queryByText('Tools')).not.toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText('Tools Topic One')).toBeInTheDocument();
     });
+  });
+
+  it('should set document title from parsed front matter title', async () => {
+    render(
+      <MemoryRouter initialEntries={['/tools']}>
+        <ToolsResourceController />
+      </MemoryRouter>,
+    );
+
+    await waitFor(() => {
+      expect(document.title).toBe('CCDI Hub Tools');
+    });
+  });
+
+  it('should render an empty div when parsed data has no toolsContent', async () => {
+    parseToolsMarkdown.mockReturnValueOnce({ title: 'Tools', toolsContent: undefined });
+
+    const { container } = render(
+      <MemoryRouter initialEntries={['/tools']}>
+        <ToolsResourceController />
+      </MemoryRouter>,
+    );
+
+    await waitFor(() => {
+      expect(axios.get).toHaveBeenCalled();
+    });
+    expect(screen.queryByText('Tools Topic One')).not.toBeInTheDocument();
+    expect(container.querySelector('div').textContent).toBe('');
   });
 });

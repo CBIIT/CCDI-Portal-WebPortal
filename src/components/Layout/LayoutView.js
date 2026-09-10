@@ -1,18 +1,18 @@
 import React from "react";
 import { withStyles, CssBaseline } from '@material-ui/core';
-import { Route, Routes, } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import Footer from '../ResponsiveFooter/';
 import Header from '../ResponsiveHeader/';
 import Home from '../../pages/landing/landingController';
 import About from '../../pages/about/AboutPage/AboutController';
 import DataUsagePoliciesView from '../../pages/about/DataUsagePoliciesPage/DataUsagePoliciesController';
+import FaqView from '../../pages/about/FaqPage/FaqController';
 import PublicationsView from '../../pages/about/publications/publicationsController';
 import News from '../../pages/news/newsController';
 import DataModelNavigator from '../../pages/dmn/DataModelNavigator';
 import Error from '../../pages/error/Error';
 import Search from '../../pages/globalSearch/searchController';
 import Inventory from '../../pages/inventory/inventoryController';
-import Cart from '../../pages/cart/cartController';
 import ScrollButton from '../ScrollButton/ScrollButtonView';
 import MCIResourceView from '../../pages/resource/MCIResourcePage/MCIResourceMarkdownController'
 import PMTLResourceView from '../../pages/resource/PMTLResourcePage/PMTLResourceController';
@@ -29,6 +29,7 @@ import ToolsResourceView from "../../pages/resource/ToolsResourcePage/ToolsResou
 import CCDIEventAnnouncementsResourceView from "../../pages/resource/CCDIEventAnnouncementsResourcePage/CCDIEventAnnouncementsResourceController";
 import CCDIEventDetailView from "../../pages/resource/CCDIEventAnnouncementsResourcePage/EventDetailController";
 import RareCancerResourceView from "../../pages/resource/RareCancerResourcePage/RareCancerResourceController";
+import MCIJson2TsvResourceView from "../../pages/resource/MCIJson2TsvResourcePage/MCIJson2TsvResourceController";
 // import NewsDetail from '../../pages/news/newsDetailView';
 
 const Layout = () => {
@@ -45,12 +46,14 @@ const Layout = () => {
           <Route path="/data-model" element={<DataModelNavigator />} />
           <Route path="/sitesearch" element={<Search />} />
           <Route path="/explore" element={<Inventory />} />
-          <Route path="/fileCentricCart" element={<Cart />} />
           <Route path="/MCI" element={<MCIResourceView />} />
+          <Route path="/MCI_JSON2TSV" element={<MCIJson2TsvResourceView />} />
           <Route path="/pmtl" element={<PMTLResourceView />} />
           <Route path="/data-federation-resource" element={<FederationResourceView/>} />
           <Route path="/data-federation-data-model" element={<FederationDataModelNavigator />} />
           <Route path="/data-usage-policies" element={<DataUsagePoliciesView />} />
+          <Route path="/faqs" element={<FaqView />} />
+          <Route path="/faq" element={<Navigate to="/faqs" replace />} />
           <Route path="/ccdi-participant-index" element={<CPIResourceView />} />
           <Route path="/publications" element={<PublicationsView />} />
           <Route path="/tools" element={<ToolsResourceView />} />

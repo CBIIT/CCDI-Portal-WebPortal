@@ -4,13 +4,13 @@ import {
 } from '@material-ui/core';
 import { cn } from 'bento-components';
 import useStyles from './style';
-import { useNavigate } from 'react-router-dom';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 import { ReactComponent as DownArrowIcon } from '../../assets/Down_Arrow.svg';
 import { ReactComponent as UpArrowIcon } from '../../assets/Up_Arrow.svg';
-import { studyDownloadLinks, openDoubleLink } from '../../../../bento/studiesData';
+import { studycBioPortalLinks } from '../../../../bento/studiesData';
+import { openC3dcStudy } from '../participant/c3dcService';
 
 const CONSENT_GLOSSARY_URL = 'https://www.ncbi.nlm.nih.gov/gap/docs/submissionguide/#consentgloss';
 
@@ -107,7 +107,7 @@ const StudiesCard = ({ data = {}, index }) => {
   } = data;
 
   const classes = useStyles();
-  const navigate = useNavigate();
+  const cBioPortalUrl = studycBioPortalLinks && studycBioPortalLinks[study_id];
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [consentCodesExpanded, setConsentCodesExpanded] = useState(false);
@@ -133,21 +133,16 @@ const StudiesCard = ({ data = {}, index }) => {
   };
 
   const handleViewStudy = () => {
-    navigate(`/studies/${study_id}`);
+    openC3dcStudy(study_id);
+    setDropdownOpen(false);
   };
 
   const handleCBioPortal = () => {
-    window.open('https://cbioportal.ccdi.cancer.gov/', '_blank');
-  };
-
-  const handleDownloadManifest = () => {
-    const downloadUrl = studyDownloadLinks[study_id];
-    if (downloadUrl) {
-      const fileName = `${study_id}_CCDI_Study_Manifest.xlsx`;
-      openDoubleLink(downloadUrl, fileName);
-    } else {
-      console.warn(`No download link found for study: ${study_id}`);
+    if (!cBioPortalUrl) {
+      return;
     }
+    window.open(cBioPortalUrl, '_blank', 'noopener,noreferrer');
+    setDropdownOpen(false);
   };
 
   // Close dropdown when clicking outside
@@ -355,28 +350,19 @@ const StudiesCard = ({ data = {}, index }) => {
                       />
                     </ListItem>
                     
-                    <ListItem 
-                      button 
-                      className={classes.dropdownItem}
-                      onClick={handleDownloadManifest}
-                    >
-                      <ListItemText 
-                        primary="DOWNLOAD MANIFEST" 
-                        className={classes.dropdownItemText}
-                      />
-                    </ListItem>
-                    
-                    <ListItem 
-                      button 
-                      className={classes.dropdownItem}
-                      onClick={handleCBioPortal}
-                    >
-                      <ListItemText 
-                        primary="CCDI CBioPortal" 
-                        className={classes.dropdownItemText}
-                      />
-                      <OpenInNewIcon style={{ color: '#07679C', fontSize: '16px' }} />
-                    </ListItem>
+                    {cBioPortalUrl ? (
+                      <ListItem 
+                        button 
+                        className={classes.dropdownItem}
+                        onClick={handleCBioPortal}
+                      >
+                        <ListItemText 
+                          primary="CCDI CBioPortal" 
+                          className={classes.dropdownItemText}
+                        />
+                        <OpenInNewIcon style={{ color: '#07679C', fontSize: '16px' }} />
+                      </ListItem>
+                    ) : null}
                   </List>
                 </Box>
               )}

@@ -1,37 +1,44 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import env from '../../../utils/env';
-import yaml from "js-yaml";
-import axios from "axios";
-import ToolsResourceView from "./ToolsResourceView";
+import axios from 'axios';
+import parseToolsMarkdown from './parseToolsMarkdown';
+import ToolsResourceView from './ToolsResourceView';
 
-const RESOURCE_URL = env.REACT_APP_STATIC_CONTENT_URL + '/resourceData.yaml';
+const TOOLS_MD_URL = `${env.REACT_APP_STATIC_CONTENT_URL}/toolsData.md`;
 
-const ToolsController = ({ match }) => {
-  const [data, setData] = useState([]);
+const ToolsController = () => {
+  const [data, setData] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
-      let resultData = [];
-      let result = [];
+      let resultData = {};
       try {
-        const fileUrl = `${RESOURCE_URL}?ts=${new Date().getTime()}`;
-        result = await axios.get(
-          fileUrl
-        );
-        resultData = yaml.safeLoad(result.data);
+        const fileUrl = `${TOOLS_MD_URL}?ts=${new Date().getTime()}`;
+        const result = await axios.get(fileUrl);
+        resultData = parseToolsMarkdown(result.data);
       } catch (_error) {
-        // result = await axios.get(YAMLData);
-        // resultData = yaml.safeLoad(result.data);
+        /* empty state; page still mounts */
       }
-
       setData(resultData);
     };
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (!data.title) {
+      return undefined;
+    }
+    const previousTitle = document.title;
+    document.title = data.title;
+    return () => {
+      document.title = previousTitle;
+    };
+  }, [data.title]);
+
   if (data.toolsContent) {
     return <ToolsResourceView data={data} />;
-  } else {
-    return <div />
   }
+  return <div />;
 };
+
 export default ToolsController;

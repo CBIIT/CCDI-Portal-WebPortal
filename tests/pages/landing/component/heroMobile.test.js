@@ -2,19 +2,32 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import HeroMobile from '../../../../src/pages/landing/component/heroMobile';
+import { LandingContentProvider } from '../../../../src/pages/landing/LandingContentContext';
 
 jest.mock('../../../../src/pages/landing/component/PageVisibility', () => ({
   __esModule: true,
   default: jest.fn(() => true),
 }));
 
-jest.mock('../../../../src/bento/landingPageData', () => ({
+const heroContent = {
+  introData: {
+    introTitle1: 'Discover CCDI Resources',
+    introTitle2: 'Explore the CCDI Hub',
+  },
   carouselList: [
     { content: 'Card One', link: 'https://example.test/one', mobile: 'm1' },
     { content: 'Card Two', link: 'https://example.test/two', mobile: 'm2' },
     { content: 'Card Three', link: 'https://example.test/three', mobile: 'm3' },
   ],
-}));
+};
+
+function renderHeroMobile() {
+  return render(
+    <LandingContentProvider value={heroContent}>
+      <HeroMobile />
+    </LandingContentProvider>,
+  );
+}
 
 describe('HeroMobile', () => {
   beforeEach(() => {
@@ -32,14 +45,14 @@ describe('HeroMobile', () => {
   });
 
   it('should render hero title and carousel cards', () => {
-    render(<HeroMobile />);
+    renderHeroMobile();
     expect(screen.getByText(/Discover/)).toBeInTheDocument();
     expect(screen.getByText('Card One')).toBeInTheDocument();
     expect(screen.getByText('Card Two')).toBeInTheDocument();
   });
 
   it('should toggle pause button style and support arrows', () => {
-    const { container } = render(<HeroMobile />);
+    const { container } = renderHeroMobile();
     const pauseButton = container.querySelector('.pauseButtonContainer');
     const arrowButtons = container.querySelectorAll('.arrowButtonContainer');
     const list = container.querySelector('#mcarouselList');

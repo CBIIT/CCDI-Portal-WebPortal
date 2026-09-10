@@ -1,14 +1,11 @@
 /**
- * CPI page: static YAML (`resourceData.yaml`) + JSON from participant index API.
+ * CPI page: static markdown (`cpiData.md`) + JSON from participant index API.
  * URL must match `CPIResourceController.js` for contract assertions.
  */
 
-export const CPI_PARTICIPANT_STATS_URL =
-  'https://participantindex.ccdi.cancer.gov/v1/statistic';
-
-/** Minimal `resourceData.yaml` payload for CPIResourceView (keys used by the view). */
-export const minimalCpiResourceYamlData = {
-  cpiIntroText: '<p>CPI intro for unit test.</p>',
+/** Minimal parsed `cpiData.md` payload for CPIResourceView (keys used by the view). */
+export const minimalCpiResourceData = {
+  cpiIntroText: 'CPI intro for unit test.',
   CPI_Header_URL: '',
   CPI_Unique_Participants_Icon_URL: '',
   CPI_Total_Mapped_Participants_Ids_Icon_URL: '',
@@ -19,15 +16,21 @@ export const minimalCpiResourceYamlData = {
     {
       id: 'overview_section',
       topic: 'Overview Topic',
-      content: '<p>CPI section body for testing.</p>',
+      content: 'CPI section body for testing.',
     },
     {
       id: 'CPI_Components_block',
       topic: 'Components Topic',
-      content: '<p>Components section body.</p>',
+      content: 'Components section body.',
     },
   ],
 };
+
+/** @deprecated Prefer minimalCpiResourceData — kept for older import paths during migration. */
+export const minimalCpiResourceYamlData = minimalCpiResourceData;
+
+export const CPI_PARTICIPANT_STATS_URL =
+  'https://participantindex.ccdi.cancer.gov/v1/statistic';
 
 /**
  * Shape expected by CPIResourceView when rendering the stats grid (subset of production API).

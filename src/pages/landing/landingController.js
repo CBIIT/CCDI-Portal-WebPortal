@@ -1,24 +1,54 @@
 import React, { useEffect, useState } from 'react';
 import { useApolloClient } from '@apollo/client';
 import { connect } from 'react-redux';
-import env from '../../utils/env'
-import yaml from "js-yaml";
-import axios from "axios";
-import { fetchReleaseNotesData } from '../releaseNotePage/parseReleaseNotesMarkdown';
+import env from '../../utils/env';
+import axios from 'axios';
+import { fetchNewsData } from '../news/parseNewsMarkdown';
+import { fetchReleaseNotesData, mergeReleaseNotesLists } from '../releaseNotePage/parseReleaseNotesMarkdown';
 import { CircularProgress } from '@material-ui/core';
-import { statsData } from '../../bento/landingPageData';
+import {
+  introData as assetIntroData,
+  titleData as assetTitleData,
+  statsData as assetStatsData,
+  statsNote as assetStatsNote,
+  resourcesAppliationsListData as assetResourcesApplications,
+  resourcesCloudListData as assetResourcesCloud,
+  carouselList as assetCarouselList,
+  LANDING_DATA_QUERY,
+} from '../../bento/landingPageData';
+import { srcList as localNewsSrcList } from '../../bento/newsData';
+import parseLandingMarkdown, {
+  createEmptyLandingContent,
+  mergeLandingContent,
+} from './parseLandingMarkdown';
+import { LandingContentProvider } from './LandingContentContext';
 import LandingView from './landingView';
-import { LANDING_DATA_QUERY } from '../../bento/landingPageData';
 
-const CCDCurl ='https://datacatalog.ccdi.cancer.gov/service/datasets/count';
-const NEWS_URL = `${env.REACT_APP_STATIC_CONTENT_URL}/newsData.yaml`;
+const CCDCurl = 'https://datacatalog.ccdi.cancer.gov/service/datasets/count';
+const LANDING_MD_URL = `${env.REACT_APP_STATIC_CONTENT_URL}/landingData.md`;
+
+/** Local webpack assets only — never used as copy fallback when MD is missing. */
+const landingAssetDefaults = {
+  introData: assetIntroData,
+  titleData: assetTitleData,
+  statsData: assetStatsData,
+  statsNote: assetStatsNote,
+  resourcesAppliationsListData: assetResourcesApplications,
+  resourcesCloudListData: assetResourcesCloud,
+  carouselList: assetCarouselList,
+};
+
+const emptyLandingContent = createEmptyLandingContent(landingAssetDefaults);
 
 const getDashData = () => {
   const client = useApolloClient();
   async function getData() {
-    let result = await client.query({
+    // MCI participant count lives on C3DC Integrated OpenSearch, not Hub.
+    const result = await client.query({
       query: LANDING_DATA_QUERY,
       variables: {},
+      context: { clientName: 'c3dcService' },
+      fetchPolicy: 'network-only',
     })
       .then((response) => response.data);
     return result;
@@ -31,57 +61,97 @@ const getDashData = () => {
   }
 
   async function getNewsData() {
-    let resultData = {};
-    try {
-      const fileUrl = `${NEWS_URL}?ts=${new Date().getTime()}`;
-      const result = await axios.get(fileUrl);
-      resultData = yaml.safeLoad(result.data) || {};
-    } catch (_error) {
-    }
-    const { releaseNotesList } = await fetchReleaseNotesData();
-    return { ...resultData, releaseNotesList };
+    const news = await fetchNewsData();
+    const { releaseNotesList, ccdiDataUpdatesList } = await fetchReleaseNotesData();
+    return {
+      newsList: news.newsList,
+      newsImgUrlList: { ...localNewsSrcList, ...news.newsImgUrlList },
+      altList: news.altList,
+      releaseNotesList: mergeReleaseNotesLists(releaseNotesList, ccdiDataUpdatesList),
+    };
   }
 
-  const [statsDataNew, setStatsDataNew] = useState(statsData);
+  async function getLandingContent() {
+    try {
+      const fileUrl = `${LANDING_MD_URL}?ts=${new Date().getTime()}`;
+      const result = await axios.get(fileUrl);
+      const parsed = parseLandingMarkdown(result.data);
+      if (!parsed) {
+        return emptyLandingContent;
+      }
+      return mergeLandingContent(parsed, landingAssetDefaults);
+    } catch (_error) {
+      return emptyLandingContent;
+    }
+  }
+
+  const [landingContent, setLandingContent] = useState(emptyLandingContent);
+  const [statsDataNew, setStatsDataNew] = useState([]);
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const controller = new AbortController();
-    getCCDC().then((result) => {
-      let newStatList = statsDataNew;
-      newStatList[0].num = result.data;
-      setStatsDataNew([...newStatList]);
+
+    getLandingContent().then((content) => {
+      setLandingContent(content);
+      setStatsDataNew(content.statsData.map((row) => ({ ...row })));
     });
-    getData().then((result) => {
-      let newStatList = statsDataNew;
-      const MCICount = result.numberOfMCICount;
-      newStatList[1].num = MCICount;
-      setStatsDataNew([...newStatList]);
-    });
+
     getNewsData().then((resultData) => {
       setData(resultData);
     });
+
     return () => controller.abort();
-  },[]);
-  return { statsDataNew, data };
+  }, []);
+
+  useEffect(() => {
+    getCCDC().then((result) => {
+      setStatsDataNew((prev) => {
+        const next = prev.map((row) => ({ ...row }));
+        if (next[0]) {
+          next[0] = { ...next[0], num: result.data };
+        }
+        return next;
+      });
+    });
+    getData().then((result) => {
+      setStatsDataNew((prev) => {
+        const next = prev.map((row) => ({ ...row }));
+        if (next[1]) {
+          next[1] = { ...next[1], num: result.numberOfMCICount };
+        }
+        return next;
+      });
+    });
+  }, []);
+
+  return { statsDataNew, data, landingContent };
 };
 
 const LandingController = (() => {
-  const { statsDataNew, data } = getDashData();
+  const { statsDataNew, data, landingContent } = getDashData();
 
-  if (!statsDataNew) {
-    return (<div style={{"height": "1200px","paddingTop": "10px"}}><div style={{"margin": "auto","display": "flex","maxWidth": "1800px"}}><CircularProgress /></div></div>);
+  if (statsDataNew == null) {
+    return (
+      <div style={{ height: '1200px', paddingTop: '10px' }}>
+        <div style={{ margin: 'auto', display: 'flex', maxWidth: '1800px' }}>
+          <CircularProgress />
+        </div>
+      </div>
+    );
   }
 
   return (
-    <LandingView
-      statsData={statsDataNew}
-      newsData={data}
-    />
+    <LandingContentProvider value={landingContent}>
+      <LandingView
+        statsData={statsDataNew}
+        newsData={data}
+      />
+    </LandingContentProvider>
   );
 });
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = () => ({
 });
 
 export default connect(mapStateToProps, null)(LandingController);

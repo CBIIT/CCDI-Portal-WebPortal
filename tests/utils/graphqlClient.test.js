@@ -37,6 +37,7 @@ jest.mock('../../src/utils/env', () => ({
   default: {
     REACT_APP_BACKEND_API: 'https://backend.test/graphql',
     REACT_APP_INTEROP_SERVICE_API: 'https://interop.test/',
+    REACT_APP_C3DC: 'https://c3dc.test',
   },
 }));
 
@@ -49,6 +50,7 @@ describe('graphqlClient', () => {
     it('should create HttpLinks from env URLs', () => {
       expect(HttpLink).toHaveBeenCalledWith({ uri: 'https://backend.test/graphql' });
       expect(HttpLink).toHaveBeenCalledWith({ uri: 'https://interop.test/graphql' });
+      expect(HttpLink).toHaveBeenCalledWith({ uri: 'https://c3dc.test/v1/graphql/' });
     });
 
     it('should build ApolloClient with InMemoryCache and composed link', () => {
@@ -64,7 +66,7 @@ describe('graphqlClient', () => {
 
     it('should compose dynamic fetch policy link with split routing', () => {
       expect(mockDynamicLinkRequestFns.length).toBeGreaterThan(0);
-      expect(mockSplitPredicates.length).toBeGreaterThan(0);
+      expect(mockSplitPredicates.length).toBe(2);
     });
   });
 
@@ -95,6 +97,15 @@ describe('graphqlClient', () => {
       expect(forward).toHaveBeenCalledWith(operation);
     });
 
+    it('should set no-cache fetch policy for c3dcService operations', () => {
+      const { operation, forward } = runDynamicLink('c3dcService');
+
+      const contextUpdater = operation.setContext.mock.calls[0][0];
+      const nextContext = contextUpdater({ fetchOptions: {} });
+      expect(nextContext.fetchOptions.fetchPolicy).toBe('no-cache');
+      expect(forward).toHaveBeenCalledWith(operation);
+    });
+
     it('should set cache-first fetch policy for non-interop operations', () => {
       const { operation, forward } = runDynamicLink('backendService');
 
@@ -106,10 +117,18 @@ describe('graphqlClient', () => {
   });
 
   describe('ApolloLink.split', () => {
+    // Nested split evaluates the inner predicate first, then the outer.
+    const c3dcPredicate = () => mockSplitPredicates[0];
+    const interopPredicate = () => mockSplitPredicates[1];
+
     it('should route interopService operations to the interop link', () => {
-      const predicate = mockSplitPredicates[0];
-      expect(predicate({ getContext: () => ({ clientName: 'interopService' }) })).toBe(true);
-      expect(predicate({ getContext: () => ({ clientName: 'other' }) })).toBe(false);
+      expect(interopPredicate()({ getContext: () => ({ clientName: 'interopService' }) })).toBe(true);
+      expect(interopPredicate()({ getContext: () => ({ clientName: 'other' }) })).toBe(false);
+    });
+
+    it('should route c3dcService operations to the C3DC link', () => {
+      expect(c3dcPredicate()({ getContext: () => ({ clientName: 'c3dcService' }) })).toBe(true);
+      expect(c3dcPredicate()({ getContext: () => ({ clientName: 'other' }) })).toBe(false);
     });
   });
 });

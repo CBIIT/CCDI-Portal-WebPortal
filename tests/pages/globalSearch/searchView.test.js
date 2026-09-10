@@ -138,7 +138,7 @@ describe('Global Search — searchView page', () => {
     });
   });
 
-  it('should request counts on mount when keyword query param is empty', async () => {
+  it('should not request counts when keyword query param is empty', async () => {
     render(
       <ThemeProvider theme={theme}>
         <MemoryRouter initialEntries={['/sitesearch']}>
@@ -159,11 +159,12 @@ describe('Global Search — searchView page', () => {
     );
 
     await waitFor(() => {
-      expect(queryCountAPI).toHaveBeenCalledWith('', true);
+      expect(screen.getByTestId('mock-global-search-results')).toBeInTheDocument();
     });
+    expect(queryCountAPI).not.toHaveBeenCalled();
   });
 
-  it('should call queryCountAPI and navigate when search bar onChange receives a new keyword', async () => {
+  it('should navigate when search bar onChange receives a new keyword (counts load from URL)', async () => {
     render(
       <ThemeProvider theme={theme}>
         <MemoryRouter initialEntries={['/sitesearch?keyword=alpha']}>
@@ -191,11 +192,9 @@ describe('Global Search — searchView page', () => {
       capturedSearchBarFunctions.onChange('beta');
     });
 
-    await waitFor(() => {
-      expect(queryCountAPI).toHaveBeenCalledWith('beta');
-    });
-
     expect(mockNavigate).toHaveBeenCalledWith('/sitesearch?keyword=beta');
+    // Counts are fetched by the keyword URL effect after navigation, not in onChange.
+    expect(queryCountAPI).not.toHaveBeenCalledWith('beta');
   });
 
   it('should assemble autocomplete suggestions when getSuggestions runs for an authorized user', async () => {

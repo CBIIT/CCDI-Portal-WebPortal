@@ -7,7 +7,7 @@ import { cn } from 'bento-components';
 import { Link } from 'react-router-dom';
 import { ReactComponent as DownArrowIcon } from '../../assets/Down_Arrow.svg';
 import { ReactComponent as UpArrowIcon } from '../../assets/Up_Arrow.svg';
-import ToastNotification from '../participant/ToastNotification';
+import { openC3dcExploreFiles } from '../participant/c3dcService';
 
 const removeSquareBracketsFromString = (text) => {
   return text.replace(/\[|\]/g, '');
@@ -93,9 +93,8 @@ const truncateTitle = (title, containerWidth) => {
   };
 };
 
-const FilesCard = ({ data = {}, index, addFiles, cartFiles = [] }) => {
+const FilesCard = ({ data = {}, index }) => {
   const {
-    id,
     file_name,
     data_category,
     participant_id,
@@ -109,7 +108,6 @@ const FilesCard = ({ data = {}, index, addFiles, cartFiles = [] }) => {
   const [containerWidth, setContainerWidth] = useState(0);
   const [participantExpanded, setParticipantExpanded] = useState(false);
   const [sampleExpanded, setSampleExpanded] = useState(false);
-  const [notification, setNotification] = useState({ open: false, message: '', type: 'success' });
   const cardRef = useRef(null);
 
   // Measure container width for title truncation
@@ -125,40 +123,8 @@ const FilesCard = ({ data = {}, index, addFiles, cartFiles = [] }) => {
     return () => window.removeEventListener('resize', measureWidth);
   }, []);
 
-  const showNotification = (message, type = 'success') => {
-    setNotification({ open: true, message, type });
-  };
-
-  const handleNotificationClose = () => {
-    setNotification({ open: false, message: '', type: 'success' });
-  };
-
-  const handleAddToCart = () => {
-    if (!addFiles) {
-      console.warn('Cart functionality not available: missing addFiles prop');
-      return;
-    }
-
-    const upperLimit = 200000;
-    const cartCount = cartFiles.length;
-
-    if (cartCount >= upperLimit) {
-      showNotification('Cart limit reached. Please remove some files first.', 'error');
-      return;
-    }
-
-    // Check if file is already in cart
-    if (cartFiles.includes(id)) {
-      showNotification('File already in cart', 'error');
-      return;
-    }
-
-    if (cartCount + 1 <= upperLimit) {
-      addFiles([id]);
-      showNotification('1 File successfully added to your cart', 'success');
-    } else {
-      showNotification('Cart limit reached. Please remove some files first.', 'error');
-    }
+  const handleViewInExplore = () => {
+    openC3dcExploreFiles();
   };
 
   const renderInfo = (label, value = '') => (
@@ -173,23 +139,21 @@ const FilesCard = ({ data = {}, index, addFiles, cartFiles = [] }) => {
   );
 
   const renderParticipant = (label, value = '') => {
-    // Simple, reliable character limits based on screen size
-    // Reduced to account for the '...' we add manually
+    // Character limits decide when the expand arrow appears; CSS ellipsis
+    // clips by available width so long unbroken IDs never cover the arrow.
     const getMaxLength = () => {
       if (window.innerWidth <= 749) {
-        return 85; // Mobile
+        return 75;
       } else if (window.innerWidth <= 900) {
-        return 47; // Tablet  
+        return 40;
       } else if (window.innerWidth <= 1200) {
-        return 67; // Small desktop
-      } else {
-        return 90; // Large desktop - conservative to prevent overflow
+        return 58;
       }
+      return 78;
     };
 
     const [maxLength, setMaxLength] = React.useState(getMaxLength());
 
-    // Update character limit on window resize
     React.useEffect(() => {
       const handleResize = () => {
         setMaxLength(getMaxLength());
@@ -200,9 +164,6 @@ const FilesCard = ({ data = {}, index, addFiles, cartFiles = [] }) => {
     }, []);
 
     const shouldTruncate = value && value.length > maxLength;
-    const displayValue = shouldTruncate && !participantExpanded 
-      ? value.substring(0, maxLength) 
-      : value;
 
     const handleToggleExpand = () => {
       setParticipantExpanded(!participantExpanded);
@@ -210,30 +171,29 @@ const FilesCard = ({ data = {}, index, addFiles, cartFiles = [] }) => {
 
     return {
       content: (
-        <div className={classes.keyAndValueRow}>
+        <div className={cn(classes.keyAndValueRow, classes.expandableContent)}>
           <Typography variant="h6" className={classes.key}>
             {label}
           </Typography>
           <div className={classes.participantContainer}>
-            <Typography 
-              variant="body1" 
-              className={`${classes.value} ${shouldTruncate ? classes.clickableText : ''}`}
-              style={{ 
-                paddingLeft: 0,
-                wordBreak: participantExpanded ? 'break-word' : 'normal',
-                whiteSpace: participantExpanded ? 'normal' : 'nowrap',
-                overflowWrap: 'break-word',
-              }}
+            <Typography
+              variant="body1"
+              component="div"
+              className={cn(
+                classes.value,
+                shouldTruncate && !participantExpanded && classes.truncatedValue,
+                participantExpanded && classes.expandedValue,
+                shouldTruncate && classes.clickableText,
+              )}
               onClick={shouldTruncate ? handleToggleExpand : undefined}
             >
-              {displayValue}
-              {shouldTruncate && !participantExpanded && '...'}
+              {value}
             </Typography>
           </div>
         </div>
       ),
       arrow: shouldTruncate ? (
-        <span 
+        <span
           className={classes.expandToggle}
           onClick={handleToggleExpand}
         >
@@ -244,23 +204,19 @@ const FilesCard = ({ data = {}, index, addFiles, cartFiles = [] }) => {
   };
 
   const renderSample = (label, value = '') => {
-    // Simple, reliable character limits based on screen size
-    // Reduced to account for the '...' we add manually
     const getMaxLength = () => {
       if (window.innerWidth <= 749) {
-        return 85; // Mobile
+        return 75;
       } else if (window.innerWidth <= 900) {
-        return 47; // Tablet  
+        return 40;
       } else if (window.innerWidth <= 1200) {
-        return 67; // Small desktop
-      } else {
-        return 90; // Large desktop - conservative to prevent overflow
+        return 58;
       }
+      return 78;
     };
 
     const [maxLength, setMaxLength] = React.useState(getMaxLength());
 
-    // Update character limit on window resize
     React.useEffect(() => {
       const handleResize = () => {
         setMaxLength(getMaxLength());
@@ -271,9 +227,6 @@ const FilesCard = ({ data = {}, index, addFiles, cartFiles = [] }) => {
     }, []);
 
     const shouldTruncate = value && value.length > maxLength;
-    const displayValue = shouldTruncate && !sampleExpanded 
-      ? value.substring(0, maxLength) 
-      : value;
 
     const handleToggleExpand = () => {
       setSampleExpanded(!sampleExpanded);
@@ -281,30 +234,29 @@ const FilesCard = ({ data = {}, index, addFiles, cartFiles = [] }) => {
 
     return {
       content: (
-        <div className={classes.keyAndValueRow}>
+        <div className={cn(classes.keyAndValueRow, classes.expandableContent)}>
           <Typography variant="h6" className={classes.key}>
             {label}
           </Typography>
           <div className={classes.sampleContainer}>
-            <Typography 
-              variant="body1" 
-              className={`${classes.value} ${shouldTruncate ? classes.clickableText : ''}`}
-              style={{ 
-                paddingLeft: 0,
-                wordBreak: sampleExpanded ? 'break-word' : 'normal',
-                whiteSpace: sampleExpanded ? 'normal' : 'nowrap',
-                overflowWrap: 'break-word',
-              }}
+            <Typography
+              variant="body1"
+              component="div"
+              className={cn(
+                classes.value,
+                shouldTruncate && !sampleExpanded && classes.truncatedValue,
+                sampleExpanded && classes.expandedValue,
+                shouldTruncate && classes.clickableText,
+              )}
               onClick={shouldTruncate ? handleToggleExpand : undefined}
             >
-              {displayValue}
-              {shouldTruncate && !sampleExpanded && '...'}
+              {value}
             </Typography>
           </div>
         </div>
       ),
       arrow: shouldTruncate ? (
-        <span 
+        <span
           className={classes.expandToggle}
           onClick={handleToggleExpand}
         >
@@ -369,11 +321,11 @@ const FilesCard = ({ data = {}, index, addFiles, cartFiles = [] }) => {
             </div>
           </Grid>
 
-          {/* Add to Cart button moved to top right */}
+          {/* View in Explore button moved to top right */}
           <Grid item className={classes.buttonAlignWithTitle}>
             <Button
               variant="outlined"
-              onClick={handleAddToCart}
+              onClick={handleViewInExplore}
               style={{
                 width: '189px',
                 height: '41px',
@@ -394,7 +346,7 @@ const FilesCard = ({ data = {}, index, addFiles, cartFiles = [] }) => {
               }}
               className={classes.addToCartButton}
             >
-              Add to Cart
+              View in Explore
             </Button>
           </Grid>
         </Grid>
@@ -426,7 +378,7 @@ const FilesCard = ({ data = {}, index, addFiles, cartFiles = [] }) => {
         </div>
 
         {/* Participant - Line 4 */}
-        <div className={classes.propertyLine} style={{ position: 'relative' }}>
+        <div className={classes.expandablePropertyLine}>
           {(() => {
             const participant = renderParticipant('Participant:', formatListWithSemicolons(participant_id));
             return (
@@ -444,7 +396,7 @@ const FilesCard = ({ data = {}, index, addFiles, cartFiles = [] }) => {
         </div>
 
         {/* Sample - Line 6 */}
-        <div className={classes.propertyLine} style={{ position: 'relative' }}>
+        <div className={classes.expandablePropertyLine}>
           {(() => {
             const sample = renderSample('Sample:', formatListWithSemicolons(sample_id));
             return (
@@ -456,13 +408,6 @@ const FilesCard = ({ data = {}, index, addFiles, cartFiles = [] }) => {
           })()}
         </div>
       </div>
-      
-      <ToastNotification
-        open={notification.open}
-        message={notification.message}
-        type={notification.type}
-        onClose={handleNotificationClose}
-      />
     </div>
   );
 };

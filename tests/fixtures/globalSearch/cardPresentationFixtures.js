@@ -90,7 +90,12 @@ export const participantCardRow = {
 /** Non-empty `cpi_data` enables AVAILABLE ACTIONS (CPI modal stub, cohort submenu, Explore, cart). */
 export const participantCardRowWithCpi = {
   ...participantCardRow,
-  cpi_data: [{ source: 'fixture-cpi-1' }],
+  cpi_data: [{
+    associated_id: 'ASSOC-FIXTURE-1',
+    repository_of_synonym_id: 'Repo Fixture',
+    domain_description: 'Fixture synonym',
+    domain_category: 'CategoryA',
+  }],
 };
 
 /** `ValueCard` — fields aligned with `CARD_PROPERTIES` / `prepareLinks` in ValueCard.js */

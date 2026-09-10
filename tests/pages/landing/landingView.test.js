@@ -11,6 +11,15 @@ import { MemoryRouter } from 'react-router-dom';
 import { render, screen, within } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import LandingView from '../../../src/pages/landing/landingView';
+import { LandingContentProvider } from '../../../src/pages/landing/LandingContentContext';
+import {
+  introData,
+  titleData,
+  statsNote,
+  resourcesAppliationsListData,
+  resourcesCloudListData,
+  carouselList,
+} from '../../../src/bento/landingPageData';
 import {
   defaultLandingStatsData,
   defaultLandingNewsData,
@@ -27,11 +36,22 @@ jest.mock('../../../src/pages/landing/component/latestUpdate', () => function La
   return <div data-testid="latest-update" />;
 });
 
+const landingContentForView = {
+  introData,
+  titleData,
+  statsNote,
+  resourcesAppliationsListData,
+  resourcesCloudListData,
+  carouselList,
+};
+
 function renderLandingView(props = {}) {
   const { statsData = defaultLandingStatsData, newsData = defaultLandingNewsData } = props;
   return render(
     <MemoryRouter>
-      <LandingView statsData={statsData} newsData={newsData} />
+      <LandingContentProvider value={landingContentForView}>
+        <LandingView statsData={statsData} newsData={newsData} />
+      </LandingContentProvider>
     </MemoryRouter>,
   );
 }
@@ -107,14 +127,13 @@ describe('LandingView', () => {
     it('should render one stat item per statsData entry', () => {
       renderLandingView();
       const statsSection = screen.getByTestId('landing-stats-section');
-      const statLinks = within(statsSection).getAllByRole('link', { name: /Childhood Cancer Data Catalog|Molecular Characterization Initiative|Molecular Targets Platform|National Childhood Cancer Registry Explorer/i });
-      expect(statLinks.length).toBe(4);
+      const statLinks = within(statsSection).getAllByRole('link', { name: /Childhood Cancer Data Catalog|Molecular Characterization Initiative|National Childhood Cancer Registry Explorer/i });
+      expect(statLinks.length).toBe(3);
     });
 
     it('should format stat numbers with en-US locale', () => {
       renderLandingView();
-      expect(screen.getByText('1,700,440')).toBeInTheDocument();
-      expect(screen.getByText('58,867')).toBeInTheDocument();
+      expect(screen.getByText('1,760,951')).toBeInTheDocument();
     });
 
     it('should show asterisk for Participants stat', () => {

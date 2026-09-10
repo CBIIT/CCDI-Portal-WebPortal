@@ -1,10 +1,16 @@
 /**
- * Unit tests for FederationResourceView (`resourceData.yaml` — federation fields as static props).
+ * Unit tests for FederationResourceView (federationData.md parsed props).
  *
  * Structure follows tests/TEST_STRUCTURE.md:
  * Rendering → feature sections → Side effects → Edge cases.
  * Fixtures: tests/fixtures/resource/resourceDataViewProps.js (no network).
  */
+
+jest.mock('../../../../src/pages/resource/FederationResourcePage/FederationMarkdown', () => (
+  function MockFederationMarkdown({ children }) {
+    return <div data-testid="federation-markdown">{children}</div>;
+  }
+));
 
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
@@ -15,6 +21,7 @@ import { minimalFederationResourceData } from '../../../fixtures/resource/resour
 import { multiTopicFederationData } from '../../../fixtures/resource/resourceInteractionData';
 import {
   clickTopicNav,
+  clickSubtopicNav,
   triggerResourceScroll,
   toggleMobileSection,
 } from '../shared/resourceViewTestUtils';
@@ -93,6 +100,20 @@ describe('FederationResourceView', () => {
 
       const topicB = clickTopicNav('Topic B');
       expect(topicB).toHaveClass('selected');
+      expect(scrollTo).toHaveBeenCalled();
+    });
+
+    it('should render nested subtopics and scroll when a subtitle nav item is clicked', () => {
+      const scrollTo = jest.fn();
+      window.scrollTo = scrollTo;
+      renderFederationView(multiTopicFederationData);
+
+      expect(screen.getAllByText('Agent Skill').length).toBeGreaterThan(0);
+      expect(screen.getByText('Agent Skill body')).toBeInTheDocument();
+
+      const agentSkillNav = clickSubtopicNav('Agent Skill');
+      expect(agentSkillNav).toHaveClass('selected');
+      expect(agentSkillNav).toHaveClass('subtitle');
       expect(scrollTo).toHaveBeenCalled();
     });
 

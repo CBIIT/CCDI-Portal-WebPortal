@@ -22,6 +22,7 @@ import {
   landingDataQueryData,
 } from '../../fixtures/landing/apiResponses';
 import { createCcdcFetchMock, setupNewsYamlAxiosMock } from '../../helpers/landingApiMocks';
+import { sampleLandingMarkdownRaw } from '../../fixtures/landing/landingMarkdownSamples';
 
 // Ensure MutationObserver exists for RTL async helpers (e.g. waitFor) in this test env
 if (typeof global.MutationObserver === 'undefined') {
@@ -57,7 +58,7 @@ jest.mock('@apollo/client', () => {
 jest.mock('../../../src/utils/env', () => ({
   REACT_APP_STATIC_CONTENT_URL: 'https://static.example.com/',
 }));
-setupNewsYamlAxiosMock();
+setupNewsYamlAxiosMock({ landingMarkdown: sampleLandingMarkdownRaw });
 
 // Minimal Redux store for connected LandingController (mapStateToProps is empty)
 const rootReducer = combineReducers({
@@ -85,7 +86,7 @@ beforeEach(() => {
   mockQuery.mockClear();
   mockQuery.mockImplementation(() => Promise.resolve({ data: landingDataQueryData }));
   axios.get.mockClear();
-  setupNewsYamlAxiosMock();
+  setupNewsYamlAxiosMock({ landingMarkdown: sampleLandingMarkdownRaw });
   global.fetch = createCcdcFetchMock();
 });
 
@@ -102,7 +103,7 @@ describe('LandingController (mocked count APIs)', () => {
     });
   });
 
-  it('should call MCI GraphQL query and display the mocked count', async () => {
+  it('should call MCI GraphQL query on C3DC and display the mocked count', async () => {
     renderLandingController();
 
     await waitFor(() => {
@@ -110,6 +111,8 @@ describe('LandingController (mocked count APIs)', () => {
         expect.objectContaining({
           query: LANDING_DATA_QUERY,
           variables: {},
+          context: { clientName: 'c3dcService' },
+          fetchPolicy: 'network-only',
         }),
       );
     });
@@ -131,7 +134,57 @@ describe('LandingController (mocked count APIs)', () => {
 
     expect(global.fetch).toHaveBeenCalledWith(ccdcDatasetsCountUrl);
     expect(mockQuery).toHaveBeenCalledWith(
-      expect.objectContaining({ query: LANDING_DATA_QUERY }),
+      expect.objectContaining({
+        query: LANDING_DATA_QUERY,
+        context: { clientName: 'c3dcService' },
+      }),
     );
+  });
+
+  it('should request landingData.md with cache-bust query', async () => {
+    renderLandingController();
+
+    await waitFor(() => {
+      expect(axios.get).toHaveBeenCalledWith(
+        expect.stringMatching(/\/landingData\.md\?ts=/),
+      );
+    });
+  });
+
+  it('should overlay hero title from landingData.md when fetch succeeds', async () => {
+    setupNewsYamlAxiosMock({
+      landingMarkdown: `---
+heroTitle: Remote Hero Title Here
+heroSubtitle: Remote subtitle from markdown
+introTitle3: ABOUT CCDI HUB
+introButtonTitle: ABOUT CCDI
+---
+`,
+    });
+
+    renderLandingController();
+
+    await waitFor(() => {
+      expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Remote');
+      expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Hero');
+      expect(screen.getByText(/Remote subtitle from markdown/)).toBeInTheDocument();
+    });
+  });
+
+  it('should leave hero empty when landingData.md is unavailable', async () => {
+    setupNewsYamlAxiosMock();
+
+    renderLandingController();
+
+    await waitFor(() => {
+      expect(axios.get).toHaveBeenCalledWith(
+        expect.stringMatching(/\/landingData\.md\?ts=/),
+      );
+    });
+
+    await waitFor(() => {
+      const heroHeading = screen.getByRole('heading', { level: 1 });
+      expect(heroHeading).toHaveTextContent('');
+    });
   });
 });

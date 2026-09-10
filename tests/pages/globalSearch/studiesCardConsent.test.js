@@ -2,9 +2,16 @@
  * StudiesCard — consent code parsing, truncation, and expand/collapse.
  */
 
+jest.mock('../../../src/pages/globalSearch/Cards/participant/c3dcService', () => ({
+  openC3dcStudy: jest.fn(),
+}));
+
 jest.mock('../../../src/bento/studiesData', () => ({
   studyDownloadLinks: {
     phsCARD_TEST_001: 'https://example.com/mock-study-manifest.xlsx',
+  },
+  studycBioPortalLinks: {
+    phsCARD_TEST_001: 'https://cbioportal.test/study/phsCARD_TEST_001',
   },
   openDoubleLink: jest.fn(),
 }));

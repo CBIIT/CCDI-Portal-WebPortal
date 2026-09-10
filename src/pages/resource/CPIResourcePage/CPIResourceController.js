@@ -1,25 +1,21 @@
 import React, { useState, useEffect } from "react";
 import env from '../../../utils/env';
-import yaml from "js-yaml";
 import axios from "axios";
+import parseCpiMarkdown from "./parseCpiMarkdown";
 import CPIResourceView from "./CPIResourceView";
 
-const RESOURCE_URL = env.REACT_APP_STATIC_CONTENT_URL + '/resourceData.yaml';
+const CPI_MD_URL = `${env.REACT_APP_STATIC_CONTENT_URL}/cpiData.md`;
 const CPI_URL = 'https://participantindex.ccdi.cancer.gov/v1/statistic';
 
 const getCPIData = () => {
   async function getResourceData() {
-    let resultData = [];
-    let result = [];
+    let resultData = {};
     try {
-      const fileUrl = `${RESOURCE_URL}?ts=${new Date().getTime()}`;
-      result = await axios.get(
-        fileUrl
-      );
-      resultData = yaml.safeLoad(result.data);
+      const fileUrl = `${CPI_MD_URL}?ts=${new Date().getTime()}`;
+      const result = await axios.get(fileUrl);
+      resultData = parseCpiMarkdown(result.data);
     } catch (_error) {
-      // result = await axios.get(YAMLData);
-      // resultData = yaml.safeLoad(result.data);
+      resultData = {};
     }
     return resultData;
   }
@@ -39,7 +35,7 @@ const getCPIData = () => {
     }
   }
 
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({});
   const [cpiStats, setCpiStats] = useState(null);
   const [loadingData, setLoadingData] = useState(true);
   const [loadingCpiStats, setLoadingCpiStats] = useState(true);

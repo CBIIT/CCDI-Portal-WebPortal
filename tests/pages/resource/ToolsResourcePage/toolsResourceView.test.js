@@ -1,10 +1,16 @@
 /**
- * Unit tests for ToolsResourceView (`resourceData.yaml` — `toolsContent` / `toolsIntroText` as static props).
+ * Unit tests for ToolsResourceView (toolsData.md parsed props).
  *
  * Structure follows tests/TEST_STRUCTURE.md:
  * Rendering → feature sections → Side effects → Edge cases.
  * Fixtures: tests/fixtures/resource/resourceDataViewProps.js (no network).
  */
+
+jest.mock('../../../../src/pages/resource/ToolsResourcePage/ToolsMarkdown', () => (
+  function MockToolsMarkdown({ children }) {
+    return <div data-testid="tools-markdown">{children}</div>;
+  }
+));
 
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
@@ -59,6 +65,7 @@ describe('ToolsResourceView', () => {
     it('should render toolsIntroText', () => {
       renderToolsView();
       expect(screen.getByText(/Tools intro for unit test/i)).toBeInTheDocument();
+      expect(screen.getAllByTestId('tools-markdown').length).toBeGreaterThan(0);
     });
   });
 

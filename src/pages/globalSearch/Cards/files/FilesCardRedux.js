@@ -1,28 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { onAddCartFiles } from '@bento-core/cart';
 import FilesCard from './FilesCard';
 
-const FilesCardRedux = (props) => {
-  return (
-    <FilesCard {...props} />
-  );
-};
-
 /**
- * Map Redux state to component props
+ * Thin wrapper kept for existing search card wiring.
+ * Cart behavior was removed when file actions moved to C3DC Explore Files.
  */
-const mapStateToProps = (state) => ({
-  count: state.cartReducer && state.cartReducer.count,
-  cartFiles: state.cartReducer && state.cartReducer.filesId,
-});
+const FilesCardRedux = (props) => <FilesCard {...props} />;
 
-/**
- * Map dispatch actions to component props
- */
-const mapDispatchToProps = (dispatch) => ({
-  addFiles: (files) => { dispatch(onAddCartFiles(files)); },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(FilesCardRedux);
-
+export default FilesCardRedux;

@@ -22,55 +22,18 @@ const detailPageSlugByLinkText = events.reduce((map, event) => {
 export const getDetailPageSlugForLinkText = (text) =>
   detailPageSlugByLinkText.get(slugify(text)) || null;
 
-const parseUsShortDate = (dateStr) => {
-  if (!dateStr) return '';
-  const parts = dateStr.trim().split('/');
-  if (parts.length !== 3) return '';
-  const [month, day, year] = parts;
-  const fullYear = year.length === 2 ? `20${year}` : year;
-  return `${fullYear}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
-};
-
-const getEntrySortDate = (entryHtml) => {
-  const match = entryHtml.match(/<br>\s*([\d/]+)/);
-  return parseUsShortDate(match ? match[1] : '');
-};
-
-const LIST_ENTRY_PATTERN = /<a class="link"[\s\S]*?<\/a><br>\s*[\d/]+/g;
-
-export const buildDetailPageListEntryHtml = (event) => (
-  `<a href="${EVENT_ROUTE_BASE}/${event.slug}">${event.title}</a><br>${event.rawDate}`
+export const buildDetailPageListEntryMarkdown = (event) => (
+  `[${event.title}](${EVENT_ROUTE_BASE}/${event.slug})  \n${event.rawDate}`
 );
 
-export const mergeDetailPageEventsIntoAnnouncementsContent = (sections) => {
-  if (!Array.isArray(sections)) return sections;
+/** @deprecated Prefer buildDetailPageListEntryMarkdown; kept for callers/tests during migration. */
+export const buildDetailPageListEntryHtml = buildDetailPageListEntryMarkdown;
 
-  return sections.map((section) => {
-    if (!section.topic || !/past events/i.test(section.topic)) {
-      return section;
-    }
-
-    const content = section.content || '';
-    const detailEvents = getAllEvents().filter(
-      (event) => !content.includes(event.title),
-    );
-
-    if (detailEvents.length === 0) {
-      return section;
-    }
-
-    const existingEntries = (content.match(LIST_ENTRY_PATTERN) || []).map((entry) => entry.trim());
-    const detailEntries = detailEvents.map(buildDetailPageListEntryHtml);
-    const mergedEntries = [...detailEntries, ...existingEntries].sort(
-      (a, b) => getEntrySortDate(b).localeCompare(getEntrySortDate(a)),
-    );
-
-    return {
-      ...section,
-      content: `<p>${mergedEntries.join('<br><br>')}</p>`,
-    };
-  });
-};
+/**
+ * Identity passthrough — Past Events are sourced from eventAnnouncements.md only.
+ * Local eventsData.json is used for detail-page routes, not list injection.
+ */
+export const mergeDetailPageEventsIntoAnnouncementsContent = (sections) => sections;
 
 export const getAllEvents = () => events;
 
@@ -93,6 +56,7 @@ export default {
   EVENT_ROUTE_BASE,
   slugify,
   getDetailPageSlugForLinkText,
+  buildDetailPageListEntryMarkdown,
   buildDetailPageListEntryHtml,
   mergeDetailPageEventsIntoAnnouncementsContent,
   getAllEvents,

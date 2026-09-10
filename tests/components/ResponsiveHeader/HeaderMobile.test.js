@@ -11,6 +11,13 @@ if (typeof global.MutationObserver === 'undefined') {
   };
 }
 
+jest.mock('../../../src/utils/env', () => ({
+  __esModule: true,
+  default: {
+    REACT_APP_C3DC: 'https://clinicalcommons-dev.ccdi.cancer.gov',
+  },
+}));
+
 jest.mock('../../../src/components/ResponsiveHeader/components/LogoMobile', () => {
   const React = require('react');
   return { __esModule: true, default: () => <div data-testid="logo-mock" /> };
@@ -25,16 +32,25 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
 import HeaderMobile from '../../../src/components/ResponsiveHeader/HeaderMobile';
+import NavContentContext from '../../../src/components/ResponsiveHeader/NavContentContext';
+import {
+  navMobileList,
+  navbarSublists,
+} from '../../../src/bento/globalHeaderData';
 
 function clickWithInnerText(element, text) {
   Object.defineProperty(element, 'innerText', { configurable: true, value: text });
   fireEvent.click(element);
 }
 
+const navValue = { navMobileList, navbarSublists };
+
 function renderAt(path) {
   return render(
     <MemoryRouter initialEntries={[path]}>
-      <HeaderMobile />
+      <NavContentContext.Provider value={navValue}>
+        <HeaderMobile />
+      </NavContentContext.Provider>
     </MemoryRouter>,
   );
 }
@@ -52,13 +68,35 @@ describe('HeaderMobile', () => {
   });
 
   describe('Menu interaction', () => {
-    it('should open the menu and expose Home and MY FILES links', () => {
+    it('should open the menu and expose Home without MY FILES', () => {
       renderAt('/');
 
       fireEvent.click(screen.getByText('Menu'));
 
       expect(screen.getByRole('link', { name: 'Home' })).toBeInTheDocument();
-      expect(screen.getByText('MY FILES')).toBeInTheDocument();
+      expect(screen.queryByText('MY FILES')).not.toBeInTheDocument();
+    });
+
+    it('should list primary nav without Cohort Analyzer and point Explore/Studies to C3DC', () => {
+      renderAt('/');
+
+      fireEvent.click(screen.getByText('Menu'));
+
+      expect(screen.getByRole('link', { name: 'Home' })).toBeInTheDocument();
+      expect(screen.getByRole('link', { name: 'Explore' })).toHaveAttribute(
+        'href',
+        'https://clinicalcommons-dev.ccdi.cancer.gov/exploreParticipants',
+      );
+      expect(screen.getByRole('link', { name: 'Studies' })).toHaveAttribute(
+        'href',
+        'https://clinicalcommons-dev.ccdi.cancer.gov/studies',
+      );
+      expect(screen.getByRole('link', { name: 'Explore' })).not.toHaveAttribute('target');
+      expect(screen.getByRole('link', { name: 'Studies' })).not.toHaveAttribute('target');
+      expect(screen.getByText('Resources')).toBeInTheDocument();
+      expect(screen.getByRole('link', { name: 'News' })).toBeInTheDocument();
+      expect(screen.getByText('About')).toBeInTheDocument();
+      expect(screen.queryByText('Cohort Analyzer')).not.toBeInTheDocument();
     });
   });
 

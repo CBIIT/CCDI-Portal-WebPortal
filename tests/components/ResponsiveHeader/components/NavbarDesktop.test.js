@@ -2,17 +2,35 @@
  * NavbarDesktop — primary navigation strip (Explore, Studies, Resources dropdown, etc.).
  */
 
+jest.mock('../../../../src/utils/env', () => ({
+  __esModule: true,
+  default: {
+    REACT_APP_C3DC: 'https://clinicalcommons-dev.ccdi.cancer.gov',
+  },
+}));
+
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
 import NavbarDesktop from '../../../../src/components/ResponsiveHeader/components/NavbarDesktop';
+import NavContentContext from '../../../../src/components/ResponsiveHeader/NavContentContext';
+import {
+  navMobileList,
+  navbarSublists,
+} from '../../../../src/bento/globalHeaderData';
+
+const C3DC_URL = 'https://clinicalcommons-dev.ccdi.cancer.gov';
+
+const navValue = { navMobileList, navbarSublists };
 
 describe('NavbarDesktop', () => {
   function renderNav(path = '/') {
     return render(
       <MemoryRouter initialEntries={[path]}>
-        <NavbarDesktop />
+        <NavContentContext.Provider value={navValue}>
+          <NavbarDesktop />
+        </NavContentContext.Provider>
       </MemoryRouter>,
     );
   }
@@ -27,9 +45,29 @@ describe('NavbarDesktop', () => {
   describe('Rendering', () => {
     it('should render core nav labels from global header data', () => {
       renderNav();
+      expect(screen.getByText('Home')).toBeInTheDocument();
       expect(screen.getByText('Explore')).toBeInTheDocument();
       expect(screen.getByText('Studies')).toBeInTheDocument();
       expect(screen.getByText('Resources')).toBeInTheDocument();
+      expect(screen.getByText('News')).toBeInTheDocument();
+      expect(screen.getByText('About')).toBeInTheDocument();
+      expect(screen.queryByText('Cohort Analyzer')).not.toBeInTheDocument();
+    });
+
+    it('should link Explore and Studies to C3DC in the same tab', () => {
+      renderNav();
+      const explore = screen.getByRole('link', { name: 'Explore' });
+      const studies = screen.getByRole('link', { name: 'Studies' });
+      expect(explore).toHaveAttribute('href', `${C3DC_URL}/exploreParticipants`);
+      expect(studies).toHaveAttribute('href', `${C3DC_URL}/studies`);
+      expect(explore).not.toHaveAttribute('target');
+      expect(studies).not.toHaveAttribute('target');
+    });
+
+    it('should keep internal primary items as router links', () => {
+      renderNav();
+      expect(screen.getByRole('link', { name: 'Home' })).toHaveAttribute('href', '/home');
+      expect(screen.getByRole('link', { name: 'News' })).toHaveAttribute('href', '/news');
     });
   });
 
@@ -50,7 +88,13 @@ describe('NavbarDesktop', () => {
     it('should open About submenu on /about route styling', () => {
       renderNav('/about');
       clickNavLabel('About');
-      expect(screen.getByText('About CCDI Hub')).toBeInTheDocument();
+      expect(screen.getByText('About CCDI Data')).toBeInTheDocument();
+      expect(screen.getByText('CCDI Knowledge and Training')).toBeInTheDocument();
+      expect(screen.getByText('Help')).toBeInTheDocument();
+      expect(screen.getByRole('link', { name: 'About CCDI Hub' })).toHaveAttribute('href', '/about');
+      expect(screen.getByRole('link', { name: 'Release Notes' })).toBeInTheDocument();
+      expect(screen.getByRole('link', { name: 'CCDI FAQs' })).toHaveAttribute('href', '/faqs');
+      expect(screen.queryByText('Hub Explore Dashboard Tutorial Video')).not.toBeInTheDocument();
     });
 
     it('should support keyboard Enter on clickable nav items', () => {

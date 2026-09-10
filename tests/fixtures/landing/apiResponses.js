@@ -19,6 +19,7 @@ export const ccdcDatasetsCountFormatted = '12,345';
 
 /**
  * GraphQL LANDING_DATA_QUERY — shape of `response.data` from Apollo client.query
+ * against C3DC Integrated (`clientName: 'c3dcService'`).
  * @see src/bento/landingPageData.js LANDING_DATA_QUERY
  */
 export const landingDataQueryData = {
@@ -26,10 +27,9 @@ export const landingDataQueryData = {
 };
 
 /**
- * Raw YAML returned for newsData.yaml (axios.get). Parsed by landingController with js-yaml.
+ * Raw markdown returned for newsData.md (axios.get). Parsed by parseNewsMarkdown.
  */
-export const newsDataYamlRaw =
-  'newsList: []\nnewsImgUrlList: []\nreleaseNotesList: []\naltList: []';
+export const newsDataMarkdownRaw = '';
 
 export const landingPageApi = {
   ccdcDatasetsCount: {
@@ -40,7 +40,7 @@ export const landingPageApi = {
   landingDataQuery: {
     data: landingDataQueryData,
   },
-  newsYaml: {
-    raw: newsDataYamlRaw,
+  newsMarkdown: {
+    raw: newsDataMarkdownRaw,
   },
 };

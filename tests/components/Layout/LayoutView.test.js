@@ -59,6 +59,14 @@ jest.mock('../../../src/pages/about/DataUsagePoliciesPage/DataUsagePoliciesContr
   };
 });
 
+jest.mock('../../../src/pages/about/FaqPage/FaqController', () => {
+  const React = require('react');
+  return {
+    __esModule: true,
+    default: () => <div data-testid="route-faqs" />,
+  };
+});
+
 jest.mock('../../../src/pages/about/publications/publicationsController', () => {
   const React = require('react');
   return {
@@ -104,14 +112,6 @@ jest.mock('../../../src/pages/inventory/inventoryController', () => {
   return {
     __esModule: true,
     default: () => <div data-testid="route-explore" />,
-  };
-});
-
-jest.mock('../../../src/pages/cart/cartController', () => {
-  const React = require('react');
-  return {
-    __esModule: true,
-    default: () => <div data-testid="route-cart" />,
   };
 });
 
@@ -219,6 +219,14 @@ jest.mock('../../../src/pages/resource/RareCancerResourcePage/RareCancerResource
   };
 });
 
+jest.mock('../../../src/pages/resource/MCIJson2TsvResourcePage/MCIJson2TsvResourceController', () => {
+  const React = require('react');
+  return {
+    __esModule: true,
+    default: () => <div data-testid="route-mci-json2tsv" />,
+  };
+});
+
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
@@ -258,11 +266,21 @@ describe('LayoutView', () => {
       renderLayoutAt('/about');
       expect(screen.getByTestId('route-about')).toBeInTheDocument();
     });
+
+    it('should render the FAQ controller on /faqs', () => {
+      renderLayoutAt('/faqs');
+      expect(screen.getByTestId('route-faqs')).toBeInTheDocument();
+    });
   });
 
   describe('Edge cases', () => {
     it('should render the error route for unknown paths', () => {
       renderLayoutAt('/this-route-does-not-exist');
+      expect(screen.getByTestId('route-error')).toBeInTheDocument();
+    });
+
+    it('should render the error route for removed cart path', () => {
+      renderLayoutAt('/fileCentricCart');
       expect(screen.getByTestId('route-error')).toBeInTheDocument();
     });
   });

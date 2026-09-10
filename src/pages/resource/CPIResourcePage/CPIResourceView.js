@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef, createRef } from 'react';
 import styled from 'styled-components';
-import ReactHtmlParser from 'html-react-parser';
 import exportIcon from '../../../assets/resources/Explore_Icon.svg';
 import closeIcon from '../../../assets/icons/Close_Icon.svg';
 import arrowDownIcon from '../../../assets/icons/Arrow_Down.svg';
@@ -8,6 +7,7 @@ import arrowDownIcon from '../../../assets/icons/Arrow_Down.svg';
 import exportIconBlue from '../../../assets/icons/Export_Icon.svg';
 import blurBorder from '../../../assets/resources/blur_border.svg';
 import blurBorderMobile from '../../../assets/resources/blur_border_mobile.svg';
+import CpiMarkdown from './CpiMarkdown';
 
 const CPIResourceContainer = styled.div`
     width: 100%;
@@ -775,7 +775,7 @@ const CPIResourceView = ({data, cpiStats, loadingCpiStats, cpiStatsError}) => {
                 </div>
                 <div className='contentSection'>
                     <div className='contentList'>
-                        {data.cpiIntroText && <div className='introContainer'>{ReactHtmlParser(data.cpiIntroText)}</div>}
+                        {data.cpiIntroText && <div className='introContainer'><CpiMarkdown>{data.cpiIntroText}</CpiMarkdown></div>}
                         <CPIStatsContainer>
                             <img className='blurBorder' src={isMobile ? blurBorderMobile : blurBorder} alt="blurBorder" />
                             <div className='statsHeader'>
@@ -891,7 +891,7 @@ const CPIResourceView = ({data, cpiStats, loadingCpiStats, cpiStatsError}) => {
                                         <div id={cpiItem.id} name={mciid} className='mciTitleMobile sectionCollapse' onClick={handleCollapseSection}>{cpiItem.topic && cpiItem.topic}</div>
                                         <div className="mciSection mobileCollapse" ref={sectionList.current[mciid]}>
                                             <div className='mciContentContainer'>
-                                                {cpiItem.content && ReactHtmlParser(cpiItem.content)}
+                                                {cpiItem.content && <CpiMarkdown>{cpiItem.content}</CpiMarkdown>}
                                                 
                                                 {cpiItem.id && cpiItem.id.includes('CPI_Components') && 
                                                 <div>

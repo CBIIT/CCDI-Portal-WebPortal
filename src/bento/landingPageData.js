@@ -1,4 +1,5 @@
 import gql from 'graphql-tag';
+import env from '../utils/env';
 import landingImg from '../assets/landing/Hero_1.png'
 import aboutImg from '../assets/landing/About_1.png';
 import wheel1 from '../assets/landing/ccdc_carousel.svg';
@@ -42,10 +43,13 @@ import cBioPortalLogo from '../assets/landing/cBioPortal_logo.svg';
 import rareCancerLogo from '../assets/landing/CCDI_Rare_Cancer_Initiative_logo.svg';
 import pmtlLogo from '../assets/landing/pmtl_logo.png';
 
+const C3DC_BASE_URL = String(env.REACT_APP_C3DC || '').replace(/\/$/, '');
+
 export const introData = {
   landingIntroPic: landingImg,
-  introTitle1: 'Discover CCDI applications, data, resources, and other tools',
-  introTitle2: 'Explore the CCDI Hub by selecting an available resource on the Hub Wheel',
+  // Word-split with <br /> in landingView; keep three short words for the hero stack.
+  introTitle1: 'Discover CCDI Resources',
+  introTitle2: 'Explore the CCDI Hub, its applications,\nand analytic tools by selecting an\navailable resource',
   introTitle3: 'ABOUT CCDI HUB',
   introButtonTitle: 'ABOUT CCDI',
 };
@@ -54,7 +58,7 @@ export const titleData = {
   latestUpdatesTitle: 'Latest Updates',
   resourceTitle: 'Resources',
   applicationsTitle: 'CCDI-SUPPORTED RESOURCES',
-  cloudResourcesTitle: 'OTHER RESOURCES',
+  cloudResourcesTitle: 'Other Resources',
   aboutTitle: 'About the CCDI Community',
 };
 
@@ -72,7 +76,7 @@ export const statsData = [
     link: '/MCI',
   },
   {
-    num: 1700440,
+    num: 1760951,
     title: 'Reported Cases Under Age 40<br>(1995-2020)',
     detail: 'National Childhood Cancer Registry Explorer',
     link: 'https://nccrexplorer.ccdi.cancer.gov',
@@ -86,8 +90,8 @@ export const resourcesAppliationsListData = [
     id: 'c3dc',
     title: 'Childhood Cancer Clinical Data Commons',
     subtitle: 'C3DC',
-    content: 'A database that houses childhood cancer demographics and phenotypic clinical data.',
-    link: 'https://clinicalcommons.ccdi.cancer.gov/',
+    content: 'A searchable database of childhood cancer demographics and phenotypic clinical data.',
+    link: `${C3DC_BASE_URL}/`,
     img: c3dcLogo,
   },
   {
@@ -266,7 +270,7 @@ export const carouselList = [
     img: wheel11,
     mobile: c3dcMobile,
     content: 'Childhood Cancer Clinical Data Commons',
-    link: 'https://clinicalcommons.ccdi.cancer.gov',
+    link: C3DC_BASE_URL,
   },
   {
     img: wheel12,
@@ -292,6 +296,7 @@ export const LANDING_DATA_QUERY = gql`{
     numberOfMCICount
   }
 `;
+// Queried against C3DC Integrated (`clientName: 'c3dcService'`) from landingController.
 
 export const GLOBAL_STATS_BAR_QUERY = gql`{
   numberOfParticipants,

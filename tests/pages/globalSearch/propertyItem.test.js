@@ -76,6 +76,11 @@ describe('PropertyItem', () => {
     expect(screen.getByTestId('line-breaks')).toHaveTextContent('Line one');
   });
 
+  it('should space semicolon-delimited values', () => {
+    renderPropertyItem({ label: 'Race', value: 'White;Asian' });
+    expect(screen.getByText('White; Asian')).toBeInTheDocument();
+  });
+
   it('should render numeric zero as a value', () => {
     renderPropertyItem({ label: 'Count', value: 0 });
     expect(screen.getByText('0')).toBeInTheDocument();

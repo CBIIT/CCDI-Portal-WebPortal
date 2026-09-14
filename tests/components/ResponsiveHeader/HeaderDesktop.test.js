@@ -1,5 +1,5 @@
 /**
- * HeaderDesktop — US banner, main shell, search area hidden on /sitesearch.
+ * HeaderDesktop — US banner, main shell, search area on every route.
  * Child header pieces are mocked to keep the suite fast.
  */
 
@@ -43,16 +43,16 @@ describe('HeaderDesktop', () => {
       expect(screen.queryByTestId('cart-mock')).not.toBeInTheDocument();
     });
 
-    it('should show the search area when the path is not /sitesearch', () => {
+    it('should show the search area', () => {
       renderAt('/explore');
       expect(screen.getByTestId('search-mock')).toBeInTheDocument();
     });
   });
 
   describe('Edge cases', () => {
-    it('should not render the search area on /sitesearch', () => {
+    it('should keep the search area on /sitesearch', () => {
       renderAt('/sitesearch');
-      expect(screen.queryByTestId('search-mock')).not.toBeInTheDocument();
+      expect(screen.getByTestId('search-mock')).toBeInTheDocument();
     });
   });
 });

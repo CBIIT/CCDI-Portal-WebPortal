@@ -143,11 +143,13 @@ const styles = (theme) => {
         display: 'none',
       },
       [lgBreakpoint]: {
-        minWidth: '1047px',
-        width: '1047px',
+        width: '100%',
+        maxWidth: '1047px',
       },
+      width: '100%',
       maxWidth: '800px',
-      padding: '24px 16px 24px 20px',
+      boxSizing: 'border-box',
+      padding: '24px 32px',
       border: '0.25px solid #78AEB3',
       borderTopRightRadius: '20px',
       borderBottomLeftRadius: '20px',
@@ -226,12 +228,12 @@ const styles = (theme) => {
     cardTitle: {
       margin: '0px',
       padding: '0px',
-      marginTop: '2px',
       marginLeft: '10px',
       fontFamily: 'Inter',
       fontSize: '18px',
       fontWeight: 500,
-      lineHeight: '22px',
+      // Matches the category pill's height so the title centers against it.
+      lineHeight: '30px',
       letterSpacing: '0px',
       textAlign: 'left',
       color: '#00838F',
@@ -245,6 +247,13 @@ const styles = (theme) => {
       textAlign: 'left',
       margin: '0px',
       marginTop: '-2px',
+    },
+    // The page URL under the card body; was falling back to the browser default.
+    link: {
+      fontFamily: 'Inter',
+      fontSize: '16px',
+      letterSpacing: '2%',
+      color: '#4725CC',
     },
   };
 };

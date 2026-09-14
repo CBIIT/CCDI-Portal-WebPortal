@@ -82,6 +82,22 @@ describe('ParticipantCard', () => {
       expect(openC3dcStudy).toHaveBeenCalledWith(participantCardRow.study_id);
     });
 
+    it('should space semicolon-delimited field lists', () => {
+      renderParticipantCard({
+        data: {
+          ...participantCardRow,
+          race_str: 'Hispanic or Latino;White',
+          treatment_type_str: 'Chemotherapy;Surgery',
+          treatment_agent_str: 'Etoposide;Cisplatin',
+          last_known_survival_status_str: 'Alive;Dead',
+        },
+      });
+      expect(screen.getByText('Hispanic or Latino; White')).toBeInTheDocument();
+      expect(screen.getByText('Chemotherapy; Surgery')).toBeInTheDocument();
+      expect(screen.getByText('Etoposide; Cisplatin')).toBeInTheDocument();
+      expect(screen.getByText('Alive; Dead')).toBeInTheDocument();
+    });
+
     it('should not offer cohort or cart actions', () => {
       renderParticipantCard({ data: participantCardRowWithCpi });
       fireEvent.click(screen.getByText('AVAILABLE ACTIONS'));

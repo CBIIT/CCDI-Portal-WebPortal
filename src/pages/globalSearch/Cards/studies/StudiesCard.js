@@ -11,6 +11,7 @@ import { ReactComponent as DownArrowIcon } from '../../assets/Down_Arrow.svg';
 import { ReactComponent as UpArrowIcon } from '../../assets/Up_Arrow.svg';
 import { studycBioPortalLinks } from '../../../../bento/studiesData';
 import { openC3dcStudy } from '../participant/c3dcService';
+import formatSemicolonList from '../formatSemicolonList';
 
 const CONSENT_GLOSSARY_URL = 'https://www.ncbi.nlm.nih.gov/gap/docs/submissionguide/#consentgloss';
 
@@ -165,7 +166,7 @@ const StudiesCard = ({ data = {}, index }) => {
         {label}
       </Typography>
       <Typography variant="body1" className={classes.value}>
-        {value}
+        {formatSemicolonList(value)}
       </Typography>
     </div>
   );

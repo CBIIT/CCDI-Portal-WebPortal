@@ -10,16 +10,28 @@ const useStyles = makeStyles((theme) => {
         display: 'none',
       },
       [lgBreakpoint]: {
-        minWidth: '1047px',
-        width: '1047px',
+        width: '100%',
+        maxWidth: '1047px',
       },
+      width: '100%',
       maxWidth: '800px',
-      padding: '24px 16px 24px 20px',
+      boxSizing: 'border-box',
+      padding: '24px 32px',
       border: '0.25px solid #78AEB3',
       borderTopRightRadius: '20px',
       borderBottomLeftRadius: '20px',
       boxShadow: '0px 4px 20px 0px #00000040',
       marginBottom: '20px',
+      '@media (max-width: 749px)': {
+        display: 'grid',
+        gridTemplateColumns: '1fr',
+        justifyItems: 'start',
+        boxSizing: 'border-box',
+        width: '100%',
+        maxWidth: '100%',
+        borderRadius: '20px',
+        padding: '16px',
+      },
     },
     indexContainer: {
       marginTop: '6px',
@@ -92,12 +104,12 @@ const useStyles = makeStyles((theme) => {
     titleValue: {
       margin: '0px',
       padding: '0px',
-      marginTop: '2px',
       marginLeft: '10px',
       fontFamily: 'Inter',
       fontSize: '18px',
       fontWeight: 500,
-      lineHeight: '22px',
+      // Matches the category pill's height so the title centers against it.
+      lineHeight: '30px',
       letterSpacing: '0px',
       textAlign: 'left',
       color: '#00838F',
@@ -135,8 +147,8 @@ const useStyles = makeStyles((theme) => {
       },
       [lgBreakpoint]: {
         marginLeft: '36px',
-        width: '925px',
-        minWidth: '925px',
+        width: '100%',
+        maxWidth: '925px',
       },
     },
     hr: {
@@ -171,16 +183,44 @@ const useStyles = makeStyles((theme) => {
         alignItems: 'center',
         width: '100%',
       },
+      '@media (max-width: 749px)': {
+        alignSelf: 'start',
+      },
     },
     cardHeader: {
       marginBottom: '8px',
+      '@media (max-width: 749px)': {
+        display: 'contents',
+        '& .MuiGrid-container': {
+          display: 'contents',
+        },
+      },
     },
     titleContainer: {
       flex: 1,
       width: '100%',
+      '@media (max-width: 749px)': {
+        gridRow: 1,
+        gridColumn: 1,
+        width: '100%',
+      },
     },
     buttonAlignWithTitle: {
       marginTop: '-20px', // Move button up to align with title baseline
+      '@media (max-width: 749px)': {
+        gridRow: 3,
+        gridColumn: 1,
+        justifySelf: 'start',
+        width: 'auto',
+        marginTop: '14px',
+      },
+    },
+    contentArea: {
+      '@media (max-width: 749px)': {
+        gridRow: 2,
+        gridColumn: 1,
+        width: '100%',
+      },
     },
     customTooltip: {
       backgroundColor: '#ffffff',

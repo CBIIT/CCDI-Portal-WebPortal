@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => {
       },
       width: '100%',
       maxWidth: '100%',
+      boxSizing: 'border-box',
       padding: '16px 12px',
       border: '0.25px solid #78AEB3',
       borderTopRightRadius: '20px',
@@ -18,31 +19,62 @@ const useStyles = makeStyles((theme) => {
       boxShadow: '0px 4px 20px 0px #00000040',
       marginBottom: '20px',
       position: 'relative',
+      '@media (max-width: 749px)': {
+        display: 'grid',
+        gridTemplateColumns: '1fr',
+        justifyItems: 'start',
+        boxSizing: 'border-box',
+        borderRadius: '20px',
+        padding: '16px',
+      },
       [mdBreakpoint]: {
-        padding: '20px 24px',
+        padding: '20px 32px',
         maxWidth: '800px',
       },
       [lgBreakpoint]: {
-        minWidth: '1047px',
-        width: '1047px',
-        padding: '24px 16px 24px 20px',
+        width: '100%',
+        maxWidth: '1047px',
+        padding: '24px 32px',
       },
     },
     cardHeader: {
       marginBottom: '8px',
+      '@media (max-width: 749px)': {
+        display: 'contents',
+        '& .MuiGrid-container': {
+          display: 'contents',
+        },
+      },
     },
     titleContainer: {
       flex: 1,
       width: '100%',
+      '@media (max-width: 749px)': {
+        gridRow: 1,
+        gridColumn: 1,
+        width: '100%',
+      },
     },
     buttonAlignWithTitle: {
       marginTop: '-8px', // Move button up to align with title baseline
+      '@media (max-width: 749px)': {
+        gridRow: 3,
+        gridColumn: 1,
+        justifySelf: 'start',
+        width: 'auto',
+        marginTop: '14px',
+      },
     },
     contentArea: {
       display: 'flex',
       flexDirection: 'column',
       gap: '6px',
       marginTop: '0px',
+      '@media (max-width: 749px)': {
+        gridRow: 2,
+        gridColumn: 1,
+        width: '100%',
+      },
     },
     propertyLine: {
       display: 'flex',
@@ -173,12 +205,12 @@ const useStyles = makeStyles((theme) => {
     titleValue: {
       margin: '0px',
       padding: '0px',
-      marginTop: '2px',
       marginLeft: '8px',
       fontFamily: 'Inter',
       fontSize: '16px',
       fontWeight: 500,
-      lineHeight: '22px',
+      // Matches the category pill's height so the title centers against it.
+      lineHeight: '30px',
       letterSpacing: '0px',
       textAlign: 'left',
       color: '#00838F',
@@ -198,7 +230,7 @@ const useStyles = makeStyles((theme) => {
       margin: '-2px 0px 0px 3px',
       padding: '0px',
       textTransform: 'uppercase',
-      color: 'blue',
+      color: '#4725CC',
       whiteSpace: 'nowrap',
       textDecoration: 'underline',
       backgroundColor: 'transparent',
@@ -332,7 +364,7 @@ const useStyles = makeStyles((theme) => {
       margin: '0',
       padding: '0px',
       textTransform: 'none',
-      color: 'blue',
+      color: '#4725CC',
       whiteSpace: 'normal',
       textDecoration: 'underline',
       backgroundColor: 'transparent',
@@ -343,7 +375,7 @@ const useStyles = makeStyles((theme) => {
     },
     consentExternalIcon: {
       fontSize: '14px',
-      color: 'blue',
+      color: '#4725CC',
       flexShrink: 0,
       display: 'inline-block',
       verticalAlign: 'middle',
@@ -384,8 +416,8 @@ const useStyles = makeStyles((theme) => {
       },
       [lgBreakpoint]: {
         marginLeft: '36px',
-        width: '925px',
-        minWidth: '925px',
+        width: '100%',
+        maxWidth: '925px',
       },
     },
     hr: {
@@ -420,10 +452,16 @@ const useStyles = makeStyles((theme) => {
         alignItems: 'center',
         width: '100%',
       },
+      '@media (max-width: 749px)': {
+        alignSelf: 'start',
+      },
     },
     topRightButton: {
       marginTop: '0px !important',
       width: '160px',
+      '@media (max-width: 749px)': {
+        width: '172px',
+      },
       [mdBreakpoint]: {
         width: '189px',
       },
@@ -437,6 +475,9 @@ const useStyles = makeStyles((theme) => {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'flex-end',
+      '@media (max-width: 749px)': {
+        alignItems: 'flex-start',
+      },
     },
     dropdown: {
       position: 'absolute',
@@ -453,6 +494,10 @@ const useStyles = makeStyles((theme) => {
       width: '189px',
       transformOrigin: 'top',
       animation: '$slideDown 0.2s ease-out',
+      '@media (max-width: 749px)': {
+        left: 0,
+        right: 'auto',
+      },
     },
     '@keyframes slideDown': {
       '0%': {
@@ -525,8 +570,10 @@ const useStyles = makeStyles((theme) => {
     dropdownItemText: {
       '& .MuiListItemText-primary': {
         fontFamily: 'Poppins',
-        fontWeight: '600',
+        // Medium; the dropdown's own button label stays semibold.
+        fontWeight: '500',
         fontSize: '12px',
+        lineHeight: '14px',
         color: '#07679C',
         textTransform: 'uppercase',
         letterSpacing: '0.5px',
@@ -574,8 +621,9 @@ const useStyles = makeStyles((theme) => {
     cohortItemText: {
       '& .MuiListItemText-primary': {
         fontFamily: 'Poppins',
-        fontWeight: '400',
+        fontWeight: '500',
         fontSize: '12px',
+        lineHeight: '14px',
         color: '#07679C',
         textTransform: 'capitalize',
       },

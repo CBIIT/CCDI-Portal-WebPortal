@@ -2,10 +2,15 @@ import React, { useState, useEffect, useRef, createRef } from 'react';
 import styled from 'styled-components';
 import ToolsMarkdown from './ToolsMarkdown';
 import { buildToolsNavItems } from './parseToolsMarkdown';
+import ResourceContentSegments from '../components/ResourceContentSegments';
 import headerImg from '../../../assets/about/Data_Usage_Policies_Header.png';
 import exportIconBlue from '../../../assets/icons/Export_Icon.svg';
 import closeIcon from '../../../assets/icons/Close_Icon.svg';
 import arrowDownIcon from '../../../assets/icons/Arrow_Down.svg';
+
+function hasSegments(segments) {
+    return Array.isArray(segments) && segments.length > 0;
+}
 
 const ToolsContainer = styled.div`
     width: 100%;
@@ -91,6 +96,25 @@ const ToolsBody = styled.div`
             text-underline-position: under;
             line-break: anywhere;
         }
+    }
+
+    .ecosystemImg {
+        width: 100%;
+    }
+
+    .ecosystemImgMobile {
+        display: none;
+    }
+
+    .ImgCaption {
+        color: #000;
+        font-family: Inter;
+        font-size: 14px;
+        font-style: italic;
+        font-weight: 500;
+        line-height: 22px;
+        letter-spacing: -0.28px;
+        padding: 10px 35px;
     }
 
     .navList {
@@ -354,6 +378,16 @@ const ToolsBody = styled.div`
         .mciSubtitle {
             margin-left: 0;
         }
+
+        .ecosystemImg {
+            display: none;
+        }
+
+        .ecosystemImgMobile {
+            display: block;
+            width: 310px;
+            margin: 10px auto;
+        }
     }
 `;
 
@@ -443,10 +477,21 @@ const ToolsResourceView = ({data}) => {
                 </div>
                 <div className='contentSection'>
                     <div className='contentList'>
-                    {data.toolsIntroText && (
+                    {hasSegments(data.toolsIntroSegments) ? (
                         <div className='introContainer'>
-                            <ToolsMarkdown>{data.toolsIntroText}</ToolsMarkdown>
+                            <ResourceContentSegments
+                                segments={data.toolsIntroSegments}
+                                pageData={data}
+                                MarkdownComponent={ToolsMarkdown}
+                                keyPrefix="tools_intro_seg"
+                            />
                         </div>
+                    ) : (
+                        data.toolsIntroText ? (
+                            <div className='introContainer'>
+                                <ToolsMarkdown>{data.toolsIntroText}</ToolsMarkdown>
+                            </div>
+                        ) : null
                     )}
                         {
                             toolsContent && toolsContent.map((toolsItem, toolid) => {
@@ -465,9 +510,18 @@ const ToolsResourceView = ({data}) => {
                                                             <div key={listItemKey}>
                                                                 <div id={listItem.id} className='mciSubtitle'>{listItem.subtopic && listItem.subtopic}</div>
                                                                 <div className='mciContentContainer nestedContent'>
-                                                                    {listItem.content && <ToolsMarkdown>{listItem.content}</ToolsMarkdown>}
+                                                                    {hasSegments(listItem.segments) ? (
+                                                                        <ResourceContentSegments
+                                                                            segments={listItem.segments}
+                                                                            pageData={data}
+                                                                            MarkdownComponent={ToolsMarkdown}
+                                                                            keyPrefix={`tools_${toolid}_${idx}`}
+                                                                        />
+                                                                    ) : (
+                                                                        listItem.content && <ToolsMarkdown>{listItem.content}</ToolsMarkdown>
+                                                                    )}
                                                                 </div>
-                                                                {listItem.content && <div style={{height: '40px'}} />}
+                                                                {(hasSegments(listItem.segments) || listItem.content) && <div style={{height: '40px'}} />}
                                                             </div>
                                                         )
                                                     })
@@ -484,9 +538,18 @@ const ToolsResourceView = ({data}) => {
                                         <div id={toolsItem.id} name={toolid} className='mciTitleMobile sectionCollapse' onClick={handleCollapseSection}>{toolsItem.topic && toolsItem.topic}</div>
                                         <div className="mciSection mobileCollapse" ref={sectionList.current[toolid]}>
                                             <div className='mciContentContainer'>
-                                                {toolsItem.content && <ToolsMarkdown>{toolsItem.content}</ToolsMarkdown>}
+                                                {hasSegments(toolsItem.segments) ? (
+                                                    <ResourceContentSegments
+                                                        segments={toolsItem.segments}
+                                                        pageData={data}
+                                                        MarkdownComponent={ToolsMarkdown}
+                                                        keyPrefix={`tools_flat_${toolid}`}
+                                                    />
+                                                ) : (
+                                                    toolsItem.content && <ToolsMarkdown>{toolsItem.content}</ToolsMarkdown>
+                                                )}
                                             </div>
-                                            {toolsItem.content && <div style={{height: '40px'}} />}
+                                            {(hasSegments(toolsItem.segments) || toolsItem.content) && <div style={{height: '40px'}} />}
                                         </div>
                                     </div>
                                 )

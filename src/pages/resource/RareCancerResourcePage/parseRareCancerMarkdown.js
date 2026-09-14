@@ -1,6 +1,7 @@
 import matter from 'gray-matter';
 import {
   buildNavTitleSet,
+  buildSegments,
   normalizeNavTitleKey,
   resolveShowInNav,
 } from '../MCIResourcePage/parseMciMarkdown';
@@ -121,8 +122,22 @@ function extractIntroAndRest(body) {
 }
 
 /**
- * Removes the dedicated flow-chart image from intro markdown so the view can
- * render it once from RCI_Data_Flow_Chart_URL (with a bundled fallback).
+ * True when intro already has a flow-chart (or matching FM URL) image.
+ */
+function introHasFlowChartImage(intro, fmUrl) {
+  const text = String(intro || '');
+  if (/!\[[^\]]*flow\s*chart[^\]]*\]\(/i.test(text)) {
+    return true;
+  }
+  if (fmUrl && text.includes(fmUrl)) {
+    return true;
+  }
+  return false;
+}
+
+/**
+ * Removes the dedicated flow-chart image from intro markdown.
+ * @deprecated Flow charts stay inline in the intro; prefer not calling this.
  */
 export function stripIntroFlowChart(intro, fmUrl) {
   const imgRe = /!\[[^\]]*\]\(([^)\s]+)(?:\s+"[^"]*")?\)/g;
@@ -286,7 +301,6 @@ function normalizeDownloadConfig(raw) {
  * @returns {{
  *   title: string,
  *   RCI_Header: string,
- *   RCI_Data_Flow_Chart_URL: string,
  *   RCI_DOWNLOAD_CONFIG: { url: string, filename: string }|undefined,
  *   rareCancerIntroText: string,
  *   navTitles: string[]|undefined,
@@ -310,21 +324,27 @@ export function parseRareCancerMarkdown(rawMarkdown) {
 
   const title = String(fmTitle || '').trim();
   const RCI_Header = String(fmHeader || '').trim();
+  const fmFlowUrl = String(fmFlowChart || '').trim();
   const rawNavTitles = firstDefined(fmNavTitles, rareCancerNavTitles, fmNavTitlesSnake);
   const navTitleSet = buildNavTitleSet(rawNavTitles);
   const navTitles = Array.isArray(rawNavTitles) ? rawNavTitles : undefined;
 
   const { intro: introFromBody, rest } = extractIntroAndRest(body || '');
-  const introRaw =
+  let rareCancerIntroText =
     String(introFromBody || '').trim() !== ''
-      ? introFromBody
+      ? trimMd(introFromBody)
       : legacyIntro != null
         ? String(legacyIntro)
         : '';
 
-  const fmFlowUrl = String(fmFlowChart || '').trim();
-  const { intro: rareCancerIntroText, extractedUrl } = stripIntroFlowChart(introRaw, fmFlowUrl);
-  const RCI_Data_Flow_Chart_URL = fmFlowUrl || extractedUrl;
+  // Legacy: FM-only flow chart — inject into intro when body has no chart image yet.
+  if (fmFlowUrl && !introHasFlowChartImage(rareCancerIntroText, fmFlowUrl)) {
+    rareCancerIntroText = trimMd(
+      rareCancerIntroText
+        ? `${rareCancerIntroText}\n\n![RCI data flow chart](${fmFlowUrl})`
+        : `![RCI data flow chart](${fmFlowUrl})`,
+    );
+  }
 
   const topics = splitH2(rest);
   const rareCancerContent = topics.map((t) => {
@@ -337,6 +357,7 @@ export function parseRareCancerMarkdown(rawMarkdown) {
         subtopic: s.subtopic,
         showInNav: resolveShowInNav(s.subtopic, navTitleSet),
         content,
+        segments: buildSegments(content),
       };
     });
     return {
@@ -351,8 +372,8 @@ export function parseRareCancerMarkdown(rawMarkdown) {
     ...restFm,
     title,
     RCI_Header,
-    RCI_Data_Flow_Chart_URL,
     RCI_DOWNLOAD_CONFIG: normalizeDownloadConfig(fmDownload),
+    rareCancerIntroSegments: buildSegments(rareCancerIntroText),
     rareCancerIntroText,
     navTitles,
     rareCancerContent,

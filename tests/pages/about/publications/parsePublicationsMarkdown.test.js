@@ -62,5 +62,26 @@ describe('parsePublicationsMarkdown', () => {
       const data = parsePublicationsMarkdown(md);
       expect(data.publicationsList).toHaveLength(1);
     });
+
+    it('should prefer front-matter Publications_Header and bannerText', () => {
+      const md = `---
+Publications_Header: https://example.com/fm-header.png
+bannerText: FM banner text
+---
+
+# Good
+### 2024 | Journal
+Summary.
+tags: test
+| id | a |
+| link | # |
+| summary | Primary |
+`;
+      const data = parsePublicationsMarkdown(md);
+      expect(data.Publications_Header).toBe('https://example.com/fm-header.png');
+      expect(data.bannerText).toBe('FM banner text');
+      expect(data.publicationsList).toHaveLength(1);
+      expect(data.publicationsList[0].title).toBe('Good');
+    });
   });
 });

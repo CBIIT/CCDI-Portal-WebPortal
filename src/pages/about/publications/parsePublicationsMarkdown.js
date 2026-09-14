@@ -1,7 +1,11 @@
 /**
  * Parses publicationsData.md into the shape previously produced from YAML
  * (Publications_Header, bannerText, publicationsList).
+ *
+ * Banner: YAML `Publications_Header` or `headerImage`; legacy leading `![…](url)` still works.
  */
+
+import matter from 'gray-matter';
 
 const SPECIAL_TYPES = new Set(['Preprint', 'White Paper']);
 
@@ -143,22 +147,33 @@ function parsePublicationBlock(block) {
 
 export function parsePublicationsMarkdown(markdown) {
   const text = String(markdown).replace(/^\uFEFF/, '');
-  const allLines = text.split('\n').map((l) => l.replace(/\r$/, ''));
+  const { data: fm, content: bodyMd } = matter(text);
+  const fmHeader = String(fm.Publications_Header || fm.headerImage || '').trim();
+  const fmBannerText = fm.bannerText != null ? String(fm.bannerText).trim() : '';
+
+  const allLines = String(bodyMd || '').split('\n').map((l) => l.replace(/\r$/, ''));
 
   let i = 0;
-  let publicationsHeader = '';
-  let bannerText = '';
+  let publicationsHeader = fmHeader;
+  let bannerText = fmBannerText;
 
   if (allLines[i]) {
     const imgMatch = allLines[i].trim().match(/^!\[([^\]]*)\]\(([^)]+)\)\s*$/);
     if (imgMatch) {
-      publicationsHeader = imgMatch[2].trim();
+      if (!publicationsHeader) {
+        publicationsHeader = imgMatch[2].trim();
+      }
       i += 1;
     }
   }
 
-  if (allLines[i] !== undefined) {
-    bannerText = allLines[i].trim();
+  if (!bannerText && allLines[i] !== undefined) {
+    const candidate = allLines[i].trim();
+    if (candidate && !candidate.startsWith('#')) {
+      bannerText = candidate;
+      i += 1;
+    }
+  } else if (bannerText && allLines[i] !== undefined && allLines[i].trim() === bannerText) {
     i += 1;
   }
 

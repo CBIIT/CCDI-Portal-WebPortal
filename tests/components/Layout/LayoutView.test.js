@@ -99,6 +99,17 @@ jest.mock('../../../src/pages/error/Error', () => {
   };
 });
 
+jest.mock('../../../src/pages/redirects/legacyC3dcUserGuideRedirect', () => {
+  const React = require('react');
+  const LEGACY_CCDI_USAGE_INSTRUCTIONS_PDF_PATH =
+    '/static/media/CCDI_Usage_Instructions_Nov2024_v2.5.0.69ea3cd5.pdf';
+  return {
+    __esModule: true,
+    LEGACY_CCDI_USAGE_INSTRUCTIONS_PDF_PATH,
+    default: () => <div data-testid="route-legacy-c3dc-user-guide-redirect" />,
+  };
+});
+
 jest.mock('../../../src/pages/globalSearch/searchController', () => {
   const React = require('react');
   return {
@@ -270,6 +281,16 @@ describe('LayoutView', () => {
     it('should render the FAQ controller on /faqs', () => {
       renderLayoutAt('/faqs');
       expect(screen.getByTestId('route-faqs')).toBeInTheDocument();
+    });
+
+    it('should redirect the legacy usage-instructions PDF path to the C3DC user guide route', () => {
+      renderLayoutAt(
+        '/static/media/CCDI_Usage_Instructions_Nov2024_v2.5.0.69ea3cd5.pdf',
+      );
+      expect(
+        screen.getByTestId('route-legacy-c3dc-user-guide-redirect'),
+      ).toBeInTheDocument();
+      expect(screen.queryByTestId('route-error')).not.toBeInTheDocument();
     });
   });
 

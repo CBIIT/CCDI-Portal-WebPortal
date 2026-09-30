@@ -45,11 +45,10 @@ describe('HeaderDesktop', () => {
 
     it('should show a separate feature update notice above the US government banner', () => {
       renderAt('/home');
-      expect(screen.getByText(/Feature Update/i)).toBeInTheDocument();
+      expect(screen.getByRole('status', { name: /feature update/i })).toBeInTheDocument();
       expect(
         screen.getByText(/Childhood Cancer Clinical Data Commons \(C3DC\)/i),
       ).toBeInTheDocument();
-      expect(screen.getByRole('status', { name: /feature update/i })).toBeInTheDocument();
     });
 
     it('should show the search area when the path is not /sitesearch', () => {

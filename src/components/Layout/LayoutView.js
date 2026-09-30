@@ -26,6 +26,9 @@ import CCDIEventAnnouncementsResourceView from "../../pages/resource/CCDIEventAn
 import CCDIEventDetailView from "../../pages/resource/CCDIEventAnnouncementsResourcePage/EventDetailController";
 import RareCancerResourceView from "../../pages/resource/RareCancerResourcePage/RareCancerResourceController";
 import MCIJson2TsvResourceView from "../../pages/resource/MCIJson2TsvResourcePage/MCIJson2TsvResourceController";
+import LegacyC3dcUserGuideRedirect, {
+  LEGACY_CCDI_USAGE_INSTRUCTIONS_PDF_PATH,
+} from '../../pages/redirects/legacyC3dcUserGuideRedirect';
 import C3dcRedirect from './c3dcRedirect';
 // import NewsDetail from '../../pages/news/newsDetailView';
 
@@ -51,6 +54,10 @@ const Layout = () => {
           <Route path="/data-usage-policies" element={<DataUsagePoliciesView />} />
           <Route path="/faqs" element={<FaqView />} />
           <Route path="/faq" element={<Navigate to="/faqs" replace />} />
+          <Route
+            path={LEGACY_CCDI_USAGE_INSTRUCTIONS_PDF_PATH}
+            element={<LegacyC3dcUserGuideRedirect />}
+          />
           <Route path="/ccdi-participant-index" element={<CPIResourceView />} />
           <Route path="/publications" element={<PublicationsView />} />
           <Route path="/tools" element={<ToolsResourceView />} />

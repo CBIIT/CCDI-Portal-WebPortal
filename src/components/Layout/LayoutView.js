@@ -12,7 +12,6 @@ import News from '../../pages/news/newsController';
 import DataModelNavigator from '../../pages/dmn/DataModelNavigator';
 import Error from '../../pages/error/Error';
 import Search from '../../pages/globalSearch/searchController';
-import Inventory from '../../pages/inventory/inventoryController';
 import ScrollButton from '../ScrollButton/ScrollButtonView';
 import MCIResourceView from '../../pages/resource/MCIResourcePage/MCIResourceMarkdownController'
 import PMTLResourceView from '../../pages/resource/PMTLResourcePage/PMTLResourceController';
@@ -21,10 +20,7 @@ import FederationDataModelNavigator from "../../pages/resource/FederationDMN/Fed
 import CPIResourceView from "../../pages/resource/CPIResourcePage/CPIResourceController";
 // import CBioPortalResourceView from "../../pages/resource/cBioPortalResourcePage/cBioPortalResourceController";
 import ReleaseNotesPageView from '../../pages/releaseNotePage/releaseNotePageController';
-import StudiesView from '../../pages/studies/studiesView';
-import StudiesDetail from "../../pages/studyDetail/studyDetailController";
 import OverlayWindow from '../OverlayWindow/OverlayWindow';
-import CohortAnalyzerController  from "../../pages/CohortAnalyzer/CohortAnalyzerController";
 import ToolsResourceView from "../../pages/resource/ToolsResourcePage/ToolsResourceController";
 import CCDIEventAnnouncementsResourceView from "../../pages/resource/CCDIEventAnnouncementsResourcePage/CCDIEventAnnouncementsResourceController";
 import CCDIEventDetailView from "../../pages/resource/CCDIEventAnnouncementsResourcePage/EventDetailController";
@@ -45,7 +41,6 @@ const Layout = () => {
           <Route path="/news" element={<News />} />
           <Route path="/data-model" element={<DataModelNavigator />} />
           <Route path="/sitesearch" element={<Search />} />
-          <Route path="/explore" element={<Inventory />} />
           <Route path="/MCI" element={<MCIResourceView />} />
           <Route path="/MCI_JSON2TSV" element={<MCIJson2TsvResourceView />} />
           <Route path="/pmtl" element={<PMTLResourceView />} />
@@ -61,11 +56,6 @@ const Layout = () => {
           <Route path="/ccdi-events-announcements/:slug" element={<CCDIEventDetailView />} />
           <Route path="/pediatric-adolescent-and-young-adult-rare-cancer-study" element={<RareCancerResourceView/>} />
           <Route path="/release-notes" element={<ReleaseNotesPageView />} />
-          <Route path="/cohortAnalyzer" element={<CohortAnalyzerController />} />
-          <Route path="/studies" >
-            <Route index={true} element={<StudiesView />}></Route>
-            <Route path=":studyId" element={<StudiesDetail />} />
-          </Route>
           <Route path="*" element={<Error />} />
         </Routes>
         <Footer />

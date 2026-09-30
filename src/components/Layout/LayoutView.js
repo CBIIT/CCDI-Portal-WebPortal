@@ -26,6 +26,7 @@ import CCDIEventAnnouncementsResourceView from "../../pages/resource/CCDIEventAn
 import CCDIEventDetailView from "../../pages/resource/CCDIEventAnnouncementsResourcePage/EventDetailController";
 import RareCancerResourceView from "../../pages/resource/RareCancerResourcePage/RareCancerResourceController";
 import MCIJson2TsvResourceView from "../../pages/resource/MCIJson2TsvResourcePage/MCIJson2TsvResourceController";
+import C3dcRedirect from './c3dcRedirect';
 // import NewsDetail from '../../pages/news/newsDetailView';
 
 const Layout = () => {
@@ -41,6 +42,7 @@ const Layout = () => {
           <Route path="/news" element={<News />} />
           <Route path="/data-model" element={<DataModelNavigator />} />
           <Route path="/sitesearch" element={<Search />} />
+          <Route path="/explore" element={<C3dcRedirect to="/exploreParticipants" />} />
           <Route path="/MCI" element={<MCIResourceView />} />
           <Route path="/MCI_JSON2TSV" element={<MCIJson2TsvResourceView />} />
           <Route path="/pmtl" element={<PMTLResourceView />} />
@@ -56,6 +58,11 @@ const Layout = () => {
           <Route path="/ccdi-events-announcements/:slug" element={<CCDIEventDetailView />} />
           <Route path="/pediatric-adolescent-and-young-adult-rare-cancer-study" element={<RareCancerResourceView/>} />
           <Route path="/release-notes" element={<ReleaseNotesPageView />} />
+          <Route path="/cohortAnalyzer" element={<C3dcRedirect />} />
+          <Route path="/studies">
+            <Route index element={<C3dcRedirect />} />
+            <Route path=":studyId" element={<C3dcRedirect />} />
+          </Route>
           <Route path="*" element={<Error />} />
         </Routes>
         <Footer />

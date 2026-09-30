@@ -3,6 +3,13 @@
  * Page controllers and route targets are mocked (tests/TEST_STRUCTURE.md — no heavy imports).
  */
 
+jest.mock('../../../src/utils/env', () => ({
+  __esModule: true,
+  default: {
+    REACT_APP_C3DC: 'https://clinicalcommons-dev.ccdi.cancer.gov',
+  },
+}));
+
 jest.mock('../../../src/components/ResponsiveFooter/', () => {
   const React = require('react');
   return {
@@ -203,6 +210,7 @@ import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 import Layout from '../../../src/components/Layout/LayoutView';
 
 const theme = createTheme();
+const C3DC_URL = 'https://clinicalcommons-dev.ccdi.cancer.gov';
 
 function renderLayoutAt(path) {
   return render(
@@ -252,12 +260,24 @@ describe('LayoutView', () => {
       expect(screen.getByTestId('route-error')).toBeInTheDocument();
     });
 
-    it.each(['/explore', '/studies', '/studies/phs000001', '/cohortAnalyzer'])(
-      'should render the error route for deprecated path %s',
-      (path) => {
-        renderLayoutAt(path);
-        expect(screen.getByTestId('route-error')).toBeInTheDocument();
-      },
-    );
+    it.each([
+      ['/explore', `${C3DC_URL}/exploreParticipants`],
+      ['/explore?tab=1', `${C3DC_URL}/exploreParticipants?tab=1`],
+      ['/studies', `${C3DC_URL}/studies`],
+      ['/studies/phs000001', `${C3DC_URL}/studies/phs000001`],
+      ['/cohortAnalyzer', `${C3DC_URL}/cohortAnalyzer`],
+    ])('should redirect %s to %s', (path, expectedUrl) => {
+      const replace = jest.fn();
+      const originalLocation = window.location;
+      delete window.location;
+      window.location = { replace };
+
+      renderLayoutAt(path);
+
+      expect(replace).toHaveBeenCalledWith(expectedUrl);
+      expect(screen.queryByTestId('route-error')).not.toBeInTheDocument();
+
+      window.location = originalLocation;
+    });
   });
 });

@@ -5,7 +5,6 @@
 export const sampleFederationMarkdownRaw = `---
 title: CCDI Data Federation Resource
 Federation_Header: https://example.com/federation-header.png
-CCDI_Federation_Data_Access: https://example.com/federation-diagram.png
 navTitles:
   - Data Access
   - Additional Available Resources
@@ -24,6 +23,12 @@ This list will expand as more organizations implement CCDI's data federation API
 ## Data Access
 
 Researchers can search for deidentified individual-level data through the API.
+
+\`\`\`responsive-img
+wide: 'https://example.com/federation-diagram.png'
+alt: 'CCDI Federation Service ecosystem'
+Caption: ""
+\`\`\`
 
 To access the CCDI Data Federation Resource API, please click [here](https://cbiit.github.io/ccdi-federation-api-aggregation/).
 

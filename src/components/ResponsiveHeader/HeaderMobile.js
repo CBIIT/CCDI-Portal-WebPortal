@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import Logo from '../ResponsiveHeader/components/LogoMobile';
 import SearchBar from '../ResponsiveHeader/components/SearchBarMobile';
@@ -226,7 +226,6 @@ const USGovBanner = styled.div`
 `;
 
 const Header = () => {
-  const path = useLocation().pathname;
   const { navMobileList, navbarSublists } = useNavContent();
   const [clickTitle, setClickTitle] = useState('');
   const [navMobileDisplay, setNavMobileDisplay] = useState('none');
@@ -272,7 +271,7 @@ const Header = () => {
           <Logo />
           <div className='headerLowerContainer'>
             <div className='menuButton' onClick={() => setNavMobileDisplay('block')}>Menu</div>
-            { path !== "/sitesearch" && <div className='searchBarArea'><SearchBar /></div> }
+            <div className='searchBarArea'><SearchBar /></div>
           </div>
         </HeaderContainer>
       </HeaderBanner>

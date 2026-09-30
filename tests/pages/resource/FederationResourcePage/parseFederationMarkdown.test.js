@@ -17,7 +17,7 @@ describe('parseFederationMarkdown', () => {
 
     expect(data.title).toBe('CCDI Data Federation Resource');
     expect(data.Federation_Header).toBe('https://example.com/federation-header.png');
-    expect(data.CCDI_Federation_Data_Access).toBe('https://example.com/federation-diagram.png');
+    expect(data.CCDI_Federation_Data_Access).toBe('');
     expect(data.federationIntroText).toContain('pull data from across various resources');
     expect(data.federationIntroText).toContain('piloting data federation');
     expect(data.federationIntroText).toContain('will expand as more organizations');
@@ -28,6 +28,7 @@ describe('parseFederationMarkdown', () => {
     expect(dataAccess.topic).toBe('Data Access');
     expect(dataAccess.id).toBe('Data_Access');
     expect(dataAccess.content).toContain('deidentified individual-level data');
+    expect(dataAccess.segments.some((s) => s.type === 'widget' && s.widget === 'responsiveImg')).toBe(true);
     expect(dataAccess.content).toContain('ccdi-federation-api-aggregation');
     expect(dataAccess.list).toEqual([]);
   });
@@ -68,9 +69,19 @@ describe('parseFederationMarkdown', () => {
   it('should parse topic bodies into markdown/widget segments', () => {
     const data = parseFederationMarkdown(sampleFederationMarkdownRaw);
     const dataAccess = data.federationContent[0];
-    expect(dataAccess.segments).toHaveLength(1);
-    expect(dataAccess.segments[0].type).toBe('markdown');
-    expect(dataAccess.segments[0].markdown).toContain('deidentified individual-level data');
+    expect(dataAccess.segments.length).toBeGreaterThanOrEqual(2);
+    expect(dataAccess.segments).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ type: 'markdown' }),
+        expect.objectContaining({
+          type: 'widget',
+          widget: 'responsiveImg',
+          data: expect.objectContaining({
+            wide: 'https://example.com/federation-diagram.png',
+          }),
+        }),
+      ]),
+    );
   });
 
   it('should build side nav from navTitles including subtitle entries', () => {
@@ -123,6 +134,24 @@ describe('parseFederationMarkdown', () => {
     expect(parsed.title).toBe('BOM Federation');
     expect(parsed.federationContent[0].content).toBe('Body.');
     expect(parsed.federationContent[0].list).toEqual([]);
+  });
+  it('should pass through legacy CCDI_Federation_Data_Access for view fallback', () => {
+    const md = `---
+title: Fed
+Federation_Header: https://example.com/h.png
+CCDI_Federation_Data_Access: https://example.com/fm-diagram.png
+---
+
+Intro.
+
+## Data Access
+
+Researchers can search.
+`;
+    const data = parseFederationMarkdown(md);
+    expect(data.CCDI_Federation_Data_Access).toBe('https://example.com/fm-diagram.png');
+    expect(data.federationContent[0].content).toBe('Researchers can search.');
+    expect(data.federationContent[0].content).not.toContain('fm-diagram.png');
   });
 });
 

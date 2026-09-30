@@ -3,6 +3,7 @@ import { Grid, Typography, withStyles } from '@material-ui/core';
 import LineBreaksRenderer from '../../../utils/LineBreaksRenderer';
 
 import { Link } from 'react-router-dom';
+import formatSemicolonList from './formatSemicolonList';
 
 const Anchor = ({ link, text, classes }) => {
   return link.match(/\w+:\/\//) ? (
@@ -55,7 +56,7 @@ const PropertyItem = ({ ...props }) => {
     } else if (hasBreakLine) {
       return <LineBreaksRenderer htmlContent={value} classes={classes} />;
     } else {
-      return value;
+      return formatSemicolonList(value);
     }
   };
 
@@ -104,7 +105,7 @@ const styles = () => ({
     paddingLeft: '3px',
   },
   link: {
-    color: '#990099',
+    color: '#4725CC',
     textDecoration: 'none',
     fontFamily: 'Roboto',
     fontSize: '16px',

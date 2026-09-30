@@ -14,7 +14,6 @@ jest.mock('../../../../src/pages/resource/FederationResourcePage/parseFederation
   default: jest.fn(() => ({
     title: 'CCDI Data Federation Resource',
     Federation_Header: 'https://example.com/federation-header.png',
-    CCDI_Federation_Data_Access: 'https://example.com/federation-diagram.png',
     federationIntroText: 'Federation intro for unit test.',
     navTitles: ['Federation Overview'],
     federationContent: [

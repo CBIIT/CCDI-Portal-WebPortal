@@ -5,7 +5,6 @@ import ReactHtmlParser from "html-react-parser";
 // import { releaseNotesList } from '../../bento/newsData';
 import ArrowDownIcon from '../../assets/about/Arrow_Down_Black_Icon.svg';
 import arrowDownGreenIcon from '../../assets/about/arrowDownGreen.svg';
-import arrowUpGreenIcon from '../../assets/about/arrowUpGreen.svg';
 import UploadIcon from '../../assets/about/Upload-Icon.svg';
 import ClinicalTrialsIcon from '../../assets/about/Release_Clinical_Icon.svg';
 import GenomicsIcon from '../../assets/about/Release_Genomics_Icon.svg';
@@ -243,6 +242,11 @@ const NavContainer = styled.div`
 
     .tabDropIcon {
       float: right;
+      transition: transform 0.2s ease;
+    }
+
+    .tabDropIconOpen {
+      transform: rotate(180deg);
     }
 
     .navTitle {
@@ -489,6 +493,9 @@ const ReleaseNotesPageView = ( {releaseNotesList} ) => {
           yearObj.version = releaseNotesList[i].version;
           yearObj.date = newDate;
           yearObj.index = i;
+          // #region agent log
+          fetch('http://127.0.0.1:7850/ingest/7113f069-b7a8-439a-bc17-2e478c6a527a',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'b3212c'},body:JSON.stringify({sessionId:'b3212c',runId:'pre-pr',hypothesisId:'A',location:'releaseNotePageView.js:createNav',message:'nav item index assignment',data:{version:yearObj.version,year:currYear,loopIndex:i,storedIndex:yearObj.index,indexMatchesLoop:yearObj.index===i},timestamp:Date.now()})}).catch(()=>{});
+          // #endregion
           SubList.push(yearObj);
           if (i === releaseNotesList.length - 1) {
             SubObj.list = SubList;
@@ -509,7 +516,12 @@ const ReleaseNotesPageView = ( {releaseNotesList} ) => {
     useEffect(() => {
             window.addEventListener('resize', resizeHandler);
             resizeHandler();
-            return () => window.addEventListener('resize', resizeHandler);
+            return () => {
+              // #region agent log
+              fetch('http://127.0.0.1:7850/ingest/7113f069-b7a8-439a-bc17-2e478c6a527a',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'b3212c'},body:JSON.stringify({sessionId:'b3212c',runId:'pre-pr',hypothesisId:'D',location:'releaseNotePageView.js:resizeCleanup',message:'resize effect cleanup ran',data:{cleanupAddsListener:true},timestamp:Date.now()})}).catch(()=>{});
+              // #endregion
+              window.addEventListener('resize', resizeHandler);
+            };
         }, []);
 
     useEffect(() => {
@@ -557,7 +569,10 @@ const ReleaseNotesPageView = ( {releaseNotesList} ) => {
     };
 
     const onClickDropdownItem = (idx) => {
-      setSelectedIdx(idx);
+      // #region agent log
+      fetch('http://127.0.0.1:7850/ingest/7113f069-b7a8-439a-bc17-2e478c6a527a',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'b3212c'},body:JSON.stringify({sessionId:'b3212c',runId:'pre-pr',hypothesisId:'B',location:'releaseNotePageView.js:onClickDropdownItem',message:'version click resolved index',data:{clickedIndex:idx,resolvedVersion:releaseNotesList[idx]&&releaseNotesList[idx].version,resolvedTitle:releaseNotesList[idx]&&releaseNotesList[idx].title,listLength:releaseNotesList.length},timestamp:Date.now()})}).catch(()=>{});
+      // #endregion
+      setSelectedIdx(idx === 0 ? idx : idx - 1);
       setDropdownOpen(false);
     }
 
@@ -601,7 +616,7 @@ const ReleaseNotesPageView = ( {releaseNotesList} ) => {
                       style={dropdownOpen? {fontSize: '16px'} : null}
                     >
                       {dropdownOpen ? "Select a release version" : "Version: " + releaseNotesList[selectedIdx].version}
-                      <img className='tabDropIcon' src={dropdownOpen? arrowUpGreenIcon : arrowDownGreenIcon} alt='arrow img' />
+                      <img className={dropdownOpen ? 'tabDropIcon tabDropIconOpen' : 'tabDropIcon'} src={arrowDownGreenIcon} alt='arrow img' />
                     </div>
                     <div className="navTitle">Release Note</div>
                   {

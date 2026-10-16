@@ -3,7 +3,6 @@ import styled from 'styled-components';
 // import {aboutData} from '../../../bento/aboutPageData';
 import aboutImg from '../../../assets/about/About_Img_Large.png';
 import exportIcon from '../../../assets/about/Export_Icon.svg';
-import exportBlackIcon from '../../../assets/landing/Export_Icon_Black.svg';
 import AboutMarkdown from './AboutMarkdown';
 
 const AboutContainer = styled.div`
@@ -113,8 +112,6 @@ const AboutContainer = styled.div`
     color: #000000;
     font-family: Inter;
     font-weight: 700;
-    padding-right: 20px;
-    background: url(${exportBlackIcon}) right center no-repeat;
     text-underline-offset: 4px;
   }
 

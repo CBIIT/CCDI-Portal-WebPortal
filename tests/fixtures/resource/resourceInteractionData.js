@@ -115,12 +115,12 @@ export const multiTopicPmtlData = {
     {
       id: 'pmtl_a',
       topic: 'PMTL Topic A',
-      list: [{ id: 'pmtl_sub_a', subtopic: 'PMTL Sub A', content: '<p>PMTL A</p>' }],
+      list: [{ id: 'pmtl_sub_a', subtopic: 'PMTL Sub A', content: 'PMTL A' }],
     },
     {
       id: 'pmtl_b',
       topic: 'PMTL Topic B',
-      list: [{ id: 'pmtl_sub_b', subtopic: 'PMTL Sub B', content: '<p>PMTL B</p>' }],
+      list: [{ id: 'pmtl_sub_b', subtopic: 'PMTL Sub B', content: 'PMTL B' }],
     },
   ],
 };

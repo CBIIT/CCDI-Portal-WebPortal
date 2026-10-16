@@ -572,7 +572,7 @@ const ReleaseNotesPageView = ( {releaseNotesList} ) => {
       // #region agent log
       fetch('http://127.0.0.1:7850/ingest/7113f069-b7a8-439a-bc17-2e478c6a527a',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'b3212c'},body:JSON.stringify({sessionId:'b3212c',runId:'pre-pr',hypothesisId:'B',location:'releaseNotePageView.js:onClickDropdownItem',message:'version click resolved index',data:{clickedIndex:idx,resolvedVersion:releaseNotesList[idx]&&releaseNotesList[idx].version,resolvedTitle:releaseNotesList[idx]&&releaseNotesList[idx].title,listLength:releaseNotesList.length},timestamp:Date.now()})}).catch(()=>{});
       // #endregion
-      setSelectedIdx(idx === 0 ? idx : idx - 1);
+      setSelectedIdx(idx);
       setDropdownOpen(false);
     }
 

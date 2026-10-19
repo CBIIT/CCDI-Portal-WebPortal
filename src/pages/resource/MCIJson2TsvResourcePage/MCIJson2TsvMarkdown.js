@@ -93,7 +93,7 @@ const MCIJson2TsvMarkdown = ({ children }) => {
             <a
               {...rest}
               href={href}
-              className={external || mailto ? 'link' : undefined}
+              className={external ? 'link' : undefined}
               target={external || mailto ? '_blank' : undefined}
               rel="noopener noreferrer"
             >

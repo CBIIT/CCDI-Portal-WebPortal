@@ -1,5 +1,5 @@
 /**
- * PMTLResourceController — mocked axios GET for `pmtlData.yaml`; YAML resolves to PMTLResourceView props.
+ * PMTLResourceController — mocked axios GET for `pmtlData.md`; markdown resolves to PMTLResourceView props.
  *
  * Follows tests/TEST_STRUCTURE.md controller pattern (mock env/axios/heavy children, waitFor, assert URL + DOM).
  */
@@ -10,8 +10,13 @@ import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import axios from 'axios';
 import PMTLResourceController from '../../../../src/pages/resource/PMTLResourcePage/PMTLResourceController';
-import { defaultPmtlViewData } from '../../../fixtures/resource/pmtlViewProps';
-import { createDedicatedYamlAxiosMock } from '../../../helpers/resourceYamlApiMocks';
+import { samplePmtlMarkdownWithSubtopics } from '../../../fixtures/resource/pmtlMarkdownSamples';
+
+jest.mock('../../../../src/pages/resource/PMTLResourcePage/PmtlMarkdown', () => (
+  function MockPmtlMarkdown({ children }) {
+    return <div>{children}</div>;
+  }
+));
 
 if (typeof global.MutationObserver === 'undefined') {
   global.MutationObserver = class MutationObserver {
@@ -54,15 +59,10 @@ jest.mock('../../../../src/pages/resource/components/MapViewMobile', () => funct
   return <div data-testid="pmtl-map-mobile" />;
 });
 
-// Match pmtlResourceView.test.js mocks — keep controller test fast
-
 beforeEach(() => {
   window.scrollTo = jest.fn();
-  axios.get.mockImplementation(
-    createDedicatedYamlAxiosMock({
-      '/pmtlData.yaml': defaultPmtlViewData,
-    }),
-  );
+  document.title = 'Initial Title';
+  axios.get.mockResolvedValue({ data: samplePmtlMarkdownWithSubtopics });
   ['f0', 'f1', 'f2'].forEach(() => {
     document.body.appendChild(document.createElement('footer'));
   });
@@ -74,10 +74,10 @@ afterEach(() => {
 });
 
 describe('PMTLResourceController', () => {
-  describe('Mocked axios (pmtlData.yaml)', () => {
-    it('should request pmtlData.yaml and render topic content after load', async () => {
+  describe('Mocked axios (pmtlData.md)', () => {
+    it('should request pmtlData.md and render topic content after load', async () => {
       render(
-        <MemoryRouter initialEntries={['/explore']}>
+        <MemoryRouter initialEntries={['/pmtl']}>
           <PMTLResourceController />
         </MemoryRouter>,
       );
@@ -87,9 +87,22 @@ describe('PMTLResourceController', () => {
       });
 
       expect(axios.get).toHaveBeenCalledWith(
-        expect.stringMatching(/^https:\/\/static\.example\.com\/pmtlData\.yaml\?ts=\d+$/),
+        expect.stringMatching(/^https:\/\/static\.example\.com\/pmtlData\.md\?ts=\d+$/),
       );
       expect(screen.getByText(/Unit test intro for PMTL resource page/i)).toBeInTheDocument();
+      expect(screen.getByText(/PMTL subsection body for testing/i)).toBeInTheDocument();
+    });
+
+    it('should set document title from parsed front matter title', async () => {
+      render(
+        <MemoryRouter initialEntries={['/pmtl']}>
+          <PMTLResourceController />
+        </MemoryRouter>,
+      );
+
+      await waitFor(() => {
+        expect(document.title).toBe('Pediatric Molecular Target Lists');
+      });
     });
   });
 });

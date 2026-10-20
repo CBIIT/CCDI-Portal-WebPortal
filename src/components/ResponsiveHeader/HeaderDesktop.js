@@ -29,44 +29,6 @@ const HeaderContainer = styled.div`
     }
 `;
 
-const FeatureUpdateBanner = styled.div`
-  background-color: #f0f0f0;
-  width: 100%;
-  border-bottom: 1px solid #c5d5d7;
-
-  .featureUpdateInner {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    margin: 0 auto;
-    max-width: 1420px;
-    padding: 10px 32px;
-  }
-
-  .featureUpdateLabel {
-    flex-shrink: 0;
-    display: inline-block;
-    background-color: #3b7f84;
-    color: #ffffff;
-    font-family: "Open Sans", sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    line-height: 1;
-    padding: 5px 8px;
-    border-radius: 3px;
-  }
-
-  .featureUpdateText {
-    font-family: "Open Sans", sans-serif;
-    font-size: 13px;
-    font-weight: 400;
-    line-height: 1.45;
-    color: #1b1b1b;
-  }
-`;
-
 const USGovBanner = styled.div`
   background-color: #f0f0f0;
   height: 46px;
@@ -128,7 +90,6 @@ const NavBarContainer = styled.div`
 const Header = () => {
   return (
     <>
-      
       <USGovBanner>
         <div className="USGovBannerInner">
           

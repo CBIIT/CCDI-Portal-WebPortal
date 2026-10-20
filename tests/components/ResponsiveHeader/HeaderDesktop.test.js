@@ -43,12 +43,12 @@ describe('HeaderDesktop', () => {
       expect(screen.queryByTestId('cart-mock')).not.toBeInTheDocument();
     });
 
-    it('should show a separate feature update notice above the US government banner', () => {
+    it('should not show the removed feature update notice above the US government banner', () => {
       renderAt('/home');
-      expect(screen.getByRole('status', { name: /feature update/i })).toBeInTheDocument();
+      expect(screen.queryByRole('status', { name: /feature update/i })).not.toBeInTheDocument();
       expect(
-        screen.getByText(/Childhood Cancer Clinical Data Commons \(C3DC\)/i),
-      ).toBeInTheDocument();
+        screen.queryByText(/Childhood Cancer Clinical Data Commons \(C3DC\)/i),
+      ).not.toBeInTheDocument();
     });
 
     it('should show the search area', () => {

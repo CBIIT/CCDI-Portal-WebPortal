@@ -337,7 +337,7 @@ The portal loads these files at runtime from `REACT_APP_STATIC_CONTENT_URL` (see
 
 | File | Purpose |
 |------|---------|
-| `landingData.md` | Homepage hero, section titles, stats labels, resource cards, carousel |
+| `landingData.md` | Homepage integration banner, hero, section titles, stats labels, resource cards, carousel |
 | `navData.md` | Primary nav + Resources / About submenus |
 | `aboutSearchContent.md` | Global Search About-tab Fuse.js corpus |
 | `newsData.md` | News cards + homepage Latest Updates strip |
@@ -418,6 +418,7 @@ Any of these keys may be present; missing keys stay empty (no JS copy fallback).
 | `stats[]` | `title`, `detail`, `link`; optional static `num` (live MCI/CCDC counts still filled by the app) |
 | `resourcesApplications[]` / `resourcesCloud[]` | `id`, `title`, `subtitle?`, `content`, `link`, `img?`, `noLink?` |
 | `carousel[]` | `content`, `link`, `img?`, `mobile?` |
+| `integrationBanner` | Home-page bar under the nav. `isVisible` (`true` or `false`), `title`, `detail`, `buttonLabel`, `link`. The bar renders only when `isVisible: true` and `title` is set. Use `link: "{{C3DC}}/exploreParticipants"` |
 
 HTML in titles (e.g. stats line breaks) must be quoted:
 

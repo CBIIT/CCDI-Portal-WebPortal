@@ -128,14 +128,7 @@ const NavBarContainer = styled.div`
 const Header = () => {
   return (
     <>
-      <FeatureUpdateBanner role="status" aria-label="Feature update">
-        <div className="featureUpdateInner">
-          <span className="featureUpdateText">
-            As of September 2026, the CCDI Explore Dashboard, Studies list, Cohort Analyzer,
-            and Data Model features are part of the Childhood Cancer Clinical Data Commons (C3DC).
-          </span>
-        </div>
-      </FeatureUpdateBanner>
+      
       <USGovBanner>
         <div className="USGovBannerInner">
           

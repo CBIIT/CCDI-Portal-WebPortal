@@ -43,6 +43,7 @@ Each row is a remote MD file that has (or had) an image-related field. Classific
 | `mciData.md` | `/MCI` | `MCI_CCDI_Data_Ecosystem` / `_Mobile` | non-banner | done (portal) | MD view uses inline `responsive-img`; do not re-add to FM |
 | `federationData.md` | `/data-federation-resource` | `Federation_Header` | banner | done | Keep |
 | `federationData.md` | `/data-federation-resource` | `CCDI_Federation_Data_Access` | non-banner | legacy fallback | Prefer inline (`responsive-img` or `![…]`); portal still injects FM URL on Data Access when that section has no in-content graphic |
+| `pmtlData.md` | `/pmtl` | — | — | done | Bundled `PMTL_header.png`; no image fields in the markdown file |
 | `rareCancerData.md` | `/pediatric-adolescent-and-young-adult-rare-cancer-study` | `RCI_Header` | banner | done | Keep |
 | `rareCancerData.md` | `/pediatric-…` | `RCI_Data_Flow_Chart_URL` | non-banner | legacy fallback | Prefer inline in intro; portal injects FM URL into intro when no flow-chart image is present yet |
 | `cpiData.md` | `/ccdi-participant-index` | `CPI_Header_URL` | banner | done | Keep |
@@ -194,6 +195,59 @@ Each news item:
 ### Seed fixture
 
 - `tests/fixtures/news/newsMarkdownSamples.js`
+
+## `pmtlData.md` (Pediatric Molecular Target Lists)
+
+| Item | Value |
+|------|--------|
+| Path | `${REACT_APP_STATIC_CONTENT_URL}/pmtlData.md?ts=<timestamp>` |
+| Hub route | `/pmtl` |
+| Format | YAML front matter + Markdown body (`##` / optional `###` + property-table ids) |
+
+### Fields
+
+| Key | Notes |
+|-----|--------|
+| `title` | Document title and page heading |
+| `navTitles[]` | Left-nav labels; must match `##` heading text exactly |
+| Intro | Markdown before the first `##` |
+| `topic` / `id` | `##` heading plus a leading property table |
+| Section body | Markdown under the topic. A `###` heading becomes a subtitle; its id is a trailing property table. A topic with no `###` keeps one body block, and a trailing property table supplies that block's id |
+
+The page banner is the bundled PMTL header. Do not add image URLs to front matter.
+
+```markdown
+---
+title: Pediatric Molecular Target Lists
+navTitles:
+  - FDA PMTL Lists
+  - Contact
+---
+
+Intro paragraph.
+
+## FDA PMTL Lists
+
+| Property | Value |
+| --- | --- |
+| id | FDA_PMTL_Lists |
+
+Section body with [links](https://www.fda.gov).
+
+| Property | Value |
+| --- | --- |
+| id | FDA_PMTL_Lists_Introduction |
+```
+
+Known ids: `FDA_PMTL_Lists`, `FDA_PMTL_Lists_Introduction`, `Contact`, `Contact_Information_PMTL`.
+
+### Failure behavior
+
+If the file is missing or the request fails, the PMTL page renders its shell with no section content. There is no `pmtlData.yaml` fallback.
+
+### Seed fixture
+
+- `tests/fixtures/resource/pmtlMarkdownSamples.js`
 
 ## `rareCancerData.md` (Pediatric, Adolescent, and Young Adult Rare Cancer Study)
 

@@ -1,9 +1,10 @@
 /**
- * Minimal PMTL YAML-shaped data for PMTLResourceView / controller tests.
+ * Parsed pmtlData.md shape for PMTLResourceView tests.
  */
 
 export const defaultPmtlViewData = {
-  introText: '<p>Unit test intro for PMTL resource page.</p>',
+  title: 'Pediatric Molecular Target Lists',
+  introText: 'Unit test intro for PMTL resource page.',
   pmtlContent: [
     {
       id: 'section_overview',
@@ -12,7 +13,7 @@ export const defaultPmtlViewData = {
         {
           id: 'sub_first',
           subtopic: 'First Subsection',
-          content: '<p>PMTL subsection body for testing.</p>',
+          content: 'PMTL subsection body for testing.',
         },
       ],
     },

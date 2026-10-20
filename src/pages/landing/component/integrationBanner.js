@@ -133,7 +133,7 @@ const IntegrationBanner = () => {
             className="integrationBannerAction"
             href={link}
             target={external ? '_blank' : undefined}
-            rel={external ? 'noopener noreferrer' : undefined}
+            rel="noopener noreferrer"
           >
             {integrationBanner.buttonLabel}
           </a>

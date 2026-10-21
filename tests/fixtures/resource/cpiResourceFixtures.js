@@ -36,6 +36,7 @@ export const CPI_PARTICIPANT_STATS_URL =
  * Shape expected by CPIResourceView when rendering the stats grid (subset of production API).
  */
 export const minimalCpiStatsApiResponse = {
+  version: 'v1.5',
   participant_statistics: {
     unique_participant_count: 4242,
     mapped_participant_count: 9001,

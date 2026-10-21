@@ -377,7 +377,11 @@ Markdown body with [links](https://example.com) and lists.
 | `content` | Markdown body (lists, links, bold) |
 | `id` | Property table (`CPI_Components`) |
 
-Live CPI statistics still come from the Participant Index API, not from this file.
+Live CPI statistics still come from the Participant Index API, not from this file. The statistics response includes `version`. Markdown may include the content variable `{{cpiVersion}}`; the page replaces it when the stats response arrives. The stats subheading uses front matter `statsSubtitle` when set, otherwise `Summary of CPI {{cpiVersion}}`.
+
+```yaml
+statsSubtitle: "Summary of CPI {{cpiVersion}}"
+```
 
 ### Seed fixture
 

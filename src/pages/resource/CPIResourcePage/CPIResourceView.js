@@ -8,6 +8,7 @@ import exportIconBlue from '../../../assets/icons/Export_Icon.svg';
 import blurBorder from '../../../assets/resources/blur_border.svg';
 import blurBorderMobile from '../../../assets/resources/blur_border_mobile.svg';
 import CpiMarkdown from './CpiMarkdown';
+import { applyContentVariables } from '../../../utils/resolveContentTokens';
 
 const CPIResourceContainer = styled.div`
     width: 100%;
@@ -681,6 +682,12 @@ const CPIResourceView = ({data, cpiStats, loadingCpiStats, cpiStatsError}) => {
     //     return sectionList.current[i] || createRef()
     // });
     const cpiContent = data.cpiContent;
+    const cpiVersion = cpiStats && cpiStats.version ? String(cpiStats.version) : '';
+    const contentVariables = { cpiVersion };
+    const statsSubtitle = applyContentVariables(
+      (data && data.statsSubtitle) || 'Summary of CPI {{cpiVersion}}',
+      contentVariables,
+    ).replace(/\s{2,}/g, ' ').trim();
     if (cpiContent) {
         sectionList.current = cpiContent.map((element, i) => {
             return sectionList.current[i] || createRef()
@@ -775,12 +782,12 @@ const CPIResourceView = ({data, cpiStats, loadingCpiStats, cpiStatsError}) => {
                 </div>
                 <div className='contentSection'>
                     <div className='contentList'>
-                        {data.cpiIntroText && <div className='introContainer'><CpiMarkdown>{data.cpiIntroText}</CpiMarkdown></div>}
+                        {data.cpiIntroText && <div className='introContainer'><CpiMarkdown variables={contentVariables}>{data.cpiIntroText}</CpiMarkdown></div>}
                         <CPIStatsContainer>
                             <img className='blurBorder' src={isMobile ? blurBorderMobile : blurBorder} alt="blurBorder" />
                             <div className='statsHeader'>
                                 <div className='statsTitle'>CPI Stats at a Glance</div>
-                                <div className='statsSubtitle'>Summary of CPI v1.5</div>
+                                <div className='statsSubtitle'>{statsSubtitle}</div>
                             </div>
                             {loadingCpiStats ? (
                                 <div className='infoContainer'>Loading Statistics...</div>
@@ -891,7 +898,7 @@ const CPIResourceView = ({data, cpiStats, loadingCpiStats, cpiStatsError}) => {
                                         <div id={cpiItem.id} name={mciid} className='mciTitleMobile sectionCollapse' onClick={handleCollapseSection}>{cpiItem.topic && cpiItem.topic}</div>
                                         <div className="mciSection mobileCollapse" ref={sectionList.current[mciid]}>
                                             <div className='mciContentContainer'>
-                                                {cpiItem.content && <CpiMarkdown>{cpiItem.content}</CpiMarkdown>}
+                                                {cpiItem.content && <CpiMarkdown variables={contentVariables}>{cpiItem.content}</CpiMarkdown>}
                                                 
                                                 {cpiItem.id && cpiItem.id.includes('CPI_Components') && 
                                                 <div>

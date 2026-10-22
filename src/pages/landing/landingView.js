@@ -6,6 +6,7 @@ import ReactHtmlParser from 'html-react-parser';
 import Carousel from '../landing/component/carousel';
 import HeroMobile from '../landing/component/heroMobile'
 import LatestUpdate from '../landing/component/latestUpdate'
+import IntegrationBanner from '../landing/component/integrationBanner'
 import exportIcon from '../../assets/landing/Export_Icon_Black.svg';
 import bg1 from '../../assets/landing/bg_1.png';
 import bg2 from '../../assets/landing/bg_2.png';
@@ -897,6 +898,8 @@ const LandingView = ({
   }, [])
 
   return (
+    <>
+    <IntegrationBanner />
     <LandingViewContainer>
       <BackgroundFirst />
       <BackgroundSecond />
@@ -1063,6 +1066,7 @@ const LandingView = ({
         </ResourcesContainer>
       </ResourcesSection>
     </LandingViewContainer>
+    </>
   )
 };
 

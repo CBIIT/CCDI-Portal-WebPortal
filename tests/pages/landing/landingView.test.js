@@ -43,6 +43,13 @@ const landingContentForView = {
   resourcesAppliationsListData,
   resourcesCloudListData,
   carouselList,
+  integrationBanner: {
+    isVisible: true,
+    title: 'CCDI Data are now available in the updated CCDI Explore Dashboard',
+    detail: 'As of September 2026, clicking Explore, Studies, or Data Model links in Hub will open the corresponding content in C3DC',
+    buttonLabel: 'Go to new CCDI Explore',
+    link: 'https://c3dc.test.example/exploreParticipants',
+  },
 };
 
 function renderLandingView(props = {}) {
@@ -65,6 +72,15 @@ describe('LandingView', () => {
     it('should render without crashing', () => {
       const { container } = renderLandingView();
       expect(container).toBeInTheDocument();
+    });
+
+    it('should render the Explore integration banner below the navigation', () => {
+      renderLandingView();
+      expect(screen.getByText(/CCDI Data are now available in the updated CCDI Explore Dashboard/i)).toBeInTheDocument();
+      expect(screen.getByRole('link', { name: /go to new ccdi explore/i })).toHaveAttribute(
+        'href',
+        'https://c3dc.test.example/exploreParticipants',
+      );
     });
 
     it('should render with default stats and news data', () => {

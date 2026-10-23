@@ -166,6 +166,8 @@
       "^react-native$": "react-native-web",
       "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy",
       "^axios$": "axios/dist/browser/axios.cjs",
+      "^react-markdown$": "<rootDir>/tests/__mocks__/react-markdown.js",
+      "^remark-gfm$": "<rootDir>/tests/__mocks__/remark-gfm.js",
       "^@bento-core/authentication$": "<rootDir>/tests/__mocks__/bento-core-authentication.js"
     },
     "moduleFileExtensions": [

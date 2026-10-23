@@ -6,6 +6,7 @@
     "@apollo/client": "^3.6.9",
     "@apollo/react-components": "^4.0.0",
     "@babel/core": "7.2.2",
+    "@babel/plugin-proposal-class-properties": "7.3.0",
     "@bento-core/cart": "1.0.1-ccdihub.9",
     "@bento-core/data-table": "^1.0.0",
     "@bento-core/facet-filter": "1.0.1-ccdihub.41",
@@ -26,7 +27,7 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "*",
     "@svgr/webpack": "4.1.0",
-    "axios": "^0.21.1",
+    "axios": "^1.12.2",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^9.0.0",
     "babel-jest": "23.6.0",
@@ -36,8 +37,8 @@
     "bento-components": "^1.0.2",
     "bfj": "6.1.1",
     "case-sensitive-paths-webpack-plugin": "2.2.0",
-    "chart.js": "^3.1.0",
-    "chartjs-chart-venn": "^3.0.1",
+    "chart.js": "^4.4.6",
+    "chartjs-chart-venn": "^4.3.7",
     "classnames": "^2.2.6",
     "css-loader": "1.0.0",
     "dotenv": "^6.0.0",
@@ -57,9 +58,7 @@
     "gray-matter": "^4.0.3",
     "html-react-parser": "^3.0.15",
     "html-webpack-plugin": "4.0.0-alpha.2",
-    "html2pdf.js": "^0.10.2",
     "identity-obj-proxy": "3.0.0",
-    "isomorphic-fetch": "^2.2.1",
     "jest": "23.6.0",
     "jest-pnp-resolver": "1.0.2",
     "jest-resolve": "23.6.0",
@@ -96,7 +95,6 @@
     "react-vis": "^1.11.7",
     "react-zoom-pan-pinch": "^1.4.5",
     "recharts": "^2.1.16",
-    "recompose": "^0.30.0",
     "redux": "^4.1.0",
     "redux-devtools-extension": "^2.13.9",
     "redux-logger": "^3.0.6",
@@ -158,7 +156,7 @@
     "transform": {
       "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
       "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+      "^(?!.*\\.(js|jsx|ts|tsx|css|json|cjs)$)": "<rootDir>/config/jest/fileTransform.js"
     },
     "transformIgnorePatterns": [
       "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$",
@@ -167,6 +165,7 @@
     "moduleNameMapper": {
       "^react-native$": "react-native-web",
       "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy",
+      "^axios$": "axios/dist/browser/axios.cjs",
       "^@bento-core/authentication$": "<rootDir>/tests/__mocks__/bento-core-authentication.js"
     },
     "moduleFileExtensions": [

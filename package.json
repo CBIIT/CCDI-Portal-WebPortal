@@ -6,6 +6,7 @@
     "@apollo/client": "^3.6.9",
     "@apollo/react-components": "^4.0.0",
     "@babel/core": "7.2.2",
+    "@babel/plugin-proposal-class-properties": "7.3.0",
     "@bento-core/cart": "1.0.1-ccdihub.9",
     "@bento-core/data-table": "^1.0.0",
     "@bento-core/facet-filter": "1.0.1-ccdihub.41",
@@ -155,7 +156,7 @@
     "transform": {
       "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
       "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+      "^(?!.*\\.(js|jsx|ts|tsx|css|json|cjs)$)": "<rootDir>/config/jest/fileTransform.js"
     },
     "transformIgnorePatterns": [
       "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$",
@@ -164,6 +165,7 @@
     "moduleNameMapper": {
       "^react-native$": "react-native-web",
       "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy",
+      "^axios$": "axios/dist/browser/axios.cjs",
       "^@bento-core/authentication$": "<rootDir>/tests/__mocks__/bento-core-authentication.js"
     },
     "moduleFileExtensions": [

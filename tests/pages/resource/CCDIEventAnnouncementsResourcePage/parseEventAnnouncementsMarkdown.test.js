@@ -89,6 +89,24 @@ Email us.
       ccdiEventAnnouncementsContent: [],
     });
   });
+
+  it('should prefer front-matter banner over leading body image', () => {
+    const md = `---
+CCDI_Event_Announcements_Header: https://example.com/fm-header.png
+---
+![legacy](https://example.com/legacy-header.png)
+
+Intro from body.
+
+# Contact
+
+Email us.
+`;
+    const data = parseEventAnnouncementsMarkdown(md);
+    expect(data.CCDI_Event_Announcements_Header).toBe('https://example.com/fm-header.png');
+    expect(data.ccdiEventAnnouncementsIntroText).toBe('Intro from body.');
+    expect(data.ccdiEventAnnouncementsContent[0].topic).toBe('Contact');
+  });
 });
 
 describe('topicToSectionId', () => {

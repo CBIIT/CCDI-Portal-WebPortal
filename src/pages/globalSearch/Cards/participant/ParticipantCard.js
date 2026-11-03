@@ -11,6 +11,7 @@ import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 import { ReactComponent as DownArrowIcon } from '../../assets/Down_Arrow.svg';
 import { ReactComponent as UpArrowIcon } from '../../assets/Up_Arrow.svg';
 import { openC3dcExplore, openC3dcStudy } from './c3dcService';
+import formatSemicolonList from '../formatSemicolonList';
 
 const CONSENT_GLOSSARY_URL = 'https://www.ncbi.nlm.nih.gov/gap/docs/submissionguide/#consentgloss';
 
@@ -180,7 +181,7 @@ const ParticipantCard = ({ data = {}, index }) => {
       </Typography>
       {label !== 'Study ID:' ?
         <Typography variant="body1" className={classes.value}>
-          {value}
+          {formatSemicolonList(value)}
         </Typography> :
         <Button className={classes.titleLink} onClick={handleViewStudy}>
           {study_id}
@@ -189,6 +190,7 @@ const ParticipantCard = ({ data = {}, index }) => {
   );
 
   const renderTreatmentType = (label, value = '') => {
+    const listValue = formatSemicolonList(value) || '';
     // Simple, reliable character limits based on screen size
     const getMaxLength = () => {
       if (window.innerWidth <= 600) {
@@ -214,10 +216,10 @@ const ParticipantCard = ({ data = {}, index }) => {
       return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    const shouldTruncate = value && value.length > maxLength;
-    const displayValue = shouldTruncate && !treatmentTypeExpanded 
-      ? value.substring(0, maxLength) 
-      : value;
+    const shouldTruncate = listValue && listValue.length > maxLength;
+    const displayValue = shouldTruncate && !treatmentTypeExpanded
+      ? listValue.substring(0, maxLength)
+      : listValue;
 
     const handleToggleExpand = () => {
       setTreatmentTypeExpanded(!treatmentTypeExpanded);
@@ -256,6 +258,7 @@ const ParticipantCard = ({ data = {}, index }) => {
   };
 
   const renderTreatmentAgent = (label, value = '') => {
+    const listValue = formatSemicolonList(value) || '';
     // Simple, reliable character limits based on screen size
     const getMaxLength = () => {
       if (window.innerWidth <= 600) {
@@ -281,10 +284,10 @@ const ParticipantCard = ({ data = {}, index }) => {
       return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    const shouldTruncate = value && value.length > maxLength;
-    const displayValue = shouldTruncate && !treatmentAgentExpanded 
-      ? value.substring(0, maxLength) 
-      : value;
+    const shouldTruncate = listValue && listValue.length > maxLength;
+    const displayValue = shouldTruncate && !treatmentAgentExpanded
+      ? listValue.substring(0, maxLength)
+      : listValue;
 
     const handleToggleExpand = () => {
       setTreatmentAgentExpanded(!treatmentAgentExpanded);

@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { ReactComponent as DownArrowIcon } from '../../assets/Down_Arrow.svg';
 import { ReactComponent as UpArrowIcon } from '../../assets/Up_Arrow.svg';
 import { openC3dcExploreFiles } from '../participant/c3dcService';
+import formatSemicolonList from '../formatSemicolonList';
 
 const removeSquareBracketsFromString = (text) => {
   return text.replace(/\[|\]/g, '');
@@ -15,8 +16,9 @@ const removeSquareBracketsFromString = (text) => {
 
 const formatListWithSemicolons = (text) => {
   if (!text) return text;
-  // Remove square brackets and replace commas with semicolons
-  return text.replace(/\[|\]/g, '').replace(/,/g, ';');
+  // Remove square brackets and turn comma- or semicolon-delimited IDs into
+  // a list with a space after each semicolon.
+  return formatSemicolonList(text.replace(/\[|\]/g, '').replace(/,/g, ';'));
 }
 
 const formatParticipantIdForUrl = (participantId) => {
@@ -133,7 +135,7 @@ const FilesCard = ({ data = {}, index }) => {
         {label}
       </Typography>
       <Typography variant="body1" className={classes.value}>
-        {value}
+        {formatSemicolonList(value)}
       </Typography>
     </div>
   );

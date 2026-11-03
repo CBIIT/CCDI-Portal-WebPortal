@@ -1,6 +1,7 @@
 import env from './env';
 
 const C3DC_TOKEN = /\{\{\s*C3DC\s*\}\}/g;
+const CONTENT_VARIABLE = /\{\{\s*([A-Za-z][A-Za-z0-9_]*)\s*\}\}/g;
 
 function c3dcBase() {
   return String(env.REACT_APP_C3DC || '').replace(/\/$/, '');
@@ -15,6 +16,25 @@ export function resolveContentTokenString(value) {
   }
   const base = c3dcBase();
   return value.replace(C3DC_TOKEN, base);
+}
+
+/**
+ * Replace `{{variableName}}` placeholders with values known at render time.
+ * Unknown names are left unchanged. A provided empty value removes the token.
+ * @param {string} value
+ * @param {Record<string, string|number|null|undefined>} variables
+ */
+export function applyContentVariables(value, variables = {}) {
+  if (typeof value !== 'string' || !value) {
+    return value;
+  }
+  return value.replace(CONTENT_VARIABLE, (match, name) => {
+    if (!Object.prototype.hasOwnProperty.call(variables, name)) {
+      return match;
+    }
+    const replacement = variables[name];
+    return replacement == null ? '' : String(replacement);
+  });
 }
 
 /**

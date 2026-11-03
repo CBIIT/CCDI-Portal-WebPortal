@@ -1,6 +1,6 @@
 /**
  * Axios mocks for resource pages that load a single YAML file from static content.
- * - Group A: dedicated files, e.g. `/mciData.yaml`, `/pmtlData.yaml`
+ * - Group A: dedicated files, e.g. `/mciData.yaml`, `/resourceData.yaml`
  * - Group B: shared `/resourceData.yaml` (pass the payload your test’s controller needs)
  * Controllers call axios.get(`${BASE_URL}/<file>.yaml?ts=...`).
  */

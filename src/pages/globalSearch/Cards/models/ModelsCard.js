@@ -5,6 +5,7 @@ import {
 import useStyles from './style';
 import { cn } from 'bento-components';
 import { openC3dcDataModel } from '../participant/c3dcService';
+import formatSemicolonList from '../formatSemicolonList';
 
 /* const removeSquareBracketsFromString = (text) => {
   return text.replace(/\[|\]/g, '');
@@ -87,7 +88,7 @@ const ModelsCard = ({ data = {}, index }) => {
         {label}
       </Typography>
       <Typography variant="body1" className={classes.value}>
-        {value}
+        {formatSemicolonList(value)}
       </Typography>
     </div>
   );
@@ -127,7 +128,7 @@ const ModelsCard = ({ data = {}, index }) => {
       </div>
       
       {/* Content area */}
-      <Grid item container >
+      <Grid item container className={classes.contentArea}>
         <Grid item xs={true}>
           <div className={classes.row}>
             <div className={classes.column}>

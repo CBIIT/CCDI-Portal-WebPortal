@@ -54,6 +54,7 @@ describe('parseCpiMarkdown', () => {
       CPI_Domain_Coverage_Icon_URL: '',
       CPI_Total_Mapped_Participants_Ids_Icon_URL: '',
       CPI_Unique_Participants_Icon_URL: '',
+      statsSubtitle: '',
     });
 
     const bom = `\uFEFF---\nCPI_Header_URL: https://example.com/bom.png\n---\n\nIntro.\n\n# Topic\n\nBody.\n\n| Property | Value |\n| --- | --- |\n| id | Topic_Id |\n`;

@@ -61,6 +61,19 @@ describe('parseLandingMarkdown', () => {
     expect(parsed.heroTitle).toBe('Discover CCDI Resources');
     expect(parsed.resourcesApplications[0].link).toBe('https://c3dc.test.example/');
     expect(parsed.carousel[0].link).toBe('https://c3dc.test.example');
+    expect(parsed.integrationBanner).toEqual({
+      isVisible: true,
+      title: 'CCDI Data are now available in the updated CCDI Explore Dashboard',
+      detail: 'As of September 2026, clicking Explore, Studies, or Data Model links in Hub will open the corresponding content in C3DC',
+      buttonLabel: 'Go to new CCDI Explore',
+      link: 'https://c3dc.test.example/exploreParticipants',
+    });
+  });
+
+  it('should hide the integration banner when isVisible is false', () => {
+    const hidden = sampleLandingMarkdownRaw.replace('isVisible: true', 'isVisible: false');
+    const parsed = parseLandingMarkdown(hidden);
+    expect(parsed.integrationBanner).toBeNull();
   });
 
   it('should return null for empty front matter', () => {
@@ -77,6 +90,7 @@ describe('mergeLandingContent', () => {
   it('should return empty content when parsed is null (no JS copy fallback)', () => {
     const merged = mergeLandingContent(null, defaults);
     expect(merged.introData.introTitle1).toBe('');
+    expect(merged.integrationBanner).toBeNull();
     expect(merged.statsData).toEqual([]);
     expect(merged.resourcesAppliationsListData).toEqual([]);
     expect(merged.carouselList).toEqual([]);

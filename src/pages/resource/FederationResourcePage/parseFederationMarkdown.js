@@ -220,6 +220,7 @@ export default function parseFederationMarkdown(rawMarkdown) {
 
   const title = String(fmTitle || '').trim();
   const Federation_Header = String(fmFederationHeader || '').trim();
+  // Legacy non-banner FM field — view injects when Data Access body has no inline graphic.
   const CCDI_Federation_Data_Access = String(fmDataAccessImg || '').trim();
   const rawNavTitles = firstDefined(fmNavTitles, federationNavTitles, fmNavTitlesSnake);
   const navTitleSet = buildNavTitleSet(rawNavTitles);

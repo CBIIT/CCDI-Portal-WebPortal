@@ -27,6 +27,7 @@ export function createEmptyLandingContent(assetDefaults = {}) {
     resourcesAppliationsListData: [],
     resourcesCloudListData: [],
     carouselList: [],
+    integrationBanner: null,
   };
 }
 
@@ -87,6 +88,28 @@ export default function parseLandingMarkdown(rawMarkdown) {
     resourcesCloud: Array.isArray(resolved.resourcesCloud)
       ? resolved.resourcesCloud : undefined,
     carousel: Array.isArray(resolved.carousel) ? resolved.carousel : undefined,
+    integrationBanner: normalizeIntegrationBanner(resolved.integrationBanner),
+  };
+}
+
+function normalizeIntegrationBanner(raw) {
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) {
+    return null;
+  }
+  const title = raw.title != null ? String(raw.title).trim() : '';
+  const detail = raw.detail != null ? String(raw.detail).trim() : '';
+  const buttonLabel = raw.buttonLabel != null ? String(raw.buttonLabel).trim() : '';
+  const link = raw.link != null ? String(raw.link).trim() : '';
+  const isVisible = raw.isVisible === true || raw.isVisible === 'true';
+  if (!title || !isVisible) {
+    return null;
+  }
+  return {
+    title,
+    detail,
+    buttonLabel,
+    link,
+    isVisible,
   };
 }
 
@@ -142,6 +165,7 @@ export function mergeLandingContent(parsed, assetDefaults = {}) {
       assetLists.resourcesCloudListData,
     ),
     carouselList: mergeCarouselList(parsed.carousel, assetLists.carouselList),
+    integrationBanner: parsed.integrationBanner || null,
   };
 }
 

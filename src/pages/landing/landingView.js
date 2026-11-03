@@ -6,6 +6,7 @@ import ReactHtmlParser from 'html-react-parser';
 import Carousel from '../landing/component/carousel';
 import HeroMobile from '../landing/component/heroMobile'
 import LatestUpdate from '../landing/component/latestUpdate'
+import IntegrationBanner from '../landing/component/integrationBanner'
 import exportIcon from '../../assets/landing/Export_Icon_Black.svg';
 import bg1 from '../../assets/landing/bg_1.png';
 import bg2 from '../../assets/landing/bg_2.png';
@@ -665,7 +666,7 @@ const ResourcesContainer = styled.div`
       color: #000000;
       font-family: Poppins;
       font-weight: 400;
-      font-size: 20px;
+      font-size: 14px;
       margin-bottom: 4px;
       line-height: 20px;
     }
@@ -684,10 +685,12 @@ const ResourcesContainer = styled.div`
 
     .resourceListItemContext {
       color: #000000;
-      font-family: Poppins;
+      font-family: Inter;
       font-weight: 500;
-      font-size: 16px;
-      letter-spacing: 0.02em;
+      font-size: 18px;
+      line-height: 22px;
+      width: 100%;
+      overflow-wrap: break-word;
     }
 
     @media (min-width: 1420px) {
@@ -706,10 +709,14 @@ const ResourcesContainer = styled.div`
         justify-content: center;
       }
 
+      .resourceListItemLogo {
+        flex-shrink: 0;
+      }
+
       .resourceListItemText {
-        margin: 5px 0 0 20px;
-        // width: 353px;
-        height: 125px;
+        flex: 1;
+        min-width: 0;
+        margin: 5px 0 0 16px;
       }
 
       .upper {
@@ -721,7 +728,7 @@ const ResourcesContainer = styled.div`
       }
     }
 
-    @media (min-width: 1200px) and (max-width: 1419px) {
+    @media (min-width: 1187px) and (max-width: 1419px) {
       .resourceTitle {
         margin-left: calc(50vw - 580px);
       }
@@ -732,7 +739,7 @@ const ResourcesContainer = styled.div`
 
       .resourceListItem {
         display: flex;
-        margin: 17px;
+        margin: 17px 10px;
         text-decoration: none;
       }
 
@@ -743,10 +750,14 @@ const ResourcesContainer = styled.div`
         justify-content: center;
       }
 
+      .resourceListItemLogo {
+        flex-shrink: 0;
+      }
+
       .resourceListItemText {
-        margin: 5px 0 0 20px;
-        width: 353px;
-        height: 125px;
+        flex: 1;
+        min-width: 0;
+        margin: 5px 0 0 16px;
       }
 
       .upper {
@@ -758,7 +769,7 @@ const ResourcesContainer = styled.div`
       }
     }
 
-    @media (max-width: 1199px) {
+    @media (max-width: 1186px) {
       .resourceList {
         display: grid;
         grid-column-gap: 55px;
@@ -887,6 +898,8 @@ const LandingView = ({
   }, [])
 
   return (
+    <>
+    <IntegrationBanner />
     <LandingViewContainer>
       <BackgroundFirst />
       <BackgroundSecond />
@@ -1053,6 +1066,7 @@ const LandingView = ({
         </ResourcesContainer>
       </ResourcesSection>
     </LandingViewContainer>
+    </>
   )
 };
 

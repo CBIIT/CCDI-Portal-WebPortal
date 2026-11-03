@@ -67,7 +67,8 @@ const useStyles = makeStyles(() => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    height: '450px',
+    // Matches the table area it is swapped with.
+    height: 'min(450px, calc(90vh - 230px))',
   },
   errorText: {
     fontFamily: 'Poppins',
@@ -81,8 +82,10 @@ const useStyles = makeStyles(() => ({
 const CustomTableContainer = (props) => {
   const { children, themeConfig, className } = props;
   const tableStyle = {
-    height: '450px',
-    overflowX: 'hidden',
+    // Shrinks on short screens so the modal's chrome always stays visible, and
+    // scrolls sideways once the columns are wider than a narrow screen.
+    height: 'min(450px, calc(90vh - 230px))',
+    overflowX: 'auto',
   };
   return (
     <ThemeProvider theme={themeConfig}>
@@ -214,9 +217,14 @@ const CPIModal = ({
   const modalBody = {
     position: 'absolute',
     top: '5%',
-    left: '25%',
-    width: '880px',
-    height: '671px',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    // Fluid so the modal never runs off a narrow screen.
+    width: 'calc(100% - 32px)',
+    maxWidth: '880px',
+    height: 'auto',
+    maxHeight: '90vh',
+    boxSizing: 'border-box',
     background: '#FFFFFF',
     border: '1px solid #505050',
     borderRadius: '40px',
@@ -228,6 +236,8 @@ const CPIModal = ({
     justifyContent: 'center',
     alignItems: 'center',
     height: '55px',
+    boxSizing: 'border-box',
+    padding: '0px 48px',
   };
 
   const cell = {
@@ -275,8 +285,9 @@ const CPIModal = ({
   };
 
   const closeButton = {
-    marginLeft: '769px',
     position: 'absolute',
+    top: '8px',
+    right: '12px',
     backgroundColor: 'transparent',
   };
 

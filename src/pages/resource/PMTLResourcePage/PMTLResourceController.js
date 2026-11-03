@@ -1,33 +1,41 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import env from '../../../utils/env';
-import yaml from "js-yaml";
-import axios from "axios";
-import PMTLResourceView from "./PMTLResourceView";
+import axios from 'axios';
+import parsePmtlMarkdown from './parsePmtlMarkdown';
+import PMTLResourceView from './PMTLResourceView';
 
-const PMTL_URL = env.REACT_APP_STATIC_CONTENT_URL + '/pmtlData.yaml';
+const PMTL_MD_URL = `${env.REACT_APP_STATIC_CONTENT_URL}/pmtlData.md`;
 
-const PMTLResourceController = ({ match }) => {
-  const [data, setData] = useState([]);
+const PMTLResourceController = () => {
+  const [data, setData] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
-      let resultData = [];
-      let result = [];
+      let resultData = {};
       try {
-        const fileUrl = `${PMTL_URL}?ts=${new Date().getTime()}`;
-        result = await axios.get(
-          fileUrl
-        );
-        resultData = yaml.safeLoad(result.data);
+        const fileUrl = `${PMTL_MD_URL}?ts=${new Date().getTime()}`;
+        const result = await axios.get(fileUrl);
+        resultData = parsePmtlMarkdown(result.data);
       } catch (_error) {
-        // result = await axios.get(YAMLData);
-        // resultData = yaml.safeLoad(result.data);
+        /* empty state; page still mounts */
       }
-
       setData(resultData);
     };
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (!data.title) {
+      return undefined;
+    }
+    const previousTitle = document.title;
+    document.title = data.title;
+    return () => {
+      document.title = previousTitle;
+    };
+  }, [data.title]);
+
   return <PMTLResourceView data={data} />;
 };
+
 export default PMTLResourceController;

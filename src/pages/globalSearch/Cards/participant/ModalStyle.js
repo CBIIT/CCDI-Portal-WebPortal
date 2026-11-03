@@ -4,10 +4,13 @@ export default () => ({
     justifyContent: 'center',
     alignItems: 'center',
     height: '55px',
+    boxSizing: 'border-box',
+    padding: '0px 48px',
   },
   closeButton: {
-    marginLeft: '769px',
     position: 'absolute',
+    top: '8px',
+    right: '12px',
   },
   resetIcon: {
     marginLeft: '10px',
@@ -28,9 +31,14 @@ export default () => ({
   modalBody: {
     position: 'absolute',
     top: '5%',
-    left: '25%',
-    width: '840px',
-    height: '671px',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    // Fluid so the modal never runs off a narrow screen.
+    width: 'calc(100% - 32px)',
+    maxWidth: '840px',
+    height: 'auto',
+    maxHeight: '90vh',
+    boxSizing: 'border-box',
     background: '#FFFFFF',
     border: '1px solid #505050',
     borderRadius: '40px',

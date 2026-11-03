@@ -109,6 +109,7 @@ function emptyCpiData() {
     CPI_Domain_Coverage_Icon_URL: '',
     CPI_Total_Mapped_Participants_Ids_Icon_URL: '',
     CPI_Unique_Participants_Icon_URL: '',
+    statsSubtitle: '',
   };
 }
 
@@ -161,5 +162,6 @@ export default function parseCpiMarkdown(rawMarkdown) {
       fm.CPI_Total_Mapped_Participants_Ids_Icon_URL || '',
     ).trim(),
     CPI_Unique_Participants_Icon_URL: String(fm.CPI_Unique_Participants_Icon_URL || '').trim(),
+    statsSubtitle: String(fm.statsSubtitle || '').trim(),
   };
 }

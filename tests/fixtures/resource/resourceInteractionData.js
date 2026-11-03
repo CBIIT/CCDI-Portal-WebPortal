@@ -66,7 +66,6 @@ export const multiTopicFederationData = {
       list: [],
     },
   ],
-  CCDI_Federation_Data_Access: '/test-federation-infographic.png',
 };
 
 export const multiTopicCcdiEventsData = {
@@ -116,12 +115,12 @@ export const multiTopicPmtlData = {
     {
       id: 'pmtl_a',
       topic: 'PMTL Topic A',
-      list: [{ id: 'pmtl_sub_a', subtopic: 'PMTL Sub A', content: '<p>PMTL A</p>' }],
+      list: [{ id: 'pmtl_sub_a', subtopic: 'PMTL Sub A', content: 'PMTL A' }],
     },
     {
       id: 'pmtl_b',
       topic: 'PMTL Topic B',
-      list: [{ id: 'pmtl_sub_b', subtopic: 'PMTL Sub B', content: '<p>PMTL B</p>' }],
+      list: [{ id: 'pmtl_sub_b', subtopic: 'PMTL Sub B', content: 'PMTL B' }],
     },
   ],
 };
@@ -146,12 +145,11 @@ export const multiTopicRareCancerData = {
 /** Same-origin contact-form download + custom flow-chart URL. */
 export const rareCancerWithDownloadData = {
   ...minimalRareCancerResourceData,
-  rareCancerIntroText: 'Rare cancer intro with download.',
   RCI_DOWNLOAD_CONFIG: {
     url: '/local/rare-cancer-contact.pdf',
     filename: 'rare-cancer-contact.pdf',
   },
-  RCI_Data_Flow_Chart_URL: 'https://example.com/custom-rci-flow-chart.png',
+  rareCancerIntroText: 'Rare cancer intro with download.\n\n![RCI data flow chart](https://example.com/custom-rci-flow-chart.png)',
   navTitles: ['Rare Topic A', 'Contact Information', 'Rare Topic B', 'Rare Sub B'],
   rareCancerContent: [
     {

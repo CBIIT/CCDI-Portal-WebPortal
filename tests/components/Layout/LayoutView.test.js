@@ -3,6 +3,13 @@
  * Page controllers and route targets are mocked (tests/TEST_STRUCTURE.md — no heavy imports).
  */
 
+jest.mock('../../../src/utils/env', () => ({
+  __esModule: true,
+  default: {
+    REACT_APP_C3DC: 'https://clinicalcommons-dev.ccdi.cancer.gov',
+  },
+}));
+
 jest.mock('../../../src/components/ResponsiveFooter/', () => {
   const React = require('react');
   return {
@@ -99,19 +106,22 @@ jest.mock('../../../src/pages/error/Error', () => {
   };
 });
 
+jest.mock('../../../src/pages/redirects/legacyC3dcUserGuideRedirect', () => {
+  const React = require('react');
+  const LEGACY_CCDI_USAGE_INSTRUCTIONS_PDF_PATH =
+    '/static/media/CCDI_Usage_Instructions_Nov2024_v2.5.0.69ea3cd5.pdf';
+  return {
+    __esModule: true,
+    LEGACY_CCDI_USAGE_INSTRUCTIONS_PDF_PATH,
+    default: () => <div data-testid="route-legacy-c3dc-user-guide-redirect" />,
+  };
+});
+
 jest.mock('../../../src/pages/globalSearch/searchController', () => {
   const React = require('react');
   return {
     __esModule: true,
     default: () => <div data-testid="route-search" />,
-  };
-});
-
-jest.mock('../../../src/pages/inventory/inventoryController', () => {
-  const React = require('react');
-  return {
-    __esModule: true,
-    default: () => <div data-testid="route-explore" />,
   };
 });
 
@@ -163,30 +173,6 @@ jest.mock('../../../src/pages/releaseNotePage/releaseNotePageController', () => 
   };
 });
 
-jest.mock('../../../src/pages/studies/studiesView', () => {
-  const React = require('react');
-  return {
-    __esModule: true,
-    default: () => <div data-testid="route-studies" />,
-  };
-});
-
-jest.mock('../../../src/pages/studyDetail/studyDetailController', () => {
-  const React = require('react');
-  return {
-    __esModule: true,
-    default: () => <div data-testid="route-study-detail" />,
-  };
-});
-
-jest.mock('../../../src/pages/CohortAnalyzer/CohortAnalyzerController', () => {
-  const React = require('react');
-  return {
-    __esModule: true,
-    default: () => <div data-testid="route-cohort-analyzer" />,
-  };
-});
-
 jest.mock('../../../src/pages/resource/ToolsResourcePage/ToolsResourceController', () => {
   const React = require('react');
   return {
@@ -235,6 +221,7 @@ import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 import Layout from '../../../src/components/Layout/LayoutView';
 
 const theme = createTheme();
+const C3DC_URL = 'https://clinicalcommons-dev.ccdi.cancer.gov';
 
 function renderLayoutAt(path) {
   return render(
@@ -271,6 +258,16 @@ describe('LayoutView', () => {
       renderLayoutAt('/faqs');
       expect(screen.getByTestId('route-faqs')).toBeInTheDocument();
     });
+
+    it('should redirect the legacy usage-instructions PDF path to the C3DC user guide route', () => {
+      renderLayoutAt(
+        '/static/media/CCDI_Usage_Instructions_Nov2024_v2.5.0.69ea3cd5.pdf',
+      );
+      expect(
+        screen.getByTestId('route-legacy-c3dc-user-guide-redirect'),
+      ).toBeInTheDocument();
+      expect(screen.queryByTestId('route-error')).not.toBeInTheDocument();
+    });
   });
 
   describe('Edge cases', () => {
@@ -282,6 +279,26 @@ describe('LayoutView', () => {
     it('should render the error route for removed cart path', () => {
       renderLayoutAt('/fileCentricCart');
       expect(screen.getByTestId('route-error')).toBeInTheDocument();
+    });
+
+    it.each([
+      ['/explore', `${C3DC_URL}/exploreParticipants`],
+      ['/explore?tab=1', `${C3DC_URL}/exploreParticipants?tab=1`],
+      ['/studies', `${C3DC_URL}/studies`],
+      ['/studies/phs000001', `${C3DC_URL}/studies/phs000001`],
+      ['/cohortAnalyzer', `${C3DC_URL}/cohortAnalyzer`],
+    ])('should redirect %s to %s', (path, expectedUrl) => {
+      const replace = jest.fn();
+      const originalLocation = window.location;
+      delete window.location;
+      window.location = { replace };
+
+      renderLayoutAt(path);
+
+      expect(replace).toHaveBeenCalledWith(expectedUrl);
+      expect(screen.queryByTestId('route-error')).not.toBeInTheDocument();
+
+      window.location = originalLocation;
     });
   });
 });

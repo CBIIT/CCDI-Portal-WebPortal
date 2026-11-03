@@ -52,11 +52,13 @@ Adapt section names (e.g. “Hero section”, “Stats section”) to match the 
   - `tests/fixtures/landing/landingViewProps.js` — default `statsData` / `newsData` for `LandingView` tests.
   - `tests/helpers/landingApiMocks.js` — `createCcdcFetchMock`, `setupNewsMarkdownAxiosMock` (alias `setupNewsYamlAxiosMock`), optional `createLandingGraphqlQueryMock`.
 - **Resource pages (YAML from static content):**
-  - `tests/fixtures/resource/mciViewProps.js`, `pmtlViewProps.js` — dedicated YAML shapes for Group A views.
+  - `tests/fixtures/resource/mciViewProps.js` — dedicated YAML shape for Group A views.
+  - `tests/fixtures/resource/pmtlViewProps.js` — parsed `pmtlData.md` shape for the PMTL view.
+  - `tests/fixtures/resource/pmtlMarkdownSamples.js` — raw `pmtlData.md` samples for parse tests.
   - `tests/fixtures/resource/resourceDataViewProps.js` — minimal keys for `resourceData.yaml` (Group B).
   - `tests/fixtures/resource/cpiResourceFixtures.js` — CPI page: parsed `cpiData.md` keys + participant-index JSON shape + stats URL constant (Group C).
   - `tests/fixtures/resource/cpiMarkdownSamples.js` — raw `cpiData.md` samples for parse tests.
-  - `tests/helpers/resourceYamlApiMocks.js` — `createDedicatedYamlAxiosMock` for mocked `axios.get` (`/mciData.yaml`, `/pmtlData.yaml`, `/resourceData.yaml`, etc.).
+  - `tests/helpers/resourceYamlApiMocks.js` — `createDedicatedYamlAxiosMock` for mocked `axios.get` (`/mciData.yaml`, `/resourceData.yaml`, etc.). PMTL loads `pmtlData.md` instead.
   - `tests/helpers/cpiApiMocks.js` — `createCpiStatsFetchSuccessMock`, `createCpiStatsFetchHttpErrorMock` for mocked `global.fetch` to the CPI statistics endpoint.
 - **Adding new areas:** Create `tests/fixtures/<feature>/` and optional `tests/helpers/<feature>Mocks.js` following the same pattern.
 

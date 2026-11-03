@@ -1,5 +1,5 @@
 /**
- * Unit tests for PMTLResourceView (dedicated `pmtlData.yaml` shape as static props).
+ * Unit tests for PMTLResourceView (parsed `pmtlData.md` shape as static props).
  *
  * Structure follows tests/TEST_STRUCTURE.md:
  * Rendering → feature sections → Side effects → Edge cases.
@@ -14,6 +14,12 @@ import '@testing-library/jest-dom';
 import PMTLResourceView from '../../../../src/pages/resource/PMTLResourcePage/PMTLResourceView';
 import { defaultPmtlViewData } from '../../../fixtures/resource/pmtlViewProps';
 import { multiTopicPmtlData } from '../../../fixtures/resource/resourceInteractionData';
+
+jest.mock('../../../../src/pages/resource/PMTLResourcePage/PmtlMarkdown', () => (
+  function MockPmtlMarkdown({ children }) {
+    return <div>{children}</div>;
+  }
+));
 
 // Mock heavy resource components — isolate PMTLResourceView
 jest.mock('../../../../src/pages/resource/components/PMTLTable', () => function MockPMTLTable() {
@@ -90,7 +96,7 @@ describe('PMTLResourceView', () => {
       expect(screen.getByText(/PMTL subsection body for testing/i)).toBeInTheDocument();
     });
 
-    it('should render intro HTML from introText', () => {
+    it('should render intro markdown from introText', () => {
       renderPmtlView();
       expect(screen.getByText(/Unit test intro for PMTL resource page/i)).toBeInTheDocument();
     });
@@ -108,7 +114,7 @@ describe('PMTLResourceView', () => {
   describe('Edge cases', () => {
     it('should render when pmtlContent is missing without throwing', () => {
       expect(() =>
-        renderPmtlView({ introText: '<p>Intro only.</p>' }),
+        renderPmtlView({ introText: 'Intro only.' }),
       ).not.toThrow();
       expect(screen.getByText(/Intro only/i)).toBeInTheDocument();
     });

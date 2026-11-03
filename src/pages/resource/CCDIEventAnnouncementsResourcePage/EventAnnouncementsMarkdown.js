@@ -59,13 +59,14 @@ const EventAnnouncementsMarkdown = ({ children }) => {
             );
           }
 
-          const external = isExternal(href) || isMailto(href);
+          const external = isExternal(href);
+          const mailto = isMailto(href);
           return (
             <a
               {...rest}
               href={href}
               className={external ? 'link' : undefined}
-              target={external ? '_blank' : undefined}
+              target={external || mailto ? '_blank' : undefined}
               rel="noopener noreferrer"
             >
               {linkChildren}

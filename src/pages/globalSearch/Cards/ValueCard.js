@@ -136,11 +136,13 @@ const styles = (theme) => {
         display: 'none',
       },
       [lgBreakpoint]: {
-        minWidth: '959px',
-        width: '959px',
+        width: '100%',
+        maxWidth: '959px',
       },
+      width: '100%',
       maxWidth: '800px',
-      padding: '24px 16px 24px 20px',
+      boxSizing: 'border-box',
+      padding: '24px 32px',
     },
     indexContainer: {
       fontFamily: 'Roboto',
@@ -200,8 +202,8 @@ const styles = (theme) => {
       },
       [lgBreakpoint]: {
         marginLeft: '36px',
-        width: '925px',
-        minWidth: '925px',
+        width: '100%',
+        maxWidth: '925px',
       },
     },
     hr: {

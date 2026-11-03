@@ -70,6 +70,17 @@ describe('CPIResourceView', () => {
   });
 
   describe('CPI stats panel', () => {
+    it('should use a markdown stats subtitle and the API version', () => {
+      renderCpiView({
+        data: {
+          ...minimalCpiResourceData,
+          statsSubtitle: 'Release {{cpiVersion}} summary',
+        },
+        cpiStats: { ...minimalCpiStatsApiResponse, version: 'v2.0' },
+      });
+      expect(screen.getByText('Release v2.0 summary')).toBeInTheDocument();
+    });
+
     it('should show loading copy while statistics are loading', () => {
       renderCpiView({
         loadingCpiStats: true,
@@ -94,6 +105,7 @@ describe('CPIResourceView', () => {
         cpiStatsError: false,
       });
       expect(screen.getByText('CPI Stats at a Glance')).toBeInTheDocument();
+      expect(screen.getByText('Summary of CPI v1.5')).toBeInTheDocument();
       expect(screen.getByText(/4,242/)).toBeInTheDocument();
       expect(screen.getByText(/9,001/)).toBeInTheDocument();
       expect(screen.getByText(/111/)).toBeInTheDocument();

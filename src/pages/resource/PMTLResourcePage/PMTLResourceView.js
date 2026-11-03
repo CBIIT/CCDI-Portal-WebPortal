@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, createRef } from 'react';
 import styled from 'styled-components';
-import ReactHtmlParser from 'html-react-parser';
 import { NavLink } from 'react-router-dom';
+import PmtlMarkdown from './PmtlMarkdown';
 // import { MCIContent, introText } from '../../../bento/mciData';
 import headerImg from '../../../assets/resources/PMTL_header.png';
 import headerMobileImg from '../../../assets/resources/PMTL_header.png';
@@ -594,7 +594,7 @@ const PMTLResourceView = ({data}) => {
             </div>
             <div className='resourceTitleContainer'>
                 <div className='resourceTitle'>
-                    <div className='resourceTitleText'>Pediatric Molecular Target Lists</div>
+                    <div className='resourceTitleText'>{data.title || 'Pediatric Molecular Target Lists'}</div>
                     {/* <div className='goToSiteButton'>
                         <a className='goToSiteText' href="https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs002790" target="_blank" rel="noopener noreferrer">Request Access (dbGaP)</a>
                     </div> */}
@@ -608,11 +608,14 @@ const PMTLResourceView = ({data}) => {
                             PMTLContent && PMTLContent.map((pmtl, topicid) => {
                                 const topickey = `topic_${topicid}`;
                                 return (
-                                    <>
-                                        <div name={pmtl.id} className={selectedNavTitle === pmtl.id ? 'navTopicItem selected' : 'navTopicItem'} key={topickey} onClick={handleClickEvent}>{pmtl.topic}</div>
+                                    <React.Fragment key={topickey}>
+                                        <div name={pmtl.id} className={selectedNavTitle === pmtl.id ? 'navTopicItem selected' : 'navTopicItem'} onClick={handleClickEvent}>{pmtl.topic}</div>
                                         <div>
                                             {
-                                                pmtl.list.map((pmtlItem, idx) => {
+                                                (pmtl.list || []).map((pmtlItem, idx) => {
+                                                    if (!pmtlItem.subtopic) {
+                                                        return null;
+                                                    }
                                                     const listItemKey = `listItem_${idx}`;
                                                         return (
                                                             <div name={pmtlItem.id} className={selectedNavTitle === pmtlItem.id ? 'navTopicItem selected subtitle' : 'navTopicItem subtitle'} key={listItemKey} onClick={handleClickEvent}>{pmtlItem.subtopic}</div>
@@ -620,7 +623,7 @@ const PMTLResourceView = ({data}) => {
                                                 })
                                             }
                                         </div>
-                                    </>
+                                    </React.Fragment>
                                 )
                             })
                         }
@@ -628,7 +631,7 @@ const PMTLResourceView = ({data}) => {
                 </div>
                 <div className='contentSection'>
                     <div className='contentList'>
-                        {data.introText && <div className='introContainer'>{ReactHtmlParser(data.introText)}</div>}
+                        {data.introText && <div className='introContainer'><PmtlMarkdown>{data.introText}</PmtlMarkdown></div>}
                         {
                             PMTLContent && PMTLContent.map((pmtl, pmtlidx) => {
                                 const pmtlkey = `pmtl_${pmtlidx}`;
@@ -638,12 +641,17 @@ const PMTLResourceView = ({data}) => {
                                         <div id={pmtl.id} name={pmtlidx} className='pmtlTitleMobile sectionCollapse' onClick={handleCollapseSection}>{pmtl.topic && pmtl.topic}</div>
                                         <div className="pmtlSection mobileCollapse" ref={sectionList.current[pmtlidx]}>
                                         {
-                                            pmtl.list.map((pmtlItem, idx) => {
+                                            (pmtl.list || []).map((pmtlItem, idx) => {
+                                                const itemKey = pmtlItem.id || `pmtl_item_${idx}`;
                                                 return (
-                                                    <>
-                                                        <div id={pmtlItem.id} className='pmtlSubtitle'>{pmtlItem.subtopic && pmtlItem.subtopic}</div>
+                                                    <React.Fragment key={itemKey}>
+                                                        {pmtlItem.subtopic ? (
+                                                            <div id={pmtlItem.id} className='pmtlSubtitle'>{pmtlItem.subtopic}</div>
+                                                        ) : (
+                                                            pmtlItem.id ? <div id={pmtlItem.id} /> : null
+                                                        )}
                                                         <div className='pmtlContentContainer'>
-                                                            {pmtlItem.content && ReactHtmlParser(pmtlItem.content)}
+                                                            {pmtlItem.content && <PmtlMarkdown>{pmtlItem.content}</PmtlMarkdown>}
                                                             {/* {pmtlItem.donut && 
                                                             <div className='donutContainer'>
                                                                 <div className='donutTitleContainer'><h4>{pmtlItem.donut.title}</h4></div>
@@ -695,7 +703,7 @@ const PMTLResourceView = ({data}) => {
                                                             } */}
                                                         </div>
                                                         {pmtlItem.content && <div style={{height: '40px'}} />}
-                                                    </>
+                                                    </React.Fragment>
                                                 )
                                             })
                                         }

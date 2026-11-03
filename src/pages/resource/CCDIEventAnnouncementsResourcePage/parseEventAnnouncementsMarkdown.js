@@ -2,11 +2,14 @@
  * Parses eventAnnouncements.md into the shape previously produced from resourceData.yaml.
  *
  * Expected structure:
- * - Optional header image: ![alt](url)
+ * - YAML front matter banner: CCDI_Event_Announcements_Header or headerImage
+ * - Legacy fallback: leading ![alt](url) in the body
  * - Intro prose before the first heading
  * - # or ## section headings (topic titles)
  * - Optional trailing markdown property table with `id`
  */
+
+import matter from 'gray-matter';
 
 const LEGACY_SECTION_IDS = {
   'upcoming events': 'CCDI_Event_Archive_0',
@@ -101,8 +104,13 @@ function parseHeadingTitle(line) {
  */
 export function parseEventAnnouncementsMarkdown(raw) {
   const text = String(raw || '').replace(/^\uFEFF/, '');
-  const allLines = text.split('\n');
-  const { url: headerUrl, lineIndex: headerLine } = extractHeaderImage(allLines);
+  const { data: fm, content: body } = matter(text);
+  const fmHeader = String(
+    fm.CCDI_Event_Announcements_Header || fm.headerImage || '',
+  ).trim();
+
+  const allLines = String(body || '').split('\n');
+  const { url: legacyHeaderUrl, lineIndex: headerLine } = extractHeaderImage(allLines);
 
   const lines = headerLine >= 0
     ? allLines.filter((_, idx) => idx !== headerLine)
@@ -147,7 +155,7 @@ export function parseEventAnnouncementsMarkdown(raw) {
   });
 
   return {
-    CCDI_Event_Announcements_Header: headerUrl,
+    CCDI_Event_Announcements_Header: fmHeader || legacyHeaderUrl,
     ccdiEventAnnouncementsIntroText: introText,
     ccdiEventAnnouncementsContent,
   };

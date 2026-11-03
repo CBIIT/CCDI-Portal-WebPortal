@@ -57,7 +57,7 @@ function renderAt(path) {
 
 describe('HeaderTablet', () => {
   describe('Rendering', () => {
-    it('should show the US government banner, menu control, and search (off /sitesearch)', () => {
+    it('should show the US government banner, menu control, and search', () => {
       renderAt('/home');
       expect(
         screen.getByText(/An official website of the United States government/i),
@@ -101,9 +101,9 @@ describe('HeaderTablet', () => {
   });
 
   describe('Edge cases', () => {
-    it('should not mount the search bar on /sitesearch', () => {
+    it('should keep the search bar mounted on /sitesearch', () => {
       renderAt('/sitesearch');
-      expect(screen.queryByTestId('search-mock')).not.toBeInTheDocument();
+      expect(screen.getByTestId('search-mock')).toBeInTheDocument();
     });
   });
 

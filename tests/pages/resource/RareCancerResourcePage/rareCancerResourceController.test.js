@@ -14,8 +14,7 @@ jest.mock('../../../../src/pages/resource/RareCancerResourcePage/parseRareCancer
   default: jest.fn(() => ({
     title: 'Pediatric, Adolescent, and Young Adult Rare Cancer Study',
     RCI_Header: 'https://example.com/rare-cancer-header.png',
-    RCI_Data_Flow_Chart_URL: 'https://example.com/rci-flow-chart.png',
-    rareCancerIntroText: 'Rare cancer intro for unit test.',
+    rareCancerIntroText: 'Rare cancer intro for unit test.\n\n![RCI data flow chart](https://example.com/rci-flow-chart.png)',
     navTitles: ['Rare Cancer Topic', 'Rare Subsection'],
     rareCancerContent: [
       {

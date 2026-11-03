@@ -63,6 +63,7 @@ describe('parseToolsMarkdown', () => {
       title: '',
       Tools_Header: '',
       toolsIntroText: '',
+      toolsIntroSegments: [],
       navTitles: undefined,
       toolsContent: [],
     });

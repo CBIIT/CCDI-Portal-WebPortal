@@ -62,9 +62,10 @@ describe('ModalStyle', () => {
     expect(modalStyles()).toEqual(modalStyles());
   });
 
-  it('should style the modal body with absolute positioning and width', () => {
+  it('should style the modal body with absolute positioning and a fluid width', () => {
     const styles = modalStyles();
     expect(styles.modalBody.position).toBe('absolute');
-    expect(styles.modalBody.width).toBe('840px');
+    expect(styles.modalBody.width).toBe('calc(100% - 32px)');
+    expect(styles.modalBody.maxWidth).toBe('840px');
   });
 });

@@ -78,10 +78,11 @@ describe('RareCancerResourceView', () => {
       expect(css).toContain('url("https://example.com/rare-cancer-header.png")');
     });
 
-    it('should render RCI data flow image with custom URL when provided', () => {
+    it('should keep RCI data flow image markdown inline in the intro', () => {
       renderRareCancerView(rareCancerWithDownloadData);
-      const img = screen.getByAltText('RCI data flow');
-      expect(img).toHaveAttribute('src', 'https://example.com/custom-rci-flow-chart.png');
+      expect(screen.getAllByTestId('rare-cancer-markdown')[0]).toHaveTextContent(
+        '![RCI data flow chart](https://example.com/custom-rci-flow-chart.png)',
+      );
     });
   });
 

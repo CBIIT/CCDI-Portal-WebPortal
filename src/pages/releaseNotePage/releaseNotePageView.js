@@ -155,7 +155,18 @@ const NavContainer = styled.div`
   }
 
   .arrowIcon {
+    display: inline-block;
+    width: 11px;
+    height: 11px;
     margin-right: 10px;
+    object-fit: contain;
+    object-position: center;
+    transform-origin: center;
+    transition: transform 0.2s ease;
+  }
+
+  .arrowIconCollapsed {
+    transform: rotate(-90deg);
   }
 
   .dateSubList {
@@ -632,7 +643,11 @@ const ReleaseNotesPageView = ( {releaseNotesList} ) => {
                             onClick={() => handleClick(objidx)}
                             style={open[objidx] && mobile ? {borderBottom: '1px solid #969696'} : null}
                           >
-                            <img className='arrowIcon' src={ArrowDownIcon} alt="arrow down icon"/>
+                            <img
+                              className={open[objidx] ? 'arrowIcon' : 'arrowIcon arrowIconCollapsed'}
+                              src={ArrowDownIcon}
+                              alt={open[objidx] ? 'Collapse year' : 'Expand year'}
+                            />
                             <span>{subObj.year}</span>
                           </div>
                           <Collapse in={open[objidx]}>

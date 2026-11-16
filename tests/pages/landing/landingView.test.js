@@ -15,7 +15,6 @@ import { LandingContentProvider } from '../../../src/pages/landing/LandingConten
 import {
   introData,
   titleData,
-  statsNote,
   resourcesAppliationsListData,
   resourcesCloudListData,
   carouselList,
@@ -39,7 +38,6 @@ jest.mock('../../../src/pages/landing/component/latestUpdate', () => function La
 const landingContentForView = {
   introData,
   titleData,
-  statsNote,
   resourcesAppliationsListData,
   resourcesCloudListData,
   carouselList,
@@ -156,7 +154,6 @@ describe('LandingView', () => {
       renderLandingView();
       const participantsHeading = screen.getByText(/Participants with Available Genomic and Clinical Data/);
       expect(participantsHeading).toBeInTheDocument();
-      expect(screen.getByText(/Counts for MCI participants/)).toBeInTheDocument();
     });
 
     it('should use external link with target and rel for http stats links', () => {
@@ -175,9 +172,9 @@ describe('LandingView', () => {
       expect(mciLink).toHaveAttribute('href', '/MCI');
     });
 
-    it('should display the stats note', () => {
+    it('should not display the stats note', () => {
       renderLandingView();
-      expect(screen.getByText(/Counts for MCI participants in CCDI Hub/)).toBeInTheDocument();
+      expect(screen.queryByText(/Counts for MCI participants in CCDI Hub/)).not.toBeInTheDocument();
     });
   });
 

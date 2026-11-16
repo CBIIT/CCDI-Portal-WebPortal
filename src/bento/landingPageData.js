@@ -81,9 +81,25 @@ export const statsData = [
     detail: 'National Childhood Cancer Registry Explorer',
     link: 'https://nccrexplorer.ccdi.cancer.gov',
   },
+  {
+    num: '',
+    title: 'Participants with Harmonized Clinical Data',
+    detail: 'Childhood Clinical Cancer Data Commons',
+    link: 'https://clinicalcommons.ccdi.cancer.gov/exploreParticipants',
+  },
+  {
+    num: '',
+    title: 'Datasets with Mutation and Other Data',
+    detail: 'CCDI cBioPortal',
+    link: 'https://cbioportal.ccdi.cancer.gov',
+  },
+  {
+    num: '',
+    title: 'Resources Participating in Federated Data Queries',
+    detail: 'CCDI Federation Resource',
+    link: '/data-federation-resource',
+  },
 ];
-
-export const statsNote = 'Counts for MCI participants in CCDI Hub and total MCI participants consented may differ.';
 
 export const resourcesAppliationsListData = [
   {
@@ -140,7 +156,7 @@ export const resourcesAppliationsListData = [
     title: 'CCDI Participant Index',
     subtitle: 'CPI',
     content: 'CCDI’s Participant Index (CPI) API maps participant IDs across studies, empowering researchers to explore complex questions and advance pediatric cancer research.',
-    link: '/ccdi-participant-index',
+    link: 'https://ccdi.cancer.gov/ccdi-participant-index',
     img: cpiLogo,
     noLink: true
   },
@@ -258,7 +274,7 @@ export const carouselList = [
     img: wheel9,
     mobile: cpiMobile,
     content: 'CCDI Participant Index',
-    link: '/ccdi-participant-index',
+    link: 'https://ccdi.cancer.gov/ccdi-participant-index',
   },
   {
     img: wheel10,
@@ -294,9 +310,11 @@ export const carouselList = [
 
 export const LANDING_DATA_QUERY = gql`{
     numberOfMCICount
+    numberOfParticipants
   }
 `;
 // Queried against C3DC Integrated (`clientName: 'c3dcService'`) from landingController.
+// numberOfParticipants is the all-participant count for harmonized clinical data.
 
 export const GLOBAL_STATS_BAR_QUERY = gql`{
   numberOfParticipants,

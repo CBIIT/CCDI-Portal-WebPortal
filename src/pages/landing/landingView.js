@@ -212,55 +212,29 @@ const IntroAboutButtonContainer = styled.div`
 
 const StatsContainer = styled.div`
     margin: 0 auto;
-    justify-content: center;
     position: relative;
+    width: 100%;
+    box-sizing: border-box;
+
+    .leftbox,
+    .rightbox {
+      display: none;
+      position: absolute;
+      top: 0;
+      width: 72px;
+      height: 100%;
+      z-index: 2;
+      background: white;
+      filter: blur(18px);
+      pointer-events: none;
+    }
 
     .leftbox {
-      position: absolute;
-      top: 8px;
-      left: calc(1440px - 100vw - 200px);
-      width: calc(100vw - 1440px + 400px);
-      height: 520px;
-      z-index: 9;
-      background: white;
-      filter: blur(30px);
-
-      @media (min-width: 1440px) {
-        left: calc(1440px - 100vw - 230px);
-        width: calc(100vw - 1440px + 400px);
-      }
-      
-      @media (max-width: 1440px) {
-        left: calc(50vw - 950px);
-        width: 400px;
-      }
-
-      @media (max-width: 1199px) {
-        display: none;
-      }
+      left: 0;
     }
 
     .rightbox {
-      position: absolute;
-      top: 8px;
-      height: 520px;
-      z-index: 9;
-      background: white;
-      filter: blur(30px);
-    
-      @media (min-width: 1440px) {
-        right: calc(1440px - 100vw - 230px);
-        width: calc(100vw - 1440px + 400px);
-      }
-      
-      @media (max-width: 1440px) {
-        right: calc(50vw - 950px);
-        width: 400px;
-      }
-
-      @media (max-width: 1199px) {
-        display: none;
-      }
+      right: 0;
     }
 
     .borderTop {
@@ -285,7 +259,7 @@ const StatsContainer = styled.div`
       font-style: normal;
       font-weight: 600;
       font-size: 35px;
-      color: #298085;
+      color:#07645C;
       line-height: 38px;
       letter-spacing: 0.02em;
       background-color: white;
@@ -293,15 +267,21 @@ const StatsContainer = styled.div`
     }
 
     .statList {
-      display: flex;
-      justify-content: center;
-      padding-bottom: 50px;
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      width: 100%;
+      box-sizing: border-box;
+      column-gap: 12px;
+      padding: 0 16px 40px;
       background-color: white;
     }
 
     .statItem {
-      width: 278px;
-      padding: 0 45px 0 45px;
+      width: auto;
+      min-width: 0;
+      box-sizing: border-box;
+      padding: 0 8px;
+      overflow-wrap: break-word;
     }
 
     .statNum {
@@ -309,8 +289,8 @@ const StatsContainer = styled.div`
       color: #00838F;
       font-family: Inter;
       font-weight: 800;
-      font-size: 32px;
-      line-height: 40px;
+      font-size: 26px;
+      line-height: 32px;
       text-align: left;
       margin: 0;
     }
@@ -327,8 +307,8 @@ const StatsContainer = styled.div`
       color: #05555C;
       font-family: Poppins;
       font-weight: 300;
-      font-size: 19px;
-      line-height: 21px;
+      font-size: 16px;
+      line-height: 18px;
       text-align: left;
       margin-bottom: 2px;
     }
@@ -337,8 +317,8 @@ const StatsContainer = styled.div`
       color: #00838F;
       font-family: Poppins;
       font-weight: 600;
-      font-size: 19px;
-      line-height: 23px;
+      font-size: 16px;
+      line-height: 20px;
       font-family: Poppins;
       letter-spacing: 2%;
       text-transform: uppercase;
@@ -375,72 +355,105 @@ const StatsContainer = styled.div`
       }
     }
 
-    .statsNoteContainer {
-      display: flex;
-      font-family: Inter;
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 22px;
-      letter-spacing: 0.02em;
-      margin-bottom: 50px;
-      margin-left: calc(50vw - 320px);
+    @media (min-width: 1990px) {
+      max-width: 1800px;
+
+      .leftbox,
+      .rightbox {
+        display: block;
+      }
+
+      .statList {
+        padding: 0 80px 50px;
+        column-gap: 16px;
+      }
+
+      .statItem {
+        padding: 0 12px;
+      }
+
+      .statNum {
+        font-family: Poppins;
+        font-weight: 700;
+        font-size: 28px;
+        line-height: 33px;
+        letter-spacing: 0;
+        vertical-align: middle;
+      }
+
+      .statTitle {
+        font-family: Poppins;
+        font-weight: 300;
+        font-size: 19px;
+        line-height: 21px;
+        letter-spacing: 0%;
+        vertical-align: middle;
+      }
+
+      .statDetail {
+        font-family: Poppins;
+        font-weight: 600;
+        font-size: 19px;
+        line-height: 22px;
+        letter-spacing: 2%;
+      }
+
     }
 
-    .statsNoteIcon {
-      font-family: Poppins;
-      font-size: 25px;
-      font-weight: 600;
-      line-height: 30px;
-      letter-spacing: 0.02em;
-      text-align: left;
-      color: #00838F;
-      margin-right: 5px;
-    }
+    @media (min-width: 1200px) and (max-width: 1989px) {
+      .statNum {
+        font-family: Inter;
+        font-weight: 800;
+        font-size: 32px;
+        line-height: 40px;
+        letter-spacing: 2%;
+        vertical-align: middle;
+      }
 
-    @media (min-width: 1420px) {
-      width: 1420px;
+      .statTitle {
+        font-family: Poppins;
+        font-weight: 300;
+        font-size: 19px;
+        line-height: 23px;
+        letter-spacing: 2%;
+      }
 
-      .statsNoteContainer {
-        margin-left: 400px;
+      .statDetail {
+        font-family: Poppins;
+        font-weight: 600;
+        font-size: 19px;
+        line-height: 22px;
+        letter-spacing: 2%;
       }
     }
 
     @media (max-width: 1199px) {
-      .borderTop {
-        display: none;
-      }
-
+      .borderTop,
       .borderBottom {
         display: none;
       }
 
       .statGlance {
-        padding: 12px 0;
+        padding: 12px calc(50vw - 405px);
         text-align: left;
-        font-weight: 600;
         font-size: 25px;
         line-height: 20px;
-        letter-spacing: 0.02em;
-        color: #298085;
-        margin-left: calc(50vw - 405px);
       }
 
       .statList {
-        display: grid;
-        grid-column-gap: 75px;
-        grid-template-columns: 143px 143px 143px 143px;
-        // margin: 0 calc(50vw - 405px);
-        padding-bottom: 30px;
+        grid-template-columns: none;
+        grid-auto-flow: column;
+        grid-auto-columns: minmax(0, 1fr);
+        column-gap: 24px;
+        row-gap: 0;
+        padding: 0 calc(50vw - 405px) 30px;
       }
 
       .statItem {
         padding: 0;
-        width: 140px;
       }
 
       .statNum {
-        font-family: Inter;
-        font-weight: 800;
         font-size: 22px;
         line-height: 40px;
       }
@@ -452,99 +465,161 @@ const StatsContainer = styled.div`
       }
 
       .statDetail {
-        color: #00838F;
-        font-family: Poppins;
-        font-weight: 600;
         font-size: 14px;
         line-height: 13px;
-        letter-spacing: 2%;
 
         ::after {
-          content: "";
-          display: inline-block;
-          width: 8px;
-          height: 8px;
-          border-bottom: 2px solid #0095A2;
-          border-left: 2px solid #0095A2;
           margin: 0 0 1px 3px;
-          transform: rotate(-135deg);
-          -webkit-transform: rotate(-135deg);
-        }
-
-        :hover {
-          color: #455299;
-          text-decoration: underline;
-          cursor: pointer;
-
-          ::after {
-            content: "";
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            border-bottom: 2px solid #455299;
-            border-left: 2px solid #455299;
-            margin: 0 0 1px 3px;
-            transform: rotate(-135deg);
-            -webkit-transform: rotate(-135deg);
-          }
         }
       }
-      .statsNoteContainer {
-        margin-left: calc(50vw - 405px);
+
+    }
+
+    @media (max-width: 1023px) {
+      .statGlance {
+        font-size: 20px;
+        line-height: 24px;
+      }
+
+      .statList {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        grid-auto-flow: row;
+        grid-auto-columns: auto;
+        width: 100%;
+        column-gap: 16px;
+        row-gap: 0;
+        margin: 0;
+      }
+
+      .statItem,
+      .statItem:nth-child(4),
+      .statItem:nth-child(5) {
+        grid-column: auto;
+        width: auto;
+      }
+
+      .statNum {
+        font-family: Inter;
+        font-weight: 800;
+        font-size: 20px;
+        line-height: 20px;
+        letter-spacing: 2%;
+        vertical-align: middle;
+      }
+
+      .statNumIcon {
+        font-size: 12px;
+        line-height: 16px;
+      }
+
+      .statTitle {
+        font-family: Poppins;
+        font-weight: 300;
+        font-size: 12px;
+        line-height: 14px;
+        letter-spacing: 2%;
+      }
+
+      .statDetail {
+        font-family: Poppins;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 14px;
+        letter-spacing: 2%;
       }
     }
 
     @media (max-width: 872px) {
       .statGlance {
-        margin-left: 30px;
+        padding-left: 30px;
+        padding-right: 30px;
+      }
+
+      .statList {
+        padding-left: 30px;
+        padding-right: 30px;
+      }
+
+    }
+
+    @media (max-width: 769px) {
+      .statGlance {
+        margin: 0;
+        padding: 12px 30px;
+        font-family: Poppins;
         font-weight: 600;
-        font-size: 14px;
-        line-height: 17px;
         letter-spacing: 0.02em;
         text-transform: uppercase;
       }
 
       .statList {
-        display: grid;
-        grid-column-gap: 8%;
-        grid-template-columns: 19% 19% 19% 19%;
-        margin: 0 30px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        width: 100%;
+        column-gap: 24px;
+        row-gap: 32px;
+        margin: 0;
+        padding: 0 30px 30px;
       }
 
-      .statItem {
-        width: 140px;
-      }
-
-      .statsNoteContainer {
-        margin-left: 30px;
+      .statItem,
+      .statItem:nth-child(4),
+      .statItem:nth-child(5) {
+        grid-column: auto;
+        width: auto;
       }
     }
 
-    @media (max-width: 767px) {
-      .statGlance {
+    @media (max-width: 768px) {
+      .statNum {
+        font-family: Inter;
+        font-weight: 800;
+        font-size: 20px;
+        line-height: 20px;
+        letter-spacing: 2%;
+        vertical-align: middle;
+      }
+
+      .statTitle {
+        font-family: Poppins;
+        font-weight: 300;
+        font-size: 12px;
+        line-height: 14px;
+        letter-spacing: 2%;
+      }
+
+      .statDetail {
         font-family: Poppins;
         font-weight: 600;
-        font-size: 14px;
-        line-height: 17px;
+        font-size: 12px;
+        line-height: 14px;
         letter-spacing: 2%;
-        text-transform: uppercase;
       }
     }
 
-    @media (max-width: 699px) {
-      .statList {
-        display: grid;
-        grid-column-gap: 29px;
-        grid-row-gap: 10%;
-        grid-template-columns: 143px 143px;
-        margin: 0 30px;
-        justify-content: left;
+    @media (max-width: 375px) {
+      .statNum {
+        font-family: Inter;
+        font-weight: 800;
+        font-size: 18px;
+        line-height: 40px;
+        letter-spacing: 2%;
+        vertical-align: middle;
       }
-      .statItem {
-        width: 120px;
+
+      .statTitle {
+        font-family: Poppins;
+        font-weight: 300;
+        font-size: 10px;
+        line-height: 10px;
+        letter-spacing: 2%;
       }
-      .statsNoteContainer {
-        margin: 30px 30px 50px 30px;
+
+      .statDetail {
+        font-family: Poppins;
+        font-weight: 600;
+        font-size: 10px;
+        line-height: 10px;
+        letter-spacing: 2%;
       }
     }
 `;
@@ -552,6 +627,24 @@ const StatsContainer = styled.div`
 const StatsBox = styled.div`
     // margin: 0 55px;
     position: relative;
+
+    @media (min-width: 1200px) and (max-width: 1989px) {
+      z-index: 0;
+
+      /* Shadow box matches the teal rules: top line sits at the bottom of the
+         72px border strip, bottom line sits at the top of the 12px strip. */
+      &::after {
+        content: '';
+        position: absolute;
+        top: 72px;
+        right: 0;
+        bottom: 12px;
+        left: 0;
+        box-shadow: 0px 4px 25px 0px #00000040;
+        pointer-events: none;
+        z-index: -1;
+      }
+    }
 `;
 
 const ResourcesOverlayRight = styled.div`
@@ -888,7 +981,6 @@ const LandingView = ({
   const {
     introData,
     titleData,
-    statsNote,
     resourcesAppliationsListData,
     resourcesCloudListData,
   } = useLandingContent();
@@ -958,7 +1050,7 @@ const LandingView = ({
                   <div className='statItem' key={statkey}>
                     <h5 className='statNum'>
                       <div>{statItem.num.toLocaleString('en-US')}</div>
-                      {statItem.title.includes("Participants") && <div className='statNumIcon'>*</div>}
+                      {statItem.title.includes('Genomic and Clinical') && <div className='statNumIcon'>*</div>}
                     </h5>
                     <div className='statTitle'>{ReactHtmlParser(statItem.title)}</div>
                     {
@@ -973,10 +1065,6 @@ const LandingView = ({
             }
             </div>
             <div className='borderBottom' />
-            <div className='statsNoteContainer'>
-              <div className='statsNoteIcon'>*</div>
-              <div>{statsNote}</div>
-            </div>
           </StatsBox>
         </StatsContainer>
       </StatsSection>

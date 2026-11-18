@@ -253,7 +253,7 @@ const StatsContainer = styled.div`
 
     .statGlance {
       position: relative;
-      padding: 40px 0;
+      padding: 40px 0 20px;
       text-align: center;
       font-family: poppins;
       font-style: normal;
@@ -383,6 +383,15 @@ const StatsContainer = styled.div`
     @media (min-width: 1990px) {
       max-width: 1800px;
 
+      .statGlance {
+        font-family: Poppins;
+        font-weight: 600;
+        font-size: 35px;
+        line-height: 38px;
+        letter-spacing: 0%;
+        text-align: center;
+      }
+
       .leftbox,
       .rightbox {
         display: block;
@@ -431,6 +440,15 @@ const StatsContainer = styled.div`
     }
 
     @media (min-width: 1200px) and (max-width: 1989px) {
+      .statGlance {
+        font-family: Poppins;
+        font-weight: 600;
+        font-size: 35px;
+        line-height: 38px;
+        letter-spacing: 0%;
+        text-align: center;
+      }
+
       .statNum {
         font-family: Inter;
         font-weight: 800;
@@ -464,7 +482,7 @@ const StatsContainer = styled.div`
       }
 
       .statGlance {
-        padding: 12px calc(50vw - 405px);
+        padding: 12px calc(50vw - 405px) 6px;
         text-align: left;
         font-size: 25px;
         line-height: 20px;
@@ -512,8 +530,12 @@ const StatsContainer = styled.div`
 
     @media (max-width: 1023px) {
       .statGlance {
-        font-size: 20px;
-        line-height: 24px;
+        font-family: Poppins;
+        font-weight: 600;
+        font-size: 25px;
+        line-height: 20px;
+        letter-spacing: 2%;
+        text-transform: capitalize;
       }
 
       .statList {
@@ -585,10 +607,12 @@ const StatsContainer = styled.div`
     @media (max-width: 769px) {
       .statGlance {
         margin: 0;
-        padding: 12px 30px;
+        padding: 12px 30px 6px;
         font-family: Poppins;
         font-weight: 600;
-        letter-spacing: 0.02em;
+        font-size: 14px;
+        line-height: 17px;
+        letter-spacing: 2%;
         text-transform: uppercase;
       }
 
@@ -617,11 +641,13 @@ const StatsContainer = styled.div`
       .statList {
         column-gap: 65px;
         row-gap: 25px;
+        padding-bottom: 0;
       }
 
       .statsNoteContainer {
         justify-content: flex-start;
         text-align: left;
+        margin-top: 20px;
       }
 
       .statNum {
@@ -651,16 +677,30 @@ const StatsContainer = styled.div`
     }
 
     @media (max-width: 375px) {
+      .statGlance {
+        font-family: Poppins;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 17px;
+        letter-spacing: 2%;
+        text-transform: uppercase;
+      }
+
       .statList {
-        column-gap: 24px;
-        row-gap: 32px;
+        column-gap: 20px;
+        row-gap: 20px;
+        padding-bottom: 0;
+      }
+
+      .statsNoteContainer {
+        margin-top: 20px;
       }
 
       .statNum {
         font-family: Inter;
         font-weight: 800;
         font-size: 18px;
-        line-height: 40px;
+        line-height: 15px;
         letter-spacing: 2%;
         vertical-align: middle;
       }
@@ -674,11 +714,44 @@ const StatsContainer = styled.div`
       }
 
       .statDetail {
+        display: block;
+        margin-top: 4px;
         font-family: Poppins;
         font-weight: 600;
         font-size: 10px;
         line-height: 10px;
         letter-spacing: 2%;
+
+        /* The chevron is an inline (non-atomic) pseudo-element with a non-breaking
+           space, so it always stays on the same line as the last word. An
+           inline-block arrow can still drop to its own line. */
+        ::after {
+          content: '\\00a0';
+          display: inline;
+          vertical-align: baseline;
+          width: auto;
+          height: auto;
+          border: 0;
+          transform: none;
+          margin: 0 0 0 4px;
+          padding: 0;
+          background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='5' height='7' viewBox='0 0 5 7'%3E%3Cpath d='M1 1l2.5 2.5L1 6' fill='none' stroke='%2300838F' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat left center;
+          background-size: 5px 7px;
+        }
+
+        :hover::after {
+          content: '\\00a0';
+          display: inline;
+          vertical-align: baseline;
+          width: auto;
+          height: auto;
+          border: 0;
+          transform: none;
+          margin: 0 0 0 4px;
+          padding: 0;
+          background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='5' height='7' viewBox='0 0 5 7'%3E%3Cpath d='M1 1l2.5 2.5L1 6' fill='none' stroke='%23455299' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat left center;
+          background-size: 5px 7px;
+        }
       }
     }
 `;

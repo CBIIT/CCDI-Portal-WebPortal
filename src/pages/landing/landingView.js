@@ -259,7 +259,7 @@ const StatsContainer = styled.div`
       font-style: normal;
       font-weight: 600;
       font-size: 35px;
-      color:#07645C;
+      color: #298085;
       line-height: 38px;
       letter-spacing: 0.02em;
       background-color: white;
@@ -304,7 +304,7 @@ const StatsContainer = styled.div`
     }
 
     .statTitle {
-      color: #05555C;
+      color: #298085;
       font-family: Poppins;
       font-weight: 300;
       font-size: 16px;
@@ -321,7 +321,7 @@ const StatsContainer = styled.div`
       line-height: 20px;
       font-family: Poppins;
       letter-spacing: 2%;
-      text-transform: uppercase;
+      text-transform: none;
       text-align: left;
       text-decoration: none;
 
@@ -353,6 +353,31 @@ const StatsContainer = styled.div`
         transform: rotate(-135deg);
         -webkit-transform: rotate(-135deg);
       }
+    }
+
+    .statsNoteContainer {
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      font-family: Inter;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 22px;
+      letter-spacing: 0.02em;
+      margin: 0 16px 50px;
+    }
+
+    .statsNoteIcon {
+      position: relative;
+      top: -2px;
+      font-family: Poppins;
+      font-size: 25px;
+      font-weight: 600;
+      line-height: 30px;
+      letter-spacing: 0.02em;
+      text-align: left;
+      color: #00838F;
+      margin-right: 2px;
     }
 
     @media (min-width: 1990px) {
@@ -396,6 +421,11 @@ const StatsContainer = styled.div`
         font-size: 19px;
         line-height: 22px;
         letter-spacing: 2%;
+      }
+
+      .statsNoteContainer {
+        margin-left: 80px;
+        margin-right: 80px;
       }
 
     }
@@ -473,6 +503,11 @@ const StatsContainer = styled.div`
         }
       }
 
+      .statsNoteContainer {
+        margin-left: calc(50vw - 405px);
+        margin-right: calc(50vw - 405px);
+      }
+
     }
 
     @media (max-width: 1023px) {
@@ -540,6 +575,11 @@ const StatsContainer = styled.div`
         padding-right: 30px;
       }
 
+      .statsNoteContainer {
+        margin-left: 30px;
+        margin-right: 30px;
+      }
+
     }
 
     @media (max-width: 769px) {
@@ -567,9 +607,23 @@ const StatsContainer = styled.div`
         grid-column: auto;
         width: auto;
       }
+
+      .statsNoteContainer {
+        margin: 24px 30px 50px;
+      }
     }
 
     @media (max-width: 768px) {
+      .statList {
+        column-gap: 65px;
+        row-gap: 25px;
+      }
+
+      .statsNoteContainer {
+        justify-content: flex-start;
+        text-align: left;
+      }
+
       .statNum {
         font-family: Inter;
         font-weight: 800;
@@ -597,6 +651,11 @@ const StatsContainer = styled.div`
     }
 
     @media (max-width: 375px) {
+      .statList {
+        column-gap: 24px;
+        row-gap: 32px;
+      }
+
       .statNum {
         font-family: Inter;
         font-weight: 800;
@@ -981,6 +1040,7 @@ const LandingView = ({
   const {
     introData,
     titleData,
+    statsNote,
     resourcesAppliationsListData,
     resourcesCloudListData,
   } = useLandingContent();
@@ -1048,10 +1108,10 @@ const LandingView = ({
                 const statkey = `stat_${statidx}`;
                 return (
                   <div className='statItem' key={statkey}>
-                    <h5 className='statNum'>
+                    <h3 className='statNum'>
                       <div>{statItem.num.toLocaleString('en-US')}</div>
                       {statItem.title.includes('Genomic and Clinical') && <div className='statNumIcon'>*</div>}
-                    </h5>
+                    </h3>
                     <div className='statTitle'>{ReactHtmlParser(statItem.title)}</div>
                     {
                       statItem.link.includes('http') ?
@@ -1066,6 +1126,12 @@ const LandingView = ({
             </div>
             <div className='borderBottom' />
           </StatsBox>
+          {statsNote ? (
+            <div className='statsNoteContainer'>
+              <div className='statsNoteIcon'>*</div>
+              <div>{statsNote}</div>
+            </div>
+          ) : null}
         </StatsContainer>
       </StatsSection>
       <LatestUpdate newsList={newsData.newsList} srcList={newsData.newsImgUrlList} releaseNotesList={newsData.releaseNotesList} altList={newsData.altList} />

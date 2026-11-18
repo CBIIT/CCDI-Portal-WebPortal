@@ -101,6 +101,8 @@ export const statsData = [
   },
 ];
 
+export const statsNote = 'Counts for MCI participants in CCDI Hub and total MCI participants consented may differ.';
+
 export const resourcesAppliationsListData = [
   {
     id: 'c3dc',

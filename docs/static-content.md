@@ -472,6 +472,7 @@ Any of these keys may be present; missing keys stay empty (no JS copy fallback).
 | `heroTitle`, `heroSubtitle` | Hero headline / supporting text (`heroSubtitle` may use `\|` multiline) |
 | `introTitle3`, `introButtonTitle` | About buttons under the hero |
 | `latestUpdatesTitle`, `resourceTitle`, `applicationsTitle`, `cloudResourcesTitle` | Section headings |
+| `statsNote` | Footnote under stats |
 | `stats[]` | `title`, `detail`, `link`; optional static `num` (live MCI/CCDC/NCCR/C3DC counts still filled by the app) |
 | `resourcesApplications[]` / `resourcesCloud[]` | `id`, `title`, `subtitle?`, `content`, `link`, `img?`, `noLink?` |
 | `carousel[]` | `content`, `link`, `img?`, `mobile?` |

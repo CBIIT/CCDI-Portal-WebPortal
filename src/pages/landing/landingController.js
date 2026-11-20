@@ -26,7 +26,7 @@ import LandingView from './landingView';
 
 const CCDCurl = 'https://datacatalog.ccdi.cancer.gov/service/datasets/count';
 const NCCRExplorerUrl = 'https://datacatalog.ccdi.cancer.gov/service/datasets/CCDI-NCCR_Explorer';
-const CBIOPORTAL_STUDIES_URL = 'https://cbioportal-api.ccdi.cancer.gov/api/studies/';
+const CBIOPORTAL_STUDIES_URL = 'https://cbioportal-api.ccdi.cancer.gov/api/studies';
 const FEDERATION_ORGANIZATIONS_URL = 'https://federation.ccdi.cancer.gov/api/v1/organization';
 const PARTICIPANT_INDEX_URL = 'https://ccdi.cancer.gov/ccdi-participant-index';
 const LANDING_MD_URL = `${env.REACT_APP_STATIC_CONTENT_URL}/landingData.md`;

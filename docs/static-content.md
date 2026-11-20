@@ -480,7 +480,7 @@ Any of these keys may be present; missing keys stay empty (no JS copy fallback).
 
 The app fills two glance counts from live APIs when `landingData.md` omits those rows:
 
-- **CCDI cBioPortal** (`cbioportal.ccdi.cancer.gov`): number of studies from `https://cbioportal-api.ccdi.cancer.gov/api/studies/`. Appended title is `Datasets with Mutation and Other Data`.
+- **CCDI cBioPortal** (`cbioportal.ccdi.cancer.gov`): number of studies from `https://cbioportal-api.ccdi.castudies/ncer.gov/api/`. Appended title is `Datasets with Mutation and Other Data`.
 - **CCDI Federation Resource** (`/data-federation-resource`): number of organization groups from `https://federation.ccdi.cancer.gov/api/v1/organization`. Appended title is `Resources Participating in Federated Data Queries`.
 
 CCDI Participant Index links use `https://ccdi.cancer.gov/ccdi-participant-index`.

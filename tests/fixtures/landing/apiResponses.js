@@ -31,7 +31,7 @@ export const nccrExplorerDatasetResponseBody = {
 export const nccrExplorerCaseCountFormatted = '2,026,371';
 
 /** GET cBioPortal studies — stat count is the array length */
-export const cBioPortalStudiesUrl = 'https://cbioportal-api.ccdi.cancer.gov/api/studies/';
+export const cBioPortalStudiesUrl = 'https://cbioportal-api.ccdi.cancer.gov/api/studies';
 
 export const cBioPortalStudiesResponseBody = [
   { studyId: 'phs001327_ccss_sn' },

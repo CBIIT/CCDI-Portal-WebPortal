@@ -387,7 +387,7 @@ const StatsContainer = styled.div`
         font-family: Poppins;
         font-weight: 600;
         font-size: 35px;
-        line-height: 38px;
+        line-height: 55px;
         letter-spacing: 0%;
         text-align: center;
       }
@@ -533,7 +533,7 @@ const StatsContainer = styled.div`
         font-family: Poppins;
         font-weight: 600;
         font-size: 25px;
-        line-height: 20px;
+        line-height: 30px;
         letter-spacing: 2%;
         text-transform: capitalize;
       }
@@ -559,7 +559,7 @@ const StatsContainer = styled.div`
         font-family: Inter;
         font-weight: 800;
         font-size: 20px;
-        line-height: 20px;
+        line-height: 30px;
         letter-spacing: 2%;
         vertical-align: middle;
       }
@@ -700,7 +700,7 @@ const StatsContainer = styled.div`
         font-family: Inter;
         font-weight: 800;
         font-size: 18px;
-        line-height: 15px;
+        line-height: 25px;
         letter-spacing: 2%;
         vertical-align: middle;
       }
@@ -1106,6 +1106,25 @@ const ResourcesContainer = styled.div`
     }
 `;
 
+/**
+ * Groups a stat detail into lines of two words, with a line break before each new group.
+ * @param {string} text Stat detail text.
+ * @returns {Array<JSX.Element>} One fragment per two-word line.
+ */
+function renderStatDetailLines(text) {
+  const words = String(text || '').split(/\s+/).filter(Boolean);
+  const lines = [];
+  for (let i = 0; i < words.length; i += 2) {
+    lines.push(words.slice(i, i + 2).join(' '));
+  }
+  return lines.map((line, index) => (
+    <React.Fragment key={index}>
+      {index > 0 && <br />}
+      {line}
+    </React.Fragment>
+  ));
+}
+
 const LandingView = ({
   statsData,
   newsData
@@ -1188,9 +1207,9 @@ const LandingView = ({
                     <div className='statTitle'>{ReactHtmlParser(statItem.title)}</div>
                     {
                       statItem.link.includes('http') ?
-                      <a className='statDetail' href={statItem.link} target="_blank" rel="noopener noreferrer">{statItem.detail}</a>
+                      <a className='statDetail' href={statItem.link} target="_blank" rel="noopener noreferrer">{renderStatDetailLines(statItem.detail)}</a>
                       :
-                      <NavLink className='statDetail' to={statItem.link}>{statItem.detail}</NavLink>
+                      <NavLink className='statDetail' to={statItem.link}>{renderStatDetailLines(statItem.detail)}</NavLink>
                     }
                   </div>
                 )

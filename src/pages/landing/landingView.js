@@ -1119,6 +1119,7 @@ function renderStatDetailLines(text) {
   }
   return lines.map((line, index) => (
     <React.Fragment key={index}>
+      {index > 0 && ' '}
       {index > 0 && <br />}
       {line}
     </React.Fragment>

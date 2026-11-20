@@ -9,7 +9,7 @@
 
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { render, screen, waitFor } from '@testing-library/react';
+import { act, render, screen, waitFor, within } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 import '@testing-library/jest-dom';
@@ -19,6 +19,13 @@ import { LANDING_DATA_QUERY } from '../../../src/bento/landingPageData';
 import {
   ccdcDatasetsCountUrl,
   ccdcDatasetsCountFormatted,
+  nccrExplorerDatasetUrl,
+  nccrExplorerCaseCountFormatted,
+  cBioPortalStudiesUrl,
+  cBioPortalStudiesCountFormatted,
+  federationOrganizationsUrl,
+  federationOrganizationsCountFormatted,
+  c3dcParticipantCountFormatted,
   landingDataQueryData,
 } from '../../fixtures/landing/apiResponses';
 import { createCcdcFetchMock, setupNewsYamlAxiosMock } from '../../helpers/landingApiMocks';
@@ -119,6 +126,117 @@ describe('LandingController (mocked count APIs)', () => {
 
     await waitFor(() => {
       expect(screen.getByText(String(landingDataQueryData.numberOfMCICount))).toBeInTheDocument();
+    });
+  });
+
+  it('should keep live catalog and MCI counts when landing copy arrives later', async () => {
+    let releaseLanding;
+    axios.get.mockImplementation((url) => {
+      const pathPart = String(url).split('?')[0];
+      if (pathPart.endsWith('/landingData.md')) {
+        return new Promise((resolve) => {
+          releaseLanding = () => resolve({
+            data: sampleLandingMarkdownRaw
+              .replace(
+                '  - title: Cataloged Datasets\n',
+                '  - title: Cataloged Datasets\n    num: 1\n',
+              )
+              .replace(
+                '  - title: Participants with Available Genomic and Clinical Data\n',
+                '  - title: Participants with Available Genomic and Clinical Data\n    num: 2\n',
+              ),
+          });
+        });
+      }
+      if (pathPart.endsWith('/newsData.md')
+        || pathPart.endsWith('/releaseNotesData.md')
+        || pathPart.endsWith('/ccdiDataUpdates.md')) {
+        return Promise.resolve({ data: '' });
+      }
+      return Promise.reject(new Error(`Unexpected axios.get URL in test: ${url}`));
+    });
+
+    renderLandingController();
+
+    await waitFor(() => {
+      expect(global.fetch).toHaveBeenCalledWith(ccdcDatasetsCountUrl);
+      expect(mockQuery).toHaveBeenCalled();
+    });
+
+    await act(async () => {
+      releaseLanding();
+    });
+
+    await waitFor(() => {
+      expect(screen.getByText(ccdcDatasetsCountFormatted)).toBeInTheDocument();
+      expect(screen.getByText(String(landingDataQueryData.numberOfMCICount))).toBeInTheDocument();
+      expect(screen.getByText(nccrExplorerCaseCountFormatted)).toBeInTheDocument();
+    });
+  });
+
+  it('should show the C3DC participant count before the cBioPortal stat', async () => {
+    renderLandingController();
+
+    await waitFor(() => {
+      expect(screen.getByText(c3dcParticipantCountFormatted)).toBeInTheDocument();
+    });
+
+    const commonsLink = screen.getByRole('link', { name: /Childhood Clinical Cancer Data Commons/i });
+    expect(commonsLink).toHaveAttribute(
+      'href',
+      'https://clinicalcommons.ccdi.cancer.gov/exploreParticipants',
+    );
+    expect(screen.getByText('Participants with Harmonized Clinical Data')).toBeInTheDocument();
+
+    const statsSection = screen.getByTestId('landing-stats-section');
+    const links = within(statsSection).getAllByRole('link');
+    const commonsAt = links.findIndex((link) => /Clinical Cancer Data Commons/i.test(link.textContent));
+    const cbioAt = links.findIndex((link) => /cBioPortal/i.test(link.textContent));
+    expect(commonsAt).toBeGreaterThan(-1);
+    expect(cbioAt).toBeGreaterThan(commonsAt);
+  });
+
+  it('should count cBioPortal studies and link the explorer label', async () => {
+    renderLandingController();
+
+    await waitFor(() => {
+      expect(global.fetch).toHaveBeenCalledWith(cBioPortalStudiesUrl);
+    });
+
+    await waitFor(() => {
+      expect(screen.getByText(cBioPortalStudiesCountFormatted)).toBeInTheDocument();
+    });
+
+    const explorerLink = screen.getByRole('link', { name: /CCDI cBioPortal/i });
+    expect(explorerLink).toHaveAttribute('href', 'https://cbioportal.ccdi.cancer.gov');
+    expect(screen.getByText('Datasets with Mutation and Other Data')).toBeInTheDocument();
+  });
+
+  it('should count federation organization groups and link the federation resource', async () => {
+    renderLandingController();
+
+    await waitFor(() => {
+      expect(global.fetch).toHaveBeenCalledWith(federationOrganizationsUrl);
+    });
+
+    await waitFor(() => {
+      expect(screen.getByText(federationOrganizationsCountFormatted)).toBeInTheDocument();
+    });
+
+    const federationLink = screen.getByRole('link', { name: /CCDI Federation Resource/i });
+    expect(federationLink).toHaveAttribute('href', '/data-federation-resource');
+    expect(screen.getByText('Resources Participating in Federated Data Queries')).toBeInTheDocument();
+  });
+
+  it('should call the NCCR Explorer dataset endpoint and display case_id', async () => {
+    renderLandingController();
+
+    await waitFor(() => {
+      expect(global.fetch).toHaveBeenCalledWith(nccrExplorerDatasetUrl);
+    });
+
+    await waitFor(() => {
+      expect(screen.getByText(nccrExplorerCaseCountFormatted)).toBeInTheDocument();
     });
   });
 

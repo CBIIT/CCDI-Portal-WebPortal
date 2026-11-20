@@ -23,7 +23,7 @@ export function createEmptyLandingContent(assetDefaults = {}) {
       aboutTitle: '',
     },
     statsData: [],
-    statsNote: '',
+    statsNote: assetDefaults.statsNote || '',
     resourcesAppliationsListData: [],
     resourcesCloudListData: [],
     carouselList: [],
@@ -155,7 +155,9 @@ export function mergeLandingContent(parsed, assetDefaults = {}) {
     introData,
     titleData,
     statsData: mergeStats(parsed.stats, assetLists.statsData),
-    statsNote: parsed.statsNote != null ? parsed.statsNote : '',
+    statsNote: parsed.statsNote != null
+      ? parsed.statsNote
+      : (assetDefaults.statsNote || ''),
     resourcesAppliationsListData: mergeResourceList(
       parsed.resourcesApplications,
       assetLists.resourcesAppliationsListData,

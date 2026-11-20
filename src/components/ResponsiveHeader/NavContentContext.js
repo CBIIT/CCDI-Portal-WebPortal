@@ -6,6 +6,28 @@ import env from '../../utils/env';
 import parseNavMarkdown from '../../bento/parseNavMarkdown';
 
 const NAV_URL = `${env.REACT_APP_STATIC_CONTENT_URL}/navData.md`;
+const PARTICIPANT_INDEX_URL = 'https://ccdi.cancer.gov/ccdi-participant-index';
+
+function withParticipantIndexLink(items) {
+  if (!Array.isArray(items)) {
+    return items;
+  }
+  return items.map((item) => {
+    if (!item || typeof item !== 'object') {
+      return item;
+    }
+    const next = { ...item };
+    const label = String(next.name || '');
+    const link = String(next.link || '');
+    if (/participant index/i.test(label) || /ccdi-participant-index/i.test(link)) {
+      next.link = PARTICIPANT_INDEX_URL;
+    }
+    if (Array.isArray(next.children)) {
+      next.children = withParticipantIndexLink(next.children);
+    }
+    return next;
+  });
+}
 
 const emptyNav = {
   navMobileList: [],
@@ -32,10 +54,10 @@ export function NavContentProvider({ children }) {
           return;
         }
         if (parsed) {
-          setNavMobileList(parsed.navMobileList);
+          setNavMobileList(withParticipantIndexLink(parsed.navMobileList));
           setNavbarSublists({
-            Resources: parsed.navbarSublists.Resources || [],
-            About: parsed.navbarSublists.About || [],
+            Resources: withParticipantIndexLink(parsed.navbarSublists.Resources || []),
+            About: withParticipantIndexLink(parsed.navbarSublists.About || []),
           });
         } else {
           setNavMobileList(emptyNav.navMobileList);

@@ -212,55 +212,29 @@ const IntroAboutButtonContainer = styled.div`
 
 const StatsContainer = styled.div`
     margin: 0 auto;
-    justify-content: center;
     position: relative;
+    width: 100%;
+    box-sizing: border-box;
+
+    .leftbox,
+    .rightbox {
+      display: none;
+      position: absolute;
+      top: 0;
+      width: 72px;
+      height: 100%;
+      z-index: 2;
+      background: white;
+      filter: blur(18px);
+      pointer-events: none;
+    }
 
     .leftbox {
-      position: absolute;
-      top: 8px;
-      left: calc(1440px - 100vw - 200px);
-      width: calc(100vw - 1440px + 400px);
-      height: 520px;
-      z-index: 9;
-      background: white;
-      filter: blur(30px);
-
-      @media (min-width: 1440px) {
-        left: calc(1440px - 100vw - 230px);
-        width: calc(100vw - 1440px + 400px);
-      }
-      
-      @media (max-width: 1440px) {
-        left: calc(50vw - 950px);
-        width: 400px;
-      }
-
-      @media (max-width: 1199px) {
-        display: none;
-      }
+      left: 0;
     }
 
     .rightbox {
-      position: absolute;
-      top: 8px;
-      height: 520px;
-      z-index: 9;
-      background: white;
-      filter: blur(30px);
-    
-      @media (min-width: 1440px) {
-        right: calc(1440px - 100vw - 230px);
-        width: calc(100vw - 1440px + 400px);
-      }
-      
-      @media (max-width: 1440px) {
-        right: calc(50vw - 950px);
-        width: 400px;
-      }
-
-      @media (max-width: 1199px) {
-        display: none;
-      }
+      right: 0;
     }
 
     .borderTop {
@@ -279,7 +253,7 @@ const StatsContainer = styled.div`
 
     .statGlance {
       position: relative;
-      padding: 40px 0;
+      padding: 40px 0 20px;
       text-align: center;
       font-family: poppins;
       font-style: normal;
@@ -293,15 +267,21 @@ const StatsContainer = styled.div`
     }
 
     .statList {
-      display: flex;
-      justify-content: center;
-      padding-bottom: 50px;
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      width: 100%;
+      box-sizing: border-box;
+      column-gap: 12px;
+      padding: 0 16px 40px;
       background-color: white;
     }
 
     .statItem {
-      width: 278px;
-      padding: 0 45px 0 45px;
+      width: auto;
+      min-width: 0;
+      box-sizing: border-box;
+      padding: 0 8px;
+      overflow-wrap: break-word;
     }
 
     .statNum {
@@ -309,8 +289,8 @@ const StatsContainer = styled.div`
       color: #00838F;
       font-family: Inter;
       font-weight: 800;
-      font-size: 32px;
-      line-height: 40px;
+      font-size: 26px;
+      line-height: 32px;
       text-align: left;
       margin: 0;
     }
@@ -324,11 +304,11 @@ const StatsContainer = styled.div`
     }
 
     .statTitle {
-      color: #05555C;
+      color: #298085;
       font-family: Poppins;
       font-weight: 300;
-      font-size: 19px;
-      line-height: 21px;
+      font-size: 16px;
+      line-height: 18px;
       text-align: left;
       margin-bottom: 2px;
     }
@@ -337,11 +317,11 @@ const StatsContainer = styled.div`
       color: #00838F;
       font-family: Poppins;
       font-weight: 600;
-      font-size: 19px;
-      line-height: 23px;
+      font-size: 16px;
+      line-height: 20px;
       font-family: Poppins;
       letter-spacing: 2%;
-      text-transform: uppercase;
+      text-transform: none;
       text-align: left;
       text-decoration: none;
 
@@ -377,16 +357,19 @@ const StatsContainer = styled.div`
 
     .statsNoteContainer {
       display: flex;
+      justify-content: center;
+      text-align: center;
       font-family: Inter;
       font-size: 14px;
       font-weight: 400;
       line-height: 22px;
       letter-spacing: 0.02em;
-      margin-bottom: 50px;
-      margin-left: calc(50vw - 320px);
+      margin: 0 16px 50px;
     }
 
     .statsNoteIcon {
+      position: relative;
+      top: -2px;
       font-family: Poppins;
       font-size: 25px;
       font-weight: 600;
@@ -394,53 +377,131 @@ const StatsContainer = styled.div`
       letter-spacing: 0.02em;
       text-align: left;
       color: #00838F;
-      margin-right: 5px;
+      margin-right: 2px;
     }
 
-    @media (min-width: 1420px) {
-      width: 1420px;
-
-      .statsNoteContainer {
-        margin-left: 400px;
-      }
-    }
-
-    @media (max-width: 1199px) {
-      .borderTop {
-        display: none;
-      }
-
-      .borderBottom {
-        display: none;
-      }
+    @media (min-width: 1990px) {
+      max-width: 1800px;
 
       .statGlance {
-        padding: 12px 0;
-        text-align: left;
+        font-family: Poppins;
         font-weight: 600;
-        font-size: 25px;
-        line-height: 20px;
-        letter-spacing: 0.02em;
-        color: #298085;
-        margin-left: calc(50vw - 405px);
+        font-size: 35px;
+        line-height: 55px;
+        letter-spacing: 0%;
+        text-align: center;
+      }
+
+      .leftbox,
+      .rightbox {
+        display: block;
       }
 
       .statList {
-        display: grid;
-        grid-column-gap: 75px;
-        grid-template-columns: 143px 143px 143px 143px;
-        // margin: 0 calc(50vw - 405px);
-        padding-bottom: 30px;
+        padding: 0 80px 50px;
+        column-gap: 16px;
       }
 
       .statItem {
-        padding: 0;
-        width: 140px;
+        padding: 0 12px;
+      }
+
+      .statNum {
+        font-family: Poppins;
+        font-weight: 700;
+        font-size: 28px;
+        line-height: 33px;
+        letter-spacing: 0;
+        vertical-align: middle;
+      }
+
+      .statTitle {
+        font-family: Poppins;
+        font-weight: 300;
+        font-size: 19px;
+        line-height: 21px;
+        letter-spacing: 0%;
+        vertical-align: middle;
+      }
+
+      .statDetail {
+        font-family: Poppins;
+        font-weight: 600;
+        font-size: 19px;
+        line-height: 22px;
+        letter-spacing: 2%;
+      }
+
+      .statsNoteContainer {
+        margin-left: 80px;
+        margin-right: 80px;
+      }
+
+    }
+
+    @media (min-width: 1200px) and (max-width: 1989px) {
+      .statGlance {
+        font-family: Poppins;
+        font-weight: 600;
+        font-size: 35px;
+        line-height: 38px;
+        letter-spacing: 0%;
+        text-align: center;
       }
 
       .statNum {
         font-family: Inter;
         font-weight: 800;
+        font-size: 32px;
+        line-height: 40px;
+        letter-spacing: 2%;
+        vertical-align: middle;
+      }
+
+      .statTitle {
+        font-family: Poppins;
+        font-weight: 300;
+        font-size: 19px;
+        line-height: 23px;
+        letter-spacing: 2%;
+      }
+
+      .statDetail {
+        font-family: Poppins;
+        font-weight: 600;
+        font-size: 19px;
+        line-height: 22px;
+        letter-spacing: 2%;
+      }
+    }
+
+    @media (max-width: 1199px) {
+      .borderTop,
+      .borderBottom {
+        display: none;
+      }
+
+      .statGlance {
+        padding: 12px calc(50vw - 405px) 6px;
+        text-align: left;
+        font-size: 25px;
+        line-height: 20px;
+      }
+
+      .statList {
+        grid-template-columns: none;
+        grid-auto-flow: column;
+        grid-auto-columns: minmax(0, 1fr);
+        column-gap: 24px;
+        row-gap: 0;
+        padding: 0 calc(50vw - 405px) 30px;
+      }
+
+      .statItem {
+        padding: 0;
+      }
+
+      .statNum {
         font-size: 22px;
         line-height: 40px;
       }
@@ -452,75 +513,170 @@ const StatsContainer = styled.div`
       }
 
       .statDetail {
-        color: #00838F;
-        font-family: Poppins;
-        font-weight: 600;
         font-size: 14px;
         line-height: 13px;
-        letter-spacing: 2%;
 
         ::after {
-          content: "";
-          display: inline-block;
-          width: 8px;
-          height: 8px;
-          border-bottom: 2px solid #0095A2;
-          border-left: 2px solid #0095A2;
           margin: 0 0 1px 3px;
-          transform: rotate(-135deg);
-          -webkit-transform: rotate(-135deg);
-        }
-
-        :hover {
-          color: #455299;
-          text-decoration: underline;
-          cursor: pointer;
-
-          ::after {
-            content: "";
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            border-bottom: 2px solid #455299;
-            border-left: 2px solid #455299;
-            margin: 0 0 1px 3px;
-            transform: rotate(-135deg);
-            -webkit-transform: rotate(-135deg);
-          }
         }
       }
+
       .statsNoteContainer {
         margin-left: calc(50vw - 405px);
+        margin-right: calc(50vw - 405px);
+      }
+
+    }
+
+    @media (max-width: 1023px) {
+      .statGlance {
+        font-family: Poppins;
+        font-weight: 600;
+        font-size: 25px;
+        line-height: 30px;
+        letter-spacing: 2%;
+        text-transform: capitalize;
+      }
+
+      .statList {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        grid-auto-flow: row;
+        grid-auto-columns: auto;
+        width: 100%;
+        column-gap: 16px;
+        row-gap: 0;
+        margin: 0;
+      }
+
+      .statItem,
+      .statItem:nth-child(4),
+      .statItem:nth-child(5) {
+        grid-column: auto;
+        width: auto;
+      }
+
+      .statNum {
+        font-family: Inter;
+        font-weight: 800;
+        font-size: 20px;
+        line-height: 30px;
+        letter-spacing: 2%;
+        vertical-align: middle;
+      }
+
+      .statNumIcon {
+        font-size: 12px;
+        line-height: 16px;
+      }
+
+      .statTitle {
+        font-family: Poppins;
+        font-weight: 300;
+        font-size: 12px;
+        line-height: 14px;
+        letter-spacing: 2%;
+      }
+
+      .statDetail {
+        font-family: Poppins;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 14px;
+        letter-spacing: 2%;
       }
     }
 
     @media (max-width: 872px) {
       .statGlance {
-        margin-left: 30px;
-        font-weight: 600;
-        font-size: 14px;
-        line-height: 17px;
-        letter-spacing: 0.02em;
-        text-transform: uppercase;
+        padding-left: 30px;
+        padding-right: 30px;
       }
 
       .statList {
-        display: grid;
-        grid-column-gap: 8%;
-        grid-template-columns: 19% 19% 19% 19%;
-        margin: 0 30px;
-      }
-
-      .statItem {
-        width: 140px;
+        padding-left: 30px;
+        padding-right: 30px;
       }
 
       .statsNoteContainer {
         margin-left: 30px;
+        margin-right: 30px;
+      }
+
+    }
+
+    @media (max-width: 769px) {
+      .statGlance {
+        margin: 0;
+        padding: 12px 30px 6px;
+        font-family: Poppins;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 17px;
+        letter-spacing: 2%;
+        text-transform: uppercase;
+      }
+
+      .statList {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        width: 100%;
+        column-gap: 24px;
+        row-gap: 32px;
+        margin: 0;
+        padding: 0 30px 30px;
+      }
+
+      .statItem,
+      .statItem:nth-child(4),
+      .statItem:nth-child(5) {
+        grid-column: auto;
+        width: auto;
+      }
+
+      .statsNoteContainer {
+        margin: 24px 30px 50px;
       }
     }
 
-    @media (max-width: 767px) {
+    @media (max-width: 768px) {
+      .statList {
+        column-gap: 65px;
+        row-gap: 25px;
+        padding-bottom: 0;
+      }
+
+      .statsNoteContainer {
+        justify-content: flex-start;
+        text-align: left;
+        margin-top: 20px;
+      }
+
+      .statNum {
+        font-family: Inter;
+        font-weight: 800;
+        font-size: 20px;
+        line-height: 20px;
+        letter-spacing: 2%;
+        vertical-align: middle;
+      }
+
+      .statTitle {
+        font-family: Poppins;
+        font-weight: 300;
+        font-size: 12px;
+        line-height: 14px;
+        letter-spacing: 2%;
+      }
+
+      .statDetail {
+        font-family: Poppins;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 14px;
+        letter-spacing: 2%;
+      }
+    }
+
+    @media (max-width: 375px) {
       .statGlance {
         font-family: Poppins;
         font-weight: 600;
@@ -529,22 +685,73 @@ const StatsContainer = styled.div`
         letter-spacing: 2%;
         text-transform: uppercase;
       }
-    }
 
-    @media (max-width: 699px) {
       .statList {
-        display: grid;
-        grid-column-gap: 29px;
-        grid-row-gap: 10%;
-        grid-template-columns: 143px 143px;
-        margin: 0 30px;
-        justify-content: left;
+        column-gap: 20px;
+        row-gap: 20px;
+        padding-bottom: 0;
       }
-      .statItem {
-        width: 120px;
-      }
+
       .statsNoteContainer {
-        margin: 30px 30px 50px 30px;
+        margin-top: 20px;
+      }
+
+      .statNum {
+        font-family: Inter;
+        font-weight: 800;
+        font-size: 18px;
+        line-height: 25px;
+        letter-spacing: 2%;
+        vertical-align: middle;
+      }
+
+      .statTitle {
+        font-family: Poppins;
+        font-weight: 300;
+        font-size: 10px;
+        line-height: 10px;
+        letter-spacing: 2%;
+      }
+
+      .statDetail {
+        display: block;
+        margin-top: 4px;
+        font-family: Poppins;
+        font-weight: 600;
+        font-size: 10px;
+        line-height: 10px;
+        letter-spacing: 2%;
+
+        /* The chevron is an inline (non-atomic) pseudo-element with a non-breaking
+           space, so it always stays on the same line as the last word. An
+           inline-block arrow can still drop to its own line. */
+        ::after {
+          content: '\\00a0';
+          display: inline;
+          vertical-align: baseline;
+          width: auto;
+          height: auto;
+          border: 0;
+          transform: none;
+          margin: 0 0 0 4px;
+          padding: 0;
+          background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='5' height='7' viewBox='0 0 5 7'%3E%3Cpath d='M1 1l2.5 2.5L1 6' fill='none' stroke='%2300838F' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat left center;
+          background-size: 5px 7px;
+        }
+
+        :hover::after {
+          content: '\\00a0';
+          display: inline;
+          vertical-align: baseline;
+          width: auto;
+          height: auto;
+          border: 0;
+          transform: none;
+          margin: 0 0 0 4px;
+          padding: 0;
+          background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='5' height='7' viewBox='0 0 5 7'%3E%3Cpath d='M1 1l2.5 2.5L1 6' fill='none' stroke='%23455299' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat left center;
+          background-size: 5px 7px;
+        }
       }
     }
 `;
@@ -552,6 +759,24 @@ const StatsContainer = styled.div`
 const StatsBox = styled.div`
     // margin: 0 55px;
     position: relative;
+
+    @media (min-width: 1200px) and (max-width: 1989px) {
+      z-index: 0;
+
+      /* Shadow box matches the teal rules: top line sits at the bottom of the
+         72px border strip, bottom line sits at the top of the 12px strip. */
+      &::after {
+        content: '';
+        position: absolute;
+        top: 72px;
+        right: 0;
+        bottom: 12px;
+        left: 0;
+        box-shadow: 0px 4px 25px 0px #00000040;
+        pointer-events: none;
+        z-index: -1;
+      }
+    }
 `;
 
 const ResourcesOverlayRight = styled.div`
@@ -881,6 +1106,26 @@ const ResourcesContainer = styled.div`
     }
 `;
 
+/**
+ * Groups a stat detail into lines of two words, with a line break before each new group.
+ * @param {string} text Stat detail text.
+ * @returns {Array<JSX.Element>} One fragment per two-word line.
+ */
+function renderStatDetailLines(text) {
+  const words = String(text || '').split(/\s+/).filter(Boolean);
+  const lines = [];
+  for (let i = 0; i < words.length; i += 2) {
+    lines.push(words.slice(i, i + 2).join(' '));
+  }
+  return lines.map((line, index) => (
+    <React.Fragment key={index}>
+      {index > 0 && ' '}
+      {index > 0 && <br />}
+      {line}
+    </React.Fragment>
+  ));
+}
+
 const LandingView = ({
   statsData,
   newsData
@@ -956,16 +1201,16 @@ const LandingView = ({
                 const statkey = `stat_${statidx}`;
                 return (
                   <div className='statItem' key={statkey}>
-                    <h5 className='statNum'>
+                    <h3 className='statNum'>
                       <div>{statItem.num.toLocaleString('en-US')}</div>
-                      {statItem.title.includes("Participants") && <div className='statNumIcon'>*</div>}
-                    </h5>
+                      {statItem.title.includes('Genomic and Clinical') && <div className='statNumIcon'>*</div>}
+                    </h3>
                     <div className='statTitle'>{ReactHtmlParser(statItem.title)}</div>
                     {
                       statItem.link.includes('http') ?
-                      <a className='statDetail' href={statItem.link} target="_blank" rel="noopener noreferrer">{statItem.detail}</a>
+                      <a className='statDetail' href={statItem.link} target="_blank" rel="noopener noreferrer">{renderStatDetailLines(statItem.detail)}</a>
                       :
-                      <NavLink className='statDetail' to={statItem.link}>{statItem.detail}</NavLink>
+                      <NavLink className='statDetail' to={statItem.link}>{renderStatDetailLines(statItem.detail)}</NavLink>
                     }
                   </div>
                 )
@@ -973,11 +1218,13 @@ const LandingView = ({
             }
             </div>
             <div className='borderBottom' />
+          </StatsBox>
+          {statsNote ? (
             <div className='statsNoteContainer'>
               <div className='statsNoteIcon'>*</div>
               <div>{statsNote}</div>
             </div>
-          </StatsBox>
+          ) : null}
         </StatsContainer>
       </StatsSection>
       <LatestUpdate newsList={newsData.newsList} srcList={newsData.newsImgUrlList} releaseNotesList={newsData.releaseNotesList} altList={newsData.altList} />

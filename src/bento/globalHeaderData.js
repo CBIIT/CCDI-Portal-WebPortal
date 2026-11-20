@@ -95,7 +95,7 @@ export const navbarSublists = {
   },
   {
     name:'CCDI Participant Index',
-    link: '/ccdi-participant-index',
+    link: 'https://ccdi.cancer.gov/ccdi-participant-index',
     className: 'navMobileSubItem',
   },
   {

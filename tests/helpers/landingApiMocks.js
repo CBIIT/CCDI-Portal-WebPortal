@@ -6,6 +6,12 @@ import axios from 'axios';
 import {
   ccdcDatasetsCountUrl,
   ccdcDatasetsCountResponseBody,
+  nccrExplorerDatasetUrl,
+  nccrExplorerDatasetResponseBody,
+  cBioPortalStudiesUrl,
+  cBioPortalStudiesResponseBody,
+  federationOrganizationsUrl,
+  federationOrganizationsResponseBody,
   landingDataQueryData,
   newsDataMarkdownRaw,
 } from '../fixtures/landing/apiResponses';
@@ -15,11 +21,32 @@ import {
  */
 export function createCcdcFetchMock(overrides = {}) {
   const body = overrides.ccdcJson ?? ccdcDatasetsCountResponseBody;
+  const nccrBody = overrides.nccrJson ?? nccrExplorerDatasetResponseBody;
+  const cBioBody = overrides.cBioJson ?? cBioPortalStudiesResponseBody;
+  const federationBody = overrides.federationJson ?? federationOrganizationsResponseBody;
   return jest.fn((url) => {
     if (url === ccdcDatasetsCountUrl) {
       return Promise.resolve({
         ok: true,
         json: () => Promise.resolve(body),
+      });
+    }
+    if (url === nccrExplorerDatasetUrl) {
+      return Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve(nccrBody),
+      });
+    }
+    if (url === cBioPortalStudiesUrl) {
+      return Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve(cBioBody),
+      });
+    }
+    if (url === federationOrganizationsUrl) {
+      return Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve(federationBody),
       });
     }
     return Promise.reject(new Error(`Unexpected fetch in test: ${url}`));

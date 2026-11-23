@@ -6,8 +6,6 @@ import axios from 'axios';
 import {
   ccdcDatasetsCountUrl,
   ccdcDatasetsCountResponseBody,
-  nccrExplorerDatasetUrl,
-  nccrExplorerDatasetResponseBody,
   cBioPortalStudiesUrl,
   cBioPortalStudiesResponseBody,
   federationOrganizationsUrl,
@@ -21,7 +19,6 @@ import {
  */
 export function createCcdcFetchMock(overrides = {}) {
   const body = overrides.ccdcJson ?? ccdcDatasetsCountResponseBody;
-  const nccrBody = overrides.nccrJson ?? nccrExplorerDatasetResponseBody;
   const cBioBody = overrides.cBioJson ?? cBioPortalStudiesResponseBody;
   const federationBody = overrides.federationJson ?? federationOrganizationsResponseBody;
   return jest.fn((url) => {
@@ -29,12 +26,6 @@ export function createCcdcFetchMock(overrides = {}) {
       return Promise.resolve({
         ok: true,
         json: () => Promise.resolve(body),
-      });
-    }
-    if (url === nccrExplorerDatasetUrl) {
-      return Promise.resolve({
-        ok: true,
-        json: () => Promise.resolve(nccrBody),
       });
     }
     if (url === cBioPortalStudiesUrl) {

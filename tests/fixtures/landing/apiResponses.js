@@ -17,18 +17,13 @@ export const ccdcDatasetsCountResponseBody = {
 /** Expected stat display when using en-US locale (see landingView formatting) */
 export const ccdcDatasetsCountFormatted = '12,345';
 
-/** GET …/service/datasets/CCDI-NCCR_Explorer — case_id is the reported-case total */
-export const nccrExplorerDatasetUrl =
-  'https://datacatalog.ccdi.cancer.gov/service/datasets/CCDI-NCCR_Explorer';
+/**
+ * NCCR Explorer case count is manual: it comes from the static `num` in landingData.md
+ * (or the bundled default), not from an API call.
+ */
+export const nccrManualCaseCount = 1760951;
 
-export const nccrExplorerDatasetResponseBody = {
-  status: 'success',
-  data: {
-    case_id: 2026371,
-  },
-};
-
-export const nccrExplorerCaseCountFormatted = '2,026,371';
+export const nccrManualCaseCountFormatted = '1,760,951';
 
 /** GET cBioPortal studies — stat count is the array length */
 export const cBioPortalStudiesUrl = 'https://cbioportal-api.ccdi.cancer.gov/api/studies';

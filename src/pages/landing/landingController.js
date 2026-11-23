@@ -25,7 +25,6 @@ import { LandingContentProvider } from './LandingContentContext';
 import LandingView from './landingView';
 
 const CCDCurl = 'https://datacatalog.ccdi.cancer.gov/service/datasets/count';
-const NCCRExplorerUrl = 'https://datacatalog.ccdi.cancer.gov/service/datasets/CCDI-NCCR_Explorer';
 const CBIOPORTAL_STUDIES_URL = 'https://cbioportal-api.ccdi.cancer.gov/api/studies';
 const FEDERATION_ORGANIZATIONS_URL = 'https://federation.ccdi.cancer.gov/api/v1/organization';
 const PARTICIPANT_INDEX_URL = 'https://ccdi.cancer.gov/ccdi-participant-index';
@@ -100,7 +99,6 @@ function federationResourceCount(body) {
 /**
  * Live counts replace markdown/static nums.
  * Labels still come from landingData.md when that row is present.
- * NCCR cases use the catalog dataset field case_id.
  * Harmonized clinical participants use C3DC numberOfParticipants.
  * cBioPortal datasets use the studies array length.
  * Federation resources use the organization response length.
@@ -116,10 +114,6 @@ function applyLiveStatCounts(rows, liveCounts) {
   if (next[1] && liveCounts.mci != null) {
     next[1] = { ...next[1], num: liveCounts.mci };
   }
-  if (next[2] && liveCounts.nccr != null) {
-    next[2] = { ...next[2], num: liveCounts.nccr };
-  }
-
   let c3dcIndex = next.findIndex(isC3dcParticipantsStat);
   if (c3dcIndex === -1) {
     const cbioAt = next.findIndex(isCbioPortalStat);
@@ -184,12 +178,6 @@ const getDashData = () => {
     return result;
   }
 
-  async function getNCCRExplorer() {
-    const response = await fetch(NCCRExplorerUrl);
-    const result = await response.json();
-    return result;
-  }
-
   async function getCBioPortalStudies() {
     const response = await fetch(CBIOPORTAL_STUDIES_URL);
     const result = await response.json();
@@ -238,7 +226,6 @@ const getDashData = () => {
   const liveCountsRef = useRef({
     catalog: undefined,
     mci: undefined,
-    nccr: undefined,
     participants: undefined,
     cbioportal: undefined,
     federation: undefined,
@@ -286,18 +273,6 @@ const getDashData = () => {
       })
       .catch(() => {
         // Keep labels visible when the MCI count request fails.
-      });
-    getNCCRExplorer()
-      .then((result) => {
-        const caseId = result && result.data && result.data.case_id;
-        if (caseId == null) {
-          return;
-        }
-        liveCountsRef.current.nccr = caseId;
-        setStatsDataNew((prev) => applyLiveStatCounts(prev, liveCountsRef.current));
-      })
-      .catch(() => {
-        // Keep the markdown case total when the NCCR dataset request fails.
       });
     getCBioPortalStudies()
       .then((result) => {

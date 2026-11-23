@@ -19,8 +19,7 @@ import { LANDING_DATA_QUERY } from '../../../src/bento/landingPageData';
 import {
   ccdcDatasetsCountUrl,
   ccdcDatasetsCountFormatted,
-  nccrExplorerDatasetUrl,
-  nccrExplorerCaseCountFormatted,
+  nccrManualCaseCountFormatted,
   cBioPortalStudiesUrl,
   cBioPortalStudiesCountFormatted,
   federationOrganizationsUrl,
@@ -170,7 +169,7 @@ describe('LandingController (mocked count APIs)', () => {
     await waitFor(() => {
       expect(screen.getByText(ccdcDatasetsCountFormatted)).toBeInTheDocument();
       expect(screen.getByText(String(landingDataQueryData.numberOfMCICount))).toBeInTheDocument();
-      expect(screen.getByText(nccrExplorerCaseCountFormatted)).toBeInTheDocument();
+      expect(screen.getByText(nccrManualCaseCountFormatted)).toBeInTheDocument();
     });
   });
 
@@ -228,16 +227,15 @@ describe('LandingController (mocked count APIs)', () => {
     expect(screen.getByText('Resources Participating in Federated Data Queries')).toBeInTheDocument();
   });
 
-  it('should call the NCCR Explorer dataset endpoint and display case_id', async () => {
+  it('should show the manual NCCR Explorer case count without calling the NCCR endpoint', async () => {
     renderLandingController();
 
     await waitFor(() => {
-      expect(global.fetch).toHaveBeenCalledWith(nccrExplorerDatasetUrl);
+      expect(screen.getByText(nccrManualCaseCountFormatted)).toBeInTheDocument();
     });
 
-    await waitFor(() => {
-      expect(screen.getByText(nccrExplorerCaseCountFormatted)).toBeInTheDocument();
-    });
+    const nccrCalls = global.fetch.mock.calls.filter(([url]) => String(url).includes('CCDI-NCCR_Explorer'));
+    expect(nccrCalls).toHaveLength(0);
   });
 
   it('should display both CCDC and MCI counts when both APIs resolve', async () => {

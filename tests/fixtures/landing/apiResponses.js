@@ -18,13 +18,54 @@ export const ccdcDatasetsCountResponseBody = {
 export const ccdcDatasetsCountFormatted = '12,345';
 
 /**
+ * NCCR Explorer case count is manual: it comes from the static `num` in landingData.md
+ * (or the bundled default), not from an API call.
+ */
+export const nccrManualCaseCount = 1760951;
+
+export const nccrManualCaseCountFormatted = '1,760,951';
+
+/** GET cBioPortal studies — stat count is the array length */
+export const cBioPortalStudiesUrl = 'https://cbioportal-api.ccdi.cancer.gov/api/studies';
+
+export const cBioPortalStudiesResponseBody = [
+  { studyId: 'phs001327_ccss_sn' },
+  { studyId: 'pedmatch_phs002883' },
+  { studyId: 'phs002790' },
+  { studyId: 'phs002529' },
+  { studyId: 'openpedcan_v15' },
+  { studyId: 'pstpdx_uthsa_2023' },
+];
+
+export const cBioPortalStudiesCountFormatted = '6';
+
+/** GET federation organizations — stat count is the outer array length */
+export const federationOrganizationsUrl =
+  'https://federation.ccdi.cancer.gov/api/v1/organization';
+
+export const federationOrganizationsResponseBody = [
+  [{ identifier: 'pcdc' }],
+  [{ identifier: 'ucsc-treehouse' }],
+  [{ identifier: 'stjudecloud' }],
+  [{ identifier: 'cbtn' }, { identifier: 'kidsfirst-drc' }],
+  [{ identifier: 'sanfordburnhamprebys' }],
+  [{ identifier: 'IUSCCC' }],
+  [{ identifier: 'CCDI-DCC' }],
+];
+
+export const federationOrganizationsCountFormatted = '7';
+
+/**
  * GraphQL LANDING_DATA_QUERY — shape of `response.data` from Apollo client.query
  * against C3DC Integrated (`clientName: 'c3dcService'`).
  * @see src/bento/landingPageData.js LANDING_DATA_QUERY
  */
 export const landingDataQueryData = {
   numberOfMCICount: 999,
+  numberOfParticipants: 63610,
 };
+
+export const c3dcParticipantCountFormatted = '63,610';
 
 /**
  * Raw markdown returned for newsData.md (axios.get). Parsed by parseNewsMarkdown.

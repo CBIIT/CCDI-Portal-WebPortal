@@ -13,7 +13,7 @@ RUN NODE_OPTIONS="--max-old-space-size=4096 --openssl-legacy-provider" npm run b
 
 # FROM nginx:1.23.3-alpine
 #FROM nginx:1.25.5
-FROM nginx:1.30.4-alpine-slim AS fnl_base_image
+FROM nginx:1.30.7-alpine-slim AS fnl_base_image
 RUN apk add --no-cache ca-certificates && update-ca-certificates
 RUN apk --no-cache upgrade && apk add --no-cache --upgrade openssl 'zlib>=1.3.2-r0' 'musl>=1.2.5-r3'
 RUN mkdir -p /run/nginx

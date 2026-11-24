@@ -473,10 +473,17 @@ Any of these keys may be present; missing keys stay empty (no JS copy fallback).
 | `introTitle3`, `introButtonTitle` | About buttons under the hero |
 | `latestUpdatesTitle`, `resourceTitle`, `applicationsTitle`, `cloudResourcesTitle` | Section headings |
 | `statsNote` | Footnote under stats |
-| `stats[]` | `title`, `detail`, `link`; optional static `num` (live MCI/CCDC counts still filled by the app) |
+| `stats[]` | `title`, `detail`, `link`; optional static `num` (live MCI/CCDC/C3DC counts still filled by the app; the NCCR Explorer count is manual, so set its `num` here) |
 | `resourcesApplications[]` / `resourcesCloud[]` | `id`, `title`, `subtitle?`, `content`, `link`, `img?`, `noLink?` |
 | `carousel[]` | `content`, `link`, `img?`, `mobile?` |
 | `integrationBanner` | Home-page bar under the nav. `isVisible` (`true` or `false`), `title`, `detail`, `buttonLabel`, `link`. The bar renders only when `isVisible: true` and `title` is set. Use `link: "{{C3DC}}/exploreParticipants"` |
+
+The app fills two glance counts from live APIs when `landingData.md` omits those rows:
+
+- **CCDI cBioPortal** (`cbioportal.ccdi.cancer.gov`): number of studies from `https://cbioportal-api.ccdi.castudies/ncer.gov/api/`. Appended title is `Datasets with Mutation and Other Data`.
+- **CCDI Federation Resource** (`/data-federation-resource`): number of organization groups from `https://federation.ccdi.cancer.gov/api/v1/organization`. Appended title is `Resources Participating in Federated Data Queries`.
+
+CCDI Participant Index links use `https://ccdi.cancer.gov/ccdi-participant-index`.
 
 HTML in titles (e.g. stats line breaks) must be quoted:
 
